@@ -148,10 +148,16 @@ class WpTravel_Helpers_Strings { // @phpcs:ignore
 			'map'                    => __( 'Map', 'wp-travel' ),
 
 			'help_text'				 => array(
-				'date_pricing'    => __( 'Type Pricing option and enter', 'wp-travel' ),
+				'date_pricing'       => __( 'Type Pricing option and enter', 'wp-travel' ),
 				'enable_location'    => __( 'Enable/Disable latitude-longitude option', 'wp-travel' ),
 				'use_global_payout'  => __( 'Note: In case of multiple cart items checkout, global payout will be used.', 'wp-travel' ),
 			),
+			'full_name'              => __( 'Full Name', 'wp-travel' ),
+			'enter_your_name'        => __( 'Enter your name', 'wp-travel' ),
+			'email'                  => __( 'Email', 'wp-travel' ),
+			'enter_your_email'       => __( 'Enter your email', 'wp-travel' ),
+			'enquiry_message'        => __( 'Enquiry Message', 'wp-travel' ),
+			'enter_your_enquiry'     => __( 'Enter your enquiry...', 'wp-travel' ),
 		);
 	
 		return apply_filters( 'wp_travel_strings', $localized_strings );

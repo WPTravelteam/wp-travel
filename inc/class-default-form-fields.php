@@ -16,25 +16,33 @@ class WP_Travel_Default_Form_Fields {
 	 * @return array Returns form fields.
 	 */
 	public static function enquiry() {
+
+		$strings = WpTravel_Helpers_Strings::get();
+		$label_full_name          = $strings['full_name'];
+		$label_enter_your_name    = $strings['enter_your_name'];
+		$label_email              = $strings['email'];
+		$label_enter_your_email   = $strings['enter_your_email'];
+		$label_enquiry_message    = $strings['enquiry_message'];
+		$label_enter_your_enquiry = $strings['enter_your_enquiry'];
 		$fields = array(
 			'full_name' => array(
 				'type'        => 'text',
-				'label'       => __( 'Full Name', 'wp-travel' ),
+				'label'       => $label_full_name,
 				'name'        => 'wp_travel_enquiry_name',
 				'id'          => 'wp-travel-enquiry-name',
-				'placeholder' => __( 'Enter your name', 'wp-travel' ),
+				'placeholder' => $label_enter_your_name,
 				'validations' => array(
 					'required'  => true,
 					'maxlength' => '80',
 				),
 				'attributes'  => array(
-					'placeholder' => __( 'Enter your full name', 'wp-travel' ),
+					'placeholder' => $label_enter_your_name,
 				),
 				'priority'    => 10,
 			),
 			'email'     => array(
 				'type'        => 'email',
-				'label'       => __( 'Email', 'wp-travel' ),
+				'label'       => $label_email,
 				'name'        => 'wp_travel_enquiry_email',
 				'id'          => 'wp-travel-enquiry-email',
 				'validations' => array(
@@ -42,17 +50,17 @@ class WP_Travel_Default_Form_Fields {
 					'maxlength' => '60',
 				),
 				'attributes'  => array(
-					'placeholder' => __( 'Enter your email', 'wp-travel' ),
+					'placeholder' => $label_enter_your_email,
 				),
 				'priority'    => 60,
 			),
 			'note'      => array(
 				'type'          => 'textarea',
-				'label'         => __( 'Enquiry Message', 'wp-travel' ),
+				'label'         => $label_enquiry_message,
 				'name'          => 'wp_travel_enquiry_query',
 				'id'            => 'wp-travel-enquiry-query',
 				'attributes'    => array(
-					'placeholder' => __( 'Enter your enquiry...', 'wp-travel' ),
+					'placeholder' => $label_enter_your_enquiry,
 					'rows'        => 6,
 					'cols'        => 150,
 				),
