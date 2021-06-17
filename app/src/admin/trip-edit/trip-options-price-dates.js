@@ -229,6 +229,8 @@ const WPTravelTripOptionsPricings = () => {
                 }]}>{__( 'No Pricings found.', 'wp-travel')}</Notice></>
                 }
             </>}
+            {applyFilters('wp_travel_after_pricings_options', [], allData )}
+
             { settings.partial_payment == 'yes' &&
                 <>
                     <PanelRow>
@@ -304,7 +306,6 @@ const WPTravelTripOptionsPricings = () => {
                 </>
             }
 
-            {applyFilters('wp_travel_after_pricings_options', [], allData )}
         </div>
     </ErrorBoundary>;
 }
