@@ -608,36 +608,46 @@ class WpTravel_Frontend_Assets {
 		if ( is_array( $rdp_locale_array ) && count( $rdp_locale_array ) > 1 && strtoupper( $rdp_locale_array[0] ) === strtoupper( $rdp_locale_array[1] ) ) {
 			$rdp_locale = $rdp_locale_array[0];
 		}
-		$rdp_locale = str_replace( '_', '', $rdp_locale );
+		$rdp_locale = str_replace( '_', '', $rdp_locale ); // React date picker locale.
 		// Frontend Localized Strings for React block.
 		if ( self::is_request( 'frontend' ) ) {
 			$trip_id    = $post->ID;
+			$map_data       = wptravel_get_map_data( $trip_id  ); // Only Google map data.
+			$maps           = array(
+				'google_map' => array(
+					'lat' => $map_data['lat'],
+					'lng' => $map_data['lng'],
+					'loc' => $map_data['loc'],
+				)
+			);
+			$maps = apply_filters( 'wptravel_maps_data', $maps, $settings ); // Filter @since WP Travel 4.6.5
 			$_wp_travel = array();
 			$trip       = WP_Travel_Helpers_Trips::get_trip( $trip_id );
 			if ( ! is_wp_error( $trip ) && 'WP_TRAVEL_TRIP_INFO' === $trip['code'] ) {
-				$_wp_travel['trip_data']          = $trip['trip'];
-				$_wp_travel['currency']           = $settings['currency'];
-				$_wp_travel['currency_symbol']    = wptravel_get_currency_symbol();
-				$_wp_travel['cart_url']           = wptravel_get_cart_url();
-				$_wp_travel['ajax_url']           = admin_url( 'admin-ajax.php' );
-				$_wp_travel['rdp_locale']         = $rdp_locale;
 				$_wp_travel['_nonce']             = wp_create_nonce( 'wp_travel_nonce' );
+				$_wp_travel['ajax_url']           = admin_url( 'admin-ajax.php' );
+				$_wp_travel['build_path']         = esc_url( trailingslashit( plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'app/build' ) );
+				$_wp_travel['cart_url']           = wptravel_get_cart_url();
+				$_wp_travel['currency']           = $settings['currency'];
 				$_wp_travel['currency_position']  = $settings['currency_position'];
-				$_wp_travel['thousand_separator'] = $settings['thousand_separator'] ? $settings['thousand_separator'] : ',';
-				$_wp_travel['decimal_separator']  = $settings['decimal_separator'] ? $settings['decimal_separator'] : '.';
-				$_wp_travel['number_of_decimals'] = $settings['number_of_decimals'] ? $settings['number_of_decimals'] : 0;
+				$_wp_travel['currency_symbol']    = wptravel_get_currency_symbol();
 				$_wp_travel['date_format']        = get_option( 'date_format' );
 				$_wp_travel['date_format_moment'] = wptravel_php_to_moment_format( get_option( 'date_format' ) );
+				$_wp_travel['decimal_separator']  = $settings['decimal_separator'] ? $settings['decimal_separator'] : '.';
+				$_wp_travel['maps']               = $maps;
+				$_wp_travel['number_of_decimals'] = $settings['number_of_decimals'] ? $settings['number_of_decimals'] : 0;
+				$_wp_travel['rdp_locale']         = $rdp_locale;
+				$_wp_travel['thousand_separator'] = $settings['thousand_separator'] ? $settings['thousand_separator'] : ',';
 				$_wp_travel['time_format']        = get_option( 'time_format' );
+				$_wp_travel['trip_data']          = $trip['trip'];
 				$_wp_travel['trip_date_listing']  = $settings['trip_date_listing'];
-				$_wp_travel['build_path']         = esc_url( trailingslashit( plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'app/build' ) );
 			}
 			$_wp_travel['strings']      = WpTravel_Helpers_Strings::get();
 			$_wp_travel['itinerary_v2'] = wptravel_use_itinerary_v2_layout();
 	
 			$localized_data['_wp_travel'] = $_wp_travel;
 	
-			// Localized varialble for old trips less than WP Travel 4.0.
+			// Localized varialble for old trips less than WP Travel 4.0. // Need to migrate in _wp_travel.
 			$wp_travel = array(
 				'currency_symbol'    => wptravel_get_currency_symbol(),
 				'currency_position'  => $settings['currency_position'],
@@ -754,10 +764,9 @@ class WpTravel_Frontend_Assets {
 			// End of Booking Chart Data.
 
 			// Map & Gallery Data. Need to merge in wp_travel or _wp_travel.
-			$map_data                                     = wptravel_get_map_data();
 			$wp_travel_gallery_data                       = array(
 				'ajax'            => admin_url( 'admin-ajax.php' ),
-				'lat'             => isset( $map_data['lat'] ) ? $map_data['lat'] : '',
+				'lat'             => isset( $map_data['lat'] ) ? $map_data['lat'] : '', // May be these map data are not required because it always return empty due to no trip id param will work in admin.
 				'lng'             => isset( $map_data['lng'] ) ? $map_data['lng'] : '',
 				'loc'             => isset( $map_data['loc'] ) ? $map_data['loc'] : '',
 				'labels'          => array(

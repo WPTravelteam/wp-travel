@@ -355,13 +355,19 @@ function wptravel_get_maps() {
 }
 
 /**
- * Get Map Data.
+ * Get Map Data
+ *
+ * @param number $trip_id Trip ID to get map data of scpcific trip.
  */
 function wptravel_get_map_data( $trip_id = null ) {
 	if ( ! $trip_id ) {
 		global $post;
 		if ( ! $post ) {
-			return;
+			return array(
+				'lat' => '',
+				'lng' => '',
+				'loc' => '',
+			);
 		}
 		$trip_id = $post->ID;
 	}

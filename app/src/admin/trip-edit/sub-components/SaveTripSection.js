@@ -73,7 +73,7 @@ const SaveTripSection = () => {
                         url  = url.replace("post-new.php", replaceString );
                         history.pushState(null, '', url);  
 
-                        jQuery('#original_publish, #publish').val( _wp_travel.update )
+                        jQuery('#original_publish, #publish').val( __i18n.update )
                     }
                     displayUpdatedMessage(true)
 

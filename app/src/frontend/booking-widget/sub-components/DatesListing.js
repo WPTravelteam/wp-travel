@@ -449,7 +449,7 @@ const DatesListing = ({ dates, isTourDate, getPricingsByDate, allData, onFixedDe
                                     <table>
                                         <thead className="thead-table">
                                             <tr>
-                                                <th data-label={c}>{__i18n.bookings.pricings_list_label}</th>
+                                                <th data-label={__i18n.bookings.pricings_list_label}>{__i18n.bookings.pricings_list_label}</th>
                                                 <th data-label={__i18n.bookings.person}>{__i18n.bookings.person}</th>
                                                 <th data-label={__i18n.bookings.date}>{__i18n.bookings.date}</th>
                                                 {/* <th>{__i18n.bookings.action}</th> */}

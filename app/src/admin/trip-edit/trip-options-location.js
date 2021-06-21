@@ -195,7 +195,8 @@ addFilter('wp_travel_admin_map_area', 'wp_travel', (content, settingsData, map_d
     content = [...content,
     <div className="wp-travel-gmap">
         <div className="wp-travel-autocomplete-wrap">
-            <Autocomplete
+            {/* <Autocomplete
+                apiKey={google_map_api_key}
                 style={{ width: '90%' }}
                 onPlaceSelected={(place) => {
                     updateMapFromAutocomplete(place)
@@ -203,7 +204,7 @@ addFilter('wp_travel_admin_map_area', 'wp_travel', (content, settingsData, map_d
                 placeholder={map_data.loc}
                 searchText={map_data.loc}
                 types={['address']}
-            />
+            /> */}
         </div>
         <Gmaps
             width={'100%'}
