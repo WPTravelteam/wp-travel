@@ -244,6 +244,12 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
+= 4.6.6 =
+Release Date:
+
+Fixes:
+* Fixed Undefined index ID of undefined notice in 404 page.
+
 = 4.6.5 =
 Release Date: 21st June, 2021
 

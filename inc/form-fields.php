@@ -95,7 +95,11 @@ function wptravel_get_checkout_form_fields() {
 		);
 	}
 
-	if ( wptravel_is_payment_enabled() ) {
+	global $wt_cart;
+
+	$cart_amounts = $wt_cart->get_total();
+	$cart_total   = isset( $cart_amounts['total'] ) ? $cart_amounts['total'] : 0;
+	if ( wptravel_is_payment_enabled() && $cart_total > 0 ) {
 		$payment_fields['wp_travel_billing_address_heading'] = array(
 			'type'        => 'heading',
 			'label'       => __( 'Booking / Payments', 'wp-travel' ),

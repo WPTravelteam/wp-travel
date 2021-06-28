@@ -77,7 +77,7 @@ class WpTravel_Frontend_Assets {
 
 				if ( ! wp_script_is( 'jquery-parsley', 'enqueued' ) ) {
 					// Parsley For Frontend Single Trips.
-					wp_enqueue_script( 'jquery-parsley' );
+					wp_enqueue_script( 'jquery-parsley' ); // Maybe already enqueued from form fields.
 				}
 
 				// for GMAP.
@@ -611,16 +611,19 @@ class WpTravel_Frontend_Assets {
 		$rdp_locale = str_replace( '_', '', $rdp_locale ); // React date picker locale.
 		// Frontend Localized Strings for React block.
 		if ( self::is_request( 'frontend' ) ) {
+			if ( ! $post ) { // There will be no $post for 404 and other pages.
+				return;
+			}
 			$trip_id    = $post->ID;
-			$map_data       = wptravel_get_map_data( $trip_id  ); // Only Google map data.
-			$maps           = array(
+			$map_data   = wptravel_get_map_data( $trip_id ); // Only Google map data.
+			$maps       = array(
 				'google_map' => array(
 					'lat' => $map_data['lat'],
 					'lng' => $map_data['lng'],
 					'loc' => $map_data['loc'],
-				)
+				),
 			);
-			$maps = apply_filters( 'wptravel_maps_data', $maps, $settings ); // Filter @since WP Travel 4.6.5
+			$maps       = apply_filters( 'wptravel_maps_data', $maps, $settings ); // Filter @since WP Travel 4.6.5
 			$_wp_travel = array();
 			$trip       = WP_Travel_Helpers_Trips::get_trip( $trip_id );
 			if ( ! is_wp_error( $trip ) && 'WP_TRAVEL_TRIP_INFO' === $trip['code'] ) {

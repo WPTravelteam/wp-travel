@@ -1347,7 +1347,11 @@ function wptravel_is_itinerary( $post_id = null ) {
  * Check whether payment script is loadable or not.
  */
 function wptravel_can_load_payment_scripts() {
-	return ( WP_Travel::is_page( 'dashboard' ) || WP_Travel::is_page( 'checkout' ) ) && wptravel_is_payment_enabled();
+	global $wt_cart;
+
+	$cart_amounts = $wt_cart->get_total();
+	$cart_total   = isset( $cart_amounts['total'] ) ? $cart_amounts['total'] : 0;
+	return ( WP_Travel::is_page( 'dashboard' ) || WP_Travel::is_page( 'checkout' ) ) && wptravel_is_payment_enabled() && $cart_total > 0;
 }
 
 // WP Travel Pricing Varition options.
