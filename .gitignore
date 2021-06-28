@@ -36,3 +36,5 @@ test.php
 /inc/extended/**
 vendor
 wordpress
+# Logs
+yarn-error.log
