@@ -249,6 +249,11 @@ Release Date:
 
 Fixes:
 * Fixed Undefined index ID of undefined notice in 404 page.
+* Fixed Showing payment option if we use 100% coupon code. Now payment options will be hidden if 100% coupon discount.
+* Fixed Review count always shows 0 in homepage sections even the trip has review.
+* Fixed Gloabl FAQ answer is not showing in add new trip.
+* Disabled editing Global FAQ in the trip page because it is global.
+* Removed remove option for Global FAQ's in the trip edit page.
 
 = 4.6.5 =
 Release Date: 21st June, 2021

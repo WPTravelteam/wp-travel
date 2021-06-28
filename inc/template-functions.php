@@ -1229,6 +1229,7 @@ function wptravel_get_average_rating( $post_id = null ) {
  * Get the total amount (COUNT) of ratings.
  *
  * @param  int $value Optional. Rating value to get the count for. By default returns the count of all rating values.
+ * @todo Need to change custom query in this function to get rating count. use get_comments_number instead if possible.
  * @return int
  */
 function wptravel_get_rating_count( $value = null ) {
@@ -1236,7 +1237,6 @@ function wptravel_get_rating_count( $value = null ) {
 
 	// No meta data? Do the calculation.
 	if ( ! metadata_exists( 'post', $post->ID, '_wpt_rating_count' ) ) {
-
 		$counts     = array();
 		$raw_counts = $wpdb->get_results(
 			$wpdb->prepare(
@@ -1261,8 +1261,7 @@ function wptravel_get_rating_count( $value = null ) {
 
 		$counts = get_post_meta( $post->ID, '_wpt_rating_count', true );
 	}
-
-	if ( is_null( $value ) ) {
+	if ( ! $value ) {
 		return array_sum( $counts );
 	} else {
 		return isset( $counts[ $value ] ) ? $counts[ $value ] : 0;
