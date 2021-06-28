@@ -1217,6 +1217,7 @@ function wptravel_get_faqs( $post_id ) {
 	$settings         = wptravel_get_settings();
 	$is_global_faq    = get_post_meta( $post_id, 'wp_travel_is_global_faq', true );
 	$global_questions = isset( $settings['wp_travel_utils_global_faq_question'] ) ? $settings['wp_travel_utils_global_faq_question'] : array(); // value to check whether trip faq exists in gloabl on not.
+	$global_answers   = isset( $settings['wp_travel_utils_global_faq_answer'] ) ? $settings['wp_travel_utils_global_faq_answer'] : array(); // value to check whether trip faq exists in gloabl on not.
 
 	$use_global_faq = get_post_meta( $post_id, 'wp_travel_utils_use_global_faq_for_trip', true );
 	$use_global_faq = ( $use_global_faq ) ? $use_global_faq : 'no';
@@ -1228,11 +1229,12 @@ function wptravel_get_faqs( $post_id ) {
 		$answers = get_post_meta( $post_id, 'wp_travel_faq_answer', true );
 		$answers = apply_filters( 'wp_travel_itinerary_faq_answers', $answers, $post_id ); // Modified in 2.0.7
 		foreach ( $questions as $key => $question ) :
-
+			$answer = ''; // initiallize empty answer.
 			// This will check the current question exists in global question or not. if yes then set this as global. This will work for initial check.
-			$global_faq = 'no';
+			$global_faq    = 'no';
 			if ( ! empty( $global_questions ) && in_array( $question, $global_questions ) ) {
-				$global_faq = 'yes';
+				$global_faq    = 'yes';
+				$answer = isset( $global_answers[ $key ] ) ? $global_answers[ $key ] : ''; // Global answer index may vary if we sort the global faq along with trip faq.
 			}
 
 			// with only above condition if faq is saved and after that delete global settings, it will treat as trip faq because global faq are saved along with trip faq. so we need to seperate faq type (global or individual).
@@ -1240,7 +1242,9 @@ function wptravel_get_faqs( $post_id ) {
 				$global_faq = $is_global_faq[ $key ];
 			}
 
-			$answer = isset( $answers[ $key ] ) ? $answers[ $key ] : '';
+			if ( isset( $answers[ $key ] ) && ( ! empty( $answers[ $key ] ) || 'yes' !== $global_faq ) ) { // Do not override global faq answers in initial load.. $answers empty refer to new trips without saved.
+				$answer = $answers[ $key ];
+			}
 
 			// remove global if utilities is not exists.
 			if ( ! class_exists( 'WP_Travel_Utilities_Core' ) && 'yes' == $global_faq ) {

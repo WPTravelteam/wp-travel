@@ -1,4 +1,4 @@
-import { Button, Notice, PanelBody, PanelRow, TabPanel, TextareaControl, TextControl } from '@wordpress/components';
+import { Button, Notice, PanelBody, PanelRow, TabPanel, TextareaControl, TextControl, Disabled } from '@wordpress/components';
 import { dispatch, useSelect } from '@wordpress/data';
 import { addFilter, applyFilters } from '@wordpress/hooks';
 import { __ } from '@wordpress/i18n';
@@ -56,77 +56,110 @@ const WPTravelTripOptionsFaqContent = () => {
         <div className="wp-travel-trip-faq">
             {applyFilters('wp_travel_trip_faq_tab_content', '', allData)}
             
-            {typeof faqs != 'undefined' &&  Object.keys(faqs).length > 0 ? <>
-            <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addFaq()}>{__i18n.add_faq}</Button></PanelRow>
-            <div className="wp-travel-sortable-component">
-                <ReactSortable
-                    list={faqs}
-                    setList={sortedFaqs => sortFaqs( sortedFaqs)}
-                    handle=".components-panel__icon"
-                >
-                {
-                    Object.keys(faqs).map(function (faqId) {
-                        let hiddenClass = ''
-                        if ( 'undefined' != typeof utilities ) {
-                            if ( 'undefined' != utilities.wp_travel_utils_use_global_faq_for_trip && 'undefined' != utilities.wp_travel_utils_use_trip_faq_for_trip ) {
-                                if ( 'yes' == utilities.wp_travel_utils_use_global_faq_for_trip ) {
-                                    if ( 'yes' != utilities.wp_travel_utils_use_trip_faq_for_trip ) {
-                                        if ( faqs[faqId].global != 'yes' ) {
+            {typeof faqs != 'undefined' &&  Object.keys(faqs).length > 0 ? 
+            <>
+                {}
+                <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addFaq()}>{__i18n.add_faq}</Button></PanelRow>
+                <div className="wp-travel-sortable-component">
+                    <ReactSortable
+                        list={faqs}
+                        setList={sortedFaqs => sortFaqs( sortedFaqs)}
+                        handle=".components-panel__icon"
+                    >
+                    {
+                        Object.keys(faqs).map(function (faqId) {
+                            let hiddenClass = ''
+                            if ( 'undefined' != typeof utilities ) {
+                                if ( 'undefined' != utilities.wp_travel_utils_use_global_faq_for_trip && 'undefined' != utilities.wp_travel_utils_use_trip_faq_for_trip ) {
+                                    if ( 'yes' == utilities.wp_travel_utils_use_global_faq_for_trip ) {
+                                        if ( 'yes' != utilities.wp_travel_utils_use_trip_faq_for_trip ) {
+                                            if ( faqs[faqId].global != 'yes' ) {
+                                                hiddenClass = 'hidden'
+                                            }
+                                        }
+                                    } else {
+                                        if ( faqs[faqId].global == 'yes' ) {
                                             hiddenClass = 'hidden'
                                         }
                                     }
-                                } else {
-                                    if ( faqs[faqId].global == 'yes' ) {
-                                        hiddenClass = 'hidden'
-                                    }
-                                }
-                            } 
-                        }
-                        return <PanelBody  className={hiddenClass}
-                            icon= {alignJustify}
-                            title={`${faqs[faqId].question ? faqs[faqId].question : __i18n.faq_questions}`}
-                            initialOpen={false} >
+                                } 
+                            }
 
-                            <PanelRow>
-                                <label>{__i18n.enter_question}</label>
-                                <TextControl
-                                    placeholder={__i18n.faq_questions}
-                                    value={faqs[faqId].question ? faqs[faqId].question : ''}
-                                    onChange={
-                                        (e) => updateTripFaqs('question', e, faqId)
-                                    }
-                                />
-                            </PanelRow>
+                            if ( 'yes' ===faqs[faqId].global ) {
+                                return <PanelBody  className={hiddenClass}
+                                icon= {alignJustify}
+                                title={`${faqs[faqId].question ? faqs[faqId].question : __i18n.faq_questions}`}
+                                initialOpen={false} >
+                                <Disabled>
+                                    <PanelRow>
+                                        <label>{__i18n.enter_question}</label>
+                                        <TextControl
+                                            placeholder={__i18n.faq_questions}
+                                            value={faqs[faqId].question ? faqs[faqId].question : ''}
+                                            onChange={
+                                                (e) => updateTripFaqs('question', e, faqId)
+                                            }
+                                        />
+                                    </PanelRow>
 
-                            <PanelRow>
-                                <label>{__i18n.faq_answer}</label>
-                                <TextareaControl
-                                    value={faqs[faqId].answer ? faqs[faqId].answer : null}
-                                    onChange={
-                                        (e) => updateTripFaqs('answer', e, faqId)
-                                    }
-                                />
-                            </PanelRow>
-                            <PanelRow className="wp-travel-action-section has-right-padding">
-                                <span></span><Button isDefault onClick={() => {
-                                    if (!confirm( __i18n.alert.remove_faq)) {
-                                        return false;
-                                    }
-                                    let faqData = [];
-                                    faqData = faqs.filter((faq, newFaqId) => {
-                                        return newFaqId != faqId;
-                                    });
-                                    updateFaqs(faqData);
-                                }} className="wp-traval-button-danger">{__i18n.remove_faq}</Button>
-                            </PanelRow>
+                                    <PanelRow>
+                                        <label>{__i18n.faq_answer}</label>
+                                        <TextareaControl
+                                            value={faqs[faqId].answer ? faqs[faqId].answer : null}
+                                            onChange={
+                                                (e) => updateTripFaqs('answer', e, faqId)
+                                            }
+                                        />
+                                    </PanelRow>
+                                </Disabled>
+                                
+                            </PanelBody>
+                            }
+                            return <PanelBody  className={hiddenClass}
+                                icon= {alignJustify}
+                                title={`${faqs[faqId].question ? faqs[faqId].question : __i18n.faq_questions}`}
+                                initialOpen={false} >
 
-                        </PanelBody>
-                    })
-                }
-                </ReactSortable>
+                                <PanelRow>
+                                    <label>{__i18n.enter_question}</label>
+                                    <TextControl
+                                        placeholder={__i18n.faq_questions}
+                                        value={faqs[faqId].question ? faqs[faqId].question : ''}
+                                        onChange={
+                                            (e) => updateTripFaqs('question', e, faqId)
+                                        }
+                                    />
+                                </PanelRow>
 
-            </div>
-            { Object.keys(faqs).length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addFaq()}>{__i18n.add_faq}</Button></PanelRow> }
+                                <PanelRow>
+                                    <label>{__i18n.faq_answer}</label>
+                                    <TextareaControl
+                                        value={faqs[faqId].answer ? faqs[faqId].answer : null}
+                                        onChange={
+                                            (e) => updateTripFaqs('answer', e, faqId)
+                                        }
+                                    />
+                                </PanelRow>
+                                <PanelRow className="wp-travel-action-section has-right-padding">
+                                    <span></span><Button isDefault onClick={() => {
+                                        if (!confirm( __i18n.alert.remove_faq)) {
+                                            return false;
+                                        }
+                                        let faqData = [];
+                                        faqData = faqs.filter((faq, newFaqId) => {
+                                            return newFaqId != faqId;
+                                        });
+                                        updateFaqs(faqData);
+                                    }} className="wp-traval-button-danger">{__i18n.remove_faq}</Button>
+                                </PanelRow>
+
+                            </PanelBody>
+                        })
+                    }
+                    </ReactSortable>
+
+                </div>
+                { Object.keys(faqs).length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addFaq()}>{__i18n.add_faq}</Button></PanelRow> }
             </> : 
             <>
                 <Notice isDismissible={false} actions={[{
