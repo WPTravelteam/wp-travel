@@ -476,7 +476,7 @@ class WpTravel_Frontend_Assets {
 			}
 			$scripts['wp-travel-admin-script'] = array(
 				'src'       => self::$app_path . '/assets/js/wp-travel-back-end' . $suffix . '.js',
-				'deps'      => array( 'jquery' ),
+				'deps'      => array( 'jquery', 'jquery-ui-sortable', 'jquery-ui-accordion' ),
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,
 			);
