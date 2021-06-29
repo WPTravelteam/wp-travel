@@ -252,6 +252,8 @@ Fixes:
 * Fixed Showing payment option if we use 100% coupon code. Now payment options will be hidden if 100% coupon discount.
 * Fixed Review count always shows 0 in homepage sections even the trip has review.
 * Fixed Gloabl FAQ answer is not showing in add new trip.
+* Fixed System information download as csv button issue.
+* Fixed js error on console in admin plugin page and customizer page.
 * Disabled editing Global FAQ in the trip page because it is global.
 * Removed remove option for Global FAQ's in the trip edit page.
 
