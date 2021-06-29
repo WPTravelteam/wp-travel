@@ -256,6 +256,7 @@ Fixes:
 * Fixed js error on console in admin plugin page and customizer page.
 * Fixed showing 'No size limit' even it is set in pricing in case of multisite. 
 * Fixed Minor style issue in themes page. 
+* Fixed Js error regarding tabs in case of loading bundle js file. 
 * Disabled editing Global FAQ in the trip page because it is global.
 * Removed remove option for Global FAQ's in the trip edit page.
 
