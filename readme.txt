@@ -245,7 +245,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.6.6 =
-Release Date:
+Release Date: 1st July, 2021
 
 Fixes:
 * Fixed Undefined index ID of undefined notice in 404 page.
@@ -258,6 +258,7 @@ Fixes:
 * Fixed Minor style issue in themes page. 
 * Fixed Js error regarding tabs in case of loading bundle js file. 
 * Fixed trip type and trip location filter toolbar not working in taxonomy page.
+* Added missing translation string in booking widget.
 * Disabled editing Global FAQ in the trip page because it is global.
 * Removed remove option for Global FAQ's in the trip edit page.
 
