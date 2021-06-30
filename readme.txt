@@ -249,18 +249,18 @@ Release Date: 1st July, 2021
 
 Fixes:
 * Fixed Undefined index ID of undefined notice in 404 page.
-* Fixed Showing payment option if we use 100% coupon code. Now payment options will be hidden if 100% coupon discount.
+* Fixed Showing payment option if we use 100% coupon code. Now payment options will be hidden in case of 100% coupon discount.
 * Fixed Review count always shows 0 in homepage sections even the trip has review.
-* Fixed Gloabl FAQ answer is not showing in add new trip.
-* Fixed System information download as csv button issue.
+* Fixed Global FAQ answer is not showing when creating new trip.
+* Fixed System information Export as csv button issue.
 * Fixed js error on console in admin plugin page and customizer page.
-* Fixed showing 'No size limit' even it is set in pricing in case of multisite. 
+* Fixed showing 'No size limit' even if max pax has been set under pricing. 
 * Fixed Minor style issue in themes page. 
 * Fixed Js error regarding tabs in case of loading bundle js file. 
 * Fixed trip type and trip location filter toolbar not working in taxonomy page.
 * Added missing translation string in booking widget.
-* Disabled editing Global FAQ in the trip page because it is global.
-* Removed remove option for Global FAQ's in the trip edit page.
+Removed feature to edit FAQs which has been enqueued from global settings in trip page. 
+Removed 'Remove FAQ' button for Global FAQ's in trip edit page.
 
 Deprecated:
 * Function `wptravel_get_strings` is deprecated use `WpTravel_Helpers_Strings::get()` instead.
