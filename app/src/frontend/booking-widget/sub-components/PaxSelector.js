@@ -84,6 +84,10 @@ const PaxSelector = ({ pricing, onPaxChange, counts, inventory }) => {
 					if ( 'undefined' == typeof c.term_info ) { // Fixes : index title of undefined.
 						return <></>
 					}
+					let price_per_label = c.price_per;
+					if ( 'undefined' != typeof( __i18n.price_per_labels[price_per_label] ) ) {
+						price_per_label = __i18n.price_per_labels[price_per_label];
+					}
 					return <li key={i}>
 						<div className="text-left">
 							<strong>
@@ -121,7 +125,7 @@ const PaxSelector = ({ pricing, onPaxChange, counts, inventory }) => {
 							</span>}
 						</div>
 						<div className="text-right">
-							<span className="item-price">{c.is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat(c.regular_price) }}></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCategoryPrice(c.id, true)) }}></span>/{c.price_per}</span>
+							<span className="item-price">{c.is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat(c.regular_price) }}></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCategoryPrice(c.id, true)) }}></span>/{price_per_label}</span>
 							<div className="pricing-area">
 								<div className="qty-spinner">
 									<button onClick={onPaxChange(c.id, -1)}>-</button>
