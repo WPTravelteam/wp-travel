@@ -259,7 +259,7 @@ function wptravel_single_itinerary_trip_code( $wp_travel_itinerary ) {
 	?>
 	<div class="trip-code">
 		<?php
-		$strings         = wptravel_get_strings();
+		$strings         = WpTravel_Helpers_Strings::get();
 		$trip_code_label = $strings['trip_code'];
 		echo esc_html( $trip_code_label );
 		?>
@@ -318,7 +318,7 @@ function wptravel_single_trip_tabs_and_price( $trip_id ) {
 					<div class="wti__single-price-area">
 						<div class="price-amount">
 							<?php
-							$strings                          = wptravel_get_strings();
+							$strings                          = WpTravel_Helpers_Strings::get();
 							$args                             = $args_regular = array( 'trip_id' => $trip_id ); //phpcs:ignore
 							$args_regular['is_regular_price'] = true;
 							$trip_price                       = WP_Travel_Helpers_Pricings::get_price( $args );
@@ -726,7 +726,7 @@ function wptravel_single_related_trips( $trip_id ) {
  * @param int $trip_id Trip ID.
  */
 function wptravel_single_itinerary_meta_info( $trip_id ) {
-	$strings               = wptravel_get_strings();
+	$strings               = WpTravel_Helpers_Strings::get();
 	$trip_type_text        = isset( $strings['trip_type'] ) ? $strings['trip_type'] : __( 'Trip Type', 'wp-travel' );
 	$empty_trip_type_text  = isset( $strings['empty_results']['trip_type'] ) ? $strings['empty_results']['trip_type'] : __( 'No Trip Type', 'wp-travel' );
 	$activities_text       = isset( $strings['activities'] ) ? $strings['activities'] : __( 'Activities', 'wp-travel' );
@@ -864,7 +864,7 @@ function wptravel_archive_before_content() {
 			<div class="wti__inner">
 				<?php
 				if ( WP_Travel::is_page( 'archive' ) ) {
-					$strings        = wptravel_get_strings();
+					$strings        = WpTravel_Helpers_Strings::get();
 					$price_text     = $strings['price'];
 					$trip_type_text = $strings['trip_type'];
 					$location_text  = $strings['location'];

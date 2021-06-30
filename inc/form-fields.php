@@ -71,7 +71,7 @@ function wptravel_get_checkout_form_fields() {
 
 	$policy_link = wptravel_privacy_link();
 
-	$strings                    = wptravel_get_strings();
+	$strings                    = WpTravel_Helpers_Strings::get();
 	$label_booking_options      = $strings['bookings']['booking_option'];
 	$label_booking_with_payment = $strings['bookings']['booking_with_payment'];
 	$label_booking_only         = $strings['bookings']['booking_only'];
@@ -305,7 +305,7 @@ function wptravel_search_filter_widget_form_fields( $sanitize_get = array() ) {
 
 	$show_end_date = wptravel_booking_show_end_date();
 
-	$strings       = wptravel_get_strings();
+	$strings       = WpTravel_Helpers_Strings::get();
 	$trip_duration = array(
 		array(
 			'name'  => 'trip_start',

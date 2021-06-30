@@ -257,8 +257,12 @@ Fixes:
 * Fixed showing 'No size limit' even it is set in pricing in case of multisite. 
 * Fixed Minor style issue in themes page. 
 * Fixed Js error regarding tabs in case of loading bundle js file. 
+* Fixed trip type and trip location filter toolbar not working in taxonomy page.
 * Disabled editing Global FAQ in the trip page because it is global.
 * Removed remove option for Global FAQ's in the trip edit page.
+
+Deprecated:
+* Function `wptravel_get_strings` is deprecated use `WpTravel_Helpers_Strings::get()` instead.
 
 = 4.6.5 =
 Release Date: 21st June, 2021

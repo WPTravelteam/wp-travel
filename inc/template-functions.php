@@ -380,7 +380,7 @@ function wptravel_trip_price( $trip_id, $hide_rating = false ) {
 		)
 	);
 
-	$strings = wptravel_get_strings();
+	$strings = WpTravel_Helpers_Strings::get();
 
 	?>
 
@@ -481,7 +481,7 @@ function wptravel_single_excerpt( $post_id ) {
 	if ( ! $post_id ) {
 		return;
 	}
-	$strings = wptravel_get_strings();
+	$strings = WpTravel_Helpers_Strings::get();
 	// Get Settings.
 	$settings = wptravel_get_settings();
 
@@ -675,7 +675,7 @@ function wptravel_single_keywords( $post_id ) {
 	endif;
 	global $wp_travel_itinerary;
 	if ( is_singular( WP_TRAVEL_POST_TYPE ) ) :
-		$strings         = wptravel_get_strings();
+		$strings         = WpTravel_Helpers_Strings::get();
 		$trip_code_label = $strings['trip_code'];
 		?>
 		<div class="wp-travel-trip-code"><span><?php echo esc_html( $trip_code_label ); ?> </span><code><?php echo esc_html( $wp_travel_itinerary->get_trip_code() ); ?></code></div>
@@ -693,7 +693,7 @@ function wptravel_single_location( $post_id ) {
 		return;
 	}
 	// Get Strings
-	$strings = wptravel_get_strings();
+	$strings = WpTravel_Helpers_Strings::get();
 
 	$terms = get_the_terms( $post_id, 'travel_locations' );
 
@@ -1534,7 +1534,7 @@ function wptravel_archive_filter_by( $submission_get = array() ) {
 		return;
 	}
 
-	$strings = wptravel_get_strings();
+	$strings = WpTravel_Helpers_Strings::get();
 
 	$filter_by_text = $strings['filter_by'];
 	$price_text     = $strings['price'];
@@ -2061,7 +2061,7 @@ function wptravel_booking_default_princing_list_content( $trip_id ) {
 		return;
 	}
 	// Label Strings
-	$strings               = wptravel_get_strings();
+	$strings               = WpTravel_Helpers_Strings::get();
 	$pricing_name_string   = isset( $strings['bookings']['pricing_name'] ) ? $strings['bookings']['pricing_name'] : __( 'Pricing Name', 'wp-travel' );
 	$start_date_string     = isset( $strings['bookings']['start_date'] ) ? $strings['bookings']['start_date'] : __( 'Start', 'wp-travel' );
 	$end_date_string       = isset( $strings['bookings']['end_date'] ) ? $strings['bookings']['end_date'] : __( 'End', 'wp-travel' );
@@ -2445,7 +2445,7 @@ function wptravel_booking_fixed_departure_list_content( $trip_id ) {
 		return;
 	}
 	// Strings
-	$strings               = wptravel_get_strings();
+	$strings               = WpTravel_Helpers_Strings::get();
 	$pricing_name_string   = isset( $strings['bookings']['pricing_name'] ) ? $strings['bookings']['pricing_name'] : __( 'Pricing Name', 'wp-travel' );
 	$start_date_string     = isset( $strings['bookings']['start_date'] ) ? $strings['bookings']['start_date'] : __( 'Start', 'wp-travel' );
 	$end_date_string       = isset( $strings['bookings']['end_date'] ) ? $strings['bookings']['end_date'] : __( 'End', 'wp-travel' );

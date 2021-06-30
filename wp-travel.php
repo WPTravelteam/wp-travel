@@ -3,7 +3,7 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 4.6.5
+ * Version: 4.6.6
  * Author: WP Travel
  * Author URI: http://wptravel.io/
  * Requires at least: 5.4.1
@@ -37,7 +37,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '4.6.5';
+		public $version = '4.6.6';
 
 		/**
 		 * WP Travel API version.
@@ -125,13 +125,10 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 
 			add_action( 'init', 'wptravel_book_now', 99 );
 			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
-			// add_action( 'wp_enqueue_scripts', array( 'WpTravel_Assets', 'frontend' ) );
 			// add_action( 'init', array( $this, 'set_block_script_translation' ) );.
 			add_action( 'wp_head', array( 'WpTravel_Assets', 'styles_filter' ), 7 ); // @since 4.0.6
 			add_action( 'wp_footer', array( 'WpTravel_Assets', 'scripts_filter' ), 11 ); // @since 4.0.6
 			if ( $this->is_request( 'admin' ) ) {
-				// add_action( 'admin_enqueue_scripts', array( 'WpTravel_Assets', 'admin' ) );
-
 				// To delete transient.
 				add_action( 'admin_init', 'wptravel_admin_init' ); // @since 1.0.7
 

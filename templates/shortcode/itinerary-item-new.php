@@ -25,7 +25,7 @@ if ( post_password_required() ) {
 	return;
 }
 $wptravel_post_id                          = get_the_ID();
-$wptravel_strings                          = wptravel_get_strings();
+$wptravel_strings                          = WpTravel_Helpers_Strings::get();
 $wptravel_args                             = $wptravel_args_regular = array( 'trip_id' => $wptravel_post_id ); // phpcs:ignore
 $wptravel_args_regular['is_regular_price'] = true;
 $wptravel_trip_price                       = WP_Travel_Helpers_Pricings::get_price( $wptravel_args );
