@@ -292,7 +292,7 @@ function wptravel_get_dropdown_list( $args = array() ) {
  * Sanitize data. It may be either string or array
  *
  * @param mixed $array input data
- * @param bool	$wp_kses_post if data need wp keses or not.
+ * @param bool  $wp_kses_post if data need wp keses or not.
  */
 function wptravel_sanitize_array( $array, $wp_kses_post = false ) {
 	if ( is_string( $array ) ) {
@@ -1129,9 +1129,9 @@ function wptravel_get_admin_trip_tabs( $post_id, $custom_tab_enabled = false, $f
 		$_wp_travel_tabs = json_decode( $wp_travel_tabs );
 		if ( is_array( $_wp_travel_tabs ) && ! empty( $_wp_travel_tabs ) ) {
 			$wp_travel_tabs = array();
-			$index = 0;
-			foreach( $_wp_travel_tabs as $tab ) {
-				$wp_travel_tabs[ $index ] = (array) $tab;
+			$index          = 0;
+			foreach ( $_wp_travel_tabs as $tab ) {
+				$wp_travel_tabs[ $index ]       = (array) $tab;
 				$wp_travel_tabs[ $index ]['id'] = $index;
 				$index++;
 			}
@@ -1231,10 +1231,10 @@ function wptravel_get_faqs( $post_id ) {
 		foreach ( $questions as $key => $question ) :
 			$answer = ''; // initiallize empty answer.
 			// This will check the current question exists in global question or not. if yes then set this as global. This will work for initial check.
-			$global_faq    = 'no';
+			$global_faq = 'no';
 			if ( ! empty( $global_questions ) && in_array( $question, $global_questions ) ) {
-				$global_faq    = 'yes';
-				$answer = isset( $global_answers[ $key ] ) ? $global_answers[ $key ] : ''; // Global answer index may vary if we sort the global faq along with trip faq.
+				$global_faq = 'yes';
+				$answer     = isset( $global_answers[ $key ] ) ? $global_answers[ $key ] : ''; // Global answer index may vary if we sort the global faq along with trip faq.
 			}
 
 			// with only above condition if faq is saved and after that delete global settings, it will treat as trip faq because global faq are saved along with trip faq. so we need to seperate faq type (global or individual).
@@ -1758,9 +1758,18 @@ if ( ! function_exists( 'wptravel_get_trip_available_dates' ) ) {
  *
  * @since 4.0.3
  */
-
 function wptravel_is_react_version_enabled() {
-	$settings = wptravel_get_settings();
+	/**
+	 * Note: not used wptravel_get_settings() function here.
+	 * Because this function is used in pre_get_post hook which will conflict with default settings value of `global_tab_settings`.
+	 * which is used via filter it in downloads via another filter in function wptravel_get_default_trip_tabs (callback function of `global_tab_settings` settings key ).
+	 */
+	$default    = array( 'wp_travel_switch_to_react' => 'no' );
+	$user_since = get_option( 'wp_travel_user_since' );
+	if ( version_compare( $user_since, '4.0.0', '>=' ) ) {
+		$default['wp_travel_switch_to_react'] = 'yes';
+	}
+	$settings = get_option( 'wp_travel_settings', $default );
 	return isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_travel_switch_to_react'];
 }
 
@@ -2121,7 +2130,7 @@ function wptravel_get_search_filter_form( $args ) {
 
 				<div class="wp-travel-search">
 					<!-- need class name as wp_travel_search_widget_filters_input and attribute data-index to submit data -->
-					<input class="wp_travel_search_widget_filters_input<?php echo esc_attr( $index ); ?>" type="hidden" name="_nonce"  value="<?php echo esc_attr( WP_Travel::create_nonce() ) ?>" >
+					<input class="wp_travel_search_widget_filters_input<?php echo esc_attr( $index ); ?>" type="hidden" name="_nonce"  value="<?php echo esc_attr( WP_Travel::create_nonce() ); ?>" >
 					<input class="filter-data-index" type="hidden" data-index="<?php echo esc_attr( $index ); ?>">
 
 					<input class="wp-travel-widget-filter-view-mode" type="hidden" name="view_mode" data-mode="<?php echo esc_attr( $view_mode ); ?>" value="<?php echo esc_attr( $view_mode ); ?>" >
@@ -2414,8 +2423,9 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 												<span class="my-order-pricing"><?php echo esc_html( $pricing_title ); ?></span>
 												<span class="my-order-tail">
 													<?php if ( ! empty( $order_detail['trip'] ) ) : ?>
-														<?php foreach ( $order_detail['trip'] as $category_id => $trip ) :
-															if (  $trip['pax'] < 1 ) {
+														<?php
+														foreach ( $order_detail['trip'] as $category_id => $trip ) :
+															if ( $trip['pax'] < 1 ) {
 																continue;
 															}
 															?>
@@ -2777,8 +2787,8 @@ function wptravel_get_strings() {
 			'max_pax_alert'         => __( 'Pax should be lower than or equal to {max_pax}.', 'wp-travel' ),
 			'both_pax_alert'        => __( 'Pax should be between {min_pax} and {max_pax}.', 'wp-travel' ),
 		),
-		'admin_tabs' => array(
-			'itinerary' => __( 'Itinerary', 'wp-travel' ),
+		'admin_tabs'                => array(
+			'itinerary'     => __( 'Itinerary', 'wp-travel' ),
 			'price_n_dates' => __( 'Prices & Dates', 'wp-travel' ),
 		),
 
@@ -3984,7 +3994,7 @@ function wptravel_itinerary_v2_frontend_tab_gallery( $gallery_ids ) {
  * @return string
  */
 function wptravel_php_to_moment_format( $format ) {
-	$replacements = array(
+	$replacements  = array(
 		'd' => 'DD',
 		'D' => 'ddd',
 		'j' => 'D',
@@ -4023,8 +4033,8 @@ function wptravel_php_to_moment_format( $format ) {
 		'r' => '', // no equivalent.
 		'U' => 'X',
 	);
-    $moment_format = strtr($format, $replacements);
-    return $moment_format;
+	$moment_format = strtr( $format, $replacements );
+	return $moment_format;
 }
 
 /**
