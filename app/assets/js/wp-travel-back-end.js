@@ -783,6 +783,7 @@
         }
     });
 
+    // Multi Select Start.
     jQuery('.select-main .close').addClass('hidden');
     jQuery(document).on('click', '.select-main .close', function () {
         $(this).siblings('.wp-travel-active').removeClass('wp-travel-active');
@@ -838,7 +839,7 @@
         jQuery(this).closest('.select-main').find('ul').siblings('.selected-item').html(countSelected + ' item selected');
     }
     jQuery(document).on('input click change', 'input.wp-travel-multi-inner', updateTable)
-
+    // Multi Select Ends.
 
     //Facts.
     jQuery(document).on('click', '.fact-deleter', function () {
