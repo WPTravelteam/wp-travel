@@ -193,6 +193,9 @@ if ( wptravel_is_react_version_enabled() ) {
 											$category = isset( $categories[ $category_id ] ) ? $categories[ $category_id ] : array(); // undefined offset fixes.
 											$ctitle   = isset( $category['term_info']['title'] ) ? esc_html( $category['term_info']['title'] ) : '';
 											$pax      = (int) $detail['pax'];
+											if ( $pax < 1 ) {
+												continue;
+											}
 											echo '<span><span data-wpt-category-count="' . esc_attr( $category_id ) . "\">{$pax}</span> x {$ctitle}</span>";
 										}
 										?>
