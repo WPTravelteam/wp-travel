@@ -258,9 +258,10 @@ Fixes:
 * Fixed Minor style issue in themes page. 
 * Fixed Js error regarding tabs in case of loading bundle js file. 
 * Fixed trip type and trip location filter toolbar not working in taxonomy page.
-* Added missing translation string in booking widget.
-Removed feature to edit FAQs which has been enqueued from global settings in trip page. 
-Removed 'Remove FAQ' button for Global FAQ's in trip edit page.
+* Fixed select trip dropdown not working in coupon page.
+* Added missing translation string in booking section.
+* Removed feature to edit FAQs which has been enqueued from global settings in trip page. 
+* Removed 'Remove FAQ' button for Global FAQ's in trip edit page.
 
 Deprecated:
 * Function `wptravel_get_strings` is deprecated use `WpTravel_Helpers_Strings::get()` instead.
