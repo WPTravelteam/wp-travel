@@ -245,11 +245,13 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 == Changelog ==
 
 = 4.6.6 =
-Release Date: 1st July, 2021
+Release Date: 4th July, 2021
+
+Enhancement:
+* Hide Payment option in case of 100% coupon discount on booking.
 
 Fixes:
 * Fixed Undefined index ID of undefined notice in 404 page.
-* Fixed Showing payment option if we use 100% coupon code. Now payment options will be hidden in case of 100% coupon discount.
 * Fixed Review count always shows 0 in homepage sections even the trip has review.
 * Fixed Global FAQ answer is not showing when creating new trip.
 * Fixed System information Export as csv button issue.
@@ -259,6 +261,7 @@ Fixes:
 * Fixed Js error regarding tabs in case of loading bundle js file. 
 * Fixed trip type and trip location filter toolbar not working in taxonomy page.
 * Fixed select trip dropdown not working in coupon page.
+* Removed unselected category displaying as category (0) x amount in mini cart in checkout page while booking trip.
 * Added missing translation string in booking section.
 * Removed feature to edit FAQs which has been enqueued from global settings in trip page. 
 * Removed 'Remove FAQ' button for Global FAQ's in trip edit page.
