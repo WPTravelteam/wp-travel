@@ -113,7 +113,7 @@ class WP_Travel_Ajax {
 					if ( ! empty( $pricing_categories ) ) {
 						foreach ( $pricing_categories as $pricing_category ) {
 							$category = array(
-								'id'              => $pricing_category->id,
+								'id'              => $pricing_category->pricing_category_id,
 								'price_per'       => $pricing_category->price_per,
 								'regular_price'   => $pricing_category->regular_price,
 								'is_sale'         => $pricing_category->is_sale,
