@@ -50,11 +50,9 @@
   position: relative;
   .wp-travel-form-input-clear-btn {
     height: 100%;
-    overflow: auto;
     position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
+    top: -5px;
+    right: -10px;
     margin: auto;
     background: transparent;
     border: 0;
