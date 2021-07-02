@@ -177,7 +177,7 @@ class WP_Travel_Ajax {
 					'date_days'  => $exclude_date->date_days,
 					'start_date' => $exclude_date->start_date,
 					'end_date'   => $exclude_date->end_date,
-					'time'       => $exclude_date->time,
+					'trip_time'  => $exclude_date->time,
 				);
 				WpTravel_Helpers_Trip_Excluded_Dates_Times::add_individual_date_time( $new_trip_id, $new_exclude_date );
 			}
