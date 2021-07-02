@@ -251,6 +251,7 @@ Enhancement:
 * Hide Payment option in case of 100% coupon discount on booking.
 
 Fixes:
+* Fixed Clone trip issue with pricing, dates and exclude dates.
 * Fixed Undefined index ID of undefined notice in 404 page.
 * Fixed Review count always shows 0 in homepage sections even the trip has review.
 * Fixed Global FAQ answer is not showing when creating new trip.
