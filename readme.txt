@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 5.4.1
 Tested up to: 5.7.2
 Requires PHP: 5.6.2
-Stable tag: 4.6.6
+Stable tag: 4.7.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -244,7 +244,7 @@ Before updating plugin please check ["our latest release notes"](http://wptravel
 
 == Changelog ==
 
-= 4.6.6 =
+= 4.7.0 =
 Release Date: 4th July, 2021
 
 Enhancement:
