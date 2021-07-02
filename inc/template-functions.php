@@ -42,7 +42,7 @@ add_action( 'wp_travel_booking_fixed_departure_list', 'wptravel_booking_fixed_de
 add_filter( 'get_header_image_tag', 'wptravel_get_header_image_tag', 10 );
 add_filter( 'jetpack_relatedposts_filter_options', 'wptravel_remove_jetpack_related_posts' );
 
-add_action( 'pre_get_posts', 'wptravel_posts_filter' );
+add_action( 'pre_get_posts', 'wptravel_posts_filter', 20 );
 add_filter( 'posts_clauses', 'wptravel_posts_clauses_filter', 11, 2 );
 
 /**
