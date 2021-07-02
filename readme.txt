@@ -264,6 +264,8 @@ Fixes:
 * Fixed select trip dropdown not working in coupon page.
 * Removed unselected category displaying as category (0) x amount in mini cart in checkout page while booking trip.
 * Added missing translation string in booking section.
+
+Tweaks:
 * Removed feature to edit FAQs which has been enqueued from global settings in trip page. 
 * Removed 'Remove FAQ' button for Global FAQ's in trip edit page.
 
