@@ -136,7 +136,7 @@ class WP_Travel_Ajax {
 
 				// Add new pricing id in newly inserted date.
 				$pricing_ids_of_date  = $date->pricing_ids;
-				$new_temp_ids = array();
+				$new_temp_ids         = array();
 				if ( ! empty( $pricing_ids_of_date ) ) {
 					$temp_ids = explode( ',', $pricing_ids_of_date );
 					foreach ( $temp_ids as $temp_id ) {
@@ -148,17 +148,17 @@ class WP_Travel_Ajax {
 				$new_pricing_ids = implode( ',', $new_temp_ids );
 
 				$new_date = array(
-					'title'       => $date->title,
-					'recurring'   => $date->recurring,
-					'years'       => $date->years,
-					'months'      => $date->months,
-					'weeks'       => $date->weeks,
-					'days'        => $date->days,
-					'date_days'   => $date->date_days,
-					'start_date'  => $date->start_date,
-					'end_date'    => $date->end_date,
-					'trip_time'   => $date->trip_time,
-					'pricing_ids' => $new_pricing_ids,
+					'title'        => $date->title,
+					'is_recurring' => $date->recurring,
+					'years'        => $date->years,
+					'months'       => $date->months,
+					'weeks'        => $date->weeks,
+					'days'         => $date->days,
+					'date_days'    => $date->date_days,
+					'start_date'   => $date->start_date,
+					'end_date'     => $date->end_date,
+					'trip_time'    => $date->trip_time,
+					'pricing_ids'  => $new_pricing_ids,
 				);
 				WpTravel_Helpers_Trip_Dates::add_individual_date( $new_trip_id, $new_date );
 			}
