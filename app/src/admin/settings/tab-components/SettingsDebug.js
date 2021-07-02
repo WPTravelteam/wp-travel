@@ -16,7 +16,6 @@ export default () => {
     const allData = useSelect((select) => {
         return select('WPTravel/Admin').getAllStore()
     }, []);
-    console.log(allData)
     const { updateSettings } = dispatch('WPTravel/Admin');
     const {
         wt_test_mode,
