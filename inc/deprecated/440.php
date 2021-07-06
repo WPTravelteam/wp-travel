@@ -6,11 +6,12 @@
  */
 
 /**
- * Check sale price enable or not.
+ * Check sale price enable or not. Modified in 2.0.1, 2.0.5, 2.0.7.
  *
- * @param Number $post_id Current post id.
+ * @param Number $trip_id Current post id.
  * @param String $price_key Price Key for multiple pricing.
- * @since WP Travel 1.0.5 Modified in 2.0.1, 2.0.5, 2.0.7 and Deprecated in WP Travel 4.4.0
+ * @since 1.0.5
+ * @deprecated 4.4.0
  */
 function wp_travel_is_enable_sale( $trip_id, $price_key = null ) {
 	wp_travel_deprecated_function( 'wp_travel_is_enable_sale', '4.4.0', 'WP_Travel_Helpers_Trips::is_sale_enabled()' );
@@ -28,7 +29,8 @@ function wp_travel_is_enable_sale( $trip_id, $price_key = null ) {
  * @param String $pricing_id Pricing Id of trip.
  * @param String $category_id Category Id of trip.
  * @param String $price_key Price Key of trip.
- * @since WP Travel 3.0.0 and Deprecated in WP Travel 4.4.0
+ * @since 3.0.0
+ * @deprecated 4.4.0
  */
 function wp_travel_is_enable_sale_price( $trip_id, $from_price_sale_enable = false, $pricing_id = '', $category_id = '', $price_key = '' ) {
 	wp_travel_deprecated_function( 'wp_travel_is_enable_sale_price', '4.4.0', 'WP_Travel_Helpers_Trips::is_sale_enabled()' );
@@ -45,7 +47,7 @@ function wp_travel_is_enable_sale_price( $trip_id, $from_price_sale_enable = fal
 /**
  * Return True if Tax is enabled in settings.
  *
- * @since Deprecated in WP Travel 4.4.0
+ * @deprecated 4.4.0
  */
 function wp_travel_is_trip_price_tax_enabled( $trip_id, $from_price_sale_enable = false, $pricing_id = '', $category_id = '', $price_key = '' ) {
 	wp_travel_deprecated_function( 'wp_travel_is_trip_price_tax_enabled', '4.4.0', 'WP_Travel_Helpers_Trips::is_tax_enabled()' );
@@ -56,7 +58,8 @@ function wp_travel_is_trip_price_tax_enabled( $trip_id, $from_price_sale_enable 
 /**
  * Return True Percent if tax is applicable otherwise return false.
  *
- * @since WP Travel 1.9.1 and Deprecated in WP Travel 4.4.0
+ * @since 1.9.1
+ * @deprecated 4.4.0
  * @return Mixed
  */
 function wp_travel_is_taxable() {
@@ -67,7 +70,8 @@ function wp_travel_is_taxable() {
 /**
  * Return HTML Booking Form
  *
- * @since WP Travel 1.0.0 and Deprecated in WP Travel 4.4.0
+ * @since 1.0.0
+ * @deprecated 4.4.0
  * @return HTML [description]
  */
 function wp_travel_get_booking_form() {
@@ -164,7 +168,8 @@ function wp_travel_get_booking_form() {
 /**
  * Array List of form field to generate booking fields.
  *
- * @since WP Travel 1.0.0 and Deprecated in WP Travel 4.4.0
+ * @since 1.0.0
+ * @deprecated 4.4.0
  * @return array Returns form fields.
  */
 function wp_travel_booking_form_fields() {
@@ -418,7 +423,8 @@ function wp_travel_booking_form_fields() {
  * @param Object $elements Post Object.
  * @param Int    $parent_id Parent ID of post.
  *
- * @since WP Travel 1.9.1 and Deprecated in WP Travel 4.4.0
+ * @since 1.9.1
+ * @deprecated 4.4.0
  * @return Object Return Tree Form of post Object.
  */
 function wp_travel_build_post_tree( array &$elements, $parent_id = 0 ) {
@@ -445,7 +451,8 @@ function wp_travel_build_post_tree( array &$elements, $parent_id = 0 ) {
  * @param  [type]  $selected        [description].
  * @param  integer $nesting_level   [description].
  * @param  boolean $echo            [description].
- * @since  WP Travel 1.9.1 and Deprecated in WP Travel 4.4.0
+ * @since  1.9.1
+ * @deprecated 4.4.0
  * @return [type]                   [description]
  */
 function wp_travel_get_post_hierarchy_dropdown( $list_serialized, $selected, $nesting_level = 0, $echo = true ) {
@@ -474,9 +481,10 @@ function wp_travel_get_post_hierarchy_dropdown( $list_serialized, $selected, $ne
 }
 
 /**
- * Get Price of trip. Price key is only for old data less than WP Travel @since 3.0.0-below legacy version
+ * Get Price of trip. Price key is only for old data less than WP Travel @since 3.0.0-below legacy version.
  *
- * @since WP Travel 3.0.0 and Deprecated in WP Travel 4.4.0
+ * @since 3.0.0
+ * @deprecated 4.4.0
  * @return Number
  */
 function wp_travel_get_price( $trip_id, $is_regular_price = false, $pricing_id = '', $category_id = '', $price_key = '' ) {
@@ -494,13 +502,14 @@ function wp_travel_get_price( $trip_id, $is_regular_price = false, $pricing_id =
 }
 
 /**
- * Return Trip Price.
+ * Return Trip Price. Modified 1.9.2, 2.0.7.
  *
  * @param int    $trip_id Post id of the post.
  * @param String $price_key Price key for multiple pricing.
  * @param Bool   $only_regular_price Return only trip price rather than sale price as trip price if this is set to true.
  *
- * @since WP Travel 1.0.5 // Modified 1.9.2, 2.0.7 and Deprecated in WP Travel 4.4.0
+ * @since 1.0.5
+ * @deprecated 4.4.0
  * @return int Trip Price.
  */
 function wp_travel_get_actual_trip_price( $trip_id = 0, $price_key = '', $is_regular_price = false ) {
@@ -523,7 +532,8 @@ function wp_travel_get_actual_trip_price( $trip_id = 0, $price_key = '', $is_reg
  *
  * @param  int $trip_id Post id of the post.
  *
- * @since WP Travel 1.9.1 and Deprecated in WP Travel 4.4.0
+ * @since 1.9.1
+ * @deprecated 4.4.0
  * @return int Trip Price.
  */
 function wp_travel_get_trip_sale_price( $trip_id = 0 ) {
@@ -544,7 +554,8 @@ function wp_travel_get_trip_sale_price( $trip_id = 0 ) {
  *
  * @param  int $post_id Post id of the post.
  *
- * @since WP Travel 1.9.1 and Deprecated in WP Travel 4.4.0
+ * @since 1.9.1
+ * @deprecated 4.4.0
  * @return int Trip Price.
  */
 function wp_travel_get_trip_price( $post_id = 0 ) {
@@ -560,11 +571,12 @@ function wp_travel_get_trip_price( $post_id = 0 ) {
 }
 
 /**
- * Return Min price key for the trip
+ * Return Min price key for the trip. modified in 2.0,5 not required from 3.0.0.
  *
  * @param Mixed $options pricing_option | trip id.
  *
- * @since WP Travel 2.0.0, 2.0.5 [Introduced in 2.0.0 or earlier, modified in 2.0,5 ] not required @since 3.0.0 and Deprecated in WP Travel 4.4.0
+ * @since 2.0.0
+ * @deprecated 4.4.0
  * @return Mixed.
  */
 function wp_travel_get_min_price_key( $options ) {

@@ -885,9 +885,9 @@ function wptravel_get_permalink_structure() {
 }
 
 /**
- * Return Tabs and its content for single page.
+ * Return Tabs and its content for single page. Modified in 2.0.7
  *
- * @since 1.1.2 Modified in 2.0.7
+ * @since 1.1.2
  *
  * @return void
  */
@@ -950,7 +950,7 @@ function wptravel_get_frontend_tabs( $show_in_menu_query = false, $frontend_hide
  * Default Tabs and its content.
  *
  * @var bool $is_show_in_menu_query  Set true when this function need to call from admin.
- * @since Modified in 2.0.7
+ * @since 2.0.0
  * @return array
  */
 function wptravel_get_default_trip_tabs( $is_show_in_menu_query = false, $frontend_hide_content = false ) {
@@ -1107,10 +1107,10 @@ function wptravel_get_global_tabs( $settings, $custom_tab_enabled = false ) {
 }
 
 /**
- * Return list of trip tabs for admin trip page.
+ * Return list of trip tabs for admin trip page.  Modified in 2.0.7
  *
  * @param array $settings Settings data.
- * @since 1.9.3 Modified in 2.0.7
+ * @since 1.9.3
  * @return array
  */
 function wptravel_get_admin_trip_tabs( $post_id, $custom_tab_enabled = false, $frontend_hide_content = false ) {
@@ -1993,7 +1993,7 @@ function wptravel_booking_show_end_date() {
 function wptravel_get_trip_pricing_name_by_pricing_id( $trip_id, $pricing_id ) {
 	$pricing_name       = get_the_title( $trip_id );
 	$pricing            = wptravel_get_pricing_by_pricing_id( $trip_id, $pricing_id );
-	$show_pricing_label = apply_filters( 'wp_travel_show_pricing_label_on_name', true ); // filter @since WP Travel 4.3.1
+	$show_pricing_label = apply_filters( 'wp_travel_show_pricing_label_on_name', true ); // filter @since 4.3.1
 	if ( ! is_null( $pricing ) && $show_pricing_label ) {
 		$pricing_name = sprintf( '%s (%s)', $pricing_name, $pricing['title'] );
 	}
@@ -2030,7 +2030,7 @@ function wptravel_get_trip_pricing_name( $trip_id, $price_key = '' ) {
 
 		if ( $pricing_option ) {
 			$pricing_label      = isset( $pricing_option['pricing_name'] ) ? $pricing_option['pricing_name'] : false;
-			$show_pricing_label = apply_filters( 'wp_travel_show_pricing_lable_on_name', true ); // filter @since WP Travel 4.3.1
+			$show_pricing_label = apply_filters( 'wp_travel_show_pricing_lable_on_name', true ); // filter @since 4.3.1
 			if ( $pricing_label && $show_pricing_label ) {
 				$pricing_name = sprintf( '%s (%s)', $pricing_name, $pricing_label );
 			}
@@ -2282,7 +2282,7 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 										/**
 										 * Fix for field editor billing checkbox issue.
 										 *
-										 * @since v2.1.0
+										 * @since 2.1.0
 										 */
 										$billing_data = implode( ', ', $billing_data );
 									}

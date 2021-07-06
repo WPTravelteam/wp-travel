@@ -2,7 +2,7 @@
 /**
  * Booking Class
  *
- * @since WP Travel 4.4.2
+ * @since 4.4.2
  *
  * @package wp-travel\inc\admin
  */
@@ -56,7 +56,7 @@ class WP_Travel_Admin_Booking {
 	 * Customize Admin column.
 	 *
 	 * @param Array $booking_columns List of columns.
-	 * @since WP Travel 4.4.2
+	 * @since 4.4.2
 	 * @return Array                  [description]
 	 */
 	public function booking_columns( $booking_columns ) {
@@ -76,7 +76,7 @@ class WP_Travel_Admin_Booking {
 	 * Add data to custom column.
 	 *
 	 * @param String $column_name Custom column name.
-	 * @since WP Travel 4.4.2
+	 * @since 4.4.2
 	 * @param int    $id          Post ID.
 	 */
 	public function booking_columns_content( $column_name, $id ) {
@@ -88,7 +88,7 @@ class WP_Travel_Admin_Booking {
 				break;
 
 			case 'contact_name':
-				$full_name = get_post_meta( $id, 'wp_travel_fullname', true ); // @since WP Travel 4.4.2. used for sorting and display the full name in the admin column.
+				$full_name = get_post_meta( $id, 'wp_travel_fullname', true ); // @since 4.4.2. used for sorting and display the full name in the admin column.
 
 				if ( ! $full_name ) {
 					$first_name = get_post_meta( $id, 'wp_travel_fname_traveller', true );
@@ -145,7 +145,7 @@ class WP_Travel_Admin_Booking {
 	 * ADMIN COLUMN - SORTING - MAKE HEADERS SORTABLE.
 	 *
 	 * @param array $columns Custom column in the booking list.
-	 * @since WP Travel 4.4.2
+	 * @since 4.4.2
 	 */
 	public function booking_columns_sort( $columns ) {
 		$custom = array(
@@ -159,7 +159,7 @@ class WP_Travel_Admin_Booking {
 	 * Manage Order By custom column.
 	 *
 	 * @param  Array $vars Order By array.
-	 * @since WP Travel 4.4.2
+	 * @since 4.4.2
 	 * @return Array       Order By array.
 	 */
 	public function booking_columns_content_sort( $vars ) {
@@ -178,7 +178,7 @@ class WP_Travel_Admin_Booking {
 	/**
 	 * Register metabox.
 	 *
-	 * @since WP Travel 4.4.2
+	 * @since 4.4.2
 	 */
 	public function register_metaboxes() {
 		global $post;
@@ -192,7 +192,7 @@ class WP_Travel_Admin_Booking {
 	 * Call back for booking metabox.
 	 *
 	 * @param Object $post Post object.
-	 * @since WP Travel 4.4.2
+	 * @since 4.4.2
 	 */
 	public function booking_info( $post ) {
 		if ( ! $post ) {
@@ -457,7 +457,7 @@ class WP_Travel_Admin_Booking {
 	/**
 	 * Save Bookings.
 	 *
-	 * @since WP Travel 4.4.2
+	 * @since 4.4.2
 	 * @param int $booking_id Booking ID.
 	 */
 	public function save( $booking_id ) {

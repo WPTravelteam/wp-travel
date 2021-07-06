@@ -546,7 +546,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @param string  $slug       page slug.
 		 * @param boolean $admin_page check if page is admin page.
 		 *
-		 * @since WP Travel 4.4.2
+		 * @since 4.4.2
 		 * @return boolean
 		 */
 		public static function is_page( $slug, $admin_page = false ) {
@@ -589,7 +589,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @param boolean $admin_page check if page is admin page.
 		 *
-		 * @since WP Travel 4.5.4
+		 * @since 4.5.4
 		 * @return boolean
 		 */
 		public static function is_pages( $admin_page = false ) {
@@ -615,7 +615,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		/**
 		 * Create WP Travel nonce in case of any request.
 		 *
-		 * @since WP Travel 4.4.7
+		 * @since 4.4.7
 		 * @return boolean
 		 */
 		public static function create_nonce() {
@@ -637,7 +637,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		/**
 		 * Verify WP Travel nonce in case of any request.
 		 *
-		 * @since WP Travel 4.4.7
+		 * @since 4.4.7
 		 * @param boolean $return_bool Check if return bool.
 		 * @return boolean
 		 */
@@ -658,7 +658,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		/**
 		 * Get WP Travel request.
 		 *
-		 * @since WP Travel 4.4.7
+		 * @since 4.4.7
 		 * @param string $method Request method.
 		 * @return boolean
 		 */

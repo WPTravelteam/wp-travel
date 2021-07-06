@@ -8,7 +8,8 @@
  /**
  * Check if the current page is WP Travel page or not.
  *
- * @since WP Travel 1.0.4 and Deprecated in WP Travel 4.4.2
+ * @since 1.0.4
+ * @deprecated 4.4.2
  * @return Boolean
  */
 function is_wp_travel_archive_page() {
@@ -19,7 +20,8 @@ function is_wp_travel_archive_page() {
 /**
  * Check whether page is checkout page or not.
  *
- * @since WP Travel 1.8.5* and Deprecated in WP Travel 4.4.2
+ * @since 1.8.5
+ * @deprecated 4.4.2
  * @return Boolean
  */
 function wp_travel_is_checkout_page() {
@@ -30,7 +32,8 @@ function wp_travel_is_checkout_page() {
 /**
  * Check whether page is cart page or not.
  *
- * @since WP Travel 1.8.5* and Deprecated in WP Travel 4.4.2
+ * @since 1.8.5
+ * @deprecated 4.4.2
  * @return Boolean
  */
 function wp_travel_is_cart_page() {
@@ -41,7 +44,8 @@ function wp_travel_is_cart_page() {
 /**
  * Check whether page is dashboard page or not.
  *
- * @since WP Travel 1.8.5* and Deprecated in WP Travel 4.4.2
+ * @since 1.8.5
+ * @deprecated 4.4.2
  * @return Boolean
  */
 function wp_travel_is_dashboard_page() {
@@ -52,7 +56,8 @@ function wp_travel_is_dashboard_page() {
 /**
  * wp_travel_Is_account_page - Returns true when viewing an account page.
  *
- * @since WP Travel 1.8.5* and Deprecated in WP Travel 4.4.2
+ * @since 1.8.5
+ * @deprecated 4.4.2
  * @return bool
  */
 function wp_travel_is_account_page() {
@@ -61,7 +66,8 @@ function wp_travel_is_account_page() {
 }
 
 /**
- * @since WP Travel 1.0.0 and Deprecated in WP Travel 4.4.2
+ * @since 1.0.0
+ * @deprecated 4.4.2
  */
 function wp_travel_register_booking_metaboxes() {
 	// register_metaboxes
@@ -70,7 +76,8 @@ function wp_travel_register_booking_metaboxes() {
 /**
  * Hide publish and visibility.
  *
- * @since WP Travel 1.0.0 and Deprecated in WP Travel 4.4.2
+ * @since 1.0.0
+ * @deprecated 4.4.2
  */
 function wp_travel_admin_head_meta() {
 	// internal_style
@@ -82,7 +89,8 @@ function wp_travel_admin_head_meta() {
 /**
  * Call back for booking metabox.
  *
- * @since WP Travel 1.0.0 and Deprecated in WP Travel 4.4.2
+ * @since 1.0.0
+ * @deprecated 4.4.2
  * @param Object $post Post object.
  */
 function wp_travel_booking_info( $post ) {
@@ -96,8 +104,9 @@ function wp_travel_booking_info( $post ) {
  * Save Post meta data from admin.
  *
  * @param  int $booking_id Booking ID.
- * 
- * @since WP Travel 1.0.0 and Deprecated in WP Travel 4.4.2
+ *
+ * @since 1.0.0
+ * @deprecated 4.4.2
  * @return Mixed
  */
 function wp_travel_save_booking_data( $booking_id ) {
@@ -112,7 +121,8 @@ function wp_travel_save_booking_data( $booking_id ) {
  *
  * @param  Array $booking_columns List of columns.
  *
- * @since WP Travel 1.0.0 and Deprecated in WP Travel 4.4.2
+ * @since 1.0.0
+ * @deprecated 4.4.2
  * @return Array                  [description]
  */
 function wp_travel_booking_columns( $booking_columns ) {
@@ -128,7 +138,8 @@ function wp_travel_booking_columns( $booking_columns ) {
  * @param  String $column_name Custom column name.
  * @param  int    $id          Post ID.
  * 
- * @since WP Travel 1.0.0 and Deprecated in WP Travel 4.4.2
+ * @since 1.0.0
+ * @deprecated 4.4.2
  */
 function wp_travel_booking_manage_columns( $column_name, $id ) {
 	// booking_columns_content
@@ -140,8 +151,9 @@ function wp_travel_booking_manage_columns( $column_name, $id ) {
 /**
  * ADMIN COLUMN - SORTING - MAKE HEADERS SORTABLE
  * https://gist.github.com/906872
- * 
- * @since WP Travel 1.0.0 and Deprecated in WP Travel 4.4.2
+ *
+ * @since 1.0.0
+ * @deprecated 4.4.2
  */
 function wp_travel_booking_sort( $columns ) {
 	// booking_columns_sort
@@ -155,8 +167,9 @@ function wp_travel_booking_sort( $columns ) {
  * Manage Order By custom column.
  *
  * @param  Array $vars Order By array.
- * 
- * @since WP Travel 1.0.0 and Deprecated in WP Travel 4.4.2
+ *
+ * @since 1.0.0
+ * @deprecated 4.4.2
  * @return Array       Order By array.
  */
 function wp_travel_booking_column_orderby( $vars ) {

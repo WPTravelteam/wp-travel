@@ -289,11 +289,11 @@ class WpTravel_Helpers_Pricings {
 	}
 
 	/**
-	 * Get Price of trip. Price key is only for old data less than WP Travel @since 3.0.0-below legacy version
+	 * Get Price of trip. Price key is only for old data less than WP Travel @since 3.0.0
 	 *
 	 * @param array $args Arguments.
 	 *
-	 * @since WP Travel  4.4.0
+	 * @since 4.4.0
 	 * @return Number
 	 */
 	public static function get_price( $args = array() ) {
@@ -302,7 +302,7 @@ class WpTravel_Helpers_Pricings {
 		if ( ! $trip_id ) {
 			return 0;
 		}
-		if ( 'single-price' === wptravel_get_pricing_option_type( $trip_id ) ) { // For legacy single pricing support @since WP Travel 3.0.0.
+		if ( 'single-price' === wptravel_get_pricing_option_type( $trip_id ) ) { // For legacy single pricing support @since 3.0.0.
 			$price = self::get_price_legacy( $args );
 		} else {
 			$settings     = wptravel_get_settings();
@@ -315,7 +315,7 @@ class WpTravel_Helpers_Pricings {
 		}
 
 		$price = $price ? $price : 0;
-		return apply_filters( 'wptravel_get_price', $price, $args ); // filter wptravel_get_price @since WP Travel 4.6.4.
+		return apply_filters( 'wptravel_get_price', $price, $args ); // filter wptravel_get_price @since 4.6.4.
 	}
 
 	/**
@@ -323,7 +323,7 @@ class WpTravel_Helpers_Pricings {
 	 *
 	 * @param array $args Arguments.
 	 *
-	 * @since WP Travel  4.4.0
+	 * @since 4.4.0
 	 * @return Number
 	 */
 	public static function get_price_legacy( $args = array() ) {
@@ -337,7 +337,7 @@ class WpTravel_Helpers_Pricings {
 		$category_id      = isset( $args['category_id'] ) ? $args['category_id'] : '';
 		$price_key        = isset( $args['price_key'] ) ? $args['price_key'] : '';
 
-		if ( 'single-price' === wptravel_get_pricing_option_type( $trip_id ) ) { // For legacy single pricing support @since WP Travel 3.0.0.
+		if ( 'single-price' === wptravel_get_pricing_option_type( $trip_id ) ) { // For legacy single pricing support @since 3.0.0.
 			$price       = get_post_meta( $trip_id, 'wp_travel_price', true );
 			$enable_sale = get_post_meta( $trip_id, 'wp_travel_enable_sale', true );
 			if ( $enable_sale && ! $is_regular_price ) {
@@ -351,13 +351,13 @@ class WpTravel_Helpers_Pricings {
 				// Specific listing as per pricing_id to get price.
 				if ( ! empty( $pricing_id ) ) {
 					$pricing_option = isset( $pricing_options[ $pricing_id ] ) ? $pricing_options[ $pricing_id ] : array();
-					if ( ! isset( $pricing_option['categories'] ) ) { // Old Listing upto WP Travel @since 3.0.0-below legacy version.
+					if ( ! isset( $pricing_option['categories'] ) ) { // Old Listing upto WP Travel @since 3.0.0.
 						if ( ! $price_key && $pricing_id === $category_id ) { // By default we set category_id = pricing_id due to no category_id in listing of legacy version.
 							$price_key = isset( $pricing_options[ $pricing_id ]['price_key'] ) ? $pricing_options[ $pricing_id ]['price_key'] : '';
 						}
 
 						// [Snippet from wp_travel_get_actual_trip_price function ].
-						// @since 1.9.2 // Added price calculation for pricing key [multiple pricing].
+						// Added price calculation for pricing key [multiple pricing] @since 1.9.2.
 						$enable_pricing_options = wptravel_is_enable_pricing_options( $trip_id );
 						$valid_price_key        = wptravel_is_price_key_valid( $trip_id, $price_key );
 						if ( '' !== $price_key && $enable_pricing_options && $valid_price_key ) {
@@ -395,7 +395,7 @@ class WpTravel_Helpers_Pricings {
 					$pricing_id     = isset( $min_keys['pricing_id'] ) ? $min_keys['pricing_id'] : '';
 					$pricing_option = ! empty( $pricing_id ) && isset( $pricing_options[ $pricing_id ] ) ? $pricing_options[ $pricing_id ] : array();
 
-					if ( ! isset( $pricing_option['categories'] ) ) { // Old Listing upto WP Travel @since 3.0.0-below legacy version.
+					if ( ! isset( $pricing_option['categories'] ) ) { // Old Listing upto WP Travel @since 3.0.0.
 
 						if ( isset( $pricing_option['price'] ) ) { // Old pricing option.
 
@@ -451,7 +451,7 @@ class WpTravel_Helpers_Pricings {
 	 *
 	 * @param array $args Arguments.
 	 *
-	 * @since WP Travel  4.4.0
+	 * @since 4.4.0
 	 * @return Number
 	 */
 	public static function get_price_v4( $args = array() ) {

@@ -9,14 +9,14 @@ defined( 'ABSPATH' ) || exit;
 /**
  * WpTravel_Helpers_Strings class.
  *
- * @since WP Travel 4.6.4
+ * @since 4.6.4
  */
 class WpTravel_Helpers_Strings { // @phpcs:ignore
 
 	/**
 	 * Get all strings used in WP Travel.
 	 *
-	 * @since WP Travel 4.6.4
+	 * @since 4.6.4
 	 *
 	 * @return array
 	 */
@@ -174,7 +174,7 @@ class WpTravel_Helpers_Strings { // @phpcs:ignore
 	/**
 	 * Get all booking related strings.
 	 *
-	 * @since WP Travel 4.6.4
+	 * @since 4.6.4
 	 *
 	 * @return array
 	 */
@@ -223,7 +223,7 @@ class WpTravel_Helpers_Strings { // @phpcs:ignore
 	/**
 	 * Get all tabs related strings.
 	 *
-	 * @since WP Travel 4.6.4
+	 * @since 4.6.4
 	 *
 	 * @return array
 	 */
@@ -247,7 +247,7 @@ class WpTravel_Helpers_Strings { // @phpcs:ignore
 	/**
 	 * Get all alert strings.
 	 *
-	 * @since WP Travel 4.6.4
+	 * @since 4.6.4
 	 *
 	 * @return array
 	 */
@@ -271,7 +271,7 @@ class WpTravel_Helpers_Strings { // @phpcs:ignore
 	/**
 	 * Get all empty results strings.
 	 *
-	 * @since WP Travel 4.6.4
+	 * @since 4.6.4
 	 *
 	 * @return array
 	 */
@@ -292,7 +292,7 @@ class WpTravel_Helpers_Strings { // @phpcs:ignore
 	/**
 	 * Get all admin notices strings.
 	 *
-	 * @since WP Travel 4.6.4
+	 * @since 4.6.4
 	 *
 	 * @return array
 	 */

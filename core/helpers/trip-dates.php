@@ -220,7 +220,7 @@ class WpTravel_Helpers_Trip_Dates {
 	 *
 	 * @param int     $trip_id Trip id of the trip.
 	 * @param boolean $check_for_multiple_departure Only for Legacy version less than V4.
-	 * @since WP Travel 4.4.5
+	 * @since 4.4.5
 	 */
 	public static function is_fixed_departure( $trip_id, $check_for_multiple_departure = false ) {
 		if ( ! $trip_id ) {

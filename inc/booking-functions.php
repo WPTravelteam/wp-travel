@@ -8,7 +8,7 @@
 /**
  * Frontend booking and send Email after clicking Book Now.
  *
- * @since WP Travel 1.7.5
+ * @since 1.7.5
  */
 function wptravel_book_now() {
 	if (
@@ -25,7 +25,7 @@ function wptravel_book_now() {
 	 * Trigger any action before Booking Process.
 	 *
 	 * @hooked array( 'WP_Travel_Coupon', 'process_update_count' )
-	 * @since WP Travel 4.4.2
+	 * @since 4.4.2
 	 */
 	do_action( 'wp_travel_action_before_booking_process' ); // phpcs:ignore
 	do_action( 'wptravel_action_before_booking_process' );
@@ -47,8 +47,8 @@ function wptravel_book_now() {
 	$arrival_date           = array();
 	$departure_date         = array();
 	$arrival_date_email_tag = array(); // quick fix to add arrival date along with time in email.
-	$pricing_id             = array(); // @since WP Travel v4.0
-	$trip_time              = array(); // @since WP Travel v4.0
+	$pricing_id             = array(); // @since v4.0
+	$trip_time              = array(); // @since v4.0
 	foreach ( $items as $key => $item ) {
 		// @since 3.1.3
 		$email_travel_date = apply_filters( 'wp_travel_email_travel_date', $item['arrival_date'], $item ); // phpcs:ignore
@@ -60,8 +60,8 @@ function wptravel_book_now() {
 		$arrival_date[]           = $item['arrival_date'];
 		$departure_date[]         = $item['departure_date'];
 		$arrival_date_email_tag[] = $email_travel_date;
-		$pricing_id[]             = isset( $item['pricing_id'] ) ? $item['pricing_id'] : 0; // @since WP Travel v4.0
-		$trip_time[]              = isset( $item['trip_time'] ) ? $item['trip_time'] : ''; // @since WP Travel v4.0
+		$pricing_id[]             = isset( $item['pricing_id'] ) ? $item['pricing_id'] : 0; // @since v4.0
+		$trip_time[]              = isset( $item['trip_time'] ) ? $item['trip_time'] : ''; // @since v4.0
 		$total_pax               += $item['pax'];
 	}
 
@@ -180,7 +180,7 @@ function wptravel_book_now() {
 		 * Trigger Update inventory values.
 		 *
 		 * @hooked array( 'WP_Travel_Util_Inventory', 'update_inventory' )
-		 * @since WP Travel 4.0.0
+		 * @since 4.0.0
 		 */
 		$inventory_args = apply_filters( 'wp_travel_inventory_args', $args ); // phpcs:ignore
 		$inventory_args = apply_filters( 'wptravel_inventory_args', $inventory_args );
@@ -194,7 +194,7 @@ function wptravel_book_now() {
 		 * Trigger Email functions. sends email to admin and client.
 		 *
 		 * @hooked array( 'WP_Travel_Email', 'send_booking_emails' )
-		 * @since WP Travel 4.4.2
+		 * @since 4.4.2
 		 */
 		do_action( 'wp_travel_action_after_inventory_update', $args ); // phpcs:ignore
 		do_action( 'wptravel_action_after_inventory_update', $args );
@@ -257,7 +257,7 @@ function wptravel_book_now() {
 			 * Trigger Update inventory values action.
 			 *
 			 * @hooked array( 'WP_Travel_Util_Inventory', 'update_inventory' )
-			 * @since WP Travel 4.0.0
+			 * @since 4.0.0
 			 */
 			$inventory_args = apply_filters( 'wp_travel_inventory_args', $args ); // phpcs:ignore
 			$inventory_args = apply_filters( 'wptravel_inventory_args', $inventory_args );

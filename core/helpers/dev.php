@@ -20,7 +20,7 @@ function wptravel_dev_mode() {
 /**
  * WP Travel script suffix function.
  *
- * @since WP Travel 4.6.3
+ * @since 4.6.3
  * @return String
  */
 function wptravel_script_suffix() {

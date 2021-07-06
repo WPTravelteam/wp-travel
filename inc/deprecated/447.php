@@ -546,6 +546,14 @@ function wp_travel_get_global_tabs( $settings, $custom_tab_enabled = '' ) { // @
 	return wptravel_get_global_tabs( $settings, $custom_tab_enabled );
 }
 
+/**
+ * Default Tabs and its content.
+ *
+ * This will get all required tabs and its content for trip single page.
+ *
+ * @since 2.0.7
+ * @deprecated 4.4.7 Use wptravel_get_default_trip_tabs() instead.
+ */
 function wp_travel_get_default_trip_tabs( $is_show_in_menu_query = '', $frontend_hide_content = '' ) { // @phpcs:ignore
 	wptravel_deprecated_function( 'wp_travel_get_default_trip_tabs', '4.4.7', 'wptravel_get_default_trip_tabs' );
 	return wptravel_get_default_trip_tabs( $is_show_in_menu_query, $frontend_hide_content );

@@ -128,7 +128,7 @@ class WP_Travel_Coupon {
 	 *
 	 * @param Number $coupon_id Current coupon/post id.
 	 *
-	 * @since WP Travel 4.4.7
+	 * @since 4.4.7
 	 * @return Number Discount value
 	 */
 	public function get_discount_value( $coupon_id ) {
@@ -206,7 +206,7 @@ class WP_Travel_Coupon {
 	 * @param Number $coupon_id ID of the coupon.
 	 * @param Number $trip_id Trip id to check whether this trip has discount or not.
 	 *
-	 * @since WP Travel 4.4.7
+	 * @since 4.4.7
 	 *
 	 * @return Boolean
 	 */
@@ -235,7 +235,7 @@ class WP_Travel_Coupon {
 	 *
 	 * @param Number $coupon_id ID of the coupon.
 	 *
-	 * @since WP Travel 4.4.7
+	 * @since 4.4.7
 	 *
 	 * @return Boolean
 	 */
@@ -260,7 +260,7 @@ class WP_Travel_Coupon {
 	 * @param Number $coupon_id ID of the coupon.
 	 * @param Bool   $partial_total Either return partial total or full total.
 	 *
-	 * @since WP Travel 4.4.7
+	 * @since 4.4.7
 	 *
 	 * @return Boolean
 	 */

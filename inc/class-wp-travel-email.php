@@ -2,7 +2,7 @@
 /**
  * Handle/Send Booking/Payment Emails
  *
- * @since WP Travel 4.4.2
+ * @since 4.4.2
  * @package WP Travel
  */
 
@@ -40,7 +40,7 @@ class WP_Travel_Email extends WP_Travel_Emails {
 	 * Send Booking emails to client and admin.
 	 *
 	 * @param array $args Data to send booking email.
-	 * @since WP Travel 4.4.2
+	 * @since 4.4.2
 	 */
 	public function send_booking_emails( $args ) {
 

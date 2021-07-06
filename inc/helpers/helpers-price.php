@@ -545,7 +545,7 @@ function wptravel_is_enable_pricing_options( $trip_id ) {
  * Used For Calculation purpose. for display purpose use wptravel_get_formated_price_currency.
  *
  * @param int  $price Amount to be formatted.
- * @param bool $format If true should be formatted according to the WP Travel Number fomatting Setting @since WP Travel v3.0.4
+ * @param bool $format If true should be formatted according to the WP Travel Number fomatting Setting @since v3.0.4
  * @param int  $number_of_decimals Number after decimal .00.
  */
 function wptravel_get_formated_price( $price, $format = true, $number_of_decimals = 2 ) {
@@ -579,7 +579,7 @@ function wptravel_get_formated_price( $price, $format = true, $number_of_decimal
  * @param bool      $convert [Optional] Default is true, pass false if the price has been already been converted,
  *                                      so it won't reconvert it the converted price.
  *
- * @since WP-Travel 4.0.7
+ * @since 4.0.7
  * @author Garvit Shrestha
  */
 function wptravel_convert_price( $price, $convert = true ) {

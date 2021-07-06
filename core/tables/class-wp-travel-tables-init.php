@@ -4,7 +4,7 @@
  *
  * @todo Use of namespace.
  * @package WP Travel API
- * @since WP Travel 4.4.5
+ * @since 4.4.5
  */
 
 if ( ! class_exists( 'WP_Travel_Tables_Init' ) ) {
@@ -16,7 +16,7 @@ if ( ! class_exists( 'WP_Travel_Tables_Init' ) ) {
 		 * The single instance of the class.
 		 *
 		 * @var WP Travel
-		 * @since WP Travel 4.4.5
+		 * @since 4.4.5
 		 */
 		protected static $_instance = null;
 
@@ -24,7 +24,7 @@ if ( ! class_exists( 'WP_Travel_Tables_Init' ) ) {
 		 * Main WP_Travel_Tables_Init Instance.
 		 * Ensures only one instance of WP_Travel_Tables_Init is loaded or can be loaded.
 		 *
-		 * @since WP Travel 4.4.5
+		 * @since 4.4.5
 		 * @static
 		 * @see WP_Travel_Tables_Init()
 		 * @return WP_Travel_Tables_Init - Main instance.
@@ -47,7 +47,7 @@ if ( ! class_exists( 'WP_Travel_Tables_Init' ) ) {
 		/**
 		 * Hook into actions and filters.
 		 *
-		 * @since WP Travel 4.4.5
+		 * @since 4.4.5
 		 * @return void
 		 */
 		private function init_hooks() {
@@ -57,7 +57,7 @@ if ( ! class_exists( 'WP_Travel_Tables_Init' ) ) {
 		/**
 		 * Include required core files used in admin and on the frontend.
 		 *
-		 * @since WP Travel 4.4.5
+		 * @since 4.4.5
 		 * @return void
 		 */
 		public function includes() {

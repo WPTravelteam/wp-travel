@@ -158,7 +158,7 @@ function wptravel_marketplace_page() {
  *
  * Will Display HTML content of support box
  *
- * @since WP Travel 4.4.2
+ * @since 4.4.2
  */
 function wptravel_meta_box_support() {
 	?>
@@ -187,7 +187,7 @@ function wptravel_meta_box_support() {
  *
  * Will Display HTML content of documentation box
  *
- * @since WP Travel 4.4.2
+ * @since 4.4.2
  */
 function wptravel_meta_box_documentation() {
 
@@ -218,7 +218,7 @@ function wptravel_meta_box_documentation() {
  *
  * Will Display HTML content of review box
  *
- * @since WP Travel 4.4.2
+ * @since 4.4.2
  */
 function wptravel_meta_box_review() {
 

@@ -623,7 +623,7 @@ class WpTravel_Frontend_Assets {
 					'loc' => $map_data['loc'],
 				),
 			);
-			$maps       = apply_filters( 'wptravel_maps_data', $maps, $settings ); // Filter @since WP Travel 4.6.5
+			$maps       = apply_filters( 'wptravel_maps_data', $maps, $settings ); // @since 4.6.5
 			$_wp_travel = array();
 			$trip       = WP_Travel_Helpers_Trips::get_trip( $trip_id );
 			if ( ! is_wp_error( $trip ) && 'WP_TRAVEL_TRIP_INFO' === $trip['code'] ) {
@@ -788,7 +788,7 @@ class WpTravel_Frontend_Assets {
 			// end of Map & Gallery Data.
 			$localized_data['wp_travel_drag_drop_uploader'] = $wp_travel_gallery_data;
 
-			// @since WP Travel 4.6.4
+			// @since 4.6.4
 			$_wp_travel_admin = array(
 				'strings' => WpTravel_Helpers_Strings::get(),
 				'ajaxUrl' => admin_url( 'admin-ajax.php' ),

@@ -3,7 +3,7 @@
 /**
  * Class to add Custom Post status.
  * 
- * @since WP Travel 4.4.4
+ * @since 4.4.4
  */
 class WP_Travel_Post_Status {
 
@@ -29,7 +29,7 @@ class WP_Travel_Post_Status {
 	/**
 	 * Register Trip status.
 	 *
-	 * @since WP Travel 4.4.4
+	 * @since 4.4.4
 	 * @return void
 	 */
 	public static function register_trip_status() {
@@ -46,7 +46,7 @@ class WP_Travel_Post_Status {
 	/**
 	 * Add custom status in dropdown.
 	 *
-	 * @since WP Travel 4.4.4
+	 * @since 4.4.4
 	 * @return void
 	 */
 	public static function trip_status_dropdown() {
@@ -69,7 +69,7 @@ class WP_Travel_Post_Status {
 	/**
 	 * Add custom status in dropdown for quick edit.
 	 *
-	 * @since WP Travel 4.4.4
+	 * @since 4.4.4
 	 * @return void
 	 */
 	public static function quick_edit_trip_status_dropdown() {
@@ -92,7 +92,7 @@ class WP_Travel_Post_Status {
 	/**
 	 * Status expired along with Title in the trip archive list.
 	 *
-	 * @since WP Travel 4.4.4
+	 * @since 4.4.4
 	 * @return void
 	 */
 	public static function trip_states_column( $status ) {
@@ -106,7 +106,7 @@ class WP_Travel_Post_Status {
 	/**
 	 * Remove edit, view.
 	 *
-	 * @since WP Travel 4.4.4
+	 * @since 4.4.4
 	 * @return void
 	 */
 	public static function remove_view_link( $actions, $trip ) {

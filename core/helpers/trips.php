@@ -452,7 +452,7 @@ class WpTravel_Helpers_Trips {
 	 *
 	 * @param array $args Arguments to filter trips.
 	 *
-	 * @since WP Travel 3.0.0
+	 * @since 3.0.0
 	 * @return Array
 	 */
 	public static function filter_trips( $args = array() ) {
@@ -563,7 +563,7 @@ class WpTravel_Helpers_Trips {
 	 *
 	 * @param array $args Arguments for data to retrive.
 	 *
-	 * @since WP Travel 3.0.0
+	 * @since 3.0.0
 	 * @return Array
 	 */
 	public static function get_trip_ids( $args = array() ) {
@@ -719,7 +719,7 @@ class WpTravel_Helpers_Trips {
 	 *
 	 * @param array $args Arguments.
 	 *
-	 * @since WP Travel  4.4.0
+	 * @since 4.4.0
 	 * @return Boolean
 	 */
 	public static function is_sale_enabled( $args = array() ) {
@@ -770,7 +770,7 @@ class WpTravel_Helpers_Trips {
 	 *
 	 * @param array $args Argument.
 	 *
-	 * @since WP Travel  4.4.0
+	 * @since 4.4.0
 	 * @return Array
 	 */
 	public static function is_sale_enabled_legacy( $args = array() ) {
@@ -801,7 +801,7 @@ class WpTravel_Helpers_Trips {
 			if ( ! empty( $pricing_id ) ) {
 				$pricing_option = isset( $pricing_options[ $pricing_id ] ) ? $pricing_options[ $pricing_id ] : array();
 
-				if ( ! isset( $pricing_option['categories'] ) ) { // Old Listing upto WP Travel @since 3.0.0-below legacy version.
+				if ( ! isset( $pricing_option['categories'] ) ) { // Old Listing upto WP Travel @since 3.0.0.
 					if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
 						foreach ( $pricing_options as $pricing_key => $option ) {
 							if ( isset( $option['enable_sale'] ) && 'yes' === $option['enable_sale'] ) {
@@ -819,7 +819,7 @@ class WpTravel_Helpers_Trips {
 
 				foreach ( $pricing_options as $pricing_id => $pricing_option ) {
 
-					if ( ! isset( $pricing_option['categories'] ) ) { // Old Listing upto WP Travel @since 3.0.0-below legacy version.
+					if ( ! isset( $pricing_option['categories'] ) ) { // Old Listing upto WP Travel @since 3.0.0.
 						if ( $price_key && ! empty( $price_key ) ) { // checks in indivicual pricing key [specific pricing is enabled in trip].
 							if ( isset( $pricing_options[ $price_key ]['enable_sale'] ) && 'yes' === $pricing_options[ $price_key ]['enable_sale'] ) {
 								$enable_sale = true;
@@ -879,7 +879,7 @@ class WpTravel_Helpers_Trips {
 	 *
 	 * @param array $args Arguments.
 	 *
-	 * @since WP Travel  4.4.0
+	 * @since 4.4.0
 	 * @return Array
 	 */
 	public static function is_sale_enabled_v4( $args = array() ) {
@@ -949,7 +949,7 @@ class WpTravel_Helpers_Trips {
 	/**
 	 * Return True if tax enable in settings.
 	 *
-	 * @since WP Travel  4.4.0
+	 * @since 4.4.0
 	 * @return Boolean
 	 */
 	public static function is_tax_enabled() {
@@ -960,7 +960,7 @@ class WpTravel_Helpers_Trips {
 	/**
 	 * Return True Percent if tax is applicable otherwise return false.
 	 *
-	 * @since WP Travel  4.4.0
+	 * @since 4.4.0
 	 * @return Mixed
 	 */
 	public static function get_tax_rate() {

@@ -200,7 +200,7 @@ class WP_Travel_Helpers_Settings {
 				if ( in_array( $settings_field, $page_ids ) && ! empty( $settings_data[ $settings_field ] ) ) {
 					$page_id = $settings_data[ $settings_field ];
 					/**
-					 * @since 3.1.8 WPML configuration.
+					 * @since 3.1.8.
 					 */
 					if ( defined( 'ICL_LANGUAGE_CODE' ) ) {
 						update_option( 'wp_travel_' . $settings_field . '_' . ICL_LANGUAGE_CODE, $page_id );

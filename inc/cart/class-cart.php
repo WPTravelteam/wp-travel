@@ -241,7 +241,7 @@ class WP_Travel_Cart {
 	/**
 	 * Function to update partial values like partial percent and partial amount.
 	 *
-	 * @since WP Travel 4.5.3
+	 * @since 4.5.3
 	 */
 	public function update_partials() {
 		if ( wptravel_is_partial_payment_enabled() ) {
@@ -511,7 +511,7 @@ class WP_Travel_Cart {
 	/**
 	 * This will clear discount values. Call this function while add/remove item from cart.
 	 *
-	 * @since WP Travel 4.4.7
+	 * @since 4.4.7
 	 */
 	public function clear_discount_values() {
 		$this->discounts = array();
@@ -603,7 +603,7 @@ class WP_Travel_Cart {
 		$tax_amount_partial      = 0;
 		$discount_amount_partial = 0;
 
-		$settings        = wptravel_get_settings(); // @since WP Travel 4.0.0.
+		$settings        = wptravel_get_settings(); // @since 4.0.0.
 		$wp_travel_react = isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_travel_switch_to_react'];
 
 		// Total amount without tax.
@@ -698,7 +698,7 @@ class WP_Travel_Cart {
 	/**
 	 * Return true if multiple cart item is allowed.
 	 *
-	 * @since WP Travel 4.4.2
+	 * @since 4.4.2
 	 */
 	public static function allow_multiple_items() {
 		$allow_multiple_items = apply_filters( 'wp_travel_allow_multiple_cart_items', false ); // @phpcs:ignore
@@ -711,7 +711,7 @@ class WP_Travel_Cart {
 	 *
 	 * @param string $cart_item_id Cart item id.
 	 * @param bool   $partial_total Either return partial total or full total.
-	 * @since WP Travel 4.4.7
+	 * @since 4.4.7
 	 */
 	public function get_item_total( $cart_item_id = '', $partial_total = false ) {
 		if ( ! $cart_item_id ) {

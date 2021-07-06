@@ -38,7 +38,7 @@ class WP_Travel_Actions_Activation { // @phpcs:ignore
 		Wp_Travel_Taxonomies::init();
 		self::create_pages();
 		self::migrations();
-		WP_Travel::create_roles(); // @since WP Travel 1.3.7
+		WP_Travel::create_roles(); // @since 1.3.7
 		self::update_db_version();
 		// Flush Rewrite rule.
 		flush_rewrite_rules();
@@ -48,7 +48,7 @@ class WP_Travel_Actions_Activation { // @phpcs:ignore
 	/**
 	 * Check compatibility before activate.
 	 *
-	 * @since WP Travel 4.5.8
+	 * @since 4.5.8
 	 */
 	public static function compatibility() {
 		// Check for PHP Compatibility.
@@ -76,7 +76,7 @@ class WP_Travel_Actions_Activation { // @phpcs:ignore
 	/**
 	 * Create WP Travel Pages.
 	 *
-	 * @since WP Travel 4.5.8
+	 * @since 4.5.8
 	 */
 	public static function create_pages() {
 		/**
@@ -127,7 +127,7 @@ class WP_Travel_Actions_Activation { // @phpcs:ignore
 	/**
 	 * Migrations.
 	 *
-	 * @since WP Travel 4.5.8
+	 * @since 4.5.8
 	 */
 	public static function migrations() {
 		$migrations = array(
@@ -179,7 +179,7 @@ class WP_Travel_Actions_Activation { // @phpcs:ignore
 	 * Include all Migration files.
 	 *
 	 * @param array $files List of migration files.
-	 * @since WP Travel 4.4.0
+	 * @since 4.4.0
 	 * @return void
 	 */
 	public static function migration_includes( $files ) {
@@ -200,7 +200,7 @@ class WP_Travel_Actions_Activation { // @phpcs:ignore
 	/**
 	 * Update DB Version.
 	 *
-	 * @since WP Travel 4.5.8
+	 * @since 4.5.8
 	 */
 	public static function update_db_version() {
 		$current_db_version = get_option( 'wp_travel_version' );
@@ -413,10 +413,10 @@ class WP_Travel_Actions_Activation { // @phpcs:ignore
 		}
 		$blog_prefix = $blog_id ? $blog_id . '_' : '';
 
-		$tables['pricings_table']            = $wpdb->base_prefix . $blog_prefix . 'wt_pricings'; // @since V4.0.0
-		$tables['dates_table']               = $wpdb->base_prefix . $blog_prefix . 'wt_dates'; // @since V4.0.0
-		$tables['excluded_dates_time_table'] = $wpdb->base_prefix . $blog_prefix . 'wt_excluded_dates_times'; // @since V4.0.0
-		$tables['price_category_relation']   = $wpdb->base_prefix . $blog_prefix . 'wt_price_category_relation'; // @since V4.0.0
+		$tables['pricings_table']            = $wpdb->base_prefix . $blog_prefix . 'wt_pricings'; // @since 4.0.0
+		$tables['dates_table']               = $wpdb->base_prefix . $blog_prefix . 'wt_dates'; // @since 4.0.0
+		$tables['excluded_dates_time_table'] = $wpdb->base_prefix . $blog_prefix . 'wt_excluded_dates_times'; // @since 4.0.0
+		$tables['price_category_relation']   = $wpdb->base_prefix . $blog_prefix . 'wt_price_category_relation'; // @since 4.0.0
 		return $tables;
 	}
 

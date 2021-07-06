@@ -329,13 +329,13 @@ const BookingWidget = () => {
 					return false
 
 				let dateRules = generateRRule(data, startDate)
-				if ( ! applyFilters( 'wpTravelRecurringCutofDateFilter', true, dateRules, allData.tripData, date, data )  ) { // @since WP Travel 4.3.1
+				if ( ! applyFilters( 'wpTravelRecurringCutofDateFilter', true, dateRules, allData.tripData, date, data )  ) { // @since 4.3.1
 					return
 				}
 				return dateRules.find(da => moment(moment(da).format("YYYY-MM-DD")).unix() === moment(moment(date).format('YYYY-MM-DD')).unix()) instanceof Date
 			}
 			if (data.start_date) {
-				if ( ! applyFilters( 'wpTravelCutofDateFilter', true, allData.tripData, date, data )  ) { // @since WP Travel 4.3.1
+				if ( ! applyFilters( 'wpTravelCutofDateFilter', true, allData.tripData, date, data )  ) { // @since 4.3.1
 					return
 				}
 				return moment(date).isSame(moment(data.start_date))
@@ -618,7 +618,7 @@ const BookingWidget = () => {
 			let date = datesById[td]
 			if (date.pricing_ids && date.pricing_ids.split(',').includes(pricingId)) {
 				let times = date.trip_time && date.trip_time.split(',') || []
-				times = applyFilters( 'wpTravelCutofTimeFilter', times, allData.tripData, selectedDateTime )  // @since WP Travel 4.3.1
+				times = applyFilters( 'wpTravelCutofTimeFilter', times, allData.tripData, selectedDateTime )  // @since 4.3.1
 				return times;
 			}
 			return []

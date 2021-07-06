@@ -470,11 +470,11 @@ function wptravel_trip_rating( $post_id ) {
 
 
 /**
- * Add html for excerpt and booking button.
+ * Add html for excerpt and booking button. Modified in 2.0.7.
  *
  * @param int $post_id ID of current post.
  *
- * @since Modified in 2.0.7
+ * @since 2.0.0
  */
 function wptravel_single_excerpt( $post_id ) {
 
