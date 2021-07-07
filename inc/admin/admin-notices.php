@@ -2,7 +2,7 @@
 /**
  * Admin Notices.
  *
- * @package inc/admin/
+ * @package WP_Travel
  */
 
  /**

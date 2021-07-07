@@ -2,13 +2,13 @@
 /**
  * Callback function of detail tab.
  *
- * @package WP Travel
+ * @package WP_Travel
  */
 
 /**
  * Detail Tab HTML.
  *
- * @package wp-travel\inc\admin\views\tabs\tab-contents\itineraries
+ * @package WP_Travel
  */
 function wptravel_trip_callback_detail() {
 

@@ -9,7 +9,7 @@
  *  fix the current issues with the original repo, as well as update the code
  *  for use according to PayPal's documentation, and today's standards.
  *
- *  @package    PHP-PayPal-IPN
+ *  @package    WP_Travel
  *  @link       https://github.com/WadeShuler/PHP-PayPal-IPN
  *  @forked     https://github.com/Quixotix/PHP-PayPal-IPN
  *  @author     Wade Shuler

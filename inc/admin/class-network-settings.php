@@ -2,7 +2,7 @@
 /**
  * Admin Settings.
  *
- * @package inc/admin
+ * @package WP_Travel
  */
 
 /**

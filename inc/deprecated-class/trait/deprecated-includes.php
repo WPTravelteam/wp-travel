@@ -2,7 +2,7 @@
 /**
  * Deprecated Traits.
  *
- * @package inc/deprecated-class
+ * @package WP_Travel
  */
 
 include sprintf( '%s/inc/deprecated-class/class-assets.php', WP_TRAVEL_ABSPATH );

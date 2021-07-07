@@ -2,7 +2,7 @@
 /**
  * Admin Localize file.
  *
- * @package wp-travel/upgrade.
+ * @package WP_Travel
  */
 
 /**

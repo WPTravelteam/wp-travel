@@ -8,7 +8,7 @@
  *  This package is available at GitHub:
  *  https://github.com/WadeShuler/PHP-PayPal-IPN/
  *
- *  @package    PHP-PayPal-IPN
+ *  @package    WP_Travel
  *  @link       https://github.com/WadeShuler/PHP-PayPal-IPN
  *  @forked     https://github.com/Quixotix/PHP-PayPal-IPN
  *  @author     Wade Shuler

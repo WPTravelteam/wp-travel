@@ -4,7 +4,7 @@
  *
  * @since 4.4.2
  *
- * @package wp-travel\inc\admin
+ * @package WP_Travel
  */
 
 /**

@@ -3,7 +3,7 @@
  * REST API: WP_Travel_Tables_Init class
  *
  * @todo Use of namespace.
- * @package WP Travel API
+ * @package WP_Travel
  * @since 4.4.5
  */
 

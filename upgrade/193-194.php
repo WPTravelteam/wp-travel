@@ -2,7 +2,7 @@
 /**
  * WP Data Update for above version 1.9.3
  *
- * @package wp-travel/upgrade
+ * @package WP_Travel
  */
 
 $wptravel_migrate_194 = get_option( 'wp_travel_migrate_194' );

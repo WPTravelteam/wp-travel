@@ -2,7 +2,7 @@
 /**
  * Helpers class to do network action in multisite.
  *
- * @package core/helpers
+ * @package WP_Travel
  */
 
 /**

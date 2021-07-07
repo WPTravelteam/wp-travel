@@ -2,7 +2,7 @@
 /**
  * Template file for WP Travel gallery tab.
  *
- * @package WP Travel
+ * @package WP_Travel
  */
 
 global $post;

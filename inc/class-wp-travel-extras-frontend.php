@@ -2,7 +2,7 @@
 /**
  * Front End Output Class for Tour Extras.
  *
- * @package WP_Travel_Tour_Extras
+ * @package WP_Travel
  */
 class WPTravel_Extras_Frontend {
 

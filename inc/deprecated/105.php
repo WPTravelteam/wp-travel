@@ -2,7 +2,7 @@
 /**
  * Depricated Functions.
  *
- * @package wp-travel/inc/deprecated
+ * @package WP_Travel
  */
 
 /** Return All Settings of WP travel and it is depricated since 1.0.5*/

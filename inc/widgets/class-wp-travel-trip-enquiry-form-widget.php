@@ -2,7 +2,7 @@
 /**
  * Exit if accessed directly.
  *
- * @package wp-travel
+ * @package WP_Travel
  * @subpackage wp-travel/includes/widgets
  */
 
@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @author   WenSolutions
  * @category Widgets
- * @package  wp-travel/Widgets
+ * @package  WP_Travel
  * @extends  WP_Widget
  */
 class WP_Travel_Trip_Enquiry_Form_Widget extends WP_Widget {

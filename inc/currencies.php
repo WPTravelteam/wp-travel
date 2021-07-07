@@ -2,7 +2,7 @@
 /**
  *  All Currency Listing Array.
  *
- *  @package wp-pattern-design
+ *  @package WP_Travel
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

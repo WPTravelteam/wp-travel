@@ -2,7 +2,7 @@
 /**
  * Fact Tab HTML.
  *
- * @package wp-travel\inc\admin\views\tabs\tab-contents\itineraries
+ * @package WP_Travel
  */
 
 if ( ! function_exists( 'wptravel_trip_callback_trip_facts' ) ) {

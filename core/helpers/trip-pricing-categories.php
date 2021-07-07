@@ -2,7 +2,7 @@
 /**
  * Helpers class for trip pricing categories.
  *
- * @package Wptravel
+ * @package WP_Travel
  */
 
 /**

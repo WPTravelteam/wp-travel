@@ -2,7 +2,7 @@
 /**
  * Admin Info Pointers
  *
- * @package WP Travel
+ * @package WP_Travel
  * @author WEN Solutions
  */
 

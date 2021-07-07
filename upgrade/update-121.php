@@ -2,7 +2,7 @@
 /**
  * Upgrade Functions.
  *
- * @package wp-travel/upgrade
+ * @package WP_Travel
  */
 
 add_action( 'admin_notices', 'wptravel_delete_paypal_notice' );

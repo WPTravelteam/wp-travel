@@ -2,7 +2,7 @@
 /**
  * Deprecated Traits.
  *
- * @package inc/deprecated-class
+ * @package WP_Travel
  */
 
 namespace WpTravel\deprecated;

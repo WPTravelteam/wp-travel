@@ -2,7 +2,7 @@
 /**
  * Default form fields.
  *
- * @package inc
+ * @package WP_Travel
  */
 
  /**

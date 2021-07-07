@@ -2,7 +2,7 @@
 /**
  * Single Itinerary hooks file.
  *
- * @package WP Travel.
+ * @package WP_Travel
  */
 
 /**

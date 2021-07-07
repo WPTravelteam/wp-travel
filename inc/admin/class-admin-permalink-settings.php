@@ -2,10 +2,9 @@
 /**
  * Adds settings to the permalinks admin settings page
  *
- * @class       WP_Travel_Admin_Permalink_Settings
- * @category    Admin
- * @package     wp-travel/inc/admin
- * @version     1.1.0
+ * @category Admin
+ * @package WP_Travel
+ * @version 1.1.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

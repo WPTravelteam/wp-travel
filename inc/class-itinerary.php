@@ -2,7 +2,7 @@
 /**
  * WP Travel Itinerary class
  *
- * @package WP Travel
+ * @package WP_Travel
  */
 
 /**

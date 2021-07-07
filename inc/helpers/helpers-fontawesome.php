@@ -2,7 +2,7 @@
 /**
  * Helper Functions.
  *
- * @package wp-travel/inc
+ * @package WP_Travel
  */
 
 /**

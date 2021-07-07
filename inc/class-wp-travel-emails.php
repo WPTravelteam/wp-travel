@@ -2,7 +2,7 @@
 /**
  * Handle WP Travel Email Templates. Base Class For WP Travel Email.
  *
- * @package WP Travel
+ * @package WP_Travel
  */
 
 /**

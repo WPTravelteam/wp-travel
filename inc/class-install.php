@@ -2,7 +2,7 @@
 /**
  * For activation or deactivation of plugin.
  *
- * @package WP Travel
+ * @package WP_Travel
  */
 
 /**

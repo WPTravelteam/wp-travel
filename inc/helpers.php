@@ -2,7 +2,7 @@
 /**
  * Helper Functions.
  *
- * @package wp-travel/inc
+ * @package WP_Travel
  */
 
 require sprintf( '%s/inc/helpers/helpers-price.php', WP_TRAVEL_ABSPATH );

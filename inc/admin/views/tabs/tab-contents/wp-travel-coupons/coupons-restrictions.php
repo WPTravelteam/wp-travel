@@ -2,7 +2,7 @@
 /**
  * Tab Contents
  *
- * @package WP Travel
+ * @package WP_Travel
  */
 
 function wptravel_coupons_restrictions_tab_callback() {

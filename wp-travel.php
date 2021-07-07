@@ -13,7 +13,7 @@
  * Text Domain: wp-travel
  * Domain Path: /i18n/languages/
  *
- * @package WP Travel
+ * @package WP_Travel
  * @category Core
  * @author WenSolutions
  */

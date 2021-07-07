@@ -2,7 +2,7 @@
 /**
  * Callback function of cart & checkout tab.
  *
- * @package WP Travel
+ * @package WP_Travel
  */
 
 /**

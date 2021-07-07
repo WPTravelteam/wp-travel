@@ -2,7 +2,7 @@
 /**
  * Installation Class for Coupon Pro
  *
- * @package Wp_Travel_Coupons_Pro
+ * @package WP_Travel
  */
 
 if ( ! class_exists( 'WP_Travel_Coupons_Pro_Install' ) ) :

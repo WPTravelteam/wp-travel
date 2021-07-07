@@ -3,7 +3,7 @@
  * Handle/Send Booking/Payment Emails
  *
  * @since 4.4.2
- * @package WP Travel
+ * @package WP_Travel
  */
 
 /**

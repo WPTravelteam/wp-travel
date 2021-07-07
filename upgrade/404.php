@@ -2,7 +2,7 @@
 /**
  * WP Travel Data Update for above version 4.0.4
  *
- * @package wp-travel/upgrade
+ * @package WP_Travel
  */
 
 /**

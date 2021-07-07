@@ -3,7 +3,7 @@
  * Input field class for radio.
  *
  * @since 1.0.5
- * @package WP-Travel/inc/framework/form/fields/
+ * @package WP_Travel
  */
 
 class WP_Travel_FW_Field_Radio {

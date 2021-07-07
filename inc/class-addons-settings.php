@@ -2,7 +2,7 @@
 /**
  * This file has the requrired codes for the class WpTravel_Addons_Settings.
  *
- * @package inc
+ * @package WP_Travel
  * @since 3.0.1
  */
 

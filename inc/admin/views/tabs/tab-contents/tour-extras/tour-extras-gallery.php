@@ -2,7 +2,7 @@
 /**
  * Tour extras General Tab Contents
  *
- * @package WP Travel
+ * @package WP_Travel
  */
 
 function wptravel_tour_extras_gallery_tab_callback() {

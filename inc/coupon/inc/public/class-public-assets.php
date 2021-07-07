@@ -2,7 +2,7 @@
 /**
  * Public Assets Class.
  *
- * @package WP_Travel_Coupons_Pro
+ * @package WP_Travel
  */
 
 if ( ! class_exists( 'WP_Travel_Coupons_Pro_Public_Assets' ) ) :

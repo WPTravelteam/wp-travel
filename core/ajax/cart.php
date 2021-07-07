@@ -2,7 +2,7 @@
 /**
  * Ajax Request for cart.
  *
- * @package core/ajax
+ * @package WP_Travel
  */
 
 /**

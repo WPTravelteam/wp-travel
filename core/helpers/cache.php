@@ -2,7 +2,7 @@
 /**
  * Helpers cache.
  *
- * @package core/helpers
+ * @package WP_Travel
  */
 
 defined( 'ABSPATH' ) || exit;

@@ -2,7 +2,7 @@
 /**
  * Sidebars
  *
- * @package wp-travel\inc
+ * @package WP_Travel
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

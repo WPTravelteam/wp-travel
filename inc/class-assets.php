@@ -2,7 +2,7 @@
 /**
  * For assets on WP Travel.
  *
- * @package WP Travel
+ * @package WP_Travel
  */
 
 if ( ! class_exists( 'WpTravel_Assets' ) ) {

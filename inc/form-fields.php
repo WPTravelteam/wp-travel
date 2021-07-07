@@ -3,7 +3,7 @@
  * Booking Functions.
  * // TODO: Remove This function.
  *
- * @package wp-travel/inc/
+ * @package WP_Travel
  */
 
 /**

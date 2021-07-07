@@ -3,7 +3,7 @@
  * Contains the query functions for WP Travel which alter the front-end post queries and loops
  *
  * @version 1.3.6
- * @package WP Travel\Includes
+ * @package WP_Travel
  * @author  WEN Solutions
  */
 

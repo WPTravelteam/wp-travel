@@ -2,7 +2,7 @@
 /**
  * Helpers cart.
  *
- * @package core/helpers
+ * @package WP_Travel
  */
 
 /**

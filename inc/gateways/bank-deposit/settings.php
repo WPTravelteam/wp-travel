@@ -2,7 +2,7 @@
 /**
  * Bank deposit Settings.
  *
- * @package wp-travel/inc/gateways/bank-deposit
+ * @package WP_Travel
  */
 
 function wptravel_bank_deposit_default_settings_fields( $settings ) {

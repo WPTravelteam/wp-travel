@@ -2,7 +2,7 @@
 /**
  * Upgrade changes migration in version 175 to 176.
  *
- * @package Wptravel
+ * @package WP_Travel
  */
 
 if ( ! function_exists( 'wptravel_upgrade_175_176' ) ) {

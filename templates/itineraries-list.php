@@ -2,7 +2,7 @@
 /**
  * Termplate file for itinerary list.
  *
- * @package templates
+ * @package WP_Travel
  */
 
 global $post;

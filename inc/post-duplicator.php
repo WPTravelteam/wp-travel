@@ -2,7 +2,7 @@
 /**
  * WP Travel Post Duplicator.
  *
- * @package wp-travel/inc/
+ * @package WP_Travel
  */
 
 /**

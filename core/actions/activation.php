@@ -2,7 +2,7 @@
 /**
  * WP Travel Activation hooks.
  *
- * @package Core/Actions
+ * @package WP_Travel
  */
 
 /**

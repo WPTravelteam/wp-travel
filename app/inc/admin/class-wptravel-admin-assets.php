@@ -2,7 +2,7 @@
 /**
  * Admin Assets file.
  *
- * @package wp-travel/app/inc/admin.
+ * @package WP_Travel
  */
 
 /**

@@ -2,7 +2,7 @@
 /**
  * Depricated Functions.
  *
- * @package wp-travel/inc/deprecated
+ * @package WP_Travel
  */
 
 /**

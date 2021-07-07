@@ -11,7 +11,7 @@
  *
  * @see         http://docs.wensolutions.com/document/template-structure/
  * @author      WenSolutions
- * @package     wp-travel/Templates
+ * @package     WP_Travel
  * @since       5.0.0
  */
 

@@ -2,7 +2,7 @@
 /**
  * Admin tabs.
  *
- * @package WP Travel
+ * @package WP_Travel
  * @author WEN Solutions
  */
 

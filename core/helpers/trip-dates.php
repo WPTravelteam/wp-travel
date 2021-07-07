@@ -2,7 +2,7 @@
 /**
  * Helper class for the trip dates.
  *
- * @package Wptravel
+ * @package WP_Travel
  */
 
 /**

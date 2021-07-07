@@ -2,7 +2,7 @@
 /**
  * Depricated Functions.
  *
- * @package wp-travel/inc/deprecated
+ * @package WP_Travel
  */
 
 function wp_travel_get_default_frontend_tabs( $is_show_in_menu_query = false ) {

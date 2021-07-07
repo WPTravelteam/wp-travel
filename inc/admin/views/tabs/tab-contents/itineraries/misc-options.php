@@ -2,7 +2,7 @@
 /**
  * Template file for WP Travel Misc tab.
  *
- * @package WP Travel
+ * @package WP_Travel
  */
 
 /**

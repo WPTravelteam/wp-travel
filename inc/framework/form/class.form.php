@@ -2,7 +2,7 @@
 /**
  * Form Class.
  *
- * @package inc/framework/form/
+ * @package WP_Travel
  */
 
 include WP_TRAVEL_ABSPATH . 'inc/framework/form/class.field.php';

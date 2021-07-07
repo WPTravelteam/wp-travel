@@ -2,7 +2,7 @@
 /**
  * WP Travel Dev Mode
  *
- * @package core/helpers
+ * @package WP_Travel
  */
 
 /**

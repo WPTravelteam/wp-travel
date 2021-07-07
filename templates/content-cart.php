@@ -2,7 +2,7 @@
 /**
  * WP Travel Checkout.
  *
- * @package WP Travel
+ * @package WP_Travel
  */
 
 // Exit if accessed directly.

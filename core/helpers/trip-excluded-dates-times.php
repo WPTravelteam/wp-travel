@@ -2,7 +2,7 @@
 /**
  * Helpers class for trip excluded dates and times.
  *
- * @package Wptravel
+ * @package WP_Travel
  */
 
 /**

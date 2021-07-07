@@ -3,7 +3,7 @@
 /**
  * WP Travel Data Update for above version 4.0.0
  *
- * @package wp-travel/upgrade
+ * @package WP_Travel
  */
 
 if ( ! function_exists( 'wptravel_migrate_data_to_400' ) ) {

@@ -2,7 +2,7 @@
 /**
  * Template file for WP Travel tabs.
  *
- * @package WP Travel
+ * @package WP_Travel
  */
 
 ?>

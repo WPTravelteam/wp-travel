@@ -2,7 +2,7 @@
 /**
  * Metabox for Iteneraries fields.
  *
- * @package wp-travel-coupons-pro\inc\admin
+ * @package WP_Travel
  */
 
 /**

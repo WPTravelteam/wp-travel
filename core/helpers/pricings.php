@@ -1,9 +1,9 @@
 <?php
 /**
- * Class file for helpers pricing class.
+ * Helper pricing class that provides all the utility methods for pricings.
  *
  * @category Plugin
- * @package  Wptravel
+ * @package  WP_Travel
  * @author   WEN Solutions
  * @license  GPLv2 or later
  * @link     wp-content/plugins/wp-travel/core/helpers/pricings.php
@@ -18,12 +18,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Helper pricing class that provides all the utility methods for pricings.
- *
- * @package Wptravel
- * @category Plugin
- * @author WEN Solutions
- * @license GPLv2 or later
- * @link wp-content/plugins/wp-travel/core/helpers/pricings.php
  */
 class WpTravel_Helpers_Pricings {
 

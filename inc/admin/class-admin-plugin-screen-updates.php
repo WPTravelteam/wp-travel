@@ -2,7 +2,7 @@
 /**
  * Admin Update Notices.
  *
- * @package inc/admin/
+ * @package WP_Travel
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

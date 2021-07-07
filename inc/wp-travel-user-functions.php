@@ -2,7 +2,7 @@
 /**
  * User Functions.
  *
- * @package Wp_Travel
+ * @package WP_Travel
  */
 
 if ( ! function_exists( 'wptravel_disable_admin_bar' ) ) {

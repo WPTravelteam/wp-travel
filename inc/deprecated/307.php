@@ -2,7 +2,7 @@
 /**
  * Depricated Functions.
  *
- * @package wp-travel/inc/deprecated
+ * @package WP_Travel
  */
 
 function wp_travel_get_pricing_name_by_key( $key = null ) {

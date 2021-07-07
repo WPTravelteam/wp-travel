@@ -2,7 +2,7 @@
 /**
  * Base class for WP Travel All tables.
  *
- * @package WP Travel Core
+ * @package WP_Travel
  * @subpackage lib
  * @since 4.4.7
  */

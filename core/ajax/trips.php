@@ -2,7 +2,7 @@
 /**
  * Trip Ajax actions. Get, update trips.
  *
- * @package core
+ * @package WP_Travel
  */
 
 /**

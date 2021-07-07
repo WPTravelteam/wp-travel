@@ -2,7 +2,7 @@
 /**
  * Paypal payment request
  *
- * @package WP-Travel-Paypal
+ * @package WP_Travel
  * @author WEN Solutions.
  */
 

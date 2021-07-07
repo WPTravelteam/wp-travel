@@ -1,7 +1,7 @@
 <?php
 /**
  * WP Travel Bookings
- * @package WP_Travel/inc
+ * @package WP_Travel
  */
 if ( ! class_exists( 'WP_Travel_Booking' ) ) :
 

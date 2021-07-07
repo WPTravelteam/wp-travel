@@ -2,7 +2,7 @@
 /**
  * Upgrade functions.
  *
- * @package wp-travel/upgrade.
+ * @package WP_Travel
  */
 
 $wptravel_itineraries = get_posts(

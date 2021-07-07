@@ -2,7 +2,7 @@
 /**
  * Template file for WP Travel gallery tab.
  *
- * @package WP Travel
+ * @package WP_Travel
  */
 
 if ( ! function_exists( 'wptravel_trip_callback_images_gallery' ) ) {

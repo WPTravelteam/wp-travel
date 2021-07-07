@@ -2,9 +2,8 @@
 /**
  * Admin Tablenav
  *
- * @package inc/admin/
+ * @package WP_Travel
  */
-
 
  /**
   * Display Upsell notice in table nav.

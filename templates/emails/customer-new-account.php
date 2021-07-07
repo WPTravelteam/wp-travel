@@ -10,10 +10,10 @@
  * happen. When this occurs the version of the template file will be bumped and
  * the readme will list any important changes.
  *
- * @see 	    https://docs.wensolutions.com/document/template-structure/
- * @author 		WEN Solutions
- * @package 	WP_Travel/Templates/Emails
- * @version     1.2.7
+ * @see     https://docs.wensolutions.com/document/template-structure/
+ * @author  WEN Solutions
+ * @package WP_Travel
+ * @version 1.2.7
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

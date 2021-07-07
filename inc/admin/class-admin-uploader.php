@@ -2,7 +2,7 @@
 /**
  * Admin uploader.
  *
- * @package WP Travel
+ * @package WP_Travel
  * @author WEN Solutions
  */
 

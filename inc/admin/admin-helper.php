@@ -2,7 +2,7 @@
 /**
  * Admin Helper
  *
- * @package inc/admin/
+ * @package WP_Travel
  */
 
 /**

@@ -2,7 +2,7 @@
 /**
  * Metabox for Iteneraries fields.
  *
- * @package wp-travel\inc\admin
+ * @package WP_Travel
  */
 
 /**

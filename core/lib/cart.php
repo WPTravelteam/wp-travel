@@ -3,7 +3,7 @@
 /**
  * WP Travel Cart.
  *
- * @package WP Travel
+ * @package WP_Travel
  */
 
 // Exit if accessed directly.

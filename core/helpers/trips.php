@@ -4,7 +4,7 @@
  *
  * @phpcs:disable
  *
- * @package Wptravel
+ * @package WP_Travel
  */
 
 /**

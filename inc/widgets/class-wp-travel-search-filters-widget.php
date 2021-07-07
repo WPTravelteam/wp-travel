@@ -2,7 +2,7 @@
 /**
  * Exit if accessed directly.
  *
- * @package wp-travel\incldues
+ * @package WP_Travel
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @author   WenSolutions
  * @category Widgets
- * @package  wp-travel/Widgets
+ * @package  WP_Travel
  * @extends  WP_Widget
  */
 class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {

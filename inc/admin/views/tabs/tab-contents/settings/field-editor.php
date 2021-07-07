@@ -2,7 +2,7 @@
 /**
  * Template file for WP Travel Field Editor tab.
  *
- * @package WP Travel
+ * @package WP_Travel
  */
 
 if ( ! function_exists( 'wptravel_settings_callback_field_editor' ) ) {

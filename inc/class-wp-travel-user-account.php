@@ -2,7 +2,7 @@
 /**
  * Wp_Travel_User_Account.
  *
- * @package WP Travel
+ * @package WP_Travel
  */
 
 // Exit if accessed directly.

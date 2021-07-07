@@ -2,7 +2,7 @@
 /**
  * Frontend itineraries listing.
  *
- * @package WP Travel.
+ * @package WP_Travel
  */
 
 global $post;

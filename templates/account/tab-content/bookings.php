@@ -2,7 +2,7 @@
 /**
  * Dashboard Booking Tab.
  *
- * @package wp-travel/templates/account/tab-content/
+ * @package WP_Travel
  */
 
 /**

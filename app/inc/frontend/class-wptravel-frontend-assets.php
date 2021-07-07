@@ -2,7 +2,7 @@
 /**
  * Frontend assets file.
  *
- * @package WP Travel.
+ * @package WP_Travel
  */
 
 /**
