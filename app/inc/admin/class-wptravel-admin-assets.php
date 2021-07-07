@@ -33,8 +33,7 @@ class WpTravel_Admin_Assets {
 		$_wp_travel_admin             = isset( $all_localized['_wp_travel_admin'] ) ? $all_localized['_wp_travel_admin'] : array();
 
 		$screen         = get_current_screen();
-		$wptravel_pages = array( 'itineraries', 'itinerary-booking_page_wp-travel-marketplace', 'itinerary-booking_page_settings', 'wp-travel-coupons', 'toplevel_page_wp_travel_network_settings-network', 'tour-extras' );
-
+		$wptravel_pages = array( 'itineraries', 'itinerary-booking', 'itinerary-booking_page_wp-travel-marketplace', 'itinerary-booking_page_settings', 'wp-travel-coupons', 'toplevel_page_wp_travel_network_settings-network', 'tour-extras' );
 		if ( in_array( $screen->id, $wptravel_pages ) ) {
 			// Styles.
 			wp_enqueue_media();
