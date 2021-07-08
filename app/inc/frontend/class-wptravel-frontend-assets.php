@@ -222,7 +222,7 @@ class WpTravel_Frontend_Assets {
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,
 			),
-			'select2-js'           => array(
+			'select2-js'                => array(
 				'src'       => self::$app_path . '/assets/js/lib/select2/select2.min.js',
 				'deps'      => array( 'jquery' ),
 				'ver'       => WP_TRAVEL_VERSION,
@@ -604,7 +604,7 @@ class WpTravel_Frontend_Assets {
 		}
 
 		$rdp_locale       = get_locale();
-		$rdp_locale_array = explode( '_',  $rdp_locale );
+		$rdp_locale_array = explode( '_', $rdp_locale );
 		if ( is_array( $rdp_locale_array ) && count( $rdp_locale_array ) > 1 && strtoupper( $rdp_locale_array[0] ) === strtoupper( $rdp_locale_array[1] ) ) {
 			$rdp_locale = $rdp_locale_array[0];
 		}
@@ -647,9 +647,9 @@ class WpTravel_Frontend_Assets {
 			}
 			$_wp_travel['strings']      = WpTravel_Helpers_Strings::get();
 			$_wp_travel['itinerary_v2'] = wptravel_use_itinerary_v2_layout();
-	
+
 			$localized_data['_wp_travel'] = $_wp_travel;
-	
+
 			// Localized varialble for old trips less than WP Travel 4.0. // Need to migrate in _wp_travel.
 			$wp_travel = array(
 				'currency_symbol'    => wptravel_get_currency_symbol(),
@@ -657,7 +657,7 @@ class WpTravel_Frontend_Assets {
 				'thousand_separator' => $settings['thousand_separator'],
 				'decimal_separator'  => $settings['decimal_separator'],
 				'number_of_decimals' => $settings['number_of_decimals'],
-	
+
 				'prices'             => wptravel_get_itinereries_prices_array(), // Used to get min and max price to use it in range slider filter widget.
 				'locale'             => $locale,
 				'nonce'              => wp_create_nonce( 'wp_travel_frontend_security' ),
@@ -674,13 +674,13 @@ class WpTravel_Frontend_Assets {
 				'isEnabledCartPage'  => WP_Travel_Helpers_Cart::is_enabled_cart_page(), // @since 4.3.2
 			);
 			if ( wptravel_can_load_payment_scripts() ) {
-	
+
 				global $wt_cart;
-	
+
 				$cart_amounts   = $wt_cart->get_total();
 				$trip_price     = isset( $cart_amounts['total'] ) ? $cart_amounts['total'] : '';
 				$payment_amount = isset( $cart_amounts['total_partial'] ) ? $cart_amounts['total_partial'] : '';
-	
+
 				$wp_travel['payment']['currency_code']   = $settings['currency'];
 				$wp_travel['payment']['currency_symbol'] = wptravel_get_currency_symbol();
 				$wp_travel['payment']['price_per']       = wptravel_get_price_per_text( $trip_id, '', true );
