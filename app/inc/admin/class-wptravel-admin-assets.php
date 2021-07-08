@@ -34,20 +34,20 @@ class WpTravel_Admin_Assets {
 
 		$screen         = get_current_screen();
 		$wptravel_pages = array( 'itineraries', 'itinerary-booking', 'itinerary-booking_page_wp-travel-marketplace', 'itinerary-booking_page_settings', 'wp-travel-coupons', 'toplevel_page_wp_travel_network_settings-network', 'tour-extras' );
-		if ( in_array( $screen->id, $wptravel_pages ) ) {
+		if ( in_array( $screen->id, $wptravel_pages, true ) ) {
 			// Styles.
 			wp_enqueue_media();
 			wp_enqueue_style( 'font-awesome-css' );
 			wp_enqueue_style( 'select2-style' );
 			wp_enqueue_style( 'wp-travel-popup' );
 			wp_enqueue_style( 'jquery-datepicker-lib' );
-			
+
 			// Scripts.
 			wp_enqueue_script( 'wp-travel-fields-scripts' );
 			wp_enqueue_script( 'wp-travel-tabs' );
 			wp_enqueue_script( 'wp-travel-accordion' );
 			wp_enqueue_script( 'wp-travel-popup' );
-			
+
 		}
 		wp_enqueue_style( 'wp-travel-back-end' ); // enqueued for wp travel menu icon.
 
@@ -63,9 +63,8 @@ class WpTravel_Admin_Assets {
 				$backend_depencency[] = 'jquery-gmaps';
 			}
 
-			
 			wp_enqueue_script( 'wptravel-uploader' );
-			
+
 			wp_enqueue_script( 'jquery-parsley' );
 
 			wp_localize_script( 'wp-travel-media-upload', 'wp_travel_drag_drop_uploader', $wp_travel_drag_drop_uploader );
