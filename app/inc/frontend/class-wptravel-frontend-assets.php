@@ -156,7 +156,7 @@ class WpTravel_Frontend_Assets {
 		$lang_code            = explode( '-', get_bloginfo( 'language' ) );
 		$locale               = $lang_code[0];
 		$wp_content_file_path = WP_CONTENT_DIR . '/languages/wp-travel/datepicker/';
-		$default_path         = sprintf( '%s/assets/js/lib/datepicker/i18n/', self::$app_path );
+		$default_path         = sprintf( '%s/app/assets/js/lib/datepicker/i18n/', plugin_dir_path( WP_TRAVEL_PLUGIN_FILE ) );
 
 		$wp_content_file_url = WP_CONTENT_URL . '/languages/wp-travel/datepicker/';
 		$default_url         = sprintf( '%s/assets/js/lib/datepicker/i18n/', self::$app_path );
