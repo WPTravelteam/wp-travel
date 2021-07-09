@@ -182,7 +182,13 @@ class WP_Travel_Cart {
 		}
 
 		$arrival_date = isset( $attrs['arrival_date'] ) ? $attrs['arrival_date'] : '';
-		$cart_item_id = $this->wptravel_get_cart_item_id( $trip_id, $price_key, $arrival_date );
+		$item_id_args = array(
+			'trip_id'    => $trip_id,
+			'price_key'  => $price_key,
+			'start_date' => $arrival_date,
+			'pricing_id' => $attrs['pricing_id'],
+		);
+		$cart_item_id = $this->get_cart_item_id( $item_id_args );
 
 		// For additional cart item attrs.
 		if ( is_array( $attrs ) && count( $attrs ) > 0 ) {
@@ -687,12 +693,35 @@ class WP_Travel_Cart {
 	 * @return  String  cart item id.
 	 *
 	 * @since   1.5.8
+	 * @deprecated 4.7.1
 	 */
 	public function wptravel_get_cart_item_id( $trip_id, $price_key = '', $start_date = '' ) {
 
 		$cart_item_id = ( isset( $price_key ) && '' !== $price_key ) ? $trip_id . '_' . $price_key : $trip_id;
 		$cart_item_id = ( isset( $start_date ) && '' !== $start_date ) ? $cart_item_id . '_' . $start_date : $cart_item_id;
 		return apply_filters( 'wp_travel_filter_cart_item_id', $cart_item_id, $trip_id, $price_key );
+	}
+
+	/**
+	 * Return cart item id as per $trip_id and $price_key.
+	 *
+	 * @param array $args Data to generate cart item id.
+	 *
+	 * @return  String  cart item id.
+	 *
+	 * @since   4.7.1
+	 */
+	public function get_cart_item_id( $args = array() ) {
+
+		$trip_id    = isset( $args['trip_id'] ) ? $args['trip_id'] : '';
+		$price_key  = isset( $args['price_key'] ) ? $args['price_key'] : '';
+		$start_date = isset( $args['start_date'] ) ? $args['start_date'] : '';
+		$pricing_id = isset( $args['pricing_id'] ) ? $args['pricing_id'] : '';
+
+		$cart_item_id = ( isset( $price_key ) && '' !== $price_key ) ? $trip_id . '_' . $price_key : $trip_id;
+		$cart_item_id = ( isset( $start_date ) && '' !== $start_date ) ? $cart_item_id . '_' . $start_date : $cart_item_id;
+		$cart_item_id = ( isset( $pricing_id ) && '' !== $pricing_id ) ? $cart_item_id . '_' . $pricing_id : $cart_item_id;
+		return apply_filters( 'wptravel_filter_cart_item_id', $cart_item_id, $args );
 	}
 
 	/**

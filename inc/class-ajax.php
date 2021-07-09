@@ -135,8 +135,8 @@ class WP_Travel_Ajax {
 			foreach ( $dates as $date ) {
 
 				// Add new pricing id in newly inserted date.
-				$pricing_ids_of_date  = $date->pricing_ids;
-				$new_temp_ids         = array();
+				$pricing_ids_of_date = $date->pricing_ids;
+				$new_temp_ids        = array();
 				if ( ! empty( $pricing_ids_of_date ) ) {
 					$temp_ids = explode( ',', $pricing_ids_of_date );
 					foreach ( $temp_ids as $temp_id ) {
@@ -346,7 +346,6 @@ class WP_Travel_Ajax {
 				$trip_price_partial += $category_price_partial;
 			}
 			$attrs['trip'] = $trip;
-			// $pax   = $total_pax;
 		} else {
 			$pax       = array_sum( (array) $pax );
 			$price_per = get_post_meta( $trip_id, 'wp_travel_price_per', true );
@@ -362,7 +361,7 @@ class WP_Travel_Ajax {
 				$percent                = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
 				$category_price_partial = ( $trip_price * $percent ) / 100;
 			}
-			if ( 'person' == $price_per ) {
+			if ( 'person' === $price_per ) {
 				$trip_price = $price * $pax;
 			}
 
@@ -403,7 +402,7 @@ class WP_Travel_Ajax {
 		if ( $attrs['enable_partial'] ) {
 			$trip_price_partial             = $trip_price;
 			$payout_percent                 = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
-			$attrs['partial_payout_figure'] = $payout_percent; // added in 1.8.4
+			$attrs['partial_payout_figure'] = $payout_percent; // added in 1.8.4.
 
 			if ( $payout_percent > 0 ) {
 				$trip_price_partial = ( $trip_price * $payout_percent ) / 100;
@@ -417,11 +416,17 @@ class WP_Travel_Ajax {
 		$attrs['departure_date'] = $departure_date;
 		$attrs['trip_extras']    = $trip_extras;
 
-		$attrs = apply_filters( 'wp_travel_cart_attributes', $attrs, $post_data );
+		$attrs = apply_filters( 'wp_travel_cart_attributes', $attrs, $post_data ); // @phpcs:ignore
 
-		$cart_item_id = $wt_cart->wptravel_get_cart_item_id( $trip_id, $price_key, $arrival_date );
+		$item_id_args = array(
+			'trip_id'    => $trip_id,
+			'price_key'  => $price_key,
+			'start_date' => $arrival_date,
+			'pricing_id' => $pricing_id,
+		);
+		$cart_item_id = $wt_cart->get_cart_item_id( $item_id_args );
 
-		$update_cart_on_add = apply_filters( 'wp_travel_filter_update_cart_on_add', true );
+		$update_cart_on_add = apply_filters( 'wp_travel_filter_update_cart_on_add', true ); // @phpcs:ignore
 
 		$add_to_cart_args = array(
 			'trip_id'            => $trip_id,
@@ -448,7 +453,7 @@ class WP_Travel_Ajax {
 		} else {
 			$wt_cart->add( $add_to_cart_args );
 		}
-		// Need to update cart add. in calse of multiple items partial figure need to update in individual item
+		// Need to update cart add. in calse of multiple items partial figure need to update in individual item.
 		echo true;
 
 	}
