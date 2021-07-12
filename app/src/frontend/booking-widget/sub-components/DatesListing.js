@@ -38,7 +38,8 @@ const generateRRUleArgs = data => {
     let ruleArgs = {
         freq: RRule.DAILY,
         count: datePerPage,
-        dtstart: new Date(Date.UTC(rruleStartDate.getFullYear(), rruleStartDate.getMonth(), rruleStartDate.getDate(), 0, 0, 0)),
+        // dtstart: new Date(Date.UTC(rruleStartDate.getFullYear(), rruleStartDate.getMonth(), rruleStartDate.getDate(), 0, 0, 0)),
+        dtstart: new Date(rruleStartDate),
     };
     if ( data.end_date && '0000-00-00' != data.end_date ) { // if has end date.
         let endDate = new Date(data.end_date)

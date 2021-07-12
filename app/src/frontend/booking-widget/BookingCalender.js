@@ -309,7 +309,8 @@ const BookingWidget = () => {
 		let currentDate = date.getDate();
 		let currentMonth = date.getMonth();
 
-		let startDate = moment(new Date(Date.UTC(curretYear, currentMonth, currentDate, 0, 0, 0))).utc();
+		// let startDate = moment(new Date(Date.UTC(curretYear, currentMonth, currentDate, 0, 0, 0))).utc();
+		let startDate = moment(new Date(date));
 
 		if (tempExcludeDate.includes(startDate.format('YYYY-MM-DD'))) {
 			return false
@@ -372,7 +373,8 @@ const BookingWidget = () => {
 		}
 
 		// @todo use getPricingsByDate function below to get pricing ids/_nomineePricings.
-		let startDate = moment(new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0))).utc();
+		// let startDate = moment(new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0))).utc();
+		let startDate = moment(new Date(date));
 
 		const _dateIds = _dates // Trip Date IDs matches to selected date.
 			.filter(_date => {
@@ -417,7 +419,8 @@ const BookingWidget = () => {
 
 	// Function used to get pricings in Fixed departure listing.
 	const getPricingsByDate = ( date, date_id, returnDateIds ) => {
-		let startDate = moment(new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0))).utc();
+		// let startDate = moment(new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0))).utc();
+		let startDate = moment(new Date(date));
 
 		const _dateIds = _dates // Trip Date IDs matches to selected date.
 			.filter(_date => {
@@ -583,7 +586,7 @@ const BookingWidget = () => {
 						if ( wp_travel.isEnabledCartPage ) {
 							location.href = wp_travel.cartUrl; // This may include cart or checkout page url.
 						} else {
-						location.href = wp_travel.checkoutUrl; // [only checkout page url]
+						// location.href = wp_travel.checkoutUrl; // [only checkout page url]
 						}
 					}
 				}), 1000)
