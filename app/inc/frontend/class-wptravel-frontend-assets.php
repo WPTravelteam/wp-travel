@@ -253,6 +253,13 @@ class WpTravel_Frontend_Assets {
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,
 			),
+			'wp-travel-admin-pointers-js'       => array(
+				'src'       => self::$app_path . '/assets/js/wp-travel-backend-pointers.js',
+				'deps'      => array( 'wp-pointer' ),
+				'ver'       => WP_TRAVEL_VERSION,
+				'in_footer' => true,
+			),
+
 		);
 
 		$styles = array(
