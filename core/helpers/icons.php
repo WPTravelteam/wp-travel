@@ -1,6 +1,6 @@
 <?php
 /**
- * Helpers cart.
+ * Helpers Icon class to get icons as per icon type.
  *
  * @package WP_Travel
  */
