@@ -34,15 +34,15 @@ class WpTravel_Helpers_Booking { // @phpcs:ignore
 		}
 		ob_start();
 		?>
-		<h2 class="wp-travel-order-heading"><?php esc_html_e( 'Booking Details', 'wp-travel-pro' ); ?></h2>
+		<h2 class="wp-travel-order-heading"><?php esc_html_e( 'Booking Details', 'wp-travel' ); ?></h2>
 
 		<table class="wp-travel-table-content" cellpadding="0" cellspacing="0" height="100%" width="100%" style="text-align: left;">
 			<thead>
 				<tr>
-					<th><?php esc_html_e( 'Itinerary', 'wp-travel-pro' ); ?></th>
-					<th><?php esc_html_e( 'PAX', 'wp-travel-pro' ); ?></th>
-					<th><?php esc_html_e( 'Arrival Date', 'wp-travel-pro' ); ?></th>
-					<th><?php esc_html_e( 'Departure Date', 'wp-travel-pro' ); ?></th>
+					<th><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></th>
+					<th><?php esc_html_e( 'PAX', 'wp-travel' ); ?></th>
+					<th><?php esc_html_e( 'Arrival Date', 'wp-travel' ); ?></th>
+					<th><?php esc_html_e( 'Departure Date', 'wp-travel' ); ?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -158,7 +158,7 @@ class WpTravel_Helpers_Booking { // @phpcs:ignore
 		
 		ob_start();
 		?>
-		<h2 class="wp-travel-order-heading"><?php esc_html_e( 'Traveler Details', 'wp-travel-pro' ); ?></h2>
+		<h2 class="wp-travel-order-heading"><?php esc_html_e( 'Traveler Details', 'wp-travel' ); ?></h2>
 
 		<table class="wp-travel-table-content" cellpadding="0" cellspacing="0" height="100%" width="100%" style="text-align: left;">
 			
@@ -189,7 +189,7 @@ class WpTravel_Helpers_Booking { // @phpcs:ignore
 					?>
 					<thead>
 						<tr>
-							<th colspan="6"><?php esc_html_e( 'Trip : ', 'wp-travel-pro' ); ?> <strong><?php echo esc_html( $title ); ?></strong> / <span class="my-order-pricing"><?php echo esc_html( $pricing_title ); ?></span></th>
+							<th colspan="6"><?php esc_html_e( 'Trip : ', 'wp-travel' ); ?> <strong><?php echo esc_html( $title ); ?></strong> / <span class="my-order-pricing"><?php echo esc_html( $pricing_title ); ?></span></th>
 						</tr>
 						<tr>
 							<th><?php esc_html_e( 'Traveler Name', 'wp-travel' ); ?></th>
