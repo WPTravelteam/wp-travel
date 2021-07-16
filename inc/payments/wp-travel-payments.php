@@ -478,6 +478,7 @@ function wptravel_send_email_payment( $booking_id ) {
 		'{currency_symbol}'        => '', // Depricated tag @since 2.0.1.
 		'{currency}'               => wptravel_get_currency_symbol(),
 		'{booking_info}'           => wptravel_booking_info_table( $booking_id ),
+		'{payment_details}'        => WpTravel_Helpers_Payment::render_payment_details( $booking_id ),
 	);
 
 	$email_tags = apply_filters( 'wp_travel_payment_email_tags', $email_tags );

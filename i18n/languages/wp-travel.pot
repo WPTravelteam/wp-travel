@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 4.7.0\n"
+"Project-Id-Version: WP Travel 4.7.1-beta2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-07 08:09:21+00:00\n"
+"POT-Creation-Date: 2021-07-13 04:42:00+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -482,8 +482,8 @@ msgid "Fact"
 msgstr ""
 
 #: core/helpers/strings.php:46 core/helpers/strings.php:82
-#: inc/admin/views/tabs/tab-contents/itineraries/misc-options.php:25
-#: inc/admin/views/tabs/tab-contents/itineraries/misc-options.php:43
+#: inc/admin/views/tabs/tab-contents/itineraries/misc-options.php:21
+#: inc/admin/views/tabs/tab-contents/itineraries/misc-options.php:39
 #: inc/helpers.php:2074 inc/itinerary-v2-functions.php:243
 #: inc/template-functions.php:614
 msgid "Trip Enquiry"
@@ -509,7 +509,7 @@ msgid "Global Partial Payout"
 msgstr ""
 
 #: core/helpers/strings.php:51
-#: inc/admin/views/tabs/tab-contents/itineraries/misc-options.php:28
+#: inc/admin/views/tabs/tab-contents/itineraries/misc-options.php:24
 msgid "Global Trip Enquiry Option"
 msgstr ""
 
@@ -580,8 +580,8 @@ msgstr ""
 #: inc/admin/admin-helper.php:1017 inc/admin/class-admin-metaboxes.php:369
 #: inc/admin/class-admin-pointers.php:382
 #: inc/admin/views/tabs/tab-contents/itineraries/cart-checkout.php:24
-#: inc/admin/views/tabs/tab-contents/itineraries/downloads.php:22
-#: inc/admin/views/tabs/tab-contents/itineraries/faq.php:26
+#: inc/admin/views/tabs/tab-contents/itineraries/downloads.php:23
+#: inc/admin/views/tabs/tab-contents/itineraries/faq.php:28
 #: inc/admin/views/tabs/tab-contents/itineraries/inventory.php:26
 #: inc/admin/views/tabs/tab-contents/itineraries/locations.php:34
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:952
@@ -926,7 +926,7 @@ msgstr ""
 
 #: core/helpers/strings.php:139 core/helpers/strings.php:232
 #: inc/admin/class-admin-metaboxes.php:49
-#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:26
+#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:30
 #: inc/email-template-functions.php:33 inc/email-template-functions.php:138
 #: inc/email-template-functions.php:241 inc/email-template-functions.php:319
 #: inc/email-template-functions.php:612 inc/email-template-functions.php:920
@@ -935,12 +935,12 @@ msgid "Itinerary"
 msgstr ""
 
 #: core/helpers/strings.php:140
-#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:136
+#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:140
 msgid "Day X"
 msgstr ""
 
 #: core/helpers/strings.php:141
-#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:137
+#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:141
 msgid "Your Plan"
 msgstr ""
 
@@ -949,26 +949,26 @@ msgid "Trip Outline"
 msgstr ""
 
 #: core/helpers/strings.php:143
-#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:89
-#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:155
+#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:93
+#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:159
 msgid "Itinerary Label"
 msgstr ""
 
 #: core/helpers/strings.php:144
-#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:93
-#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:159
+#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:97
+#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:163
 msgid "Itinerary Title"
 msgstr ""
 
 #: core/helpers/strings.php:145
-#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:97
-#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:163
+#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:101
+#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:167
 msgid "Itinerary Date"
 msgstr ""
 
 #: core/helpers/strings.php:146
-#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:101
-#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:167
+#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:105
+#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:171
 msgid "Itinerary Time"
 msgstr ""
 
@@ -981,8 +981,8 @@ msgid "Minute"
 msgstr ""
 
 #: core/helpers/strings.php:149
-#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:114
-#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:175
+#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:118
+#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:179
 #: inc/admin/views/tabs/tab-contents/tour-extras/tour-extras-general.php:27
 msgid "Description"
 msgstr ""
@@ -1333,12 +1333,12 @@ msgid ""
 msgstr ""
 
 #: core/helpers/strings.php:310
-#: inc/admin/views/tabs/tab-contents/itineraries/downloads.php:19
+#: inc/admin/views/tabs/tab-contents/itineraries/downloads.php:20
 msgid "Need to add your downloads?"
 msgstr ""
 
 #: core/helpers/strings.php:311 inc/admin/admin-helper.php:285
-#: inc/admin/views/tabs/tab-contents/itineraries/downloads.php:20
+#: inc/admin/views/tabs/tab-contents/itineraries/downloads.php:21
 msgid "By upgrading to Pro, you can add your downloads in all of your trips !"
 msgstr ""
 
@@ -1361,12 +1361,12 @@ msgid "Need advance Trip Extras options?"
 msgstr ""
 
 #: core/helpers/strings.php:322
-#: inc/admin/views/tabs/tab-contents/itineraries/faq.php:23
+#: inc/admin/views/tabs/tab-contents/itineraries/faq.php:25
 msgid "Tired of updating repitative FAQs ?"
 msgstr ""
 
 #: core/helpers/strings.php:323
-#: inc/admin/views/tabs/tab-contents/itineraries/faq.php:24
+#: inc/admin/views/tabs/tab-contents/itineraries/faq.php:26
 msgid ""
 "By upgrading to Pro, you can create and use Global FAQs in all of your "
 "trips !"
@@ -1408,14 +1408,14 @@ msgid ""
 msgstr ""
 
 #: core/lib/cart.php:219 core/lib/cart.php:370 core/lib/cart.php:414
-#: inc/cart/class-cart.php:218 inc/cart/class-cart.php:408
-#: inc/cart/class-cart.php:457
+#: inc/cart/class-cart.php:224 inc/cart/class-cart.php:414
+#: inc/cart/class-cart.php:463
 msgid ""
 "Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for "
 "this trip. Available pax is set for booking."
 msgstr ""
 
-#: core/lib/cart.php:457 inc/cart/class-cart.php:551
+#: core/lib/cart.php:457 inc/cart/class-cart.php:557
 msgid "Your cart is empty please <a href=\"%s\"> click here </a> to add trips."
 msgstr ""
 
@@ -1848,7 +1848,7 @@ msgstr ""
 
 #: inc/admin/class-admin-metaboxes.php:371
 #: inc/admin/views/tabs/tab-contents/itineraries/cart-checkout.php:26
-#: inc/admin/views/tabs/tab-contents/itineraries/faq.php:28
+#: inc/admin/views/tabs/tab-contents/itineraries/faq.php:30
 #: inc/admin/views/tabs/tab-contents/itineraries/inventory.php:28
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:954
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1802
@@ -2352,11 +2352,11 @@ msgstr ""
 msgid "Learn more about manual excerpts"
 msgstr ""
 
-#: inc/admin/views/tabs/tab-contents/itineraries/faq.php:49
+#: inc/admin/views/tabs/tab-contents/itineraries/faq.php:51
 msgid "Click on add new question to add FAQ."
 msgstr ""
 
-#: inc/admin/views/tabs/tab-contents/itineraries/faq.php:53
+#: inc/admin/views/tabs/tab-contents/itineraries/faq.php:55
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:151
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:650
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1104
@@ -2366,7 +2366,7 @@ msgstr ""
 msgid "Open All"
 msgstr ""
 
-#: inc/admin/views/tabs/tab-contents/itineraries/faq.php:54
+#: inc/admin/views/tabs/tab-contents/itineraries/faq.php:56
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:152
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:651
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1105
@@ -2376,15 +2376,19 @@ msgstr ""
 msgid "Close All"
 msgstr ""
 
-#: inc/admin/views/tabs/tab-contents/itineraries/faq.php:63
-#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:48
-#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:49
+#: inc/admin/views/tabs/tab-contents/itineraries/faq.php:65
+#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:52
+#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:53
 msgid "Untitled"
 msgstr ""
 
-#: inc/admin/views/tabs/tab-contents/itineraries/faq.php:83
-#: inc/admin/views/tabs/tab-contents/itineraries/faq.php:116
+#: inc/admin/views/tabs/tab-contents/itineraries/faq.php:85
+#: inc/admin/views/tabs/tab-contents/itineraries/faq.php:118
 msgid "Enter Your Question"
+msgstr ""
+
+#: inc/admin/views/tabs/tab-contents/itineraries/faq.php:108
+msgid "FAQ?"
 msgstr ""
 
 #: inc/admin/views/tabs/tab-contents/itineraries/images-gallery.php:24
@@ -2398,11 +2402,11 @@ msgid ""
 "position."
 msgstr ""
 
-#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:40
+#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:44
 msgid "Click on 'Add Itinerary' to add Itineraries."
 msgstr ""
 
-#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:129
+#: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:133
 msgid "Add Itinerary"
 msgstr ""
 
@@ -2418,11 +2422,11 @@ msgstr ""
 msgid "View WP Travel Map addons"
 msgstr ""
 
-#: inc/admin/views/tabs/tab-contents/itineraries/misc-options.php:39
+#: inc/admin/views/tabs/tab-contents/itineraries/misc-options.php:35
 msgid "Use Global Trip Enquiry Option from setting."
 msgstr ""
 
-#: inc/admin/views/tabs/tab-contents/itineraries/misc-options.php:53
+#: inc/admin/views/tabs/tab-contents/itineraries/misc-options.php:48
 msgid "Check to enable trip enquiry for this trip."
 msgstr ""
 
@@ -3348,42 +3352,42 @@ msgstr ""
 msgid "Show all your \"%s\" settings and enable its feature."
 msgstr ""
 
-#: inc/class-ajax.php:335 inc/class-ajax.php:379 inc/helpers.php:1376
+#: inc/class-ajax.php:335 inc/class-ajax.php:378 inc/helpers.php:1376
 #: inc/helpers.php:3376
 msgid "Custom"
 msgstr ""
 
-#: inc/class-ajax.php:482
+#: inc/class-ajax.php:487
 msgid "<strong> </strong>Cart updated succesfully.Please Proceed to Checkout"
 msgstr ""
 
-#: inc/class-ajax.php:500
+#: inc/class-ajax.php:505
 msgid "Coupon Code cannot be empty"
 msgstr ""
 
-#: inc/class-ajax.php:511
+#: inc/class-ajax.php:516
 msgid "Invalid Coupon Code"
 msgstr ""
 
-#: inc/class-ajax.php:521
+#: inc/class-ajax.php:526
 msgid ""
 "The coupoun is either inactive or has expired. Coupon Code could not be "
 "applied."
 msgstr ""
 
-#: inc/class-ajax.php:533
+#: inc/class-ajax.php:538
 msgid "This coupon cannot be applied to the selected trip"
 msgstr ""
 
-#: inc/class-ajax.php:549
+#: inc/class-ajax.php:554
 msgid "Coupon Expired. Maximum no. of coupon usage exceeded."
 msgstr ""
 
-#: inc/class-ajax.php:566
+#: inc/class-ajax.php:571
 msgid "Cannot apply coupon for this trip."
 msgstr ""
 
-#: inc/class-ajax.php:573
+#: inc/class-ajax.php:578
 msgid "Coupon applied succesfully."
 msgstr ""
 

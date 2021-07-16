@@ -122,18 +122,18 @@ class WP_Travel_Emails {
 			font-size: 14px;
 			padding: 10px 25px;
 		}
-		#newBookingDetails thead th {
+		.wp-travel-table-content thead th {
 			padding: 15px 10px;
 		}
-		#newBookingDetails thead > tr > th {
+		.wp-travel-table-content thead > tr > th {
 			border: 1px solid #e1e1e1;
 			background: #f0f0f0;
 		}
 		
-		#newBookingDetails tbody td {
+		.wp-travel-table-content tbody td {
 			padding: 15px 10px;
 		}
-		#newBookingDetails tbody > tr > td {
+		.wp-travel-table-content tbody > tr > td {
 			border: 1px solid #f0f0f0;
 		}
 		@media screen and ( max-width:600px ){

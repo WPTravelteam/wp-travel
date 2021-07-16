@@ -159,25 +159,55 @@ function wptravel_book_now() {
 	reset( $customer_email );
 	$first_key = key( $customer_email );
 	$customer_email = isset( $customer_email[ $first_key ][0] ) ? $customer_email[ $first_key ][0] : '';
-	if ( ! $allow_multiple_items || ( 1 === count( $items ) ) ) {
-		$args = array(
-			'trip_id'        => $trip_id,
-			'booking_id'     => $booking_id,
-			'pricing_id'     => $pricing_id,
-			'pax'            => $pax,
-			'selected_date'  => $arrival_date, // [used in inventory]
-			'time'           => $trip_time,
-			'price_key'      => $price_key, // Just for legacy. Note: Not used for inventory [For Email].
-			'arrival_date'   => $arrival_date_email_tag, // For Email [arrival_date along with time].
-			'departure_date' => $departure_date, // For Email.
-			'customer_email' => $customer_email,
-		);
+	
+	// Update single trip vals. // Need Enhancement. lots of loop with this $items in this functions.
+	foreach ( $items as $item_key => $trip ) {
+
+		$trip_id      = $trip['trip_id'];
+		$pax          = $trip['pax'];
+		$price_key    = isset( $trip['price_key'] ) && ! empty( $trip['price_key'] ) ? $trip['price_key'] : false;
+		$arrival_date = isset( $trip['arrival_date'] ) && ! empty( $trip['arrival_date'] ) ? $trip['arrival_date'] : '';
+
+		$booking_count     = get_post_meta( $trip_id, 'wp_travel_booking_count', true );
+		$booking_count     = ( isset( $booking_count ) && '' !== $booking_count ) ? $booking_count : 0;
+		$new_booking_count = $booking_count + 1;
+		update_post_meta( $trip_id, 'wp_travel_booking_count', sanitize_text_field( $new_booking_count ) );
+
+		if ( is_user_logged_in() ) {
+
+			$user = wp_get_current_user();
+
+			if ( in_array( 'wp-travel-customer', (array) $user->roles, true ) ) {
+
+				$saved_booking_ids = get_user_meta( $user->ID, 'wp_travel_user_bookings', true );
+
+				if ( ! $saved_booking_ids ) {
+					$saved_booking_ids = array();
+				}
+
+				array_push( $saved_booking_ids, $booking_id );
+
+				update_user_meta( $user->ID, 'wp_travel_user_bookings', $saved_booking_ids );
+
+			}
+		}
+
 		/**
 		 * Add Support for invertory addon options.
 		 */
 		wptravel_do_deprecated_action( 'wp_travel_update_trip_inventory_values', array( $trip_id, $pax, $price_key, $arrival_date, $booking_id ), '4.4.0', 'wp_travel_trip_inventory' );
+		
+		$args = array(
+			'trip_id'       => $trip_id,
+			'booking_id'    => $booking_id,
+			'pricing_id'    => $pricing_id,
+			'pax'           => $pax,
+			'selected_date' => $arrival_date, // [used in inventory].
+			'time'          => $trip_time,
+			'price_key'     => $price_key, // Just for legacy. Note: Not used for inventory [For Email].
+		);
 		/**
-		 * Trigger Update inventory values.
+		 * Trigger Update inventory values action.
 		 *
 		 * @hooked array( 'WP_Travel_Util_Inventory', 'update_inventory' )
 		 * @since 4.0.0
@@ -188,91 +218,17 @@ function wptravel_book_now() {
 		do_action( 'wp_travel_trip_inventory', $inventory_args ); // phpcs:ignore
 		do_action( 'wptravel_trip_inventory', $inventory_args );
 		// End of Inventory.
-
-		// Begin Send Email to client / admin.
-		/**
-		 * Trigger Email functions. sends email to admin and client.
-		 *
-		 * @hooked array( 'WP_Travel_Email', 'send_booking_emails' )
-		 * @since 4.4.2
-		 */
-		do_action( 'wp_travel_action_after_inventory_update', $args ); // phpcs:ignore
-		do_action( 'wptravel_action_after_inventory_update', $args );
-	} else {
-
-		// Update single trip vals. // Need Enhancement. lots of loop with this $items in this functions.
-		foreach ( $items as $item_key => $trip ) {
-
-			$trip_id      = $trip['trip_id'];
-			$pax          = $trip['pax'];
-			$price_key    = isset( $trip['price_key'] ) && ! empty( $trip['price_key'] ) ? $trip['price_key'] : false;
-			$arrival_date = isset( $trip['arrival_date'] ) && ! empty( $trip['arrival_date'] ) ? $trip['arrival_date'] : '';
-
-			$booking_count     = get_post_meta( $trip_id, 'wp_travel_booking_count', true );
-			$booking_count     = ( isset( $booking_count ) && '' !== $booking_count ) ? $booking_count : 0;
-			$new_booking_count = $booking_count + 1;
-			update_post_meta( $trip_id, 'wp_travel_booking_count', sanitize_text_field( $new_booking_count ) );
-
-			if ( is_user_logged_in() ) {
-
-				$user = wp_get_current_user();
-
-				if ( in_array( 'wp-travel-customer', (array) $user->roles, true ) ) {
-
-					$saved_booking_ids = get_user_meta( $user->ID, 'wp_travel_user_bookings', true );
-
-					if ( ! $saved_booking_ids ) {
-						$saved_booking_ids = array();
-					}
-
-					array_push( $saved_booking_ids, $booking_id );
-
-					update_user_meta( $user->ID, 'wp_travel_user_bookings', $saved_booking_ids );
-
-				}
-			}
-
-			/**
-			 * Add Support for invertory addon options.
-			 */
-			wptravel_do_deprecated_action( 'wp_travel_update_trip_inventory_values', array( $trip_id, $pax, $price_key, $arrival_date, $booking_id ), '4.4.0', 'wp_travel_trip_inventory' );
-			$args = array(
-				'trip_id'       => $trip_id,
-				'booking_id'    => $booking_id,
-				'pricing_id'    => $pricing_id,
-				'pax'           => $pax,
-				'selected_date' => $arrival_date,
-				'time'          => $trip_time,
-			);
-			$args = array(
-				'trip_id'       => $trip_id,
-				'booking_id'    => $booking_id,
-				'pricing_id'    => $pricing_id,
-				'pax'           => $pax,
-				'selected_date' => $arrival_date, // [used in inventory].
-				'time'          => $trip_time,
-				'price_key'     => $price_key, // Just for legacy. Note: Not used for inventory [For Email].
-			);
-			/**
-			 * Trigger Update inventory values action.
-			 *
-			 * @hooked array( 'WP_Travel_Util_Inventory', 'update_inventory' )
-			 * @since 4.0.0
-			 */
-			$inventory_args = apply_filters( 'wp_travel_inventory_args', $args ); // phpcs:ignore
-			$inventory_args = apply_filters( 'wptravel_inventory_args', $inventory_args );
-
-			do_action( 'wp_travel_trip_inventory', $inventory_args ); // phpcs:ignore
-			do_action( 'wptravel_trip_inventory', $inventory_args );
-			// End of Inventory.
-		}
-		if ( class_exists( 'WP_Travel_Multiple_Cart_Booking' ) ) {
-			$multiple_order = new WP_Travel_Multiple_Cart_Booking();
-			// Finally, send the booking e-mails.
-			$multiple_order->send_emails( $booking_id );
-		}
 	}
 
+	/**
+	 * Trigger Email functions. Sends Booking email to admin and client.
+	 *
+	 * @hooked array( 'WP_Travel_Email', 'send_booking_email' );
+	 * @since 4.7.1
+	 */
+	do_action( 'wptravel_action_send_booking_email', $booking_id, wptravel_sanitize_array( $_POST ) );
+
+		
 	/**
 	 * Hook used to add payment and its info.
 	 *

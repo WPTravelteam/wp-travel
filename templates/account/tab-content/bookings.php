@@ -51,7 +51,7 @@ function wptravel_account_tab_content( $args ) {
 							<h3><?php esc_html_e( 'Your Booking Details', 'wp-travel' ); ?> <a href="<?php echo esc_url( $back_link ); ?>"><?php esc_html_e( '(Back)', 'wp-travel' ); ?></a></h3>
 							<?php wptravel_view_booking_details_table( $booking_id ); ?>
 						</div>
-						<?php wptravel_view_payment_details_table( $booking_id ); ?>
+						<?php echo WpTravel_Helpers_Payment::render_payment_details( $booking_id ); // @phpcs:ignore ?>
 					</div>
 				</div>
 			</div>

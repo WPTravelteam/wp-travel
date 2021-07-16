@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 5.4.1
 Tested up to: 5.7.2
 Requires PHP: 5.6.2
-Stable tag: 4.7.0
+Stable tag: 4.7.1-beta2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -243,6 +243,14 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
 
 == Changelog ==
+
+= 4.7.1 =
+Release Date:
+
+Fixes:
+* Calendar translation issue in filter widget when it is used in homepage.
+* Fixed Script 'wp-travel-backend-pointers.js' not found on admin pages.
+* Fixed Trip extras label not displaying in trip edit page.
 
 = 4.7.0 =
 Release Date: 4th July, 2021
