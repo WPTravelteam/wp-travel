@@ -583,11 +583,11 @@ const BookingWidget = () => {
 			})
 				.then(res => {
 					if (true === res.success && 'WP_TRAVEL_ADDED_TO_CART' === res.data.code) {
-						if ( wp_travel.isEnabledCartPage ) {
-							location.href = wp_travel.cartUrl; // This may include cart or checkout page url.
-						} else {
-						// location.href = wp_travel.checkoutUrl; // [only checkout page url]
-						}
+						// if ( wp_travel.isEnabledCartPage ) {
+						// 	location.href = wp_travel.cartUrl; // This may include cart or checkout page url.
+						// } else {
+						location.href = wp_travel.checkoutUrl; // [only checkout page url]
+						// }
 					}
 				}), 1000)
 			.catch(error => {
