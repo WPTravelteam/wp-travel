@@ -31,8 +31,6 @@ class WpTravel_Helpers_Payment { // @phpcs:ignore
         $payment_data = wptravel_payment_data( $booking_id );
         $status_list  = wptravel_get_payment_status();
 
-        error_log( print_r( $payment_data, true ) );
-
         ob_start();
         if ( $payment_data && count( $payment_data ) > 0 ) {
             $payment_id   = wptravel_get_payment_id( $booking_id );
