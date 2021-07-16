@@ -1993,9 +1993,14 @@ function wptravel_booking_show_end_date() {
 function wptravel_get_trip_pricing_name_by_pricing_id( $trip_id, $pricing_id ) {
 	$pricing_name       = get_the_title( $trip_id );
 	$pricing            = wptravel_get_pricing_by_pricing_id( $trip_id, $pricing_id );
+	
+	if ( is_array( $pricing ) && isset( $pricing['title'] ) ) {
+		$pricing = $pricing['title'];
+	} 
+
 	$show_pricing_label = apply_filters( 'wp_travel_show_pricing_label_on_name', true ); // filter @since 4.3.1
 	if ( ! is_null( $pricing ) && $show_pricing_label ) {
-		$pricing_name = sprintf( '%s (%s)', $pricing_name, $pricing['title'] );
+		$pricing_name = sprintf( '%s (%s)', $pricing_name, $pricing );
 	}
 	return $pricing_name;
 }
@@ -3218,7 +3223,7 @@ function wptravel_get_cart_pricing( $cart_id ) {
  */
 if ( ! function_exists( 'wptravel_get_trip_pricings' ) ) :
 	function wptravel_get_trip_pricings( $trip_id ) {
-		$pricings_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id, true );
+		$pricings_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id );
 		return ! is_wp_error( $pricings_data ) && isset( $pricings_data['pricings'] ) ? $pricings_data['pricings'] : array(); // Trip Pricings.
 	}
 endif;

@@ -444,7 +444,7 @@ class WP_Travel_Admin_Booking {
 								<?php do_action( 'wp_travel_booking_metabox_after_title', $booking_id ); // @since 3.0.6 ?>
 								<?php wptravel_view_booking_details_table( $booking_id, true ); ?>
 							</div>
-							<?php wptravel_view_payment_details_table( $booking_id ); ?>
+							<?php echo WpTravel_Helpers_Payment::render_payment_details( $booking_id ); // @phpcs:ignore ?>
 						</div>
 					</div>
 				</div>

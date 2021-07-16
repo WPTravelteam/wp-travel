@@ -92,7 +92,7 @@ class WpTravel_Helpers_Pricings {
 				}
 			}
 
-			if ( absint( $price->id ) === $pricing_id ) {
+			if ( absint( $price->id ) === absint( $pricing_id ) ) {
 				$selected_pricing = $pricings[ $index ];
 			}
 			$index++;
@@ -460,7 +460,7 @@ class WpTravel_Helpers_Pricings {
 		$price_key        = isset( $args['price_key'] ) ? $args['price_key'] : '';
 
 		$price         = 0;
-		$pricings_data = self::get_pricings( $trip_id, true );
+		$pricings_data = self::get_pricings( $trip_id );
 		if ( ! empty( $pricing_id ) && ! empty( $category_id ) && is_array( $pricings_data ) ) { // Quick Fix here. Pricing data may be WP Error object.
 
 			$pricings = array_filter(

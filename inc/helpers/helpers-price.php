@@ -440,7 +440,7 @@ function wptravel_get_cart_attrs( $args, $pax = 0, $price_key = '', $pricing_id 
 		$switch_to_react = $settings_fields['wp_travel_switch_to_react'];
 
 		if ( 'yes' === $switch_to_react && $pricing_id ) {
-			$pricings_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id, true );
+			$pricings_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id );
 			if ( ! is_wp_error( $pricings_data ) && 'WP_TRAVEL_TRIP_PRICINGS' === $pricings_data['code'] ) {
 				$pricings_data = $pricings_data['pricings'];
 				foreach ( $pricings_data as $pricing_data ) {
