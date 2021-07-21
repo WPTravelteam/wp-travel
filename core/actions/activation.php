@@ -99,11 +99,6 @@ class WP_Travel_Actions_Activation { // @phpcs:ignore
 		$pages = apply_filters(
 			'wp_travel_create_pages', // phpcs:ignore
 			array(
-				'wp-travel-cart'      => array(
-					'name'    => _x( 'wp-travel-cart', 'Page slug', 'wp-travel' ),
-					'title'   => _x( 'WP Travel Cart', 'Page title', 'wp-travel' ),
-					'content' => '[' . $cart_shortcode_tag . ']',
-				),
 				'wp-travel-checkout'  => array(
 					'name'    => _x( 'wp-travel-checkout', 'Page slug', 'wp-travel' ),
 					'title'   => _x( 'WP Travel Checkout', 'Page title', 'wp-travel' ),
