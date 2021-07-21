@@ -11,6 +11,13 @@
 class WpTravel_Helpers_Schema {
 
 	/**
+	 * This variable include trip data which is used in schema.
+	 *
+	 * @var array $trip
+	 */
+	public static $trip;
+
+	/**
 	 * Initialize schema in WP Travel.
 	 *
 	 * @since 4.7.1
@@ -27,7 +34,22 @@ class WpTravel_Helpers_Schema {
 	 * @since 4.7.1
 	 */
 	public static function run() {
+		$use_schema = apply_filters( wptravel_use_schema, true );
+		if ( ! $use_schema ) {
+			return;
+		}
+		if ( WP_Travel::is_page( 'single' ) ) {
+			global $post;
+			$trip_id   = $post->ID;
+			$trip_data = WpTravel_Helpers_Trips::get_trip( $trip_id );
+			$trip      = array();
+			if ( is_array( $trip_data ) && ! is_wp_error( $trip_data ) && isset( $trip_data['code'] ) && 'WP_TRAVEL_TRIP_INFO' === $trip_data['code'] ) {
+				$trip = $trip_data['trip'];
+			}
+			self::$trip = $trip;
+		}
 		self::get_trip_schema();
+		self::get_trip_rating_schema();
 	}
 
 	/**
@@ -37,19 +59,11 @@ class WpTravel_Helpers_Schema {
 	 * @return string
 	 */
 	public static function get_trip_schema() {
-		global $post;
-		if ( ! $post ) {
+		if ( ! self::$trip ) {
 			return;
 		}
-		$trip_id = $post->ID;
-		if ( ! WP_Travel::is_page( 'single' ) ) {
-			return;
-		}
-		$trip_data = WpTravel_Helpers_Trips::get_trip( $trip_id );
-		$trip      = array();
-		if ( is_array( $trip_data ) && ! is_wp_error( $trip_data ) && isset( $trip_data['code'] ) && 'WP_TRAVEL_TRIP_INFO' === $trip_data['code'] ) {
-			$trip = $trip_data['trip'];
-		}
+		$trip    = self::$trip;
+		$trip_id = $trip['id'];
 
 		$schema = array(
 			'@context' => 'https://schema.org',
@@ -78,6 +92,28 @@ class WpTravel_Helpers_Schema {
 				$i++;
 			}
 		}
+		$schema = apply_filters( 'wptravel_trip_schema', $schema, $trip_id, $trip );
+		self::generate_schema( $schema );
+	}
+
+	/**
+	 * Generate schema as per $schema array.
+	 *
+	 * @since 4.7.1
+	 * @return string
+	 */
+	public static function get_trip_rating_schema() {
+		if ( ! self::$trip ) {
+			return;
+		}
+		$trip    = self::$trip;
+		$trip_id = $trip['id'];
+
+		$schema = array(
+			'@context' => 'https://schema.org',
+			'@type'    => 'Review', // Fixed.
+			'name'     => isset( $trip['title'] ) ? ucwords( $trip['title'] ) : '',
+		);
 
 		// Rating Data.
 		$schema['aggregateRating'] = array(
