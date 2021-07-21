@@ -78,6 +78,14 @@ class WpTravel_Helpers_Schema {
 				$i++;
 			}
 		}
+
+		// Rating Data.
+		$schema['aggregateRating'] = array(
+			'@type'       => 'AggregateRating', // Fixed.
+			'ratingValue' => wptravel_get_average_rating( $trip_id ),
+			'reviewCount' => wptravel_get_rating_count(),
+		);
+
 		$schema = apply_filters( 'wptravel_trip_schema', $schema, $trip_id, $trip );
 		self::generate_schema( $schema );
 	}
