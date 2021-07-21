@@ -34,7 +34,7 @@ class WpTravel_Helpers_Schema {
 	 * @since 4.7.1
 	 */
 	public static function run() {
-		$use_schema = apply_filters( wptravel_use_schema, true );
+		$use_schema = apply_filters( 'wptravel_use_schema', true );
 		if ( ! $use_schema ) {
 			return;
 		}
