@@ -92,6 +92,12 @@ class WpTravel_Helpers_Schema {
 				$i++;
 			}
 		}
+		/**
+		 * Trip schema structure.
+		 *
+		 * @param array $schema Schema data for trip.
+		 * @since 4.7.1
+		 */
 		$schema = apply_filters( 'wptravel_trip_schema', $schema, $trip_id, $trip );
 		self::generate_schema( $schema );
 	}
@@ -122,7 +128,13 @@ class WpTravel_Helpers_Schema {
 			'reviewCount' => wptravel_get_rating_count(),
 		);
 
-		$schema = apply_filters( 'wptravel_trip_schema', $schema, $trip_id, $trip );
+		/**
+		 * Trip Review schema structure.
+		 *
+		 * @param array $schema Schema data for trip rating.
+		 * @since 4.7.1
+		 */
+		$schema = apply_filters( 'wptravel_trip_rating_schema', $schema, $trip_id, $trip );
 		self::generate_schema( $schema );
 	}
 
