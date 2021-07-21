@@ -31,6 +31,7 @@ class Wp_Travel_Shortcodes {
 		 * Shortcodes for new checkout process.
 		 */
 		$shortcodes = array(
+			'wp_travel_cart'         => __CLASS__ . '::cart',
 			'wp_travel_checkout'     => __CLASS__ . '::checkout',
 			'wp_travel_user_account' => __CLASS__ . '::user_account',
 		);
@@ -41,6 +42,15 @@ class Wp_Travel_Shortcodes {
 			add_shortcode( apply_filters( "{$shortcode}_shortcode_tag", $shortcode ), $function );
 		}
 
+	}
+
+	/**
+	 * Cart page shortcode.
+	 *
+	 * @return string
+	 */
+	public static function cart() {
+		return self::shortcode_wrapper( array( 'WP_Travel_Cart', 'output' ) );
 	}
 
 	/**
