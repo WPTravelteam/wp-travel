@@ -125,7 +125,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 
 			add_action( 'init', 'wptravel_book_now', 99 );
 			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
-			// add_action( 'init', array( $this, 'set_block_script_translation' ) );.
 			add_action( 'wp_head', array( 'WpTravel_Assets', 'styles_filter' ), 7 ); // @since 4.0.6
 			add_action( 'wp_footer', array( 'WpTravel_Assets', 'scripts_filter' ), 11 ); // @since 4.0.6
 			if ( $this->is_request( 'admin' ) ) {
@@ -161,14 +160,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			 */
 			add_filter( 'option_wp_travel_settings', array( $this, 'filter_wp_travel_settings' ), 11, 2 );
 			self::reject_cache_in_checkout();
-		}
-
-		/**
-		 * Set Block script translation support.
-		 */
-		public function set_block_script_translation() {
-			// Frontend Booking Script.
-			wp_set_script_translations( 'wp-travel-frontend-booking-widget', 'wp-travel', plugin_dir_path( __FILE__ ) . 'i18n/languages' );
 		}
 
 		/**
@@ -389,6 +380,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			require WP_TRAVEL_ABSPATH . '/core/helpers/icons.php';
 			require WP_TRAVEL_ABSPATH . '/core/helpers/booking.php';
 			require WP_TRAVEL_ABSPATH . '/core/helpers/payment.php';
+			require WP_TRAVEL_ABSPATH . '/core/helpers/schema.php';
 
 			// Ajax.
 			require WP_TRAVEL_ABSPATH . '/core/ajax/settings.php';
@@ -549,6 +541,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @param boolean $admin_page check if page is admin page.
 		 *
 		 * @since 4.4.2
+		 * @since 4.7.1 Added is_singular page for trip single page check.
 		 * @return boolean
 		 */
 		public static function is_page( $slug, $admin_page = false ) {
@@ -579,6 +572,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 						$is_account_page   = apply_filters( 'wptravel_is_account_page', $is_account_page );
 
 						return ( (int) $dashboard_page_id === $page_id || wptravel_post_content_has_shortcode( 'wp_travel_user_account' ) || $is_account_page );
+					case 'single':
+						return is_singular( WP_TRAVEL_POST_TYPE );
 					case 'archive':
 						return ( is_post_type_archive( WP_TRAVEL_POST_TYPE ) || is_tax( array( 'itinerary_types', 'travel_locations', 'travel_keywords', 'activity' ) ) ) && ! is_search();
 				}
