@@ -18,7 +18,7 @@ WP Travel is a free powerful travel engine for making customized travel agency o
 
 With such a powerful tour and travel engine, you can efficiently create customized tour and trekking packages along with receiving payments, preparing itineraries, among others. It supports all your travel website’s needs including travel booking, receiving payments, itinerary schedules, and much more. WP Travel is scalable, powerful and probably, the easiest travel & tour management plugin on WordPress. For further details, check the [best WP travel and operator engines](https://wptravel.io/?utm_source=home&utm_campaign=WP%20Plugin) website.
 
-View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=demo&utm_campaign=WP%20Plugin) | [Travel Booking Plugin Modules](https://wptravel.io/downloads/?utm_source=addons&utm_campaign=WP%20Plugin) | [Best WP Travel & Tour Themes](https://wptravel.io/wordpress-travel-themes/?utm_source=besttraveltourthemes&utm_campaign=WP%20Plugin) | [WP Travel Booking Plugin Tutorial](https://wptravel.io/documentations/?utm_source=Tutorial&utm_campaign=WP%20Plugin)
+View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=demo&utm_campaign=WP%20Plugin) | [Travel Booking Plugin Modules](https://wptravel.io/downloads/?utm_source=addons&utm_campaign=WP%20Plugin) | [Best WP Travel & Tour Themes](https://wptravel.io/wordpress-travel-themes/?utm_source=besttraveltourthemes&utm_campaign=WP%20Plugin) | [WP Travel Booking Plugin Tutorial](https://wptravel.io/wp-travel-docs/?utm_source=Tutorial&utm_campaign=WP%20Plugin)
 
 
 > **WP Travel PRO**
@@ -165,10 +165,10 @@ These themes are specially designed for WP Travel plugin. So, it is 100% compati
 = Dedicated Support and Documentation =
 We have an entire team of happiness engineers ready to help you. Ask your questions in the [support forum](https://wptravel.io/contact/).
 
-Also you can checkout WP Travel [documentation](http://wptravel.io/documentations/?utm_source=tutorial&utm_medium=documentation&utm_campaign=WP%20Plugin).
+Also you can checkout WP Travel [documentation](https://wptravel.io/wp-travel-docs/?utm_source=tutorial&utm_medium=documentation&utm_campaign=WP%20Plugin).
 
 = Release Notes: =
-Before updating the plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/?utm_source=releasenotes&utm_medium=relasenotes&utm_campaign=WP%20Plugin).
+Before updating the plugin please check ["our latest release notes"](#developers).
 
 == Installation ==
 = Using The WordPress Dashboard =
@@ -194,7 +194,7 @@ Before updating the plugin please check ["our latest release notes"](http://wptr
 == Frequently Asked Questions ==
 = Where can I find WP Travel documentation and user guides? =
 
-For setting up your site using the WP Travel plugin and extensions please refer to [Documentation page](http://wptravel.io/documentations/?utm_source=FAQ&utm_medium=tutorial&utm_campaign=WP%20Plugin)
+For setting up your site using the WP Travel plugin and extensions please refer to [Documentation page](https://wptravel.io/wp-travel-docs/?utm_source=FAQ&utm_medium=tutorial&utm_campaign=WP%20Plugin)
 
 = There is something cool you could add... =
 
@@ -240,7 +240,7 @@ If you have any queries regarding the plugin and extensions then you can ask for
 10. Frontend: Trip listing
 
 == Upgrade Notice ==
-Before updating plugin please check ["our latest release notes"](http://wptravel.io/category/wp-travel-release/).
+Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
 
