@@ -9,7 +9,7 @@
 /**
  * WP Travel email templates class.
  */
-class WP_Travel_Email extends WP_Travel_Emails {
+class WP_Travel_Email extends WP_Travel_Emails { // @phpcs:ignore
 
 	/**
 	 * Settings.
@@ -41,7 +41,7 @@ class WP_Travel_Email extends WP_Travel_Emails {
 		 * @since 4.7.1
 		 */
 		add_action( 'wptravel_action_send_booking_email', array( $this, 'send_booking_email' ), 10, 2 );
-		
+
 	}
 
 
@@ -49,7 +49,7 @@ class WP_Travel_Email extends WP_Travel_Emails {
 	 * Send Booking emails to client and admin.
 	 *
 	 * @param array $args Data to send booking email.
-	 * 
+	 *
 	 * @deprecated 4.7.1
 	 * @since 4.4.2
 	 */
@@ -124,22 +124,21 @@ class WP_Travel_Email extends WP_Travel_Emails {
 		if ( empty( $customer_email_ids ) ) {
 			return;
 		}
-		
+
 		$all_customer_email_ids = array(); // include emails of all trips added in cart. This will helps you to send emails to all travellers.
 		foreach ( $customer_email_ids as $cart_item_id => $email_ids ) {
 			foreach ( $email_ids as $email_id ) {
 				$all_customer_email_ids[] = $email_id;
 			}
 		}
-		
+
 		$customer_email = $all_customer_email_ids[0];
 
 		$reply_to_email = isset( $this->settings['wp_travel_from_email'] ) ? $this->settings['wp_travel_from_email'] : $this->admin_email;
 
 		$email      = new WP_Travel_Emails();
 		$email_tags = $this->get_tags( $booking_id, $request_data ); // Supported email tags.
-		// error_log( print_r( $email_tags, true ) );
-		// die;
+
 		$send_email_to_admin = $this->settings['send_booking_email_to_admin']; // Default 'yes'
 		if ( 'yes' === $send_email_to_admin ) { // Send mail to admin if booking email is set to yes.
 			$email_template = $email->wptravel_get_email_template( 'bookings', 'admin' );
@@ -182,7 +181,7 @@ class WP_Travel_Email extends WP_Travel_Emails {
 	}
 
 	/**
-	 * Booking Email Tags.
+	 * Booking Email Tags. Deprecated in 4.7.1 use WP_Travel_Email::get_tags() instead.
 	 *
 	 * @param array $args Email tag args.
 	 *
@@ -268,11 +267,11 @@ class WP_Travel_Email extends WP_Travel_Emails {
 		$discounts   = $wt_cart->get_discounts();
 		$coupon_code = ! empty( $discounts['coupon_code'] ) ? ( $discounts['coupon_code'] ) : '';
 
-		$items       = $wt_cart->getItems();
+		$items = $wt_cart->getItems();
 		// Cart Datas.
-		$trip_ids        = array();
-		$price_keys      = array();
-		$paxs            = array();
+		$trip_ids   = array();
+		$price_keys = array();
+		$paxs       = array();
 
 		// Tags.
 		$itinerary_links  = array();
@@ -284,15 +283,15 @@ class WP_Travel_Email extends WP_Travel_Emails {
 		$total_pax = 0;
 		if ( is_array( $items ) && 0 < count( $items ) ) {
 			foreach ( $items as $key => $item ) {
-				$trip_id           = isset( $item['trip_id'] ) ? $item['trip_id'] : 0;
-				$price_key         = isset( $item['price_key'] ) ? $item['price_key'] : '';
-				$arrival_date      = isset( $item['arrival_date'] ) ? $item['arrival_date'] : '';  // date along with time.
-				$departure_date    = isset( $item['departure_date'] ) ? $item['departure_date'] : '';
-				$time              = isset( $item['time'] ) ? $item['time'] : '';
+				$trip_id        = isset( $item['trip_id'] ) ? $item['trip_id'] : 0;
+				$price_key      = isset( $item['price_key'] ) ? $item['price_key'] : '';
+				$arrival_date   = isset( $item['arrival_date'] ) ? $item['arrival_date'] : '';  // date along with time.
+				$departure_date = isset( $item['departure_date'] ) ? $item['departure_date'] : '';
+				$time           = isset( $item['time'] ) ? $item['time'] : '';
 
-				$trip_ids[]        = $trip_id;
-				$price_keys[]      = $price_key;
-				$paxs[]            = isset( $item['pax'] ) ? $item['pax'] : '';
+				$trip_ids[]   = $trip_id;
+				$price_keys[] = $price_key;
+				$paxs[]       = isset( $item['pax'] ) ? $item['pax'] : '';
 
 				// Tags values.
 				$itinerary_links[]  = get_permalink( $trip_id );
@@ -332,7 +331,7 @@ class WP_Travel_Email extends WP_Travel_Emails {
 			$bank_deposit_table = wptravel_get_bank_deposit_account_table( false );
 		}
 
-		$email_tags        = array(
+		$email_tags = array(
 			'{sitename}'               => $this->sitename,
 
 			'{itinerary_link}'         => get_permalink( $trip_id ), // @deprecated.
@@ -341,11 +340,11 @@ class WP_Travel_Email extends WP_Travel_Emails {
 			'{booking_departure_date}' => $departure_date,  // @deprecated.
 			'{booking_selected_time}'  => $time,  // @deprecated.
 			'{booking_scheduled_date}' => esc_html__( 'N/A', 'wp-travel' ), // @deprecated.
-			'{customer_name}'          => $customer_name,  // @deprecated.
-			'{customer_country}'       => $customer_country,  // @deprecated.
-			'{customer_address}'       => $customer_address,  // @deprecated.
-			'{customer_phone}'         => $customer_phone,  // @deprecated.
-			'{customer_email}'         => $customer_email,  // @deprecated.
+			'{customer_name}'          => $customer_name,
+			'{customer_country}'       => $customer_country,
+			'{customer_address}'       => $customer_address,
+			'{customer_phone}'         => $customer_phone,
+			'{customer_email}'         => $customer_email,
 
 			'{booking_id}'             => $booking_id,
 			'{booking_no_of_pax}'      => $total_pax,
