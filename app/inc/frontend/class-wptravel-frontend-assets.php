@@ -518,6 +518,30 @@ class WpTravel_Frontend_Assets {
 				'media' => 'all',
 			);
 
+			// Coupon.
+			$coupon_deps                      = $all_dependencies['admin-coupon'];
+			$scripts['wptravel-admin-coupon'] = array(
+				'src'       => self::$app_path . '/build/admin-coupon' . $suffix . '.js',
+				'deps'      => $coupon_deps['dependencies'],
+				'ver'       => $coupon_deps['version'],
+				'in_footer' => true,
+			);
+
+			$styles['wptravel-admin-coupon'] = array(
+				'src'   => self::$app_path . '/build/admin-coupon' . $suffix . '.css',
+				'deps'  => array( 'wp-components', 'font-awesome-css' ),
+				'ver'   => $coupon_deps['version'],
+				'media' => 'all',
+			);
+
+			// Legacy Widgets.
+			// $legacy_widget_deps                 = $all_dependencies['legacy-widgets'];
+			// $scripts['wptravel-legacy-widgets'] = array(
+			// 	'src'       => self::$app_path . '/build/legacy-widgets' . $suffix . '.js',
+			// 	'deps'      => $legacy_widget_deps['dependencies'],
+			// 	'ver'       => $legacy_widget_deps['version'],
+			// 	'in_footer' => true,
+			// );
 		}
 
 		// Register scripts and styles.
@@ -588,6 +612,18 @@ class WpTravel_Frontend_Assets {
 		$trip_edit['dependencies'][]     = 'jquery';
 		$dependenccies['admin-settings'] = $trip_edit;
 		// End of Admin Settings.
+
+		// Admin coupon.
+		$admin_coupon                   = include_once sprintf( '%sapp/build/admin-coupon.asset.php', WP_TRAVEL_ABSPATH );
+		$admin_coupon['dependencies'][] = 'jquery';
+		$dependenccies['admin-coupon']  = $admin_coupon;
+		// End of Admin coupon.
+
+		// Legacy widget.
+		// $legacy_widgets                   = include_once sprintf( '%sapp/build/legacy-widgets.asset.php', WP_TRAVEL_ABSPATH );
+		// $legacy_widgets['dependencies'][] = 'jquery';
+		// $dependenccies['legacy-widgets']  = $legacy_widgets;
+		// End of Legacy widget.
 
 		return $dependenccies; // it will return all block dependency along with compled version.
 	}

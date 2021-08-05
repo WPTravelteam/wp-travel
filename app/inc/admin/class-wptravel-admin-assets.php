@@ -91,6 +91,12 @@ class WpTravel_Admin_Assets {
 			wp_enqueue_style( 'wp-travel-admin-settings-style' );
 			wp_enqueue_script( 'wp-travel-admin-settings' );
 		}
+		// Block Coupon.
+		if ( WP_Travel::is_page( 'coupon', true ) ) {
+			wp_enqueue_style( 'wptravel-admin-coupon' );
+			wp_enqueue_script( 'wptravel-admin-coupon' );
+		}
+		wp_enqueue_script( 'wptravel-legacy-widgets' );
 	}
 }
 

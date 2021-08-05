@@ -187,17 +187,19 @@ class WP_Travel_Ajax {
 
 	public function check_coupon_code() {
 
-		check_ajax_referer( 'wp_travel_nonce', '_nonce' );
-		if ( ! isset( $_POST['coupon_code'] ) || ! isset( $_POST['coupon_id'] ) ) {
+		WP_Travel::verify_nonce();
+	
+		$post_data = wptravel_sanitize_array( $_REQUEST );
+		if ( ! isset( $post_data['coupon_code'] ) || ! isset( $post_data['coupon_id'] ) ) {
 			return;
 		}
 
-		$coupon_id   = absint( $_POST['coupon_id'] );
-		$coupon_code = sanitize_text_field( wp_unslash( $_POST['coupon_code'] ) );
+		$coupon_id   = absint( $post_data['coupon_id'] );
+		$coupon_code = sanitize_text_field( wp_unslash( $post_data['coupon_code'] ) );
 
 		$coupon = WPTravel()->coupon->get_coupon_id_by_code( $coupon_code );
 
-		if ( ! $coupon || $coupon_id === $coupon ) {
+		if ( ! $coupon || absint( $coupon_id ) === absint( $coupon ) ) {
 
 			wp_send_json_success( $coupon_code );
 		}

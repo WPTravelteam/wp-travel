@@ -21,6 +21,8 @@ class WpTravel_Localize_Admin {
 	/**
 	 * Localize data function.
 	 *
+	 * // @todo Need to Move this into into get_localized_data of WpTravel_Frontend_Assets class.
+	 *
 	 * @return void
 	 */
 	public static function localize_data() {
@@ -40,6 +42,7 @@ class WpTravel_Localize_Admin {
 
 		// Coupon Page.
 		if ( 'wp-travel-coupons' === $screen->id ) {
+			$translation_array['postID'] = get_the_ID();
 			wp_localize_script( 'wp-travel-coupons-backend-js', '_wp_travel', $translation_array );
 		}
 

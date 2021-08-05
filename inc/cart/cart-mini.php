@@ -35,7 +35,7 @@ if ( wptravel_is_react_version_enabled() ) {
 	$coupon_applied = isset( $cart['cart']['coupon']['coupon_id'] );
 	$readonly       = '';
 	$disabled       = '';
-	$coupon_code    = '';
+	$coupon_code    = WpTravel_Helpers_Coupon::get_default_coupon();
 	$coupon_type    = '';
 	if ( $coupon_applied ) {
 		$readonly    = 'readonly';

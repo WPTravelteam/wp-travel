@@ -221,7 +221,8 @@ function wptravel_trip_facts_single_html( $fact = array(), $index = false ) {
 	$label = ! empty( $fact_setting ) ? $fact_setting['name'] : $fact['label'];
 	$type  = $fact['type'];
 	$icon  = ! empty( $fact_setting['icon'] ) ? $fact_setting['icon'] : $fact['icon'];
-	$value = isset( $fact['value'] ) ? $fact['value'] : is_array( $type ) ? array() : '';
+	$val   = is_array( $type ) ? array() : '';
+	$value = isset( $fact['value'] ) ? $fact['value'] : $val;
 
 	ob_start();
 	?>

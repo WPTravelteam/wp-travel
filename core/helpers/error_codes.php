@@ -18,6 +18,9 @@ class WP_Travel_Helpers_Error_Codes {
 			'WP_TRAVEL_NO_TRIP_ID'                        => array(
 				'message' => __( 'Invalid trip id.', 'wp-travel' ),
 			),
+			'WP_TRAVEL_NO_COUPON_ID'                        => array(
+				'message' => __( 'Invalid coupon id.', 'wp-travel' ),
+			),
 			'WP_TRAVEL_NO_PRICINGS'                       => array(
 				'message' => __( 'No pricings found for the trip.', 'wp-travel' ),
 			),

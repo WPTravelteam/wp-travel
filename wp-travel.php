@@ -381,6 +381,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			require WP_TRAVEL_ABSPATH . '/core/helpers/booking.php';
 			require WP_TRAVEL_ABSPATH . '/core/helpers/payment.php';
 			require WP_TRAVEL_ABSPATH . '/core/helpers/schema.php';
+			require WP_TRAVEL_ABSPATH . '/core/helpers/coupon.php';
 
 			// Ajax.
 			require WP_TRAVEL_ABSPATH . '/core/ajax/settings.php';
@@ -541,7 +542,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @param boolean $admin_page check if page is admin page.
 		 *
 		 * @since 4.4.2
-		 * @since 4.7.1 Added is_singular page for trip single page check.
+		 * @since 4.7.1 Added trip single page and admin coupon coupon page check.
 		 * @return boolean
 		 */
 		public static function is_page( $slug, $admin_page = false ) {
@@ -552,6 +553,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 					case 'settings':
 						$pages = array( 'itinerary-booking_page_settings', 'itinerary-booking_page_settings2' );
 						return in_array( $screen->id, $pages, true );
+					case 'coupon':
+						return 'wp-travel-coupons' === $screen->id;
 				}
 				return;
 			} else {
