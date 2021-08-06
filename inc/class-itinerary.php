@@ -31,8 +31,11 @@ class WP_Travel_Itinerary {
 
 	function get_gallery_ids() {
 		$gallery_ids = get_post_meta( $this->post->ID, 'wp_travel_itinerary_gallery_ids', true );
-		if ( false !== $gallery_ids && ! empty( $gallery_ids ) ) {
+		$gallery_id_array = json_decode( $gallery_ids );
+		if ( is_array( $gallery_ids ) && ! empty( $gallery_ids ) ) {
 			return $gallery_ids;
+		} else if( is_array( $gallery_id_array ) && ! empty( $gallery_id_array ) ) {
+			return wp_list_pluck( $gallery_id_array, 'id' );
 		}
 
 		$adv_gallery_ids = (array) get_post_meta( $this->post->ID, 'wp_travel_advanced_gallery', true );
@@ -101,7 +104,11 @@ class WP_Travel_Itinerary {
 	}
 
 	function get_content() {
-		if ( isset( $this->post->post_content ) && '' !== $this->post->post_content ) {
+		$wp_travel_overview = get_post_meta( $this->post->ID, 'wp_travel_overview', true );
+		if ( false !== $wp_travel_overview && '' !== $wp_travel_overview ) {
+			return apply_filters( 'wp_travel_the_content', $wp_travel_overview );
+		}
+		else if ( isset( $this->post->post_content ) && '' !== $this->post->post_content ) {
 			return apply_filters( 'wp_travel_the_content', $this->post->post_content );
 		}
 		return false;

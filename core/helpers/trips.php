@@ -125,7 +125,7 @@ class WpTravel_Helpers_Trips {
 		$use_lat_lng = ! empty( get_post_meta( $trip_id, 'wp_travel_trip_map_use_lat_lng', true ) ) ? get_post_meta( $trip_id, 'wp_travel_trip_map_use_lat_lng', true ) : 'no';
 		$use_lat_lng = apply_filters( 'wp_travel_trip_map_use_lat_lng', $use_lat_lng, $trip_id );
 		$use_lat_lng = apply_filters( 'wptravel_trip_map_use_lat_lng', $use_lat_lng, $trip_id );
-		
+
 		$iframe_height           = ! empty( get_post_meta( $trip_id, 'wp_travel_map_iframe_height', true ) ) ? absint( get_post_meta( $trip_id, 'wp_travel_map_iframe_height', true ) ) : 400;
 		$map_data['zoomlevel']   = $zoomlevel;
 		$map_data['use_lat_lng'] = $use_lat_lng;
@@ -223,6 +223,8 @@ class WpTravel_Helpers_Trips {
 				$gallery_data[ $index ]['id']        = $item_id;
 				$gallery_data[ $index ]['thumbnail'] = isset( $attachment[0] ) ? $attachment[0] : '';
 			}
+		} else {
+			$gallery_data = json_decode( $gallery_items_ids );
 		}
 		$trip_data['gallery']       = $gallery_data;
 		$trip_data['_thumbnail_id'] = (int) get_post_meta( $trip_id, '_thumbnail_id', true );
