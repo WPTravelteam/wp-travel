@@ -1,3 +1,8 @@
+/**
+ * External dependencies.
+ */
+ import { isEmpty, has, isUndefined } from 'lodash';
+
 import { TextControl, Draggable, Panel, PanelRow, PanelBody, Button, TabPanel,Notice, CheckboxControl} from '@wordpress/components';
 import { useSelect, dispatch } from '@wordpress/data';
 import { sprintf, _n, __} from '@wordpress/i18n';
@@ -23,14 +28,14 @@ const WPTravelTripOptionsFactContent = () => {
     const { trip_facts } = allData;
     const {wp_travel_trip_facts_enable, wp_travel_trip_facts_settings} = settingsData // All Facts options from settings.
 
-    let factOptions = Object.keys(wp_travel_trip_facts_settings).length > 0 ? Object.keys(wp_travel_trip_facts_settings).map( ( index ) => {
+    let factOptions = ! isUndefined( wp_travel_trip_facts_settings )  && Object.keys(wp_travel_trip_facts_settings).length > 0 ? Object.keys(wp_travel_trip_facts_settings).map( ( index ) => {
         return {
             label: wp_travel_trip_facts_settings[index].name,
             value: wp_travel_trip_facts_settings[index].name
           }
     } ) : []
     const updateFactType = ( key, data, _factIndex ) => {
-      
+
         const { trip_facts } = allData;
         let _allTripFacts = trip_facts;
         _allTripFacts[_factIndex][key] = data[key]
@@ -45,9 +50,9 @@ const WPTravelTripOptionsFactContent = () => {
         })
     }
     const updateFactValue = ( key, value, _factId ) => { // Update single value as per key
-      
+
         const { trip_facts } = allData;
-    
+
         let _allTripFacts = trip_facts;
         _allTripFacts[_factId][key] = value
         updateTripData({
@@ -95,7 +100,7 @@ const WPTravelTripOptionsFactContent = () => {
     return( <ErrorBoundary>
         <div className="wp-travel-trip-fact">
             {typeof wp_travel_trip_facts_settings != 'undefined' && <>
-                { Object.keys(wp_travel_trip_facts_settings).length > 0 ? 
+                { Object.keys(wp_travel_trip_facts_settings).length > 0 ?
                     <>
                         { typeof trip_facts != 'undefined' && trip_facts.length > 0 ? <>
                             <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addFact()}>{__i18n.add_fact}</Button></PanelRow>
@@ -121,7 +126,7 @@ const WPTravelTripOptionsFactContent = () => {
                                         title={trip_fact.label ? trip_fact.label : __i18n.fact }
                                         initialOpen={false}
                                         >
-                                    
+
                                         <PanelRow>
                                             <label>{__i18n.select_type}</label>
                                             <div className="wp-travel-select-wrapper">
@@ -144,15 +149,15 @@ const WPTravelTripOptionsFactContent = () => {
 
                                         <PanelRow>
                                             <label>{ __i18n.value }</label>
-                                            {trip_fact.type == 'text' && 
+                                            {trip_fact.type == 'text' &&
                                                 <TextControl
                                                     value={trip_fact.value ? trip_fact.value : '' }
-                                                    onChange={ 
-                                                        (e) => updateFactValue( 'value', e, factIndex) 
+                                                    onChange={
+                                                        (e) => updateFactValue( 'value', e, factIndex)
                                                     }
                                                 />
                                             }
-                                            {trip_fact.type == 'single' && 
+                                            {trip_fact.type == 'single' &&
                                                 <div className="wp-travel-select-wrapper">
                                                     <Select
                                                     value={singleSelected}
@@ -166,31 +171,31 @@ const WPTravelTripOptionsFactContent = () => {
                                                     />
                                                 </div>
                                             }
-                                            {trip_fact.type == 'multiple' && 
+                                            {trip_fact.type == 'multiple' &&
                                                 <div className="wp-travel-checkbox-wrapper">
                                                     {singleOrMultipleOptions.map( ( factOption, key ) => {
                                                         return <CheckboxControl
                                                                 label={factOption.label}
                                                                 checked={ multipleSelected.includes( factOption.value ) }
                                                                 onChange={ (e) => {
-                                                                
+
                                                                     if (e) {
                                                                         multipleSelected.push(factOption.value)
                                                                     } else {
                                                                         multipleSelected = multipleSelected.filter( (ele) => {
-                                                                            return ele != factOption.value; 
+                                                                            return ele != factOption.value;
                                                                             })
                                                                     }
 
                                                                     let _allTripFacts = trip_facts;
                                                                     _allTripFacts[factIndex].value = multipleSelected
-                                                                
+
                                                                     updateTripData({
                                                                         ...allData,
                                                                         trip_facts:[..._allTripFacts]
                                                                     })
                                                                 }
-                                                                    
+
                                                                 }
                                                             />
                                                     } )}
@@ -209,11 +214,11 @@ const WPTravelTripOptionsFactContent = () => {
                                                 updateFacts(factData);
                                             }} className="wp-traval-button-danger">{__i18n.remove_fact}</Button>
                                         </PanelRow>
-                                    
+
                                     </PanelBody>
 
                                 })}
-                            </ReactSortable> 
+                            </ReactSortable>
                             {trip_facts.length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addFact()}>{__i18n.add_fact}</Button></PanelRow> }</div></>:
                             <Notice isDismissible={false} actions={[{
                                 'label': __i18n.add_fact,
@@ -224,8 +229,8 @@ const WPTravelTripOptionsFactContent = () => {
                                 className: 'is-link'
                             }]}>{ __i18n.messages.add_fact }</Notice>
                         }
-                        
-                    </> : 
+
+                    </> :
                     <>
                         <Notice isDismissible={false} actions={[{
                             'label': __i18n.add_fact,
@@ -236,7 +241,7 @@ const WPTravelTripOptionsFactContent = () => {
                             noDefaultClasses: true,
                             className: 'is-link'
                         }]}>{ __i18n.messages.add_new_fact }</Notice>
-                    </> 
+                    </>
                 }
                 </>
             }
