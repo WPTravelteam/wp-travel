@@ -16,7 +16,6 @@ export default () => {
     const coupon_limit_number = 'undefined' !== typeof restriction && 'undefined' !== typeof restriction.coupon_limit_number ? restriction.coupon_limit_number : '';
     let restricted_trips      = ( 'undefined' !== typeof restriction && 'undefined' !== typeof restriction.restricted_trips ) ? restriction.restricted_trips : [];
     let coupon_user_id        = ( 'undefined' !== typeof restriction && 'undefined' !== typeof restriction.coupon_user_id ) ? restriction.coupon_user_id : 0;
-    console.log(restricted_trips);
     const {trips, users} = options;
     let allTrips = 'undefined' != typeof trips ? trips : [];
     
@@ -50,6 +49,7 @@ export default () => {
                 <label>{ __( 'Limit Coupon to Trips', 'wp-travel' ) }</label>
                 <div className="wp-travel-field-value">
                     <FormTokenField
+                        label=""
                         value={restricted_trips_names}
                         suggestions={tripSuggestions.map(tripSuggestion => { return tripSuggestion.title })}
                         onChange={

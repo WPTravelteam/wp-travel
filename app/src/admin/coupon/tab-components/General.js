@@ -3,7 +3,7 @@ import { useState} from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 import { useSelect, select, dispatch, withSelect, forwardRef } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
-import { PanelRow, ToggleControl, TextControl, SelectControl, Dropdown, DatePicker, Notice } from '@wordpress/components';
+import { PanelRow, ToggleControl, TextControl, SelectControl, Dropdown, DateTimePicker, Notice } from '@wordpress/components';
 import Select from 'react-select'
 import {VersionCompare} from '../../fields/VersionCompare'
 // import DatePicker, {registerLocale} from "react-datepicker";
@@ -21,7 +21,6 @@ export default () => {
     const coupon_type        = 'undefined' !== typeof general && 'undefined' !== typeof general.coupon_type ? general.coupon_type : 'fixed';
     const coupon_value       = 'undefined' !== typeof general && 'undefined' !== typeof general.coupon_value ? general.coupon_value : '';
     const coupon_expiry_date = 'undefined' !== typeof general && 'undefined' !== typeof general.coupon_expiry_date ? general.coupon_expiry_date : '';
-    
     // Update Values
     const { updateCoupon } = dispatch('WPTravel/Coupon');
 
@@ -61,7 +60,6 @@ export default () => {
                                 // Checks whether coupon already exists or not.
                                 const url = `${ajaxurl}?action=wp_travel_check_coupon_code&_nonce=${_wp_travel._nonce}&coupon_id=${_wp_travel.postID}&coupon_code=${value}`;
                                 apiFetch( { url: url } ).then( ( result ) => {
-                                    console.log('result', result)
                                     if ( ! result.success ) {
                                         updateState({
                                             code_exists:true
@@ -136,7 +134,7 @@ export default () => {
 
                                 return (
                                     <div className="wp-travel-dropdown-content-wrap wp-travel-datetimepicker wp-travel-datetimepicker-hide-time">
-                                        <DatePicker
+                                        <DateTimePicker
                                             currentDate={_coupon_expiry_date}
                                             minDate={new Date()}
                                             onChange={(date) => {

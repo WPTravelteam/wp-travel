@@ -65,11 +65,9 @@ registerStore('WPTravel/Coupon', {
     },
     resolvers: {
         * setCoupon(couponId) {
-            console.log( 'couponId', couponId );
             const url = `${ajaxurl}?action=wptravel_get_coupon&_nonce=${_wp_travel._nonce}&coupon_id=${couponId}`;
             yield actions.updateRequestSending(true);
             const response = yield actions.getCouponsFromAPI( url );
-            console.log('response', response);
             if(false !== response.success && "WP_TRAVEL_COUPON" === response.data.code ) {
                 yield actions.updateRequestSending(false);
                 return actions.setCoupon( response.data.coupon );

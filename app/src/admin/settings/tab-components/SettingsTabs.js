@@ -53,6 +53,12 @@ export default () => {
                 >
                     {global_tab_settings.map(function (tab, tabIndex) {
                         return <div className="wp-travel-block-section">
+                                <button onClick={(e) => {
+                                    console.log( 'up' );
+                                }}>up</button>
+                                <button onClick={(e) => {
+                                    console.log( 'down' );
+                                }}>down</button>
                                 <PanelBody
                                     icon= {alignJustify}
                                     title={tab.label ? tab.label : tab.default_label }

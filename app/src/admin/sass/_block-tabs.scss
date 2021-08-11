@@ -284,3 +284,74 @@ td{
   justify-content: flex-end;
 }
 
+.wp-travel-ui {
+	&.wp-travel-ui-card {
+		border: 1px solid #e0e0e0;
+		padding: 16px;
+		margin-bottom: 15px;
+		padding-top: 7px;
+		padding-bottom: 0 !important;
+
+		&.wp-travel-save-changes {
+			border-top: 1px solid #eee !important;
+			margin: 0 !important;
+			padding: 15px !important;
+		}
+
+		&.wp-travel-ui-card-top-border {
+			border-top: 5px solid #e0e0e0;
+		}
+
+		&.wp-travel-ui-card-no-border {
+			border: 0;
+		}
+
+		h3,
+		h4 {
+			margin-top: 0;
+		}
+	}
+}
+
+.wp-traval-button-danger {
+	color: #F44336 !important;
+	border-color: #F44336 !important;
+	margin-top: 13px !important;
+
+	&:not(:disabled):not([aria-disabled="true"]):hover {
+		color: #F44336 !important;
+		border-color: #F44336 !important;
+	}
+}
+
+.components-button {
+	height: auto;
+	min-height: 32px;
+
+	&.is-small {
+		margin-top: 15px;
+	}
+}
+// quick fix for calendar style.
+.wp-travel-styles .wp-travel-block-tabs-wrapper table tr td{
+  padding:0
+}
+.wp-travel-datetimepicker {
+  &.wp-travel-datetimepicker-hide-time {
+    .components-datetime__time {
+      fieldset:last-child {
+        display: none;
+      }
+    }
+  }
+  &.wp-travel-datetimepicker-hide-date {
+    .components-datetime__time {
+      fieldset:first-child {
+        display: none;
+      }
+    }
+    .components-datetime__date {
+      display: none;
+    }
+  }
+}

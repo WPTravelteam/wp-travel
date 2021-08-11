@@ -31,10 +31,11 @@ class WP_Travel_Itinerary {
 
 	function get_gallery_ids() {
 		$gallery_ids = get_post_meta( $this->post->ID, 'wp_travel_itinerary_gallery_ids', true );
-		$gallery_id_array = json_decode( $gallery_ids );
+		$gallery_id_array = $gallery_ids;
 		if ( is_array( $gallery_ids ) && ! empty( $gallery_ids ) ) {
 			return $gallery_ids;
-		} else if( is_array( $gallery_id_array ) && ! empty( $gallery_id_array ) ) {
+		} elseif ( is_array( $gallery_id_array ) && ! empty( $gallery_id_array ) ) {
+			$gallery_id_array = json_decode( $gallery_id_array );
 			return wp_list_pluck( $gallery_id_array, 'id' );
 		}
 

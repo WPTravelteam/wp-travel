@@ -33,18 +33,18 @@ class WpTravel_Helpers_Coupon {
 		$coupon_metas = get_post_meta( $coupon_id, 'wp_travel_coupon_metas', true );
 
 		// General Tab.
-		$general_tab = isset( $coupon_metas['general'] ) ? $coupon_metas['general'] : array();
+		$general_tab                = isset( $coupon_metas['general'] ) ? $coupon_metas['general'] : array();
 		$general_tab['coupon_code'] = get_post_meta( $coupon_id, 'wp_travel_coupon_code', true ); // Saved individually to search code.
 
 		$coupon                = new WP_Travel_Coupon();
 		$general_tab['status'] = ucfirst( $coupon->get_coupon_status( $coupon_id ) );
 
 		// Restriction Tab.
-		$restriction_tab = isset( $coupon_metas['restriction'] ) ? $coupon_metas['restriction'] : array();
+		$restriction_tab                   = isset( $coupon_metas['restriction'] ) ? $coupon_metas['restriction'] : array();
 		$restriction_tab['coupon_user_id'] = get_post_meta( $coupon_id, 'coupon_user_id', true );  // Saved individually to search logged in user.
 
 		$trips       = wptravel_get_itineraries_array();
-		$mapped_trip = array(); 
+		$mapped_trip = array();
 		foreach ( $trips as $id => $title ) {
 			$mapped_trip[] = array(
 				'id'    => $id,
@@ -85,9 +85,10 @@ class WpTravel_Helpers_Coupon {
 		$coupon_metas = get_post_meta( $coupon_id, 'wp_travel_coupon_metas', true );
 
 		// General Tab.
-		$general     = isset( $data['general'] ) ? $data['general'] : array();
-		$coupon_code = $general['coupon_code'];
+		$general                 = isset( $data['general'] ) ? $data['general'] : array();
 		unset( $general['status'] ); // coupon code is saved in seperate meta wp_travel_coupon_code.
+		$coupon_metas['general'] = $general;
+		$coupon_code             = $general['coupon_code'];
 
 		// Restriction Tab.
 		$restriction                 = isset( $data['restriction'] ) ? $data['restriction'] : array();

@@ -350,6 +350,9 @@ class WP_Travel_Coupon {
 
 			return false;
 		}
+		if ( ! get_post_meta( $coupon_id, 'wp_travel_coupon_code', true ) ) {
+			return;
+		}
 
 		if ( ! $this->is_coupon_valid( $coupon_id ) ) {
 
