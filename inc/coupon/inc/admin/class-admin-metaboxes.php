@@ -8,7 +8,7 @@
 /**
  * WP_Travel_Admin_Coupon_Metaboxes Class.
  */
-class WP_Travel_Admin_Coupon_Metaboxes {
+class WP_Travel_Admin_Coupon_Metaboxes { // @phpcs:ignore
 	/**
 	 * Private var $post_type.
 	 *
@@ -43,8 +43,15 @@ class WP_Travel_Admin_Coupon_Metaboxes {
 	}
 	/**
 	 * Load Coupons Tab Template.
+	 *
+	 * @param Object $post Coupon post.
 	 */
 	public function load_coupons_tab_template( $post ) {
+		if ( wptravel_dev_mode() ) {
+			?>
+			<div id="wp-travel-coupon-block"></div>
+			<?php
+		}
 
 		// Print Errors / Notices.
 		wptravel_print_notices();
@@ -77,7 +84,7 @@ class WP_Travel_Admin_Coupon_Metaboxes {
 		);
 
 		$tabs[ self::$post_type ] = $coupons;
-		return apply_filters( 'wp_travel_coupons_tabs', $tabs );
+		return apply_filters( 'wp_travel_coupons_tabs', $tabs ); // @phpcs:ignore
 	}
 
 	/**
@@ -91,7 +98,9 @@ class WP_Travel_Admin_Coupon_Metaboxes {
 	}
 
 	/**
-	 * Save Coupons Metabox Data
+	 * Save Coupons Metabox Data.
+	 *
+	 * @param int $post_id Coupon id.
 	 */
 	public function save_coupons_metabox_data( $post_id ) {
 		if ( ! isset( $_POST['wp_travel_security'] ) ) {

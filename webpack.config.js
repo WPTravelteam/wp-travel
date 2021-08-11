@@ -26,6 +26,14 @@ module.exports = (env, options) => {
       './app/assets/js/wp-travel-front-end.js',
       './app/src/frontend/sass/main.scss',
     ];
+
+    entries['admin-coupon' + fileSuffix ] = [
+      './app/src/admin/coupon/index.js',
+      './app/src/admin/coupon/sass/main.scss',
+    ];
+    // entries['legacy-widgets' + fileSuffix ] = [
+    //   './app/src/LegacyWidgets/BlockWidgets.js',
+    // ];
   return {
     ...defaultConfig,
     entry: entries,
