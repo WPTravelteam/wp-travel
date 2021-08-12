@@ -11,13 +11,6 @@ import { useRef } from '@wordpress/element'
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
 
 export default () => {
-    const myRefname= useRef(null);
-    const handleClick = () => {
-        console.log(myRefname)
-        setTimeout(() => {
-            myRefname.current.click();
-        }, 2000)
-     }
     const allData = useSelect((select) => {
         return select('WPTravel/Admin').getAllStore()
     }, []);
