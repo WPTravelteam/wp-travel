@@ -137,6 +137,12 @@ export default () => {
                                         <DateTimePicker
                                             currentDate={_coupon_expiry_date}
                                             minDate={new Date()}
+                                            isInvalidDate={ (date) =>{
+                                                if (!moment(date).isAfter(new Date())) {
+                                                    return true;
+                                                }
+                                                return false;
+                                            } }
                                             onChange={(date) => {
                                                 updateCoupon({
                                                     ...allData,
