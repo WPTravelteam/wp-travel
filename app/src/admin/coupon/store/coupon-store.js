@@ -5,7 +5,8 @@ const DEFAULT_STATE = () => {
     let initState = {
         // Additional states
         has_state_changes:false,
-        is_sending_request:true
+        is_sending_request:true,
+        disable_save:false,
     };
 
     return initState;
@@ -17,6 +18,12 @@ const actions = {
         return {
             type: 'UPDATE_STATE_CHANGE',
             isChanged
+        };
+    },
+    disableSave( disable ) {
+        return {
+            type: 'DISABLE_SAVE',
+            disable
         };
     },
     displaySavedMessage(isUpdated) {
@@ -81,6 +88,8 @@ registerStore('WPTravel/Coupon', {
                 return {...state,is_sending_request:action.requesting};
             case 'UPDATE_STATE_CHANGE':
                 return {...state,has_state_changes:action.isChanged, show_updated_message:true};
+            case 'DISABLE_SAVE':
+                return {...state,disable_save:action.disable};
             case 'DATA_UPDATED':
                 return {...state, show_updated_message:action.isUpdated};
                 

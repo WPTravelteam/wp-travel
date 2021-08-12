@@ -22,7 +22,7 @@ export default () => {
     const coupon_value       = 'undefined' !== typeof general && 'undefined' !== typeof general.coupon_value ? general.coupon_value : '';
     const coupon_expiry_date = 'undefined' !== typeof general && 'undefined' !== typeof general.coupon_expiry_date ? general.coupon_expiry_date : '';
     // Update Values
-    const { updateCoupon } = dispatch('WPTravel/Coupon');
+    const { updateCoupon, disableSave } = dispatch('WPTravel/Coupon');
 
     // Local States
     const initialState = {
@@ -64,10 +64,12 @@ export default () => {
                                         updateState({
                                             code_exists:true
                                         });
+                                        disableSave(true)
                                     } else {
                                         updateState({
                                             code_exists:false
                                         });
+                                        disableSave(false)
                                     }
                                 } );
                             }

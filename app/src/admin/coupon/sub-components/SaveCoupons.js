@@ -13,7 +13,7 @@ const SaveCoupons = (props) => {
     }, []);
     const { updateRequestSending, updateStateChange, displaySavedMessage } = dispatch('WPTravel/Coupon');
 
-    const { has_state_changes, show_updated_message } = allData;
+    const { has_state_changes, show_updated_message, disable_save } = allData;
     setTimeout(() => {
         if ( typeof show_updated_message != 'undefined' && show_updated_message ) {
             displaySavedMessage(false)
@@ -40,7 +40,7 @@ const SaveCoupons = (props) => {
                     }
                 } );
             }}
-            disabled={!has_state_changes}
+            disabled={!has_state_changes || disable_save }
             >{__('Save Coupon', 'wp-travel' )}</Button>
         </PanelRow>
     </>
