@@ -5,17 +5,24 @@ import { PanelBody, PanelRow, ToggleControl, TextControl, RadioControl } from '@
 import Select from 'react-select'
 import {VersionCompare} from '../../fields/VersionCompare'
 import {alignJustify } from '@wordpress/icons';
-import { ReactSortable } from 'react-sortablejs';
+import { ReactSortable } from "react-sortablejs";
+import { useRef } from '@wordpress/element'
 
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
 
 export default () => {
-
+    const myRefname= useRef(null);
+    const handleClick = () => {
+        console.log(myRefname)
+        setTimeout(() => {
+            myRefname.current.click();
+        }, 2000)
+     }
     const allData = useSelect((select) => {
         return select('WPTravel/Admin').getAllStore()
     }, []);
 
-    const { updateSettings } = dispatch('WPTravel/Admin');
+    const { updateSettings, updateRequestSending } = dispatch('WPTravel/Admin');
     const {
         global_tab_settings,
         options
@@ -34,12 +41,23 @@ export default () => {
         })
     }
     const SortTabs = ( sortedPricing) => {
+        console.log('sorted')
         updateSettings({
             ...allData, // allData
             global_tab_settings: sortedPricing
         })
     }
-
+    const  array_move = (arr, old_index, new_index) => {
+        if (new_index >= arr.length) {
+            var k = new_index - arr.length + 1;
+            while (k--) {
+                arr.push(undefined);
+            }
+        }
+        arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+        return arr; // for testing
+    };
+    // mount whatever plugins you'd like to. These are the only current options.
     return <div className="wp-travel-ui wp-travel-ui-card settings-general">
         <h2>{ __( 'Global Tabs Settings', 'wp-travel' ) }</h2>
         <ErrorBoundary>
@@ -49,16 +67,32 @@ export default () => {
                 <ReactSortable
                     list={global_tab_settings}
                     setList={sorted => SortTabs(sorted)}
-                    handle=".settings-general .components-panel__icon"
+                    // handle="span.dashicons.dashicons-menu"
+                    handle=".wp-travel-block-sortable .components-panel__icon"
                 >
                     {global_tab_settings.map(function (tab, tabIndex) {
-                        return <div className="wp-travel-block-section">
-                                <button onClick={(e) => {
-                                    console.log( 'up' );
-                                }}>up</button>
-                                <button onClick={(e) => {
-                                    console.log( 'down' );
-                                }}>down</button>
+                        return <div className="wp-travel-block-section" style={{position:'relative'}}>
+                                {/* <span className="dashicons dashicons-menu"></span> */}
+                                <div style={{position:'absolute', right:'50px', zIndex:111, cursor:'pointer'}}>
+                                    <button
+                                    style={{padding:0, display:'block'}}
+                                    disabled={0 === tabIndex}
+                                    onClick={(e) => {
+                                        let sorted = array_move( global_tab_settings, tabIndex, tabIndex - 1 )
+                                        SortTabs(sorted)
+                                        updateRequestSending(true); // Temp fixes to reload the content.
+                                        updateRequestSending(false);
+                                    }}><i className="dashicons dashicons-arrow-up"></i></button>
+                                    <button 
+                                    style={{padding:0, display:'block'}}
+                                    disabled={(global_tab_settings.length-1) === tabIndex}
+                                    onClick={(e) => {
+                                        let sorted = array_move( global_tab_settings, tabIndex, tabIndex + 1 )
+                                        SortTabs(sorted)
+                                        updateRequestSending(true);
+                                        updateRequestSending(false);
+                                    }}><i className="dashicons dashicons-arrow-down"></i></button>
+                                </div>
                                 <PanelBody
                                     icon= {alignJustify}
                                     title={tab.label ? tab.label : tab.default_label }
