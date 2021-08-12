@@ -85,7 +85,7 @@ class WpTravel_Helpers_Coupon {
 		$coupon_metas = get_post_meta( $coupon_id, 'wp_travel_coupon_metas', true );
 
 		// General Tab.
-		$general                 = isset( $data['general'] ) ? $data['general'] : array();
+		$general = isset( $data['general'] ) ? $data['general'] : array();
 		unset( $general['status'] ); // coupon code is saved in seperate meta wp_travel_coupon_code.
 		$coupon_metas['general'] = $general;
 		$coupon_code             = $general['coupon_code'];
@@ -123,18 +123,22 @@ class WpTravel_Helpers_Coupon {
 
 			global $wpdb;
 			$meta_key = 'coupon_user_id';
-			$sql      = $wpdb->prepare(
-				"
-				SELECT post_id
-				FROM $wpdb->postmeta
-				WHERE meta_key = %s
-				AND meta_value = %s
-			",
-				$meta_key,
-				esc_sql( $user_id )
-			);
 
-			$row = $wpdb->get_row( $sql );
+			$row = $wpdb->get_row( // @phpcs:ignore
+				$wpdb->prepare(
+					"
+					SELECT post_id
+					FROM $wpdb->postmeta Meta 
+					join
+					$wpdb->posts P
+					on Meta.post_id = P.ID
+					WHERE Meta.meta_key = %s
+					AND Meta.meta_value = %s and P.post_status = 'publish'
+				",
+					$meta_key,
+					esc_sql( $user_id )
+				)
+			);
 
 			if ( empty( $row ) ) {
 				return false;
