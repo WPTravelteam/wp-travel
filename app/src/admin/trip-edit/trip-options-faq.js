@@ -15,7 +15,7 @@ const WPTravelTripOptionsFaqContent = () => {
     const allData = useSelect((select) => {
         return select('WPTravel/TripEdit').getAllStore()
     }, []);
-    const { updateTripData, addNewFaq } = dispatch('WPTravel/TripEdit');
+    const { updateTripData, addNewFaq, updateRequestSending } = dispatch('WPTravel/TripEdit');
     const { faqs, utilities } = allData;
     
     const updateTripFaqs = (key, value, _faqId) => {
@@ -52,6 +52,135 @@ const WPTravelTripOptionsFaqContent = () => {
             faqs: sortedFaqs
         })
     }
+    // Swap any array or object as per provided index.
+    const  swapList = (data, old_index, new_index) => {
+        if ( 'object' === typeof data ) {
+            if (new_index >= Object.keys(data).length) {
+                var k = new_index - Object.keys(data).length + 1;
+                while (k--) {
+                    data.push(undefined);
+                }
+            }
+            data.splice(new_index, 0, data.splice(old_index, 1)[0]);
+        }
+        if ( 'array' === typeof data ) {
+            if (new_index >= data.length) {
+                var k = new_index - data.length + 1;
+                while (k--) {
+                    data.push(undefined);
+                }
+            }
+            data.splice(new_index, 0, data.splice(old_index, 1)[0]);
+        }
+        return data;
+    };
+
+    // get swap index for FAQ. 
+    let customSwapIndexes = Object.keys(faqs).map(function (faqId) {
+        let i = parseInt(faqId);
+        let globalFaq = 'yes' ===faqs[i].global
+
+        // Default indexes for global + trip faq
+        let upIndex   = i-1;
+        let downIndex = i+1;
+
+        if ( 'undefined' != typeof utilities ) {
+            if ( 'undefined' != utilities.wp_travel_utils_use_global_faq_for_trip && 'undefined' != utilities.wp_travel_utils_use_trip_faq_for_trip ) {
+                if ( 'yes' == utilities.wp_travel_utils_use_global_faq_for_trip ) {
+                    if ( 'yes' != utilities.wp_travel_utils_use_trip_faq_for_trip ) {
+                        // Filter if only global faq is used
+                        // Down index calculation
+                        let downIndexes = Object.keys(faqs).filter(function (tempFaqId) {
+                            let j = parseInt(tempFaqId);
+                            let tempGglobalFaq = 'yes' === faqs[j].global
+                            if ( globalFaq ) {
+                                return tempGglobalFaq && i < j
+                            } else {
+                                return ! tempGglobalFaq && i < j
+                            }
+                        })
+                        downIndex = 'undefined' != typeof downIndexes && 'undefined' != typeof downIndexes[0] ? parseInt( downIndexes[0] ) : downIndex;
+
+                        // Up index calculation
+                        let upIndexes = Object.keys(faqs).filter(function (tempFaqId) {
+                            let j = parseInt(tempFaqId);
+                            let tempGglobalFaq = 'yes' === faqs[j].global
+                            if ( globalFaq ) {
+                                return tempGglobalFaq && i > j
+                            } else {
+                                return ! tempGglobalFaq && i > j
+                            }
+                        })
+                        let len = upIndexes.length;
+                        upIndex = 'undefined' != typeof upIndexes && 'undefined' != typeof upIndexes[len-1] ? parseInt( upIndexes[len-1] ) : upIndex;
+                    } 
+                } else {
+                    // Filter if only trip faq is used
+
+                    // Down index calculation
+                    let downIndexes = Object.keys(faqs).filter(function (tempFaqId) {
+                        let j = parseInt(tempFaqId);
+                        let tempGglobalFaq = 'yes' === faqs[j].global
+                        // if ( globalFaq ) {
+                        //     return tempGglobalFaq && i < j
+                        // } else {
+                            return ! tempGglobalFaq && i < j
+                        // }
+                    })
+                    downIndex = 'undefined' != typeof downIndexes && 'undefined' != typeof downIndexes[0] ? parseInt( downIndexes[0] ) : downIndex;
+
+                    // Up index calculation
+                    let upIndexes = Object.keys(faqs).filter(function (tempFaqId) {
+                        let j = parseInt(tempFaqId);
+                        let tempGglobalFaq = 'yes' === faqs[j].global
+                        // if ( globalFaq ) {
+                        //     return tempGglobalFaq && i > j
+                        // } else {
+                            return ! tempGglobalFaq && i > j
+                        // }
+                    })
+                    let len = upIndexes.length;
+                    upIndex = 'undefined' != typeof upIndexes && 'undefined' != typeof upIndexes[len-1] ? parseInt( upIndexes[len-1] ) : upIndex;
+
+                }
+            } 
+        }
+        return {index:i, upIndex: upIndex, downIndex: downIndex, global:globalFaq }
+    })
+    
+
+    let startIndex = 0;
+    let endIndex   = typeof faqs != 'undefined' &&  Object.keys(faqs).length > 0 ? parseInt( Object.keys(faqs).length -1 ) : 0;
+
+    if ( 'undefined' != typeof utilities ) {
+        if ( 'undefined' != utilities.wp_travel_utils_use_global_faq_for_trip && 'undefined' != utilities.wp_travel_utils_use_trip_faq_for_trip ) {
+            if ( 'yes' == utilities.wp_travel_utils_use_global_faq_for_trip ) {
+                if ( 'yes' != utilities.wp_travel_utils_use_trip_faq_for_trip ) {
+                    // Filter if only global faq is used.
+                    let indexes = Object.keys(faqs).filter(function (tempFaqId) {
+                            return 'yes' === faqs[tempFaqId].global
+                        });
+                    if ( 'undefined' != typeof indexes && indexes.length > 0 ) {
+                        startIndex = parseInt(indexes[0]);
+                        endIndex = parseInt(indexes[ indexes.length - 1 ]);
+                    }
+                    
+                }
+            } else {
+                // Filter if only trip faq is used
+                let indexes = Object.keys(faqs).filter(function (tempFaqId) {
+                    return 'yes' !== faqs[tempFaqId].global
+                });
+                if ( 'undefined' != typeof indexes && indexes.length > 0 ) {
+                    startIndex = parseInt(indexes[0]);
+                    endIndex = parseInt(indexes[ indexes.length - 1 ]);
+                }
+               
+            }
+
+            
+        } 
+    }
     return <ErrorBoundary>
         <div className="wp-travel-trip-faq">
             {applyFilters('wp_travel_trip_faq_tab_content', '', allData)}
@@ -68,6 +197,13 @@ const WPTravelTripOptionsFaqContent = () => {
                     >
                     {
                         Object.keys(faqs).map(function (faqId) {
+                            let index     = parseInt(faqId);
+                            let upIndex   = index - 1; // swip item up in the list
+                            let downIndex = index + 1; // swip item down in the list
+
+                            upIndex = 'undefined' != typeof customSwapIndexes && 'undefined' != typeof customSwapIndexes[index] && 'undefined' != typeof customSwapIndexes[index].upIndex ? customSwapIndexes[index].upIndex : upIndex
+                            downIndex = 'undefined' != typeof customSwapIndexes && 'undefined' != typeof customSwapIndexes[index] && 'undefined' != typeof customSwapIndexes[index].downIndex ? customSwapIndexes[index].downIndex : downIndex
+                            
                             let hiddenClass = ''
                             if ( 'undefined' != typeof utilities ) {
                                 if ( 'undefined' != utilities.wp_travel_utils_use_global_faq_for_trip && 'undefined' != utilities.wp_travel_utils_use_trip_faq_for_trip ) {
@@ -86,11 +222,83 @@ const WPTravelTripOptionsFaqContent = () => {
                             }
 
                             if ( 'yes' ===faqs[faqId].global ) {
-                                return <PanelBody  className={hiddenClass}
-                                icon= {alignJustify}
-                                title={`${faqs[faqId].question ? faqs[faqId].question : __i18n.faq_questions}`}
-                                initialOpen={false} >
-                                <Disabled>
+                                return <div style={{position:'relative'}}  data-index={index}>
+                                    <div style={{position:'absolute', right:'50px', zIndex:111, cursor:'pointer'}}  className={hiddenClass}>
+                                    <Button
+                                    style={{padding:0, display:'block'}}
+                                    disabled={startIndex == index}
+                                    onClick={(e) => {
+                                        let sorted = swapList( faqs, index, upIndex )
+                                        sortFaqs(sorted)
+                                        updateRequestSending(true); // Temp fixes to reload the content.
+                                        updateRequestSending(false);
+                                    }}><i className="dashicons dashicons-arrow-up"></i></Button>
+                                    <Button 
+                                    style={{padding:0, display:'block'}}
+                                    disabled={endIndex == index}
+                                    onClick={(e) => {
+                                        let sorted = swapList( faqs, index, downIndex )
+                                        sortFaqs(sorted)
+                                        updateRequestSending(true);
+                                        updateRequestSending(false);
+                                    }}><i className="dashicons dashicons-arrow-down"></i></Button>
+                                </div>
+                                        <PanelBody  className={hiddenClass}
+                                        icon= {alignJustify}
+                                        title={`${faqs[faqId].question ? faqs[faqId].question : __i18n.faq_questions}`}
+                                        initialOpen={false} >
+                                        <Disabled>
+                                            <PanelRow>
+                                                <label>{__i18n.enter_question}</label>
+                                                <TextControl
+                                                    placeholder={__i18n.faq_questions}
+                                                    value={faqs[faqId].question ? faqs[faqId].question : ''}
+                                                    onChange={
+                                                        (e) => updateTripFaqs('question', e, faqId)
+                                                    }
+                                                />
+                                            </PanelRow>
+
+                                            <PanelRow>
+                                                <label>{__i18n.faq_answer}</label>
+                                                <TextareaControl
+                                                    value={faqs[faqId].answer ? faqs[faqId].answer : null}
+                                                    onChange={
+                                                        (e) => updateTripFaqs('answer', e, faqId)
+                                                    }
+                                                />
+                                            </PanelRow>
+                                        </Disabled>
+                                        
+                                    </PanelBody>
+                                </div>
+                            }
+                            return <div style={{position:'relative'}} data-index={index}>
+                                <div style={{position:'absolute', right:'50px', zIndex:111, cursor:'pointer'}}  className={hiddenClass} >
+                                    <Button
+                                    style={{padding:0, display:'block'}}
+                                    disabled={startIndex == index}
+                                    onClick={(e) => {
+                                        let sorted = swapList( faqs, index, upIndex )
+                                        sortFaqs(sorted)
+                                        updateRequestSending(true); // Temp fixes to reload the content.
+                                        updateRequestSending(false);
+                                    }}><i className="dashicons dashicons-arrow-up"></i></Button>
+                                    <Button 
+                                    style={{padding:0, display:'block'}}
+                                    disabled={endIndex == index}
+                                    onClick={(e) => {
+                                        let sorted = swapList( faqs, index, downIndex )
+                                        sortFaqs(sorted)
+                                        updateRequestSending(true);
+                                        updateRequestSending(false);
+                                    }}><i className="dashicons dashicons-arrow-down"></i></Button>
+                                </div>
+                                <PanelBody  className={hiddenClass}
+                                    icon= {alignJustify}
+                                    title={`${faqs[faqId].question ? faqs[faqId].question : __i18n.faq_questions}`}
+                                    initialOpen={false} >
+
                                     <PanelRow>
                                         <label>{__i18n.enter_question}</label>
                                         <TextControl
@@ -111,49 +319,21 @@ const WPTravelTripOptionsFaqContent = () => {
                                             }
                                         />
                                     </PanelRow>
-                                </Disabled>
-                                
-                            </PanelBody>
-                            }
-                            return <PanelBody  className={hiddenClass}
-                                icon= {alignJustify}
-                                title={`${faqs[faqId].question ? faqs[faqId].question : __i18n.faq_questions}`}
-                                initialOpen={false} >
+                                    <PanelRow className="wp-travel-action-section has-right-padding">
+                                        <span></span><Button isDefault onClick={() => {
+                                            if (!confirm( __i18n.alert.remove_faq)) {
+                                                return false;
+                                            }
+                                            let faqData = [];
+                                            faqData = faqs.filter((faq, newFaqId) => {
+                                                return newFaqId != faqId;
+                                            });
+                                            updateFaqs(faqData);
+                                        }} className="wp-traval-button-danger">{__i18n.remove_faq}</Button>
+                                    </PanelRow>
 
-                                <PanelRow>
-                                    <label>{__i18n.enter_question}</label>
-                                    <TextControl
-                                        placeholder={__i18n.faq_questions}
-                                        value={faqs[faqId].question ? faqs[faqId].question : ''}
-                                        onChange={
-                                            (e) => updateTripFaqs('question', e, faqId)
-                                        }
-                                    />
-                                </PanelRow>
-
-                                <PanelRow>
-                                    <label>{__i18n.faq_answer}</label>
-                                    <TextareaControl
-                                        value={faqs[faqId].answer ? faqs[faqId].answer : null}
-                                        onChange={
-                                            (e) => updateTripFaqs('answer', e, faqId)
-                                        }
-                                    />
-                                </PanelRow>
-                                <PanelRow className="wp-travel-action-section has-right-padding">
-                                    <span></span><Button isDefault onClick={() => {
-                                        if (!confirm( __i18n.alert.remove_faq)) {
-                                            return false;
-                                        }
-                                        let faqData = [];
-                                        faqData = faqs.filter((faq, newFaqId) => {
-                                            return newFaqId != faqId;
-                                        });
-                                        updateFaqs(faqData);
-                                    }} className="wp-traval-button-danger">{__i18n.remove_faq}</Button>
-                                </PanelRow>
-
-                            </PanelBody>
+                                </PanelBody>
+                            </div>
                         })
                     }
                     </ReactSortable>

@@ -34,7 +34,6 @@ export default () => {
         })
     }
     const SortTabs = ( sortedPricing) => {
-        console.log('sorted')
         updateSettings({
             ...allData, // allData
             global_tab_settings: sortedPricing
