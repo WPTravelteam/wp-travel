@@ -125,6 +125,8 @@ const WPTravelTripOptionsPricings = () => {
                                     }}
                                 />
                             </PanelRow>
+                            {applyFilters('wptravel_pricings_after_max_pax', [], allData, price, priceIndex)}
+
                             <hr />
                             <PanelRow className="wp-travel-has-child-panel">
                                 <label>{__i18n.price_category}</label>
