@@ -37,6 +37,17 @@ const DiscountTable = ({ groupPricings }) => {
 
 const PaxSelector = ({ pricing, onPaxChange, counts, inventory }) => {
 	let categories = pricing && pricing.categories || []
+
+	const objectSum = (obj) => {
+		var sum = 0;
+		for( var el in obj ) {
+		  if( obj.hasOwnProperty( el ) ) {
+			sum += parseFloat( obj[el] );
+		  }
+		}
+		return sum;
+	}
+
 	const getCategoryPrice = (categoryId, single) => { // This function handles group discounts as well
 		let category = pricing.categories.find(c => c.id == categoryId)
 		if (!category) {
@@ -45,7 +56,22 @@ const PaxSelector = ({ pricing, onPaxChange, counts, inventory }) => {
 		let count = counts[categoryId] || 0
 		let price = category && category.is_sale ? category.sale_price : category.regular_price
 
-		if (category.has_group_price && category.group_prices.length > 0) { // If has group price/discount.
+		if ( 'undefined' != typeof pricing.has_group_price && pricing.has_group_price && pricing.group_prices && pricing.group_prices.length > 0  ) {
+			let totalPax = objectSum(counts);
+			let groupPrices = _.orderBy(pricing.group_prices, gp => parseInt(gp.max_pax))
+			let group_price = groupPrices.find(gp => parseInt(gp.min_pax) <= totalPax && parseInt(gp.max_pax) >= totalPax)
+			if (group_price && group_price.price) {
+				if (single)
+					return parseFloat(group_price.price)
+				// price = 'group' === category.price_per ? (totalPax > 0 ? parseFloat(group_price.price) : 0) : parseFloat(group_price.price) * totalPax
+				price =  parseFloat(group_price.price) * totalPax
+			} else {
+				if (single)
+					return parseFloat(price)
+				// price = 'group' === category.price_per ? (totalPax > 0 ? parseFloat(price) : 0) : parseFloat(price) * totalPax
+				price = parseFloat(price) * totalPax
+			}
+		} else if (category.has_group_price && category.group_prices.length > 0) { // If has group price/discount.
 			// hasGroupPrice = true
 			let groupPrices = _.orderBy(category.group_prices, gp => parseInt(gp.max_pax))
 			let group_price = groupPrices.find(gp => parseInt(gp.min_pax) <= count && parseInt(gp.max_pax) >= count)

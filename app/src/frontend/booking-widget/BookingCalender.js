@@ -349,7 +349,6 @@ const BookingWidget = () => {
 	}
 
 	const dayClicked = ( date, date_id ) => {
-		// console.log('Book now click step 2')
 		if (!isFixedDeparture) {
 			updateState({
 				pricingUnavailable: false,
@@ -529,11 +528,18 @@ const BookingWidget = () => {
 		let txTotal = 0;
 
 		let tpax = 0
-		total = _.size(paxCounts) > 0 && Object.entries(paxCounts).map(([i, count]) => {
-			tpax += parseInt(count)
-			return count > 0 && getCategoryPrice(i, count) || 0 // i is category id here.
-			// return parseFloat(price) * count
-		}).reduce((acc, curr) => acc + curr) || 0
+
+		if ( selectedPricing && 'undefined' != typeof pricings[selectedPricing].has_group_price && pricings[selectedPricing].has_group_price && pricings[selectedPricing].group_prices && pricings[selectedPricing].group_prices.length > 0  ) {
+			total = getCategoryPrice();
+			tpax = objectSum(paxCounts);
+		} else {
+
+			total = _.size(paxCounts) > 0 && Object.entries(paxCounts).map(([i, count]) => {
+				tpax += parseInt(count)
+				return count > 0 && getCategoryPrice(i, count) || 0 // i is category id here.
+				// return parseFloat(price) * count
+			}).reduce((acc, curr) => acc + curr) || 0
+		}
 		if (!withExtras || tpax <= 0) {
 			return total
 		}
@@ -595,23 +601,54 @@ const BookingWidget = () => {
 			})
 	}
 
+	const objectSum = (obj) => {
+		var sum = 0;
+		for( var el in obj ) {
+		  if( obj.hasOwnProperty( el ) ) {
+			sum += parseFloat( obj[el] );
+		  }
+		}
+		return sum;
+	}
 	const getCategoryPrice = (categoryId, count) => {
+		let counts = paxCounts;
 		let pricing = pricings[selectedPricing]
+		let isPricingGroupPrice = 'undefined' != typeof pricing.has_group_price && pricing.has_group_price && pricing.group_prices && pricing.group_prices.length > 0 ; 
 		let category = pricing.categories.find(c => c.id == categoryId)
-		if (!category) return
-		let price = category && category.is_sale ? category.sale_price : category.regular_price
+		let price = 0;
+		if ( category || isPricingGroupPrice ) {
 
-		if (category.has_group_price && category.group_prices.length > 0) { // If has group price/discount.
-			// hasGroupPrice = true
-			let groupPrices = _.orderBy(category.group_prices, gp => parseInt(gp.max_pax))
-			let group_price = groupPrices.find(gp => parseInt(gp.min_pax) <= count && parseInt(gp.max_pax) >= count)
-			if (group_price && group_price.price) {
-				price = 'group' === category.price_per ? count > 0 && parseFloat(group_price.price) || 0 : parseFloat(group_price.price) * count
+			if ( category && 'undefined' != typeof category.regular_price ) {
+				price = category && category.is_sale ? category.sale_price : category.regular_price
+			}
+	
+			if ( isPricingGroupPrice ) {
+				// need one additional loop here to get default total price.
+				Object.entries(counts).map( ( [i, count]) => {
+					let category = pricing.categories.find(c => c.id == i)
+					let p = category && category.is_sale ? category.sale_price : category.regular_price
+					price += parseFloat(p) * count
+				})
+				
+				let totalPax = objectSum(counts);
+				let groupPrices = _.orderBy(pricing.group_prices, gp => parseInt(gp.max_pax))
+				let group_price = groupPrices.find(gp => parseInt(gp.min_pax) <= totalPax && parseInt(gp.max_pax) >= totalPax)
+				if (group_price && group_price.price) {
+					price =  parseFloat(group_price.price) * totalPax
+				} 
+				
+			} else if (category.has_group_price && category.group_prices.length > 0) { // If has group price/discount.
+				// hasGroupPrice = true
+				let groupPrices = _.orderBy(category.group_prices, gp => parseInt(gp.max_pax))
+				let group_price = groupPrices.find(gp => parseInt(gp.min_pax) <= count && parseInt(gp.max_pax) >= count)
+				if (group_price && group_price.price) {
+					price = 'group' === category.price_per ? count > 0 && parseFloat(group_price.price) || 0 : parseFloat(group_price.price) * count
+				} else {
+					price = 'group' === category.price_per ? count > 0 && parseFloat(price) || 0 : parseFloat(price) * count
+				}
 			} else {
 				price = 'group' === category.price_per ? count > 0 && parseFloat(price) || 0 : parseFloat(price) * count
 			}
-		} else {
-			price = 'group' === category.price_per ? count > 0 && parseFloat(price) || 0 : parseFloat(price) * count
 		}
 		return price || 0
 	}
