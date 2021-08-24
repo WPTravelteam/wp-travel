@@ -58,6 +58,7 @@ if ( wptravel_is_react_version_enabled() ) {
 					<ul class="cart-summary-content list-group">
 					<?php
 					foreach ( $cart_items as $cart_id => $cart_item ) {
+
 						$pricing_id   = $cart_item['pricing_id'];
 						$trip_id      = $cart_item['trip_data']['id'];
 						$pricings     = $cart_item['trip_data']['pricings']; // all pricings
@@ -215,8 +216,19 @@ if ( wptravel_is_react_version_enabled() ) {
 										$category_price = $category['is_sale'] ? $category['sale_price'] : $category['regular_price'];
 										$category_price = $category_price ? $category_price : 0; // Temp fixes.
 
-
-										if ( isset( $category['has_group_price'] ) && $category['has_group_price'] ) {
+										$pricing_group_price = isset( $cart_pricing['has_group_price'] ) && $cart_pricing['has_group_price'];
+										if ( $pricing_group_price ) {
+											$group_prices = $cart_pricing['group_prices'];
+											$group_price  = array();
+											foreach ( $group_prices as $gp ) {
+												if ( $pax >= $gp['min_pax'] && $pax <= $gp['max_pax'] ) {
+													$group_price = $gp;
+													break;
+												}
+											}
+											$category_price = isset( $group_price['price'] ) ? $group_price['price'] : $category_price;
+											$category_price = $category_price ? $category_price : 0; // Temp fixes.
+										} elseif ( isset( $category['has_group_price'] ) && $category['has_group_price'] ) {
 											$group_prices = $category['group_prices'];
 											$group_price  = array();
 											foreach ( $group_prices as $gp ) {
@@ -228,7 +240,11 @@ if ( wptravel_is_react_version_enabled() ) {
 											$category_price = isset( $group_price['price'] ) ? $group_price['price'] : $category_price;
 											$category_price = $category_price ? $category_price : 0; // Temp fixes.
 										}
-										$category_total = $price_per_group ? $category_price : $pax * (float) $category_price;
+										if ( $pricing_group_price ) { // Pricing group price treat as price per only
+											$category_total = $pax * (float) $category_price;
+										} else {
+											$category_total = $price_per_group ? $category_price : $pax * (float) $category_price;
+										}
 
 										$min_pax = ! empty( $category['default_pax'] ) ? $category['default_pax'] : 0;
 										$max_pax = ! empty( $cart_pricing['max_pax'] ) ? $cart_pricing['max_pax'] : 999;

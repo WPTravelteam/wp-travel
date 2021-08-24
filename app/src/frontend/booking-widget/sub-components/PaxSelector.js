@@ -125,7 +125,7 @@ const PaxSelector = ({ pricing, onPaxChange, counts, inventory }) => {
 									<span className="wp_travel_pax_info">({`${counts[c.id]}`}/{`${pricing.max_pax}`})</span>
 								}
 							</strong>
-							{c.has_group_price && c.group_prices.length > 0 && <span className="tooltip group-discount-button">
+							{( ( c.has_group_price && c.group_prices.length > 0 ) || pricing && 'undefined' != typeof pricing.has_group_price && pricing.has_group_price && pricing.group_prices.length > 0 ) && <span className="tooltip group-discount-button">
 								<span>{__i18n.bookings.group_discount_tooltip}</span>
 								<svg version="1.1" x="0px" y="0px" viewBox="0 0 512.003 512.003" style={{ enableBackground: 'new 0 0 512.003 512.003' }}><path d="M477.958,262.633c-2.06-4.215-2.06-9.049,0-13.263l19.096-39.065c10.632-21.751,2.208-47.676-19.178-59.023l-38.41-20.38
                                         c-4.144-2.198-6.985-6.11-7.796-10.729l-7.512-42.829c-4.183-23.846-26.241-39.87-50.208-36.479l-43.053,6.09
@@ -147,7 +147,13 @@ const PaxSelector = ({ pricing, onPaxChange, counts, inventory }) => {
                                         c13.569,0,24.609-11.039,24.609-24.609C221.549,163.686,210.51,152.646,196.941,152.646z"></path>
 								</svg>
 								{__i18n.bookings.view_group_discount}
-								{c.has_group_price && c.group_prices.length > 0 && <DiscountTable groupPricings={c.group_prices} />}
+								{pricing && 'undefined' != typeof pricing.has_group_price && pricing.has_group_price && pricing.group_prices.length > 0 ?
+									<DiscountTable groupPricings={pricing.group_prices} />
+								:
+								<>
+									{c.has_group_price && c.group_prices.length > 0 && <DiscountTable groupPricings={c.group_prices} />}
+								</>
+								}
 							</span>}
 						</div>
 						<div className="text-right">

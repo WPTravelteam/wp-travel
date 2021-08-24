@@ -1,4 +1,4 @@
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
@@ -311,6 +311,23 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
     toggleCartLoader();
   });
 
+  function dynamicSort(property) {
+    var sortOrder = 1;
+
+    if (property[0] === "-") {
+      sortOrder = -1;
+      property = property.substr(1);
+    }
+
+    return function (a, b) {
+      /* next line works with strings and numbers, 
+       * and you may want to customize it to your needs
+       */
+      var result = a[property] < b[property] ? -1 : a[property] > b[property] ? 1 : 0;
+      return result * sortOrder;
+    };
+  }
+
   var updateItem = function updateItem(id) {
     var _data = {};
     var tripTotalWOExtras = 0,
@@ -328,6 +345,12 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
     var payoutPercentage = item.trip_data && item.trip_data.minimum_partial_payout_percent; // Categories.
 
     var formGroupsCategory = itemNode.querySelectorAll('[data-wpt-category]');
+    var totalPax = 0;
+    formGroupsCategory.forEach(function (fg) {
+      var tempCatCount = fg.querySelector('[data-wpt-category-count-input]');
+      var tempCount = tempCatCount && parseInt(tempCatCount.value) || 0;
+      totalPax += tempCount;
+    });
     formGroupsCategory.forEach(function (fg) {
       var categoryTotalContainer = fg.querySelector('[data-wpt-category-total]');
       var dataCategoryCount = fg.querySelector('[data-wpt-category-count-input]');
@@ -341,7 +364,19 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
 
       var _count = dataCategoryCount && parseInt(dataCategoryCount.value) || 0;
 
-      if (_category.has_group_price) {
+      if ('undefined' != typeof pricing.has_group_price && pricing.has_group_price && pricing.group_prices && pricing.group_prices.length > 0) {
+        var groupPrices = pricing.group_prices;
+        groupPrices = groupPrices.sort(dynamicSort('max_pax'));
+        console.log(groupPrices);
+        var group_price = groupPrices.find(function (gp) {
+          return parseInt(gp.min_pax) <= totalPax && parseInt(gp.max_pax) >= totalPax;
+        });
+
+        if (group_price && group_price.price) {
+          _price = parseFloat(group_price.price);
+          if (dataCategoryPrice) dataCategoryPrice.innerHTML = wp_travel_cart.format(_price);
+        }
+      } else if (_category.has_group_price) {
         var _groupPrice = _category.group_prices.find(function (gp) {
           return _count >= parseInt(gp.min_pax) && _count <= parseInt(gp.max_pax);
         });

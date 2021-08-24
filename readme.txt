@@ -251,6 +251,13 @@ Fixes:
 * Calendar translation issue in filter widget when it is used in homepage.
 * Fixed Script 'wp-travel-backend-pointers.js' not found on admin pages.
 * Fixed Trip extras label not displaying in trip edit page.
+* Fixed Trip fact issue with PHP 8. It shows E_COMPILE_ERROR on edit trip.
+
+Tewaks:
+* Removed the_content filter in frontend tabs.
+
+Enhancement:
+* Coupon Section update to React Block.
 
 = 4.7.0 =
 Release Date: 4th July, 2021

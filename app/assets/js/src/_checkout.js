@@ -306,7 +306,20 @@ const wptravelcheckout = (shoppingCart) => {
             alert('[X] Request Timeout!')
             toggleCartLoader()
         })
-
+    function dynamicSort(property) {
+        var sortOrder = 1;
+        if(property[0] === "-") {
+            sortOrder = -1;
+            property = property.substr(1);
+        }
+        return function (a,b) {
+            /* next line works with strings and numbers, 
+             * and you may want to customize it to your needs
+             */
+            var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+            return result * sortOrder;
+        }
+    }
     const updateItem = id => {
         let _data = {}
         let tripTotalWOExtras = 0, tripTotalPartialWOExtras = 0, extrasTotal = 0
@@ -323,6 +336,12 @@ const wptravelcheckout = (shoppingCart) => {
 
         // Categories.
         let formGroupsCategory = itemNode.querySelectorAll('[data-wpt-category]')
+        let totalPax = 0;
+        formGroupsCategory.forEach(fg => {
+            let tempCatCount = fg.querySelector('[data-wpt-category-count-input]')
+            let tempCount = tempCatCount && parseInt(tempCatCount.value) || 0
+            totalPax += tempCount;
+        })
         formGroupsCategory.forEach(fg => {
             let categoryTotalContainer = fg.querySelector('[data-wpt-category-total]')
             let dataCategoryCount = fg.querySelector('[data-wpt-category-count-input]')
@@ -332,7 +351,17 @@ const wptravelcheckout = (shoppingCart) => {
 
             let _price = _category && _category.is_sale ? parseFloat(_category['sale_price']) : parseFloat(_category['regular_price'])
             let _count = dataCategoryCount && parseInt(dataCategoryCount.value) || 0
-            if (_category.has_group_price) {
+            if ( 'undefined' != typeof pricing.has_group_price && pricing.has_group_price && pricing.group_prices && pricing.group_prices.length > 0  ) {
+                let groupPrices = pricing.group_prices
+                groupPrices = groupPrices.sort(dynamicSort('max_pax'))
+                console.log( groupPrices);
+                let group_price = groupPrices.find(gp => parseInt(gp.min_pax) <= totalPax && parseInt(gp.max_pax) >= totalPax)
+                if (group_price && group_price.price) {
+                    _price =  parseFloat(group_price.price)
+                    if (dataCategoryPrice)
+                    dataCategoryPrice.innerHTML = wp_travel_cart.format(_price)
+                }
+            }else if (_category.has_group_price) {
                 let _groupPrice = _category.group_prices.find(gp => _count >= parseInt(gp.min_pax) && _count <= parseInt(gp.max_pax))
                 _price = _groupPrice && _groupPrice.price || _price
                 if (dataCategoryPrice)
