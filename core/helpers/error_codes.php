@@ -135,6 +135,9 @@ class WP_Travel_Helpers_Error_Codes {
 			'WP_TRAVEL_COUPON_NOT_ALLOWED_FOR_TRIP'       => array(
 				'message' => __( 'You can not apply coupon for this trip.', 'wp-travel' ),
 			),
+			'WP_TRAVEL_COUPON_NOT_ALLOWED_FOR_USER'       => array(
+				'message' => __( 'You are not allowed to use this coupon', 'wp-travel' ),
+			),
 
 			// Media response Codes.
 			'WP_TRAVEL_NO_ATTACHMENT_ID'                  => array(

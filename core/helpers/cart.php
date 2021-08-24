@@ -222,6 +222,11 @@ class WP_Travel_Helpers_Cart {
 				WP_Travel_Helpers_REST_API::response( $error );
 			}
 
+			if ( ! WPTravel()->coupon->valid_for_user( $coupon_id ) ) {
+				$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_COUPON_NOT_ALLOWED_FOR_USER' );
+				WP_Travel_Helpers_REST_API::response( $error );
+			}
+
 			$cart = self::get_cart();
 			// Prepare Coupon Application.
 			if ( is_wp_error( $cart ) ) {

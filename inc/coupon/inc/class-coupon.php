@@ -254,6 +254,36 @@ class WP_Travel_Coupon {
 		return false;
 	}
 
+
+	/**
+	 * Check whether trip has for specific user or not.
+	 *
+	 * @param Number $coupon_id ID of the coupon.
+	 *
+	 * @since 5.0.0
+	 *
+	 * @return Boolean
+	 */
+	public function valid_for_user( $coupon_id ) {
+
+		$coupon_metas     = get_post_meta( $coupon_id, 'wp_travel_coupon_metas', true );
+		$restrictions_tab = isset( $coupon_metas['restriction'] ) ? $coupon_metas['restriction'] : array();
+		$coupon_user_id   = isset( $restrictions_tab['coupon_user_id'] ) ? $restrictions_tab['coupon_user_id'] : '';
+
+		if ( ! empty( $coupon_user_id ) ) {
+			if ( ! is_user_logged_in() ) {
+				return false;
+			}
+			$current_user    = wp_get_current_user();
+			$current_user_id = $current_user->data->ID;
+			if ( absint( $current_user_id ) === absint( $coupon_user_id ) ) {
+				return true;
+			}
+			return false;
+		}
+		return true;
+	}
+
 	/**
 	 * Get Discount applicable total/partial total along with extras price.
 	 *

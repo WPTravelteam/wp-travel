@@ -14,6 +14,18 @@ import SaveCoupons from './sub-components/SaveCoupons'
 import General from './tab-components/General';
 import Restriction from './tab-components/Restriction';
 
+const toggleDisablePostUpdate = ( isDisabled = false ) => {
+    if( jQuery('#submitpost').find( '#wp-travel-post-disable-message' ).length < 1 && isDisabled ) {
+        jQuery('#submitpost').append( `<div id="wp-travel-post-disable-message">${__('* Please save coupon options first.')}</div>`)
+        jQuery('#major-publishing-actions #publishing-action input#publish').attr('disabled', 'disabled')
+        jQuery('#minor-publishing #save-action input#save-post').attr('disabled', 'disabled')
+    } else if( !isDisabled) {
+        jQuery('#submitpost').find( '#wp-travel-post-disable-message' ).remove();
+        jQuery('#major-publishing-actions #publishing-action input#publish').removeAttr('disabled' )
+        jQuery('#minor-publishing #save-action input#save-post').removeAttr('disabled')
+    }
+}
+
 const WPTravelCoupon = () => {
     // Set Coupon in state first.
     useEffect(() => {
@@ -25,6 +37,8 @@ const WPTravelCoupon = () => {
     const allData = useSelect((select) => {
         return select('WPTravel/Coupon').getAllStore()
     }, []);
+
+    toggleDisablePostUpdate(allData.has_state_changes);
    
     let wrapperClasses = "wp-travel-block-tabs-wrapper wp-travel-trip-settings";
     // wrapperClasses = allData.is_sending_request ? wrapperClasses + ' wp-travel-sending-request' : wrapperClasses;
