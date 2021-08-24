@@ -3,14 +3,14 @@
  * Helpers Coupon.
  *
  * @package WP_Travel
- * @since 4.7.1
+ * @since 5.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
 /**
  * WpTravel_Helpers_Coupon class.
  *
- * @since 4.7.1
+ * @since 5.0.0
  */
 class WpTravel_Helpers_Coupon {
 
@@ -18,7 +18,7 @@ class WpTravel_Helpers_Coupon {
 	 * Get Coupon Meta data along with coupon code.
 	 *
 	 * @param int $coupon_id Coupon id.
-	 * @since 4.7.1
+	 * @since 5.0.0
 	 *
 	 * @return array
 	 */
@@ -73,7 +73,7 @@ class WpTravel_Helpers_Coupon {
 	 *
 	 * @param int   $coupon_id Coupon id.
 	 * @param array $data Coupon data.
-	 * @since 4.7.1
+	 * @since 5.0.0
 	 *
 	 * @return array
 	 */
@@ -112,7 +112,7 @@ class WpTravel_Helpers_Coupon {
 	/**
 	 * This will return default coupon code for any user if the coupon is for that specific user.
 	 *
-	 * @since 4.7.1
+	 * @since 5.0.0
 	 * @return string default coupon code.
 	 */
 	public static function get_default_coupon() {

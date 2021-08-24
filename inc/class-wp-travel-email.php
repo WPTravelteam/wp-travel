@@ -38,7 +38,7 @@ class WP_Travel_Email extends WP_Travel_Emails { // @phpcs:ignore
 		add_action( 'wptravel_action_after_inventory_update', array( $this, 'send_booking_emails' ) );
 
 		/**
-		 * @since 4.7.1
+		 * @since 5.0.0
 		 */
 		add_action( 'wptravel_action_send_booking_email', array( $this, 'send_booking_email' ), 10, 2 );
 
@@ -114,7 +114,7 @@ class WP_Travel_Email extends WP_Travel_Emails { // @phpcs:ignore
 	 *
 	 * @param int   $booking_id Booking id.
 	 * @param array $request_data POST request data.
-	 * @since 4.7.1
+	 * @since 5.0.0
 	 */
 	public function send_booking_email( $booking_id, $request_data ) {
 
@@ -258,7 +258,7 @@ class WP_Travel_Email extends WP_Travel_Emails { // @phpcs:ignore
 	 * @param int   $booking_id Booking Id.
 	 * @param array $request_data All POST Request data.
 	 *
-	 * @since 4.7.1
+	 * @since 5.0.0
 	 * @return array
 	 */
 	public function get_tags( $booking_id = 0, $request_data = array() ) {

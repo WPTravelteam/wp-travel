@@ -224,7 +224,7 @@ function wptravel_book_now() {
 	 * Trigger Email functions. Sends Booking email to admin and client.
 	 *
 	 * @hooked array( 'WP_Travel_Email', 'send_booking_email' );
-	 * @since 4.7.1
+	 * @since 5.0.0
 	 */
 	do_action( 'wptravel_action_send_booking_email', $booking_id, wptravel_sanitize_array( $_POST ) );
 

@@ -3,7 +3,7 @@ class WP_Travel_Ajax_Coupon { // @phpcs:ignore
 	/**
 	 * Initialize Ajax request for Coupon.
 	 *
-	 * @since 4.7.1
+	 * @since 5.0.0
 	 */
 	public static function init() {
 
@@ -23,7 +23,7 @@ class WP_Travel_Ajax_Coupon { // @phpcs:ignore
 	/**
 	 * Apply Coupon. Code
 	 *
-	 * @since 4.7.1
+	 * @since 5.0.0
 	 */
 	public static function apply_coupon_code() {
 		$permission = WP_Travel::verify_nonce();
@@ -44,7 +44,7 @@ class WP_Travel_Ajax_Coupon { // @phpcs:ignore
 	/**
 	 * Get Coupon details.
 	 *
-	 * @since 4.7.1
+	 * @since 5.0.0
 	 */
 	public static function get_coupon_code() {
 		$permission = WP_Travel::verify_nonce();
@@ -64,7 +64,7 @@ class WP_Travel_Ajax_Coupon { // @phpcs:ignore
 	/**
 	 * Update Coupon details.
 	 *
-	 * @since 4.7.1
+	 * @since 5.0.0
 	 */
 	public static function update_coupon_code() {
 		$permission = WP_Travel::verify_nonce();

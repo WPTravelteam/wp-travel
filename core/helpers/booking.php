@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * WpTravel_Helpers_Booking class.
  *
- * @since 4.7.1
+ * @since 5.0.0
  */
 class WpTravel_Helpers_Booking { // @phpcs:ignore
 
@@ -17,7 +17,7 @@ class WpTravel_Helpers_Booking { // @phpcs:ignore
 	 * Generate HTML for Booking Details.
 	 *
 	 * @param int   $booking_id Trip Booking ID. 
-	 * @since 4.7.1
+	 * @since 5.0.0
 	 * @return mixed
 	 */
 	public static function render_booking_details( $booking_id ) {
@@ -137,7 +137,7 @@ class WpTravel_Helpers_Booking { // @phpcs:ignore
 	 * Generate HTML for Traveler Details.
 	 *
 	 * @param int   $booking_id Trip Booking ID. 
-	 * @since 4.7.1
+	 * @since 5.0.0
 	 * @return mixed
 	 */
 	public static function render_traveler_details( $booking_id ) {

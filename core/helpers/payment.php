@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * WpTravel_Helpers_Payment class.
  *
- * @since 4.7.1
+ * @since 5.0.0
  */
 class WpTravel_Helpers_Payment { // @phpcs:ignore
 
@@ -18,7 +18,7 @@ class WpTravel_Helpers_Payment { // @phpcs:ignore
 	 *
 	 * @param int   $booking_id Trip Booking ID. 
      * 
-	 * @since 4.7.1
+	 * @since 5.0.0
 	 *
 	 * @return array
 	 */

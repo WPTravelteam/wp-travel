@@ -20,7 +20,7 @@ class WpTravel_Helpers_Schema {
 	/**
 	 * Initialize schema in WP Travel.
 	 *
-	 * @since 4.7.1
+	 * @since 5.0.0
 	 */
 	public static function init() {
 		if ( wptravel_dev_mode() ) {
@@ -31,7 +31,7 @@ class WpTravel_Helpers_Schema {
 	/**
 	 * Display all available schema for WP Travel.
 	 *
-	 * @since 4.7.1
+	 * @since 5.0.0
 	 */
 	public static function run() {
 		$use_schema = apply_filters( 'wptravel_use_schema', true );
@@ -55,7 +55,7 @@ class WpTravel_Helpers_Schema {
 	/**
 	 * Generate schema as per $schema array.
 	 *
-	 * @since 4.7.1
+	 * @since 5.0.0
 	 * @return string
 	 */
 	public static function get_trip_schema() {
@@ -96,7 +96,7 @@ class WpTravel_Helpers_Schema {
 		 * Trip schema structure.
 		 *
 		 * @param array $schema Schema data for trip.
-		 * @since 4.7.1
+		 * @since 5.0.0
 		 */
 		$schema = apply_filters( 'wptravel_trip_schema', $schema, $trip_id, $trip );
 		self::generate_schema( $schema );
@@ -105,7 +105,7 @@ class WpTravel_Helpers_Schema {
 	/**
 	 * Generate schema as per $schema array.
 	 *
-	 * @since 4.7.1
+	 * @since 5.0.0
 	 * @return string
 	 */
 	public static function get_trip_rating_schema() {
@@ -132,7 +132,7 @@ class WpTravel_Helpers_Schema {
 		 * Trip Review schema structure.
 		 *
 		 * @param array $schema Schema data for trip rating.
-		 * @since 4.7.1
+		 * @since 5.0.0
 		 */
 		$schema = apply_filters( 'wptravel_trip_rating_schema', $schema, $trip_id, $trip );
 		self::generate_schema( $schema );
@@ -141,7 +141,7 @@ class WpTravel_Helpers_Schema {
 	/**
 	 * Generate schema as per $schema array.
 	 *
-	 * @since 4.7.1
+	 * @since 5.0.0
 	 * @param array $schema Schema structure array.
 	 * @return string
 	 */

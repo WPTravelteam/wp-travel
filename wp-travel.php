@@ -542,7 +542,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @param boolean $admin_page check if page is admin page.
 		 *
 		 * @since 4.4.2
-		 * @since 4.7.1 Added trip single page and admin coupon coupon page check.
+		 * @since 5.0.0 Added trip single page and admin coupon coupon page check.
 		 * @return boolean
 		 */
 		public static function is_page( $slug, $admin_page = false ) {
