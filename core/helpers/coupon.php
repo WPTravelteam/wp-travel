@@ -83,6 +83,9 @@ class WpTravel_Helpers_Coupon {
 		}
 
 		$coupon_metas = get_post_meta( $coupon_id, 'wp_travel_coupon_metas', true );
+		if ( ! $coupon_metas || ! is_array( $coupon_metas ) ){
+			$coupon_metas = array();
+		}
 
 		// General Tab.
 		$general = isset( $data['general'] ) ? $data['general'] : array();
