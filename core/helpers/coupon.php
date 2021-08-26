@@ -83,7 +83,7 @@ class WpTravel_Helpers_Coupon {
 		}
 
 		$coupon_metas = get_post_meta( $coupon_id, 'wp_travel_coupon_metas', true );
-		if ( ! $coupon_metas || ! is_array( $coupon_metas ) ){
+		if ( ! $coupon_metas || ! is_array( $coupon_metas ) ) {
 			$coupon_metas = array();
 		}
 
@@ -119,7 +119,7 @@ class WpTravel_Helpers_Coupon {
 	 * @return string default coupon code.
 	 */
 	public static function get_default_coupon() {
-
+		$coupon_code = '';
 		if ( is_user_logged_in() ) {
 			$user    = wp_get_current_user();
 			$user_id = $user->data->ID;
@@ -127,7 +127,7 @@ class WpTravel_Helpers_Coupon {
 			global $wpdb;
 			$meta_key = 'coupon_user_id';
 
-			$row = $wpdb->get_row( // @phpcs:ignore
+			$results = $wpdb->get_results( // @phpcs:ignore
 				$wpdb->prepare(
 					"
 					SELECT post_id
@@ -142,17 +142,18 @@ class WpTravel_Helpers_Coupon {
 					esc_sql( $user_id )
 				)
 			);
-
-			if ( empty( $row ) ) {
-				return false;
-			}
-			if ( isset( $row->post_id ) ) {
-				$coupon_id   = $row->post_id;
-				$coupon_code = get_post_meta( $coupon_id, 'wp_travel_coupon_code', true );
-				return $coupon_code;
+			if ( ! empty( $results ) ) {
+				foreach ( $results as $result ) {
+					$coupon_id = $result->post_id;
+					$total     = WPTravel()->coupon->get_discount_applicable_total( $coupon_id );
+					if ( $total ) { // if discount applicable total price is greater than 0 that mean the current coupon is valid for trip.
+						$coupon_code = get_post_meta( $coupon_id, 'wp_travel_coupon_code', true );
+						break;
+					}
+				}
 			}
 		}
-		return '';
+		return $coupon_code;
 	}
 
 }
