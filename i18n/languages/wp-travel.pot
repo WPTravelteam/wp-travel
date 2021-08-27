@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 4.7.1-beta2\n"
+"Project-Id-Version: WP Travel 5.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-16 08:26:24+00:00\n"
+"POT-Creation-Date: 2021-08-27 10:34:33+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,12 +23,12 @@ msgstr ""
 msgid "Trip Options"
 msgstr ""
 
-#: app/inc/frontend/class-wptravel-frontend-assets.php:716
-#: app/inc/frontend/class-wptravel-frontend-assets.php:759
+#: app/inc/frontend/class-wptravel-frontend-assets.php:752
+#: app/inc/frontend/class-wptravel-frontend-assets.php:795
 #: inc/admin/class-admin-status.php:94 inc/admin/views/status.php:162
 #: inc/booking-functions.php:461 inc/booking-functions.php:465
 #: inc/booking-functions.php:489 inc/booking-functions.php:493
-#: inc/class-wp-travel-email.php:240 inc/class-wp-travel-email.php:343
+#: inc/class-wp-travel-email.php:239 inc/class-wp-travel-email.php:342
 #: inc/currencies.php:342 inc/helpers/helpers-stat.php:252
 #: inc/helpers/helpers-stat.php:450 inc/helpers/helpers-stat.php:559
 #: inc/helpers.php:750 inc/helpers.php:795 inc/helpers.php:823
@@ -38,19 +38,19 @@ msgstr ""
 msgid "N/A"
 msgstr ""
 
-#: app/inc/frontend/class-wptravel-frontend-assets.php:735
+#: app/inc/frontend/class-wptravel-frontend-assets.php:771
 msgid "Chart Stat"
 msgstr ""
 
-#: app/inc/frontend/class-wptravel-frontend-assets.php:743
+#: app/inc/frontend/class-wptravel-frontend-assets.php:779
 msgid "More"
 msgstr ""
 
-#: app/inc/frontend/class-wptravel-frontend-assets.php:744
+#: app/inc/frontend/class-wptravel-frontend-assets.php:780
 msgid "Less"
 msgstr ""
 
-#: app/inc/frontend/class-wptravel-frontend-assets.php:783
+#: app/inc/frontend/class-wptravel-frontend-assets.php:819
 msgid "Select Files from Your Computer"
 msgstr ""
 
@@ -108,18 +108,18 @@ msgstr ""
 msgid "Pricing Category"
 msgstr ""
 
-#: core/helpers/booking.php:37 inc/email-template-functions.php:196
-#: inc/email-template-functions.php:441 inc/email-template-functions.php:749
-#: inc/email-template-functions.php:1049 inc/email-template-functions.php:1258
+#: core/helpers/booking.php:37 inc/email-template-functions.php:385
+#: inc/email-template-functions.php:691 inc/email-template-functions.php:991
+#: inc/email-template-functions.php:1200
 msgid "Booking Details"
 msgstr ""
 
 #: core/helpers/booking.php:42 core/helpers/strings.php:139
 #: core/helpers/strings.php:232 inc/admin/class-admin-metaboxes.php:49
 #: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:30
-#: inc/email-template-functions.php:123 inc/email-template-functions.php:201
-#: inc/email-template-functions.php:448 inc/email-template-functions.php:756
-#: inc/email-template-functions.php:1056 inc/email-template-functions.php:1265
+#: inc/email-template-functions.php:122 inc/email-template-functions.php:392
+#: inc/email-template-functions.php:698 inc/email-template-functions.php:998
+#: inc/email-template-functions.php:1207
 msgid "Itinerary"
 msgstr ""
 
@@ -128,16 +128,16 @@ msgid "PAX"
 msgstr ""
 
 #: core/helpers/booking.php:44 inc/deprecated/440.php:328
-#: inc/email-template-functions.php:225 inc/email-template-functions.php:492
-#: inc/email-template-functions.php:800 inc/email-template-functions.php:1309
-#: inc/template-functions.php:2072 inc/template-functions.php:2456
+#: inc/email-template-functions.php:436 inc/email-template-functions.php:742
+#: inc/email-template-functions.php:1251 inc/template-functions.php:2072
+#: inc/template-functions.php:2456
 msgid "Arrival Date"
 msgstr ""
 
 #: core/helpers/booking.php:45 inc/deprecated/440.php:341
-#: inc/email-template-functions.php:230 inc/email-template-functions.php:506
-#: inc/email-template-functions.php:814 inc/email-template-functions.php:1323
-#: inc/template-functions.php:2073 inc/template-functions.php:2457
+#: inc/email-template-functions.php:450 inc/email-template-functions.php:756
+#: inc/email-template-functions.php:1265 inc/template-functions.php:2073
+#: inc/template-functions.php:2457
 msgid "Departure Date"
 msgstr ""
 
@@ -160,8 +160,7 @@ msgstr ""
 #: core/helpers/booking.php:196 inc/booking-functions.php:334
 #: inc/booking-functions.php:394 inc/class-default-form-fields.php:123
 #: inc/class-default-form-fields.php:248 inc/deprecated/440.php:279
-#: inc/email-template-functions.php:245 inc/email-template-functions.php:540
-#: inc/email-template-functions.php:848
+#: inc/email-template-functions.php:484 inc/email-template-functions.php:790
 msgid "Country"
 msgstr ""
 
@@ -171,9 +170,9 @@ msgstr ""
 
 #: core/helpers/booking.php:198 core/helpers/strings.php:159
 #: inc/admin/class-admin-settings.php:113 inc/class-default-form-fields.php:272
-#: inc/deprecated/440.php:316 inc/email-template-functions.php:258
-#: inc/email-template-functions.php:582 inc/email-template-functions.php:890
-#: inc/email-template-functions.php:1091 inc/framework/form/class.field.php:41
+#: inc/deprecated/440.php:316 inc/email-template-functions.php:526
+#: inc/email-template-functions.php:832 inc/email-template-functions.php:1033
+#: inc/framework/form/class.field.php:41
 #: templates/single-wp-travel-reviews.php:74
 msgid "Email"
 msgstr ""
@@ -186,7 +185,7 @@ msgstr ""
 msgid "Gender"
 msgstr ""
 
-#: core/helpers/cart.php:63 core/helpers/error_codes.php:25
+#: core/helpers/cart.php:63 core/helpers/error_codes.php:28
 msgid "Cart is empty."
 msgstr ""
 
@@ -214,7 +213,7 @@ msgstr ""
 msgid "Cart item updated."
 msgstr ""
 
-#: core/helpers/cart.php:258
+#: core/helpers/cart.php:263
 msgid "Discount coupon code applied successfully."
 msgstr ""
 
@@ -227,94 +226,98 @@ msgid "Invalid permission."
 msgstr ""
 
 #: core/helpers/error_codes.php:22
+msgid "Invalid coupon id."
+msgstr ""
+
+#: core/helpers/error_codes.php:25
 msgid "No pricings found for the trip."
 msgstr ""
 
-#: core/helpers/error_codes.php:28
+#: core/helpers/error_codes.php:31
 msgid "Pricing id not found."
 msgstr ""
 
-#: core/helpers/error_codes.php:31 core/helpers/strings.php:26
+#: core/helpers/error_codes.php:34 core/helpers/strings.php:26
 msgid "Please add date."
 msgstr ""
 
-#: core/helpers/error_codes.php:34
+#: core/helpers/error_codes.php:37
 msgid "Please add pax."
 msgstr ""
 
-#: core/helpers/error_codes.php:37
+#: core/helpers/error_codes.php:40
 msgid "No trip pricing categories found."
 msgstr ""
 
-#: core/helpers/error_codes.php:40
+#: core/helpers/error_codes.php:43
 msgid "No Pricing category id."
 msgstr ""
 
-#: core/helpers/error_codes.php:43
+#: core/helpers/error_codes.php:46
 msgid "No Pricing category found."
 msgstr ""
 
-#: core/helpers/error_codes.php:46
+#: core/helpers/error_codes.php:49
 msgid "Error adding pricing category."
 msgstr ""
 
-#: core/helpers/error_codes.php:49
+#: core/helpers/error_codes.php:52
 msgid "Error deleting pricing categories."
 msgstr ""
 
-#: core/helpers/error_codes.php:52
+#: core/helpers/error_codes.php:55
 msgid "Error updating pricing category."
 msgstr ""
 
-#: core/helpers/error_codes.php:55
+#: core/helpers/error_codes.php:58
 msgid "Error deleting pricing category."
 msgstr ""
 
-#: core/helpers/error_codes.php:58
+#: core/helpers/error_codes.php:61
 msgid "Error saving Pricing."
 msgstr ""
 
-#: core/helpers/error_codes.php:61
+#: core/helpers/error_codes.php:64
 msgid "Error deleting Pricing."
 msgstr ""
 
-#: core/helpers/error_codes.php:66 core/helpers/error_codes.php:86
+#: core/helpers/error_codes.php:69 core/helpers/error_codes.php:89
 msgid "Error deleting trip dates."
 msgstr ""
 
-#: core/helpers/error_codes.php:69
+#: core/helpers/error_codes.php:72
 msgid "No trip dates."
 msgstr ""
 
-#: core/helpers/error_codes.php:72
+#: core/helpers/error_codes.php:75
 msgid "No trip date."
 msgstr ""
 
-#: core/helpers/error_codes.php:75 core/helpers/error_codes.php:95
+#: core/helpers/error_codes.php:78 core/helpers/error_codes.php:98
 msgid "Error adding trip date."
 msgstr ""
 
-#: core/helpers/error_codes.php:78
+#: core/helpers/error_codes.php:81
 msgid "No trip date id"
 msgstr ""
 
-#: core/helpers/error_codes.php:81
+#: core/helpers/error_codes.php:84
 msgid "Error deleting trip date."
 msgstr ""
 
-#: core/helpers/error_codes.php:89
+#: core/helpers/error_codes.php:92
 msgid "No exclude trip date."
 msgstr ""
 
-#: core/helpers/error_codes.php:92
+#: core/helpers/error_codes.php:95
 msgid "No trip exclude dates & time found."
 msgstr ""
 
-#: core/helpers/error_codes.php:100
+#: core/helpers/error_codes.php:103
 msgid "No trip extras found."
 msgstr ""
 
-#: core/helpers/error_codes.php:105
+#: core/helpers/error_codes.php:108
 #: inc/widgets/class-wp-travel-widget-location.php:117
 #: inc/widgets/class-wp-travel-widget-sale-widget.php:123
 #: inc/widgets/class-wp-travel-widget-trip-type.php:117
@@ -322,88 +325,92 @@ msgstr ""
 msgid "Trips not found."
 msgstr ""
 
-#: core/helpers/error_codes.php:110
+#: core/helpers/error_codes.php:113
 msgid "No trip pricing category term found."
 msgstr ""
 
-#: core/helpers/error_codes.php:115
+#: core/helpers/error_codes.php:118
 msgid "The coupon code is invalid."
 msgstr ""
 
-#: core/helpers/error_codes.php:118
+#: core/helpers/error_codes.php:121
 msgid "Coupon Code cannot be empty."
 msgstr ""
 
-#: core/helpers/error_codes.php:121
+#: core/helpers/error_codes.php:124
 msgid "Coupon expired."
 msgstr ""
 
-#: core/helpers/error_codes.php:124
+#: core/helpers/error_codes.php:127
 msgid "Coupon uses limit exceed."
 msgstr ""
 
-#: core/helpers/error_codes.php:127
+#: core/helpers/error_codes.php:130
 msgid "Discount amount higher than trip amount."
 msgstr ""
 
-#: core/helpers/error_codes.php:130
+#: core/helpers/error_codes.php:133
 msgid "Discount applicable trip amount must be higher than discount amount."
 msgstr ""
 
-#: core/helpers/error_codes.php:133
+#: core/helpers/error_codes.php:136
 msgid "You can not apply coupon for this trip."
 msgstr ""
 
-#: core/helpers/error_codes.php:138
+#: core/helpers/error_codes.php:139
+msgid "You are not allowed to use this coupon"
+msgstr ""
+
+#: core/helpers/error_codes.php:144
 msgid "The Attachment is invalid."
 msgstr ""
 
-#: core/helpers/error_codes.php:142
+#: core/helpers/error_codes.php:148
 msgid "The Attachment not found."
 msgstr ""
 
-#: core/helpers/payment.php:51 inc/helpers.php:2565
+#: core/helpers/payment.php:49 inc/helpers.php:2565
 msgid "Payment Details"
 msgstr ""
 
-#: core/helpers/payment.php:55 core/helpers/strings.php:212
+#: core/helpers/payment.php:53 core/helpers/strings.php:212
 #: inc/admin/admin-helper.php:429 inc/admin/class-dashboard-widgets.php:57
 #: inc/framework/form/class.field.php:76 inc/helpers.php:2568
 #: templates/itineraries-list.php:57 upgrade/400.php:390 upgrade/400.php:425
 msgid "Date"
 msgstr ""
 
-#: core/helpers/payment.php:56 inc/helpers.php:2569
+#: core/helpers/payment.php:54 inc/helpers.php:2569
 msgid "Payment ID / Txn ID"
 msgstr ""
 
-#: core/helpers/payment.php:57 inc/helpers.php:2570
+#: core/helpers/payment.php:55 inc/helpers.php:2570
 msgid "Payment Method"
 msgstr ""
 
-#: core/helpers/payment.php:58 inc/email-template-functions.php:1386
-#: inc/email-template-functions.php:1592 inc/form-fields.php:196
+#: core/helpers/payment.php:56 inc/email-template-functions.php:1328
+#: inc/email-template-functions.php:1534 inc/form-fields.php:196
 #: inc/helpers.php:2571
 msgid "Payment Amount"
 msgstr ""
 
-#: core/helpers/payment.php:95 inc/helpers.php:2606
+#: core/helpers/payment.php:93 inc/helpers.php:2606
 msgid "View Payment Receipt"
 msgstr ""
 
-#: core/helpers/response_codes.php:7
+#: core/helpers/response_codes.php:10
 msgid "Successfully updated trip."
 msgstr ""
 
-#: core/helpers/response_codes.php:12
+#: core/helpers/response_codes.php:14
 msgid "Successfully removed trip pricing."
 msgstr ""
 
-#: core/helpers/response_codes.php:17
+#: core/helpers/response_codes.php:18
 msgid "Successfully removed trip pricing categories."
 msgstr ""
 
-#: core/helpers/response_codes.php:20
+#: core/helpers/response_codes.php:21
 msgid "Successfully removed trip pricing category."
 msgstr ""
 
@@ -431,43 +438,51 @@ msgstr ""
 msgid "Successfully updated trip dates & times."
 msgstr ""
 
-#: core/helpers/response_codes.php:52
+#: core/helpers/response_codes.php:51
 msgid "Successfully added trip to cart."
 msgstr ""
 
-#: core/helpers/response_codes.php:57
+#: core/helpers/response_codes.php:55
 msgid "Successfully listed filter result."
 msgstr ""
 
-#: core/helpers/response_codes.php:62
+#: core/helpers/response_codes.php:59
 msgid "Attachment data."
 msgstr ""
 
-#: core/helpers/response_codes.php:65
+#: core/helpers/response_codes.php:62
 msgid "Trip Tab loaded successfully."
 msgstr ""
 
-#: core/helpers/response_codes.php:68
+#: core/helpers/response_codes.php:65
 msgid "Settings loaded successfully."
 msgstr ""
 
-#: core/helpers/response_codes.php:71
+#: core/helpers/response_codes.php:68
 msgid "Settings updated successfully."
 msgstr ""
 
-#: core/helpers/response_codes.php:74
+#: core/helpers/response_codes.php:71
 msgid "Trip ID loaded successfully."
 msgstr ""
 
-#: core/helpers/response_codes.php:77
+#: core/helpers/response_codes.php:74
 msgid "License activation."
 msgstr ""
 
-#: core/helpers/response_codes.php:80
+#: core/helpers/response_codes.php:77
 msgid "License deactivation."
 msgstr ""
 
+#: core/helpers/response_codes.php:80
+msgid "Coupon loaded successfully"
+msgstr ""
+
 #: core/helpers/response_codes.php:83
+msgid "Coupon updated successfully"
+msgstr ""
+
+#: core/helpers/response_codes.php:86
 msgid "Migrate to V4 Sussessfully."
 msgstr ""
 
@@ -632,7 +647,7 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:544
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1236
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1379
-#: inc/cart/cart-mini.php:237 inc/helpers/helpers-price.php:17
+#: inc/cart/cart-mini.php:253 inc/helpers/helpers-price.php:17
 #: inc/helpers.php:1375
 msgid "Group"
 msgstr ""
@@ -874,7 +889,7 @@ msgstr ""
 msgid "Drop files here to upload."
 msgstr ""
 
-#: core/helpers/strings.php:102 inc/cart/cart-mini.php:295
+#: core/helpers/strings.php:102 inc/cart/cart-mini.php:311
 msgid "Update"
 msgstr ""
 
@@ -972,7 +987,7 @@ msgstr ""
 
 #: core/helpers/strings.php:125
 #: inc/admin/views/tabs/tab-contents/itineraries/trip-facts.php:78
-#: inc/admin/views/tabs/tab-contents/itineraries/trip-facts.php:246
+#: inc/admin/views/tabs/tab-contents/itineraries/trip-facts.php:247
 msgid "Select Type"
 msgstr ""
 
@@ -1115,8 +1130,8 @@ msgstr ""
 msgid "Enter your email"
 msgstr ""
 
-#: core/helpers/strings.php:161 inc/email-template-functions.php:153
-#: inc/email-template-functions.php:1105
+#: core/helpers/strings.php:161 inc/email-template-functions.php:152
+#: inc/email-template-functions.php:1047
 msgid "Enquiry Message"
 msgstr ""
 
@@ -1151,13 +1166,12 @@ msgid "Seats left"
 msgstr ""
 
 #: core/helpers/strings.php:190 inc/booking-functions.php:458
-#: inc/booking-functions.php:486 inc/cart/cart-mini.php:392
+#: inc/booking-functions.php:486 inc/cart/cart-mini.php:408
 #: inc/class-default-form-fields.php:187 inc/deprecated/440.php:368
-#: inc/email-template-functions.php:211 inc/email-template-functions.php:464
-#: inc/email-template-functions.php:772 inc/email-template-functions.php:1281
-#: inc/itinerary-v2-functions.php:735 inc/template-functions.php:507
-#: inc/template-functions.php:2070 inc/template-functions.php:2454
-#: templates/content-cart.php:28
+#: inc/email-template-functions.php:408 inc/email-template-functions.php:714
+#: inc/email-template-functions.php:1223 inc/itinerary-v2-functions.php:735
+#: inc/template-functions.php:507 inc/template-functions.php:2070
+#: inc/template-functions.php:2454 templates/content-cart.php:28
 msgid "Pax"
 msgstr ""
 
@@ -1204,7 +1218,7 @@ msgstr ""
 msgid "Clear All"
 msgstr ""
 
-#: core/helpers/strings.php:205 inc/cart/cart-mini.php:343
+#: core/helpers/strings.php:205 inc/cart/cart-mini.php:359
 msgid "Total:"
 msgstr ""
 
@@ -1665,13 +1679,13 @@ msgid "Booking Status"
 msgstr ""
 
 #: inc/admin/admin-helper.php:584 inc/admin/class-admin-metaboxes.php:268
-#: inc/email-template-functions.php:1354 inc/email-template-functions.php:1560
+#: inc/email-template-functions.php:1296 inc/email-template-functions.php:1502
 #: inc/form-fields.php:183 inc/form-fields.php:441
 msgid "Payment Mode"
 msgstr ""
 
-#: inc/admin/admin-helper.php:585 inc/email-template-functions.php:1338
-#: inc/email-template-functions.php:1544 inc/helpers.php:2202
+#: inc/admin/admin-helper.php:585 inc/email-template-functions.php:1280
+#: inc/email-template-functions.php:1486 inc/helpers.php:2202
 #: templates/account/tab-content/bookings.php:74
 #: templates/account/tab-content/bookings.php:147
 msgid "Payment Status"
@@ -1776,6 +1790,14 @@ msgid ""
 "Travel once to update your database."
 msgstr ""
 
+#: inc/admin/admin-notices.php:198
+msgid ""
+"This is the notice for the users who still use previous layout (v3 layout) "
+"to migrate all the trips created using WP Travel versions before 4.0.0 "
+"through Migrate Pricing and Date option as we are going to remove 'Switch "
+"to V4' option in settings page from WP Travel v5.1.0."
+msgstr ""
+
 #: inc/admin/class-admin-booking.php:68 inc/admin/class-admin-metaboxes.php:359
 #: inc/admin/class-dashboard-widgets.php:53
 #: inc/admin/views/tabs/tab-contents/itineraries/detail.php:30
@@ -1814,7 +1836,7 @@ msgstr ""
 #: inc/admin/class-admin-metaboxes.php:42
 #: inc/admin/class-admin-metaboxes.php:43 inc/admin/class-admin-settings.php:97
 #: inc/admin/extras/class-tour-extras-admin-metabox.php:63
-#: inc/coupon/inc/admin/class-admin-metaboxes.php:64
+#: inc/coupon/inc/admin/class-admin-metaboxes.php:71
 msgid "General"
 msgstr ""
 
@@ -2051,7 +2073,7 @@ msgstr ""
 
 #: inc/admin/class-admin-settings.php:98
 #: inc/admin/extras/class-tour-extras-admin-metabox.php:64
-#: inc/coupon/inc/admin/class-admin-metaboxes.php:65
+#: inc/coupon/inc/admin/class-admin-metaboxes.php:72
 msgid "General Settings"
 msgstr ""
 
@@ -2357,9 +2379,9 @@ msgstr ""
 msgid "Current Theme"
 msgstr ""
 
-#: inc/admin/views/status.php:336 inc/email-template-functions.php:133
-#: inc/email-template-functions.php:240 inc/email-template-functions.php:526
-#: inc/email-template-functions.php:834 inc/email-template-functions.php:1077
+#: inc/admin/views/status.php:336 inc/email-template-functions.php:132
+#: inc/email-template-functions.php:470 inc/email-template-functions.php:776
+#: inc/email-template-functions.php:1019
 #: templates/single-wp-travel-reviews.php:72
 msgid "Name"
 msgstr ""
@@ -2674,7 +2696,7 @@ msgid ""
 msgstr ""
 
 #: inc/admin/views/tabs/tab-contents/itineraries/trip-facts.php:82
-#: inc/admin/views/tabs/tab-contents/itineraries/trip-facts.php:251
+#: inc/admin/views/tabs/tab-contents/itineraries/trip-facts.php:252
 msgid "Select a Label"
 msgstr ""
 
@@ -3326,89 +3348,89 @@ msgstr ""
 msgid "You have selected %s items in your cart"
 msgstr ""
 
-#: inc/cart/cart-mini.php:95
+#: inc/cart/cart-mini.php:96
 msgid "Are you sure you want to remove '%s' from cart?"
 msgstr ""
 
-#: inc/cart/cart-mini.php:257 inc/class-wp-travel-extras-frontend.php:155
+#: inc/cart/cart-mini.php:273 inc/class-wp-travel-extras-frontend.php:155
 msgid "Trip Extras:"
 msgstr ""
 
-#: inc/cart/cart-mini.php:317 inc/cart/cart-mini.php:565
+#: inc/cart/cart-mini.php:333 inc/cart/cart-mini.php:581
 msgid "Subtotal"
 msgstr ""
 
-#: inc/cart/cart-mini.php:326
+#: inc/cart/cart-mini.php:342
 msgid "Discount:"
 msgstr ""
 
-#: inc/cart/cart-mini.php:338
+#: inc/cart/cart-mini.php:354
 msgid "Tax(%s):"
 msgstr ""
 
-#: inc/cart/cart-mini.php:348
+#: inc/cart/cart-mini.php:364
 msgid "Total upfront (%1s%%)"
 msgstr ""
 
-#: inc/cart/cart-mini.php:358
+#: inc/cart/cart-mini.php:374
 msgid "Enter promo code"
 msgstr ""
 
-#: inc/cart/cart-mini.php:359
+#: inc/cart/cart-mini.php:375
 msgid "Coupon Applied."
 msgstr ""
 
-#: inc/cart/cart-mini.php:360
+#: inc/cart/cart-mini.php:376
 msgid "Coupon Applied"
 msgstr ""
 
-#: inc/cart/cart-mini.php:360 templates/content-cart.php:294
+#: inc/cart/cart-mini.php:376 templates/content-cart.php:294
 msgid "Apply Coupon"
 msgstr ""
 
-#: inc/cart/cart-mini.php:365
+#: inc/cart/cart-mini.php:381
 msgid "Proceed to Pay"
 msgstr ""
 
-#: inc/cart/cart-mini.php:406
+#: inc/cart/cart-mini.php:422
 msgid "Your order"
 msgstr ""
 
-#: inc/cart/cart-mini.php:411 templates/account/tab-content/bookings.php:72
+#: inc/cart/cart-mini.php:427 templates/account/tab-content/bookings.php:72
 #: templates/account/tab-content/bookings.php:137
 msgid "Trip"
 msgstr ""
 
-#: inc/cart/cart-mini.php:412 inc/cart/cart-mini.php:594 inc/helpers.php:2531
+#: inc/cart/cart-mini.php:428 inc/cart/cart-mini.php:610 inc/helpers.php:2531
 #: templates/content-cart.php:56 templates/content-cart.php:283
 msgid "Total"
 msgstr ""
 
-#: inc/cart/cart-mini.php:413 inc/helpers.php:815
+#: inc/cart/cart-mini.php:429 inc/helpers.php:815
 msgid "Partial"
 msgstr ""
 
-#: inc/cart/cart-mini.php:455
+#: inc/cart/cart-mini.php:471
 msgid " Pax"
 msgstr ""
 
-#: inc/cart/cart-mini.php:512
+#: inc/cart/cart-mini.php:528
 msgid "Group (%s)"
 msgstr ""
 
-#: inc/cart/cart-mini.php:541
+#: inc/cart/cart-mini.php:557
 msgid "Coupon Discount "
 msgstr ""
 
-#: inc/cart/cart-mini.php:566 templates/content-cart.php:266
+#: inc/cart/cart-mini.php:582 templates/content-cart.php:266
 msgid "Tax: "
 msgstr ""
 
-#: inc/cart/cart-mini.php:570 templates/content-cart.php:270
+#: inc/cart/cart-mini.php:586 templates/content-cart.php:270
 msgid "%"
 msgstr ""
 
-#: inc/cart/cart-mini.php:607
+#: inc/cart/cart-mini.php:623
 msgid "Trip Book"
 msgstr ""
 
@@ -3417,42 +3439,42 @@ msgstr ""
 msgid "Show all your \"%s\" settings and enable its feature."
 msgstr ""
 
-#: inc/class-ajax.php:335 inc/class-ajax.php:378 inc/helpers.php:1376
+#: inc/class-ajax.php:337 inc/class-ajax.php:380 inc/helpers.php:1376
 #: inc/helpers.php:3381
 msgid "Custom"
 msgstr ""
 
-#: inc/class-ajax.php:487
+#: inc/class-ajax.php:489
 msgid "<strong> </strong>Cart updated succesfully.Please Proceed to Checkout"
 msgstr ""
 
-#: inc/class-ajax.php:505
+#: inc/class-ajax.php:507
 msgid "Coupon Code cannot be empty"
 msgstr ""
 
-#: inc/class-ajax.php:516
+#: inc/class-ajax.php:518
 msgid "Invalid Coupon Code"
 msgstr ""
 
-#: inc/class-ajax.php:526
+#: inc/class-ajax.php:528
 msgid ""
 "The coupoun is either inactive or has expired. Coupon Code could not be "
 "applied."
 msgstr ""
 
-#: inc/class-ajax.php:538
+#: inc/class-ajax.php:540
 msgid "This coupon cannot be applied to the selected trip"
 msgstr ""
 
-#: inc/class-ajax.php:554
+#: inc/class-ajax.php:556
 msgid "Coupon Expired. Maximum no. of coupon usage exceeded."
 msgstr ""
 
-#: inc/class-ajax.php:571
+#: inc/class-ajax.php:573
 msgid "Cannot apply coupon for this trip."
 msgstr ""
 
-#: inc/class-ajax.php:578
+#: inc/class-ajax.php:580
 msgid "Coupon applied succesfully."
 msgstr ""
 
@@ -3463,8 +3485,8 @@ msgid "Billing Address"
 msgstr ""
 
 #: inc/class-default-form-fields.php:92 inc/class-wp-travel-user-account.php:44
-#: inc/deprecated/440.php:291 inc/email-template-functions.php:250
-#: inc/email-template-functions.php:554 inc/email-template-functions.php:862
+#: inc/deprecated/440.php:291 inc/email-template-functions.php:498
+#: inc/email-template-functions.php:804
 #: templates/account/tab-content/dashboard.php:49
 msgid "Address"
 msgstr ""
@@ -3478,9 +3500,8 @@ msgid "Postal"
 msgstr ""
 
 #: inc/class-default-form-fields.php:133 inc/deprecated/440.php:381
-#: inc/email-template-functions.php:34 inc/email-template-functions.php:78
-#: inc/email-template-functions.php:262 inc/email-template-functions.php:596
-#: inc/email-template-functions.php:904
+#: inc/email-template-functions.php:34 inc/email-template-functions.php:77
+#: inc/email-template-functions.php:540 inc/email-template-functions.php:846
 msgid "Note"
 msgstr ""
 
@@ -3843,7 +3864,7 @@ msgid "New Activity"
 msgstr ""
 
 #: inc/class-wp-travel-email.php:88 inc/class-wp-travel-email.php:108
-#: inc/class-wp-travel-email.php:160 inc/class-wp-travel-email.php:180
+#: inc/class-wp-travel-email.php:159 inc/class-wp-travel-email.php:179
 msgid ""
 "Your trip has been booked but the email could not be sent. Possible reason: "
 "your host may have disabled the mail() function."
@@ -3860,7 +3881,7 @@ msgid "Booking Confirmed"
 msgstr ""
 
 #: inc/class-wp-travel-emails.php:191 inc/class-wp-travel-emails.php:216
-#: inc/email-template-functions.php:737
+#: inc/email-template-functions.php:679
 msgid "Thank you for your booking."
 msgstr ""
 
@@ -4984,11 +5005,11 @@ msgstr ""
 msgid "Coupon Options"
 msgstr ""
 
-#: inc/coupon/inc/admin/class-admin-metaboxes.php:72
+#: inc/coupon/inc/admin/class-admin-metaboxes.php:79
 msgid "Restrictions"
 msgstr ""
 
-#: inc/coupon/inc/admin/class-admin-metaboxes.php:73
+#: inc/coupon/inc/admin/class-admin-metaboxes.php:80
 msgid "Coupon Restrictions"
 msgstr ""
 
@@ -5063,88 +5084,86 @@ msgid "The called class %1$s is <strong>deprecated</strong> since version %2$s!"
 msgstr ""
 
 #: inc/email-template-functions.php:21 inc/email-template-functions.php:65
-#: inc/email-template-functions.php:112 inc/email-template-functions.php:189
-#: inc/email-template-functions.php:298 inc/email-template-functions.php:434
-#: inc/email-template-functions.php:742 inc/email-template-functions.php:1043
-#: inc/email-template-functions.php:1251 inc/email-template-functions.php:1534
+#: inc/email-template-functions.php:111 inc/email-template-functions.php:189
+#: inc/email-template-functions.php:235 inc/email-template-functions.php:378
+#: inc/email-template-functions.php:684 inc/email-template-functions.php:985
+#: inc/email-template-functions.php:1193 inc/email-template-functions.php:1476
 msgid "Hello"
 msgstr ""
 
-#: inc/email-template-functions.php:21 inc/email-template-functions.php:112
-#: inc/email-template-functions.php:189 inc/email-template-functions.php:434
-#: inc/email-template-functions.php:1043 inc/email-template-functions.php:1251
+#: inc/email-template-functions.php:21 inc/email-template-functions.php:111
+#: inc/email-template-functions.php:189 inc/email-template-functions.php:378
+#: inc/email-template-functions.php:985 inc/email-template-functions.php:1193
 msgid "Admin"
 msgstr ""
 
-#: inc/email-template-functions.php:22 inc/email-template-functions.php:435
+#: inc/email-template-functions.php:22 inc/email-template-functions.php:379
 msgid "You have received bookings from"
 msgstr ""
 
 #: inc/email-template-functions.php:23 inc/email-template-functions.php:67
-#: inc/email-template-functions.php:191 inc/email-template-functions.php:300
-#: inc/email-template-functions.php:436 inc/email-template-functions.php:744
-#: inc/email-template-functions.php:1253 inc/email-template-functions.php:1536
+#: inc/email-template-functions.php:191 inc/email-template-functions.php:237
+#: inc/email-template-functions.php:380 inc/email-template-functions.php:686
+#: inc/email-template-functions.php:1195 inc/email-template-functions.php:1478
 msgid "Booking ID"
 msgstr ""
 
-#: inc/email-template-functions.php:42 inc/email-template-functions.php:163
-#: inc/email-template-functions.php:273 inc/email-template-functions.php:609
-#: inc/email-template-functions.php:1118
+#: inc/email-template-functions.php:42 inc/email-template-functions.php:162
+#: inc/email-template-functions.php:208 inc/email-template-functions.php:552
+#: inc/email-template-functions.php:1060
 msgid "View details on site"
 msgstr ""
 
-#: inc/email-template-functions.php:66 inc/email-template-functions.php:743
+#: inc/email-template-functions.php:66 inc/email-template-functions.php:685
 msgid ""
 "Your booking has been received and is now being processed. Your order "
 "details are shown below for your reference"
 msgstr ""
 
-#: inc/email-template-functions.php:82
+#: inc/email-template-functions.php:81
 msgid "Customer Note"
 msgstr ""
 
-#: inc/email-template-functions.php:113 inc/email-template-functions.php:1044
+#: inc/email-template-functions.php:112 inc/email-template-functions.php:986
 msgid "You have received trip enquiry from"
 msgstr ""
 
-#: inc/email-template-functions.php:118
+#: inc/email-template-functions.php:117
 msgid "Enquiry Details"
 msgstr ""
 
-#: inc/email-template-functions.php:143
+#: inc/email-template-functions.php:142
 msgid "E-mail"
 msgstr ""
 
-#: inc/email-template-functions.php:190 inc/email-template-functions.php:1252
+#: inc/email-template-functions.php:190 inc/email-template-functions.php:1194
 msgid "You have received payment from"
 msgstr ""
 
-#: inc/email-template-functions.php:219 inc/email-template-functions.php:478
-#: inc/email-template-functions.php:786 inc/email-template-functions.php:1295
-msgid "Scheduled Date"
-msgstr ""
-
-#: inc/email-template-functions.php:236 inc/email-template-functions.php:519
-#: inc/email-template-functions.php:1070
-msgid "Customer Details"
-msgstr ""
-
-#: inc/email-template-functions.php:254 inc/email-template-functions.php:568
-#: inc/email-template-functions.php:876
-msgid "Phone"
-msgstr ""
-
-#: inc/email-template-functions.php:299 inc/email-template-functions.php:1535
+#: inc/email-template-functions.php:236 inc/email-template-functions.php:1477
 msgid "Your payment has been received."
 msgstr ""
 
-#: inc/email-template-functions.php:428
+#: inc/email-template-functions.php:372
 msgid "New Bookings"
 msgstr ""
 
-#: inc/email-template-functions.php:615 inc/email-template-functions.php:916
-#: inc/email-template-functions.php:1123 inc/email-template-functions.php:1407
-#: inc/email-template-functions.php:1607
+#: inc/email-template-functions.php:422 inc/email-template-functions.php:728
+#: inc/email-template-functions.php:1237
+msgid "Scheduled Date"
+msgstr ""
+
+#: inc/email-template-functions.php:463 inc/email-template-functions.php:1012
+msgid "Customer Details"
+msgstr ""
+
+#: inc/email-template-functions.php:512 inc/email-template-functions.php:818
+msgid "Phone"
+msgstr ""
+
+#: inc/email-template-functions.php:557 inc/email-template-functions.php:858
+#: inc/email-template-functions.php:1065 inc/email-template-functions.php:1349
+#: inc/email-template-functions.php:1549
 msgid "Powered By"
 msgstr ""
 
@@ -5152,29 +5171,29 @@ msgstr ""
 msgid "WP Travel"
 msgstr ""
 
-#: inc/email-template-functions.php:827
+#: inc/email-template-functions.php:769
 msgid "Your Details"
 msgstr ""
 
-#: inc/email-template-functions.php:1038
+#: inc/email-template-functions.php:980
 msgid "New Trip Enquiry"
 msgstr ""
 
-#: inc/email-template-functions.php:1246
+#: inc/email-template-functions.php:1188
 msgid "New Bookings Payment"
 msgstr ""
 
-#: inc/email-template-functions.php:1370 inc/email-template-functions.php:1576
+#: inc/email-template-functions.php:1312 inc/email-template-functions.php:1518
 #: inc/form-fields.php:236
 #: inc/gateways/standard-paypal/class-wp-travel-gateway-paypal-request.php:249
 msgid "Trip Price"
 msgstr ""
 
-#: inc/email-template-functions.php:1402
+#: inc/email-template-functions.php:1344
 msgid "View details "
 msgstr ""
 
-#: inc/email-template-functions.php:1529
+#: inc/email-template-functions.php:1471
 msgid "Thank you for your Payment."
 msgstr ""
 
@@ -9191,7 +9210,7 @@ msgid "Custom Filters"
 msgstr ""
 
 #: inc/helpers.php:2909 inc/helpers.php:2917 inc/helpers.php:2925
-#: wp-travel.php:221
+#: wp-travel.php:212
 msgid "Settings"
 msgstr ""
 
@@ -9270,26 +9289,26 @@ msgstr ""
 msgid "Bank Deposit"
 msgstr ""
 
-#: inc/payments/wp-travel-payments.php:508
-#: inc/payments/wp-travel-payments.php:530
+#: inc/payments/wp-travel-payments.php:510
+#: inc/payments/wp-travel-payments.php:532
 msgid ""
 "Your Payment has been received but the email could not be sent. Possible "
 "reason: your host may have disabled the mail() function."
 msgstr ""
 
-#: inc/payments/wp-travel-payments.php:592
+#: inc/payments/wp-travel-payments.php:594
 msgid "Your booking has been canceled"
 msgstr ""
 
-#: inc/payments/wp-travel-payments.php:596
+#: inc/payments/wp-travel-payments.php:598
 msgid "We've received your booking and payment details. We'll contact you soon."
 msgstr ""
 
-#: inc/payments/wp-travel-payments.php:609
+#: inc/payments/wp-travel-payments.php:611
 msgid "Invalid"
 msgstr ""
 
-#: inc/payments/wp-travel-payments.php:628
+#: inc/payments/wp-travel-payments.php:630
 msgid "Success"
 msgstr ""
 
@@ -9922,7 +9941,7 @@ msgid ""
 "Please  Delete your WP Travel Standard Paypal addons from Plugin Directory."
 msgstr ""
 
-#: upgrade/update-137.php:25 wp-travel.php:481
+#: upgrade/update-137.php:25 wp-travel.php:474
 msgid "WP Travel Customer"
 msgstr ""
 
@@ -9945,34 +9964,34 @@ msgid ""
 "sales."
 msgstr ""
 
-#: core/actions/activation.php:103 upgrade/update-137.php:48
-msgctxt "Page slug"
-msgid "wp-travel-cart"
-msgstr ""
-
-#: core/actions/activation.php:108 upgrade/update-137.php:53
+#: core/actions/activation.php:103 upgrade/update-137.php:53
 msgctxt "Page slug"
 msgid "wp-travel-checkout"
 msgstr ""
 
-#: core/actions/activation.php:113 upgrade/update-137.php:58
+#: core/actions/activation.php:108 upgrade/update-137.php:58
 msgctxt "Page slug"
 msgid "wp-travel-dashboard"
 msgstr ""
 
-#: core/actions/activation.php:104 upgrade/update-137.php:49
-msgctxt "Page title"
-msgid "WP Travel Cart"
+#: upgrade/update-137.php:48
+msgctxt "Page slug"
+msgid "wp-travel-cart"
 msgstr ""
 
-#: core/actions/activation.php:109 upgrade/update-137.php:54
+#: core/actions/activation.php:104 upgrade/update-137.php:54
 msgctxt "Page title"
 msgid "WP Travel Checkout"
 msgstr ""
 
-#: core/actions/activation.php:114 upgrade/update-137.php:59
+#: core/actions/activation.php:109 upgrade/update-137.php:59
 msgctxt "Page title"
 msgid "WP Travel Dashboard"
+msgstr ""
+
+#: upgrade/update-137.php:49
+msgctxt "Page title"
+msgid "WP Travel Cart"
 msgstr ""
 
 #: core/actions/register_taxonomies.php:10

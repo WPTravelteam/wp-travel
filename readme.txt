@@ -3,10 +3,9 @@ Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 5.4.1
-Tested up to: 5.7.2
+Tested up to: 5.8
 Requires PHP: 5.6.2
-Stable tag: 4.7.1-beta2
-License: GPLv3
+Stable tag: 5icense: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 WP Travel is a free WordPress travel & tour agency plugin & travel engine to create customized travel & trekking websites in minutes!
@@ -244,8 +243,8 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
 
-= 4.7.1 =
-Release Date:
+= 5.0.0 =
+Release Date: 29 August, 2021
 
 Fixes:
 * Calendar translation issue in filter widget when it is used in homepage.
@@ -253,10 +252,14 @@ Fixes:
 * Fixed Trip extras label not displaying in trip edit page.
 * Fixed Trip fact issue with PHP 8. It shows E_COMPILE_ERROR on edit trip.
 
-Tewaks:
+Tweaks:
 * Removed the_content filter in frontend tabs.
 
 Enhancement:
+* Added schema for Trip data and rating in trip single page.
+* Added User specific coupon discount feature. 
+* Added Support for Multiple Cart items.
+* Added Support For Pricing group discount as we have group discount for pricing category only.
 * Coupon Section update to React Block.
 
 = 4.7.0 =
@@ -446,133 +449,10 @@ Fixes:
 * Fixed custom booking html not being displayed in frontend.
 * Admin trip extras tabs layout issue fixes.
 
-= 4.4.9 =
-Release Date: 25th February, 2021
-
-Fixes:
-* Fixed array to string conversion notice in the admin screen.
-* Fixed Fatal error occurs when making a payment with PayPal express checkout
-* Fixed filter widget search by options not working.
-
-Deprecated:
-* Function `wptravel_process_trip_price_tax_by_price` is deprecated.
-* Function `get_wp_travel_map_data` is deprecated use `wptravel_get_map_data` instead.
-
-= 4.4.8 =
-Release Date: 24th February, 2021
-
-Fixes:
-* Fixed trip extras fields in admin not showing.
-* Fixed undefined index in case of empty extras value.
-* Fixed WP Travel Menu icon not being displayed.
-* Fixed Booking detail page not being displayed in the dashboard page.
-* Removed not working tabs in Icon selector.
-* Critical error on new WP Travel activation.
-
-= 4.4.7 =
-Release Date: 22nd February, 2021
-
-Fixes:
-* Added nonce verification in missing form request and sanitize input data.
-* Updated exteral JS library to latest version.
-* Function prefixing changed to 'wptravel_' from 'wp_travel_'.
-* Function name starts with 'wp_travel_' are deprecated.
-
-= 4.4.6 =
-Release Date: 5th February, 2021
-
-Enhancement:
-* Added pax information on frontend pax selector. This feature is currently not supported for trip time feature. 
-* Added support for WP Rocket plugin to never cache 'wp_travel_cart' cookies on WP Travel checkout page. 
-
-= 4.4.5 =
-Release Date: 28th January, 2021
-
-Fixes:
-* Issue in select pax section of the legacy version of booking regarding price and price per not displaying in the list.
-* Translation of booking options list strings fixes in the checkout page.
-* Cannot read property 'title' of undefined while selecting pricing.
-* Undefined $post a global variable notice in customizer.
-* Sort Trip by date in the shortcode `WP_TRAVEL_ITINERARIES`.
-
-Enhancement:
-* Added support for currency name display (E.g USD, AUD instead of $) on frontend trip pages. This can be enabled or disable from  WP Travel Admin Settings.
-
-Tweaks:
-* Added Helper function `WP_Travel_Helpers_Trip_Dates::is_fixed_departure($trip_id)` to check whether it is fixed departure trip or not.
-
-= 4.4.4 =
-Release Date: 7th January, 2021
-
-Enhancement:
-* Added option to draft/delete expired trips.
-* Added support for WP Rocket plugin to disable caching on WP Travel checkout page. 
-
-Tweaks:
-* Enable Multiple Travelers moved to Checkout option from Trip option.
-* Removed cart Page option.
-
-Fixes:
-* Fixed, call_user_func_array() expects parameter 1 to be a valid callback, function 'save' not found or invalid function name.
-
-= 4.4.3 =
-Release Date: 31st December, 2020
-
-Tweaks:
-* WP Travel upsell message, terms and link is updated.
-* 'Cart & Checkout' label changed to 'Checkout' in admin settings. 
-
-= 4.4.2 =
-Release Date: 30th December, 2020
-
-Fixes:
-* Fixed trip booking sort by Contact name not working.
-* Trip facts error displaying on trip edit fact section is fixed.
-
-Tweaks:
-* add method of cart class parameters updated. First parameter type casting is changed to array from number consisting all required attributes in the array.
-* Code split & cleanup for the booking process and email after booking is saved.
-
-= 4.4.1 =
-Release Date: 16th December 2020
-
-Fixes:
-* Trip Facts not displaying on frontend, mismatch value is fixed.
-* WP Travel Settings license tab layout issue is fixed.
-
-= 4.4.0 =
-Release Date: 11th December 2020
-
-Fixes:
-* License Activation on a renewal is fixed.
-* Fixed Dashboard page is not selectable from admin settings. When we change the dashboard page option it will change the checkout page option in admin settings.
-* Trip facts not displaying on single itinerary page after migration from older version of WP Travel to v4 is fixed.
-
-Tweaks:
-* Added Enable/Disable all payment gateway option in the settings.
-* License term updated. We have updated our premium license to Freemius from Themepalace.
-
-Deprecated
-* Function `wp_travel_is_enable_sale_price` and `wp_travel_is_enable_sale` is deprecated use `WP_Travel_Helpers_Trips::is_sale_enabled()` instead of these 2 functions.
-* Function `wp_travel_is_trip_price_tax_enabled` is deprecated use `WP_Travel_Helpers_Trips::is_tax_enabled()` instead of.
-* Function `wp_travel_is_taxable` is deprecated use `WP_Travel_Helpers_Trips::get_tax_rate()` instead of. 
-* Function `wp_travel_get_price` is deprecated use `WP_Travel_Helpers_Trips::get_price()` instead of. 
-* Function `wp_travel_get_actual_trip_price` is deprecated use `WP_Travel_Helpers_Trips::get_price()` instead of. 
-* Function `wp_travel_get_trip_sale_price` is deprecated use `WP_Travel_Helpers_Trips::get_price()` instead of. 
-* Function `wp_travel_get_trip_price` is deprecated use `WP_Travel_Helpers_Trips::get_price()` instead of. 
-* Function `wp_travel_get_min_price_key` is deprecated. 
-* Function `wp_travel_get_booking_form` is deprecated. 
-* Function `wp_travel_booking_form_fields` is deprecated. 
-* Function `wp_travel_build_post_tree` is deprecated. 
-* Function `wp_travel_get_post_hierarchy_dropdown` is deprecated.
-* Action Hook `wp_travel_update_trip_inventory_values` is deprecated use `wp_travel_trip_inventory` instead of.
-* Action Hook `wp_travel_booking_princing_options_list` is deprecated use `wp_travel_booking_default_princing_list` instead of.
-* Action Hook `wp_travel_booking_departure_date_list` is deprecated use `wp_travel_booking_fixed_departure_list` instead of.
-
 = Earlier versions =
 For the changelog of earlier versions, please refer to [the changelog on wptravel.io](https://wptravel.io/changelog-wp-travel/).
 
 == Upgrade Notice ==
 
-= 4.0 =
-4.0 is a major update. Make a full site backup, update your theme and extensions, and [review update best practices](https://wptravel.io/wp-travel-version-(4-0-0)-pre-release-post) before upgrading.
+= 5.0 =
+There is a new version of WP Travel available which is a major release and has come with support of the most requested features.[View Details](https://wptravel.io/wp-travel-plugin-version-5-0-0-major-release-note/) or update Now.

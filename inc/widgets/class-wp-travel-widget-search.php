@@ -23,7 +23,7 @@ class WP_Travel_Widget_Search extends WP_Widget {
 	 */
 	function __construct() {
 		// Instantiate the parent object.
-		parent::__construct( false, __( 'WP Travel Search', 'wp-travel' ) );
+		parent::__construct( false, __( 'WP Travel Search (Deprecated)', 'wp-travel' ) );
 	}
 
 	/**

@@ -42,7 +42,7 @@ class WP_Travel_Widget_Sale_Itineraries extends WP_Widget { // @phpcs:ignore
 	 */
 	public function __construct() {
 		// Instantiate the parent object.
-		parent::__construct( false, __( 'WP Travel Sales Widget', 'wp-travel' ) );
+		parent::__construct( false, __( 'WP Travel Sales Widget (Deprecated)', 'wp-travel' ) );
 		$this->no_of_trip_show = 2;
 		$this->trip_per_row    = 1;
 		$this->view_mode       = 'grid';

@@ -23,7 +23,7 @@ class WP_Travel_Trip_Enquiry_Form_Widget extends WP_Widget {
 	 */
 	public function __construct() {
 		// Instantiate the parent object.
-		parent::__construct( false, __( 'WP Travel Enquiry Form Widget', 'wp-travel' ) );
+		parent::__construct( false, __( 'WP Travel Enquiry Form Widget (Deprecated)', 'wp-travel' ) );
 	}
 
 	/**

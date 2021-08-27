@@ -1,7 +1,7 @@
 import { applyFilters } from '@wordpress/hooks';
 import { useSelect, select, dispatch, withSelect } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
-import { PanelRow, ToggleControl, TextControl, CheckboxControl } from '@wordpress/components';
+import { PanelRow, ToggleControl, TextControl, CheckboxControl, Spinner } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 
@@ -27,11 +27,22 @@ export default () => {
         } = allData;
 
     const {wp_travel_user_since} = options;
-    const initialState = {forceMigrateToV4: false }
-    const [ { forceMigrateToV4 } , setState ] = useState(initialState)
+    const initialState = {
+        forceMigrateToV4: false,
+        migrating:false,
+        showMigrateCompleteNotice:false
+    }
+    const [ { forceMigrateToV4, migrating, showMigrateCompleteNotice } , setState ] = useState(initialState)
     const updateState = data => {
 		setState(state => ({ ...state, ...data }))
 	}
+    setTimeout(() => {
+        if ( 'undefined' !== typeof showMigrateCompleteNotice && showMigrateCompleteNotice ) {
+            updateState({
+                showMigrateCompleteNotice:false
+            })
+        }
+    }, 5000)
     return <div className="wp-travel-ui wp-travel-ui-card settings-general">
         <h2>{ __( 'Debug Options', 'wp-travel' ) }</h2>
         <ErrorBoundary>
@@ -103,17 +114,22 @@ export default () => {
 
             {VersionCompare( wp_travel_user_since, '4.0.0', '<' ) &&
                 <PanelRow>
-                    <label>{ __( 'Migrate Pricing and Date', 'wp-travel' ) }</label>
+                    <label>{ __( 'Migrate Pricing and Date', 'wp-travel' ) } {migrating&& <Spinner />}{showMigrateCompleteNotice && <p className="text-success" >Migration completed! Please Do not check it again</p>}</label>
                     <div className="wp-travel-field-value">
                         <CheckboxControl
                             checked={ forceMigrateToV4 }
                             onChange={ () => {
                                 if ( confirm('Are your sure to migrate your trips to v4 trips?') ) {
-
+                                    updateState({
+                                        migrating: true
+                                    })
+                                    
                                     apiFetch( { url: `${ajaxurl}?action=wptravel_force_migrate&_nonce=${_wp_travel_admin._nonce}`, data:{force_migrate_to_v4:true}, method:'post' } ).then( res => {
                                         
                                         updateState({
-                                            forceMigrateToV4: ! forceMigrateToV4
+                                            forceMigrateToV4: ! forceMigrateToV4,
+                                            migrating:false,
+                                            showMigrateCompleteNotice:true
                                         })
                                     } );
                                 }

@@ -23,7 +23,7 @@ class WP_Travel_Widget_Filter_Search_Widget extends WP_Widget {
 	 */
 	public function __construct() {
 		// Instantiate the parent object.
-		parent::__construct( false, __( 'WP Travel Filters Widget', 'wp-travel' ) );
+		parent::__construct( false, __( 'WP Travel Filters Widget (Deprecated)', 'wp-travel' ) );
 	}
 
 	/**

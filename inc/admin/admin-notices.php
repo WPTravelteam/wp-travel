@@ -185,3 +185,33 @@ function wptravel_pricing_table_created_notice() {
 	}
 }
 // add_action( 'admin_notices', 'wptravel_pricing_table_created_notice', 100 );
+
+function wptravel_remove_v3_trips_notice() {
+	$settings = wptravel_get_settings();
+	$user_since = get_option( 'wp_travel_user_since', '3.0.0' );
+	$switch_to_v4 = $settings['wp_travel_switch_to_react'];
+	if ( version_compare( $user_since, '4.0.0', '<' ) && 'yes' !== $switch_to_v4 ) {
+		?>
+		<div class="wp-travel-notification notification-warning notice notice-info is-dismissible"> 
+			<div class="notification-content">
+				<ul>
+					<div><p><strong><span style="color:#f00">Note : </span> <?php esc_html_e( "This is the notice for the users who still use previous layout (v3 layout) to migrate all the trips created using WP Travel versions before 4.0.0 through Migrate Pricing and Date option as we are going to remove 'Switch to V4' option in settings page from WP Travel v5.1.0.", 'wp-travel' ); ?> <a href="https://wptravel.io/removal-of-switch-to-v4-option/" target="_blank">More.</a></strong></p></div>
+				</ul>
+			</div>
+		</div>
+		<?php
+	}
+}
+add_action( 'admin_notices', 'wptravel_remove_v3_trips_notice', 100 );
+
+function wptravel_v3_notice_display( $show ) {
+	$settings = wptravel_get_settings();
+	$user_since = get_option( 'wp_travel_user_since', '3.0.0' );
+	$switch_to_v4 = $settings['wp_travel_switch_to_react'];
+	if ( version_compare( $user_since, '4.0.0', '<' ) && 'yes' !== $switch_to_v4 ) {
+		$show = true;
+	}
+	return $show;
+}
+
+add_filter( 'wp_travel_display_general_admin_notices', 'wptravel_v3_notice_display', 100 );
