@@ -456,4 +456,4 @@ For the changelog of earlier versions, please refer to [the changelog on wptrave
 == Upgrade Notice ==
 
 = 5.0 =
-There is a new version of WP Travel available which is a major release and has come with support of the most requested features.[View Details](https://wptravel.io/wp-travel-plugin-version-5-0-0-major-release-note/) or update Now.
+There is a new version of WP Travel available which is a major release and has come with support of the most requested features. Check the [release note](https://wptravel.io/wp-travel-plugin-version-5-0-0-major-release-note/) for more detail.
