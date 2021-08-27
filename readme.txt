@@ -254,7 +254,7 @@ Fixes:
 * Fixed Trip fact issue with PHP 8. It shows E_COMPILE_ERROR on edit trip.
 
 Tweaks:
-* Removed the_content filter in frontend tabs.
+* Removed `the_content` filter in frontend tabs.
 
 Enhancement:
 * Added schema for Trip data and rating in trip single page.
