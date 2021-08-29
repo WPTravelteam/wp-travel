@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 5.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-27 10:34:33+00:00\n"
+"POT-Creation-Date: 2021-08-29 05:24:32+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -9419,7 +9419,7 @@ msgid "Enquiry sent succesfully !!"
 msgstr ""
 
 #: inc/widgets/class-wp-travel-search-filters-widget.php:26
-msgid "WP Travel Filters Widget"
+msgid "WP Travel Filters Widget (Deprecated)"
 msgstr ""
 
 #: inc/widgets/class-wp-travel-search-filters-widget.php:88
@@ -9453,7 +9453,7 @@ msgid "Enable Filters"
 msgstr ""
 
 #: inc/widgets/class-wp-travel-trip-enquiry-form-widget.php:26
-msgid "WP Travel Enquiry Form Widget"
+msgid "WP Travel Enquiry Form Widget (Deprecated)"
 msgstr ""
 
 #: inc/widgets/class-wp-travel-trip-enquiry-form-widget.php:40
@@ -9461,7 +9461,7 @@ msgid "Enquiry"
 msgstr ""
 
 #: inc/widgets/class-wp-travel-widget-featured.php:30
-msgid "WP Travel Featured Trip"
+msgid "WP Travel Featured Trip (Deprecated)"
 msgstr ""
 
 #: inc/widgets/class-wp-travel-widget-featured.php:113
@@ -9503,7 +9503,7 @@ msgid "List View"
 msgstr ""
 
 #: inc/widgets/class-wp-travel-widget-location.php:30
-msgid "WP Travel Trips by Location"
+msgid "WP Travel Trips by Location (Deprecated)"
 msgstr ""
 
 #: inc/widgets/class-wp-travel-widget-location.php:202
@@ -9511,15 +9511,15 @@ msgid "Select Location"
 msgstr ""
 
 #: inc/widgets/class-wp-travel-widget-sale-widget.php:45
-msgid "WP Travel Sales Widget"
+msgid "WP Travel Sales Widget (Deprecated)"
 msgstr ""
 
 #: inc/widgets/class-wp-travel-widget-search.php:26
-msgid "WP Travel Search"
+msgid "WP Travel Search (Deprecated)"
 msgstr ""
 
 #: inc/widgets/class-wp-travel-widget-trip-type.php:30
-msgid "WP Travel Trips by Type"
+msgid "WP Travel Trips by Type (Deprecated)"
 msgstr ""
 
 #: inc/widgets/class-wp-travel-widget-trip-type.php:202
