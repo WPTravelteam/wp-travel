@@ -1,9 +1,8 @@
-import { useState, useEffect } from '@wordpress/element';
-import { TextControl, PanelRow, PanelBody, Button, TabPanel, Disabled, Notice, ToggleControl, FormTokenField } from '@wordpress/components';
+import { TextControl, PanelRow, PanelBody, Disabled, Notice, ToggleControl } from '@wordpress/components';
 import { applyFilters, addFilter } from '@wordpress/hooks';
-import { useSelect, dispatch } from '@wordpress/data';
-import apiFetch from '@wordpress/api-fetch';
-import { sprintf, _n, __ } from '@wordpress/i18n';
+import { _n, __ } from '@wordpress/i18n';
+import { withSelect, withDispatch } from '@wordpress/data';
+import { compose } from '@wordpress/compose';
 
 import { ReactSortable } from 'react-sortablejs';
 import {alignJustify } from '@wordpress/icons';
@@ -12,12 +11,7 @@ import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
 const __i18n = {
 	..._wp_travel_admin.strings
 }
-const WPTravelTripOptionsTabsContent = () => {
-    const allData = useSelect((select) => {
-        return select('WPTravel/TripEdit').getAllStore()
-    }, []);
-    const { updateTripData } = dispatch('WPTravel/TripEdit');
-
+const WPTravelTripOptionsTabsContent = ({ allData, updateTripData }) => {
     const updateTabOption = (key, value, _tabIndex) => {
 
         const { trip_tabs } = allData;
@@ -138,8 +132,21 @@ addFilter('wp_travel_itinerary_custom_tabs', 'wp_travel', (content, id, allData)
     return content
 }, 9);
 
-const WPTravelTripOptionsTabs = () => {
-    return <div className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-no-border"><WPTravelTripOptionsTabsContent /></div>
+const WPTravelTripOptionsTabs = ( props ) => {
+    return <div className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-no-border"><WPTravelTripOptionsTabsContent { ...props } /></div>
 }
 
-export default WPTravelTripOptionsTabs;
+export default compose([
+	withSelect((select)=>{
+		const allData = select('WPTravel/TripEdit').getAllStore();
+		return {
+			allData
+		}
+	}),
+withDispatch((dispatch)=>{
+	const { updateTripData } = dispatch('WPTravel/TripEdit');
+	return {
+		updateTripData
+	}
+})
+])(WPTravelTripOptionsTabs);
