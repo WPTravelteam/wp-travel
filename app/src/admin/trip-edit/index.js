@@ -73,7 +73,7 @@ const WPTravelTripOptions = () => {
             onSelect={() => false}
             tabs={tabs}>
             {
-                (tab) => 'undefined' !== typeof tab.content ? <ErrorBoundary><tab.content /></ErrorBoundary> : <>Error.</>
+                (tab) => 'undefined' !== typeof tab.content ? <ErrorBoundary><div className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-no-border">{applyFilters( `wptravel_trip_edit_tab_content_${tab.name.replaceAll('-','_')}`, [<tab.content key={tab.name}/>], allData)}</div></ErrorBoundary> : <>Error.</>
             }
         </TabPanel>
         <SaveTripSection />

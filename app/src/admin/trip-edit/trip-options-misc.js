@@ -62,3 +62,16 @@ const WPTravelTripOptionsMisc = () => {
 }
 
 export default WPTravelTripOptionsMisc;
+
+const TripEnquiryTitle = () => {
+    return <h3>{ __i18n.trip_enquiry }</h3>
+}
+
+
+addFilter('wptravel_trip_edit_tab_content_misc', 'wp_travel', (content, allData) => {
+    return [
+        ...content,
+        < TripEnquiryTitle />
+    ]
+    
+});
