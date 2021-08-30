@@ -92,9 +92,10 @@ const WPTravelTripDates = () => {
     
 
     const updateDateTimes = (storeKey, data) => {
-        let _allData = allData;
-        _allData[storeKey] = [...data];
-        updateTripData(_allData)
+        updateTripData({
+            ...allData,
+            [storeKey]:[...data]
+        })
     }
     
 
@@ -126,6 +127,7 @@ const WPTravelTripDates = () => {
                             onChange={(e) =>{
                                 let _trip_duration = allData.trip_duration;
                                 _trip_duration.days = e;
+
                                 updateTripData({
                                     ...allData,
                                     trip_duration:{..._trip_duration}
