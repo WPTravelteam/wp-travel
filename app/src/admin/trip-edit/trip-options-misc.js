@@ -58,7 +58,7 @@ const WPTravelTripOptionsMiscContent = () => {
 }
 
 const WPTravelTripOptionsMisc = () => {
-    return <div className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-no-border"><WPTravelTripOptionsMiscContent /></div>
+    return <WPTravelTripOptionsMiscContent />
 }
 
 export default WPTravelTripOptionsMisc;
@@ -67,11 +67,38 @@ const TripEnquiryTitle = () => {
     return <h3>{ __i18n.trip_enquiry }</h3>
 }
 
-
 addFilter('wptravel_trip_edit_tab_content_misc', 'wp_travel', (content, allData) => {
     return [
         ...content,
-        < TripEnquiryTitle />
+        < TripEnquiryTitle  />
     ]
     
-});
+}, 10 );
+
+const GlobalTripEnquiryOption = ({allData}) => {
+    const { updateTripData } = dispatch('WPTravel/TripEdit');
+
+    const { use_global_trip_enquiry_option, enable_trip_enquiry_option } = allData;
+    return <PanelRow>
+    <label>{ __i18n.global_trip_enquiry }</label>
+    <ToggleControl
+        value={use_global_trip_enquiry_option}
+        checked={ use_global_trip_enquiry_option == 'yes' ? true : false }
+        onChange={ 
+            (use_global_trip_enquiry_option) => {
+                updateTripData({
+                    ...allData,
+                    use_global_trip_enquiry_option:use_global_trip_enquiry_option ? 'yes' : 'no'
+                })
+            }
+        }
+    />
+    </PanelRow>
+}
+addFilter('wptravel_trip_edit_tab_content_misc', 'wp_travel', (content, allData) => {
+    return [
+        ...content,
+        < GlobalTripEnquiryOption allData={allData} />
+    ]
+    
+}, 11 );
