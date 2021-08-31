@@ -62,5 +62,5 @@ const EnableTripEnquiry = ({allData}) => {
 
 // Hooks.
 addFilter('wptravel_trip_edit_tab_content_misc', 'wp_travel', (content ) => { return [ ...content, < TripEnquiryTitle  />] }, 10 );
-addFilter('wptravel_trip_edit_tab_content_misc', 'wp_travel', (content, allData ) => { return [ ...content, < EnableGlobalTripEnquiry allData={allData} /> ] }, 11 );
-addFilter('wptravel_trip_edit_tab_content_misc', 'wp_travel', (content, allData ) => { return [ ...content, < EnableTripEnquiry allData={allData} /> ] }, 12 );
+addFilter('wptravel_trip_edit_tab_content_misc', 'wp_travel', (content, allData ) => { return [ ...content, < EnableGlobalTripEnquiry allData={allData} /> ] }, 20 );
+addFilter('wptravel_trip_edit_tab_content_misc', 'wp_travel', (content, allData ) => { return [ ...content, < EnableTripEnquiry allData={allData} /> ] }, 30 );
