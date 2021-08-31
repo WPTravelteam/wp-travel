@@ -60,7 +60,20 @@ const EnableTripEnquiry = ({allData}) => {
     </>;
 }
 
+// Callbacks.
+const TripEnquiryTitleCB = ( content ) => {
+    return [ ...content, <TripEnquiryTitle /> ];
+}
+
+const EnableGlobalTripEnquiryCB = ( content, allData ) => {
+    return [ ...content, <EnableGlobalTripEnquiry allData={allData} /> ];
+}
+
+const EnableTripEnquiryCB = ( content, allData ) => {
+    return [ ...content, <EnableTripEnquiry allData={allData} /> ];
+}
+
 // Hooks.
-addFilter('wptravel_trip_edit_tab_content_misc', 'wp_travel', (content ) => { return [ ...content, < TripEnquiryTitle  />] }, 10 );
-addFilter('wptravel_trip_edit_tab_content_misc', 'wp_travel', (content, allData ) => { return [ ...content, < EnableGlobalTripEnquiry allData={allData} /> ] }, 20 );
-addFilter('wptravel_trip_edit_tab_content_misc', 'wp_travel', (content, allData ) => { return [ ...content, < EnableTripEnquiry allData={allData} /> ] }, 30 );
+addFilter( 'wptravel_trip_edit_tab_content_misc', 'wpTravelTripEnquiryTitle', TripEnquiryTitleCB, 10 );
+addFilter( 'wptravel_trip_edit_tab_content_misc', 'wpTravelEnableGlobalTripEnquiryCB', EnableGlobalTripEnquiryCB, 20 );
+addFilter( 'wptravel_trip_edit_tab_content_misc', 'wpTravelEnableTripEnquiryCB', EnableTripEnquiryCB, 30 );
