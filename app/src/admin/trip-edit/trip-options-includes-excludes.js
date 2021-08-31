@@ -34,7 +34,6 @@ const TripIncludes = ({allData}) => {
     </>;
 }
 
-// Single Components for hook callbacks.
 const TripExcludes = ({allData}) => {
     const { updateTripData } = dispatch('WPTravel/TripEdit');
     const { trip_exclude } = allData;
@@ -54,6 +53,15 @@ const TripExcludes = ({allData}) => {
     </>;
 }
 
+// Callbacks.
+const TripIncludesCB = ( content, allData ) => {
+    return [ ...content, <TripIncludes allData={allData} /> ];
+}
+
+const TripExcludesCB = ( content, allData ) => {
+    return [ ...content, <TripExcludes allData={allData} /> ];
+}
+
 // Hooks.
-addFilter('wptravel_trip_edit_tab_content_includes_excludes', 'wp_travel', (content, allData ) => { return [ ...content, <TripIncludes allData={allData} /> ] }, 10 );
-addFilter('wptravel_trip_edit_tab_content_includes_excludes', 'wp_travel', (content, allData ) => { return [ ...content, <TripExcludes allData={allData} /> ] }, 20 );
+addFilter( 'wptravel_trip_edit_tab_content_includes_excludes', 'WPTravel\TripEdit\TripIncludes', TripIncludesCB, 10 );
+addFilter( 'wptravel_trip_edit_tab_content_includes_excludes', 'WPTravel\TripEdit\TripExcludes', TripExcludesCB, 20 );
