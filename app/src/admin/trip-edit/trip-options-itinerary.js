@@ -102,16 +102,16 @@ const Itinerary = ({allData}) => {
         })
     }
     return <>
-        <div className="wp-travel-itinerary-title">
+            <div className="wp-travel-itinerary-title">
                 <h3 className="wp-travel-tab-content-title">{__i18n.itinerary}</h3>
                 {typeof itineraries != 'undefined' && itineraries && Object.keys(itineraries).length > 0 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addItinerary()}>{__i18n.add_itinerary}</Button></PanelRow> }
             </div>
             {typeof itineraries != 'undefined' && itineraries && Object.keys(itineraries).length > 0 ?
-                <div className="wp-travel-sortable-component">
+                <div className="wp-travel-sortable-component itinerary-sortable">
                     <ReactSortable
                         list={itineraries}
                         setList={sortedItineraries => sortItineraries(sortedItineraries)}
-                        handle=".wp-travel-trip-itinerary .components-panel__icon"
+                        handle=".wp-travel-sortable-component.itinerary-sortable .components-panel__icon"
                     >
                         {
                             Object.keys(itineraries).map(function (itineraryId) {
@@ -293,4 +293,4 @@ const ItineraryCB = ( content, allData ) => {
 // Hooks.
 addFilter( 'wptravel_trip_edit_tab_content_itinerary', 'WPTravel\TripEdit\TripCode', TripCodeCB, 10 );
 addFilter( 'wptravel_trip_edit_tab_content_itinerary', 'WPTravel\TripEdit\TripOutline', TripOutlineCB, 20 );
-addFilter( 'wptravel_trip_edit_tab_content_itinerary', 'WPTravel\TripEdit\Itinerary', ItineraryCB, 20 );
+addFilter( 'wptravel_trip_edit_tab_content_itinerary', 'WPTravel\TripEdit\Itinerary', ItineraryCB, 30 );
