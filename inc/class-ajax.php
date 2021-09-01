@@ -100,7 +100,7 @@ class WP_Travel_Ajax {
 					'max_pax'         => $pricing->max_pax,
 					'min_pax'         => $pricing->min_pax,
 					'has_group_price' => $pricing->has_group_price,
-					'group_prices'    => $pricing->group_prices,
+					'group_prices'    => maybe_unserialize( $pricing->group_prices ),
 					'trip_extras'     => $pricing->trip_extras,
 				);
 
@@ -119,7 +119,7 @@ class WP_Travel_Ajax {
 								'is_sale'         => $pricing_category->is_sale,
 								'sale_price'      => $pricing_category->sale_price,
 								'has_group_price' => $pricing_category->has_group_price,
-								'group_prices'    => $pricing_category->has_group_price,
+								'group_prices'    => maybe_unserialize( $pricing_category->group_prices ),
 								'default_pax'     => $pricing_category->default_pax,
 							);
 							WpTravel_Helpers_Trip_Pricing_Categories::add_individual_pricing_category( $new_pricing_id, $category );
