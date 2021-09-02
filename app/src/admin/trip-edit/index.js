@@ -212,9 +212,9 @@ addFilter(
     'wp_travel',
     (content ) => {
         content = [
-            <p class="description">
+            <p className="description">
                 {__i18n.notices.need_extras_option.title}
-                <a href="https://wptravel.io/wp-travel-pro/" target="_blank" class="wp-travel-upsell-badge">{__i18n.notice_button_text.get_pro}</a>
+                <a href="https://wptravel.io/wp-travel-pro/" target="_blank" className="wp-travel-upsell-badge">{__i18n.notice_button_text.get_pro}</a>
             </p>,
             ...content,
         ]
