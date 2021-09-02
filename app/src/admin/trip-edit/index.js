@@ -7,7 +7,6 @@ import domReady from '@wordpress/dom-ready';
 import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
 
 import './trip-store';
-import './trip-pro-options';
 
 import '../settings/store/settings-store'; // @since 4.5.1
 
@@ -147,19 +146,18 @@ addFilter( 'wp_travel_trip_options_tabs', 'wp_travel', ( tabs ) => {
 				className: 'tab-downloads',
 				content: WPTravelTripOptionsDownloads
 			},
+            {
+				name: 'tabs',
+				title: __i18n.admin_tabs.tabs,
+				className: 'tab-tabs',
+				content: WPTravelTripOptionsTabs
+			},
 			{
 				name: 'misc',
 				title: __i18n.admin_tabs.misc,
 				className: 'tab-misc',
 				content: WPTravelTripOptionsMisc
 			},
-			{
-				name: 'tabs',
-				title: __i18n.admin_tabs.tabs,
-				className: 'tab-tabs',
-				content: WPTravelTripOptionsTabs
-			},
-
 
 		]
 	];
