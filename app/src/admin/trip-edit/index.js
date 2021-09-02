@@ -15,11 +15,6 @@ import SaveTripSection from './sub-components/SaveTripSection'
 
 // Tab Items.
 import WPTravelTripOptionsPriceDates from './trip-options-price-dates';
-import WPTravelTripOptionsTabs from './trip-options-tabs';
-import WPTravelTripOptionsFaq from './trip-options-faq';
-
-import WPTravelTripOptionsInventoryOptions from './trip-options-inventory-options';
-import WPTravelTripOptionsDownloads from './trip-options-downloads';
 
 import WPTravelTripOptionsItinerary from './Components/Itinerary';
 import WPTravelTripOptionsIncludesExcludes from './Components/IncludesExcludes';
@@ -27,9 +22,12 @@ import WPTravelTripOptionsFact from './Components/Facts';
 import WPTravelTripOptionsGallery from './Components/Gallery'
 import WPTravelTripOptionsLocation from './Components/Locations';
 import WPTravelTripOptionsCartAndCheckout from './Components/Checkout';
-
-
+import WPTravelTripOptionsInventoryOptions from './Components/Inventory';
+import WPTravelTripOptionsFaq from './Components/Faqs';
+import WPTravelTripOptionsDownloads from './Components/Downloads';
 import WPTravelTripOptionsMisc from './Components/Misc';
+import WPTravelTripOptionsTabs from './Components/Tabs';
+
 
 const toggleDisablePostUpdate = ( isDisabled = false ) => {
     if( jQuery('#submitpost').find( '#wp-travel-post-disable-message' ).length < 1 && isDisabled ) {
@@ -168,41 +166,11 @@ addFilter( 'wp_travel_trip_options_tabs', 'wp_travel', ( tabs ) => {
 });
 
 // Just added this for backward compatibility. need to remove after removing content.splice from pro options.
-addFilter('wp_travel_trip_cart_checkout_tab_content', 'wp_travel', (content) => { content = [ <> </>, ...content, ]; return content });
-
-addFilter('wp_travel_trip_inventory_tab_content', 'wp_travel', (content, allData) => {
-    content = [
-        <>
-            <Notice isDismissible={false} status="informational">
-                <strong>{__i18n.notices.inventory_option.title}</strong>
-                <br />
-                {__i18n.notices.inventory_option.description}
-                <br />
-                <br />
-                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
-            </Notice><br />
-        </>,
-        ...content,
-    ]
-    return content
-});
-
-addFilter('wp_travel_trip_downloads_tab_content', 'wp_travel', (content, allData) => {
-    content = [
-        <>
-            <Notice isDismissible={false} status="informational">
-                <strong>{__i18n.notices.downloads_option.title}</strong>
-                <br />
-                {__i18n.notices.downloads_option.description}
-                <br />
-                <br />
-                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
-            </Notice><br />
-        </>,
-        ...content,
-    ]
-    return content
-});
+addFilter('wp_travel_trip_cart_checkout_tab_content', 'wp_travel', ( content ) => { content = [ <> </>, ...content, ]; return content; } );
+addFilter('wp_travel_trip_inventory_tab_content', 'wp_travel', ( content ) => { content = [<> </>, ...content, ]; return content; } );
+addFilter('wp_travel_trip_faq_tab_content', 'wp_travel', ( content ) => { content = [ <> </>, ...content, ]; return content } );
+addFilter('wp_travel_trip_downloads_tab_content', 'wp_travel', ( content ) => { content = [ <> </>, ...content, ]; return content } );
+addFilter('wp_travel_itinerary_custom_tabs', 'wp_travel', ( content ) => { content = [ <> </>, ...content, ]; return content } );
 
 addFilter('wp_travel_after_pricings_options', 'wp_travel', (content, allData) => {
     content = [

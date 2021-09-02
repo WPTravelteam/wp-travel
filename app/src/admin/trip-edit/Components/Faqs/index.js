@@ -5,16 +5,34 @@ import { __ } from '@wordpress/i18n';
 import { ReactSortable } from 'react-sortablejs';
 import {alignJustify } from '@wordpress/icons';
 
-import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
+import ErrorBoundary from '../../../../ErrorBoundry/ErrorBoundry';
 
 const __i18n = {
 	..._wp_travel_admin.strings
 }
 
-const WPTravelTripOptionsFaqContent = () => {
-    const allData = useSelect((select) => {
-        return select('WPTravel/TripEdit').getAllStore()
-    }, []);
+// @todo Need to remove this in future.
+const WPTravelTripOptionsFaq = () => {
+    return <></>;
+}
+export default WPTravelTripOptionsFaq;
+
+// Single Components for hook callbacks.
+const FaqsNotice = () => {
+    return <>
+        <Notice isDismissible={false} status="informational">
+            <strong>{__i18n.notices.global_faq_option.title}</strong>
+            <br />
+            {__i18n.notices.global_faq_option.description}
+            <br />
+            <br />
+            <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
+        </Notice><br />
+    </>
+}
+
+const Faqs = ({allData}) => {
+   
     const { updateTripData, addNewFaq, updateRequestSending } = dispatch('WPTravel/TripEdit');
     const { faqs, utilities } = allData;
     
@@ -354,25 +372,15 @@ const WPTravelTripOptionsFaqContent = () => {
         </div>
     </ErrorBoundary>;
 }
-addFilter('wp_travel_trip_faq_tab_content', 'wp_travel', (content, allData) => {
-    content = [
-        <>
-            <Notice isDismissible={false} status="informational">
-                <strong>{__i18n.notices.global_faq_option.title}</strong>
-                <br />
-                {__i18n.notices.global_faq_option.description}
-                <br />
-                <br />
-                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
-            </Notice><br />
-        </>,
-        ...content,
-    ]
-    return content
-}, 9);
 
-const WPTravelTripOptionsFaq = () => {
-    return <div className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-no-border"><WPTravelTripOptionsFaqContent /></div>
+// Callbacks.
+const FaqsNoticeCB = ( content ) => {
+    return [ ...content, <FaqsNotice /> ];
+}
+const FaqsCB = ( content, allData ) => {
+    return [ ...content, <Faqs allData={allData} /> ];
 }
 
-export default WPTravelTripOptionsFaq;
+// Hooks.
+addFilter( 'wptravel_trip_edit_tab_content_faqs', 'WPTravel\TripEdit\FaqsNotice', FaqsNoticeCB, 10 );
+addFilter( 'wptravel_trip_edit_tab_content_faqs', 'WPTravel\TripEdit\Faqs', FaqsCB, 20 );
