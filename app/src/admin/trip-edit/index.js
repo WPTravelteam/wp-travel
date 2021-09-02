@@ -15,17 +15,21 @@ import SaveTripSection from './sub-components/SaveTripSection'
 
 // Tab Items.
 import WPTravelTripOptionsPriceDates from './trip-options-price-dates';
-import WPTravelTripOptionsItinerary from './trip-options-itinerary';
 import WPTravelTripOptionsTabs from './trip-options-tabs';
-import WPTravelTripOptionsIncludesExcludes from './trip-options-includes-excludes';
 import WPTravelTripOptionsFaq from './trip-options-faq';
-import WPTravelTripOptionsGallery from './trip-options-gallery/'
-import WPTravelTripOptionsFact from './trip-options-fact';
-import WPTravelTripOptionsMisc from './trip-options-misc';
-import WPTravelTripOptionsLocation from './trip-options-location';
+
 import WPTravelTripOptionsCartAndCheckout from './trip-options-cart-checkout';
 import WPTravelTripOptionsInventoryOptions from './trip-options-inventory-options';
 import WPTravelTripOptionsDownloads from './trip-options-downloads';
+
+import WPTravelTripOptionsItinerary from './Components/Itinerary';
+import WPTravelTripOptionsIncludesExcludes from './Components/IncludesExcludes';
+import WPTravelTripOptionsFact from './Components/Facts';
+import WPTravelTripOptionsGallery from './Components/Gallery'
+import WPTravelTripOptionsLocation from './Components/Locations';
+
+
+import WPTravelTripOptionsMisc from './Components/Misc';
 
 const toggleDisablePostUpdate = ( isDisabled = false ) => {
     if( jQuery('#submitpost').find( '#wp-travel-post-disable-message' ).length < 1 && isDisabled ) {

@@ -1,4 +1,4 @@
-import { TextControl, PanelRow, PanelBody, Button, TabPanel,Notice, CheckboxControl} from '@wordpress/components';
+import { TextControl, PanelRow, PanelBody, Button, Notice, CheckboxControl} from '@wordpress/components';
 import { addFilter } from '@wordpress/hooks';
 import { isUndefined } from 'lodash';
 import { useSelect, dispatch } from '@wordpress/data';
@@ -8,7 +8,7 @@ import { ReactSortable } from 'react-sortablejs';
 import {alignJustify } from '@wordpress/icons';
 import Select from 'react-select'
 
-import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
+import ErrorBoundary from '../../../../ErrorBoundry/ErrorBoundry';
 
 const __i18n = {
 	..._wp_travel_admin.strings

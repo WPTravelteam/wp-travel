@@ -1,3 +1,4 @@
+import { addFilter } from '@wordpress/hooks';
 import apiFetch from '@wordpress/api-fetch';
 import { dispatch, useSelect } from '@wordpress/data'; // redux [and also for hook / filter] | dispatch : send data to store
 import { useState } from '@wordpress/element';
@@ -8,16 +9,23 @@ import { __ } from '@wordpress/i18n'
 const __i18n = {
 	..._wp_travel_admin.strings
 }
-export default () => {
+
+// @todo Need to remove this in future.
+const WPTravelTripOptionsGallery = () => {
+    return <></>;
+}
+export default WPTravelTripOptionsGallery
+
+// Single Components for hook callbacks.
+const SimpleGallery = ({allData}) => {
     const [{ isUploading, isOpenModal }, setState] = useState({
         isUploading: false,
         isOpenModal: false
     })
     const store = useSelect(select => select('WPTravel/TripEdit'));
-    const tripData = store.getAllStore()
     const { updateTripData } = dispatch('WPTravel/TripEdit')
 
-    const { gallery, _thumbnail_id } = tripData
+    const { gallery, _thumbnail_id } = allData
     const galleryMediaInstance = wp.media({
         multiple: true
     })
@@ -36,7 +44,7 @@ export default () => {
             const selectedItems = galleryMediaInstance.state().get('selection').toJSON()
             let currentGallery = store.getAllStore().gallery
             selectedItems.length > 0 && updateTripData({
-                ...tripData,
+                ...allData,
                 gallery: [...currentGallery, ...selectedItems.map(item => ({ id: item.id, thumbnail: item.url }))]
             })
         })
@@ -52,14 +60,14 @@ export default () => {
         })
     }
 
-    const onItemClickHandle = id => e => updateTripData({ ...tripData, _thumbnail_id: id })
+    const onItemClickHandle = id => e => updateTripData({ ...allData, _thumbnail_id: id })
 
     const onImagesDropHandle = async files => {
         setState(state => ({ ...state, isUploading: true }))
         if (files.length > 0) {
             let previewData = await previewImages(files)
             updateTripData({
-                ...tripData,
+                ...allData,
                 gallery: [...store.getAllStore().gallery, ...previewData],
             })
             const formData = new FormData()
@@ -82,7 +90,7 @@ export default () => {
                     newGallery.splice(newGallery.length - previewData.length, 1, { id: res.id, thumbnail: res.source_url })
                     previewData.shift()
                     updateTripData({
-                        ...tripData,
+                        ...allData,
                         gallery: [...newGallery],
                     })
                 }
@@ -93,7 +101,7 @@ export default () => {
 
     const onImagesSortHandle = (data) => {
         updateTripData({
-            ...tripData,
+            ...allData,
             ...data
         })
     }
@@ -102,7 +110,7 @@ export default () => {
         e.stopPropagation()
         if (confirm( __i18n.alert.remove_gallery )) {
             updateTripData({
-                ...tripData,
+                ...allData,
                 gallery: gallery.filter((el, i) => i !== index)
             })
         }
@@ -124,3 +132,11 @@ export default () => {
         {!isUploading && <GalleyDropZone onImagesDrop={onImagesDropHandle} onMediaLib={onMediaLibHandle} />}
     </div>
 }
+
+// Callbacks.
+const SimpleGalleryCB = ( content, allData ) => {
+    return [ ...content, <SimpleGallery allData={allData} /> ];
+}
+
+// Hooks.
+addFilter( 'wptravel_trip_edit_tab_content_gallery', 'WPTravel\TripEdit\SimpleGallery', SimpleGalleryCB, 10 );

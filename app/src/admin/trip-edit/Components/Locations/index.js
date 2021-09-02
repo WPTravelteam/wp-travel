@@ -7,35 +7,16 @@ import Geocode from "react-geocode";
 import { Gmaps, Marker } from 'react-gmaps';
 import Autocomplete from 'react-google-autocomplete';
 
-import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
+import ErrorBoundary from '../../../../ErrorBoundry/ErrorBoundry';
 const __i18n = {
 	..._wp_travel_admin.strings
 }
-const WPTravelTripOptionsLocationContent = () => {
-    const allData = useSelect((select) => {
-        return select('WPTravel/TripEdit').getAllStore()
-    }, []);
 
-    const settingsData = useSelect((select) => {
-        return select('WPTravel/TripEdit').getSettings()
-    }, []);
-
-    const { map_data } = allData
-
-    return <ErrorBoundary>
-        <div className="wp-travel-trip-location">
-            <h4>{__i18n.map}</h4>
-
-            {applyFilters('wp_travel_admin_map_area', '', settingsData, map_data)}
-        </div>
-    </ErrorBoundary>;
-}
-
+// @todo Need to remove this in future.
 const WPTravelTripOptionsLocation = () => {
-    return <div className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-no-border">
-        <WPTravelTripOptionsLocationContent />
-    </div>
+    return <></>;
 }
+export default WPTravelTripOptionsLocation;
 
 const GmapIframe = props => {
     const allData = useSelect((select) => {
@@ -115,23 +96,46 @@ const GmapIframe = props => {
     </>
 }
 
-addFilter('wp_travel_admin_map_area', 'wp_travel', (content, settingsData, map_data) => {
+// Single Components for hook callbacks.
+const Locations = ({allData}) => {
+    const settingsData = useSelect((select) => {
+        return select('WPTravel/TripEdit').getSettings()
+    }, []);
+    const { map_data } = allData
+    return <ErrorBoundary>
+        <div className="wp-travel-trip-location">
+            <h4>{__i18n.map}</h4>
+            {applyFilters('wp_travel_admin_map_area', [], settingsData, map_data)}
+        </div>
+    </ErrorBoundary>;
+}
+
+const MapNotice = ( {settingsData, map_data } ) => {
+    return <Notice isDismissible={false} status="informational">
+        <strong>{__i18n.notices.map_option.title}</strong>
+        <br />
+        {__i18n.notices.map_option.description}
+        <br />
+        <br />
+        <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
+    </Notice>
+}
+
+const GoogleMap = ( {settingsData, map_data } ) => {
     const { google_map_api_key, google_map_zoom_level, wp_travel_map } = settingsData
 
     if (wp_travel_map !== 'google-map') {
-        return content;
+        return <></>;
     }
-    if (!google_map_api_key) {
-        content = [...content,
-        <>
+    if ( ! google_map_api_key ) {
+        return <>
             <Notice status="warning" isDismissible={false}>
                 <strong dangerouslySetInnerHTML={{ __html: sprintf(__(`${__i18n.notices.map_key_option.description}`), `<a href="edit.php?post_type=itinerary-booking&page=settings">`, `</a>`) }}></strong>
             </Notice><br />
-        </>,
-        <GmapIframe zoomlevel={google_map_zoom_level} />
-        ]
-        return content
+            <GmapIframe zoomlevel={google_map_zoom_level} />
+        </>;
     }
+
     let zoom = (google_map_zoom_level) ? parseInt(google_map_zoom_level) : 15;
     const allData = useSelect((select) => {
         return select('WPTravel/TripEdit').getAllStore()
@@ -187,13 +191,12 @@ addFilter('wp_travel_admin_map_area', 'wp_travel', (content, settingsData, map_d
         lng: map_data && map_data.lng
     };
 
-    // const params = {v: '3.exp', key: 'YOUR_API_KEY'};
 
     const onDragEnd = (e) => {
         updateMapFromMarker(e)
     }
-    content = [...content,
-    <div className="wp-travel-gmap">
+
+    return <div className="wp-travel-gmap">
         <div className="wp-travel-autocomplete-wrap">
             {/* <Autocomplete
                 apiKey={google_map_api_key}
@@ -223,24 +226,26 @@ addFilter('wp_travel_admin_map_area', 'wp_travel', (content, settingsData, map_d
         </Gmaps>
         <br />
     </div>
-    ]
-    return content
-});
+    
+}
 
-addFilter('wp_travel_admin_map_area', 'wp_travel', (content, settingsData, map_data) => {
-    content = [<>
-        <Notice isDismissible={false} status="informational">
-            <strong>{__i18n.notices.map_option.title}</strong>
-            <br />
-            {__i18n.notices.map_option.description}
-            <br />
-            <br />
-            <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
-        </Notice><br />
-    </>,
-    ...content
-    ]
-    return content
-});
+// Callbacks.
+const LocationsCB = ( content, allData ) => {
+    return [ ...content, <Locations allData={allData} /> ];
+}
 
-export default WPTravelTripOptionsLocation;
+const MapNoticeCB = ( content, settingsData, map_data ) => {
+    return [ ...content, <MapNotice settingsData={settingsData} map_data={map_data} /> ];
+}
+
+const GoogleMapCB = ( content, settingsData, map_data ) => {
+    return [ ...content, <GoogleMap settingsData={settingsData} map_data={map_data} /> ];
+}
+
+
+// Hooks.
+addFilter( 'wptravel_trip_edit_tab_content_locations', 'WPTravel\TripEdit\Locations', LocationsCB, 10 ); // Main Wrapper hook. other hooks are inside its content.
+
+addFilter('wp_travel_admin_map_area', 'WPTravel\TripEdit\Locations\MapNotice',  MapNoticeCB, 10 ); // Need to remove this hook from pro.
+// Maps.
+addFilter('wp_travel_admin_map_area', 'WPTravel\TripEdit\Locations\GoogleMap',  GoogleMapCB, 20 );
