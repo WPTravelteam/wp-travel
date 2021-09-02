@@ -18,7 +18,6 @@ import WPTravelTripOptionsPriceDates from './trip-options-price-dates';
 import WPTravelTripOptionsTabs from './trip-options-tabs';
 import WPTravelTripOptionsFaq from './trip-options-faq';
 
-import WPTravelTripOptionsCartAndCheckout from './trip-options-cart-checkout';
 import WPTravelTripOptionsInventoryOptions from './trip-options-inventory-options';
 import WPTravelTripOptionsDownloads from './trip-options-downloads';
 
@@ -27,6 +26,7 @@ import WPTravelTripOptionsIncludesExcludes from './Components/IncludesExcludes';
 import WPTravelTripOptionsFact from './Components/Facts';
 import WPTravelTripOptionsGallery from './Components/Gallery'
 import WPTravelTripOptionsLocation from './Components/Locations';
+import WPTravelTripOptionsCartAndCheckout from './Components/Checkout';
 
 
 import WPTravelTripOptionsMisc from './Components/Misc';
@@ -167,22 +167,8 @@ addFilter( 'wp_travel_trip_options_tabs', 'wp_travel', ( tabs ) => {
 	];
 });
 
-addFilter('wp_travel_trip_cart_checkout_tab_content', 'wp_travel', (content) => {
-    content = [
-        <>
-            <Notice isDismissible={false} status="informational">
-                <strong>{__i18n.notices.checkout_option.title}</strong>
-                <br />
-                {__i18n.notices.checkout_option.description}
-                <br />
-                <br />
-                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
-            </Notice><br />
-        </>,
-        ...content,
-    ]
-    return content
-});
+// Just added this for backward compatibility. need to remove after removing content.splice from pro options.
+addFilter('wp_travel_trip_cart_checkout_tab_content', 'wp_travel', (content) => { content = [ <> </>, ...content, ]; return content });
 
 addFilter('wp_travel_trip_inventory_tab_content', 'wp_travel', (content, allData) => {
     content = [
