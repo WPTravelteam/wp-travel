@@ -255,4 +255,5 @@ const TripFactsCB = ( content, allData ) => {
     return [ ...content, <TripFacts allData={allData} /> ];
 }
 
+// Hooks.
 addFilter( 'wptravel_trip_edit_tab_content_facts', 'WPTravel\TripEdit\TripFacts', TripFactsCB, 10 );
