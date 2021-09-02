@@ -2,9 +2,9 @@ import { useState, useEffect } from '@wordpress/element';
 import { TextControl, PanelBody, PanelRow, ToggleControl, Button, FormTokenField, SelectControl, Dropdown, RangeControl, DateTimePicker, Notice, CheckboxControl } from '@wordpress/components';
 import { sprintf, _n, __ } from '@wordpress/i18n';
 import { useSelect, dispatch } from '@wordpress/data';
-import { applyFilters } from '@wordpress/hooks';
+import { applyFilters, addFilter } from '@wordpress/hooks';
 import apiFetch from '@wordpress/api-fetch';
-import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
+import ErrorBoundary from '../../../../../ErrorBoundry/ErrorBoundry';
 
 const __i18n = {
 	..._wp_travel_admin.strings

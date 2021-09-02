@@ -11,10 +11,10 @@ const __i18n = {
 }
 
 // @todo Need to remove this in future.
-const WPTravelTripOptionsGallery = () => {
-    return <></>;
-}
-export default WPTravelTripOptionsGallery
+// const WPTravelTripOptionsGallery = () => {
+//     return <></>;
+// }
+// export default WPTravelTripOptionsGallery
 
 // Single Components for hook callbacks.
 const SimpleGallery = ({allData}) => {

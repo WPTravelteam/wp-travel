@@ -5,10 +5,10 @@ const __i18n = {
 }
 
 // @todo Need to remove this in future.
-const WPTravelTripOptionsCartAndCheckout = () => {
-    return <>{applyFilters('wp_travel_trip_cart_checkout_tab_content', '')}</>;
-}
-export default WPTravelTripOptionsCartAndCheckout;
+// const WPTravelTripOptionsCartAndCheckout = () => {
+//     return <>{applyFilters('wp_travel_trip_cart_checkout_tab_content', '')}</>;
+// }
+// export default WPTravelTripOptionsCartAndCheckout;
 
 // Single Components for hook callbacks.
 const CheckoutNotice = ( {settingsData, map_data } ) => {

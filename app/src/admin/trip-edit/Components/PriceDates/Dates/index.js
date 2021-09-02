@@ -4,21 +4,18 @@ import { useSelect, dispatch } from '@wordpress/data';
 import {format} from '@wordpress/date'
 import apiFetch from '@wordpress/api-fetch';
 import { sprintf, _n, __} from '@wordpress/i18n';
-import { applyFilters } from '@wordpress/hooks';
+import { applyFilters, addFilter } from '@wordpress/hooks';
 import _ from 'lodash';
 
 import TripDatesTimes from './dates-times';
-import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
+
+
+import ErrorBoundary from '../../../../../ErrorBoundry/ErrorBoundry';
 
 const __i18n = {
 	..._wp_travel_admin.strings
 }
-
-const WPTravelTripDates = () => {
-    
-    const allData = useSelect((select) => {
-        return select('WPTravel/TripEdit').getAllStore()
-    }, []);
+const Dates = ( {allData} ) => {
     const { updateTripData, updateRequestSending, setTripData, updateStateChange } = dispatch('WPTravel/TripEdit');
 
     const {is_fixed_departure, has_state_changes, is_multiple_dates, dates, trip_time, pricings, trip_duration } = allData;
@@ -158,4 +155,10 @@ const WPTravelTripDates = () => {
     </ErrorBoundary>
 }
 
-export default WPTravelTripDates;
+// Callbacks.
+const DatesCB = ( content, allData ) => {
+    return [ ...content, <Dates allData={allData} /> ];
+}
+
+// Hooks.
+addFilter( 'wptravel_trip_edit_sub_tab_content_dates', 'WPTravel\TripEdit\PriceDates\Dates', DatesCB, 10 );

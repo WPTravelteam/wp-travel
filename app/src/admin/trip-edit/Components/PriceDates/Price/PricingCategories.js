@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { useSelect, dispatch } from '@wordpress/data';
 import apiFetch from '@wordpress/api-fetch';
 import { sprintf, _n, __} from '@wordpress/i18n';
-import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
+import ErrorBoundary from '../../../../../ErrorBoundry/ErrorBoundry';
 const __i18n = {
 	..._wp_travel_admin.strings
 }

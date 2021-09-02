@@ -5,10 +5,10 @@ const __i18n = {
 }
 
 // @todo Need to remove this in future.
-const WPTravelTripOptionsDownloads = () => {
-    return <>{applyFilters('wp_travel_trip_downloads_tab_content', '')}</>;
-}
-export default WPTravelTripOptionsDownloads;
+// const WPTravelTripOptionsDownloads = () => {
+//     return <>{applyFilters('wp_travel_trip_downloads_tab_content', '')}</>;
+// }
+// export default WPTravelTripOptionsDownloads;
 
 // Single Components for hook callbacks.
 const DownloadsNotice = ( {settingsData, map_data } ) => {

@@ -10,16 +10,18 @@ import ErrorBoundary from '../../../../ErrorBoundry/ErrorBoundry';
 const __i18n = {
 	..._wp_travel_admin.strings
 }
-const WPTravelTripOptionsTabs = () => {
-    const allData = useSelect((select) => {
-        return select('WPTravel/TripEdit').getAllStore()
-    }, []);
-    const { updateTripData } = dispatch('WPTravel/TripEdit');
-    const { id } = allData;
-    return <>{applyFilters('wp_travel_itinerary_custom_tabs', '', id, allData, updateTripData)}</>;
-}
 
-export default WPTravelTripOptionsTabs;
+// @todo Need to remove this in future.
+// const WPTravelTripOptionsTabs = () => {
+//     const allData = useSelect((select) => {
+//         return select('WPTravel/TripEdit').getAllStore()
+//     }, []);
+//     const { updateTripData } = dispatch('WPTravel/TripEdit');
+//     const { id } = allData;
+//     return <>{applyFilters('wp_travel_itinerary_custom_tabs', '', id, allData, updateTripData)}</>;
+// }
+
+// export default WPTravelTripOptionsTabs;
 
 // Single Components for hook callbacks.
 const TripTabsNotice = () => {

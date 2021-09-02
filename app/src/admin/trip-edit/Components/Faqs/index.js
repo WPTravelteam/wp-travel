@@ -12,10 +12,10 @@ const __i18n = {
 }
 
 // @todo Need to remove this in future.
-const WPTravelTripOptionsFaq = () => {
-    return <></>;
-}
-export default WPTravelTripOptionsFaq;
+// const WPTravelTripOptionsFaq = () => {
+//     return <></>;
+// }
+// export default WPTravelTripOptionsFaq;
 
 // Single Components for hook callbacks.
 const FaqsNotice = () => {

@@ -7,10 +7,10 @@ const __i18n = {
 }
 
 // @todo Need to remove this in future.
-const WPTravelTripOptionsMisc = () => {
-    return <></>
-}
-export default WPTravelTripOptionsMisc;
+// const WPTravelTripOptionsMisc = () => {
+//     return <></>
+// }
+// export default WPTravelTripOptionsMisc;
 
 // Single Components for hook callbacks.
 const TripEnquiryTitle = () => {

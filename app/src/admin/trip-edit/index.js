@@ -2,7 +2,7 @@ import { render, useEffect } from '@wordpress/element'; // [ useeffect : used on
 import { TabPanel, Spinner, Notice } from '@wordpress/components';
 import { useSelect, select, dispatch } from '@wordpress/data'; // redux [and also for hook / filter] | dispatch : send data to store
 import { applyFilters, addFilter } from '@wordpress/hooks';
-import { sprintf, _n, __ } from '@wordpress/i18n';
+import { _n, __ } from '@wordpress/i18n';
 import domReady from '@wordpress/dom-ready';
 import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
 
@@ -13,19 +13,31 @@ import '../settings/store/settings-store'; // @since 4.5.1
 import SaveTripSection from './sub-components/SaveTripSection'
 
 // Tab Items.
-import WPTravelTripOptionsPriceDates from './trip-options-price-dates';
+// import WPTravelTripOptionsItinerary from './Components/Itinerary';
+// import WPTravelTripOptionsPriceDates from './Components/PriceDates';
+// import WPTravelTripOptionsIncludesExcludes from './Components/IncludesExcludes';
+// import WPTravelTripOptionsFact from './Components/Facts';
+// import WPTravelTripOptionsGallery from './Components/Gallery'
+// import WPTravelTripOptionsLocation from './Components/Locations';
+// import WPTravelTripOptionsCartAndCheckout from './Components/Checkout';
+// import WPTravelTripOptionsInventoryOptions from './Components/Inventory';
+// import WPTravelTripOptionsFaq from './Components/Faqs';
+// import WPTravelTripOptionsDownloads from './Components/Downloads';
+// import WPTravelTripOptionsMisc from './Components/Misc';
+// import WPTravelTripOptionsTabs from './Components/Tabs';
 
-import WPTravelTripOptionsItinerary from './Components/Itinerary';
-import WPTravelTripOptionsIncludesExcludes from './Components/IncludesExcludes';
-import WPTravelTripOptionsFact from './Components/Facts';
-import WPTravelTripOptionsGallery from './Components/Gallery'
-import WPTravelTripOptionsLocation from './Components/Locations';
-import WPTravelTripOptionsCartAndCheckout from './Components/Checkout';
-import WPTravelTripOptionsInventoryOptions from './Components/Inventory';
-import WPTravelTripOptionsFaq from './Components/Faqs';
-import WPTravelTripOptionsDownloads from './Components/Downloads';
-import WPTravelTripOptionsMisc from './Components/Misc';
-import WPTravelTripOptionsTabs from './Components/Tabs';
+import './Components/Itinerary';
+import './Components/PriceDates';
+import './Components/IncludesExcludes';
+import './Components/Facts';
+import './Components/Gallery'
+import './Components/Locations';
+import './Components/Checkout';
+import './Components/Inventory';
+import './Components/Faqs';
+import './Components/Downloads';
+import './Components/Misc';
+import './Components/Tabs';
 
 
 const toggleDisablePostUpdate = ( isDisabled = false ) => {
@@ -59,7 +71,6 @@ const WPTravelTripOptions = () => {
         let store = getTripData(_wp_travel.postID);
 
         let tripCats = getTripPricingCategories();
-        // let settings = getSettings();
 
     }, []);
     let wrapperClasses = "wp-travel-trip-pricings";
@@ -74,7 +85,7 @@ const WPTravelTripOptions = () => {
             onSelect={() => false}
             tabs={tabs}>
             {
-                (tab) => 'undefined' !== typeof tab.content ? <ErrorBoundary><div className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-no-border">{applyFilters( `wptravel_trip_edit_tab_content_${tab.name.replaceAll('-','_')}`, [<tab.content key={tab.name}/>], allData)}</div></ErrorBoundary> : <>Error.</>
+                (tab) => <ErrorBoundary><div className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-no-border">{applyFilters( `wptravel_trip_edit_tab_content_${tab.name.replaceAll('-','_')}`, [], allData)}</div></ErrorBoundary>
             }
         </TabPanel>
         <SaveTripSection />
@@ -89,74 +100,74 @@ addFilter( 'wp_travel_trip_options_tabs', 'wp_travel', ( tabs ) => {
 				name: 'itinerary',
 				title: __i18n.admin_tabs.itinerary,
 				className: 'tab-itinerary',
-				content: WPTravelTripOptionsItinerary
+				// content: WPTravelTripOptionsItinerary
 			},
 			{
 				name: 'price-dates',
 				title: __i18n.admin_tabs.price_n_dates,
 				className: 'tab-price-dates',
-				content: WPTravelTripOptionsPriceDates
+				// content: WPTravelTripOptionsPriceDates
 			},
 
 			{
 				name: 'includes-excludes',
 				title: __i18n.admin_tabs.includes_excludes,
 				className: 'tab-includes-excludes',
-				content: WPTravelTripOptionsIncludesExcludes
+				// content: WPTravelTripOptionsIncludesExcludes
 			},
 			{
 				name: 'facts',
 				title: __i18n.admin_tabs.facts,
 				className: 'tab-facts',
-				content: WPTravelTripOptionsFact
+				// content: WPTravelTripOptionsFact
 			},
 			{
 				name: 'gallery',
 				title: __i18n.admin_tabs.gallery,
 				className: 'tab-gallery',
-				content: WPTravelTripOptionsGallery
+				// content: WPTravelTripOptionsGallery
 			},
 			{
 				name: 'locations',
 				title: __i18n.admin_tabs.locations,
 				className: 'tab-locations',
-				content: WPTravelTripOptionsLocation
+				// content: WPTravelTripOptionsLocation
 			},
 			{
 				name: 'cart-checkout',
 				title: __i18n.admin_tabs.checkout, // cart & checkout label updated to checkout @since 4.4.3
 				className: 'tab-cart-checkout',
-				content: WPTravelTripOptionsCartAndCheckout
+				// content: WPTravelTripOptionsCartAndCheckout
 			},
 			{
 				name: 'inventory-options',
 				title: __i18n.admin_tabs.inventory_options,
 				className: 'tab-inventory-options',
-				content: WPTravelTripOptionsInventoryOptions
+				// content: WPTravelTripOptionsInventoryOptions
 			},
 			{
 				name: 'faqs',
 				title: __i18n.admin_tabs.faqs,
 				className: 'tab-faqs',
-				content: WPTravelTripOptionsFaq
+				// content: WPTravelTripOptionsFaq
 			},
 			{
 				name: 'downloads',
 				title: __i18n.admin_tabs.downloads,
 				className: 'tab-downloads',
-				content: WPTravelTripOptionsDownloads
+				// content: WPTravelTripOptionsDownloads
 			},
             {
 				name: 'tabs',
 				title: __i18n.admin_tabs.tabs,
 				className: 'tab-tabs',
-				content: WPTravelTripOptionsTabs
+				// content: WPTravelTripOptionsTabs
 			},
 			{
 				name: 'misc',
 				title: __i18n.admin_tabs.misc,
 				className: 'tab-misc',
-				content: WPTravelTripOptionsMisc
+				// content: WPTravelTripOptionsMisc
 			},
 
 		]

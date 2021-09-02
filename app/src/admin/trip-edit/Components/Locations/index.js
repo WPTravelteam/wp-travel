@@ -13,10 +13,10 @@ const __i18n = {
 }
 
 // @todo Need to remove this in future.
-const WPTravelTripOptionsLocation = () => {
-    return <></>;
-}
-export default WPTravelTripOptionsLocation;
+// const WPTravelTripOptionsLocation = () => {
+//     return <></>;
+// }
+// export default WPTravelTripOptionsLocation;
 
 const GmapIframe = props => {
     const allData = useSelect((select) => {
