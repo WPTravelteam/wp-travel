@@ -58,6 +58,7 @@ class WP_Travel_Ajax {
 			'post_content' => $trip->post_content,
 			'post_status'  => 'draft',
 			'post_type'    => WP_TRAVEL_POST_TYPE,
+			'post_excerpt' => $trip->post_excerpt,
 		);
 
 		// Cloning trip.
