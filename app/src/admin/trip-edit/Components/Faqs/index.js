@@ -241,7 +241,7 @@ const Faqs = ({allData}) => {
 
                             if ( 'yes' ===faqs[faqId].global ) {
                                 return <div style={{position:'relative'}}  data-index={index} key={index} >
-                                    <div style={{position:'absolute', right:'50px', zIndex:111, cursor:'pointer'}}  className={hiddenClass}>
+                                    <div className={`wptravel-swap-list ${hiddenClass}`}>
                                     <Button
                                     // style={{padding:0, display:'block'}}
                                     disabled={startIndex == index}
