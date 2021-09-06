@@ -202,6 +202,24 @@
   }
 }
 
+.wp-travel-sortable-component, // Used in trip edit.
+.wp-travel-block-sortable { // used in settings
+  .wptravel-swap-list{
+    position:absolute;
+    right:50px;
+    z-index:111;
+    cursor:pointer;
+    top: calc( 50% - 12px );
+    height: 24px;
+    button{
+      padding: 0;
+      background: none;
+      outline: none;
+      border: none;
+      min-height: auto !important;
+    }
+  }
+}
 .popover-wrapper .overlay{
   content: "";
   display: block;
@@ -215,10 +233,10 @@
 }
 
 .wp-travel-trip-edit-menu{
-  .components-tab-panel__tabs{
-    flex-direction: row !important;
-    margin-bottom: 1em !important;
-  }
+  // .components-tab-panel__tabs{
+  //   flex-direction: row !important;
+  //   margin-bottom: 1em !important;
+  // }
   .components-tab-panel__tab-content{
     table{
       width: 100%;
