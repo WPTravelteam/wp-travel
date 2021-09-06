@@ -1035,8 +1035,8 @@ function wptravel_upsell_message( $args ) {
 		return;
 	}
 	?>
-<div class="wp-travel-upsell-message <?php echo esc_attr( implode( ' ', $args['main_wrapper_class'] ) ); ?>">
-<div class="wp-travel-pro-feature-notice clearfix">
+<div class="wp-travel-upsell-message wp-travel-pro-feature-notice clearfix <?php echo esc_attr( implode( ' ', $args['main_wrapper_class'] ) ); ?>">
+<!-- <div class=""> -->
 	<div class="section-one">
 		<h4><?php echo esc_html( $args['title'] ); ?></h4>
 		<p><?php echo wp_kses_post( $args['content'] ); ?></p>
@@ -1056,7 +1056,7 @@ function wptravel_upsell_message( $args ) {
 		</div>
 		<?php endif; ?>
 	</div>
-</div>
+<!-- </div> -->
 </div>
 	<?php
 }
