@@ -79,6 +79,12 @@ class WP_Travel_Ajax {
 
 		// Cloning taxonomies.
 		$trip_taxonomies = array( 'itinerary_types', 'travel_locations', 'travel_keywords', 'activity' );
+		$custom_filters  = get_option( 'wp_travel_custom_filters_option', array() );
+		if ( is_array( $custom_filters ) && ! empty( $custom_filters ) ) {
+			foreach ( $custom_filters as $slug => $value ) {
+				$trip_taxonomies[] = $slug;
+			}
+		}
 		foreach ( $trip_taxonomies as $taxonomy ) {
 			$trip_terms      = get_the_terms( $trip_id, $taxonomy );
 			$trip_term_names = array();
