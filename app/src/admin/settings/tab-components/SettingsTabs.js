@@ -65,9 +65,8 @@ export default () => {
                     {global_tab_settings.map(function (tab, tabIndex) {
                         return <div className="wp-travel-block-section" style={{position:'relative'}}>
                                 {/* <span className="dashicons dashicons-menu"></span> */}
-                                <div style={{position:'absolute', right:'50px', zIndex:111, cursor:'pointer'}}>
+                                <div className={`wptravel-swap-list`}>
                                     <button
-                                    style={{padding:0, display:'block'}}
                                     disabled={0 === tabIndex}
                                     onClick={(e) => {
                                         let sorted = array_move( global_tab_settings, tabIndex, tabIndex - 1 )
@@ -75,8 +74,7 @@ export default () => {
                                         updateRequestSending(true); // Temp fixes to reload the content.
                                         updateRequestSending(false);
                                     }}><i className="dashicons dashicons-arrow-up"></i></button>
-                                    <button 
-                                    style={{padding:0, display:'block'}}
+                                    <button
                                     disabled={(global_tab_settings.length-1) === tabIndex}
                                     onClick={(e) => {
                                         let sorted = array_move( global_tab_settings, tabIndex, tabIndex + 1 )
