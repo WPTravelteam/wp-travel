@@ -26,7 +26,7 @@ const InventoryNotice = ( {settingsData, map_data } ) => {
 
 // Callbacks.
 const InventoryNoticeCB = ( content, allData ) => {
-    return [ ...content, <InventoryNotice allData={allData} /> ];
+    return [ ...content, <InventoryNotice allData={allData} key="InventoryNotice" /> ];
 }
 
 // Hooks.

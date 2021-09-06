@@ -1,5 +1,5 @@
 import { Notice } from '@wordpress/components';
-import { addFilter, applyFilters } from '@wordpress/hooks';
+import { addFilter, applyFilters, removeFilter } from '@wordpress/hooks';
 const __i18n = {
 	..._wp_travel_admin.strings
 }
@@ -26,8 +26,9 @@ const DownloadsNotice = ( {settingsData, map_data } ) => {
 
 // Callbacks.
 const DownloadsNoticeCB = ( content, allData ) => {
-    return [ ...content, <DownloadsNotice allData={allData} /> ];
+    return [ ...content, <DownloadsNotice allData={allData} key="DownloadsNotice" /> ];
 }
 
 // Hooks.
 addFilter( 'wptravel_trip_edit_tab_content_downloads', 'WPTravel\TripEdit\DownloadsNotice', DownloadsNoticeCB, 10 );
+// wptravel_trip_edit_tab_content_downloads

@@ -231,15 +231,15 @@ const GoogleMap = ( {settingsData, map_data } ) => {
 
 // Callbacks.
 const LocationsCB = ( content, allData ) => {
-    return [ ...content, <Locations allData={allData} /> ];
+    return [ ...content, <Locations allData={allData} key="Locations" /> ];
 }
 
 const MapNoticeCB = ( content, settingsData, map_data ) => {
-    return [ ...content, <MapNotice settingsData={settingsData} map_data={map_data} /> ];
+    return [ ...content, <MapNotice settingsData={settingsData} map_data={map_data} key="MapNotice" /> ];
 }
 
 const GoogleMapCB = ( content, settingsData, map_data ) => {
-    return [ ...content, <GoogleMap settingsData={settingsData} map_data={map_data} /> ];
+    return [ ...content, <GoogleMap settingsData={settingsData} map_data={map_data} key="GoogleMap" /> ];
 }
 
 

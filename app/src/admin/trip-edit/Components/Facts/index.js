@@ -252,7 +252,7 @@ const TripFacts = ({allData}) => {
 
 // Callbacks.
 const TripFactsCB = ( content, allData ) => {
-    return [ ...content, <TripFacts allData={allData} /> ];
+    return [ ...content, <TripFacts allData={allData} key="TripFacts" /> ];
 }
 
 // Hooks.

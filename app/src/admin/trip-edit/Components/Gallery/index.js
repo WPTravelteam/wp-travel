@@ -135,7 +135,7 @@ const SimpleGallery = ({allData}) => {
 
 // Callbacks.
 const SimpleGalleryCB = ( content, allData ) => {
-    return [ ...content, <SimpleGallery allData={allData} /> ];
+    return [ ...content, <SimpleGallery allData={allData} key="SimpleGallery" /> ];
 }
 
 // Hooks.

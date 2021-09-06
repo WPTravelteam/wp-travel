@@ -1,5 +1,5 @@
-import { Button, Notice, PanelBody, PanelRow, TabPanel, TextareaControl, TextControl, Disabled } from '@wordpress/components';
-import { dispatch, useSelect } from '@wordpress/data';
+import { Button, Notice, PanelBody, PanelRow, TextareaControl, TextControl, Disabled } from '@wordpress/components';
+import { dispatch } from '@wordpress/data';
 import { addFilter, applyFilters } from '@wordpress/hooks';
 import { __ } from '@wordpress/i18n';
 import { ReactSortable } from 'react-sortablejs';
@@ -199,7 +199,7 @@ const Faqs = ({allData}) => {
             
         } 
     }
-    return <ErrorBoundary>
+    return <ErrorBoundary key="faqsLists">
         <div className="wp-travel-trip-faq">
             {applyFilters('wp_travel_trip_faq_tab_content', '', allData)}
             
@@ -240,10 +240,10 @@ const Faqs = ({allData}) => {
                             }
 
                             if ( 'yes' ===faqs[faqId].global ) {
-                                return <div style={{position:'relative'}}  data-index={index}>
+                                return <div style={{position:'relative'}}  data-index={index} key={index} >
                                     <div style={{position:'absolute', right:'50px', zIndex:111, cursor:'pointer'}}  className={hiddenClass}>
                                     <Button
-                                    style={{padding:0, display:'block'}}
+                                    // style={{padding:0, display:'block'}}
                                     disabled={startIndex == index}
                                     onClick={(e) => {
                                         let sorted = swapList( faqs, index, upIndex )
@@ -252,7 +252,7 @@ const Faqs = ({allData}) => {
                                         updateRequestSending(false);
                                     }}><i className="dashicons dashicons-arrow-up"></i></Button>
                                     <Button 
-                                    style={{padding:0, display:'block'}}
+                                    // style={{padding:0, display:'block'}}
                                     disabled={endIndex == index}
                                     onClick={(e) => {
                                         let sorted = swapList( faqs, index, downIndex )
@@ -291,10 +291,9 @@ const Faqs = ({allData}) => {
                                     </PanelBody>
                                 </div>
                             }
-                            return <div style={{position:'relative'}} data-index={index}>
-                                <div style={{position:'absolute', right:'50px', zIndex:111, cursor:'pointer'}}  className={hiddenClass} >
+                            return <div style={{position:'relative'}} data-index={index} key={index}>
+                                <div className={`wptravel-swap-list ${hiddenClass}`} >
                                     <Button
-                                    style={{padding:0, display:'block'}}
                                     disabled={startIndex == index}
                                     onClick={(e) => {
                                         let sorted = swapList( faqs, index, upIndex )
@@ -303,7 +302,6 @@ const Faqs = ({allData}) => {
                                         updateRequestSending(false);
                                     }}><i className="dashicons dashicons-arrow-up"></i></Button>
                                     <Button 
-                                    style={{padding:0, display:'block'}}
                                     disabled={endIndex == index}
                                     onClick={(e) => {
                                         let sorted = swapList( faqs, index, downIndex )
@@ -375,10 +373,10 @@ const Faqs = ({allData}) => {
 
 // Callbacks.
 const FaqsNoticeCB = ( content ) => {
-    return [ ...content, <FaqsNotice /> ];
+    return [ ...content, <FaqsNotice key="FaqsNotice" /> ];
 }
 const FaqsCB = ( content, allData ) => {
-    return [ ...content, <Faqs allData={allData} /> ];
+    return [ ...content, <Faqs allData={allData} key="Faqs" /> ];
 }
 
 // Hooks.

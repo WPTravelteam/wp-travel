@@ -55,11 +55,11 @@ const TripExcludes = ({allData}) => {
 
 // Callbacks.
 const TripIncludesCB = ( content, allData ) => {
-    return [ ...content, <TripIncludes allData={allData} /> ];
+    return [ ...content, <TripIncludes allData={allData} key="TripIncludes" /> ];
 }
 
 const TripExcludesCB = ( content, allData ) => {
-    return [ ...content, <TripExcludes allData={allData} /> ];
+    return [ ...content, <TripExcludes allData={allData} key="TripExcludes" /> ];
 }
 
 // Hooks.

@@ -281,13 +281,13 @@ const Itinerary = ({allData}) => {
 
 // Callbacks.
 const TripCodeCB = ( content, allData ) => {
-    return [ ...content, <TripCode allData={allData} /> ];
+    return [ ...content, <TripCode allData={allData} key="TripCode" /> ];
 }
 const TripOutlineCB = ( content, allData ) => {
-    return [ ...content, <TripOutline allData={allData} /> ];
+    return [ ...content, <TripOutline allData={allData} key="TripOutline" /> ];
 }
 const ItineraryCB = ( content, allData ) => {
-    return [ ...content, <Itinerary allData={allData} /> ];
+    return [ ...content, <Itinerary allData={allData} key="Itinerary" /> ];
 }
 
 // Hooks.
