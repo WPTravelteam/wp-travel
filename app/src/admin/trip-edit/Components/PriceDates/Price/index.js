@@ -48,7 +48,7 @@ const Pricings = ( {allData} ) => {
     //Fixes
     let payout_percentages = [];
 
-    if ( ! minimum_partial_payout_use_global && settings.minimum_partial_payout.length > 0 ) {
+    if ( ! minimum_partial_payout_use_global && 'undefined' != typeof settings && 'undefined' != typeof settings.minimum_partial_payout && settings.minimum_partial_payout.length > 0 ) {
         // Pro enabled case.
         if ( 'undefined' != typeof options && 'undefined' != options.has_partial_payment && options.has_partial_payment ) {
             payout_percentages = settings.minimum_partial_payout; 

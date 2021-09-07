@@ -1029,7 +1029,7 @@ function wptravel_frontend_contents( $post_id ) {
 							?>
 							<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
 								<?php
-									echo do_shortcode( $tab_info['content'] );
+									echo wpautop( do_shortcode( $tab_info['content'] ) );
 								// if ( apply_filters( 'wp_travel_trip_tabs_output_raw', false, $tab_key ) ) {
 
 
