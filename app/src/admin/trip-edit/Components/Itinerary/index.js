@@ -32,7 +32,7 @@ const TripCode = ({allData}) => {
                     disabled={true}
                     name="" />
                     <p className="description">
-                        {__i18n.notices.trip_code_option.description}<a href="https://wptravel.io/downloads/wp-travel-utilities/" target="_blank" className="wp-travel-upsell-badge">{__i18n.notice_button_text.get_pro}</a>
+                        {__i18n.notices.trip_code_option.description}<br/><a href="https://wptravel.io/downloads/wp-travel-utilities/" target="_blank" className="wp-travel-upsell-badge">{__i18n.notice_button_text.get_pro}</a>
                     </p>
             </div>
         </PanelRow>
