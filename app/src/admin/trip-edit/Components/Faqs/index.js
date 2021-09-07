@@ -94,7 +94,7 @@ const Faqs = ({allData}) => {
     };
 
     // get swap index for FAQ. 
-    let customSwapIndexes = Object.keys(faqs).map(function (faqId) {
+    let customSwapIndexes = 'undefined' != typeof faqs && Object.keys(faqs).map(function (faqId) {
         let i = parseInt(faqId);
         let globalFaq = 'yes' ===faqs[i].global
 
