@@ -89,9 +89,10 @@ const Dates = ( {allData} ) => {
     
 
     const updateDateTimes = (storeKey, data) => {
-        let _allData = allData;
-        _allData[storeKey] = [...data];
-        updateTripData(_allData)
+        updateTripData({
+            ...allData,
+            [storeKey]:[...data]
+        })
     }
     
 
