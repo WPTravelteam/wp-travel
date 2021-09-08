@@ -1,5 +1,5 @@
-import { useState, useEffect } from '@wordpress/element';
-import { TextControl, PanelRow, PanelBody, Button, TabPanel,Notice , ToggleControl} from '@wordpress/components';
+import { useState } from '@wordpress/element';
+import { TextControl, PanelRow, PanelBody, Button, Notice , ToggleControl} from '@wordpress/components';
 import { applyFilters, addFilter } from '@wordpress/hooks';
 import { useSelect, dispatch } from '@wordpress/data';
 import apiFetch from '@wordpress/api-fetch';
@@ -308,10 +308,30 @@ const Pricings = ( {allData} ) => {
     </ErrorBoundary>;
 }
 
+const MorePricingNotice = () => {
+    return  <Notice isDismissible={false} status="informational">
+            <strong>{__i18n.notices.need_more_option.title}</strong>
+
+            <br />
+            {__i18n.notices.need_more_option.description}
+            <br />
+            <br />
+            <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
+        </Notice>
+
+}
+
 // Callbacks.
 const PricingsCB = ( content, allData ) => {
     return [ ...content, <Pricings allData={allData} /> ];
 }
 
+const MorePricingNoticeCB = ( content ) => {
+    return [ ...content, <MorePricingNotice /> ];
+}
+
 // Hooks.
 addFilter( 'wptravel_trip_edit_sub_tab_content_prices', 'WPTravel\TripEdit\PriceDates\Pricings', PricingsCB, 10 );
+
+// Notice inside pricing.
+addFilter('wp_travel_after_pricings_options', 'WPTravel\TripEdit\PriceDates\MorePricingNotice', MorePricingNoticeCB, 10 );
