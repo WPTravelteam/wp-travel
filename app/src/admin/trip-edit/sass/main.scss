@@ -51,11 +51,13 @@
 	.wp-travel-form-input-clear-btn {
 		height: 100%;
 		position: absolute;
-		top: -5px;
-		right: -10px;
+		// top: -5px;
+		// right: -10px;
 		margin: auto;
 		background: transparent;
 		border: 0;
+		top: 0;
+		right: 0;
 		&:hover {
 			color: red;
 		}
@@ -194,6 +196,18 @@
 	}
 }
 
+.wp-travel-block-tabs {
+	.components-tab-panel__tab-content {
+		.wp-travel-ui {
+			.wp-travel-trip-edit-menu {
+				.components-tab-panel__tabs {
+					flex-direction: row;
+				}
+			}
+		}
+	}
+}
+
 .wp-travel-trip-pricings {
 	.components-panel__body {
 		border: 1px solid #e0e0e0;
@@ -245,6 +259,7 @@
 				width: 100%;
 				.wp-editor-tools {
 					.wp-editor-container {
+						border: none;
 						textarea {
 							width: 100%;
 						}
@@ -255,10 +270,80 @@
 	}
 }
 
+.wp-travel-ui {
+	.wp-travel-trip-edit-menu {
+		.components-tab-panel__tabs {
+			background: #f3f4f5;
+			padding-left: 20px;
+		}
+	}
+
+	// Facts tab
+	.wp-travel-trip-fact {
+		.components-panel__row {
+			margin-top: 5px;
+			margin-bottom: 20px;
+		}
+	}
+
+	// Locations tab
+	.wp-travel-trip-location {
+		.components-panel__row {
+			.components-base-control {
+				display: flex;
+				flex-wrap: wrap;
+				flex-direction: column;
+				align-items: end;
+				.components-base-control__field {
+					display: block;
+					.components-form-toggle {
+						margin-right: 0;
+					}
+				}
+			}
+		}
+	}
+
+	// Checkout tab
+	.components-panel__row {
+		.wp-core-ui.wp-editor-wrap {
+			width: 100%;
+		}
+	}
+
+ // Inventory Options
+ .components-panel__row {
+   .components-base-control {
+     .components-base-control__field {
+       display: flex;
+       justify-content: flex-start;
+       flex-direction: row-reverse;
+       .components-form-toggle {
+         margin-right: 0;
+       }
+     }
+   }
+ }
+}
+
 .wp-travel-trip-edit-menu .components-panel__icon {
 	position: absolute;
 	top: 15px;
 	left: 0;
+}
+
+.components-tab-panel__tab-content {
+	margin-top: 15px;
+	.wp-travel-trip-pricings {
+		.wp-travel-select-pricing {
+			background: #f2f3f4;
+			border-radius: 4px;
+			.components-panel__row {
+				align-items: center !important;
+				padding: 10px 15px !important;
+			}
+		}
+	}
 }
 
 // extra css
@@ -271,6 +356,15 @@
 						.components-tab-panel__tabs {
 							.components-button {
 								height: auto;
+								padding: 15px;
+								&.active-tab {
+									background: #fff;
+									border: none;
+								}
+								&:focus {
+									border: none;
+									// box-shadow: none;
+								}
 							}
 						}
 						.components-tab-panel__tab-content {
@@ -344,6 +438,7 @@
 									width: unset;
 								}
 							}
+
 							.components-base-control {
 								width: 250px;
 								.components-base-control__field {
@@ -352,6 +447,11 @@
 									.components-form-toggle {
 										margin-right: 0;
 									}
+								}
+							}
+							.text-right {
+								.components-base-control {
+									width: auto;
 								}
 							}
 							.components-toggle-control {
