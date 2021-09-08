@@ -181,23 +181,6 @@ addFilter('wp_travel_trip_faq_tab_content', 'wp_travel', ( content ) => { conten
 addFilter('wp_travel_trip_downloads_tab_content', 'wp_travel', ( content ) => { content = [ <> </>, ...content, ]; return content } );
 addFilter('wp_travel_itinerary_custom_tabs', 'wp_travel', ( content ) => { content = [ <> </>, ...content, ]; return content } );
 
-addFilter('wp_travel_after_pricings_options', 'wp_travel', (content, allData) => {
-    content = [
-        <>
-            <Notice isDismissible={false} status="informational">
-                <strong>{__i18n.notices.need_more_option.title}</strong>
-
-                <br />
-                {__i18n.notices.need_more_option.description}
-                <br />
-                <br />
-                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
-            </Notice><br />
-        </>,
-        ...content,
-    ]
-    return content
-});
 addFilter('wp_travel_after_dates_options', 'wp_travel', (content, allData) => {
     content = [
         <>
