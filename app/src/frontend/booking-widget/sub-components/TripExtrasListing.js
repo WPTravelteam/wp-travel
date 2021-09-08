@@ -74,7 +74,7 @@ const TripExtrasListing = ({ options, onChange, counts }) => {
 									</div>
 								</div>
 								<div className="text-right">
-									<span className="item-price">{tx.is_sale && <del dangerouslySetInnerHTML={{__html: wpTravelFormat(tx.tour_extras_metas.extras_item_price)}}></del>} <span dangerouslySetInnerHTML={{__html: wpTravelFormat(price)}}></span> /unit</span>
+									<span className="item-price">{tx.is_sale && <del dangerouslySetInnerHTML={{__html: wpTravelFormat(tx.tour_extras_metas.extras_item_price)}}></del>} <span dangerouslySetInnerHTML={{__html: wpTravelFormat(price)}}></span> /{__i18n.unit}</span>
 									<div className="pricing-area">
 										<div className="qty-spinner">
 											<button onClick={handleClick(i, -1)}>-</button>
