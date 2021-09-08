@@ -1,17 +1,67 @@
 import { TextControl, PanelRow, PanelBody, Disabled, Notice, ToggleControl } from '@wordpress/components';
 import { applyFilters, addFilter } from '@wordpress/hooks';
+import { useSelect, dispatch } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
-import { withSelect, withDispatch } from '@wordpress/data';
-import { compose } from '@wordpress/compose';
 
 import { ReactSortable } from 'react-sortablejs';
 import {alignJustify } from '@wordpress/icons';
 
-import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
+import ErrorBoundary from '../../../../ErrorBoundry/ErrorBoundry';
 const __i18n = {
 	..._wp_travel_admin.strings
 }
-const WPTravelTripOptionsTabsContent = ({ allData, updateTripData }) => {
+
+// @todo Need to remove this in future.
+// const WPTravelTripOptionsTabs = () => {
+//     const allData = useSelect((select) => {
+//         return select('WPTravel/TripEdit').getAllStore()
+//     }, []);
+//     const { updateTripData } = dispatch('WPTravel/TripEdit');
+//     const { id } = allData;
+//     return <>{applyFilters('wp_travel_itinerary_custom_tabs', '', id, allData, updateTripData)}</>;
+// }
+
+// export default WPTravelTripOptionsTabs;
+
+// Single Components for hook callbacks.
+const TripTabsNotice = () => {
+    return <>
+        <Notice isDismissible={false} status="informational">
+            <strong>{__i18n.notices.global_tab_option.title}</strong>
+            <br />
+            {__i18n.notices.global_tab_option.description}
+            <br />
+            <br />
+            <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
+        </Notice><br />
+    </>
+}
+
+const TripTabsUseGlobal = ( {allData} ) => {
+    const {use_global_tabs} = allData;
+    const { updateTripData } = dispatch('WPTravel/TripEdit');
+
+    return <PanelRow>
+        <label>{__i18n.use_global_tabs_layout}</label>
+        <ToggleControl
+            value={use_global_tabs}
+            checked={use_global_tabs == 'yes' ? true : false}
+            onChange={
+                (use_global_tabs) => {
+                    updateTripData({
+                        ...allData,
+                        use_global_tabs: use_global_tabs ? 'yes' : 'no'
+                    })
+                }
+            }
+        />
+    </PanelRow>
+}
+
+const TripTabs = ( {allData} ) => {
+    
+    const { updateTripData } = dispatch('WPTravel/TripEdit');
+
     const updateTabOption = (key, value, _tabIndex) => {
 
         const { trip_tabs } = allData;
@@ -88,23 +138,6 @@ const WPTravelTripOptionsTabsContent = ({ allData, updateTripData }) => {
 
     return <ErrorBoundary>
         <div className="wp-travel-trip-tabs">
-
-            {applyFilters('wp_travel_itinerary_custom_tabs', '', id, allData, updateTripData)}
-            <PanelRow>
-                <label>{__i18n.use_global_tabs_layout}</label>
-                <ToggleControl
-                    value={use_global_tabs}
-                    checked={use_global_tabs == 'yes' ? true : false}
-                    onChange={
-                        (use_global_tabs) => {
-                            updateTripData({
-                                ...allData,
-                                use_global_tabs: use_global_tabs ? 'yes' : 'no'
-                            })
-                        }
-                    }
-                />
-            </PanelRow>
             { 'yes' == use_global_tabs ?
                 <Disabled>{tabsContent()}</Disabled> :
                 tabsContent()
@@ -113,40 +146,18 @@ const WPTravelTripOptionsTabsContent = ({ allData, updateTripData }) => {
     </ErrorBoundary>;
 }
 
-addFilter('wp_travel_itinerary_custom_tabs', 'wp_travel', (content, id, allData) => {
-    const { trip_code } = allData;
-
-    content = [
-        <>
-            <Notice isDismissible={false} status="informational">
-                <strong>{__i18n.notices.global_tab_option.title}</strong>
-                <br />
-                {__i18n.notices.global_tab_option.description}
-                <br />
-                <br />
-                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
-            </Notice><br />
-        </>,
-        ...content
-    ]
-    return content
-}, 9);
-
-const WPTravelTripOptionsTabs = ( props ) => {
-    return <div className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-no-border"><WPTravelTripOptionsTabsContent { ...props } /></div>
+// Callbacks.
+const TripTabsNoticeCB = ( content ) => {
+    return [ ...content, <TripTabsNotice /> ];
 }
 
-export default compose([
-	withSelect((select)=>{
-		const allData = select('WPTravel/TripEdit').getAllStore();
-		return {
-			allData
-		}
-	}),
-withDispatch((dispatch)=>{
-	const { updateTripData } = dispatch('WPTravel/TripEdit');
-	return {
-		updateTripData
-	}
-})
-])(WPTravelTripOptionsTabs);
+const TripTabsUseGlobalCB = ( content, allData ) => {
+    return [ ...content, <TripTabsUseGlobal allData={allData} /> ];
+}
+const TripTabsCB = ( content, allData ) => {
+    return [ ...content, <TripTabs allData={allData} /> ];
+}
+
+addFilter( 'wptravel_trip_edit_tab_content_tabs', 'WPTravel\TripEdit\TripTabsNotice', TripTabsNoticeCB, 10 );
+addFilter( 'wptravel_trip_edit_tab_content_tabs', 'WPTravel\TripEdit\TripTabsUseGlobal', TripTabsUseGlobalCB, 20 );
+addFilter( 'wptravel_trip_edit_tab_content_tabs', 'WPTravel\TripEdit\TripTabs', TripTabsCB, 30 );

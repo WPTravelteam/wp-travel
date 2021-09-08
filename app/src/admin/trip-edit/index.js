@@ -2,30 +2,43 @@ import { render, useEffect } from '@wordpress/element'; // [ useeffect : used on
 import { TabPanel, Spinner, Notice } from '@wordpress/components';
 import { useSelect, select, dispatch } from '@wordpress/data'; // redux [and also for hook / filter] | dispatch : send data to store
 import { applyFilters, addFilter } from '@wordpress/hooks';
-import { sprintf, _n, __ } from '@wordpress/i18n';
+import { _n, __ } from '@wordpress/i18n';
 import domReady from '@wordpress/dom-ready';
 import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
 
 import './trip-store';
-import './trip-pro-options';
 
 import '../settings/store/settings-store'; // @since 4.5.1
 
 import SaveTripSection from './sub-components/SaveTripSection'
 
 // Tab Items.
-import WPTravelTripOptionsPriceDates from './trip-options-price-dates';
-import WPTravelTripOptionsItinerary from './trip-options-itinerary';
-import WPTravelTripOptionsTabs from './trip-options-tabs';
-import WPTravelTripOptionsIncludesExcludes from './trip-options-includes-excludes';
-import WPTravelTripOptionsFaq from './trip-options-faq';
-import WPTravelTripOptionsGallery from './trip-options-gallery/'
-import WPTravelTripOptionsFact from './trip-options-fact';
-import WPTravelTripOptionsMisc from './trip-options-misc';
-import WPTravelTripOptionsLocation from './trip-options-location';
-import WPTravelTripOptionsCartAndCheckout from './trip-options-cart-checkout';
-import WPTravelTripOptionsInventoryOptions from './trip-options-inventory-options';
-import WPTravelTripOptionsDownloads from './trip-options-downloads';
+// import WPTravelTripOptionsItinerary from './Components/Itinerary';
+// import WPTravelTripOptionsPriceDates from './Components/PriceDates';
+// import WPTravelTripOptionsIncludesExcludes from './Components/IncludesExcludes';
+// import WPTravelTripOptionsFact from './Components/Facts';
+// import WPTravelTripOptionsGallery from './Components/Gallery'
+// import WPTravelTripOptionsLocation from './Components/Locations';
+// import WPTravelTripOptionsCartAndCheckout from './Components/Checkout';
+// import WPTravelTripOptionsInventoryOptions from './Components/Inventory';
+// import WPTravelTripOptionsFaq from './Components/Faqs';
+// import WPTravelTripOptionsDownloads from './Components/Downloads';
+// import WPTravelTripOptionsMisc from './Components/Misc';
+// import WPTravelTripOptionsTabs from './Components/Tabs';
+
+import './Components/Itinerary';
+import './Components/PriceDates';
+import './Components/IncludesExcludes';
+import './Components/Facts';
+import './Components/Gallery'
+import './Components/Locations';
+import './Components/Checkout';
+import './Components/Inventory';
+import './Components/Faqs';
+import './Components/Downloads';
+import './Components/Misc';
+import './Components/Tabs';
+
 
 const toggleDisablePostUpdate = ( isDisabled = false ) => {
     if( jQuery('#submitpost').find( '#wp-travel-post-disable-message' ).length < 1 && isDisabled ) {
@@ -58,7 +71,6 @@ const WPTravelTripOptions = () => {
         let store = getTripData(_wp_travel.postID);
 
         let tripCats = getTripPricingCategories();
-        // let settings = getSettings();
 
     }, []);
     let wrapperClasses = "wp-travel-trip-pricings";
@@ -73,7 +85,7 @@ const WPTravelTripOptions = () => {
             onSelect={() => false}
             tabs={tabs}>
             {
-                (tab) => 'undefined' !== typeof tab.content ? <ErrorBoundary><tab.content /></ErrorBoundary> : <>Error.</>
+                (tab) => <ErrorBoundary><div className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-no-border">{applyFilters( `wptravel_trip_edit_tab_content_${tab.name.replaceAll('-','_')}`, [], allData)}</div></ErrorBoundary>
             }
         </TabPanel>
         <SaveTripSection />
@@ -88,149 +100,87 @@ addFilter( 'wp_travel_trip_options_tabs', 'wp_travel', ( tabs ) => {
 				name: 'itinerary',
 				title: __i18n.admin_tabs.itinerary,
 				className: 'tab-itinerary',
-				content: WPTravelTripOptionsItinerary
+				// content: WPTravelTripOptionsItinerary
 			},
 			{
 				name: 'price-dates',
 				title: __i18n.admin_tabs.price_n_dates,
 				className: 'tab-price-dates',
-				content: WPTravelTripOptionsPriceDates
+				// content: WPTravelTripOptionsPriceDates
 			},
 
 			{
 				name: 'includes-excludes',
 				title: __i18n.admin_tabs.includes_excludes,
 				className: 'tab-includes-excludes',
-				content: WPTravelTripOptionsIncludesExcludes
+				// content: WPTravelTripOptionsIncludesExcludes
 			},
 			{
 				name: 'facts',
 				title: __i18n.admin_tabs.facts,
 				className: 'tab-facts',
-				content: WPTravelTripOptionsFact
+				// content: WPTravelTripOptionsFact
 			},
 			{
 				name: 'gallery',
 				title: __i18n.admin_tabs.gallery,
 				className: 'tab-gallery',
-				content: WPTravelTripOptionsGallery
+				// content: WPTravelTripOptionsGallery
 			},
 			{
 				name: 'locations',
 				title: __i18n.admin_tabs.locations,
 				className: 'tab-locations',
-				content: WPTravelTripOptionsLocation
+				// content: WPTravelTripOptionsLocation
 			},
 			{
 				name: 'cart-checkout',
 				title: __i18n.admin_tabs.checkout, // cart & checkout label updated to checkout @since 4.4.3
 				className: 'tab-cart-checkout',
-				content: WPTravelTripOptionsCartAndCheckout
+				// content: WPTravelTripOptionsCartAndCheckout
 			},
 			{
 				name: 'inventory-options',
 				title: __i18n.admin_tabs.inventory_options,
 				className: 'tab-inventory-options',
-				content: WPTravelTripOptionsInventoryOptions
+				// content: WPTravelTripOptionsInventoryOptions
 			},
 			{
 				name: 'faqs',
 				title: __i18n.admin_tabs.faqs,
 				className: 'tab-faqs',
-				content: WPTravelTripOptionsFaq
+				// content: WPTravelTripOptionsFaq
 			},
 			{
 				name: 'downloads',
 				title: __i18n.admin_tabs.downloads,
 				className: 'tab-downloads',
-				content: WPTravelTripOptionsDownloads
+				// content: WPTravelTripOptionsDownloads
+			},
+            {
+				name: 'tabs',
+				title: __i18n.admin_tabs.tabs,
+				className: 'tab-tabs',
+				// content: WPTravelTripOptionsTabs
 			},
 			{
 				name: 'misc',
 				title: __i18n.admin_tabs.misc,
 				className: 'tab-misc',
-				content: WPTravelTripOptionsMisc
+				// content: WPTravelTripOptionsMisc
 			},
-			{
-				name: 'tabs',
-				title: __i18n.admin_tabs.tabs,
-				className: 'tab-tabs',
-				content: WPTravelTripOptionsTabs
-			},
-
 
 		]
 	];
 });
 
-addFilter('wp_travel_trip_cart_checkout_tab_content', 'wp_travel', (content) => {
-    content = [
-        <>
-            <Notice isDismissible={false} status="informational">
-                <strong>{__i18n.notices.checkout_option.title}</strong>
-                <br />
-                {__i18n.notices.checkout_option.description}
-                <br />
-                <br />
-                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
-            </Notice><br />
-        </>,
-        ...content,
-    ]
-    return content
-});
+// Just added this for backward compatibility. need to remove after removing content.splice from pro options.
+addFilter('wp_travel_trip_cart_checkout_tab_content', 'wp_travel', ( content ) => { content = [ <> </>, ...content, ]; return content; } );
+addFilter('wp_travel_trip_inventory_tab_content', 'wp_travel', ( content ) => { content = [<> </>, ...content, ]; return content; } );
+addFilter('wp_travel_trip_faq_tab_content', 'wp_travel', ( content ) => { content = [ <> </>, ...content, ]; return content } );
+addFilter('wp_travel_trip_downloads_tab_content', 'wp_travel', ( content ) => { content = [ <> </>, ...content, ]; return content } );
+addFilter('wp_travel_itinerary_custom_tabs', 'wp_travel', ( content ) => { content = [ <> </>, ...content, ]; return content } );
 
-addFilter('wp_travel_trip_inventory_tab_content', 'wp_travel', (content, allData) => {
-    content = [
-        <>
-            <Notice isDismissible={false} status="informational">
-                <strong>{__i18n.notices.inventory_option.title}</strong>
-                <br />
-                {__i18n.notices.inventory_option.description}
-                <br />
-                <br />
-                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
-            </Notice><br />
-        </>,
-        ...content,
-    ]
-    return content
-});
-
-addFilter('wp_travel_trip_downloads_tab_content', 'wp_travel', (content, allData) => {
-    content = [
-        <>
-            <Notice isDismissible={false} status="informational">
-                <strong>{__i18n.notices.downloads_option.title}</strong>
-                <br />
-                {__i18n.notices.downloads_option.description}
-                <br />
-                <br />
-                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
-            </Notice><br />
-        </>,
-        ...content,
-    ]
-    return content
-});
-
-addFilter('wp_travel_after_pricings_options', 'wp_travel', (content, allData) => {
-    content = [
-        <>
-            <Notice isDismissible={false} status="informational">
-                <strong>{__i18n.notices.need_more_option.title}</strong>
-
-                <br />
-                {__i18n.notices.need_more_option.description}
-                <br />
-                <br />
-                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
-            </Notice><br />
-        </>,
-        ...content,
-    ]
-    return content
-});
 addFilter('wp_travel_after_dates_options', 'wp_travel', (content, allData) => {
     content = [
         <>
@@ -254,9 +204,9 @@ addFilter(
     'wp_travel',
     (content ) => {
         content = [
-            <p class="description">
-                {__i18n.notices.need_extras_option.title}
-                <a href="https://wptravel.io/wp-travel-pro/" target="_blank" class="wp-travel-upsell-badge">{__i18n.notice_button_text.get_pro}</a>
+            <p className="description">
+                {__i18n.notices.need_extras_option.title}<br />
+                <a href="https://wptravel.io/wp-travel-pro/" target="_blank" className="wp-travel-upsell-badge">{__i18n.notice_button_text.get_pro}</a>
             </p>,
             ...content,
         ]

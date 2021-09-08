@@ -1,7 +1,7 @@
 import { Button, Spinner, Notice } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { ReactSortable } from 'react-sortablejs';
-import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
+import ErrorBoundary from '../../../../ErrorBoundry/ErrorBoundry';
 const __i18n = {
 	..._wp_travel_admin.strings
 }
@@ -15,7 +15,7 @@ export default props => {
         onItemClick
     } = props
     return <ErrorBoundary>
-        {gallery.length > 0 &&
+        { 'undefined' != typeof gallery && gallery.length > 0 &&
             <ReactSortable
                 list={gallery}
                 setList={newList => onImagesSort({ gallery: newList })}

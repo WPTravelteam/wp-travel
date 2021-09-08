@@ -25,7 +25,7 @@ const SaveTripSection = () => {
         <div>
             {has_state_changes&&<div className="wp-travel-save-notice">{__i18n.messages.save_changes}</div>}
             {show_updated_message && <div>
-                <p class="text-success"><strong>{__i18n.messages.trip_saved}</strong></p>
+                <p className="text-success"><strong>{__i18n.messages.trip_saved}</strong></p>
             </div> }
         </div>
         <Button isPrimary onClick={()=>{

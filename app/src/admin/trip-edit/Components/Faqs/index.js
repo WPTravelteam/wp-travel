@@ -1,20 +1,38 @@
-import { Button, Notice, PanelBody, PanelRow, TabPanel, TextareaControl, TextControl, Disabled } from '@wordpress/components';
-import { dispatch, useSelect } from '@wordpress/data';
+import { Button, Notice, PanelBody, PanelRow, TextareaControl, TextControl, Disabled } from '@wordpress/components';
+import { dispatch } from '@wordpress/data';
 import { addFilter, applyFilters } from '@wordpress/hooks';
 import { __ } from '@wordpress/i18n';
 import { ReactSortable } from 'react-sortablejs';
 import {alignJustify } from '@wordpress/icons';
 
-import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
+import ErrorBoundary from '../../../../ErrorBoundry/ErrorBoundry';
 
 const __i18n = {
 	..._wp_travel_admin.strings
 }
 
-const WPTravelTripOptionsFaqContent = () => {
-    const allData = useSelect((select) => {
-        return select('WPTravel/TripEdit').getAllStore()
-    }, []);
+// @todo Need to remove this in future.
+// const WPTravelTripOptionsFaq = () => {
+//     return <></>;
+// }
+// export default WPTravelTripOptionsFaq;
+
+// Single Components for hook callbacks.
+const FaqsNotice = () => {
+    return <>
+        <Notice isDismissible={false} status="informational">
+            <strong>{__i18n.notices.global_faq_option.title}</strong>
+            <br />
+            {__i18n.notices.global_faq_option.description}
+            <br />
+            <br />
+            <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
+        </Notice><br />
+    </>
+}
+
+const Faqs = ({allData}) => {
+   
     const { updateTripData, addNewFaq, updateRequestSending } = dispatch('WPTravel/TripEdit');
     const { faqs, utilities } = allData;
     
@@ -76,7 +94,7 @@ const WPTravelTripOptionsFaqContent = () => {
     };
 
     // get swap index for FAQ. 
-    let customSwapIndexes = Object.keys(faqs).map(function (faqId) {
+    let customSwapIndexes = 'undefined' != typeof faqs && Object.keys(faqs).map(function (faqId) {
         let i = parseInt(faqId);
         let globalFaq = 'yes' ===faqs[i].global
 
@@ -181,7 +199,7 @@ const WPTravelTripOptionsFaqContent = () => {
             
         } 
     }
-    return <ErrorBoundary>
+    return <ErrorBoundary key="faqsLists">
         <div className="wp-travel-trip-faq">
             {applyFilters('wp_travel_trip_faq_tab_content', '', allData)}
             
@@ -222,10 +240,10 @@ const WPTravelTripOptionsFaqContent = () => {
                             }
 
                             if ( 'yes' ===faqs[faqId].global ) {
-                                return <div style={{position:'relative'}}  data-index={index}>
-                                    <div style={{position:'absolute', right:'50px', zIndex:111, cursor:'pointer'}}  className={hiddenClass}>
+                                return <div style={{position:'relative'}}  data-index={index} key={index} >
+                                    <div className={`wptravel-swap-list ${hiddenClass}`}>
                                     <Button
-                                    style={{padding:0, display:'block'}}
+                                    // style={{padding:0, display:'block'}}
                                     disabled={startIndex == index}
                                     onClick={(e) => {
                                         let sorted = swapList( faqs, index, upIndex )
@@ -234,7 +252,7 @@ const WPTravelTripOptionsFaqContent = () => {
                                         updateRequestSending(false);
                                     }}><i className="dashicons dashicons-arrow-up"></i></Button>
                                     <Button 
-                                    style={{padding:0, display:'block'}}
+                                    // style={{padding:0, display:'block'}}
                                     disabled={endIndex == index}
                                     onClick={(e) => {
                                         let sorted = swapList( faqs, index, downIndex )
@@ -273,10 +291,9 @@ const WPTravelTripOptionsFaqContent = () => {
                                     </PanelBody>
                                 </div>
                             }
-                            return <div style={{position:'relative'}} data-index={index}>
-                                <div style={{position:'absolute', right:'50px', zIndex:111, cursor:'pointer'}}  className={hiddenClass} >
+                            return <div style={{position:'relative'}} data-index={index} key={index}>
+                                <div className={`wptravel-swap-list ${hiddenClass}`} >
                                     <Button
-                                    style={{padding:0, display:'block'}}
                                     disabled={startIndex == index}
                                     onClick={(e) => {
                                         let sorted = swapList( faqs, index, upIndex )
@@ -285,7 +302,6 @@ const WPTravelTripOptionsFaqContent = () => {
                                         updateRequestSending(false);
                                     }}><i className="dashicons dashicons-arrow-up"></i></Button>
                                     <Button 
-                                    style={{padding:0, display:'block'}}
                                     disabled={endIndex == index}
                                     onClick={(e) => {
                                         let sorted = swapList( faqs, index, downIndex )
@@ -354,25 +370,15 @@ const WPTravelTripOptionsFaqContent = () => {
         </div>
     </ErrorBoundary>;
 }
-addFilter('wp_travel_trip_faq_tab_content', 'wp_travel', (content, allData) => {
-    content = [
-        <>
-            <Notice isDismissible={false} status="informational">
-                <strong>{__i18n.notices.global_faq_option.title}</strong>
-                <br />
-                {__i18n.notices.global_faq_option.description}
-                <br />
-                <br />
-                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
-            </Notice><br />
-        </>,
-        ...content,
-    ]
-    return content
-}, 9);
 
-const WPTravelTripOptionsFaq = () => {
-    return <div className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-no-border"><WPTravelTripOptionsFaqContent /></div>
+// Callbacks.
+const FaqsNoticeCB = ( content ) => {
+    return [ ...content, <FaqsNotice key="FaqsNotice" /> ];
+}
+const FaqsCB = ( content, allData ) => {
+    return [ ...content, <Faqs allData={allData} key="Faqs" /> ];
 }
 
-export default WPTravelTripOptionsFaq;
+// Hooks.
+addFilter( 'wptravel_trip_edit_tab_content_faqs', 'WPTravel\TripEdit\FaqsNotice', FaqsNoticeCB, 10 );
+addFilter( 'wptravel_trip_edit_tab_content_faqs', 'WPTravel\TripEdit\Faqs', FaqsCB, 20 );

@@ -1,24 +1,66 @@
-import { useState, useEffect } from '@wordpress/element';
-import { TextControl, PanelRow, PanelBody, Button, TabPanel, Notice, FormTokenField, TextareaControl, Dropdown, DateTimePicker, RangeControl } from '@wordpress/components';
+import { useState } from '@wordpress/element';
+import { TextControl, PanelRow, PanelBody, Button, Notice, TextareaControl, Dropdown, DateTimePicker, RangeControl } from '@wordpress/components';
 import { applyFilters, addFilter } from '@wordpress/hooks';
-import { useSelect, dispatch } from '@wordpress/data';
-// imsport apiFetch from '@wordpress/api-fetch';
-import { sprintf, _n, __ } from '@wordpress/i18n';
+import { dispatch } from '@wordpress/data';
+import { _n, __ } from '@wordpress/i18n';
 
 import { ReactSortable } from 'react-sortablejs';
 import {alignJustify } from '@wordpress/icons';
 
-import WPEditor from '../fields/WPEditor';
-import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
+import WPEditor from '../../../fields/WPEditor';
 const __i18n = {
 	..._wp_travel_admin.strings
 }
-const WPTravelTripOptionsItineraryContent = () => {
-    const allData = useSelect((select) => {
-        return select('WPTravel/TripEdit').getAllStore()
-    }, []);
+
+// @todo Need to remove this in future.
+// const WPTravelTripOptionsItinerary = () => {
+//     return <></>;
+// }
+
+// export default WPTravelTripOptionsItinerary;
+
+// Single Components for hook callbacks.
+const TripCode = ({allData}) => {
+    const { trip_code } = allData;
+    return <>
+        <PanelRow>
+            <label>{__i18n.trip_code}</label>
+            <div className="wp-travel-field-value">
+                <TextControl
+                    value={trip_code}
+                    onChange={() => false}
+                    disabled={true}
+                    name="" />
+                    <p className="description">
+                        {__i18n.notices.trip_code_option.description}<br/><a href="https://wptravel.io/downloads/wp-travel-utilities/" target="_blank" className="wp-travel-upsell-badge">{__i18n.notice_button_text.get_pro}</a>
+                    </p>
+            </div>
+        </PanelRow>
+    </>;
+}
+
+const TripOutline = ({allData}) => {
+    const { trip_outline } = allData;
+    const { updateTripData } = dispatch('WPTravel/TripEdit')
+    return <>
+        <PanelRow>
+            <label htmlFor="wp-travel-trip-outline">{__i18n.trip_outline}</label>
+        </PanelRow>
+        <PanelRow className="wp-travel-editor">
+            {'undefined' !== typeof trip_outline && <WPEditor id="wp-travel-trip-outline" value={trip_outline}
+            onContentChange={(trip_outline) => {
+                updateTripData({
+                    ...allData,
+                    trip_outline: trip_outline
+                })
+            }} name="trip_outline" />}
+        </PanelRow>
+    </>;
+}
+
+const Itinerary = ({allData}) => {
+    const { itineraries } = allData;
     const { updateTripData, addNewItinerary } = dispatch('WPTravel/TripEdit');
-    const { trip_outline, itineraries } = allData;
     const updateTripItinerary = (key, value, _itineraryId) => { // Update on change itineraries.
 
         let _allItineraries = itineraries;
@@ -59,35 +101,17 @@ const WPTravelTripOptionsItineraryContent = () => {
             itineraries: sortedItineraries
         })
     }
-    
     return <>
-        <div className="wp-travel-trip-itinerary">
-            <ErrorBoundary>
-            {applyFilters('wp_travel_before_itinerary_content', '', allData)}
-            <PanelRow>
-                <label htmlFor="wp-travel-trip-outline">{__i18n.trip_outline}</label>
-                </PanelRow>
-                <PanelRow className="wp-travel-editor">
-                
-                {'undefined' !== typeof trip_outline && <WPEditor id="wp-travel-trip-outline" value={trip_outline}
-            onContentChange={(trip_outline) => {
-                updateTripData({
-                    ...allData,
-                    trip_outline: trip_outline
-                })
-            }} name="trip_outline" />}
-            </PanelRow>
-            <hr/>
             <div className="wp-travel-itinerary-title">
                 <h3 className="wp-travel-tab-content-title">{__i18n.itinerary}</h3>
                 {typeof itineraries != 'undefined' && itineraries && Object.keys(itineraries).length > 0 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addItinerary()}>{__i18n.add_itinerary}</Button></PanelRow> }
             </div>
             {typeof itineraries != 'undefined' && itineraries && Object.keys(itineraries).length > 0 ?
-                <div className="wp-travel-sortable-component">
+                <div className="wp-travel-sortable-component itinerary-sortable">
                     <ReactSortable
                         list={itineraries}
                         setList={sortedItineraries => sortItineraries(sortedItineraries)}
-                        handle=".wp-travel-trip-itinerary .components-panel__icon"
+                        handle=".wp-travel-sortable-component.itinerary-sortable .components-panel__icon"
                     >
                         {
                             Object.keys(itineraries).map(function (itineraryId) {
@@ -252,35 +276,21 @@ const WPTravelTripOptionsItineraryContent = () => {
                     className:'is-link'
                 }]}>{__i18n.empty_results.itinerary}</Notice></>
             }
-            </ErrorBoundary>
-        </div>
     </>;
 }
 
-addFilter('wp_travel_before_itinerary_content', 'wp_travel', (content, allData) => {
-    const { trip_code } = allData;
-
-    content = [
-        <PanelRow>
-            <label>{__i18n.trip_code}</label>
-            <div className="wp-travel-field-value">
-                <TextControl
-                    value={trip_code}
-                    onChange={() => false}
-                    disabled={true}
-                    name="" />
-                    <p class="description">
-                        {__i18n.notices.trip_code_option.description}<a href="https://wptravel.io/downloads/wp-travel-utilities/" target="_blank" class="wp-travel-upsell-badge">{__i18n.notice_button_text.get_pro}</a>
-                    </p>
-            </div>
-        </PanelRow>,
-        ...content
-    ]
-    return content
-}, 9);
-
-const WPTravelTripOptionsItinerary = () => {
-    return <div className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-no-border"><WPTravelTripOptionsItineraryContent /></div>;
+// Callbacks.
+const TripCodeCB = ( content, allData ) => {
+    return [ ...content, <TripCode allData={allData} key="TripCode" /> ];
+}
+const TripOutlineCB = ( content, allData ) => {
+    return [ ...content, <TripOutline allData={allData} key="TripOutline" /> ];
+}
+const ItineraryCB = ( content, allData ) => {
+    return [ ...content, <Itinerary allData={allData} key="Itinerary" /> ];
 }
 
-export default WPTravelTripOptionsItinerary;
+// Hooks.
+addFilter( 'wptravel_trip_edit_tab_content_itinerary', 'WPTravel\TripEdit\TripCode', TripCodeCB, 10 );
+addFilter( 'wptravel_trip_edit_tab_content_itinerary', 'WPTravel\TripEdit\TripOutline', TripOutlineCB, 20 );
+addFilter( 'wptravel_trip_edit_tab_content_itinerary', 'WPTravel\TripEdit\Itinerary', ItineraryCB, 30 );

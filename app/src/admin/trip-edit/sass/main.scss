@@ -171,7 +171,7 @@
 
     .wp-travel-trip-edit-menu-add-gap {
       .components-tab-panel__tab-content {
-        padding: 15px;
+        margin-top: 15px;
         .wp-travel-trip-pricings{
           .wp-travel-select-pricing{
             .components-panel__row{
@@ -276,9 +276,13 @@
                 padding-bottom: 20px;
                 flex-wrap: wrap;
                 .description{
+                  float: right;
+                  margin: 10px 0;
                   .wp-travel-upsell-badge{
                     margin-left: 1em;
                     display: inline-block;
+                    float: right;
+                    margin-top: 10px;
                   }
                 }
                 .wp-travel-select-wrapper {
@@ -380,6 +384,16 @@
   }
 }
 
+.description{
+  float: right;
+  margin: 10px 0;
+  .wp-travel-upsell-badge{
+    margin-left: 1em;
+    display: inline-block;
+    float: right;
+    margin-top: 10px;
+  }
+}
 .wp-travel-trip-itinerary, [aria-labelledby="0-price-dates"] {
   .components-panel__row {
     label {

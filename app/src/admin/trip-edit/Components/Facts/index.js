@@ -1,26 +1,27 @@
-/**
- * External dependencies.
- */
- import { isEmpty, has, isUndefined } from 'lodash';
-
-import { TextControl, Draggable, Panel, PanelRow, PanelBody, Button, TabPanel,Notice, CheckboxControl} from '@wordpress/components';
+import { TextControl, PanelRow, PanelBody, Button, Notice, CheckboxControl} from '@wordpress/components';
+import { addFilter } from '@wordpress/hooks';
+import { isUndefined } from 'lodash';
 import { useSelect, dispatch } from '@wordpress/data';
-import { sprintf, _n, __} from '@wordpress/i18n';
+import { _n, __} from '@wordpress/i18n';
 import { ReactSortable } from 'react-sortablejs';
 
 import {alignJustify } from '@wordpress/icons';
 import Select from 'react-select'
 
-import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
+import ErrorBoundary from '../../../../ErrorBoundry/ErrorBoundry';
 
 const __i18n = {
 	..._wp_travel_admin.strings
 }
-const WPTravelTripOptionsFactContent = () => {
-    const allData = useSelect((select) => {
-        return select('WPTravel/TripEdit').getAllStore()
-    }, []);
 
+// @todo Need to remove this in future.
+// const WPTravelTripOptionsFact = () => {
+//     return <></>;
+// }
+// export default WPTravelTripOptionsFact;
+
+// Single Components for hook callbacks.
+const TripFacts = ({allData}) => {
     const settingsData = useSelect((select) => {
         return select('WPTravel/TripEdit').getSettings()
     }, []);
@@ -249,8 +250,10 @@ const WPTravelTripOptionsFactContent = () => {
     </ErrorBoundary>);
 }
 
-const WPTravelTripOptionsFact = () => {
-    return <div className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-no-border"><WPTravelTripOptionsFactContent /></div>
+// Callbacks.
+const TripFactsCB = ( content, allData ) => {
+    return [ ...content, <TripFacts allData={allData} key="TripFacts" /> ];
 }
 
-export default WPTravelTripOptionsFact;
+// Hooks.
+addFilter( 'wptravel_trip_edit_tab_content_facts', 'WPTravel\TripEdit\TripFacts', TripFactsCB, 10 );

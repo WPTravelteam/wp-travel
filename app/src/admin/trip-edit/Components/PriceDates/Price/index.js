@@ -1,26 +1,22 @@
-import { useState, useEffect } from '@wordpress/element';
-import { TextControl, PanelRow, PanelBody, Button, TabPanel,Notice , FormTokenField, ToggleControl} from '@wordpress/components';
-import { applyFilters } from '@wordpress/hooks';
+import { useState } from '@wordpress/element';
+import { TextControl, PanelRow, PanelBody, Button, Notice , ToggleControl} from '@wordpress/components';
+import { applyFilters, addFilter } from '@wordpress/hooks';
 import { useSelect, dispatch } from '@wordpress/data';
 import apiFetch from '@wordpress/api-fetch';
-import { sprintf, _n, __} from '@wordpress/i18n';
+import { _n, __} from '@wordpress/i18n';
 import {alignJustify } from '@wordpress/icons';
 
 import { ReactSortable } from 'react-sortablejs';
 import Select from 'react-select'
 
-import WPTravelTripPricingCategories from './trip-pricings-categories';
-import WPTravelTripDates from './trip-dates';
+import WPTravelTripPricingCategories from './PricingCategories';
 
-import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
+import ErrorBoundary from '../../../../../ErrorBoundry/ErrorBoundry';
+
 const __i18n = {
 	..._wp_travel_admin.strings
 }
-const WPTravelTripOptionsPricings = () => {
-    const allData = useSelect((select) => {
-        return select('WPTravel/TripEdit').getAllStore()
-    }, []);
-
+const Pricings = ( {allData} ) => {
     const [{tripExtrasData}, setState] = useState({
         tripExtrasData:[]
     });
@@ -28,9 +24,9 @@ const WPTravelTripOptionsPricings = () => {
         return select('WPTravel/TripEdit').getSettings()
     }, []);
 
-    const { pricing_type, pricings, has_state_changes, is_multiple_dates, group_size, has_extras, dates, minimum_partial_payout_use_global, minimum_partial_payout_percent } = allData;
-    const {options} = settings
-    const {updateStateChange, updateTripPricing, addTripPricing, updateTripPrices, updateTripData, setTripData, updateRequestSending } = dispatch('WPTravel/TripEdit');
+    const { pricing_type, pricings, has_extras, minimum_partial_payout_use_global, minimum_partial_payout_percent } = allData;
+    const { options } = settings;
+    const { updateTripPricing, addTripPricing, updateTripPrices, updateTripData } = dispatch('WPTravel/TripEdit');
 
     let tripPrices = 'undefined' != typeof pricings ? pricings : [];
     
@@ -52,7 +48,7 @@ const WPTravelTripOptionsPricings = () => {
     //Fixes
     let payout_percentages = [];
 
-    if ( ! minimum_partial_payout_use_global && settings.minimum_partial_payout.length > 0 ) {
+    if ( ! minimum_partial_payout_use_global && 'undefined' != typeof settings && 'undefined' != typeof settings.minimum_partial_payout && settings.minimum_partial_payout.length > 0 ) {
         // Pro enabled case.
         if ( 'undefined' != typeof options && 'undefined' != options.has_partial_payment && options.has_partial_payment ) {
             payout_percentages = settings.minimum_partial_payout; 
@@ -312,26 +308,30 @@ const WPTravelTripOptionsPricings = () => {
     </ErrorBoundary>;
 }
 
-const WPTravelTripOptionsPriceDates = () => {
-    return <TabPanel className="wp-travel-trip-edit-menu wp-travel-trip-edit-menu-horizontal wp-travel-trip-edit-menu-add-gap"
-        activeClass="active-tab"
-        onSelect={() => false}
-        tabs={[
-            {
-                name: 'prices',
-                title: __i18n.prices,
-                className: 'tab-one',
-            },
-            {
-                name: 'dates',
-                title: __i18n.dates,
-                className: 'tab-two',
-            },
-        ]}>
-        {
-            (tab) => 'prices' == tab.name ? <ErrorBoundary> <WPTravelTripOptionsPricings /></ErrorBoundary> : <ErrorBoundary><WPTravelTripDates /></ErrorBoundary>
-        }
-    </TabPanel>;
+const MorePricingNotice = () => {
+    return  <Notice isDismissible={false} status="informational">
+            <strong>{__i18n.notices.need_more_option.title}</strong>
+
+            <br />
+            {__i18n.notices.need_more_option.description}
+            <br />
+            <br />
+            <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
+        </Notice>
+
 }
 
-export default WPTravelTripOptionsPriceDates;
+// Callbacks.
+const PricingsCB = ( content, allData ) => {
+    return [ ...content, <Pricings allData={allData} /> ];
+}
+
+const MorePricingNoticeCB = ( content ) => {
+    return [ ...content, <MorePricingNotice /> ];
+}
+
+// Hooks.
+addFilter( 'wptravel_trip_edit_sub_tab_content_prices', 'WPTravel\TripEdit\PriceDates\Pricings', PricingsCB, 10 );
+
+// Notice inside pricing.
+addFilter('wp_travel_after_pricings_options', 'WPTravel\TripEdit\PriceDates\MorePricingNotice', MorePricingNoticeCB, 10 );

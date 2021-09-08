@@ -309,8 +309,19 @@ const BookingWidget = () => {
 		let currentDate = date.getDate();
 		let currentMonth = date.getMonth();
 
-		// let startDate = moment(new Date(Date.UTC(curretYear, currentMonth, currentDate, 0, 0, 0))).utc();
-		let startDate = moment(new Date(date));
+		// UTC Offset Fixes.
+        let totalOffsetMin = new Date(date).getTimezoneOffset();
+        let offsetHour = parseInt(totalOffsetMin/60);
+        let offsetMin = parseInt(totalOffsetMin%60);
+
+        let currentHours = 0;
+        let currentMin = 0;
+        if ( offsetHour > 0 ) {
+            currentHours = offsetHour;
+            currentMin = offsetMin;
+        }
+		let startDate = moment(new Date(Date.UTC(curretYear, currentMonth, currentDate, currentHours, currentMin, 0))).utc();
+		// let startDate = moment(new Date(date));
 
 		if (tempExcludeDate.includes(startDate.format('YYYY-MM-DD'))) {
 			return false
@@ -372,8 +383,19 @@ const BookingWidget = () => {
 		}
 
 		// @todo use getPricingsByDate function below to get pricing ids/_nomineePricings.
-		// let startDate = moment(new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0))).utc();
-		let startDate = moment(new Date(date));
+		// UTC Offset Fixes.
+        let totalOffsetMin = new Date(date).getTimezoneOffset();
+        let offsetHour = parseInt(totalOffsetMin/60);
+        let offsetMin = parseInt(totalOffsetMin%60);
+
+        let currentHours = 0;
+        let currentMin = 0;
+        if ( offsetHour > 0 ) {
+            currentHours = offsetHour;
+            currentMin = offsetMin;
+        }
+		let startDate = moment(new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), currentHours, currentMin, 0))).utc();
+		// let startDate = moment(new Date(date));
 
 		const _dateIds = _dates // Trip Date IDs matches to selected date.
 			.filter(_date => {
@@ -418,8 +440,19 @@ const BookingWidget = () => {
 
 	// Function used to get pricings in Fixed departure listing.
 	const getPricingsByDate = ( date, date_id, returnDateIds ) => {
-		// let startDate = moment(new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0))).utc();
-		let startDate = moment(new Date(date));
+		// UTC Offset Fixes.
+        let totalOffsetMin = new Date(date).getTimezoneOffset();
+        let offsetHour = parseInt(totalOffsetMin/60);
+        let offsetMin = parseInt(totalOffsetMin%60);
+
+        let currentHours = 0;
+        let currentMin = 0;
+        if ( offsetHour > 0 ) {
+            currentHours = offsetHour;
+            currentMin = offsetMin;
+        }
+		let startDate = moment(new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), currentHours, currentMin, 0))).utc();
+		// let startDate = moment(new Date(date));
 
 		const _dateIds = _dates // Trip Date IDs matches to selected date.
 			.filter(_date => {
