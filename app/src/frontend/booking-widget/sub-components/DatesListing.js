@@ -161,7 +161,7 @@ const RecurringDates = ({ data, isTourDate, getPricingsByDate, onFixedDepartureP
                         componentData.isLoading && componentData.selectedDateIds.includes(data.id) && componentData.selectedPricingId == componentData.pricing.id && _date.isSame( _selectedDateTime ) && 'wptravel-loading'
                         } >
 
-                        <td data-label="pricings">
+                        <td data-label={__i18n.bookings.pricings_list_label}>
                             {/* <Loader /> */}
                             {componentData.isLoading && componentData.selectedDateIds.includes(data.id) && componentData.selectedPricingId == componentData.pricing.id && _date.isSame( _selectedDateTime ) && <Loader />}
                             { 'undefined' != typeof _pricingIds.length && _pricingIds.length > 0 &&
@@ -178,7 +178,7 @@ const RecurringDates = ({ data, isTourDate, getPricingsByDate, onFixedDepartureP
                                 </>
                             }
                         </td>
-                        <td data-label="person">
+                        <td data-label={__i18n.bookings.person}>
                             <div className ="person-box">
                         {
                         !componentData.pricingUnavailable && componentData.pricing && componentData.inventory.find(i => i.pax_available > 0 && componentData.selectedPricingId == componentData.pricing.id && componentData.selectedDateIds.includes(data.id) && _date.isSame( _selectedDateTime ) ) ? 
@@ -218,7 +218,7 @@ const RecurringDates = ({ data, isTourDate, getPricingsByDate, onFixedDepartureP
                         }
                         </div>
                         </td>
-                        <td data-label="date">
+                        <td data-label={__i18n.bookings.date}>
                             <div className="date-time-wrapper">
                                 <span className="start-date"><span>{__i18n.bookings.start_date}: </span>{_date.format(_wp_travel.date_format_moment)}</span>
                             </div>
@@ -265,7 +265,7 @@ const RecurringDates = ({ data, isTourDate, getPricingsByDate, onFixedDepartureP
                                 {/* </Suspense> */}
                             </Disabled>
                         </td>
-                        <td data-label="date"><Disabled>
+                        <td data-label={__i18n.bookings.pricings_list_label}><Disabled>
                                 <div className="date-time-wrapper">
                                 <span className="start-date"><span>{__i18n.bookings.start_date}: </span>{_date.format(_wp_travel.date_format_moment)}</span>
                             </div></Disabled>
@@ -278,9 +278,9 @@ const RecurringDates = ({ data, isTourDate, getPricingsByDate, onFixedDepartureP
         </tbody> 
         <tfoot className="wp-travel-recurring-dates-nav-btns">
            <tr> 
-               <td colSpan="3">{activePage > 1 && <button onClick={loadMoreDates(-1)} className="prev">{__('Previous')}</button>}
-            {activePage < pagesCount && activePage >= 1 && <button className="next" onClick={loadMoreDates(1)}>{__('Next')}</button>}
-            { ( activePage >= pagesCount && activeRecurringDates.length >= datePerPage ) && <button onClick={loadMoreDates(1)} className="show-more">{__('Load More...')}</button>}</td>
+               <td colSpan="3">{activePage > 1 && <button onClick={loadMoreDates(-1)} className="prev">{__i18n.previous}</button>}
+            {activePage < pagesCount && activePage >= 1 && <button className="next" onClick={loadMoreDates(1)}>{__i18n.next}</button>}
+            { ( activePage >= pagesCount && activeRecurringDates.length >= datePerPage ) && <button onClick={loadMoreDates(1)} className="show-more">{__i18n.load_more}</button>}</td>
             </tr>
         </tfoot>
     </>
@@ -351,7 +351,7 @@ const DatesListing = ({ dates, isTourDate, getPricingsByDate, allData, onFixedDe
                                                         _start_date.isSame( _selectedDateTime ) ? 'selected': '',
                                                         componentData.isLoading && componentData.selectedDateIds.includes(date.id) && 'wptravel-loading'
                                                         }>
-                                                        <td data-label="pricings">
+                                                        <td data-label={__i18n.bookings.pricings_list_label}>
                                                             {componentData.isLoading && componentData.selectedDateIds.includes(date.id) && <Loader /> }
                                                                 {/* <Loader /> */}
                                                             { 'undefined' != typeof _pricingIds.length && _pricingIds.length > 0 &&
@@ -367,7 +367,7 @@ const DatesListing = ({ dates, isTourDate, getPricingsByDate, allData, onFixedDe
                                                                 </>
                                                             }
                                                         </td>
-                                                        <td data-label="person">
+                                                        <td data-label={__i18n.bookings.person}>
                                                             
                                                         <div className ="person-box">
                                                         {
@@ -410,7 +410,7 @@ const DatesListing = ({ dates, isTourDate, getPricingsByDate, allData, onFixedDe
                                                         
                                                         </div>
                                                         </td>
-                                                        <td data-label="date">
+                                                        <td data-label={__i18n.bookings.date}>
                                                             <div className = "date-box">
                                                                 <div className="date-time-wrapper">
                                                                     <span className="start-date"><span>{__i18n.bookings.start_date}: </span>{moment(date.start_date).format(_wp_travel.date_format_moment)}</span>
