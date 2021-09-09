@@ -3,9 +3,9 @@ Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 5.4.1
-Tested up to: 5.8
+Tested up to: 5.8.1
 Requires PHP: 5.6.2
-Stable tag: 5.0.0
+Stable tag: 5.0.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -250,7 +250,7 @@ Release Date: 12, 2021
 Fixes:
 * Fixed group discount, custom filters and excerpt data is not being cloning.
 * Fixed Marketplace page layout issue and other minor layout issue fixes.
-* Fixed Overview tab layout issue with texts.
+* Fixed Overview tab layout issue due to recent changes on overview and other frontend tabs.
 * Fixed Trip date issue with timezone.
 * Fixed Checkout page translation issue.
 * Fixed Translation issue.

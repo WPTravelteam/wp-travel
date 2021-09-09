@@ -8,7 +8,7 @@
  * Author URI: http://wptravel.io/
  * Requires at least: 5.4.1
  * Requires PHP: 5.6.2
- * Tested up to: 5.8
+ * Tested up to: 5.8.1
  *
  * Text Domain: wp-travel
  * Domain Path: /i18n/languages/
@@ -260,6 +260,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		public function includes() {
 			include sprintf( '%s/core/helpers/strings.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/core/helpers/dev.php', WP_TRAVEL_ABSPATH );
+			include sprintf( '%s/core/helpers/localize.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-assets.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-default-form-fields.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-wp-travel-emails.php', WP_TRAVEL_ABSPATH );

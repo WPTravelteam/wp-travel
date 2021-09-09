@@ -21,7 +21,7 @@ class WpTravel_Localize_Admin {
 	/**
 	 * Localize data function.
 	 *
-	 * // @todo Need to Move this into into get_localized_data of WpTravel_Frontend_Assets class.
+	 * // @todo Need to Move this into into WpTravel_Helpers_Localize::get(); of WpTravel_Frontend_Assets class.
 	 *
 	 * @return void
 	 */
