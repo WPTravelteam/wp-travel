@@ -165,7 +165,7 @@ class Wp_Travel_Form_Handler {
 
 			// If successful, redirect to my account with query arg set.
 			if ( $success ) {
-				wp_safe_redirect( add_query_arg( 'reset-link-sent', 'true', wp_lostpassword_url() ) );
+				wp_safe_redirect( add_query_arg( 'reset-link-sent', 'true', wptravel_lostpassword_url() ) );
 				exit;
 			}
 		}

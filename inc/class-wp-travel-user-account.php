@@ -275,15 +275,10 @@ class Wp_Travel_User_Account {
 			)
 		);
 
-		// To send HTML mail, the Content-type header must be set.
-		$headers  = 'MIME-Version: 1.0' . "\r\n";
-		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-
-		$from = get_option( 'admin_email' );
-			// Create email headers.
-			$headers .= 'From: ' . $from . "\r\n";
-			$headers .= 'Reply-To: ' . $from . "\r\n" .
-			'X-Mailer: PHP/' . phpversion();
+		// Create email headers.
+		$from    = get_option( 'admin_email' );
+		$email   = new WP_Travel_Emails();
+		$headers = $email->email_headers( $from, $from );
 
 		if ( $user_login && $key ) {
 
