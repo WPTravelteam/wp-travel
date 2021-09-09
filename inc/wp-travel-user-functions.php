@@ -114,12 +114,7 @@ if ( ! function_exists( 'wptravel_create_new_customer' ) ) {
 		);
 		$new_customer_data = apply_filters(
 			'wptravel_new_customer_data',
-			array(
-				'user_login' => $username,
-				'user_pass'  => $password,
-				'user_email' => $email,
-				'role'       => 'wp-travel-customer',
-			)
+			$new_customer_data
 		);
 
 		$customer_id = wp_insert_user( $new_customer_data );

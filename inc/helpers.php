@@ -1562,15 +1562,10 @@ function wptravel_user_new_account_created( $customer_id, $new_customer_data, $p
 		)
 	);
 
-	// To send HTML mail, the Content-type header must be set.
-	$headers  = 'MIME-Version: 1.0' . "\r\n";
-	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-
-	$from = get_option( 'admin_email' );
 	// Create email headers.
-	$headers .= 'From: ' . $from . "\r\n";
-	$headers .= 'Reply-To: ' . $from . "\r\n" .
-	'X-Mailer: PHP/' . phpversion();
+	$from    = get_option( 'admin_email' );
+	$email   = new WP_Travel_Emails();
+	$headers = $email->email_headers( $from, $from );
 
 	if ( $new_customer_data['user_login'] ) {
 
@@ -1991,8 +1986,8 @@ function wptravel_booking_show_end_date() {
  * @since 4.0.3
  */
 function wptravel_get_trip_pricing_name_by_pricing_id( $trip_id, $pricing_id ) {
-	$pricing_name       = get_the_title( $trip_id );
-	$pricing            = wptravel_get_pricing_by_pricing_id( $trip_id, $pricing_id );
+	$pricing_name = get_the_title( $trip_id );
+	$pricing      = wptravel_get_pricing_by_pricing_id( $trip_id, $pricing_id );
 
 	if ( is_array( $pricing ) && isset( $pricing['title'] ) ) {
 		$pricing = $pricing['title'];
