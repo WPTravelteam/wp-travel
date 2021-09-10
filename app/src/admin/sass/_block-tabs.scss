@@ -469,4 +469,12 @@ td {
 			padding-bottom: 20px;
 		}
 	}
+
+	.wp-travel-sortable-component {
+		.components-panel__body.is-opened {
+			.components-panel__row.wp-travel-has-child-panel {
+				overflow-x: auto;
+			}
+		}
+	}
 }

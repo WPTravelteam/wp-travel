@@ -8,9 +8,8 @@
 }
 
 #send-email {
-	// margin-top: 85px !important;
-	// margin-top: 30px !important;
-	margin-top: -25px !important;
+	// margin-top: -25px !important;
+	margin-top: 0px !important;
 	margin-bottom: 30px;
 }
 
@@ -18,19 +17,21 @@
 	text-align: center;
 	margin: 30px 0;
 	a.itinerary-download-button {
-		background: #f83531;
+		background: rgb(218, 218, 218);
 		// padding: 10px 40px 10px 20px;
 		padding: 10px 20px;
 		font-size: 18px;
 		border-radius: 3px;
-		color: #fff !important;
+		text-decoration: none;
+		color: #545454 !important;
 		transition: 0.3s ease-in-out linear;
 		i.fas.fa-download {
 			margin-left: 10px;
 			font-size: 14px;
 		}
 		&:hover {
-			background: #df1814;
+			color: #545454 !important;
+			background: #c7c7c7;
 		}
 		// position: relative;
 		// &::after {
