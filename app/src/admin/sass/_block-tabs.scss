@@ -445,21 +445,28 @@ td {
 			.components-base-control__help {
 				text-align: right;
 			}
-			// 	// .components-base-control__field {
-			// 	// 	.components-radio-control__option {
-			// 	// 		display: flex;
-			// 	// 		flex-wrap: nowrap;
-			// 	// 		justify-content: space-between;
-			// 	// 		align-items: center;
-			// 	// 		.components-radio-control__input {
-			// 	// 			margin-right: 0;
-			// 	// 		}
-			// 	// 		label {
-			// 	// 			margin-right: 7px;
-			// 	// 			margin-left: 5px;
-			// 	// 		}
-			// 	// 	}
-			// 	// }
+			.components-base-control__field {
+				.components-radio-control__option {
+					display: flex;
+					flex-wrap: nowrap;
+					justify-content: space-between;
+					align-items: center;
+					.components-radio-control__input {
+						margin-right: 0;
+					}
+					label {
+						margin-right: 7px;
+						margin-left: 5px;
+					}
+				}
+			}
+		}
+	}
+
+	.wp-travel-trip-faq {
+		.components-panel__row.wp-travel-action-section {
+			padding-top: 10px;
+			padding-bottom: 20px;
 		}
 	}
 }
