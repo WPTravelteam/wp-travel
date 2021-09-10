@@ -64,6 +64,12 @@
 			margin-top: 13px;
 			padding-top: 8px;
 			border-top: 1px solid #eee;
+			// width for color picker in wp travel email tab
+			.components-color-picker__inputs-fields {
+				.components-base-control {
+					width: 100% !important;
+				}
+			}
 		}
 		.components-base-control {
 			width: 100%;
@@ -80,9 +86,15 @@
 				}
 			}
 		}
-		.components-color-picker__inputs-toggle {
-			svg {
-				transform: rotate(-90deg);
+		.components-color-picker__inputs-toggle-wrapper {
+			position: relative;
+			top: 3px;
+			right: 38px;
+
+			.components-color-picker__inputs-toggle {
+				svg {
+					transform: rotate(-90deg);
+				}
 			}
 		}
 	}
@@ -390,7 +402,7 @@ td {
 	}
 }
 
-.wp-travel-ui.wp-travel-ui-card h4 {
+.wp-travel-ui.wp-travel-ui-card .components-panel__body.is-opened h4 {
 	padding-left: 30px;
 }
 
@@ -399,18 +411,55 @@ td {
 		.wp-travel-field-value {
 			.components-base-control {
 				.components-base-control__field {
-					.components-input-control__container {
-						.components-select-control__input {
-							height: auto;
-							padding-left: 0;
-							padding-right: 0;
+					.components-select-control {
+						.components-input-control__container {
+							select.components-select-control__input {
+								padding-left: 10px;
+								padding-right: 10px;
+							}
 						}
-						.components-input-control__suffix {
+					}
+					.components-input-control__container {
+						select[multiple] {
+							padding-left: 0 !important;
+							padding-right: 0 !important;
+						}
+						select[multiple] + span {
 							display: none;
 						}
+						.components-select-control__input {
+							height: auto;
+							// padding-left: 0;
+							// padding-right: 0;
+						}
+						// .components-input-control__suffix {
+						// 	display: none;
+						// }
 					}
 				}
 			}
+		}
+
+		.components-base-control {
+			width: 250px !important;
+			.components-base-control__help {
+				text-align: right;
+			}
+			// 	// .components-base-control__field {
+			// 	// 	.components-radio-control__option {
+			// 	// 		display: flex;
+			// 	// 		flex-wrap: nowrap;
+			// 	// 		justify-content: space-between;
+			// 	// 		align-items: center;
+			// 	// 		.components-radio-control__input {
+			// 	// 			margin-right: 0;
+			// 	// 		}
+			// 	// 		label {
+			// 	// 			margin-right: 7px;
+			// 	// 			margin-left: 5px;
+			// 	// 		}
+			// 	// 	}
+			// 	// }
 		}
 	}
 }
