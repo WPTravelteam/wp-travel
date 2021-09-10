@@ -1,18 +1,47 @@
-@import './node_modules/react-datepicker/src/stylesheets/datepicker.scss';
-
-
-
-
+@import "./node_modules/react-datepicker/src/stylesheets/datepicker.scss";
 
 // map
-.wp-travel-map{
-    iframe{
-        border: 0;
-    }
+.wp-travel-map {
+	iframe {
+		border: 0;
+	}
 }
 
 #send-email {
-    // margin-top: 85px !important;
-    // margin-top: 30px !important;
-    margin-top: 0 !important;
+	// margin-top: 85px !important;
+	// margin-top: 30px !important;
+	margin-top: -25px !important;
+	margin-bottom: 30px;
+}
+
+.wp-travel-itinerary-downloads {
+	text-align: center;
+	margin: 30px 0;
+	a.itinerary-download-button {
+		background: #f83531;
+		// padding: 10px 40px 10px 20px;
+		padding: 10px 20px;
+		font-size: 18px;
+		border-radius: 3px;
+		color: #fff !important;
+		i.fas.fa-download {
+			margin-left: 10px;
+			font-size: 14px;
+		}
+		// position: relative;
+		// &::after {
+		//     content: "";
+		//     background-image: url(../../../../assets/images/download-button.svg);
+		//     background-repeat: no-repeat;
+		//     background-position: center;
+		//     background-size: 100%;
+		//     position: absolute;
+		//     width: 15px;
+		//     height: 15px;
+		//     top: 50%;
+		//     left: 90%;
+		//     transform: translate(-50%, -50%);
+		//     filter: invert(100%) sepia(5%) saturate(499%) hue-rotate(28deg) brightness(113%) contrast(100%);
+		// }
+	}
 }
