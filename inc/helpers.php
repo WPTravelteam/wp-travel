@@ -2411,7 +2411,7 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 									$pricing_title = '';
 									if ( ! is_wp_error( $pricing_data ) && isset( $pricing_data['code'] ) && 'WP_TRAVEL_TRIP_PRICINGS' === $pricing_data['code'] ) {
 										$pricing       = $pricing_data['pricings'];
-										$pricing_title = $pricing[0]['title'];
+										$pricing_title = $pricing['title'];
 									}
 									if ( isset( $order_detail['trip'] ) ) { // @since 3.0.0.
 										$total = $order_detail['trip_price'];

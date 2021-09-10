@@ -29,7 +29,7 @@ $generate_user_password =  isset( $settings['generate_user_password'] ) ? $setti
 
 	<p><?php printf( __( 'Thanks for creating an account on %1$s. Your username is %2$s', 'wp-travel' ), esc_html( $blogname ), '<strong>' . esc_html( $user_login ) . '</strong>' ); ?></p>
 
-<?php if ( 'yes' === $generate_username_from_email && $password_generated ) : ?>
+<?php if ( 'yes' === $generate_user_password && $password_generated ) : ?>
 
 	<p><?php printf( __( 'Your password has been automatically generated: %s', 'wp-travel' ), '<strong>' . esc_html( $user_pass ) . '</strong>' ); ?></p>
 
