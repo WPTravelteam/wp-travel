@@ -245,20 +245,19 @@ Before updating plugin please check ["our latest release notes"](#developers).
 == Changelog ==
 
 = 5.0.1 =
-Release Date: 12, 2021
+Release Date: 12th September, 2021
 
 Fixes:
-* Fixed group discount, custom filters and excerpt data is not being cloning.
+* Fixed group discount, custom filters, and excerpt data clone issue.
 * Fixed Marketplace page layout issue and other minor layout issue fixes.
 * Fixed Overview tab layout issue due to recent changes on overview and other frontend tabs.
 * Fixed Trip date issue with timezone.
-* Fixed Checkout page translation issue.
-* Fixed Translation issue.
-* Fixed Minor layout issue in admin.
+* Fixed Checkout page and other translation issues.
+* Fixed Minor layout issue in the admin.
 * Fixed unsupported character issue in password reset and customer creation email.
 
 Tweaks:
-* Enhanced trip edit blocks with hooks. 
+* Enhanced trip edit blocks with hooks.  Fetched all tab content using wp hooks.
 
 = 5.0.0 =
 Release Date: 29 August, 2021
