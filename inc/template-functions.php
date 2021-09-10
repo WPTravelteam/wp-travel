@@ -1399,6 +1399,8 @@ function wptravel_save_offer( $trip_id ) {
 	if ( ! $trip_id ) {
 		return;
 	}
+	$strings     = WpTravel_Helpers_Strings::get();
+	$save_label  = $strings['save'];
 	$enable_sale = WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => $trip_id ) );
 
 	if ( ! $enable_sale ) {
@@ -1414,7 +1416,7 @@ function wptravel_save_offer( $trip_id ) {
 		$save = ( 1 - ( $trip_price / $regular_price ) ) * 100;
 		$save = number_format( $save, 2, '.', ',' );
 		?>
-		<div class="wp-travel-savings"><?php printf( 'save <span>%s&#37;</span>', $save ); ?></div>
+		<div class="wp-travel-savings"><?php printf( '%s <span>%s&#37;</span>', $save_label, $save ); ?></div>
 		<?php
 	}
 }
