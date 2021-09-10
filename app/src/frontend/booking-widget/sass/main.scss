@@ -24,9 +24,13 @@
 		font-size: 18px;
 		border-radius: 3px;
 		color: #fff !important;
+		transition: 0.3s ease-in-out linear;
 		i.fas.fa-download {
 			margin-left: 10px;
 			font-size: 14px;
+		}
+		&:hover {
+			background: #df1814;
 		}
 		// position: relative;
 		// &::after {
