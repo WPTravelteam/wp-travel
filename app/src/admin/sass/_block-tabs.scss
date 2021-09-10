@@ -432,9 +432,6 @@ td {
 							// padding-left: 0;
 							// padding-right: 0;
 						}
-						// .components-input-control__suffix {
-						// 	display: none;
-						// }
 					}
 				}
 			}
@@ -447,10 +444,10 @@ td {
 			}
 			.components-base-control__field {
 				.components-radio-control__option {
-					display: flex;
-					flex-wrap: nowrap;
-					justify-content: space-between;
-					align-items: center;
+					// display: flex;
+					// flex-wrap: nowrap;
+					// justify-content: space-between;
+					// align-items: center;
 					.components-radio-control__input {
 						margin-right: 0;
 					}
@@ -471,10 +468,35 @@ td {
 	}
 
 	.wp-travel-sortable-component {
-		.components-panel__body.is-opened {
-			.components-panel__row.wp-travel-has-child-panel {
-				overflow-x: auto;
+		.components-panel__body {
+			&.is-opened {
+				.components-panel__row.wp-travel-has-child-panel {
+					// overflow-x: auto;
+					table.wp-list-table {
+						tbody {
+							tr {
+								td {
+									.components-base-control {
+										width: 100% !important;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.wptag-tab-content {
+		.wp-travel-advanced-gallery {
+			.wptag__media-card {
+				.wptag__media-detail-form {
+					width: 100%;
+				}
 			}
 		}
 	}
 }
+
+

@@ -239,6 +239,11 @@
 			min-width: 50%;
 			max-width: 100%;
 			width: 100%;
+			.components-panel__body {
+				.components-panel__body-title {
+					padding-left: 0 !important;
+				}
+			}
 		}
 	}
 
@@ -311,19 +316,19 @@
 		}
 	}
 
- // Inventory Options
- .components-panel__row {
-   .components-base-control {
-     .components-base-control__field {
-       display: flex;
-       justify-content: flex-start;
-       flex-direction: row-reverse;
-       .components-form-toggle {
-         margin-right: 0;
-       }
-     }
-   }
- }
+	// Inventory Options
+	.components-panel__row {
+		.components-base-control {
+			.components-base-control__field {
+				display: flex;
+				justify-content: flex-start;
+				flex-direction: row-reverse;
+				.components-form-toggle {
+					margin-right: 0;
+				}
+			}
+		}
+	}
 }
 
 .wp-travel-trip-edit-menu .components-panel__icon {
@@ -368,10 +373,24 @@
 							}
 						}
 						.components-tab-panel__tab-content {
-							h2 {
-								// padding-left: 0 !important;
-								padding-left: 20px !important;
+							.wp-travel-trip-pricings {
+								.wp-travel-sortable-component {
+									.components-panel__body {
+										h2 {
+											// padding-left: 0 !important;
+											padding-left: 20px !important;
+										}
+									}
+									.components-panel__row.wp-travel-has-child-panel {
+										.wp-travel-panel-wrap {
+											h2 {
+												padding-left: 0 !important;
+											}
+										}
+									}
+								}
 							}
+
 							hr {
 								display: none;
 							}
@@ -443,7 +462,8 @@
 								width: 250px;
 								.components-base-control__field {
 									justify-content: flex-start;
-									flex-direction: row-reverse;
+									// flex-direction: row-reverse;
+									flex-direction: column;
 									.components-form-toggle {
 										margin-right: 0;
 									}
@@ -575,7 +595,7 @@
 .wp-travel-sortable-component {
 	.components-panel__body {
 		.components-panel__body-title {
-			padding: 0 !important;
+			padding-left: 20px !important;
 			.components-button {
 				padding-left: 30px;
 				// For both section wp-travel-react-test and block section
