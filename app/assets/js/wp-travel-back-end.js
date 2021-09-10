@@ -407,7 +407,7 @@
 
         var data = {
             post_id: post_id,
-            security: security,
+            _nonce: _wp_travel_admin._nonce,
             action: 'wp_travel_clone_trip'
         }
         $.ajax({
