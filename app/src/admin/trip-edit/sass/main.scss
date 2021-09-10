@@ -748,3 +748,17 @@ div[aria-labelledby="0-itinerary"] {
 		}
 	}
 }
+
+.components-popover .components-popover__content {
+    
+    overflow: auto;
+}
+.components-base-control {
+	&.components-range-control {
+		.components-range-control__root {
+			.components-input-control__container {
+				width: 80px !important;
+			}
+		}
+	}
+}
