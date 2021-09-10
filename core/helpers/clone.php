@@ -24,9 +24,6 @@ class WpTravel_Helpers_Clone {
 	 * @deprecated 5.0.1
 	 */
 	public static function clone_trip( $payload ) {
-		// Run a security check first.
-		// check_ajax_referer( 'wp_travel_clone_post_nonce', 'security' );
-
 		if ( ! isset( $payload['post_id'] ) ) {
 			return;
 		}
