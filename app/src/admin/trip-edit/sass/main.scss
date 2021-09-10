@@ -318,9 +318,10 @@
 
 	// Inventory Options
 	.components-panel__row {
+		margin: 20px 0;
 		.components-base-control {
 			.components-base-control__field {
-				display: flex;
+				// display: flex;
 				justify-content: flex-start;
 				flex-direction: row-reverse;
 				.components-form-toggle {
