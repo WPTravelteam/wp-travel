@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 5.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 04:50:29+00:00\n"
+"POT-Creation-Date: 2021-09-10 09:04:41+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -3490,7 +3490,7 @@ msgid "Coupon applied succesfully."
 msgstr ""
 
 #: inc/class-default-form-fields.php:83
-#: inc/class-wp-travel-form-handler.php:281
+#: inc/class-wp-travel-form-handler.php:280
 #: templates/account/tab-content/address.php:8
 msgid "Billing Address"
 msgstr ""
@@ -3912,72 +3912,72 @@ msgstr ""
 msgid "Username can not be empty"
 msgstr ""
 
-#: inc/class-wp-travel-form-handler.php:199
+#: inc/class-wp-travel-form-handler.php:198
 msgid "Please enter your password."
 msgstr ""
 
-#: inc/class-wp-travel-form-handler.php:203
+#: inc/class-wp-travel-form-handler.php:202
 msgid "Passwords do not match"
 msgstr ""
 
-#: inc/class-wp-travel-form-handler.php:282
+#: inc/class-wp-travel-form-handler.php:281
 msgid "Billing City"
 msgstr ""
 
-#: inc/class-wp-travel-form-handler.php:283
+#: inc/class-wp-travel-form-handler.php:282
 msgid "ZIP Code"
 msgstr ""
 
-#: inc/class-wp-travel-form-handler.php:289
-#: inc/class-wp-travel-form-handler.php:366
+#: inc/class-wp-travel-form-handler.php:288
+#: inc/class-wp-travel-form-handler.php:365
 msgid "%s is a required field."
 msgstr ""
 
-#: inc/class-wp-travel-form-handler.php:306
+#: inc/class-wp-travel-form-handler.php:305
 msgid "Billing Details Updated Successfully"
 msgstr ""
 
-#: inc/class-wp-travel-form-handler.php:359
+#: inc/class-wp-travel-form-handler.php:358
 msgid "First name"
 msgstr ""
 
-#: inc/class-wp-travel-form-handler.php:360
+#: inc/class-wp-travel-form-handler.php:359
 msgid "Last name"
 msgstr ""
 
-#: inc/class-wp-travel-form-handler.php:361
+#: inc/class-wp-travel-form-handler.php:360
 msgid "Email address"
 msgstr ""
 
-#: inc/class-wp-travel-form-handler.php:373
+#: inc/class-wp-travel-form-handler.php:372
 msgid "Please Provide a valid email address"
 msgstr ""
 
-#: inc/class-wp-travel-form-handler.php:375
+#: inc/class-wp-travel-form-handler.php:374
 msgid "The email address is already registered"
 msgstr ""
 
-#: inc/class-wp-travel-form-handler.php:381
+#: inc/class-wp-travel-form-handler.php:380
 msgid "Please Fill Out All Password Fields."
 msgstr ""
 
-#: inc/class-wp-travel-form-handler.php:384
+#: inc/class-wp-travel-form-handler.php:383
 msgid "Please Enter Your Current Password"
 msgstr ""
 
-#: inc/class-wp-travel-form-handler.php:387
+#: inc/class-wp-travel-form-handler.php:386
 msgid "Please re-enter your password"
 msgstr ""
 
-#: inc/class-wp-travel-form-handler.php:390
+#: inc/class-wp-travel-form-handler.php:389
 msgid "New Passwords do not match"
 msgstr ""
 
-#: inc/class-wp-travel-form-handler.php:393
+#: inc/class-wp-travel-form-handler.php:392
 msgid "Your current password is incorrect"
 msgstr ""
 
-#: inc/class-wp-travel-form-handler.php:414
+#: inc/class-wp-travel-form-handler.php:413
 msgid "Account Details Updated Successfully"
 msgstr ""
 

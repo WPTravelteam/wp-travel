@@ -112,9 +112,8 @@ class Wp_Travel_Form_Handler {
 			$generate_user_password = isset( $settings['generate_user_password'] ) ? $settings['generate_user_password'] : 'no';
 
 			$username = 'no' === $generate_username_from_email ? trim( sanitize_text_field( wp_unslash( $_POST['username'] ) ) ) : ''; // phpcs:ignore
-			$password = 'no' === $generate_user_password ? sanitize_text_field( wp_unslash( $_POST['username'] ) ) : ''; // phpcs:ignore
+			$password = 'no' === $generate_user_password ? sanitize_text_field( wp_unslash( $_POST['password'] ) ) : ''; // phpcs:ignore
 			$email    = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
-
 			try {
 				$validation_error = new WP_Error();
 				$validation_error = apply_filters( 'wp_travel_process_registration_errors', $validation_error, $username, $password, $email );

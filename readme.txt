@@ -255,6 +255,8 @@ Fixes:
 * Fixed Checkout page and other translation issues.
 * Fixed Minor layout issue in the admin.
 * Fixed unsupported character issue in password reset and customer creation email.
+* Fixed password is auto-generated even Automatically generate password is off in the admin settings.
+* Fixed pricing title not displaying in admin booking detail and dashboard page.
 
 Tweaks:
 * Enhanced trip edit blocks with hooks.  Fetched all tab content using wp hooks.
