@@ -254,7 +254,8 @@ Fixes:
 * Fixed Trip date issue with timezone.
 * Fixed Checkout page translation issue.
 * Fixed Translation issue.
-* Minor style issue fixes.
+* Fixed Minor layout issue in admin.
+* Fixed unsupported character issue in password reset and customer creation email.
 
 Tweaks:
 * Enhanced trip edit blocks with hooks. 

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 5.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-09 08:42:05+00:00\n"
+"POT-Creation-Date: 2021-09-09 12:00:00+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -110,7 +110,7 @@ msgstr ""
 msgid "Departure Date"
 msgstr ""
 
-#: core/helpers/booking.php:91 inc/helpers.php:2467
+#: core/helpers/booking.php:91 inc/helpers.php:2462
 msgid "Additional Services"
 msgstr ""
 
@@ -346,8 +346,8 @@ msgstr ""
 #: inc/currencies.php:342 inc/helpers/helpers-stat.php:252
 #: inc/helpers/helpers-stat.php:450 inc/helpers/helpers-stat.php:559
 #: inc/helpers.php:750 inc/helpers.php:795 inc/helpers.php:823
-#: inc/helpers.php:2240 inc/helpers.php:2974 inc/helpers.php:3028
-#: inc/helpers.php:3389 inc/helpers.php:3615 inc/helpers.php:3688
+#: inc/helpers.php:2235 inc/helpers.php:2969 inc/helpers.php:3023
+#: inc/helpers.php:3384 inc/helpers.php:3610 inc/helpers.php:3683
 #: templates/shortcode/itinerary-item-new.php:158
 msgid "N/A"
 msgstr ""
@@ -368,32 +368,32 @@ msgstr ""
 msgid "Select Files from Your Computer"
 msgstr ""
 
-#: core/helpers/payment.php:49 inc/helpers.php:2565
+#: core/helpers/payment.php:49 inc/helpers.php:2560
 msgid "Payment Details"
 msgstr ""
 
 #: core/helpers/payment.php:53 core/helpers/strings.php:216
 #: inc/admin/admin-helper.php:429 inc/admin/class-dashboard-widgets.php:57
-#: inc/framework/form/class.field.php:76 inc/helpers.php:2568
+#: inc/framework/form/class.field.php:76 inc/helpers.php:2563
 #: templates/itineraries-list.php:57 upgrade/400.php:390 upgrade/400.php:425
 msgid "Date"
 msgstr ""
 
-#: core/helpers/payment.php:54 inc/helpers.php:2569
+#: core/helpers/payment.php:54 inc/helpers.php:2564
 msgid "Payment ID / Txn ID"
 msgstr ""
 
-#: core/helpers/payment.php:55 inc/helpers.php:2570
+#: core/helpers/payment.php:55 inc/helpers.php:2565
 msgid "Payment Method"
 msgstr ""
 
 #: core/helpers/payment.php:56 inc/email-template-functions.php:1328
 #: inc/email-template-functions.php:1534 inc/form-fields.php:196
-#: inc/helpers.php:2571
+#: inc/helpers.php:2566
 msgid "Payment Amount"
 msgstr ""
 
-#: core/helpers/payment.php:93 inc/helpers.php:2606
+#: core/helpers/payment.php:93 inc/helpers.php:2601
 msgid "View Payment Receipt"
 msgstr ""
 
@@ -606,7 +606,7 @@ msgstr ""
 #: core/helpers/strings.php:46 core/helpers/strings.php:85
 #: inc/admin/views/tabs/tab-contents/itineraries/misc-options.php:21
 #: inc/admin/views/tabs/tab-contents/itineraries/misc-options.php:39
-#: inc/helpers.php:2079 inc/itinerary-v2-functions.php:243
+#: inc/helpers.php:2074 inc/itinerary-v2-functions.php:243
 #: inc/template-functions.php:614
 msgid "Trip Enquiry"
 msgstr ""
@@ -1315,8 +1315,8 @@ msgid "FAQs"
 msgstr ""
 
 #: core/helpers/strings.php:245 inc/admin/class-admin-metaboxes.php:112
-#: inc/admin/class-admin-metaboxes.php:113 inc/helpers.php:2932
-#: inc/helpers.php:2933
+#: inc/admin/class-admin-metaboxes.php:113 inc/helpers.php:2927
+#: inc/helpers.php:2928
 msgid "Downloads"
 msgstr ""
 
@@ -1334,15 +1334,15 @@ msgstr ""
 msgid "Please select at least minimum pax."
 msgstr ""
 
-#: core/helpers/strings.php:261 inc/helpers.php:2722
+#: core/helpers/strings.php:261 inc/helpers.php:2717
 msgid "Pax should be between {min_pax} and {max_pax}."
 msgstr ""
 
-#: core/helpers/strings.php:262 inc/helpers.php:2726
+#: core/helpers/strings.php:262 inc/helpers.php:2721
 msgid "Pax should be lower than or equal to {max_pax}."
 msgstr ""
 
-#: core/helpers/strings.php:263 inc/helpers.php:2724
+#: core/helpers/strings.php:263 inc/helpers.php:2719
 msgid "Pax should be greater than or equal to {min_pax}."
 msgstr ""
 
@@ -1374,7 +1374,7 @@ msgstr ""
 msgid "Are you sure to delete this price?"
 msgstr ""
 
-#: core/helpers/strings.php:271 inc/helpers.php:2734
+#: core/helpers/strings.php:271 inc/helpers.php:2729
 msgid "Pax is required."
 msgstr ""
 
@@ -1580,7 +1580,7 @@ msgstr ""
 msgid "View Detail"
 msgstr ""
 
-#: inc/admin/admin-helper.php:117 inc/helpers.php:2895 inc/helpers.php:2896
+#: inc/admin/admin-helper.php:117 inc/helpers.php:2890 inc/helpers.php:2891
 msgid "Marketplace"
 msgstr ""
 
@@ -1700,7 +1700,7 @@ msgid "Payment Mode"
 msgstr ""
 
 #: inc/admin/admin-helper.php:585 inc/email-template-functions.php:1280
-#: inc/email-template-functions.php:1486 inc/helpers.php:2202
+#: inc/email-template-functions.php:1486 inc/helpers.php:2197
 #: templates/account/tab-content/bookings.php:74
 #: templates/account/tab-content/bookings.php:147
 msgid "Payment Status"
@@ -1921,7 +1921,7 @@ msgid "Payment Date : "
 msgstr ""
 
 #: inc/admin/class-admin-metaboxes.php:249
-#: inc/admin/class-dashboard-widgets.php:55 inc/helpers.php:2876
+#: inc/admin/class-dashboard-widgets.php:55 inc/helpers.php:2871
 msgid "Status"
 msgstr ""
 
@@ -2072,8 +2072,8 @@ msgid ""
 msgstr ""
 
 #: inc/admin/class-admin-settings.php:48
-#: inc/admin/class-network-settings.php:67 inc/helpers.php:2908
-#: inc/helpers.php:2916 inc/helpers.php:2924
+#: inc/admin/class-network-settings.php:67 inc/helpers.php:2903
+#: inc/helpers.php:2911 inc/helpers.php:2919
 msgid "WP Travel Settings"
 msgstr ""
 
@@ -3412,7 +3412,7 @@ msgstr ""
 msgid "Trip"
 msgstr ""
 
-#: inc/cart/cart-mini.php:428 inc/cart/cart-mini.php:610 inc/helpers.php:2531
+#: inc/cart/cart-mini.php:428 inc/cart/cart-mini.php:610 inc/helpers.php:2526
 #: templates/content-cart.php:56 templates/content-cart.php:283
 msgid "Total"
 msgstr ""
@@ -3451,7 +3451,7 @@ msgid "Show all your \"%s\" settings and enable its feature."
 msgstr ""
 
 #: inc/class-ajax.php:344 inc/class-ajax.php:387 inc/helpers.php:1376
-#: inc/helpers.php:3381
+#: inc/helpers.php:3376
 msgid "Custom"
 msgstr ""
 
@@ -3545,7 +3545,7 @@ msgid "Female"
 msgstr ""
 
 #: inc/class-notices.php:77 inc/class-wp-travel-form-handler.php:52
-#: inc/class-wp-travel-form-handler.php:56 inc/wp-travel-user-functions.php:128
+#: inc/class-wp-travel-form-handler.php:56 inc/wp-travel-user-functions.php:123
 msgid "Error:"
 msgstr ""
 
@@ -4012,7 +4012,7 @@ msgstr ""
 msgid "Password reset is not allowed for this user."
 msgstr ""
 
-#: inc/class-wp-travel-user-account.php:295
+#: inc/class-wp-travel-user-account.php:290
 msgid "Password Reset Request"
 msgstr ""
 
@@ -5355,23 +5355,23 @@ msgstr ""
 msgid "Account Detail"
 msgstr ""
 
-#: inc/gateways/bank-deposit/settings.php:73 inc/helpers.php:2808
+#: inc/gateways/bank-deposit/settings.php:73 inc/helpers.php:2803
 msgid "Account Name"
 msgstr ""
 
-#: inc/gateways/bank-deposit/settings.php:74 inc/helpers.php:2811
+#: inc/gateways/bank-deposit/settings.php:74 inc/helpers.php:2806
 msgid "Account Number"
 msgstr ""
 
-#: inc/gateways/bank-deposit/settings.php:75 inc/helpers.php:2814
+#: inc/gateways/bank-deposit/settings.php:75 inc/helpers.php:2809
 msgid "Bank Name"
 msgstr ""
 
-#: inc/gateways/bank-deposit/settings.php:76 inc/helpers.php:2817
+#: inc/gateways/bank-deposit/settings.php:76 inc/helpers.php:2812
 msgid "Sort Code"
 msgstr ""
 
-#: inc/gateways/bank-deposit/settings.php:77 inc/helpers.php:2820
+#: inc/gateways/bank-deposit/settings.php:77 inc/helpers.php:2815
 msgid "IBAN"
 msgstr ""
 
@@ -9067,7 +9067,7 @@ msgstr ""
 msgid "Location:"
 msgstr ""
 
-#: inc/helpers.php:651 inc/helpers.php:2144
+#: inc/helpers.php:651 inc/helpers.php:2139
 msgid "Search"
 msgstr ""
 
@@ -9128,104 +9128,104 @@ msgstr ""
 msgid "Couple"
 msgstr ""
 
-#: inc/helpers.php:1580
+#: inc/helpers.php:1575
 msgid "New Account Created"
 msgstr ""
 
-#: inc/helpers.php:1874
+#: inc/helpers.php:1869
 msgid "%s days"
 msgstr ""
 
-#: inc/helpers.php:2217
+#: inc/helpers.php:2212
 msgid "Order Status"
 msgstr ""
 
-#: inc/helpers.php:2219
+#: inc/helpers.php:2214
 msgid "Order Number :"
 msgstr ""
 
-#: inc/helpers.php:2223
+#: inc/helpers.php:2218
 msgid "Booking Date :"
 msgstr ""
 
-#: inc/helpers.php:2227
+#: inc/helpers.php:2222
 msgid "Tour :"
 msgstr ""
 
-#: inc/helpers.php:2257
+#: inc/helpers.php:2252
 msgid "Travel Date :"
 msgstr ""
 
-#: inc/helpers.php:2370
+#: inc/helpers.php:2365
 msgid "Name :"
 msgstr ""
 
-#: inc/helpers.php:2374
+#: inc/helpers.php:2369
 msgid "Country :"
 msgstr ""
 
-#: inc/helpers.php:2378
+#: inc/helpers.php:2373
 msgid "Phone No. :"
 msgstr ""
 
-#: inc/helpers.php:2382
+#: inc/helpers.php:2377
 msgid "Email :"
 msgstr ""
 
-#: inc/helpers.php:2386
+#: inc/helpers.php:2381
 msgid "Date of Birth :"
 msgstr ""
 
-#: inc/helpers.php:2390
+#: inc/helpers.php:2385
 msgid "Gender :"
 msgstr ""
 
-#: inc/helpers.php:2404
+#: inc/helpers.php:2399
 msgid "Price Breakdown"
 msgstr ""
 
-#: inc/helpers.php:2501
+#: inc/helpers.php:2496
 msgid "Person/s"
 msgstr ""
 
-#: inc/helpers.php:2512
+#: inc/helpers.php:2507
 msgid "Sub Total Price"
 msgstr ""
 
-#: inc/helpers.php:2518
+#: inc/helpers.php:2513
 msgid "Discount Price"
 msgstr ""
 
-#: inc/helpers.php:2524
+#: inc/helpers.php:2519
 msgid "Tax"
 msgstr ""
 
-#: inc/helpers.php:2823
+#: inc/helpers.php:2818
 msgid "Swift"
 msgstr ""
 
-#: inc/helpers.php:2851
+#: inc/helpers.php:2846
 msgid "No detail found"
 msgstr ""
 
-#: inc/helpers.php:2875
+#: inc/helpers.php:2870
 msgid "System Status"
 msgstr ""
 
-#: inc/helpers.php:2882 inc/helpers.php:2883
+#: inc/helpers.php:2877 inc/helpers.php:2878
 msgid "Reports"
 msgstr ""
 
-#: inc/helpers.php:2889 inc/helpers.php:2890
+#: inc/helpers.php:2884 inc/helpers.php:2885
 msgid "Custom Filters"
 msgstr ""
 
-#: inc/helpers.php:2909 inc/helpers.php:2917 inc/helpers.php:2925
-#: wp-travel.php:214
+#: inc/helpers.php:2904 inc/helpers.php:2912 inc/helpers.php:2920
+#: wp-travel.php:212
 msgid "Settings"
 msgstr ""
 
-#: inc/helpers.php:3134 inc/helpers.php:3888
+#: inc/helpers.php:3129 inc/helpers.php:3883
 msgid "No gallery images found."
 msgstr ""
 
@@ -9553,7 +9553,7 @@ msgstr ""
 msgid "An account is already registered with that username. Please choose another."
 msgstr ""
 
-#: inc/wp-travel-user-functions.php:128
+#: inc/wp-travel-user-functions.php:123
 msgid ""
 "Couldn&#8217;t register you&hellip; please contact us if you continue to "
 "have problems."
@@ -9851,27 +9851,27 @@ msgstr ""
 msgid "View Gallery"
 msgstr ""
 
-#: templates/emails/customer-lost-password.php:28
+#: templates/emails/customer-lost-password.php:38
 msgid "Someone requested that the password be reset for the following account:"
 msgstr ""
 
-#: templates/emails/customer-lost-password.php:29
+#: templates/emails/customer-lost-password.php:39
 msgid "Username: %s"
 msgstr ""
 
-#: templates/emails/customer-lost-password.php:30
+#: templates/emails/customer-lost-password.php:40
 msgid "If this was a mistake, just ignore this email and nothing will happen."
 msgstr ""
 
-#: templates/emails/customer-lost-password.php:31
+#: templates/emails/customer-lost-password.php:41
 msgid "To reset your password, visit the following address:"
 msgstr ""
 
-#: templates/emails/customer-lost-password.php:34
+#: templates/emails/customer-lost-password.php:44
 msgid "Click here to reset your password"
 msgstr ""
 
-#: templates/emails/customer-lost-password.php:36
+#: templates/emails/customer-lost-password.php:46
 #: templates/emails/customer-new-account.php:39
 msgid "Powered by"
 msgstr ""
@@ -9952,15 +9952,15 @@ msgid ""
 "Please  Delete your WP Travel Standard Paypal addons from Plugin Directory."
 msgstr ""
 
-#: upgrade/update-137.php:25 wp-travel.php:477
+#: upgrade/update-137.php:25 wp-travel.php:475
 msgid "WP Travel Customer"
 msgstr ""
 
-#: wp-travel.php:93
+#: wp-travel.php:91
 msgid "trips"
 msgstr ""
 
-#: wp-travel.php:94
+#: wp-travel.php:92
 msgid "trip"
 msgstr ""
 

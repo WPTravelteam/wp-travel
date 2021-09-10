@@ -197,7 +197,7 @@ function wptravel_lostpassword_url() {
 	// 	// return;
 	// 	return $default_url = wp_lostpassword_url();
 	// }
-
+	$default_url = wp_lostpassword_url();
 	// Avoid loading too early.
 	if ( ! did_action( 'init' ) ) {
 		$url = $default_url;
