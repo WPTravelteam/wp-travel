@@ -91,6 +91,19 @@
 	}
 }
 
+#wp-travel-settings-block {
+	.wp-travel-block-tabs-wrapper {
+		.wp-travel-block-tabs {
+			.components-tab-panel__tab-content {
+				margin-top: 0;
+			}
+			// #tab-panel-0-general-view {
+			// 	margin-top: 0;
+			// }
+		}
+	}
+}
+
 #wp-travel-trip-options {
 	.inside {
 		padding: 0 !important;
