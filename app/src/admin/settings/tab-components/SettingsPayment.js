@@ -15,7 +15,7 @@ export default () => {
     }, []);
     let _allData = allData
 
-    const { updateSettings } = dispatch('WPTravel/Admin');
+    const { updateSettings, updateRequestSending } = dispatch('WPTravel/Admin');
     const {
         partial_payment,
         minimum_partial_payout,
@@ -92,6 +92,16 @@ export default () => {
             sorted_gateways: sortedPricing
         })
     }
+    const  array_move = (arr, old_index, new_index) => {
+        if (new_index >= arr.length) {
+            var k = new_index - arr.length + 1;
+            while (k--) {
+                arr.push(undefined);
+            }
+        }
+        arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+        return arr; // for testing
+    };
 
     let x = 1;
     return <div className="wp-travel-ui wp-travel-ui-card settings-general">
@@ -251,19 +261,39 @@ export default () => {
                         handle=".settings-general .components-panel__icon"
                     >
                         {
-                            sorted_gateways.map((gateway, index) => {
+                            sorted_gateways.map((gateway, tabIndex) => {
                                 let gateway_key = `payment_option_${gateway.key}`
                                 let gateway_enabled = 'undefined' != typeof allData[gateway_key] && allData[gateway_key] ? allData[gateway_key] : 'no';
                                 
-                                return <PanelBody
-                                    icon= {alignJustify}
-                                    title={ gateway.label }
-                                    initialOpen={false}
-                                    className={'no' == gateway_enabled ? 'ws-gateway gateway-disabled' : 'ws-gateway gateway-enabled' }
-                                >
+                                return <div style={{position:'relative'}}>
+                                    <div className={`wptravel-swap-list`}>
+                                        <button
+                                        disabled={0 === tabIndex}
+                                        onClick={(e) => {
+                                            let sorted = array_move( sorted_gateways, tabIndex, tabIndex - 1 )
+                                            sortGateways(sorted)
+                                            updateRequestSending(true); // Temp fixes to reload the content.
+                                            updateRequestSending(false);
+                                        }}><i className="dashicons dashicons-arrow-up"></i></button>
+                                        <button
+                                        disabled={(sorted_gateways.length-1) === tabIndex}
+                                        onClick={(e) => {
+                                            let sorted = array_move( sorted_gateways, tabIndex, tabIndex + 1 )
+                                            sortGateways(sorted)
+                                            updateRequestSending(true);
+                                            updateRequestSending(false);
+                                        }}><i className="dashicons dashicons-arrow-down"></i></button>
+                                    </div>
+                                    <PanelBody
+                                        icon= {alignJustify}
+                                        title={ gateway.label }
+                                        initialOpen={false}
+                                        className={'no' == gateway_enabled ? 'ws-gateway gateway-disabled' : 'ws-gateway gateway-enabled' }
+                                    >
 
-                                    {applyFilters( `wp_travel_payment_gateway_fields_${gateway.key}`, [], allData )}
-                                </PanelBody>
+                                        {applyFilters( `wp_travel_payment_gateway_fields_${gateway.key}`, [], allData )}
+                                    </PanelBody>
+                                </div>
                             } )
                         }
 

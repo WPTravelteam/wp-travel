@@ -2,12 +2,15 @@
 .settings-general{
     .components-panel__body.ws-gateway  {
         .components-panel__body-title{
+            .components-panel__body-toggle{
+                padding-left: 70px !important;
+            }
             button:after{
                 font-family: dashicons;
                 content: "\f12a";
                 font-size: 20px;
                 position: absolute;
-                right: 45px;
+                left: 40px;
             }
         }
         &.gateway-enabled{
@@ -24,4 +27,7 @@
     padding: 20px;
     background: #fcfcfc;
     border-bottom: 1px solid #e6e6e6;
+}
+.wp-travel-block-payment {
+    
 }
