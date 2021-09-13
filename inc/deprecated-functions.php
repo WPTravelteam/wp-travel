@@ -47,20 +47,27 @@ function wptravel_do_deprecated_action( $tag, $args, $version, $replacement = nu
  * Runs a deprecated filter with notice only if used.
  *
  * @since 4.4.7
+ * @since 5.0.2 Filter Notice added and deprication flow fixes.
  * @param string $tag         The name of the action hook.
  * @param array  $args        Array of additional function arguments to be passed to do_action().
  * @param string $version     The version of WooCommerce that deprecated the hook.
  * @param string $replacement The hook that should have been used.
  * @param string $message     A message regarding the change.
+ *
+ * @return mixed
  */
 function wptravel_do_deprecated_filter( $tag, $args, $version, $replacement = null, $message = null ) {
-	if ( has_filter( $tag ) ) {
-		error_log( 'has old filter' );
-		// return apply_filters_deprecated( $tag, $args, $version, $replacement );
-		return apply_filters_ref_array( $tag, $args ); //@phpcs:ignore
+	if ( ! has_filter( $tag ) ) {
+		return;
 	}
-	return $args[0];
-	// wptravel_deprecated_hook( $tag, $version, $replacement, $message );
+	global $wp_filter, $wp_current_filter;
+	wptravel_deprecated_hook( $tag, $version, $replacement, $message );
+
+	$value = $args[0];
+
+	$filtered = $wp_filter[ $tag ]->apply_filters( $value, $args );
+	array_pop( $wp_current_filter );
+	return $filtered;
 }
 
 /**
