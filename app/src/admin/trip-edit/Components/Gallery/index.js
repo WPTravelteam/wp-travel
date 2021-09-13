@@ -120,7 +120,7 @@ const SimpleGallery = ({allData}) => {
         galleryMediaInstance && galleryMediaInstance.open()
     }
 
-    return <div className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-no-border">
+    return <div className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-no-border wp-travel-sortable-component">
         <Gallery
             images={gallery}
             onImageRemove={onRemoveImageHandle}
