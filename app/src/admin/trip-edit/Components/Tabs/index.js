@@ -1,4 +1,4 @@
-import { TextControl, PanelRow, PanelBody, Disabled, Notice, ToggleControl } from '@wordpress/components';
+import { TextControl, PanelRow, PanelBody, Disabled, Notice, ToggleControl, Button } from '@wordpress/components';
 import { applyFilters, addFilter } from '@wordpress/hooks';
 import { useSelect, dispatch } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
@@ -58,9 +58,32 @@ const TripTabsUseGlobal = ( {allData} ) => {
     </PanelRow>
 }
 
+// Swap any array or object as per provided index.
+const  swapList = (data, old_index, new_index) => {
+    if ( 'object' === typeof data ) {
+        if (new_index >= Object.keys(data).length) {
+            var k = new_index - Object.keys(data).length + 1;
+            while (k--) {
+                data.push(undefined);
+            }
+        }
+        data.splice(new_index, 0, data.splice(old_index, 1)[0]);
+    }
+    if ( 'array' === typeof data ) {
+        if (new_index >= data.length) {
+            var k = new_index - data.length + 1;
+            while (k--) {
+                data.push(undefined);
+            }
+        }
+        data.splice(new_index, 0, data.splice(old_index, 1)[0]);
+    }
+    return data;
+};
+
 const TripTabs = ( {allData} ) => {
     
-    const { updateTripData } = dispatch('WPTravel/TripEdit');
+    const { updateTripData, updateRequestSending } = dispatch('WPTravel/TripEdit');
 
     const updateTabOption = (key, value, _tabIndex) => {
 
@@ -90,7 +113,29 @@ const TripTabs = ( {allData} ) => {
                 >
                 {
                     trip_tabs.map(function (tab, tabIndex) {
-                        return <PanelBody
+                        let index            = parseInt(tabIndex);
+                        return <div style={{position:'relative'}}  data-index={index} key={index} >
+                            <div className={`wptravel-swap-list`}>
+                            <Button
+                            // style={{padding:0, display:'block'}}
+                            disabled={0 == index}
+                            onClick={(e) => {
+                                let sorted = swapList( trip_tabs, index, index - 1 )
+                                sortTabs(sorted)
+                                updateRequestSending(true); // Temp fixes to reload the content.
+                                updateRequestSending(false);
+                            }}><i className="dashicons dashicons-arrow-up"></i></Button>
+                            <Button 
+                            // style={{padding:0, display:'block'}}
+                            disabled={( Object.keys(trip_tabs).length - 1 ) === index}
+                            onClick={(e) => {
+                                let sorted = swapList( faqs, index, index + 1 )
+                                sortTabs(sorted)
+                                updateRequestSending(true);
+                                updateRequestSending(false);
+                            }}><i className="dashicons dashicons-arrow-down"></i></Button>
+                        </div>
+                        <PanelBody
                             icon= {alignJustify}
                             title={tab.label ? tab.label : tab.default_label }
                             initialOpen={false}
@@ -128,6 +173,7 @@ const TripTabs = ( {allData} ) => {
                             }
 
                         </PanelBody>
+                        </div>
                     })
                 }
             </ReactSortable></div>
