@@ -148,7 +148,7 @@ const Itinerary = ({allData}) => {
 											updateRequestSending(true); // Temp fixes to reload the content.
 											updateRequestSending(false);
 										}}><i className="dashicons dashicons-arrow-up"></i></Button>
-										<Button 
+										<Button
 										// style={{padding:0, display:'block'}}
 										disabled={( Object.keys(itineraries).length - 1 ) === index}
 										onClick={(e) => {
@@ -219,7 +219,7 @@ const Itinerary = ({allData}) => {
                                     </PanelRow>
                                     <PanelRow>
                                         <label>{__i18n.itinerary_time}</label>
-                                        
+
                                         <Dropdown
                                             className="my-container-class-name"
                                             contentClassName="my-popover-content-classname"
@@ -265,16 +265,16 @@ const Itinerary = ({allData}) => {
                                                         let time = `${_hours}:${_minutes}`;
 
                                                         // @todo: Need to format time.
-                                                        updateTripItinerary('time', time, itineraryId) 
+                                                        updateTripItinerary('time', time, itineraryId)
                                                         // updateTripItinerary('time', moment.time(time).format('hh:mm a', time), itineraryId)
-                                                        
+
                                                         onToggle()
                                                     }} isDefault>{__i18n.add}</Button>
-                
+
                                                 </div>
                                                 </div>
                                             ) }
-                                            
+
                                         />
                                     </PanelRow>
                                     {applyFilters('wp_travel_itinerary_list_before_description', '', itineraryId)}
@@ -338,3 +338,6 @@ const ItineraryCB = ( content, allData ) => {
 addFilter( 'wptravel_trip_edit_tab_content_itinerary', 'WPTravel\TripEdit\TripCode', TripCodeCB, 10 );
 addFilter( 'wptravel_trip_edit_tab_content_itinerary', 'WPTravel\TripEdit\TripOutline', TripOutlineCB, 20 );
 addFilter( 'wptravel_trip_edit_tab_content_itinerary', 'WPTravel\TripEdit\Itinerary', ItineraryCB, 30 );
+
+addFilter( 'wp_travel_block_trip_edit_tab_trip_outline', 'WPTravel/TripEdit/Block/Outline/TripOutline', TripOutlineCB );
+addFilter( 'wp_travel_block_trip_edit_tab_trip_outline', 'WPTravel/TripEdit/Block/Outline/Itinerary', ItineraryCB );

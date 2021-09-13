@@ -32,10 +32,10 @@ const FaqsNotice = () => {
 }
 
 const Faqs = ({allData}) => {
-   
+
     const { updateTripData, addNewFaq, updateRequestSending } = dispatch('WPTravel/TripEdit');
     const { faqs, utilities } = allData;
-    
+
     const updateTripFaqs = (key, value, _faqId) => {
 
         const { faqs } = allData;
@@ -93,7 +93,7 @@ const Faqs = ({allData}) => {
         return data;
     };
 
-    // get swap index for FAQ. 
+    // get swap index for FAQ.
     let customSwapIndexes = 'undefined' != typeof faqs && Object.keys(faqs).map(function (faqId) {
         let i = parseInt(faqId);
         let globalFaq = 'yes' ===faqs[i].global
@@ -131,7 +131,7 @@ const Faqs = ({allData}) => {
                         })
                         let len = upIndexes.length;
                         upIndex = 'undefined' != typeof upIndexes && 'undefined' != typeof upIndexes[len-1] ? parseInt( upIndexes[len-1] ) : upIndex;
-                    } 
+                    }
                 } else {
                     // Filter if only trip faq is used
 
@@ -161,11 +161,11 @@ const Faqs = ({allData}) => {
                     upIndex = 'undefined' != typeof upIndexes && 'undefined' != typeof upIndexes[len-1] ? parseInt( upIndexes[len-1] ) : upIndex;
 
                 }
-            } 
+            }
         }
         return {index:i, upIndex: upIndex, downIndex: downIndex, global:globalFaq }
     })
-    
+
 
     let startIndex = 0;
     let endIndex   = typeof faqs != 'undefined' &&  Object.keys(faqs).length > 0 ? parseInt( Object.keys(faqs).length -1 ) : 0;
@@ -182,7 +182,7 @@ const Faqs = ({allData}) => {
                         startIndex = parseInt(indexes[0]);
                         endIndex = parseInt(indexes[ indexes.length - 1 ]);
                     }
-                    
+
                 }
             } else {
                 // Filter if only trip faq is used
@@ -193,17 +193,17 @@ const Faqs = ({allData}) => {
                     startIndex = parseInt(indexes[0]);
                     endIndex = parseInt(indexes[ indexes.length - 1 ]);
                 }
-               
+
             }
 
-            
-        } 
+
+        }
     }
     return <ErrorBoundary key="faqsLists">
         <div className="wp-travel-trip-faq">
             {applyFilters('wp_travel_trip_faq_tab_content', '', allData)}
-            
-            {typeof faqs != 'undefined' &&  Object.keys(faqs).length > 0 ? 
+
+            {typeof faqs != 'undefined' &&  Object.keys(faqs).length > 0 ?
             <>
                 {}
                 <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addFaq()}>{__i18n.add_faq}</Button></PanelRow>
@@ -221,7 +221,7 @@ const Faqs = ({allData}) => {
 
                             upIndex = 'undefined' != typeof customSwapIndexes && 'undefined' != typeof customSwapIndexes[index] && 'undefined' != typeof customSwapIndexes[index].upIndex ? customSwapIndexes[index].upIndex : upIndex
                             downIndex = 'undefined' != typeof customSwapIndexes && 'undefined' != typeof customSwapIndexes[index] && 'undefined' != typeof customSwapIndexes[index].downIndex ? customSwapIndexes[index].downIndex : downIndex
-                            
+
                             let hiddenClass = ''
                             if ( 'undefined' != typeof utilities ) {
                                 if ( 'undefined' != utilities.wp_travel_utils_use_global_faq_for_trip && 'undefined' != utilities.wp_travel_utils_use_trip_faq_for_trip ) {
@@ -236,7 +236,7 @@ const Faqs = ({allData}) => {
                                             hiddenClass = 'hidden'
                                         }
                                     }
-                                } 
+                                }
                             }
 
                             if ( 'yes' ===faqs[faqId].global ) {
@@ -251,7 +251,7 @@ const Faqs = ({allData}) => {
                                         updateRequestSending(true); // Temp fixes to reload the content.
                                         updateRequestSending(false);
                                     }}><i className="dashicons dashicons-arrow-up"></i></Button>
-                                    <Button 
+                                    <Button
                                     // style={{padding:0, display:'block'}}
                                     disabled={endIndex == index}
                                     onClick={(e) => {
@@ -287,7 +287,7 @@ const Faqs = ({allData}) => {
                                                 />
                                             </PanelRow>
                                         </Disabled>
-                                        
+
                                     </PanelBody>
                                 </div>
                             }
@@ -301,7 +301,7 @@ const Faqs = ({allData}) => {
                                         updateRequestSending(true); // Temp fixes to reload the content.
                                         updateRequestSending(false);
                                     }}><i className="dashicons dashicons-arrow-up"></i></Button>
-                                    <Button 
+                                    <Button
                                     disabled={endIndex == index}
                                     onClick={(e) => {
                                         let sorted = swapList( faqs, index, downIndex )
@@ -356,7 +356,7 @@ const Faqs = ({allData}) => {
 
                 </div>
                 { Object.keys(faqs).length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addFaq()}>{__i18n.add_faq}</Button></PanelRow> }
-            </> : 
+            </> :
             <>
                 <Notice isDismissible={false} actions={[{
                     'label': __i18n.add_faq,
@@ -382,3 +382,6 @@ const FaqsCB = ( content, allData ) => {
 // Hooks.
 addFilter( 'wptravel_trip_edit_tab_content_faqs', 'WPTravel\TripEdit\FaqsNotice', FaqsNoticeCB, 10 );
 addFilter( 'wptravel_trip_edit_tab_content_faqs', 'WPTravel\TripEdit\Faqs', FaqsCB, 20 );
+
+addFilter( 'wp_travel_block_trip_edit_tab_faq', 'WPTravel/TripEdit/Block/FAQ/FaqsNotice', FaqsNoticeCB );
+addFilter( 'wp_travel_block_trip_edit_tab_faq', 'WPTravel/TripEdit/Block/FAQ/Faqs', FaqsCB );

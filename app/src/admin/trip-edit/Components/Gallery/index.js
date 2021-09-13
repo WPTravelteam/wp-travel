@@ -140,3 +140,4 @@ const SimpleGalleryCB = ( content, allData ) => {
 
 // Hooks.
 addFilter( 'wptravel_trip_edit_tab_content_gallery', 'WPTravel\TripEdit\SimpleGallery', SimpleGalleryCB, 10 );
+addFilter( 'wp_travel_block_trip_edit_tab_gallery', 'WPTravel/TripEdit/Block/Gallery/SimpleGallery', SimpleGalleryCB, 10 );

@@ -82,7 +82,7 @@ const  swapList = (data, old_index, new_index) => {
 };
 
 const TripTabs = ( {allData} ) => {
-    
+
     const { updateTripData, updateRequestSending } = dispatch('WPTravel/TripEdit');
 
     const updateTabOption = (key, value, _tabIndex) => {
@@ -125,7 +125,7 @@ const TripTabs = ( {allData} ) => {
                                 updateRequestSending(true); // Temp fixes to reload the content.
                                 updateRequestSending(false);
                             }}><i className="dashicons dashicons-arrow-up"></i></Button>
-                            <Button 
+                            <Button
                             // style={{padding:0, display:'block'}}
                             disabled={( Object.keys(trip_tabs).length - 1 ) === index}
                             onClick={(e) => {
@@ -207,3 +207,7 @@ const TripTabsCB = ( content, allData ) => {
 addFilter( 'wptravel_trip_edit_tab_content_tabs', 'WPTravel\TripEdit\TripTabsNotice', TripTabsNoticeCB, 10 );
 addFilter( 'wptravel_trip_edit_tab_content_tabs', 'WPTravel\TripEdit\TripTabsUseGlobal', TripTabsUseGlobalCB, 20 );
 addFilter( 'wptravel_trip_edit_tab_content_tabs', 'WPTravel\TripEdit\TripTabs', TripTabsCB, 30 );
+
+addFilter( 'wp_travel_trip_edit_block_tab_inspector_controls', 'WPTravel/TripEdit/Block/Tab/InspectorControls/TripTabsNotice', TripTabsNoticeCB );
+addFilter( 'wp_travel_trip_edit_block_tab_inspector_controls', 'WPTravel/TripEdit/Block/Tab/InspectorControls/TripTabsUseGlobal', TripTabsUseGlobalCB );
+addFilter( 'wp_travel_trip_edit_block_tab_inspector_controls', 'WPTravel/TripEdit/Block/Tab/InspectorControls/TripTabs', TripTabsCB );
