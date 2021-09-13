@@ -91,6 +91,19 @@
 	}
 }
 
+#wp-travel-settings-block {
+	.wp-travel-block-tabs-wrapper {
+		.wp-travel-block-tabs {
+			.components-tab-panel__tab-content {
+				margin-top: 0;
+			}
+			// #tab-panel-0-general-view {
+			// 	margin-top: 0;
+			// }
+		}
+	}
+}
+
 #wp-travel-trip-options {
 	.inside {
 		padding: 0 !important;
@@ -192,6 +205,35 @@
 		width: 100%;
 		textarea {
 			width: 100%;
+		}
+	}
+}
+
+#wp-travel-trip-options-wrap {
+	.wp-travel-trip-pricings {
+		#tab-panel-0-price-dates-view {
+			margin-top: 0;
+			.wp-travel-ui.wp-travel-ui-card {
+				padding-top: 0;
+				padding-left: 0;
+				padding-right: 0;
+				.wp-travel-trip-edit-menu {
+					#tab-panel-2-dates-view {
+						padding: 0 16px;
+						h4 {
+							padding-left: 16px !important;
+							padding-right: 16px !important;
+						}
+						.components-panel__row {
+							padding-left: 16px !important;
+							padding-right: 16px !important;
+						}
+					}
+					.components-tab-panel__tab-content {
+						padding: 0 16px;
+					}
+				}
+			}
 		}
 	}
 }
