@@ -57,10 +57,31 @@ const TripOutline = ({allData}) => {
         </PanelRow>
     </>;
 }
-
+// Swap any array or object as per provided index.
+const  swapList = (data, old_index, new_index) => {
+    if ( 'object' === typeof data ) {
+        if (new_index >= Object.keys(data).length) {
+            var k = new_index - Object.keys(data).length + 1;
+            while (k--) {
+                data.push(undefined);
+            }
+        }
+        data.splice(new_index, 0, data.splice(old_index, 1)[0]);
+    }
+    if ( 'array' === typeof data ) {
+        if (new_index >= data.length) {
+            var k = new_index - data.length + 1;
+            while (k--) {
+                data.push(undefined);
+            }
+        }
+        data.splice(new_index, 0, data.splice(old_index, 1)[0]);
+    }
+    return data;
+};
 const Itinerary = ({allData}) => {
     const { itineraries } = allData;
-    const { updateTripData, addNewItinerary } = dispatch('WPTravel/TripEdit');
+    const { updateTripData, addNewItinerary, updateRequestSending } = dispatch('WPTravel/TripEdit');
     const updateTripItinerary = (key, value, _itineraryId) => { // Update on change itineraries.
 
         let _allItineraries = itineraries;
@@ -72,7 +93,7 @@ const Itinerary = ({allData}) => {
         })
     }
 
-    const [{stateHours, stateMinutes},setState] = useState({
+	const [{stateHours, stateMinutes},setState] = useState({
         stateHours:0,
         stateMinutes:0
     });
@@ -115,7 +136,29 @@ const Itinerary = ({allData}) => {
                     >
                         {
                             Object.keys(itineraries).map(function (itineraryId) {
-                                return <PanelBody
+								let index     = parseInt(itineraryId);
+                                return <div style={{position:'relative'}}  data-index={index} key={index} >
+										<div className={`wptravel-swap-list`}>
+										<Button
+										// style={{padding:0, display:'block'}}
+										disabled={0 == index}
+										onClick={(e) => {
+											let sorted = swapList( itineraries, index, index - 1 )
+											sortItineraries(sorted)
+											updateRequestSending(true); // Temp fixes to reload the content.
+											updateRequestSending(false);
+										}}><i className="dashicons dashicons-arrow-up"></i></Button>
+										<Button 
+										// style={{padding:0, display:'block'}}
+										disabled={( Object.keys(itineraries).length - 1 ) === index}
+										onClick={(e) => {
+											let sorted = swapList( faqs, index, index + 1 )
+											sortItineraries(sorted)
+											updateRequestSending(true);
+											updateRequestSending(false);
+										}}><i className="dashicons dashicons-arrow-down"></i></Button>
+									</div>
+                            		<PanelBody
                                     icon= {alignJustify}
                                     title={`${itineraries[itineraryId].label ? itineraries[itineraryId].label : __i18n.day_x}, ${itineraries[itineraryId].title ? itineraries[itineraryId].title : __i18n.your_plan} `}
                                     initialOpen={false} >
@@ -141,7 +184,7 @@ const Itinerary = ({allData}) => {
                                         />
                                     </PanelRow>
                                     <PanelRow>
-                                        <label>{__i18n.itinery_date}</label>
+                                        <label>{__i18n.itinerary_date}</label>
                                         <Dropdown
                                             className="wp-travel-dropdown-container"
                                             contentClassName="wp-travel-dropdown-popup-content"
@@ -261,6 +304,7 @@ const Itinerary = ({allData}) => {
                                     </PanelRow>
 
                                 </PanelBody>
+                                </div>
                             })
                         }
                     </ReactSortable>
