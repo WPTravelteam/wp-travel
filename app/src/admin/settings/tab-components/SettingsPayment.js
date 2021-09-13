@@ -1,9 +1,7 @@
 import { applyFilters, addFilter } from '@wordpress/hooks';
-import { useSelect, select, dispatch, withSelect } from '@wordpress/data';
+import { useSelect, dispatch } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
 import { PanelRow, ToggleControl, RangeControl, RadioControl, PanelBody, TextControl, TextareaControl, Button, Icon } from '@wordpress/components';
-import Select from 'react-select'
-import {VersionCompare} from '../../fields/VersionCompare'
 import { ReactSortable } from 'react-sortablejs';
 import {alignJustify } from '@wordpress/icons';
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
