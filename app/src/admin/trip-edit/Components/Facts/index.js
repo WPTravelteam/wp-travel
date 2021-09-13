@@ -20,12 +20,35 @@ const __i18n = {
 // }
 // export default WPTravelTripOptionsFact;
 
+// Swap any array or object as per provided index.
+const  swapList = (data, old_index, new_index) => {
+    if ( 'object' === typeof data ) {
+        if (new_index >= Object.keys(data).length) {
+            var k = new_index - Object.keys(data).length + 1;
+            while (k--) {
+                data.push(undefined);
+            }
+        }
+        data.splice(new_index, 0, data.splice(old_index, 1)[0]);
+    }
+    if ( 'array' === typeof data ) {
+        if (new_index >= data.length) {
+            var k = new_index - data.length + 1;
+            while (k--) {
+                data.push(undefined);
+            }
+        }
+        data.splice(new_index, 0, data.splice(old_index, 1)[0]);
+    }
+    return data;
+};
+
 // Single Components for hook callbacks.
 const TripFacts = ({allData}) => {
     const settingsData = useSelect((select) => {
         return select('WPTravel/TripEdit').getSettings()
     }, []);
-    const { updateTripData, addNewFact } = dispatch('WPTravel/TripEdit');
+    const { updateTripData, addNewFact, updateRequestSending } = dispatch('WPTravel/TripEdit');
     const { trip_facts } = allData;
     const {wp_travel_trip_facts_enable, wp_travel_trip_facts_settings} = settingsData // All Facts options from settings.
 
@@ -121,8 +144,31 @@ const TripFacts = ({allData}) => {
                                     singleSelected = typeof singleSelected != 'undefined' ? singleSelected[0] : {}
 
                                     let multipleSelected = trip_fact.value ? trip_fact.value : []
+								    let index            = parseInt(factIndex);
 
-                                    return <PanelBody
+
+                                    return <div style={{position:'relative'}}  data-index={index} key={index} >
+                                        <div className={`wptravel-swap-list`}>
+                                        <Button
+                                        // style={{padding:0, display:'block'}}
+                                        disabled={0 == index}
+                                        onClick={(e) => {
+                                            let sorted = swapList( trip_facts, index, index - 1 )
+                                            sortFacts(sorted)
+                                            updateRequestSending(true); // Temp fixes to reload the content.
+                                            updateRequestSending(false);
+                                        }}><i className="dashicons dashicons-arrow-up"></i></Button>
+                                        <Button 
+                                        // style={{padding:0, display:'block'}}
+                                        disabled={( Object.keys(trip_facts).length - 1 ) === index}
+                                        onClick={(e) => {
+                                            let sorted = swapList( faqs, index, index + 1 )
+                                            sortFacts(sorted)
+                                            updateRequestSending(true);
+                                            updateRequestSending(false);
+                                        }}><i className="dashicons dashicons-arrow-down"></i></Button>
+                                    </div>
+                                    <PanelBody
                                         icon= {alignJustify}
                                         title={trip_fact.label ? trip_fact.label : __i18n.fact }
                                         initialOpen={false}
@@ -217,7 +263,7 @@ const TripFacts = ({allData}) => {
                                         </PanelRow>
 
                                     </PanelBody>
-
+                                    </div>
                                 })}
                             </ReactSortable>
                             {trip_facts.length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addFact()}>{__i18n.add_fact}</Button></PanelRow> }</div></>:
