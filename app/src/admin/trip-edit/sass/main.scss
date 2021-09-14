@@ -236,6 +236,18 @@
 			}
 		}
 
+		.wp-travel-trip-edit-menu {
+			.components-tab-panel__tab-content {
+				.wp-travel-ui {
+					.wp-travel-sortable-component {
+						.wptravel-swap-list {
+							display: none;
+						}
+					}
+				}
+			}
+		}
+
 		.wp-travel-ui {
 			.wp-travel-gallery-list {
 				.gallery-item {
@@ -245,6 +257,7 @@
 						left: 40px;
 						// top: unset;
 						right: unset;
+						display: block !important;
 						.components-button {
 							&:first-child {
 								background: #fff;
@@ -307,12 +320,11 @@
 							.components-button {
 								padding-bottom: 2px;
 							}
-							
 						}
 
 						.components-button {
 							display: block;
-							
+
 							padding-bottom: 2px;
 						}
 					}

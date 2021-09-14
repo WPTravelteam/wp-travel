@@ -158,7 +158,7 @@ const TripFacts = ({allData}) => {
                                             updateRequestSending(true); // Temp fixes to reload the content.
                                             updateRequestSending(false);
                                         }}><i className="dashicons dashicons-arrow-up"></i></Button>
-                                        <Button 
+                                        <Button
                                         // style={{padding:0, display:'block'}}
                                         disabled={( Object.keys(trip_facts).length - 1 ) === index}
                                         onClick={(e) => {
@@ -303,3 +303,5 @@ const TripFactsCB = ( content, allData ) => {
 
 // Hooks.
 addFilter( 'wptravel_trip_edit_tab_content_facts', 'WPTravel\TripEdit\TripFacts', TripFactsCB, 10 );
+
+addFilter( 'wp_travel_trip_edit_block_facts', 'WPTravel/TripEdit/Block/Facts/FactsFields', TripFactsCB, 10 );
