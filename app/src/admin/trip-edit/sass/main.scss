@@ -246,7 +246,7 @@
 						// top: unset;
 						right: unset;
 						.components-button {
-							svg.gallery-prev-arrow {
+							&:first-child {
 								background: #fff;
 								padding: 5px;
 								color: #2f2c2c;
@@ -257,7 +257,7 @@
 									color: #007cba;
 								}
 							}
-							svg.gallery-next-arrow {
+							&:last-child {
 								background: #fff;
 								padding: 5px;
 								color: #2f2c2c;
@@ -271,17 +271,27 @@
 						}
 					}
 					.components-button {
-						svg.gallery-delete-button {
-							position: absolute;
-							padding: 5px;
-							background: #fff;
-							color: #2f2c2c;
-							top: 7px;
-							right: 7px;
-							&:hover {
-								color: #e8213d;
-							}
+						padding: 5px;
+						background: #fff;
+						color: #2f2c2c;
+						top: 7px;
+						right: 7px;
+						display: none;
+						border-radius: 0 !important;
+						&:hover {
+							color: #e8213d;
 						}
+						// svg.gallery-delete-button {
+						// 	// position: absolute;
+						// 	// padding: 5px;
+						// 	// background: #fff;
+						// 	// color: #2f2c2c;
+						// 	// top: 7px;
+						// 	// right: 7px;
+						// 	// &:hover {
+						// 	// 	color: #e8213d;
+						// 	// }
+						// }
 					}
 					&.featured-image {
 						&::before {
@@ -289,6 +299,21 @@
 							left: unset;
 							bottom: 7px;
 							right: 7px;
+						}
+					}
+					&:hover {
+						.wptravel-swap-list {
+							// display: block;
+							.components-button {
+								padding-bottom: 2px;
+							}
+							
+						}
+
+						.components-button {
+							display: block;
+							
+							padding-bottom: 2px;
 						}
 					}
 				}

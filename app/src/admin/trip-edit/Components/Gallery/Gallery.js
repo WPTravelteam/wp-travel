@@ -44,7 +44,7 @@ export default props => {
                 tag="ul"
                 className="wp-travel-gallery-list">
                 {gallery.map((image, index) => {
-                    return <li key={index} onClick={onItemClick(image.id)} className={`gallery-item${featuredImage === parseInt(image.id) ? ' featured-image' : ''} ${image.transient && 'gallery-item-preview'}`} style={{position:'relative'}}>
+                    return <li key={index} className={`gallery-item${featuredImage === parseInt(image.id) ? ' featured-image' : ''} ${image.transient && 'gallery-item-preview'}`} style={{position:'relative'}}>
                         <div className={`wptravel-swap-list`}>
                             <Button
                             // style={{padding:0, display:'block'}}
@@ -72,7 +72,7 @@ export default props => {
                                 </Button>
                         </div>
                         <figure>
-                            <img src={image.thumbnail} />
+                            <img src={image.thumbnail} onClick={onItemClick(image.id)}  />
                             {
                                 image.transient && <span className="loader">
                                     <Spinner />
