@@ -175,6 +175,7 @@ class WP_Travel_Actions_Activation { // @phpcs:ignore
 	 *
 	 * @param array $files List of migration files.
 	 * @since 4.4.0
+	 * @since 5.0.2 Optimized migration script. run/include only required migration file on activation.
 	 * @return void
 	 */
 	public static function migration_includes( $files ) {
