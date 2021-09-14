@@ -152,7 +152,7 @@ const Itinerary = ({allData}) => {
 										// style={{padding:0, display:'block'}}
 										disabled={( Object.keys(itineraries).length - 1 ) === index}
 										onClick={(e) => {
-											let sorted = swapList( faqs, index, index + 1 )
+											let sorted = swapList( itineraries, index, index + 1 )
 											sortItineraries(sorted)
 											updateRequestSending(true);
 											updateRequestSending(false);
