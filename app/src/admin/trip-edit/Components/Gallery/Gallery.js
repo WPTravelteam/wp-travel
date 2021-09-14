@@ -37,7 +37,7 @@ export default props => {
         onItemClick
     } = props
     return <ErrorBoundary>
-        { 'undefined' != typeof gallery && gallery.length > 0 &&
+        { 'undefined' != typeof gallery && gallery && gallery.length > 0 &&
             <ReactSortable
                 list={gallery}
                 setList={newList => onImagesSort({ gallery: newList })}
