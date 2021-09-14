@@ -35,10 +35,10 @@ const PriceDates = ( {allData} ) => {
             },
         ]}>
         {
-            (tab) => 'prices' == tab.name ? 
-            <ErrorBoundary>{applyFilters( `wptravel_trip_edit_sub_tab_content_prices`, [], allData)}</ErrorBoundary> 
-                : 
-            <ErrorBoundary>{applyFilters( `wptravel_trip_edit_sub_tab_content_dates`, [], allData)}</ErrorBoundary> 
+            (tab) => 'prices' == tab.name ?
+            <ErrorBoundary>{applyFilters( `wptravel_trip_edit_sub_tab_content_prices`, [], allData)}</ErrorBoundary>
+                :
+            <ErrorBoundary>{applyFilters( `wptravel_trip_edit_sub_tab_content_dates`, [], allData)}</ErrorBoundary>
         }
     </TabPanel>;
 }
@@ -50,3 +50,5 @@ const PriceDatesCB = ( content, allData ) => {
 
 // Hooks.
 addFilter( 'wptravel_trip_edit_tab_content_price_dates', 'WPTravel\TripEdit\PriceDates', PriceDatesCB, 10 );
+
+addFilter( 'wp_travel_trip_edit_block_tab_booking', 'WPTravel/TripEdit/Block/Tab/Booking/PriceDates', PriceDatesCB, 10 );
