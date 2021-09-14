@@ -57,13 +57,12 @@ function wptravel_do_deprecated_action( $tag, $args, $version, $replacement = nu
  * @return mixed
  */
 function wptravel_do_deprecated_filter( $tag, $args, $version, $replacement = null, $message = null ) {
+	$value = isset( $args[0] ) ? $args[0] : false;
 	if ( ! has_filter( $tag ) ) {
-		return;
+		return $value;
 	}
 	global $wp_filter, $wp_current_filter;
 	wptravel_deprecated_hook( $tag, $version, $replacement, $message );
-
-	$value = $args[0];
 
 	$filtered = $wp_filter[ $tag ]->apply_filters( $value, $args );
 	array_pop( $wp_current_filter );
