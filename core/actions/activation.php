@@ -166,6 +166,10 @@ class WP_Travel_Actions_Activation { // @phpcs:ignore
 				'name'    => '404',
 				'version' => '4.0.4',
 			),
+			array(
+				'name'    => '502',
+				'version' => '5.0.2',
+			),
 		);
 		self::migration_includes( $migrations );
 	}
@@ -186,9 +190,9 @@ class WP_Travel_Actions_Activation { // @phpcs:ignore
 		}
 
 		$user_since   = get_option( 'wp_travel_user_since', '1.0.0' );
-		$include_path = sprintf( '%s/upgrade', WP_TRAVEL_ABSPATH );
+		$include_path = sprintf( '%s/upgrade', untrailingslashit( WP_TRAVEL_ABSPATH ) );
 		foreach ( $files as $file ) {
-			if ( version_compare( $user_since, $file['version'], '<' ) && version_compare( WP_TRAVEL_VERSION, $file['version'], '>' ) ) {
+			if ( version_compare( $user_since, $file['version'], '<' ) && version_compare( WP_TRAVEL_VERSION, $file['version'], '>=' ) ) {
 				include_once sprintf( '%s/%s.php', $include_path, $file['name'] );
 			}
 		}

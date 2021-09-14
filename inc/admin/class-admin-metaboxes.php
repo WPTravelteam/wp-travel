@@ -453,6 +453,8 @@ class WP_Travel_Admin_Metaboxes {
 		}
 
 		$trip_meta = array();
+		// overview.
+		$trip_meta['wp_travel_overview'] = isset( $_POST['wp_travel_overview'] ) ? wp_kses_post( $_POST['wp_travel_overview'] ) : ''; // For getting html we can't sanitize it.
 
 		// Save pricing option type @since 1.7.6.
 		$trip_meta['wp_travel_pricing_option_type'] = isset( $_POST['wp_travel_pricing_option_type'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_pricing_option_type'] ) ) : 'multiple-price'; // default multiple price @since 3.0.0.
