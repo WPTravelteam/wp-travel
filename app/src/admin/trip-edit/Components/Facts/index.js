@@ -162,7 +162,7 @@ const TripFacts = ({allData}) => {
                                         // style={{padding:0, display:'block'}}
                                         disabled={( Object.keys(trip_facts).length - 1 ) === index}
                                         onClick={(e) => {
-                                            let sorted = swapList( faqs, index, index + 1 )
+                                            let sorted = swapList( trip_facts, index, index + 1 )
                                             sortFacts(sorted)
                                             updateRequestSending(true);
                                             updateRequestSending(false);
