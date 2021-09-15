@@ -34,11 +34,14 @@ export default props => {
         onImageRemove,
         onChange,
         onImagesSort,
-        onItemClick
+        onItemClick,
+        drag
     } = props
+    let draggable = 'undefined' != typeof drag ? drag : true;
     return <ErrorBoundary>
         { 'undefined' != typeof gallery && gallery && gallery.length > 0 &&
             <ReactSortable
+                disabled={! draggable }
                 list={gallery}
                 setList={newList => onImagesSort({ gallery: newList })}
                 tag="ul"
