@@ -66,7 +66,7 @@ class WP_Travel_Post_Types {
 			'show_in_rest'       => true,
 		);
 		if ( 'yes' === $switch_to_react ) {
-			$args['supports'][] = 'editor';
+			// $args['supports'][] = 'editor';
 			$args['show_in_rest'] = false;
 		}
 		/**
