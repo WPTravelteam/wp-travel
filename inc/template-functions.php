@@ -896,7 +896,7 @@ function wptravel_frontend_trip_facts( $post_id ) {
  * @return void
  */
 function wptravel_frontend_contents( $post_id ) {
-	global $wp_travel_itinerary;
+	$wp_travel_itinerary      = new WP_Travel_Itinerary( get_post( $post_id ) );
 	$no_details_found_message = '<p class="wp-travel-no-detail-found-msg">' . __( 'No details found.', 'wp-travel' ) . '</p>';
 	$trip_content             = $wp_travel_itinerary->get_content() ? $wp_travel_itinerary->get_content() : $no_details_found_message;
 	$trip_outline             = $wp_travel_itinerary->get_outline() ? $wp_travel_itinerary->get_outline() : $no_details_found_message;
