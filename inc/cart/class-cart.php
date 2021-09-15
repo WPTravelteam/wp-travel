@@ -401,7 +401,7 @@ class WP_Travel_Cart {
 
 				$this->items[ $cart_item_id ]['trip_price']         = $trip_price;
 				$this->items[ $cart_item_id ]['trip_price_partial'] = $trip_price_partial;
-
+				error_log( print_r( $trip_extras, true ) );
 				if ( $trip_extras ) {
 
 					if ( is_array( $trip_extras ) && ! empty( $trip_extras ) ) {
@@ -767,7 +767,7 @@ class WP_Travel_Cart {
 				if ( $sale_price ) {
 					$price = $sale_price;
 				}
-				$qty         = isset( $trip_extras['qty'][ $k ] ) && ! empty( $trip_extras['qty'][ $k ] ) ? $trip_extras['qty'][ $k ] : 1;
+				$qty         = isset( $trip_extras['qty'][ $k ] ) ? ( int ) $trip_extras['qty'][ $k ] : 1;
 				$extra_price = wptravel_get_formated_price( $price * $qty );
 
 				$item_total += $extra_price;
