@@ -96,13 +96,38 @@ class WpTravel_Helpers_Trips {
 			$i++;
 		endforeach;
 
-		$trip_facts = get_post_meta( $trip_id, 'wp_travel_trip_facts', true );
+		$trip_facts     = get_post_meta( $trip_id, 'wp_travel_trip_facts', true );
+		$settings_facts = $settings['wp_travel_trip_facts_settings'];
 
 		if ( is_string( $trip_facts ) ) {
 			$trip_facts = json_decode( $trip_facts, true );
 		}
 		if ( empty( $trip_facts ) ) {
 			$trip_facts = array();
+		}
+		foreach ( $trip_facts as $key => $trip_fact ) {
+			$trip_fact_id = $trip_fact['fact_id'];
+			if ( isset( $settings_facts[ $trip_fact_id ] ) ) { // To check if current trip facts id matches the settings trip facts id. If matches then get icon and label.
+				$icon_args = $settings_facts[ $trip_fact_id ];
+			} else {
+				$trip_fact_setting = array_filter(
+					$settings_facts,
+					function( $setting ) use ( $trip_fact ) {
+						return $setting['name'] === $trip_fact['label'];
+					}
+				); // Gives an array for matches label with its other detail as well.
+
+				if ( empty( $trip_fact_setting ) ) { // If there is empty array that means label doesn't matches. Hence skip that and continue.
+					continue;
+				}
+				foreach ( $trip_fact_setting as $set ) {
+					$icon      = $set['icon'];
+					$label     = $set['name'];
+					$icon_args = $set;
+				}
+			}
+			$icon_args['return']        = true;
+			$trip_facts[ $key ]['icon'] = WpTravel_Helpers_Icon::get( $icon_args );
 		}
 
 		$use_global_trip_enquiry_option = get_post_meta( $trip_id, 'wp_travel_use_global_trip_enquiry_option', true );

@@ -249,7 +249,11 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
                                 let _allDates = dates;
                                 _allDates[_dateIndex] = { ..._allDates[_dateIndex], end_date: '' }
                                 onUpdate(storeKey, _allDates);
-                            }}>X</button>
+                            }}>
+                                {/* X */}
+                                <i class="fas fa-times-circle"></i>
+                                {/* <i class="far fa-times-circle"></i> */}
+                                </button>
                         </div>
                     </PanelRow>
                     {applyFilters('wp_travel_after_end_date', '', dates, _dateIndex, _date, onUpdate, storeKey)}
