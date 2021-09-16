@@ -1,4 +1,4 @@
-import { Button, DropZone, DropZoneProvider, Spinner } from '@wordpress/components';
+import { Button, DropZone, Spinner } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
@@ -12,8 +12,7 @@ export default ({ onImagesDrop, onMediaLib }) => {
     }, setState] = useState({
         hasDropped: false
     })
-    return <DropZoneProvider>
-        <div className="dropzone">
+    return  <div className="dropzone">
             {hasDropped &&
                 <span className="loader">
                     <Spinner />
@@ -35,5 +34,4 @@ export default ({ onImagesDrop, onMediaLib }) => {
                 </>}
             <DropZone onFilesDrop={(images, position) => onImagesDrop(images)} />
         </div>
-    </DropZoneProvider>
 }

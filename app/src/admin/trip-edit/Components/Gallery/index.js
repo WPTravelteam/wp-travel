@@ -17,7 +17,7 @@ const __i18n = {
 // export default WPTravelTripOptionsGallery
 
 // Single Components for hook callbacks.
-const SimpleGallery = ({allData}) => {
+const SimpleGallery = ({allData, drag=true }) => {
     const [{ isUploading, isOpenModal }, setState] = useState({
         isUploading: false,
         isOpenModal: false
@@ -66,9 +66,10 @@ const SimpleGallery = ({allData}) => {
         setState(state => ({ ...state, isUploading: true }))
         if (files.length > 0) {
             let previewData = await previewImages(files)
+            let galleryData = store.getAllStore().gallery ? store.getAllStore().gallery : [];
             updateTripData({
                 ...allData,
-                gallery: [...store.getAllStore().gallery, ...previewData],
+                gallery: [...galleryData, ...previewData],
             })
             const formData = new FormData()
             const headers = new Headers()
@@ -128,7 +129,7 @@ const SimpleGallery = ({allData}) => {
             onChange={() => console.log('changes')}
             onImagesSort={onImagesSortHandle}
             onItemClick={onItemClickHandle}
-            // drag={false}
+            drag={drag}
         />
         {!isUploading && <GalleyDropZone onImagesDrop={onImagesDropHandle} onMediaLib={onMediaLibHandle} />}
     </div>
@@ -141,4 +142,6 @@ const SimpleGalleryCB = ( content, allData ) => {
 
 // Hooks.
 addFilter( 'wptravel_trip_edit_tab_content_gallery', 'WPTravel\TripEdit\SimpleGallery', SimpleGalleryCB, 10 );
-addFilter( 'wp_travel_trip_edit_block_tab_gallery', 'WPTravel/TripEdit/Block/Gallery/SimpleGallery', SimpleGalleryCB, 10 );
+addFilter( 'wp_travel_trip_edit_block_tab_gallery', 'WPTravel/TripEdit/Block/Gallery/SimpleGallery', ( content, allData ) => {
+    return [ ...content, <SimpleGallery allData={allData} key="SimpleGallery" drag={false} /> ];
+}, 10 );

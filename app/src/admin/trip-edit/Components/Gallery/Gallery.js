@@ -59,7 +59,7 @@ export default props => {
                                 // updateRequestSending(false);
                             }}>
                                 {/* <i className="dashicons dashicons-arrow-left"></i> */}
-                                <svg class="gallery-prev-arrow" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false"><path d="M14.6 7l-1.2-1L8 12l5.4 6 1.2-1-4.6-5z"></path></svg>
+                                <svg className="gallery-prev-arrow" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false"><path d="M14.6 7l-1.2-1L8 12l5.4 6 1.2-1-4.6-5z"></path></svg>
                                 </Button>
                             <Button 
                             // style={{padding:0, display:'block'}}
@@ -71,7 +71,7 @@ export default props => {
                                 // updateRequestSending(false);
                             }}>
                                 {/* <i className="dashicons dashicons-arrow-right"></i> */}
-                                <svg class="gallery-next-arrow" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false"><path d="M10.6 6L9.4 7l4.6 5-4.6 5 1.2 1 5.4-6z"></path></svg>
+                                <svg className="gallery-next-arrow" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false"><path d="M10.6 6L9.4 7l4.6 5-4.6 5 1.2 1 5.4-6z"></path></svg>
                                 </Button>
                         </div>
                         <figure>
@@ -84,7 +84,7 @@ export default props => {
                         </figure>
                         <Button onClick={onImageRemove(index)}>
                             {/* <div className="dashicons dashicons-no delete-image"></div> */}
-                            <svg class="gallery-delete-button" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false"><path d="M12 13.06l3.712 3.713 1.061-1.06L13.061 12l3.712-3.712-1.06-1.06L12 10.938 8.288 7.227l-1.061 1.06L10.939 12l-3.712 3.712 1.06 1.061L12 13.061z"></path></svg>
+                            <svg className="gallery-delete-button" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false"><path d="M12 13.06l3.712 3.713 1.061-1.06L13.061 12l3.712-3.712-1.06-1.06L12 10.938 8.288 7.227l-1.061 1.06L10.939 12l-3.712 3.712 1.06 1.061L12 13.061z"></path></svg>
                             </Button>
                     </li>
                 })}
