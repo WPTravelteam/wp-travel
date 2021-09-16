@@ -1,6 +1,12 @@
 @import "./wp-travel-ui.scss";
 @import "tabs";
 
+
+i.fa-times-circle {
+	font-size: 18px;
+	color: #ff4545;
+	cursor: pointer;
+}
 //Top notification
 .wp-travel-notification {
 	&.notice-error.tab-error {
@@ -211,6 +217,20 @@
 
 #wp-travel-trip-options-wrap {
 	.wp-travel-trip-pricings {
+		.components-tab-panel__tab-content {
+			.wp-travel-ui {
+				.wp-travel-sortable-component.itinerary-sortable {
+					.components-panel__body {
+						.components-panel__row.itinerary-description {
+							flex-direction: row-reverse;
+							.components-base-control {
+								width: 60% !important;
+							}
+						}
+					}
+				}
+			}
+		}
 		#tab-panel-0-price-dates-view {
 			margin-top: 0;
 			.wp-travel-ui.wp-travel-ui-card {
@@ -231,6 +251,9 @@
 					}
 					.components-tab-panel__tab-content {
 						padding: 0 16px;
+						.wp-travel-ui.wp-travel-ui-card-top-border {
+							padding: 5px 15px !important;
+						}
 					}
 				}
 			}

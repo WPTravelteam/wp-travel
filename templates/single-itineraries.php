@@ -19,19 +19,9 @@ get_header( 'itinerary' ); ?>
 <?php
 while ( have_posts() ) :
 	the_post();
-	?>
+	do_action( 'wptravel_single_itinerary_main_content' );
 
-	<?php
-	$itinerary_layout_v2_enabled = wptravel_use_itinerary_v2_layout();
-
-	if ( $itinerary_layout_v2_enabled ) {
-		wptravel_get_template_part( 'content', 'single-itineraries-v2' ); // @since v5.0.0.
-	} else {
-		wptravel_get_template_part( 'content', 'single-itineraries' );
-	}
-	?>
-
-<?php endwhile; // end of the loop. ?>
+endwhile; // end of the loop. ?>
 <?php do_action( 'wp_travel_after_main_content' ); ?>
 <?php
 get_footer( 'itinerary' );

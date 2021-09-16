@@ -45,6 +45,8 @@ add_filter( 'jetpack_relatedposts_filter_options', 'wptravel_remove_jetpack_rela
 add_action( 'pre_get_posts', 'wptravel_posts_filter', 20 );
 add_filter( 'posts_clauses', 'wptravel_posts_clauses_filter', 11, 2 );
 
+add_action( 'wptravel_single_itinerary_main_content', 'wptravel_single_itinerary_trip_content' );
+
 /**
  * Load single itinerary hooks according to layout selection.
  *
@@ -2825,4 +2827,19 @@ function wptravel_raw_output_on_tab_content( $raw, $tab_key ) {
 		$raw = true;
 	}
 	return $raw;
+}
+
+/**
+ * Hook call back for single itinerary.
+ *
+ * @return void
+ */
+function wptravel_single_itinerary_trip_content() {
+	$itinerary_layout_v2_enabled = wptravel_use_itinerary_v2_layout();
+
+	if ( $itinerary_layout_v2_enabled ) {
+		wptravel_get_template_part( 'content', 'single-itineraries-v2' ); // @since v5.0.0.
+	} else {
+		wptravel_get_template_part( 'content', 'single-itineraries' );
+	}
 }
