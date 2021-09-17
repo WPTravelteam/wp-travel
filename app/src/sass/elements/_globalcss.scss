@@ -1,6 +1,20 @@
 .wp-travel {
 	max-width: 1250px !important;
+	&.resp-tabs-list {
+		display: flex;
+		justify-content: center;
+	}
+	.wptravel-block-wrapper & {
+		max-width: unset !important;
+	}
+
 }
+.wp-travel-tab-wrapper {
+	.resp-tabs-container {
+		background: #fff;
+	}
+}
+
 // button{
 //     font-size: 16px;
 //     border-radius: 5px;
