@@ -74,6 +74,8 @@ class WpTravel_Helpers_Strings { // @phpcs:ignore
 			'pricing_name'              => __( 'Pricing Name', 'wp-travel' ),
 			'reviews'                   => __( 'Reviews', 'wp-travel' ),
 			'sale_price'                => __( 'Sale Price', 'wp-travel' ),
+			'search'                    => __( 'Search', 'wp-travel' ),
+			'search_placeholder'        => __( 'Ex: Trekking', 'wp-travel' ),
 			'select'                    => __( 'Select', 'wp-travel' ),
 			'save'                      => __( 'Save', 'wp-travel' ),
 			'save_settings'             => __( 'Save Settings', 'wp-travel' ),

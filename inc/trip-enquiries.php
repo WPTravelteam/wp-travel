@@ -82,8 +82,8 @@ function wptravel_get_enquiries_form( $trips_dropdown = false ) {
 
 	$fields = wptravel_enquiries_form_fields();
 	$form   = new WP_Travel_FW_Form();
+	$form_options['class'] = 'wp-travel-enquiries-form';
 	if ( $trips_dropdown ) {
-		$form_options['class'] = 'wp-travel-enquiries-form';
 		$query                 = new WP_Query(
 			array(
 				'post_type'      => WP_TRAVEL_POST_TYPE,
