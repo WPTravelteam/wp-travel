@@ -423,9 +423,9 @@ function wptravel_trip_price( $trip_id, $hide_rating = false ) {
  * @param bool $hide_rating Flag to sho hide rating.
  */
 function wptravel_single_trip_rating( $post_id, $hide_rating = false ) {
-	if ( ! is_singular( WP_TRAVEL_POST_TYPE ) ) {
-		return;
-	}
+	// if ( ! is_singular( WP_TRAVEL_POST_TYPE ) ) {
+	// 	return;
+	// }
 	if ( ! $post_id ) {
 		return;
 	}
