@@ -70,6 +70,7 @@ function wptravel_get_enquiries_form( $trips_dropdown = false ) {
 		'wrapper_class' => 'wp-travel-enquiries-form-wrapper',
 		'submit_button' => array(
 			'name'  => 'wp_travel_enquiry_submit',
+			'class' => 'button',
 			'id'    => 'wp-travel-enquiry-submit',
 			'value' => apply_filters( 'wp_travel_enquiry_submit_button_label', __( 'SUBMIT ENQUIRY', 'wp-travel' ) ),
 		),
