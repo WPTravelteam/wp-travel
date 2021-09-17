@@ -350,8 +350,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 
 			if ( $this->is_request( 'frontend' ) ) {
 
-				include sprintf( '%s/inc/class-wp-travel-extras-frontend.php', WP_TRAVEL_ABSPATH );
 			}
+			include sprintf( '%s/inc/class-wp-travel-extras-frontend.php', WP_TRAVEL_ABSPATH );
 
 			// Additional.
 			require WP_TRAVEL_ABSPATH . '/core/helpers/response_codes.php';
