@@ -642,5 +642,21 @@ jQuery(function ($) {
      * faq end
      * =========================
      */ 
-
+    jQuery('#wp-travel-tab-wrapper .resp-tabs-list').wrap('<div id="slider-tab" />');
+    var slick_options = {
+        dots: false,
+        infinite: false,
+        speed: 300,
+        slidesToShow: 6,
+        centerMode: false,
+        arrows: true,
+        variableWidth: true,
+        // slide: 'li',
+        cssEase: 'linear',
+        slidesToScroll: 1,
+    }
+    if (jQuery('body').hasClass('rtl')) {
+        slick_options.rtl = true;
+    }
+    jQuery('#wp-travel-tab-wrapper .resp-tabs-list').slick(slick_options);
 });
