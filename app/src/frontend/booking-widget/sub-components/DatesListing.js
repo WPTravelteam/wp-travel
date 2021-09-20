@@ -319,15 +319,23 @@ const DatesListing = ({ dates, isTourDate, getPricingsByDate, allData, onFixedDe
                                 <tbody className="tbody-table">
                                     {
                                         nonRecurringDates.map((date, index) => {
-                                            let _pricingIds = getPricingsByDate(moment(date.start_date).toDate(), date.id);
-                                            let firstPricingId = _pricingIds[0];
-                                            let firstPricing = pricings[firstPricingId]
-
-                                            let firstCategories = firstPricing.categories
+                                            let firstPricing = {};
                                             let firstCounts = {}
-                                            firstCategories.forEach(c => {
-                                                firstCounts = { ...firstCounts, [c.id]: parseInt(c.default_pax) || 0 }
-                                            })
+
+                                            let _pricingIds = getPricingsByDate(moment(date.start_date).toDate(), date.id);
+                                            if ( ! _pricingIds.length ) {
+                                                return  <tr><td colspan="3"><p className="text-center">Date has no pricings</p></td></tr>
+                                            }
+                                            let firstPricingId = _pricingIds[0];
+                                            firstPricing = pricings[firstPricingId]
+                                            if ( 'undefined' != typeof firstPricing ) {
+                                                // console.log('pricings', pricings);
+                                                // console.log('firstPricing', firstPricing);
+                                                let firstCategories = firstPricing.categories
+                                                firstCategories.forEach(c => {
+                                                    firstCounts = { ...firstCounts, [c.id]: parseInt(c.default_pax) || 0 }
+                                                })
+                                            }
 
                                             let pricingOptions = []
                                             if ( 'undefined' != typeof _pricingIds.length && _pricingIds.length ) {
