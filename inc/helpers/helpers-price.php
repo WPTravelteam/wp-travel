@@ -662,7 +662,7 @@ function wptravel_get_formated_price_currency( $price = 0, $regular_price = fals
 function wptravel_get_pricing_option_type( $post_id = null ) {
 	if ( ! $post_id ) {
 		global $post;
-		$post_id = $post->ID;
+		$post_id = isset( $post->ID ) ? $post->ID : 0;
 	}
 	$settings        = wptravel_get_settings();
 	$switch_to_react = $settings['wp_travel_switch_to_react'];

@@ -51,6 +51,8 @@ class WpTravel_Helpers_Trips {
 		}
 
 		$trip = get_post( $trip_id );
+		$wp_travel_itinerary = new WP_Travel_Itinerary( $trip );
+		$group_size          = $wp_travel_itinerary->get_group_size();
 
 		if ( ! is_object( $trip ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
@@ -155,7 +157,6 @@ class WpTravel_Helpers_Trips {
 		$map_data['zoomlevel']   = $zoomlevel;
 		$map_data['use_lat_lng'] = $use_lat_lng;
 
-		$group_size = get_post_meta( $trip_id, 'wp_travel_group_size', true );
 
 		$minimum_partial_payout_use_global = get_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_use_global', true );
 		$minimum_partial_payout_percent    = get_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_percent', true );
