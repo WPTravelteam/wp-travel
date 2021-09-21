@@ -227,6 +227,7 @@ class WpTravel_Helpers_Trips {
 		$dates = WP_Travel_Helpers_Trip_Dates::get_dates( $trip->ID );
 		if ( ! is_wp_error( $dates ) && 'WP_TRAVEL_TRIP_DATES' === $dates['code'] ) {
 			$trip_data['dates'] = (array) $dates['dates'];
+			$trip_data['display_dates'] = wptravel_get_fixed_departure_date( $trip->ID ); // This date is only for display in Blocks component.
 		}
 
 		$excluded_dates_times = WP_Travel_Helpers_Trip_Excluded_Dates_Times::get_dates_times( $trip->ID );
@@ -236,8 +237,9 @@ class WpTravel_Helpers_Trips {
 
 		$trip_meta = get_post_meta( $trip_id );
 
-		$is_fixed_departure              = ! empty( $trip_meta['wp_travel_fixed_departure'][0] ) && 'yes' === $trip_meta['wp_travel_fixed_departure'][0] ? true : false;
-		$trip_data['is_fixed_departure'] = $is_fixed_departure;
+		// $is_fixed_departure              = ! empty( $trip_meta['wp_travel_fixed_departure'][0] ) && 'yes' === $trip_meta['wp_travel_fixed_departure'][0] ? true : false;
+		// $trip_data['is_fixed_departure'] = $is_fixed_departure;
+		$trip_data['is_fixed_departure'] = WP_Travel_Helpers_Trip_Dates::is_fixed_departure( $trip_id );
 
 		// Gallery Data.
 		$gallery_items_ids = get_post_meta( $trip_id, 'wp_travel_itinerary_gallery_ids', true );
