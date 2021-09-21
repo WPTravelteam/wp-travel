@@ -69,6 +69,9 @@ class WpTravel_Helpers_Trips {
 			'custom_booking_link_text'            => '',
 			'custom_booking_link_open_in_new_tab' => '',
 			'pricings'                            => array(),
+			'trip_price'                          => 0,
+			'regular_price'                       => 0,
+			'enable_sale'                         => false,
 			'featured_image_data'                 => false,
 			'has_extras'                          => $has_extras,
 		);
@@ -222,6 +225,23 @@ class WpTravel_Helpers_Trips {
 		$pricings = WP_Travel_Helpers_Pricings::get_pricings( $trip->ID );
 		if ( ! is_wp_error( $pricings ) && 'WP_TRAVEL_TRIP_PRICINGS' === $pricings['code'] ) {
 			$trip_data['pricings'] = (array) $pricings['pricings'];
+
+
+			$args                             = array( 'trip_id' => $trip_id );
+			$args_regular                     = $args;
+			$args_regular['is_regular_price'] = true;
+			$trip_price                       = WP_Travel_Helpers_Pricings::get_price( $args );
+			$regular_price                    = WP_Travel_Helpers_Pricings::get_price( $args_regular );
+			$enable_sale                      = self::is_sale_enabled(
+				array(
+					'trip_id'                => $trip_id,
+					'from_price_sale_enable' => true,
+				)
+			);
+
+			$trip_data['trip_price']    = $trip_price;
+			$trip_data['regular_price'] = $regular_price;
+			$trip_data['enable_sale']   = $enable_sale;
 		}
 
 		$dates = WP_Travel_Helpers_Trip_Dates::get_dates( $trip->ID );

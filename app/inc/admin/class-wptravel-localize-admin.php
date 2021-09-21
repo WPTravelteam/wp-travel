@@ -28,11 +28,18 @@ class WpTravel_Localize_Admin {
 	public static function localize_data() {
 		$screen         = get_current_screen();
 		$allowed_screen = array( WP_TRAVEL_POST_TYPE, 'edit-' . WP_TRAVEL_POST_TYPE, 'itinerary-enquiries' );
+		$settings       = wptravel_get_settings();
 
 		$translation_array = array(
-			'_nonce'    => wp_create_nonce( 'wp_travel_nonce' ),
-			'admin_url' => admin_url(),
-			'dev_mode'  => wptravel_dev_mode()
+			'_nonce'             => wp_create_nonce( 'wp_travel_nonce' ),
+			'admin_url'          => admin_url(),
+			'dev_mode'           => wptravel_dev_mode(),
+			'currency'           => $settings['currency'],
+			'currency_position'  => $settings['currency_position'],
+			'currency_symbol'    => wptravel_get_currency_symbol(),
+			'number_of_decimals' => $settings['number_of_decimals'] ? $settings['number_of_decimals'] : 0,
+			'decimal_separator'  => $settings['decimal_separator'] ? $settings['decimal_separator'] : '.',
+			'thousand_separator' => $settings['thousand_separator'] ? $settings['thousand_separator'] : ',',
 		);
 		// trip edit page.
 		if ( in_array( $screen->id, $allowed_screen, true ) ) {

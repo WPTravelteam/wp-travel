@@ -129,6 +129,11 @@ const RecurringDates = ({ data, isTourDate, getPricingsByDate, onFixedDepartureP
             setPagination(state => ({ ...state, ...pagination }))
         }
     }
+    let _pricingIds = getPricingsByDate(moment(data.start_date).toDate(), data.id);
+
+    if ( ! _pricingIds.length ) {
+        return  <tbody><tr><td colSpan="3"><p className="text-center">Date has no pricings</p></td></tr></tbody>;
+    }
     return <>
     <tbody className="tbody-table">
         {activeRecurringDates.map( ( date, dateIndex ) => {
@@ -137,7 +142,6 @@ const RecurringDates = ({ data, isTourDate, getPricingsByDate, onFixedDepartureP
             if (componentData.selectedDateTime) {
                 _selectedDateTime = moment(moment(componentData.selectedDateTime).format("YYYY-MM-DD"));
             }
-            let _pricingIds = getPricingsByDate(moment(data.start_date).toDate(), data.id);
             let firstPricingId = _pricingIds[0];
             let firstPricing = pricings[firstPricingId]
 
@@ -324,7 +328,7 @@ const DatesListing = ({ dates, isTourDate, getPricingsByDate, allData, onFixedDe
 
                                             let _pricingIds = getPricingsByDate(moment(date.start_date).toDate(), date.id);
                                             if ( ! _pricingIds.length ) {
-                                                return  <tr><td colspan="3"><p className="text-center">Date has no pricings</p></td></tr>
+                                                return  <tr><td colSpan="3"><p className="text-center">Date has no pricings</p></td></tr>
                                             }
                                             let firstPricingId = _pricingIds[0];
                                             firstPricing = pricings[firstPricingId]
