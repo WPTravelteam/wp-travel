@@ -7,6 +7,9 @@
 	}
 }
 
+// .wptravel-block-wrapper {
+// 	margin-top: 30px;
+// }
 #send-email {
 	// margin-top: -25px !important;
 	margin-top: 0px !important;
@@ -33,20 +36,5 @@
 			color: #545454 !important;
 			background: #c7c7c7;
 		}
-		// position: relative;
-		// &::after {
-		//     content: "";
-		//     background-image: url(../../../../assets/images/download-button.svg);
-		//     background-repeat: no-repeat;
-		//     background-position: center;
-		//     background-size: 100%;
-		//     position: absolute;
-		//     width: 15px;
-		//     height: 15px;
-		//     top: 50%;
-		//     left: 90%;
-		//     transform: translate(-50%, -50%);
-		//     filter: invert(100%) sepia(5%) saturate(499%) hue-rotate(28deg) brightness(113%) contrast(100%);
-		// }
 	}
 }
