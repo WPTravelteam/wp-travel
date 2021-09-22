@@ -351,13 +351,14 @@ td {
 		border-color: #f44336 !important;
 	}
 }
+.wp-travel-trip-edit-block-tab {
+	.components-button {
+		height: auto;
+		min-height: 32px;
 
-.components-button {
-	height: auto;
-	min-height: 32px;
-
-	&.is-small {
-		margin-top: 15px;
+		&.is-small {
+			margin-top: 15px;
+		}
 	}
 }
 // quick fix for calendar style.
@@ -498,5 +499,3 @@ td {
 		}
 	}
 }
-
-

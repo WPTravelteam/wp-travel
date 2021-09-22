@@ -40,13 +40,15 @@
 	}
 }
 
-.components-button {
-	height: auto;
-	// min-height: 32px;
-	min-height: auto;
+#wp-travel-trip-options-wrap {
+	.components-button {
+		height: auto;
+		// min-height: 32px;
+		min-height: auto;
 
-	&.is-small {
-		margin-top: 15px;
+		&.is-small {
+			margin-top: 15px;
+		}
 	}
 }
 // For WP Travel map UI.
