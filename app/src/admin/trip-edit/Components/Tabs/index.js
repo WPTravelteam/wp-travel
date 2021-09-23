@@ -208,6 +208,6 @@ addFilter( 'wptravel_trip_edit_tab_content_tabs', 'WPTravel\TripEdit\TripTabsNot
 addFilter( 'wptravel_trip_edit_tab_content_tabs', 'WPTravel\TripEdit\TripTabsUseGlobal', TripTabsUseGlobalCB, 20 );
 addFilter( 'wptravel_trip_edit_tab_content_tabs', 'WPTravel\TripEdit\TripTabs', TripTabsCB, 30 );
 
-addFilter( 'wp_travel_trip_edit_block_tab_inspector_controls', 'WPTravel/TripEdit/Block/Tab/InspectorControls/TripTabsNotice', TripTabsNoticeCB );
-addFilter( 'wp_travel_trip_edit_block_tab_inspector_controls_tab_sort', 'WPTravel/TripEdit/Block/Tab/InspectorControls/TabSort/TripTabsUseGlobal', TripTabsUseGlobalCB );
-addFilter( 'wp_travel_trip_edit_block_tab_inspector_controls_tab_sort', 'WPTravel/TripEdit/Block/Tab/InspectorControls/TabSort/TripTabs', TripTabsCB );
+addFilter( 'wptravel_trip_edit_block_tab_inspector_controls', 'WPTravel/TripEdit/Block/Tab/InspectorControls/TripTabsNotice', TripTabsNoticeCB );
+addFilter( 'wptravel_trip_edit_block_tab_inspector_controls_tab_sort', 'WPTravel/TripEdit/Block/Tab/InspectorControls/TabSort/TripTabsUseGlobal', TripTabsUseGlobalCB );
+addFilter( 'wptravel_trip_edit_block_tab_inspector_controls_tab_sort', 'WPTravel/TripEdit/Block/Tab/InspectorControls/TabSort/TripTabs', TripTabsCB );

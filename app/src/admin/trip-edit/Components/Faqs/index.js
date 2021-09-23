@@ -383,5 +383,5 @@ const FaqsCB = ( content, allData ) => {
 addFilter( 'wptravel_trip_edit_tab_content_faqs', 'WPTravel\TripEdit\FaqsNotice', FaqsNoticeCB, 10 );
 addFilter( 'wptravel_trip_edit_tab_content_faqs', 'WPTravel\TripEdit\Faqs', FaqsCB, 20 );
 
-addFilter( 'wp_travel_trip_edit_block_tab_faq', 'WPTravel/TripEdit/Block/FAQ/FaqsNotice', FaqsNoticeCB );
-addFilter( 'wp_travel_trip_edit_block_tab_faq', 'WPTravel/TripEdit/Block/FAQ/Faqs', FaqsCB );
+addFilter( 'wptravel_trip_edit_block_tab_faq', 'WPTravel/TripEdit/Block/FAQ/FaqsNotice', FaqsNoticeCB );
+addFilter( 'wptravel_trip_edit_block_tab_faq', 'WPTravel/TripEdit/Block/FAQ/Faqs', FaqsCB );

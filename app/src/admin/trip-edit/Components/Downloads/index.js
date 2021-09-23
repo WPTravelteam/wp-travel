@@ -33,4 +33,4 @@ const DownloadsNoticeCB = ( content, allData ) => {
 addFilter( 'wptravel_trip_edit_tab_content_downloads', 'WPTravel\TripEdit\DownloadsNotice', DownloadsNoticeCB, 10 );
 // wptravel_trip_edit_tab_content_downloads
 
-addFilter( 'wp_travel_trip_edit_block_tab_downloads', 'WPTravel/TripEdit/Block/Downloads/DownloadsFields', DownloadsNoticeCB );
+addFilter( 'wptravel_trip_edit_block_tab_downloads', 'WPTravel/TripEdit/Block/Downloads/DownloadsFields', DownloadsNoticeCB );

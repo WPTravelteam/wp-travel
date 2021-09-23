@@ -4,7 +4,7 @@ import { dispatch, useSelect } from '@wordpress/data';
 import { addFilter, applyFilters } from '@wordpress/hooks';
 import { sprintf, __ } from '@wordpress/i18n';
 import Geocode from "react-geocode";
-import { Gmaps, Marker } from 'react-gmaps';
+// import { Gmaps, Marker } from 'react-gmaps';
 import Autocomplete from 'react-google-autocomplete';
 
 import ErrorBoundary from '../../../../ErrorBoundry/ErrorBoundry';
@@ -209,7 +209,7 @@ const GoogleMap = ( {settingsData, map_data } ) => {
                 types={['address']}
             /> */}
         </div>
-        <Gmaps
+        {/* <Gmaps
             width={'100%'}
             height={'400px'}
             lat={coords.lat}
@@ -223,7 +223,7 @@ const GoogleMap = ( {settingsData, map_data } ) => {
                 draggable={true}
                 onDragEnd={onDragEnd}
             />
-        </Gmaps>
+        </Gmaps> */}
         <br />
     </div>
     

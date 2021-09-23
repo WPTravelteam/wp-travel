@@ -1057,7 +1057,8 @@ function wptravel_frontend_contents( $post_id ) {
 }
 
 function wptravel_trip_map( $post_id ) {
-	global $wp_travel_itinerary;
+	$wp_travel_itinerary = new WP_Travel_Itinerary();
+	// global $wp_travel_itinerary;
 	if ( ! $wp_travel_itinerary->get_location() ) {
 		return;
 	}

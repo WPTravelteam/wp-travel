@@ -74,6 +74,7 @@ class WpTravel_Helpers_Trips {
 			'enable_sale'                         => false,
 			'featured_image_data'                 => false,
 			'has_extras'                          => $has_extras,
+			'reviews'                             => get_comments_number( $trip_id ), // for blocks.
 		);
 
 		$enable_custom_itinerary_tabs = apply_filters( 'wp_travel_custom_itinerary_tabs', false ); // @phpcs:ignore
