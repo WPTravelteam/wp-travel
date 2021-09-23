@@ -380,8 +380,8 @@ const FaqsCB = ( content, allData ) => {
 }
 
 // Hooks.
-addFilter( 'wptravel_trip_edit_tab_content_faqs', 'WPTravel\TripEdit\FaqsNotice', FaqsNoticeCB, 10 );
-addFilter( 'wptravel_trip_edit_tab_content_faqs', 'WPTravel\TripEdit\Faqs', FaqsCB, 20 );
+addFilter( 'wptravel_trip_edit_tab_content_faqs', 'WPTravel/TripEdit/FaqsNotice', FaqsNoticeCB, 10 );
+addFilter( 'wptravel_trip_edit_tab_content_faqs', 'WPTravel/TripEdit/Faqs', FaqsCB, 20 );
 
 addFilter( 'wptravel_trip_edit_block_tab_faq', 'WPTravel/TripEdit/Block/FAQ/FaqsNotice', FaqsNoticeCB );
 addFilter( 'wptravel_trip_edit_block_tab_faq', 'WPTravel/TripEdit/Block/FAQ/Faqs', FaqsCB );

@@ -74,6 +74,6 @@ const EnableTripEnquiryCB = ( content, allData ) => {
 }
 
 // Hooks.
-addFilter( 'wptravel_trip_edit_tab_content_misc', 'WPTravel\TripEdit\TripEnquiryTitle', TripEnquiryTitleCB, 10 );
-addFilter( 'wptravel_trip_edit_tab_content_misc', 'WPTravel\TripEdit\EnableGlobalTripEnquiry', EnableGlobalTripEnquiryCB, 20 );
-addFilter( 'wptravel_trip_edit_tab_content_misc', 'WPTravel\TripEdit\EnableTripEnquiry', EnableTripEnquiryCB, 30 );
+addFilter( 'wptravel_trip_edit_tab_content_misc', 'WPTravel/TripEdit/TripEnquiryTitle', TripEnquiryTitleCB, 10 );
+addFilter( 'wptravel_trip_edit_tab_content_misc', 'WPTravel/TripEdit/EnableGlobalTripEnquiry', EnableGlobalTripEnquiryCB, 20 );
+addFilter( 'wptravel_trip_edit_tab_content_misc', 'WPTravel/TripEdit/EnableTripEnquiry', EnableTripEnquiryCB, 30 );

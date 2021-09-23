@@ -335,9 +335,9 @@ const ItineraryCB = ( content, allData ) => {
 }
 
 // Hooks.
-addFilter( 'wptravel_trip_edit_tab_content_itinerary', 'WPTravel\TripEdit\TripCode', TripCodeCB, 10 );
-addFilter( 'wptravel_trip_edit_tab_content_itinerary', 'WPTravel\TripEdit\TripOutline', TripOutlineCB, 20 );
-addFilter( 'wptravel_trip_edit_tab_content_itinerary', 'WPTravel\TripEdit\Itinerary', ItineraryCB, 30 );
+addFilter( 'wptravel_trip_edit_tab_content_itinerary', 'WPTravel/TripEdit/TripCode', TripCodeCB, 10 );
+addFilter( 'wptravel_trip_edit_tab_content_itinerary', 'WPTravel/TripEdit/TripOutline', TripOutlineCB, 20 );
+addFilter( 'wptravel_trip_edit_tab_content_itinerary', 'WPTravel/TripEdit/Itinerary', ItineraryCB, 30 );
 
 addFilter( 'wptravel_trip_edit_block_tab_trip_outline', 'WPTravel/TripEdit/Block/Outline/Itinerary', ItineraryCB );
 addFilter( 'wp_travel_trip_edit_block_itinerary_view', 'WPTravel/TripEdit/Block/Itinerary/ItineraryView', ItineraryCB );

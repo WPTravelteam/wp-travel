@@ -331,7 +331,7 @@ const MorePricingNoticeCB = ( content ) => {
 }
 
 // Hooks.
-addFilter( 'wptravel_trip_edit_sub_tab_content_prices', 'WPTravel\TripEdit\PriceDates\Pricings', PricingsCB, 10 );
+addFilter( 'wptravel_trip_edit_sub_tab_content_prices', 'WPTravel/TripEdit/PriceDates/Pricings', PricingsCB, 10 );
 
 // Notice inside pricing.
-addFilter('wp_travel_after_pricings_options', 'WPTravel\TripEdit\PriceDates\MorePricingNotice', MorePricingNoticeCB, 10 );
+addFilter('wp_travel_after_pricings_options', 'WPTravel/TripEdit/PriceDates/MorePricingNotice', MorePricingNoticeCB, 10 );

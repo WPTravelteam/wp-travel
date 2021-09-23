@@ -49,6 +49,6 @@ const PriceDatesCB = ( content, allData ) => {
 }
 
 // Hooks.
-addFilter( 'wptravel_trip_edit_tab_content_price_dates', 'WPTravel\TripEdit\PriceDates', PriceDatesCB, 10 );
+addFilter( 'wptravel_trip_edit_tab_content_price_dates', 'WPTravel/TripEdit/PriceDates', PriceDatesCB, 10 );
 
 addFilter( 'wptravel_trip_edit_block_tab_booking', 'WPTravel/TripEdit/Block/Tab/Booking/PriceDates', PriceDatesCB, 10 );

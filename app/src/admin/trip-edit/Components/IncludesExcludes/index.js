@@ -63,5 +63,5 @@ const TripExcludesCB = ( content, allData ) => {
 }
 
 // Hooks.
-addFilter( 'wptravel_trip_edit_tab_content_includes_excludes', 'WPTravel\TripEdit\TripIncludes', TripIncludesCB, 10 );
-addFilter( 'wptravel_trip_edit_tab_content_includes_excludes', 'WPTravel\TripEdit\TripExcludes', TripExcludesCB, 20 );
+addFilter( 'wptravel_trip_edit_tab_content_includes_excludes', 'WPTravel/TripEdit/TripIncludes', TripIncludesCB, 10 );
+addFilter( 'wptravel_trip_edit_tab_content_includes_excludes', 'WPTravel/TripEdit/TripExcludes', TripExcludesCB, 20 );

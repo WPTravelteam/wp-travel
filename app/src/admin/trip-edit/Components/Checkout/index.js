@@ -30,5 +30,5 @@ const CheckoutNoticeCB = ( content, allData ) => {
 }
 
 // Hooks.
-addFilter( 'wptravel_trip_edit_tab_content_cart_checkout', 'WPTravel\TripEdit\CheckoutNotice', CheckoutNoticeCB, 10 );
+addFilter( 'wptravel_trip_edit_tab_content_cart_checkout', 'WPTravel/TripEdit/CheckoutNotice', CheckoutNoticeCB, 10 );
 // removeAllFilters( 'wptravel_trip_edit_tab_content_downloads' );

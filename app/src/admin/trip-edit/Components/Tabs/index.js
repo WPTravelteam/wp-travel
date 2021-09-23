@@ -204,9 +204,9 @@ const TripTabsCB = ( content, allData ) => {
     return [ ...content, <TripTabs allData={allData} /> ];
 }
 
-addFilter( 'wptravel_trip_edit_tab_content_tabs', 'WPTravel\TripEdit\TripTabsNotice', TripTabsNoticeCB, 10 );
-addFilter( 'wptravel_trip_edit_tab_content_tabs', 'WPTravel\TripEdit\TripTabsUseGlobal', TripTabsUseGlobalCB, 20 );
-addFilter( 'wptravel_trip_edit_tab_content_tabs', 'WPTravel\TripEdit\TripTabs', TripTabsCB, 30 );
+addFilter( 'wptravel_trip_edit_tab_content_tabs', 'WPTravel/TripEdit/TripTabsNotice', TripTabsNoticeCB, 10 );
+addFilter( 'wptravel_trip_edit_tab_content_tabs', 'WPTravel/TripEdit/TripTabsUseGlobal', TripTabsUseGlobalCB, 20 );
+addFilter( 'wptravel_trip_edit_tab_content_tabs', 'WPTravel/TripEdit/TripTabs', TripTabsCB, 30 );
 
 addFilter( 'wptravel_trip_edit_block_tab_inspector_controls', 'WPTravel/TripEdit/Block/Tab/InspectorControls/TripTabsNotice', TripTabsNoticeCB );
 addFilter( 'wptravel_trip_edit_block_tab_inspector_controls_tab_sort', 'WPTravel/TripEdit/Block/Tab/InspectorControls/TabSort/TripTabsUseGlobal', TripTabsUseGlobalCB );

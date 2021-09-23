@@ -163,4 +163,4 @@ const DatesCB = ( content, allData ) => {
 }
 
 // Hooks.
-addFilter( 'wptravel_trip_edit_sub_tab_content_dates', 'WPTravel\TripEdit\PriceDates\Dates', DatesCB, 10 );
+addFilter( 'wptravel_trip_edit_sub_tab_content_dates', 'WPTravel/TripEdit/PriceDates/Dates', DatesCB, 10 );

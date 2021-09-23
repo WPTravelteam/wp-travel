@@ -30,7 +30,7 @@ const DownloadsNoticeCB = ( content, allData ) => {
 }
 
 // Hooks.
-addFilter( 'wptravel_trip_edit_tab_content_downloads', 'WPTravel\TripEdit\DownloadsNotice', DownloadsNoticeCB, 10 );
+addFilter( 'wptravel_trip_edit_tab_content_downloads', 'WPTravel/TripEdit/DownloadsNotice', DownloadsNoticeCB, 10 );
 // wptravel_trip_edit_tab_content_downloads
 
 addFilter( 'wptravel_trip_edit_block_tab_downloads', 'WPTravel/TripEdit/Block/Downloads/DownloadsFields', DownloadsNoticeCB );

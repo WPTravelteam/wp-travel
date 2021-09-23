@@ -244,8 +244,8 @@ const GoogleMapCB = ( content, settingsData, map_data ) => {
 
 
 // Hooks.
-addFilter( 'wptravel_trip_edit_tab_content_locations', 'WPTravel\TripEdit\Locations', LocationsCB, 10 ); // Main Wrapper hook. other hooks are inside its content.
+addFilter( 'wptravel_trip_edit_tab_content_locations', 'WPTravel/TripEdit/Locations', LocationsCB, 10 ); // Main Wrapper hook. other hooks are inside its content.
 
-addFilter('wp_travel_admin_map_area', 'WPTravel\TripEdit\Locations\MapNotice',  MapNoticeCB, 10 ); // Need to remove this hook from pro.
+addFilter('wp_travel_admin_map_area', 'WPTravel/TripEdit/Locations/MapNotice',  MapNoticeCB, 10 ); // Need to remove this hook from pro.
 // Maps.
-addFilter('wp_travel_admin_map_area', 'WPTravel\TripEdit\Locations\GoogleMap',  GoogleMapCB, 20 );
+addFilter('wp_travel_admin_map_area', 'WPTravel/TripEdit/Locations/GoogleMap',  GoogleMapCB, 20 );

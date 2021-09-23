@@ -30,4 +30,4 @@ const InventoryNoticeCB = ( content, allData ) => {
 }
 
 // Hooks.
-addFilter( 'wptravel_trip_edit_tab_content_inventory_options', 'WPTravel\TripEdit\InventoryNotice', InventoryNoticeCB, 10 );
+addFilter( 'wptravel_trip_edit_tab_content_inventory_options', 'WPTravel/TripEdit/InventoryNotice', InventoryNoticeCB, 10 );
