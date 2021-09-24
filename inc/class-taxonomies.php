@@ -27,6 +27,7 @@ class Wp_Travel_Taxonomies {
 			'labels'            => $labels,
 			'show_ui'           => true,
 			'show_admin_column' => true,
+			'show_in_rest'      => true,
 			'query_var'         => true,
 			'rewrite'           => array( 'slug' => $permalink['wp_travel_trip_type_base'] ),
 		);
@@ -52,6 +53,7 @@ class Wp_Travel_Taxonomies {
 			'labels'            => $labels,
 			'show_ui'           => true,
 			'show_admin_column' => true,
+			'show_in_rest'      => true,
 			'query_var'         => true,
 			'rewrite'           => array( 'slug' => $permalink['wp_travel_destination_base'] ),
 		);
@@ -77,6 +79,7 @@ class Wp_Travel_Taxonomies {
 			'labels'            => $labels,
 			'show_ui'           => true,
 			'show_admin_column' => false,
+			'show_in_rest'      => true,
 			'query_var'         => true,
 			'rewrite'           => array( 'slug' => 'travel-keywords' ),
 		);
@@ -102,6 +105,7 @@ class Wp_Travel_Taxonomies {
 			'labels'            => $labels,
 			'show_ui'           => true,
 			'show_admin_column' => false,
+			'show_in_rest'      => true,
 			'query_var'         => true,
 			'rewrite'           => array( 'slug' => $permalink['wp_travel_activity_base'] ),
 		);
