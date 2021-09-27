@@ -1,4 +1,4 @@
-import { Notice, PanelRow, TextControl, ToggleControl } from '@wordpress/components';
+import { Notice, PanelRow, TextControl, ToggleControl, Button } from '@wordpress/components';
 import { useEffect } from '@wordpress/element'
 import { dispatch, useSelect } from '@wordpress/data';
 import { addFilter, applyFilters } from '@wordpress/hooks';
@@ -117,7 +117,7 @@ const MapNotice = ( {settingsData, map_data } ) => {
         {__i18n.notices.map_option.description}
         <br />
         <br />
-        <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
+        <Button href="https://wptravel.io/wp-travel-pro/" isSmall target="_blank" isSecondary>{__i18n.notice_button_text.get_pro}</Button>
     </Notice>
 }
 
@@ -249,3 +249,6 @@ addFilter( 'wptravel_trip_edit_tab_content_locations', 'WPTravel/TripEdit/Locati
 addFilter('wp_travel_admin_map_area', 'WPTravel/TripEdit/Locations/MapNotice',  MapNoticeCB, 10 ); // Need to remove this hook from pro.
 // Maps.
 addFilter('wp_travel_admin_map_area', 'WPTravel/TripEdit/Locations/GoogleMap',  GoogleMapCB, 20 );
+
+
+addFilter( 'wptravel_trip_edit_block_map_area', 'WPTravel/TripEdit/Block/Maps/MapsNoticeFields', MapNoticeCB, 10 );
