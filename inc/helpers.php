@@ -3114,14 +3114,19 @@ function wptravel_frontend_tab_gallery( $gallery_ids ) {
 		<div class="wp-travel-gallery wp-travel-container-wrap">
 			<div class="wp-travel-row-wrap">
 				<ul>
-					<?php foreach ( $gallery_ids as $gallery_id ) : ?>
-					<li>
-						<?php $gallery_image = wp_get_attachment_image_src( $gallery_id, $image_size ); ?>
-						<a title="<?php echo esc_attr( wp_get_attachment_caption( $gallery_id ) ); ?>" href="<?php echo esc_url( wp_get_attachment_url( $gallery_id ) ); ?>">
-						<img alt="" src="<?php echo esc_attr( $gallery_image[0] ); ?>" />
-						</a>
-					</li>
-					<?php endforeach; ?>
+					<?php 
+					foreach ( $gallery_ids as $gallery_id ) :
+						if ( $gallery_id ) {
+							$gallery_image = wp_get_attachment_image_src( $gallery_id, $image_size );
+							?>
+							<li>
+								<a title="<?php echo esc_attr( wp_get_attachment_caption( $gallery_id ) ); ?>" href="<?php echo esc_url( wp_get_attachment_url( $gallery_id ) ); ?>">
+								<img alt="" src="<?php echo esc_attr( $gallery_image[0] ); ?>" />
+								</a>
+							</li>
+							<?php
+						}
+					endforeach; ?>
 				</ul>
 			</div>
 		</div>
