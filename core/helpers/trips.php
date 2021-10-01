@@ -570,8 +570,8 @@ class WpTravel_Helpers_Trips {
 			$query_args['tax_query'] = array();
 
 			if ( ! empty( $travel_locations ) ) {
-				$query_args['tax_query']['relation'] = 'AND';
-				$query_args['tax_query']             = array(
+				// $query_args['tax_query']['relation'] = 'AND';
+				$query_args['tax_query'][] = array(
 					'taxonomy' => 'travel_locations',
 					'field'    => 'slug',
 					'terms'    => $travel_locations,
@@ -588,7 +588,13 @@ class WpTravel_Helpers_Trips {
 		if ( isset( $args['numberposts'] ) ) {
 			$query_args['posts_per_page'] = $args['numberposts'];
 		}
-		error_log( print_r( $query_args, true ) );
+
+		if ( isset( $args['orderby'] ) ) {
+			$order  = $args['order'] ? $args['order'] : 'desc';
+			$query_args['orderby'] = $args['orderby'];
+			$query_args['order'] = $order;
+		}
+		// error_log( print_r( $query_args, true ) );
 		$the_query = new WP_Query( $query_args );
 		$trips     = array();
 		// The Loop.
@@ -647,7 +653,15 @@ class WpTravel_Helpers_Trips {
 		$max_price = isset( $args['max_price'] ) ? $args['max_price'] : '';
 
 		// List all trip ids as per filter arguments.
-		$sql = "select trip_id from {$date_table}";
+		$sql = "select distinct DATES.trip_id from {$date_table}";
+
+		// Order By qyery.
+		$orderby_sql = " ORDER BY post_date desc";
+		if ( isset( $args['orderby'] ) && $args['orderby'] ) {
+			$orderby = $args['orderby'];
+			$order = isset( $args['order'] ) && $args['order'] ? $args['order'] : 'desc';
+			$orderby_sql = " ORDER BY ${orderby} {$order}";
+		}
 
 		$year      = '';
 		$month     = ''; // 1,2,3 ... 12.
@@ -688,40 +702,17 @@ class WpTravel_Helpers_Trips {
 					)";
 			}
 		}
-		$results = $wpdb->get_results( $sql ); // @phpcs:ignore
-
-		if ( empty( $results ) ) {
-			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIPS' );
-		}
-
-		// Get Distinct post ids.
-		$post_ids = array();
-		foreach ( $results as $result ) {
-			$post_ids[] = $result->trip_id;
-		}
-		$sql = "select distinct trip_id from {$wpdb->prefix}wt_pricings where trip_id IN(" . implode( ',', $post_ids ) . ') ';
+		$sql .= ' DATES'; // table alias.
+		$sql .= " JOIN {$wpdb->prefix}wt_pricings PRICINGS on DATES.trip_id=PRICINGS.trip_id";
 
 		// Second query for group size if max_pax param.
 		if ( $max_pax && $max_pax > 0 ) {
-			$sql .= " and max_pax >= {$max_pax}";
-		}
-		$results = $wpdb->get_results( $sql ); // @phpcs:ignore
-
-		if ( empty( $results ) ) {
-			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIPS' );
-		}
-
-		$post_ids = array();
-		foreach ( $results as $result ) {
-			$post_ids[] = $result->trip_id;
+			$sql .= " and ( PRICINGS.max_pax = 0 or ( {$max_pax} >= PRICINGS.min_pax and {$max_pax} <= PRICINGS.max_pax  ) )";
 		}
 
 		// Filter as per min and max price @todo:need query enhancement.
 		if ( ( $min_price && $min_price > 0 ) || ( $max_price && $max_price > 0 ) ) {
-			// $sql     = "select pricing_id, pricing_category_id,regular_price,is_sale,sale_price, trip_id from {$price_category_table} PC join {$pricing_table} P on PC.pricing_id=P.id  where P.trip_id IN(" . implode( ',', $post_ids ) . ") ";
-			// $results = $wpdb->get_results( $sql );
-
-			$results = $wpdb->get_results( $wpdb->prepare( "select pricing_id, pricing_category_id,regular_price,is_sale,sale_price, trip_id from {$wpdb->prefix}wt_price_category_relation PC join {$wpdb->prefix}wt_pricings P on PC.pricing_id=P.id  where P.trip_id IN(%s) ", implode( ',', $post_ids ) ) );
+			$results = $wpdb->get_results( $wpdb->prepare( "select pricing_id, pricing_category_id,regular_price,is_sale,sale_price, trip_id, TRIPS.post_date, TRIPS.post_title from {$wpdb->prefix}wt_price_category_relation PC join {$wpdb->prefix}wt_pricings P on PC.pricing_id=P.id join {$wpdb->prefix}posts TRIPS on P.trip_id = TRIPS.ID where P.trip_id IN(%s) {$orderby_sql}", $sql ) );
 
 			if ( empty( $results ) ) {
 				return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIPS' );
@@ -757,7 +748,12 @@ class WpTravel_Helpers_Trips {
 			);
 
 		}
+		$sql = "select TRIPS.ID as trip_id, TRIPS.post_date, TRIPS.post_title from {$wpdb->prefix}posts TRIPS where TRIPS.ID IN({$sql}) {$orderby_sql}";
+		$results = $wpdb->get_results( $sql ); // @phpcs:ignore
 
+		if ( empty( $results ) ) {
+			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIPS' );
+		}
 		$post_ids = array();
 		foreach ( $results as $result ) {
 			$post_ids[] = $result->trip_id;
