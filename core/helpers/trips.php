@@ -563,9 +563,11 @@ class WpTravel_Helpers_Trips {
 
 		$travel_locations = isset( $args['travel_locations'] ) ? $args['travel_locations'] : '';
 		$itinerary_types  = isset( $args['itinerary_types'] ) ? $args['itinerary_types'] : '';
+		$activity         = isset( $args['activity'] ) ? $args['activity'] : '';
+		$travel_keywords  = isset( $args['travel_keywords'] ) ? $args['travel_keywords'] : '';
 
 		// Tax Query Args.
-		if ( ! empty( $travel_locations ) || ! empty( $itinerary_types ) ) {
+		if ( ! empty( $travel_locations ) || ! empty( $itinerary_types ) || ! empty( $activity ) || ! empty( $travel_keywords ) ) {
 
 			$query_args['tax_query'] = array();
 
@@ -582,6 +584,20 @@ class WpTravel_Helpers_Trips {
 					'taxonomy' => 'itinerary_types',
 					'field'    => 'slug',
 					'terms'    => $itinerary_types,
+				);
+			}
+			if ( ! empty( $activity ) ) {
+				$query_args['tax_query'][] = array(
+					'taxonomy' => 'activity',
+					'field'    => 'slug',
+					'terms'    => $activity,
+				);
+			}
+			if ( ! empty( $travel_keywords ) ) {
+				$query_args['tax_query'][] = array(
+					'taxonomy' => 'travel_keywords',
+					'field'    => 'slug',
+					'terms'    => $travel_keywords,
 				);
 			}
 		}
