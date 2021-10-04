@@ -49,7 +49,6 @@ class WpTravel_Helpers_Trips {
 		if ( empty( $trip_id ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
 		}
-		// error_log( print_r( $trip_id, true ) );
 		$trip = get_post( $trip_id );
 		$wp_travel_itinerary = new WP_Travel_Itinerary( $trip );
 		$group_size          = $wp_travel_itinerary->get_group_size();
@@ -518,8 +517,6 @@ class WpTravel_Helpers_Trips {
 
 		$post_ids      = array();
 		$post_ids_data = self::get_trip_ids( $args );
-		// error_log( print_r( $args, true ) );
-		// error_log( print_r( $post_ids_data, true ) );
 		if ( is_array( $post_ids_data ) && isset( $post_ids_data['code'] ) && 'WP_TRAVEL_TRIP_IDS' == $post_ids_data['code'] ) {
 			$post_ids = $post_ids_data['trip_ids'];
 		}
@@ -610,7 +607,6 @@ class WpTravel_Helpers_Trips {
 			$query_args['orderby'] = $args['orderby'];
 			$query_args['order'] = $order;
 		}
-		// error_log( print_r( $query_args, true ) );
 		$the_query = new WP_Query( $query_args );
 		$trips     = array();
 		// The Loop.
@@ -726,13 +722,20 @@ class WpTravel_Helpers_Trips {
 			$sql .= " and ( PRICINGS.max_pax = 0 or ( {$max_pax} >= PRICINGS.min_pax and {$max_pax} <= PRICINGS.max_pax  ) )";
 		}
 
-		// Filter as per min and max price @todo:need query enhancement.
-		if ( ( $min_price && $min_price > 0 ) || ( $max_price && $max_price > 0 ) ) {
-			$results = $wpdb->get_results( $wpdb->prepare( "select pricing_id, pricing_category_id,regular_price,is_sale,sale_price, trip_id, TRIPS.post_date, TRIPS.post_title from {$wpdb->prefix}wt_price_category_relation PC join {$wpdb->prefix}wt_pricings P on PC.pricing_id=P.id join {$wpdb->prefix}posts TRIPS on P.trip_id = TRIPS.ID where P.trip_id IN(%s) {$orderby_sql}", $sql ) );
+		// Query 2 for trip duration dates.
+		$duration_query = "Select META.post_id as trip_id, TRIPS.post_date, TRIPS.post_title from {$wpdb->prefix}postmeta META join {$wpdb->prefix}posts TRIPS on META.post_id=TRIPS.ID where META.meta_key='wp_travel_fixed_departure' and META.meta_value!= 'yes' and TRIPS.post_status IN ( 'publish' ) {$orderby_sql}";
 
-			if ( empty( $results ) ) {
+		// Filter as per min and max price.
+		if ( ( $min_price && $min_price > 0 ) || ( $max_price && $max_price > 0 ) ) {
+			// Trip ID's From Dates table.
+			$results  = $wpdb->get_results( $wpdb->prepare( "select pricing_id, pricing_category_id,regular_price,is_sale,sale_price, trip_id, TRIPS.post_date, TRIPS.post_title from {$wpdb->prefix}wt_price_category_relation PC join {$wpdb->prefix}wt_pricings P on PC.pricing_id=P.id join {$wpdb->prefix}posts TRIPS on P.trip_id = TRIPS.ID where P.trip_id IN(%s) {$orderby_sql}", $sql ) );
+			$results2 = $wpdb->get_results( $duration_query );
+		
+			if ( empty( $results && empty( $results2 ) ) ) {
 				return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIPS' );
 			}
+	
+			$results = array_unique (array_merge ( $results, $results2 ) );
 
 			// return form here if min and max price.
 			$post_ids = array();
@@ -764,12 +767,16 @@ class WpTravel_Helpers_Trips {
 			);
 
 		}
-		$sql = "select TRIPS.ID as trip_id, TRIPS.post_date, TRIPS.post_title from {$wpdb->prefix}posts TRIPS where TRIPS.ID IN({$sql}) {$orderby_sql}";
-		$results = $wpdb->get_results( $sql ); // @phpcs:ignore
-
-		if ( empty( $results ) ) {
+		// SQL for Trip ids from dates table.
+		$sql      = "select TRIPS.ID as trip_id, TRIPS.post_date, TRIPS.post_title from {$wpdb->prefix}posts TRIPS where TRIPS.ID IN({$sql}) {$orderby_sql}";
+		$results  = $wpdb->get_results( $sql ); // @phpcs:ignore
+		$results2 = $wpdb->get_results( $duration_query );
+		
+		if ( empty( $results && empty( $results2 ) ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIPS' );
 		}
+
+		$results = array_unique (array_merge ( $results, $results2 ) );
 		$post_ids = array();
 		foreach ( $results as $result ) {
 			$post_ids[] = $result->trip_id;
