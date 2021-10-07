@@ -148,6 +148,7 @@ class WpTravel_Helpers_Strings { // @phpcs:ignore
 			'day_x'                     => __( 'Day X', 'wp-travel' ),
 			'your_plan'                 => __( 'Your Plan', 'wp-travel' ),
 			'trip_outline'              => __( 'Trip Outline', 'wp-travel' ),
+			'overview'                  => __( 'Overview', 'wp-travel' ),
 			'itinerary_label'           => __( 'Itinerary Label', 'wp-travel' ),
 			'itinerary_title'           => __( 'Itinerary Title', 'wp-travel' ),
 			'itinerary_date'            => __( 'Itinerary Date', 'wp-travel' ),

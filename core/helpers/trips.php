@@ -388,6 +388,15 @@ class WpTravel_Helpers_Trips {
 		}
 		update_post_meta( $trip_id, 'wp_travel_trip_facts', $trip_facts );
 
+		if ( ! empty( $trip_data->trip_overview ) ) {
+			/**
+			 * Save trip outline.
+			 *
+			 * @todo Need escaping in wp_travel_overview
+			 */
+			update_post_meta( $trip_id, 'wp_travel_overview', wp_kses_post( $trip_data->trip_overview ) );
+		}
+
 		if ( ! empty( $trip_data->trip_outline ) ) {
 			/**
 			 * Save trip outline.
