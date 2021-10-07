@@ -57,25 +57,6 @@ const TripOutline = ({allData}) => {
         </PanelRow>
     </>;
 }
-const TripOverview = ({allData}) => {
-    const { trip_overview } = allData;
-    const { updateTripData } = dispatch('WPTravel/TripEdit');
-    return <>
-        <PanelRow>
-            <label htmlFor="wp-travel-trip-overview">{__i18n.overview}</label>
-        </PanelRow>
-        <PanelRow className="wp-travel-editor">
-            {'undefined' !== typeof trip_overview && <WPEditor id="wp-travel-trip-overview" value={trip_overview}
-            onContentChange={(trip_overview) => {
-                updateTripData({
-                    ...allData,
-                    trip_overview: trip_overview
-                })
-            }} name="trip_overview" />}
-        </PanelRow>
-    </>;
-}
-
 // Swap any array or object as per provided index.
 const  swapList = (data, old_index, new_index) => {
     if ( 'object' === typeof data ) {
@@ -346,10 +327,6 @@ const Itinerary = ({allData}) => {
 const TripCodeCB = ( content, allData ) => {
     return [ ...content, <TripCode allData={allData} key="TripCode" /> ];
 }
-
-const TripOverviewCB = ( content, allData ) => {
-    return [ ...content, <TripOverview allData={allData} key="TripOverview" /> ];
-}
 const TripOutlineCB = ( content, allData ) => {
     return [ ...content, <TripOutline allData={allData} key="TripOutline" /> ];
 }
@@ -359,9 +336,8 @@ const ItineraryCB = ( content, allData ) => {
 
 // Hooks.
 addFilter( 'wptravel_trip_edit_tab_content_itinerary', 'WPTravel/TripEdit/TripCode', TripCodeCB, 10 );
-addFilter( 'wptravel_trip_edit_tab_content_itinerary', 'WPTravel/TripEdit/TripOverview', TripOverviewCB, 20 );
-addFilter( 'wptravel_trip_edit_tab_content_itinerary', 'WPTravel/TripEdit/TripOutline', TripOutlineCB, 30 );
-addFilter( 'wptravel_trip_edit_tab_content_itinerary', 'WPTravel/TripEdit/Itinerary', ItineraryCB, 40 );
+addFilter( 'wptravel_trip_edit_tab_content_itinerary', 'WPTravel/TripEdit/TripOutline', TripOutlineCB, 20 );
+addFilter( 'wptravel_trip_edit_tab_content_itinerary', 'WPTravel/TripEdit/Itinerary', ItineraryCB, 30 );
 
 addFilter( 'wptravel_trip_edit_block_tab_trip_outline', 'WPTravel/TripEdit/Block/Outline/Itinerary', ItineraryCB );
 addFilter( 'wp_travel_trip_edit_block_itinerary_view', 'WPTravel/TripEdit/Block/Itinerary/ItineraryView', ItineraryCB );

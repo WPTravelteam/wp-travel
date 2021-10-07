@@ -26,6 +26,7 @@ import SaveTripSection from './sub-components/SaveTripSection'
 // import WPTravelTripOptionsMisc from './Components/Misc';
 // import WPTravelTripOptionsTabs from './Components/Tabs';
 
+import './Components/Overview';
 import './Components/Itinerary';
 import './Components/PriceDates';
 import './Components/IncludesExcludes';
@@ -96,6 +97,12 @@ addFilter( 'wp_travel_trip_options_tabs', 'wp_travel', ( tabs ) => {
 	return [
 		...tabs,
 		...[
+			{
+				name: 'overview',
+				title: __i18n.overview,
+				className: 'tab-overview',
+				// content: WPTravelTripOptionsItinerary
+			},
 			{
 				name: 'itinerary',
 				title: __i18n.admin_tabs.itinerary,
