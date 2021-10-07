@@ -1,7 +1,9 @@
 import { applyFilters } from '@wordpress/hooks';
 import { useSelect, select, dispatch, withSelect } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
-import { PanelRow, ToggleControl, TextControl } from '@wordpress/components';
+import { PanelRow, ToggleControl, TextControl, Tooltip, Icon } from '@wordpress/components';
+import {info, alignJustify } from '@wordpress/icons';
+
 import Select from 'react-select'
 import {VersionCompare} from '../../fields/VersionCompare'
 
@@ -221,7 +223,11 @@ export default () => {
 
             { 'google-map' == wp_travel_map && <>
                 <PanelRow>
-                    <label>{ __( 'API Key', 'wp-travel' ) }</label>
+                    <label>{ __( 'API Key', 'wp-travel' ) }
+                        <Tooltip text={__( 'If you don\'t have API Key, you can use Map by using Lat/Lng or Location from location tab under trip edit page.', 'wp-travel' )}>
+                            <span> <Icon icon={info} size="16" /></span>
+                        </Tooltip>
+                    </label>
                     <div className="wp-travel-field-value">
                         <TextControl
                             // help={__( 'To get your Google map API keys click here', 'wp-travel' )}
@@ -235,7 +241,9 @@ export default () => {
                                 }
                             }
                         />
-                        <p className="description">{__( 'To get your Google map API keys ', 'wp-travel' )} <a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">{__( 'click here ', 'wp-travel' )}</a></p>
+                        <p className="description">{__( 'To get your Google map V3 API keys ', 'wp-travel' )} <a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">{__( 'click here ', 'wp-travel' )}</a></p>
+                        
+                         
                     </div>
                 </PanelRow>
                 <PanelRow>

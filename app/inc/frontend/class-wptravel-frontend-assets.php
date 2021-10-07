@@ -149,6 +149,7 @@ class WpTravel_Frontend_Assets {
 	 */
 	public static function register_scripts() {
 		$suffix           = wptravel_script_suffix();
+		// $suffix           = ''; // Temp fixes due to build issue.
 		$all_dependencies = self::get_block_dependencies(); // Dependency & version for Block JS.
 		$settings         = wptravel_get_settings();
 
@@ -341,9 +342,9 @@ class WpTravel_Frontend_Assets {
 		}
 
 		if ( '' !== $api_key && true === $show_google_map ) {
-
 			$scripts['google-map-api'] = array(
-				'src'       => 'https://maps.google.com/maps/api/js?libraries=places&key=' . $api_key,
+				// 'src'       => 'https://maps.google.com/maps/api/js?libraries=places&key=' . $api_key,
+				'src'       => 'https://maps.googleapis.com/maps/api/js?libraries=places&key=' . $api_key,
 				'deps'      => array(),
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,

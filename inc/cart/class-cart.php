@@ -401,7 +401,6 @@ class WP_Travel_Cart {
 
 				$this->items[ $cart_item_id ]['trip_price']         = $trip_price;
 				$this->items[ $cart_item_id ]['trip_price_partial'] = $trip_price_partial;
-				error_log( print_r( $trip_extras, true ) );
 				if ( $trip_extras ) {
 
 					if ( is_array( $trip_extras ) && ! empty( $trip_extras ) ) {

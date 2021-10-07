@@ -59,8 +59,9 @@ class WpTravel_Admin_Assets {
 		$allowed_screen = array( WP_TRAVEL_POST_TYPE, 'edit-' . WP_TRAVEL_POST_TYPE, 'itinerary-enquiries' );
 		if ( in_array( $screen->id, $allowed_screen, true ) ) {
 			$backend_depencency = array( 'jquery', 'jquery-ui-tabs', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng', 'wp-travel-media-upload', 'jquery-ui-sortable', 'jquery-ui-accordion', 'moment' );
-			if ( isset( $registered_scripts['jquery-gmaps'] ) ) {
-				$backend_depencency[] = 'jquery-gmaps';
+			if ( isset( $registered_scripts['google-map-api'] ) ) {
+				// This will only registered if set google map as default map and has api key.
+				wp_enqueue_script( 'google-map-api' );
 			}
 
 			wp_enqueue_script( 'wptravel-uploader' );
