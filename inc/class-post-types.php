@@ -65,9 +65,8 @@ class WP_Travel_Post_Types {
 			'menu_position'      => 30,
 			'show_in_rest'       => true,
 		);
-		if ( 'yes' === $switch_to_react ) {
+		if ( is_plugin_active( 'elementor/elementor.php' ) ) {
 			$args['supports'][] = 'editor';
-			$args['show_in_rest'] = false;
 		}
 		/**
 		 * Register a itineraries post type.
