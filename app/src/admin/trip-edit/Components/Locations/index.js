@@ -51,6 +51,7 @@ const GmapIframe = props => {
     }
     const q = 'yes' === useLatLng ? `${lat},${lng}` : location
     return <>
+        { ! props.isBlock &&<>
         <PanelRow>
             <label>{__i18n.location}</label>
             <ToggleControl
@@ -83,6 +84,7 @@ const GmapIframe = props => {
                     />
                 </PanelRow>
             </>}
+        </>}
         
         <PanelRow>
             <div className="wp-travel-map-wrap">
@@ -121,7 +123,7 @@ const MapNotice = ( {settingsData, map_data } ) => {
     </Notice>
 }
 
-const GoogleMap = ( {settingsData, map_data } ) => {
+const GoogleMap = ( {settingsData, map_data, isBlock } ) => {
     if ( ! settingsData ) {
         return <></>;
     }
@@ -135,7 +137,7 @@ const GoogleMap = ( {settingsData, map_data } ) => {
             <Notice status="warning" isDismissible={false}>
                 <strong dangerouslySetInnerHTML={{ __html: sprintf(__(`${__i18n.notices.map_key_option.description}`), `<a href="edit.php?post_type=itinerary-booking&page=settings">`, `</a>`) }}></strong>
             </Notice><br />
-            <GmapIframe zoomlevel={google_map_zoom_level} />
+            <GmapIframe zoomlevel={google_map_zoom_level} isBlock={isBlock} />
         </>;
     }
 
@@ -242,7 +244,10 @@ const MapNoticeCB = ( content, settingsData, map_data ) => {
 }
 
 const GoogleMapCB = ( content, settingsData, map_data ) => {
-    return [ ...content, <GoogleMap settingsData={settingsData} map_data={map_data} key="GoogleMap" /> ];
+    return [ ...content, <GoogleMap settingsData={settingsData} map_data={map_data} key="GoogleMap" isBlock={false} /> ];
+}
+const GoogleMapBlockCB = ( content, settingsData, map_data ) => {
+    return [ ...content, <GoogleMap settingsData={settingsData} map_data={map_data} key="GoogleMap" isBlock={true} /> ];
 }
 
 
@@ -255,4 +260,4 @@ addFilter('wp_travel_admin_map_area', 'WPTravel/TripEdit/Locations/GoogleMap',  
 
 
 addFilter( 'wptravel_trip_edit_block_map_area', 'WPTravel/TripEdit/Block/Maps/MapsNoticeFields', MapNoticeCB, 10 );
-addFilter( 'wptravel_trip_edit_block_map_area_view', 'WPTravel/TripEdit/Block/Location/GoogleMap', GoogleMapCB );
+addFilter( 'wptravel_trip_edit_block_map_area_view', 'WPTravel/TripEdit/Block/Locations/GoogleMap', GoogleMapBlockCB );
