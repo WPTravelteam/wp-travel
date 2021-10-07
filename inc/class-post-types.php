@@ -24,6 +24,9 @@ class WP_Travel_Post_Types {
 	 * @return void
 	 */
 	public static function register_trip() {
+		if ( ! function_exists( 'is_plugin_active' ) ) {
+			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+		}
 		$settings = wptravel_get_settings();
 		$switch_to_react = $settings['wp_travel_switch_to_react'];
 		$permalink = wptravel_get_permalink_structure();
