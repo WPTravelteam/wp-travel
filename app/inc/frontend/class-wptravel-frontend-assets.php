@@ -431,14 +431,16 @@ class WpTravel_Frontend_Assets {
 
 		// Admin Specific.
 		if ( self::is_request( 'admin' ) ) {
-
-			// Main Styles for all admin pages.
-			$styles['wp-travel-back-end'] = array(
-				'src'   => self::$app_path . '/build/wp-travel-back-end' . $suffix . '.css',
-				'deps'  => array(),
-				'ver'   => WP_TRAVEL_VERSION,
-				'media' => 'all',
-			);
+			$screen = get_current_screen();
+			if ( ! $screen->is_block_editor ) {
+				// Main Styles for all admin pages.
+				$styles['wp-travel-back-end'] = array(
+					'src'   => self::$app_path . '/build/wp-travel-back-end' . $suffix . '.css',
+					'deps'  => array(),
+					'ver'   => WP_TRAVEL_VERSION,
+					'media' => 'all',
+				);
+			}
 
 			// Required Scripts for all admin pages.
 			$scripts['wp-travel-fields-scripts'] = array(
