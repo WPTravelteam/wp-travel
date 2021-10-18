@@ -29,6 +29,10 @@ module.exports = (env, options) => {
       './app/src/frontend/sass/main.scss',
     ];
 
+	entries['wp-travel-front-end-v2' + fileSuffix ] = [
+		'./app/src/frontend/sass/v2/main.scss',
+	];
+
     entries['admin-coupon' + fileSuffix ] = [
       './app/src/admin/coupon/index.js',
       './app/src/admin/coupon/sass/main.scss',
@@ -62,11 +66,11 @@ module.exports = (env, options) => {
       ...defaultConfig.module,
       rules: [
         ...defaultConfig.module.rules,
-        { 
+        {
           test: /\.(png|woff|woff2|eot|ttf|svg)$/,
           use: [
             {
-              loader: 'url-loader?limit=100000' 
+              loader: 'url-loader?limit=100000'
             }
           ]
         },
