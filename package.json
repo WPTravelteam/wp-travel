@@ -73,7 +73,7 @@
     "react-datepicker": "^3.7.0",
     "react-geocode": "^0.2.1",
     "react-gmaps": "^1.9.0",
-    "react-google-autocomplete": "^1.1.2",
+    "react-google-autocomplete": "^2.4.3",
     "react-select": "^3.0.8",
     "react-sortablejs": "^6.0.0",
     "rrule": "^2.6.4",
