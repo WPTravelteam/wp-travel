@@ -80,7 +80,8 @@
 //savings tag in itinerary post items
 .wp-travel-savings {
 	position: absolute;
-	bottom: 0;
+	// bottom: 0;
+	bottom: unset;
 	background: rgb(0, 146, 29);
 	color: #fff;
 	right: -8px;

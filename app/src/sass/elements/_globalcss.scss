@@ -1,7 +1,8 @@
 .wp-travel {
 	max-width: 1250px !important;
 	&.resp-tabs-list {
-		display: flex;
+		// display: flex;
+		display: block;
 		justify-content: center;
 	}
 	.wptravel-block-wrapper & {
@@ -25,6 +26,8 @@
 			height: 66px;
 			box-shadow: none;
 			font-size: 0;
+			height: 0;
+			display: none !important;
 			&.slick-prev {
 				left: 0;
 				// @media (min-width: 769px) {

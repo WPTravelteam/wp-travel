@@ -1,0 +1,50 @@
+// input[type="text"],
+// input[type="password"],
+// input[type="date"],
+// input[type="datetime"],
+// input[type="datetime-local"],
+// input[type="email"],
+// input[type="month"],
+// input[type="number"],
+// input[type="search"],
+// input[type="tel"],
+// input[type="time"],
+// input[type="url"],
+// input[type="week"],
+// select {
+// 	//max-width: 300px;
+// 	width: 100%;
+// 	box-shadow: none;
+// 	border: 1px solid #d3d3d3;
+// 	border-radius: 4px;
+// 	padding: 8px 12px;
+// 	height: 38px;
+// 	outline: 0;
+// 	border-left: 3px solid #d3d3d3;
+
+// 	&:focus {
+// 		border-left: 3px solid #38a17d;
+// 	}
+// }
+
+// input[type=number],
+// input.date-input {
+// 	width: 180px;
+// }
+
+input[type="radio"] {
+	width: 16px;
+	border-radius: 50%;
+	height: 16px;
+
+	&:focus {
+		border-left: 1px solid #d3d3d3;
+	}
+}
+
+.label_title {
+	color: #757575;
+	font-size: 1em;
+	text-transform: capitalize;
+	font-weight: 500;
+}

@@ -1,0 +1,44 @@
+
+.wp-travel-trips-has-sidebar {
+	width: 66.666667%;
+	padding-right: 15px;
+	float: left;
+
+	& + .wp-travel-widget-area {
+		width: 33.3333%;
+		float: right;
+		padding: 0px 15px;
+		display: block;
+	}
+
+	@include sidr-view {
+		width: 100%;
+		padding-right: 0;
+
+		& + .wp-travel-widget-area {
+			width: 100%;
+			padding-left: 0;
+		}
+	}
+
+	.wp-travel-default-article {
+		.wp-travel-article-image-wrap {
+			margin-right: 0;
+		}
+	}
+}
+
+.post-type-archive-itineraries {
+	.wp-travel-trips-has-sidebar {
+		& + .wp-travel-widget-area {
+			@include sidr-view {
+				padding: 0;
+				float: left;
+			}
+
+			@include above-sidr-view {
+				padding-right: 0;
+			}
+		}
+	}
+}
