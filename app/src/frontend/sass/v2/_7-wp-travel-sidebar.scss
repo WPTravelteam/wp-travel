@@ -26,6 +26,17 @@
 			margin-right: 0;
 		}
 	}
+
+	.wp-travel-itinerary-items {
+		.site-main {
+			.status-publish {
+				.entry-content {
+					display: flex;
+					flex-wrap: wrap;
+				}
+			}
+		}
+	}
 }
 
 .post-type-archive-itineraries {
