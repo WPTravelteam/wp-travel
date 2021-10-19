@@ -1,4 +1,4 @@
-import { Notice, PanelRow, TextControl, ToggleControl, Button } from '@wordpress/components';
+import { Notice, PanelRow, TextControl, ToggleControl, Button, PanelBody, BaseControl } from '@wordpress/components';
 import { useEffect } from '@wordpress/element'
 import { dispatch, useSelect } from '@wordpress/data';
 import { addFilter, applyFilters } from '@wordpress/hooks';
@@ -11,7 +11,7 @@ import ErrorBoundary from '../../../../ErrorBoundry/ErrorBoundry';
 const __i18n = {
 	..._wp_travel_admin.strings
 }
-
+import { isEmpty, has } from 'lodash';
 // @todo Need to remove this in future.
 // const WPTravelTripOptionsLocation = () => {
 //     return <></>;
@@ -202,6 +202,7 @@ const GoogleMap = ( {settingsData, map_data, isBlock } ) => {
     }
 
     return <div className="wp-travel-gmap">
+        { ! isBlock &&
         <div className="wp-travel-autocomplete-wrap">
             <Autocomplete
                 apiKey={google_map_api_key}
@@ -214,6 +215,7 @@ const GoogleMap = ( {settingsData, map_data, isBlock } ) => {
                 types={['address']}
             />
         </div>
+        }
         <Gmaps
             width={'100%'}
             height={'400px'}
@@ -234,6 +236,104 @@ const GoogleMap = ( {settingsData, map_data, isBlock } ) => {
     
 }
 
+const GoogleMapBlockControls = ({ location, changeLocation, settings }) => {
+    
+    if ( ! settings ) {
+        return <></>;
+    }
+    const { wp_travel_map, google_map_api_key } = settings;
+    if (wp_travel_map !== 'google-map') {
+        return <></>;
+    }
+
+    const address = has( location, 'loc' ) && ! isEmpty( location.loc ) ? location.loc : '';
+    const lat = has( location, 'lat' ) && ! isEmpty( location.lat ) ? location.lat : '';
+    const lng = has( location, 'lng' ) && ! isEmpty( location.lng ) ? location.lng : '';
+    const useLatLng = has( location, 'use_lat_lng' ) && ! isEmpty( location.use_lat_lng ) && 'no' !== location.use_lat_lng ? location.use_lat_lng : false;
+    const hasApiKey = has( settings, 'google_map_api_key' ) && ! isEmpty( settings.google_map_api_key );
+    return (
+        <Fragment>
+            <PanelBody
+                /* translators: block settings */
+                title={ __( 'Map Settings' ) }
+            >
+                <Notice status="warning" isDismissible={ false }>
+                    <strong>Note:</strong> Making changes on following setting will also change trip location.
+                </Notice>
+                <hr />
+                <ToggleControl label={ __( 'Enable Latitude/ Longitude' ) } checked={ useLatLng } onChange={ ( value ) => {
+                    changeLocation( {
+                        use_lat_lng: value ? 'yes' : 'no',
+                    } );
+                } } />
+                <Fragment>
+                    { ! useLatLng && 
+                        <>
+                        { ! hasApiKey ? 
+                        
+                            <TextControl label={ __( 'Location' ) } value={ address } onChange={ ( value ) => {
+                                changeLocation( {
+                                    loc: value,
+                                } );
+                            } } /> 
+                        :  
+                            <>
+                            <BaseControl id="map-location"
+                                label={ __( 'Location' ) } help={ __( 'Enter location to search.' ) }>
+                                <Autocomplete
+                                    apiKey={google_map_api_key}
+                                    style={{ width: '100%' }}
+                                    onPlaceSelected={(place) => {
+                                        const data = {};
+                                        data.lat = String( place.geometry.location.lat() );
+                                        data.lng = String( place.geometry.location.lng() );
+                                        data.loc = place.formatted_address;
+                                        data.use_lat_lng = 'no';
+                                        changeLocation( data );
+                                    }}
+                                    onChange={ (e) => {
+                                        changeLocation( {
+                                            loc: e.target.value,
+                                        } );
+                                    } }
+                                    placeholder={location && location.loc}
+                                    searchText={location && location.loc}
+                                    types={['address']}
+                                    value={address}
+                                />
+                            </BaseControl>
+                            
+                            </>
+                        }
+                        </>
+                    }
+                    { useLatLng && 
+                    <div>
+                        <TextControl label={ __( 'Latitude' ) } value={ lat } onChange={ ( value ) => {
+                            changeLocation( {
+                                lat: value,
+                            } );
+                        } } />
+                        <TextControl label={ __( 'Longitude' ) } value={ lng } onChange={ ( value ) => {
+                            changeLocation( {
+                                lng: value,
+                            } );
+                        } } />
+                    </div> }
+
+                    { ! hasApiKey &&
+                        <Notice isDismissible={ false }>
+                            { __( 'You can add \'Google Map API Key\' in the settings to use additional features.' ) }
+                        </Notice>
+                    }
+                </Fragment> 
+                {/* } */}
+            </PanelBody>
+        </Fragment>
+    );
+}
+
+
 // Callbacks.
 const LocationsCB = ( content, allData ) => {
     return [ ...content, <Locations allData={allData} key="Locations" /> ];
@@ -250,6 +350,9 @@ const GoogleMapBlockCB = ( content, settingsData, map_data ) => {
     return [ ...content, <GoogleMap settingsData={settingsData} map_data={map_data} key="GoogleMap" isBlock={true} /> ];
 }
 
+const GoogleMapBlockControlsCB = ( content, settingsData, map_data, props ) => {
+    return [ ...content, <GoogleMapBlockControls {...props} /> ];
+}
 
 // Hooks.
 addFilter( 'wptravel_trip_edit_tab_content_locations', 'WPTravel/TripEdit/Locations', LocationsCB, 10 ); // Main Wrapper hook. other hooks are inside its content.
@@ -260,4 +363,5 @@ addFilter('wp_travel_admin_map_area', 'WPTravel/TripEdit/Locations/GoogleMap',  
 
 
 addFilter( 'wptravel_trip_edit_block_map_area', 'WPTravel/TripEdit/Block/Maps/MapsNoticeFields', MapNoticeCB, 10 );
-addFilter( 'wptravel_trip_edit_block_map_area_view', 'WPTravel/TripEdit/Block/Locations/GoogleMap', GoogleMapBlockCB );
+addFilter( 'wptravel_trip_edit_block_map_area', 'WPTravel/TripEdit/Block/Locations/GoogleMapControls', GoogleMapBlockControlsCB, 20 ); // Google Map block edit mode.
+addFilter( 'wptravel_trip_edit_block_map_area_view', 'WPTravel/TripEdit/Block/Locations/GoogleMap', GoogleMapBlockCB );   // Google Map block view mode.

@@ -1055,14 +1055,39 @@ function wptravel_frontend_contents( $post_id ) {
 	<?php
 }
 
-function wptravel_trip_map( $post_id ) {
+/**
+ * Load Maps as per selected map in settings.
+ *
+ * @since 1.0.0
+ * @since 5.0.2 Load all maps instead of google map only.
+ */
+function wptravel_trip_map( $trip_id ) {
 	$wp_travel_itinerary = new WP_Travel_Itinerary();
 	// global $wp_travel_itinerary;
 	if ( ! $wp_travel_itinerary->get_location() ) {
 		return;
 	}
-	$get_maps        = wptravel_get_maps();
-	$current_map     = $get_maps['selected'];
+	$get_maps    = wptravel_get_maps(); // Get map data.
+	$current_map = $get_maps['selected'];
+	/**
+	 * Load Map as per selected current map in the settings.
+	 *
+	 * @since 5.0.2
+	 */
+	do_action( 'wptravel_trip_map_' . $current_map, $trip_id, $get_maps );
+}
+
+/**
+ * Google Map for frontend.
+ *
+ * @param number $trip_id Trip id.
+ * @param array  $data    Map Related data.
+ * 
+ * @since 5.0.2
+ */
+function wptravel_google_map( $trip_id, $data ) {
+	$current_map = $data['selected'];
+
 	$show_google_map = ( 'google-map' === $current_map ) ? true : false;
 	$show_google_map = apply_filters( 'wp_travel_load_google_maps_api', $show_google_map );
 
@@ -1087,7 +1112,7 @@ function wptravel_trip_map( $post_id ) {
 		</div>
 		<?php
 	} else {
-		$use_lat_lng = get_post_meta( $post_id, 'wp_travel_trip_map_use_lat_lng', true );
+		$use_lat_lng = get_post_meta( $trip_id, 'wp_travel_trip_map_use_lat_lng', true );
 		if ( $use_lat_lng === 'yes' ) {
 			$q = "{$lat},{$lng}";
 		} else {
@@ -1104,6 +1129,7 @@ function wptravel_trip_map( $post_id ) {
 		endif;
 	}
 }
+add_action( 'wptravel_trip_map_google-map', 'wptravel_google_map', 10, 2 );
 
 /**
  * Display Related Product.
