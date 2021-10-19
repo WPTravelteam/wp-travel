@@ -318,7 +318,12 @@ class WpTravel_Frontend_Assets {
 				'ver'   => WP_TRAVEL_VERSION,
 				'media' => 'all',
 			),
-
+			'wp-travel-frontend-v2'        => array(
+				'src'   => self::$app_path . '/build/wp-travel-front-end-v2' . $suffix . '.css',
+				'deps'  => array(),
+				'ver'   => WP_TRAVEL_VERSION,
+				'media' => 'all',
+			),
 			'wp-travel-frontend-bundle' => array(
 				'src'   => self::$app_path . '/build/wp-travel-frontend.bundle.css',
 				'deps'  => array(),
