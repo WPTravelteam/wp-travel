@@ -557,31 +557,24 @@ ul.availabily-list {
 //trips facts
 .tour-info {
 	// margin: 0 0 30px;
-	margin: 30px 0;
+	// margin: 30px 0;
 
 	.tour-info-box {
-		border: 1px solid #e0e0e0;
-		background: #f1f1f1;
-		padding: 20px 25px;
+		// border: 1px solid #e0e0e0;
+		// background: #f1f1f1;
+		// padding: 20px 25px;
 	}
 
 	.tour-info-column {
 		width: 100%;
 		float: left;
-		display: -webkit-flex;
-		display: -mox-flex;
 		display: flex;
 		flex-wrap: wrap;
-
-		-webkit-flex-flow: row wrap;
-		-ms-flex-flow: row wrap;
-		-moz-flex-flow: row wrap;
 		justify-content: left;
 
 		.tour-info-item {
 			display: inline-flex;
 			font-style: italic;
-			color: #595959;
 			// width: 33.3333%;
 			float: left;
 			margin: 2px 0;
