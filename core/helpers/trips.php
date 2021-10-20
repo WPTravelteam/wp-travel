@@ -443,15 +443,18 @@ class WpTravel_Helpers_Trips {
 		}
 
 		// Update trip gallery meta.
-		if ( isset( $trip_data->gallery ) ) {
-			$data = (array) $trip_data->gallery;
-			$data = array_map(
-				function( $el ) {
-					$el = (object) $el;
-					return (int) $el->id;
-				},
-				$data
-			);
+		if ( isset( $trip_data->gallery )  ) {
+			$data = array();
+			if ( $trip_data->gallery  ) {
+				$data = (array) $trip_data->gallery;
+				$data = array_map(
+					function( $el ) {
+						$el = (object) $el;
+						return (int) $el->id;
+					},
+					$data
+				);
+			}
 			if ( ! empty( $trip_data->_thumbnail_id ) ) {
 				$_thumbnail_id = in_array( (int) $trip_data->_thumbnail_id, $data ) ? (int) $trip_data->_thumbnail_id : 0;
 				update_post_meta( $trip_id, '_thumbnail_id', $_thumbnail_id );
