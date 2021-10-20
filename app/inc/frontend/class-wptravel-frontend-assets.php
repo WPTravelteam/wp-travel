@@ -91,7 +91,8 @@ class WpTravel_Frontend_Assets {
 					$api_key = $settings['google_map_api_key'];
 				}
 				if ( '' !== $api_key && true === $show_google_map ) {
-					wp_enqueue_script( 'wp-travel-maps' );
+					// wp_enqueue_script( 'wp-travel-maps' ); // wp-travel-front-end-map.js is not required as it is in template-functions.php
+					wp_enqueue_script( 'jquery-gmaps' );
 				}
 			}
 

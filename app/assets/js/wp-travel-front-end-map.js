@@ -1,5 +1,5 @@
 jQuery(document).ready(function($) {
-    if ('' !== wp_travel.lat && '' !== wp_travel.lng) {
+    if ('' !== wp_travel.lat && '' !== wp_travel.lng && $( '#wp-travel-map' ).length > 0 ) {
         // Create map.
         var map = new GMaps({
             div: '#wp-travel-map',
