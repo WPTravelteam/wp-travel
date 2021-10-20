@@ -1110,33 +1110,15 @@ function wptravel_google_map( $trip_id, $data ) {
 	if ( '' != $api_key && $show_google_map && ! empty( $lat ) && ! empty( $lng ) ) {
 		?>
 		<div class="wp-travel-map <?php echo esc_attr( $wrapper_class ); ?>">
-			<div id="<?php echo esc_attr( $map_id ); ?>" style="width:100%;height:300px"></div>
+			<div class="<?php echo esc_attr( $map_id ); ?>" id="<?php echo esc_attr( $map_id ); ?>" style="width:100%;height:300px"></div>
 		</div>
-		<script defer>
+		<script>
 			jQuery(document).ready(function($) {
-				if ('' !== wp_travel.lat && '' !== wp_travel.lng &&  $( '#<?php echo esc_attr( $map_id ); ?>' ).length > 0 ) {
-					// Create map.
-					var map = new GMaps({
-						div: '#<?php echo esc_attr( $map_id ); ?>',
-						lat: wp_travel.lat,
-						lng: wp_travel.lng,
-						scrollwheel: false,
-						navigationControl: false,
-						mapTypeControl: false,
-						scaleControl: false,
-						// draggable: false,
-					});
-
-					map.setCenter(wp_travel.lat, wp_travel.lng);
-					map.setZoom(parseInt(wp_travel.zoom));
-					map.addMarker({
-						lat: wp_travel.lat,
-						lng: wp_travel.lng,
-						title: wp_travel.loc,
-						draggable: false
-
-					});
-				}
+				// var options = {
+				// 	lat : '27.693171845837',
+				// 	lng : '85.281285846253',
+				// }
+				$( '#<?php echo esc_attr( $map_id ); ?>' ).wptravelGoogleMap();
 			});
 		</script>
 		<?php

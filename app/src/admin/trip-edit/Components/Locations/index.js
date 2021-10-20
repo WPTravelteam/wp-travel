@@ -247,10 +247,10 @@ const GoogleMapBlockControls = ({ location, changeLocation, settings }) => {
     }
 
     const address = has( location, 'loc' ) && ! isEmpty( location.loc ) ? location.loc : '';
-    const lat = has( location, 'lat' ) && ! isEmpty( location.lat ) ? location.lat : '';
-    const lng = has( location, 'lng' ) && ! isEmpty( location.lng ) ? location.lng : '';
-    const useLatLng = has( location, 'use_lat_lng' ) && ! isEmpty( location.use_lat_lng ) && 'no' !== location.use_lat_lng ? location.use_lat_lng : false;
-    const hasApiKey = has( settings, 'google_map_api_key' ) && ! isEmpty( settings.google_map_api_key );
+    const lat = 'undefined' != typeof location && location.lat ? location.lat : '';
+    const lng = 'undefined' != typeof location && location.lng ? location.lng : '';
+    const useLatLng = 'undefined' != typeof location && location.use_lat_lng && 'no' !== location.use_lat_lng ? true : false;
+    const hasApiKey = 'undefined' != typeof location && settings.google_map_api_key;
     return (
         <Fragment>
             <PanelBody
