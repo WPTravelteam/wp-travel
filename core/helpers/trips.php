@@ -785,7 +785,7 @@ class WpTravel_Helpers_Trips {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIPS' );
 		}
 
-		$results = array_unique (array_merge ( $results, $results2 ) );
+		$results = array_merge ( $results, $results2 );
 		$post_ids = array();
 		foreach ( $results as $result ) {
 			$post_ids[] = $result->trip_id;
@@ -794,7 +794,7 @@ class WpTravel_Helpers_Trips {
 		return WP_Travel_Helpers_Response_Codes::get_success_response(
 			'WP_TRAVEL_TRIP_IDS',
 			array(
-				'trip_ids' => $post_ids,
+				'trip_ids' => array_unique( $post_ids ),
 			)
 		);
 	}
