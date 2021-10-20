@@ -1082,7 +1082,7 @@ function wptravel_trip_map( $trip_id ) {
  *
  * @param number $trip_id Trip id.
  * @param array  $data    Map Related data.
- * 
+ *
  * @since 5.0.2
  */
 function wptravel_google_map( $trip_id, $data ) {

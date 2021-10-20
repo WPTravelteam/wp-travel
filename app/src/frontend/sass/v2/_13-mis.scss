@@ -1,0 +1,16 @@
+input[type="radio"] {
+	width: 16px;
+	border-radius: 50%;
+	height: 16px;
+
+	&:focus {
+		border-left: 1px solid #d3d3d3;
+	}
+}
+
+.label_title {
+	color: #757575;
+	font-size: 1em;
+	text-transform: capitalize;
+	font-weight: 500;
+}

@@ -7,13 +7,14 @@
 
 	ul {
 		margin: 0 !important;
-		padding: 0 !important;
+		// padding: 0 !important;
+		padding: 0 30px !important;
 
 		li {
 			list-style: none;
 			float: left;
 			margin-bottom: 20px;
-			width: 33.33333%;
+			// width: 33.33333%;
 			// width: calc(33.33% - 15px);
 			position: relative;
 			min-height: 1px;
@@ -47,7 +48,7 @@
 		}
 
 		img {
-			width: 100%;
+			// width: 100%;
 			display: block;
 			margin: 0;
 		}
