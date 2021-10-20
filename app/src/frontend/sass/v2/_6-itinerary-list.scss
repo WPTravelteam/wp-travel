@@ -1,3 +1,6 @@
+a {
+	text-decoration: none;
+}
 .trip-price {
 	del {
 		opacity: 0.5;
@@ -378,6 +381,7 @@
 		display: inline-block;
 	}
 }
+
 .entry-meta {
 	padding: 10px 0;
 	display: block;
@@ -452,11 +456,54 @@
 	}
 }
 
+.wp-travel-grid-mode .entry-meta {
+	padding: 10px 0;
+	display: block;
+	@include clearfix();
+	.category-list-items {
+		padding: 2px 0;
+		position: relative;
+		@extend .travel-info;
+	}
+}
+
 .post-category {
 	.entry-meta {
 		.category-list-items {
 			margin-right: 0;
 			padding: 2px 0;
+			.wp-travel-caret {
+				padding-left: 7px;
+				display: inline-block;
+				cursor: pointer;
+				.sub-category-menu {
+					visibility: hidden;
+					opacity: 0;
+					position: absolute;
+					top: 40px;
+					right: 0px;
+					text-align: left;
+					background: #fff none repeat scroll 0 0;
+					box-shadow: 0 6px 12px #5e5e5e;
+					min-width: 115px;
+					padding: 10px;
+					width: 100%;
+					transform: translateY(-2em);
+					z-index: 2;
+					transition: all 0.3s ease-in-out 0s,
+						visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+				}
+				&:hover {
+					.sub-category-menu {
+						visibility: visible;
+						opacity: 1;
+						z-index: 2;
+						top: 30px;
+						transform: translateY(0%);
+						transition-delay: 0s, 0s, 0.3s;
+					}
+				}
+			}
 		}
 	}
 }
