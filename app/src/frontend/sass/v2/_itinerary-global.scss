@@ -1354,14 +1354,14 @@ a {
 			}
 			.wti_price_lists {
 				button {
-					width: 100%;
-					margin: 5px 0;
-					color: $itinerary-font-color;
-					background-color: #eee;
-					text-align: left;
-					font-size: 14px;
-					padding: 0.75em 1em;
-					border: 0;
+					// width: 100%;
+					// margin: 5px 0;
+					// color: $itinerary-font-color;
+					// background-color: #eee;
+					// text-align: left;
+					// font-size: 14px;
+					// padding: 0.75em 1em;
+					// border: 0;
 
 					&.active {
 						background-color: $itinerary-blue-bg;
@@ -1383,14 +1383,14 @@ a {
 			}
 			.wti_trip_times {
 				button {
-					margin: 5px 3px;
-					display: inline-block;
-					color: $itinerary-font-color;
-					background-color: #eee;
-					text-align: left;
-					padding: 0.75em 1em;
-					font-size: 14px;
-					border: 0;
+					// margin: 5px 3px;
+					// display: inline-block;
+					// color: $itinerary-font-color;
+					// background-color: #eee;
+					// text-align: left;
+					// padding: 0.75em 1em;
+					// font-size: 14px;
+					// border: 0;
 
 					&:hover {
 						background-color: $itinerary-blue-bg;
@@ -1645,13 +1645,13 @@ a {
 							}
 							button,
 							.button {
-								width: 30px;
-								border: 0;
-								padding: 0;
-								cursor: pointer;
-								background-color: $itinerary-blue-bg;
-								color: #fff;
-								transition: all 0.3s linear;
+								// width: 30px;
+								// border: 0;
+								// padding: 0;
+								// cursor: pointer;
+								// background-color: $itinerary-blue-bg;
+								// color: #fff;
+								// transition: all 0.3s linear;
 								&:hover {
 									background-color: $itinerary-green;
 								}
