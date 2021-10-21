@@ -117,6 +117,14 @@
 	td.product-thumbnail {
 		width: 110px;
 	}
+	.table-wrp {
+		table.order-list-table {
+			width: 100%;
+			tbody {
+				text-align: center;
+			}
+		}
+	}
 
 	.order-list-table thead {
 		border-bottom: 2px solid #dcdcdc;
@@ -134,8 +142,19 @@
 	.log-out span {
 		display: block;
 	}
-	.book-more a {
-		display: block;
+	.book-more {
+		width: 12%;
+		float: right;
+		margin-top: 25px;
+		a {
+			display: block;
+			background: red;
+			text-align: center;
+			padding: 10px 15px;
+			border-radius: 5px;
+      color: #fff;
+      font-weight: bold;
+		}
 	}
 	@media (max-width: 767.99px) {
 		.resp-accordion .fa {
@@ -199,6 +218,8 @@
 
 	.lists {
 		margin: 0 -20px 0 0;
+		display: flex;
+		flex-wrap: wrap;
 	}
 	.list-item {
 		display: inline-block;
