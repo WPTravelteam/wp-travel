@@ -279,6 +279,7 @@ $defaultColor: #3399ff;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	box-sizing: border-box;
 	.left-info {
 		p:last-child {
 			margin-bottom: 0;
@@ -1294,7 +1295,7 @@ $defaultColor: #3399ff;
 //Calendar Trip Date Listing
 #booking.wp-travel-calendar-view {
 	background-color: #fff;
-	padding: 0 1em;
+	padding: 0 1em 1em;
 	// .wp-travel-booking__panel-bottom {
 	//     .right-info{
 	//         width: 100%;
@@ -1678,7 +1679,7 @@ $defaultColor: #3399ff;
 			li {
 				padding: 0.5em 1em;
 				background-color: #fff;
-				margin-bottom: 1em;
+				// margin-bottom: 1em;
 				font-size: 15px;
 				border-radius: 4px;
 				box-shadow: 0 10px 20px rgba(#000, 0.1);
