@@ -1,64 +1,71 @@
 .checkout-page-wrap {
-    display: grid;
-    grid-template-columns: 1fr 35%;
-    grid-gap: 100px;
-    margin-top: 50px;
-    .number-accordion {
+	display: grid;
+	grid-template-columns: 1fr 35%;
+	// grid-gap: 100px;
+	grid-gap: 35px;
+	margin-top: 50px;
+	.number-accordion {
 		.checkout-accordion {
 			h4 {
 				margin: 0;
 			}
 		}
 	}
-	label.radio-checkbox-label{
-		input{
-			margin-right: .5em;
+	label.radio-checkbox-label {
+		input {
+			margin-right: 0.5em;
 		}
 	}
-    &.wti_no_mini_cart {
-        grid-template-columns: 100%;
-    }
-    > div {
-        width: 100%;
-    }
-    @media (max-width: 1199px) {
-        grid-template-columns: 1fr 42%;
-        grid-gap: 30px;
-    }
-    @media (max-width: 991px) {
-        grid-template-columns: 100%;
-    }
-    .wp-travel-minicart {
-        @media (min-width: 992px) {
-            order: 2;
-        }
-    }
-    .wp-travel-checkout-section {
-        @media (min-width: 992px) {
-            order: 1;
-        }
-        .checkout-left {
-            border-radius: 5px;
-            border-color: #ccc;
-            .ws-theme-timeline-block {
-                .panel-body {
-                    padding: 0;
-                    .payment-content {
-                        .wp-travel-form-field {
-                            #wp-travel-book-now {
-                                margin: 0;
-                                float: right;
-                            }
-                        }
-                    }
-                }
-                .panel-collapse {
-                    border: 0;
-                }
-            }
-        }
-    }
-   
+	&.wti_no_mini_cart {
+		grid-template-columns: 100%;
+	}
+	> div {
+		width: 100%;
+	}
+	@media (max-width: 1199px) {
+		grid-template-columns: 1fr 42%;
+		grid-gap: 30px;
+	}
+	@media (max-width: 991px) {
+		grid-template-columns: 100%;
+	}
+	.wp-travel-minicart {
+		@media (min-width: 992px) {
+			order: 2;
+		}
+	}
+	.wp-travel-checkout-section {
+		@media (min-width: 992px) {
+			order: 1;
+		}
+		.checkout-left {
+			border-radius: 5px;
+			border-color: #ccc;
+			.ws-theme-timeline-block {
+				.panel-body {
+					padding: 0;
+					.payment-content {
+						.wp-travel-form-field {
+							#wp-travel-book-now {
+								margin: 0;
+								float: right;
+							}
+						}
+					}
+				}
+				.panel-collapse {
+					border: 0;
+					padding: 0 20px;
+				}
+				.panel.panel-default {
+					.panel-collapse {
+						border: 1px solid #d9d9d9;
+						border-top: none;
+					}
+				}
+			}
+		}
+	}
 }
 
 .checkout-page-wrap,
@@ -80,6 +87,11 @@
 		background-color: #fff;
 		padding: 20px 15px;
 		border: 1px solid #eee;
+		&.checkout-right {
+			background-color: transparent;
+			padding: 0;
+			border: none;
+		}
 
 		h3 {
 			font-size: 18px;
@@ -101,8 +113,8 @@
 	}
 
 	.checkout-right {
-		border: 4px solid #eee;
-		border-radius: 3px;
+		// border: 4px solid #eee;
+		// border-radius: 3px;
 	}
 
 	h6.heading {
@@ -162,9 +174,15 @@
 	}
 
 	.ws-theme-timeline-block {
-		margin: 0 0 40px;
+		// margin: 0 0 40px;
+		margin: 0 0 20px;
 		border-bottom: 1px solid #e3e3e3;
-		padding-bottom: 30px;
+		// padding-bottom: 30px;
+		padding-bottom: 15px;
+		// &:last-child {
+		// 	margin: 0;
+		// 	padding-bottom: 0;
+		// }
 	}
 
 	.payment-traveller {
@@ -195,6 +213,10 @@
 		margin: 10px 0;
 		display: inline-block;
 		width: 100%;
+		&.wp-travel-radio-group {
+			display: flex;
+			justify-content: start;
+		}
 
 		label {
 			font-weight: 600;
@@ -224,6 +246,7 @@
 			.radio-checkbox-label {
 				display: inline-block;
 				float: none;
+				margin-bottom: 0 !important;
 			}
 
 			> div:last-of-type {
@@ -283,7 +306,16 @@
 			}
 
 			.wp-travel-radio {
-				width: 75%;
+				// width: 75%;
+				width: 20%;
+				margin-bottom: 12px;
+				display: flex;
+				align-items: center;
+				input[type="radio"] {
+					width: 20px;
+					height: 20px;
+					margin-right: 5px;
+				}
 			}
 		}
 	}
@@ -300,7 +332,7 @@
 	position: sticky;
 	top: 20px;
 	background-color: #fff;
-	box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+	// box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
 	// a {
 	// 	color: $primaryColor;
 	// }
@@ -354,7 +386,8 @@
 	.cart-summary {
 		position: relative;
 		.cart-header {
-			padding: 1em 1.5em 0.5em;
+			// padding: 1em 1.5em 0.5em;
+			padding: 1em 1em 0.5em;
 			.title {
 				font-size: 18px;
 				font-weight: bold;
@@ -387,14 +420,16 @@
 		}
 		.list-group {
 			list-style: none;
-			padding: 0 1.5em;
+			// padding: 0 1.5em;
+			padding: 0 1em;
 			margin: 1em 0 0 0;
 			li {
 				position: relative;
 				margin: 20px 0;
 				background: #f1f1f1;
 				padding: 15px;
-				border-radius: 0px 27px;
+				// border-radius: 12px;
+				border-radius: 5px;
 				&:not(:first-child) {
 					border-top: 1px solid #f4f4f4;
 				}
@@ -426,16 +461,22 @@
 					right: 0px;
 					top: -38px;
 					background: #e8e8e8;
-					padding: 5px 10px;
-					border-radius: 0 20px 0 0;
-					box-shadow: rgba(39, 39, 39, 0.65) 1px 1px 26px -7px;
+					// padding: 5px 10px;
+					// border-radius: 0 20px 0 0;
+					// box-shadow: rgba(39, 39, 39, 0.65) 1px 1px 26px -7px;
+					width: 35px;
+					height: 35px;
+					border-radius: 50%;
 					a {
-						font-size: 17px;
+						// font-size: 17px;
+						font-size: 0;
 					}
 				}
 				> div {
 					display: flex;
 					margin-top: 27px;
+					align-items: center;
+					justify-content: center;
 					@media (max-width: 558px) {
 						flex-direction: column;
 					}
@@ -444,19 +485,20 @@
 						flex: 0 0 22%;
 						margin-right: 20px;
 						.img-wrapper {
-							background: #fff;
-							padding: 14px;
-							border-radius: 21px;
+							// background: #fff;
+							// padding: 14px;
+							// border-radius: 21px;
+							border-radius: 12px;
 							max-width: 133px;
 							margin: 0 auto;
-							box-shadow: rgba(39, 39, 39, 0.65) 1px 1px 26px -4px;
+							// box-shadow: rgba(39, 39, 39, 0.65) 1px 1px 26px -4px;
 							@media (max-width: 558px) {
 								margin-bottom: 30px;
 							}
 						}
 						img {
 							border: 1px solid #efefef;
-							border-radius: 3px;
+							// border-radius: 3px;
 							height: 100% !important;
 							border-radius: 12px;
 						}
@@ -641,6 +683,7 @@
 							width: 15px;
 							height: 15px;
 							margin-right: 0.25em;
+							fill: #fff;
 							path {
 								// fill: $primaryColor;
 							}
@@ -748,7 +791,8 @@
 		}
 		.extra-fields {
 			list-style: none;
-			padding: 0 1.5em;
+			// padding: 0 1.5em;
+			padding: 0 1em;
 			margin: 0;
 			li {
 				display: flex;
@@ -771,7 +815,8 @@
 		.cart-summary-bottom {
 			border-top: 1px solid #efefef;
 			background-color: #fff;
-			padding: 1em 1.5em 1em;
+			// padding: 1em 1.5em 1em;
+			padding: 1em;
 			// margin-top: 1em;
 			.flex-wrapper {
 				display: flex;
@@ -783,6 +828,7 @@
 				}
 				.update-cart-form {
 					margin-bottom: 1em;
+					width: 100%;
 				}
 				.price-calculate {
 					margin: 0;
@@ -820,8 +866,9 @@
 					input {
 						flex: 1;
 						margin-right: 0.5em;
-						padding: 0 1em;
-						max-width: 140px;
+						// padding: 0 1em;
+						// max-width: 140px;
+						max-width: 100%;
 					}
 					.btn {
 						font-size: 12px;
@@ -879,7 +926,6 @@
 	flex-wrap: wrap;
 	width: 100%;
 }
-
 
 .wp-travel-payment-field {
 	.wp-travel-text-info {
