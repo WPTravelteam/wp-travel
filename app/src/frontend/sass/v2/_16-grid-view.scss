@@ -92,31 +92,31 @@
 							padding-left: 7px;
 							display: inline-block;
 							cursor: pointer;
-							.sub-category-menu {
-								visibility: hidden;
-								opacity: 0;
-								position: absolute;
-								top: 40px;
-								right: 0px;
-								text-align: left;
-								background: #fff none repeat scroll 0 0;
-								box-shadow: 0 6px 12px #c7c7c7;
-								min-width: 115px;
-								// padding: 10px;
-                                padding: 0;
-								width: 100%;
-								transform: translateY(-2em);
-								z-index: 2;
-								transition: all 0.3s ease-in-out 0s,
-									visibility 0s linear 0.3s,
-									z-index 0s linear 0.01s;
-                                    a {
-										padding: 6px 10px;
-										border-bottom: 1px solid #eee;
-										cursor: pointer;
-										display: block;
-									}
-							}
+							// .sub-category-menu {
+							// 	visibility: hidden;
+							// 	opacity: 0;
+							// 	position: absolute;
+							// 	top: 40px;
+							// 	right: 0px;
+							// 	text-align: left;
+							// 	background: #fff none repeat scroll 0 0;
+							// 	box-shadow: 0 6px 12px #c7c7c7;
+							// 	min-width: 115px;
+							// 	// padding: 10px;
+                            //     padding: 0;
+							// 	width: 100%;
+							// 	transform: translateY(-2em);
+							// 	z-index: 2;
+							// 	transition: all 0.3s ease-in-out 0s,
+							// 		visibility 0s linear 0.3s,
+							// 		z-index 0s linear 0.01s;
+                            //         a {
+							// 			padding: 6px 10px;
+							// 			border-bottom: 1px solid #eee;
+							// 			cursor: pointer;
+							// 			display: block;
+							// 		}
+							// }
 							&:hover {
 								.sub-category-menu {
 									visibility: visible;
@@ -156,4 +156,32 @@
 			}
 		}
 	}
+}
+
+
+
+.sub-category-menu {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 40px;
+    right: 0px;
+    text-align: left;
+    background: #fff none repeat scroll 0 0;
+    box-shadow: 0 6px 12px #c7c7c7;
+    min-width: 115px;
+    // padding: 10px;
+    padding: 0;
+    width: 100%;
+    transform: translateY(-2em);
+    z-index: 2;
+    transition: all 0.3s ease-in-out 0s,
+        visibility 0s linear 0.3s,
+        z-index 0s linear 0.01s;
+        a {
+            padding: 6px 10px;
+            // border-bottom: 1px solid #eee;
+            cursor: pointer;
+            display: block;
+        }
 }
