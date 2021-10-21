@@ -706,7 +706,7 @@ function wptravel_search_form() {
 
 			<?php wp_nonce_field( '_wp_travel_search_nonce_action', '_wp_travel_search_nonce' ); ?>
 
-			<p class="wp-travel-search"><input type="submit" name="wp-travel_search" id="wp-travel-search" class="button button-primary" value="<?php echo esc_attr( $search_button_string ); ?>"  /></p>
+			<p class="wp-travel-search"><input type="submit" name="wp-travel_search" id="wp-travel-search" class="button wp-block-button__link button-primary" value="<?php echo esc_attr( $search_button_string ); ?>"  /></p>
 		</form>
 	</div>
 	<?php
@@ -2135,7 +2135,7 @@ function wptravel_get_search_filter_form( $args ) {
 					<input class="wp-travel-widget-filter-view-mode" type="hidden" name="view_mode" data-mode="<?php echo esc_attr( $view_mode ); ?>" value="<?php echo esc_attr( $view_mode ); ?>" >
 
 					<input type="hidden" class="wp-travel-widget-filter-archive-url" value="<?php echo esc_url( get_post_type_archive_link( WP_TRAVEL_POST_TYPE ) ); ?>" />
-					<input type="submit" id="wp-travel-filter-search-submit" class="button button-primary wp-travel-filter-search-submit" value="<?php esc_html_e( 'Search', 'wp-travel' ); ?>">
+					<input type="submit" id="wp-travel-filter-search-submit" class="button wp-block-button__link button-primary wp-travel-filter-search-submit" value="<?php esc_html_e( 'Search', 'wp-travel' ); ?>">
 				</div>
 			</div>
 		</div>
