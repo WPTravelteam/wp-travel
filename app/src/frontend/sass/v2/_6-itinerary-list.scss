@@ -17,7 +17,7 @@ a {
 
 .trip-price {
 	font-weight: 600;
-	font-size: 22px;
+	// font-size: 22px;
 
 	.person-count {
 		text-transform: capitalize;
@@ -127,71 +127,71 @@ a {
 		}
 	}
 
-	.wp-travel-post-item-wrapper {
-		position: relative;
-		min-height: 1px;
+	// .wp-travel-post-item-wrapper {
+	// 	position: relative;
+	// 	min-height: 1px;
 
-		@include mob {
-			width: 100%;
-		}
+	// 	@include mob {
+	// 		width: 100%;
+	// 	}
 
-		.post-title {
-			margin-top: 0;
-			margin-bottom: 0;
-			line-height: 1;
+	// 	.post-title {
+	// 		margin-top: 0;
+	// 		margin-bottom: 0;
+	// 		line-height: 1;
 
-			a {
-				font-size: 14px;
-			}
-		}
+	// 		a {
+	// 			font-size: 14px;
+	// 		}
+	// 	}
 
-		.wp-travel-post-content {
-			padding: 10px;
+	// 	.wp-travel-post-content {
+	// 		padding: 10px;
 
-			.post-category {
-				a {
-					font-weight: 300;
-					font-size: 12px;
-					margin-right: 2px;
+	// 		.post-category {
+	// 			a {
+	// 				font-weight: 300;
+	// 				font-size: 12px;
+	// 				margin-right: 2px;
 
-					&:last-child {
-						margin-right: 0;
-					}
-				}
-			}
-		}
+	// 				&:last-child {
+	// 					margin-right: 0;
+	// 				}
+	// 			}
+	// 		}
+	// 	}
 
-		.wp-travel-post-thumbnail {
-			position: relative;
+	// 	.wp-travel-post-thumbnail {
+	// 		position: relative;
 
-			a {
-				display: block;
-				width: 100%;
-				background: #f1f1f1;
-				position: relative;
-			}
+	// 		a {
+	// 			display: block;
+	// 			width: 100%;
+	// 			background: #f1f1f1;
+	// 			position: relative;
+	// 		}
 
-			img {
-				margin: 0;
-				display: block;
-				width: 100%;
-			}
-		}
+	// 		img {
+	// 			margin: 0;
+	// 			display: block;
+	// 			width: 100%;
+	// 		}
+	// 	}
 
-		.wp-travel-average-review {
-			font-size: 12px;
-			margin-top: 5px;
-		}
+	// 	.wp-travel-average-review {
+	// 		font-size: 12px;
+	// 		margin-top: 5px;
+	// 	}
 
-		.category-list-items {
-			float: right;
-		}
+	// 	.category-list-items {
+	// 		float: right;
+	// 	}
 
-		.wp-travel-review-text {
-			float: left;
-			margin-top: 5px;
-		}
-	}
+	// 	.wp-travel-review-text {
+	// 		float: left;
+	// 		margin-top: 5px;
+	// 	}
+	// }
 
 	.wp-travel-post-wrap-bg {
 		background: #fff;
@@ -347,10 +347,10 @@ a {
 			margin-bottom: 0;
 		}
 
-		a {
-			padding: 7px 19px;
-			border: 1px solid #eee;
-		}
+		// a {
+		// 	padding: 7px 19px;
+		// 	border: 1px solid #eee;
+		// }
 	}
 
 	button {
