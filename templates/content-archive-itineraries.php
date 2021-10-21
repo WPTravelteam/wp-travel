@@ -117,8 +117,8 @@ if ( post_password_required() ) {
 				</div>
 				<div class="description-right">
 					<?php wptravel_trip_price( get_the_ID() ); ?>
-					<div class="wp-travel-explore">
-							<a class="" href="<?php the_permalink(); ?>"><?php esc_html_e( 'Explore', 'wp-travel' ); ?></a>
+					<div class="wp-travel-explore wp-block-button is-style-outline">
+							<a class="wp-block-button__link" href="<?php the_permalink(); ?>"><?php esc_html_e( 'Explore', 'wp-travel' ); ?></a>
 					</div>
 				</div>
 			</div>
