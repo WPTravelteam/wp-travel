@@ -1105,7 +1105,7 @@ function wptravel_google_map( $trip_id, $data ) {
 	$lng      = isset( $map_data['lng'] ) ? $map_data['lng'] : '';
 
 	$wrapper_class = wptravel_get_theme_wrapper_class();
-	$id = rand();
+	$id = uniqid();
 	$map_id = sprintf( 'wp-travel-map-%s', $id );
 	if ( '' != $api_key && $show_google_map && ! empty( $lat ) && ! empty( $lng ) ) {
 		?>
