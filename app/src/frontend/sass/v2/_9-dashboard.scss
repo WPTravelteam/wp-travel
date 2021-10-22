@@ -121,13 +121,15 @@
 		table.order-list-table {
 			width: 100%;
 			tbody {
-				text-align: center;
+				// text-align: center;
+				text-align: left;
 			}
 		}
 	}
 
 	.order-list-table thead {
 		border-bottom: 2px solid #dcdcdc;
+		text-align: left;
 	}
 	.product-thumbnail img {
 		margin-bottom: 0 !important;
