@@ -48,6 +48,7 @@
 	position: relative;
 	width: 5.5em;
 	display: inline-block;
+	word-break: normal;
 
 	&:before {
 		color: #f9a032;
