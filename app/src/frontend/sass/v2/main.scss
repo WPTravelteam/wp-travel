@@ -43,18 +43,18 @@
 
 .wp-travel-grid-mode {
 	.site-content {
-        @media (max-width: 1199px) {
-            grid-template-columns: 1fr !important;
-        }
+		@media (max-width: 1199px) {
+			grid-template-columns: 1fr !important;
+		}
 		.entry-content {
 			display: grid;
 			position: relative;
 			padding-left: 0;
 			grid-gap: 1rem;
 			grid-template-columns: repeat(2, 1fr);
-            @media (max-width: 575px) {
-                grid-template-columns: repeat(1, 1fr);
-            }
+			@media (max-width: 575px) {
+				grid-template-columns: repeat(1, 1fr);
+			}
 			&::before,
 			&::after {
 				content: none;
@@ -131,6 +131,15 @@
 				// 		}
 				// 	}
 				// }
+			}
+		}
+		main.site-main {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			grid-gap: 35px;
+			li {
+				list-style: none;
+				border: 1px solid #eaeaea;
 			}
 		}
 	}

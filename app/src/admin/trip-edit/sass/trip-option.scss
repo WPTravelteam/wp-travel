@@ -282,8 +282,8 @@ i.fa-times-circle {
 								padding: 5px;
 								color: #2f2c2c;
 								position: absolute;
-								left: -33px;
-								top: -15px;
+								left: 7px;
+								top: 7px;
 								&:hover {
 									color: #007cba;
 								}
@@ -293,8 +293,8 @@ i.fa-times-circle {
 								padding: 5px;
 								color: #2f2c2c;
 								position: absolute;
-								left: 5px;
-								top: -15px;
+								left: 46px;
+								top: 7px;
 								&:hover {
 									color: #007cba;
 								}
@@ -379,7 +379,7 @@ i.fa-times-circle {
 		}
 
 		.components-panel__body-title {
-			padding: 0 !important;
+			padding: 0 20px !important;
 		}
 
 		.components-panel__row {
@@ -907,6 +907,8 @@ div[aria-labelledby="0-itinerary"] {
 
 .components-popover .components-popover__content {
 	overflow: auto;
+	left: -395px;
+	top: -90px;
 }
 .components-base-control {
 	&.components-range-control {
@@ -916,4 +918,8 @@ div[aria-labelledby="0-itinerary"] {
 			}
 		}
 	}
+}
+
+.components-button:focus {
+	box-shadow: none;
 }

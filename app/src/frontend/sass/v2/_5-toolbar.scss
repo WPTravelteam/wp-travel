@@ -33,7 +33,8 @@
 		gap: var(--gap);
 		align-items: center;
 		justify-content: space-between;
-		padding: 10px 0;
+		// padding: 10px 0;
+		padding: 10px 15px;
 		margin: 0 calc(-1 * var(--gap));
 		.wp-travel-filter-by-heading {
 			// float: left;
@@ -129,7 +130,8 @@
 	.wp-travel-view-mode-lists {
 		list-style: none;
 		margin: 0;
-		padding: 15px 0;
+		// padding: 15px 0;
+		padding: 15px;
 		text-align: center;
 
 		li {
