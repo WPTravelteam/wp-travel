@@ -298,7 +298,9 @@ label.radio-checkbox-label{
 }
 
 /* enquiry form single trips */
-
+.wp-travel-enquiries-form-wrapper {
+	display: none;
+}
 #wp-travel-enquiries {
 	max-width: 550px;
 	margin: 0 auto;
@@ -358,6 +360,7 @@ label.radio-checkbox-label{
 		font-size: 12px;
 	}
 }
+
 
 .mfp-wrap {
 	#wp-travel-enquiries {

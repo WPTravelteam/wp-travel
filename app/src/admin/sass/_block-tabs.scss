@@ -505,4 +505,20 @@ td {
 	.components-tab-panel__tabs {
 	flex-direction: row;
 	margin-bottom: 20px;
+	// border-bottom: 1px solid #007cba;
+	button.components-button.active-tab {
+		color: #007cba;
+		// border: 1px solid #007cba !important;
+		// position: relative;
+		// &::before {
+		// 	content: "";
+		// 	position: absolute;
+		// 	background: #fff;
+		// 	width: 100%;
+		// 	height: 10px;
+		// 	top: 100%;
+		// 	left: 50%;
+		// 	transform: translate(-50%, -50%);
+		// }
+	}
 }
