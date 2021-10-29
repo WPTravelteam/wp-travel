@@ -403,8 +403,9 @@ td {
 // 	}
 // }
 
-.wp-travel-ui.wp-travel-ui-card .components-panel__body.is-opened h4 {
-	padding-left: 30px;
+.wp-travel-block-tabs .components-tab-panel__tab-content .wp-travel-ui.wp-travel-ui-card .components-panel__body.is-opened h4 {
+	// padding-left: 30px;
+	padding-left: 0;
 }
 
 .wp-travel-ui {
@@ -498,4 +499,10 @@ td {
 			}
 		}
 	}
+}
+
+.wp-travel-trip-edit-menu.wp-travel-trip-edit-menu-horizontal.wp-travel-trip-edit-menu-add-gap
+	.components-tab-panel__tabs {
+	flex-direction: row;
+	margin-bottom: 20px;
 }
