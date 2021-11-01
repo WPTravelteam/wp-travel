@@ -38,3 +38,9 @@
 		}
 	}
 }
+
+.react-datepicker__tab-loop {
+	.react-datepicker-popper {
+		z-index: 11;
+	}
+}
