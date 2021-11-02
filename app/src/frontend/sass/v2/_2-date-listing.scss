@@ -1584,7 +1584,8 @@ $defaultColor: #3399ff;
 			}
 			@media (max-width: 575px) {
 				margin-top: 15px;
-				width: 100%;
+				// width: 100%;
+				width: 95%;
 			}
 			&::before,
 			&::after {
