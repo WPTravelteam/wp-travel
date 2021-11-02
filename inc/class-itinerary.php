@@ -106,10 +106,11 @@ class WP_Travel_Itinerary {
 
 	function get_content() {
 		$wp_travel_overview = get_post_meta( $this->post->ID, 'wp_travel_overview', true );
-		if ( false !== $wp_travel_overview && '' !== $wp_travel_overview ) {
+		if ( false !== $wp_travel_overview ) {
 			return apply_filters( 'wp_travel_the_content', $wp_travel_overview );
 		}
 		else if ( isset( $this->post->post_content ) && '' !== $this->post->post_content ) {
+			update_post_meta( $this->post->ID, 'wp_travel_overview', ' ' );
 			return apply_filters( 'wp_travel_the_content', $this->post->post_content );
 		}
 		return false;
