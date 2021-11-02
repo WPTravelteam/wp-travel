@@ -31,3 +31,11 @@
 .wp-travel-block-payment {
     
 }
+
+#wp-travel-settings-block-wrapper {
+    .wp-travel-block-tabs-wrapper.wp-travel-trip-settings {
+        span.components-spinner {
+            margin-top: 13px;
+        }
+    }
+}

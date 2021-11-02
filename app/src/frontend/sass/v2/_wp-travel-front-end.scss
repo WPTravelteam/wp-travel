@@ -584,6 +584,9 @@ ul.availabily-list {
 
 			@include sidr-view {
 				width: 50%;
+				@media (max-width: 991px) {
+					width: auto;
+				}
 			}
 
 			@include mob {

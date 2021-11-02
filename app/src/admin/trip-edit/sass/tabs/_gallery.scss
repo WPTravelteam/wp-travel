@@ -170,4 +170,29 @@
 }
 
 
+.wp-travel-advanced-gallery {
+	li {
+		&.featured-image {
+			&::before {
+				top: unset;
+				bottom: 5px;
+				left: 220px;
+			}
+			.wptag__media-card {
+				.wptag__thumbnail {
+					position: relative;
+					&::after {
+						content: "";
+						position: absolute;
+						width: 100%;
+						height: 100%;
+						background-color: #000;
+						opacity: .3;
+						
+					}
+				}
+			}
+		}
+	}
+}
 

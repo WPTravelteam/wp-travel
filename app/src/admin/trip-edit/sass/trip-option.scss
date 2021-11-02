@@ -213,6 +213,9 @@ i.fa-times-circle {
 
 #wp-travel-trip-options-wrap {
 	.wp-travel-trip-pricings {
+		span.components-spinner {
+			right: 50% !important;
+		}
 		.components-tab-panel__tab-content {
 			.wp-travel-ui {
 				.wp-travel-sortable-component.itinerary-sortable {
@@ -880,6 +883,11 @@ div[aria-labelledby="0-includes-excludes"] {
 
 .wp-travel-save-changes .text-success {
 	margin: 0;
+	
+}
+.wp-travel-save-changes {
+	display: none;
+	
 }
 
 .text-success {
