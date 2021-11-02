@@ -291,6 +291,9 @@ function wptravel_update_payment_status_admin( $booking_id ) {
 	if ( $payment_id ) {
 		$payment_status = isset( $_POST['wp_travel_payment_status'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_payment_status'] ) ) : 'N/A';
 		update_post_meta( $payment_id, 'wp_travel_payment_status', $payment_status );
+		
+		update_post_meta( $booking_id, 'wp_travel_payment_status', $payment_status ); // Since WP Travel 5.0.2
+		update_post_meta( $booking_id, 'wp_travel_payment_mode', 'partial' );  // Since WP Travel 5.0.2
 	}
 }
 
@@ -564,14 +567,15 @@ function wptravel_update_payment_status( $booking_id, $amount, $status, $args, $
 	$due_amount   = ! empty( $details['due_amount'] ) ? $details['due_amount'] : '';
 	if ( 'partial' === $payment_mode ) {
 		if ( '0.00' !== $due_amount ) { // if due amount is not 0 and mode is partial. ( In case of partial).
-			update_post_meta( $payment_id, 'wp_travel_payment_status', 'partially_paid' );
+			$status = 'partially_paid';
 		} else { // If due amount is 0 and mode is partial. ( This is also for first booking only and then pay later from dashboard as it takes this payment as partial payment mode. And to quick fix, this has been added since 4.3.4 ).
-			update_post_meta( $payment_id, 'wp_travel_payment_mode', 'full' );
-			update_post_meta( $payment_id, 'wp_travel_payment_status', $status );
+			update_post_meta( $payment_id, 'wp_travel_payment_mode', 'full' ); // @todo remove latter.
+			update_post_meta( $booking_id, 'wp_travel_payment_mode', 'full' ); // Since WP Travel 5.0.2 Need to ignore payment meta.
 		}
-	} else {
-		update_post_meta( $payment_id, 'wp_travel_payment_status', $status );
-	}
+	} 
+
+	update_post_meta( $payment_id, 'wp_travel_payment_status', $status ); // @todo remove latter.
+	update_post_meta( $booking_id, 'wp_travel_payment_status', $status ); // Since WP Travel 5.0.2 Need to ignore payment meta.
 }
 
 /**

@@ -1085,7 +1085,7 @@ function wptravel_trip_map( $trip_id ) {
  *
  * @since 5.0.2
  */
-function wptravel_google_map( $trip_id, $data ) {
+function wptravel_frontend_google_map( $trip_id, $data ) {
 	$current_map = $data['selected'];
 
 	$show_google_map = ( 'google-map' === $current_map ) ? true : false;
@@ -1140,7 +1140,7 @@ function wptravel_google_map( $trip_id, $data ) {
 		endif;
 	}
 }
-add_action( 'wptravel_trip_map_google-map', 'wptravel_google_map', 10, 2 );
+add_action( 'wptravel_trip_map_google-map', 'wptravel_frontend_google_map', 10, 2 );
 
 /**
  * Display Related Product.

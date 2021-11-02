@@ -69,6 +69,7 @@ function wptravel_account_tab_content( $args ) {
 							<table class="order-list-table">
 								<thead>
 									<tr>
+										<th><?php esc_html_e( 'Booking ID', 'wp-travel' ); ?></th>
 										<th><?php esc_html_e( 'Trip', 'wp-travel' ); ?></th>
 										<th><?php esc_html_e( 'Booking Status', 'wp-travel' ); ?></th>
 										<th><?php esc_html_e( 'Payment Status', 'wp-travel' ); ?></th>
@@ -134,6 +135,11 @@ function wptravel_account_tab_content( $args ) {
 								}
 								?>
 								<tr class="tbody-content">
+									<td class="name" data-title="#<?php echo esc_html( $b_id ); ?>">
+										<div class="name-title">
+											#<?php echo esc_html( $b_id ); ?>
+										</div>
+									</td>
 									<td class="name" data-title="<?php esc_html_e( 'Trip', 'wp-travel' ); ?>">
 										<div class="name-title">
 										<a href="<?php echo esc_url( get_the_permalink( $bkd_trip_id ) ); ?>"><?php echo esc_html( get_the_title( $bkd_trip_id ) ); ?></a>
