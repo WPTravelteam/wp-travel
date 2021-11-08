@@ -264,7 +264,7 @@ const Faqs = ({allData}) => {
                                         <PanelBody  className={hiddenClass}
                                         icon= {alignJustify}
                                         title={`${faqs[faqId].question ? faqs[faqId].question : __i18n.faq_questions}`}
-                                        initialOpen={false} >
+                                        initialOpen={ ( Object.keys(faqs).length - 1 ) === parseInt(index) } >
                                         <Disabled>
                                             <PanelRow>
                                                 <label>{__i18n.enter_question}</label>
@@ -313,7 +313,7 @@ const Faqs = ({allData}) => {
                                 <PanelBody  className={hiddenClass}
                                     icon= {alignJustify}
                                     title={`${faqs[faqId].question ? faqs[faqId].question : __i18n.faq_questions}`}
-                                    initialOpen={false} >
+                                    initialOpen={ ( Object.keys(faqs).length - 1 ) === parseInt(index) } >
 
                                     <PanelRow>
                                         <label>{__i18n.enter_question}</label>
