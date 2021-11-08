@@ -8,7 +8,7 @@
 }
 
 //advance search
-.widget_wp_travel_filter_search_widget {
+// .widget_wp_travel_filter_search_widget {
 	.wp-travel-itinerary-items {
 		padding: 15px;
 	}
@@ -57,30 +57,36 @@
 		input {
 			max-width: 120px;
 			display: block;
-			padding-left: 35px;
+			// padding-left: 35px;
+			padding-left: 45px;
 		}
 
 		.calender-icon {
 			position: absolute;
-			top: 22px;
+			top: 24px;
 			left: 1px;
-			width: 28px;
+			// width: 28px;
 			text-align: center;
 			line-height: 25px;
 			background: #ddd;
+			width: 37px;
+			height: 37px;
 
 			@media all and (-ms-high-contrast: none),
 				(-ms-high-contrast: active) {
 				line-height: 21px;
 			}
 
-			&:before {
+			&::before {
 				content: "\f073";
 				font-family: "Font Awesome 5 Free";
+				position: absolute;
+				top: 5px;
+				right: 12px;	
 			}
 		}
 	}
-}
+// }
 
 // Search form widget
 .wp-travel-search {
