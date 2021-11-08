@@ -171,7 +171,7 @@ const TripFacts = ({allData}) => {
                                     <PanelBody
                                         icon= {alignJustify}
                                         title={trip_fact.label ? trip_fact.label : __i18n.fact }
-                                        initialOpen={false}
+                                        initialOpen={ ( trip_facts.length - 1 === index ) }
                                         >
 
                                         <PanelRow>

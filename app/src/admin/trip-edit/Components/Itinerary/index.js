@@ -161,7 +161,7 @@ const Itinerary = ({allData}) => {
                             		<PanelBody
                                     icon= {alignJustify}
                                     title={`${itineraries[itineraryId].label ? itineraries[itineraryId].label : __i18n.day_x}, ${itineraries[itineraryId].title ? itineraries[itineraryId].title : __i18n.your_plan} `}
-                                    initialOpen={false} >
+                                    initialOpen={(Object.keys(itineraries).length - 1 === index )} >
 
                                     <PanelRow>
                                         <label>{__i18n.itinerary_label}</label>
