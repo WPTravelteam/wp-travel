@@ -128,8 +128,9 @@ const SimpleGallery = ({allData, drag=true }) => {
             featuredImage={_thumbnail_id}
             onChange={() => console.log('changes')}
             onImagesSort={onImagesSortHandle}
-            onItemClick={onItemClickHandle}
+            // onItemClick={onItemClickHandle}
             drag={drag}
+            allData={allData}
         />
         {!isUploading && <GalleyDropZone onImagesDrop={onImagesDropHandle} onMediaLib={onMediaLibHandle} />}
     </div>
