@@ -98,6 +98,15 @@
 			}
 		}
 	}
+	.wp-travel-select-wrapper {
+		.css-b8ldur-Input {
+			margin: 0;
+			padding: 0;
+			input{
+				box-shadow: none;
+			}
+		}
+	}
 	.wp-travel-save-changes {
 		background-color: #fff;
 		border: 1px solid #ccc !important;
@@ -391,9 +400,9 @@ td {
 	}
 }
 
-.components-input-control__container {
-	width: 250px !important;
-}
+// .components-input-control__container {
+// 	width: 250px !important;
+// }
 
 // .components-panel__body {
 // 	&.is-opened {
@@ -459,6 +468,9 @@ td {
 					}
 				}
 			}
+		}
+		td .components-base-control {
+			width: inherit !important;
 		}
 	}
 

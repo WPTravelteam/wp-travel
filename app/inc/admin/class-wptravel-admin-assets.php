@@ -49,8 +49,11 @@ class WpTravel_Admin_Assets {
 			wp_enqueue_script( 'wp-travel-popup' );
 
 		}
-		wp_enqueue_style( 'wp-travel-back-end' ); // enqueued for wp travel menu icon.
-
+		if ( ! $screen->is_block_editor ) {
+			wp_enqueue_style( 'wp-travel-back-end' );
+		}
+		wp_enqueue_style( 'wptravel-admin' ); // enqueued for wp travel menu icon.
+		
 		if ( 'itinerary-booking_page_booking_chart' === $screen->id ) {
 			wp_localize_script( 'jquery-chart-custom', 'wp_travel_chart_data', $wp_travel_chart_data );
 			wp_enqueue_script( 'jquery-chart-custom' );

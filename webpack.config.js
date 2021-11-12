@@ -24,6 +24,10 @@ module.exports = (env, options) => {
       './app/assets/js/wp-travel-back-end.js',
       './app/src/admin/sass/main.scss',
     ];
+    entries['admin' + fileSuffix ] = [
+      './app/assets/js/wp-travel-backend-pointers.js', // just to add js entry point. temp fixes
+      './app/src/admin/sass/style.scss', // style which need to inclued in all admin pages. it contents admin menu logo icon class
+    ];
     entries['wp-travel-front-end' + fileSuffix ] = [
       './app/assets/js/wp-travel-front-end.js',
       './app/src/frontend/sass/main.scss',

@@ -447,6 +447,13 @@ class WpTravel_Frontend_Assets {
 				);
 			}
 
+			$styles['wptravel-admin'] = array(
+				'src'   => self::$app_path . '/build/admin' . $suffix . '.css',
+				'deps'  => array(),
+				'ver'   => WP_TRAVEL_VERSION,
+				'media' => 'all',
+			);
+
 			// Required Scripts for all admin pages.
 			$scripts['wp-travel-fields-scripts'] = array(
 				'src'       => self::$app_path . '/assets/js/wp-travel-fields-scripts' . $suffix . '.js',
