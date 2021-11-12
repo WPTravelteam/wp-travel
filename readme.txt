@@ -254,6 +254,7 @@ Fixes:
 * Fixed something went error if a date in the trip has no pricing.
 * Fixed Edit Traveler detail not working from admin booking.
 * Fixed Frontend gallery tab undefined index issue.
+* Fixed partial payment not working in user dashboard.
 
 Tweaks:
 * Migration Script optimized in activation hook.
