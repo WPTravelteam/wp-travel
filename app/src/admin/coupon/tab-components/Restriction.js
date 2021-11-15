@@ -11,20 +11,20 @@ export default () => {
     const allData = useSelect((select) => {
         return select('WPTravel/Coupon').getAllStore()
     }, []);
-
     const {general, restriction, options} = allData
     const coupon_limit_number = 'undefined' !== typeof restriction && 'undefined' !== typeof restriction.coupon_limit_number ? restriction.coupon_limit_number : '';
     let restricted_trips      = ( 'undefined' !== typeof restriction && 'undefined' !== typeof restriction.restricted_trips ) ? restriction.restricted_trips : [];
     let coupon_user_id        = ( 'undefined' !== typeof restriction && 'undefined' !== typeof restriction.coupon_user_id ) ? restriction.coupon_user_id : 0;
     const {trips, users} = options;
     let allTrips = 'undefined' != typeof trips ? trips : [];
-    
+   
     let tripSuggestions = []
     if (allTrips.length > 0) {
         tripSuggestions = allTrips.map(allTrip => {
             return { id: allTrip.id, title: allTrip.title }
         })
     }
+    console.log(tripSuggestions);
     let restricted_trips_names = [];
     if (restricted_trips.length > 0) {
         restricted_trips.filter((restrictedId) => {
@@ -36,8 +36,10 @@ export default () => {
             }
         })
     }
-    
+    //console.log(restricted_trips_names);
+    console.log(users);
     let allUsers = users.map( userData => {return {label:userData.data.user_login, value:userData.data.ID }} );
+    //console.log(allUsers);
     allUsers.unshift({label: 'Select User', value:'' }); 
     // Update Values
     const { updateCoupon } = dispatch('WPTravel/Coupon');

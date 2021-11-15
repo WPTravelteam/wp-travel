@@ -7,13 +7,11 @@ import { _n, __} from '@wordpress/i18n';
 const __i18n = {
 	..._wp_travel_admin.strings
 }
-const SaveCoupons = (props) => {
+const saveEnquiry = (props) => {
     const allData = useSelect((select) => {
-        return select('WPTravel/Coupon').getAllStore()
+        return select('WPTravel/Enquiry').getAllStore()
     }, []);
-  
-    const { updateRequestSending, updateStateChange, displaySavedMessage } = dispatch('WPTravel/Coupon');
-
+    const { updateRequestSending, updateStateChange, displaySavedMessage } = dispatch('WPTravel/Enquiry');
     const { has_state_changes, show_updated_message, disable_save } = allData;
     setTimeout(() => {
         if ( typeof show_updated_message != 'undefined' && show_updated_message ) {
@@ -26,26 +24,25 @@ const SaveCoupons = (props) => {
             <div>
                 {has_state_changes&&<div className="wp-travel-save-notice">{__('* Please save the changes', 'wp-travel' )}</div>}
                 {show_updated_message && <div>
-                    <p className="text-success"><strong>{__('Coupon Saved !', 'wp-travel')}</strong></p>
+                    <p className="text-success"><strong>{__('Enquiry Saved !', 'wp-travel')}</strong></p>
                 </div> }
             </div>
             <Button isPrimary onClick={()=>{
-                 
+
                 updateRequestSending(true);
-                apiFetch( { url: `${ajaxurl}?action=wptravel_update_coupon&_nonce=${_wp_travel._nonce}&coupon_id=${_wp_travel.postID}`, data:allData, method:'post' } ).then( res => {
+                apiFetch( { url: `${ajaxurl}?action=wptravel_update_enquiry&_nonce=${_wp_travel._nonce}&enquiry_id=${_wp_travel.postID}`, data:allData, method:'post' } ).then( res => {
                     updateRequestSending(false);
                     
-                    if( res.success && "WP_TRAVEL_UPDATED_COUPON" === res.data.code){
+                    if( res.success && "WP_TRAVEL_UPDATED_ENQUIRY" === res.data.code){
                         updateStateChange(false)
                         displaySavedMessage(true)
-                        disable_save(true)
                     }
                 } );
             }}
             disabled={!has_state_changes || disable_save }
-            >{__('Save Coupon', 'wp-travel' )}</Button>
+            >{__('Save Enquiry', 'wp-travel' )}</Button>
         </PanelRow>
     </>
 }
 
-export default SaveCoupons;
+export default saveEnquiry;

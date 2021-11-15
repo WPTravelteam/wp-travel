@@ -10000,11 +10000,12 @@ react-gmaps@^1.9.0:
     create-react-class "^15.5.2"
     object-assign "^4.0.1"
 
-react-google-autocomplete@^1.1.2:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/react-google-autocomplete/-/react-google-autocomplete-1.3.0.tgz#98cd30bf8874d6e3e83aab97e89433ec64d6d14f"
-  integrity sha512-GTgjtot439n4NGitPGv0RmWJgI8iwEwLjg2D19VSyE7vAN2SeZ2w1Rgvf94QgtawT8gm6Lvde8RTlH6XEcrVKA==
+react-google-autocomplete@^2.4.3:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/react-google-autocomplete/-/react-google-autocomplete-2.6.0.tgz#8ef39f9a77ab9f6100f9390e7973467df7782924"
+  integrity sha512-R2KjiICuQH2ktW/8hej7dgVzF3I/WvheUE9vXgAEZs6RVst9tJp6NZF87kbwa8xNhxj9aYFh6b9Wcoq04hB62Q==
   dependencies:
+    lodash.debounce "^4.0.8"
     prop-types "^15.5.0"
 
 react-input-autosize@^3.0.0:

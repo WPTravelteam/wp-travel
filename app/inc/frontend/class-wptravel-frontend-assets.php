@@ -527,7 +527,7 @@ class WpTravel_Frontend_Assets {
 			);
 
 			// Coupon.
-			$coupon_deps                      = $all_dependencies['admin-coupon'];
+			$coupon_deps = $all_dependencies['admin-coupon'];
 			$scripts['wptravel-admin-coupon'] = array(
 				'src'       => self::$app_path . '/build/admin-coupon' . $suffix . '.js',
 				'deps'      => $coupon_deps['dependencies'],
@@ -541,6 +541,16 @@ class WpTravel_Frontend_Assets {
 				'ver'   => $coupon_deps['version'],
 				'media' => 'all',
 			);
+			//enquiry
+			$enquiry_deps = $all_dependencies['admin-enquiry'];
+			$scripts['wptravel-admin-enquiry'] = array(
+				'src'       => self::$app_path . '/build/admin-enquiry' . $suffix . '.js',
+				'deps'      => $coupon_deps['dependencies'],
+				'ver'       => $coupon_deps['version'],
+				'in_footer' => true,
+			);
+
+			
 
 			// Legacy Widgets.
 			// $legacy_widget_deps                 = $all_dependencies['legacy-widgets'];
@@ -626,6 +636,12 @@ class WpTravel_Frontend_Assets {
 		$admin_coupon['dependencies'][] = 'jquery';
 		$dependenccies['admin-coupon']  = $admin_coupon;
 		// End of Admin coupon.
+
+		// Admin enquiry.
+		$admin_enquiry                   = include_once sprintf( '%sapp/build/admin-enquiry.asset.php', WP_TRAVEL_ABSPATH );
+		$admin_enquiry['dependencies'][] = 'jquery';
+		$dependenccies['admin-enquiry']  = $admin_enquiry;
+		// End of Admin enquiry.
 
 		// Legacy widget.
 		// $legacy_widgets                   = include_once sprintf( '%sapp/build/legacy-widgets.asset.php', WP_TRAVEL_ABSPATH );

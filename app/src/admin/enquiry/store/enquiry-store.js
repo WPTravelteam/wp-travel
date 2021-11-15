@@ -39,31 +39,31 @@ const actions = {
         };
     },
 
-    updateCoupon(data){
+    updateEnquiry(data){
         return {
-            type: 'UPDATE_COUPON',
+            type: 'UPDATE_ENQUIRY',
             data,
         };
     },
-    getCouponsFromAPI(url) {
+    getEnquiryFromAPI(url) {
         return {
             type: 'FETCH_FROM_API',
             url,
         };
     },
-    setCoupon(coupon) {
+    setEnquiry(enquiry) {
         return {
-            type: 'SET_COUPON',
-            coupon,
+            type: 'SET_ENQUIRY',
+            enquiry,
         };
     }
     
     
 };
 
-registerStore('WPTravel/Coupon', {
+registerStore('WPTravel/Enquiry', {
     selectors: {
-        setCoupon(state) {
+        setEnquiry(state) {
             return {...state.coupon}
         },
         getAllStore(store) {
@@ -71,14 +71,14 @@ registerStore('WPTravel/Coupon', {
         },
     },
     resolvers: {
-        * setCoupon(couponId) {
-            const url = `${ajaxurl}?action=wptravel_get_coupon&_nonce=${_wp_travel._nonce}&coupon_id=${couponId}`;
+        * setEnquiry(enquiry_id) {
+            const url = `${ajaxurl}?action=wptravel_get_enquiry&_nonce=${_wp_travel._nonce}&enquiry_id=${enquiry_id}`;
             yield actions.updateRequestSending(true);
-            const response = yield actions.getCouponsFromAPI( url );
-            console.log(response);
+            const response = yield actions.getEnquiryFromAPI( url );
+            console.log('set',response);
             if(false !== response.success && "WP_TRAVEL_COUPON" === response.data.code ) {
                 yield actions.updateRequestSending(false);
-                return actions.setCoupon( response.data.coupon );
+                return actions.setEnquiry( response.data.enquiry );
             }
         },
     },
@@ -94,13 +94,13 @@ registerStore('WPTravel/Coupon', {
             case 'DATA_UPDATED':
                 return {...state, show_updated_message:action.isUpdated};
                 
-            case 'SET_COUPON':
+            case 'SET_ENQUIRY':
                 return {
                     ...state,
-                    ...action.coupon,
+                    ...action.enquiry,
                     is_sending_request:false
                 };
-            case 'UPDATE_COUPON':
+            case 'UPDATE_ENQUIRY':
                 return {...state,
                     ...action.data,
                     has_state_changes:true

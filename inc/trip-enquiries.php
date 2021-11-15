@@ -175,28 +175,17 @@ function wptravel_enquiries_info() {
 	$wp_travel_itinerary_list = wptravel_get_itineraries_array(); ?>
 
 	<div class="wp-travel-booking-form-wrapper">
-			<?php wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' ); ?>
-			<div class="wp-travel-form-field full-width">
-				<label for="wp-travel-post-id"><?php echo esc_html( ucfirst( WP_TRAVEL_POST_TITLE_SINGULAR ) ); ?></label>
-				<select id="wp-travel-post-id" name="wp_travel_post_id" >
-				<?php foreach ( $wp_travel_itinerary_list as $itinerary_id => $itinerary_name ) : ?>
-					<option value="<?php echo esc_attr( $itinerary_id ); ?>" <?php selected( $wp_travel_post_id, $itinerary_id ); ?>>
-						<?php echo esc_html( $itinerary_name ); ?>
-					</option>
-				<?php endforeach; ?>
-				</select>
-			</div>
-
-			<?php
-			$fields = new WP_Travel_FW_Field();
-			$fields->init( $form_fields )->render();
-			?>
+		
 	  <script>
 	  jQuery(function($){
 		$('#post').parsley();
 	  });
 	  </script>
+
+		<div id="wp_travel_enquiries">
 	</div>
+	</div>
+
 	<?php
 
 }

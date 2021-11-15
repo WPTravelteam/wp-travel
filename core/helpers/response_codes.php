@@ -9,6 +9,10 @@ class WP_Travel_Helpers_Response_Codes { // @phpcs:ignore
 			'WP_TRAVEL_UPDATED_TRIP'                      => array(
 				'message' => __( 'Successfully updated trip.', 'wp-travel' ),
 			),
+			//ENQUIRY UPDATED
+			'WP_TRAVEL_UPDATED_ENQUIRY'                      => array(
+				'message' => __( 'Successfully updated enquiry.', 'wp-travel' ),
+			),
 			// Trip Pricings.
 			'WP_TRAVEL_REMOVED_TRIP_PRICING'              => array(
 				'message' => __( 'Successfully removed trip pricing.', 'wp-travel' ),

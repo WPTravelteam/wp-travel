@@ -21,6 +21,10 @@ class WP_Travel_Helpers_Error_Codes {
 			'WP_TRAVEL_NO_COUPON_ID'                        => array(
 				'message' => __( 'Invalid coupon id.', 'wp-travel' ),
 			),
+			//enquiry id
+			'WP_TRAVEL_NO_Enquiry_ID'                        => array(
+				'message' => __( 'Invalid enquiry id.', 'wp-travel' ),
+			),
 			'WP_TRAVEL_NO_PRICINGS'                       => array(
 				'message' => __( 'No pricings found for the trip.', 'wp-travel' ),
 			),
@@ -63,7 +67,9 @@ class WP_Travel_Helpers_Error_Codes {
 			'WP_TRAVEL_ERROR_DELETING_PRICING'            => array(
 				'message' => __( 'Error deleting Pricing.', 'wp-travel' ),
 			),
-
+					'WP_TRAVEL_ERROR_DELETING_PRICING'            => array(
+				'message' => __( 'Error deleting Pricing.', 'wp-travel' ),
+			),
 			// Trip Dates.
 			'WP_TRAVEL_ERROR_DELETING_TRIP_DATES'         => array(
 				'message' => __( 'Error deleting trip dates.', 'wp-travel' ),

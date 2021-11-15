@@ -383,6 +383,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			require WP_TRAVEL_ABSPATH . '/core/helpers/payment.php';
 			require WP_TRAVEL_ABSPATH . '/core/helpers/schema.php';
 			require WP_TRAVEL_ABSPATH . '/core/helpers/coupon.php';
+			require WP_TRAVEL_ABSPATH . '/core/helpers/enquiry.php';
 			require WP_TRAVEL_ABSPATH . '/core/helpers/clone.php';
 
 			// Ajax.
@@ -395,6 +396,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			require WP_TRAVEL_ABSPATH . '/core/ajax/pricings.php';
 			require WP_TRAVEL_ABSPATH . '/core/ajax/cart.php';
 			require WP_TRAVEL_ABSPATH . '/core/ajax/coupon.php';
+			require WP_TRAVEL_ABSPATH . '/core/ajax/enquiry.php';
 			require WP_TRAVEL_ABSPATH . '/core/ajax/clone.php';
 			require WP_TRAVEL_ABSPATH . '/core/ajax/trips.php';
 

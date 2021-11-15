@@ -81,7 +81,7 @@ class WpTravel_Admin_Assets {
 		}
 
 		// Block Trip edit.
-		if ( WP_TRAVEL_POST_TYPE === $screen->id || WP_Travel::is_page( 'settings', true ) ) { // why this enqueue for settings page.?
+		if ( WP_TRAVEL_POST_TYPE === $screen->id || WP_Travel::is_page( 'settings', true )|| 'itinerary-enquiries' === $screen->id ) { // why this enqueue for settings page.?
 			wp_enqueue_editor();
 			wp_enqueue_style( 'wp-travel-admin-trip-options-style' );
 			wp_enqueue_script( 'wp-travel-admin-trip-options' );
@@ -97,6 +97,10 @@ class WpTravel_Admin_Assets {
 			wp_enqueue_style( 'wptravel-admin-coupon' );
 			wp_enqueue_script( 'wptravel-admin-coupon' );
 		}
+		//Block Enquiries
+		 wp_enqueue_style( 'wptravel-admin-enquiry' );
+		wp_enqueue_script( 'wptravel-admin-enquiry' );
+
 		wp_enqueue_script( 'wptravel-legacy-widgets' );
 	}
 }
