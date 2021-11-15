@@ -3,9 +3,9 @@ Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 5.4.1
-Tested up to: 5.8.1
+Tested up to: 5.8.2
 Requires PHP: 5.6.2
-Stable tag: 5.0.1
+Stable tag: 5.0.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -106,7 +106,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * **Tour Extras:** It allows you to add paid or free service for the individual trip.
 * **Painless Booking System:** WP Travel includes a very easy and simple travel booking system which users can fill up very fast and get you more bookings.
 * **Full Data Reporting:** Data is very important for all businesses. WP Travel has an in-build booking stat that helps you to generate the report from different date ranges, types and locations.
-* **Payment System:** Currently we have Standard PayPal merged within the WP Travel plugin and has eleven additional payment gateway. [View all 11 payment options](https://wptravel.io/downloads/category/payment/?utm_source=addons&utm_medium=allpaymentoptions&utm_campaign=WP%20Plugin)
+* **Payment System:** Currently we have Standard PayPal merged within the WP Travel plugin and has twelve additional payment gateway. [View all 12 payment options](https://wptravel.io/downloads/category/payment/?utm_source=addons&utm_medium=allpaymentoptions&utm_campaign=WP%20Plugin)
 * **Multiple pricing and Multiple dates:** This feature allows you to add multiple pricing and multiple dates for a single trip.
 * **Tax Options:** With this feature, you will be able to add tax to the price of the trips if you wish or if that falls under your company policy.
 * **User Dashboard:** WP Travel Customer Dashboard and Bookings Views.
@@ -244,6 +244,23 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
 
+= 5.0.2 =
+Release Date: 15th November, 2021
+
+Fixes:
+* Fixed Itinerary date label not displaying in an itinerary tab of the trip edit page.
+* Fixed Gallery tab has `something went wrong` on adding a new trip.
+* Fixed issue with a total price. The total price is wrong if trip extras remove from the cart. 
+* Fixed `something went wrong` error if a date in the trip has no pricing.
+* Fixed Add/Edit Traveler detail not working from admin booking.
+* Fixed Frontend gallery tab undefined index issue.
+* Fixed partial payment not working in user dashboard.
+
+Tweaks:
+* Migration Script optimized in activation hook.
+* Added Trip tab slide feature. which was available in WP Travel Pro previously.
+* Form field type name changed to Dropdown from select.
+
 = 5.0.1 =
 Release Date: 12th September, 2021
 
@@ -269,9 +286,11 @@ Fixes:
 * Fixed Script 'wp-travel-backend-pointers.js' not found on admin pages.
 * Fixed Trip extras label not displaying in trip edit page.
 * Fixed Trip fact issue with PHP 8. It shows E_COMPILE_ERROR on edit trip.
+* Available dates not displaying in date picker due to time zone and UTC offset issue fixed.
 
 Tweaks:
 * Removed `the_content` filter in frontend tabs.
+* Booking with payment option will hide in case of 100% coupon discount.
 
 Enhancement:
 * Added schema for Trip data and rating in trip single page.

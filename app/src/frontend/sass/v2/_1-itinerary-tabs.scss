@@ -6,6 +6,11 @@
 			display: flex;
 		}
 	}
+	#slider-tab {
+		@media (max-width: 768px) {
+			display: none;
+		}
+	}
 }
 .wp-travel-booking-wrapper {
 	margin: 18px 0 0;
@@ -17,7 +22,7 @@
 	margin-right: auto !important;
 	@include mob {
 		padding: 20px 0px 10px !important;
-	}
+	}	
 
 	.tab-list.resp-tabs-list {
 		margin: 0px;

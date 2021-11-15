@@ -53,7 +53,7 @@ class WP_Travel_FW_Field {
 		);
 
 		$field_types['select'] = array(
-			'label' => __( 'Select', 'wp-travel' ),
+			'label' => __( 'Dropdown', 'wp-travel' ),
 			'class' => 'WP_Travel_FW_Field_Select',
 		);
 

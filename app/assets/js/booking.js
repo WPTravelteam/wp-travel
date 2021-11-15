@@ -9,7 +9,7 @@ jQuery(document).ready(function ($) {
 		$(this).closest('form').slideUp('slow').siblings('.wp-travel-book-now').slideToggle('slow');
 	});
 
-	$(document).on('click', '.wp-travel-booknow-btn', function () {
+	$(document).on('click', '.wp-travel-booknow-btn, div.wp-travel-booknow-btn a', function () {
 		$(".wp-travel-booking-form").trigger("click");
 		var winWidth = $(window).width();
 		var tabHeight = $('.wp-travel-tab-wrapper').offset().top;

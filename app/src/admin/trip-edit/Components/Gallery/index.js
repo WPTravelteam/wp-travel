@@ -33,11 +33,13 @@ const SimpleGallery = ({allData, drag=true }) => {
     galleryMediaInstance
         .on('open', () => {
             const library = galleryMediaInstance.state().get('library')
-            let currentGallery = store.getAllStore().gallery
-            currentGallery.forEach(element => {
-                var attachment = wp.media.attachment(element.id)
-                library.remove(attachment ? [attachment] : [])
-            });
+            let currentGallery = store.getAllStore().gallery;
+            if ( currentGallery ) {
+                currentGallery.forEach(element => {
+                    var attachment = wp.media.attachment(element.id)
+                    library.remove(attachment ? [attachment] : [])
+                });
+            }
 
         })
         .on('select', () => {
@@ -128,8 +130,9 @@ const SimpleGallery = ({allData, drag=true }) => {
             featuredImage={_thumbnail_id}
             onChange={() => console.log('changes')}
             onImagesSort={onImagesSortHandle}
-            onItemClick={onItemClickHandle}
+            // onItemClick={onItemClickHandle}
             drag={drag}
+            allData={allData}
         />
         {!isUploading && <GalleyDropZone onImagesDrop={onImagesDropHandle} onMediaLib={onMediaLibHandle} />}
     </div>

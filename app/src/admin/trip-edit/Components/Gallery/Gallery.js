@@ -1,3 +1,4 @@
+import { withSelect, dispatch } from '@wordpress/data'; // redux [and also for hook / filter] | dispatch : send data to store
 import { Button, Spinner, Notice } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { ReactSortable } from 'react-sortablejs';
@@ -27,7 +28,8 @@ const  swapList = (data, old_index, new_index) => {
     }
     return data;
 };
-export default props => {
+const Gallery = ( props ) => {
+    // console.log( props );
     const {
         images: gallery,
         featuredImage,
@@ -35,9 +37,20 @@ export default props => {
         onChange,
         onImagesSort,
         onItemClick,
-        drag
+        drag,
+        allData,
+        setFeaturedImage
     } = props
     let draggable = 'undefined' != typeof drag ? drag : true;
+    const { updateTripData } = dispatch('WPTravel/TripEdit')
+    const setThumbnail = id => e => { 
+        updateTripData({ ...allData, _thumbnail_id: id });
+        setFeaturedImage( id );
+    }
+
+    if ( props && props.featuredImageId && props.featuredImageId !== allData._thumbnail_id ) {
+        updateTripData({ ...allData, _thumbnail_id: props.featuredImageId  });
+    }
     return <ErrorBoundary>
         { 'undefined' != typeof gallery && gallery && gallery.length > 0 &&
             <ReactSortable
@@ -47,7 +60,9 @@ export default props => {
                 tag="ul"
                 className="wp-travel-gallery-list">
                 {gallery.map((image, index) => {
-                    return <li key={index} className={`gallery-item${featuredImage === parseInt(image.id) ? ' featured-image' : ''} ${image.transient && 'gallery-item-preview'}`} style={{position:'relative'}}>
+                    const featuredClass        = 'undefined' != typeof featuredImage && ( featuredImage === parseInt( image.id ) ) ? ' featured-image' : '';
+                    const featuredPreviewClass = 'undefined' != typeof image.transient && image.transient ? ' gallery-item-preview' : '';
+                    return <li key={index} className={`gallery-item ${ featuredClass } ${featuredPreviewClass}`} style={{position:'relative'}}>
                         <div className={`wptravel-swap-list`}>
                             <Button
                             // style={{padding:0, display:'block'}}
@@ -75,7 +90,7 @@ export default props => {
                                 </Button>
                         </div>
                         <figure>
-                            <img src={image.thumbnail} onClick={onItemClick(image.id)}  />
+                            <img src={image.thumbnail} onClick={setThumbnail(image.id)}  />
                             {
                                 image.transient && <span className="loader">
                                     <Spinner />
@@ -92,3 +107,16 @@ export default props => {
             || <Notice isDismissible={false} status="info">{__i18n.messages.no_gallery}</Notice>}
     </ErrorBoundary>
 }
+export default withSelect( (select ) => {
+    const { getMedia } = select( 'core' );
+    const { getEditedPostAttribute } = select( 'core/editor' );
+    const featuredImageId = getEditedPostAttribute( 'featured_media' );
+
+    return {
+        media: featuredImageId ? getMedia( featuredImageId ) : null,
+        featuredImageId,
+        setFeaturedImage: function(attachmentId) {
+			dispatch('core/editor').editPost({ featured_media: attachmentId });
+		}
+    };
+  })( Gallery )

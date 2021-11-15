@@ -97,8 +97,10 @@ function wptravel_book_now() {
 	);
 	wp_update_post( $update_data_array );
 
+	$sanitized_data = wptravel_sanitize_array( $_POST );
+	
 	// Updating Booking Metas.
-	update_post_meta( $booking_id, 'order_data', wptravel_sanitize_array( $_POST ) );
+	update_post_meta( $booking_id, 'order_data', $sanitized_data );
 	update_post_meta( $booking_id, 'order_items_data', $items ); // @since 1.8.3
 	update_post_meta( $booking_id, 'order_totals', $wt_cart->get_total() );
 	update_post_meta( $booking_id, 'wp_travel_pax', $total_pax );
@@ -236,6 +238,23 @@ function wptravel_book_now() {
 	 */
 	do_action( 'wp_travel_after_frontend_booking_save', $booking_id, $first_key ); // phpcs:ignore
 	do_action( 'wptravel_after_frontend_booking_save', $booking_id, $first_key );
+
+	// Temp fixes [add payment id in case of booking only].
+	// if ( 'booking_only' === $sanitized_data['wp_travel_booking_option'] ) {
+		$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
+		if ( ! $payment_id ) {
+			$title      = 'Payment - #' . $booking_id;
+			$post_array = array(
+				'post_title'   => $title,
+				'post_content' => '',
+				'post_status'  => 'publish',
+				'post_slug'    => uniqid(),
+				'post_type'    => 'wp-travel-payment',
+			);
+			$payment_id = wp_insert_post( $post_array );
+			update_post_meta( $booking_id, 'wp_travel_payment_id', $payment_id );
+		}
+	// }
 
 	$require_login_to_checkout = isset( $settings['enable_checkout_customer_registration'] ) ? $settings['enable_checkout_customer_registration'] : 'no'; // if required login then there is registration option as well. so we continue if this is no.
 	$create_user_while_booking = isset( $settings['create_user_while_booking'] ) ? $settings['create_user_while_booking'] : 'no';

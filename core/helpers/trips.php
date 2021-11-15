@@ -456,7 +456,7 @@ class WpTravel_Helpers_Trips {
 				);
 			}
 			if ( ! empty( $trip_data->_thumbnail_id ) ) {
-				$_thumbnail_id = in_array( (int) $trip_data->_thumbnail_id, $data ) ? (int) $trip_data->_thumbnail_id : 0;
+				$_thumbnail_id = ( in_array( (int) $trip_data->_thumbnail_id, $data ) ||  wp_attachment_is( 'image', $trip_data->_thumbnail_id ) ) ? (int) $trip_data->_thumbnail_id : 0;
 				update_post_meta( $trip_id, '_thumbnail_id', $_thumbnail_id );
 			} else {
 				update_post_meta( $trip_id, '_thumbnail_id', isset( $data[0] ) ? $data[0] : 0 );

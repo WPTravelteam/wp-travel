@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 5.0.1\n"
+"Project-Id-Version: WP Travel 5.0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-10 10:02:44+00:00\n"
+"POT-Creation-Date: 2021-11-15 06:05:39+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: grunt-wp-i18n 1.0.3\n"
 
-#: app/inc/admin/class-wptravel-admin-metabox-trip-edit.php:30
+#: app/inc/admin/class-wptravel-admin-metabox-trip-edit.php:33
 msgid "Trip Options"
 msgstr ""
 
@@ -83,8 +83,8 @@ msgstr ""
 msgid "Booking Details"
 msgstr ""
 
-#: core/helpers/booking.php:42 core/helpers/strings.php:145
-#: core/helpers/strings.php:238 inc/admin/class-admin-metaboxes.php:49
+#: core/helpers/booking.php:42 core/helpers/strings.php:147
+#: core/helpers/strings.php:241 inc/admin/class-admin-metaboxes.php:49
 #: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:30
 #: inc/email-template-functions.php:122 inc/email-template-functions.php:392
 #: inc/email-template-functions.php:698 inc/email-template-functions.php:998
@@ -98,19 +98,19 @@ msgstr ""
 
 #: core/helpers/booking.php:44 inc/deprecated/440.php:328
 #: inc/email-template-functions.php:436 inc/email-template-functions.php:742
-#: inc/email-template-functions.php:1251 inc/template-functions.php:2074
-#: inc/template-functions.php:2458
+#: inc/email-template-functions.php:1251 inc/template-functions.php:2122
+#: inc/template-functions.php:2506
 msgid "Arrival Date"
 msgstr ""
 
 #: core/helpers/booking.php:45 inc/deprecated/440.php:341
 #: inc/email-template-functions.php:450 inc/email-template-functions.php:756
-#: inc/email-template-functions.php:1265 inc/template-functions.php:2075
-#: inc/template-functions.php:2459
+#: inc/email-template-functions.php:1265 inc/template-functions.php:2123
+#: inc/template-functions.php:2507
 msgid "Departure Date"
 msgstr ""
 
-#: core/helpers/booking.php:91 inc/helpers.php:2462
+#: core/helpers/booking.php:91 inc/helpers.php:2461
 msgid "Additional Services"
 msgstr ""
 
@@ -126,8 +126,8 @@ msgstr ""
 msgid "Traveler Name"
 msgstr ""
 
-#: core/helpers/booking.php:196 inc/booking-functions.php:334
-#: inc/booking-functions.php:394 inc/class-default-form-fields.php:123
+#: core/helpers/booking.php:196 inc/booking-functions.php:353
+#: inc/booking-functions.php:413 inc/class-default-form-fields.php:123
 #: inc/class-default-form-fields.php:248 inc/deprecated/440.php:279
 #: inc/email-template-functions.php:484 inc/email-template-functions.php:790
 msgid "Country"
@@ -137,7 +137,7 @@ msgstr ""
 msgid "Phone No."
 msgstr ""
 
-#: core/helpers/booking.php:198 core/helpers/strings.php:165
+#: core/helpers/booking.php:198 core/helpers/strings.php:168
 #: inc/admin/class-admin-settings.php:113 inc/class-default-form-fields.php:272
 #: inc/deprecated/440.php:316 inc/email-template-functions.php:526
 #: inc/email-template-functions.php:832 inc/email-template-functions.php:1033
@@ -340,14 +340,14 @@ msgstr ""
 
 #: core/helpers/localize.php:142 core/helpers/localize.php:185
 #: inc/admin/class-admin-status.php:94 inc/admin/views/status.php:162
-#: inc/booking-functions.php:461 inc/booking-functions.php:465
-#: inc/booking-functions.php:489 inc/booking-functions.php:493
+#: inc/booking-functions.php:480 inc/booking-functions.php:484
+#: inc/booking-functions.php:508 inc/booking-functions.php:512
 #: inc/class-wp-travel-email.php:239 inc/class-wp-travel-email.php:342
 #: inc/currencies.php:342 inc/helpers/helpers-stat.php:252
 #: inc/helpers/helpers-stat.php:450 inc/helpers/helpers-stat.php:559
 #: inc/helpers.php:750 inc/helpers.php:795 inc/helpers.php:823
-#: inc/helpers.php:2235 inc/helpers.php:2969 inc/helpers.php:3023
-#: inc/helpers.php:3384 inc/helpers.php:3610 inc/helpers.php:3683
+#: inc/helpers.php:2234 inc/helpers.php:2968 inc/helpers.php:3022
+#: inc/helpers.php:3388 inc/helpers.php:3614 inc/helpers.php:3687
 #: templates/shortcode/itinerary-item-new.php:158
 msgid "N/A"
 msgstr ""
@@ -368,32 +368,32 @@ msgstr ""
 msgid "Select Files from Your Computer"
 msgstr ""
 
-#: core/helpers/payment.php:49 inc/helpers.php:2560
+#: core/helpers/payment.php:49 inc/helpers.php:2559
 msgid "Payment Details"
 msgstr ""
 
-#: core/helpers/payment.php:53 core/helpers/strings.php:218
+#: core/helpers/payment.php:53 core/helpers/strings.php:221
 #: inc/admin/admin-helper.php:429 inc/admin/class-dashboard-widgets.php:57
-#: inc/framework/form/class.field.php:76 inc/helpers.php:2563
+#: inc/framework/form/class.field.php:76 inc/helpers.php:2562
 #: templates/itineraries-list.php:57 upgrade/400.php:390 upgrade/400.php:425
 msgid "Date"
 msgstr ""
 
-#: core/helpers/payment.php:54 inc/helpers.php:2564
+#: core/helpers/payment.php:54 inc/helpers.php:2563
 msgid "Payment ID / Txn ID"
 msgstr ""
 
-#: core/helpers/payment.php:55 inc/helpers.php:2565
+#: core/helpers/payment.php:55 inc/helpers.php:2564
 msgid "Payment Method"
 msgstr ""
 
 #: core/helpers/payment.php:56 inc/email-template-functions.php:1328
 #: inc/email-template-functions.php:1534 inc/form-fields.php:196
-#: inc/helpers.php:2566
+#: inc/helpers.php:2565
 msgid "Payment Amount"
 msgstr ""
 
-#: core/helpers/payment.php:93 inc/helpers.php:2601
+#: core/helpers/payment.php:93 inc/helpers.php:2600
 msgid "View Payment Receipt"
 msgstr ""
 
@@ -520,8 +520,8 @@ msgstr ""
 msgid "Multiple Select"
 msgstr ""
 
-#: core/helpers/strings.php:25 inc/class-taxonomies.php:97
-#: inc/itinerary-v2-functions.php:732 inc/template-functions.php:505
+#: core/helpers/strings.php:25 inc/class-taxonomies.php:100
+#: inc/itinerary-v2-functions.php:732 inc/template-functions.php:507
 msgid "Activities"
 msgstr ""
 
@@ -530,10 +530,10 @@ msgid "Book and Pay"
 msgstr ""
 
 #: core/helpers/strings.php:29 core/helpers/strings.php:45
-#: core/helpers/strings.php:204 core/helpers/strings.php:212
+#: core/helpers/strings.php:207 core/helpers/strings.php:215
 #: inc/cart/checkout.php:161 inc/deprecated/440.php:98
-#: inc/template-functions.php:616 inc/template-functions.php:2077
-#: inc/template-functions.php:2461
+#: inc/template-functions.php:618 inc/template-functions.php:2125
+#: inc/template-functions.php:2509
 msgid "Book Now"
 msgstr ""
 
@@ -547,7 +547,7 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
-#: core/helpers/strings.php:33 core/helpers/strings.php:203
+#: core/helpers/strings.php:33 core/helpers/strings.php:206
 msgid "Close"
 msgstr ""
 
@@ -603,11 +603,11 @@ msgstr ""
 msgid "Fact"
 msgstr ""
 
-#: core/helpers/strings.php:46 core/helpers/strings.php:86
+#: core/helpers/strings.php:46 core/helpers/strings.php:88
 #: inc/admin/views/tabs/tab-contents/itineraries/misc-options.php:21
 #: inc/admin/views/tabs/tab-contents/itineraries/misc-options.php:39
-#: inc/helpers.php:2074 inc/itinerary-v2-functions.php:243
-#: inc/template-functions.php:614
+#: inc/helpers.php:2073 inc/itinerary-v2-functions.php:243
+#: inc/template-functions.php:616
 msgid "Trip Enquiry"
 msgstr ""
 
@@ -621,8 +621,8 @@ msgstr ""
 msgid "Fixed Departure"
 msgstr ""
 
-#: core/helpers/strings.php:49 inc/booking-functions.php:320
-#: inc/booking-functions.php:380
+#: core/helpers/strings.php:49 inc/booking-functions.php:339
+#: inc/booking-functions.php:399
 msgid "From"
 msgstr ""
 
@@ -647,7 +647,7 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1236
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1379
 #: inc/cart/cart-mini.php:255 inc/helpers/helpers-price.php:17
-#: inc/helpers.php:1375
+#: inc/helpers.php:1374
 msgid "Group"
 msgstr ""
 
@@ -677,9 +677,9 @@ msgstr ""
 msgid "Location"
 msgstr ""
 
-#: core/helpers/strings.php:60 core/helpers/strings.php:243
+#: core/helpers/strings.php:60 core/helpers/strings.php:246
 #: inc/admin/class-admin-metaboxes.php:84
-#: inc/admin/class-admin-metaboxes.php:85 inc/template-functions.php:708
+#: inc/admin/class-admin-metaboxes.php:85 inc/template-functions.php:710
 msgid "Locations"
 msgstr ""
 
@@ -747,7 +747,7 @@ msgstr ""
 msgid "Price Per"
 msgstr ""
 
-#: core/helpers/strings.php:71 core/helpers/strings.php:217
+#: core/helpers/strings.php:71 core/helpers/strings.php:220
 #: inc/admin/admin-helper.php:937
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:320
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:469
@@ -758,7 +758,7 @@ msgstr ""
 msgid "Person"
 msgstr ""
 
-#: core/helpers/strings.php:72 core/helpers/strings.php:198
+#: core/helpers/strings.php:72 core/helpers/strings.php:201
 #: inc/admin/admin-helper.php:906 inc/admin/admin-helper.php:915
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:119
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:254
@@ -766,7 +766,7 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1072
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1198
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1342
-#: inc/template-functions.php:2073 inc/template-functions.php:2457
+#: inc/template-functions.php:2121 inc/template-functions.php:2505
 #: templates/admin/post/tab-contents/additional-info-tab.php:3
 msgid "Price"
 msgstr ""
@@ -775,17 +775,17 @@ msgstr ""
 msgid "Price Range"
 msgstr ""
 
-#: core/helpers/strings.php:74 core/helpers/strings.php:189
+#: core/helpers/strings.php:74 core/helpers/strings.php:192
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:211
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:404
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1160
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1307
-#: inc/template-functions.php:2067 inc/template-functions.php:2451
+#: inc/template-functions.php:2115 inc/template-functions.php:2499
 msgid "Pricing Name"
 msgstr ""
 
 #: core/helpers/strings.php:75 inc/admin/admin-helper.php:244
-#: inc/helpers.php:1016 inc/template-functions.php:508
+#: inc/helpers.php:1016 inc/template-functions.php:510
 msgid "Reviews"
 msgstr ""
 
@@ -800,205 +800,212 @@ msgstr ""
 msgid "Sale Price"
 msgstr ""
 
-#: core/helpers/strings.php:77 core/helpers/strings.php:202
-#: inc/framework/form/class.field.php:56 inc/template-functions.php:2078
-#: inc/template-functions.php:2462
+#: core/helpers/strings.php:77 inc/helpers.php:651 inc/helpers.php:2138
+msgid "Search"
+msgstr ""
+
+#: core/helpers/strings.php:78 inc/helpers.php:665
+msgid "Ex: Trekking"
+msgstr ""
+
+#: core/helpers/strings.php:79 core/helpers/strings.php:205
+#: inc/template-functions.php:2126 inc/template-functions.php:2510
 msgid "Select"
 msgstr ""
 
-#: core/helpers/strings.php:78 templates/account/form-reset-password.php:61
+#: core/helpers/strings.php:80 templates/account/form-reset-password.php:61
 msgid "Save"
 msgstr ""
 
-#: core/helpers/strings.php:79 inc/admin/class-admin-settings.php:53
+#: core/helpers/strings.php:81 inc/admin/class-admin-settings.php:53
 #: inc/admin/class-admin-settings.php:64
 #: inc/admin/class-network-settings.php:72
 #: inc/admin/class-network-settings.php:83
 msgid "Save Settings"
 msgstr ""
 
-#: core/helpers/strings.php:80
+#: core/helpers/strings.php:82
 msgid "Show"
 msgstr ""
 
-#: core/helpers/strings.php:81 inc/admin/class-admin-settings.php:59
+#: core/helpers/strings.php:83 inc/admin/class-admin-settings.php:59
 #: inc/admin/class-network-settings.php:78 inc/admin/views/status.php:9
 msgid "System Information"
 msgstr ""
 
-#: core/helpers/strings.php:82 inc/booking-functions.php:327
-#: inc/booking-functions.php:387
+#: core/helpers/strings.php:84 inc/booking-functions.php:346
+#: inc/booking-functions.php:406
 msgid "To"
 msgstr ""
 
-#: core/helpers/strings.php:83
+#: core/helpers/strings.php:85
 msgid "Trip code"
 msgstr ""
 
-#: core/helpers/strings.php:84
+#: core/helpers/strings.php:86
 msgid "Trip date"
 msgstr ""
 
-#: core/helpers/strings.php:85
+#: core/helpers/strings.php:87
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:597
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1449
 #: inc/deprecated/440.php:354
 msgid "Trip Duration"
 msgstr ""
 
-#: core/helpers/strings.php:87
+#: core/helpers/strings.php:89
 msgid "Trip Name"
 msgstr ""
 
-#: core/helpers/strings.php:88 inc/itinerary-v2-functions.php:730
-#: inc/template-functions.php:504
+#: core/helpers/strings.php:90 inc/itinerary-v2-functions.php:730
+#: inc/template-functions.php:506
 msgid "Trip Type"
 msgstr ""
 
-#: core/helpers/strings.php:89 inc/admin/admin-helper.php:936
+#: core/helpers/strings.php:91 inc/admin/admin-helper.php:936
 msgid "Unit"
 msgstr ""
 
-#: core/helpers/strings.php:90
+#: core/helpers/strings.php:92
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:928
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1777
 msgid "Use Global Payout"
 msgstr ""
 
-#: core/helpers/strings.php:91
+#: core/helpers/strings.php:93
 #: inc/admin/views/tabs/tab-contents/itineraries/tabs.php:51
 msgid "Use Global Tabs Layout"
 msgstr ""
 
-#: core/helpers/strings.php:97
+#: core/helpers/strings.php:99
 msgid "Please add new fact here."
 msgstr ""
 
-#: core/helpers/strings.php:98
+#: core/helpers/strings.php:100
 msgid "Please add fact from the settings"
 msgstr ""
 
-#: core/helpers/strings.php:99
+#: core/helpers/strings.php:101
 msgid "Please add new FAQ here."
 msgstr ""
 
-#: core/helpers/strings.php:100
+#: core/helpers/strings.php:102
 msgid "There are no gallery images."
 msgstr ""
 
-#: core/helpers/strings.php:101
+#: core/helpers/strings.php:103
 msgid "Before making any changes in date, please make sure pricing is saved."
 msgstr ""
 
-#: core/helpers/strings.php:102
+#: core/helpers/strings.php:104
 msgid "* Please save the changes"
 msgstr ""
 
-#: core/helpers/strings.php:103
+#: core/helpers/strings.php:105
 msgid ""
 "Error: Total payout percent is not equals to 100%. Please update the trip "
 "once else global partial percent will be used as default."
 msgstr ""
 
-#: core/helpers/strings.php:104
+#: core/helpers/strings.php:106
 msgid "Trip Saved!"
 msgstr ""
 
-#: core/helpers/strings.php:105
+#: core/helpers/strings.php:107
 msgid "Drop files here to upload."
 msgstr ""
 
-#: core/helpers/strings.php:107 inc/cart/cart-mini.php:313
+#: core/helpers/strings.php:109 inc/cart/cart-mini.php:313
 msgid "Update"
 msgstr ""
 
-#: core/helpers/strings.php:108
+#: core/helpers/strings.php:110
 msgid "Upload"
 msgstr ""
 
-#: core/helpers/strings.php:109
+#: core/helpers/strings.php:111
 msgid "Media Library"
 msgstr ""
 
-#: core/helpers/strings.php:110
+#: core/helpers/strings.php:112
 msgid "Save Changes"
 msgstr ""
 
-#: core/helpers/strings.php:111
+#: core/helpers/strings.php:113
 msgid "+ Add"
 msgstr ""
 
-#: core/helpers/strings.php:112 inc/admin/class-admin-booking.php:443
+#: core/helpers/strings.php:114 inc/admin/class-admin-booking.php:443
 #: templates/account/tab-content/dashboard.php:63
 #: templates/account/tab-content/dashboard.php:82
 msgid "Edit"
 msgstr ""
 
-#: core/helpers/strings.php:113
+#: core/helpers/strings.php:115
 msgid "-Remove"
 msgstr ""
 
-#: core/helpers/strings.php:114
+#: core/helpers/strings.php:116
 msgid "+ Add Date"
 msgstr ""
 
-#: core/helpers/strings.php:115
+#: core/helpers/strings.php:117
 msgid "-Remove Date"
 msgstr ""
 
-#: core/helpers/strings.php:116
+#: core/helpers/strings.php:118
 msgid "+ Add Category"
 msgstr ""
 
-#: core/helpers/strings.php:117
+#: core/helpers/strings.php:119
 msgid "-Remove Category"
 msgstr ""
 
-#: core/helpers/strings.php:118
+#: core/helpers/strings.php:120
 msgid "+ Add Extras"
 msgstr ""
 
-#: core/helpers/strings.php:119
+#: core/helpers/strings.php:121
 msgid "-Remove Extras"
 msgstr ""
 
-#: core/helpers/strings.php:120
+#: core/helpers/strings.php:122
 msgid "+ Add Fact"
 msgstr ""
 
-#: core/helpers/strings.php:121
+#: core/helpers/strings.php:123
 msgid "-Remove Fact"
 msgstr ""
 
-#: core/helpers/strings.php:122
+#: core/helpers/strings.php:124
 msgid "+ Add Faq"
 msgstr ""
 
-#: core/helpers/strings.php:123
+#: core/helpers/strings.php:125
 msgid "-Remove Faq"
 msgstr ""
 
-#: core/helpers/strings.php:124
+#: core/helpers/strings.php:126
 msgid "+ Add Price"
 msgstr ""
 
-#: core/helpers/strings.php:125
+#: core/helpers/strings.php:127
 msgid "-Remove Price"
 msgstr ""
 
-#: core/helpers/strings.php:126
+#: core/helpers/strings.php:128
 msgid "+ Add Itinerary"
 msgstr ""
 
-#: core/helpers/strings.php:127
+#: core/helpers/strings.php:129
 msgid "-Remove Itinerary"
 msgstr ""
 
-#: core/helpers/strings.php:128
+#: core/helpers/strings.php:130
 msgid "Date Label"
 msgstr ""
 
-#: core/helpers/strings.php:129
+#: core/helpers/strings.php:131
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:702
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:791
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1556
@@ -1006,468 +1013,474 @@ msgstr ""
 msgid "Select pricing options"
 msgstr ""
 
-#: core/helpers/strings.php:130
+#: core/helpers/strings.php:132
 msgid "Select All"
 msgstr ""
 
-#: core/helpers/strings.php:131
+#: core/helpers/strings.php:133
 #: inc/admin/views/tabs/tab-contents/itineraries/trip-facts.php:78
 #: inc/admin/views/tabs/tab-contents/itineraries/trip-facts.php:247
 msgid "Select Type"
 msgstr ""
 
-#: core/helpers/strings.php:132
+#: core/helpers/strings.php:134
 msgid "Start Date"
 msgstr ""
 
-#: core/helpers/strings.php:133
+#: core/helpers/strings.php:135
 msgid "End Date"
 msgstr ""
 
-#: core/helpers/strings.php:134
+#: core/helpers/strings.php:136
 msgid "Date & time"
 msgstr ""
 
-#: core/helpers/strings.php:135
+#: core/helpers/strings.php:137
 msgid "Enable Fixed Departure"
 msgstr ""
 
-#: core/helpers/strings.php:136
+#: core/helpers/strings.php:138
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:600
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1452
 msgid "Night(s)"
 msgstr ""
 
-#: core/helpers/strings.php:137
+#: core/helpers/strings.php:139
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:599
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1451
 msgid "Day(s)"
 msgstr ""
 
-#: core/helpers/strings.php:138
+#: core/helpers/strings.php:140
 msgid "Value"
 msgstr ""
 
-#: core/helpers/strings.php:139
+#: core/helpers/strings.php:141
 msgid "FAQ Questions ?"
 msgstr ""
 
-#: core/helpers/strings.php:140
+#: core/helpers/strings.php:142
 msgid "Enter your question"
 msgstr ""
 
-#: core/helpers/strings.php:141
+#: core/helpers/strings.php:143
 msgid "Your Answer"
 msgstr ""
 
-#: core/helpers/strings.php:142
+#: core/helpers/strings.php:144
 #: inc/admin/views/tabs/tab-contents/itineraries/trip-includes.php:20
 #: inc/helpers.php:995
 msgid "Trip Includes"
 msgstr ""
 
-#: core/helpers/strings.php:143
+#: core/helpers/strings.php:145
 #: inc/admin/views/tabs/tab-contents/itineraries/trip-includes.php:25
 #: inc/helpers.php:1002
 msgid "Trip Excludes"
 msgstr ""
 
-#: core/helpers/strings.php:146
+#: core/helpers/strings.php:148
 #: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:140
 msgid "Day X"
 msgstr ""
 
-#: core/helpers/strings.php:147
+#: core/helpers/strings.php:149
 #: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:141
 msgid "Your Plan"
 msgstr ""
 
-#: core/helpers/strings.php:148 inc/helpers.php:988
+#: core/helpers/strings.php:150 inc/helpers.php:988
 msgid "Trip Outline"
 msgstr ""
 
-#: core/helpers/strings.php:149
+#: core/helpers/strings.php:151
+#: inc/admin/views/tabs/tab-contents/itineraries/detail.php:42
+#: inc/helpers.php:981
+msgid "Overview"
+msgstr ""
+
+#: core/helpers/strings.php:152
 #: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:93
 #: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:159
 msgid "Itinerary Label"
 msgstr ""
 
-#: core/helpers/strings.php:150
+#: core/helpers/strings.php:153
 #: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:97
 #: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:163
 msgid "Itinerary Title"
 msgstr ""
 
-#: core/helpers/strings.php:151
+#: core/helpers/strings.php:154
 #: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:101
 #: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:167
 msgid "Itinerary Date"
 msgstr ""
 
-#: core/helpers/strings.php:152
+#: core/helpers/strings.php:155
 #: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:105
 #: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:171
 msgid "Itinerary Time"
 msgstr ""
 
-#: core/helpers/strings.php:153
+#: core/helpers/strings.php:156
 msgid "Hours"
 msgstr ""
 
-#: core/helpers/strings.php:154
+#: core/helpers/strings.php:157
 msgid "Minute"
 msgstr ""
 
-#: core/helpers/strings.php:155
+#: core/helpers/strings.php:158
 #: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:118
 #: inc/admin/views/tabs/tab-contents/itineraries/itineraries-content.php:179
 #: inc/admin/views/tabs/tab-contents/tour-extras/tour-extras-general.php:27
 msgid "Description"
 msgstr ""
 
-#: core/helpers/strings.php:156
+#: core/helpers/strings.php:159
 #: inc/admin/views/tabs/tab-contents/itineraries/locations.php:26
 #: inc/itinerary-v2-functions.php:829 inc/itinerary-v2-functions.php:845
 msgid "Map"
 msgstr ""
 
-#: core/helpers/strings.php:159
+#: core/helpers/strings.php:162
 msgid "Type Pricing option and enter"
 msgstr ""
 
-#: core/helpers/strings.php:160
+#: core/helpers/strings.php:163
 msgid "Enable/Disable latitude-longitude option"
 msgstr ""
 
-#: core/helpers/strings.php:161
+#: core/helpers/strings.php:164
 msgid "Note: In case of multiple cart items checkout, global payout will be used."
 msgstr ""
 
-#: core/helpers/strings.php:163
+#: core/helpers/strings.php:166
 msgid "Full Name"
 msgstr ""
 
-#: core/helpers/strings.php:164
+#: core/helpers/strings.php:167
 msgid "Enter your name"
 msgstr ""
 
-#: core/helpers/strings.php:166
+#: core/helpers/strings.php:169
 msgid "Enter your email"
 msgstr ""
 
-#: core/helpers/strings.php:167 inc/email-template-functions.php:152
+#: core/helpers/strings.php:170 inc/email-template-functions.php:152
 #: inc/email-template-functions.php:1047
 msgid "Enquiry Message"
 msgstr ""
 
-#: core/helpers/strings.php:168
+#: core/helpers/strings.php:171
 msgid "Enter your enquiry..."
 msgstr ""
 
-#: core/helpers/strings.php:190 inc/template-functions.php:2068
-#: inc/template-functions.php:2228 inc/template-functions.php:2452
+#: core/helpers/strings.php:193 inc/template-functions.php:2116
+#: inc/template-functions.php:2276 inc/template-functions.php:2500
 msgid "Start"
 msgstr ""
 
-#: core/helpers/strings.php:191 inc/template-functions.php:2069
-#: inc/template-functions.php:2253 inc/template-functions.php:2453
+#: core/helpers/strings.php:194 inc/template-functions.php:2117
+#: inc/template-functions.php:2301 inc/template-functions.php:2501
 msgid "End"
 msgstr ""
 
-#: core/helpers/strings.php:192 inc/gateways/bank-deposit/settings.php:79
+#: core/helpers/strings.php:195 inc/gateways/bank-deposit/settings.php:79
 msgid "Action"
 msgstr ""
 
-#: core/helpers/strings.php:193
+#: core/helpers/strings.php:196
 msgid "Recurring:"
 msgstr ""
 
-#: core/helpers/strings.php:194
+#: core/helpers/strings.php:197
 msgid "Group (Min-Max)"
 msgstr ""
 
-#: core/helpers/strings.php:195
+#: core/helpers/strings.php:198
 msgid "Seats left"
 msgstr ""
 
-#: core/helpers/strings.php:196 inc/booking-functions.php:458
-#: inc/booking-functions.php:486 inc/cart/cart-mini.php:410
+#: core/helpers/strings.php:199 inc/booking-functions.php:477
+#: inc/booking-functions.php:505 inc/cart/cart-mini.php:410
 #: inc/class-default-form-fields.php:187 inc/deprecated/440.php:368
 #: inc/email-template-functions.php:408 inc/email-template-functions.php:714
 #: inc/email-template-functions.php:1223 inc/itinerary-v2-functions.php:735
-#: inc/template-functions.php:507 inc/template-functions.php:2072
-#: inc/template-functions.php:2456 templates/content-cart.php:28
+#: inc/template-functions.php:509 inc/template-functions.php:2120
+#: inc/template-functions.php:2504 templates/content-cart.php:28
 msgid "Pax"
 msgstr ""
 
-#: core/helpers/strings.php:197 inc/template-functions.php:2080
-#: inc/template-functions.php:2463
+#: core/helpers/strings.php:200 inc/template-functions.php:2128
+#: inc/template-functions.php:2511
 msgid "Select Pax"
 msgstr ""
 
-#: core/helpers/strings.php:199
+#: core/helpers/strings.php:202
 msgid "Arrival date"
 msgstr ""
 
-#: core/helpers/strings.php:200
+#: core/helpers/strings.php:203
 msgid "Departure date"
 msgstr ""
 
-#: core/helpers/strings.php:201
+#: core/helpers/strings.php:204
 msgid "Sold Out"
 msgstr ""
 
-#: core/helpers/strings.php:205 inc/template-functions.php:2079
+#: core/helpers/strings.php:208 inc/template-functions.php:2127
 msgid "Pricing"
 msgstr ""
 
-#: core/helpers/strings.php:206
+#: core/helpers/strings.php:209
 msgid ""
 "The pricing is not available on the selected Date. Please choose another "
 "date or pricing."
 msgstr ""
 
-#: core/helpers/strings.php:207
+#: core/helpers/strings.php:210
 msgid "Max. Pax Exceeded."
 msgstr ""
 
-#: core/helpers/strings.php:208
+#: core/helpers/strings.php:211
 msgid "Select a Date"
 msgstr ""
 
-#: core/helpers/strings.php:209
+#: core/helpers/strings.php:212
 msgid "Select a Date to view available pricings and other options."
 msgstr ""
 
-#: core/helpers/strings.php:210
+#: core/helpers/strings.php:213
 msgid "Clear All"
 msgstr ""
 
-#: core/helpers/strings.php:211 inc/cart/cart-mini.php:361
+#: core/helpers/strings.php:214 inc/cart/cart-mini.php:361
 msgid "Total:"
 msgstr ""
 
-#: core/helpers/strings.php:213
+#: core/helpers/strings.php:216
 msgid "Pax Selector"
 msgstr ""
 
-#: core/helpers/strings.php:214
+#: core/helpers/strings.php:217
 msgid "Group Discounts"
 msgstr ""
 
-#: core/helpers/strings.php:215
+#: core/helpers/strings.php:218
 msgid "Discounts"
 msgstr ""
 
-#: core/helpers/strings.php:216
+#: core/helpers/strings.php:219
 msgid "Pricings"
 msgstr ""
 
-#: core/helpers/strings.php:219 core/helpers/strings.php:220
+#: core/helpers/strings.php:222 core/helpers/strings.php:223
 #: inc/admin/admin-helper.php:758 inc/admin/admin-helper.php:811
 #: inc/admin/extras/class-tour-extras-admin-metabox.php:41
-#: inc/class-post-types.php:241
+#: inc/class-post-types.php:243
 msgid "Trip Extras"
 msgstr ""
 
-#: core/helpers/strings.php:221
+#: core/helpers/strings.php:224
 msgid "Learn More"
 msgstr ""
 
-#: core/helpers/strings.php:222
+#: core/helpers/strings.php:225
 msgid "Available times"
 msgstr ""
 
-#: core/helpers/strings.php:223
+#: core/helpers/strings.php:226
 msgid "Booking Options"
 msgstr ""
 
-#: core/helpers/strings.php:224
+#: core/helpers/strings.php:227
 msgid "Booking with payment"
 msgstr ""
 
-#: core/helpers/strings.php:225
+#: core/helpers/strings.php:228
 msgid "Booking only"
 msgstr ""
 
-#: core/helpers/strings.php:239
+#: core/helpers/strings.php:242
 msgid "Prices & Dates"
 msgstr ""
 
-#: core/helpers/strings.php:240
+#: core/helpers/strings.php:243
 msgid "Includes/Excludes"
 msgstr ""
 
-#: core/helpers/strings.php:241 inc/admin/class-admin-metaboxes.php:70
+#: core/helpers/strings.php:244 inc/admin/class-admin-metaboxes.php:70
 #: inc/admin/class-admin-settings.php:143
 msgid "Facts"
 msgstr ""
 
-#: core/helpers/strings.php:242 inc/admin/class-admin-metaboxes.php:77
+#: core/helpers/strings.php:245 inc/admin/class-admin-metaboxes.php:77
 #: inc/admin/class-admin-metaboxes.php:78
 #: inc/admin/extras/class-tour-extras-admin-metabox.php:70
 #: inc/admin/extras/class-tour-extras-admin-metabox.php:71 inc/helpers.php:1009
 msgid "Gallery"
 msgstr ""
 
-#: core/helpers/strings.php:244
+#: core/helpers/strings.php:247
 msgid "Checkout"
 msgstr ""
 
-#: core/helpers/strings.php:245 inc/admin/class-admin-metaboxes.php:98
+#: core/helpers/strings.php:248 inc/admin/class-admin-metaboxes.php:98
 msgid "Inventory Options"
 msgstr ""
 
-#: core/helpers/strings.php:246 inc/admin/class-admin-metaboxes.php:105
+#: core/helpers/strings.php:249 inc/admin/class-admin-metaboxes.php:105
 #: inc/admin/class-admin-metaboxes.php:106
 #: inc/admin/class-admin-settings.php:166
 msgid "FAQs"
 msgstr ""
 
-#: core/helpers/strings.php:247 inc/admin/class-admin-metaboxes.php:112
-#: inc/admin/class-admin-metaboxes.php:113 inc/helpers.php:2927
-#: inc/helpers.php:2928
+#: core/helpers/strings.php:250 inc/admin/class-admin-metaboxes.php:112
+#: inc/admin/class-admin-metaboxes.php:113 inc/helpers.php:2926
+#: inc/helpers.php:2927
 msgid "Downloads"
 msgstr ""
 
-#: core/helpers/strings.php:248
+#: core/helpers/strings.php:251
 msgid "Misc"
 msgstr ""
 
-#: core/helpers/strings.php:249 inc/admin/class-admin-metaboxes.php:119
+#: core/helpers/strings.php:252 inc/admin/class-admin-metaboxes.php:119
 #: inc/admin/class-admin-metaboxes.php:120
 #: inc/admin/class-admin-settings.php:129
 msgid "Tabs"
 msgstr ""
 
-#: core/helpers/strings.php:262
+#: core/helpers/strings.php:265
 msgid "Please select at least minimum pax."
 msgstr ""
 
-#: core/helpers/strings.php:263 inc/helpers.php:2717
+#: core/helpers/strings.php:266 inc/helpers.php:2716
 msgid "Pax should be between {min_pax} and {max_pax}."
 msgstr ""
 
-#: core/helpers/strings.php:264 inc/helpers.php:2721
+#: core/helpers/strings.php:267 inc/helpers.php:2720
 msgid "Pax should be lower than or equal to {max_pax}."
 msgstr ""
 
-#: core/helpers/strings.php:265 inc/helpers.php:2719
+#: core/helpers/strings.php:268 inc/helpers.php:2718
 msgid "Pax should be greater than or equal to {min_pax}."
 msgstr ""
 
-#: core/helpers/strings.php:266
+#: core/helpers/strings.php:269
 msgid "Are you sure to delete category?"
 msgstr ""
 
-#: core/helpers/strings.php:267
+#: core/helpers/strings.php:270
 msgid "Are you sure to delete this date?"
 msgstr ""
 
-#: core/helpers/strings.php:268
+#: core/helpers/strings.php:271
 msgid "Are you sure to delete remove fact?"
 msgstr ""
 
-#: core/helpers/strings.php:269
+#: core/helpers/strings.php:272
 msgid "Are you sure to delete FAQ?"
 msgstr ""
 
-#: core/helpers/strings.php:270
+#: core/helpers/strings.php:273
 msgid "Are you sure, want to remove the image from Gallery?"
 msgstr ""
 
-#: core/helpers/strings.php:271
+#: core/helpers/strings.php:274
 msgid "Are you sure to delete this itinerary?"
 msgstr ""
 
-#: core/helpers/strings.php:272
+#: core/helpers/strings.php:275
 msgid "Are you sure to delete this price?"
 msgstr ""
 
-#: core/helpers/strings.php:273 inc/helpers.php:2729
+#: core/helpers/strings.php:276 inc/helpers.php:2728
 msgid "Pax is required."
 msgstr ""
 
-#: core/helpers/strings.php:286 inc/itinerary-v2-functions.php:733
-#: inc/template-functions.php:511
+#: core/helpers/strings.php:289 inc/itinerary-v2-functions.php:733
+#: inc/template-functions.php:513
 msgid "No Activities"
 msgstr ""
 
-#: core/helpers/strings.php:287
+#: core/helpers/strings.php:290
 msgid "Please add extras first"
 msgstr ""
 
-#: core/helpers/strings.php:288
+#: core/helpers/strings.php:291
 msgid "No category found."
 msgstr ""
 
-#: core/helpers/strings.php:289
+#: core/helpers/strings.php:292
 msgid "No dates found"
 msgstr ""
 
-#: core/helpers/strings.php:290
+#: core/helpers/strings.php:293
 msgid "No extras found."
 msgstr ""
 
-#: core/helpers/strings.php:291 inc/template-functions.php:2272
-#: inc/template-functions.php:2569
+#: core/helpers/strings.php:294 inc/template-functions.php:2320
+#: inc/template-functions.php:2617
 msgid "No size limit"
 msgstr ""
 
-#: core/helpers/strings.php:292
+#: core/helpers/strings.php:295
 msgid "No Itineraries found."
 msgstr ""
 
-#: core/helpers/strings.php:293
+#: core/helpers/strings.php:296
 msgid "No pricing found."
 msgstr ""
 
-#: core/helpers/strings.php:294 inc/itinerary-v2-functions.php:731
-#: inc/template-functions.php:510
+#: core/helpers/strings.php:297 inc/itinerary-v2-functions.php:731
+#: inc/template-functions.php:512
 msgid "No Trip Type"
 msgstr ""
 
-#: core/helpers/strings.php:308
+#: core/helpers/strings.php:311
 #: inc/admin/views/tabs/tab-contents/itineraries/cart-checkout.php:21
 msgid "Need to add your checkout options?"
 msgstr ""
 
-#: core/helpers/strings.php:309
+#: core/helpers/strings.php:312
 #: inc/admin/views/tabs/tab-contents/itineraries/cart-checkout.php:22
 msgid ""
 "By upgrading to Pro, you can add your checkout options for all of your "
 "trips !"
 msgstr ""
 
-#: core/helpers/strings.php:312
+#: core/helpers/strings.php:315
 #: inc/admin/views/tabs/tab-contents/itineraries/inventory.php:23
 msgid "Need to add your inventory options?"
 msgstr ""
 
-#: core/helpers/strings.php:313
+#: core/helpers/strings.php:316
 #: inc/admin/views/tabs/tab-contents/itineraries/inventory.php:24
 msgid ""
 "By upgrading to Pro, you can add your inventory options in all of your "
 "trips !"
 msgstr ""
 
-#: core/helpers/strings.php:316
+#: core/helpers/strings.php:319
 #: inc/admin/views/tabs/tab-contents/itineraries/downloads.php:20
 msgid "Need to add your downloads?"
 msgstr ""
 
-#: core/helpers/strings.php:317 inc/admin/admin-helper.php:285
+#: core/helpers/strings.php:320 inc/admin/admin-helper.php:285
 #: inc/admin/views/tabs/tab-contents/itineraries/downloads.php:21
 msgid "By upgrading to Pro, you can add your downloads in all of your trips !"
 msgstr ""
 
-#: core/helpers/strings.php:320
+#: core/helpers/strings.php:323
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:949
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1797
 msgid "Need More Options ?"
 msgstr ""
 
-#: core/helpers/strings.php:321
+#: core/helpers/strings.php:324
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:950
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1798
 msgid ""
@@ -1475,51 +1488,51 @@ msgid ""
 "Inventory Options, Custom Sold out action/message and Group size limits. !"
 msgstr ""
 
-#: core/helpers/strings.php:324
+#: core/helpers/strings.php:327
 msgid "Need advance Trip Extras options?"
 msgstr ""
 
-#: core/helpers/strings.php:328
+#: core/helpers/strings.php:331
 #: inc/admin/views/tabs/tab-contents/itineraries/faq.php:25
 msgid "Tired of updating repitative FAQs ?"
 msgstr ""
 
-#: core/helpers/strings.php:329
+#: core/helpers/strings.php:332
 #: inc/admin/views/tabs/tab-contents/itineraries/faq.php:26
 msgid ""
 "By upgrading to Pro, you can create and use Global FAQs in all of your "
 "trips !"
 msgstr ""
 
-#: core/helpers/strings.php:332
+#: core/helpers/strings.php:335
 #: inc/admin/views/tabs/tab-contents/itineraries/detail.php:35
 msgid "Need Custom Trip Code? Check"
 msgstr ""
 
-#: core/helpers/strings.php:335
+#: core/helpers/strings.php:338
 #: inc/admin/views/tabs/tab-contents/itineraries/locations.php:31
 msgid "Need alternative maps ?"
 msgstr ""
 
-#: core/helpers/strings.php:336
+#: core/helpers/strings.php:339
 #: inc/admin/views/tabs/tab-contents/itineraries/locations.php:32
 msgid ""
 "If you need alternative to current map then you can get free or pro maps "
 "for WP Travel."
 msgstr ""
 
-#: core/helpers/strings.php:339
+#: core/helpers/strings.php:342
 msgid ""
 "You can add 'Google Map API Key' in the %1$ssettings%2$s to use additional "
 "features."
 msgstr ""
 
-#: core/helpers/strings.php:342
+#: core/helpers/strings.php:345
 #: inc/admin/views/tabs/tab-contents/itineraries/tabs.php:34
 msgid "Need Additional Tabs ?"
 msgstr ""
 
-#: core/helpers/strings.php:343
+#: core/helpers/strings.php:346
 #: inc/admin/views/tabs/tab-contents/itineraries/tabs.php:35
 msgid ""
 "By upgrading to Pro, you can get trip specific custom tabs addition options "
@@ -1527,14 +1540,14 @@ msgid ""
 msgstr ""
 
 #: core/lib/cart.php:219 core/lib/cart.php:370 core/lib/cart.php:414
-#: inc/cart/class-cart.php:224 inc/cart/class-cart.php:414
-#: inc/cart/class-cart.php:463
+#: inc/cart/class-cart.php:224 inc/cart/class-cart.php:413
+#: inc/cart/class-cart.php:462
 msgid ""
 "Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for "
 "this trip. Available pax is set for booking."
 msgstr ""
 
-#: core/lib/cart.php:457 inc/cart/class-cart.php:557
+#: core/lib/cart.php:457 inc/cart/class-cart.php:556
 msgid "Your cart is empty please <a href=\"%s\"> click here </a> to add trips."
 msgstr ""
 
@@ -1590,7 +1603,7 @@ msgstr ""
 msgid "View Detail"
 msgstr ""
 
-#: inc/admin/admin-helper.php:117 inc/helpers.php:2890 inc/helpers.php:2891
+#: inc/admin/admin-helper.php:117 inc/helpers.php:2889 inc/helpers.php:2890
 msgid "Marketplace"
 msgstr ""
 
@@ -1688,7 +1701,7 @@ msgstr ""
 msgid "WP Travel version: %s"
 msgstr ""
 
-#: inc/admin/admin-helper.php:424 inc/booking-functions.php:295
+#: inc/admin/admin-helper.php:424 inc/booking-functions.php:314
 #: inc/helpers.php:1023
 msgid "Booking"
 msgstr ""
@@ -1698,8 +1711,8 @@ msgid "Featured"
 msgstr ""
 
 #: inc/admin/admin-helper.php:554 inc/admin/class-admin-booking.php:70
-#: templates/account/tab-content/bookings.php:73
-#: templates/account/tab-content/bookings.php:142
+#: templates/account/tab-content/bookings.php:74
+#: templates/account/tab-content/bookings.php:148
 msgid "Booking Status"
 msgstr ""
 
@@ -1710,9 +1723,9 @@ msgid "Payment Mode"
 msgstr ""
 
 #: inc/admin/admin-helper.php:585 inc/email-template-functions.php:1280
-#: inc/email-template-functions.php:1486 inc/helpers.php:2197
-#: templates/account/tab-content/bookings.php:74
-#: templates/account/tab-content/bookings.php:147
+#: inc/email-template-functions.php:1486 inc/helpers.php:2196
+#: templates/account/tab-content/bookings.php:75
+#: templates/account/tab-content/bookings.php:153
 msgid "Payment Status"
 msgstr ""
 
@@ -1827,7 +1840,7 @@ msgid "Trip Code"
 msgstr ""
 
 #: inc/admin/class-admin-booking.php:69
-#: inc/admin/class-dashboard-widgets.php:54 inc/trip-enquiries.php:218
+#: inc/admin/class-dashboard-widgets.php:54 inc/trip-enquiries.php:219
 msgid "Contact Name"
 msgstr ""
 
@@ -1925,13 +1938,13 @@ msgid "Payment Date : "
 msgstr ""
 
 #: inc/admin/class-admin-metaboxes.php:249
-#: inc/admin/class-dashboard-widgets.php:55 inc/helpers.php:2871
+#: inc/admin/class-dashboard-widgets.php:55 inc/helpers.php:2870
 msgid "Status"
 msgstr ""
 
 #: inc/admin/class-admin-metaboxes.php:272
-#: templates/account/tab-content/bookings.php:75
-#: templates/account/tab-content/bookings.php:156
+#: templates/account/tab-content/bookings.php:76
+#: templates/account/tab-content/bookings.php:162
 msgid "Total Price"
 msgstr ""
 
@@ -2076,8 +2089,8 @@ msgid ""
 msgstr ""
 
 #: inc/admin/class-admin-settings.php:48
-#: inc/admin/class-network-settings.php:67 inc/helpers.php:2903
-#: inc/helpers.php:2911 inc/helpers.php:2919
+#: inc/admin/class-network-settings.php:67 inc/helpers.php:2902
+#: inc/helpers.php:2910 inc/helpers.php:2918
 msgid "WP Travel Settings"
 msgstr ""
 
@@ -2112,7 +2125,7 @@ msgstr ""
 #: inc/admin/class-admin-settings.php:136
 #: inc/admin/class-dashboard-widgets.php:56
 #: inc/admin/views/tabs/tab-contents/settings/payment.php:77
-#: inc/booking-functions.php:296 inc/helpers/helpers-stat.php:155
+#: inc/booking-functions.php:315 inc/helpers/helpers-stat.php:155
 #: inc/helpers/helpers-stat.php:378
 msgid "Payment"
 msgstr ""
@@ -2447,11 +2460,6 @@ msgstr ""
 msgid "Utilities addons"
 msgstr ""
 
-#: inc/admin/views/tabs/tab-contents/itineraries/detail.php:42
-#: inc/helpers.php:981
-msgid "Overview"
-msgstr ""
-
 #: inc/admin/views/tabs/tab-contents/itineraries/detail.php:48
 msgid "Short Description"
 msgstr ""
@@ -2476,7 +2484,7 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1104
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1503
 #: inc/admin/views/tabs/tab-contents/settings/email.php:59
-#: inc/cart/checkout.php:63 inc/template-functions.php:983
+#: inc/cart/checkout.php:63 inc/template-functions.php:985
 msgid "Open All"
 msgstr ""
 
@@ -2486,7 +2494,7 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1105
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1504
 #: inc/admin/views/tabs/tab-contents/settings/email.php:60
-#: inc/cart/checkout.php:64 inc/template-functions.php:984
+#: inc/cart/checkout.php:64 inc/template-functions.php:986
 msgid "Close All"
 msgstr ""
 
@@ -3301,57 +3309,57 @@ msgstr ""
 msgid "Coupon Usage Limit"
 msgstr ""
 
-#: inc/booking-functions.php:286
+#: inc/booking-functions.php:305
 msgid "Statistics"
 msgstr ""
 
-#: inc/booking-functions.php:293
+#: inc/booking-functions.php:312
 msgid "Display Chart"
 msgstr ""
 
-#: inc/booking-functions.php:307
+#: inc/booking-functions.php:326
 msgid "Compare Stat"
 msgstr ""
 
-#: inc/booking-functions.php:338 inc/booking-functions.php:398
+#: inc/booking-functions.php:357 inc/booking-functions.php:417
 msgid "All Country"
 msgstr ""
 
-#: inc/booking-functions.php:353 inc/booking-functions.php:413
+#: inc/booking-functions.php:372 inc/booking-functions.php:432
 msgid "All "
 msgstr ""
 
-#: inc/booking-functions.php:371
+#: inc/booking-functions.php:390
 msgid "Show All"
 msgstr ""
 
-#: inc/booking-functions.php:425
+#: inc/booking-functions.php:444
 msgid "Compare"
 msgstr ""
 
-#: inc/booking-functions.php:442
+#: inc/booking-functions.php:461
 msgid "Compare 1"
 msgstr ""
 
-#: inc/booking-functions.php:448 inc/booking-functions.php:477
+#: inc/booking-functions.php:467 inc/booking-functions.php:496
 msgid "Total Sales"
 msgstr ""
 
-#: inc/booking-functions.php:453 inc/booking-functions.php:481
-#: inc/class-post-types.php:96 inc/class-wp-travel-user-account.php:38
+#: inc/booking-functions.php:472 inc/booking-functions.php:500
+#: inc/class-post-types.php:98 inc/class-wp-travel-user-account.php:38
 #: inc/helpers/helpers-stat.php:126
 msgid "Bookings"
 msgstr ""
 
-#: inc/booking-functions.php:462 inc/booking-functions.php:490
+#: inc/booking-functions.php:481 inc/booking-functions.php:509
 msgid "Countries"
 msgstr ""
 
-#: inc/booking-functions.php:466 inc/booking-functions.php:494
+#: inc/booking-functions.php:485 inc/booking-functions.php:513
 msgid "Top itinerary"
 msgstr ""
 
-#: inc/booking-functions.php:473
+#: inc/booking-functions.php:492
 msgid "Compare 2"
 msgstr ""
 
@@ -3411,12 +3419,12 @@ msgstr ""
 msgid "Your order"
 msgstr ""
 
-#: inc/cart/cart-mini.php:429 templates/account/tab-content/bookings.php:72
-#: templates/account/tab-content/bookings.php:137
+#: inc/cart/cart-mini.php:429 templates/account/tab-content/bookings.php:73
+#: templates/account/tab-content/bookings.php:143
 msgid "Trip"
 msgstr ""
 
-#: inc/cart/cart-mini.php:430 inc/cart/cart-mini.php:612 inc/helpers.php:2526
+#: inc/cart/cart-mini.php:430 inc/cart/cart-mini.php:612 inc/helpers.php:2525
 #: templates/content-cart.php:56 templates/content-cart.php:283
 msgid "Total"
 msgstr ""
@@ -3454,8 +3462,8 @@ msgstr ""
 msgid "Show all your \"%s\" settings and enable its feature."
 msgstr ""
 
-#: inc/class-ajax.php:179 inc/class-ajax.php:222 inc/helpers.php:1376
-#: inc/helpers.php:3376
+#: inc/class-ajax.php:179 inc/class-ajax.php:222 inc/helpers.php:1375
+#: inc/helpers.php:3380
 msgid "Custom"
 msgstr ""
 
@@ -3559,174 +3567,174 @@ msgid_plural "Expired <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/class-post-types.php:36
+#: inc/class-post-types.php:39
 msgid "Add New Trip"
 msgstr ""
 
-#: inc/class-post-types.php:37
+#: inc/class-post-types.php:40
 msgid "New Trip"
 msgstr ""
 
-#: inc/class-post-types.php:38
+#: inc/class-post-types.php:41
 msgid "Edit Trip"
 msgstr ""
 
-#: inc/class-post-types.php:39
+#: inc/class-post-types.php:42
 msgid "View Trip"
 msgstr ""
 
-#: inc/class-post-types.php:40
+#: inc/class-post-types.php:43
 msgid "All Trips"
 msgstr ""
 
-#: inc/class-post-types.php:41
+#: inc/class-post-types.php:44
 msgid "Search Trips"
 msgstr ""
 
-#: inc/class-post-types.php:42
+#: inc/class-post-types.php:45
 msgid "Parent Trips:"
 msgstr ""
 
-#: inc/class-post-types.php:43
+#: inc/class-post-types.php:46
 msgid "No Trips found."
 msgstr ""
 
-#: inc/class-post-types.php:44
+#: inc/class-post-types.php:47
 msgid "No Trips found in Trash."
 msgstr ""
 
-#: inc/class-post-types.php:49 inc/class-post-types.php:105
-#: inc/class-post-types.php:154 inc/class-post-types.php:203
-#: inc/class-post-types.php:250 inc/coupon/inc/class-install.php:55
+#: inc/class-post-types.php:52 inc/class-post-types.php:107
+#: inc/class-post-types.php:156 inc/class-post-types.php:205
+#: inc/class-post-types.php:252 inc/coupon/inc/class-install.php:55
 msgid "Description."
 msgstr ""
 
-#: inc/class-post-types.php:92
+#: inc/class-post-types.php:94
 msgid "Add New booking"
 msgstr ""
 
-#: inc/class-post-types.php:93
+#: inc/class-post-types.php:95
 msgid "New booking"
 msgstr ""
 
-#: inc/class-post-types.php:94 inc/class-post-types.php:95
+#: inc/class-post-types.php:96 inc/class-post-types.php:97
 msgid "View booking"
 msgstr ""
 
-#: inc/class-post-types.php:97
+#: inc/class-post-types.php:99
 msgid "Search bookings"
 msgstr ""
 
-#: inc/class-post-types.php:98
+#: inc/class-post-types.php:100
 msgid "Parent bookings:"
 msgstr ""
 
-#: inc/class-post-types.php:99
+#: inc/class-post-types.php:101
 msgid "No bookings found."
 msgstr ""
 
-#: inc/class-post-types.php:100
+#: inc/class-post-types.php:102
 msgid "No bookings found in Trash."
 msgstr ""
 
-#: inc/class-post-types.php:141
+#: inc/class-post-types.php:143
 msgid "Add New Enquiry"
 msgstr ""
 
-#: inc/class-post-types.php:142 inc/class-wp-travel-emails.php:226
+#: inc/class-post-types.php:144 inc/class-wp-travel-emails.php:226
 #: inc/class-wp-travel-emails.php:230 inc/helpers.php:70 inc/helpers.php:71
 msgid "New Enquiry"
 msgstr ""
 
-#: inc/class-post-types.php:143 inc/class-post-types.php:144
+#: inc/class-post-types.php:145 inc/class-post-types.php:146
 msgid "View Enquiry"
 msgstr ""
 
-#: inc/class-post-types.php:145
+#: inc/class-post-types.php:147
 msgid "Enquiries"
 msgstr ""
 
-#: inc/class-post-types.php:146
+#: inc/class-post-types.php:148
 msgid "Search Enquiries"
 msgstr ""
 
-#: inc/class-post-types.php:147
+#: inc/class-post-types.php:149
 msgid "Parent Enquiries:"
 msgstr ""
 
-#: inc/class-post-types.php:148
+#: inc/class-post-types.php:150
 msgid "No Enquiries found."
 msgstr ""
 
-#: inc/class-post-types.php:149
+#: inc/class-post-types.php:151
 msgid "No Enquiries found in Trash."
 msgstr ""
 
-#: inc/class-post-types.php:190
+#: inc/class-post-types.php:192
 msgid "Add New Payment"
 msgstr ""
 
-#: inc/class-post-types.php:191
+#: inc/class-post-types.php:193
 msgid "New Payment"
 msgstr ""
 
-#: inc/class-post-types.php:192
+#: inc/class-post-types.php:194
 msgid "Edit Payment"
 msgstr ""
 
-#: inc/class-post-types.php:193
+#: inc/class-post-types.php:195
 msgid "View Payment"
 msgstr ""
 
-#: inc/class-post-types.php:194
+#: inc/class-post-types.php:196
 msgid "All Payments"
 msgstr ""
 
-#: inc/class-post-types.php:195
+#: inc/class-post-types.php:197
 msgid "Search Payments"
 msgstr ""
 
-#: inc/class-post-types.php:196
+#: inc/class-post-types.php:198
 msgid "Parent Payments:"
 msgstr ""
 
-#: inc/class-post-types.php:197
+#: inc/class-post-types.php:199
 msgid "No Payments found."
 msgstr ""
 
-#: inc/class-post-types.php:198
+#: inc/class-post-types.php:200
 msgid "No Payments found in Trash."
 msgstr ""
 
-#: inc/class-post-types.php:237
+#: inc/class-post-types.php:239
 msgid "Add New Trip Extra"
 msgstr ""
 
-#: inc/class-post-types.php:238
+#: inc/class-post-types.php:240
 msgid "New Trip Extra"
 msgstr ""
 
-#: inc/class-post-types.php:239
+#: inc/class-post-types.php:241
 msgid "Edit Trip Extra"
 msgstr ""
 
-#: inc/class-post-types.php:240
+#: inc/class-post-types.php:242
 msgid "View Trip Extra"
 msgstr ""
 
-#: inc/class-post-types.php:242
+#: inc/class-post-types.php:244
 msgid "Search Trip Extras"
 msgstr ""
 
-#: inc/class-post-types.php:243
+#: inc/class-post-types.php:245
 msgid "Parent Trip Extras:"
 msgstr ""
 
-#: inc/class-post-types.php:244
+#: inc/class-post-types.php:246
 msgid "No Trip Extras found."
 msgstr ""
 
-#: inc/class-post-types.php:245
+#: inc/class-post-types.php:247
 msgid "No Trip Extras found in Trash."
 msgstr ""
 
@@ -3774,107 +3782,107 @@ msgstr ""
 msgid "Trip Types"
 msgstr ""
 
-#: inc/class-taxonomies.php:39
+#: inc/class-taxonomies.php:40
 msgid "Search Destinations"
 msgstr ""
 
-#: inc/class-taxonomies.php:40
+#: inc/class-taxonomies.php:41
 msgid "All Destinations"
 msgstr ""
 
-#: inc/class-taxonomies.php:41
+#: inc/class-taxonomies.php:42
 msgid "Parent Destination"
 msgstr ""
 
-#: inc/class-taxonomies.php:42
+#: inc/class-taxonomies.php:43
 msgid "Parent Destination:"
 msgstr ""
 
-#: inc/class-taxonomies.php:43
+#: inc/class-taxonomies.php:44
 msgid "Edit Destination"
 msgstr ""
 
-#: inc/class-taxonomies.php:44
+#: inc/class-taxonomies.php:45
 msgid "Update Destination"
 msgstr ""
 
-#: inc/class-taxonomies.php:45
+#: inc/class-taxonomies.php:46
 msgid "Add New Destination"
 msgstr ""
 
-#: inc/class-taxonomies.php:46
+#: inc/class-taxonomies.php:47
 msgid "New Destination"
 msgstr ""
 
-#: inc/class-taxonomies.php:47
+#: inc/class-taxonomies.php:48
 msgid "Destinations"
 msgstr ""
 
-#: inc/class-taxonomies.php:64
+#: inc/class-taxonomies.php:66
 msgid "Search Keywords"
 msgstr ""
 
-#: inc/class-taxonomies.php:65
+#: inc/class-taxonomies.php:67
 msgid "All Keywords"
 msgstr ""
 
-#: inc/class-taxonomies.php:66
+#: inc/class-taxonomies.php:68
 msgid "Parent Keyword"
 msgstr ""
 
-#: inc/class-taxonomies.php:67
+#: inc/class-taxonomies.php:69
 msgid "Parent Keyword:"
 msgstr ""
 
-#: inc/class-taxonomies.php:68
+#: inc/class-taxonomies.php:70
 msgid "Edit Keyword"
 msgstr ""
 
-#: inc/class-taxonomies.php:69
+#: inc/class-taxonomies.php:71
 msgid "Update Keyword"
 msgstr ""
 
-#: inc/class-taxonomies.php:70
+#: inc/class-taxonomies.php:72
 msgid "Add New Keyword"
 msgstr ""
 
-#: inc/class-taxonomies.php:71
+#: inc/class-taxonomies.php:73
 msgid "New Keyword"
 msgstr ""
 
-#: inc/class-taxonomies.php:72
+#: inc/class-taxonomies.php:74
 msgid "Keywords"
 msgstr ""
 
-#: inc/class-taxonomies.php:89
+#: inc/class-taxonomies.php:92
 msgid "Search Activities"
 msgstr ""
 
-#: inc/class-taxonomies.php:90
+#: inc/class-taxonomies.php:93
 msgid "All Activities"
 msgstr ""
 
-#: inc/class-taxonomies.php:91
+#: inc/class-taxonomies.php:94
 msgid "Parent Activity"
 msgstr ""
 
-#: inc/class-taxonomies.php:92
+#: inc/class-taxonomies.php:95
 msgid "Parent Activity:"
 msgstr ""
 
-#: inc/class-taxonomies.php:93
+#: inc/class-taxonomies.php:96
 msgid "Edit Activity"
 msgstr ""
 
-#: inc/class-taxonomies.php:94
+#: inc/class-taxonomies.php:97
 msgid "Update Activity"
 msgstr ""
 
-#: inc/class-taxonomies.php:95
+#: inc/class-taxonomies.php:98
 msgid "Add New Activity"
 msgstr ""
 
-#: inc/class-taxonomies.php:96
+#: inc/class-taxonomies.php:99
 msgid "New Activity"
 msgstr ""
 
@@ -5081,7 +5089,7 @@ msgstr ""
 msgid "By contacting us, you agree to our "
 msgstr ""
 
-#: inc/deprecated/440.php:114 inc/form-fields.php:84 inc/trip-enquiries.php:119
+#: inc/deprecated/440.php:114 inc/form-fields.php:84 inc/trip-enquiries.php:120
 msgid "Privacy Policy"
 msgstr ""
 
@@ -5120,6 +5128,7 @@ msgstr ""
 #: inc/email-template-functions.php:191 inc/email-template-functions.php:237
 #: inc/email-template-functions.php:380 inc/email-template-functions.php:686
 #: inc/email-template-functions.php:1195 inc/email-template-functions.php:1478
+#: templates/account/tab-content/bookings.php:72
 msgid "Booking ID"
 msgstr ""
 
@@ -5234,11 +5243,11 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: inc/form-fields.php:397 inc/template-functions.php:1587
+#: inc/form-fields.php:397 inc/template-functions.php:1635
 msgid "Price low to high"
 msgstr ""
 
-#: inc/form-fields.php:398 inc/template-functions.php:1588
+#: inc/form-fields.php:398 inc/template-functions.php:1636
 msgid "Price high to low"
 msgstr ""
 
@@ -5264,6 +5273,10 @@ msgstr ""
 
 #: inc/framework/form/class.field.php:51
 msgid "Hidden"
+msgstr ""
+
+#: inc/framework/form/class.field.php:56
+msgid "Dropdown"
 msgstr ""
 
 #: inc/framework/form/class.field.php:61
@@ -5359,23 +5372,23 @@ msgstr ""
 msgid "Account Detail"
 msgstr ""
 
-#: inc/gateways/bank-deposit/settings.php:73 inc/helpers.php:2803
+#: inc/gateways/bank-deposit/settings.php:73 inc/helpers.php:2802
 msgid "Account Name"
 msgstr ""
 
-#: inc/gateways/bank-deposit/settings.php:74 inc/helpers.php:2806
+#: inc/gateways/bank-deposit/settings.php:74 inc/helpers.php:2805
 msgid "Account Number"
 msgstr ""
 
-#: inc/gateways/bank-deposit/settings.php:75 inc/helpers.php:2809
+#: inc/gateways/bank-deposit/settings.php:75 inc/helpers.php:2808
 msgid "Bank Name"
 msgstr ""
 
-#: inc/gateways/bank-deposit/settings.php:76 inc/helpers.php:2812
+#: inc/gateways/bank-deposit/settings.php:76 inc/helpers.php:2811
 msgid "Sort Code"
 msgstr ""
 
-#: inc/gateways/bank-deposit/settings.php:77 inc/helpers.php:2815
+#: inc/gateways/bank-deposit/settings.php:77 inc/helpers.php:2814
 msgid "IBAN"
 msgstr ""
 
@@ -9071,14 +9084,6 @@ msgstr ""
 msgid "Location:"
 msgstr ""
 
-#: inc/helpers.php:651 inc/helpers.php:2139
-msgid "Search"
-msgstr ""
-
-#: inc/helpers.php:665
-msgid "Ex: Trekking"
-msgstr ""
-
 #: inc/helpers.php:748 templates/shortcode/itinerary-item-new.php:156
 msgid " Days"
 msgstr ""
@@ -9087,8 +9092,8 @@ msgstr ""
 msgid "Partially Paid"
 msgstr ""
 
-#: inc/helpers.php:779 templates/account/tab-content/bookings.php:76
-#: templates/account/tab-content/bookings.php:165
+#: inc/helpers.php:779 templates/account/tab-content/bookings.php:77
+#: templates/account/tab-content/bookings.php:171
 msgid "Paid"
 msgstr ""
 
@@ -9108,7 +9113,7 @@ msgstr ""
 msgid "Full"
 msgstr ""
 
-#: inc/helpers.php:968 inc/template-functions.php:900
+#: inc/helpers.php:968 inc/template-functions.php:902
 msgid "No details found."
 msgstr ""
 
@@ -9116,120 +9121,120 @@ msgstr ""
 msgid "FAQ"
 msgstr ""
 
-#: inc/helpers.php:1371
+#: inc/helpers.php:1370
 msgid "Adult"
 msgstr ""
 
-#: inc/helpers.php:1372
+#: inc/helpers.php:1371
 msgid "Child"
 msgstr ""
 
-#: inc/helpers.php:1373
+#: inc/helpers.php:1372
 msgid "Infant"
 msgstr ""
 
-#: inc/helpers.php:1374
+#: inc/helpers.php:1373
 msgid "Couple"
 msgstr ""
 
-#: inc/helpers.php:1575
+#: inc/helpers.php:1574
 msgid "New Account Created"
 msgstr ""
 
-#: inc/helpers.php:1869
+#: inc/helpers.php:1868
 msgid "%s days"
 msgstr ""
 
-#: inc/helpers.php:2212
+#: inc/helpers.php:2211
 msgid "Order Status"
 msgstr ""
 
-#: inc/helpers.php:2214
+#: inc/helpers.php:2213
 msgid "Order Number :"
 msgstr ""
 
-#: inc/helpers.php:2218
+#: inc/helpers.php:2217
 msgid "Booking Date :"
 msgstr ""
 
-#: inc/helpers.php:2222
+#: inc/helpers.php:2221
 msgid "Tour :"
 msgstr ""
 
-#: inc/helpers.php:2252
+#: inc/helpers.php:2251
 msgid "Travel Date :"
 msgstr ""
 
-#: inc/helpers.php:2365
+#: inc/helpers.php:2364
 msgid "Name :"
 msgstr ""
 
-#: inc/helpers.php:2369
+#: inc/helpers.php:2368
 msgid "Country :"
 msgstr ""
 
-#: inc/helpers.php:2373
+#: inc/helpers.php:2372
 msgid "Phone No. :"
 msgstr ""
 
-#: inc/helpers.php:2377
+#: inc/helpers.php:2376
 msgid "Email :"
 msgstr ""
 
-#: inc/helpers.php:2381
+#: inc/helpers.php:2380
 msgid "Date of Birth :"
 msgstr ""
 
-#: inc/helpers.php:2385
+#: inc/helpers.php:2384
 msgid "Gender :"
 msgstr ""
 
-#: inc/helpers.php:2399
+#: inc/helpers.php:2398
 msgid "Price Breakdown"
 msgstr ""
 
-#: inc/helpers.php:2496
+#: inc/helpers.php:2495
 msgid "Person/s"
 msgstr ""
 
-#: inc/helpers.php:2507
+#: inc/helpers.php:2506
 msgid "Sub Total Price"
 msgstr ""
 
-#: inc/helpers.php:2513
+#: inc/helpers.php:2512
 msgid "Discount Price"
 msgstr ""
 
-#: inc/helpers.php:2519
+#: inc/helpers.php:2518
 msgid "Tax"
 msgstr ""
 
-#: inc/helpers.php:2818
+#: inc/helpers.php:2817
 msgid "Swift"
 msgstr ""
 
-#: inc/helpers.php:2846
+#: inc/helpers.php:2845
 msgid "No detail found"
 msgstr ""
 
-#: inc/helpers.php:2870
+#: inc/helpers.php:2869
 msgid "System Status"
 msgstr ""
 
-#: inc/helpers.php:2877 inc/helpers.php:2878
+#: inc/helpers.php:2876 inc/helpers.php:2877
 msgid "Reports"
 msgstr ""
 
-#: inc/helpers.php:2884 inc/helpers.php:2885
+#: inc/helpers.php:2883 inc/helpers.php:2884
 msgid "Custom Filters"
 msgstr ""
 
-#: inc/helpers.php:2904 inc/helpers.php:2912 inc/helpers.php:2920
+#: inc/helpers.php:2903 inc/helpers.php:2911 inc/helpers.php:2919
 #: wp-travel.php:212
 msgid "Settings"
 msgstr ""
 
-#: inc/helpers.php:3129 inc/helpers.php:3883
+#: inc/helpers.php:3133 inc/helpers.php:3887
 msgid "No gallery images found."
 msgstr ""
 
@@ -9242,13 +9247,13 @@ msgstr ""
 msgid "Offer"
 msgstr ""
 
-#: inc/itinerary-v2-functions.php:180 inc/template-functions.php:438
-#: inc/template-functions.php:460 templates/shortcode/itinerary-item.php:60
+#: inc/itinerary-v2-functions.php:180 inc/template-functions.php:440
+#: inc/template-functions.php:462 templates/shortcode/itinerary-item.php:60
 msgid "Rated %s out of 5"
 msgstr ""
 
 #: inc/itinerary-v2-functions.php:183 inc/itinerary-v2-functions.php:188
-#: inc/template-functions.php:441 inc/template-functions.php:463
+#: inc/template-functions.php:443 inc/template-functions.php:465
 #: templates/shortcode/itinerary-item.php:63
 msgid "out of %1$s5%2$s"
 msgstr ""
@@ -9257,7 +9262,7 @@ msgstr ""
 msgid "View Photos"
 msgstr ""
 
-#: inc/itinerary-v2-functions.php:611 inc/template-functions.php:1008
+#: inc/itinerary-v2-functions.php:611 inc/template-functions.php:1010
 msgid "No Details Found"
 msgstr ""
 
@@ -9265,12 +9270,12 @@ msgstr ""
 msgid "Related Trips"
 msgstr ""
 
-#: inc/itinerary-v2-functions.php:734 inc/template-functions.php:506
+#: inc/itinerary-v2-functions.php:734 inc/template-functions.php:508
 msgid "Group size"
 msgstr ""
 
-#: inc/itinerary-v2-functions.php:736 inc/template-functions.php:512
-#: inc/template-functions.php:1505
+#: inc/itinerary-v2-functions.php:736 inc/template-functions.php:514
+#: inc/template-functions.php:1552
 msgid "No Size Limit"
 msgstr ""
 
@@ -9279,12 +9284,12 @@ msgid "%d %s"
 msgstr ""
 
 #: inc/itinerary-v2-functions.php:890 inc/itinerary-v2-functions.php:934
-#: inc/template-functions.php:1625 inc/template-functions.php:1632
+#: inc/template-functions.php:1673 inc/template-functions.php:1680
 msgid "Ascending"
 msgstr ""
 
 #: inc/itinerary-v2-functions.php:891 inc/itinerary-v2-functions.php:935
-#: inc/template-functions.php:1626 inc/template-functions.php:1633
+#: inc/template-functions.php:1674 inc/template-functions.php:1681
 msgid "Descending"
 msgstr ""
 
@@ -9304,26 +9309,26 @@ msgstr ""
 msgid "Bank Deposit"
 msgstr ""
 
-#: inc/payments/wp-travel-payments.php:510
-#: inc/payments/wp-travel-payments.php:532
+#: inc/payments/wp-travel-payments.php:513
+#: inc/payments/wp-travel-payments.php:535
 msgid ""
 "Your Payment has been received but the email could not be sent. Possible "
 "reason: your host may have disabled the mail() function."
 msgstr ""
 
-#: inc/payments/wp-travel-payments.php:594
+#: inc/payments/wp-travel-payments.php:598
 msgid "Your booking has been canceled"
 msgstr ""
 
-#: inc/payments/wp-travel-payments.php:598
+#: inc/payments/wp-travel-payments.php:602
 msgid "We've received your booking and payment details. We'll contact you soon."
 msgstr ""
 
-#: inc/payments/wp-travel-payments.php:611
+#: inc/payments/wp-travel-payments.php:615
 msgid "Invalid"
 msgstr ""
 
-#: inc/payments/wp-travel-payments.php:630
+#: inc/payments/wp-travel-payments.php:634
 msgid "Success"
 msgstr ""
 
@@ -9331,73 +9336,73 @@ msgstr ""
 msgid "Clone %s"
 msgstr ""
 
-#: inc/template-functions.php:573
+#: inc/template-functions.php:575
 msgid "%1$d %2$s"
 msgstr ""
 
-#: inc/template-functions.php:597
+#: inc/template-functions.php:599
 msgid "%s Review"
 msgid_plural "%s Reviews"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/template-functions.php:658
+#: inc/template-functions.php:660
 msgid "Keywords : "
 msgstr ""
 
-#: inc/template-functions.php:709
+#: inc/template-functions.php:711
 msgid "Fixed departure"
 msgstr ""
 
-#: inc/template-functions.php:710
+#: inc/template-functions.php:712
 msgid "Trip duration"
 msgstr ""
 
-#: inc/template-functions.php:765
+#: inc/template-functions.php:767
 msgid "%1$s Day(s) %2$s Night(s)"
 msgstr ""
 
-#: inc/template-functions.php:1465
+#: inc/template-functions.php:1512
 msgid "We've received your booking details. We'll contact you soon."
 msgstr ""
 
-#: inc/template-functions.php:1474
+#: inc/template-functions.php:1521
 msgid "Your Item has been added but the email could not be sent."
 msgstr ""
 
-#: inc/template-functions.php:1474 inc/trip-enquiries.php:457
+#: inc/template-functions.php:1521 inc/trip-enquiries.php:458
 msgid "Possible reason: your host may have disabled the mail() function."
 msgstr ""
 
-#: inc/template-functions.php:1502
+#: inc/template-functions.php:1549
 msgid "%d pax"
 msgstr ""
 
-#: inc/template-functions.php:2070 inc/template-functions.php:2454
+#: inc/template-functions.php:2118 inc/template-functions.php:2502
 msgid "Group (min-max)"
 msgstr ""
 
-#: inc/template-functions.php:2071 inc/template-functions.php:2455
+#: inc/template-functions.php:2119 inc/template-functions.php:2503
 msgid "Seats Left"
 msgstr ""
 
-#: inc/template-functions.php:2076 inc/template-functions.php:2460
+#: inc/template-functions.php:2124 inc/template-functions.php:2508
 msgid "Sold out"
 msgstr ""
 
-#: inc/template-functions.php:2238
+#: inc/template-functions.php:2286
 msgid "Please Select a Date"
 msgstr ""
 
-#: inc/template-functions.php:2295 inc/template-functions.php:2606
+#: inc/template-functions.php:2343 inc/template-functions.php:2654
 msgid "Available Seats: "
 msgstr ""
 
-#: inc/template-functions.php:2325
+#: inc/template-functions.php:2373
 msgid "No size limit."
 msgstr ""
 
-#: inc/trip-enquiries.php:24 inc/trip-enquiries.php:74
+#: inc/trip-enquiries.php:24 inc/trip-enquiries.php:75
 msgid "SUBMIT ENQUIRY"
 msgstr ""
 
@@ -9405,31 +9410,31 @@ msgstr ""
 msgid "PROCESSING..."
 msgstr ""
 
-#: inc/trip-enquiries.php:100
+#: inc/trip-enquiries.php:101
 msgid "Trips"
 msgstr ""
 
-#: inc/trip-enquiries.php:219
+#: inc/trip-enquiries.php:220
 msgid "Contact Email"
 msgstr ""
 
-#: inc/trip-enquiries.php:220
+#: inc/trip-enquiries.php:221
 msgid "Enquiry Date"
 msgstr ""
 
-#: inc/trip-enquiries.php:335
+#: inc/trip-enquiries.php:336
 msgid "Nonce Verification Failed !!"
 msgstr ""
 
-#: inc/trip-enquiries.php:360
+#: inc/trip-enquiries.php:361
 msgid "Invalid Post Type"
 msgstr ""
 
-#: inc/trip-enquiries.php:457
+#: inc/trip-enquiries.php:458
 msgid "Your Enquiry has been added but the email could not be sent."
 msgstr ""
 
-#: inc/trip-enquiries.php:467
+#: inc/trip-enquiries.php:468
 msgid "Enquiry sent succesfully !!"
 msgstr ""
 
@@ -9723,21 +9728,21 @@ msgstr ""
 msgid "Your Bookings"
 msgstr ""
 
-#: templates/account/tab-content/bookings.php:77
-#: templates/account/tab-content/bookings.php:174
+#: templates/account/tab-content/bookings.php:78
 #: templates/account/tab-content/bookings.php:180
+#: templates/account/tab-content/bookings.php:186
 msgid "Detail"
 msgstr ""
 
-#: templates/account/tab-content/bookings.php:196
+#: templates/account/tab-content/bookings.php:202
 msgid "Book more ?"
 msgstr ""
 
-#: templates/account/tab-content/bookings.php:202
+#: templates/account/tab-content/bookings.php:208
 msgid "You have not booked any trips"
 msgstr ""
 
-#: templates/account/tab-content/bookings.php:203
+#: templates/account/tab-content/bookings.php:209
 msgid "Book one now ?"
 msgstr ""
 
@@ -10025,7 +10030,7 @@ msgctxt "taxonomy singular name"
 msgid "Trip Type"
 msgstr ""
 
-#: inc/admin/class-admin-booking.php:67 inc/trip-enquiries.php:217
+#: inc/admin/class-admin-booking.php:67 inc/trip-enquiries.php:218
 msgctxt "column name"
 msgid "Title"
 msgstr ""
@@ -10081,27 +10086,27 @@ msgctxt "post"
 msgid "Expired"
 msgstr ""
 
-#: inc/class-post-types.php:31
+#: inc/class-post-types.php:34
 msgctxt "post type general name"
 msgid "Trips"
 msgstr ""
 
-#: inc/class-post-types.php:87
+#: inc/class-post-types.php:89
 msgctxt "post type general name"
 msgid "Bookings"
 msgstr ""
 
-#: inc/class-post-types.php:136
+#: inc/class-post-types.php:138
 msgctxt "post type general name"
 msgid "Enquiries"
 msgstr ""
 
-#: inc/class-post-types.php:185
+#: inc/class-post-types.php:187
 msgctxt "post type general name"
 msgid "Payments"
 msgstr ""
 
-#: inc/class-post-types.php:232
+#: inc/class-post-types.php:234
 msgctxt "post type general name"
 msgid "Trip Extras"
 msgstr ""
@@ -10111,27 +10116,27 @@ msgctxt "post type general name"
 msgid "Coupons"
 msgstr ""
 
-#: inc/class-post-types.php:32
+#: inc/class-post-types.php:35
 msgctxt "post type singular name"
 msgid "Trip"
 msgstr ""
 
-#: inc/class-post-types.php:88
+#: inc/class-post-types.php:90
 msgctxt "post type singular name"
 msgid "Booking"
 msgstr ""
 
-#: inc/class-post-types.php:137
+#: inc/class-post-types.php:139
 msgctxt "post type singular name"
 msgid "Enquiry"
 msgstr ""
 
-#: inc/class-post-types.php:186
+#: inc/class-post-types.php:188
 msgctxt "post type singular name"
 msgid "Payment"
 msgstr ""
 
-#: inc/class-post-types.php:233
+#: inc/class-post-types.php:235
 msgctxt "post type singular name"
 msgid "Trip Extra"
 msgstr ""
@@ -10141,27 +10146,27 @@ msgctxt "post type singular name"
 msgid "Coupon"
 msgstr ""
 
-#: inc/class-post-types.php:33
+#: inc/class-post-types.php:36
 msgctxt "admin menu"
 msgid "Trips"
 msgstr ""
 
-#: inc/class-post-types.php:89
+#: inc/class-post-types.php:91
 msgctxt "admin menu"
 msgid "WP Travel"
 msgstr ""
 
-#: inc/class-post-types.php:138
+#: inc/class-post-types.php:140
 msgctxt "admin menu"
 msgid "Enquiries"
 msgstr ""
 
-#: inc/class-post-types.php:187
+#: inc/class-post-types.php:189
 msgctxt "admin menu"
 msgid "Payments"
 msgstr ""
 
-#: inc/class-post-types.php:234
+#: inc/class-post-types.php:236
 msgctxt "admin menu"
 msgid "Trip Extras"
 msgstr ""
@@ -10171,27 +10176,27 @@ msgctxt "admin menu"
 msgid "Coupons"
 msgstr ""
 
-#: inc/class-post-types.php:34
+#: inc/class-post-types.php:37
 msgctxt "add new on admin bar"
 msgid "Trip"
 msgstr ""
 
-#: inc/class-post-types.php:90
+#: inc/class-post-types.php:92
 msgctxt "add new on admin bar"
 msgid "Booking"
 msgstr ""
 
-#: inc/class-post-types.php:139
+#: inc/class-post-types.php:141
 msgctxt "add new on admin bar"
 msgid "Enquiry"
 msgstr ""
 
-#: inc/class-post-types.php:188
+#: inc/class-post-types.php:190
 msgctxt "add new on admin bar"
 msgid "Payment"
 msgstr ""
 
-#: inc/class-post-types.php:235
+#: inc/class-post-types.php:237
 msgctxt "add new on admin bar"
 msgid "Trip Extra"
 msgstr ""
@@ -10201,49 +10206,49 @@ msgctxt "add new on admin bar"
 msgid "Coupon"
 msgstr ""
 
-#: inc/class-post-types.php:35
+#: inc/class-post-types.php:38
 msgctxt "wp-travel"
 msgid "New Trip"
 msgstr ""
 
-#: inc/class-post-types.php:91 inc/class-post-types.php:140
-#: inc/class-post-types.php:189 inc/class-post-types.php:236
+#: inc/class-post-types.php:93 inc/class-post-types.php:142
+#: inc/class-post-types.php:191 inc/class-post-types.php:238
 #: inc/coupon/inc/class-install.php:41
 msgctxt "wp-travel"
 msgid "Add New"
 msgstr ""
 
-#: inc/class-taxonomies.php:37
+#: inc/class-taxonomies.php:38
 msgctxt "general name"
 msgid "Destinations"
 msgstr ""
 
-#: inc/class-taxonomies.php:62
+#: inc/class-taxonomies.php:64
 msgctxt "general name"
 msgid "Keywords"
 msgstr ""
 
-#: inc/class-taxonomies.php:87
+#: inc/class-taxonomies.php:90
 msgctxt "general name"
 msgid "Activities"
 msgstr ""
 
-#: inc/class-taxonomies.php:38
+#: inc/class-taxonomies.php:39
 msgctxt "singular name"
 msgid "Destination"
 msgstr ""
 
-#: inc/class-taxonomies.php:63
+#: inc/class-taxonomies.php:65
 msgctxt "singular name"
 msgid "Keyword"
 msgstr ""
 
-#: inc/class-taxonomies.php:88
+#: inc/class-taxonomies.php:91
 msgctxt "singular name"
 msgid "Activity"
 msgstr ""
 
-#: inc/trip-enquiries.php:493
+#: inc/trip-enquiries.php:494
 msgctxt "Trip Enquiry Form Title"
 msgid "Enquiry: %s"
 msgstr ""
