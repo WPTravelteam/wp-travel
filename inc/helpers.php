@@ -3940,6 +3940,10 @@ function wptravel_php_to_moment_format( $format ) {
 		'U' => 'X',
 	);
 	$moment_format = strtr( $format, $replacements );
+	// Quick fix for spanish.
+	if ( 'D \DD\zz MMMM \DD\zz YYYY' === $moment_format ) {
+		$moment_format = 'MMMM D YYYY';
+	}
 	return $moment_format;
 }
 
