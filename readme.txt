@@ -245,14 +245,14 @@ Before updating plugin please check ["our latest release notes"](#developers).
 == Changelog ==
 
 = 5.0.2 =
-Release Date: 14th November, 2021
+Release Date: 15th November, 2021
 
 Fixes:
 * Fixed Itinerary date label not displaying in an itinerary tab of the trip edit page.
 * Fixed Gallery tab has `something went wrong` on adding a new trip.
 * Fixed issue with a total price. The total price is wrong if trip extras remove from the cart. 
-* Fixed something went error if a date in the trip has no pricing.
-* Fixed Edit Traveler detail not working from admin booking.
+* Fixed `something went wrong` error if a date in the trip has no pricing.
+* Fixed Add/Edit Traveler detail not working from admin booking.
 * Fixed Frontend gallery tab undefined index issue.
 * Fixed partial payment not working in user dashboard.
 
