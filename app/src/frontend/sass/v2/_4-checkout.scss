@@ -173,6 +173,12 @@
 
 	.wp-travel-trip-details {
 		padding-bottom: 30px;
+		ul {
+			list-style: none;
+			li {
+				color: red;
+			}
+		}
 	}
 	form.wp-travel-booking {
 		> .ws-theme-timeline-block {
@@ -182,6 +188,20 @@
 			margin: 0;
 			border-bottom: 0;
 			padding-bottom: 0;
+			#number-accordion3 {
+				.panel-body {
+					.payment-content {
+						.wp-travel-form-field {
+							ul {
+								list-style: none;
+								li {
+									color: red;
+								}
+							}
+						}
+					}
+				}
+			}
 			&:nth-child(2) {
 				border-top: 1px solid #cbcbcb;
 				padding: 25px 0 0;
