@@ -110,7 +110,7 @@ $end_date    = get_post_meta( get_the_ID(), 'wp_travel_end_date', true );
 			</div>
 		</div>
 		<div class="description-right">
-			<?php wptravel_trip_price( get_the_ID() ); ?>
+			<?php wptravel_trip_price( get_the_ID(), true ); ?>
 			<div class="wp-travel-explore">
 				<a class="" href="<?php the_permalink(); ?>"><?php esc_html_e( 'Explore', 'wp-travel' ); ?></a>
 			</div>

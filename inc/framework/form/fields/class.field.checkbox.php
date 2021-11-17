@@ -17,7 +17,7 @@ class WP_Travel_FW_Field_Checkbox {
 		$validations = '';
 		if ( isset( $this->field['validations'] ) ) {
 			foreach ( $this->field['validations'] as $key => $attr ) {
-				if ( 'maxlength' === $key ) {
+				if ( 'maxlength' === $key ) { // issue fixes for field editor conflict with validaton. checkbox doesn't have maxlength.
 					continue;
 				}
 				$validations .= sprintf( 'data-parsley-%s="%s"', $key, $attr );

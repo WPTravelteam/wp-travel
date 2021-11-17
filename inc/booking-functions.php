@@ -12,13 +12,11 @@
  */
 function wptravel_book_now() {
 	if (
-		! isset( $_POST['wp_travel_book_now'] )
-		|| ! isset( $_POST['wp_travel_security'] )
-		|| ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['wp_travel_security'] ) ), 'wp_travel_security_action' )
+		! WP_Travel::verify_nonce( true )
+		|| ! isset( $_POST['wp_travel_book_now'] ) // @phpcs:ignore
 		) {
 		return;
 	}
-
 	global $wt_cart;
 
 	/**
@@ -97,8 +95,8 @@ function wptravel_book_now() {
 	);
 	wp_update_post( $update_data_array );
 
-	$sanitized_data = wptravel_sanitize_array( $_POST );
-	
+	$sanitized_data = wptravel_sanitize_array( $_POST ); // @phpcs:ignore
+
 	// Updating Booking Metas.
 	update_post_meta( $booking_id, 'order_data', $sanitized_data );
 	update_post_meta( $booking_id, 'order_items_data', $items ); // @since 1.8.3
@@ -114,7 +112,7 @@ function wptravel_book_now() {
 	update_post_meta( $booking_id, 'wp_travel_arrival_date_email_tag', sanitize_text_field( $arrival_date_email_tag ) ); // quick fix arrival date with time.
 
 	// Insert $_POST as Booking Meta.
-	$post_ignore = array( '_wp_http_referer', 'wp_travel_security', 'wptravel_book_now', 'wp_travel_payment_amount' );
+	$post_ignore = array( '_wp_http_referer', 'wp_travel_security', '_nonce', 'wptravel_book_now', 'wp_travel_payment_amount' );
 	$meta_array  = wptravel_sanitize_array( $_POST );
 	foreach ( $meta_array as $meta_name => $meta_val ) {
 		if ( in_array( $meta_name, $post_ignore, true ) ) {
@@ -159,9 +157,9 @@ function wptravel_book_now() {
 	$settings       = wptravel_get_settings();
 	$customer_email = isset( $_POST['wp_travel_email_traveller'] ) ? wptravel_sanitize_array( wp_unslash( $_POST['wp_travel_email_traveller'] ) ) : array(); // @phpcs:ignore
 	reset( $customer_email );
-	$first_key = key( $customer_email );
+	$first_key      = key( $customer_email );
 	$customer_email = isset( $customer_email[ $first_key ][0] ) ? $customer_email[ $first_key ][0] : '';
-	
+
 	// Update single trip vals. // Need Enhancement. lots of loop with this $items in this functions.
 	foreach ( $items as $item_key => $trip ) {
 
@@ -198,7 +196,7 @@ function wptravel_book_now() {
 		 * Add Support for invertory addon options.
 		 */
 		wptravel_do_deprecated_action( 'wp_travel_update_trip_inventory_values', array( $trip_id, $pax, $price_key, $arrival_date, $booking_id ), '4.4.0', 'wp_travel_trip_inventory' );
-		
+
 		$args = array(
 			'trip_id'       => $trip_id,
 			'booking_id'    => $booking_id,
@@ -229,8 +227,6 @@ function wptravel_book_now() {
 	 * @since 5.0.0
 	 */
 	do_action( 'wptravel_action_send_booking_email', $booking_id, wptravel_sanitize_array( $_POST ) );
-
-		
 	/**
 	 * Hook used to add payment and its info.
 	 *
@@ -242,18 +238,18 @@ function wptravel_book_now() {
 	// Temp fixes [add payment id in case of booking only].
 	// if ( 'booking_only' === $sanitized_data['wp_travel_booking_option'] ) {
 		$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
-		if ( ! $payment_id ) {
-			$title      = 'Payment - #' . $booking_id;
-			$post_array = array(
-				'post_title'   => $title,
-				'post_content' => '',
-				'post_status'  => 'publish',
-				'post_slug'    => uniqid(),
-				'post_type'    => 'wp-travel-payment',
-			);
-			$payment_id = wp_insert_post( $post_array );
-			update_post_meta( $booking_id, 'wp_travel_payment_id', $payment_id );
-		}
+	if ( ! $payment_id ) {
+		$title      = 'Payment - #' . $booking_id;
+		$post_array = array(
+			'post_title'   => $title,
+			'post_content' => '',
+			'post_status'  => 'publish',
+			'post_slug'    => uniqid(),
+			'post_type'    => 'wp-travel-payment',
+		);
+		$payment_id = wp_insert_post( $post_array );
+		update_post_meta( $booking_id, 'wp_travel_payment_id', $payment_id );
+	}
 	// }
 
 	$require_login_to_checkout = isset( $settings['enable_checkout_customer_registration'] ) ? $settings['enable_checkout_customer_registration'] : 'no'; // if required login then there is registration option as well. so we continue if this is no.

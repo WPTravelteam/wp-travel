@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 5.4.1
 Tested up to: 5.8.2
 Requires PHP: 5.6.2
-Stable tag: 5.0.3
+Stable tag: 5.0.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -165,6 +165,8 @@ These themes are specially designed for WP Travel plugin. So, it is 100% compati
 = Dedicated Support and Documentation =
 We have an entire team of happiness engineers ready to help you. Ask your questions in the [support forum](https://wptravel.io/contact/).
 
+Spanish translation partner - [Blarlo](https://www.blarlo.com/)
+
 Also you can checkout WP Travel [documentation](https://wptravel.io/wp-travel-docs/?utm_source=tutorial&utm_medium=documentation&utm_campaign=WP%20Plugin).
 
 = Release Notes: =
@@ -243,6 +245,22 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 5.0.4 =
+Release Date: 17th November, 2021
+
+Fixes:
+* Fixed conflict raised due to checkbox input added from field editor with validation in the checkout page.
+* Fixed rating displays under all of the price sections.
+* Fixed Trying to get property 'is_block_editor' of non-object while activating a plugin.
+* Admin Settings loader style fixes along with overlay style.
+
+Tweaks:
+* Added post revision support in trips.
+* Checkout page nonce name updated for consistency.
+
+Translation:
+* Spanish language file added in the plugin.
 
 = 5.0.3 =
 Release Date: 15th November, 2021
