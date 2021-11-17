@@ -108,8 +108,7 @@ class WP_Travel_Itinerary {
 		$wp_travel_overview = get_post_meta( $this->post->ID, 'wp_travel_overview', true );
 		if ( $wp_travel_overview ) {
 			return apply_filters( 'wp_travel_the_content', $wp_travel_overview );
-		}
-		else if ( isset( $this->post->post_content ) && '' !== $this->post->post_content ) {
+		} elseif ( isset( $this->post->post_content ) && '' !== $this->post->post_content ) {
 			update_post_meta( $this->post->ID, 'wp_travel_overview', ' ' );
 			return apply_filters( 'wp_travel_the_content', $this->post->post_content );
 		}
