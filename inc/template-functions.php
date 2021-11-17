@@ -423,9 +423,9 @@ function wptravel_trip_price( $trip_id, $hide_rating = false ) {
  * @param bool $hide_rating Flag to sho hide rating.
  */
 function wptravel_single_trip_rating( $post_id, $hide_rating = false ) {
-	// if ( ! is_singular( WP_TRAVEL_POST_TYPE ) ) {
-	// return;
-	// }
+	if ( ! is_singular( WP_TRAVEL_POST_TYPE ) ) {
+		return; // This function also called from archive list. so need to return here. @todo Need to use this in blocks as well.
+	}
 	if ( ! $post_id ) {
 		return;
 	}
@@ -438,7 +438,7 @@ function wptravel_single_trip_rating( $post_id, $hide_rating = false ) {
 	$average_rating = wptravel_get_average_rating( $post_id );
 	?>
 	<div class="wp-travel-average-review" title="<?php printf( __( 'Rated %s out of 5', 'wp-travel' ), esc_attr( $average_rating ) ); ?>">
-		<a>
+		<a href="#">
 			<span style="width:<?php echo esc_attr( ( $average_rating / 5 ) * 100 ); ?>%">
 				<strong itemprop="ratingValue" class="rating"><?php echo esc_html( $average_rating ); ?></strong> <?php printf( esc_html__( 'out of %1$s5%2$s', 'wp-travel' ), '<span itemprop="bestRating">', '</span>' ); ?>
 			</span>
@@ -1105,8 +1105,8 @@ function wptravel_frontend_google_map( $trip_id, $data ) {
 	$lng      = isset( $map_data['lng'] ) ? $map_data['lng'] : '';
 
 	$wrapper_class = wptravel_get_theme_wrapper_class();
-	$id = uniqid();
-	$map_id = sprintf( 'wp-travel-map-%s', $id );
+	$id            = uniqid();
+	$map_id        = sprintf( 'wp-travel-map-%s', $id );
 	if ( '' != $api_key && $show_google_map && ! empty( $lat ) && ! empty( $lng ) ) {
 		?>
 		<div class="wp-travel-map <?php echo esc_attr( $wrapper_class ); ?>">
@@ -1581,7 +1581,7 @@ function wptravel_setup_itinerary_data( $post ) {
 function wptravel_archive_filter_by( $submission_get = array() ) {
 	// [NOTE: Removed archive condition to display when its used]
 	// if ( ! WP_Travel::is_page( 'archive' ) ) {
-	// 	return;
+	// return;
 	// }
 
 	$strings = WpTravel_Helpers_Strings::get();
