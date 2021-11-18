@@ -136,8 +136,8 @@ function wptravel_process_trip_price_tax( $trip_id ) {
 	}
 	$settings = wptravel_get_settings();
 
-	$args = $args_regular = array( 'trip_id' => $trip_id );
-	$trip_price= WP_Travel_Helpers_Pricings::get_price( $args );
+	$args       = $args_regular = array( 'trip_id' => $trip_id );
+	$trip_price = WP_Travel_Helpers_Pricings::get_price( $args );
 
 	if ( WP_Travel_Helpers_Trips::is_tax_enabled() ) {
 
@@ -429,8 +429,8 @@ function wptravel_get_cart_attrs( $args, $pax = 0, $price_key = '', $pricing_id 
 					// Product Metas.
 					$trip_start_date       = isset( $request_data['arrival_date'] ) && '' !== $request_data['arrival_date'] ? $request_data['arrival_date'] : '';
 					$pricing_default_types = wptravel_get_pricing_variation_options();
-					$max_available = ! empty( $pricing['max_pax'] ) ? $pricing['max_pax'] : $group_size;
-					$min_available = ! empty( $pricing['min_pax'] ) ? $pricing['min_pax'] : 1;
+					$max_available         = ! empty( $pricing['max_pax'] ) ? $pricing['max_pax'] : $group_size;
+					$min_available         = ! empty( $pricing['min_pax'] ) ? $pricing['min_pax'] : 1;
 
 				endforeach;
 			}
@@ -475,7 +475,7 @@ function wptravel_get_cart_attrs( $args, $pax = 0, $price_key = '', $pricing_id 
 		);
 
 		$response = WP_Travel_Helpers_Inventory::get_inventory( $args );
-		if ( is_array( $response ) && isset( $response[ 'code' ] ) && 'WP_TRAVEL_INVENTORY_INFO' === $response[ 'code' ] ) {
+		if ( is_array( $response ) && isset( $response['code'] ) && 'WP_TRAVEL_INVENTORY_INFO' === $response['code'] ) {
 			$available_pax = $response['inventory'][0]['pax_available'];
 		}
 
@@ -497,8 +497,11 @@ function wptravel_get_cart_attrs( $args, $pax = 0, $price_key = '', $pricing_id 
 
 function wptravel_get_partial_trip_price( $trip_id, $price_key = null ) {
 
-	$args = array( 'trip_id' => $trip_id, 'price_key' => $price_key );
-	$trip_price= WP_Travel_Helpers_Pricings::get_price( $args );
+	$args       = array(
+		'trip_id'   => $trip_id,
+		'price_key' => $price_key,
+	);
+	$trip_price = WP_Travel_Helpers_Pricings::get_price( $args );
 
 	if ( wptravel_is_partial_payment_enabled() ) {
 		$payout_percent = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );

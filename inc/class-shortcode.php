@@ -328,7 +328,7 @@ class Wp_Travel_Shortcodes {
 
 							foreach ( $icon as $key => $ico ) {
 
-								$icon = $ico['icon'];
+								$icon      = $ico['icon'];
 								$icon_args = $ico;
 							}
 							?>

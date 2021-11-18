@@ -37,10 +37,10 @@ class WP_Travel_Checkout {
 		// Check if login is required for checkout.
 		$settings = wptravel_get_settings();
 
-        $require_login_to_checkout = isset( $settings['enable_checkout_customer_registration'] ) ? $settings['enable_checkout_customer_registration'] : 'no';
+		$require_login_to_checkout = isset( $settings['enable_checkout_customer_registration'] ) ? $settings['enable_checkout_customer_registration'] : 'no';
 
-        if ( 'yes' === $require_login_to_checkout && ! is_user_logged_in() ) {
-            return wptravel_get_template_part( 'account/form', 'login' );
+		if ( 'yes' === $require_login_to_checkout && ! is_user_logged_in() ) {
+			return wptravel_get_template_part( 'account/form', 'login' );
 		}
 		// @since 4.0.7
 		do_action( 'wp_travel_before_checkout_page_wrap' );
@@ -62,7 +62,7 @@ class WP_Travel_Checkout {
 				</div>
 			</div>
 		</div>
-	<?php
+		<?php
 	}
 
 	/**
@@ -77,14 +77,17 @@ class WP_Travel_Checkout {
 			return false;
 		}
 
-		//Get Pricing variations.
+		// Get Pricing variations.
 		$pricing_variations = get_post_meta( $trip_id, 'wp_travel_pricing_options', true );
 
 		if ( is_array( $pricing_variations ) && '' !== $pricing_variations ) {
 
-			$result = array_filter($pricing_variations, function( $single ) use ( $pricing_key ) {
-				return in_array( $pricing_key, $single, true );
-			});
+			$result = array_filter(
+				$pricing_variations,
+				function( $single ) use ( $pricing_key ) {
+					return in_array( $pricing_key, $single, true );
+				}
+			);
 			return ( '' !== $result && count( $result ) > 0 ) ? true : false;
 		}
 		return false;
@@ -110,8 +113,7 @@ class WP_Travel_Checkout {
 		if ( 'yes' === $trip_multiple_date_options && is_array( $available_dates ) && ! empty( $available_dates ) ) {
 
 			return in_array( $test_date, $available_dates, true );
-		}
-		else {
+		} else {
 
 			$date_now  = new DateTime();
 			$test_date = new DateTime( $test_date );

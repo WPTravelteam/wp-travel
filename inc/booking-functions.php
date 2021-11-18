@@ -113,8 +113,7 @@ function wptravel_book_now() {
 
 	// Insert $_POST as Booking Meta.
 	$post_ignore = array( '_wp_http_referer', 'wp_travel_security', '_nonce', 'wptravel_book_now', 'wp_travel_payment_amount' );
-	$meta_array  = wptravel_sanitize_array( $_POST );
-	foreach ( $meta_array as $meta_name => $meta_val ) {
+	foreach ( $sanitized_data as $meta_name => $meta_val ) {
 		if ( in_array( $meta_name, $post_ignore, true ) ) {
 			continue;
 		}

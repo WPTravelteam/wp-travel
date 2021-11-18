@@ -52,12 +52,11 @@ class WPTravel_Extras_Frontend {
 		}
 		$pricing_option_type = wptravel_get_pricing_option_type( $trip_id );
 
-		
 		if ( $price_key && 'multiple-price' === $pricing_option_type ) {
-			if( 'yes' != $switch_to_react ) {
+			if ( 'yes' != $switch_to_react ) {
 				$pricing_options = wptravel_get_pricing_variation( $trip_id, $price_key );
 				$pricing_option  = ( is_array( $pricing_options ) && ! empty( $pricing_options ) ) ? reset( $pricing_options ) : false;
-	
+
 				if ( $pricing_option ) {
 					$trip_extras = isset( $pricing_option['tour_extras'] ) ? $pricing_option['tour_extras'] : array();
 				}
@@ -99,7 +98,7 @@ class WPTravel_Extras_Frontend {
 		if ( 'yes' == $switch_to_react ) {
 			$pricing_id               = $price_key; // the $price_key param is $pricing_id in the case.
 			$trip_pricings_with_dates = wptravel_get_trip_pricings_with_dates( $trip_id );
-			$trip_extras              = array(); //$trip_pricings_with_dates[ $pricing_id ]['trip_extras'];
+			$trip_extras              = array(); // $trip_pricings_with_dates[ $pricing_id ]['trip_extras'];
 			return is_array( $trip_extras ) && count( $trip_extras ) > 0 ? $trip_extras : array();
 		}
 

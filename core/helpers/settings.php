@@ -83,7 +83,7 @@ class WP_Travel_Helpers_Settings {
 		$mapped_facts = array();
 		if ( is_array( $facts ) && count( $facts ) > 0 ) {
 			foreach ( $facts as $key => $fact ) {
-				$new_fact       = array(
+				$new_fact = array(
 					'key'                => $key,
 					'name'               => isset( $facts[ $key ]['name'] ) ? $facts[ $key ]['name'] : '',
 					'type'               => isset( $facts[ $key ]['type'] ) ? $facts[ $key ]['type'] : '',

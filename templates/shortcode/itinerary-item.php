@@ -9,7 +9,7 @@
  * as little as possible, but it does happen. When this occurs the version of the template file will.
  * be bumped and the readme will list any important changes.
  *
- * @see 	http://docs.wensolutions.com/document/template-structure/
+ * @see     http://docs.wensolutions.com/document/template-structure/
  * @author  WenSolutions
  * @package WP_Travel
  * @since   1.0.2
@@ -24,15 +24,15 @@ if ( post_password_required() ) {
 	echo get_the_password_form();
 	return;
 }
-$post_id 		= get_the_ID();
-$enable_sale 	= WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => $post_id ) );
+$post_id     = get_the_ID();
+$enable_sale = WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => $post_id ) );
 ?>
 <li>
 <div class="wp-travel-post-item-wrapper">
-    <div class="wp-travel-post-wrap-bg">
+	<div class="wp-travel-post-wrap-bg">
 
 		<div class="wp-travel-post-thumbnail">
-			<a href="<?php the_permalink() ?>">
+			<a href="<?php the_permalink(); ?>">
 				<?php echo wptravel_get_post_thumbnail( $post_id, 'wp_travel_thumbnail' ); ?>
 			</a>
 			<?php wptravel_save_offer( $post_id ); ?>
@@ -41,11 +41,11 @@ $enable_sale 	= WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => $p
 			<?php do_action( 'wp_travel_before_item_title', get_the_ID() ); ?>
 			<?php wptravel_do_deprecated_action( 'wp_tarvel_before_archive_title', array( get_the_ID() ), '2.0.4', 'wp_travel_before_item_title' ); ?>
 			<h4 class="post-title">
-				<a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to: ', 'wp-travel' ) ) ); ?>">
+				<a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to: ', 'wp-travel' ) ) ); ?>">
 					<?php the_title(); ?>
 				</a>
 			</h4>
-			<?php do_action( 'wp_travel_after_archive_title', get_the_ID() ) ?>
+			<?php do_action( 'wp_travel_after_archive_title', get_the_ID() ); ?>
 			<div class="recent-post-bottom-meta">
 				<?php wptravel_trip_price( $post_id, true ); ?>
 			</div>
@@ -56,7 +56,7 @@ $enable_sale 	= WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => $p
 			<span class="post-category">
 				<div class="entry-meta">
 					<?php if ( wptravel_tab_show_in_menu( 'reviews' ) ) : ?>
-						<?php $average_rating = wptravel_get_average_rating( $post_id ) ?>
+						<?php $average_rating = wptravel_get_average_rating( $post_id ); ?>
 						<div class="wp-travel-average-review" title="<?php printf( esc_attr__( 'Rated %s out of 5', 'wp-travel' ), $average_rating ); ?>">
 
 							<span style="width:<?php echo esc_attr( ( $average_rating / 5 ) * 100 ); ?>%">
@@ -72,8 +72,9 @@ $enable_sale 	= WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => $p
 							<i class="wt-icon wt-icon-folder" aria-hidden="true"></i>
 							<?php
 							$first_term = array_shift( $terms );
-							$term_name = $first_term->name;
-							$term_link = get_term_link( $first_term->term_id, 'itinerary_types' ); ?>
+							$term_name  = $first_term->name;
+							$term_link  = get_term_link( $first_term->term_id, 'itinerary_types' );
+							?>
 							<a href="<?php echo esc_url( $term_link ); ?>" rel="tag">
 								<?php echo esc_html( $term_name ); ?>
 							</a>
@@ -81,10 +82,11 @@ $enable_sale 	= WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => $p
 							<div class="wp-travel-caret">
 								<i class="wt-icon wt-icon-caret-down"></i>
 								<div class="sub-category-menu">
-									<?php foreach( $terms as $term ) : ?>
+									<?php foreach ( $terms as $term ) : ?>
 										<?php
 											$term_name = $term->name;
-											$term_link = get_term_link( $term->term_id, 'itinerary_types' ); ?>
+											$term_link = get_term_link( $term->term_id, 'itinerary_types' );
+										?>
 										<a href="<?php echo esc_url( $term_link ); ?>">
 											<?php echo esc_html( $term_name ); ?>
 										</a>

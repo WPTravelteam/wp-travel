@@ -23,12 +23,12 @@ function wptravel_settings_callback_email( $tab, $args ) {
 		// Enquiry Admin Email.
 		$enquiry_admin_email_settings = $settings['enquiry_admin_template_settings'];
 
-		?>
+	?>
 		<?php do_action( 'wp_travel_tab_content_before_email', $args ); ?>
 		<?php
 		$upsell_args = array(
-			'title'      => __( 'Want to get more e-mail customization options?', 'wp-travel' ),
-			'content'    => __( 'By upgrading to Pro, you can get features like multiple email notifications, email footer powered by text removal options and more !', 'wp-travel' ),
+			'title'       => __( 'Want to get more e-mail customization options?', 'wp-travel' ),
+			'content'     => __( 'By upgrading to Pro, you can get features like multiple email notifications, email footer powered by text removal options and more !', 'wp-travel' ),
 			'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
 			'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
 			'type'        => array( 'wp-travel-utilities' ),

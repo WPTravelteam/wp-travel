@@ -15,7 +15,7 @@ class WPTravel_Helpers_Modules {
 	 * @return void
 	 */
 	public static function init() {
-		$premium_addons  = apply_filters( 'wp_travel_premium_addons_list', array() );
+		$premium_addons = apply_filters( 'wp_travel_premium_addons_list', array() );
 		if ( count( $premium_addons ) > 0 ) {
 			foreach ( $premium_addons as $key => $premium_addon ) {
 				if ( is_array( $premium_addon ) ) {
@@ -42,14 +42,14 @@ class WPTravel_Helpers_Modules {
 			$license_data = get_transient( $premium_addon['_option_prefix'] . 'data' );
 			$filtered_key = str_replace( '-', '_', $key );
 
-			$license_link = '';
-			$account_link = '';
-			$host = 'tp';
+			$license_link  = '';
+			$account_link  = '';
+			$host          = 'tp';
 			$plugin_prefix = $filtered_key . '_fs';
 			if ( function_exists( $plugin_prefix ) ) {
 				$host = 'freemius';
 
-				$status = ''; // need empty because It may be valid/active in TP license.
+				$status       = ''; // need empty because It may be valid/active in TP license.
 				$license_link = admin_url( 'edit.php?post_type=itinerary-booking&page=' . $key . '-license' );
 				$account_link = admin_url( 'edit.php?post_type=itinerary-booking&page=' . $key . '-license-account' );
 				if ( $plugin_prefix()->is_paying() ) {

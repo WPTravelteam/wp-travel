@@ -120,7 +120,7 @@ class WpTravel_Helpers_Localize {
 				$wp_travel['payment']['trip_price']      = $trip_price;
 				$wp_travel['payment']['payment_amount']  = $payment_amount;
 			}
-			$wp_travel                   = apply_filters( 'wptravel_frontend_data', $wp_travel, $settings );
+			$wp_travel = apply_filters( 'wptravel_frontend_data', $wp_travel, $settings );
 			// $wp_travel                   = wptravel_do_deprecated_filter( 'wp_travel_frontend_data', array( $wp_travel, $settings ), '5.0.2', 'wptravel_frontend_data' );
 			$localized_data['wp_travel'] = $wp_travel;
 		}
@@ -238,7 +238,7 @@ class WpTravel_Helpers_Localize {
 	 * What type of request is this?
 	 *
 	 * @param  string $type admin, ajax, cron or frontend.
-	 * 
+	 *
 	 * @since 5.0.1
 	 * @return bool
 	 */

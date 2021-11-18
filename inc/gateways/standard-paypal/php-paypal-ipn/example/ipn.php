@@ -18,11 +18,11 @@
  */
 
 // TODO: I hate 'ini_set', fix this later
-ini_set('log_errors', true);
-ini_set('error_log', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'ipn_errors.log');
+ini_set( 'log_errors', true );
+ini_set( 'error_log', dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'ipn_errors.log' );
 
 // include the IPNListener Class
-require_once( dirname(__FILE__) . DIRECTORY_SEPARATOR . 'IPNListener.php');
+require_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'IPNListener.php';
 
-$listener = new IPNListener();      // NOTICE new upper-casing of the class name
+$listener              = new IPNListener();      // NOTICE new upper-casing of the class name
 $listener->use_sandbox = true;      // Only needed for testing (sandbox), else omit or set false

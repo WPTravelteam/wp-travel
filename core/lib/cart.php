@@ -163,18 +163,18 @@ class WP_Travel_Lib_Cart {
 	 * @param array $attrs Item attributes.
 	 * @return boolean
 	 */
-	public function add( $trip_id, $trip_price = 0, $trip_price_partial = 0, $pax=0, $price_key = '', $attrs = array() ) {
+	public function add( $trip_id, $trip_price = 0, $trip_price_partial = 0, $pax = 0, $price_key = '', $attrs = array() ) {
 		if ( is_array( $trip_id ) ) {
 			$item = $trip_id;
 			if ( empty( $item['trip_id'] ) || empty( $item['pricing_id'] ) || empty( $item['pax'] ) || empty( $item['arrival_date'] ) ) {
 				return false;
 			}
 
-			$trip_id = ! empty( $item['trip_id'] ) ? $item['trip_id'] : false;
-			$pricing_id = ! empty( $item['pricing_id'] ) ? $item['pricing_id'] : false;
+			$trip_id      = ! empty( $item['trip_id'] ) ? $item['trip_id'] : false;
+			$pricing_id   = ! empty( $item['pricing_id'] ) ? $item['pricing_id'] : false;
 			$arrival_date = ! empty( $item['arrival_date'] ) ? $item['arrival_date'] : false;
 
-			$cart_item_id = $this->wp_travel_get_cart_item_id( $trip_id, $pricing_id, $arrival_date );
+			$cart_item_id                 = $this->wp_travel_get_cart_item_id( $trip_id, $pricing_id, $arrival_date );
 			$this->items[ $cart_item_id ] = $item;
 			$this->write();
 			return true;
@@ -312,7 +312,7 @@ class WP_Travel_Lib_Cart {
 				$cart_trip     = $this->items[ $cart_item_id ]['trip'];
 				$max_available = $this->items[ $cart_item_id ]['max_available'];
 
-				$trip_price = 0;
+				$trip_price         = 0;
 				$trip_price_partial = 0;
 				foreach ( $pax as $category_id => $pax_value ) {
 					if ( $pax_value < 1 ) {
@@ -320,10 +320,10 @@ class WP_Travel_Lib_Cart {
 						continue;
 					}
 					$this->items[ $cart_item_id ]['trip'][ $category_id ]['pax'] = $pax_value;
-					
-					$args = array(
-						'trip_id' => $trip_id,
-						'pricing_id' => $pricing_id,
+
+					$args           = array(
+						'trip_id'     => $trip_id,
+						'pricing_id'  => $pricing_id,
 						'category_id' => $category_id,
 					);
 					$category_price = WP_Travel_Helpers_Pricings::get_price( $args );
@@ -339,24 +339,24 @@ class WP_Travel_Lib_Cart {
 
 					// if ( $this->items[ $cart_item_id ]['enable_partial'] ) {
 					if ( wptravel_is_partial_payment_enabled() ) {
-						$percent = wptravel_get_actual_payout_percent( $trip_id );
+						$percent                = wptravel_get_actual_payout_percent( $trip_id );
 						$category_price_partial = ( $category_price * $percent ) / 100;
 					}
 					// Updating individual category price. [ Price may change if group discount applies. so need to update individual category price as well].
-					$this->items[ $cart_item_id ]['trip'][ $category_id ]['price'] = $category_price;
+					$this->items[ $cart_item_id ]['trip'][ $category_id ]['price']         = $category_price;
 					$this->items[ $cart_item_id ]['trip'][ $category_id ]['price_partial'] = $category_price_partial;
 
 					// multiply category_price by pax to add in trip price if price per is person.
 					if ( 'person' == $cart_trip[ $category_id ]['price_per'] ) {
-						$category_price *= $pax_value;
+						$category_price         *= $pax_value;
 						$category_price_partial *= $pax_value;
 					}
 					// add price.
-					$trip_price += $category_price;
+					$trip_price         += $category_price;
 					$trip_price_partial += $category_price_partial;
 
 				}
-				$this->items[ $cart_item_id ]['trip_price'] = $trip_price;
+				$this->items[ $cart_item_id ]['trip_price']         = $trip_price;
 				$this->items[ $cart_item_id ]['trip_price_partial'] = $trip_price_partial;
 
 				if ( $trip_extras ) {
@@ -618,8 +618,8 @@ class WP_Travel_Lib_Cart {
 	 */
 	public function wptravel_get_cart_item_id( $trip_id, $price_key = '', $start_date = '' ) {
 
-		$cart_item_id = ( !empty( $price_key ) && '' !== $price_key ) ? $trip_id . '_' . $price_key : $trip_id;
-		$cart_item_id = ( !empty( $start_date ) && '' !== $start_date ) ? $cart_item_id . '_' . $start_date : $cart_item_id;
+		$cart_item_id = ( ! empty( $price_key ) && '' !== $price_key ) ? $trip_id . '_' . $price_key : $trip_id;
+		$cart_item_id = ( ! empty( $start_date ) && '' !== $start_date ) ? $cart_item_id . '_' . $start_date : $cart_item_id;
 		return apply_filters( 'wp_travel_filter_cart_item_id', md5( $cart_item_id ), $trip_id, $price_key, $start_date );
 	}
 }

@@ -22,8 +22,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $settings = wptravel_get_settings();
 
-$generate_username_from_email =  isset( $settings['generate_username_from_email'] ) ? $settings['generate_username_from_email'] : 'no';
-$generate_user_password =  isset( $settings['generate_user_password'] ) ? $settings['generate_user_password'] : 'no';
+$generate_username_from_email = isset( $settings['generate_username_from_email'] ) ? $settings['generate_username_from_email'] : 'no';
+$generate_user_password       = isset( $settings['generate_user_password'] ) ? $settings['generate_user_password'] : 'no';
 
 ?>
 

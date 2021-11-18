@@ -7,7 +7,7 @@ class WP_Travel_FW_Field_Category_Dropdown {
 	}
 
 	function render( $display = true ) {
-		if ( !  $this->field['taxonomy'] ) {
+		if ( ! $this->field['taxonomy'] ) {
 			return;
 		}
 		$taxonomy = $this->field['taxonomy'];
@@ -30,12 +30,20 @@ class WP_Travel_FW_Field_Category_Dropdown {
 
 		$output = sprintf( '<select id="%s" name="%s" class="%s" %s %s>', $this->field['id'], $this->field['name'], $this->field['class'], $validations, $attributes );
 		if ( ! empty( $this->field['attributes']['placeholder'] ) ) {
-			$this->field['options'] = wp_parse_args( $this->field['options'], array(
-				'' => $this->field['attributes']['placeholder'],
-			));
+			$this->field['options'] = wp_parse_args(
+				$this->field['options'],
+				array(
+					'' => $this->field['attributes']['placeholder'],
+				)
+			);
 		}
-		$terms = get_terms( array( 'taxonomy' => $taxonomy, 'hide_empty' => true ) );
-		
+		$terms = get_terms(
+			array(
+				'taxonomy'   => $taxonomy,
+				'hide_empty' => true,
+			)
+		);
+
 		if ( isset( $this->field['show_option_all'] ) ) {
 			$output .= sprintf( '<option value="">%s</option>', $this->field['show_option_all'] );
 		}
@@ -49,43 +57,41 @@ class WP_Travel_FW_Field_Category_Dropdown {
 						if ( ! is_array( $attr ) ) {
 							$option_attributes .= sprintf( '%s="%s"', $key1, $attr );
 						} else {
-							foreach( $attr as $att ) {
+							foreach ( $attr as $att ) {
 								$option_attributes .= sprintf( '%s="%s"', $key1, $att );
 							}
 						}
 					}
-					
 				}
-				$key = $term->slug;
-				$value = $term->name;
+				$key      = $term->slug;
+				$value    = $term->name;
 				$selected = ( $key == $this->field['default'] ) ? 'selected' : '';
-				$output .= sprintf( '<option %s value="%s" %s>%s</option>', $option_attributes, $key, $selected, $value );
+				$output  .= sprintf( '<option %s value="%s" %s>%s</option>', $option_attributes, $key, $selected, $value );
 
 			}
 		}
 
-
 		// if ( ! empty( $this->field['options'] ) ) {
-		// 	foreach ( $this->field['options'] as $key => $value ) {
+		// foreach ( $this->field['options'] as $key => $value ) {
 
-		// 		// Option Attributes.
-		// 		$option_attributes = '';
-		// 		if ( isset( $this->field['option_attributes'] ) && count( $this->field['option_attributes'] ) > 0 ) {
+		// Option Attributes.
+		// $option_attributes = '';
+		// if ( isset( $this->field['option_attributes'] ) && count( $this->field['option_attributes'] ) > 0 ) {
 
-		// 			foreach ( $this->field['option_attributes'] as $key1 => $attr ) {
-		// 				if ( ! is_array( $attr ) ) {
-		// 					$option_attributes .= sprintf( '%s="%s"', $key1, $attr );
-		// 				} else {
-		// 					foreach( $attr as $att ) {
-		// 						$option_attributes .= sprintf( '%s="%s"', $key1, $att );
-		// 					}
-		// 				}
-		// 			}
-		// 		}
+		// foreach ( $this->field['option_attributes'] as $key1 => $attr ) {
+		// if ( ! is_array( $attr ) ) {
+		// $option_attributes .= sprintf( '%s="%s"', $key1, $attr );
+		// } else {
+		// foreach( $attr as $att ) {
+		// $option_attributes .= sprintf( '%s="%s"', $key1, $att );
+		// }
+		// }
+		// }
+		// }
 
-		// 		$selected = ( $key == $this->field['default'] ) ? 'selected' : '';
-		// 		$output .= sprintf( '<option %s value="%s" %s>%s</option>', $option_attributes, $key, $selected, $value );
-		// 	}
+		// $selected = ( $key == $this->field['default'] ) ? 'selected' : '';
+		// $output .= sprintf( '<option %s value="%s" %s>%s</option>', $option_attributes, $key, $selected, $value );
+		// }
 		// }
 		$output .= sprintf( '</select>' );
 

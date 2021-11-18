@@ -14,7 +14,6 @@
  */
 function wptravel_trip_callback_tabs( $tab, $args ) {
 
-
 	$post_id = $args['post']->ID;
 
 	$wp_travel_use_global_tabs    = get_post_meta( $post_id, 'wp_travel_use_global_tabs', true );
@@ -31,10 +30,10 @@ function wptravel_trip_callback_tabs( $tab, $args ) {
 	}
 	if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) :
 		$args = array(
-			'title'      => __( 'Need Additional Tabs ?', 'wp-travel' ),
-			'content'    => __( 'By upgrading to Pro, you can get trip specific custom tabs addition options with customized content and sorting !', 'wp-travel' ),
-			'link'       => 'https://wptravel.io/wp-travel-pro/',
-        	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+			'title'       => __( 'Need Additional Tabs ?', 'wp-travel' ),
+			'content'     => __( 'By upgrading to Pro, you can get trip specific custom tabs addition options with customized content and sorting !', 'wp-travel' ),
+			'link'        => 'https://wptravel.io/wp-travel-pro/',
+			'link_label'  => __( 'Get WP Travel Pro', 'wp-travel' ),
 			'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
 			'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
 		);
@@ -76,7 +75,7 @@ function wptravel_trip_callback_tabs( $tab, $args ) {
 			<?php
 			foreach ( $tabs as $key => $tab ) :
 				if ( ! is_array( $tab ) ) {
-					$tab = ( array ) $tab; // @todo need to reset tab.
+					$tab = (array) $tab; // @todo need to reset tab.
 				}
 				$default_label = isset( $default_tabs[ $key ]['label'] ) ? $default_tabs[ $key ]['label'] : $tab['label'];
 				?>

@@ -80,11 +80,11 @@ function wptravel_get_enquiries_form( $trips_dropdown = false ) {
 		),
 	);
 
-	$fields = wptravel_enquiries_form_fields();
-	$form   = new WP_Travel_FW_Form();
+	$fields                = wptravel_enquiries_form_fields();
+	$form                  = new WP_Travel_FW_Form();
 	$form_options['class'] = 'wp-travel-enquiries-form';
 	if ( $trips_dropdown ) {
-		$query                 = new WP_Query(
+		$query = new WP_Query(
 			array(
 				'post_type'      => WP_TRAVEL_POST_TYPE,
 				'status'         => 'published',
@@ -481,8 +481,8 @@ add_action( 'wp_ajax_nopriv_wptravel_save_user_enquiry', 'wptravel_save_user_enq
  *
  * @return Boolen
  */
-function is_blog () {
-    return ( is_archive() || is_author() || is_category() || is_home() || is_tag() );
+function is_blog() {
+	return ( is_archive() || is_author() || is_category() || is_home() || is_tag() );
 }
 
 function wptravel_enquiry_form_header() {

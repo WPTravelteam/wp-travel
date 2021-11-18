@@ -610,6 +610,7 @@ function wptravel_get_itinereries_prices_array() {
  * Return WP Travel Featured post.
  *
  * @param integer $no_of_post_to_show No of post to show.
+ * @since 1.0.1
  * @return array
  */
 function wptravel_featured_itineraries( $no_of_post_to_show = 3 ) {
@@ -3113,7 +3114,7 @@ function wptravel_frontend_tab_gallery( $gallery_ids ) {
 		<div class="wp-travel-gallery wp-travel-container-wrap">
 			<div class="wp-travel-row-wrap">
 				<ul>
-					<?php 
+					<?php
 					foreach ( $gallery_ids as $gallery_id ) :
 						if ( $gallery_id ) {
 							$gallery_image = wp_get_attachment_image_src( $gallery_id, $image_size );
@@ -3125,7 +3126,8 @@ function wptravel_frontend_tab_gallery( $gallery_ids ) {
 							</li>
 							<?php
 						}
-					endforeach; ?>
+					endforeach;
+					?>
 				</ul>
 			</div>
 		</div>

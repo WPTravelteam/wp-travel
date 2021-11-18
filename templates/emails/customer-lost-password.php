@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Customer Lost Password email Template
  *
@@ -9,7 +9,7 @@
  * as little as possible, but it does happen. When this occurs the version of the template file will.
  * be bumped and the readme will list any important changes.
  *
- * @see 	http://docs.wensolutions.com/document/template-structure/
+ * @see     http://docs.wensolutions.com/document/template-structure/
  * @author  WenSolutions
  * @package WP_Travel
  * @since   1.0.0
@@ -24,11 +24,11 @@ $user_login = $args['user_login'];
 $reset_key  = $args['reset_key'];
 
 
-$url   = add_query_arg(
+$url = add_query_arg(
 	array(
 		'action' => 'rp',
-		'key'   => $reset_key,
-		'login' => rawurlencode( $user_login ),
+		'key'    => $reset_key,
+		'login'  => rawurlencode( $user_login ),
 	),
 	wp_lostpassword_url()
 );

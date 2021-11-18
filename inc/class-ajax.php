@@ -30,7 +30,7 @@ class WP_Travel_Ajax {
 	public function check_coupon_code() {
 
 		WP_Travel::verify_nonce();
-	
+
 		$post_data = wptravel_sanitize_array( $_REQUEST );
 		if ( ! isset( $post_data['coupon_code'] ) || ! isset( $post_data['coupon_id'] ) ) {
 			return;

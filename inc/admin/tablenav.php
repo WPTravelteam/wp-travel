@@ -23,8 +23,8 @@ function wptravel_tablenav( $which ) {
 				'edit-itinerary-enquiries',
 				'edit-tour-extras',
 			);
-			$screen = get_current_screen();
-			$screen_id = $screen->id;
+			$screen         = get_current_screen();
+			$screen_id      = $screen->id;
 			if ( ! in_array( $screen_id, $allowed_screen ) ) {
 				return;
 			}

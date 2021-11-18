@@ -315,7 +315,7 @@ class WP_Travel_Admin_Settings { // @phpcs:ignore
 	public static function get_system_info() {
 		require_once sprintf( '%s/inc/admin/views/status.php', WP_TRAVEL_ABSPATH );
 	}
-	
+
 }
 
 new WP_Travel_Admin_Settings();

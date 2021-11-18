@@ -6,5 +6,5 @@
  * @param  Array $args Settings arg list.
  */
 function wptravel_settings_callback_license( $tab, $args ) {
-    do_action( 'wp_travel_license_tab_fields', $args );
+	do_action( 'wp_travel_license_tab_fields', $args );
 }

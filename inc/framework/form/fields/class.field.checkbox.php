@@ -37,7 +37,7 @@ class WP_Travel_FW_Field_Checkbox {
 						if ( ! is_array( $attr ) ) {
 							$option_attributes .= sprintf( '%s="%s"', $key1, $attr );
 						} else {
-							foreach( $attr as $att ) {
+							foreach ( $attr as $att ) {
 								$option_attributes .= sprintf( '%s="%s"', $key1, $att );
 							}
 						}
@@ -51,10 +51,10 @@ class WP_Travel_FW_Field_Checkbox {
 					$checked = ( $key === $this->field['default'] ) ? 'checked' : '';
 				}
 
-				$checkbox_value = is_numeric( $key ) ? $value : $key;
-				$error_coontainer_id = sprintf( 'error_container-%s', $this->field['id'] );
+				$checkbox_value          = is_numeric( $key ) ? $value : $key;
+				$error_coontainer_id     = sprintf( 'error_container-%s', $this->field['id'] );
 				$parsley_error_container = ( 0 === $index ) ? sprintf( 'data-parsley-errors-container="#%s"', $error_coontainer_id ) : '';
-				$output .= sprintf( '<label class="radio-checkbox-label"><input type="checkbox" name="%s[]" %s value="%s" %s %s %s/>%s</label>', $this->field['name'],  $option_attributes, $checkbox_value, $checked, $validations,$parsley_error_container, $value );
+				$output                 .= sprintf( '<label class="radio-checkbox-label"><input type="checkbox" name="%s[]" %s value="%s" %s %s %s/>%s</label>', $this->field['name'], $option_attributes, $checkbox_value, $checked, $validations, $parsley_error_container, $value );
 				$index++;
 			}
 			$output .= sprintf( '<div id="%s"></div>', $error_coontainer_id );

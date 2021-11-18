@@ -30,7 +30,7 @@ class WP_Travel_Itinerary {
 	}
 
 	function get_gallery_ids() {
-		$gallery_ids = get_post_meta( $this->post->ID, 'wp_travel_itinerary_gallery_ids', true );
+		$gallery_ids      = get_post_meta( $this->post->ID, 'wp_travel_itinerary_gallery_ids', true );
 		$gallery_id_array = $gallery_ids;
 		if ( is_array( $gallery_ids ) && ! empty( $gallery_ids ) ) {
 			return $gallery_ids;

@@ -10,7 +10,7 @@ class WP_Travel_Admin_Menu {
 	public function add_menus() {
 
 		$all_submenus = wptravel_get_submenu();
-		
+
 		foreach ( $all_submenus as $type => $submenus ) {
 			$parent_slug = '';
 			if ( 'bookings' === $type ) {
@@ -18,7 +18,7 @@ class WP_Travel_Admin_Menu {
 			}
 			$submenus = wptravel_sort_array_by_priority( $submenus );
 			foreach ( $submenus as $submenu ) {
-				if ( ! isset( $submenu['page_title'] ) || ! isset( $submenu['menu_title'] ) || ! isset( $submenu['menu_slug'] )  || ! isset( $submenu['callback'] ) ) {
+				if ( ! isset( $submenu['page_title'] ) || ! isset( $submenu['menu_title'] ) || ! isset( $submenu['menu_slug'] ) || ! isset( $submenu['callback'] ) ) {
 					continue;
 				}
 				$capability = isset( $submenu['capability'] ) ? $submenu['capability'] : 'manage_options';
@@ -29,7 +29,7 @@ class WP_Travel_Admin_Menu {
 		// Remove from menu.
 		remove_submenu_page( 'edit.php?post_type=itinerary-booking', 'sysinfo' );
 		remove_submenu_page( 'edit.php?post_type=itinerary-booking', 'settings2' );
-		
+
 		global $submenu;
 		unset( $submenu['edit.php?post_type=itinerary-booking'][10] ); // Removes 'Add New'.
 	}

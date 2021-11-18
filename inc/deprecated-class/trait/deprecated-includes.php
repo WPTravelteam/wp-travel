@@ -5,8 +5,8 @@
  * @package WP_Travel
  */
 
-include sprintf( '%s/inc/deprecated-class/class-assets.php', WP_TRAVEL_ABSPATH );
-include sprintf( '%s/inc/deprecated-class/class-helpers-trips.php', WP_TRAVEL_ABSPATH );
+require sprintf( '%s/inc/deprecated-class/class-assets.php', WP_TRAVEL_ABSPATH );
+require sprintf( '%s/inc/deprecated-class/class-helpers-trips.php', WP_TRAVEL_ABSPATH );
 
 // class WP_Travel_Session extends WpTravel_Session { }
 class WP_Travel_Helpers_Trip_Excluded_Dates_Times extends WpTravel_Helpers_Trip_Excluded_Dates_Times { }

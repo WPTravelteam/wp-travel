@@ -16,7 +16,7 @@ class WpTravel_Helpers_Booking { // @phpcs:ignore
 	/**
 	 * Generate HTML for Booking Details.
 	 *
-	 * @param int   $booking_id Trip Booking ID. 
+	 * @param int $booking_id Trip Booking ID.
 	 * @since 5.0.0
 	 * @return mixed
 	 */
@@ -49,14 +49,14 @@ class WpTravel_Helpers_Booking { // @phpcs:ignore
 				<?php
 				// Order Details.
 				foreach ( $items as $item_key => $trip ) {
-					$trip_id    = $trip['trip_id'];
+					$trip_id = $trip['trip_id'];
 
 					// Values
 					$title          = get_the_title( $trip_id );
 					$pax            = isset( $trip['pax'] ) ? $trip['pax'] : '';
 					$arrival_date   = isset( $trip['arrival_date'] ) && ! empty( $trip['arrival_date'] ) ? wptravel_format_date( $trip['arrival_date'] ) : '';
 					$departure_date = isset( $trip['departure_date'] ) && ! empty( $trip['departure_date'] ) ? wptravel_format_date( $trip['departure_date'] ) : '';
-					
+
 					$pricing_id   = $trip['pricing_id'];
 					$pricing_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id, $pricing_id );
 
@@ -74,8 +74,9 @@ class WpTravel_Helpers_Booking { // @phpcs:ignore
 							<span class="my-order-pricing"><?php echo esc_html( $pricing_title ); ?></span>
 							<span class="my-order-tail">
 								<?php if ( ! empty( $trip['trip'] ) ) : ?>
-									<?php foreach ( $trip['trip'] as $category_id => $t ) :
-										if (  $t['pax'] < 1 ) {
+									<?php
+									foreach ( $trip['trip'] as $category_id => $t ) :
+										if ( $t['pax'] < 1 ) {
 											continue;
 										}
 										?>
@@ -86,7 +87,7 @@ class WpTravel_Helpers_Booking { // @phpcs:ignore
 							<?php
 							if ( isset( $trip['trip_extras'] ) && isset( $trip['trip_extras']['id'] ) && count( $trip['trip_extras']['id'] ) > 0 ) :
 									$extras = $trip['trip_extras'];
-									?>
+								?>
 									<div class="my-order-price-breakdown-additional-service">
 										<span><strong><?php esc_html_e( 'Additional Services', 'wp-travel' ); ?></strong></span>
 										<?php
@@ -114,7 +115,8 @@ class WpTravel_Helpers_Booking { // @phpcs:ignore
 									</div>
 
 									<?php
-								endif;?>
+								endif;
+							?>
 						</td>
 						<td><?php echo esc_html( $pax ); ?></td>
 						<td><?php echo esc_html( $arrival_date ); ?></td>
@@ -122,7 +124,8 @@ class WpTravel_Helpers_Booking { // @phpcs:ignore
 					</tr>
 
 					<?php
-				} ?>
+				}
+				?>
 			</tbody>
 		</table>
 		<?php
@@ -136,7 +139,7 @@ class WpTravel_Helpers_Booking { // @phpcs:ignore
 	/**
 	 * Generate HTML for Traveler Details.
 	 *
-	 * @param int   $booking_id Trip Booking ID. 
+	 * @param int $booking_id Trip Booking ID.
 	 * @since 5.0.0
 	 * @return mixed
 	 */
@@ -155,7 +158,6 @@ class WpTravel_Helpers_Booking { // @phpcs:ignore
 		// Consist of traveler, billing details.
 		$checkout_form_data = get_post_meta( $booking_id, 'order_data', true );
 
-		
 		ob_start();
 		?>
 		<h2 class="wp-travel-order-heading"><?php esc_html_e( 'Traveler Details', 'wp-travel' ); ?></h2>
@@ -166,7 +168,7 @@ class WpTravel_Helpers_Booking { // @phpcs:ignore
 				<?php
 				// Order Details.
 				foreach ( $items as $item_key => $trip ) {
-					$trip_id    = $trip['trip_id'];
+					$trip_id = $trip['trip_id'];
 
 					// Values.
 					$title        = get_the_title( $trip_id );
@@ -223,7 +225,8 @@ class WpTravel_Helpers_Booking { // @phpcs:ignore
 						?>
 					</tbody>
 					<?php
-				} ?>
+				}
+				?>
 			</tbody>
 		</table>
 		<?php
