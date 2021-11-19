@@ -1,7 +1,14 @@
 <?php
+/**
+ * Checkout page Form.
+ *
+ * @package WP_Travel
+ */
+
 if ( ! class_exists( 'WP_Travel_FW_Form' ) ) {
 	include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
 }
+global $wt_cart;
 
 // Fields array.
 $checkout_fields              = wptravel_get_checkout_form_fields();
@@ -11,7 +18,6 @@ $payment_fields               = isset( $checkout_fields['payment_fields'] ) ? $c
 $settings                     = wptravel_get_settings();
 $enable_multiple_travellers   = isset( $settings['enable_multiple_travellers'] ) && $settings['enable_multiple_travellers'] ? esc_html( $settings['enable_multiple_travellers'] ) : 'no';
 $all_travelers_fields_require = apply_filters( 'wp_travel_require_all_travelers_fields', false );
-global $wt_cart;
 $form_fw    = new WP_Travel_FW_Form();
 $form_field = new WP_Travel_FW_Field();
 $form_fw->init_validation( 'wp-travel-booking' );
@@ -156,11 +162,14 @@ $form_fw->init_validation( 'wp-travel-booking' );
 				<div class="payment-content">
 					<?php $form_field->init( $payment_fields )->render(); ?>
 					<?php
-					// @since 4.3.0.
+					/**
+					 * Before Booknow button on checkout page.
+					 *
+					 * @since 4.3.0
+					 */
 					do_action( 'wp_travel_action_before_book_now' ); // @phpcs:ignore  ?>
 					<div class="wp-travel-form-field button-field">
 						<?php
-						// wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' ); // Need to remove this.
 						WP_Travel::create_nonce_field();
 						?>
 						<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="<?php esc_html_e( 'Book Now', 'wp-travel' ); ?>">

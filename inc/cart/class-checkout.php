@@ -16,12 +16,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WP_Travel_Checkout {
 
 	/**
-	 * Constructor.
-	 */
-	function __construct() {
-	}
-
-	/**
 	 * Output of checkout shotcode.
 	 *
 	 * @since 2.2.3

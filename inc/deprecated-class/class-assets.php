@@ -4,13 +4,14 @@
  *
  * @package WP_Travel
  */
+
 use WpTravel\deprecated\WpTravelDeprecatedClassTrait;
 
 if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 	/**
 	 * WP Travel install class.
 	 */
-	class WP_Travel_Assets extends WpTravel_Assets {
+	class WP_Travel_Assets extends WpTravel_Assets { // @phpcs:ignore
 		use WpTravelDeprecatedClassTrait;
 		/**
 		 * Assets path.
@@ -23,7 +24,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 		 * Frontend assets.
 		 */
 		public static function frontend() {
-			self::deprecated_class( '4.47', 'WpTravel_Assets' );
+			self::deprecated_class( '4.4.7', 'WpTravel_Assets' );
 			parent::frontend();
 		}
 
@@ -31,7 +32,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 		 * Admin assets.
 		 */
 		public static function admin() {
-			self::deprecated_class( '4.47', 'WpTravel_Assets' );
+			self::deprecated_class( '4.4.7', 'WpTravel_Assets' );
 			parent::admin();
 		}
 
@@ -41,7 +42,7 @@ if ( ! class_exists( 'WP_Travel_Assets' ) ) {
 		 * @since 2.0.7
 		 */
 		public static function register_scripts() {
-			self::deprecated_class( '4.47', 'WpTravel_Assets' );
+			self::deprecated_class( '4.4.7', 'WpTravel_Assets' );
 			parent::register_scripts();
 		}
 

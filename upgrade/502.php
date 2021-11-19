@@ -27,7 +27,7 @@ if ( ! function_exists( 'wptravel_migrate_data_to_502' ) ) {
 				$tirp          = get_post( $trip_id );
 				$overview      = $tirp->post_content;
 				$overview_meta = get_post_meta( $trip_id, 'wp_travel_overview', true );
-				if ( ! $overview_meta ) {
+				if ( ! trim( $overview_meta ) ) {
 					update_post_meta( $trip_id, 'wp_travel_overview', $overview );
 				}
 			}
