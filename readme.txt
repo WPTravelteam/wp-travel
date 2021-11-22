@@ -332,7 +332,7 @@ Enhancement:
 * Added User specific coupon discount feature. 
 * Added Support for Multiple Cart items.
 * Added Support For Pricing group discount as we have group discount for pricing category only.
-* Coupon Section update to React Block.
+* Enquiry Section update to React Block.
 
 * Check the [release note](https://wptravel.io/wp-travel-plugin-version-5-0-0-major-release-note/) for more detail.
 
