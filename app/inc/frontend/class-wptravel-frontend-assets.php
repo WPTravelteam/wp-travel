@@ -148,7 +148,7 @@ class WpTravel_Frontend_Assets {
 	 * @since 4.6.4
 	 */
 	public static function register_scripts() {
-		$suffix           = wptravel_script_suffix();
+		$suffix = wptravel_script_suffix();
 		// $suffix           = ''; // Temp fixes due to build issue.
 		$all_dependencies = self::get_block_dependencies(); // Dependency & version for Block JS.
 		$settings         = wptravel_get_settings();
@@ -175,86 +175,86 @@ class WpTravel_Frontend_Assets {
 
 		// General Libraries.
 		$scripts = array(
-			'jquery-datepicker-lib'     => array(
+			'jquery-datepicker-lib'       => array(
 				'src'       => self::$app_path . '/assets/js/lib/datepicker/datepicker.js',
 				'deps'      => array( 'jquery' ),
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,
 			),
-			'jquery-datepicker-lib-eng' => array(
+			'jquery-datepicker-lib-eng'   => array(
 				'src'       => $datepicker_i18n_file,
 				'deps'      => array( 'jquery' ),
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,
 			),
-			'jquery-parsley'            => array(
+			'jquery-parsley'              => array(
 				'src'       => self::$app_path . '/assets/js/lib/parsley/parsley.min.js',
 				'deps'      => array( 'jquery' ),
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => false,
 			),
-			'wp-travel-modernizer'      => array(
+			'wp-travel-modernizer'        => array(
 				'src'       => self::$app_path . '/assets/js/lib/modernizer/modernizr.min.js',
 				'deps'      => array( 'jquery' ),
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,
 			),
-			'wp-travel-sticky-kit'      => array(
+			'wp-travel-sticky-kit'        => array(
 				'src'       => self::$app_path . '/assets/js/lib/sticky-kit/sticky-kit.min.js',
 				'deps'      => array( 'jquery' ),
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,
 			),
-			'wp-travel-popup'           => array(
+			'wp-travel-popup'             => array(
 				'src'       => self::$app_path . '/assets/js/lib/jquery.magnific-popup/jquery.magnific-popup.min.js',
 				'deps'      => array( 'jquery' ),
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,
 			),
-			'easy-responsive-tabs'      => array(
+			'easy-responsive-tabs'        => array(
 				'src'       => self::$app_path . '/assets/js/lib/easy-responsive-tabs/easy-responsive-tabs.min.js',
 				'deps'      => array( 'jquery' ),
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,
 			),
-			'wp-travel-slick'           => array(
+			'wp-travel-slick'             => array(
 				'src'       => self::$app_path . '/assets/js/lib/slick/slick.min.js',
 				'deps'      => array( 'jquery' ),
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,
 			),
-			'select2-js'                => array(
+			'select2-js'                  => array(
 				'src'       => self::$app_path . '/assets/js/lib/select2/select2.min.js',
 				'deps'      => array( 'jquery' ),
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,
 			),
-			'wp-travel-isotope'         => array( // added since @3.1.7.
+			'wp-travel-isotope'           => array( // added since @3.1.7.
 				'src'       => self::$app_path . '/assets/js/lib/isotope/isotope.pkgd.js',
 				'deps'      => array( 'jquery' ),
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,
 			),
 
-			'collapse-js'               => array(
+			'collapse-js'                 => array(
 				'src'       => self::$app_path . '/assets/js/collapse' . $suffix . '.js',
 				'deps'      => array( 'jquery' ),
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,
 			),
-			'wp-travel-widget-scripts'  => array(
+			'wp-travel-widget-scripts'    => array(
 				'src'       => self::$app_path . '/assets/js/wp-travel-widgets' . $suffix . '.js',
 				'deps'      => array( 'jquery', 'jquery-ui-slider', 'wp-util', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng' ),
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,
 			),
-			'wp-travel-accordion'       => array(
+			'wp-travel-accordion'         => array(
 				'src'       => self::$app_path . '/assets/js/wp-travel-accordion' . $suffix . '.js',
 				'deps'      => array( 'jquery', 'jquery-ui-accordion' ),
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,
 			),
-			'wp-travel-admin-pointers-js'       => array(
+			'wp-travel-admin-pointers-js' => array(
 				'src'       => self::$app_path . '/assets/js/wp-travel-backend-pointers.js',
 				'deps'      => array( 'wp-pointer' ),
 				'ver'       => WP_TRAVEL_VERSION,
@@ -318,7 +318,7 @@ class WpTravel_Frontend_Assets {
 				'ver'   => WP_TRAVEL_VERSION,
 				'media' => 'all',
 			),
-			'wp-travel-frontend-v2'        => array(
+			'wp-travel-frontend-v2'     => array(
 				'src'   => self::$app_path . '/build/wp-travel-front-end-v2' . $suffix . '.css',
 				'deps'  => array(),
 				'ver'   => WP_TRAVEL_VERSION,
@@ -436,15 +436,17 @@ class WpTravel_Frontend_Assets {
 
 		// Admin Specific.
 		if ( self::is_request( 'admin' ) ) {
-			$screen = get_current_screen();
-			if ( ! $screen->is_block_editor ) {
-				// Main Styles for all admin pages.
-				$styles['wp-travel-back-end'] = array(
-					'src'   => self::$app_path . '/build/wp-travel-back-end' . $suffix . '.css',
-					'deps'  => array(),
-					'ver'   => WP_TRAVEL_VERSION,
-					'media' => 'all',
-				);
+			if ( function_exists( 'get_current_screen' ) ) {
+				$screen = get_current_screen();
+				if ( isset( $screen->is_block_editor ) && ! $screen->is_block_editor ) {
+					// Main Styles for all admin pages.
+					$styles['wp-travel-back-end'] = array(
+						'src'   => self::$app_path . '/build/wp-travel-back-end' . $suffix . '.css',
+						'deps'  => array(),
+						'ver'   => WP_TRAVEL_VERSION,
+						'media' => 'all',
+					);
+				}
 			}
 
 			$styles['wptravel-admin'] = array(
@@ -562,10 +564,10 @@ class WpTravel_Frontend_Assets {
 			// Legacy Widgets.
 			// $legacy_widget_deps                 = $all_dependencies['legacy-widgets'];
 			// $scripts['wptravel-legacy-widgets'] = array(
-			// 	'src'       => self::$app_path . '/build/legacy-widgets' . $suffix . '.js',
-			// 	'deps'      => $legacy_widget_deps['dependencies'],
-			// 	'ver'       => $legacy_widget_deps['version'],
-			// 	'in_footer' => true,
+			// 'src'       => self::$app_path . '/build/legacy-widgets' . $suffix . '.js',
+			// 'deps'      => $legacy_widget_deps['dependencies'],
+			// 'ver'       => $legacy_widget_deps['version'],
+			// 'in_footer' => true,
 			// );
 		}
 

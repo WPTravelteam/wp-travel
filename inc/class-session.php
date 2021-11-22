@@ -1,7 +1,6 @@
 <?php
 /**
  * Wrapper for WP Session Manager.
- *
  */
 
 // Exit if accessed directly.

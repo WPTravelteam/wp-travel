@@ -18,7 +18,7 @@ class WP_Travel_Admin_Info_Pointers {
 		add_action( 'admin_enqueue_scripts', array( $this, 'load_pointers' ), 999 );
 
 		$after_multiple_pricing = get_option( 'wp_travel_user_after_multiple_pricing_category' );
-		$user_since      = get_option( 'wp_travel_user_since', '1.0.0' );
+		$user_since             = get_option( 'wp_travel_user_since', '1.0.0' );
 		if ( 'yes' === $after_multiple_pricing && version_compare( $user_since, '3.0.0', '<=' ) ) {
 			add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'menu_order_changed' ) );
 			add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'new_trips_menu' ) );

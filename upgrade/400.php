@@ -529,7 +529,7 @@ if ( ! function_exists( 'wptravel_update_to_400' ) ) {
 		return WP_Travel_Helpers_Response_Codes::get_success_response(
 			'MIGRATE_V4',
 			array(
-				'migrate' => get_option( 'wp_travel_migrate_400'  ),
+				'migrate' => get_option( 'wp_travel_migrate_400' ),
 			)
 		);
 

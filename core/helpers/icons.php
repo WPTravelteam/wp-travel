@@ -25,11 +25,14 @@ class WpTravel_Helpers_Icon {
 			case 'icon-class':
 			case 'fontawesome-icon':
 				$icon = $args['icon'];
-				?><i class="<?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i><?php
+				?><i class="<?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i>
+				<?php
 				break;
 			case 'custom-upload':
 				$icon_url = $args['icon_img'];
-				?><img style="height:24px;margin:0;padding-right:10px" src="<?php echo esc_url( $icon_url ); ?>" /><?php
+				?>
+				<img style="height:24px;margin:0;padding-right:10px" src="<?php echo esc_url( $icon_url ); ?>" />
+				<?php
 				break;
 		}
 		$content = ob_get_contents();

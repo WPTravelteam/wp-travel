@@ -1,4 +1,3 @@
-
 i.fa-times-circle {
 	font-size: 18px;
 	color: #ff4545;
@@ -28,6 +27,9 @@ i.fa-times-circle {
 
 .wp-travel-dropdown-content-wrap {
 	padding: 20px;
+	> div {
+		text-align: right;
+	}
 }
 .wp-travel-datetimepicker {
 	&.wp-travel-datetimepicker-hide-time {
@@ -108,108 +110,108 @@ i.fa-times-circle {
 	}
 }
 
-	.inside {
-		padding: 0 !important;
-		margin: 0;
+.inside {
+	padding: 0 !important;
+	margin: 0;
+}
+
+.components-panel__body {
+	&.wp-travel-panelbody-add-top-gap {
+		margin-top: 16px;
+	}
+	h4 {
+		padding: 0px 16px;
+	}
+}
+
+.wp-travel-trip-edit-menu {
+	display: grid;
+	grid-template-columns: 20% 80%;
+
+	.components-tab-panel__tabs {
+		background: #f3f4f5;
+		border-right: 1px solid #e2e4e7;
+		min-width: 20%;
+		display: flex;
+		flex-direction: column;
+
+		button {
+			box-shadow: unset;
+			border-radius: 0;
+			display: block;
+			width: 100%;
+			text-align: left;
+			padding: 10px 5px;
+			font-weight: 400;
+			padding: 15px;
+			border-bottom: 1px solid #e2e4e7;
+			&:focus {
+				background: transparent;
+			}
+			&.active-tab {
+				// font-weight: 600;
+				box-shadow: inset -3px 0px #007cba;
+			}
+
+			&:hover {
+				box-shadow: inset -3px 0px #007cba;
+			}
+		}
 	}
 
-	.components-panel__body {
-		&.wp-travel-panelbody-add-top-gap {
-			margin-top: 16px;
-		}
-		h4 {
-			padding: 0px 16px;
-		}
+	.components-tab-panel__tab-content {
+		// padding: 16px;
+		flex: 1;
 	}
 
-	.wp-travel-trip-edit-menu {
-		display: grid;
-		grid-template-columns: 20% 80%;
+	&.wp-travel-trip-edit-menu-horizontal {
+		display: flex;
+		flex-direction: column;
 
 		.components-tab-panel__tabs {
-			background: #f3f4f5;
-			border-right: 1px solid #e2e4e7;
-			min-width: 20%;
-			display: flex;
-			flex-direction: column;
-
-			button {
-				box-shadow: unset;
-				border-radius: 0;
-				display: block;
-				width: 100%;
-				text-align: left;
-				padding: 10px 5px;
-				font-weight: 400;
-				padding: 15px;
-				border-bottom: 1px solid #e2e4e7;
-				&:focus {
-					background: transparent;
-				}
+			display: block;
+			padding: 0 20px;
+			.components-button {
+				width: auto;
+				display: inline-block;
+				border-bottom: 0;
 				&.active-tab {
-					// font-weight: 600;
-					box-shadow: inset -3px 0px #007cba;
+					background: #fff;
+					box-shadow: none;
+					border-bottom-left-radius: 0;
+					border-bottom-right-radius: 0;
 				}
 
 				&:hover {
-					box-shadow: inset -3px 0px #007cba;
+					box-shadow: none;
 				}
 			}
 		}
+	}
 
+	.wp-travel-trip-edit-menu-add-gap {
 		.components-tab-panel__tab-content {
-			// padding: 16px;
-			flex: 1;
-		}
-
-		&.wp-travel-trip-edit-menu-horizontal {
-			display: flex;
-			flex-direction: column;
-
-			.components-tab-panel__tabs {
-				display: block;
-				padding: 0 20px;
-				.components-button {
-					width: auto;
-					display: inline-block;
-					border-bottom: 0;
-					&.active-tab {
-						background: #fff;
-						box-shadow: none;
-						border-bottom-left-radius: 0;
-						border-bottom-right-radius: 0;
-					}
-
-					&:hover {
-						box-shadow: none;
-					}
-				}
-			}
-		}
-
-		.wp-travel-trip-edit-menu-add-gap {
-			.components-tab-panel__tab-content {
-				margin-top: 15px;
-				.wp-travel-trip-pricings {
-					.wp-travel-select-pricing {
-						.components-panel__row {
-							padding: 10px !important;
-							border-radius: 4px;
-							background-color: #eee;
-							align-items: center !important;
-						}
+			margin-top: 15px;
+			.wp-travel-trip-pricings {
+				.wp-travel-select-pricing {
+					.components-panel__row {
+						padding: 10px !important;
+						border-radius: 4px;
+						background-color: #eee;
+						align-items: center !important;
 					}
 				}
 			}
 		}
 	}
+}
 
-	.wp-editor-wrap {
+.wp-editor-wrap {
+	width: 100%;
+	textarea {
 		width: 100%;
-		textarea {
-			width: 100%;
-		}
 	}
+}
 
 #wp-travel-trip-options-wrap {
 	.wp-travel-trip-pricings {
@@ -886,11 +888,10 @@ div[aria-labelledby="0-includes-excludes"] {
 
 .wp-travel-save-changes .text-success {
 	margin: 0;
-	
 }
 // .wp-travel-save-changes {
 // 	display: none;
-	
+
 // }
 
 .text-success {

@@ -13,7 +13,7 @@ $post_ids  = $wpdb->get_results( $query1 );
 if ( is_array( $post_ids ) && count( $post_ids ) > 0 ) {
 	foreach ( $post_ids as $trip ) {
 		$trip_id    = $trip->ID;
-		$args = array(
+		$args       = array(
 			'trip_id' => $trip_id,
 		);
 		$trip_price = WP_Travel_Helpers_Pricings::get_price( $args );

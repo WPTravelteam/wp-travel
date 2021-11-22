@@ -13,14 +13,23 @@ class WP_Travel_Email extends WP_Travel_Emails { // @phpcs:ignore
 
 	/**
 	 * Settings.
+	 *
+	 * @var $settings WP Travel Settings.
 	 */
 	public $settings;
 
 	/**
 	 * Email ID/s of Admin.
+	 *
+	 * @var $admin_email WPtravel admin email.
 	 */
 	public $admin_email;
 
+	/**
+	 * Website Name.
+	 *
+	 * @var $site_name Name of website.
+	 */
 	public $site_name;
 
 	/**
@@ -33,29 +42,32 @@ class WP_Travel_Email extends WP_Travel_Emails { // @phpcs:ignore
 			$this->sitename = get_network()->site_name;
 		}
 		/**
+		 * Action hook run after Inventory data update.
+		 *
 		 * @deprecated 4.7.1
 		 */
 		add_action( 'wptravel_action_after_inventory_update', array( $this, 'send_booking_emails' ) );
 
 		/**
+		 * Action hook run after Inventory data update.
+		 *
 		 * @since 5.0.0
 		 */
 		add_action( 'wptravel_action_send_booking_email', array( $this, 'send_booking_email' ), 10, 2 );
 
 	}
 
-
 	/**
-	 * Send Booking emails to client and admin.
+	 * Send Booking emails to client and admin. This Method is deprecated @since 4.7.1. Need to remove in future.
 	 *
 	 * @param array $args Data to send booking email.
 	 *
-	 * @deprecated 4.7.1
 	 * @since 4.4.2
+	 * @deprecated 4.7.1
 	 */
 	public function send_booking_emails( $args ) {
 
-		$this->admin_email = apply_filters( 'wp_travel_booking_admin_emails', get_option( 'admin_email' ) );
+		$this->admin_email = apply_filters( 'wp_travel_booking_admin_emails', get_option( 'admin_email' ) ); // @phpcs:ignore
 
 		$customer_email = $args['customer_email'];
 
@@ -68,7 +80,7 @@ class WP_Travel_Email extends WP_Travel_Emails { // @phpcs:ignore
 		$email      = new WP_Travel_Emails();
 		$email_tags = $this->get_email_tags( $args ); // Supported email tags.
 
-		$send_email_to_admin = $this->settings['send_booking_email_to_admin']; // Default 'yes'
+		$send_email_to_admin = $this->settings['send_booking_email_to_admin']; // 'yes' By default.
 		if ( 'yes' === $send_email_to_admin ) { // Send mail to admin if booking email is set to yes.
 			$email_template = $email->wptravel_get_email_template( 'bookings', 'admin' );
 
@@ -118,7 +130,7 @@ class WP_Travel_Email extends WP_Travel_Emails { // @phpcs:ignore
 	 */
 	public function send_booking_email( $booking_id, $request_data ) {
 
-		$this->admin_email = apply_filters( 'wp_travel_booking_admin_emails', get_option( 'admin_email' ) );
+		$this->admin_email = apply_filters( 'wp_travel_booking_admin_emails', get_option( 'admin_email' ) ); // @phpcs:ignore
 
 		$customer_email_ids = isset( $request_data['wp_travel_email_traveller'] ) ? $request_data['wp_travel_email_traveller'] : array();
 		if ( empty( $customer_email_ids ) ) {
@@ -139,7 +151,7 @@ class WP_Travel_Email extends WP_Travel_Emails { // @phpcs:ignore
 		$email      = new WP_Travel_Emails();
 		$email_tags = $this->get_tags( $booking_id, $request_data ); // Supported email tags.
 
-		$send_email_to_admin = $this->settings['send_booking_email_to_admin']; // Default 'yes'
+		$send_email_to_admin = $this->settings['send_booking_email_to_admin']; // 'yes' By default.
 		if ( 'yes' === $send_email_to_admin ) { // Send mail to admin if booking email is set to yes.
 			$email_template = $email->wptravel_get_email_template( 'bookings', 'admin' );
 
@@ -203,11 +215,12 @@ class WP_Travel_Email extends WP_Travel_Emails { // @phpcs:ignore
 		$trip_time      = isset( $args['time'] ) ? $args['time'] : '';
 
 		// Customer Details.[nonce already verified before calling this method].
-		$first_name       = isset( $_POST['wp_travel_fname_traveller'] ) ? wptravel_sanitize_array( wp_unslash( $_POST['wp_travel_fname_traveller'] ) ) : '';
-		$last_name        = isset( $_POST['wp_travel_lname_traveller'] ) ? wptravel_sanitize_array( wp_unslash( $_POST['wp_travel_lname_traveller'] ) ) : '';
-		$customer_country = isset( $_POST['wp_travel_country_traveller'] ) ? wptravel_sanitize_array( wp_unslash( $_POST['wp_travel_country_traveller'] ) ) : '';
-		$customer_phone   = isset( $_POST['wp_travel_phone_traveller'] ) ? wptravel_sanitize_array( wp_unslash( $_POST['wp_travel_phone_traveller'] ) ) : '';
-		$customer_email   = isset( $_POST['wp_travel_email_traveller'] ) ? wptravel_sanitize_array( wp_unslash( $_POST['wp_travel_email_traveller'] ) ) : '';
+		$requests         = WP_Travel::get_sanitize_request( 'request' );
+		$first_name       = isset( $requests['wp_travel_fname_traveller'] ) ? $requests['wp_travel_fname_traveller'] : '';
+		$last_name        = isset( $requests['wp_travel_lname_traveller'] ) ? $requests['wp_travel_lname_traveller'] : '';
+		$customer_country = isset( $requests['wp_travel_country_traveller'] ) ? $requests['wp_travel_country_traveller'] : '';
+		$customer_phone   = isset( $requests['wp_travel_phone_traveller'] ) ? $requests['wp_travel_phone_traveller'] : '';
+		$customer_email   = isset( $requests['wp_travel_email_traveller'] ) ? $requests['wp_travel_email_traveller'] : '';
 
 		reset( $first_name );
 		$first_key = key( $first_name );
@@ -220,23 +233,23 @@ class WP_Travel_Email extends WP_Travel_Emails { // @phpcs:ignore
 		$customer_phone   = isset( $customer_phone[ $first_key ] ) && isset( $customer_phone[ $first_key ][0] ) ? $customer_phone[ $first_key ][0] : '';
 		$customer_email   = isset( $customer_email[ $first_key ] ) && isset( $customer_email[ $first_key ][0] ) ? $customer_email[ $first_key ][0] : '';
 
-		$customer_address = isset( $_POST['wp_travel_address'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_address'] ) ) : '';
-		$customer_note    = isset( $_POST['wp_travel_note'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_note'] ) ) : '';
+		$customer_address = isset( $requests['wp_travel_address'] ) ? $requests['wp_travel_address'] : '';
+		$customer_note    = isset( $requests['wp_travel_note'] ) ? $requests['wp_travel_note'] : '';
 
 		// Bank Deposite table.
 		$bank_deposit_table = '';
-		if ( isset( $_POST['wp_travel_payment_gateway'] ) && 'bank_deposit' === $_POST['wp_travel_payment_gateway'] ) {
+		if ( isset( $requests['wp_travel_payment_gateway'] ) && 'bank_deposit' === $requests['wp_travel_payment_gateway'] ) {
 			$bank_deposit_table = wptravel_get_bank_deposit_account_table( false );
 		}
 
-		$email_tags        = array(
+		$email_tags = array(
 			'{sitename}'               => $this->sitename,
 			'{itinerary_link}'         => get_permalink( $trip_id ),
 			'{itinerary_title}'        => wptravel_get_trip_pricing_name( $trip_id, $price_key ),
 			'{booking_id}'             => $booking_id,
 			'{booking_edit_link}'      => get_edit_post_link( $booking_id ),
 			'{booking_no_of_pax}'      => $pax,
-			'{booking_scheduled_date}' => esc_html__( 'N/A', 'wp-travel' ), // always N/A. @todo: Need to remove this in future.
+			'{booking_scheduled_date}' => esc_html__( 'N/A', 'wp-travel' ), // always N/A. Need to remove this in future.
 			'{booking_arrival_date}'   => $arrival_date,
 			'{booking_departure_date}' => $departure_date,
 			'{booking_selected_time}'  => $trip_time,
@@ -249,7 +262,8 @@ class WP_Travel_Email extends WP_Travel_Emails { // @phpcs:ignore
 			'{customer_note}'          => $customer_note,
 			'{bank_deposit_table}'     => $bank_deposit_table,
 		);
-		return $email_tags = apply_filters( 'wp_travel_admin_booking_email_tags', $email_tags, $booking_id );
+		$email_tags = apply_filters( 'wp_travel_admin_booking_email_tags', $email_tags, $booking_id ); // @phpcs:ignore
+		return $email_tags;
 	}
 
 	/**
@@ -357,7 +371,8 @@ class WP_Travel_Email extends WP_Travel_Emails { // @phpcs:ignore
 			'{payment_details}'        => WpTravel_Helpers_Payment::render_payment_details( $booking_id ),
 
 		);
-		return $email_tags = apply_filters( 'wp_travel_admin_booking_email_tags', $email_tags, $booking_id );
+		$email_tags = apply_filters( 'wp_travel_admin_booking_email_tags', $email_tags, $booking_id ); // @phpcs:ignore
+		return $email_tags;
 	}
 }
 new WP_Travel_Email();

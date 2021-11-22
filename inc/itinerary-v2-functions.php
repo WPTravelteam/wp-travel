@@ -144,11 +144,12 @@ function wptravel_single_trip_location( $trip_id ) {
 	<div class="wti__trip-meta">
 		<div class="trip__location">
 		<?php
-		$i     = 0;
+		$i = 0;
 		if ( is_array( $terms ) && count( $terms ) > 0 ) {
 			foreach ( $terms as $term ) {
 				if ( $i > 0 ) {
-					?>,
+					?>
+					,
 					<?php
 				}
 				?>

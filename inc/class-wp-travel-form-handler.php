@@ -6,9 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Handle frontend forms.
  *
- * @class 		Wp_Travel_Form_Handler
- * @version		1.3.3
- * @category	Class
+ * @class       Wp_Travel_Form_Handler
+ * @version     1.3.3
+ * @category    Class
  */
 class Wp_Travel_Form_Handler {
 
@@ -109,7 +109,7 @@ class Wp_Travel_Form_Handler {
 			$settings = wptravel_get_settings();
 
 			$generate_username_from_email = isset( $settings['generate_username_from_email'] ) ? $settings['generate_username_from_email'] : 'no';
-			$generate_user_password = isset( $settings['generate_user_password'] ) ? $settings['generate_user_password'] : 'no';
+			$generate_user_password       = isset( $settings['generate_user_password'] ) ? $settings['generate_user_password'] : 'no';
 
 			$username = 'no' === $generate_username_from_email ? trim( sanitize_text_field( wp_unslash( $_POST['username'] ) ) ) : ''; // phpcs:ignore
 			$password = 'no' === $generate_user_password ? sanitize_text_field( wp_unslash( $_POST['password'] ) ) : ''; // phpcs:ignore
@@ -262,16 +262,16 @@ class Wp_Travel_Form_Handler {
 		$current_user = get_user_by( 'id', $user_id );
 
 		// if ( ! in_array( 'wp-travel-customer', (array) $current_user->roles ) ) {
-		// 	return;
+		// return;
 		// }
 
 		// Get Billing Data.
-		$billing_address  = ! empty( $_POST['customer_billing_address'] ) ? wptravel_clean_vars( wp_unslash( $_POST['customer_billing_address'] ) ): '';
-		$billing_city     = ! empty( $_POST['customer_billing_city'] ) ? wptravel_clean_vars( wp_unslash( $_POST['customer_billing_city'] ) ): '';
-		$billing_company  = ! empty( $_POST['customer_billing_company'] ) ? wptravel_clean_vars( wp_unslash( $_POST['customer_billing_company'] ) ): '';
-		$billing_zip_code = ! empty( $_POST['customer_zip_code'] ) ? wptravel_clean_vars( wp_unslash( $_POST['customer_zip_code'] ) ): '';
-		$billing_country  = ! empty( $_POST['customer_country'] ) ? wptravel_clean_vars( wp_unslash( $_POST['customer_country'] ) ): '';
-		$billing_phone    = ! empty( $_POST['customer_phone'] ) ? wptravel_clean_vars( wp_unslash( $_POST['customer_phone'] ) ): '';
+		$billing_address  = ! empty( $_POST['customer_billing_address'] ) ? wptravel_clean_vars( wp_unslash( $_POST['customer_billing_address'] ) ) : '';
+		$billing_city     = ! empty( $_POST['customer_billing_city'] ) ? wptravel_clean_vars( wp_unslash( $_POST['customer_billing_city'] ) ) : '';
+		$billing_company  = ! empty( $_POST['customer_billing_company'] ) ? wptravel_clean_vars( wp_unslash( $_POST['customer_billing_company'] ) ) : '';
+		$billing_zip_code = ! empty( $_POST['customer_zip_code'] ) ? wptravel_clean_vars( wp_unslash( $_POST['customer_zip_code'] ) ) : '';
+		$billing_country  = ! empty( $_POST['customer_country'] ) ? wptravel_clean_vars( wp_unslash( $_POST['customer_country'] ) ) : '';
+		$billing_phone    = ! empty( $_POST['customer_phone'] ) ? wptravel_clean_vars( wp_unslash( $_POST['customer_phone'] ) ) : '';
 
 		// Handle required fields.
 		$required_fields = apply_filters(
@@ -337,12 +337,12 @@ class Wp_Travel_Form_Handler {
 		$current_last_name  = $current_user->last_name;
 		$current_email      = $current_user->user_email;
 
-		$account_first_name = ! empty( $_POST['account_first_name'] ) ? wptravel_clean_vars( wp_unslash( $_POST['account_first_name'] ) ): '';
-		$account_last_name  = ! empty( $_POST['account_last_name'] ) ? wptravel_clean_vars( wp_unslash( $_POST['account_last_name'] ) ): '';
-		$account_email      = ! empty( $_POST['account_email'] ) ? wptravel_clean_vars( wp_unslash( $_POST['account_email'] ) ): '';
-		$pass_cur           = ! empty( $_POST['password_current'] ) ? wptravel_clean_vars( wp_unslash( $_POST['password_current'] ) ): '';
-		$pass1              = ! empty( $_POST['password_1'] ) ? wptravel_clean_vars( wp_unslash( $_POST['password_1'] ) ): '';
-		$pass2              = ! empty( $_POST['password_2'] ) ? wptravel_clean_vars( wp_unslash( $_POST['password_2'] ) ): '';
+		$account_first_name = ! empty( $_POST['account_first_name'] ) ? wptravel_clean_vars( wp_unslash( $_POST['account_first_name'] ) ) : '';
+		$account_last_name  = ! empty( $_POST['account_last_name'] ) ? wptravel_clean_vars( wp_unslash( $_POST['account_last_name'] ) ) : '';
+		$account_email      = ! empty( $_POST['account_email'] ) ? wptravel_clean_vars( wp_unslash( $_POST['account_email'] ) ) : '';
+		$pass_cur           = ! empty( $_POST['password_current'] ) ? wptravel_clean_vars( wp_unslash( $_POST['password_current'] ) ) : '';
+		$pass1              = ! empty( $_POST['password_1'] ) ? wptravel_clean_vars( wp_unslash( $_POST['password_1'] ) ) : '';
+		$pass2              = ! empty( $_POST['password_2'] ) ? wptravel_clean_vars( wp_unslash( $_POST['password_2'] ) ) : '';
 		$save_pass          = true;
 
 		$user             = new stdClass();
@@ -354,11 +354,14 @@ class Wp_Travel_Form_Handler {
 		$user->display_name = is_email( $current_user->display_name ) ? $user->first_name : $current_user->display_name;
 
 		// Handle required fields.
-		$required_fields = apply_filters( 'wp_travel_save_account_details_required_fields', array(
-			'account_first_name' => __( 'First name', 'wp-travel' ),
-			'account_last_name'  => __( 'Last name', 'wp-travel' ),
-			'account_email'      => __( 'Email address', 'wp-travel' ),
-		) );
+		$required_fields = apply_filters(
+			'wp_travel_save_account_details_required_fields',
+			array(
+				'account_first_name' => __( 'First name', 'wp-travel' ),
+				'account_last_name'  => __( 'Last name', 'wp-travel' ),
+				'account_email'      => __( 'Email address', 'wp-travel' ),
+			)
+		);
 
 		foreach ( $required_fields as $field_key => $field_name ) {
 			if ( empty( $_POST[ $field_key ] ) ) {

@@ -663,7 +663,7 @@ class WP_Travel_Cart {
 
 		$payout_percent           = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
 		$total_trip_price_partial = ( $total_trip_price * $payout_percent ) / 100;
-		$get_total = array(
+		$get_total                = array(
 			'cart_total'         => wptravel_get_formated_price( $cart_total ), // Effective for multiple cart items[cart_total].
 			'discount'           => wptravel_get_formated_price( $discount_amount ),
 			'sub_total'          => wptravel_get_formated_price( $total_trip_price_after_dis ),
@@ -766,7 +766,7 @@ class WP_Travel_Cart {
 				if ( $sale_price ) {
 					$price = $sale_price;
 				}
-				$qty         = isset( $trip_extras['qty'][ $k ] ) ? ( int ) $trip_extras['qty'][ $k ] : 1;
+				$qty         = isset( $trip_extras['qty'][ $k ] ) ? (int) $trip_extras['qty'][ $k ] : 1;
 				$extra_price = wptravel_get_formated_price( $price * $qty );
 
 				$item_total += $extra_price;

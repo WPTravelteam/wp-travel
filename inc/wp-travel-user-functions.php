@@ -88,7 +88,7 @@ if ( ! function_exists( 'wptravel_create_new_customer' ) ) {
 		} elseif ( empty( $password ) ) {
 			$password           = wp_generate_password(); // Quick fix.
 			$password_generated = true;
-			// return new WP_Error( 'registration-error-missing-password', __( 'Please enter an account password.', 'wp-travel' ) );
+
 		} else {
 			$password_generated = false;
 		}
@@ -192,11 +192,6 @@ function wptravel_get_endpoint_url( $endpoint, $value = '', $permalink = '' ) {
  * @return string
  */
 function wptravel_lostpassword_url() {
-
-	// if ( ! WP_Travel::verify_nonce( true ) ) {
-	// 	// return;
-	// 	return $default_url = wp_lostpassword_url();
-	// }
 	$default_url = wp_lostpassword_url();
 	// Avoid loading too early.
 	if ( ! did_action( 'init' ) ) {

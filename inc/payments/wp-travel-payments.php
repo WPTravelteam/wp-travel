@@ -153,7 +153,7 @@ function wptravel_variable_pricing_minimum_partial_payout( $post_id, $price, $ta
 	$payout_percent = wptravel_get_actual_payout_percent( $post_id );
 	$minimum_payout = ( $trip_price * $payout_percent ) / 100;
 	return number_format( $minimum_payout, 2, '.', '' );
-	
+
 }
 
 /**
@@ -291,7 +291,7 @@ function wptravel_update_payment_status_admin( $booking_id ) {
 	if ( $payment_id ) {
 		$payment_status = isset( $_POST['wp_travel_payment_status'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_payment_status'] ) ) : 'N/A';
 		update_post_meta( $payment_id, 'wp_travel_payment_status', $payment_status );
-		
+
 		update_post_meta( $booking_id, 'wp_travel_payment_status', $payment_status ); // Since WP Travel 5.0.2
 		update_post_meta( $booking_id, 'wp_travel_payment_mode', 'partial' );  // Since WP Travel 5.0.2
 	}
@@ -376,8 +376,8 @@ function wptravel_send_email_payment( $booking_id ) {
 
 	// Handle Multiple payment Emails.
 	// if ( $allow_multiple_items && 1 !== $order_items ) {
-	// 	do_action( 'wp_travel_multiple_payment_emails', $booking_id );
-	// 	exit;
+	// do_action( 'wp_travel_multiple_payment_emails', $booking_id );
+	// exit;
 	// }
 
 	// Clearing cart after successfult payment.
@@ -572,7 +572,7 @@ function wptravel_update_payment_status( $booking_id, $amount, $status, $args, $
 			update_post_meta( $payment_id, 'wp_travel_payment_mode', 'full' ); // @todo remove latter.
 			update_post_meta( $booking_id, 'wp_travel_payment_mode', 'full' ); // Since WP Travel 5.0.2 Need to ignore payment meta.
 		}
-	} 
+	}
 
 	update_post_meta( $payment_id, 'wp_travel_payment_status', $status ); // @todo remove latter.
 	update_post_meta( $booking_id, 'wp_travel_payment_status', $status ); // Since WP Travel 5.0.2 Need to ignore payment meta.
@@ -679,19 +679,20 @@ function wptravel_booking_info_table( $booking_id ) {
 				$trip_fnames = isset( $fnames[ $cart_item_id ] ) ? $fnames[ $cart_item_id ] : array();
 				$trip_lnames = isset( $lnames[ $cart_item_id ] ) ? $lnames[ $cart_item_id ] : array();
 				?>
-				<tr class="wp-travel-content"> <td><b>Trip: <?php echo esc_html( get_the_title( $item['trip_id'] ) ) ?> on <?php echo esc_html( $item['trip_start_date'] ); ?></b></td> </tr>
+				<tr class="wp-travel-content"> <td><b>Trip: <?php echo esc_html( get_the_title( $item['trip_id'] ) ); ?> on <?php echo esc_html( $item['trip_start_date'] ); ?></b></td> </tr>
 				<?php if ( is_array( $trip_fnames ) && count( $trip_fnames ) > 0 ) : ?>
 					<tr class="wp-travel-content">
 						<td>
 							<ol>
 								<?php foreach ( $trip_fnames as $k => $fname ) : ?>
-									<li> <?php printf( "%s %s", $fname, $trip_lnames[$k] ) ?> </li>
+									<li> <?php printf( '%s %s', $fname, $trip_lnames[ $k ] ); ?> </li>
 								<?php endforeach; ?>
 							</ol>
 
 						</td>
 					</tr>
-				<?php endif;
+					<?php
+				endif;
 			}
 			?>
 		</table>

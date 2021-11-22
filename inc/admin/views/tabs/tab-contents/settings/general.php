@@ -59,7 +59,7 @@ function wptravel_settings_callback_general( $tab, $args ) {
 		$wp_travel_maps = $map_data['maps'];
 		$selected_map   = $map_data['selected'];
 
-		$map_dropdown_args = array(
+		$map_dropdown_args    = array(
 			'id'           => 'wp-travel-map-select',
 			'class'        => 'wp-travel-select2',
 			'name'         => 'wp_travel_map',
@@ -72,13 +72,13 @@ function wptravel_settings_callback_general( $tab, $args ) {
 				'style' => 'width: 300px;',
 			),
 		);
-		$map_key           = 'google-map';
+		$map_key              = 'google-map';
 		$wp_travel_user_since = get_option( 'wp_travel_user_since', '3.0.0' );
-	?>
+		?>
 		<table class="form-table">
 			<?php
-				if ( version_compare( $wp_travel_user_since, '4.0.0', '<' ) ) { // Hide this option for new user from v4.
-					?>
+			if ( version_compare( $wp_travel_user_since, '4.0.0', '<' ) ) { // Hide this option for new user from v4.
+				?>
 					<tr id="wp-travel-tax-price-options" >
 						<th><label><?php esc_html_e( 'Switch to V4', 'wp-travel' ); ?></label></th>
 						<td>
@@ -94,7 +94,7 @@ function wptravel_settings_callback_general( $tab, $args ) {
 						</td>
 					</tr>
 					<?php
-				}
+			}
 			?>
 			
 			<tr>

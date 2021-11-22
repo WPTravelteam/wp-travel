@@ -35,10 +35,10 @@ function wptravel_new_pricing_list_admin() {
 	}
 
 	// Only for single pricing option. Legacy pricing.
-	$price       = get_post_meta( $trip_id, 'wp_travel_price', true );
-	$price       = $price ? $price : '';
-	$sale_price  = get_post_meta( $trip_id, 'wp_travel_sale_price', true );
-	$enable_sale = get_post_meta( $trip_id, 'wp_travel_enable_sale', true );
+	$price                  = get_post_meta( $trip_id, 'wp_travel_price', true );
+	$price                  = $price ? $price : '';
+	$sale_price             = get_post_meta( $trip_id, 'wp_travel_sale_price', true );
+	$enable_sale            = get_post_meta( $trip_id, 'wp_travel_enable_sale', true );
 	$sale_price_attribute   = 'disabled="disabled"';
 	$sale_price_style_class = 'hidden';
 
@@ -160,14 +160,14 @@ function wptravel_new_pricing_list_admin() {
 							if ( is_array( $trip_pricing_options_data ) && '' !== $trip_pricing_options_data ) :
 								foreach ( $trip_pricing_options_data as $pricing_id => $pricing ) {
 									// Set Vars.
-									$pricing_name = isset( $pricing['pricing_name'] ) ? $pricing['pricing_name'] : '';
+									$pricing_name    = isset( $pricing['pricing_name'] ) ? $pricing['pricing_name'] : '';
 									$pricing_min_pax = isset( $pricing['min_pax'] ) ? $pricing['min_pax'] : 0;
 									$pricing_max_pax = isset( $pricing['max_pax'] ) ? $pricing['max_pax'] : 0;
-									$pricing_key  = isset( $pricing['price_key'] ) ? $pricing['price_key'] : '';
+									$pricing_key     = isset( $pricing['price_key'] ) ? $pricing['price_key'] : '';
 
 									// Old legacy data. Need to migrate to new data. @since 3.0.0
 									if ( ! isset( $pricing['categories'] ) ) { // No category and its id. so create new assign pricing id and assign values in the category. WE don't need variable type category id.
-										$category_id = $pricing_id;
+										$category_id                           = $pricing_id;
 										$pricing['categories'][ $category_id ] = array(
 											'type'         => isset( $pricing['type'] ) ? $pricing['type'] : 'adult',
 											'custom_label' => isset( $pricing['custom_label'] ) ? $pricing['custom_label'] : '',
@@ -605,7 +605,7 @@ function wptravel_new_pricing_list_admin() {
 				'trip_id' => $trip_id,
 			);
 			do_action( 'wp_travel_after_trip_duration_fields', $args );
-		?>
+			?>
 		<tr class="price-option-row  <?php echo esc_attr( $multiple_pricing_option_class ); ?> wp-travel-enable-multiple-dates" >
 			<td><label for="wp-travel-enable-multiple-fixed-departure"><?php esc_html_e( 'Enable Multiple Dates', 'wp-travel' ); ?></label></td>
 			<td><span class="show-in-frontend checkbox-default-design">
@@ -632,7 +632,7 @@ function wptravel_new_pricing_list_admin() {
 				'trip_id' => $trip_id,
 			);
 			do_action( 'wp_travel_after_end_date', $args );
-		?>
+			?>
 
 		<tr class="price-option-row <?php echo esc_attr( $multiple_pricing_option_class ); ?>" id="wp-variations-multiple-dates" >
 
@@ -876,12 +876,12 @@ function wptravel_new_pricing_list_admin() {
 		$default_payout_percent = ( isset( $settings['minimum_partial_payout'] ) && $settings['minimum_partial_payout'] > 0 ) ? $settings['minimum_partial_payout'] : WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT;
 		$default_payout_percent = wptravel_initial_partial_payout_unformated( $default_payout_percent );
 
-		$args = array( 'trip_id' => $trip_id );
-		$trip_price= WP_Travel_Helpers_Pricings::get_price( $args );
+		$args       = array( 'trip_id' => $trip_id );
+		$trip_price = WP_Travel_Helpers_Pricings::get_price( $args );
 
 		$payout_percent = get_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_percent', true );
 		$payout_percent = wptravel_initial_partial_payout_unformated( $payout_percent, true );
-		
+
 		if ( ! $payout_percent ) {
 			$payout_percent = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
 		}
@@ -889,7 +889,7 @@ function wptravel_new_pricing_list_admin() {
 			$payout_percent = $default_payout_percent;
 		}
 		$payout_percent = wptravel_initial_partial_payout_unformated( $payout_percent, true );
-		$use_global = wptravel_use_global_payout_percent( $trip_id );
+		$use_global     = wptravel_use_global_payout_percent( $trip_id );
 		/**
 		 * Added filter for custom multiple partial payment.
 		 *
@@ -926,7 +926,7 @@ function wptravel_new_pricing_list_admin() {
 					<p class="wp-travel-enable-sale description">
 						<?php
 							esc_html_e( 'Use Global Payout', 'wp-travel' );
-							//echo sprintf( '%s&percnt;', esc_html( $default_payout_percent ) );
+							// echo sprintf( '%s&percnt;', esc_html( $default_payout_percent ) );
 						?>
 					</p>
 				</span>
@@ -1457,7 +1457,7 @@ function wptravel_old_pricing_list_admin() {
 				'trip_id' => $trip_id,
 			);
 			do_action( 'wp_travel_after_trip_duration_fields', $args );
-		?>
+			?>
 		<tr class="price-option-row  <?php echo esc_attr( $multiple_pricing_option_class ); ?> wp-travel-enable-multiple-dates" >
 			<td><label for="wp-travel-enable-multiple-fixed-departure"><?php esc_html_e( 'Enable Multiple Dates', 'wp-travel' ); ?></label></td>
 			<td><span class="show-in-frontend checkbox-default-design">
@@ -1485,7 +1485,7 @@ function wptravel_old_pricing_list_admin() {
 				'trip_id' => $trip_id,
 			);
 			do_action( 'wp_travel_after_end_date', $args );
-		?>
+			?>
 
 		<tr class="price-option-row <?php echo esc_attr( $multiple_pricing_option_class ); ?>" id="wp-variations-multiple-dates" >
 
@@ -1730,8 +1730,8 @@ function wptravel_old_pricing_list_admin() {
 		$default_payout_percent = ( isset( $settings['minimum_partial_payout'] ) && $settings['minimum_partial_payout'] > 0 ) ? $settings['minimum_partial_payout'] : WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT;
 		$default_payout_percent = wptravel_initial_partial_payout_unformated( $default_payout_percent );
 
-		$args = array( 'trip_id' => $trip_id );
-		$trip_price= WP_Travel_Helpers_Pricings::get_price( $args );
+		$args       = array( 'trip_id' => $trip_id );
+		$trip_price = WP_Travel_Helpers_Pricings::get_price( $args );
 
 		$payout_percent = get_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_percent', true );
 		$payout_percent = wptravel_initial_partial_payout_unformated( $payout_percent, true );
@@ -1775,7 +1775,7 @@ function wptravel_old_pricing_list_admin() {
 					<p class="wp-travel-enable-sale description">
 						<?php
 							esc_html_e( 'Use Global Payout', 'wp-travel' );
-							//echo sprintf( '%s&percnt;', esc_html( $default_payout_percent ) );
+							// echo sprintf( '%s&percnt;', esc_html( $default_payout_percent ) );
 						?>
 					</p>
 				</span>

@@ -14,7 +14,7 @@
 function wptravel_get_booking_data() {
 
 	// if ( ! WP_Travel::verify_nonce( true ) ) {
-	// 	return;
+	// return;
 	// }
 	/**
 	 * We are checking nonce using WP_Travel::verify_nonce(); method.
@@ -85,7 +85,7 @@ function wptravel_get_booking_data() {
 			$top_country_where   .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
 			$top_itinerary_where .= " and post_date >= '{$booking_from}' and post_date <= '{$booking_to}' ";
 		}
-		$limit = '';
+		$limit       = '';
 		$query_limit = null;
 	}
 
@@ -131,7 +131,7 @@ function wptravel_get_booking_data() {
 		$temp_stat_data['data_border_color'] = __( '#00f', 'wp-travel' );
 	} else {
 		// Payment Data Default Query.
-		$query = "Select count( BOOKING.ID ) as wt_total, YEAR( payment_date ) as wt_year, Month( payment_date ) as wt_month, DAY( payment_date ) as wt_day, sum( AMT.payment_amount ) as payment_amount from {$wpdb->posts} BOOKING
+		$query   = "Select count( BOOKING.ID ) as wt_total, YEAR( payment_date ) as wt_year, Month( payment_date ) as wt_month, DAY( payment_date ) as wt_day, sum( AMT.payment_amount ) as payment_amount from {$wpdb->posts} BOOKING
 		join (
 			Select distinct( PaymentMeta.post_id ), meta_value as payment_id, PaymentPost.post_date as payment_date from {$wpdb->posts} PaymentPost
 			join {$wpdb->postmeta} PaymentMeta on PaymentMeta.meta_value = PaymentPost.ID
@@ -395,7 +395,7 @@ function wptravel_get_booking_data() {
 
 				$max_bookings += (int) $result->wt_total;
 				if ( isset( $result->no_of_pax ) ) {
-					$max_pax      += (int) $result->no_of_pax;
+					$max_pax += (int) $result->no_of_pax;
 				}
 			}
 		}

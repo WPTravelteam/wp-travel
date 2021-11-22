@@ -3,7 +3,6 @@
  * Lost password form
  *
  * This template can be overridden by copying it to yourtheme/wp-travel/account/form-lostpassword.php.
- *
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -31,7 +30,7 @@ wptravel_print_notices();
 				<p class="wp-travel-form-row wp-travel-form-row--first form-row form-row-first clearfix">
 				<span class="user-username">
 					<!-- <label for="user_login"><?php esc_html_e( 'Username or email', 'wp-travel' ); ?></label> -->
-					<input class="wp-travel-Input wp-travel-Input--text input-text" type="text" name="user_login" id="user_login" placeholder="<?php echo esc_attr__('email or username', 'wp-travel'); ?>" />
+					<input class="wp-travel-Input wp-travel-Input--text input-text" type="text" name="user_login" id="user_login" placeholder="<?php echo esc_attr__( 'email or username', 'wp-travel' ); ?>" />
 				</span>	
 				</p>
 

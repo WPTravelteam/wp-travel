@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 5.4.1
 Tested up to: 5.8.2
 Requires PHP: 5.6.2
-Stable tag: 5.0.2
+Stable tag: 5.0.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -165,6 +165,8 @@ These themes are specially designed for WP Travel plugin. So, it is 100% compati
 = Dedicated Support and Documentation =
 We have an entire team of happiness engineers ready to help you. Ask your questions in the [support forum](https://wptravel.io/contact/).
 
+Spanish translation partner - [Blarlo](https://www.blarlo.com/)
+
 Also you can checkout WP Travel [documentation](https://wptravel.io/wp-travel-docs/?utm_source=tutorial&utm_medium=documentation&utm_campaign=WP%20Plugin).
 
 = Release Notes: =
@@ -243,6 +245,28 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 5.0.4 =
+Release Date: 18th November, 2021
+
+Fixes:
+* Fixed conflict raised due to checkbox input added from field editor with validation in the checkout page.
+* Fixed rating displays under all of the price sections.
+* Fixed Trying to get property `is_block_editor` of non-object while activating a plugin.
+* Admin Settings loader style fixes along with overlay style.
+
+Tweaks:
+* Added post revision support in trips.
+* Checkout page nonce name updated for consistency.
+
+Translation:
+* Spanish language file added in the plugin.
+
+= 5.0.3 =
+Release Date: 15th November, 2021
+
+Fixes:
+* Trip overview migration issue fixed.
 
 = 5.0.2 =
 Release Date: 15th November, 2021
@@ -328,165 +352,6 @@ Tweaks:
 
 Deprecated:
 * Function `wptravel_get_strings` is deprecated use `WpTravel_Helpers_Strings::get()` instead.
-
-= 4.6.5 =
-Release Date: 21st June, 2021
-
-Fixes:
-* Fixed Trip publish text is being empty on clicking save changes button.
-* Fixed Location tab something went wrong error. Removed autocomplete for now to fix current issue.
-* Fixed Something went wrong error on Date listing in case of Recurring dates.
-
-= 4.6.4 =
-Release Date: 18th June, 2021
-
-Fixes:
-* Fixed Thankyou page shortcode not working for trips created using switching to WP Travel V3 option.
-* Fixed Admin Booking shows Array error if removed billing fields.
-* Fixed Trip filter widget Date range label. Both from and to lables are displaying as from only.
-* Fixed Empty booking status value while made booking only.
-* Fixed minor layout issue. Added missing style in admin page.
-* Fixed layout issue for custom booking section.
-
-Tweaks:
-* Added `wptravel_get_price` filter hook before returning trip price.
-
-Enhancement:
-* Made frontend booking strings translation ready. 
-
-= 4.6.3 =
-Release Date: 6th June, 2021
-
-Fixes:
-* Set maximum partial payment limit to 100%.
-* Fixed showing multiple partial payments showing even no multiple partial enabled with pro.
-* Fixed search filter widget conflict with archive filter toolbar fields.
-* Fixed Cart empty issue due to cart cookie name. Now cart cookie name changed to `wp_travel_session` from `_wp_travel_session`.
-* Fixed Report data not displaying in the admin report page.
-* Strings updated in search filter widget to support change string label.
-* Fixed Recurring date issue with Pricing. All pricing are displaying even if specific pricing is selected for date.
-* Optimized and moved style path to app/build.
-
-Tweaks:
-* Added `wptravel_skip_add_to_cart` filter hook before starting add to cart process.
-
-= 4.6.2 =
-Release Date: 23rd May, 2021
-
-Fixes:
-* Fixed Add to cart fails nonce verification issue.
-* Fixed group discount price not displaying in the discount table.
-
-= 4.6.1 =
-Release Date: 6th May, 2021
-
-Enhancement:
-* Date listing feature added as default to display available dates in single trip page for new user from WP Travel v4.6.1 and above.
-
-Fixes:
-* Fixed inventory tab content not showing for V3 mode of WP Travel.
-
-= 4.6.0 =
-Release Date: 3rd May, 2021
-
-Enhancement:
-* Custom icon and Fontawesome icon select option added in Icon selector.
-* Added option to list trips by dates.
-
-Fixes:
-* Fixed FAQ accordion conflict with Divi theme.
-
-= 4.5.8 =
-Release Date: 19th April, 2021
-
-Fixes:
-* Fixed Table not being created on Network activate mode was fixed. Also deletes the relevant table if the site on the network deleted.
-* Fixed Search filter widget showing non-relevant trips in case of recurring.
-* Fixed Unable to sort custom tabs added from utility modules.
-* Removed Open Graph option from settings page.
-
-= 4.5.7 =
-Release Date: 31st March, 2021
-
-Fixes:
-* Fixed trip price reset issue in the checkout if update cart item.
-* Fixed extras items not being saved after updating trip in version 3.
-* Fixed prefixing mismatch in tabs callback function definition of version 3.
-* Fixed showing time in non-recurring date even time is disabled. If you added 2 dates with one recurring date and added time in recurring date then, the time is also displaying for a non-recurring date.
-* Fixed Multiple exclude date not working issue.
-* Fixed disabled date is also clickable if we try to select date again in the calendar.
-* Fixed custom tables like pricing, dates not being created.
-* Fixed issue when displaying price `From` on the single trip page.  A display like a sale price enabled for a minimum price even it is not enabled. but sale price enabled for other pricing rather than minimum pricing.
-* Fixed Default Pax issue. If we set default pax higher than min pax then we can't select min pax.
-* Fixed font awesome icons not loading issue in WP Travel 4.5.6
-* Fixed Sale widget not working.
-* Fixed PHP notices like undefined index lat, lng etc
-
-* Minimum recommended PHP version updated to 5.6.20 or higher.
-
-= 4.5.6 =
-Release Date: 19th March, 2021
-
-Fixes:
-* Fixed error when updating from fairly older version to latest.
-* Dashicons in frontend replaced with Font Awesome.
-* Fixed issue related to not creating customer even when create customer option is enabled.
-
-= 4.5.5 =
-Release Date: 18th March, 2021
-
-Fixes:
-* Fixed 404 page not found after booking the trip.
-* Fixed Review percent not being displaying in archive page.
-* Enquiry title removed in the enquiry widget.
-
-= 4.5.4 =
-Release Date: 16th March, 2021
-
-Fixes:
-* Fixed call_user_func_array error in case of major update notice.
-* Fixed booking and payment status update from admin not working.
-* Fixed too few arguments while rendering trip review in trip single and archive page.
-* Fixed Trip Enquiry not working outside of WP Travel pages.
-* Fixed To email not working in booking and payment email.
-* Fixed Email template editor not showing for booking, payment, and enquiry email.
-
-= 4.5.3 =
-Release Date: 10th March, 2021
-
-Fixes:
-* Fixed icomoon font issue. Font is not being loaded due to style path changes.
-* Fixed Some of payment gateway not working like Stripe, PayPal etc.
-* Fixed some of deprecated function not working.
-
-= 4.5.2 =
-Release Date: 3rd March, 2021
-
-Fixes:
-* Fixed remove items form cart in checkout page.
-* Fixes error related to undefined functions.
-
-Tweaks:
-* wpautop added in the itinerary description of itinerary lists.
-* Hook `wptravel_discount_applicable_total` added to calculated discount applicable total.
-
-= 4.5.1 =
-Release Date: 1st March, 2021
-
-Fixes:
-* Fixed thumbnail upload not working in destination term.
-* Fixes error related to undefined functions.
-
-= 4.5.0 =
-Release Date: 26th February, 2021
-
-Fixes:
-* Permalink issue fixed. WP Travel archive page is not working if permalinks updated.
-* Method not found error fixed.
-* Spacing issue in the destination of meta info section.
-* Fixed trip extras section not being displayed.
-* Fixed custom booking html not being displayed in frontend.
-* Admin trip extras tabs layout issue fixes.
 
 = Earlier versions =
 For the changelog of earlier versions, please refer to [the changelog on wptravel.io](https://wptravel.io/changelog-wp-travel/).

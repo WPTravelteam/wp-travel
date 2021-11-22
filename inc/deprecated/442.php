@@ -6,12 +6,12 @@
  */
 
  /**
- * Check if the current page is WP Travel page or not.
- *
- * @since 1.0.4
- * @deprecated 4.4.2
- * @return Boolean
- */
+  * Check if the current page is WP Travel page or not.
+  *
+  * @since 1.0.4
+  * @deprecated 4.4.2
+  * @return Boolean
+  */
 function is_wp_travel_archive_page() {
 	wp_travel_deprecated_function( 'is_wp_travel_archive_page', '4.4.2', "WP_Travel::is_page( 'archive' )" );
 	return WP_Travel::is_page( 'archive' );
@@ -137,7 +137,7 @@ function wp_travel_booking_columns( $booking_columns ) {
  *
  * @param  String $column_name Custom column name.
  * @param  int    $id          Post ID.
- * 
+ *
  * @since 1.0.0
  * @deprecated 4.4.2
  */
@@ -173,7 +173,7 @@ function wp_travel_booking_sort( $columns ) {
  * @return Array       Order By array.
  */
 function wp_travel_booking_column_orderby( $vars ) {
-	//booking_columns_content_sort
+	// booking_columns_content_sort
 	wp_travel_deprecated_function( 'wp_travel_booking_column_orderby', '4.4.2' );
 	$inst = new WP_Travel_Admin_Booking();
 	return $inst->booking_columns_content_sort( $vars );

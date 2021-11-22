@@ -235,7 +235,7 @@ class WP_Travel_Emails {
 
 			// @since 1.8.0
 			case $type:
-				$email_data = array(
+				$email_data                = array(
 					'header_details' => array(
 						'header_title' => '',
 						'header_color' => '',
@@ -243,7 +243,7 @@ class WP_Travel_Emails {
 					'subject'        => '',
 					'email_content'  => '',
 				);
-				$email_data = apply_filters( 'wp_travel_email_template_type', $email_data, $type, $sent_to );
+				$email_data                = apply_filters( 'wp_travel_email_template_type', $email_data, $type, $sent_to );
 				$header_details            = $email_data['header_details'];
 				$email_template['subject'] = $email_data['subject'];
 				$email_content             = $email_data['email_content'];

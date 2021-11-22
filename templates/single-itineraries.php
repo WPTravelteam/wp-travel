@@ -21,7 +21,8 @@ while ( have_posts() ) :
 	the_post();
 	do_action( 'wptravel_single_itinerary_main_content' );
 
-endwhile; // end of the loop. ?>
+endwhile; // end of the loop.
+?>
 <?php do_action( 'wp_travel_after_main_content' ); ?>
 <?php
 get_footer( 'itinerary' );

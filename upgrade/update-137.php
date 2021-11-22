@@ -11,13 +11,13 @@ function wptravel_maybe_create_new_roles() {
 
 		global $wp_roles;
 
-			if ( ! class_exists( 'WP_Roles' ) ) {
-				return;
-			}
+		if ( ! class_exists( 'WP_Roles' ) ) {
+			return;
+		}
 
-			if ( ! isset( $wp_roles ) ) {
-				$wp_roles = new WP_Roles(); // @codingStandardsIgnoreLine
-			}
+		if ( ! isset( $wp_roles ) ) {
+			$wp_roles = new WP_Roles(); // @codingStandardsIgnoreLine
+		}
 
 			// Customer role.
 			add_role(
@@ -43,7 +43,8 @@ function wptravel_maybe_create_pages() {
 	if ( -1 === $get_dashboard_page ) {
 
 		$pages = apply_filters(
-			'wp_travel_create_pages', array(
+			'wp_travel_create_pages',
+			array(
 				'wp-travel-cart'      => array(
 					'name'    => _x( 'wp-travel-cart', 'Page slug', 'wp-travel' ),
 					'title'   => _x( 'WP Travel Cart', 'Page title', 'wp-travel' ),

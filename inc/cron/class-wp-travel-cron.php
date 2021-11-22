@@ -80,7 +80,7 @@ if ( ! class_exists( 'WP_Travel_Cron' ) ) {
 
 			if ( is_array( $post_ids ) && count( $post_ids ) > 0 ) {
 				foreach ( $post_ids as $custom_post ) {
-					$trip_id                = $custom_post->ID;
+					$trip_id = $custom_post->ID;
 
 					// Legacy before WP Travel 4.0.0
 					$wp_travel_multiple_trip_dates = get_post_meta( $trip_id, 'wp_travel_multiple_trip_dates', true );
@@ -107,26 +107,26 @@ if ( ! class_exists( 'WP_Travel_Cron' ) ) {
 					// Update trip to expired if date expired in trips if enabled.
 					if ( 'yes' === $enable_expired_trip_option ) {
 						$trip_dates_data = WP_Travel_Helpers_Trip_Dates::get_dates( $trip_id );
-			
+
 						// Filter only Fixed Departure Trips. [need to check is array because if no trip dates above method will wp error object]
 						if ( is_array( $trip_dates_data ) && isset( $trip_dates_data['code'] ) && 'WP_TRAVEL_TRIP_DATES' === $trip_dates_data['code'] ) {
-			
+
 							$trip_dates = $trip_dates_data['dates'];
-			
-							$valid_trip = false;
-							$current_date = date('Y-m-d');
+
+							$valid_trip   = false;
+							$current_date = date( 'Y-m-d' );
 							foreach ( $trip_dates as $trip_date ) {
-			
-								$start_date = strtotime( $trip_date['start_date'] ); 
-								$start_date =  date( 'Y-m-d', $start_date ); 
-			
-								$end_date = strtotime( $trip_date['end_date'] ); 
-								$end_date =  date( 'Y-m-d', $end_date );
-			
+
+								$start_date = strtotime( $trip_date['start_date'] );
+								$start_date = date( 'Y-m-d', $start_date );
+
+								$end_date = strtotime( $trip_date['end_date'] );
+								$end_date = date( 'Y-m-d', $end_date );
+
 								$is_recurring = $trip_date['is_recurring'];
-			
+
 								if ( $is_recurring ) {
-									if ( '0000-00-00' == $trip_date['end_date']  ) { // Valid if no end date.
+									if ( '0000-00-00' == $trip_date['end_date'] ) { // Valid if no end date.
 										$valid_trip = true;
 										break;
 									} elseif ( $current_date <= $end_date ) {
@@ -140,14 +140,14 @@ if ( ! class_exists( 'WP_Travel_Cron' ) ) {
 									}
 								}
 							}
-			 
+
 							if ( ! $valid_trip ) {
 								// Update Expire status / Delete for invalid trip.
 								if ( 'delete' == $expired_trip_set_to ) {
 									wp_trash_post( $trip_id );
 								} else {
 									$update_data_array = array(
-										'ID'         => $trip_id,
+										'ID'          => $trip_id,
 										'post_status' => 'expired',
 									);
 									wp_update_post( $update_data_array );

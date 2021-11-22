@@ -7,7 +7,7 @@ class WP_Travel_Notices {
 	 *
 	 * @var $errors list of error message.
 	 */
-	private $errors  = array();
+	private $errors = array();
 
 	/**
 	 * Success Messages.

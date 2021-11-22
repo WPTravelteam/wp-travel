@@ -64,7 +64,8 @@ function wptravel_settings_callback_payment( $tab, $args ) {
 		// @since 2.0.0
 		$sorted_gateways = wptravel_sorted_payment_gateway_lists();
 		// Sorting.
-		if ( is_array( $sorted_gateways ) && count( $sorted_gateways ) > 0 ) : ?>
+	if ( is_array( $sorted_gateways ) && count( $sorted_gateways ) > 0 ) :
+		?>
 			<h3 class="wp-travel-section-title"><?php esc_html_e( 'Payment Gateways', 'wp-travel' ); ?></h3>
 			<div class="tab-accordion main-setting wp-travel-accordion has-handler" id="wp-travel-payment-accordion">
 				<div class="panel-group wp-travel-sorting-tabs wp-travel-sorting-tabs"  role="tablist" aria-multiselectable="true" >
@@ -99,21 +100,21 @@ function wptravel_settings_callback_payment( $tab, $args ) {
 		$args = array(
 			'title'       => __( 'Need more payment gateway options ?', 'wp-travel' ),
 			'content'     => '',
-			'link'       => 'https://wptravel.io/wp-travel-pro/',
-        	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
-			'link2'        => 'https://wptravel.io/downloads/category/payment-gateways/',
-			'link2_label'  => __( 'Check All Payment Gateways', 'wp-travel' ),
+			'link'        => 'https://wptravel.io/wp-travel-pro/',
+			'link_label'  => __( 'Get WP Travel Pro', 'wp-travel' ),
+			'link2'       => 'https://wptravel.io/downloads/category/payment-gateways/',
+			'link2_label' => __( 'Check All Payment Gateways', 'wp-travel' ),
 			'link3'       => 'http://wptravel.io/contact',
 			'link3_label' => __( 'Request a new one', 'wp-travel' ),
 		);
 
 		if ( class_exists( 'WP_Travel_Pro' ) ) {
-			$args['link'] = $args['link2'];
+			$args['link']       = $args['link2'];
 			$args['link_label'] = $args['link2_label'];
 			unset( $args['link2'], $args['link2_label'] );
 		}
 		wptravel_upsell_message( $args );
-	?>
+		?>
 	<br>
 	<table class="form-table">
 		<tr>
@@ -176,8 +177,8 @@ function wptravel_standard_paypal_settings_callback( $args ) {
 
 	$settings = $args['settings'];
 
-	$paypal_email             = $settings['paypal_email'];
-	$payment_option_paypal    = $settings['payment_option_paypal'];
+	$paypal_email          = $settings['paypal_email'];
+	$payment_option_paypal = $settings['payment_option_paypal'];
 	?>
 	<table class="form-table form-table-payment">
 

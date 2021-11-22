@@ -1,7 +1,14 @@
 <?php
+/**
+ * Checkout page Form.
+ *
+ * @package WP_Travel
+ */
+
 if ( ! class_exists( 'WP_Travel_FW_Form' ) ) {
 	include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
 }
+global $wt_cart;
 
 // Fields array.
 $checkout_fields              = wptravel_get_checkout_form_fields();
@@ -11,18 +18,17 @@ $payment_fields               = isset( $checkout_fields['payment_fields'] ) ? $c
 $settings                     = wptravel_get_settings();
 $enable_multiple_travellers   = isset( $settings['enable_multiple_travellers'] ) && $settings['enable_multiple_travellers'] ? esc_html( $settings['enable_multiple_travellers'] ) : 'no';
 $all_travelers_fields_require = apply_filters( 'wp_travel_require_all_travelers_fields', false );
-global $wt_cart;
 $form_fw    = new WP_Travel_FW_Form();
 $form_field = new WP_Travel_FW_Field();
 $form_fw->init_validation( 'wp-travel-booking' );
 ?>
-<form method="POST" action="<?php echo $_SERVER[ 'REQUEST_URI' ]; ?>" class="wp-travel-booking" id="wp-travel-booking">
+<form method="POST" action="<?php echo $_SERVER['REQUEST_URI']; ?>" class="wp-travel-booking" id="wp-travel-booking">
 	<?php do_action( 'wp_travel_action_before_checkout_field' ); ?>
 	<!-- Travelers info -->
 	<?php
 	foreach ( $trips as $cart_id => $trip ) :
-		$trip_id        = $trip['trip_id'];
-		$price_key      = isset( $trip['price_key'] ) ? $trip['price_key'] : '';
+		$trip_id   = $trip['trip_id'];
+		$price_key = isset( $trip['price_key'] ) ? $trip['price_key'] : '';
 
 		if ( wptravel_is_react_version_enabled() ) {
 			$pricing_id = $trip['pricing_id'];
@@ -30,7 +36,7 @@ $form_fw->init_validation( 'wp-travel-booking' );
 			$pricing_id = $price_key;
 		}
 
-		$pricing_name  = wptravel_get_trip_pricing_name( $trip_id, $pricing_id );
+		$pricing_name   = wptravel_get_trip_pricing_name( $trip_id, $pricing_id );
 		$repeator_count = isset( $trip['pax'] ) ? $trip['pax'] : 1;
 
 		// New @since 3.0.0.
@@ -135,7 +141,7 @@ $form_fw->init_validation( 'wp-travel-booking' );
 		?>
 	<?php endforeach; ?>
 
-	<?php do_action( 'wp_travel_action_before_billing_info_field' ); ?>
+	<?php do_action( 'wp_travel_action_before_billing_info_field' ); // @phpcs:ignore ?>
 	<?php if ( is_array( $billing_fields ) && count( $billing_fields ) > 0 ) : ?>
 		<!-- Billing info -->
 		<div class="panel ws-theme-timeline-block">
@@ -148,21 +154,29 @@ $form_fw->init_validation( 'wp-travel-booking' );
 			</div>
 		</div>
 	<?php endif; ?>
-	<?php do_action( 'wp_travel_action_before_payment_info_field' ); ?>
+	<?php do_action( 'wp_travel_action_before_payment_info_field' ); // @phpcs:ignore ?>
 	<!-- Payment info -->
 	<div class="panel ws-theme-timeline-block">
 		<div id="number-accordion4" class="panel-collapse collapse in">
 			<div class="panel-body">
 				<div class="payment-content">
 					<?php $form_field->init( $payment_fields )->render(); ?>
-					<?php do_action( 'wp_travel_action_before_book_now' ); // @since 4.3.0 ?>
+					<?php
+					/**
+					 * Before Booknow button on checkout page.
+					 *
+					 * @since 4.3.0
+					 */
+					do_action( 'wp_travel_action_before_book_now' ); // @phpcs:ignore  ?>
 					<div class="wp-travel-form-field button-field">
-						<?php wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' ); ?>
+						<?php
+						WP_Travel::create_nonce_field();
+						?>
 						<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="<?php esc_html_e( 'Book Now', 'wp-travel' ); ?>">
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<?php do_action( 'wp_travel_action_after_payment_info_field' ); ?>
+	<?php do_action( 'wp_travel_action_after_payment_info_field' ); // @phpcs:ignore ?>
 </form>

@@ -27,7 +27,7 @@ class Wp_Travel_User_Account {
 	 * @return array Menus.
 	 */
 	private static function dashboard_menus() {
-		$dashboard_menus        = array(
+		$dashboard_menus = array(
 			'dashboard' => array(
 				'menu_title'      => __( 'Dashboard', 'wp-travel' ),
 				'menu_icon'       => 'wt-icon wt-icon-tachometer',

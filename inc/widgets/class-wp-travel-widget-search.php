@@ -52,7 +52,7 @@ class WP_Travel_Widget_Search extends WP_Widget {
 	 * @param  Mixed $old_instance Old instance of widget.
 	 */
 	function update( $new_instance, $old_instance ) {
-		$instance = $old_instance;
+		$instance          = $old_instance;
 		$instance['title'] = sanitize_text_field( $new_instance['title'] );
 		return $instance;
 	}
@@ -74,7 +74,7 @@ class WP_Travel_Widget_Search extends WP_Widget {
 			<input type="text" value="<?php echo esc_attr( $title ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" class="widefat">
 		</p>
 			
-	<?php
+		<?php
 	}
 }
 

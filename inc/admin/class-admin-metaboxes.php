@@ -476,7 +476,7 @@ class WP_Travel_Admin_Metaboxes {
 		$trip_meta['wp_travel_trip_exclude']        = isset( $_POST['wp_travel_trip_exclude'] ) ? wp_kses_post( $_POST['wp_travel_trip_exclude'] ) : '';
 		$trip_meta['wp_travel_outline']             = isset( $_POST['wp_travel_outline'] ) ? wp_kses_post( $_POST['wp_travel_outline'] ) : '';
 		$trip_meta['wp_travel_start_date']          = isset( $_POST['wp_travel_start_date'] ) ? sanitize_text_field( $_POST['wp_travel_start_date'] ) : '';
-		$trip_meta['wp_travel_end_date']            = isset( $_POST['wp_travel_end_date'] ) ? sanitize_text_field( $_POST['wp_travel_end_date'] ): '';
+		$trip_meta['wp_travel_end_date']            = isset( $_POST['wp_travel_end_date'] ) ? sanitize_text_field( $_POST['wp_travel_end_date'] ) : '';
 		$trip_meta['wp_travel_trip_itinerary_data'] = isset( $_POST['wp_travel_trip_itinerary_data'] ) ? wp_unslash( $_POST['wp_travel_trip_itinerary_data'] ) : '';
 
 		// Gallery.
@@ -524,7 +524,7 @@ class WP_Travel_Admin_Metaboxes {
 
 		if ( 'multiple-price' === $trip_meta['wp_travel_pricing_option_type'] && is_array( $trip_meta['wp_travel_pricing_options'] ) && count( $trip_meta['wp_travel_pricing_options'] ) > 0 ) {
 			// Need to update post meta wptravel_trip_price which is used to filter by price in archive page.
-			$args = array(
+			$args  = array(
 				'trip_id' => $trip_id,
 			);
 			$price = WP_Travel_Helpers_Pricings::get_price( $args );

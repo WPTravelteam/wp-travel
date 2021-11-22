@@ -95,7 +95,7 @@ class WpTravel_Network_Settings {
 	 */
 	public function add_tabs( $tabs ) {
 
-		$settings_fields['license']                       = array(
+		$settings_fields['license'] = array(
 			'tab_label'     => __( 'License', 'wp-travel' ),
 			'content_title' => __( 'License Details', 'wp-travel' ),
 			'priority'      => 10,
