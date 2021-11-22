@@ -253,6 +253,7 @@ Fixes:
 * Fixed booking date displaying as Fj in the Month and day field.
 * Migration script optimized.
 * PHP Warning while activating plugin.
+* Minor layout fixes.
 
 Enhancement:
 * Enquiry Section update to React Block.
