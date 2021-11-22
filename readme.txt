@@ -255,7 +255,7 @@ Fixes:
 * PHP Warning while activating plugin.
 
 Enhancement:
-* Coupon Section update to React Block.
+* Enquiry Section update to React Block.
 
 = 5.0.4 =
 Release Date: 18th November, 2021
