@@ -2650,3 +2650,12 @@
 	}
 }
 
+
+// Enquiries Section SCSS 
+#wp_travel_enquiries {
+	.components-panel__row {
+		> div {
+			width: 250px;
+		}
+	}
+}
