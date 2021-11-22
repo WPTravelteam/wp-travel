@@ -251,7 +251,7 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
                                 onUpdate(storeKey, _allDates);
                             }}>
                                 {/* X */}
-                                <i class="fas fa-times-circle"></i>
+                                <i className="fas fa-times-circle"></i>
                                 {/* <i class="far fa-times-circle"></i> */}
                                 </button>
                         </div>
