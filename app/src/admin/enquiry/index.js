@@ -1,4 +1,4 @@
-import { PanelRow, ToggleControl, TextControl, SelectControl, Dropdown, DateTimePicker, Notice } from '@wordpress/components';
+import { PanelRow, ToggleControl, TextControl,TextareaControl, SelectControl, Dropdown, DateTimePicker, Notice } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 import { useSelect, select, dispatch, withSelect, forwardRef } from '@wordpress/data';
@@ -30,13 +30,12 @@ const App = () => {
     // Get All Data.
     const allData = useSelect((select) => {
         return select('WPTravel/Enquiry').getAllStore()
-    }, []);
+}, []);
 
     //change the publish button state as per the data changes
     toggleDisablePostUpdate(allData.has_state_changes);
 
-
-    const { trips, wp_travel_enquiry_name, wp_travel_enquiry_email, wp_travel_enquiry_query } = allData;
+    const { trips, wp_travel_enquiry_name, wp_travel_enquiry_email, wp_travel_enquiry_query,wp_travel_trip_id } = allData;
     let allTrips = 'undefined' != typeof trips ? trips : [];
     let tripNames = []
     if (allTrips.length > 0) {
@@ -45,25 +44,33 @@ const App = () => {
         })
     }
     let tripnames = tripNames.map(tripSuggestion => { return { label: tripSuggestion.title, value: tripSuggestion.id } }); 
-    const { updateEnquiry } = dispatch('WPTravel/Enquiry');
-     
+    const { updateEnquiry } = dispatch('WPTravel/Enquiry'); 
     return (
         <div>
 
             <PanelRow>
-                <label>{__('TRIP', 'wp-travel')}</label>
+                <label><strong>{__('Trip', 'wp-travel')}</strong></label>
                 <div >
                     <SelectControl
-                        //value={tripSuggestions.map(tripSuggestion => { return tripSuggestion.title })}
+                        value={wp_travel_trip_id}
                         options={tripnames}
+                        onChange={ 
+                            (value) => {
+                                updateEnquiry({
+                                    ...allData,
+                                    wp_travel_trip_id: value
+                                })
+                            }
+                        }
+                       
                     />
                 </div>
             </PanelRow>
             <PanelRow>
-                <label>{__('Full Name', 'wp-travel')}</label>
+                <label><strong>{__('*Full Name', 'wp-travel')}</strong></label>
                 <div >
                     <TextControl
-                        value={wp_travel_enquiry_name}
+                        value={wp_travel_enquiry_name} required
 
                         onChange={
                             (value) => {
@@ -78,9 +85,9 @@ const App = () => {
                 </div>
             </PanelRow>
             <PanelRow>
-                <label>{__('Email', 'wp-travel')}</label>
+                <label><strong>{__('*Email', 'wp-travel')}</strong></label>
                 <div >
-                    <TextControl value={wp_travel_enquiry_email}
+                    <TextControl value={wp_travel_enquiry_email} required 
                         onChange={
                             (value) => {
                                 updateEnquiry({
@@ -93,9 +100,9 @@ const App = () => {
                 </div>
             </PanelRow>
             <PanelRow>
-                <label>{__('Enquiry Message', 'wp-travel')}</label>
+                <label><strong>{__('*Enquiry Message', 'wp-travel')}</strong></label>
                 <div >
-                    <TextControl value={wp_travel_enquiry_query}
+                    <TextareaControl value={wp_travel_enquiry_query} required rows ="6"
                         onChange={
                             (value) => {
                                 updateEnquiry({
@@ -113,7 +120,6 @@ const App = () => {
         </div>
     )
 };
-
 
 domReady(function () {
     if ('undefined' !== typeof document.getElementById('wp_travel_enquiries') && null !== document.getElementById('wp_travel_enquiries')) {

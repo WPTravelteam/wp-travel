@@ -17,14 +17,15 @@ export default () => {
     let coupon_user_id        = ( 'undefined' !== typeof restriction && 'undefined' !== typeof restriction.coupon_user_id ) ? restriction.coupon_user_id : 0;
     const {trips, users} = options;
     let allTrips = 'undefined' != typeof trips ? trips : [];
-   
+     //console.log(restricted_trips,"yes");
     let tripSuggestions = []
     if (allTrips.length > 0) {
         tripSuggestions = allTrips.map(allTrip => {
             return { id: allTrip.id, title: allTrip.title }
         })
     }
-    console.log(tripSuggestions);
+    console.log(allData);
+    //console.log(tripSuggestions);
     let restricted_trips_names = [];
     if (restricted_trips.length > 0) {
         restricted_trips.filter((restrictedId) => {
@@ -36,8 +37,8 @@ export default () => {
             }
         })
     }
-    //console.log(restricted_trips_names);
-    console.log(users);
+    console.log("yes",restricted_trips);
+    //console.log(users);
     let allUsers = users.map( userData => {return {label:userData.data.user_login, value:userData.data.ID }} );
     //console.log(allUsers);
     allUsers.unshift({label: 'Select User', value:'' }); 

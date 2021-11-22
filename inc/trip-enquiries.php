@@ -175,7 +175,7 @@ function wptravel_enquiries_info() {
 	$wp_travel_itinerary_list = wptravel_get_itineraries_array(); ?>
 
 	<div class="wp-travel-booking-form-wrapper">
-		
+	
 	  <script>
 	  jQuery(function($){
 		$('#post').parsley();

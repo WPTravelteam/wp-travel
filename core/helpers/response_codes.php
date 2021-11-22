@@ -86,6 +86,9 @@ class WP_Travel_Helpers_Response_Codes { // @phpcs:ignore
 			'WP_TRAVEL_UPDATED_COUPON'                    => array(
 				'message' => __( 'Coupon updated successfully', 'wp-travel' ),
 			),
+			'WP_TRAVEL_ENQUIRY'                            => array(
+				'message' => __( 'Enquiry loaded successfully', 'wp-travel' ),
+			),
 			'MIGRATE_V4'                                  => array(
 				'message' => __( 'Migrate to V4 Sussessfully.', 'wp-travel' ),
 			),

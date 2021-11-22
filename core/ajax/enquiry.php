@@ -7,7 +7,7 @@ class WP_Travel_Ajax_Enquiry { // @phpcs:ignore
 	 */
 	public static function init() {
 
-	// For admin Get  enquiry details
+	    // For admin Get  enquiry details
 		add_action( 'wp_ajax_wptravel_get_enquiry', array( __CLASS__, 'get_enquiry_details' ) );
 		add_action( 'wp_ajax_nopriv_wptravel_get_enquiry', array( __CLASS__, 'get_enquiry_details' ) );
 
