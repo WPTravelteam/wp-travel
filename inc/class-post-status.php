@@ -1,15 +1,16 @@
 <?php
+/**
+ * Class to add Custom Post status.
+ *
+ * @package WP_Travel
+ */
 
 /**
  * Class to add Custom Post status.
  *
  * @since 4.4.4
  */
-class WP_Travel_Post_Status {
-
-	public function __construct() {
-
-	}
+class WP_Travel_Post_Status { // @phpcs:ignore
 
 	/**
 	 * Init post status class.
@@ -37,7 +38,7 @@ class WP_Travel_Post_Status {
 			'expired',
 			array(
 				'label'                     => _x( 'Expired', 'post', 'wp-travel' ),
-				'label_count'               => _n_noop( 'Expired <span class="count">(%s)</span>', 'Expired <span class="count">(%s)</span>', 'wp-travel' ),
+				'label_count'               => _n_noop( 'Expired <span class="count">(%s)</span>', 'Expired <span class="count">(%s)</span>', 'wp-travel' ), // @phpcs:ignore
 				'public'                    => false,
 				'exclude_from_search'       => true,
 				'show_in_admin_all_list'    => false,
@@ -50,7 +51,7 @@ class WP_Travel_Post_Status {
 	 * Add custom status in dropdown.
 	 *
 	 * @since 4.4.4
-	 * @return void
+	 * @return Mixed
 	 */
 	public static function trip_status_dropdown() {
 		global $post;
@@ -61,7 +62,7 @@ class WP_Travel_Post_Status {
 		<script>
 			jQuery(document).ready( function() {
 				jQuery( 'select[name=\"post_status\"]' ).append( '<option value=\"expired\">Expired</option>' );
-				<?php if ( $post->post_status == 'expired' ) : ?>
+				<?php if ( 'expired' === $post->post_status ) : ?>
 					jQuery( '#post-status-display' ).text( 'Expired' ); 
 					jQuery( 'select[name="post_status"]' ).val('expired');
 				<?php endif; ?>
@@ -97,8 +98,9 @@ class WP_Travel_Post_Status {
 	/**
 	 * Status expired along with Title in the trip archive list.
 	 *
+	 * @param String $status Name of status.
 	 * @since 4.4.4
-	 * @return void
+	 * @return string
 	 */
 	public static function trip_states_column( $status ) {
 		global $post;
@@ -111,8 +113,10 @@ class WP_Travel_Post_Status {
 	/**
 	 * Remove edit, view.
 	 *
+	 * @param array  $actions Remove View trips in admin trip list.
+	 * @param object $trip Trip post object.
 	 * @since 4.4.4
-	 * @return void
+	 * @return Mixed
 	 */
 	public static function remove_view_link( $actions, $trip ) {
 		if ( WP_TRAVEL_POST_TYPE === $trip->post_type && 'expired' === $trip->post_status ) {

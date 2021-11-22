@@ -8,13 +8,13 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-if ( ! function_exists( 'wptravel_migrate_data_to_502' ) ) {
+if ( ! function_exists( 'wptravel_migrate_data_to_505' ) ) {
 
 	/**
 	 * Migrate the_content in meta key wp_travel_overview.
 	 */
-	function wptravel_migrate_data_to_502() {
-		if ( 'yes' === get_option( 'wptravel_price_migrate_502', 'no' ) ) {
+	function wptravel_migrate_data_to_505() {
+		if ( 'yes' === get_option( 'wptravel_overview_migrate_505', 'no' ) ) {
 			return;
 		}
 		global $wpdb;
@@ -31,8 +31,8 @@ if ( ! function_exists( 'wptravel_migrate_data_to_502' ) ) {
 					update_post_meta( $trip_id, 'wp_travel_overview', $overview );
 				}
 			}
-			update_option( 'wptravel_price_migrate_502', 'yes' );
+			update_option( 'wptravel_overview_migrate_505', 'yes' );
 		}
 	}
-	wptravel_migrate_data_to_502();
+	wptravel_migrate_data_to_505();
 }

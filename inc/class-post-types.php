@@ -1,9 +1,14 @@
 <?php
-class WP_Travel_Post_Types {
+/**
+ * WP Travel Post Type class
+ *
+ * @package WP_Travel
+ */
 
-	public function __construct() {
-
-	}
+/**
+ * WP Travel Post Type class
+ */
+class WP_Travel_Post_Types { // @phpcs:ignore
 
 	/**
 	 * Init.
@@ -13,9 +18,7 @@ class WP_Travel_Post_Types {
 	public static function init() {
 		self::register_bookings();
 		self::register_trip();
-		// self::register_enquiries();
 		self::register_payment();
-		// self::register_tour_extras();
 		WP_Travel_Post_Status::init();
 	}
 	/**
@@ -159,7 +162,6 @@ class WP_Travel_Post_Types {
 			'show_ui'            => true,
 			'show_in_menu'       => 'edit.php?post_type=itinerary-booking',
 			'query_var'          => true,
-			// 'rewrite'            => array( 'slug' => 'itinerary-booking' ),
 			'capability_type'    => 'post',
 			'has_archive'        => false,
 			'hierarchical'       => false,
@@ -265,7 +267,7 @@ class WP_Travel_Post_Types {
 			'show_in_rest'       => true,
 		);
 
-		$args = apply_filters( 'wp_travel_tour_extras_post_type_args', $args );
+		$args = apply_filters( 'wp_travel_tour_extras_post_type_args', $args ); // @phpcs:ignore
 		/**
 		 * Register a WP Travel Tour Extras post type.
 		 *

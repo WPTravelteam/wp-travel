@@ -167,8 +167,8 @@ class WP_Travel_Actions_Activation { // @phpcs:ignore
 				'version' => '4.0.4',
 			),
 			array(
-				'name'    => '502',
-				'version' => '5.0.2',
+				'name'    => '505',
+				'version' => '5.0.5',
 			),
 		);
 		self::migration_includes( $migrations );
