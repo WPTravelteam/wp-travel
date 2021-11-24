@@ -85,21 +85,21 @@
 
 	.wp-detail-review-wrap {
 		@include clearfix();
+		display: inline-block;
 
 		.wp-travel-trip-detail {
 			position: relative;
 			margin-bottom: 20px;
-			display: inline-block;
+			// display: inline-block;
 			//float: left;
 		}
 
 		.trip-short-desc {
 			margin-bottom: 25px;
 		}
-
-		.wp-travel-average-review {
-			float: right;
-		}
+	}
+	.wp-travel-average-review {
+		float: right;
 	}
 	.wp-travel-booknow-btn {
 		padding: 5px 50px;
