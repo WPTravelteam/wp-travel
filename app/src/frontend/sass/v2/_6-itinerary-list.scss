@@ -13,7 +13,7 @@
 }
 
 .trip-price {
-	font-weight: 600;
+	// font-weight: 600;
 
 	.person-count {
 		text-transform: capitalize;
@@ -309,9 +309,9 @@
 }
 
 .entry-meta {
-	padding: 10px 0;
-	display: block;
-	@include clearfix();
+	// padding: 10px 0;
+	// display: block;
+	// @include clearfix();
 
 	.travel-info {
 		float: left;
@@ -329,11 +329,11 @@
 		}
 	}
 
-	a,
-	i {
-		font-weight: 300;
-		font-size: 12px;
-	}
+	// a,
+	// i {
+	// 	font-weight: 300;
+	// 	font-size: 12px;
+	// }
 
 	i.wt-icon-caret-down {
 		color: #555;
