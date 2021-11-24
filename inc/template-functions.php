@@ -9,6 +9,11 @@
 add_action( 'after_setup_theme', 'wptravel_load_single_itinerary_hooks' );
 add_action( 'wp_travel_single_trip_after_booknow', 'wptravel_single_keywords', 1 );
 add_action( 'wp_travel_single_trip_meta_list', 'wptravel_single_location', 1 );
+/**
+ * Hook to display trip rating in trip single page besides price.
+ *
+ * @since 5.0.6
+ */
 add_action( 'wp_travel_single_trip_after_price', 'wptravel_single_trip_rating', 10, 2 );
 add_filter( 'the_content', 'wptravel_content_filter' );
 add_filter( 'wp_travel_trip_tabs_output_raw', 'wptravel_raw_output_on_tab_content', 10, 2 ); // @since 2.0.6. Need true to hide trip detail.
@@ -59,6 +64,7 @@ function wptravel_load_single_itinerary_hooks() {
 	// Hooks for old itinerary layout.
 	if ( ! $itinerary_v2_enable ) {
 		add_action( 'wp_travel_single_trip_after_title', 'wptravel_trip_price', 1 );
+		add_action( 'wp_travel_single_trip_after_title', 'wptravel_after_trip_price', 1 ); // Just quick fix of review snippet displaying in archive and related trips sections. Moved review hook from callback wptravel_trip_price and added that hook into this callback.
 		add_action( 'wp_travel_single_trip_after_title', 'wptravel_single_excerpt', 1 );
 		add_action( 'wp_travel_single_trip_after_header', 'wptravel_frontend_trip_facts' );
 		add_action( 'wp_travel_single_trip_after_header', 'wptravel_frontend_contents', 15 );
@@ -407,13 +413,21 @@ function wptravel_trip_price( $trip_id, $hide_rating = false ) {
 				</div>
 			<?php endif; ?>
 		</div>
-		<?php
-			wptravel_do_deprecated_action( 'wp_travel_single_after_trip_price', array( $trip_id, $hide_rating ), '2.0.4', 'wp_travel_single_trip_after_price' );
-			do_action( 'wp_travel_single_trip_after_price', $trip_id, $hide_rating ); // @phpcs:ignore
-		?>
 	</div>
 
 	<?php
+}
+
+/**
+ * Displays content after Price in the trip single page. like ratings.
+ *
+ * @since 5.0.6
+ * @param int  $trip_id ID for current trip.
+ * @param bool $hide_rating Boolean value to show/hide rating.
+ */
+function wptravel_after_trip_price( $trip_id, $hide_rating = false ) {
+	wptravel_do_deprecated_action( 'wp_travel_single_after_trip_price', array( $trip_id, $hide_rating ), '2.0.4', 'wp_travel_single_trip_after_price' );
+	do_action( 'wp_travel_single_trip_after_price', $trip_id, $hide_rating ); // @phpcs:ignore
 }
 
 /**
@@ -423,9 +437,9 @@ function wptravel_trip_price( $trip_id, $hide_rating = false ) {
  * @param bool $hide_rating Flag to sho hide rating.
  */
 function wptravel_single_trip_rating( $trip_id, $hide_rating = false ) {
-	if ( ! is_singular( WP_TRAVEL_POST_TYPE ) ) {
-		return; // This function also called from archive list. so need to return here. Need to use this in blocks as well.
-	}
+	// if ( ! is_singular( WP_TRAVEL_POST_TYPE ) ) {
+	// return; // This function also called from archive list. so need to return here. Need to use this in blocks as well.
+	// }
 	if ( ! $trip_id ) {
 		return;
 	}
