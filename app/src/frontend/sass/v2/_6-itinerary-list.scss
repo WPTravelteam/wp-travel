@@ -309,8 +309,8 @@
 }
 
 .entry-meta {
-	padding: 10px 0;
-	display: block;
+	// padding: 10px 0;
+	// display: block;
 	@include clearfix();
 
 	.travel-info {
@@ -329,11 +329,11 @@
 		}
 	}
 
-	a,
-	i {
-		font-weight: 300;
-		font-size: 12px;
-	}
+	// a,
+	// i {
+	// 	font-weight: 300;
+	// 	font-size: 12px;
+	// }
 
 	i.wt-icon-caret-down {
 		color: #555;
