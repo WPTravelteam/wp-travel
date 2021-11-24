@@ -106,7 +106,7 @@ class WpTravel_Frontend_Assets {
 
 			if ( WP_Travel::is_page( 'checkout' ) ) { // Assets needed for Checkout page.
 				wp_enqueue_script( 'wp-travel-modernizer' );
-				wp_enqueue_script( 'wp-travel-sticky-kit' );
+				wp_enqueue_script( 'wp-travel-hc-sticky' );
 			}
 		} else {
 			if ( WP_Travel::is_pages() ) {
@@ -199,8 +199,8 @@ class WpTravel_Frontend_Assets {
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,
 			),
-			'wp-travel-sticky-kit'        => array(
-				'src'       => self::$app_path . '/assets/js/lib/sticky-kit/sticky-kit.min.js',
+			'wp-travel-hc-sticky'         => array(
+				'src'       => self::$app_path . '/assets/js/lib/hc-sticky/hc-sticky.js',
 				'deps'      => array( 'jquery' ),
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,
@@ -536,7 +536,7 @@ class WpTravel_Frontend_Assets {
 			);
 
 			// Coupon.
-			$coupon_deps = $all_dependencies['admin-coupon'];
+			$coupon_deps                      = $all_dependencies['admin-coupon'];
 			$scripts['wptravel-admin-coupon'] = array(
 				'src'       => self::$app_path . '/build/admin-coupon' . $suffix . '.js',
 				'deps'      => $coupon_deps['dependencies'],
@@ -550,16 +550,14 @@ class WpTravel_Frontend_Assets {
 				'ver'   => $coupon_deps['version'],
 				'media' => 'all',
 			);
-			//enquiry
-			$enquiry_deps = $all_dependencies['admin-enquiry'];
+			// enquiry
+			$enquiry_deps                      = $all_dependencies['admin-enquiry'];
 			$scripts['wptravel-admin-enquiry'] = array(
 				'src'       => self::$app_path . '/build/admin-enquiry' . $suffix . '.js',
 				'deps'      => $coupon_deps['dependencies'],
 				'ver'       => $coupon_deps['version'],
 				'in_footer' => true,
 			);
-
-			
 
 			// Legacy Widgets.
 			// $legacy_widget_deps                 = $all_dependencies['legacy-widgets'];

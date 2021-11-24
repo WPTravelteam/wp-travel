@@ -41,13 +41,12 @@ function sidebarSticky() {
 		return
 	}
 
-	var interval = setInterval(function () {
+	setInterval(function () {
 		if (Modernizr.mq('(min-width: 768px)')) {
-			jQuery(".container .sticky-sidebar").stick_in_parent({
-				container: jQuery(".container"),
-				parent: ".container",
-				offset_top: 50
-			});
+			jQuery('.container .sticky-sidebar').hcSticky({
+				stickTo: jQuery('.wp-travel-minicart'),
+				top:50
+			  });
 		}
 	}, 1000)
 }
