@@ -99,7 +99,8 @@
 		}
 	}
 	.wp-travel-average-review {
-		float: right;
+		float: right;		
+		margin-top: 10px;
 	}
 	.wp-travel-booknow-btn {
 		padding: 5px 50px;
@@ -129,6 +130,9 @@
 
 		&:hover {
 			transition: all 0.4s ease-in-out;
+		}
+		.dashicons {
+			padding-top: 4px;
 		}
 	}
 }
