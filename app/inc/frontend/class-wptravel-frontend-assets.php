@@ -105,8 +105,7 @@ class WpTravel_Frontend_Assets {
 			}
 
 			if ( WP_Travel::is_page( 'checkout' ) ) { // Assets needed for Checkout page.
-				wp_enqueue_script( 'wp-travel-modernizer' );
-				wp_enqueue_script( 'wp-travel-hc-sticky' );
+				wp_enqueue_script( 'wptravel-hc-sticky' );
 			}
 		} else {
 			if ( WP_Travel::is_pages() ) {
@@ -193,13 +192,7 @@ class WpTravel_Frontend_Assets {
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => false,
 			),
-			'wp-travel-modernizer'        => array(
-				'src'       => self::$app_path . '/assets/js/lib/modernizer/modernizr.min.js',
-				'deps'      => array( 'jquery' ),
-				'ver'       => WP_TRAVEL_VERSION,
-				'in_footer' => true,
-			),
-			'wp-travel-hc-sticky'         => array(
+			'wptravel-hc-sticky'         => array(
 				'src'       => self::$app_path . '/assets/js/lib/hc-sticky/hc-sticky.js',
 				'deps'      => array( 'jquery' ),
 				'ver'       => WP_TRAVEL_VERSION,
@@ -348,7 +341,6 @@ class WpTravel_Frontend_Assets {
 
 		if ( '' !== $api_key && true === $show_google_map ) {
 			$scripts['google-map-api'] = array(
-				// 'src'       => 'https://maps.google.com/maps/api/js?libraries=places&key=' . $api_key,
 				'src'       => 'https://maps.googleapis.com/maps/api/js?libraries=places&key=' . $api_key,
 				'deps'      => array(),
 				'ver'       => WP_TRAVEL_VERSION,

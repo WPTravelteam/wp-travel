@@ -34,21 +34,15 @@ jQuery(document).ready(function ($) {
 });
 
 function sidebarSticky() {
-	if ('undefined' === typeof Modernizr) {
-		return false;
-	}
-	if ('undefined' == typeof Modernizr.mq) {
-		return
-	}
-
 	setInterval(function () {
-		if (Modernizr.mq('(min-width: 768px)')) {
-			jQuery('.container .sticky-sidebar').hcSticky({
-				stickTo: jQuery('.wp-travel-minicart'),
-				top:50
-			  });
-		}
+		jQuery('.container .sticky-sidebar').hcSticky({
+			stickTo: jQuery('.wp-travel-minicart'),
+			top:50
+			});
 	}, 1000)
 }
 jQuery(document).ready(sidebarSticky);
 jQuery(window).resize(sidebarSticky);
+// document.addEventListener("DOMContentLoaded", function() {
+// 	sidebarSticky();
+// });

@@ -544,24 +544,55 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * Return if the page is WP Travel Page.
 		 *
 		 * @param string  $slug       page slug.
-		 * @param boolean $admin_page check if page is admin page.
+		 * @param boolean $is_admin_page_check check if page is admin page.
 		 *
 		 * @since 4.4.2
 		 * @since 5.0.0 Added trip single page and admin coupon coupon page check.
+		 * @since 5.0.6 Additional pages like Booking, enquiry, extras, downloads, report, custom_filters, marketplace are added.
 		 * @return boolean
 		 */
-		public static function is_page( $slug, $admin_page = false ) {
+		public static function is_page( $slug, $is_admin_page_check = false ) {
 
-			if ( $admin_page ) {
+			if ( $is_admin_page_check ) {
 				$screen = get_current_screen();
 				switch ( $slug ) {
+					// WP Travel Menu.
 					case 'settings':
 						$pages = array( 'itinerary-booking_page_settings', 'itinerary-booking_page_settings2' );
 						return in_array( $screen->id, $pages, true );
 					case 'coupon':
-						return 'wp-travel-coupons' === $screen->id;
+						return 'wp-travel-coupons' === $screen->id || 'edit-wp-travel-coupons' === $screen->id;
+					case 'booking':
+						return 'itinerary-booking' === $screen->id || 'edit-itinerary-booking' === $screen->id;
+					case 'enquiry':
+						return 'itinerary-enquiries' === $screen->id || 'edit-itinerary-enquiries' === $screen->id;
+					case 'extras':
+						return 'tour-extras' === $screen->id || 'edit-tour-extras' === $screen->id;
+					case 'downloads':
+						return 'itinerary-booking_page_download_upsell_page' === $screen->id || 'wp_travel_downloads' === $screen->id || 'edit-wp_travel_downloads' === $screen->id;
+					case 'reports':
+						return 'itinerary-booking_page_booking_chart' === $screen->id;
+					case 'custom_filters':
+						return 'itinerary-booking_page_wp_travel_custom_filters_page' === $screen->id;
+					case 'marketplace':
+						return 'itinerary-booking_page_wp-travel-marketplace' === $screen->id;
+
+					// Trips Menu.
+					case 'itineraries':
+						return 'itineraries' === $screen->id || 'edit-itineraries' === $screen->id;
+					case 'pricing_category':
+						return 'itinerary_pricing_category' === $screen->id || 'edit-itinerary_pricing_category' === $screen->id;
+					case 'trip_types':
+						return 'itinerary_types' === $screen->id || 'edit-itinerary_types' === $screen->id;
+					case 'destinations':
+						return 'travel_locations' === $screen->id || 'edit-travel_locations' === $screen->id;
+					case 'keywords':
+						return 'travel_keywords' === $screen->id || 'edit-travel_keywords' === $screen->id;
+					case 'activity':
+						return 'activity' === $screen->id || 'edit-activity' === $screen->id;
+					case $slug:
+						return apply_filters( 'wptravel_is_admin_page', false, $slug, $screen->id );
 				}
-				return;
 			} else {
 				global $post;
 				$page_id  = (int) get_the_ID();
@@ -592,25 +623,56 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		/**
 		 * Check whether current page is wp travel pages or not.
 		 *
-		 * @param boolean $admin_page check if page is admin page.
+		 * @param boolean $is_admin_page_check check if page is admin page.
 		 *
 		 * @since 4.5.4
+		 * @since 5.0.6 Additional pages like Booking, enquiry, extras, downloads, report, custom_filters, marketplace are added.
 		 * @return boolean
 		 */
-		public static function is_pages( $admin_page = false ) {
+		public static function is_pages( $is_admin_page_check = false ) {
 
-			if ( $admin_page ) {
-				if ( self::is_page( 'settings', $admin_page ) ) {
-					return true;
+			if ( $is_admin_page_check ) {
+				$admin_pages = array(
+					'settings',
+					'coupon',
+					'booking',
+					'enquiry',
+					'extras',
+					'downloads',
+					'reports',
+					'custom_filters',
+					'marketplace',
+					'itineraries',
+					'pricing_category',
+					'trip_types',
+					'destinations',
+					'keywords',
+					'activity',
+				);
+				/**
+				 * Filter to add additional pages added from Custom filters.
+				 *
+				 * @since 5.0.6
+				 */
+				$admin_pages = apply_filters( 'wptravel_is_admin_pages', $admin_pages );
+				foreach ( $admin_pages as $admin_page ) {
+					if ( self::is_page( $admin_page, $is_admin_page_check ) ) {
+						return true;
+					}
 				}
 			} else {
-				if (
-					is_singular( WP_TRAVEL_POST_TYPE ) ||
-					self::is_page( 'archive' ) ||
-					self::is_page( 'cart' ) ||
-					self::is_page( 'checkout' ) ||
-					self::is_page( 'dashboard' ) ) {
-
+				$front_pages = array(
+					'archive',
+					'cart',
+					'checkout',
+					'dashboard',
+				);
+				foreach ( $front_pages as $front_page ) {
+					if ( self::is_page( $front_page ) ) {
+						return true;
+					}
+				}
+				if ( is_singular( WP_TRAVEL_POST_TYPE ) ) {
 					return true;
 				}
 			}

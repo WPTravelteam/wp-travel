@@ -232,7 +232,7 @@ module.exports = function (grunt) {
 						'app/assets/js/lib/datepicker/datepicker.js', // jquery-datepicker-lib
 						'app/assets/js/lib/jquery.magnific-popup/jquery.magnific-popup.min.js',
 						'app/assets/js/lib/slick/slick.min.js',
-						'app/assets/js/lib/modernizer/modernizr.min.js',
+						// 'app/assets/js/lib/modernizer/modernizr.min.js',
 						'app/assets/js/wp-travel-accordion.js',//wp-travel-accordion ['jquery','jquery-ui-accordion']
 						'app/assets/js/lib/parsley/parsley.min.js',
 						'app/assets/js/booking.js',//wp-travel-booking ['jquery']
