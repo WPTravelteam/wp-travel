@@ -7,6 +7,12 @@
 		.checkout-accordion {
 			h4 {
 				margin: 0;
+				padding: 0;
+				a {
+					display: block;
+					padding: 10px 40px 10px 15px;
+					color: inherit;
+				}
 			}
 		}
 	}
@@ -37,9 +43,15 @@
 		@media (min-width: 992px) {
 			order: 1;
 		}
+
+		.panel-group {
+			.payment-content {
+				padding: 0 15px;
+			}
+		}
 		.checkout-left {
-			border-radius: 5px;
-			border-color: #ccc;
+			// border-radius: 5px;
+			// border-color: #ccc;
 			.ws-theme-timeline-block {
 				.panel-body {
 					padding: 0;
@@ -55,7 +67,7 @@
 				}
 				.panel-collapse {
 					border: 0;
-					padding: 0 20px;
+					// padding: 0 20px;
 				}
 				.panel.panel-default {
 					.panel-collapse {
@@ -84,9 +96,9 @@
 	}
 
 	.checkout-block {
-		background-color: #fff;
-		padding: 20px 15px;
-		border: 1px solid #eee;
+		// background-color: #fff;
+		// padding: 20px 15px;
+		// border: 1px solid #eee;
 		&.checkout-right {
 			background-color: transparent;
 			padding: 0;
@@ -172,7 +184,7 @@
 	}
 
 	.wp-travel-trip-details {
-		padding-bottom: 30px;
+		// padding-bottom: 30px;
 		ul {
 			list-style: none;
 			li {
@@ -203,8 +215,8 @@
 				}
 			}
 			&:nth-child(2) {
-				border-top: 1px solid #cbcbcb;
-				padding: 25px 0 0;
+				// border-top: 1px solid #cbcbcb;
+				// padding: 25px 0 0;
 			}
 		}
 	}
@@ -350,12 +362,12 @@
 }
 
 #shopping-cart {
-	border-radius: 5px;
-	border: 1px solid #ccc;
-	overflow: hidden;
-	position: sticky;
-	top: 20px;
-	background-color: #fff;
+	// border-radius: 5px;
+	border: 1px solid #f0f0f0;
+	// overflow: hidden;
+	// position: sticky;
+	// top: 20px;
+	// background-color: #fff;
 	.wp-travel-cart-loader {
 		position: absolute;
 		top: 0;
@@ -443,8 +455,8 @@
 			margin: 1em 0 0 0;
 			li {
 				position: relative;
-				margin: 20px 0;
-				background: #f1f1f1;
+				// margin: 20px 0;
+				// background: #f1f1f1;
 				padding: 15px;
 				border-radius: 5px;
 				&:not(:first-child) {
@@ -499,7 +511,7 @@
 						flex: 0 0 22%;
 						margin-right: 20px;
 						.img-wrapper {
-							border-radius: 12px;
+							border-radius: 5px;
 							max-width: 133px;
 							margin: 0 auto;
 							@media (max-width: 558px) {
@@ -509,7 +521,7 @@
 						img {
 							border: 1px solid #efefef;
 							height: 100% !important;
-							border-radius: 12px;
+							border-radius: 5px;
 						}
 					}
 					.content-right {
@@ -548,11 +560,11 @@
 								line-height: 1;
 								h5 {
 									a {
-										display: inline;
-										text-decoration: none;
-										color: #444;
-										font-weight: 600;
-										font-size: 15px;
+										// display: inline;
+										// text-decoration: none;
+										// color: #444;
+										// font-weight: 600;
+										// font-size: 15px;
 									}
 								}
 								.group-discount-button {

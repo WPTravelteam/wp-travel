@@ -1,14 +1,14 @@
 
 .wp-travel-trips-has-sidebar {
-	width: 66.666667%;
-	padding-right: 15px;
-	float: left;
+	// width: 66.666667%;
+	// padding-right: 15px;
+	// float: left;
 
 	& + .wp-travel-widget-area {
-		width: 33.3333%;
-		float: right;
-		padding: 0px 15px;
-		display: block;
+		// width: 33.3333%;
+		// float: right;
+		// padding: 0px 15px;
+		// display: block;
 	}
 
 	@include sidr-view {
