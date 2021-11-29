@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * WP Travel Checkout Shortcode Class.
  */
-class WP_Travel_Checkout {
+class WP_Travel_Checkout { // @phpcs:ignore
 
 	/**
 	 * Output of checkout shotcode.
@@ -37,8 +37,8 @@ class WP_Travel_Checkout {
 			return wptravel_get_template_part( 'account/form', 'login' );
 		}
 		// @since 4.0.7
-		do_action( 'wp_travel_before_checkout_page_wrap' );
-		$hide_mini_cart = apply_filters( 'wp_travel_hide_mini_cart_on_checkout', false );
+		do_action( 'wp_travel_before_checkout_page_wrap' ); // @phpcs:ignore
+		$hide_mini_cart = apply_filters( 'wp_travel_hide_mini_cart_on_checkout', false ); // @phpcs:ignore
 		?>
 		<div class="checkout-page-wrap <?php echo $hide_mini_cart ? 'wti_no_mini_cart' : ''; ?>">
 			<?php if ( ! $hide_mini_cart ) : ?>
@@ -62,6 +62,8 @@ class WP_Travel_Checkout {
 	/**
 	 * Validate pricing Key
 	 *
+	 * @param Number $trip_id Trip Id of the trip.
+	 * @param String $pricing_key Pricing Key of the trip.
 	 * @return bool true | false.
 	 */
 	public static function is_pricing_key_valid( $trip_id, $pricing_key ) {
@@ -91,6 +93,9 @@ class WP_Travel_Checkout {
 	/**
 	 * Validate date
 	 *
+	 * @param Number $trip_id Trip Id of the trip.
+	 * @param String $pricing_key Pricing Key of the trip.
+	 * @param String $test_date Trip date.
 	 * @return bool true | false.
 	 */
 	public static function is_request_date_valid( $trip_id, $pricing_key, $test_date ) {
