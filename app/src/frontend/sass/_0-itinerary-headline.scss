@@ -269,8 +269,10 @@ label.radio-checkbox-label {
 	}
 	.mfp-close {
 		position: absolute;
-		top: 5px !important;
-		right: 5px !important;
+		// trip enquiry popup close button position fix
+		top: 7px !important;
+		right: 6px !important;
+		left: unset;
 		background-color: #fff !important;
 		color: red;
 		font-size: 24px;
@@ -362,10 +364,13 @@ label.radio-checkbox-label {
 .mfp-wrap {
 	#wp-travel-enquiries {
 		button.mfp-close {
-			right: -3px;
-			top: -2px;
+			// right: -3px;
+			// top: -2px;
+			top: 7px;
+			right: 6px;
 			background-color: transparent;
 			box-shadow: none;
+			padding: 0 0 0 2px;
 
 			&:hover {
 				color: #f83531;
