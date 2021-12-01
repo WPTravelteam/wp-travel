@@ -235,7 +235,7 @@ $defaultColor: #3399ff;
 	}
 }
 
-#booking .wp-travel-booking__header {
+.wp-travel-booking__header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -316,7 +316,7 @@ $defaultColor: #3399ff;
 	}
 }
 //Dates Trip Date Listing
-#booking.wp-travel-list-view {
+.wp-travel-list-view {
 	.wp-travel-booking__pricing-wrapper {
 		display: none;
 		.wp-travel-booking__pricing-name {
@@ -1293,7 +1293,7 @@ $defaultColor: #3399ff;
 	}
 }
 //Calendar Trip Date Listing
-#booking.wp-travel-calendar-view {
+.wp-travel-calendar-view {
 	background-color: #fff;
 	padding: 0 1em 1em;
 	// .wp-travel-booking__panel-bottom {
