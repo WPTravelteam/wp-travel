@@ -250,9 +250,7 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
                                 _allDates[_dateIndex] = { ..._allDates[_dateIndex], end_date: '' }
                                 onUpdate(storeKey, _allDates);
                             }}>
-                                {/* X */}
                                 <i className="fas fa-times-circle"></i>
-                                {/* <i class="far fa-times-circle"></i> */}
                                 </button>
                         </div>
                     </PanelRow>

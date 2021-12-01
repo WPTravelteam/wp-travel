@@ -384,7 +384,7 @@ class WpTravel_Frontend_Assets {
 			);
 			$scripts['wp-travel-booking']                 = array(
 				'src'       => self::$app_path . '/assets/js/booking' . $suffix . '.js',
-				'deps'      => array( 'jquery' ),
+				'deps'      => array( 'jquery', 'wptravel-hc-sticky' ),
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,
 			);

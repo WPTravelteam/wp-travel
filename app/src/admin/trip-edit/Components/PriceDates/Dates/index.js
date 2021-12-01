@@ -96,7 +96,7 @@ const Dates = ( {allData} ) => {
     }
     
 
-    return <ErrorBoundary>
+    return <ErrorBoundary key="1">
     <div className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-top-border">
         <h4>{ __i18n.date_time }</h4>
         <PanelRow>
