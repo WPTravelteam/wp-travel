@@ -1,41 +1,20 @@
 import apiFetch from '@wordpress/api-fetch';
 import { useSelect } from '@wordpress/data';
 import { applyFilters } from '@wordpress/hooks';
-import { forwardRef, useEffect, useState, lazy, Suspense } from '@wordpress/element';
+import {  useEffect, lazy } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import moment from 'moment';
-import RRule from "rrule";
 import ErrorBoundry from './ErrorBoundry';
 import { wpTravelFormat, wpTravelTimeout } from "./functions";
-// React datepicker.
-// const DatePicker        = lazy( () => import( "react-datepicker" ) );
-import DatePicker, {registerLocale} from "react-datepicker";
-
-// sub-components
-// const PricingListing    = lazy(() => import("./sub-components/PricingListing"));
-// const PaxSelector       = lazy(() => import("./sub-components/PaxSelector"));
-// const TripTimesListing  = lazy(() => import("./sub-components/TripTimesListing"));
-// const TripExtrasListing = lazy(() => import("./sub-components/TripExtrasListing"));
 
 import PricingListing from './sub-components/PricingListing';
 import PaxSelector from './sub-components/PaxSelector';
 import TripTimesListing from './sub-components/TripTimesListing';
 import TripExtrasListing from './sub-components/TripExtrasListing';
 
-import RDP_Locale from './Locale'
-registerLocale("DPLocale", RDP_Locale() );
-// Loader.
-import Loader from '../../GlobalComponents/Loader'
-
-
-// List by date.
-const DatesListing      = lazy(() => import("./sub-components/DatesListing"));
-
-const _ = lodash
+const _ = lodash;
 
 const storeName = 'WPTravelFrontend/BookingWidget';
-
-const { currency_symbol: currencySymbol } = _wp_travel
 
 const Notice = ({ children, className }) => {
 	return <div className="wp-travel-booking__notice is-info">
@@ -44,23 +23,7 @@ const Notice = ({ children, className }) => {
 	</div>
 }
 
-const initialState = {
-	selectedDate: null,
-	selectedTripDate: [],
-	nomineePricings: [],
-	nomineeTimes: [],
-	selectedPricing: null,
-	selectedDateTime: null,
-	selectedTime: null,
-	rruleAll: {},
-	paxCounts: {},
-	tripExtras: {},
-	inventory: [],
-	isLoading: false,
-	excludedDateTimes: [],
-	pricingUnavailable: false,
-	tempExcludeDate: [] // Temp fixes. Just to check exclude date
-}
+
 const __i18n = {
 	..._wp_travel.strings
 }
@@ -94,9 +57,9 @@ const InventoryNotice = ({ inventory }) => {
 	return <p>{__i18n.bookings.pricing_not_available}</p>
 }
 
-const BookingWidget = () => {
-	const renderLoader = () => <div className="loader"></div>;
-	const [{ selectedDate,
+const BookingWidget = (props) => {
+	const { 
+		selectedDate,
 		selectedTripDate,
 		selectedTime,
 		nomineePricings,
@@ -110,12 +73,11 @@ const BookingWidget = () => {
 		inventory,
 		isLoading,
 		pricingUnavailable,
-		tempExcludeDate }
-		, setState] = useState(initialState)
+		tempExcludeDate,
+		// Functions
+		updateState } = props;
 
-	const updateState = data => {
-		setState(state => ({ ...state, ...data }))
-	}
+	
 
 	const allData = useSelect((select) => {
 		return select(storeName).getAllStore()
@@ -143,9 +105,6 @@ const BookingWidget = () => {
 						let _datetimes = _times.map(t => moment(`${ed.start_date} ${t}`).toDate())
 						if ( !selectedDateTime || _excludedDatesTimes.includes(moment(ed.start_date).format('YYYY-MM-DD')) ) {
 							excludedDateTimes.push(_datetimes[0]); // Temp fixes Pushing into direct state is not good.
-							// updateState({
-							// 	excludedDateTimes: [ ...excludedDateTimes, _datetimes[0] ]
-							// })
 						}
 						return false
 					}
@@ -267,260 +226,6 @@ const BookingWidget = () => {
 		}
 	}, [selectedDateTime])
 
-
-	const generateRRule = (data, startDate) => {
-		// let _startDate = moment(data.start_date)
-		let ruleArgs = {
-			freq: RRule.DAILY,
-			dtstart: startDate.toDate(),
-			until: startDate.toDate(),
-		};
-		let selectedYears = data.years ? data.years.split(",").filter(year => year != 'every_year').map(year => parseInt(year)) : [];
-
-		if (selectedYears.length > 0 && !selectedYears.includes(startDate.year()))
-			return []
-
-
-		let selectedMonths = data.months ? data.months.split(",").filter(month => month != 'every_month') : [];
-		let selectedDates = data.date_days ? data.date_days.split(",").filter(date => date !== 'every_weekdays' && date !== '') : [];
-		let selectedDays = data.days ? data.days.split(",").filter(day => day !== 'every_date_days' && day !== '') : [];
-
-		if (selectedMonths.length > 0) {
-			ruleArgs.bymonth = selectedMonths.map(m => parseInt(m));
-		}
-		if (selectedDays.length > 0) {
-			ruleArgs.byweekday = selectedDays.map(sd => RRule[sd]);
-		}
-		else if (selectedDates.length > 0) {
-			ruleArgs.bymonthday = selectedDates.map(md => parseInt(md));
-		}
-
-		let rule = new RRule(ruleArgs);
-		return rule.all()
-	}
-
-	// Date param need to have only Y-M-D date without time.
-	const isTourDate = date => {
-		if (moment(date).isBefore(moment(new Date())))
-			return false
-		if (!isFixedDeparture)
-			return true
-		let curretYear = date.getFullYear();
-		let currentDate = date.getDate();
-		let currentMonth = date.getMonth();
-
-		// UTC Offset Fixes.
-        let totalOffsetMin = new Date(date).getTimezoneOffset();
-        let offsetHour = parseInt(totalOffsetMin/60);
-        let offsetMin = parseInt(totalOffsetMin%60);
-
-        let currentHours = 0;
-        let currentMin = 0;
-        if ( offsetHour > 0 ) {
-            currentHours = offsetHour;
-            currentMin = offsetMin;
-        }
-		let startDate = moment(new Date(Date.UTC(curretYear, currentMonth, currentDate, currentHours, currentMin, 0))).utc();
-		// let startDate = moment(new Date(date));
-
-		if (tempExcludeDate.includes(startDate.format('YYYY-MM-DD'))) {
-			return false
-		}
-
-		const _date = _dates.find(data => {
-			if (data.is_recurring) {
-				let selectedYears = data.years ? data.years.split(",").filter(year => year != 'every_year').map(year => parseInt(year)) : [];
-
-				if (data.end_date && moment(date).toDate().toString().toLowerCase() != 'invalid date' && moment(date).isAfter(moment(data.end_date))) {
-					return false
-				}
-				if (data.start_date && moment(date).toDate().toString().toLowerCase() != 'invalid date' && moment(date).isBefore(moment(data.start_date))) {
-					return false
-				}
-				if (selectedYears.length > 0 && !selectedYears.includes(startDate.year()))
-					return false
-
-				let dateRules = generateRRule(data, startDate)
-				if ( ! applyFilters( 'wpTravelRecurringCutofDateFilter', true, dateRules, allData.tripData, date, data )  ) { // @since 4.3.1
-					return
-				}
-				return dateRules.find(da => moment(moment(da).format("YYYY-MM-DD")).unix() === moment(moment(date).format('YYYY-MM-DD')).unix()) instanceof Date
-			}
-			if (data.start_date) {
-				if ( ! applyFilters( 'wpTravelCutofDateFilter', true, allData.tripData, date, data )  ) { // @since 4.3.1
-					return
-				}
-				return moment(date).isSame(moment(data.start_date))
-				
-			}
-			return false
-		})
-		return _date && 'undefined' !== typeof _date.id
-		// }
-	}
-
-	const dayClicked = ( date, date_id ) => {
-		if (!isFixedDeparture) {
-			updateState({
-				pricingUnavailable: false,
-				selectedDate: date,
-				selectedDateTime: date,
-				isLoading: true,
-			})
-			return
-		}
-
-		updateState({
-			...initialState,
-			excludedDateTimes,
-			isLoading: true,
-			pricingUnavailable: false,
-		})
-
-		let _state = {
-			selectedDate: date,
-			selectedDateTime: date,
-		}
-
-		// @todo use getPricingsByDate function below to get pricing ids/_nomineePricings.
-		// UTC Offset Fixes.
-        let totalOffsetMin = new Date(date).getTimezoneOffset();
-        let offsetHour = parseInt(totalOffsetMin/60);
-        let offsetMin = parseInt(totalOffsetMin%60);
-
-        let currentHours = 0;
-        let currentMin = 0;
-        if ( offsetHour > 0 ) {
-            currentHours = offsetHour;
-            currentMin = offsetMin;
-        }
-		let startDate = moment(new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), currentHours, currentMin, 0))).utc();
-		// let startDate = moment(new Date(date));
-
-		const _dateIds = _dates // Trip Date IDs matches to selected date.
-			.filter(_date => {
-				if (
-					_date.is_recurring 
-					&& ( ( 'undefined' == typeof date_id && 'dates' === tripDateListing ) || 'calendar' === tripDateListing ) ) { // Temp fixes of going inside all loop. date_id is not available in onclick event of recurring date so checking date id to prevent go inside if clicked non recuring date. 
-					if (_date.end_date) {
-						if (moment(date).toDate().toString().toLowerCase() != 'invalid date' && moment(date).isAfter(moment(_date.end_date))) {
-							return false
-						}
-					}
-
-					if (_date.start_date) {
-						if (moment(date).toDate().toString().toLowerCase() != 'invalid date' && moment(date).isBefore(moment(_date.start_date))) {
-							return false
-						}
-					}
-
-					let dateRules = generateRRule(_date, startDate);
-					return dateRules.find(da => moment(moment(da).format("YYYY-MM-DD")).unix() === moment(moment(date).format('YYYY-MM-DD')).unix()) instanceof Date
-				}
-				if (_date.start_date) {
-					return moment(date).isSame(moment(_date.start_date))
-				}
-				return moment(_date.start_date).isSame(moment(date))
-			}).map(d => d.id)
-
-		let _nomineePricings = _dateIds.map(id => datesById[id].pricing_ids.split(',').map(id => id.trim()))
-
-		_nomineePricings = _.chain(_nomineePricings).flatten().uniq().value().filter(p => p != '' && typeof pricings[p] !== 'undefined')
-
-		if (_nomineePricings.length <= 0) {
-			_state = { ..._state, pricingUnavailable: true }
-		} else {
-			_state = { ..._state, nomineePricings: _nomineePricings }
-		}
-
-		_state = { ..._state, selectedTripDate: _dateIds, isLoading: false }
-
-		updateState(_state)
-	}
-
-	// Function used to get pricings in Fixed departure listing.
-	const getPricingsByDate = ( date, date_id, returnDateIds ) => {
-		// UTC Offset Fixes.
-        let totalOffsetMin = new Date(date).getTimezoneOffset();
-        let offsetHour = parseInt(totalOffsetMin/60);
-        let offsetMin = parseInt(totalOffsetMin%60);
-
-        let currentHours = 0;
-        let currentMin = 0;
-        if ( offsetHour > 0 ) {
-            currentHours = offsetHour;
-            currentMin = offsetMin;
-        }
-		let startDate = moment(new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), currentHours, currentMin, 0))).utc();
-		// let startDate = moment(new Date(date));
-
-		const _dateIds = _dates // Trip Date IDs matches to selected date.
-			.filter(_date => {
-				if (
-					_date.is_recurring 
-					&& ( ( 'undefined' == typeof date_id && 'dates' === tripDateListing ) || 'calendar' === tripDateListing ) ) { // Temp fixes of going inside all loop. date_id is not available in onclick event of recurring date so checking date id to prevent go inside if clicked non recuring date. 
-					if (_date.end_date) {
-						if (moment(date).toDate().toString().toLowerCase() != 'invalid date' && moment(date).isAfter(moment(_date.end_date))) {
-							return false
-						}
-					}
-
-					let dateRules = generateRRule(_date, startDate);
-					return dateRules.find(da => moment(moment(da).format("YYYY-MM-DD")).unix() === moment(moment(date).format('YYYY-MM-DD')).unix()) instanceof Date
-				}
-				if (_date.start_date) {
-					return moment(date).isSame(moment(_date.start_date))
-				
-				}
-				return moment(_date.start_date).isSame(moment(date))
-			}).map(d => d.id)
-
-		if ( ! returnDateIds ) { // return pricings
-			let _nomineePricings = _dateIds.map(id => datesById[id].pricing_ids.split(',').map(id => id.trim()))
-			_nomineePricings = _.chain(_nomineePricings).flatten().uniq().value().filter(p => p != '' && typeof pricings[p] !== 'undefined')
-			return _nomineePricings;
-		}
-		return _dateIds;
-	}
-
-	// For fixed departure listing.
-	const handleFixedDeparturePricingSelect = ( date, date_id, pricingId ) => {
-		if (!isFixedDeparture) {
-			updateState({
-				pricingUnavailable: false,
-				selectedDate: date,
-				selectedDateTime: date,
-				isLoading: true,
-			})
-			return
-		}
-
-		updateState({
-			...initialState,
-			excludedDateTimes,
-			isLoading: true,
-			pricingUnavailable: false,
-		})
-
-		let _state = {
-			selectedDate: date,
-			selectedDateTime: date,
-		}
-
-		let _dateIds = getPricingsByDate( date, date_id, true );
-		let _nomineePricings = _dateIds.map(id => datesById[id].pricing_ids.split(',').map(id => id.trim()))
-			_nomineePricings = _.chain(_nomineePricings).flatten().uniq().value().filter(p => p != '' && typeof pricings[p] !== 'undefined')
-		if (_nomineePricings.length <= 0) {
-			_state = { ..._state, pricingUnavailable: true }
-		} else {
-			_state = { ..._state, nomineePricings: _nomineePricings }
-		}
-
-		_state = { ..._state, selectedTripDate: _dateIds, isLoading: true, selectedPricing:pricingId }
-		updateState(_state)
-		// end of date update in state
-	}
-
 	const handleTimeClick = time => () => {
 		updateState({ selectedDateTime: time.toDate(), selectedTime: time.format('HH:mm') })
 	}
@@ -529,8 +234,6 @@ const BookingWidget = () => {
 		let pricing = pricings[selectedPricing]
 		let category = pricing.categories.find(c => c.id === id)
 		let count = paxCounts[id] + value < 0 ? 0 : paxCounts[id] + value
-		// if (parseInt(category.default_pax) > count)
-		// 	count = parseInt(category.default_pax)
 
 		let _inventory = inventory.find(i => i.date === moment(selectedDateTime).format('YYYY-MM-DD[T]HH:mm'))
 		let maxPax = _inventory && _inventory.pax_available
@@ -622,11 +325,7 @@ const BookingWidget = () => {
 			})
 				.then(res => {
 					if (true === res.success && 'WP_TRAVEL_ADDED_TO_CART' === res.data.code) {
-						// if ( wp_travel.isEnabledCartPage ) {
-						// 	location.href = wp_travel.cartUrl; // This may include cart or checkout page url.
-						// } else {
 						location.href = wp_travel.checkoutUrl; // [only checkout page url]
-						// }
 					}
 				}), 1000)
 			.catch(error => {
@@ -742,9 +441,7 @@ const BookingWidget = () => {
 
 					_state = _times.length > 0 && { ..._state, selectedDateTime: _times[0].toDate(), selectedTime: _times[0].format('HH:mm') } || _state
 					_state = times.length > 0 && { ..._state, nomineeTimes: _times } || _state
-					// if (excludedDateTimes.length > 0 && _times.length <= 0) { // Why??
-					// 	_state = { ..._state, pricingUnavailable: true }
-					// }
+
 					if (_times.length <= 0) { // Why??
 						_state = { ..._state, pricingUnavailable: true }
 					}
@@ -766,107 +463,17 @@ const BookingWidget = () => {
 		jQuery('.wti__selector-item.active').find('.wti__selector-content-wrapper').slideDown();
 	}),[];
 
-
-	// Calendar Data starts.
-	const DatePickerBtn = forwardRef(({ value, onClick }, ref) => (
-		!_wp_travel.itinerary_v2 ? 
-		<button className="wp-travel-date-picker-btn" onClick={onClick}>
-			{selectedDate ? !isFixedDeparture && `${moment(selectedDate).format('MMM D, YYYY')} - ${moment(selectedDate).add(duration - 1, 'days').format('MMM D, YYYY')}` || moment(selectedDate).format('MMM D, YYYY') : __i18n.bookings.date_select}
-			<span>
-				<svg enableBackground="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m446 40h-46v-24c0-8.836-7.163-16-16-16s-16 7.164-16 16v24h-224v-24c0-8.836-7.163-16-16-16s-16 7.164-16 16v24h-46c-36.393 0-66 29.607-66 66v340c0 36.393 29.607 66 66 66h380c36.393 0 66-29.607 66-66v-340c0-36.393-29.607-66-66-66zm-380 32h46v16c0 8.836 7.163 16 16 16s16-7.164 16-16v-16h224v16c0 8.836 7.163 16 16 16s16-7.164 16-16v-16h46c18.748 0 34 15.252 34 34v38h-448v-38c0-18.748 15.252-34 34-34zm380 408h-380c-18.748 0-34-15.252-34-34v-270h448v270c0 18.748-15.252 34-34 34z"></path></g></svg>
-			</span>
-		</button>
-		:
-		<button className="wp-travel-date-picker-btn" onClick={onClick}>
-			{selectedDate ? !isFixedDeparture && `${moment(selectedDate).format('MMM D, YYYY')} - ${moment(selectedDate).add(duration - 1, 'days').format('MMM D, YYYY')}` || moment(selectedDate).format('MMM D, YYYY') : __i18n.bookings.date_select}
-			<span>
-				<i className="far fa-calendar-alt"></i>
-			</span>
-		</button>
-	))
-
 	let _mindate = _.chain(_dates).sortBy(d => moment(d.start_date).unix()).value() || []
 	_mindate = _mindate.find(md => moment(md.start_date).isAfter(moment(new Date())) || moment(md.start_date).isSame(moment(new Date())))
 
-	let minDate = _mindate && moment(_mindate.start_date).toDate() || new Date();
-	let maxDate = new Date( new Date().setFullYear(new Date().getFullYear() + 10 ));
-	
-	let params = {
-		showMonthDropdown: true,
-		customInput: <DatePickerBtn isFixedDeparture={isFixedDeparture} duration={duration} selectedDate={selectedDate} />,
-		showYearDropdown: true,
-		dropdownMode: "select",
-		minDate: minDate,
-		maxDate: maxDate,
-		onChange: dayClicked,
-		filterDate: isTourDate,
-		locale:"DPLocale"
-	}
-	if (!isFixedDeparture) {
-		delete params.filterDate
-		params.minDate = new Date()
-		params.startDate = selectedDate
-		params.endDate = moment(selectedDate).add(duration - 1, 'days').toDate()
-	}
 	// calendar Data ends.
-
 	let totalPax = _.size(paxCounts) > 0 && Object.values(paxCounts).reduce((acc, curr) => acc + curr) || 0
 	let minPaxToBook = selectedPricing && pricings[selectedPricing].min_pax && parseInt(pricings[selectedPricing].min_pax) || 1
 	let activeInventory = inventory.find(i => i.date === moment(selectedDateTime).format('YYYY-MM-DD[T]HH:mm'))
 	let maxPaxToBook = activeInventory && parseInt(activeInventory.pax_available)
-	const tripDateListing = _wp_travel.trip_date_listing
-	// Only used in fixed departure date listing.
-	let componentData ={
-		pricing: pricings[selectedPricing] || null,
-		onPaxChange:handlePaxChange,
-		counts:paxCounts,
-		inventory:inventory,
-		selectedPricingId:selectedPricing, // Additional Data.
-		selectedDateIds:selectedTripDate, // Additional Data.
-		selectedDateTime:selectedDateTime, // Additional Data.  for pax picker and time picker
-		onTimeSelect:handleTimeClick, // For time picker
-		nomineeTimes:nomineeTimes, // For time picker
-		totalPax:totalPax, // For extras.
-		tripExtras:tripExtras, // For extras.
-		updateState:updateState, // For extras.
-		isLoading:isLoading
-	}
+
 	return <>
 		
-			<div className="wp-travel-booking__header">
-				{/* {__( 'test translation.', 'wp-travel' )} */}
-				<h3>{__i18n.booking_tab_content_label}</h3>
-				{selectedDate && <button onClick={() => {
-					let _initialState = Object.assign(initialState)
-					if (!isFixedDeparture)
-						delete _initialState.nomineePricings
-					updateState(_initialState)
-				}}>
-					<svg version="1.1" xmlns="http://www.w3.org/2000/svg" x={0} y={0} viewBox="0 0 36.9 41.7"><path
-						d="M35.8,17.1l-2.8,1c0.6,1.7,0.9,3.4,0.9,5.2c0,8.5-6.9,15.4-15.4,15.4C9.9,38.7,3,31.8,3,23.3C3,14.8,9.9,7.8,18.4,7.8
-						c1.3,0,2.6,0.2,3.9,0.5l-2.8,3l2.2,2L25,9.9l2.3-2.4L26,4.4L24.2,0l-2.8,1.1l1.8,4.3c-1.5-0.4-3.1-0.6-4.7-0.6
-						C8.3,4.8,0,13.1,0,23.3c0,10.2,8.3,18.4,18.4,18.4c10.2,0,18.4-8.3,18.4-18.4C36.9,21.2,36.5,19.1,35.8,17.1z">
-					</path>
-					</svg>
-					{__i18n.bookings.booking_tab_clear_all}</button>}
-			</div>
-		
-			{
-				isFixedDeparture && 'dates' === tripDateListing && 
-					<div className="wp-travel-booking__content-wrapper">
-						{/* <Suspense fallback={<Loader />}> */}
-							<DatesListing {...{ dates: datesById, isTourDate, getPricingsByDate, allData, onFixedDeparturePricingSelect:handleFixedDeparturePricingSelect, componentData, getPricingTripTimes:getPricingTripTimes }} />
-						{/* </Suspense> */}
-					</div>
-				||
-				<div className="wp-travel-booking__datepicker-wrapper">
-					{/* <Suspense fallback={<Loader />}> */}
-						<DatePicker {...params} />
-						{!selectedDateTime && <p>{__i18n.bookings.date_select_to_view_options}</p> || null}
-					{/* </Suspense> */}
-				</div>
-			}
-			
 
 			{selectedDateTime && 
 				<>

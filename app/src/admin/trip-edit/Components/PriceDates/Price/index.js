@@ -56,7 +56,7 @@ const Pricings = ( {allData} ) => {
             payout_percentages = [ settings.minimum_partial_payout[0] ];
         }
     }
-    return <ErrorBoundary>
+    return <ErrorBoundary key="1">
         <div className="wp-travel-trip-pricings">
             {applyFilters('wp_travel_before_pricings_options', [], allData)}
             {'multiple-price' === pricing_type && <>
