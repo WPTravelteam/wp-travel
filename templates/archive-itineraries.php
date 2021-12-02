@@ -33,13 +33,6 @@ if ( 'twentyseventeen' === $current_theme->get( 'TextDomain' ) ) {
 	<?php
 }
 
-?>
-	<header class="page-header">
-		<?php the_archive_title( '<h1 class="page-title">', '</h1>' ); ?>
-		<?php the_archive_description( '<div class="taxonomy-description">', '</div>' ); ?>
-	</header>
-<?php
-
 do_action( 'wp_travel_before_main_content' );
 
 $itinerary_layout_v2_enabled = wptravel_use_itinerary_v2_layout();

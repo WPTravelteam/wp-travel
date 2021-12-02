@@ -80,6 +80,24 @@ function wptravel_load_single_itinerary_hooks() {
 		add_action( 'wp_travel_before_main_content', 'wptravel_archive_before_content' );
 		add_action( 'wp_travel_after_main_content', 'wptravel_archive_v2_wrapper_close' );
 	}
+	add_action( 'wp_travel_before_main_content', 'wptravel_archive_title', 9 );
+
+}
+
+/**
+ * Add Page title and description on the archive page.
+ *
+ * @since 5.0.6
+ */
+function wptravel_archive_title() {
+	if ( ( WP_Travel::is_page( 'archive' ) ) && ! is_admin() ) :
+		?>
+		<header class="page-header">
+			<?php the_archive_title( '<h1 class="page-title">', '</h1>' ); ?>
+			<?php the_archive_description( '<div class="taxonomy-description">', '</div>' ); ?>
+		</header>
+		<?php
+	endif;
 }
 
 /**
