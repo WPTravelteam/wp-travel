@@ -726,5 +726,8 @@ if (document.getElementById(bookingWidgetElementId)) {
 
 let blockId = 'wptravel-block-trip-calendar';
 if (document.getElementById(blockId)) {
-    render(<WPTravelBookingWidget forceCalendarDisplay={true} calendarInline={true} />, document.getElementById(blockId));
+	let elem = document.getElementById(blockId);
+	const props = Object.assign( {}, elem.dataset );
+	const inline = undefined != typeof props.inline && props.inline;
+	render(<WPTravelBookingWidget forceCalendarDisplay={true} calendarInline={inline} />, elem );
 }
