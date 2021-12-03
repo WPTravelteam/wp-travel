@@ -651,6 +651,7 @@ jQuery(function ($) {
         centerMode: false,
         arrows: true,
         variableWidth: true,
+        rows:0, // Tab issue fix
         // slide: 'li',
         cssEase: 'linear',
         slidesToScroll: 1,

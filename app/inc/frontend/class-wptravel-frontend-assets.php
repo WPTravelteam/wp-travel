@@ -497,6 +497,13 @@ class WpTravel_Frontend_Assets {
 				'in_footer' => true,
 			);
 
+			$scripts['wptravel-yoast']                 = array(
+				'src'       => self::$app_path . '/assets/js/yoast.js',
+				'deps'      => array( 'jquery' ),
+				'ver'       => WP_TRAVEL_VERSION,
+				'in_footer' => true,
+			);
+
 			// Trip Edit.
 			$trip_edit_deps                               = $all_dependencies['admin-trip-options'];
 			$scripts['wp-travel-admin-trip-options']      = array(

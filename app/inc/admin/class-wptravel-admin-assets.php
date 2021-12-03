@@ -81,6 +81,10 @@ class WpTravel_Admin_Assets {
 		wp_enqueue_script( 'wp-travel-admin-script' ); // backend.js.
 		wp_enqueue_script( 'wptravel-legacy-widgets' );
 
+		if ( WP_Travel::is_page( 'itineraries', true ) && function_exists( 'wpseo_auto_load' ) ) {
+			wp_enqueue_script( 'wptravel-yoast' ); // Yoast Compatibility.
+		}
+
 		// Block Trip edit.
 		if ( WP_Travel::is_page( 'itineraries', true ) || WP_Travel::is_page( 'settings', true ) || WP_Travel::is_page( 'enquiry', true ) ) { // why this enqueue for settings page.?
 			wp_enqueue_editor();

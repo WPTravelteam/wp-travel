@@ -220,13 +220,19 @@ class WpTravel_Helpers_Localize {
 			$wp_travel_gallery_data = apply_filters( 'wptravel_localize_gallery_data', $wp_travel_gallery_data );
 			// end of Map & Gallery Data.
 			$localized_data['wp_travel_drag_drop_uploader'] = $wp_travel_gallery_data;
-
+			
+			
 			// @since 4.6.4
 			$_wp_travel_admin = array(
 				'strings' => WpTravel_Helpers_Strings::get(),
 				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 				'_nonce'  => wp_create_nonce( 'wp_travel_nonce' ),
 			);
+
+			if ( WP_Travel::is_page( 'itineraries', true ) ) {
+				$wp_travel_itinerary = new WP_Travel_Itinerary( $post );
+				$_wp_travel_admin['overview'] = $wp_travel_itinerary->get_content();
+			}
 
 			$localized_data['_wp_travel_admin'] = $_wp_travel_admin;
 
