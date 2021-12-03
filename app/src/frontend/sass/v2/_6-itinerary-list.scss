@@ -289,6 +289,9 @@
 			justify-content: left;
 			padding-left: 0;
 			margin: 0 -10px;
+			flex-wrap: wrap;
+			gap: 20px;
+			margin-left: 0;
 
 			@include mob {
 				margin: 0 !important;
