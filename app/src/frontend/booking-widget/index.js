@@ -1,9 +1,9 @@
-import { useSelect } from '@wordpress/data';
-import { forwardRef, useEffect, useState, render, lazy, Suspense } from '@wordpress/element';
-import { addFilter, applyFilters } from '@wordpress/hooks';
+import { useSelect, dispatch } from '@wordpress/data';
+import { forwardRef, useEffect, render, lazy, Suspense } from '@wordpress/element';
+import {  applyFilters } from '@wordpress/hooks';
 import apiFetch from '@wordpress/api-fetch';
 import ErrorBoundary from './ErrorBoundry';
-import './_Store';
+import {DEFAULT_BOOKING_STATE} from './_Store'; // Note: This store content 2 stores one for trip data and another for selected info for booking.
 
 // Additional lib
 const _ = lodash;
@@ -18,25 +18,7 @@ import RRule from "rrule";
  * https://stackoverflow.com/questions/39879680/example-of-setting-webpack-public-path-at-runtime
  */
 __webpack_public_path__ = _wp_travel.build_path;
-
-const initialState = {
-	selectedDate: null,
-	selectedTripDate: [],
-	nomineePricings: [],
-	nomineeTimes: [],
-	selectedPricing: null,
-	selectedDateTime: null,
-	selectedTime: null,
-	rruleAll: {},
-	paxCounts: {},
-	tripExtras: {},
-	inventory: [],
-	isLoading: false,
-	excludedDateTimes: [],
-	pricingUnavailable: false,
-	tempExcludeDate: [] // Temp fixes. Just to check exclude date
-}
-
+const initialState = DEFAULT_BOOKING_STATE(); // just to reset purpose.
 const __i18n = {
 	..._wp_travel.strings
 }
@@ -44,14 +26,17 @@ const __i18n = {
 const BookingWidget = lazy(() => import("./BookingWidget"));
 import DatesListing from "./sub-components/DatesListing";
 
-
-const storeName = 'WPTravelFrontend/BookingWidget';
+// Store Names.
+const storeName        = 'WPTravelFrontend/BookingWidget';
+const bookingStoreName = 'WPTravel/Booking';
 
 const WPTravelBookingWidget = ( props ) => {
+	const bookingState      = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
+    const { updateBooking } = dispatch( bookingStoreName );
+	
     const forceCalendarDisplay = 'undefined' !== typeof props.forceCalendarDisplay ? props.forceCalendarDisplay : false;
     const calendarInline = 'undefined' !== typeof props.calendarInline ? props.calendarInline : false;
 
-    const [bookingState, setBookingState] = useState( initialState );
     const { selectedDate,
 		selectedTripDate,
 		selectedTime,
@@ -68,12 +53,9 @@ const WPTravelBookingWidget = ( props ) => {
 		pricingUnavailable,
 		tempExcludeDate } = bookingState;
     const updateState = data => {
-        setBookingState( state => ({ ...state, ...data }))
+		updateBooking({ ...bookingState, ...data });
     }
-
-
 	const renderLoader = () => <div className="loader"></div>;
-
     const allData = useSelect((select) => {
         return select(storeName).getAllStore()
     }, []);
@@ -633,9 +615,6 @@ const WPTravelBookingWidget = ( props ) => {
 	// calendar Data ends.
 
 	let totalPax = _.size(paxCounts) > 0 && Object.values(paxCounts).reduce((acc, curr) => acc + curr) || 0
-	let minPaxToBook = selectedPricing && pricings[selectedPricing].min_pax && parseInt(pricings[selectedPricing].min_pax) || 1
-	let activeInventory = inventory.find(i => i.date === moment(selectedDateTime).format('YYYY-MM-DD[T]HH:mm'))
-	let maxPaxToBook = activeInventory && parseInt(activeInventory.pax_available)
 	const tripDateListing = _wp_travel.trip_date_listing
 	// Only used in fixed departure date listing.
 	let componentData ={
@@ -724,6 +703,7 @@ if (document.getElementById(bookingWidgetElementId)) {
     render(<WPTravelBookingWidget />, document.getElementById(bookingWidgetElementId));
 }
 
+// For Block.
 let blockId = 'wptravel-block-trip-calendar';
 if (document.getElementById(blockId)) {
 	let elem = document.getElementById(blockId);
