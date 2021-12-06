@@ -834,7 +834,9 @@
 						flex: 1;
 						margin-right: 0.5em;
 						padding: 0 1em;
-						max-width: 140px;
+						// max-width: 140px;
+						max-width: 100%;
+						width: 100%;
 					}
 					.btn {
 						font-size: 12px;
