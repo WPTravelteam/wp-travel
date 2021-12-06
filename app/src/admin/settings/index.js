@@ -1,4 +1,4 @@
-import { render, useEffect } from '@wordpress/element'; // [ useeffect : used on onload, component update ]
+import { render, useEffect, isValidElement } from '@wordpress/element'; // [ useeffect : used on onload, component update ]
 import { TabPanel, Spinner, Notice } from '@wordpress/components';
 import { useSelect, select, dispatch } from '@wordpress/data'; // redux [and also for hook / filter] | dispatch : send data to store
 import { applyFilters, addFilter } from '@wordpress/hooks';
@@ -137,7 +137,17 @@ const WPTravelTripSettings = () => {
             onSelect={() => false}
             tabs={tabs}>
             {
-                (tab) => 'undefined' !== typeof tab.content ? <ErrorBoundary><tab.content /></ErrorBoundary> : <>{__('Error', 'wp-travel')}</>
+                (tab) =><ErrorBoundary>
+                    { tab.content && isValidElement( <tab.content /> ) ? <tab.content /> : ''} {/* Need to remove this latter. add all content with filter instead */}
+                    {applyFilters(
+                        `wptravel_settings_tab_content_${tab.name.replaceAll(
+                            "-",
+                            "_"
+                        )}`,
+                        [],
+                        allData
+                    )}
+                </ErrorBoundary>
             }
         </TabPanel>
         <SaveSettings position="bottom" />
