@@ -80,6 +80,11 @@
 	}
 }
 
+.sticky-sidebar {
+    position: sticky;
+    top: 46px;
+}
+
 .checkout-page-wrap,
 .wp-travel-enquiries-form {
 	@media (min-width: 768px) {
@@ -557,7 +562,7 @@
 							.trip-name {
 								display: inline-block;
 								margin-right: 10px;
-								line-height: 1;
+								// line-height: 1;
 								h5 {
 									a {
 										// display: inline;
@@ -812,7 +817,7 @@
 					margin: 0;
 				}
 				&.selected-payable-amount {
-					color: #3399ff;
+					// color: #3399ff;
 					.price,
 					label {
 						font-size: 20px;
