@@ -68,7 +68,8 @@
 
 	.tab-list-content {
 		display: none;
-		padding: 40px 20px;
+		// padding: 40px 20px;
+		padding: 30px 20px 20px;
 		border: none;
 
 		&.current-content {
@@ -251,6 +252,11 @@
 			}
 		}
 	}
+}
+
+// Gallery 
+#gallery {
+
 }
 
 //Reviews
