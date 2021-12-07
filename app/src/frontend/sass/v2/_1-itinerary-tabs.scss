@@ -22,7 +22,7 @@
 	margin-right: auto !important;
 	@include mob {
 		padding: 20px 0px 10px !important;
-	}	
+	}
 
 	.tab-list.resp-tabs-list {
 		margin: 0px;
@@ -406,15 +406,23 @@
 }
 
 //tabs front end
-.wp-travel-feature-slide-content {
-	&.featured-detail-section {
-		.right-plot-inner-wrap {
-			.entry-header {
-				padding-top: 0;
-				padding-bottom: 0;
-				background: none;
-				.entry-title {
-					margin: 0;
+.trip-headline-wrapper {
+	.wp-travel-feature-slide-content {
+		&.left-plot {
+			height: 598px !important;
+		}
+		&.right-plot {
+			height: 100% !important;
+		}
+		&.featured-detail-section {
+			.right-plot-inner-wrap {
+				.entry-header {
+					padding-top: 0;
+					padding-bottom: 0;
+					background: none;
+					.entry-title {
+						margin: 0;
+					}
 				}
 			}
 		}
