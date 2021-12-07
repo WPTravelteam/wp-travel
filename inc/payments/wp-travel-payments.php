@@ -302,10 +302,7 @@ function wptravel_update_payment_status_booking_process_frontend( $booking_id ) 
 		return;
 	}
 
-	if (
-		! isset( $_POST['wp_travel_security'] )
-		|| ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['wp_travel_security'] ) ), 'wp_travel_security_action' )
-		) {
+	if ( ! WP_Travel::verify_nonce( true ) ) {
 		return;
 	}
 	$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
