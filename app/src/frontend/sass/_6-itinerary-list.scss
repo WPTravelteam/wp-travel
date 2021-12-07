@@ -122,8 +122,14 @@
 	ul.wp-travel-itinerary-list {
 		position: relative;
 		padding: 0;
-		display: flex;
-		flex-wrap: wrap;
+		// display: flex;
+		// flex-wrap: wrap;
+		display: grid;
+		grid-gap: 20px;
+		grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)) !important;
+		// @media (max-width: 992px) {
+		// 	grid-template-columns: repeat(2, 1fr) !important;
+		// }
 
 		@include sidr-view {
 		}
@@ -189,7 +195,8 @@
 			box-sizing: border-box;
 			border: 1px solid #eaeaea;
 			background: #fff;
-			width: calc(33.333% - 20px);
+			// width: calc(33.333% - 20px);
+			width: 100%;
 			height: auto;
 			margin: 10px;
 			padding-left: 0;

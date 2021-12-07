@@ -81,8 +81,8 @@
 }
 
 .sticky-sidebar {
-    position: sticky;
-    top: 46px;
+	position: sticky;
+	top: 46px;
 }
 
 .checkout-page-wrap,
@@ -462,7 +462,7 @@
 				position: relative;
 				// margin: 20px 0;
 				// background: #f1f1f1;
-				padding: 15px;
+				// padding: 15px;
 				border-radius: 5px;
 				&:not(:first-child) {
 					border-top: 1px solid #f4f4f4;
@@ -874,10 +874,19 @@
 				.field-inline {
 					display: flex;
 					position: relative;
+					@media (max-width: 420px) {
+						flex-wrap: wrap;
+						flex-direction: column;
+						gap: 1em;
+					}
 					input {
 						flex: 1;
 						margin-right: 0.5em;
 						max-width: 100%;
+						@media (max-width: 420px) {
+							margin-right: 0;
+							padding-block: 15px;
+						}
 					}
 					.btn {
 						font-size: 12px;
