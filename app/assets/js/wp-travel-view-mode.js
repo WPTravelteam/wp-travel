@@ -120,6 +120,13 @@ jQuery(document).ready(function($) {
         var view_layout = $(this).data('view');
         $('.wti__list-wrapper').removeClass('grid-view list-view');
         $('.wti__list-wrapper').addClass(view_layout);
-    })
+    });
+
+    $(document).on( 'click', '.btn-wptravel-filter-by', function(){
+        var parent = $(this).parent( '.wp-travel-filter-by-heading' );
+        if ( parent &&  parent.siblings( '.wp-toolbar-filter-field' ) ) {
+            parent.siblings( '.wp-toolbar-filter-field' ).toggleClass( 'show-in-mobile' );
+        }
+    } );
 
 });

@@ -1634,6 +1634,7 @@ function wptravel_archive_filter_by( $submission_get = array() ) {
 	<div class="wp-travel-post-filter clearfix">
 		<div class="wp-travel-filter-by-heading">
 			<h4><?php echo esc_html( $filter_by_text ); ?></h4>
+			<button class="btn btn-wptravel-filter-by"><?php echo esc_html( $filter_by_text ); ?><i class="arrow down"></i></button>
 		</div>
 
 		<?php do_action( 'wp_travel_before_post_filter' ); ?>
