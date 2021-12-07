@@ -53,6 +53,11 @@
 
 		.resp-tab-content {
 			padding: 0;
+			.account-setting {
+				.wp-travel-Button {
+					width: auto;
+				}
+			}
 		}
 	}
 	select,
@@ -612,7 +617,7 @@
 	-ms-user-select: none;
 }
 .onoffswitch-checkbox {
-	display: none;
+	display: none !important;
 }
 .onoffswitch-label {
 	display: block;
