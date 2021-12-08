@@ -39,10 +39,13 @@
 		padding: 0;
 		display: grid;
 		grid-gap: 20px;
-		grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)) !important;
-		// @media (max-width: 992px) {
-		// 	grid-template-columns: repeat(2, 1fr) !important;
-		// }
+		// grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)) !important;
+		@media (max-width: 992px) {
+			grid-template-columns: repeat(2, 1fr) !important;
+		}
+		@media (max-width: 675px) {
+			grid-template-columns: repeat(1, 1fr) !important;
+		}
 
 		@include sidr-view {
 		}

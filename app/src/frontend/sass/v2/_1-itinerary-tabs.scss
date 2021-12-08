@@ -234,19 +234,41 @@
 .itenary {
 	.timeline-contents {
 		.tc-content {
+			@media (max-width: 992px) {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+			}
 			img {
 				transform: translateY(8px);
 			}
 			&.right {
+				@media (max-width: 992px) {
+					justify-content: left;
+				}
 				img {
 					float: left;
 					margin-right: 1.5em;
+					@media (max-width: 992px) {
+						margin-bottom: 1.5em;
+					}
 				}
 			}
 			&.left {
+				@media (max-width: 992px) {
+					justify-content: right;
+				}
+				@media (max-width: 767px) {
+					justify-content: left;
+				}
 				img {
 					float: right;
 					margin-left: 1.5em;
+					margin-bottom: 1.5em;
+					@media (max-width: 992px) {
+						margin-bottom: 1.5em;
+					}
+					
 				}
 			}
 		}
