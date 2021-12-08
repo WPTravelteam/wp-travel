@@ -75,7 +75,8 @@ const BookingWidget = (props) => {
 		pricingUnavailable,
 		tempExcludeDate,
 		// Functions
-		updateState } = props;
+		updateState,
+		handlePricingSelect } = props;
 
 	
 
@@ -129,7 +130,7 @@ const BookingWidget = (props) => {
 
 	useEffect(() => {
 		if (nomineePricings.length === 1) {
-			handlePricingSelect(nomineePricings[0])()
+			handlePricingSelect(nomineePricings[0])
 			updateState({
 				isLoading: true,
 			})
@@ -449,14 +450,6 @@ const BookingWidget = (props) => {
 					updateState(_state)
 				}
 			})
-	}
-
-	const handlePricingSelect = id => () => {
-		
-		let _state = {}
-		_state.isLoading = true
-		_state.selectedPricing = id
-		updateState(_state)
 	}
 
 	useEffect(() => {

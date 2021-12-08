@@ -106,10 +106,7 @@ const WPTravelBookingWidget = ( props ) => {
 
 	useEffect(() => {
 		if (nomineePricings.length === 1) {
-			handlePricingSelect(nomineePricings[0])()
-			updateState({
-				isLoading: true,
-			})
+			handlePricingSelect(nomineePricings[0])
 		}
 	}, [selectedDate])
 
@@ -558,12 +555,12 @@ const WPTravelBookingWidget = ( props ) => {
 			})
 	}
 
-	const handlePricingSelect = id => () => {
-		
-		let _state = {}
-		_state.isLoading = true
-		_state.selectedPricing = id
-		updateState(_state)
+	const handlePricingSelect = (id) => {
+		let _state = {
+			isLoading: true,
+			selectedPricing:id
+		}
+		updateState( _state )
 	}
 
 	useEffect(() => {
@@ -691,7 +688,7 @@ const WPTravelBookingWidget = ( props ) => {
                                     {/* </Suspense> */}
                                 </div>
                             }
-                            <BookingWidget {...bookingState} updateState={updateState} /> {/* just a calendar */}
+                            <BookingWidget {...bookingState} initialState={initialState} handlePricingSelect={handlePricingSelect} updateState={updateState} /> {/* just a calendar */}
 					</Suspense>
                 </ErrorBoundary>
             }

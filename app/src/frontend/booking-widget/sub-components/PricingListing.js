@@ -22,7 +22,7 @@ const PricingListing =  ({ selected, options, onPricingSelect }) => {
 						(id, i) => <button key={i}
 							disabled={selected == id}
 							className={selected == id ? 'active' : ''}
-							onClick={onPricingSelect(id)}>
+							onClick={ () => onPricingSelect(id) }>
 							{pricings[id] && pricings[id].title}
 						</button>
 					)
