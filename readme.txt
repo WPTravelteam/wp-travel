@@ -244,7 +244,12 @@ If you have any queries regarding the plugin and extensions then you can ask for
 == Upgrade Notice ==
 Before updating plugin please check ["our latest release notes"](#developers).
 
-== Changelog ==
+==
+= 5.0.6 =
+Release Date:
+
+Enhancement:
+* Made trip overview content compatible with yoast seo.
 
 = 5.0.5 =
 Release Date: 22nd November, 2021
