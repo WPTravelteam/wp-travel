@@ -76,7 +76,10 @@ const BookingWidget = (props) => {
 		tempExcludeDate,
 		// Functions
 		updateState,
-		handlePricingSelect } = props;
+		handlePricingSelect,
+		handleTimeClick,
+		handlePaxChange
+		} = props;
 
 	
 
@@ -88,177 +91,34 @@ const BookingWidget = (props) => {
 	const pricings = allData.tripData && allData.tripData.pricings && _.keyBy(allData.tripData.pricings, p => p.id)
 	const _dates   = 'undefined' !== typeof allData.tripData.dates && allData.tripData.dates.length > 0 ? allData.tripData.dates : [];
 
-	// conditional.
-	const isFixedDeparture   = allData.tripData.is_fixed_departure || false
-	const isInventoryEnabled = allData.tripData.inventory && allData.tripData.inventory.enable_trip_inventory === 'yes'
+	// const handlePaxChange = (id, value) => e => {
+	// 	let pricing = pricings[selectedPricing]
+	// 	let category = pricing.categories.find(c => c.id === id)
+	// 	let count = paxCounts[id] + value < 0 ? 0 : paxCounts[id] + value
 
-	// Additional data.
-	const datesById           = _.keyBy(_dates, d => d.id)
-	const duration            = allData.tripData.trip_duration.days && parseInt(allData.tripData.trip_duration.days) || 1
-	const _excludedDatesTimes = allData.tripData.excluded_dates_times && allData.tripData.excluded_dates_times.length > 0 && allData.tripData.excluded_dates_times || []
-	let excludedDates = []
-	useEffect(() => {
-		// if (!selectedDateTime) {
-			excludedDates = _excludedDatesTimes
-				.filter(ed => {
-					if (ed.trip_time.length > 0) {
-						let _times = ed.trip_time.split(',')
-						let _datetimes = _times.map(t => moment(`${ed.start_date} ${t}`).toDate())
-						if ( !selectedDateTime || _excludedDatesTimes.includes(moment(ed.start_date).format('YYYY-MM-DD')) ) {
-							excludedDateTimes.push(_datetimes[0]); // Temp fixes Pushing into direct state is not good.
-						}
-						return false
-					}
-					return true
-				});
-			
-			// Seperated exclude date.
-			excludedDates = excludedDates.map(ed => ed.start_date)
-				updateState({
-					tempExcludeDate:excludedDates
-				});
-		// }
-	}, [selectedDateTime])
+	// 	let _inventory = inventory.find(i => i.date === moment(selectedDateTime).format('YYYY-MM-DD[T]HH:mm'))
+	// 	let maxPax = _inventory && _inventory.pax_available
+	// 	// }
+	// 	if (maxPax >= 1) {
+	// 		let _totalPax = _.size(paxCounts) > 0 && Object.values(paxCounts).reduce((acc, curr) => acc + curr) || 0
+	// 		if (_totalPax + value > parseInt(maxPax)) {
+	// 			if (e.target.parentElement.querySelector('.error'))
+	// 				return
+	// 			let em = document.createElement('em')
+	// 			em.classList.add('error')
+	// 			em.textContent = __i18n.bookings.max_pax_exceeded
+	// 			e.target.parentElement.appendChild(em)
+	// 			setTimeout(() => {
+	// 				em.remove()
+	// 			}, 1000)
+	// 			return
+	// 		} else {
+	// 			e.target.parentElement.querySelector('.error') && e.target.parentElement.querySelector('.error').remove()
+	// 		}
+	// 	}
 
-	useEffect(() => { // If No Fixed departure set all pricings.
-		if (!isFixedDeparture) {
-			updateState({ nomineePricings: Object.keys(pricings) })
-			isLoading && updateState({ isLoading: false })
-		}
-	}, [selectedDate])
-
-
-	useEffect(() => {
-		if (nomineePricings.length === 1) {
-			handlePricingSelect(nomineePricings[0])
-			updateState({
-				isLoading: true,
-			})
-		}
-	}, [selectedDate])
-
-	useEffect(() => {
-		if (!selectedPricing) {
-			return
-		}
-		let _state = {
-			pricingUnavailable: false
-		}
-		let times = getPricingTripTimes(selectedPricing, selectedTripDate)
-		if (isLoading) { // Prevent looping request.
-
-			if (isInventoryEnabled && isFixedDeparture) {
-				setInventoryData(selectedPricing, selectedDate, times)
-			} else {
-				let pricing = pricings[selectedPricing]
-				let categories = pricing.categories
-				let _paxCounts = {}
-				categories.forEach(c => {
-					_paxCounts = { ..._paxCounts, [c.id]: parseInt(c.default_pax) || 0 }
-				})
-	
-				let maxPax = pricing.max_pax || 999
-				let _tripExtras = {}
-	
-				if (pricing.trip_extras.length > 0) {
-					pricing.trip_extras.forEach(x => {
-						_tripExtras = { ..._tripExtras, [x.id]: x.is_required ? 1 : 0 }
-					})
-				}
-	
-				_state = {
-					..._state,
-					isLoading: false,
-					inventory: [{
-						'date': moment(selectedDateTime).format('YYYY-MM-DD[T]HH:mm'),
-						'pax_available': maxPax,
-						'booked_pax': 0,
-						'pax_limit': maxPax,
-	
-					}],
-					nomineeTimes: [],
-					tripExtras: _tripExtras,
-					paxCounts: _paxCounts
-				}
-	
-				if (times.length > 0) {
-					let _times = times
-						.map(time => {
-							return moment(`${selectedDate.toDateString()} ${time}`)
-						})
-						.filter(time => {
-							if (excludedDateTimes.find(et => moment(et).isSame(time))) {
-								return false
-							}
-							return true
-						})
-					_state = {
-						..._state,
-						selectedDateTime: _times[0].toDate(),
-						selectedTime: _times[0].format('HH:mm'),
-						nomineeTimes: _times,
-						inventory: [{
-							'date': _times[0].format('YYYY-MM-DD[T]HH:mm'),
-							'pax_available': maxPax,
-							'booked_pax': 0,
-							'pax_limit': maxPax,
-						}],
-					}
-	
-				}
-			}
-		}
-
-		updateState(_state)
-	}, [selectedPricing, selectedDateTime])
-
-	useEffect(() => {
-		if (!isInventoryEnabled && selectedPricing) {
-			let pricing = pricings[selectedPricing]
-			let maxPax = pricing.max_pax || 999
-			updateState({
-				inventory: [{
-					'date': moment(selectedDateTime).format('YYYY-MM-DD[T]HH:mm'),
-					'pax_available': maxPax,
-					'booked_pax': 0,
-					'pax_limit': maxPax,
-				}]
-			})
-		}
-	}, [selectedDateTime])
-
-	const handleTimeClick = time => () => {
-		updateState({ selectedDateTime: time.toDate(), selectedTime: time.format('HH:mm') })
-	}
-
-	const handlePaxChange = (id, value) => e => {
-		let pricing = pricings[selectedPricing]
-		let category = pricing.categories.find(c => c.id === id)
-		let count = paxCounts[id] + value < 0 ? 0 : paxCounts[id] + value
-
-		let _inventory = inventory.find(i => i.date === moment(selectedDateTime).format('YYYY-MM-DD[T]HH:mm'))
-		let maxPax = _inventory && _inventory.pax_available
-		// }
-		if (maxPax >= 1) {
-			let _totalPax = _.size(paxCounts) > 0 && Object.values(paxCounts).reduce((acc, curr) => acc + curr) || 0
-			if (_totalPax + value > parseInt(maxPax)) {
-				if (e.target.parentElement.querySelector('.error'))
-					return
-				let em = document.createElement('em')
-				em.classList.add('error')
-				em.textContent = __i18n.bookings.max_pax_exceeded
-				e.target.parentElement.appendChild(em)
-				setTimeout(() => {
-					em.remove()
-				}, 1000)
-				return
-			} else {
-				e.target.parentElement.querySelector('.error') && e.target.parentElement.querySelector('.error').remove()
-			}
-		}
-
-		updateState({ paxCounts: { ...paxCounts, [id]: count } })
-	}
+	// 	updateState({ paxCounts: { ...paxCounts, [id]: count } })
+	// }
 
 	const getCartTotal = (withExtras) => {
 		let total = 0;
@@ -386,72 +246,6 @@ const BookingWidget = (props) => {
 		return price || 0
 	}
 
-	const getPricingTripTimes = (pricingId, selectedTripdates) => {
-		let trip_time = selectedTripdates.map(td => {
-			let date = datesById[td]
-			if (date.pricing_ids && date.pricing_ids.split(',').includes(pricingId)) {
-				let times = date.trip_time && date.trip_time.split(',') || []
-				times = applyFilters( 'wpTravelCutofTimeFilter', times, allData.tripData, selectedDateTime )  // @since 4.3.1
-				return times;
-			}
-			return []
-		})
-		return _.chain(trip_time).flatten().uniq().value()
-
-	}
-
-	const setInventoryData = (pricingId, date, times) => {
-		apiFetch({
-			url: `${_wp_travel.ajax_url}?action=wp_travel_get_inventory&pricing_id=${pricingId}&trip_id=${allData.tripData.id}&selected_date=${moment(date).format('YYYY-MM-DD')}&times=${times.join()}&_nonce=${_wp_travel._nonce}`
-		})
-			.then(res => {
-				if (res.success && res.data.code === 'WP_TRAVEL_INVENTORY_INFO') {
-					if (res.data.inventory.length <= 0) {
-						return
-					}
-					let _times = res.data.inventory.filter(inventory => {
-						if (inventory.pax_available > 0) {
-							if (excludedDateTimes.find(et => moment(et).isSame(moment(inventory.date)))) {
-								return false
-							}
-							return true
-						}
-						return false
-					}).map(inventory => {
-						return moment(inventory.date)
-					})
-					let _state = {
-						isLoading: false
-					}
-
-					let _tripExtras = {}
-					let pricing = pricings[pricingId]
-					if (pricing.trip_extras.length > 0) {
-						pricing.trip_extras.forEach(x => {
-							_tripExtras = { ..._tripExtras, [x.id]: x.is_required ? 1 : 0 }
-						})
-						_state = { ..._state, tripExtras: _tripExtras }
-					}
-
-					let categories = pricing.categories
-					let _paxCounts = {}
-					categories.forEach(c => {
-						_paxCounts = { ..._paxCounts, [c.id]: parseInt(c.default_pax) || 0 }
-					})
-					_state = { ..._state, paxCounts: _paxCounts }
-
-					_state = _times.length > 0 && { ..._state, selectedDateTime: _times[0].toDate(), selectedTime: _times[0].format('HH:mm') } || _state
-					_state = times.length > 0 && { ..._state, nomineeTimes: _times } || _state
-
-					if (_times.length <= 0) { // Why??
-						_state = { ..._state, pricingUnavailable: true }
-					}
-					_state = res.data.inventory.length > 0 && { ..._state, inventory: res.data.inventory } || { ..._state, pricingUnavailable: true }
-					updateState(_state)
-				}
-			})
-	}
-
 	useEffect(() => {
 		jQuery('.wti__selector-item.active').find('.wti__selector-content-wrapper').slideDown();
 	}),[];
@@ -485,7 +279,7 @@ const BookingWidget = (props) => {
 									</ErrorBoundry>
 								}
 								{
-									!pricingUnavailable && nomineeTimes.length > 0 && <ErrorBoundry>
+									! pricingUnavailable && nomineeTimes.length > 0 && <ErrorBoundry>
 										{/* <Suspense fallback={<Loader />}> */}
 											<TripTimesListing
 												selected={selectedDateTime}
