@@ -36,6 +36,7 @@ const DiscountTable = ({ groupPricings }) => {
 }
 
 const PaxSelector = ({ pricing, onPaxChange, counts, inventory }) => {
+	// console.log( 'onPaxChange', onPaxChange );
 	let categories = pricing && pricing.categories || []
 
 	const objectSum = (obj) => {
@@ -114,6 +115,8 @@ const PaxSelector = ({ pricing, onPaxChange, counts, inventory }) => {
 					if ( 'undefined' != typeof( __i18n.price_per_labels[price_per_label] ) ) {
 						price_per_label = __i18n.price_per_labels[price_per_label];
 					}
+					// console.log( 'counts', counts );
+					// console.log( 'c', c );
 					return <li key={i}>
 						<div className="text-left">
 							<strong>
