@@ -1,3 +1,11 @@
+.wp-travel-form-field{
+	.parsley-errors-list{
+		padding-left: 0px;
+		list-style: none;
+		color: #FF0000;
+	}
+}
+
 .checkout-page-wrap {
 	display: grid;
 	grid-template-columns: 1fr 42%;
@@ -24,9 +32,9 @@
 	&.wti_no_mini_cart {
 		grid-template-columns: 100%;
 	}
-	> div {
-		width: 100%;
-	}
+	// > div {
+	// 	width: 100%;
+	// }
 	@media (max-width: 1199px) {
 		grid-template-columns: 1fr 42%;
 		grid-gap: 30px;
@@ -34,15 +42,15 @@
 	@media (max-width: 991px) {
 		grid-template-columns: 100%;
 	}
-	.wp-travel-minicart {
-		@media (min-width: 992px) {
-			order: 2;
-		}
-	}
+	// .wp-travel-minicart {
+	// 	@media (min-width: 992px) {
+	// 		order: 2;
+	// 	}
+	// }
 	.wp-travel-checkout-section {
-		@media (min-width: 992px) {
-			order: 1;
-		}
+		// @media (min-width: 992px) {
+		// 	order: 1;
+		// }
 
 		.panel-group {
 			.payment-content {
@@ -89,7 +97,6 @@
 .wp-travel-enquiries-form {
 	@media (min-width: 768px) {
 		.wp-travel-minicart {
-			float: right;
 			position: static;
 
 			.is_stuck {
@@ -104,11 +111,11 @@
 		// background-color: #fff;
 		// padding: 20px 15px;
 		// border: 1px solid #eee;
-		&.checkout-right {
-			background-color: transparent;
-			padding: 0;
-			border: none;
-		}
+		// &.checkout-right {
+		// 	background-color: transparent;
+		// 	padding: 0;
+		// 	border: none;
+		// }
 
 		h3 {
 			font-size: 18px;
@@ -127,9 +134,6 @@
 		@media (max-width: 767.99px) {
 			margin-bottom: 30px;
 		}
-	}
-
-	.checkout-right {
 	}
 
 	h6.heading {
@@ -259,9 +263,9 @@
 			justify-content: start;
 		}
 
-		label {
-			font-weight: 600;
-		}
+		// label {
+		// 	font-weight: 600;
+		// }
 
 		input:not([type="radio"]):not([type="checkbox"]):not([type="submit"]),
 		select,
@@ -301,12 +305,12 @@
 		@media screen and (min-width: 768px) {
 			label,
 			.wp-travel-text-info {
-				width: 33.3333333333%;
-				float: left;
-				min-height: 1px;
-				position: relative;
-				padding: 0 15px 0 0;
-				font-size: 13.8px;
+				// width: 33.3333333333%;
+				// float: left;
+				// min-height: 1px;
+				// position: relative;
+				// padding: 0 15px 0 0;
+				// font-size: 13.8px;
 
 				&.radio-checkbox-label {
 					margin-bottom: 15px !important;
@@ -333,10 +337,10 @@
 		}
 
 		@media screen and (min-width: 992px) {
-			label:not(.radio-checkbox-label),
-			.wp-travel-text-info {
-				width: 25%;
-			}
+			// label:not(.radio-checkbox-label),
+			// .wp-travel-text-info {
+			// 	width: 25%;
+			// }
 
 			input:not([type="radio"]):not([type="checkbox"]):not([type="submit"]),
 			select,
@@ -364,15 +368,26 @@
 	.checkbox-block {
 		padding: 0 15px;
 	}
+	.wp-travel-enquiry-subscribe-section{ //subcription section fix (Booking section)
+		display: flex;
+		flex-direction: column;
+		.radio-checkbox-label {
+			margin-top: 10px;
+		}
+	}
 }
 
+.cart-summary{
+	.cart-item-items {
+		justify-content: space-between;
+		margin-bottom: 10px;
+		i {
+			margin-right: 0.25em;
+			font-size: 80%;
+		}
+	}
+}
 #shopping-cart {
-	// border-radius: 5px;
-	border: 1px solid #f0f0f0;
-	// overflow: hidden;
-	// position: sticky;
-	// top: 20px;
-	// background-color: #fff;
 	.wp-travel-cart-loader {
 		position: absolute;
 		top: 0;
@@ -393,26 +408,6 @@
 			}
 		}
 	}
-	.btn {
-		outline: none;
-		padding: 0.75em 1em;
-		font-size: 16px;
-		font-weight: 500;
-		cursor: pointer;
-		text-align: center;
-		&:hover {
-			text-decoration: none;
-		}
-		&.btn-dark {
-			background-color: #444;
-			color: #fff;
-			border-color: #444;
-			&:hover {
-				background-color: rgba(#444, 0.7);
-				text-decoration: none;
-			}
-		}
-	}
 	button,
 	a {
 		&:disabled {
@@ -422,13 +417,15 @@
 	}
 	.cart-summary {
 		position: relative;
+		border: 1px solid #f0f0f0;
+		padding: 1rem;
 		.cart-header {
-			padding: 1em 1em 0.5em;
+			// padding: 1em 1em 0.5em;
 			.title {
-				font-size: 18px;
-				font-weight: bold;
-				color: #444;
-				display: flex;
+				// font-size: 18px;
+				// font-weight: bold;
+				// color: #444;
+				// display: flex;
 				margin: 0;
 				svg {
 					width: 20px;
@@ -441,82 +438,42 @@
 			}
 			.subtitle {
 				color: #999;
-				font-weight: 500;
-				font-size: 14px;
+				// font-weight: 500;
+				// font-size: 14px;
 				margin: 0;
 				strong {
-					display: inline-block;
-					border-radius: 3px;
+					// display: inline-block;
+					border-radius: 2px;
 					background-color: #444;
 					color: #fff;
 					padding: 0 5px;
-					line-height: 1;
+					// line-height: 1;
 				}
 			}
 		}
 		.list-group {
 			list-style: none;
-			padding: 0 1em;
-			margin: 1em 0 0 0;
+			padding: 0;
+			margin: 0;
 			li {
 				position: relative;
-				// margin: 20px 0;
-				// background: #f1f1f1;
-				// padding: 15px;
-				border-radius: 5px;
 				&:not(:first-child) {
 					border-top: 1px solid #f4f4f4;
-				}
-				.del-btn {
-					// font-size: 12px;
-					font-size: 15px;
-					font-weight: 900;
-					position: absolute;
-					top: -5px;
-					left: -10px;
-					padding: 0;
-					border-radius: 50%;
-					background: #f93b3b;
-					color: #fff;
-					width: 20px;
-					height: 20px;
-					text-align: center;
-					border: 0;
-					line-height: unset;
-					cursor: pointer;
-					z-index: 1;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					&:hover {
-						background: #444;
-					}
-				}
-				.edit-trip {
-					position: absolute;
-					right: 0px;
-					top: -38px;
-					a {
-						font-size: 0;
-						padding: 7px;
-						background: #e8e8e8;
-						border-radius: 50%;
-					}
 				}
 				> div {
 					display: flex;
 					margin-top: 27px;
 					align-items: center;
-					justify-content: center;
-					@media (max-width: 558px) {
-						flex-direction: column;
-					}
+					gap: 1rem;
 
 					.content-left {
-						flex: 0 0 22%;
-						margin-right: 20px;
+						flex: 0 0 50px;
+						@media (max-width: 558px) {
+							display: none;
+						}
+						// margin-right: 20px;
 						.img-wrapper {
-							border-radius: 5px;
+							// border-radius: 5px;
 							max-width: 133px;
 							margin: 0 auto;
 							@media (max-width: 558px) {
@@ -524,8 +481,8 @@
 							}
 						}
 						img {
-							border: 1px solid #efefef;
-							height: 100% !important;
+						object-fit: cover;
+							height: 100%;
 							border-radius: 5px;
 						}
 					}
@@ -559,6 +516,7 @@
 							display: flex;
 							align-items: center;
 							justify-content: space-between;
+							gap: 0.5rem;
 							.trip-name {
 								display: inline-block;
 								margin-right: 10px;
@@ -693,18 +651,6 @@
 							font-weight: 600;
 						}
 					}
-					.edit {
-						display: inline-flex;
-						align-items: center;
-						svg {
-							width: 13px;
-							height: 13px;
-							margin-right: 0.25em;
-							fill: #fff;
-							path {
-							}
-						}
-					}
 				}
 				.update-fields-collapse {
 					margin-top: 1em;
@@ -805,7 +751,7 @@
 		}
 		.extra-fields {
 			list-style: none;
-			padding: 0 1em;
+			padding: 0;
 			margin: 0;
 			li {
 				display: flex;
@@ -827,8 +773,8 @@
 		}
 		.cart-summary-bottom {
 			border-top: 1px solid #efefef;
-			background-color: #fff;
-			padding: 1em;
+			// background-color: #fff;
+			padding-top: 1em;
 			.flex-wrapper {
 				display: flex;
 				align-items: center;
@@ -838,7 +784,7 @@
 					flex-direction: column-reverse;
 				}
 				.update-cart-form {
-					margin-bottom: 1em;
+					// margin-bottom: 1em;
 					width: 100%;
 				}
 				.price-calculate {
@@ -888,10 +834,10 @@
 							padding-block: 15px;
 						}
 					}
-					.btn {
-						font-size: 12px;
-						margin: 0;
-					}
+					// .btn {
+					// 	font-size: 12px;
+					// 	margin: 0;
+					// }
 					.error {
 						position: absolute;
 						top: 100%;
