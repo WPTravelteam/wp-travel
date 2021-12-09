@@ -17,13 +17,13 @@
 		margin-bottom: 15px;
 	}
 
-	label {
-		display: block;
-		font-weight: 500;
-	}
+	// label {
+	// 	display: block;
+	// 	font-weight: 500;
+	// }
 
 	select,
-	input {
+	input:not([type="checkbox"]) {
 		width: 100%;
 	}
 
