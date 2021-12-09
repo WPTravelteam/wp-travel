@@ -107,6 +107,10 @@ class WpTravel_Frontend_Assets {
 			if ( WP_Travel::is_page( 'checkout' ) ) { // Assets needed for Checkout page.
 				wp_enqueue_script( 'wptravel-hc-sticky' );
 			}
+			if ( WP_Travel::is_page( 'single' ) ) {
+				wp_enqueue_script( 'wp-travel-slick' );
+				wp_enqueue_style( 'wp-travel-slick' );
+			}
 		} else {
 			if ( WP_Travel::is_pages() ) {
 				wp_localize_script( 'wp-travel-frontend-bundle', 'wp_travel', $wp_travel );
@@ -192,7 +196,7 @@ class WpTravel_Frontend_Assets {
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => false,
 			),
-			'wptravel-hc-sticky'         => array(
+			'wptravel-hc-sticky'          => array(
 				'src'       => self::$app_path . '/assets/js/lib/hc-sticky/hc-sticky.js',
 				'deps'      => array( 'jquery' ),
 				'ver'       => WP_TRAVEL_VERSION,
@@ -497,7 +501,7 @@ class WpTravel_Frontend_Assets {
 				'in_footer' => true,
 			);
 
-			$scripts['wptravel-yoast']                 = array(
+			$scripts['wptravel-yoast'] = array(
 				'src'       => self::$app_path . '/assets/js/yoast.js',
 				'deps'      => array( 'jquery' ),
 				'ver'       => WP_TRAVEL_VERSION,
