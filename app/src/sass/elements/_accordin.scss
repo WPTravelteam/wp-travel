@@ -437,6 +437,7 @@
 
 		[data-toggle="collapse"].collapsed {
 			color: #999;
+			background: none;
 
 			& span.collapse-icon:after {
 				content: "\f140";
@@ -455,19 +456,33 @@
 	}
 
 	h4 {
-		border: 1px solid #ddd;
-		padding: 10px 40px 10px 15px;
-		margin: 0;
-		background-color: #f7f7f1;
-		position: relative;
-		font-size: 14px;
-		font-weight: 500;
+		// border: 1px solid #ddd;
+		// padding: 10px 40px 10px 15px;
+		// margin: 0;
+		// background-color: #f7f7f1;
+		// position: relative;
+		// font-size: 14px;
+		// font-weight: 500;
+		margin-bottom: 0;
+		margin-top: 10px;
 
 		&:hover {
 			background-color: #fff;
 		}
 
 		a {
+			// FAQ full width
+
+			border: 1px solid #ddd;
+			padding: 10px 40px 10px 15px;
+			margin: 0;
+			// background-color: #f7f7f1;
+			background: #e7e7e7;
+			position: relative;
+			font-size: 14px;
+			font-weight: 500;
+			display: block;
+
 			color: #999;
 			text-decoration: none;
 		}
@@ -488,6 +503,10 @@
 
 	.panel-body {
 		padding: 10px 15px;
+		p {
+			margin-top: 0;
+			margin-bottom: 10px;
+		}
 	}
 
 	.panel-default {
@@ -524,6 +543,7 @@
 
 		[data-toggle="collapse"].collapsed {
 			color: #999;
+			background: none;
 
 			& span.collapse-icon:after {
 				content: "\f140";

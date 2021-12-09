@@ -189,13 +189,6 @@
 // 	}
 // }
 
-
-
-
-
-
-
-
 // Filter by Toolbar
 .wp-travel-toolbar {
 	border: 1px solid #eee;
@@ -234,6 +227,7 @@
 		display: flex;
 		gap: var(--gap);
 		align-items: center;
+		flex-wrap: wrap;
 		justify-content: flex; //(Space between before)
 		// padding: 10px 0;
 		padding: 10px 0px; //(toolbar issue fix) 10px 25px before
@@ -277,15 +271,15 @@
 					display: block !important;
 				}
 			}
-			@media (max-width: 1354px) {
+			// @media (max-width: 1354px) {
+			// 	//(toolbar issue fix)
+			// 	width: 100%;
+			// 	padding: 0 15px;
+			// }
+			@media (max-width: 1020px) {
 				//(toolbar issue fix)
 				width: 100%;
 				padding: 0 15px;
-			}
-			@media (max-width: 992px) {
-				//(toolbar issue fix)
-				width: 100% !important;
-				padding: 0 15px !important;
 			}
 		}
 	}
@@ -327,34 +321,40 @@
 		@media (min-width: 993px) and (max-width: 1399px) {
 			float: none;
 			position: absolute;
-			top: 8px;
+			top: 0;
 			right: 0;
 		}
-		@media (max-width: 575px) {
-			//(toolbar issue fix)
+		@media (max-width: 992px){
 			float: none;
 			position: absolute;
-			top: 14px !important;
+			top: 0;
 			right: 0;
 		}
+		// @media (max-width: 575px) {
+		// 	//(toolbar issue fix)
+		// 	float: none;
+		// 	position: absolute;
+		// 	top: 14px !important;
+		// 	right: 0;
+		// }
 	}
 }
 
 .wp-toolbar-filter-field {
 	// float: left;
 	// padding: 15px 10px 0;
-	@media (min-width: 921px) and (max-width: 992px) {
-		width: 210px !important;
-	}
-	@media (min-width: 860px) and (max-width: 920px) {
-		//(toolbar issue fix)
-		width: 200px;
-	}
-	@media (min-width: 768px) and (max-width: 859px) {
-		//(toolbar issue fix)
-		width: 180px;
-	}
-	@media (max-width: 767px) {
+	// @media (min-width: 921px) and (max-width: 992px) {
+	// 	width: 210px !important;
+	// }
+	// @media (min-width: 860px) and (max-width: 920px) {
+	// 	//(toolbar issue fix)
+	// 	width: 200px;
+	// }
+	// @media (min-width: 768px) and (max-width: 859px) {
+	// 	//(toolbar issue fix)
+	// 	width: 180px;
+	// }
+	@media (max-width: 640px) {
 		//(toolbar issue fix)
 		float: none;
 		width: 100%;
@@ -410,11 +410,22 @@
 	list-style: none;
 	margin: 0;
 	// padding: 15px 0;
-	padding: 15px;
+	// padding: 15px;
 	text-align: center;
 
-	// itinerary page filter section button paddinf top fix
-	padding-top: 10px;
+	// itinerary page filter section button padding top fix
+	padding: 0px;
+	@media (min-width: 1199px) {
+		padding:15px  15px;
+		// padding-top: 10px;
+	}
+	@media (max-width: 1199px){
+		padding: 15px;
+	}
+	@media (max-width:991px){
+		padding: 15px;
+		padding-top: 25px;
+	}
 	@media (max-width: 767px) {
 		display: none;
 	}
@@ -436,13 +447,27 @@
 		width: 23px;
 		height: 23px;
 	}
-	@media (min-width: 993px) and (max-width: 1399px) {
-		// padding: 25px 15px !important;
+	@media (min-width: 1200px) {
+		padding: 10px 15px;
+		// padding-top: 10px;
 	}
-	@media (max-width: 992px) {
-		//(toolbar issue fix)
-		padding: 25px 15px !important;
+	@media (max-width: 1199px) {
+		padding: 15px;
 	}
+	@media (max-width: 991px) {
+		padding: 15px;
+		padding-top: 30px;
+	}
+	@media (max-width: 767px) {
+		display: none;
+	}
+	// @media (min-width: 993px) and (max-width: 1399px) {
+	// 	// padding: 25px 15px !important;
+	// }
+	// @media (max-width: 992px) {
+	// 	//(toolbar issue fix)
+	// 	padding: 25px 15px !important;
+	// }
 }
 
 .wp-toolbar-filter-field {
