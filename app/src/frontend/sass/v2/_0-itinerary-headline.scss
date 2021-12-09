@@ -39,10 +39,9 @@
 				background: rgba(0, 0, 0, 0.66);
 				color: #fff;
 				padding: 10px;
-				border-top-left-radius: 5px;
-				border-bottom-left-radius: 5px;
-				text-shadow: 0 4px 2px #000;
-				box-shadow: none;
+				&:hover{
+					color: inherit;
+				}
 			}
 		}
 	}
@@ -105,36 +104,21 @@
 		border-radius: 5px;
 
 		ul {
-			margin: 0 !important;
-			padding: 0 !important;
-		}
-	}
-	//right plot trip info meta
-	.wp-travel-trip-meta-info {
-		ul {
 			margin: 0;
 			padding: 0;
+			display: grid;
+			list-style: none;
+			@media only screen and (min-width: 592px) {
+				grid-template-columns: 1fr 1fr;
+			}
 
 			li {
-				padding: 0 10px 10px 15px;
-				display: inline-block;
-				vertical-align: top;
-				width: 50%;
-				margin-right: -0.25em;
-				margin-top: 10px;
-				font-size: 16px;
+				padding: 15px 10px;
 				position: relative;
-				text-align: left;
 
-				@include sm {
-					width: 100%;
-					display: block;
-				}
-
-				&.full-width {
-					@include fullwidth;
-				}
-
+				// &.full-width {
+				// 	@include fullwidth;
+				// }
 				&:before {
 					content: "";
 					position: absolute;
@@ -144,11 +128,23 @@
 					height: 1px;
 					background: rgba(222, 222, 222, 0.32);
 				}
-
-				&.no-border:before {
-					height: 0px;
-					background: none;
+				&:last-child {
+					&:before {
+						content: none;
+					}
 				}
+				@media only screen and (min-width: 592px) {
+					&:nth-child(3) {
+						&:before {
+							content: none;
+						}
+					}
+				}
+
+				// &.no-border:before {
+				// 	height: 0px;
+				// 	background: none;
+				// }
 
 				.travel-info {
 					margin-bottom: 5px;
