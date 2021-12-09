@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 5.4.1
 Tested up to: 5.8.2
 Requires PHP: 5.6.2
-Stable tag: 5.0.5
+Stable tag: 5.0.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -246,10 +246,20 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 ==
 = 5.0.6 =
-Release Date:
+Release Date: 9th December, 2021
+
+Fixes:
+* Partial payment amount is not being recorded in the booking system.
+* Minor layout issue fixes.
 
 Enhancement:
 * Made trip overview content compatible with yoast seo.
+
+Tweaks:
+* Outdated Script `sticky-kit` replaced with `hc-sticky`.
+* Removed Modnizer script and its dependencies.
+* Archive title added from a hook in the archive template file.
+* Admin styles and scripts loading optimized.
 
 = 5.0.5 =
 Release Date: 22nd November, 2021
