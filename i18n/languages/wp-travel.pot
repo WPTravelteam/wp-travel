@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 5.0.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-08 11:16:45+00:00\n"
+"POT-Creation-Date: 2021-12-10 07:07:30+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -658,7 +658,7 @@ msgstr ""
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:544
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1236
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1379
-#: inc/cart/cart-mini.php:255 inc/helpers/helpers-price.php:17
+#: inc/cart/cart-mini.php:257 inc/helpers/helpers-price.php:17
 #: inc/helpers.php:1375
 msgid "Group"
 msgstr ""
@@ -927,7 +927,7 @@ msgstr ""
 msgid "Drop files here to upload."
 msgstr ""
 
-#: core/helpers/strings.php:109 inc/cart/cart-mini.php:313
+#: core/helpers/strings.php:109 inc/cart/cart-mini.php:315
 msgid "Update"
 msgstr ""
 
@@ -1216,7 +1216,7 @@ msgid "Seats left"
 msgstr ""
 
 #: core/helpers/strings.php:199 inc/booking-functions.php:472
-#: inc/booking-functions.php:500 inc/cart/cart-mini.php:410
+#: inc/booking-functions.php:500 inc/cart/cart-mini.php:412
 #: inc/class-default-form-fields.php:191 inc/deprecated/440.php:368
 #: inc/email-template-functions.php:408 inc/email-template-functions.php:714
 #: inc/email-template-functions.php:1223 inc/itinerary-v2-functions.php:736
@@ -1268,7 +1268,7 @@ msgstr ""
 msgid "Clear All"
 msgstr ""
 
-#: core/helpers/strings.php:214 inc/cart/cart-mini.php:361
+#: core/helpers/strings.php:214 inc/cart/cart-mini.php:363
 msgid "Total:"
 msgstr ""
 
@@ -3384,89 +3384,93 @@ msgstr ""
 msgid "You have selected %s items in your cart"
 msgstr ""
 
-#: inc/cart/cart-mini.php:98
+#: inc/cart/cart-mini.php:202
 msgid "Are you sure you want to remove '%s' from cart?"
 msgstr ""
 
-#: inc/cart/cart-mini.php:275 inc/class-wp-travel-extras-frontend.php:154
+#: inc/cart/cart-mini.php:202
+msgid "Remove"
+msgstr ""
+
+#: inc/cart/cart-mini.php:277 inc/class-wp-travel-extras-frontend.php:154
 msgid "Trip Extras:"
 msgstr ""
 
-#: inc/cart/cart-mini.php:335 inc/cart/cart-mini.php:583
+#: inc/cart/cart-mini.php:337 inc/cart/cart-mini.php:585
 msgid "Subtotal"
 msgstr ""
 
-#: inc/cart/cart-mini.php:344
+#: inc/cart/cart-mini.php:346
 msgid "Discount:"
 msgstr ""
 
-#: inc/cart/cart-mini.php:356
+#: inc/cart/cart-mini.php:358
 msgid "Tax(%s):"
 msgstr ""
 
-#: inc/cart/cart-mini.php:366
+#: inc/cart/cart-mini.php:368
 msgid "Total upfront (%1s%%)"
 msgstr ""
 
-#: inc/cart/cart-mini.php:376
+#: inc/cart/cart-mini.php:378
 msgid "Enter promo code"
 msgstr ""
 
-#: inc/cart/cart-mini.php:377
+#: inc/cart/cart-mini.php:379
 msgid "Coupon Applied."
 msgstr ""
 
-#: inc/cart/cart-mini.php:378
+#: inc/cart/cart-mini.php:380
 msgid "Coupon Applied"
 msgstr ""
 
-#: inc/cart/cart-mini.php:378 templates/content-cart.php:294
+#: inc/cart/cart-mini.php:380 templates/content-cart.php:294
 msgid "Apply Coupon"
 msgstr ""
 
-#: inc/cart/cart-mini.php:383
+#: inc/cart/cart-mini.php:385
 msgid "Proceed to Pay"
 msgstr ""
 
-#: inc/cart/cart-mini.php:424
+#: inc/cart/cart-mini.php:426
 msgid "Your order"
 msgstr ""
 
-#: inc/cart/cart-mini.php:429 templates/account/tab-content/bookings.php:73
+#: inc/cart/cart-mini.php:431 templates/account/tab-content/bookings.php:73
 #: templates/account/tab-content/bookings.php:143
 msgid "Trip"
 msgstr ""
 
-#: inc/cart/cart-mini.php:430 inc/cart/cart-mini.php:612 inc/helpers.php:2526
+#: inc/cart/cart-mini.php:432 inc/cart/cart-mini.php:614 inc/helpers.php:2526
 #: templates/content-cart.php:56 templates/content-cart.php:283
 msgid "Total"
 msgstr ""
 
-#: inc/cart/cart-mini.php:431 inc/helpers.php:816
+#: inc/cart/cart-mini.php:433 inc/helpers.php:816
 msgid "Partial"
 msgstr ""
 
-#: inc/cart/cart-mini.php:473
+#: inc/cart/cart-mini.php:475
 msgid " Pax"
 msgstr ""
 
-#: inc/cart/cart-mini.php:530
+#: inc/cart/cart-mini.php:532
 msgid "Group (%s)"
 msgstr ""
 
-#: inc/cart/cart-mini.php:559
+#: inc/cart/cart-mini.php:561
 msgid "Coupon Discount "
 msgstr ""
 
-#: inc/cart/cart-mini.php:584 templates/content-cart.php:266
+#: inc/cart/cart-mini.php:586 templates/content-cart.php:266
 msgid "Tax: "
 msgstr ""
 
-#: inc/cart/cart-mini.php:588 templates/content-cart.php:270
+#: inc/cart/cart-mini.php:590 templates/content-cart.php:270
 msgid "%"
 msgstr ""
 
-#: inc/cart/cart-mini.php:625
+#: inc/cart/cart-mini.php:627
 msgid "Trip Book"
 msgstr ""
 
@@ -5332,40 +5336,40 @@ msgstr ""
 msgid "File"
 msgstr ""
 
-#: inc/gateways/bank-deposit/bank-deposit.php:56
+#: inc/gateways/bank-deposit/bank-deposit.php:55
 msgid "Unable to create directory \"wp-travel-slip\""
 msgstr ""
 
-#: inc/gateways/bank-deposit/bank-deposit.php:76
+#: inc/gateways/bank-deposit/bank-deposit.php:75
 msgid "Uploaded files are not allowed."
 msgstr ""
 
-#: inc/gateways/bank-deposit/bank-deposit.php:135
+#: inc/gateways/bank-deposit/bank-deposit.php:134
 msgid "Amount"
 msgstr ""
 
-#: inc/gateways/bank-deposit/bank-deposit.php:140
+#: inc/gateways/bank-deposit/bank-deposit.php:139
 msgid "Bank Payment"
 msgstr ""
 
-#: inc/gateways/bank-deposit/bank-deposit.php:141
+#: inc/gateways/bank-deposit/bank-deposit.php:140
 msgid "Submit Payment Receipt"
 msgstr ""
 
-#: inc/gateways/bank-deposit/bank-deposit.php:142
+#: inc/gateways/bank-deposit/bank-deposit.php:141
 msgid "View Bank Details"
 msgstr ""
 
-#: inc/gateways/bank-deposit/bank-deposit.php:179
+#: inc/gateways/bank-deposit/bank-deposit.php:178
 #: templates/single-wp-travel-reviews.php:77
 msgid "Submit"
 msgstr ""
 
-#: inc/gateways/bank-deposit/bank-deposit.php:198
+#: inc/gateways/bank-deposit/bank-deposit.php:197
 msgid "Submit Bank Payment Receipt"
 msgstr ""
 
-#: inc/gateways/bank-deposit/bank-deposit.php:203
+#: inc/gateways/bank-deposit/bank-deposit.php:202
 msgid "Bank Details"
 msgstr ""
 
