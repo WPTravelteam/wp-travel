@@ -27,19 +27,65 @@
 			box-shadow: none;
 			font-size: 0;
 			height: 0;
-			padding: 32px 20px;
-			// display: none !important;
+			padding: 33px 20px;
+			position: relative;
+			display: inline-block;
+			// padding: 15px 20px;
+			// border: 1px solid;
+			border-radius: 3px;
+			transition: 0.2s 0.1s;
+			top: 0;
+			left: 0;
+			border: 1px solid #ebebeb;
+			border-right: none;
+			border-top: none;
+			border-bottom: none;
+			@media (max-width: 992px) {
+				padding: 20px;
+			}
+			&.slick-prev,
+			&.slick-next {
+				&::before {
+					font-family: "Font Awesome 5 Free";
+					opacity: 0.9;
+					position: absolute;
+					top: 25px;
+					left: 15px;
+					font-weight: 900;
+					@media (max-width: 992px) {
+						top: 16px;
+					}
+				}
+			}
 			&.slick-prev {
-				left: 0;
-				// @media (min-width: 769px) {
-				// 	border-right: 1px solid #ebebeb;
-				// }
+				// left: 0;
+				&::before {
+					content: "\f053";
+				}
 			}
 			&.slick-next {
-				// right: 5px;
 				right: 0;
 				@media (min-width: 769px) {
 					border-left: 1px solid #ebebeb;
+				}
+				&::before {
+					content: "\f054";
+				}
+			}
+			&:hover {
+				&.slick-prev {
+					&::before {
+						left: unset;
+						right: 13px;
+						@media (max-width: 992px) {
+							right: 15px;
+						}
+					}
+				}
+				&.slick-next {
+					&::before {
+						left: 16px;
+					}
 				}
 			}
 		}

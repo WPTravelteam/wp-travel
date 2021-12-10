@@ -413,11 +413,13 @@
 				border-radius: 50%;
 				float: right;
 				text-align: center;
-				top: 7px;
+				// top: 7px;
+				top: 5px;
 			}
 			&.collapsed {
 				.collapse-icon {
-					top: 13px;
+					// top: 13px;
+					top: 12px;
 				}
 			}
 		}
@@ -429,9 +431,13 @@
 				// font-family: 'dashicons';
 				font-family: "Font Awesome 5 Free";
 				font-weight: 900;
-				content: "\f142";
-				content: "\f0dd";
-				font-size: 18px;
+				// content: "\f142";
+				// content: "\f0dd";
+				// font-size: 18px;
+				font-size: 15px;
+				content: "\f077";
+				position: absolute;
+				top: 5px;
 			}
 		}
 
@@ -440,8 +446,10 @@
 			background: none;
 
 			& span.collapse-icon:after {
-				content: "\f140";
-				content: "\f0de";
+				// content: "\f140";
+				// content: "\f0de";
+				content: "\f078";
+				top: 0;
 			}
 
 			&:hover {
