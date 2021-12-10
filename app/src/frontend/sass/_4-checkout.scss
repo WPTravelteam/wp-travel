@@ -1,8 +1,10 @@
 .checkout-page-wrap {
 	display: grid;
-	grid-template-columns: 1fr 35%;
-	grid-gap: 100px;
+	// grid-template-columns: 1fr 35%;
+	grid-template-columns: 1fr 42%;
+	grid-gap: 35px;
 	margin-top: 50px;
+	// grid-gap: 100px;
 	.number-accordion {
 		.checkout-accordion {
 			h4 {
@@ -32,12 +34,13 @@
 		@media (min-width: 992px) {
 			order: 2;
 		}
-		// .sticky-sidebar {
-		//     .checkout-right {
-		//         padding: 0;
-		//         border: 0;
-		//     }
-		// }
+		.sticky-sidebar {
+			top: 48px;
+			//     .checkout-right {
+			//         padding: 0;
+			//         border: 0;
+			//     }
+		}
 	}
 	.wp-travel-checkout-section {
 		@media (min-width: 992px) {
@@ -47,13 +50,19 @@
 			border-radius: 5px;
 			border-color: #ccc;
 			// .wp-travel-booking{
-			// 	.wp-travel-trip-details{
-			// 		margin-top: 0;
-			// 	}
-			// }
+			.wp-travel-trip-details {
+				// margin-top: 0;
+				.ws-theme-timeline-block {
+					.panel-body {
+						border: 1px solid #dddddd;
+						border-top: none;
+					}
+				}
+			}
 			.ws-theme-timeline-block {
 				.panel-body {
-					padding: 0;
+					// padding: 0;
+					padding: 5px 15px;
 					.payment-content {
 						.wp-travel-form-field {
 							#wp-travel-book-now {
@@ -87,9 +96,9 @@
 	}
 
 	.checkout-block {
-		background-color: #fff;
-		padding: 20px 15px;
-		border: 1px solid #eee;
+		// background-color: #fff;
+		// padding: 20px 15px;
+		// border: 1px solid #eee;
 
 		h3 {
 			font-size: 18px;
@@ -111,7 +120,7 @@
 	}
 
 	.checkout-right {
-		border: 4px solid #eee;
+		border: 1px solid #eee;
 		border-radius: 3px;
 	}
 
@@ -304,13 +313,13 @@
 }
 
 #shopping-cart {
-	border-radius: 5px;
-	border: 1px solid #ccc;
-	overflow: hidden;
-	position: sticky;
-	top: 20px;
-	background-color: #fff;
-	box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+	// border-radius: 5px;
+	// border: 1px solid #ccc;
+	// overflow: hidden;
+	// position: sticky;
+	// top: 20px;
+	// background-color: #fff;
+	// box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
 	a {
 		color: $primaryColor;
 	}
@@ -366,13 +375,15 @@
 	}
 	.cart-summary {
 		position: relative;
+		border: 1px solid #f0f0f0;
+		padding: 1rem;
 		.cart-header {
-			padding: 1em 1.5em 0.5em;
+			// padding: 1em 1.5em 0.5em;
 			.title {
-				font-size: 18px;
-				font-weight: bold;
-				color: #444;
-				display: flex;
+				// font-size: 18px;
+				// font-weight: bold;
+				// color: #444;
+				// display: flex;
 				margin: 0;
 				svg {
 					width: 20px;
@@ -385,95 +396,118 @@
 			}
 			.subtitle {
 				color: #999;
-				font-weight: 500;
-				font-size: 14px;
+				// font-weight: 500;
+				// font-size: 14px;
 				margin: 0;
 				strong {
-					display: inline-block;
-					border-radius: 3px;
+					// display: inline-block;
+					// border-radius: 3px;
+					// background-color: #444;
+					// color: #fff;
+					// padding: 0 5px;
+					// line-height: 1;
+					border-radius: 2px;
 					background-color: #444;
 					color: #fff;
 					padding: 0 5px;
-					line-height: 1;
 				}
 			}
 		}
 		.list-group {
 			list-style: none;
-			padding: 0 1.5em;
-			margin: 1em 0 0 0;
+			// padding: 0 1.5em;
+			// margin: 1em 0 0 0;
+			padding: 0;
+			margin: 0;
 			li {
 				position: relative;
-				margin: 20px 0;
-				background: #f1f1f1;
-				padding: 15px;
-				border-radius: 0px 27px;
+				// margin: 20px 0;
+				// background: #f1f1f1;
+				// padding: 15px;
+				// border-radius: 0px 27px;
 				&:not(:first-child) {
 					border-top: 1px solid #f4f4f4;
 				}
-				.del-btn {
-					font-size: 12px;
-					position: absolute;
-					top: -5px;
-					left: -10px;
-					padding: 0;
-					border-radius: 50%;
-					background-color: #444;
-					color: #fff;
-					width: 20px;
-					height: 20px;
-					text-align: center;
-					border: 0;
-					line-height: unset;
-					cursor: pointer;
-					z-index: 1;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					&:hover {
-						background-color: red;
-					}
-				}
-				.edit-trip {
-					position: absolute;
-					right: 0px;
-					top: -38px;
-					background: #e8e8e8;
-					padding: 5px 10px;
-					border-radius: 0 20px 0 0;
-					box-shadow: rgba(39, 39, 39, 0.65) 1px 1px 26px -7px;
-					a {
-						font-size: 17px;
-					}
-				}
+				// .del-btn {
+				// 	font-size: 12px;
+				// 	position: absolute;
+				// 	top: -5px;
+				// 	left: -10px;
+				// 	padding: 0;
+				// 	border-radius: 50%;
+				// 	background-color: #444;
+				// 	color: #fff;
+				// 	width: 20px;
+				// 	height: 20px;
+				// 	text-align: center;
+				// 	border: 0;
+				// 	line-height: unset;
+				// 	cursor: pointer;
+				// 	z-index: 1;
+				// 	display: flex;
+				// 	align-items: center;
+				// 	justify-content: center;
+				// 	&:hover {
+				// 		background-color: red;
+				// 	}
+				// }
+				// .edit-trip {
+				// 	position: absolute;
+				// 	right: 0px;
+				// 	top: -38px;
+				// 	background: #e8e8e8;
+				// 	padding: 5px 10px;
+				// 	border-radius: 0 20px 0 0;
+				// 	box-shadow: rgba(39, 39, 39, 0.65) 1px 1px 26px -7px;
+				// 	a {
+				// 		font-size: 17px;
+				// 	}
+				// }
 				> div {
 					display: flex;
 					margin-top: 27px;
+					// New Change
+					align-items: center;
+					gap: 1rem;
 					@media (max-width: 558px) {
-						flex-direction: column;
+						&:not(.cart-item-items) {
+							flex-direction: column;
+						}
 					}
 
 					.content-left {
-						flex: 0 0 22%;
-						margin-right: 20px;
+						// flex: 0 0 22%;
+						// margin-right: 20px;
+						// New change
+						flex: 0 0 50px;
 						.img-wrapper {
-							background: #fff;
-							padding: 14px;
-							border-radius: 21px;
+							// background: #fff;
+							// padding: 14px;
+							// border-radius: 21px;
+							// max-width: 133px;
+							// margin: 0 auto;
+							// box-shadow: rgba(39, 39, 39, 0.65) 1px 1px 26px -4px;
+
+							// New Change
 							max-width: 133px;
 							margin: 0 auto;
-							box-shadow: rgba(39, 39, 39, 0.65) 1px 1px 26px -4px;
 							@media (max-width: 558px) {
 								margin-bottom: 30px;
 							}
 						}
 						img {
-							border: 1px solid #efefef;
-							border-radius: 3px;
-							height: 100% !important;
-							border-radius: 12px;
+							// border: 1px solid #efefef;
+							// border-radius: 3px;
+							// height: 100% !important;
+							// border-radius: 12px;
+
+							// New Change
+							object-fit: cover;
+							height: 100%;
+							border-radius: 5px;
 						}
 					}
+
 					.content-right {
 						flex: 1;
 						h5 {
@@ -507,10 +541,13 @@
 							display: flex;
 							align-items: center;
 							justify-content: space-between;
+
+							// New Change
+							gap: 0.5rem;
 							.trip-name {
 								display: inline-block;
 								margin-right: 10px;
-								line-height: 1;
+								// line-height: 1;
 								h5 {
 									display: inline;
 									line-height: 142%;
@@ -660,6 +697,20 @@
 						}
 					}
 				}
+				// New Changes for date and number of pax in mini cart section
+				.cart-item-items {
+					justify-content: space-between;
+					margin-bottom: 10px;
+					i {
+						margin-right: 0.25rem;
+						font-size: 80%;
+					}
+					a {
+						color: $primaryColor;
+						// color: red;
+					}
+				}
+
 				.update-fields-collapse {
 					margin-top: 1em;
 					display: none;
@@ -761,7 +812,8 @@
 		}
 		.extra-fields {
 			list-style: none;
-			padding: 0 1.5em;
+			// padding: 0 1.5em;
+			padding: 0;
 			margin: 0;
 			li {
 				display: flex;
@@ -773,7 +825,7 @@
 					margin: 0;
 				}
 				&.selected-payable-amount {
-					color: #3399ff;
+					// color: #3399ff;
 					.price,
 					label {
 						font-size: 20px;
@@ -783,8 +835,9 @@
 		}
 		.cart-summary-bottom {
 			border-top: 1px solid #efefef;
-			background-color: #fff;
-			padding: 1em 1.5em 1em;
+			// background-color: #fff;
+			// padding: 1em 1.5em 1em;
+			padding-top: 1em;
 			// margin-top: 1em;
 			.flex-wrapper {
 				display: flex;
@@ -795,7 +848,8 @@
 					flex-direction: column-reverse;
 				}
 				.update-cart-form {
-					margin-bottom: 1em;
+					// margin-bottom: 1em;
+					width: 100%;
 				}
 				.price-calculate {
 					margin: 0;
@@ -839,10 +893,10 @@
 					input {
 						flex: 1;
 						margin-right: 0.5em;
-						padding: 0 1em;
+						// padding: 0 1em;
 						// max-width: 140px;
 						max-width: 100%;
-						width: 100%;
+						// width: 100%;
 						@media (max-width: 420px) {
 							margin-right: 0;
 							padding-block: 15px;
