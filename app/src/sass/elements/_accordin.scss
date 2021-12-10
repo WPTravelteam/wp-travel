@@ -369,13 +369,15 @@
 .checkout-accordion {
 	.wp-collapse-open {
 		margin-bottom: 30px;
-
+		display: flex;
+		justify-content: right;
 		a {
-			float: right;
+			// float: right;
 			padding: 5px 10px;
-			margin-left: 15px;
+			// margin-left: 15px;
 			border: 1px solid #8b8b8b;
-			font-size: 12px;
+			// font-size: 12px;
+			text-decoration: none;
 		}
 	}
 
@@ -423,7 +425,7 @@
 		}
 
 		[data-toggle="collapse"] {
-			color: #444;
+			// color: #444;
 
 			& span.collapse-icon:after {
 				// font-family: 'dashicons';
@@ -436,17 +438,17 @@
 		}
 
 		[data-toggle="collapse"].collapsed {
-			color: #999;
-			background: none;
+			// color: #999;
+			// background: none;
 
 			& span.collapse-icon:after {
 				content: "\f140";
 				content: "\f0de";
 			}
 
-			&:hover {
-				color: #444;
-			}
+			// &:hover {
+			// 	color: #444;
+			// }
 		}
 
 		.collapse-icon:focus {
@@ -477,13 +479,13 @@
 			padding: 10px 40px 10px 15px;
 			margin: 0;
 			// background-color: #f7f7f1;
-			background: #e7e7e7;
+			// background: #e7e7e7;
 			position: relative;
-			font-size: 14px;
-			font-weight: 500;
+			// font-size: 14px;
+			font-weight: normal;
 			display: block;
 
-			color: #999;
+			// color: #999;
 			text-decoration: none;
 		}
 
