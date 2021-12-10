@@ -230,6 +230,10 @@
 		.parsley-errors-list {
 			width: 100%;
 			margin: -15px 0 0;
+			padding-left: 15px;
+			.parsley-required {
+				list-style-type: none;
+			}
 		}
 
 		&.wp-travel-radio-group {
