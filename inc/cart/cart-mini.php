@@ -199,7 +199,7 @@ if ( wptravel_is_react_version_enabled() ) {
 								</div>
 							</div>
 							<div class="cart-item-items">
-								<a href="javascript:void(0);" class="del-btn" data-l10n="<?php echo esc_attr( sprintf( __( 'Are you sure you want to remove \'%s\' from cart?', 'wp-travel' ), $trip_data['title'] ) ); ?>"><i class="wt-icon wt-icon-trash-alt" aria-hidden="true"></i> <?php _e( 'Remove' ); ?></a>
+								<a href="javascript:void(0);" class="del-btn" data-l10n="<?php echo esc_attr( sprintf( __( 'Are you sure you want to remove \'%s\' from cart?', 'wp-travel' ), $trip_data['title'] ) ); ?>"><i class="wt-icon wt-icon-trash-alt" aria-hidden="true"></i> <?php _e( 'Remove', 'wp-travel' ); ?></a>
 
 								<?php if ( ! $coupon_applied ) : ?>
 									<div class="edit-trip">
