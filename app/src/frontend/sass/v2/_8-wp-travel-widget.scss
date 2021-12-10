@@ -88,24 +88,20 @@
 	}
 // }
 
-// Search form widget
+// Search form widget.
 .wp-travel-search {
-	p {
-		label {
-			display: inline-block;
-			width: 24%;
-		}
-
-		input[type="text"],
-		select {
-			width: 74%;
-			// padding: 3px;
-			// border-radius: 3px;
-		}
+	form {
+		display: grid;
+		grid-template-columns: repeat( auto-fit, minmax(200px, 1fr));
+		grid-gap: 1rem;
+		align-items: end;
 	}
-
-	p.wp-travel-search {
-		text-align: right;
+	p {
+		margin: 0;
+		padding: 0;
+	}
+	label {
+		display: inline-block;
 	}
 }
 //widget filter styline
