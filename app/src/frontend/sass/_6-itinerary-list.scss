@@ -349,6 +349,21 @@
 		}
 	}
 }
+
+// Related Posts
+.wp-travel-related-posts {
+	.wp-travel-itinerary-items {
+		.wp-travel-itinerary-list {
+			grid-template-columns: repeat(3, 1fr) !important;
+			@media (max-width: 991px) {
+				grid-template-columns: repeat(2, 1fr) !important;
+			}
+			@media (max-width: 650px) {
+				grid-template-columns: repeat(1, 1fr) !important;
+			}
+		}
+	}
+}
 // List Mode
 .wp-travel-default-article {
 	display: block;

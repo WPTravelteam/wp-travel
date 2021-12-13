@@ -54,7 +54,7 @@
 				// display: inline-block;
 				font-size: 14px;
 				// padding: 22px;
-				@media (max-width: 575px) {
+				@media (max-width: 767px) {
 					//(toolbar issue fix)
 					display: none;
 				}
@@ -74,7 +74,7 @@
 						transform: rotate(180deg);
 					}
 				}
-				@media (max-width: 575px) {
+				@media (max-width: 767px) {
 					//(toolbar issue fix)
 					display: block !important;
 				}
@@ -162,7 +162,7 @@
 		width: 100%;
 		display: block;
 	}
-	@media (max-width: 575px) {
+	@media (max-width: 767px) {
 		//(toolbar issue fix)
 		display: none !important;
 	}
@@ -177,7 +177,7 @@
 	}
 }
 .wp-toolbar-filter-field.show-in-mobile {
-	@media (max-width: 575px) {
+	@media (max-width: 767px) {
 		//(toolbar issue fix)
 		display: block !important;
 	}
@@ -202,7 +202,7 @@
 		margin-top: 0px;
 		text-align: right;
 	}
-	@media (max-width: 575px) {
+	@media (max-width: 767px) {
 		//(toolbar issue fix)
 		display: none;
 	}
