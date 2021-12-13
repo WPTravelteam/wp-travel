@@ -313,6 +313,8 @@
 
 		.reply {
 			position: relative;
+			display: inline;
+			margin-left: 81px;
 		}
 	}
 
@@ -323,7 +325,10 @@
 
 	.description {
 		p {
-			padding-left: 40px;
+			// padding-left: 40px;
+			// Review Section Tab 
+			display: flex;
+			padding-left: 0;
 		}
 
 		img {
@@ -332,12 +337,16 @@
 	}
 
 	img {
-		width: 8.0909090909%;
+		// width: 8.0909090909%;
+		width: 60px;
+		height: 60px;
+		border-radius: 50%;
 		float: left;
-		margin-right: 4.0909090909%;
+		// margin-right: 4.0909090909%;
+		margin-right: 1.5em;
 		height: auto;
 		margin-bottom: 0 !important;
-		border-radius: 3px;
+		// border-radius: 3px;
 	}
 
 	.comment-text {

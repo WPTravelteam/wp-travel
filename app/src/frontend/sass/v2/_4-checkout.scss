@@ -252,6 +252,7 @@
 			margin-bottom: 15px;
 			display: block;
 		}
+		
 	}
 
 	.wp-travel-form-field {
@@ -287,13 +288,15 @@
 				&:first-of-type {
 					display: inline-block;
 					margin-bottom: 10px;
+					width: 20%;
 				}
 			}
 
 			.radio-checkbox-label {
-				display: inline-block;
+				// display: inline-block;
+				display: inline;
 				float: none;
-				margin-bottom: 0 !important;
+				margin-bottom: 5px;
 			}
 
 			> div:last-of-type {
@@ -316,9 +319,11 @@
 				// font-size: 13.8px;
 
 				&.radio-checkbox-label {
-					margin-bottom: 15px !important;
-					width: 75%;
+					margin-right: 5px;
+					// margin-bottom: 15px;
+					// width: 75%;					
 				}
+				
 			}
 
 			input:not([type="radio"]):not([type="checkbox"]):not([type="submit"]),
@@ -331,6 +336,9 @@
 			.wp-travel-radio {
 				width: 66.6666666667%;
 				float: right;
+				.client-not-found {
+					margin-top: -5px;
+				}
 			}
 
 			.parsley-errors-list {

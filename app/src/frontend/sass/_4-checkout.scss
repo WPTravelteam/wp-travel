@@ -218,6 +218,11 @@
 		label {
 			font-weight: 600;
 		}
+		// &.wp-travel-enquiry-subscribe-section {
+		// 	> label {
+		// 		width: 100% !important;
+		// 	}
+		// }
 
 		input:not([type="radio"]):not([type="checkbox"]):not([type="submit"]),
 		select,
@@ -245,8 +250,10 @@
 			}
 
 			.radio-checkbox-label {
-				display: inline-block;
+				// display: inline-block;
 				float: none;
+				display: inline;
+				padding-right: 0;
 			}
 
 			> div:last-of-type {
@@ -307,6 +314,7 @@
 
 			.wp-travel-radio {
 				width: 75%;
+				margin-bottom: 10px;
 			}
 		}
 	}
