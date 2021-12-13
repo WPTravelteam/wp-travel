@@ -306,12 +306,17 @@
 		@include sm {
 			width: 100%;
 		}
+		@media (max-width:767px){
+			width: 100% !important;
+		}
 	}
 
 	.wp-toolbar-right {
 		// float: right;
 		// margin-right: 20px;
-
+		position: absolute;
+		top: 15px;
+		right: 20px;
 		@include sidr-view {
 			float: none;
 			position: absolute;

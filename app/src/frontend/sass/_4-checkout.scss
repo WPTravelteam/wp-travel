@@ -43,6 +43,8 @@
 		}
 	}
 	.wp-travel-checkout-section {
+		background: #fff;
+		padding-inline: 10px;
 		@media (min-width: 992px) {
 			order: 1;
 		}
@@ -296,6 +298,12 @@
 			.parsley-errors-list {
 				float: right;
 				margin: -15px 0 0;
+			}
+		}
+
+		@media (max-width: 991px) {
+			.wp-travel-radio {
+				margin-bottom: 1rem;
 			}
 		}
 
