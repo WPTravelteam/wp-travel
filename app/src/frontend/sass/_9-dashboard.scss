@@ -53,7 +53,15 @@
 
 		.resp-tab-content {
 			padding: 0;
-			.account-setting, .payment-content {
+			.view-order {
+				.book-more {
+					@media (max-width: 768px) {
+						margin-bottom: 0.8em;
+					}
+				}
+			}
+			.account-setting,
+			.payment-content {
 				.edit-account {
 					.button {
 						margin-bottom: 0.8em;
