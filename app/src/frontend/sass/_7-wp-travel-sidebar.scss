@@ -1,4 +1,3 @@
-
 .wp-travel-trips-has-sidebar {
 	width: 66.666667%;
 	padding-right: 15px;
@@ -9,6 +8,14 @@
 		float: right;
 		padding: 0px 15px;
 		display: block;
+		.wp-travel-itinerary-items {
+			ul.wp-travel-itinerary-list {
+				grid-template-columns: repeat(1, 1fr) !important;
+				li {
+					margin: 0;
+				}
+			}
+		}
 	}
 
 	@include sidr-view {

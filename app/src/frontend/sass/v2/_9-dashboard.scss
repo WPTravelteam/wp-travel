@@ -59,6 +59,13 @@
 				}
 			}
 		}
+		h2.resp-accordion {
+			i {
+				@media (max-width: 768px) {
+					padding-right: 10px;
+				}
+			}
+		}
 	}
 	select,
 	input.form-control {

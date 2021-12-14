@@ -240,6 +240,11 @@
 		.tc-content {
 			img {
 				transform: translateY(8px);
+				@media (max-width: 500px) {
+					max-width: 100%;
+					height: auto;
+					width: 100%;
+				}
 			}
 			&.right {
 				img {
@@ -257,9 +262,8 @@
 	}
 }
 
-// Gallery 
+// Gallery
 #gallery {
-
 }
 
 //Reviews
@@ -326,7 +330,7 @@
 	.description {
 		p {
 			// padding-left: 40px;
-			// Review Section Tab 
+			// Review Section Tab
 			display: flex;
 			padding-left: 0;
 		}
@@ -446,8 +450,10 @@
 		.wp-travel-downloads-listings-public {
 			margin-bottom: 1em;
 			position: relative;
-			// padding-left: 1.5em;
-			padding-left: 0;
+			padding-left: 1.5em;
+			@media (max-width: 765px) {
+				grid-gap: 0;
+			}
 			> p {
 				display: none;
 			}
@@ -460,6 +466,9 @@
 				// padding-left: 100px;
 				padding-left: 0;
 				margin-left: -50px;
+				@media (max-width: 765px) {
+					margin-left: 0;
+				}
 				a {
 					margin-right: 5px;
 				}

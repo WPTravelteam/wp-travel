@@ -3,7 +3,7 @@
 	// grid-template-columns: 1fr 35%;
 	grid-template-columns: 1fr 42%;
 	grid-gap: 35px;
-	margin-top: 50px;
+	margin-top: 0px;
 	// grid-gap: 100px;
 	.number-accordion {
 		.checkout-accordion {
@@ -216,6 +216,13 @@
 		margin: 10px 0;
 		display: inline-block;
 		width: 100%;
+		&.payment-card-field {
+			display: flex;
+			flex-wrap: wrap;
+			label {
+				font-size: 14px;
+			}
+		}
 
 		label {
 			font-weight: 600;
