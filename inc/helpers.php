@@ -2320,11 +2320,18 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 								$trip_id = $order_items_data[ $cart_id ]['trip_id'];
 								?>
 								<div class="my-order-single-traveller-info">
-									<h3 class="my-order-single-title"><?php esc_html_e( sprintf( 'Travelers info [ %s ]', get_the_title( $trip_id ) ), 'wp-travel' ); ?></h3>
+									<h3 class="my-order-single-title">
+										<?php
+										/**
+										 * Translators: %s placeholder is used to show the title of the trip.
+										 */
+										printf( esc_html__( 'Travelers info [ %s ]', 'wp-travel' ), get_the_title( $trip_id ) );
+										?>
+									</h3>
 									<div class="row">
 										<?php foreach ( $first_names as $key => $first_name ) : ?>
 											<div class="col-md-6">
-												<h3 class="my-order-single-title"><?php esc_html_e( sprintf( 'Traveler %s :', $key + 1 ), 'wp-travel' ); ?></h3>
+												<h3 class="my-order-single-title"><?php printf( esc_html__( 'Traveler %d :', 'wp-travel' ), $key + 1 ); ?></h3>
 												<?php
 												$traveller_fields = isset( $checkout_fields['traveller_fields'] ) ? $checkout_fields['traveller_fields'] : array();
 												$traveller_fields = wptravel_sort_form_fields( $traveller_fields );

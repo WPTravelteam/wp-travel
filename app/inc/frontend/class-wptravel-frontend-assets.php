@@ -399,6 +399,8 @@ class WpTravel_Frontend_Assets {
 					'jquery-ui-accordion',
 					'jquery-datepicker-lib-eng',
 					'jquery-ui-slider',
+					'jquery-gmaps',
+					'easy-responsive-tabs',
 				),
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,

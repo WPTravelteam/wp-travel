@@ -229,6 +229,7 @@ module.exports = function (grunt) {
 			my_target: {
 				files: {
 					'app/assets/js/wp-travel-frontend.bundle.js': [
+						// 'app/assets/js/lib/easy-responsive-tabs/easy-responsive-tabs.js',//easy-responsive-tabs ['jquery']
 						'app/assets/js/lib/datepicker/datepicker.js', // jquery-datepicker-lib
 						'app/assets/js/lib/jquery.magnific-popup/jquery.magnific-popup.min.js',
 						'app/assets/js/lib/slick/slick.min.js',
@@ -241,9 +242,9 @@ module.exports = function (grunt) {
 						'app/assets/js/cart.js',//wp-travel-cart ['wp-util','jquery-datepicker-lib', 'jquery-datepicker-lib-eng']
 						'app/assets/js/wp-travel-view-mode.js',
 						'app/assets/js/wp-travel-widgets.js',
-						'app/assets/js/lib/easy-responsive-tabs/easy-responsive-tabs.js',//easy-responsive-tabs ['jquery']
 						'app/assets/js/collapse.js',//collapse-js ['jquery]
 						'app/assets/js/lib/hc-sticky/hc-sticky.js',
+						'app/assets/js/wp-travel-front-end-map.js',
 						// 'app/assets/js/moment.min.js',
 					],
 					'app/assets/js/booking.min.js': ['app/assets/js/booking.js'],
@@ -260,6 +261,7 @@ module.exports = function (grunt) {
 					'app/assets/js/jquery.wptraveluploader.min.js': ['app/assets/js/jquery.wptraveluploader.js'],
 					'app/assets/js/wp-travel-back-end.min.js': ['app/assets/js/wp-travel-back-end.js'],
 					'app/assets/js/wp-travel-front-end.min.js': ['app/assets/js/wp-travel-front-end.js'],
+					'app/assets/js/wp-travel-front-end-map.min.js': ['app/assets/js/wp-travel-front-end-map.js'],
 					'app/assets/js/wp-travel-media-upload.min.js': ['app/assets/js/wp-travel-media-upload.js'],
 					'app/assets/js/wp-travel-tabs.min.js': ['app/assets/js/wp-travel-tabs.js'],
 					'app/assets/js/wp-travel-fields-scripts.min.js': ['app/assets/js/wp-travel-fields-scripts.js'],
