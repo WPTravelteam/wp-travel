@@ -42,10 +42,13 @@
 		padding: 30px;
 		border: 1px solid #eae9de;
 
-		@media (max-width: 767.99px) {
+		@media (max-width: 768px) {
 			padding: 0;
 			min-height: auto;
 			width: 100%;
+			@media (max-width: 768px) {
+				border: none;
+			}
 			.resp-tab-content {
 				border: none;
 			}
@@ -53,6 +56,20 @@
 
 		.resp-tab-content {
 			padding: 0;
+			.view-order {
+				.book-more {
+					@media (max-width: 768px) {
+						margin-block: 1em;
+					}
+				}
+			}
+			.account-setting,
+			.payment-content {
+				.button {
+					margin-bottom: 0.8em;
+					width: auto;
+				}
+			}
 			.account-setting {
 				.wp-travel-Button {
 					width: auto;
@@ -60,6 +77,21 @@
 			}
 		}
 		h2.resp-accordion {
+			@media (max-width: 768px) {
+				margin-bottom: 0.5em;
+				position: relative;
+				.resp-arrow {
+					position: absolute;
+					right: 15px;
+					top: 20px;
+					transition: 0.2s ease-in-out;
+				}
+				&.resp-tab-active {
+					.resp-arrow {
+						transform: rotate(180deg);
+					}
+				}
+			}
 			i {
 				@media (max-width: 768px) {
 					padding-right: 10px;

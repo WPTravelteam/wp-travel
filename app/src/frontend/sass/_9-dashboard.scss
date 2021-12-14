@@ -35,17 +35,17 @@
 		}
 	}
 	.resp-tabs-container {
-		// width:calc( 100% - 100px) !important;
+		width: calc(100% - 100px) !important;
 		border-radius: 0;
 		border: none;
 		min-height: 485px;
 		padding: 30px !important;
 		border: 1px solid #eae9de;
 
-		@media (max-width: 767.99px) {
+		@media (max-width: 768px) {
 			padding: 0;
 			min-height: auto;
-			width: 100%;
+			width: 100% !important;
 			.resp-tab-content {
 				border: none;
 			}
@@ -53,8 +53,31 @@
 
 		.resp-tab-content {
 			padding: 0;
+			.account-setting, .payment-content {
+				.edit-account {
+					.button {
+						margin-bottom: 0.8em;
+					}
+				}
+			}
 		}
 		h2.resp-accordion {
+			@media (max-width: 768px) {
+				margin-bottom: 0.5em;
+				position: relative;
+				.resp-arrow {
+					position: absolute;
+					right: 15px;
+					top: 20px;
+					transition: 0.2s ease-in-out;
+				}
+				&.resp-tab-active {
+					.resp-arrow {
+						transform: rotate(-180deg);
+						transition: 0.2s ease-in-out;
+					}
+				}
+			}
 			i {
 				@media (max-width: 768px) {
 					padding-right: 10px;
