@@ -3,21 +3,21 @@
         wptravelGoogleMap: function( options ) {
             if ( this.length > 0 ) {
                 // Get Selector name.
-                let mapSelector = this[0].id;
-                let selectorPrefix = '#';
+                var mapSelector = this[0].id;
+                var selectorPrefix = '#';
                 if ( ! mapSelector ) {
                     mapSelector = this[0].className;
                     selectorPrefix = '.';
                 }
-                let fullSelector = selectorPrefix + mapSelector;
+                var fullSelector = selectorPrefix + mapSelector;
                 // End of getting selector name.
 
                 if ( '' !== wp_travel.lat && '' !== wp_travel.lng && $( fullSelector ).length > 0 ) {
 
-                    let lat  = options && options.lat ? options.lat : wp_travel.lat;
-                    let lng  = options && options.lng ? options.lng : wp_travel.lng;
-                    let zoom = options && options.zoom ? options.zoom : wp_travel.zoom;
-                    let loc  = options && options.loc ? options.loc : wp_travel.loc; // Location
+                    var lat  = options && options.lat ? options.lat : wp_travel.lat;
+                    var lng  = options && options.lng ? options.lng : wp_travel.lng;
+                    var zoom = options && options.zoom ? options.zoom : wp_travel.zoom;
+                    var loc  = options && options.loc ? options.loc : wp_travel.loc; // Location
                     // Create map.
                     var map = new GMaps({
                         div: fullSelector,

@@ -269,7 +269,14 @@ class WP_Travel_Emails {
 		<html>
 		<head>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<title><?php sprintf( 'TO %s', strtoupper( $sent_to ) ); ?></title>
+			<title>
+				<?php
+				/**
+				 * Translators: %s Sent to Email ID.
+				 */
+				printf( esc_html__( 'TO %s', 'wp-travel' ), strtoupper( $sent_to ) );
+				?>
+			</title>
 			<?php echo $this->email_styles(); //@phpcs:ignore ?>
 		</head>
 		<body style="background: #fcfcfc;color: #5d5d5d;margin: 0;padding: 0;">

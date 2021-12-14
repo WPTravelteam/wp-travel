@@ -109,7 +109,7 @@ if ( ! class_exists( 'WpTravel_Addons_Settings' ) ) {
 						<p class="description"><label for="<?php echo esc_attr( $field_name ); ?>">
 						<?php
 						// translators: For fiel label.
-						sprintf( esc_html_e( 'Show all your "%s" settings and enable its feature.', 'wp-travel' ), $field_label );
+						printf( esc_html__( 'Show all your "%s" settings and enable its feature.', 'wp-travel' ), $field_label );
 						?>
 						</label></p>
 					</td>
