@@ -554,6 +554,9 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		public static function is_page( $slug, $is_admin_page_check = false ) {
 
 			if ( $is_admin_page_check ) {
+				if ( ! function_exists( 'get_current_screen' ) ) {
+					return;
+				}
 				$screen = get_current_screen();
 				switch ( $slug ) {
 					// WP Travel Menu.
