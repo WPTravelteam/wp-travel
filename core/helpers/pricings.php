@@ -309,7 +309,7 @@ class WpTravel_Helpers_Pricings {
 		}
 
 		$price = $price ? $price : 0;
-		return apply_filters( 'wptravel_get_price', $price, $args ); // filter wptravel_get_price @since 4.6.4.
+		return apply_filters( 'wptravel_get_price', (float) $price, $args ); // filter wptravel_get_price @since 4.6.4.
 	}
 
 	/**
@@ -495,7 +495,7 @@ class WpTravel_Helpers_Pricings {
 					foreach ( $category_data as $pricing_categories ) {
 						foreach ( $pricing_categories as $pricing_category ) {
 							$current_price = ( $pricing_category['is_sale'] && $pricing_category['sale_price'] > 0 ) ? $pricing_category['sale_price'] : $pricing_category['regular_price'];
-							if ( ! $price || $current_price < $price ) { // init / update min price.
+							if ( ! (float) $price || (float) $current_price < (float) $price && (float) $current_price > 0 ) { // init / update min price.
 								$price   = $current_price;
 								$regular = $pricing_category['regular_price'];
 							}

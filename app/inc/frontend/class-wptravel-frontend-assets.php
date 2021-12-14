@@ -392,16 +392,20 @@ class WpTravel_Frontend_Assets {
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,
 			);
+			$bundle_deps = array(
+				'jquery',
+				'jquery-ui-accordion',
+				'jquery-datepicker-lib-eng',
+				'jquery-ui-slider',
+				'easy-responsive-tabs',
+			);
+
+			if ( '' !== $api_key && true === $show_google_map ) {
+				$bundle_deps[] = 'jquery-gmaps';
+			}
 			$scripts['wp-travel-frontend-bundle']         = array(
 				'src'       => self::$app_path . '/assets/js/wp-travel-frontend.bundle.js',
-				'deps'      => array(
-					'jquery',
-					'jquery-ui-accordion',
-					'jquery-datepicker-lib-eng',
-					'jquery-ui-slider',
-					'jquery-gmaps',
-					'easy-responsive-tabs',
-				),
+				'deps'      => $bundle_deps,
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,
 			);
