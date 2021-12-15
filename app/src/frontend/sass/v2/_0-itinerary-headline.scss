@@ -397,6 +397,11 @@ label.radio-checkbox-label {
 			margin-bottom: 0 !important;
 		}
 	}
+	.wp-travel-enquiry-gdpr-section {
+		label[for="wp-travel-enquiry-gdpr-msg"] {
+			display: none;
+		}
+	}
 	// .parsley-errors-list {
 	// 	position: relative;
 	// 	margin-left: 0;

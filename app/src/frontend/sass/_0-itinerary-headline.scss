@@ -99,7 +99,7 @@
 		}
 	}
 	.wp-travel-average-review {
-		float: right;		
+		float: right;
 		margin-top: 10px;
 	}
 	.wp-travel-booknow-btn {
@@ -349,6 +349,11 @@ label.radio-checkbox-label {
 		}
 		label.radio-checkbox-label {
 			margin-bottom: 0 !important;
+		}
+	}
+	.wp-travel-enquiry-gdpr-section {
+		label[for="wp-travel-enquiry-gdpr-msg"] {
+			display: none;
 		}
 	}
 	.parsley-errors-list {

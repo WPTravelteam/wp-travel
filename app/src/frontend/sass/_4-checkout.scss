@@ -223,10 +223,15 @@
 		}
 		.radio-checkbox-label {
 			margin-bottom: 0 !important;
+			width: auto !important;
 			@include mob {
 				margin-bottom: 10px !important;
 			}
+			
 		}
+		// label:not(.radio-checkbox-label) {
+		// 	width: auto;
+		// }
 		&.payment-card-field {
 			display: flex;
 			flex-wrap: wrap;
@@ -248,7 +253,8 @@
 		select,
 		textarea {
 			width: 100%;
-			margin-bottom: 15px;
+			// margin-bottom: 15px;
+			margin-bottom: 0;
 			padding: 3px 15px;
 		}
 
@@ -315,7 +321,8 @@
 
 			.parsley-errors-list {
 				float: right;
-				margin: -15px 0 0;
+				// margin: -15px 0 0;
+				margin: 0;
 			}
 		}
 
@@ -336,6 +343,7 @@
 			textarea,
 			.parsley-errors-list {
 				width: 75%;
+				margin-bottom: 5px;
 			}
 
 			.wp-travel-radio {

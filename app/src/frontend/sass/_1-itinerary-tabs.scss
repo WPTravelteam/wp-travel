@@ -20,6 +20,9 @@
 	position: relative;
 	margin-left: auto !important;
 	margin-right: auto !important;
+	@media (min-width: 768px) {
+		padding-bottom: 15px;
+	}
 	@include mob {
 		padding: 20px 0px 10px !important;
 	}
@@ -64,7 +67,7 @@
 			}
 
 			@include sidr-view {
-				padding: 15px 14px;
+				padding: 15px 14px !important;
 			}
 		}
 	}

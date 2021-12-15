@@ -383,6 +383,13 @@
 		padding-right: 15px;
 	}
 	@include clearfix();
+	.description-left {
+		.wp-travel-add-to-wishlists {
+			@media (max-width: 992px) {
+				top: 20px !important;
+			}
+		}
+	}
 
 	.wp-travel-article-image-wrap {
 		float: left;
