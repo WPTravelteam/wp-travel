@@ -2453,7 +2453,7 @@ li {
 		margin-left: calc(50% - 225px);
 	}
 
-	.wp-travel-form-field label {
+	.wp-travel-form-field label:not(.radio-checkbox-label) {
 		width: 60%;
 	}
 }
@@ -2475,7 +2475,7 @@ li {
 		text-align: center;
 	}
 
-	.wp-travel-form-field label {
+	.wp-travel-form-field label:not(.radio-checkbox-label) {
 		width: 75%;
 	}
 }

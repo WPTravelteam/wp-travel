@@ -9,6 +9,26 @@
 		padding: 0px 15px;
 		display: block;
 		.wp-travel-itinerary-items {
+			// list view image full width fix in sidebar
+			.wp-travel-itinerary-list {
+				.wp-travel-article-image-wrap {
+					img {
+						width: 100%;
+					}
+				}
+				.wp-travel-entry-content-wrapper {
+					.description-right {
+						.trip-price {
+							display: flex;
+							flex-wrap: wrap;
+							margin-top: 0;
+							@media (min-width: 768px) and (max-width: 991px) {
+								display: block;
+							}
+						}
+					}
+				}
+			}
 			ul.wp-travel-itinerary-list {
 				grid-template-columns: repeat(1, 1fr) !important;
 				li {

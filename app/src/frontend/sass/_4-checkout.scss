@@ -216,6 +216,17 @@
 		margin: 10px 0;
 		display: inline-block;
 		width: 100%;
+		@include mob {
+			&:not(.button-field) {
+				display: grid;
+			}
+		}
+		.radio-checkbox-label {
+			margin-bottom: 0 !important;
+			@include mob {
+				margin-bottom: 10px !important;
+			}
+		}
 		&.payment-card-field {
 			display: flex;
 			flex-wrap: wrap;
@@ -285,7 +296,7 @@
 				font-size: 13.8px;
 
 				&.radio-checkbox-label {
-					margin-bottom: 15px !important;
+					margin-bottom: 15px;
 					width: 75%;
 				}
 			}
