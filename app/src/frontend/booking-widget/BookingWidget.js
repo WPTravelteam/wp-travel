@@ -304,6 +304,7 @@ const BookingWidget = (props) => {
 											onPaxChange={handlePaxChange}
 											counts={paxCounts}
 											inventory={inventory}
+											selected={selectedDateTime}
 										/>
 									{/* </Suspense> */}
 								</ErrorBoundry>

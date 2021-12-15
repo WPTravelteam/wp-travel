@@ -694,7 +694,7 @@ const WPTravelBookingWidget = ( props ) => {
                                     {/* </Suspense> */}
                                 </div>
                             }
-                            <BookingWidget {...bookingState} initialState={initialState} handlePricingSelect={handlePricingSelect} handleTimeClick handlePaxChange={handlePaxChange} updateState={updateState} /> {/* just a calendar */}
+                            <BookingWidget {...bookingState} initialState={initialState} handlePricingSelect={handlePricingSelect} handleTimeClick={handleTimeClick} handlePaxChange={handlePaxChange} updateState={updateState} /> {/* just a calendar */}
 					</Suspense>
                 </ErrorBoundary>
             }

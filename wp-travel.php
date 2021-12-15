@@ -558,6 +558,9 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 					return;
 				}
 				$screen = get_current_screen();
+				if ( ! $screen ) {
+					return;
+				}
 				switch ( $slug ) {
 					// WP Travel Menu.
 					case 'settings':
