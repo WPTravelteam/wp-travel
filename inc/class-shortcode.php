@@ -325,7 +325,7 @@ class Wp_Travel_Shortcodes {
 										return $setting['name'] === $trip_fact['label'];
 									}
 								);
-
+							$icon_args = array();
 							foreach ( $icon as $key => $ico ) {
 
 								$icon      = $ico['icon'];

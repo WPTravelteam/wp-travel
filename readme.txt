@@ -250,15 +250,26 @@ Release Date: 9th December, 2021
 
 Fixes:
 * Partial payment amount is not being recorded in the booking system.
-* Minor layout issue fixes.
+* Zero price is displayed in from price if we don't set price in any of the pricings.
+* Trip Single page tab is not working if Load combined script is enabled.
+* Fixed error warning on sale widget view mode changed to view mode.
+* Fixed individual trip partial payout not working when setting first payment as 100%
+* Fixed Multiple loaders showing on the checkout page.
+* Fixed single trip page gallery tab layout issue.
+* Fixed layout issue in the small screen of download tab of single trip page.
+* Fixed gap between header and traveler details in the checkout page.
+* Image width fix in trip itineraries tab in a small screen.
+* WP Travel dashboard tab width and gap between icon and text fix.
+* Widget section featured trip, trip type widget fix.
+* WP Travel Dashboard page responsive and small screen layout fix.
 
 Enhancement:
-* Made trip overview content compatible with yoast seo.
+* Made trip overview content compatible with Yoast SEO.
 
 Tweaks:
 * Outdated Script `sticky-kit` replaced with `hc-sticky`.
 * Removed Modnizer script and its dependencies.
-* Archive title added from a hook in the archive template file.
+* Archive-title added from a hook in the archive template file.
 * Admin styles and scripts loading optimized.
 
 = 5.0.5 =
