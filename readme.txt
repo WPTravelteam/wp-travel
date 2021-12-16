@@ -254,7 +254,6 @@ Fixes:
 * Trip Single page tab is not working if Load combined script is enabled.
 * Fixed error warning when adding WP Travel widgets in archive sidebar.
 * Fixed individual trip partial payout not working when setting first payment as 100%.
-* Fixed Payment status issue for Bank Deposit.
 * Fixed string translation for booking detail page.
 * Fixed inventory not deducting when time enabled for trip.
 
