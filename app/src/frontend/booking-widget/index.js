@@ -53,7 +53,6 @@ const WPTravelBookingWidget = ( props ) => {
 		pricingUnavailable,
 		tempExcludeDate } = bookingState;
     const updateState = data => {
-		// console.log( 'used updateBooking', data );
 		updateBooking({ ...bookingState, ...data });
     }
 	const renderLoader = () => <div className="loader"></div>;
@@ -104,13 +103,6 @@ const WPTravelBookingWidget = ( props ) => {
 		}
 	}, [selectedDate])
 
-
-	useEffect(() => {
-		if (nomineePricings.length === 1) {
-			handlePricingSelect(nomineePricings[0])
-		}
-	}, [selectedDate])
-
 	useEffect(() => {
 		if (!selectedPricing) {
 			return
@@ -122,7 +114,6 @@ const WPTravelBookingWidget = ( props ) => {
 		if ( isLoading ) { // Prevent looping request.
 
 			if (isInventoryEnabled && isFixedDeparture) {
-				// console.log( 'inventory' );
 				setInventoryData(selectedPricing, selectedDate, times)
 			} else {
 				let pricing = pricings[selectedPricing]
@@ -183,25 +174,13 @@ const WPTravelBookingWidget = ( props ) => {
 				}
 			}
 		}
-		// console.log( '_state', _state )
 		updateState(_state)
 	}, [selectedPricing, selectedDateTime])
-
-	// useEffect(() => {
-	// 	if (!isInventoryEnabled && selectedPricing) {
-	// 		let pricing = pricings[selectedPricing]
-	// 		let maxPax = pricing.max_pax || 999
-	// 		updateState({
-	// 			inventory: [{
-	// 				'date': moment(selectedDateTime).format('YYYY-MM-DD[T]HH:mm'),
-	// 				'pax_available': maxPax,
-	// 				'booked_pax': 0,
-	// 				'pax_limit': maxPax,
-	// 			}]
-	// 		})
-	// 	}
-	// }, [selectedDateTime])
-
+	useEffect(() => {
+		if (nomineePricings.length === 1) {
+			handlePricingSelect(nomineePricings[0])
+		}
+	}, [selectedDate])
 
 	const generateRRule = (data, startDate) => {
 		// let _startDate = moment(data.start_date)
@@ -429,7 +408,6 @@ const WPTravelBookingWidget = ( props ) => {
 			})
 			return
 		}
-		// console.log('initialState', initialState);
 		updateState({
 			...initialState,
 			excludedDateTimes,
@@ -452,7 +430,6 @@ const WPTravelBookingWidget = ( props ) => {
 		}
 
 		_state = { ..._state, selectedTripDate: _dateIds, isLoading: true, selectedPricing:pricingId }
-		// console.log('_state', _state);
 
 		updateState(_state)
 		// end of date update in state
@@ -546,7 +523,7 @@ const WPTravelBookingWidget = ( props ) => {
 					_state = { ..._state, paxCounts: _paxCounts }
 
 					_state = _times.length > 0 && { ..._state, selectedDateTime: _times[0].toDate(), selectedTime: _times[0].format('HH:mm') } || _state
-					_state = times.length > 0 && { ..._state, nomineeTimes: _times } || _state
+					_state = times.length > 0 && { ..._state, nomineeTimes: _times } || { ..._state, nomineeTimes: [] }
 					// if (excludedDateTimes.length > 0 && _times.length <= 0) { // Why??
 					// 	_state = { ..._state, pricingUnavailable: true }
 					// }
@@ -618,8 +595,6 @@ const WPTravelBookingWidget = ( props ) => {
 	let totalPax = _.size(paxCounts) > 0 && Object.values(paxCounts).reduce((acc, curr) => acc + curr) || 0
 	const tripDateListing = _wp_travel.trip_date_listing
 	// Only used in fixed departure date listing.
-	// console.log( 'paxCounts', paxCounts );
-	// console.log( 'bookingState', bookingState );
 	let componentData ={
 		pricing: pricings[selectedPricing] || null,
 		onPaxChange:handlePaxChange,
