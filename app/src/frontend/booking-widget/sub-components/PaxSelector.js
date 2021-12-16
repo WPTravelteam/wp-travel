@@ -116,7 +116,7 @@ const PaxSelector = ({ pricing, onPaxChange, counts, inventory, selected, isInve
 						price_per_label = __i18n.price_per_labels[price_per_label];
 					}
 					let _inventory = inventory.find(i => i.date === moment(selected).format('YYYY-MM-DD[T]HH:mm'));
-					let maxPax = isInventoryEnabled && _inventory && _inventory.pax_available ? _inventory.pax_available : inventory[0].pax_available; // Temp fixes for inventory disabled case.
+					let maxPax = isInventoryEnabled && _inventory && _inventory.pax_available ? _inventory.pax_available : pricing.max_pax; // Temp fixes for inventory disabled case.
 					return <li key={i}>
 						<div className="text-left">
 							<strong>
