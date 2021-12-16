@@ -126,7 +126,7 @@
 		// flex-wrap: wrap;
 		display: grid;
 		grid-gap: 20px;
-		grid-template-columns: repeat(2, 1fr) !important;
+		grid-template-columns: repeat(2, 1fr);
 		// grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)) !important;
 		// @media (max-width: 992px) {
 		// 	grid-template-columns: repeat(2, 1fr) !important;
@@ -203,7 +203,8 @@
 			// width: calc(33.333% - 20px);
 			width: 100%;
 			height: auto;
-			margin: 10px;
+			// margin: 10px;
+			margin: 0;
 			padding-left: 0;
 			overflow: visible;
 
@@ -527,6 +528,9 @@
 			margin: 0 -10px;
 			gap: 0em;
 			flex-wrap: wrap;
+			li {
+				margin: 10px;
+			}
 
 			@include mob {
 				margin: 0 !important;
