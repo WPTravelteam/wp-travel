@@ -246,22 +246,27 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 ==
 = 5.0.6 =
-Release Date: 9th December, 2021
+Release Date: 16th December, 2021
 
 Fixes:
 * Partial payment amount is not being recorded in the booking system.
-* Zero price is displayed in from price if we don't set price in any of the pricings.
+* Zero price is displayed as from price when we don't set price for any pricings.
 * Trip Single page tab is not working if Load combined script is enabled.
-* Fixed error warning on sale widget view mode changed to view mode.
-* Fixed individual trip partial payout not working when setting first payment as 100%
+* Fixed error warning when adding WP Travel widgets in archive sidebar.
+* Fixed individual trip partial payout not working when setting first payment as 100%.
+* Fixed Payment status issue for Bank Deposit.
+
+Layout Fixes:
 * Fixed Multiple loaders showing on the checkout page.
 * Fixed single trip page gallery tab layout issue.
-* Fixed layout issue in the small screen of download tab of single trip page.
+* Fixed layout issue in the mobile screen of download tab of single trip page.
 * Fixed gap between header and traveler details in the checkout page.
 * Image width fix in trip itineraries tab in a small screen.
-* WP Travel dashboard tab width and gap between icon and text fix.
-* Widget section featured trip, trip type widget fix.
+* Fixed WP Travel dashboard tab width and gap between icon and text.
+* Fixed layout issue for widget section featured trip, trip type widget.
 * WP Travel Dashboard page responsive and small screen layout fix.
+* Fixed image not displaying with full width in list view in a responsive and mobile.
+* Fixed Privacy policy and subscribe field's checkbox alignment issue.
 
 Enhancement:
 * Made trip overview content compatible with Yoast SEO.

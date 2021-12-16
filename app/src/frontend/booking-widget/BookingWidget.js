@@ -90,6 +90,8 @@ const BookingWidget = (props) => {
 	// Pricing and dates data.
 	const pricings = allData.tripData && allData.tripData.pricings && _.keyBy(allData.tripData.pricings, p => p.id)
 	const _dates   = 'undefined' !== typeof allData.tripData.dates && allData.tripData.dates.length > 0 ? allData.tripData.dates : [];
+	const isInventoryEnabled = allData.tripData.inventory && allData.tripData.inventory.enable_trip_inventory === 'yes'
+
 
 	// const handlePaxChange = (id, value) => e => {
 	// 	let pricing = pricings[selectedPricing]
@@ -258,7 +260,8 @@ const BookingWidget = (props) => {
 	let minPaxToBook = selectedPricing && pricings[selectedPricing].min_pax && parseInt(pricings[selectedPricing].min_pax) || 1
 	let activeInventory = inventory.find(i => i.date === moment(selectedDateTime).format('YYYY-MM-DD[T]HH:mm'))
 	let maxPaxToBook = activeInventory && parseInt(activeInventory.pax_available)
-
+	// console.log( 'inventory from widget', inventory );
+	// console.log( 'maxPaxToBook', maxPaxToBook );
 	return <>
 		
 
@@ -304,6 +307,7 @@ const BookingWidget = (props) => {
 											onPaxChange={handlePaxChange}
 											counts={paxCounts}
 											inventory={inventory}
+											isInventoryEnabled={isInventoryEnabled}
 											selected={selectedDateTime}
 										/>
 									{/* </Suspense> */}
