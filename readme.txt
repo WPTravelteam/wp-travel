@@ -255,6 +255,7 @@ Fixes:
 * Fixed error warning when adding WP Travel widgets in archive sidebar.
 * Fixed individual trip partial payout not working when setting first payment as 100%.
 * Fixed Payment status issue for Bank Deposit.
+* Fixed string translation for booking detail page.
 
 Layout Fixes:
 * Fixed Multiple loaders showing on the checkout page.
