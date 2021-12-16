@@ -221,13 +221,17 @@
 				display: grid;
 			}
 		}
+		&.button-field {
+			.paypal-button {
+				text-align: center;
+			}
+		}
 		.radio-checkbox-label {
 			margin-bottom: 0 !important;
-			width: auto !important;
+			float: right;
 			@include mob {
-				margin-bottom: 10px !important;
+				margin-bottom: 5px !important;
 			}
-			
 		}
 		// label:not(.radio-checkbox-label) {
 		// 	width: auto;
@@ -264,6 +268,9 @@
 			padding-left: 15px;
 			.parsley-required {
 				list-style-type: none;
+			}
+			@include mob {
+				margin-top: 0;
 			}
 		}
 
@@ -329,6 +336,24 @@
 		@media (max-width: 991px) {
 			.wp-travel-radio {
 				margin-bottom: 1rem;
+			}
+			label,
+			.wp-travel-text-info {
+				width: 33.3333333333%;
+
+				&.radio-checkbox-label {
+					width: 66.6666666666%;
+				}
+			}
+		}
+		@media (max-width: 575px) {
+			label,
+			.wp-travel-text-info {
+				width: 100%;
+
+				&.radio-checkbox-label {
+					width: 100%;
+				}
 			}
 		}
 
@@ -424,6 +449,7 @@
 		position: relative;
 		border: 1px solid #f0f0f0;
 		padding: 1rem;
+		background: #fff;
 		.cart-header {
 			// padding: 1em 1.5em 0.5em;
 			.title {
