@@ -117,11 +117,18 @@ const PaxSelector = ({ pricing, onPaxChange, counts, inventory, selected, isInve
 					}
 					let _inventory = inventory.find(i => i.date === moment(selected).format('YYYY-MM-DD[T]HH:mm'));
 					let maxPax = isInventoryEnabled && _inventory && _inventory.pax_available ? _inventory.pax_available : pricing.max_pax; // Temp fixes for inventory disabled case.
+					let minPax = counts[c.id] ? counts[c.id] : 0;
 					return <li key={i}>
 						<div className="text-left">
 							<strong>
 								{`${c.term_info.title}`} &nbsp;
-								{<span className="wp_travel_pax_info">({`${counts[c.id]}`}/{maxPax})</span>}
+								{<span className="wp_travel_pax_info">({`${minPax}`}/{maxPax})</span>}
+								{/* {
+									// Currently not supported for time. Need enhancement later.
+									inventory && inventory.length < 2 && 'undefined' != typeof inventory[0] && inventory[0].booked_pax > 0 ?
+									<span className="wp_travel_pax_info">({`${counts[c.id]}`}/{`${inventory[0].pax_available}`})</span> :
+									<span className="wp_travel_pax_info">({`${counts[c.id]}`}/{`${pricing.max_pax}`})</span>
+								} */}
 							</strong>
 							{( ( c.has_group_price && c.group_prices.length > 0 ) || pricing && 'undefined' != typeof pricing.has_group_price && pricing.has_group_price && pricing.group_prices.length > 0 ) && <span className="tooltip group-discount-button">
 								<span>{__i18n.bookings.group_discount_tooltip}</span>
