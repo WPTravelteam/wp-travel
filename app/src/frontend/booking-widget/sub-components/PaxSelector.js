@@ -121,7 +121,7 @@ const PaxSelector = ({ pricing, onPaxChange, counts, inventory, selected, isInve
 						<div className="text-left">
 							<strong>
 								{`${c.term_info.title}`} &nbsp;
-								{<span className="wp_travel_pax_info">({`${counts[c.id]}`}/ {maxPax})</span>}
+								{<span className="wp_travel_pax_info">({`${counts[c.id]}`}/{maxPax})</span>}
 							</strong>
 							{( ( c.has_group_price && c.group_prices.length > 0 ) || pricing && 'undefined' != typeof pricing.has_group_price && pricing.has_group_price && pricing.group_prices.length > 0 ) && <span className="tooltip group-discount-button">
 								<span>{__i18n.bookings.group_discount_tooltip}</span>
