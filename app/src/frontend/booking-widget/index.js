@@ -523,7 +523,7 @@ const WPTravelBookingWidget = ( props ) => {
 					_state = { ..._state, paxCounts: _paxCounts }
 
 					_state = _times.length > 0 && { ..._state, selectedDateTime: _times[0].toDate(), selectedTime: _times[0].format('HH:mm') } || _state
-					_state = times.length > 0 && { ..._state, nomineeTimes: _times } || _state
+					_state = times.length > 0 && { ..._state, nomineeTimes: _times } || { ..._state, nomineeTimes: [] }
 					// if (excludedDateTimes.length > 0 && _times.length <= 0) { // Why??
 					// 	_state = { ..._state, pricingUnavailable: true }
 					// }

@@ -260,8 +260,6 @@ const BookingWidget = (props) => {
 	let minPaxToBook = selectedPricing && pricings[selectedPricing].min_pax && parseInt(pricings[selectedPricing].min_pax) || 1
 	let activeInventory = inventory.find(i => i.date === moment(selectedDateTime).format('YYYY-MM-DD[T]HH:mm'))
 	let maxPaxToBook = activeInventory && parseInt(activeInventory.pax_available)
-	// console.log( 'inventory from widget', inventory );
-	// console.log( 'maxPaxToBook', maxPaxToBook );
 	return <>
 		
 
