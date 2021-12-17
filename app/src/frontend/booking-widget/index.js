@@ -74,35 +74,17 @@ const WPTravelBookingWidget = ( props ) => {
 	const _excludedDatesTimes = allData.tripData.excluded_dates_times && allData.tripData.excluded_dates_times.length > 0 && allData.tripData.excluded_dates_times || []
 	let excludedDates = []
 	useEffect(() => {
-		// if (!selectedDateTime) {
-			excludedDates = _excludedDatesTimes
-				.filter(ed => {
-					if (ed.trip_time.length > 0) {
-						let _times = ed.trip_time.split(',')
-						let _datetimes = _times.map(t => moment(`${ed.start_date} ${t}`).toDate())
-						if ( !selectedDateTime || _excludedDatesTimes.includes(moment(ed.start_date).format('YYYY-MM-DD')) ) {
-							excludedDateTimes.push(_datetimes[0]); // Temp fixes Pushing into direct state is not good.
-						}
-						return false
-					}
-					return true
-				});
-			
-			// Seperated exclude date.
-			excludedDates = excludedDates.map(ed => ed.start_date)
-				updateState({
-					tempExcludeDate:excludedDates
-				});
-		// }
-	}, [selectedDateTime])
-
-	useEffect(() => { // If No Fixed departure set all pricings.
+		console.log('nomineePricings', nomineePricings);
+		if (nomineePricings.length === 1) {
+			handlePricingSelect(nomineePricings[0])
+		}
+		// If No Fixed departure set all pricings.
 		if (!isFixedDeparture) {
 			updateState({ nomineePricings: Object.keys(pricings) })
 			isLoading && updateState({ isLoading: false })
 		}
 	}, [selectedDate])
-
+	
 	useEffect(() => {
 		if (!selectedPricing) {
 			return
@@ -111,7 +93,7 @@ const WPTravelBookingWidget = ( props ) => {
 			pricingUnavailable: false
 		}
 		let times = getPricingTripTimes(selectedPricing, selectedTripDate)
-		if ( isLoading ) { // Prevent looping request.
+		// if ( isLoading ) { // Prevent looping request.
 
 			if (isInventoryEnabled && isFixedDeparture) {
 				setInventoryData(selectedPricing, selectedDate, times)
@@ -173,14 +155,9 @@ const WPTravelBookingWidget = ( props ) => {
 	
 				}
 			}
-		}
+		// }
 		updateState(_state)
-	}, [selectedPricing, selectedDateTime])
-	useEffect(() => {
-		if (nomineePricings.length === 1) {
-			handlePricingSelect(nomineePricings[0])
-		}
-	}, [selectedDate])
+	}, [selectedPricing, selectedDate ]) // selectedDate is also required to trigger if only date change with same pricing, this need to be trigger. because selected date may not have time.
 
 	const generateRRule = (data, startDate) => {
 		// let _startDate = moment(data.start_date)
@@ -237,7 +214,27 @@ const WPTravelBookingWidget = ( props ) => {
 		let startDate = moment(new Date(Date.UTC(curretYear, currentMonth, currentDate, currentHours, currentMin, 0))).utc();
 		// let startDate = moment(new Date(date));
 
-		if (tempExcludeDate.includes(startDate.format('YYYY-MM-DD'))) {
+		// Get all Trip Exclude Date 
+		const _excludedDatesTimes = allData.tripData.excluded_dates_times && allData.tripData.excluded_dates_times.length > 0 && allData.tripData.excluded_dates_times || []
+		let excludedDates = [];
+		excludedDates = _excludedDatesTimes
+			.filter(ed => {
+				if (ed.trip_time.length > 0) {
+					let _times = ed.trip_time.split(',')
+					let _datetimes = _times.map(t => moment(`${ed.start_date} ${t}`).toDate())
+					if ( !selectedDateTime || _excludedDatesTimes.includes(moment(ed.start_date).format('YYYY-MM-DD')) ) {
+						excludedDateTimes.push(_datetimes[0]); // Temp fixes Pushing into direct state is not good.
+					}
+					return false
+				}
+				return true
+			});
+		
+		// Seperated exclude date.
+		excludedDates = excludedDates.map(ed => ed.start_date);
+		// End of Get all Trip Exclude Date.
+
+		if ( excludedDates.length > 0 && excludedDates.includes(startDate.format('YYYY-MM-DD'))) {
 			return false
 		}
 
@@ -347,6 +344,9 @@ const WPTravelBookingWidget = ( props ) => {
 			_state = { ..._state, nomineePricings: _nomineePricings }
 		}
 
+		if (_nomineePricings.length === 1) {
+			_state = { ..._state, selectedPricing: _nomineePricings[0] }
+		}
 		_state = { ..._state, selectedTripDate: _dateIds, isLoading: false }
 
 		updateState(_state)
@@ -538,7 +538,6 @@ const WPTravelBookingWidget = ( props ) => {
 
 	const handlePricingSelect = (id) => {
 		let _state = {
-			isLoading: true,
 			selectedPricing:id
 		}
 		updateState( _state )
