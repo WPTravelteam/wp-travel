@@ -272,6 +272,7 @@ const BookingWidget = (props) => {
 									nomineePricings.length > 1 && <ErrorBoundry>
 										{/* <Suspense fallback={<Loader />}> */}
 											<PricingListing
+												isLoading={isLoading}
 												selected={selectedPricing}
 												options={nomineePricings}
 												onPricingSelect={handlePricingSelect}

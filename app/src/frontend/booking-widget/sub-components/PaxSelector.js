@@ -36,7 +36,6 @@ const DiscountTable = ({ groupPricings }) => {
 }
 
 const PaxSelector = ({ pricing, onPaxChange, counts, inventory, selected, isInventoryEnabled }) => {
-	// console.log( 'onPaxChange', onPaxChange );
 	let categories = pricing && pricing.categories || []
 
 	const objectSum = (obj) => {

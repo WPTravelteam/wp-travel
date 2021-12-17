@@ -74,7 +74,6 @@ const WPTravelBookingWidget = ( props ) => {
 	const _excludedDatesTimes = allData.tripData.excluded_dates_times && allData.tripData.excluded_dates_times.length > 0 && allData.tripData.excluded_dates_times || []
 	let excludedDates = []
 	useEffect(() => {
-		console.log('nomineePricings', nomineePricings);
 		if (nomineePricings.length === 1) {
 			handlePricingSelect(nomineePricings[0])
 		}
@@ -538,7 +537,8 @@ const WPTravelBookingWidget = ( props ) => {
 
 	const handlePricingSelect = (id) => {
 		let _state = {
-			selectedPricing:id
+			selectedPricing:id,
+			isLoading:true // temp fix for frequently price switch will creating issue with continusly switching pricing.
 		}
 		updateState( _state )
 	}

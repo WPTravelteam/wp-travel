@@ -303,7 +303,6 @@ const DatesListing = ({ dates, isTourDate, getPricingsByDate, allData, onFixedDe
     let nonRecurringDates = _dates.filter( d => { return !d.is_recurring && d.start_date && '0000-00-00' != d.start_date && new Date( d.start_date )  > new Date() } )
     let pricings = allData.tripData && allData.tripData.pricings && _.keyBy(allData.tripData.pricings, p => p.id); // All Pricings.
     let times = getPricingTripTimes(componentData.selectedPricingId, [])
-    // console.log( 'componentData', componentData );
 
     return <>
         {
@@ -335,8 +334,6 @@ const DatesListing = ({ dates, isTourDate, getPricingsByDate, allData, onFixedDe
                                             let firstPricingId = _pricingIds[0];
                                             firstPricing = pricings[firstPricingId]
                                             if ( 'undefined' != typeof firstPricing ) {
-                                                // console.log('pricings', pricings);
-                                                // console.log('firstPricing', firstPricing);
                                                 let firstCategories = firstPricing.categories
                                                 firstCategories.forEach(c => {
                                                     firstCounts = { ...firstCounts, [c.id]: parseInt(c.default_pax) || 0 }
