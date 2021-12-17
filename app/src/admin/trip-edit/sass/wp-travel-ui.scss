@@ -18,6 +18,18 @@
 
 		&.wp-travel-ui-card-no-border {
 			border: 0;
+			.itinerary-sortable {
+				.wp-travel-itinerary-image {
+					text-align: right;
+					.media-preview {
+						img {
+							max-width: 100%;
+							width: 25%;
+							height: auto;
+						}
+					}
+				}
+			}
 		}
 
 		// payment tab in wp travel settings for fixing gap
@@ -30,13 +42,13 @@
 }
 
 .wp-traval-button-danger {
-	color: #F44336 !important;
-	border-color: #F44336 !important;
+	color: #f44336 !important;
+	border-color: #f44336 !important;
 	margin-top: 13px !important;
 
 	&:not(:disabled):not([aria-disabled="true"]):hover {
-		color: #F44336 !important;
-		border-color: #F44336 !important;
+		color: #f44336 !important;
+		border-color: #f44336 !important;
 	}
 }
 
