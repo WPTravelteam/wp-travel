@@ -565,23 +565,7 @@ i.fa-times-circle {
 							hr {
 								display: none;
 							}
-							.wp-travel-ui {
-								margin-top: 60px;
-								.itinerary-sortable {
-									.components-panel__row {
-										.wp-travel-itinerary-image {
-											text-align: right;
-											.media-preview {
-												img {
-													max-width: 100%;
-													width: 25%;
-													height: auto;
-												}
-											}
-										}
-									}
-								}
-							}
+							
 							.wp-travel-ui.wp-travel-ui-card.wp-travel-ui-card-top-border {
 								.components-panel__row {
 									
@@ -706,22 +690,6 @@ i.fa-times-circle {
 								background-color: #fbfbfb;
 								.components-datetime__time-wrapper {
 									justify-content: space-between;
-								}
-							}
-							.wp-travel-ui {
-								.itinerary-sortable {
-									.components-panel__row {
-										.wp-travel-itinerary-image {
-											text-align: right;
-											.media-preview {
-												img {
-													max-width: 100%;
-													width: 25%;
-													height: auto;
-												}
-											}
-										}
-									}
 								}
 							}
 						}
