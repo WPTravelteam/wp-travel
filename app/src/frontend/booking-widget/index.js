@@ -74,14 +74,15 @@ const WPTravelBookingWidget = ( props ) => {
 	const _excludedDatesTimes = allData.tripData.excluded_dates_times && allData.tripData.excluded_dates_times.length > 0 && allData.tripData.excluded_dates_times || []
 	let excludedDates = []
 	useEffect(() => {
-		if (nomineePricings.length === 1) {
-			handlePricingSelect(nomineePricings[0])
-		}
 		// If No Fixed departure set all pricings.
 		if (!isFixedDeparture) {
 			updateState({ nomineePricings: Object.keys(pricings) })
 			isLoading && updateState({ isLoading: false })
 		}
+		if (nomineePricings.length === 1) {
+			handlePricingSelect(nomineePricings[0])
+		}
+		
 	}, [selectedDate])
 	
 	useEffect(() => {
