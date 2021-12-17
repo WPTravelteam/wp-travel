@@ -144,19 +144,19 @@ $wptravel_form_fw->init_validation( 'wp-travel-booking' );
 	<?php if ( is_array( $wptravel_billing_fields ) && count( $wptravel_billing_fields ) > 0 ) : ?>
 		<!-- Billing info -->
 		<div class="panel ws-theme-timeline-block">
-			<div id="number-accordion3" class="panel-collapse collapse in">
+			<!-- <div id="number-accordion3" class="panel-collapse collapse in"> -->
 				<div class="panel-body">
 					<div class="payment-content">
 						<?php $wptravel_form_field->init( $wptravel_billing_fields )->render(); ?>
 					</div>
 				</div>
-			</div>
+			<!-- </div> -->
 		</div>
 	<?php endif; ?>
 	<?php do_action( 'wp_travel_action_before_payment_info_field' ); // @phpcs:ignore ?>
 	<!-- Payment info -->
 	<div class="panel ws-theme-timeline-block">
-		<div id="number-accordion4" class="panel-collapse collapse in">
+		<!-- <div id="number-accordion4" class="panel-collapse collapse in"> -->
 			<div class="panel-body">
 				<div class="payment-content">
 					<?php $wptravel_form_field->init( $wptravel_payment_fields )->render(); ?>
@@ -175,7 +175,7 @@ $wptravel_form_fw->init_validation( 'wp-travel-booking' );
 					</div>
 				</div>
 			</div>
-		</div>
+		<!-- </div> -->
 	</div>
 	<?php do_action( 'wp_travel_action_after_payment_info_field' ); // @phpcs:ignore ?>
 </form>
