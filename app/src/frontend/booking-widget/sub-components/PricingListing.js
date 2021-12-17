@@ -13,7 +13,6 @@ const PricingListing =  ({ selected, options, onPricingSelect, isLoading }) => {
 	}, []);
 
 	let pricings = allData.tripData && allData.tripData.pricings && _.keyBy(allData.tripData.pricings, p => p.id)
-	console.log( 'isLoading', isLoading);
 	return <div className="wp-travel-booking__pricing-name">
 		{
 			options.length > 1 && <>
