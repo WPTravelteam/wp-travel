@@ -66,7 +66,8 @@
 					.payment-content {
 						.wp-travel-form-field {
 							#wp-travel-book-now {
-								margin: 0;
+								// margin: 0;
+								margin-bottom: 1em;
 								float: right;
 								cursor: pointer;
 							}
@@ -262,35 +263,32 @@
 			display: flex;
 			justify-content: start;
 			label {
-				width: 25%;
-				@media (max-width: 1199px) {
-					width: 30%;
-				}
+				width: 30%;
+				// @media (max-width: 1199px) {
+				// 	width: 30%;
+				// }
 			}
 			.wp-travel-radio {
-				width: 75%;
+				width: 70%;
 				float: right;
 				display: inline-block;
-				@media (max-width: 1199px) {
-					width: 70%;
-				}
+				// @media (max-width: 1199px) {
+				// 	width: 70%;
+				// }
 			}
 		}
 
-		@media (min-width: 1200px) {
+		// Card payment field
+		&.payment-card-field {
 			label {
-				width: 25%;
-				float: left;
-				display: inline-block;
+				font-size: 14px;
 			}
-			.radio-checkbox-label {
-				width: 75%;
-				float: right;
-				margin-right: 0 !important;
-				display: inline-block;
+			#card-element {
+				padding: 13px 32px;
 			}
 		}
-		@media (max-width: 1199px) {
+
+		// @media (min-width: 1200px) {
 			label {
 				width: 30%;
 				float: left;
@@ -302,7 +300,20 @@
 				margin-right: 0 !important;
 				display: inline-block;
 			}
-		}
+		// }
+		// @media (max-width: 1199px) {
+		// 	label {
+		// 		width: 30%;
+		// 		float: left;
+		// 		display: inline-block;
+		// 	}
+		// 	.radio-checkbox-label {
+		// 		width: 70%;
+		// 		float: right;
+		// 		margin-right: 0 !important;
+		// 		display: inline-block;
+		// 	}
+		// }
 
 		// label {
 		// 	font-weight: 600;
@@ -417,6 +428,7 @@
 			.paypal-button {
 				text-align: center;
 			}
+			
 		}
 	}
 

@@ -220,6 +220,16 @@
 			@include mob {
 				width: 100%;
 			}
+			@media (max-width: 992px) {
+				.wp-travel-add-to-wishlists {
+					top: 25px;
+				}
+			}
+			@media (max-width: 768px) {
+				.wp-travel-add-to-wishlists {
+					top: 10px;
+				}
+			}
 
 			.entry-title {
 				margin-top: 0;
