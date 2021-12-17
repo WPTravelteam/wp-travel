@@ -6,13 +6,14 @@ const storeName = 'WPTravelFrontend/BookingWidget';
 const __i18n = {
 	..._wp_travel.strings
 }
-const PricingListing =  ({ selected, options, onPricingSelect }) => {
+const PricingListing =  ({ selected, options, onPricingSelect, isLoading }) => {
 
 	const allData = useSelect((select) => {
 		return select(storeName).getAllStore()
 	}, []);
 
 	let pricings = allData.tripData && allData.tripData.pricings && _.keyBy(allData.tripData.pricings, p => p.id)
+	console.log( 'isLoading', isLoading);
 	return <div className="wp-travel-booking__pricing-name">
 		{
 			options.length > 1 && <>
@@ -20,7 +21,7 @@ const PricingListing =  ({ selected, options, onPricingSelect }) => {
 				{
 					options.map(
 						(id, i) => <button key={i}
-							disabled={selected == id}
+							disabled={selected == id || isLoading }
 							className={selected == id ? 'active' : ''}
 							onClick={ () => onPricingSelect(id) }>
 							{pricings[id] && pricings[id].title}

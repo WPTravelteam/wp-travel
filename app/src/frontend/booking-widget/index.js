@@ -538,7 +538,8 @@ const WPTravelBookingWidget = ( props ) => {
 
 	const handlePricingSelect = (id) => {
 		let _state = {
-			selectedPricing:id
+			selectedPricing:id,
+			isLoading:true // temp fix for frequently price switch will creating issue with continusly switching pricing.
 		}
 		updateState( _state )
 	}
