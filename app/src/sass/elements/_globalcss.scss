@@ -41,7 +41,8 @@
 			border-top: none;
 			border-bottom: none;
 			@media (max-width: 992px) {
-				padding: 20px;
+				// padding: 20px;
+				padding: 25px 20px !important;
 			}
 			&.slick-prev,
 			&.slick-next {

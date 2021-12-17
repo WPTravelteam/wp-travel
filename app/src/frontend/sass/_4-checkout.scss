@@ -7,11 +7,14 @@
 	// grid-gap: 100px;
 	.number-accordion {
 		.checkout-accordion {
+			.panel-default {
+				margin-bottom: .5em;
+			}
 			h4 {
 				margin: 0;
 
 				// Applying margin bottom to the traveler accordion
-				margin-bottom: .5em;
+				// margin-bottom: .5em;
 			}
 		}
 	}
