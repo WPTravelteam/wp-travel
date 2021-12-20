@@ -31,6 +31,9 @@
 	font-size: 12px;
 	line-height: 1;
 	margin-left: 5px;
+	@media (max-width: 767px) {
+		display: none;
+	}
 }
 
 .wp-travel-itinerary-items {
@@ -188,11 +191,26 @@
 		@include sidr-view {
 			width: 28%;
 		}
-
 		@include mob {
-			width: 100%;
-			float: none;
-			margin-right: 0;
+			width: 25%;
+		}
+		@media (max-width: 575px) {
+			width: 35%;
+		}
+
+		// @include mob {
+		// 	width: 100%;
+		// 	float: none;
+		// 	margin-right: 0;
+		// }
+
+		.wp-travel-offer {
+			span {
+				@media (max-width: 640px) {
+					width: 65px;
+					top: 0;
+				}
+			}
 		}
 	}
 
@@ -207,19 +225,34 @@
 		}
 
 		@include mob {
-			width: 100%;
-			float: none;
-			display: block;
+			width: 75%;
 		}
+		@media (max-width: 640px) {
+			flex-direction: column;
+		}
+
+		@media (max-width: 575px) {
+			width: 65%;
+		}
+ 
+		// @include mob {
+		// 	width: 100%;
+		// 	float: none;
+		// 	display: block;
+		// }
 
 		.description-left {
 			width: 70%;
 			float: left;
 			padding: 0 10px 0px 10px;
 
-			@include mob {
+			@media (max-width: 640px) {
 				width: 100%;
 			}
+
+			// @include mob {
+			// 	width: 100%;
+			// }
 			@media (max-width: 992px) {
 				.wp-travel-add-to-wishlists {
 					top: 25px;
@@ -243,6 +276,9 @@
 
 			.wp-travel-average-review {
 				display: inline-block;
+				@media (max-width: 767px) {
+					display: none;
+				}
 			}
 
 			.travel-info {
@@ -258,14 +294,20 @@
 			text-align: center;
 			border-left: 1px solid #eee;
 
-			@include mob {
-				width: 100%;
-				float: none;
-				padding: 0 15px 15px;
+			@media (max-width: 640px) {
 				border-left: none;
+				width: 100%;
 				text-align: left;
-				clear: both;
 			}
+
+			// @include mob {
+			// 	width: 100%;
+			// 	float: none;
+			// 	padding: 0 15px 15px;
+			// 	border-left: none;
+			// 	text-align: left;
+			// 	clear: both;
+			// }
 			.wp-travel-average-review {
 				display: none;
 			}
@@ -275,6 +317,13 @@
 
 				@include mob {
 					margin-top: 0;
+				}
+				@media (max-width: 640px) {
+					display: flex;
+					flex-wrap: wrap;
+					align-items: center;
+					margin-left: 10px;
+					margin-bottom: 1em;
 				}
 
 				del {
@@ -293,6 +342,10 @@
 
 		@include mob {
 			margin-bottom: 0;
+		}
+
+		@media (max-width: 640px) {
+			margin-left: 10px;
 		}
 	}
 
@@ -335,6 +388,9 @@
 	// padding: 10px 0;
 	// display: block;
 	// @include clearfix();
+	@media (max-width: 767px) {
+		display: none !important;
+	}
 
 	.travel-info {
 		float: left;

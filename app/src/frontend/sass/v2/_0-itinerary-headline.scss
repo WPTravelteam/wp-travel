@@ -116,9 +116,6 @@
 				padding: 15px 10px;
 				position: relative;
 
-				// &.full-width {
-				// 	@include fullwidth;
-				// }
 				&:before {
 					content: "";
 					position: absolute;
@@ -128,23 +125,20 @@
 					height: 1px;
 					background: rgba(222, 222, 222, 0.32);
 				}
+
 				&:last-child {
 					&:before {
 						content: none;
 					}
 				}
+
 				@media only screen and (min-width: 592px) {
-					&:nth-child(3) {
+					&:first-child:nth-last-child(4) ~ li:nth-child(3) {
 						&:before {
 							content: none;
 						}
 					}
 				}
-
-				// &.no-border:before {
-				// 	height: 0px;
-				// 	background: none;
-				// }
 
 				.travel-info {
 					margin-bottom: 5px;
