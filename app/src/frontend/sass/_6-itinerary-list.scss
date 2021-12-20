@@ -1,3 +1,19 @@
+// Wishlist icon in single trip page title
+.wp-travel-feature-slide-content {
+	.right-plot-inner-wrap {
+		.wp-travel-add-to-wishlists {
+			@media (max-width: 992px) {
+				top: 40px;
+			}
+			i {
+				@media (max-width: 576px) {
+					font-size: 18px !important;
+				}
+			}
+		}
+	}
+}
+
 .trip-price {
 	del {
 		opacity: 0.5;

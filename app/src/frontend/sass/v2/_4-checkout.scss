@@ -275,6 +275,9 @@
 				// @media (max-width: 1199px) {
 				// 	width: 70%;
 				// }
+				@media (max-width: 650px) {
+					width: 100% !important;
+				}
 			}
 		}
 
@@ -289,17 +292,23 @@
 		}
 
 		// @media (min-width: 1200px) {
-			label {
-				width: 30%;
-				float: left;
-				display: inline-block;
+		label {
+			width: 30%;
+			float: left;
+			display: inline-block;
+			@media (max-width: 650px) {
+				width: 100%;
 			}
-			.radio-checkbox-label {
-				width: 70%;
-				float: right;
-				margin-right: 0 !important;
-				display: inline-block;
+		}
+		.radio-checkbox-label {
+			width: 70%;
+			float: right;
+			margin-right: 0 !important;
+			display: inline-block;
+			@media (max-width: 650px) {
+				width: 100%;
 			}
+		}
 		// }
 		// @media (max-width: 1199px) {
 		// 	label {
@@ -340,6 +349,9 @@
 					display: inline-block;
 					margin-bottom: 10px;
 					width: 20%;
+					@media (max-width: 650px) {
+						width: 100% !important;
+					}
 				}
 			}
 
@@ -428,7 +440,6 @@
 			.paypal-button {
 				text-align: center;
 			}
-			
 		}
 	}
 
