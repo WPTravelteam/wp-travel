@@ -244,7 +244,7 @@ If you have any queries regarding the plugin and extensions then you can ask for
 == Upgrade Notice ==
 Before updating plugin please check ["our latest release notes"](#developers).
 
-==
+== Changelog ==
 = 5.0.6 =
 Release Date: 20th December, 2021
 
