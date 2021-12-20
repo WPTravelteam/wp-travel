@@ -34,8 +34,9 @@ const WPTravelBookingWidget = ( props ) => {
 	const bookingState      = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     const { updateBooking } = dispatch( bookingStoreName );
 	
-    const forceCalendarDisplay = 'undefined' !== typeof props.forceCalendarDisplay ? props.forceCalendarDisplay : false;
+    const forceCalendarDisplay = 'undefined' !== typeof props.forceCalendarDisplay ? props.forceCalendarDisplay : false; // only true or override value if this values are come from blocks.
     const calendarInline = 'undefined' !== typeof props.calendarInline ? props.calendarInline : false;
+    const showTooltip = 'undefined' !== typeof props.showTooltip ? props.showTooltip : true; 
 
     const { selectedDate,
 		selectedTripDate,
@@ -665,7 +666,7 @@ const WPTravelBookingWidget = ( props ) => {
 										calendarInline ? <DatePicker inline {...params} /> : <DatePicker {...params} />
 									}
                                         
-                                        {!selectedDateTime && <p>{__i18n.bookings.date_select_to_view_options}</p> || null}
+                                        {!selectedDateTime && showTooltip && <p>{__i18n.bookings.date_select_to_view_options}</p> || null}
                                     {/* </Suspense> */}
                                 </div>
                             }
@@ -681,11 +682,13 @@ if (document.getElementById(bookingWidgetElementId)) {
     render(<WPTravelBookingWidget />, document.getElementById(bookingWidgetElementId));
 }
 
-// For Block.
+// For Frontend Block.
 let blockId = 'wptravel-block-trip-calendar';
 if (document.getElementById(blockId)) {
 	let elem = document.getElementById(blockId);
 	const props = Object.assign( {}, elem.dataset );
 	const inline = undefined != typeof props.inline && props.inline;
-	render(<WPTravelBookingWidget forceCalendarDisplay={true} calendarInline={inline} />, elem );
+	const tooltip = undefined != typeof props.tooltip && props.tooltip;
+	
+	render(<WPTravelBookingWidget forceCalendarDisplay={true} calendarInline={inline} showTooltip={tooltip} />, elem );
 }
