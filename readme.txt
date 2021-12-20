@@ -246,7 +246,7 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 ==
 = 5.0.6 =
-Release Date: 19th December, 2021
+Release Date: 20th December, 2021
 
 Fixes:
 * Partial payment amount is not being recorded in the booking system.
