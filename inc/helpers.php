@@ -633,9 +633,12 @@ function wptravel_featured_itineraries( $no_of_post_to_show = 3 ) {
 /**
  * Show WP Travel search form.
  *
+ * @param array $args Search form arguments.
+ *
  * @since  1.0.2
+ * @since 5.0.7 Search for args added.
  */
-function wptravel_search_form() {
+function wptravel_search_form( $args = array() ) {
 
 	$submission_get = array();
 
@@ -657,15 +660,23 @@ function wptravel_search_form() {
 	$trip_type_string     = ! empty( $label_string['trip_type'] ) ? $label_string['trip_type'] : '';
 	$location_string      = ! empty( $label_string['location'] ) ? $label_string['location'] : '';
 	$search_button_string = ! empty( $label_string['search_button'] ) ? $label_string['search_button'] : '';
+
+	// Show Hide Options.
+	$show_input     = isset( $args['show_input'] ) ? $args['show_input'] : true;
+	$show_trip_type = isset( $args['show_trip_type'] ) ? $args['show_trip_type'] : true;
+	$show_location  = isset( $args['show_location'] ) ? $args['show_location'] : true;
 	ob_start(); ?>
 	<div class="wp-travel-search">
 		<form method="get" name="wp-travel_search" action="<?php echo esc_url( home_url( '/' ) ); ?>" >
 			<input type="hidden" name="post_type" value="<?php echo esc_attr( WP_TRAVEL_POST_TYPE ); ?>" />
+			<?php if ( $show_input ) : ?>
 			<p>
 				<label><?php echo esc_html( $search_string ); ?></label>
 				<?php $placeholder = __( 'Ex: Trekking', 'wp-travel' ); ?>
 				<input type="text" name="s" id="s" value="<?php the_search_query(); ?>" placeholder="<?php echo esc_attr( apply_filters( 'wp_travel_search_placeholder', $placeholder ) ); ?>">
 			</p>
+			<?php endif; ?>
+			<?php if ( $show_trip_type ) : ?>
 			<p>
 				<label><?php echo esc_html( $trip_type_string ); ?></label>
 				<?php
@@ -685,6 +696,8 @@ function wptravel_search_form() {
 				wp_dropdown_categories( $args, $taxonomy );
 				?>
 			</p>
+			<?php endif; ?>
+			<?php if ( $show_location ) : ?>
 			<p>
 				<label><?php echo esc_html( $location_string ); ?></label>
 				<?php
@@ -704,7 +717,7 @@ function wptravel_search_form() {
 				wp_dropdown_categories( $args, $taxonomy );
 				?>
 			</p>
-
+			<?php endif; ?>
 			<?php wp_nonce_field( '_wp_travel_search_nonce_action', '_wp_travel_search_nonce' ); ?>
 
 			<p class="wp-travel-search"><input type="submit" name="wp-travel_search" id="wp-travel-search" class="button wp-block-button__link button-primary" value="<?php echo esc_attr( $search_button_string ); ?>"  /></p>
