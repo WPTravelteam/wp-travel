@@ -408,29 +408,29 @@ function wptravel_trip_price( $trip_id, $hide_rating = false ) {
 
 	$strings = WpTravel_Helpers_Strings::get();
 
+	do_action( 'wp_travel_single_before_trip_price', $trip_id, $hide_rating ); // @phpcs:ignore
+	if ( ! $trip_price ) {
+		return;
+	}
 	?>
-
-	<div class="wp-detail-review-wrap">
-		<?php do_action( 'wp_travel_single_before_trip_price', $trip_id, $hide_rating ); // @phpcs:ignore ?>
-		<div class="wp-travel-trip-detail">
-			<?php if ( $trip_price ) : ?>
-				<div class="trip-price" >
+	<div class="wptravel-price-wrap">
+		<!-- <div class="wp-travel-trip-detail"> -->
+			<div class="trip-price" >
 				<span class="price-from">
 					<?php echo esc_html( $strings['from'] ); ?>
 				</span>
 				<?php if ( $enable_sale && $regular_price !== $trip_price ) : ?>
-					<del>
-						<span><?php echo wptravel_get_formated_price_currency( $regular_price, true ); // @phpcs:ignore ?></span>
-					</del>
+				<del>
+					<span><?php echo wptravel_get_formated_price_currency( $regular_price, true ); // @phpcs:ignore ?></span>
+				</del>
 				<?php endif; ?>
-					<span class="person-count">
-						<ins>
-							<span><?php echo wptravel_get_formated_price_currency( $trip_price ); // @phpcs:ignore ?></span>
-						</ins>
-					</span>
-				</div>
-			<?php endif; ?>
-		</div>
+				<span class="person-count">
+					<ins>
+						<span><?php echo wptravel_get_formated_price_currency( $trip_price ); // @phpcs:ignore ?></span>
+					</ins>
+				</span>
+			</div>
+		<!-- </div> -->
 	</div>
 
 	<?php
