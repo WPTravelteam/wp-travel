@@ -549,6 +549,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @since 4.4.2
 		 * @since 5.0.0 Added trip single page and admin coupon coupon page check.
 		 * @since 5.0.6 Additional pages like Booking, enquiry, extras, downloads, report, custom_filters, marketplace are added.
+		 * @since 5.0.7 Search Page added.
 		 * @return boolean
 		 */
 		public static function is_page( $slug, $is_admin_page_check = false ) {
@@ -619,6 +620,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 						return ( (int) $dashboard_page_id === $page_id || wptravel_post_content_has_shortcode( 'wp_travel_user_account' ) || $is_account_page );
 					case 'single':
 						return is_singular( WP_TRAVEL_POST_TYPE );
+					case 'search':
+						return is_search();
 					case 'archive':
 						return ( is_post_type_archive( WP_TRAVEL_POST_TYPE ) || is_tax( array( 'itinerary_types', 'travel_locations', 'travel_keywords', 'activity' ) ) ) && ! is_search();
 				}
@@ -672,6 +675,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 					'cart',
 					'checkout',
 					'dashboard',
+					'search',
 				);
 				foreach ( $front_pages as $front_page ) {
 					if ( self::is_page( $front_page ) ) {

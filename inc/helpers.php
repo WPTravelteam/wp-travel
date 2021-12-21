@@ -636,15 +636,11 @@ function wptravel_featured_itineraries( $no_of_post_to_show = 3 ) {
  * @param array $args Search form arguments.
  *
  * @since  1.0.2
- * @since 5.0.7 Search for args added.
+ * @since 5.0.7 Search form args added and also fetched requested data from WP_Travel::get_sanitize_request() method.
  */
 function wptravel_search_form( $args = array() ) {
 
-	$submission_get = array();
-
-	if ( isset( $_GET['__wp_travel_search_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['__wp_travel_search_nonce'] ) ), '__wp_travel_search_nonce_action' ) ) {
-		$submission_get = wptravel_sanitize_array( wp_unslash( $_GET ) );
-	}
+	$submission_get = WP_Travel::get_sanitize_request();
 
 	$label_string = apply_filters(
 		'wp_travel_search_filter_label_strings',
@@ -718,7 +714,7 @@ function wptravel_search_form( $args = array() ) {
 				?>
 			</p>
 			<?php endif; ?>
-			<?php wp_nonce_field( '_wp_travel_search_nonce_action', '_wp_travel_search_nonce' ); ?>
+			<?php WP_Travel::create_nonce_field(); ?>
 
 			<p class="wp-travel-search"><input type="submit" name="wp-travel_search" id="wp-travel-search" class="button wp-block-button__link button-primary" value="<?php echo esc_attr( $search_button_string ); ?>"  /></p>
 		</form>

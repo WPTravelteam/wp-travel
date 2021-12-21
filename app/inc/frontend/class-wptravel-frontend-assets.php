@@ -63,7 +63,7 @@ class WpTravel_Frontend_Assets {
 				wp_enqueue_style( 'wp-travel-user-css' );
 
 				// Scripts.
-				wp_enqueue_script( 'wp-travel-view-mode' );
+				// wp_enqueue_script( 'wp-travel-view-mode' );
 				wp_enqueue_script( 'wp-travel-accordion' );
 
 				wp_enqueue_script( 'wp-travel-accordion' );
@@ -100,7 +100,7 @@ class WpTravel_Frontend_Assets {
 			 *
 			 * @since 4.0.4
 			 */
-			if ( WP_Travel::is_page( 'archive' ) ) {
+			if ( WP_Travel::is_page( 'archive' ) || WP_Travel::is_page( 'search' ) ) {
 				wp_enqueue_script( 'wp-travel-view-mode' );
 			}
 
