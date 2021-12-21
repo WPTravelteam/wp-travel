@@ -245,6 +245,12 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+= 5.0.7 =
+Release Date: 20th December, 2021
+
+Fixes:
+* Trip filter not working in search page.
+
 = 5.0.6 =
 Release Date: 20th December, 2021
 
