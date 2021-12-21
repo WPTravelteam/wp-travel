@@ -44,44 +44,24 @@ class WpTravel_Helpers_Localize {
 		$rdp_locale = str_replace( '_', '', $rdp_locale ); // React date picker locale.
 		// Frontend Localized Strings for React block.
 		if ( self::is_request( 'frontend' ) ) {
-			if ( ! $post ) { // There will be no $post for 404 and other pages.
-				return;
-			}
-			$trip_id    = $post->ID;
-			$map_data   = wptravel_get_map_data( $trip_id ); // Only Google map data.
-			$maps       = array(
-				'google_map' => array(
-					'lat' => $map_data['lat'],
-					'lng' => $map_data['lng'],
-					'loc' => $map_data['loc'],
-				),
-			);
-			$maps       = apply_filters( 'wptravel_maps_data', $maps, $settings ); // @since 4.6.5
-			$_wp_travel = array();
-			$trip       = WP_Travel_Helpers_Trips::get_trip( $trip_id );
-			if ( ! is_wp_error( $trip ) && 'WP_TRAVEL_TRIP_INFO' === $trip['code'] ) {
-				$_wp_travel['_nonce']             = wp_create_nonce( 'wp_travel_nonce' );
-				$_wp_travel['ajax_url']           = admin_url( 'admin-ajax.php' );
-				$_wp_travel['build_path']         = esc_url( trailingslashit( plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'app/build' ) );
-				$_wp_travel['cart_url']           = wptravel_get_cart_url();
-				$_wp_travel['currency']           = $settings['currency'];
-				$_wp_travel['currency_position']  = $settings['currency_position'];
-				$_wp_travel['currency_symbol']    = wptravel_get_currency_symbol();
-				$_wp_travel['date_format']        = get_option( 'date_format' );
-				$_wp_travel['date_format_moment'] = wptravel_php_to_moment_format( get_option( 'date_format' ) );
-				$_wp_travel['decimal_separator']  = $settings['decimal_separator'] ? $settings['decimal_separator'] : '.';
-				$_wp_travel['maps']               = $maps;
-				$_wp_travel['number_of_decimals'] = $settings['number_of_decimals'] ? $settings['number_of_decimals'] : 0;
-				$_wp_travel['rdp_locale']         = $rdp_locale;
-				$_wp_travel['thousand_separator'] = $settings['thousand_separator'] ? $settings['thousand_separator'] : ',';
-				$_wp_travel['time_format']        = get_option( 'time_format' );
-				$_wp_travel['trip_data']          = $trip['trip'];
-				$_wp_travel['trip_date_listing']  = $settings['trip_date_listing'];
-			}
-			$_wp_travel['strings']      = WpTravel_Helpers_Strings::get();
-			$_wp_travel['itinerary_v2'] = wptravel_use_itinerary_v2_layout();
-
-			$localized_data['_wp_travel'] = $_wp_travel;
+			$_wp_travel                       = array();
+			$_wp_travel['_nonce']             = wp_create_nonce( 'wp_travel_nonce' );
+			$_wp_travel['ajax_url']           = admin_url( 'admin-ajax.php' );
+			$_wp_travel['build_path']         = esc_url( trailingslashit( plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'app/build' ) );
+			$_wp_travel['cart_url']           = wptravel_get_cart_url();
+			$_wp_travel['currency_symbol']    = wptravel_get_currency_symbol();
+			$_wp_travel['date_format_moment'] = wptravel_php_to_moment_format( get_option( 'date_format' ) );
+			$_wp_travel['rdp_locale']         = $rdp_locale;
+			$_wp_travel['time_format']        = get_option( 'time_format' );
+			$_wp_travel['date_format']        = get_option( 'date_format' );
+			$_wp_travel['currency']           = $settings['currency'];
+			$_wp_travel['currency_position']  = $settings['currency_position'];
+			$_wp_travel['decimal_separator']  = $settings['decimal_separator'] ? $settings['decimal_separator'] : '.';
+			$_wp_travel['number_of_decimals'] = $settings['number_of_decimals'] ? $settings['number_of_decimals'] : 0;
+			$_wp_travel['thousand_separator'] = $settings['thousand_separator'] ? $settings['thousand_separator'] : ',';
+			$_wp_travel['trip_date_listing']  = $settings['trip_date_listing'];
+			$_wp_travel['strings']            = WpTravel_Helpers_Strings::get();
+			$_wp_travel['itinerary_v2']       = wptravel_use_itinerary_v2_layout();
 
 			// Localized varialble for old trips less than WP Travel 4.0. // Need to migrate in _wp_travel.
 			$wp_travel = array(
@@ -97,10 +77,6 @@ class WpTravel_Helpers_Localize {
 				'_nonce'             => wp_create_nonce( 'wp_travel_nonce' ),
 				'ajaxUrl'            => admin_url( 'admin-ajax.php' ),
 				'strings'            => WpTravel_Helpers_Strings::get(),
-				// Need map data enhancement.
-				'lat'                => ! empty( $map_data['lat'] ) ? ( $map_data['lat'] ) : '',
-				'lng'                => ! empty( $map_data['lng'] ) ? ( $map_data['lng'] ) : '',
-				'loc'                => ! empty( $map_data['loc'] ) ? ( $map_data['loc'] ) : '',
 				'zoom'               => $settings['google_map_zoom_level'],
 				'cartUrl'            => wptravel_get_cart_url(),
 				'checkoutUrl'        => wptravel_get_checkout_url(), // @since 4.3.2
@@ -116,13 +92,42 @@ class WpTravel_Helpers_Localize {
 
 				$wp_travel['payment']['currency_code']   = $settings['currency'];
 				$wp_travel['payment']['currency_symbol'] = wptravel_get_currency_symbol();
-				$wp_travel['payment']['price_per']       = wptravel_get_price_per_text( $trip_id, '', true );
 				$wp_travel['payment']['trip_price']      = $trip_price;
 				$wp_travel['payment']['payment_amount']  = $payment_amount;
 			}
+
+			// Add Post specific data for wp_travel and _wp_travel var.
+			if ( $post ) { // There will be no $post for 404, search and other pages.
+				$trip_id    = $post->ID;
+				$map_data   = wptravel_get_map_data( $trip_id ); // Only Google map data.
+				$maps       = array(
+					'google_map' => array(
+						'lat' => $map_data['lat'],
+						'lng' => $map_data['lng'],
+						'loc' => $map_data['loc'],
+					),
+				);
+				$maps       = apply_filters( 'wptravel_maps_data', $maps, $settings ); // @since 4.6.5
+				$trip       = WP_Travel_Helpers_Trips::get_trip( $trip_id );
+
+				if ( ! is_wp_error( $trip ) && 'WP_TRAVEL_TRIP_INFO' === $trip['code'] ) {
+					// _wp_travel vars.
+					$_wp_travel['maps']               = $maps;
+					$_wp_travel['trip_data']          = $trip['trip'];
+
+					// wp_travel vars.
+					// Need map data enhancement.
+					$wp_travel['lat'] = ! empty( $map_data['lat'] ) ? ( $map_data['lat'] ) : '';
+					$wp_travel['lng'] = ! empty( $map_data['lng'] ) ? ( $map_data['lng'] ) : '';
+					$wp_travel['loc'] = ! empty( $map_data['loc'] ) ? ( $map_data['loc'] ) : '';
+
+					$wp_travel['payment']['price_per']       = wptravel_get_price_per_text( $trip_id, '', true );
+				}
+			}
+
 			$wp_travel = apply_filters( 'wptravel_frontend_data', $wp_travel, $settings );
-			// $wp_travel                   = wptravel_do_deprecated_filter( 'wp_travel_frontend_data', array( $wp_travel, $settings ), '5.0.2', 'wptravel_frontend_data' );
-			$localized_data['wp_travel'] = $wp_travel;
+			$localized_data['wp_travel']  = $wp_travel;
+			$localized_data['_wp_travel'] = $_wp_travel;
 		}
 
 		if ( self::is_request( 'admin' ) ) {
@@ -220,8 +225,7 @@ class WpTravel_Helpers_Localize {
 			$wp_travel_gallery_data = apply_filters( 'wptravel_localize_gallery_data', $wp_travel_gallery_data );
 			// end of Map & Gallery Data.
 			$localized_data['wp_travel_drag_drop_uploader'] = $wp_travel_gallery_data;
-			
-			
+
 			// @since 4.6.4
 			$_wp_travel_admin = array(
 				'strings' => WpTravel_Helpers_Strings::get(),
@@ -230,7 +234,7 @@ class WpTravel_Helpers_Localize {
 			);
 
 			if ( WP_Travel::is_page( 'itineraries', true ) ) {
-				$wp_travel_itinerary = new WP_Travel_Itinerary( $post );
+				$wp_travel_itinerary          = new WP_Travel_Itinerary( $post );
 				$_wp_travel_admin['overview'] = $wp_travel_itinerary->get_content();
 			}
 
