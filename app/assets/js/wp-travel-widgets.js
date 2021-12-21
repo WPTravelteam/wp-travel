@@ -18,17 +18,22 @@ jQuery(function($) {
               return parseInt(x, 10);
           });
         }
-
-        var min = Math.min.apply(null, prices),
+        var min         = 0;
+        var max         = 0;
+        var filteredMin = 0;
+        var filteredMax = 0;
+        if ( prices.length > 0 ) {
+            min = Math.min.apply(null, prices),
             max = Math.max.apply(null, prices)
+        }
 
         if (findGetParameter('min_price')) {
-            var filteredMin = findGetParameter('min_price');
+            filteredMin = findGetParameter('min_price');
         } else {
             filteredMin = min;
         }
         if (findGetParameter('max_price')) {
-            var filteredMax = findGetParameter('max_price');
+            filteredMax = findGetParameter('max_price');
         } else {
             filteredMax = max;
         }
