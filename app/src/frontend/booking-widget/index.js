@@ -635,8 +635,9 @@ const WPTravelBookingWidget = ( props ) => {
                     }
                 </> || <ErrorBoundary>
 					<Suspense fallback={renderLoader()}>
+						{ ( ! forceCalendarDisplay || selectedDate ) &&<>
                         <div className="wp-travel-booking__header">
-                            <h3>{__i18n.booking_tab_content_label}</h3>
+                            { ! forceCalendarDisplay && <h3>{__i18n.booking_tab_content_label}</h3> }
                             {selectedDate && <button onClick={() => {
                             let _initialState = Object.assign(initialState)
                             if (!isFixedDeparture)
@@ -652,6 +653,7 @@ const WPTravelBookingWidget = ( props ) => {
                             {__i18n.bookings.booking_tab_clear_all}</button>}
 
                         </div>
+						</> }
                             {
                                 isFixedDeparture && 'dates' === tripDateListing && ! forceCalendarDisplay && 
                                     <div className="wp-travel-booking__content-wrapper">
