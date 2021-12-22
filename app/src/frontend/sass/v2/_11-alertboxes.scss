@@ -42,10 +42,23 @@
 	padding: 10px 15px;
 	margin-left: auto;
 	margin-right: auto;
+	position: relative;
+	padding-left: 45px;
+	&::before {
+		content: "\f00c";
+		font-family: "Font Awesome 5 Free";
+		font-weight: 900;
+		position: absolute;
+		font-size: 16px;
+		top: 12px;
+		left: 19px;
+	}
 }
 
 .wp-travel-notice-success {
-	background: #049c04;
+	// background: #049c04;
+	background: #dff2bf;
+	color: #270;
 }
 
 .wp-travel-notice-danger {
