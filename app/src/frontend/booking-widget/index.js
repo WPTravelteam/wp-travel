@@ -37,6 +37,8 @@ const WPTravelBookingWidget = ( props ) => {
     const forceCalendarDisplay = 'undefined' !== typeof props.forceCalendarDisplay ? props.forceCalendarDisplay : false; // only true or override value if this values are come from blocks.
     const calendarInline = 'undefined' !== typeof props.calendarInline ? props.calendarInline : false;
     const showTooltip = 'undefined' !== typeof props.showTooltip ? props.showTooltip : true; 
+    const tooltipText = 'undefined' !== typeof props.tooltipText ? props.tooltipText : __i18n.bookings.date_select_to_view_options; 
+	
 
     const { selectedDate,
 		selectedTripDate,
@@ -668,7 +670,7 @@ const WPTravelBookingWidget = ( props ) => {
 										calendarInline ? <DatePicker inline {...params} /> : <DatePicker {...params} />
 									}
                                         
-                                        {!selectedDateTime && showTooltip && <p>{__i18n.bookings.date_select_to_view_options}</p> || null}
+                                        {!selectedDateTime && showTooltip && <p>{tooltipText} </p> || null}
                                     {/* </Suspense> */}
                                 </div>
                             }
@@ -691,6 +693,7 @@ if (document.getElementById(blockId)) {
 	const props = Object.assign( {}, elem.dataset );
 	const inline = undefined != typeof props.inline && props.inline;
 	const tooltip = undefined != typeof props.tooltip && props.tooltip;
+	const tooltipText = undefined != typeof props.tooltip_text && props.tooltip_text;
 	
-	render(<WPTravelBookingWidget forceCalendarDisplay={true} calendarInline={inline} showTooltip={tooltip} />, elem );
+	render(<WPTravelBookingWidget forceCalendarDisplay={true} calendarInline={inline} showTooltip={tooltip} tooltipText={tooltipText} />, elem );
 }
