@@ -58,7 +58,7 @@
 			&.resp-tab-active {
 				background: #fff;
 				// padding: 19px 30px 20px;
-				padding: 18px 30px 23px;				
+				padding: 18px 30px 23px;
 
 				@include sidr-view {
 					padding: 15px 14px;
@@ -284,7 +284,6 @@
 					@media (max-width: 992px) {
 						margin-bottom: 1.5em;
 					}
-
 				}
 			}
 		}
@@ -446,9 +445,11 @@
 //tabs front end
 .trip-headline-wrapper {
 	.wp-travel-feature-slide-content {
-		&.left-plot {
-			height: 598px !important;
-		}
+		// &.left-plot {
+		// 	@media (min-width: 768px) {
+		// 		height: 598px !important;
+		// 	}
+		// }
 		&.right-plot {
 			height: 100% !important;
 		}
