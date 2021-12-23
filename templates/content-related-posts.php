@@ -43,7 +43,7 @@ if ( 'yes' === $hide_related_itinerary ) {
 					if ( $query->have_posts() ) {
 						?>
 				
-				<ul style="grid-template-columns:repeat(<?php esc_attr_e( $col_per_row, 'wp-travel' ); ?>, 1fr)" class="wp-travel-itinerary-list">
+				<ul class="wp-travel-itinerary-list">
 						<?php
 						while ( $query->have_posts() ) :
 							$query->the_post();
