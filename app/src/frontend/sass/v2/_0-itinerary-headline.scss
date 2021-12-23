@@ -261,9 +261,11 @@
 //Close button for Trip Enquiry Form popup
 .mfp-wrap button.mfp-close {
 	margin: 0;
-	right: -29px;
+	// right: -29px;
+	right: 0;
 	box-shadow: none;
-	top: 7px;
+	// top: 7px;
+	top: 0;
 	display: inline-block;
 	background: #fff;
 	width: 30px;
