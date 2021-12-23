@@ -130,9 +130,9 @@
 				content: none;
 			}
 
-			@include sidr-view {
-				width: calc(50% - 20px);
-			}
+			// @include sidr-view {
+			// 	width: calc(50% - 20px);
+			// }
 
 			@include mob {
 				width: 100%;
@@ -178,6 +178,21 @@
 				font-size: 14px;
 				display: block;
 				text-transform: capitalize;
+			}
+		}
+	}
+}
+
+// Related Posts
+.wp-travel-related-posts {
+	.wp-travel-itinerary-items {
+		.wp-travel-itinerary-list {
+			grid-template-columns: repeat(3, 1fr);
+			@media (max-width: 991px) {
+				grid-template-columns: repeat(2, 1fr);
+			}
+			@media (max-width: 650px) {
+				grid-template-columns: repeat(1, 1fr);
 			}
 		}
 	}
