@@ -253,7 +253,9 @@ Fixes:
 * Filter widget price range now working fine.
 
 Layout Fixes:
-* Trips renderd from itineraries shortcode layout issue fixed.
+* Fixed layout issue in itinerary page when displaying trips using short code.
+* Fixed layout issue in itinerary page when displaying trips using short code with col parameter.
+* Fixed image stretching issue.
 
 = 5.0.6 =
 Release Date: 20th December, 2021
