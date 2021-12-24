@@ -1294,8 +1294,25 @@ $defaultColor: #3399ff;
 }
 //Calendar Trip Date Listing
 .wp-travel-calendar-view {
-	background-color: #fff;
-	padding: 0 1em 1em;
+	&:not(.wptravel-block-trip-calendar) {
+		background-color: #fff;
+		padding: 0 1em 1em;
+
+		.wp-travel-booking__datepicker-wrapper {
+			margin-top: 2em;
+			padding-bottom: 2em;
+			display: flex;
+			align-items: center;
+			position: relative;
+			@media (max-width: 575px) {
+				flex-direction: column;
+				align-items: flex-start;
+			}
+		}
+		button {
+			margin-right: 15px;
+		}
+	}
 	// .wp-travel-booking__panel-bottom {
 	//     .right-info{
 	//         width: 100%;
@@ -1409,16 +1426,15 @@ $defaultColor: #3399ff;
 		display: inline-block;
 		border-radius: 3px;
 		white-space: nowrap;
-		margin-right: 15px;
-		&:hover {
-			// background-color: rgba($defaultColor, .7);
-			// text-decoration: none;
-			opacity: 0.7;
-		}
-		&:disabled {
-			opacity: 0.5;
-			pointer-events: none;
-		}
+		// &:hover {
+		// 	// background-color: rgba($defaultColor, .7);
+		// 	// text-decoration: none;
+		// 	opacity: 0.7;
+		// }
+		// &:disabled {
+		// 	opacity: 0.5;
+		// 	pointer-events: none;
+		// }
 	}
 
 	.react-datepicker__day.react-datepicker__day--keyboard-selected {
@@ -1431,15 +1447,6 @@ $defaultColor: #3399ff;
 		}
 	}
 	.wp-travel-booking__datepicker-wrapper {
-		margin-top: 2em;
-		padding-bottom: 2em;
-		display: flex;
-		align-items: center;
-		position: relative;
-		@media (max-width: 575px) {
-			flex-direction: column;
-			align-items: flex-start;
-		}
 		.react-datepicker-wrapper {
 			margin-right: 1em;
 			@media (max-width: 575px) {
