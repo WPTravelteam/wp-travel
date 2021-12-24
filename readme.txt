@@ -250,6 +250,10 @@ Release Date: 20th December, 2021
 
 Fixes:
 * Trip filter not working in search page.
+* Filter widget price range now working fine.
+
+Layout Fixes:
+* Trips renderd from itineraries shortcode layout issue fixed.
 
 = 5.0.6 =
 Release Date: 20th December, 2021
