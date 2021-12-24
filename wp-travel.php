@@ -567,6 +567,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 					case 'settings':
 						$pages = array( 'itinerary-booking_page_settings', 'itinerary-booking_page_settings2' );
 						return in_array( $screen->id, $pages, true );
+					case 'templates':
+						return 'wptravel_template' === $screen->id || 'edit-wptravel_template' === $screen->id;
 					case 'coupon':
 						return 'wp-travel-coupons' === $screen->id || 'edit-wp-travel-coupons' === $screen->id;
 					case 'booking':
@@ -643,6 +645,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			if ( $is_admin_page_check ) {
 				$admin_pages = array(
 					'settings',
+					'templates',
 					'coupon',
 					'booking',
 					'enquiry',

@@ -27,7 +27,7 @@ class WpTravel_Localize_Admin {
 	 */
 	public static function localize_data() {
 		$screen         = get_current_screen();
-		$allowed_screen = array( WP_TRAVEL_POST_TYPE, 'edit-' . WP_TRAVEL_POST_TYPE, 'itinerary-enquiries' );
+		$allowed_screen = array( WP_TRAVEL_POST_TYPE, 'edit-' . WP_TRAVEL_POST_TYPE, 'itinerary-enquiries', 'wptravel_template', 'edit-wptravel_template' );
 		$settings       = wptravel_get_settings();
 
 		$translation_array = array(
