@@ -145,7 +145,7 @@
 .wp-travel-itinerary-items {
 	ul.wp-travel-itinerary-list {
 		position: relative;
-		padding: 0;
+		padding: 15px;
 		// display: flex;
 		// flex-wrap: wrap;
 		// gap: 1em;
@@ -164,8 +164,8 @@
 		}
 
 		@include mob {
-			margin: 0 !important;
-			padding-left: 0 !important;
+			margin: 0;
+			padding-left: 15px;
 		}
 
 		&.itinerary-1-per-row li {

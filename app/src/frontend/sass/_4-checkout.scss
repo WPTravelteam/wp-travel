@@ -76,6 +76,9 @@
 							#wp-travel-book-now {
 								margin: 0;
 								float: right;
+								@media (max-width: 528px) {
+									margin-bottom: 15px;
+								}
 							}
 						}
 					}
