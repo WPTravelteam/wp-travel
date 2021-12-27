@@ -57,7 +57,7 @@ class WpTravel_Admin_Assets {
 			wp_enqueue_script( 'jquery-chart-custom' );
 		}
 
-		if ( WP_Travel::is_page( 'itineraries', true ) || WP_Travel::is_page( 'enquiry', true ) ) {
+		if ( WP_Travel::is_page( 'itineraries', true ) || WP_Travel::is_page( 'enquiry', true ) || WP_Travel::is_page( 'templates', true ) ) {
 			$backend_depencency = array( 'jquery', 'jquery-ui-tabs', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng', 'wp-travel-media-upload', 'jquery-ui-sortable', 'jquery-ui-accordion', 'moment' );
 			if ( isset( $registered_scripts['google-map-api'] ) ) {
 				// This will only registered if set google map as default map and has api key.

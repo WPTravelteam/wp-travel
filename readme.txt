@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 5.4.1
 Tested up to: 5.8.2
 Requires PHP: 5.6.2
-Stable tag: 5.0.6
+Stable tag: 5.0.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -246,7 +246,7 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
 = 5.0.7 =
-Release Date: 20th December, 2021
+Release Date: 27th December, 2021
 
 Fixes:
 * Trip filter not working in search page.
@@ -256,6 +256,8 @@ Layout Fixes:
 * Fixed layout issue in itinerary page when displaying trips using short code.
 * Fixed layout issue in itinerary page when displaying trips using short code with col parameter.
 * Fixed image stretching issue.
+* Fixed checkout page radio and checkbox field in responsive.
+* Fixed dashboard booking tab layout.
 
 = 5.0.6 =
 Release Date: 20th December, 2021

@@ -3,7 +3,7 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 5.0.6
+ * Version: 5.0.7
  * Author: WP Travel
  * Author URI: http://wptravel.io/
  * Requires at least: 5.4.1
@@ -37,7 +37,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '5.0.6';
+		public $version = '5.0.7';
 
 		/**
 		 * WP Travel API version.
@@ -549,7 +549,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @since 4.4.2
 		 * @since 5.0.0 Added trip single page and admin coupon coupon page check.
 		 * @since 5.0.6 Additional pages like Booking, enquiry, extras, downloads, report, custom_filters, marketplace are added.
-		 * @since 5.0.7 Search Page added.
+		 * @since 5.0.7 templates and search pages are added.
 		 * @return boolean
 		 */
 		public static function is_page( $slug, $is_admin_page_check = false ) {
@@ -638,6 +638,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @since 4.5.4
 		 * @since 5.0.6 Additional pages like Booking, enquiry, extras, downloads, report, custom_filters, marketplace are added.
+		 * @since 5.0.7 templates and search pages are added.
 		 * @return boolean
 		 */
 		public static function is_pages( $is_admin_page_check = false ) {
