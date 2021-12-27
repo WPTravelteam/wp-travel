@@ -549,7 +549,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @since 4.4.2
 		 * @since 5.0.0 Added trip single page and admin coupon coupon page check.
 		 * @since 5.0.6 Additional pages like Booking, enquiry, extras, downloads, report, custom_filters, marketplace are added.
-		 * @since 5.0.7 Search Page added.
+		 * @since 5.0.7 templates and search pages are added.
 		 * @return boolean
 		 */
 		public static function is_page( $slug, $is_admin_page_check = false ) {
@@ -638,6 +638,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @since 4.5.4
 		 * @since 5.0.6 Additional pages like Booking, enquiry, extras, downloads, report, custom_filters, marketplace are added.
+		 * @since 5.0.7 templates and search pages are added.
 		 * @return boolean
 		 */
 		public static function is_pages( $is_admin_page_check = false ) {
