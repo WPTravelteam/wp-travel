@@ -143,6 +143,17 @@
 		}
 	}
 }
+
+.wp-travel-archive-content{
+	.wp-travel-itinerary-items{
+		ul.wp-travel-itinerary-list{
+			&.itinerary-2-per-row li {
+				width: calc(50% - 30px);
+			}
+		}
+	}
+}
+
 .wp-travel-itinerary-items {
 	ul.wp-travel-itinerary-list {
 		position: relative;
