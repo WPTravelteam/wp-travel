@@ -7,15 +7,15 @@
 	// overflow: hidden;
 	display: flex;
 	justify-content: space-between;
-	padding: 0 10px;
 	position: relative; //(toolbar issue fix) Position missing before
 	// Vertically center the filter section in itineray page
-	align-items: center;
+	align-items: baseline;
 	@include clearfix;
 	&::after,
 	&::before {
 		content: unset;
 	}
+	
 
 	@include sidr-view {
 		position: relative;
@@ -40,6 +40,9 @@
 		// padding: 10px 0;
 		padding: 10px 0px; //(toolbar issue fix) 10px 25px before
 		// margin: 0 calc(-1 * var(--gap)); (commented this)
+		@media (max-width: 767px) {
+			gap: 0;
+		}
 		.wp-travel-filter-by-heading {
 			// float: left;
 			// line-height: 1.55;
@@ -82,13 +85,19 @@
 			@media (max-width: 1354px) {
 				//(toolbar issue fix)
 				width: 100%;
-				padding: 0 15px;
+				padding: 0;
 			}
 			@media (max-width: 992px) {
 				//(toolbar issue fix)
 				width: 100% !important;
-				padding: 0 15px !important;
 			}
+			@media (max-width: 767px) {
+				padding: 0;
+			}
+		}
+		&.clearfix::before{
+			display: none;  // (-------------------------------------------none rakhne)
+			content: none;
 		}
 	}
 
@@ -119,41 +128,47 @@
 	.wp-toolbar-right {
 		// float: right;
 		// margin-right: 20px;
-		@include sidr-view {
-			float: none;
-			position: absolute;
-			top: 0;
-			right: 0;
-		}
-		@media (min-width: 993px) and (max-width: 1399px) {
-			float: none;
-			position: absolute;
-			top: 8px;
-			right: 0;
-		}
-		@media (max-width: 575px) {
-			//(toolbar issue fix)
-			float: none;
-			position: absolute;
-			top: 14px !important;
-			right: 0;
-		}
+		// @include sidr-view {
+		// 	float: none;
+		// 	position: absolute;
+		// 	top: 0;
+		// 	right: 0;
+		// }
+		// @media (min-width: 993px) and (max-width: 1399px) {
+		// 	float: none;
+		// 	position: absolute;
+		// 	top: 8px;
+		// 	right: 0;
+		// }
+		// @media (max-width: 575px) {
+		// 	//(toolbar issue fix)
+		// 	float: none;
+		// 	position: absolute;
+		// 	top: 14px !important;
+		// 	right: 0;
+		// }
 	}
 }
 
 .wp-toolbar-filter-field {
 	// float: left;
 	// padding: 15px 10px 0;
-	@media (min-width: 921px) and (max-width: 992px) {
-		width: 210px !important;
+	@media (min-width: 921px) and (max-width: 991px) {
+		width: 176px;
 	}
-	@media (min-width: 860px) and (max-width: 920px) {
+	// @media (min-width: 860px) and (max-width: 920px) {
+	// 	//(toolbar issue fix)
+	// 	width: 200px; // (comment this----------------------------------------)
+	// }
+	@media (min-width: 870px) and (max-width: 920px) {
 		//(toolbar issue fix)
-		width: 200px;
+		width: 160px;
 	}
-	@media (min-width: 768px) and (max-width: 859px) {
-		//(toolbar issue fix)
-		width: 180px;
+	@media (max-width: 869px) {
+		width: 144px;
+	}
+	@media (max-width: 821px) {
+		width: 150px;
 	}
 	@media (max-width: 767px) {
 		//(toolbar issue fix)
@@ -213,7 +228,7 @@
 	// padding: 15px 0;
 	padding: 15px;
 	text-align: center;
-
+	display: flex;
 	// itinerary page filter section button paddinf top fix
 	padding-top: 10px;
 	@media (max-width: 767px) {
