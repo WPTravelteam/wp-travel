@@ -568,21 +568,22 @@ ul.availabily-list {
 
 	.tour-info-column {
 		width: 100%;
-		float: left;
+		// float: left;
 		display: flex;
 		flex-wrap: wrap;
-		justify-content: left;
+		justify-content: space-between;
 
 		.tour-info-item {
 			display: inline-flex;
-			font-style: italic;
+			// font-style: italic;
 			// width: 33.3333%;
-			float: left;
+			// float: left;
 			margin: 2px 0;
 			// padding: 0 5px;
 			width: auto;
-			width: 33.3333333%;
-			padding: 0 15px 0 0;
+			align-items: center;
+			// width: 33.3333333%;
+			// padding: 0 15px 0 0;
 
 			@include sidr-view {
 				width: 50%;

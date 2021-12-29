@@ -97,7 +97,7 @@ class WpTravel_Helpers_Localize {
 			}
 
 			// Add Post specific data for wp_travel and _wp_travel var.
-			if ( $post ) { // There will be no $post for 404, search and other pages.
+			if ( $post && WP_Travel::is_page( 'single' ) ) { // There will be no $post for 404, search and other pages.
 				$trip_id    = $post->ID;
 				$map_data   = wptravel_get_map_data( $trip_id ); // Only Google map data.
 				$maps       = array(
@@ -125,7 +125,7 @@ class WpTravel_Helpers_Localize {
 				}
 			}
 
-			$wp_travel = apply_filters( 'wptravel_frontend_data', $wp_travel, $settings );
+			$wp_travel                    = apply_filters( 'wptravel_frontend_data', $wp_travel, $settings );
 			$localized_data['wp_travel']  = $wp_travel;
 			$localized_data['_wp_travel'] = $_wp_travel;
 		}

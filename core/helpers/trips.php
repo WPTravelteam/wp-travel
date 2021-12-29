@@ -428,9 +428,10 @@ class WpTravel_Helpers_Trips {
 		if ( ! empty( $trip_data->enable_trip_enquiry_option ) ) {
 			update_post_meta( $trip_id, 'wp_travel_enable_trip_enquiry_option', sanitize_text_field( $trip_data->enable_trip_enquiry_option ) );
 		}
-		if ( ! empty( $trip_data->group_size ) ) {
-			update_post_meta( $trip_id, 'wp_travel_group_size', sanitize_text_field( $trip_data->group_size ) );
-		}
+		// Group size post value is not accurate. @todo need to update group size in state on pricing/category changes.
+		$trip                = get_post( $trip_id );
+		$wp_travel_itinerary = new WP_Travel_Itinerary( $trip );
+		$wp_travel_itinerary->update_group_size();
 
 		$minimum_partial_payout_use_global = '';
 		if ( ! empty( $trip_data->minimum_partial_payout_use_global ) ) {
