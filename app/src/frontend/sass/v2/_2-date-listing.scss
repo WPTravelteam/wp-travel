@@ -283,6 +283,7 @@ $defaultColor: #3399ff;
 	.left-info {
 		p:last-child {
 			margin-bottom: 0;
+			margin-top: 0;
 		}
 	}
 	.right-info {
@@ -301,11 +302,14 @@ $defaultColor: #3399ff;
 			align-items: center;
 			p {
 				margin-bottom: 0;
+				margin-top: 0;
+				margin-right: 1rem;
 			}
 		}
 		.left-info {
 			p:first-child {
 				margin-right: 1rem;
+				margin-top: 0;
 			}
 		}
 		.right-info {

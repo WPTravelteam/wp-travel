@@ -565,10 +565,9 @@ i.fa-times-circle {
 							hr {
 								display: none;
 							}
-							
+
 							.wp-travel-ui.wp-travel-ui-card.wp-travel-ui-card-top-border {
 								.components-panel__row {
-									
 									border-bottom: 0;
 								}
 							}
@@ -928,10 +927,17 @@ div[aria-labelledby="0-itinerary"] {
 	}
 }
 
-.components-popover .components-popover__content {
+.components-button .components-popover .components-popover__content {
 	overflow: auto;
 	// left: -395px;
 	left: 0;
+	top: -60px;
+	width: auto;
+}
+.components-dropdown .components-popover .components-popover__content {
+	overflow: auto;
+	left: -400px;
+	// left: 0;
 	top: -60px;
 	// top: -90px;
 	// width: 310px;

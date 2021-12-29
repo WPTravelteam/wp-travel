@@ -197,7 +197,7 @@
 	border-radius: 3px;
 	// overflow: hidden;
 	display: flex;
-	padding: 0 10px;
+	padding: 0 15px;
 	justify-content: space-between;
 	position: relative; //(toolbar issue fix) Position missing before
 	// Vertically center the filter section in itineray page
@@ -207,6 +207,13 @@
 	&::after,
 	&::before {
 		content: unset;
+	}
+
+	&.clearfix {
+		&::before,
+		&::after {
+			content: none;
+		}
 	}
 
 	@include sidr-view {
@@ -283,12 +290,15 @@
 				padding: 0 0px;
 			}
 		}
-		&.clearfix::before{
-			display: none;  // (-------------------------------------------none rakhne)
+		&.clearfix::before {
+			display: none; // (-------------------------------------------none rakhne)
 			content: none;
 		}
-		@media (max-width:1199px){
+		@media (max-width: 1199px) {
 			gap: 1rem;
+		}
+		@media (max-width: 767px) {
+			gap: 0;
 		}
 	}
 
@@ -314,7 +324,7 @@
 		@include sm {
 			width: 100%;
 		}
-		@media (max-width:767px){
+		@media (max-width: 767px) {
 			width: 100% !important;
 		}
 	}
@@ -355,27 +365,29 @@
 		// }
 	}
 
-	@media (max-width:1020px){
+	@media (max-width: 1020px) {
 		align-items: unset; //(------------------------------------------------just yo rakhne)
 	}
 }
 
-.wrapper{
-	.wp-travel-toolbar{
-		.wp-toolbar-filter-field{
-			@media (max-width:992px){ //-------------------------------------for theme fix)
+.wrapper {
+	.wp-travel-toolbar {
+		.wp-toolbar-filter-field {
+			@media (max-width: 992px) {
+				//-------------------------------------for theme fix)
 				width: unset;
 			}
 		}
 	}
 }
 
-.content-area{
-	.wp-travel-toolbar{
-		.wp-travel-post-filter{
-			.wp-travel-filter-by-heading{
-				h4{
-					@media (max-width:767px){ //---------------------------------------------for theme fix)
+.content-area {
+	.wp-travel-toolbar {
+		.wp-travel-post-filter {
+			.wp-travel-filter-by-heading {
+				h4 {
+					@media (max-width: 767px) {
+						//---------------------------------------------for theme fix)
 						display: none;
 					}
 				}
@@ -383,16 +395,16 @@
 		}
 	}
 }
-.wp-travel-archive-itinerary-wrapper{
-	.wp-travel-toolbar{
-		.wp-toolbar-right{
-			@media(max-width:1200px){ //(---------------------------------Travel Joy------------------------)
+.wp-travel-archive-itinerary-wrapper {
+	.wp-travel-toolbar {
+		.wp-toolbar-right {
+			@media (max-width: 1200px) {
+				//(---------------------------------Travel Joy------------------------)
 				position: unset;
 			}
 		}
 	}
 }
-
 
 .wp-toolbar-filter-field {
 	// float: left;
@@ -472,13 +484,13 @@
 	padding: 0px;
 	display: flex;
 	@media (max-width: 1399px) {
-		padding:15px  15px;
+		padding: 15px 15px;
 		// padding-top: 10px;
 	}
 	// @media (max-width: 1199px){
 	// 	// padding: 15px;
 	// }
-	@media (max-width:991px){
+	@media (max-width: 991px) {
 		padding: 15px;
 		// padding-top: 25px; (----------------hataune=-------------------------------)
 	}
@@ -496,7 +508,7 @@
 		}
 	}
 
-	i { 
+	i {
 		padding: 0px 0; // (-------------------------------------------padding hataune--------------)
 		font-size: 24px;
 		cursor: pointer;
