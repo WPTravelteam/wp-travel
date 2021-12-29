@@ -198,9 +198,10 @@
 	// overflow: hidden;
 	display: flex;
 	padding: 0 10px;
+	justify-content: space-between;
 	position: relative; //(toolbar issue fix) Position missing before
 	// Vertically center the filter section in itineray page
-	align-items: center;
+	align-items: baseline;
 	margin-bottom: 2em;
 	@include clearfix;
 	&::after,
@@ -223,7 +224,7 @@
 	}
 
 	.wp-travel-post-filter {
-		--gap: 1rem;
+		--gap: 0rem 1rem; //(--------------------------gap hataune)
 		display: flex;
 		gap: var(--gap);
 		align-items: center;
@@ -279,13 +280,20 @@
 			@media (max-width: 1020px) {
 				//(toolbar issue fix)
 				width: 100%;
-				padding: 0 15px;
+				padding: 0 0px;
 			}
+		}
+		&.clearfix::before{
+			display: none;  // (-------------------------------------------none rakhne)
+			content: none;
+		}
+		@media (max-width:1199px){
+			gap: 1rem;
 		}
 	}
 
 	.wp_travel_input_filters {
-		width: 160px;
+		width: 145px;
 		// padding: 5px 0;
 		// border-radius: 3px;
 		// height: 30px;
@@ -314,27 +322,30 @@
 	.wp-toolbar-right {
 		// float: right;
 		// margin-right: 20px;
-		position: absolute;
-		top: 15px;
-		right: 20px;
-		@include sidr-view {
-			float: none;
-			position: absolute;
-			top: 0;
-			right: 0;
-		}
-		@media (min-width: 993px) and (max-width: 1399px) {
-			float: none;
-			position: absolute;
-			top: 0;
-			right: 0;
-		}
-		@media (max-width: 992px){
-			float: none;
-			position: absolute;
-			top: 0;
-			right: 0;
-		}
+		// position: absolute;
+		// top: 15px;
+		// right: 20px;
+		// display: flex;
+		// align-items: center;
+		// justify-content: center;
+		// @include sidr-view {
+		// 	float: none;
+		// 	position: absolute;
+		// 	top: 0;
+		// 	right: 0;  // sav hataune (---------------------------------------------------)
+		// }
+		// @media (min-width: 993px) and (max-width: 1399px) {
+		// 	float: none;
+		// 	position: absolute;
+		// 	top: 0;
+		// 	right: 0;
+		// }
+		// @media (max-width: 992px){
+		// 	float: none;
+		// 	position: absolute;
+		// 	top: 0;
+		// 	right: 0;
+		// }
 		// @media (max-width: 575px) {
 		// 	//(toolbar issue fix)
 		// 	float: none;
@@ -343,7 +354,45 @@
 		// 	right: 0;
 		// }
 	}
+
+	@media (max-width:1020px){
+		align-items: unset; //(------------------------------------------------just yo rakhne)
+	}
 }
+
+.wrapper{
+	.wp-travel-toolbar{
+		.wp-toolbar-filter-field{
+			@media (max-width:992px){ //-------------------------------------for theme fix)
+				width: unset;
+			}
+		}
+	}
+}
+
+.content-area{
+	.wp-travel-toolbar{
+		.wp-travel-post-filter{
+			.wp-travel-filter-by-heading{
+				h4{
+					@media (max-width:767px){ //---------------------------------------------for theme fix)
+						display: none;
+					}
+				}
+			}
+		}
+	}
+}
+.wp-travel-archive-itinerary-wrapper{
+	.wp-travel-toolbar{
+		.wp-toolbar-right{
+			@media(max-width:1200px){ //(---------------------------------Travel Joy------------------------)
+				position: unset;
+			}
+		}
+	}
+}
+
 
 .wp-toolbar-filter-field {
 	// float: left;
@@ -426,12 +475,12 @@
 		padding:15px  15px;
 		// padding-top: 10px;
 	}
-	@media (max-width: 1199px){
-		padding: 15px;
-	}
+	// @media (max-width: 1199px){
+	// 	// padding: 15px;
+	// }
 	@media (max-width:991px){
 		padding: 15px;
-		padding-top: 25px;
+		// padding-top: 25px; (----------------hataune=-------------------------------)
 	}
 	@media (max-width: 767px) {
 		display: none;
@@ -447,8 +496,8 @@
 		}
 	}
 
-	i {
-		padding: 3px 0;
+	i { 
+		padding: 0px 0; // (-------------------------------------------padding hataune--------------)
 		font-size: 24px;
 		cursor: pointer;
 		width: 23px;
