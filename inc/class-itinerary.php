@@ -131,51 +131,73 @@ class WP_Travel_Itinerary {
 		return false;
 	}
 
+	/**
+	 * Get Trip group size.
+	 *
+	 * @since 1.0.0
+	 */
 	function get_group_size() {
+		$group_size = $this->post_meta['wp_travel_group_size'][0];
+		if ( $group_size ) {
+			return $group_size; // If group size saved in meta. return it from meta.
+		}
 
-		// $pricing_option = ( isset( $this->post_meta['wp_travel_pricing_option_type'][0] ) && ! empty( $this->post_meta['wp_travel_pricing_option_type'][0] ) ) ? $this->post_meta['wp_travel_pricing_option_type'][0] : 'single-price';
-		$pricing_option = wptravel_get_pricing_option_type();
-		$group_size     = 0;
-		if ( 'single-price' === $pricing_option || 'multiple-price' === $pricing_option ) {
+		// Multiple Pricing.
+		$pricing_options = get_post_meta( $this->post->ID, 'wp_travel_pricing_options', true );
 
-			// Single Pricing.
-			if ( 'single-price' === $pricing_option ) {
-				if ( isset( $this->post_meta['wp_travel_group_size'][0] ) && '' !== $this->post_meta['wp_travel_group_size'][0] ) {
-					return (int) $this->post_meta['wp_travel_group_size'][0];
-				}
-			}
+		if ( wptravel_is_react_version_enabled() ) {
+			$pricing_options = wptravel_get_trip_pricings( $this->post->ID );
+		}
 
-			// Multiple Pricing.
-			$pricing_options = get_post_meta( $this->post->ID, 'wp_travel_pricing_options', true );
-
-			if ( wptravel_is_react_version_enabled() ) {
-				$pricing_options = wptravel_get_trip_pricings( $this->post->ID );
-			}
-
-			if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
-				$group_size = 0;
-				foreach ( $pricing_options as $pricing_option ) {
-					if ( isset( $pricing_option['max_pax'] ) ) {
-						if ( $pricing_option['max_pax'] > $group_size ) {
-							$group_size = $pricing_option['max_pax'];
-						}
-					} elseif ( isset( $pricing_option['categories'] ) ) { // Added for new category pricing options.
-						$max_pax_array = array_column( $pricing_option['categories'], 'max_pax' );
-						$max_pax       = array_sum( $max_pax_array );
-						$group_size    = $max_pax;
+		if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
+			$group_size = 0;
+			foreach ( $pricing_options as $pricing_option ) {
+				if ( isset( $pricing_option['max_pax'] ) ) {
+					if ( $pricing_option['max_pax'] > $group_size ) {
+						$group_size = $pricing_option['max_pax'];
 					}
+				} elseif ( isset( $pricing_option['categories'] ) ) { // Added for new category pricing options.
+					$max_pax_array = array_column( $pricing_option['categories'], 'max_pax' );
+					$max_pax       = array_sum( $max_pax_array );
+					$group_size    = $max_pax;
 				}
-			}
-
-			if ( ! $group_size && isset( $this->post_meta['wp_travel_group_size'][0] ) && '' !== $this->post_meta['wp_travel_group_size'][0] ) {
-				return (int) $this->post_meta['wp_travel_group_size'][0];
-			}
-
-			if ( $group_size ) {
-				return (int) $group_size;
 			}
 		}
+		if ( $group_size ) {
+			return (int) $group_size;
+		}
 		return false;
+	}
+
+	/**
+	 * Update Itinerary group size.
+	 *
+	 * @since 5.0.8
+	 */
+	public function update_group_size() {
+		$group_size = 0;
+		// Multiple Pricing.
+		$pricing_options = get_post_meta( $this->post->ID, 'wp_travel_pricing_options', true );
+
+		if ( wptravel_is_react_version_enabled() ) {
+			$pricing_options = wptravel_get_trip_pricings( $this->post->ID );
+		}
+
+		if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
+			$group_size = 0;
+			foreach ( $pricing_options as $pricing_option ) {
+				if ( isset( $pricing_option['max_pax'] ) ) {
+					if ( $pricing_option['max_pax'] > $group_size ) {
+						$group_size = $pricing_option['max_pax'];
+					}
+				} elseif ( isset( $pricing_option['categories'] ) ) { // Added for new category pricing options.
+					$max_pax_array = array_column( $pricing_option['categories'], 'max_pax' );
+					$max_pax       = array_sum( $max_pax_array );
+					$group_size    = $max_pax;
+				}
+			}
+		}
+		update_post_meta( $this->post->ID, 'wp_travel_group_size', $group_size );
 	}
 
 	function get_trip_code() {
