@@ -133,12 +133,12 @@ const GoogleMap = ( {settingsData, map_data, isBlock } ) => {
         return <></>;
     }
     if ( ! google_map_api_key ) {
-        return <>
+        return <div className="wptravel-gmap-iframe">
             <Notice status="warning" isDismissible={false}>
                 <strong dangerouslySetInnerHTML={{ __html: sprintf(__(`${__i18n.notices.map_key_option.description}`), `<a href="edit.php?post_type=itinerary-booking&page=settings">`, `</a>`) }}></strong>
             </Notice><br />
             <GmapIframe zoomlevel={google_map_zoom_level} isBlock={isBlock} />
-        </>;
+        </div>;
     }
 
     let zoom = (google_map_zoom_level) ? parseInt(google_map_zoom_level) : 15;
