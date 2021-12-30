@@ -80,6 +80,97 @@ class WP_Travel_Post_Types { // @phpcs:ignore
 		 * @link http://codex.wordpress.org/Function_Reference/register_post_type
 		 */
 		register_post_type( WP_TRAVEL_POST_TYPE, $args );
+
+		$post_types = array( 'itineraries' );
+		$fields     = array(
+			'wp_travel_lat' => array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'string',
+				'auth_callback' => function () {
+					return current_user_can( 'edit_posts' );
+				},
+			),
+			'wp_travel_lng' => array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'string',
+				'auth_callback' => function () {
+					return current_user_can( 'edit_posts' );
+				},
+			),
+			'wp_travel_trip_map_use_lat_lng' => array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'string',
+				'auth_callback' => function () {
+					return current_user_can( 'edit_posts' );
+				},
+			),
+			'wp_travel_location' => array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'string',
+				'auth_callback' => function () {
+					return current_user_can( 'edit_posts' );
+				},
+			),
+			// 'wp_travel_tabs' => array(
+			// 	'show_in_rest'  => true,
+			// 	'single'        => true,
+			// 	'type'          => 'string',
+			// 	'auth_callback' => function () {
+			// 		return current_user_can( 'edit_posts' );
+			// 	},
+			// ),
+			'wp_travel_overview' => array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'string',
+				'auth_callback' => function () {
+					return current_user_can( 'edit_posts' );
+				},
+			),
+			'wp_travel_outline' => array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'string',
+				'auth_callback' => function () {
+					return current_user_can( 'edit_posts' );
+				},
+			),
+			'wp_travel_trip_include' => array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'string',
+				'auth_callback' => function () {
+					return current_user_can( 'edit_posts' );
+				},
+			),
+			'wp_travel_trip_exclude' => array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'string',
+				'auth_callback' => function () {
+					return current_user_can( 'edit_posts' );
+				},
+			),
+			// 'wp_travel_itinerary_gallery_ids' => array(
+			// 	'show_in_rest'  => true,
+			// 	'single'        => true,
+			// 	'type'          => 'string',
+			// 	'auth_callback' => function () {
+			// 		return current_user_can( 'edit_posts' );
+			// 	},
+			// ),
+		);
+		/**
+		 * Filter to add meta fields for itinerary.
+		 *
+		 * @since 5.0.8
+		 */
+		$fields = apply_filters( 'wptravel_itinerary_meta_fields', $fields ); // Need to change advanced galley key for advanced gallery.
+		self::register_meta_fields( $post_types, $fields );
 	}
 
 	/**
@@ -274,5 +365,28 @@ class WP_Travel_Post_Types { // @phpcs:ignore
 		 * @link http://codex.wordpress.org/Function_Reference/register_post_type
 		 */
 		register_post_type( 'tour-extras', $args );
+	}
+
+	/**
+	 * Register meta fields as per post types.
+	 *
+	 * @param array $post_types Collection of post type.
+	 * @param array $fields     Meta fields.
+	 *
+	 * @since 5.0.8
+	 */
+	public static function register_meta_fields( $post_types, $fields ) {
+		if ( ! $post_types || ! $fields ) {
+			return;
+		}
+
+		if ( ! empty( $post_types ) && ! empty( $fields ) ) {
+			foreach ( $post_types as $pt ) {
+				foreach ( $fields as $meta_key => $field ) {
+					register_post_meta( $pt, $meta_key, $field );
+				}
+			}
+		}
+
 	}
 }
