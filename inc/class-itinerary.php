@@ -137,7 +137,7 @@ class WP_Travel_Itinerary {
 	 * @since 1.0.0
 	 */
 	function get_group_size() {
-		$group_size = $this->post_meta['wp_travel_group_size'][0];
+		$group_size = isset( $this->post_meta['wp_travel_group_size'] ) ? $this->post_meta['wp_travel_group_size'][0] : '';
 		if ( $group_size ) {
 			return $group_size; // If group size saved in meta. return it from meta.
 		}

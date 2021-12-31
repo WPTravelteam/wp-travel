@@ -44,7 +44,7 @@ const SimpleGallery = ({allData, drag=true }) => {
         })
         .on('select', () => {
             const selectedItems = galleryMediaInstance.state().get('selection').toJSON()
-            let currentGallery = store.getAllStore().gallery
+            let currentGallery = store.getAllStore().gallery ? store.getAllStore().gallery : [];
             selectedItems.length > 0 && updateTripData({
                 ...allData,
                 gallery: [...currentGallery, ...selectedItems.map(item => ({ id: item.id, thumbnail: item.url }))]
