@@ -139,7 +139,7 @@
 			display: flex;
 			flex-wrap: wrap;
 			gap: 1em;
-			justify-content: space-between;
+			justify-content: flex-start;
 		}
 	}
 }
@@ -180,42 +180,43 @@
 			padding-left: 15px;
 		}
 
-		&.itinerary-1-per-row li {
-			width: calc(100% - 20px);
-		}
+		// &.itinerary-1-per-row li {
+		// 	width: calc(100% - 20px);
+		// }
 
-		&.itinerary-2-per-row li {
-			// width: calc(50% - 30px);
-			width: calc(50% - 7px);
-		}
+		// &.itinerary-2-per-row li {
+		// 	// width: calc(50% - 30px);
+		// 	width: calc(50% - 8px);
+		// }
 
-		&.itinerary-3-per-row li {
-			width: calc(33.333% - 20px);
-		}
+		// &.itinerary-3-per-row li {
+		// 	// width: calc(33.333% - 20px);
+		// 	width: calc(33.333% - 16px);
+		// }
 
-		&.itinerary-4-per-row li {
-			width: calc(25% - 20px);
-		}
+		// &.itinerary-4-per-row li {
+		// 	width: calc(25% - 20px);
+		// }
 
-		&.itinerary-5-per-row li {
-			width: calc(20% - 20px);
-		}
+		// &.itinerary-5-per-row li {
+		// 	width: calc(20% - 20px);
+		// }
 
-		&.itinerary-6-per-row li {
-			width: calc(16.333% - 20px);
-		}
+		// &.itinerary-6-per-row li {
+		// 	width: calc(16.333% - 20px);
+		// }
 
-		&.itinerary-7-per-row li {
-			width: calc(14.2857% - 20px);
-		}
+		// &.itinerary-7-per-row li {
+		// 	width: calc(14.2857% - 20px);
+		// }
 
-		&.itinerary-8-per-row li {
-			width: calc(12.5% - 20px);
-		}
+		// &.itinerary-8-per-row li {
+		// 	width: calc(12.5% - 20px);
+		// }
 
-		&.itinerary-9-per-row li {
-			width: calc(11.1111% - 20px);
-		}
+		// &.itinerary-9-per-row li {
+		// 	width: calc(11.1111% - 20px);
+		// }
 
 		&[class*="itinerary-"] li {
 			@include sidr-view {
@@ -309,6 +310,7 @@
 				margin: 0;
 				display: block;
 				width: 100%;
+				height: auto;
 				// height: 225px;
 				object-fit: cover;
 				// @media (max-width: 1199px) {
@@ -418,6 +420,7 @@
 	margin-bottom: 30px;
 	padding: 15px;
 	padding-right: 0;
+	width: 100%;
 	@include mob {
 		padding-right: 15px;
 	}

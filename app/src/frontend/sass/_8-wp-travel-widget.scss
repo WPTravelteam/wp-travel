@@ -51,11 +51,18 @@
 		float: left;
 		margin-bottom: 20px;
 		position: relative;
+		@media (max-width: 575px) {
+			width: 100%;
+		}
 
 		input {
-			max-width: 120px;
+			// max-width: 120px;
+			max-width: 95%;
 			display: block;
 			padding-left: 35px;
+			@media (max-width: 575px) {
+                max-width: 100%;
+            }
 		}
 
 		.calender-icon {
