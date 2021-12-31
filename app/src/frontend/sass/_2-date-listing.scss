@@ -320,7 +320,23 @@ $defaultColor: #3399ff;
 .wp-travel-list-view {
 
 	.wp-travel-booking__pricing-wrapper {
-		display: none;
+		// display: none;
+        &.wptravel-pax-selector {
+            background: #fff;
+            padding: 10px 20px;
+            border: 1px solid #d5d5d5;
+        
+        .wp-travel-booking__notice {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: .5em;
+            svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
 		.wp-travel-booking__pricing-name{
 			display: none;
 		}
@@ -764,7 +780,7 @@ $defaultColor: #3399ff;
 				align-items: center;
 				position: relative;
 				padding: 10px 0;
-				padding-left: 1.2em;
+				// padding-left: 1.2em;
 				.discount-table {
 					position: absolute;
 					top: 100%;
