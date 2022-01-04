@@ -245,6 +245,15 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+= 5.0.8 =
+Release Date:
+
+Fixes:
+* Group size value not update if we set it and removed all pricings.
+* Overview content not being displayed for v3 trips.
+* Fixed Gallery images not being saved on new trip.
+* Fixed Booking tab switch to Dashboard tab when click booking detail page.
+
 = 5.0.7 =
 Release Date: 27th December, 2021
 
