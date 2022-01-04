@@ -362,7 +362,7 @@ class WpTravel_Frontend_Assets {
 		if ( self::is_request( 'frontend' ) ) {
 			$scripts['wp-travel-script'] = array(
 				'src'       => self::$app_path . '/assets/js/wp-travel-front-end.js',
-				'deps'      => array( 'jquery', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng', 'jquery-ui-accordion' ),
+				'deps'      => array( 'jquery', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng', 'jquery-ui-accordion', 'wp-travel-slick' ),
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,
 			);

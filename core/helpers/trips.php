@@ -516,6 +516,7 @@ class WpTravel_Helpers_Trips {
 	 * @param array $args Arguments to filter trips.
 	 *
 	 * @since 3.0.0
+	 * @since 5.0.8 Meta query added to filter sale trips & featured trip
 	 * @return Array
 	 */
 	public static function filter_trips( $args = array() ) {
@@ -611,6 +612,29 @@ class WpTravel_Helpers_Trips {
 				);
 			}
 		}
+		// Meta Query args. @since 5.0.8
+		$display_sale_trip  = isset( $args['sale_trip'] ) ? $args['sale_trip'] : false;
+		$display_featured_trip  = isset( $args['featured_trip'] ) ? $args['featured_trip'] : false;
+		if ( $display_sale_trip || $display_featured_trip ) {
+			$query_args['meta_query'] = array();
+
+			if ( $display_sale_trip  ) {
+				$query_args['meta_query'][] = array(
+					'key'     => 'wptravel_enable_sale',
+					'value'   => '1',
+					'compare' => '=',
+				);
+			}
+			if ( $display_featured_trip  ) {
+				$query_args['meta_query'][] = array(
+					'key'     => 'wp_travel_featured',
+					'value'   => 'yes',
+					'compare' => '=',
+				);
+			}
+		}
+		
+
 		if ( isset( $args['numberposts'] ) ) {
 			$query_args['posts_per_page'] = $args['numberposts'];
 		}

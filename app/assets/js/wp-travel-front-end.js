@@ -158,30 +158,6 @@ jQuery(function ($) {
 
     $('#wp-travel-tab-wrapper').easyResponsiveTabs({});
 
-    if (window.location.hash) {
-        var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
-
-        if ($("ul.resp-tabs-list > li." + hash).hasClass('wp-travel-ert')) {
-            lis = $("ul.resp-tabs-list > li");
-            lis.removeClass("resp-tab-active");
-            $("ul.resp-tabs-list > li." + hash).addClass("resp-tab-active");
-            tab_cont = $('.tab-list-content');
-            tab_cont.removeClass('resp-tab-content-active').hide();
-            $('#' + hash + '.tab-list-content').addClass('resp-tab-content-active').show();
-        }
-
-        if ($('.wp-travel-tab-wrapper').length) {
-            var winWidth = $(window).width();
-            var tabHeight = $('.wp-travel-tab-wrapper').offset().top;
-            if (winWidth < 767) {
-                var tabHeight = $('.resp-accordion.resp-tab-active').offset().top;
-            }
-            $('html, body').animate({
-                scrollTop: (tabHeight)
-            }, 1200);
-        }
-    }
-
     // Rating script starts.
     $('.rate_label').hover(function () {
         var rateLabel = $(this).attr('data-id');
@@ -396,7 +372,28 @@ jQuery(function ($) {
         active_border_color: '#c1c1c1', // border color for active tabs heads in this group
         active_content_border_color: '#5AB1D0' // border color for active tabs contect in this group so that it matches the tab head border
     });
-
+    if (window.location.hash) {
+        var hash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
+        if ($("ul.resp-tabs-list > li#" + hash).hasClass('wp-travel-ert')) {
+            lis = $("ul.resp-tabs-list > li");
+            lis.removeClass("resp-tab-active");
+            $("ul.resp-tabs-list > li#" + hash).addClass("resp-tab-active");
+            // Tab content.
+            tab_cont = $('.tab-list-content');
+            tab_cont.removeClass('resp-tab-content-active').hide();
+            $('#' + hash + '.tab-list-content, #wp-travel-tab-content-' + hash + '.tab-list-content').addClass('resp-tab-content-active').show();
+        }
+        if ($('.wp-travel-tab-wrapper').length) {
+            var winWidth = $(window).width();
+            var tabHeight = $('.wp-travel-tab-wrapper').offset().top;
+            if (winWidth < 767) {
+                var tabHeight = $('.resp-accordion.resp-tab-active').offset().top;
+            }
+            $('html, body').animate({
+                scrollTop: (tabHeight)
+            }, 1200);
+        }
+    }
     $('.dashtab-nav').click(function (e) {
 
         e.preventDefault();
