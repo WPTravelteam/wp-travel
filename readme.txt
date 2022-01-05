@@ -3,9 +3,9 @@ Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 5.4.1
-Tested up to: 5.8.2
-Requires PHP: 5.6.2
-Stable tag: 5.0.7
+Tested up to: 5.8
+Requires PHP: 5.6
+Stable tag: 5.0.8
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -253,6 +253,7 @@ Fixes:
 * Overview content not being displayed for v3 trips.
 * Fixed Gallery images not being saved on new trip.
 * Fixed Booking tab switch to Dashboard tab when click booking detail page.
+* Fixed Blocks Plugin not working in windows.
 
 = 5.0.7 =
 Release Date: 27th December, 2021
