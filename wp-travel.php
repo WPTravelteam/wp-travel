@@ -3,12 +3,12 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 5.0.7
+ * Version: 5.0.8
  * Author: WP Travel
  * Author URI: http://wptravel.io/
  * Requires at least: 5.4.1
- * Requires PHP: 5.6.2
- * Tested up to: 5.8.2
+ * Requires PHP: 5.6
+ * Tested up to: 5.8
  *
  * Text Domain: wp-travel
  * Domain Path: /i18n/languages/
@@ -528,8 +528,10 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @return void
 		 */
 		public function plugin_load_first_order() {
-			$path    = str_replace( WP_PLUGIN_DIR . '/', '', __FILE__ );
-			$plugins = get_option( 'active_plugins' );
+			$mapped_plugin_dir = str_replace( '\\', '/', WP_PLUGIN_DIR );
+			$mapped_file       = str_replace( '\\', '/', __FILE__ );
+			$path              = str_replace( $mapped_plugin_dir . '/', '', $mapped_file );
+			$plugins           = get_option( 'active_plugins' );
 			if ( ! empty( $plugins ) ) {
 				$key = array_search( $path, $plugins, true );
 				if ( ! empty( $key ) ) {
