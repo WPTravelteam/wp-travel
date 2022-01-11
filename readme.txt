@@ -254,6 +254,7 @@ Fixes:
 * Fixed Gallery images not being saved on new trip.
 * Fixed Booking tab switch to Dashboard tab when click booking detail page.
 * Fixed Blocks Plugin not working in windows.
+* Fixed Custom fields added from field editor value mismatch. If we add Select, Radio and checkbox as input from field ediror the value of these input is display as index.
 
 = 5.0.7 =
 Release Date: 27th December, 2021
