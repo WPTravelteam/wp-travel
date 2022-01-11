@@ -9,90 +9,89 @@
 
 //advance search
 // .widget_wp_travel_filter_search_widget {
-	// .wp-travel-itinerary-items {
-	// 	padding: 15px;
-	// }
+// .wp-travel-itinerary-items {
+// 	padding: 15px;
+// }
 
-	.wp-travel-form-field {
-		margin-bottom: 15px;
+.wp-travel-form-field {
+	margin-bottom: 15px;
+}
+
+// label {
+// 	display: block;
+// 	font-weight: 500;
+// }
+
+select,
+input:not([type="checkbox"]) {
+	width: 100%;
+}
+
+#amount {
+	background-color: transparent;
+}
+
+.wp-trave-price-range {
+	label,
+	input {
+		display: inline-block;
 	}
 
-	// label {
-	// 	display: block;
-	// 	font-weight: 500;
-	// }
-
-	select,
-	input:not([type="checkbox"]) {
-		width: 100%;
+	input {
+		color: #f83531;
 	}
+}
 
-	#amount {
-		background-color: transparent;
-	}
+input[type="submit"] {
+	padding: 0.6em 1em 0.6em;
+	line-height: 1.333;
+}
 
-	.wp-trave-price-range {
-		label,
-		input {
-			display: inline-block;
-		}
+.trip-duration-calender {
+	width: 50%;
+	display: block;
+	float: left;
+	margin-bottom: 20px;
+	position: relative;
 
-		input {
-			color: #f83531;
-		}
-	}
-
-	input[type="submit"] {
-		padding: 0.6em 1em 0.6em;
-		line-height: 1.333;
-	}
-
-	.trip-duration-calender {
-		width: 50%;
+	input {
+		max-width: 120px;
 		display: block;
-		float: left;
-		margin-bottom: 20px;
-		position: relative;
+		// padding-left: 35px;
+		padding-left: 45px;
+	}
 
-		input {
-			max-width: 120px;
-			display: block;
-			// padding-left: 35px;
-			padding-left: 45px;
+	.calender-icon {
+		position: absolute;
+		top: 24px;
+		left: 1px;
+		// width: 28px;
+		text-align: center;
+		line-height: 25px;
+		background: #ddd;
+		width: 37px;
+		height: 37px;
+
+		@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+			line-height: 21px;
 		}
 
-		.calender-icon {
+		&::before {
+			content: "\f073";
+			font-family: "Font Awesome 5 Free";
 			position: absolute;
-			top: 24px;
-			left: 1px;
-			// width: 28px;
-			text-align: center;
-			line-height: 25px;
-			background: #ddd;
-			width: 37px;
-			height: 37px;
-
-			@media all and (-ms-high-contrast: none),
-				(-ms-high-contrast: active) {
-				line-height: 21px;
-			}
-
-			&::before {
-				content: "\f073";
-				font-family: "Font Awesome 5 Free";
-				position: absolute;
-				top: 5px;
-				right: 12px;
-			}
+			top: 5px;
+			right: 12px;
 		}
 	}
+}
 // }
 
 // Search form widget.
 .wp-travel-search {
 	form {
 		display: grid;
-		grid-template-columns: repeat( auto-fit, minmax(200px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 		grid-gap: 1rem;
 		align-items: end;
 	}
@@ -367,4 +366,47 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
 	font-weight: normal;
 	color: #505050;
 	cursor: e-resize;
+}
+
+// WP Travel Trip Filter widget section
+.widget_wp_travel_filter_search_widget {
+	.wp-travel-form-field {
+		&.wp-travel-trip-duration {
+			width: 100%;
+			padding: 0;
+			display: inline-block;
+			margin-bottom: 15px;
+			vertical-align: top;
+			position: relative;
+			label {
+				display: block;
+			}
+			.trip-duration-calender {
+				@media (max-width: 450px) {
+					width: 100%;
+				}
+				input {
+					max-width: 95%;
+					display: block;
+					padding-left: 55px;
+					@media (max-width: 450px) {
+						max-width: 100%;
+					}
+				}
+			}
+			.calender-icon {
+				width: 47px;
+				height: 49px;
+				top: 30px;
+				left: 2px;
+				@media (max-width: 975px) {
+					height: 48px;
+				}
+				&::before {
+					right: 16px;
+					top: 12px;
+				}
+			}
+		}
+	}
 }

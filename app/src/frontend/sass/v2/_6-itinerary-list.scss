@@ -293,19 +293,20 @@
 }
 
 // Related Posts
-// .wp-travel-related-posts {
+.wp-travel-related-posts {
 	.wp-travel-itinerary-items {
 		.wp-travel-itinerary-list {
-			grid-template-columns: repeat(3, 1fr);
-			@media (max-width: 991px) {
-				grid-template-columns: repeat(2, 1fr);
-			}
-			@media (max-width: 650px) {
-				grid-template-columns: repeat(1, 1fr);
-			}
+			// grid-template-columns: repeat(3, 1fr);
+			grid-template-columns: repeat(auto-fill, minmax(315px, 1fr));
+			// @media (max-width: 991px) {
+			// 	grid-template-columns: repeat(2, 1fr);
+			// }
+			// @media (max-width: 650px) {
+			// 	grid-template-columns: repeat(1, 1fr);
+			// }
 		}
 	}
-// }
+}
 
 // Widget Area related trip grid view
 .widget-area {
