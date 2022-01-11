@@ -59,6 +59,7 @@ input[type="submit"] {
 		display: block;
 		// padding-left: 35px;
 		padding-left: 45px;
+		// padding-right: 0 !important;
 	}
 
 	.calender-icon {
@@ -396,7 +397,7 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
 			}
 			.calender-icon {
 				width: 47px;
-				height: 49px;
+				height: 47px;
 				top: 30px;
 				left: 2px;
 				@media (max-width: 975px) {
