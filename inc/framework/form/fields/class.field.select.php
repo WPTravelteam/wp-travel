@@ -32,7 +32,15 @@ class WP_Travel_FW_Field_Select {
 				)
 			);
 		}
-
+		
+		// Custom Fields.
+		if ( ! isset( $this->field['_default'] ) || ( isset( $this->field['_default'] ) && ! $this->field['_default'] ) && count( $this->field['options'] ) > 0 ) {
+			$mapped_options = array();
+			foreach( $this->field['options'] as $option ) {
+				$mapped_options[ $option ] = $option;
+			}
+			$this->field['options'] = $mapped_options;
+		}
 		if ( ! empty( $this->field['options'] ) ) {
 			foreach ( $this->field['options'] as $key => $value ) {
 

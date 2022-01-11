@@ -27,6 +27,13 @@ class WP_Travel_FW_Field_Checkbox {
 		// $output = sprintf( '<select id="%s" name="%s" %s>', $this->field['id'], $this->field['name'], $validations );
 		if ( ! empty( $this->field['options'] ) ) {
 			$index = 0;
+			if ( ! isset( $this->field['_default'] ) || ( isset( $this->field['_default'] ) && ! $this->field['_default'] ) && count( $this->field['options'] ) > 0 ) {
+				$mapped_options = array();
+				foreach ( $this->field['options'] as $option ) {
+					$mapped_options[ $option ] = $option;
+				}
+				$this->field['options'] = $mapped_options;
+			}
 			foreach ( $this->field['options'] as $key => $value ) {
 
 				// Option Attributes.

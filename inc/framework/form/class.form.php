@@ -129,7 +129,8 @@ class WP_Travel_FW_Form {
 			$this->init_assets();
 		}
 		?>
-		<script> jQuery( function( $ ) { if (typeof parsley == "object") { $('#<?php echo esc_attr( $id ); ?>').parsley(); } } ); </script>
+		<script> 
+		jQuery( function( $ ) { if (typeof parsley == "object") { $('#<?php echo esc_attr( $id ); ?>').parsley(); } } ); </script>
 		<?php
 	}
 
