@@ -30,9 +30,6 @@ $enable_sale   = WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => $
 $group_size    = wptravel_get_group_size( $trip_id );
 $start_date    = get_post_meta( $trip_id, 'wp_travel_start_date', true );
 $end_date      = get_post_meta( $trip_id, 'wp_travel_end_date', true );
-$sanitized_get = WP_Travel::get_sanitize_request();
-$view_mode     = wptravel_get_archive_view_mode( $sanitized_get );
-
 
 $args                             = $args_regular = array( 'trip_id' => $trip_id ); // phpcs:ignore
 $args_regular['is_regular_price'] = true;
