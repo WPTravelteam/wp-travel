@@ -18,25 +18,42 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
-do_action( 'wp_travel_before_archive_itinerary', get_the_ID() );
+$trip_id = get_the_ID();
+do_action( 'wp_travel_before_archive_itinerary', $trip_id );
 if ( post_password_required() ) {
 	echo get_the_password_form(); //phpcs:ignore
 	return;
 }
-	$enable_sale   = WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => get_the_ID() ) );
-	$group_size    = wptravel_get_group_size( get_the_ID() );
-	$start_date    = get_post_meta( get_the_ID(), 'wp_travel_start_date', true );
-	$end_date      = get_post_meta( get_the_ID(), 'wp_travel_end_date', true );
-	$sanitized_get = WP_Travel::get_sanitize_request();
-	$view_mode     = wptravel_get_archive_view_mode( $sanitized_get );
-	global $wp_travel_itinerary;
+global $wp_travel_itinerary;
+
+$enable_sale   = WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => $trip_id ) );
+$group_size    = wptravel_get_group_size( $trip_id );
+$start_date    = get_post_meta( $trip_id, 'wp_travel_start_date', true );
+$end_date      = get_post_meta( $trip_id, 'wp_travel_end_date', true );
+$sanitized_get = WP_Travel::get_sanitize_request();
+$view_mode     = wptravel_get_archive_view_mode( $sanitized_get );
+
+
+$args                             = $args_regular = array( 'trip_id' => $trip_id ); // phpcs:ignore
+$args_regular['is_regular_price'] = true;
+$trip_price                       = WP_Travel_Helpers_Pricings::get_price( $args );
+$regular_price                    = WP_Travel_Helpers_Pricings::get_price( $args_regular );
+
+$locations     = get_the_terms( $trip_id, 'travel_locations' );
+$location_name = '';
+$location_link = '';
+if ( $locations && is_array( $locations ) ) {
+	$first_location = array_shift( $locations );
+	$location_name  = $first_location->name;
+	$location_link  = get_term_link( $first_location->term_id, 'travel_locations' );
+}
 ?>
 	<!-- Contents Here -->
 	<div class="view-box">
 		<div class="view-image">
 			<a href="<?php the_permalink(); ?>" class="image-thumb">
 				<div class="image-overlay"></div>
-				<?php echo wptravel_get_post_thumbnail( get_the_ID() ); ?>
+				<?php echo wptravel_get_post_thumbnail( $trip_id ); ?>
 			</a>
 			<div class="offer">
 				<span>#<?php echo esc_html( $wp_travel_itinerary->get_trip_code() ); ?></span>
@@ -46,14 +63,13 @@ if ( post_password_required() ) {
 		<div class="view-content">
 			<div class="left-content">
 				<header>
-					<?php do_action( 'wp_travel_before_archive_content_title', get_the_ID() ); ?>
+					<?php do_action( 'wp_travel_before_archive_content_title', $trip_id ); ?>
 					<h2 class="entry-title">
 						<a class="heading-link" href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to: ', 'wp-travel' ) ) ); ?>">
 							<?php the_title(); ?>
 						</a>
 					</h2>
-					
-					<?php do_action( 'wp_travel_after_archive_title', get_the_ID() ); ?>
+					<?php do_action( 'wp_travel_after_archive_title', $trip_id ); ?>
 					<div class="favourite">
 						<a href="javascript:void(0);" data-id="5812" data-event="add" title="Add to wishlists" class="wp-travel-add-to-wishlists">
 							<i class="fas fa-bookmark"></i>
@@ -61,23 +77,23 @@ if ( post_password_required() ) {
 					</div>
 				</header>
 				<div class="trip-icons">
-					<div class="trip-time">
-						<i class="far fa-clock"></i>
-						<span>5 Hours</span>
-					</div>
-					<div class="trip-calendar">
-						<i class="far fa-calendar-alt"></i>
-						<span>Feb 7 - Feb 14</span>
-					</div>
+					<?php wptravel_get_trip_duration( $trip_id ); ?>
 					<div class="trip-location">
 						<i class="fas fa-map-marker-alt"></i>
-						<span>Africa</span>
+						<span>
+							<?php if ( $location_name ) : ?>
+								<a href="<?php echo esc_url( $location_link ); ?>" ><?php echo esc_html( $location_name ); ?></a>
+								<?php
+							else :
+								esc_html_e( 'N/A', 'wp-travel' );
+							endif;
+							?>
+						</span>
 					</div>
 					<div class="group-size">
 						<i class="fas fa-users"></i>
-						<span>5 Pax</span>
+						<span><?php echo esc_html( wptravel_get_group_size( $trip_id ) ); ?></span>
 					</div>
-					
 				</div>
 				<div class="trip-desc">
 					<?php the_excerpt(); ?>
@@ -86,17 +102,26 @@ if ( post_password_required() ) {
 			<div class="right-content">
 				<div class="footer-wrapper">
 					<div class="trip-price">
-						<span class="discount">
-							50% Off
-						</span>
-						<span class="price-here">
-							$5,000
-						</span>
-						<del>$2,500</del>
+						<?php wptravel_save_offer( $trip_id ); ?>
+						<?php if ( $trip_price > 0 ) : ?>
+							<span class="price-here">
+								<?php echo wptravel_get_formated_price_currency( $trip_price ); //phpcs:ignore ?>
+							</span>
+						<?php endif; ?>
+						<?php if ( $enable_sale ) : ?>
+							<del><?php echo wptravel_get_formated_price_currency( $regular_price, true ); //phpcs:ignore ?></del>
+						<?php endif; ?>
+
 					</div>
 					<div class="trip-rating">
 						<h4>Rating</h4>
-
+						<?php if ( wptravel_tab_show_in_menu( 'reviews' ) ) : ?>
+							<div class="wp-travel-average-review">
+								<?php wptravel_trip_rating( $trip_id ); ?>
+								<?php $count = (int) wptravel_get_review_count(); ?>
+							</div>
+							<span class="wp-travel-review-text"> (<?php printf( _n( '%d Review', '%d Reviews', $count, 'wp-travel' ), $count ); ?>)</span>
+						<?php endif; ?>
 					</div>
 				</div>
 
@@ -105,7 +130,5 @@ if ( post_password_required() ) {
 		</div>
 	</div>
 
-				
-
-				
-<?php do_action( 'wp_travel_after_archive_itinerary', get_the_ID() ); ?>
+<?php
+do_action( 'wp_travel_after_archive_itinerary', $trip_id );
