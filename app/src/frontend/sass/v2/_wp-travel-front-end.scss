@@ -583,6 +583,7 @@ ul.availabily-list {
 			// width: auto;
 			align-items: center;
 			width: 33.3333333%;
+			flex-wrap: wrap;
 			// padding: 0 15px 0 0;
 
 			@include sidr-view {

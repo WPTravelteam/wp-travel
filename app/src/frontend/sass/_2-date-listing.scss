@@ -400,6 +400,9 @@ $defaultColor: #3399ff;
 			border-radius: 3px;
 		}
 	}
+    .wp-travel-booking__pricing-wrapper {
+        display: none;
+    }
 	.wp-travel-booking__pax-selector-wrapper {
 		margin-bottom: 15px;
 		.text-left {

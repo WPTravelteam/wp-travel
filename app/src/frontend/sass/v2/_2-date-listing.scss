@@ -315,6 +315,8 @@ $defaultColor: #3399ff;
 		.right-info {
 			.wp-travel-book {
 				margin-left: 1rem;
+				padding: 10px;
+				margin: 0;
 			}
 		}
 	}
@@ -602,9 +604,12 @@ $defaultColor: #3399ff;
 				opacity: 1;
 				background-color: #444;
 				color: #fff;
+				float: right;
 			}
 			&:last-child {
 				margin-right: 0;
+				width: 128px;
+				padding: 10px;
 			}
 		}
 		@media (max-width: 991px) {
