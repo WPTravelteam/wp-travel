@@ -1523,6 +1523,7 @@ function wptravel_save_offer( $trip_id ) {
 	}
 	$strings     = WpTravel_Helpers_Strings::get();
 	$save_label  = $strings['save'];
+	$off_label   = $strings['off'];
 	$enable_sale = WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => $trip_id ) );
 
 	if ( ! $enable_sale ) {
@@ -1534,12 +1535,22 @@ function wptravel_save_offer( $trip_id ) {
 	$trip_price                       = WP_Travel_Helpers_Pricings::get_price( $args );
 	$regular_price                    = WP_Travel_Helpers_Pricings::get_price( $args_regular );
 
+	$layout_version = wptravel_layout_version();
+
 	if ( $regular_price > $trip_price ) {
 		$save = ( 1 - ( $trip_price / $regular_price ) ) * 100;
 		$save = number_format( $save, 2, '.', ',' );
-		?>
-		<div class="wp-travel-savings"><?php printf( '%s <span>%s&#37;</span>', $save_label, $save ); ?></div>
-		<?php
+		if ( 'v2' === $layout_version ) {
+			?>
+			<span class="discount">
+				<?php printf( '<span>%s&#37;</span> %s', $save, $off_label ); ?>
+			</span>
+			<?php
+		} else{
+			?>
+			<div class="wp-travel-savings"><?php printf( '%s <span>%s&#37;</span>', $save_label, $save ); ?></div>
+			<?php
+		}
 	}
 }
 
