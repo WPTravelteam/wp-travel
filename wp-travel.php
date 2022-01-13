@@ -260,6 +260,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		public function includes() {
 			include sprintf( '%s/core/helpers/strings.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/core/helpers/dev.php', WP_TRAVEL_ABSPATH );
+			include sprintf( '%s/core/helpers/layout.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/core/helpers/localize.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-assets.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-default-form-fields.php', WP_TRAVEL_ABSPATH );

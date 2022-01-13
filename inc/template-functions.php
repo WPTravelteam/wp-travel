@@ -200,7 +200,7 @@ function wptravel_posts_clauses_filter( $post_clauses, $object ) {
  * @param  String $template_name Path of template.
  * @return Mixed
  */
-function wptravel_get_template( $template_name ) {
+function wptravel_get_template( $template_name, $template_version = '' ) {
 	$template_path = apply_filters( 'wp_travel_template_path', 'wp-travel/' ); // @phpcs:ignore
 	$template_path = apply_filters( 'wptravel_template_path', $template_path );
 	$default_path  = sprintf( '%s/templates/', plugin_dir_path( dirname( __FILE__ ) ) );
@@ -212,6 +212,40 @@ function wptravel_get_template( $template_name ) {
 			$template_name,
 		)
 	);
+	// $layout_version = wptravel_layout_version();
+	// preg_match( '!\d+!', $layout_version, $version_number );
+	// if ( ! $template ) {
+	// 	// Break the recurring if template version provided and is v1.
+	// 	if ( $template_version && 'v1' === $template_version ) {
+	// 		error_log( print_r( $template_version, true ) );
+	// 		return;
+	// 	}
+
+	// 	if ( isset( $version_number[0] ) && 1 !==  (int) $version_number[0] ) {
+
+	// 		$version = (int) $version_number[0];
+	// 		for ( $i = $version; $i >= 1; $i-- ) {
+	
+	// 			$template_ver = 'v' . $i . '/';
+	// 			$replace_with = 2 >= $i ? '': 'v' . ( $i-1 ) . '/' ;
+
+	// 			error_log( 'before ' . $template_name );
+	// 			error_log( print_r( 'replace with ' . $replace_with, true ) );
+	// 			$template_name = str_replace( $template_ver, $replace_with, $template_name );
+	// 			error_log( 'after ' . $template_name );
+
+	// 			if ( file_exists( $template ) ) {
+	// 				return $template;
+	// 			}
+				
+	// 			// return wptravel_get_template( $template_name, $template_ver );
+	// 		}
+	// 	}
+	// }
+
+	// Legacy Templates for themes.
+	// error_log( print_r( $layout_version, true ) );
+
 	if ( ! $template ) {
 		$template = $default_path . $template_name;
 	}
@@ -252,6 +286,7 @@ function wptravel_get_template_part( $slug, $name = '' ) {
 	if ( $name ) {
 		$template = wptravel_get_template( $file_name );
 	}
+	// error_log( print_r( $template, true ) );
 	if ( $template ) {
 		load_template( $template, false );
 	}
@@ -1381,9 +1416,13 @@ function wptravel_comments_template_loader( $template ) {
  * @return String
  */
 function wptravel_template_loader( $template ) {
+	$layout_version = wptravel_layout_version();
 	// Load template for post archive / taxonomy archive.
 	if ( is_post_type_archive( WP_TRAVEL_POST_TYPE ) || is_tax( array( 'itinerary_types', 'travel_locations', 'travel_keywords', 'activity' ) ) ) {
-		$archive_template = wptravel_get_template( 'archive-itineraries.php' );
+		$archive_template = wptravel_get_template( $layout_version . '/archive-itineraries.php' ); // Load version specific template if version greater than v1.
+		if ( 'v1' === $layout_version ) { // Legacy Template.
+			$archive_template = wptravel_get_template( 'archive-itineraries.php' );
+		}
 		if ( $archive_template ) {
 			return $archive_template;
 		}
