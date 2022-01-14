@@ -43,7 +43,7 @@ $wrapper_class           = wptravel_get_theme_wrapper_class();
 			$query       = new WP_Query( $args );
 			if ( $query->have_posts() ) {
 				?>
-				<div id="wptravel-archive-wrapper" class="wp-travel-itinerary-items wptravel-archive-wrapper  grid-view" >
+				<div class="wp-travel-itinerary-items wptravel-archive-wrapper  grid-view" >
 					<?php
 					while ( $query->have_posts() ) :
 						$query->the_post();

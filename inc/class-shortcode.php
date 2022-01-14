@@ -187,27 +187,37 @@ class Wp_Travel_Shortcodes {
 					break;
 			}
 		}
-
-		$query = new WP_Query( $args );
+		$col_per_row    = $atts['col'];
+		$layout_version = wptravel_layout_version();
+		$query          = new WP_Query( $args );
 		ob_start();
 		?>
 		<div class="wp-travel-itinerary-items">
-			<?php $col_per_row = $atts['col']; ?>
 			<?php if ( $query->have_posts() ) : ?>
-				<ul style="" class="wp-travel-itinerary-list itinerary-<?php echo esc_attr( $col_per_row ); ?>-per-row">
-				<?php
-				while ( $query->have_posts() ) :
-					$query->the_post();
-					?>
-					<?php
-					if ( 'grid' === $view_mode ) :
-						wptravel_get_template_part( 'shortcode/itinerary', 'item' );
-					else :
-						wptravel_get_template_part( 'shortcode/itinerary', 'item-list' );
-					endif;
-					?>
-				<?php endwhile; ?>
-				</ul>
+				<?php if ( 'v1' === $layout_version ) : ?>
+					<ul style="" class="wp-travel-itinerary-list itinerary-<?php echo esc_attr( $col_per_row ); ?>-per-row">
+						<?php
+						while ( $query->have_posts() ) :
+							$query->the_post();
+							?>
+							<?php
+							if ( 'grid' === $view_mode ) :
+								wptravel_get_template_part( 'shortcode/itinerary', 'item' );
+							else :
+								wptravel_get_template_part( 'shortcode/itinerary', 'item-list' );
+							endif;
+							?>
+						<?php endwhile; ?>
+					</ul>
+				<?php else : ?>
+					<div class="wp-travel-itinerary-items wptravel-archive-wrapper  <?php echo esc_attr( 'grid' === $view_mode ? 'grid-view' : 'list-view' ); ?> itinerary-<?php echo esc_attr( $col_per_row ); ?>-per-row" >
+						<?php
+						while ( $query->have_posts() ) :
+							$query->the_post();
+							wptravel_get_template_part( 'v2/content', 'archive-itineraries' );
+						endwhile; ?>
+					</div>
+				<?php endif; ?>
 			<?php else : ?>
 				<?php wptravel_get_template_part( 'shortcode/itinerary', 'item-none' ); ?>
 			<?php endif; ?>
