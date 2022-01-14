@@ -26,10 +26,10 @@ if ( post_password_required() ) {
 }
 global $wp_travel_itinerary;
 
-$enable_sale   = WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => $trip_id ) );
-$group_size    = wptravel_get_group_size( $trip_id );
-$start_date    = get_post_meta( $trip_id, 'wp_travel_start_date', true );
-$end_date      = get_post_meta( $trip_id, 'wp_travel_end_date', true );
+$enable_sale = WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => $trip_id ) );
+$group_size  = wptravel_get_group_size( $trip_id );
+$start_date  = get_post_meta( $trip_id, 'wp_travel_start_date', true );
+$end_date    = get_post_meta( $trip_id, 'wp_travel_end_date', true );
 
 $args                             = $args_regular = array( 'trip_id' => $trip_id ); // phpcs:ignore
 $args_regular['is_regular_price'] = true;
@@ -67,11 +67,6 @@ if ( $locations && is_array( $locations ) ) {
 						</a>
 					</h2>
 					<?php do_action( 'wp_travel_after_archive_title', $trip_id ); ?>
-					<div class="favourite">
-						<a href="javascript:void(0);" data-id="5812" data-event="add" title="Add to wishlists" class="wp-travel-add-to-wishlists">
-							<i class="fas fa-bookmark"></i>
-						</a>
-					</div>
 				</header>
 				<div class="trip-icons">
 					<?php wptravel_get_trip_duration( $trip_id ); ?>

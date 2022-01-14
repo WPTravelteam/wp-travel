@@ -661,22 +661,22 @@ jQuery(function ($) {
 
 // New Archive page list/grid view switch
 function gridView() {
-    var element = document.getElementById("wptravel-archive-wrapper");
-    element.classList.add("grid-view");
-  }
+	var element = document.getElementById("wptravel-archive-wrapper");
+	element.classList.add("grid-view");
+}
   
-  function listView() {
-    var element = document.getElementById("wptravel-archive-wrapper");
-    element.classList.remove("grid-view");
-  }
+function listView() {
+	var element = document.getElementById("wptravel-archive-wrapper");
+	element.classList.remove("grid-view");
+}
   
   
-  var container = document.getElementById("btnContainer");
-  var btns = container.getElementsByClassName("btn");
-  for (var i = 0; i < btns.length; i++) {
-    btns[i].addEventListener("click", function() {
-      var current = document.getElementsByClassName("active");
-      current[0].className = current[0].className.replace(" active", "");
-      this.className += " active";
-    });
-  }
+var container = document.getElementById("wp-travel-view-mode-lists");
+var btns = container.getElementsByClassName("wp-travel-view-mode");
+for (var i = 0; i < btns.length; i++) {
+btns[i].addEventListener("click", function() {
+	var current = document.getElementsByClassName("active-mode");
+	current[0].className = current[0].className.replace(" active-mode", "");
+	this.className += " active-mode";
+});
+}

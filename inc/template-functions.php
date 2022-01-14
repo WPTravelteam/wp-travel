@@ -1805,6 +1805,11 @@ function wptravel_archive_toolbar() {
 					<li class="wp-travel-view-mode <?php echo ( 'grid' === $view_mode ) ? 'active-mode' : ''; ?>" data-mode="grid" ><a href="<?php echo esc_url( add_query_arg( 'view_mode', 'grid', $current_url ) ); ?>"><i class="dashicons dashicons-grid-view"></i></a></li>
 					<li class="wp-travel-view-mode <?php echo ( 'list' === $view_mode ) ? 'active-mode' : ''; ?>" data-mode="list" ><a href="<?php echo esc_url( add_query_arg( 'view_mode', 'list', $current_url ) ); ?>"><i class="dashicons dashicons-list-view"></i></a></li>
 				</ul>
+			<?php else : ?>
+				<ul id="wp-travel-view-mode-lists"" class="wp-travel-view-mode-lists">
+					<li class="wp-travel-view-mode <?php echo ( 'grid' === $view_mode ) ? 'active-mode' : ''; ?>"><a href="#" onclick="gridView()"><i class="dashicons dashicons-grid-view"></i></a></li>
+					<li class="wp-travel-view-mode <?php echo ( 'list' === $view_mode ) ? 'active-mode' : ''; ?>"><a href="#" onclick="listView()"><i class="dashicons dashicons-list-view"></i></a></li>
+				</ul>
 			<?php endif; ?>
 		</div>
 	</div>
