@@ -674,25 +674,6 @@
 
 // Itinerary Page List and Grid View New Design SCSS
 
-#btnContainer {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.5em;
-	justify-content: center;
-	align-items: center;
-	margin-top: 50px;
-	width: 100%;
-	button {
-		padding: 5px 10px;
-		cursor: pointer;
-		// border: 1px solid $mainColor;
-		// color: $mainColor;
-		&.active {
-			// background: $mainColor;
-			color: $whiteColor;
-		}
-	}
-}
 .entry-content {
 	.wp-travel-archive-content {
 		width: 100%;
@@ -722,7 +703,7 @@ section.view-3 {
 	// 	max-width: 1195px;
 	//   }
 	// }
-	#wptravel-archive-wrapper {
+	.wptravel-archive-wrapper {
 		.view-box {
 			margin-bottom: 20px;
 			display: flex;
@@ -990,7 +971,7 @@ section.view-3 {
 								margin: 10px 0 -7px;
 							}
 							.discount {
-								background: $offerColor;
+								background: $saveColor;
 								padding: 5px 15px;
 								border-radius: 50px;
 								font-size: 13px;
@@ -999,12 +980,6 @@ section.view-3 {
 							}
 						}
 						.trip-rating {
-							h4 {
-								font-size: 0.83em;
-								color: #585858;
-								font-weight: 600;
-								margin: 0;
-							}
 							.wp-travel-average-review {
 								display: block;
 								margin: auto;
@@ -1148,14 +1123,7 @@ section.view-3 {
 							.trip-price {
 								margin-bottom: 0;
 								text-align: right;
-								.discount {
-									background: $offerColor;
-									padding: 5px 15px;
-									border-radius: 50px;
-									font-size: 13px;
-									color: $whiteColor;
-									font-weight: 500;
-								}
+								
 								.price-here {
 									font-size: 30px;
 									color: #484848;
