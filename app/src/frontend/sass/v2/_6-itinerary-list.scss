@@ -685,10 +685,10 @@
 	button {
 		padding: 5px 10px;
 		cursor: pointer;
-		border: 1px solid $mainColor;
-		color: $mainColor;
+		// border: 1px solid $mainColor;
+		// color: $mainColor;
 		&.active {
-			background: $mainColor;
+			// background: $mainColor;
 			color: $whiteColor;
 		}
 	}
@@ -784,7 +784,7 @@ section.view-3 {
 					bottom: 20px;
 					right: 20px;
 					i {
-						color: $bookmarkColor;
+						// color: $bookmarkColor;
 						font-size: 35px;
 					}
 				}
@@ -840,7 +840,7 @@ section.view-3 {
 							.heading-link {
 								font-size: 28px;
 								line-height: 34px;
-								color: $textColor;
+								// color: $textColor;
 								display: inline;
 								text-transform: capitalize;
 								@media (max-width: 991px) {
@@ -848,11 +848,11 @@ section.view-3 {
 									line-height: 26px;
 								}
 							}
-							&:hover {
-								.heading-link {
-									color: $mainColor;
-								}
-							}
+							// &:hover {
+							// 	.heading-link {
+							// 		// color: $mainColor;
+							// 	}
+							// }
 						}
 						.favourite {
 							display: contents;
@@ -877,7 +877,7 @@ section.view-3 {
 						}
 						i {
 							font-size: 16px;
-							color: $mainColor;
+							// color: $mainColor;
 						}
 						span {
 							font-weight: 600;
@@ -949,7 +949,7 @@ section.view-3 {
 					border-left: 1px solid #e1e1e1;
 					@media (max-width: 991px) {
 						width: 100%;
-						padding-top: 20px;
+						// padding-top: 20px;
 						display: flex;
 						flex-wrap: wrap;
 						align-items: center;
@@ -986,7 +986,7 @@ section.view-3 {
 								display: block;
 								font-size: 22px;
 								font-weight: 600;
-								color: $mainColor;
+								// color: $mainColor;
 								margin: 10px 0 -7px;
 							}
 							.discount {
@@ -999,29 +999,32 @@ section.view-3 {
 							}
 						}
 						.trip-rating {
-							position: relative;
-							&::after {
-								color: $mainColor;
-								content: "\f005\f005\f005\f005\f005";
-								font-family: "Font Awesome 5 Free";
-								font-weight: 900;
-							}
 							h4 {
 								font-size: 0.83em;
 								color: #585858;
 								font-weight: 600;
 								margin: 0;
 							}
+							.wp-travel-average-review {
+								display: block;
+								margin: auto;
+							}
+							.wp-travel-review-text {
+								margin-left: 0;
+							}
 						}
 					}
 
 					.explore-btn {
-						background: $mainColor;
+						// background: $mainColor;
 						padding: 12px 15px;
 						transition: all ease 0.3s;
 						border-radius: 3px;
+						@media (max-width: 575px) {
+							width: 100%;
+						}
 						span {
-							color: $whiteColor;
+							// color: $whiteColor;
 							font-weight: 700;
 							letter-spacing: 1px;
 						}
