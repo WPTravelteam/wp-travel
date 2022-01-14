@@ -64,6 +64,7 @@
 				<element value="wptravel"/>
 			</property>
 		</properties>
+		<exclude name="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound"/>
 	</rule>
 
 </ruleset>

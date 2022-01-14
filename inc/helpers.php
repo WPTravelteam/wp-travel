@@ -395,10 +395,15 @@ function wptravel_get_related_post( $post_id ) {
 	if ( ! $post_id ) {
 		return;
 	}
+	$layout_version = wptravel_layout_version();
 	/**
 	 * Load template for related trips.
 	 */
-	echo wptravel_get_template_html( 'content-related-posts.php', $post_id ); // @phpcs:ignore
+	if ( 'v1' === $layout_version ) {
+		echo wptravel_get_template_html( 'content-related-posts.php', $post_id ); // @phpcs:ignore
+	} else {
+		echo wptravel_get_template_html( 'v2/content-related-posts.php', $post_id ); // @phpcs:ignore
+	}
 
 }
 

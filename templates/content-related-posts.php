@@ -20,10 +20,10 @@ if ( 'yes' === $hide_related_itinerary ) {
 	$no_related_post_message = '<p class="wp-travel-no-detail-found-msg">' . esc_html__( 'Related trip not found.', 'wp-travel' ) . '</p>';
 	$wrapper_class           = wptravel_get_theme_wrapper_class();
 ?>
-	 <div class="wp-travel-related-posts wp-travel-container-wrap <?php echo esc_attr( $wrapper_class ); ?>">
-		 <h2><?php echo apply_filters( 'wp_travel_related_post_title', esc_html__( 'Related Trips', 'wp-travel' ) ); ?></h2>
+	<div class="wp-travel-related-posts wp-travel-container-wrap <?php echo esc_attr( $wrapper_class ); ?>">
+		<h2><?php echo apply_filters( 'wp_travel_related_post_title', esc_html__( 'Related Trips', 'wp-travel' ) ); ?></h2>
 		<div class="wp-travel-itinerary-items"> 
-			 <?php
+			<?php
 				if ( ! empty( $terms ) ) {
 					$term_ids    = wp_list_pluck( $terms, 'term_id' );
 					$col_per_row = apply_filters( 'wp_travel_related_itineraries_col_per_row', '3' );
@@ -46,11 +46,7 @@ if ( 'yes' === $hide_related_itinerary ) {
 							<?php
 							while ( $query->have_posts() ) :
 								$query->the_post();
-									if ( 'v1' === $layout_version ) {
-										wptravel_get_template_part( 'shortcode/itinerary', 'item' );
-									} else {
-										wptravel_get_template_part( 'v2/content', 'archive-itineraries' );
-									}
+									wptravel_get_template_part( 'shortcode/itinerary', 'item' );
 							endwhile; ?>
 						</ul>
 						<?php

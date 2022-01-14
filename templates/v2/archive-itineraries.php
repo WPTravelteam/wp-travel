@@ -14,69 +14,45 @@
  * @package     WP_Travel
  * @since       1.0.0
  */
-
+$template      = get_option( 'template' );
+$current_theme = wp_get_theme();
+$sanitized_get = WP_Travel::get_sanitize_request();
+$view_mode     = wptravel_get_archive_view_mode( $sanitized_get );
 get_header( 'itinerary' );
 
-$template = get_option( 'template' );
 
 if ( 'Divi' === $template ) {
 	?>
-		<div class="container clearfix">
+	<div class="container clearfix">
 	<?php
 }
 
-$current_theme = wp_get_theme();
 
 if ( 'twentyseventeen' === $current_theme->get( 'TextDomain' ) ) {
+	?> <div class="wrap"><?php
+}
+do_action( 'wp_travel_before_main_content' );
+?>
+<div id="wptravel-archive-wrapper" class="wptravel-archive-wrapper <?php echo esc_attr( 'grid' === $view_mode ? 'grid-view' : '' ); ?> ">
+	<?php
+	if ( have_posts() ) :
+		while ( have_posts() ) :
+			the_post();
+			wptravel_get_template_part( 'v2/content', 'archive-itineraries' );
+		endwhile; // end of the loop.
+	else :
+		wptravel_get_template_part( 'v2/content', 'archive-itineraries-none' );
+	endif;
 	?>
-		<div class="wrap">
+</div>
+<?php
+do_action( 'wp_travel_after_main_content' );
+do_action( 'wp_travel_archive_listing_sidebar' );
+
+if ( 'twentyseventeen' === $current_theme->get( 'TextDomain' ) || 'Divi' === $template ) {
+	?>
+	</div>
 	<?php
 }
 
-do_action( 'wp_travel_before_main_content' );
-
-$itinerary_layout_v2_enabled = wptravel_use_itinerary_v2_layout();
-$sanitized_get               = WP_Travel::get_sanitize_request();
-$view_mode                   = wptravel_get_archive_view_mode( $sanitized_get );
-?>
-	<!-- <div id="btnContainer">
-		<button class="btn active" onclick="listView()"><i class="fa fa-bars"></i> <?php esc_html_e( 'List', 'wp-travel' ); ?></button>
-		<button class="btn" onclick="gridView()"><i class="fa fa-th-large"></i> <?php esc_html_e( 'Grid', 'wp-travel' ); ?></button>
-	</div>
-	<br> -->
-	<section class="view-3">
-		<div class="main-container">
-			<div id="wptravel-archive-wrapper" class="wptravel-archive-wrapper" class="<?php echo esc_attr( 'grid' === $view_mode ? 'grid-view' : '' ); ?> ">
-				<?php
-
-				if ( have_posts() ) :
-
-					while ( have_posts() ) :
-						the_post();
-						wptravel_get_template_part( 'v2/content', 'archive-itineraries' );
-					endwhile; // end of the loop.
-				else :
-					wptravel_get_template_part( 'v2/content', 'archive-itineraries-none' );
-				endif;
-				?>
-			</div>
-		</div>
-	</section>
-	<?php
-
-	do_action( 'wp_travel_after_main_content' );
-	do_action( 'wp_travel_archive_listing_sidebar' );
-
-	if ( 'twentyseventeen' === $current_theme->get( 'TextDomain' ) ) {
-		?>
-			</div>
-		<?php
-	}
-
-	if ( 'Divi' === $template ) {
-		?>
-			</div>
-		<?php
-	}
-
-	get_footer( 'itinerary' );
+get_footer( 'itinerary' );
