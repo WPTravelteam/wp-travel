@@ -833,36 +833,12 @@
 
 
 // Itinerary Page List and Grid View New Design SCSS
-
 .entry-content {
 	.wp-travel-archive-content {
 		width: 100%;
 	}
 }
-section.view-3 {
-	width: 100%;
-	transition: all ease 1s;
-	// .main-container {
-	//   width: 100%;
-	//   margin: auto;
-	//   padding: 0 15px;
-
-	//   @media (min-width: 576px) {
-	// 	max-width: 540px;
-	//   }
-
-	//   @media (min-width: 768px) {
-	// 	max-width: 720px;
-	//   }
-
-	//   @media (min-width: 992px) {
-	// 	max-width: 960px;
-	//   }
-
-	//   @media (min-width: 1200px) {
-	// 	max-width: 1195px;
-	//   }
-	// }
+.wptravel-layout-v2 {
 	.wptravel-archive-wrapper {
 		.view-box {
 			margin-bottom: 20px;
@@ -1122,6 +1098,7 @@ section.view-3 {
 							del {
 								color: rgb(138, 138, 138);
 								font-size: 18px;
+								margin-right: 0;
 							}
 							.price-here {
 								display: block;
@@ -1220,7 +1197,8 @@ section.view-3 {
 					flex-direction: column;
 					margin: 10px 0;
 					padding: 10px 15px 0;
-					width: 100%;
+					// width: 100%;
+					width: auto;
 					.left-content {
 						width: 100%;
 						padding-right: 0;
@@ -1283,7 +1261,7 @@ section.view-3 {
 							.trip-price {
 								margin-bottom: 0;
 								text-align: right;
-								
+
 								.price-here {
 									font-size: 30px;
 									color: #484848;
