@@ -1570,6 +1570,8 @@ function wptravel_body_class( $classes, $class ) {
 			unset( $classes[ array_search( 'has-sidebar', $classes ) ] );
 		}
 	}
+	$layout_version = wptravel_layout_version();
+	$classes[]      = 'wptravel-layout-' . $layout_version;
 	// Give me my new, modified $classes.
 	return $classes;
 }

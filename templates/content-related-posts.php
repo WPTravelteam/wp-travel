@@ -7,7 +7,7 @@
 $post_id                = $args;
 $settings               = wptravel_get_settings();
 $hide_related_itinerary = ( isset( $settings['hide_related_itinerary'] ) && '' !== $settings['hide_related_itinerary'] ) ? $settings['hide_related_itinerary'] : 'no';
-
+$layout_version         = wptravel_layout_version();
 if ( 'yes' === $hide_related_itinerary ) {
 	return;
 }
@@ -42,15 +42,17 @@ if ( 'yes' === $hide_related_itinerary ) {
 					$query       = new WP_Query( $args );
 					if ( $query->have_posts() ) {
 						?>
-				
-				<ul class="wp-travel-itinerary-list">
-						<?php
-						while ( $query->have_posts() ) :
-							$query->the_post();
-							?>
-							<?php wptravel_get_template_part( 'shortcode/itinerary', 'item' ); ?>
-					<?php endwhile; ?>
-				</ul>
+						<ul class="wp-travel-itinerary-list">
+							<?php
+							while ( $query->have_posts() ) :
+								$query->the_post();
+									if ( 'v1' === $layout_version ) {
+										wptravel_get_template_part( 'shortcode/itinerary', 'item' );
+									} else {
+										wptravel_get_template_part( 'v2/content', 'archive-itineraries' );
+									}
+							endwhile; ?>
+						</ul>
 						<?php
 					} else {
 						wptravel_get_template_part( 'shortcode/itinerary', 'item-none' );
