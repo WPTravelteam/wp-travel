@@ -46,7 +46,7 @@ $view_mode                   = wptravel_get_archive_view_mode( $sanitized_get );
 	<br> -->
 	<section class="view-3">
 		<div class="main-container">
-			<div id="wptravel-archive-wrapper" class="<?php echo esc_attr( 'grid' === $view_mode ? 'grid-view' : '' ); ?> ">
+			<div id="wptravel-archive-wrapper" class="wptravel-archive-wrapper" class="<?php echo esc_attr( 'grid' === $view_mode ? 'grid-view' : '' ); ?> ">
 				<?php
 
 				if ( have_posts() ) :

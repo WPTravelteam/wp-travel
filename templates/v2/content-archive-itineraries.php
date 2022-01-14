@@ -106,7 +106,6 @@ if ( $locations && is_array( $locations ) ) {
 
 					</div>
 					<div class="trip-rating">
-						<h4>Rating</h4>
 						<?php if ( wptravel_tab_show_in_menu( 'reviews' ) ) : ?>
 							<div class="wp-travel-average-review">
 								<?php wptravel_trip_rating( $trip_id ); ?>
