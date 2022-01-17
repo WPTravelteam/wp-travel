@@ -729,7 +729,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			/**
 			 * Nonce Verification.
 			 */
-			if ( ! isset( $_REQUEST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_nonce'] ) ), 'wp_travel_nonce' ) ) {
+			if ( ! function_exists( 'wp_verify_nonce' ) || ! isset( $_REQUEST['_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_nonce'] ) ), 'wp_travel_nonce' ) ) {
 				if ( $return_bool ) {
 					return false;
 				}
