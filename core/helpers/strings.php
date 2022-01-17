@@ -78,6 +78,7 @@ class WpTravel_Helpers_Strings { // @phpcs:ignore
 			'search_placeholder'        => __( 'Ex: Trekking', 'wp-travel' ),
 			'select'                    => __( 'Select', 'wp-travel' ),
 			'save'                      => __( 'Save', 'wp-travel' ),
+			'off'                       => __( 'Off', 'wp-travel' ),
 			'save_settings'             => __( 'Save Settings', 'wp-travel' ),
 			'show'                      => __( 'Show', 'wp-travel' ),
 			'system_information'        => __( 'System Information', 'wp-travel' ),

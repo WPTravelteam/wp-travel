@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 5.0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-05 06:07:40+00:00\n"
+"POT-Creation-Date: 2022-01-11 06:26:43+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1723,8 +1723,8 @@ msgid "Featured"
 msgstr ""
 
 #: inc/admin/admin-helper.php:554 inc/admin/class-admin-booking.php:70
-#: templates/account/tab-content/bookings.php:74
-#: templates/account/tab-content/bookings.php:148
+#: templates/account/tab-content/bookings.php:75
+#: templates/account/tab-content/bookings.php:149
 msgid "Booking Status"
 msgstr ""
 
@@ -1736,8 +1736,8 @@ msgstr ""
 
 #: inc/admin/admin-helper.php:585 inc/email-template-functions.php:1280
 #: inc/email-template-functions.php:1486 inc/helpers.php:2206
-#: templates/account/tab-content/bookings.php:75
-#: templates/account/tab-content/bookings.php:153
+#: templates/account/tab-content/bookings.php:76
+#: templates/account/tab-content/bookings.php:154
 msgid "Payment Status"
 msgstr ""
 
@@ -1869,7 +1869,7 @@ msgid "Traveler %d"
 msgstr ""
 
 #: inc/admin/class-admin-booking.php:443
-#: templates/account/tab-content/bookings.php:51
+#: templates/account/tab-content/bookings.php:52
 msgid "Your Booking Details"
 msgstr ""
 
@@ -1955,8 +1955,8 @@ msgid "Status"
 msgstr ""
 
 #: inc/admin/class-admin-metaboxes.php:272
-#: templates/account/tab-content/bookings.php:76
-#: templates/account/tab-content/bookings.php:162
+#: templates/account/tab-content/bookings.php:77
+#: templates/account/tab-content/bookings.php:163
 msgid "Total Price"
 msgstr ""
 
@@ -3436,8 +3436,8 @@ msgstr ""
 msgid "Your order"
 msgstr ""
 
-#: inc/cart/cart-mini.php:431 templates/account/tab-content/bookings.php:73
-#: templates/account/tab-content/bookings.php:143
+#: inc/cart/cart-mini.php:431 templates/account/tab-content/bookings.php:74
+#: templates/account/tab-content/bookings.php:144
 msgid "Trip"
 msgstr ""
 
@@ -5149,7 +5149,7 @@ msgstr ""
 #: inc/email-template-functions.php:191 inc/email-template-functions.php:237
 #: inc/email-template-functions.php:380 inc/email-template-functions.php:686
 #: inc/email-template-functions.php:1195 inc/email-template-functions.php:1478
-#: templates/account/tab-content/bookings.php:72
+#: templates/account/tab-content/bookings.php:73
 msgid "Booking ID"
 msgstr ""
 
@@ -9113,8 +9113,8 @@ msgstr ""
 msgid "Partially Paid"
 msgstr ""
 
-#: inc/helpers.php:789 templates/account/tab-content/bookings.php:77
-#: templates/account/tab-content/bookings.php:171
+#: inc/helpers.php:789 templates/account/tab-content/bookings.php:78
+#: templates/account/tab-content/bookings.php:172
 msgid "Paid"
 msgstr ""
 
@@ -9753,29 +9753,29 @@ msgstr ""
 msgid "My Account"
 msgstr ""
 
-#: templates/account/tab-content/bookings.php:51
+#: templates/account/tab-content/bookings.php:52
 msgid "(Back)"
 msgstr ""
 
-#: templates/account/tab-content/bookings.php:67
+#: templates/account/tab-content/bookings.php:68
 msgid "Your Bookings"
 msgstr ""
 
-#: templates/account/tab-content/bookings.php:78
-#: templates/account/tab-content/bookings.php:180
-#: templates/account/tab-content/bookings.php:186
+#: templates/account/tab-content/bookings.php:79
+#: templates/account/tab-content/bookings.php:181
+#: templates/account/tab-content/bookings.php:187
 msgid "Detail"
 msgstr ""
 
-#: templates/account/tab-content/bookings.php:202
+#: templates/account/tab-content/bookings.php:203
 msgid "Book more ?"
 msgstr ""
 
-#: templates/account/tab-content/bookings.php:208
+#: templates/account/tab-content/bookings.php:209
 msgid "You have not booked any trips"
 msgstr ""
 
-#: templates/account/tab-content/bookings.php:209
+#: templates/account/tab-content/bookings.php:210
 msgid "Book one now ?"
 msgstr ""
 

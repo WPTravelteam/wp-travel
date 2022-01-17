@@ -107,23 +107,32 @@ $alto: #ddd;
 		&.wp-travel-widget-area {
 			.wp-travel-default-article {
 				padding: 15px;
+				display: flex;
+				flex-wrap: wrap;
+				flex-direction: column;
 
 				.wp-travel-article-image-wrap {
-					width: 28%;
+					// width: 28%;
+					width: 100%;
 				}
 
 				.wp-travel-entry-content-wrapper {
-					width: 69%;
+					// width: 69%;
+					width: 100%;
 
 					.description-left {
-						width: 70%;
+						// width: 70%;
+						width: 100%;
 					}
 
 					.description-right {
-						width: 30%;
+						width: 100%;
+						// width: 30%;
 						float: left;
-						text-align: center;
-						border-left: 1px solid #eee;
+						// text-align: center;
+						text-align: left;
+						// border-left: 1px solid #eee;
+						border-left: 0;
 					}
 				}
 			}
@@ -583,6 +592,7 @@ ul.availabily-list {
 			// width: auto;
 			align-items: center;
 			width: 33.3333333%;
+			flex-wrap: wrap;
 			// padding: 0 15px 0 0;
 
 			@include sidr-view {

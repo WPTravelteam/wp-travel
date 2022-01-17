@@ -90,12 +90,12 @@ input[type="submit"] {
 
 // Search form widget.
 .wp-travel-search {
-	form {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-		grid-gap: 1rem;
-		align-items: end;
-	}
+	// form {
+	// 	// display: grid;
+	// 	// grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	// 	// grid-gap: 1rem;
+	// 	// align-items: end;
+	// }
 	p {
 		margin: 0;
 		padding: 0;

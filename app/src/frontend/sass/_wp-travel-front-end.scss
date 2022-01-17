@@ -1,10 +1,5 @@
-
-
 // Define variables.
 $alto: #ddd;
-
-
-
 
 // Css for the tabs.
 #poststuff {
@@ -16,7 +11,7 @@ $alto: #ddd;
 }
 
 .map-wrap {
-	#search-input{
+	#search-input {
 		left: 243px;
 		padding: 10px 11px 10px 13px;
 		height: 40px;
@@ -29,8 +24,6 @@ $alto: #ddd;
 		min-height: 400px;
 	}
 }
-
-
 
 // Taxonomy Wrap
 .itineraries-tax-wrap {
@@ -114,23 +107,32 @@ $alto: #ddd;
 		&.wp-travel-widget-area {
 			.wp-travel-default-article {
 				padding: 15px;
+				display: flex;
+				flex-wrap: wrap;
+				flex-direction: column;
 
 				.wp-travel-article-image-wrap {
-					width: 28%;
+					// width: 28%;
+					width: 100%;
 				}
 
 				.wp-travel-entry-content-wrapper {
-					width: 69%;
+					// width: 69%;
+					width: 100%;
 
 					.description-left {
-						width: 70%;
+						// width: 70%;
+						width: 100%;
 					}
 
 					.description-right {
-						width: 30%;
+						width: 100%;
+						// width: 30%;
 						float: left;
-						text-align: center;
-						border-left: 1px solid #eee;
+						// text-align: center;
+						text-align: left;
+						// border-left: 1px solid #eee;
+						border-left: 0;
 					}
 				}
 			}
@@ -988,7 +990,6 @@ ul.availabily-list {
 	}
 }
 
-
 .price-summary-wrapper {
 	h4 {
 		color: #f56961;
@@ -1708,9 +1709,6 @@ li {
 	}
 }
 
-
-
-
 // Cart Page having travel-tour-extras
 .ws-theme-cart-page {
 	.responsive-cart {
@@ -2375,8 +2373,6 @@ li {
 	}
 }
 
-
-
 @media screen and (max-width: 576px) {
 	.wp_travel_tour_extras
 		.wp_travel_tour_extras_option_single_content
@@ -2396,8 +2392,6 @@ li {
 		margin: -20px !important;
 	}
 }
-
-
 
 .wp-travel-popup {
 	width: 600px;
@@ -2486,7 +2480,6 @@ li {
 
 // Popup ends.
 
-
 .category .label .picker-info {
 	max-width: 50%;
 	float: left;
@@ -2530,8 +2523,6 @@ li {
 	}
 }
 
-
-
 // css for pax selector section in frontend
 
 .available-seats span {
@@ -2539,19 +2530,10 @@ li {
 	padding-left: 5px;
 }
 
-
-
-
 .category .person-count ins {
 	background: none;
 }
 
 $primaryColor: #3399ff;
 
-
-
 // Cart
-
-
-
-

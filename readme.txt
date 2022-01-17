@@ -249,13 +249,13 @@ Before updating plugin please check ["our latest release notes"](#developers).
 Release Date:
 
 Fixes:
-* Group size value not update if we set it and removed all pricings.
+* Group size value not updated if we set it and removed all prices.
 * Overview content not being displayed for v3 trips.
-* Fixed Gallery images not being saved on new trip.
-* Fixed Booking tab switch to Dashboard tab when click booking detail page.
+* Fixed Gallery images not being saved on a new trip.
+* Fixed Booking tab switch to Dashboard tab when clicking booking detail page.
 * Fixed Blocks Plugin not working in windows.
-* Fixed function `wptravel_account_tab_content` alereay exists issue.
-* Fixed Custom fields added from field editor value mismatch. If we add Select, Radio and checkbox as input from field ediror the value of these input is display as index.
+* Fixed function `wptravel_account_tab_content` already exists issue.
+* Fixed Custom fields added from field editor value mismatch. If we add Select, Radio, and checkbox as input from the field editor the value of these inputs is displayed as an index.
 
 = 5.0.7 =
 Release Date: 27th December, 2021

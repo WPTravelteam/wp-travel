@@ -261,7 +261,9 @@
 		width: 100%;
 		&.wp-travel-radio-group {
 			display: flex;
-			justify-content: start;
+			// justify-content: start;
+			flex-wrap: wrap;
+			justify-content: flex-end;
 			label {
 				width: 30%;
 				// @media (max-width: 1199px) {
@@ -348,7 +350,8 @@
 				&:first-of-type {
 					display: inline-block;
 					margin-bottom: 10px;
-					width: 20%;
+					// width: 20%;
+					width: 30%;
 					@media (max-width: 650px) {
 						width: 100% !important;
 					}
@@ -1043,4 +1046,13 @@
 }
 .partial-payment-info tr.trip-total th:first-child {
 	border-right: 10px solid #ececec;
+}
+
+// Thankyou page table border
+#newBookingDetails {
+	tbody {
+		td {
+			border: 3px double #b3b3b3;
+		}
+	}
 }

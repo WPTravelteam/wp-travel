@@ -395,10 +395,15 @@ function wptravel_get_related_post( $post_id ) {
 	if ( ! $post_id ) {
 		return;
 	}
+	$layout_version = wptravel_layout_version();
 	/**
 	 * Load template for related trips.
 	 */
-	echo wptravel_get_template_html( 'content-related-posts.php', $post_id ); // @phpcs:ignore
+	if ( 'v1' === $layout_version ) {
+		echo wptravel_get_template_html( 'content-related-posts.php', $post_id ); // @phpcs:ignore
+	} else {
+		echo wptravel_get_template_html( 'v2/content-related-posts.php', $post_id ); // @phpcs:ignore
+	}
 
 }
 
@@ -739,7 +744,7 @@ function wptravel_get_trip_duration( $post_id ) {
 	if ( $fixed_departure ) :
 		?>
 		<div class="wp-travel-trip-time trip-duration">
-			<i class="wt-icon-regular wt-icon-clock"></i>
+			<i class="far fa-calendar-alt"></i>
 			<span class="wp-travel-trip-duration">
 				<?php echo wptravel_get_fixed_departure_date( $post_id ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped ?>
 			</span>
@@ -752,7 +757,7 @@ function wptravel_get_trip_duration( $post_id ) {
 		$trip_duration = ( $trip_duration ) ? $trip_duration : 0;
 		?>
 		<div class="wp-travel-trip-time trip-duration">
-			<i class="wt-icon-regular wt-icon-clock"></i>
+			<i class="far fa-clock"></i>
 			<span class="wp-travel-trip-duration">
 				<?php if ( (int) $trip_duration > 0 ) : ?>
 					<?php echo esc_html( $trip_duration . __( ' Days', 'wp-travel' ) ); ?>
