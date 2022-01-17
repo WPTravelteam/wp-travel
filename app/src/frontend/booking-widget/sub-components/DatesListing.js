@@ -162,7 +162,7 @@ const RecurringDates = ({ data, isTourDate, getPricingsByDate, onFixedDepartureP
                  
                     <tr key={dateIndex} className={
                         _date.isSame( _selectedDateTime ) ? 'selected': '', 
-                        componentData.isLoading && componentData.selectedDateIds.includes(data.id) && componentData.selectedPricingId == componentData.pricing.id && _date.isSame( _selectedDateTime ) && 'wptravel-loading'
+                        componentData.isLoading && componentData.selectedDateIds.includes(data.id) && componentData.selectedPricingId == componentData.pricing.id && _date.isSame( _selectedDateTime ) ? 'wptravel-loading' :''
                         } >
 
                         <td data-label={__i18n.bookings.pricings_list_label}>
@@ -360,7 +360,7 @@ const DatesListing = ({ dates, isTourDate, getPricingsByDate, allData, onFixedDe
                                                     <>
                                                     <tr key={index} className={
                                                         _start_date.isSame( _selectedDateTime ) ? 'selected': '',
-                                                        componentData.isLoading && componentData.selectedDateIds.includes(date.id) && 'wptravel-loading'
+                                                        componentData.isLoading && componentData.selectedDateIds.includes(date.id) ? 'wptravel-loading' : ''
                                                         }>
                                                         <td data-label={__i18n.bookings.pricings_list_label}>
                                                             {componentData.isLoading && componentData.selectedDateIds.includes(date.id) && <Loader /> }
