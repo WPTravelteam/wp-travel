@@ -1675,9 +1675,8 @@ $defaultColor: #3399ff;
 				// margin-bottom: 1em;
 				// font-weight: bold;
 				&.active {
-					border-color: $defaultColor;
-					color: $defaultColor;
-					background-color: rgba($defaultColor, 0.2);
+					// border-color: $defaultColor;
+					background-color: rgb(122, 122, 122);
 				}
 			}
 		}
@@ -1767,6 +1766,7 @@ $defaultColor: #3399ff;
 						}
 						tbody {
 							tr {
+								border: 1px solid #eee;
 								&:last-child {
 									td {
 										border-bottom: 0;
@@ -1776,7 +1776,8 @@ $defaultColor: #3399ff;
 						}
 						th,
 						td {
-							border-bottom: 1px solid #eee;
+							// border-bottom: 1px solid #eee;
+							border: 1px solid #eee;
 							padding: 0.25em 0.5em;
 							font-size: 14px;
 							text-align: center;

@@ -1047,3 +1047,12 @@
 .partial-payment-info tr.trip-total th:first-child {
 	border-right: 10px solid #ececec;
 }
+
+// Thankyou page table border
+#newBookingDetails {
+	tbody {
+		td {
+			border: 3px double #b3b3b3;
+		}
+	}
+}

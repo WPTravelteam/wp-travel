@@ -906,7 +906,7 @@
 					border-left: 1px solid #e1e1e1;
 					@media (max-width: 991px) {
 						width: 100%;
-						// padding-top: 20px;
+						padding-top: 20px;
 						display: flex;
 						flex-wrap: wrap;
 						align-items: center;
@@ -1090,6 +1090,9 @@
 						justify-content: space-between;
 						flex-direction: column;
 						border-left: none;
+						@media (max-width: 991px) {
+							padding-top: 0;
+						}
 						.footer-wrapper {
 							margin-bottom: 1em;
 							display: flex;
