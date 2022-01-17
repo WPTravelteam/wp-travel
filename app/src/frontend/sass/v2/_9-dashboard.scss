@@ -1354,3 +1354,18 @@
 .dashboard-tab .partial-payment-info tr.payment-row.ongoing-row i {
 	font-size: 12px;
 }
+
+// Booking Detail popup
+.mfp-container {
+	.mfp-content {
+		width: auto;
+		background: #fff;
+		#wp-travel-bank-deposit-content, #wp-travel-bank-details-content {
+			padding: 20px;
+			.mfp-close.close-button {
+				top: 8px;
+				right: 8px;
+			}
+		}
+	}
+}

@@ -169,7 +169,6 @@
 	}
 }
 
-
 .wp-travel-advanced-gallery {
 	li {
 		&.featured-image {
@@ -187,8 +186,7 @@
 						width: 100%;
 						height: 100%;
 						background-color: #000;
-						opacity: .3;
-						
+						opacity: 0.3;
 					}
 				}
 			}
@@ -196,3 +194,11 @@
 	}
 }
 
+// Adding Video in gallery section
+.wptag__external-link-form {
+	gap: 1.5em;
+}
+
+.wptag__embed-preview {
+	flex: 1;
+}

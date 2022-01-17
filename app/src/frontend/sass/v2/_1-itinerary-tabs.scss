@@ -98,6 +98,25 @@
 			@media (max-width: 768px) {
 				margin-top: -15px;
 			}
+
+			.wp-travel-advanced-gallery-items-list {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+				column-gap: .5em;
+				.item {
+					width: 100%;
+					.wptag__thumbnail {
+						img {
+							@media only screen and (min-width: 651px) and (max-width: 768px) {
+								height: 200px !important;
+							}
+							@media (max-width: 650px) {
+								height: auto !important;
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 

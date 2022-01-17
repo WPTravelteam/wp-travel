@@ -277,8 +277,10 @@ i.fa-times-circle {
 				.gallery-item {
 					.wptravel-swap-list {
 						bottom: unset;
-						top: 22px;
-						left: 40px;
+						// top: 22px;
+						// left: 40px;
+						top: 0;
+						left: 0;
 						// top: unset;
 						right: unset;
 						display: block !important;
