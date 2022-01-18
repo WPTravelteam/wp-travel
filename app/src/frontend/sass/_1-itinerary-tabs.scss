@@ -105,6 +105,19 @@
 				display: grid;
 				grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 				column-gap: 0.5em;
+				&.wp-travel-advanced-gallery-items-list-masonry {
+					.item {
+						width: auto;
+					}
+				}
+				&.wp-travel-advanced-gallery-items-list-slider {
+					display: block;
+					// .slick-arrow {
+					// 	&::before {
+					// 		color: #000;
+					// 	}
+					// }
+				}
 				.item {
 					width: 100%;
 					.wptag__thumbnail {

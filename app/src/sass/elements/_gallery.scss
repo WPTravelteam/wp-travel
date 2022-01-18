@@ -9,10 +9,9 @@
 		margin: 0 !important;
 		// padding: 0 !important;
 		padding: 0 25px !important;
-		display: flex;
-		flex-wrap: wrap;
-		// justify-content: space-between;
-		align-items: center;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+		column-gap: 1.5em;
 		@media (min-width: 993px) and (max-width: 1071px) {
 			padding: 0 45px !important;
 		}
@@ -24,7 +23,8 @@
 			list-style: none;
 			float: left;
 			transition: width 1s, height 4s;
-			width: 25%;
+			// width: 25%;
+			width: 100%;
 			// margin-bottom: 20px;
 			// width: 33.33333%;
 			// width: calc(33.33% - 15px);
@@ -33,7 +33,7 @@
 			// padding-left: 15px;
 			// padding-right: 15px;
 			@media (max-width: 992px) {
-				padding: 0 25px;
+				padding: 0;
 			}
 
 			&:nth-of-type(3n):after {
@@ -46,11 +46,11 @@
 			}
 
 			@include sidr-view {
-				width: 50%;
+				// width: 50%;
 			}
 
 			@include mob {
-				width: 50%;
+				// width: 50%;
 			}
 
 			@include sm {
@@ -64,11 +64,10 @@
 
 		img {
 			// width: 100%;
-			display: block;
+			// display: block;
 			margin: 0;
 			width: 100%;
-			height: 200px;
-			object-fit: contain;
+			object-fit: cover;
 			@media (max-width: 992px) {
 				height: auto;
 				max-width: 100%;
