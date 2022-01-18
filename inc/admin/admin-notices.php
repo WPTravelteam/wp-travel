@@ -189,8 +189,8 @@ function wptravel_pricing_table_created_notice() {
 function wptravel_remove_v3_trips_notice() {
 	$settings     = wptravel_get_settings();
 	$user_since   = get_option( 'wp_travel_user_since', '3.0.0' );
-	$switch_to_v4 = $settings['wp_travel_switch_to_react'];
-	if ( version_compare( $user_since, '4.0.0', '<' ) && 'yes' !== $switch_to_v4 ) {
+	$switch_to_v4 = wptravel_is_react_version_enabled();
+	if ( version_compare( $user_since, '4.0.0', '<' ) && ! $switch_to_v4 ) {
 		?>
 		<div class="wp-travel-notification notification-warning notice notice-info is-dismissible"> 
 			<div class="notification-content">
@@ -205,10 +205,9 @@ function wptravel_remove_v3_trips_notice() {
 add_action( 'admin_notices', 'wptravel_remove_v3_trips_notice', 100 );
 
 function wptravel_v3_notice_display( $show ) {
-	$settings     = wptravel_get_settings();
 	$user_since   = get_option( 'wp_travel_user_since', '3.0.0' );
-	$switch_to_v4 = $settings['wp_travel_switch_to_react'];
-	if ( version_compare( $user_since, '4.0.0', '<' ) && 'yes' !== $switch_to_v4 ) {
+	$switch_to_v4 = wptravel_is_react_version_enabled();
+	if ( version_compare( $user_since, '4.0.0', '<' ) && ! $switch_to_v4 ) {
 		$show = true;
 	}
 	return $show;

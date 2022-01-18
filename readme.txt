@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 5.4.1
 Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 5.0.8
+Stable tag: 4.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -245,8 +245,11 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
-= 5.0.8 =
+= 5.1.0 =
 Release Date:
+
+Enhancement:
+* New layout implemented for archive page.
 
 Fixes:
 * Group size value not updated if we set it and removed all prices.
@@ -256,6 +259,12 @@ Fixes:
 * Fixed Blocks Plugin not working in windows.
 * Fixed function `wptravel_account_tab_content` already exists issue.
 * Fixed Custom fields added from field editor value mismatch. If we add Select, Radio, and checkbox as input from the field editor the value of these inputs is displayed as an index.
+
+Layout Fixes:
+* Issue in user dashboard during bank deposit payment popup fix.
+* Text invisible while viewing bank details in user dashboard fix.
+* Gap between search button and dropdown in WP Travel search widget fix.
+* Widget area list and grid view fixed in responsive.
 
 = 5.0.7 =
 Release Date: 27th December, 2021
@@ -428,5 +437,5 @@ For the changelog of earlier versions, please refer to [the changelog on wptrave
 
 == Upgrade Notice ==
 
-= 5.0 =
-There is a new version of WP Travel available which is a major release and has come with support of the most requested features. Check the [release note](https://wptravel.io/wp-travel-plugin-version-5-0-0-major-release-note/) for more detail.
+= 5.1 =
+There is a new version of WP Travel available which is a major release and has come with support of the most requested features. Check the [release note](https://wptravel.io/wp-travel-plugin-version-5-1-0-major-release-note/) for more detail.

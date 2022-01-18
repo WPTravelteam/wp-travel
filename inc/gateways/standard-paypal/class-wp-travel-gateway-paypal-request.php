@@ -226,7 +226,7 @@ class WP_Travel_Gateway_Paypal_Request {
 				/**
 				 * @since 4.0.0
 				 */
-				if ( isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_travel_switch_to_react'] ) {
+				if ( wptravel_is_react_version_enabled() ) {
 					$partial        = 'partial' === $payment_mode;
 					$trip_price     = wptravel_get_cart_item_price_with_extras( $cart_id, $trip_id, $partial );
 					$payment_amount = wptravel_get_formated_price( $trip_price );

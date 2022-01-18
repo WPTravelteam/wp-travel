@@ -43,9 +43,7 @@ class WPTravel_Extras_Frontend {
 
 		$trip_extras = array();
 
-		// $wp_travel_migrated_400 = 'yes' === get_option( 'wp_travel_migrate_400' );
-		$settings_fields = wptravel_get_settings();
-		$switch_to_react = $settings_fields['wp_travel_switch_to_react'];
+		$switch_to_react = wptravel_is_react_version_enabled();
 
 		if ( empty( $trip_id ) ) {
 			return false;
@@ -53,7 +51,7 @@ class WPTravel_Extras_Frontend {
 		$pricing_option_type = wptravel_get_pricing_option_type( $trip_id );
 
 		if ( $price_key && 'multiple-price' === $pricing_option_type ) {
-			if ( 'yes' != $switch_to_react ) {
+			if ( ! $switch_to_react ) {
 				$pricing_options = wptravel_get_pricing_variation( $trip_id, $price_key );
 				$pricing_option  = ( is_array( $pricing_options ) && ! empty( $pricing_options ) ) ? reset( $pricing_options ) : false;
 
@@ -92,10 +90,9 @@ class WPTravel_Extras_Frontend {
 		$trip_extras = array();
 
 		// $wp_travel_migrated_400 = 'yes' === get_option( 'wp_travel_migrate_400', 'no' );
-		$settings_fields = wptravel_get_settings();
-		$switch_to_react = $settings_fields['wp_travel_switch_to_react'];
+		$switch_to_react = wptravel_is_react_version_enabled();
 
-		if ( 'yes' == $switch_to_react ) {
+		if ( $switch_to_react ) {
 			$pricing_id               = $price_key; // the $price_key param is $pricing_id in the case.
 			$trip_pricings_with_dates = wptravel_get_trip_pricings_with_dates( $trip_id );
 			$trip_extras              = array(); // $trip_pricings_with_dates[ $pricing_id ]['trip_extras'];

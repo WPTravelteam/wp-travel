@@ -299,12 +299,10 @@ class WpTravel_Helpers_Pricings {
 		if ( 'single-price' === wptravel_get_pricing_option_type( $trip_id ) ) { // For legacy single pricing support @since 3.0.0.
 			$price = self::get_price_legacy( $args );
 		} else {
-			$settings     = wptravel_get_settings();
-			$switch_to_v4 = $settings['wp_travel_switch_to_react'];
-			if ( 'yes' !== $switch_to_v4 ) : // Follow the tradtion to get price.
+			$price        = self::get_price_v4( $args ); // New way to grab price @since 4.0.0.
+			$switch_to_v4 = wptravel_is_react_version_enabled();
+			if ( ! $switch_to_v4 ) : // Follow the tradtion to get price.
 				$price = self::get_price_legacy( $args );
-			else : // New way to grab price @since 4.0.0.
-				$price = self::get_price_v4( $args );
 			endif;
 		}
 

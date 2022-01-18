@@ -79,7 +79,9 @@ class WpTravel_Admin_Plugin_Screen_Updates {
 					}
 					$upgrade_notice .= '<span>';
 				}
-				break;
+				if ( $upgrade_notice ) {
+					break;
+				}
 			}
 		}
 		return $upgrade_notice;
