@@ -307,6 +307,17 @@ input[type="submit"] {
 			}
 		}
 	}
+
+	// Widget list and grid view in responsive view
+	.wp-travel-itinerary-items {
+		.wp-travel-itinerary-list {
+			@media (min-width: 651px) and (max-width: 1199px) {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				column-gap: 1.5em;
+			}
+		}
+	}
 }
 // Wp Travel Filter Search Widget
 //jquery ui range slider styling
