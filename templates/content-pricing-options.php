@@ -38,7 +38,7 @@ $enable_multiple_fixed_departue = get_post_meta( $trip_id, 'wp_travel_enable_mul
 $pricing_option_type = wptravel_get_pricing_option_type( $trip_id );
 
 $wrapper_id = isset( $tab_key ) ? $tab_key . '-booking-form' : 'booking-form'; // temp fixes.
-if ( 'yes' === $settings['wp_travel_switch_to_react'] ) {
+if ( wptravel_is_react_version_enabled() ) {
 	$wrapper_id = isset( $tab_key ) ? $tab_key : 'booking';
 }
 $settings_listing = $settings['trip_date_listing'];

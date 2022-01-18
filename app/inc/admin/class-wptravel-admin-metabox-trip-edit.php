@@ -25,11 +25,8 @@ class WpTravel_Admin_Metabox_Trip_Edit {
 	 * @return void
 	 */
 	public static function register_meta_box() {
-		$settings        = wptravel_get_settings();
-		$switch_to_react = $settings['wp_travel_switch_to_react'];
-		// add_meta_box( 'wptravel-overview', esc_html__( 'Overview', 'wp-travel' ), array( __CLASS__, 'overview_meta_box_callback' ), WP_TRAVEL_POST_TYPE, 'advanced', 'high' );
-
-		if ( 'yes' === $switch_to_react ) {
+		$switch_to_react = wptravel_is_react_version_enabled();
+		if ( $switch_to_react ) {
 			add_meta_box( 'wp-travel-trip-options', esc_html__( 'Trip Options', 'wp-travel' ), array( __CLASS__, 'meta_box_callback' ), WP_TRAVEL_POST_TYPE, 'advanced', 'high' );
 		}
 	}

@@ -436,10 +436,8 @@ function wptravel_get_cart_attrs( $args, $pax = 0, $price_key = '', $pricing_id 
 			}
 		}
 	} else {
-		$settings_fields = wptravel_get_settings();
-		$switch_to_react = $settings_fields['wp_travel_switch_to_react'];
-
-		if ( 'yes' === $switch_to_react && $pricing_id ) {
+		$switch_to_react = wptravel_is_react_version_enabled();
+		if ( $switch_to_react && $pricing_id ) {
 			$pricings_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id );
 			if ( ! is_wp_error( $pricings_data ) && 'WP_TRAVEL_TRIP_PRICINGS' === $pricings_data['code'] ) {
 				$pricings_data = $pricings_data['pricings'];
@@ -667,8 +665,7 @@ function wptravel_get_pricing_option_type( $post_id = null ) {
 		global $post;
 		$post_id = isset( $post->ID ) ? $post->ID : 0;
 	}
-	$settings        = wptravel_get_settings();
-	$switch_to_react = $settings['wp_travel_switch_to_react'];
+	$switch_to_react = wptravel_is_react_version_enabled();
 
 	// need to remove in future. [replaced this with 'wp_travel_pricing_option_type' meta]. @since 1.7.6
 	$enable_pricing_options = get_post_meta( $post_id, 'wp_travel_enable_pricing_options', true );
@@ -678,7 +675,7 @@ function wptravel_get_pricing_option_type( $post_id = null ) {
 		$pricing_option_type = isset( $enable_pricing_options ) && 'yes' === $enable_pricing_options ? 'multiple-price' : 'single-price';
 	}
 
-	if ( 'yes' == $switch_to_react && 'single-price' == $pricing_option_type ) {
+	if ( $switch_to_react && 'single-price' === $pricing_option_type ) {
 		$pricing_option_type = 'multiple-price';
 	}
 	return $pricing_option_type;

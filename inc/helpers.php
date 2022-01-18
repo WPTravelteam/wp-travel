@@ -94,7 +94,7 @@ function wptravel_settings_default_fields() {
 		'hide_related_itinerary'                  => 'no',
 		'enable_expired_trip_option'              => 'no',
 		'expired_trip_set_to'                     => 'expired',
-		'wp_travel_switch_to_react'               => 'no',
+		'wp_travel_switch_to_react'               => 'yes',
 		'enable_multiple_travellers'              => 'no',
 		'enable_multiple_category_on_pricing'     => 'yes', // This settings isn't visible for new user. So, it is always on for new settings. it means only new category layout will show in the admin and frontend.
 		'trip_pricing_options_layout'             => 'by-pricing-option',
@@ -157,9 +157,9 @@ function wptravel_settings_default_fields() {
 	);
 
 	$user_since = get_option( 'wp_travel_user_since' );
-	if ( version_compare( $user_since, '4.0.0', '>=' ) ) {
-		$settings_fields['wp_travel_switch_to_react'] = 'yes';
-	}
+	// if ( version_compare( $user_since, '4.0.0', '>=' ) ) {
+	// 	$settings_fields['wp_travel_switch_to_react'] = 'yes';
+	// }
 	if ( version_compare( $user_since, '4.6.1', '>=' ) ) {
 		$settings_fields['trip_date_listing'] = 'dates';
 	}
@@ -1773,13 +1773,16 @@ function wptravel_is_react_version_enabled() {
 	 * Because this function is used in pre_get_post hook which will conflict with default settings value of `global_tab_settings`.
 	 * which is used via filter it in downloads via another filter in function wptravel_get_default_trip_tabs (callback function of `global_tab_settings` settings key ).
 	 */
-	$default    = array( 'wp_travel_switch_to_react' => 'no' );
+	// $default    = array( 'wp_travel_switch_to_react' => 'no' );
 	$user_since = get_option( 'wp_travel_user_since' );
-	if ( version_compare( $user_since, '4.0.0', '>=' ) ) {
-		$default['wp_travel_switch_to_react'] = 'yes';
-	}
-	$settings = get_option( 'wp_travel_settings', $default );
-	return isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_travel_switch_to_react'];
+	// if ( version_compare( $user_since, '4.0.0', '>=' ) ) {
+	// 	$default['wp_travel_switch_to_react'] = 'yes';
+	// }
+	// $settings = get_option( 'wp_travel_settings', $default );
+	// return isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_travel_switch_to_react'];
+	$options = array( 'wp_travel_switch_to_react' => true );
+	$options = apply_filters( 'wptravel_force_switch_to_react', $options, $user_since );
+	return isset( $options['wp_travel_switch_to_react'] ) && $options['wp_travel_switch_to_react'];
 }
 
 if ( ! function_exists( 'wptravel_get_multiple_pricing_available_dates' ) ) {

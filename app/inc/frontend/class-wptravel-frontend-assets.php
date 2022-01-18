@@ -45,7 +45,7 @@ class WpTravel_Frontend_Assets {
 		$wp_travel     = isset( $all_localized['wp_travel'] ) ? $all_localized['wp_travel'] : array(); // localized data for WP Travel below V 4.0.
 
 		$settings     = wptravel_get_settings();
-		$switch_to_v4 = $settings['wp_travel_switch_to_react'];
+		$switch_to_v4 = wptravel_is_react_version_enabled();
 
 		if ( ! wptravel_can_load_bundled_scripts() ) {
 			wp_enqueue_style( 'wp-travel-frontend' );
@@ -125,7 +125,7 @@ class WpTravel_Frontend_Assets {
 
 		if ( is_singular( 'itineraries' ) ) {
 			// Localize the script with new data.
-			if ( 'yes' === $switch_to_v4 ) {
+			if ( $switch_to_v4 ) {
 				$_wp_travel = isset( $all_localized['_wp_travel'] ) ? $all_localized['_wp_travel'] : array();
 				wp_localize_script( 'wp-travel-frontend-booking-widget', '_wp_travel', $_wp_travel );
 				wp_enqueue_script( 'wp-travel-frontend-booking-widget' );

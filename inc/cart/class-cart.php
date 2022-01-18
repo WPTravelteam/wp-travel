@@ -608,9 +608,6 @@ class WP_Travel_Cart {
 		$tax_amount_partial      = 0;
 		$discount_amount_partial = 0;
 
-		$settings        = wptravel_get_settings(); // @since 4.0.0.
-		$wp_travel_react = isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_travel_switch_to_react'];
-
 		// Total amount without tax.
 		$trip_id = 0;
 		if ( is_array( $trips ) && count( $trips ) > 0 ) {

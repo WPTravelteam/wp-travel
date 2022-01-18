@@ -30,8 +30,6 @@ class WP_Travel_Post_Types { // @phpcs:ignore
 		if ( ! function_exists( 'is_plugin_active' ) ) {
 			require_once ABSPATH . '/wp-admin/includes/plugin.php';
 		}
-		$settings        = wptravel_get_settings();
-		$switch_to_react = $settings['wp_travel_switch_to_react'];
 		$permalink       = wptravel_get_permalink_structure();
 		$labels          = array(
 			'name'               => _x( 'Trips', 'post type general name', 'wp-travel' ),

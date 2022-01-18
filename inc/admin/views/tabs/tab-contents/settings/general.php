@@ -16,7 +16,7 @@ function wptravel_settings_callback_general( $tab, $args ) {
 		$decimal_separator  = $settings['decimal_separator'];
 		$number_of_decimals = $settings['number_of_decimals'];
 
-		$wp_travel_switch_to_react = $settings['wp_travel_switch_to_react'];
+		$wp_travel_switch_to_react = wptravel_is_react_version_enabled();
 
 		$google_map_api_key    = $settings['google_map_api_key'];
 		$google_map_zoom_level = $settings['google_map_zoom_level'];
@@ -85,7 +85,7 @@ function wptravel_settings_callback_general( $tab, $args ) {
 							<span class="show-in-frontend checkbox-default-design">
 								<label data-on="ON" data-off="OFF">
 									<input value="no" name="wp_travel_switch_to_react" type="hidden" />
-									<input <?php checked( $wp_travel_switch_to_react, 'yes' ); ?> value="yes" name="wp_travel_switch_to_react" id="wp_travel_switch_to_react" type="checkbox" />
+									<input <?php checked( $wp_travel_switch_to_react, true ); ?> value="yes" name="wp_travel_switch_to_react" id="wp_travel_switch_to_react" type="checkbox" />
 									<span class="switch"></span>
 								</label>
 							</span>

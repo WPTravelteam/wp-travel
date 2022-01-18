@@ -235,11 +235,9 @@ class WpTravel_Helpers_Trip_Dates {
 		$fd = apply_filters( 'wp_travel_fixed_departure_defalut', $fd ); // @phpcs:ignore
 		$fd = apply_filters( 'wptravel_fixed_departure_defalut', $fd );
 
-		$settings     = wptravel_get_settings();
-		$switch_to_v4 = $settings['wp_travel_switch_to_react'];
-
+		$switch_to_v4         = wptravel_is_react_version_enabled();
 		$wp_travel_user_since = get_option( 'wp_travel_user_since' );
-		if ( version_compare( $wp_travel_user_since, '4.0.0', '>=' ) || 'yes' === $switch_to_v4 ) {
+		if ( version_compare( $wp_travel_user_since, '4.0.0', '>=' ) || $switch_to_v4 ) {
 			return 'yes' === $fd;
 		} else { // Legacy.
 			if ( $check_for_multiple_departure ) { // Check if multiple fixed departure enable along with fixed departure enabled.

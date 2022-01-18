@@ -861,8 +861,8 @@ class WpTravel_Helpers_Trips {
 				$args       = array( 'trip_id' => $trip_id );
 				$trip_price = WP_Travel_Helpers_Pricings::get_price( $args );
 			}
-			$switch_to_v4 = $settings['wp_travel_switch_to_react'];
-			if ( 'yes' === $switch_to_v4 && ! is_wp_error( $pricings_data ) && is_array( $pricings_data ) && isset( $pricings_data['code'] ) && 'WP_TRAVEL_TRIP_PRICINGS' === $pricings_data['code'] ) {
+			$switch_to_v4 = wptravel_is_react_version_enabled();
+			if ( $switch_to_v4 && ! is_wp_error( $pricings_data ) && is_array( $pricings_data ) && isset( $pricings_data['code'] ) && 'WP_TRAVEL_TRIP_PRICINGS' === $pricings_data['code'] ) {
 				$pricings         = $pricings_data['pricings'];
 				$args['pricings'] = $pricings;
 
