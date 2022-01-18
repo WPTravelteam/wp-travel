@@ -60,9 +60,10 @@
 
 			&.resp-tab-active {
 				background: #fff;
+				padding: 11px 15px 14px;
 
 				@include sidr-view {
-					padding: 15px 14px;
+					padding: 13px 15px;
 				}
 			}
 
