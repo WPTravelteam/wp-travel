@@ -229,6 +229,11 @@ function wptravel_get_template( $template_name ) {
 					)
 				);
 				if ( $legacy_template ) {
+					// error_log( print_r( $legacy_template, true ) );
+					add_filter( 'wptravel_layout_version', function( $v ) {
+						return 'v1';
+						return $v;
+					} );
 					return $legacy_template;
 				}
 			}
@@ -1813,7 +1818,7 @@ function wptravel_archive_toolbar() {
 		}
 
 		?>
-		<div id="wptravel-archive-wrapper" class="wptravel-archive-wrapper <?php echo esc_attr( 'grid' === $view_mode ? 'grid-view' : '' ); ?> wp-travel-archive-content <?php echo esc_attr( $archive_sidebar_class ); ?>" >
+		<div class="wp-travel-archive-content <?php echo esc_attr( $archive_sidebar_class ); ?>">
 		<?php if ( 'grid' === $view_mode && 'v1' === $layout_version ) : ?>
 			<?php $col_per_row = apply_filters( 'wp_travel_archive_itineraries_col_per_row', '3' ); ?>
 			<?php
@@ -1821,7 +1826,8 @@ function wptravel_archive_toolbar() {
 				$col_per_row = apply_filters( 'wp_travel_archive_itineraries_col_per_row', '2' );
 			}
 			?>
-			
+			<div class="wp-travel-itinerary-items">
+				<ul class="wp-travel-itinerary-list itinerary-<?php esc_attr_e( $col_per_row, 'wp-travel' ); ?>-per-row">
 			<?php 
 		endif;
 	endif;
