@@ -1781,33 +1781,31 @@ function wptravel_archive_toolbar() {
 	$layout_version = wptravel_layout_version();
 
 	if ( ( WP_Travel::is_page( 'archive' ) || is_search() ) && ! is_admin() ) :
-		?>
-		<?php if ( WP_Travel::is_page( 'archive' ) || ( is_search() && ! empty( $_GET['post_type'] ) && 'itineraries' === $_GET['post_type'] ) ) : ?>
-	<div class="wp-travel-toolbar clearfix">
-		<div class="wp-toolbar-content wp-toolbar-left">
-			<?php wptravel_archive_filter_by( $sanitized_get ); ?>
-		</div>
-		<div class="wp-toolbar-content wp-toolbar-right">
-			<?php
-			$current_url = isset( $_SERVER['HTTP_HOST'] ) && isset( $_SERVER['REQUEST_URI'] ) ? '//' . sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) . sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
-			$current_url = add_query_arg( '_nonce', WP_Travel::create_nonce(), $current_url );
-			if ( 'v1' === $layout_version ) :
-				?>
-				<ul class="wp-travel-view-mode-lists">
-					<li class="wp-travel-view-mode <?php echo ( 'grid' === $view_mode ) ? 'active-mode' : ''; ?>" data-mode="grid" ><a href="<?php echo esc_url( add_query_arg( 'view_mode', 'grid', $current_url ) ); ?>"><i class="dashicons dashicons-grid-view"></i></a></li>
-					<li class="wp-travel-view-mode <?php echo ( 'list' === $view_mode ) ? 'active-mode' : ''; ?>" data-mode="list" ><a href="<?php echo esc_url( add_query_arg( 'view_mode', 'list', $current_url ) ); ?>"><i class="dashicons dashicons-list-view"></i></a></li>
-				</ul>
-			<?php else : ?>
-				<ul id="wp-travel-view-mode-lists"" class="wp-travel-view-mode-lists">
-					<li class="wp-travel-view-mode <?php echo ( 'grid' === $view_mode ) ? 'active-mode' : ''; ?>"><a href="#" onclick="gridView()"><i class="dashicons dashicons-grid-view"></i></a></li>
-					<li class="wp-travel-view-mode <?php echo ( 'list' === $view_mode ) ? 'active-mode' : ''; ?>"><a href="#" onclick="listView()"><i class="dashicons dashicons-list-view"></i></a></li>
-				</ul>
-			<?php endif; ?>
-		</div>
-	</div>
-	<?php endif; ?>
-		<?php
-
+		if ( WP_Travel::is_page( 'archive' ) || ( is_search() && ! empty( $_GET['post_type'] ) && 'itineraries' === $_GET['post_type'] ) ) : ?>
+			<div class="wp-travel-toolbar clearfix">
+				<div class="wp-toolbar-content wp-toolbar-left">
+					<?php wptravel_archive_filter_by( $sanitized_get ); ?>
+				</div>
+				<div class="wp-toolbar-content wp-toolbar-right">
+					<?php
+					$current_url = isset( $_SERVER['HTTP_HOST'] ) && isset( $_SERVER['REQUEST_URI'] ) ? '//' . sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) . sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+					$current_url = add_query_arg( '_nonce', WP_Travel::create_nonce(), $current_url );
+					// if ( 'v1' === $layout_version ) :
+						?>
+						<ul class="wp-travel-view-mode-lists">
+							<li class="wp-travel-view-mode <?php echo ( 'grid' === $view_mode ) ? 'active-mode' : ''; ?>" data-mode="grid" ><a href="<?php echo esc_url( add_query_arg( 'view_mode', 'grid', $current_url ) ); ?>"><i class="dashicons dashicons-grid-view"></i></a></li>
+							<li class="wp-travel-view-mode <?php echo ( 'list' === $view_mode ) ? 'active-mode' : ''; ?>" data-mode="list" ><a href="<?php echo esc_url( add_query_arg( 'view_mode', 'list', $current_url ) ); ?>"><i class="dashicons dashicons-list-view"></i></a></li>
+						</ul>
+					<?php //else : ?>
+						<!-- <ul id="wp-travel-view-mode-lists"" class="wp-travel-view-mode-lists">
+							<li class="wp-travel-view-mode <?php echo ( 'grid' === $view_mode ) ? 'active-mode' : ''; ?>"><a href="#" onclick="gridView()"><i class="dashicons dashicons-grid-view"></i></a></li>
+							<li class="wp-travel-view-mode <?php echo ( 'list' === $view_mode ) ? 'active-mode' : ''; ?>"><a href="#" onclick="listView()"><i class="dashicons dashicons-list-view"></i></a></li>
+						</ul> -->
+					<?php //endif; ?>
+				</div>
+			</div>
+			<?php 
+		endif; 
 		$archive_sidebar_class = '';
 
 		if ( is_active_sidebar( 'wp-travel-archive-sidebar' ) ) {
@@ -1815,8 +1813,9 @@ function wptravel_archive_toolbar() {
 		}
 
 		?>
-	<div class="wp-travel-archive-content <?php echo esc_attr( $archive_sidebar_class ); ?>">
-		<?php if ( 'grid' === $view_mode && 'v1' === $layout_version ) : ?>
+		<div class="wp-travel-archive-content <?php echo esc_attr( $archive_sidebar_class ); ?>">
+		<?php
+		if ( 'grid' === $view_mode && 'v1' === $layout_version ) : ?>
 			<?php $col_per_row = apply_filters( 'wp_travel_archive_itineraries_col_per_row', '3' ); ?>
 			<?php
 			if ( is_active_sidebar( 'wp-travel-archive-sidebar' ) ) {
@@ -1825,10 +1824,9 @@ function wptravel_archive_toolbar() {
 			?>
 			<div class="wp-travel-itinerary-items">
 				<ul class="wp-travel-itinerary-list itinerary-<?php esc_attr_e( $col_per_row, 'wp-travel' ); ?>-per-row">
-		<?php endif; ?>
-	<?php endif; ?>
-
-	<?php
+			<?php
+		endif;
+	endif;
 }
 /**
  * Archive page wrapper close.

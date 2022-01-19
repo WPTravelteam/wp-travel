@@ -246,7 +246,7 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
 = 5.1.0 =
-Release Date:
+Release Date: 23rd January, 2022
 
 Enhancement:
 * New layout implemented for archive page.
@@ -265,6 +265,9 @@ Layout Fixes:
 * Text invisible while viewing bank details in user dashboard fix.
 * Gap between search button and dropdown in WP Travel search widget fix.
 * Widget area list and grid view fixed in responsive.
+* Single trip page tab section next and previous button not working in responsive fix.
+* Table border layout fix in dashboard page.
+* Gallery section mansory layout fix.
 
 = 5.0.7 =
 Release Date: 27th December, 2021
