@@ -39,6 +39,9 @@
 			}
 			ul.wp-travel-itinerary-list {
 				grid-template-columns: repeat(1, 1fr) !important;
+				@media (min-width: 651px) and (max-width: 992px) {
+					grid-template-columns: repeat(2, 1fr) !important;
+				}
 				li {
 					margin: 0;
 				}

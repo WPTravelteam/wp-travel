@@ -499,7 +499,7 @@
 .widget {
 	.wp-travel-itinerary-items {
 		.wp-travel-itinerary-list {
-			@media (max-width: 1199px) {
+			@media (min-width: 651px) and (max-width: 992px) {
 				display: grid;
 				grid-template-columns: repeat(2, 1fr);
 			}
