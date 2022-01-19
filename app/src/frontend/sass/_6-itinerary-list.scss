@@ -144,20 +144,21 @@
 // 	}
 // }
 
-.wp-travel-archive-content{
-	.wp-travel-itinerary-items{
-		ul.wp-travel-itinerary-list{
-			&.itinerary-2-per-row li {
-				width: calc(50% - 30px);
-			}
-		}
-	}
-}
+// .wp-travel-archive-content{
+// 	.wp-travel-itinerary-items{
+// 		ul.wp-travel-itinerary-list{
+// 			&.itinerary-2-per-row li {
+// 				width: calc(50% - 30px);
+// 			}
+// 		}
+// 	}
+// }
 
 
 
-.wp-travel-itinerary-items {
-	ul.wp-travel-itinerary-list {
+.wp-travel-archive-content {
+	// ul.wp-travel-itinerary-list {
+		
 		position: relative;
 		// padding: 15px;
 		// display: flex;
@@ -166,7 +167,7 @@
 		display: grid;
 		grid-gap: 20px;
 		// grid-template-columns: repeat(2, 1fr);
-		// grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)) !important;
+		grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
 		// @media (max-width: 992px) {
 		// 	grid-template-columns: repeat(2, 1fr) !important;
 		// }
@@ -361,7 +362,7 @@
 				margin: 10px 0;
 			}
 		}
-	}
+	
 
 	.wp-travel-post-item-wrapper {
 		position: relative;
@@ -524,13 +525,14 @@
 	.wp-travel-itinerary-items {
 		.wp-travel-itinerary-list {
 			display: grid !important;
-			grid-template-columns: repeat(3, 1fr);
-			@media (max-width: 991px) {
-				grid-template-columns: repeat(2, 1fr);
-			}
-			@media (max-width: 650px) {
-				grid-template-columns: repeat(1, 1fr);
-			}
+			grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+			// grid-template-columns: repeat(3, 1fr);
+			// @media (max-width: 991px) {
+			// 	grid-template-columns: repeat(2, 1fr);
+			// }
+			// @media (max-width: 650px) {
+			// 	grid-template-columns: repeat(1, 1fr);
+			// }
 		}
 	}
 }
@@ -683,26 +685,26 @@
 	}
 }
 // Grid Mode.
-.wp-travel-grid-mode {
-	.wp-travel-archive-content {
-		.wp-travel-itinerary-list {
-			display: flex;
-			justify-content: left;
-			padding-left: 0;
-			margin: 0 -10px;
-			gap: 0em;
-			flex-wrap: wrap;
-			li {
-				margin: 10px;
-			}
+// .wp-travel-grid-mode {
+// 	.wp-travel-archive-content {
+// 		.wp-travel-itinerary-list {
+// 			display: flex;
+// 			justify-content: left;
+// 			padding-left: 0;
+// 			margin: 0 -10px;
+// 			gap: 0em;
+// 			flex-wrap: wrap;
+// 			li {
+// 				margin: 10px;
+// 			}
 
-			@include mob {
-				margin: 0 !important;
-				padding-left: 0 !important;
-			}
-		}
-	}
-}
+// 			@include mob {
+// 				margin: 0 !important;
+// 				padding-left: 0 !important;
+// 			}
+// 		}
+// 	}
+// }
 
 .wp-travel-post-info {
 	padding: 10px;
