@@ -33,7 +33,6 @@ if ( 'twentyseventeen' === $current_theme->get( 'TextDomain' ) ) {
 }
 do_action( 'wp_travel_before_main_content' );
 ?>
-<div id="wptravel-archive-wrapper" class="wptravel-archive-wrapper <?php echo esc_attr( 'grid' === $view_mode ? 'grid-view' : '' ); ?> ">
 	<?php
 	if ( have_posts() ) :
 		while ( have_posts() ) :
@@ -44,7 +43,6 @@ do_action( 'wp_travel_before_main_content' );
 		wptravel_get_template_part( 'v2/content', 'archive-itineraries-none' );
 	endif;
 	?>
-</div>
 <?php
 do_action( 'wp_travel_after_main_content' );
 do_action( 'wp_travel_archive_listing_sidebar' );
