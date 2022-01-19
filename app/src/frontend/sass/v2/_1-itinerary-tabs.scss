@@ -59,14 +59,16 @@
 				background: #fff;
 				// padding: 19px 30px 20px;
 				padding: 17px 30px 23px;
+				
 
 				@include sidr-view {
-					padding: 15px 14px;
+					// padding: 13px 15px;
+					padding: 12px 15px 14px;
 				}
 			}
 
 			@include sidr-view {
-				padding: 15px 14px;
+				padding: 15px;
 			}
 		}
 	}

@@ -1357,15 +1357,23 @@
 
 // Booking Detail popup
 .mfp-container {
-	.mfp-content {
-		width: auto;
-		background: #fff;
-		#wp-travel-bank-deposit-content, #wp-travel-bank-details-content {
-			padding: 20px;
-			.mfp-close.close-button {
-				top: 8px;
-				right: 8px;
+	&.mfp-inline-holder {           // Dashboard page popup in checkout view
+		.mfp-content {
+			width: auto;
+			background: #fff;
+			#wp-travel-bank-deposit-content,
+			#wp-travel-bank-details-content {
+				padding: 20px;
+				.mfp-close.close-button {
+					top: 8px;
+					right: 8px;
+				}
 			}
+		}
+	}
+	&.mfp-iframe-holder {          // Gallery Section video player
+		.mfp-content {
+			width: 100%;
 		}
 	}
 }
