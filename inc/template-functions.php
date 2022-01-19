@@ -1813,7 +1813,7 @@ function wptravel_archive_toolbar() {
 		}
 
 		?>
-		<div id="wptravel-archive-wrapper" class="wptravel-archive-wrapper <?php echo esc_attr( 'grid' === $view_mode ? 'grid-view' : '' ); ?> wp-travel-archive-content <?php echo esc_attr( $archive_sidebar_class ); ?>" 
+		<div id="wptravel-archive-wrapper" class="wptravel-archive-wrapper <?php echo esc_attr( 'grid' === $view_mode ? 'grid-view' : '' ); ?> wp-travel-archive-content <?php echo esc_attr( $archive_sidebar_class ); ?>" >
 		<?php if ( 'grid' === $view_mode && 'v1' === $layout_version ) : ?>
 			<?php $col_per_row = apply_filters( 'wp_travel_archive_itineraries_col_per_row', '3' ); ?>
 			<?php
