@@ -673,14 +673,18 @@
 }
 
 // For Blocks, for adding styles to the list and grid view in itinerary page
-.site-content {
-	.wp-travel-toolbar {
-		margin-bottom: 2em;
-	}
-	.wp-travel-trips-has-sidebar {
-		width: 66.666666667%;
-		float: left;
-	}
+
+.wp-travel-toolbar {
+	margin-bottom: 2em;
+}
+.wp-travel-trips-has-sidebar {
+	width: 66.666666667%;
+	float: left;
+	padding-right: 15px;
+}
+.wp-travel-widget-area {
+	width: 33.333333333%;
+	float: right;
 }
 
 // Itinerary Page List and Grid View New Design SCSS
@@ -1137,14 +1141,14 @@
 			&.itinerary-1-per-row {
 				grid-template-columns: repeat(1, 1fr);
 			}
-	
+
 			&.itinerary-2-per-row {
 				grid-template-columns: repeat(2, 1fr);
 				@media (max-width: 650px) {
 					grid-template-columns: repeat(1, 1fr);
 				}
 			}
-	
+
 			&.itinerary-3-per-row {
 				grid-template-columns: repeat(3, 1fr);
 				@media (max-width: 991px) {
@@ -1154,7 +1158,7 @@
 					grid-template-columns: repeat(1, 1fr);
 				}
 			}
-	
+
 			&.itinerary-4-per-row {
 				grid-template-columns: repeat(4, 1fr);
 				@media (max-width: 1199px) {
@@ -1167,7 +1171,7 @@
 					grid-template-columns: repeat(1, 1fr);
 				}
 			}
-	
+
 			&.itinerary-5-per-row {
 				grid-template-columns: repeat(5, 1fr);
 				@media (max-width: 1199px) {
@@ -1180,7 +1184,7 @@
 					grid-template-columns: repeat(1, 1fr);
 				}
 			}
-	
+
 			&.itinerary-6-per-row {
 				grid-template-columns: repeat(6, 1fr);
 				@media (max-width: 1199px) {
@@ -1193,7 +1197,7 @@
 					grid-template-columns: repeat(1, 1fr);
 				}
 			}
-	
+
 			&.itinerary-7-per-row {
 				grid-template-columns: repeat(7, 1fr);
 				@media (max-width: 1199px) {
@@ -1206,7 +1210,7 @@
 					grid-template-columns: repeat(1, 1fr);
 				}
 			}
-	
+
 			&.itinerary-8-per-row {
 				grid-template-columns: repeat(8, 1fr);
 				@media (max-width: 1199px) {
@@ -1219,7 +1223,7 @@
 					grid-template-columns: repeat(1, 1fr);
 				}
 			}
-	
+
 			&.itinerary-9-per-row {
 				grid-template-columns: repeat(9, 1fr);
 				@media (max-width: 1199px) {
