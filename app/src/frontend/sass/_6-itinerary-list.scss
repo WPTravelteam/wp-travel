@@ -165,6 +165,7 @@
 		grid-gap: 20px;
 		// grid-template-columns: repeat(2, 1fr);
 		grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+		margin-left: 0;
 		// @media (max-width: 992px) {
 		// 	grid-template-columns: repeat(2, 1fr) !important;
 		// }

@@ -672,6 +672,17 @@
 	padding-top: 55px;
 }
 
+// For Blocks, for adding styles to the list and grid view in itinerary page
+.site-content {
+	.wp-travel-toolbar {
+		margin-bottom: 2em;
+	}
+	.wp-travel-trips-has-sidebar {
+		width: 66.666666667%;
+		float: left;
+	}
+}
+
 // Itinerary Page List and Grid View New Design SCSS
 .entry-content {
 	.wp-travel-archive-content {
