@@ -67,7 +67,7 @@ export default () => {
     return <div className="wp-travel-ui wp-travel-ui-card settings-general">
         <h2>{ __( 'General Settings', 'wp-travel' ) }</h2>
         <ErrorBoundary>
-            { 'undefined' != typeof options && 'undefined' != typeof options.wp_travel_user_since && VersionCompare( options.wp_travel_user_since, '4.0.0', '<' ) &&
+            {/* { 'undefined' != typeof options && 'undefined' != typeof options.wp_travel_user_since && VersionCompare( options.wp_travel_user_since, '4.0.0', '<' ) &&
             
                 <PanelRow>
                     <label>{ __( 'Switch to V4', 'wp-travel' ) }</label>
@@ -85,7 +85,7 @@ export default () => {
                         <p className="description">{__( 'This option will switch your trip edit page layout to new layout.', 'wp-travel' )}</p>
                     </div>
                 </PanelRow>
-            }
+            } */}
             <PanelRow>
                 <label>{ __( 'Currency', 'wp-travel' ) }</label>
                 <div className="wp-travel-field-value">

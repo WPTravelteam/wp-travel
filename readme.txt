@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 5.4.1
 Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 4.5
+Stable tag: 5.1.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -258,16 +258,19 @@ Fixes:
 * Fixed Booking tab switch to Dashboard tab when clicking booking detail page.
 * Fixed Blocks Plugin not working in windows.
 * Fixed function `wptravel_account_tab_content` already exists issue.
-* Fixed Custom fields added from field editor value mismatch. If we add Select, Radio, and checkbox as input from the field editor the value of these inputs is displayed as an index.
+* Fixed Custom fields added from field editor value mismatch. If we add Select, Radio, and checkbox as input from the field editor, the value of these inputs is displayed as an index.
 
 Layout Fixes:
 * Issue in user dashboard during bank deposit payment popup fix.
 * Text invisible while viewing bank details in user dashboard fix.
-* Gap between search button and dropdown in WP Travel search widget fix.
+* Gap between the search button and dropdown in WP Travel search widget fix.
 * Widget area list and grid view fixed in responsive.
-* Single trip page tab section next and previous button not working in responsive fix.
-* Table border layout fix in dashboard page.
-* Gallery section mansory layout fix.
+* Single trip page tab section next and previous button not working in a responsive fix.
+* Table border layout fixes in the dashboard page.
+* Gallery section Mansory layout fix.
+
+Removed:
+* Removed switch to v4 option as per pre-notification.
 
 = 5.0.7 =
 Release Date: 27th December, 2021
@@ -441,4 +444,4 @@ For the changelog of earlier versions, please refer to [the changelog on wptrave
 == Upgrade Notice ==
 
 = 5.1 =
-There is a new version of WP Travel available which is a major release and has come with support of the most requested features. Check the [release note](https://wptravel.io/wp-travel-plugin-version-5-1-0-major-release-note/) for more detail.
+There is a new version of WP Travel available which has come with removal of v3 pricing options and new archive page layout. Check the [release note](https://wptravel.io/wp-travel-plugin-version-5-1-0-release-note/) for more detail.
