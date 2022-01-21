@@ -202,8 +202,8 @@ function wptravel_posts_clauses_filter( $post_clauses, $object ) {
  */
 function wptravel_get_template( $template_name ) {
 	$template_path  = apply_filters( 'wp_travel_template_path', 'wp-travel/' ); // @phpcs:ignore
-	$template_path  = apply_filters( 'wptravel_template_path', $template_path );
-	$default_path   = sprintf( '%s/templates/', plugin_dir_path( dirname( __FILE__ ) ) );
+	$template_path = apply_filters( 'wptravel_template_path', $template_path );
+	$default_path  = sprintf( '%s/templates/', plugin_dir_path( dirname( __FILE__ ) ) );
 
 	// Look templates in theme first.
 	$template       = locate_template(
@@ -219,21 +219,23 @@ function wptravel_get_template( $template_name ) {
 		if ( isset( $version_number[0] ) && 1 !== (int) $version_number[0] ) {
 			$version = (int) $version_number[0];
 			for ( $i = $version; $i >= 1; $i-- ) {
-				$template_ver = 'v' . $i . '/';
-				$replace_with = 2 >= $i ? '' : 'v' . ( $i - 1 ) . '/';
+				$template_ver         = 'v' . $i . '/';
+				$replace_with         = 2 >= $i ? '' : 'v' . ( $i - 1 ) . '/';
 				$legacy_template_name = str_replace( $template_ver, $replace_with, $template_name );
-				$legacy_template       = locate_template(
+				$legacy_template      = locate_template(
 					array(
 						trailingslashit( $template_path ) . $legacy_template_name,
 						$legacy_template_name,
 					)
 				);
 				if ( $legacy_template ) {
-					// error_log( print_r( $legacy_template, true ) );
-					add_filter( 'wptravel_layout_version', function( $v ) {
-						return 'v1';
-						return $v;
-					} );
+					add_filter(
+						'wptravel_layout_version',
+						function( $v ) {
+							return 'v1';
+							return $v;
+						}
+					);
 					return $legacy_template;
 				}
 			}
@@ -281,7 +283,6 @@ function wptravel_get_template_part( $slug, $name = '' ) {
 	if ( $name ) {
 		$template = wptravel_get_template( $file_name );
 	}
-	// error_log( print_r( $template, true ) );
 	if ( $template ) {
 		load_template( $template, false );
 	}
@@ -1786,7 +1787,8 @@ function wptravel_archive_toolbar() {
 	$layout_version = wptravel_layout_version();
 
 	if ( ( WP_Travel::is_page( 'archive' ) || is_search() ) && ! is_admin() ) :
-		if ( WP_Travel::is_page( 'archive' ) || ( is_search() && ! empty( $_GET['post_type'] ) && 'itineraries' === $_GET['post_type'] ) ) : ?>
+		if ( WP_Travel::is_page( 'archive' ) || ( is_search() && ! empty( $_GET['post_type'] ) && 'itineraries' === $_GET['post_type'] ) ) :
+			?>
 			<div class="wp-travel-toolbar clearfix">
 				<div class="wp-toolbar-content wp-toolbar-left">
 					<?php wptravel_archive_filter_by( $sanitized_get ); ?>
@@ -1796,21 +1798,21 @@ function wptravel_archive_toolbar() {
 					$current_url = isset( $_SERVER['HTTP_HOST'] ) && isset( $_SERVER['REQUEST_URI'] ) ? '//' . sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) . sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
 					$current_url = add_query_arg( '_nonce', WP_Travel::create_nonce(), $current_url );
 					// if ( 'v1' === $layout_version ) :
-						?>
+					?>
 						<ul class="wp-travel-view-mode-lists">
 							<li class="wp-travel-view-mode <?php echo ( 'grid' === $view_mode ) ? 'active-mode' : ''; ?>" data-mode="grid" ><a href="<?php echo esc_url( add_query_arg( 'view_mode', 'grid', $current_url ) ); ?>"><i class="dashicons dashicons-grid-view"></i></a></li>
 							<li class="wp-travel-view-mode <?php echo ( 'list' === $view_mode ) ? 'active-mode' : ''; ?>" data-mode="list" ><a href="<?php echo esc_url( add_query_arg( 'view_mode', 'list', $current_url ) ); ?>"><i class="dashicons dashicons-list-view"></i></a></li>
 						</ul>
-					<?php //else : ?>
+					<?php // else : ?>
 						<!-- <ul id="wp-travel-view-mode-lists"" class="wp-travel-view-mode-lists">
 							<li class="wp-travel-view-mode <?php echo ( 'grid' === $view_mode ) ? 'active-mode' : ''; ?>"><a href="#" onclick="gridView()"><i class="dashicons dashicons-grid-view"></i></a></li>
 							<li class="wp-travel-view-mode <?php echo ( 'list' === $view_mode ) ? 'active-mode' : ''; ?>"><a href="#" onclick="listView()"><i class="dashicons dashicons-list-view"></i></a></li>
 						</ul> -->
-					<?php //endif; ?>
+					<?php // endif; ?>
 				</div>
 			</div>
-			<?php 
-		endif; 
+			<?php
+		endif;
 		$archive_sidebar_class = '';
 
 		if ( is_active_sidebar( 'wp-travel-archive-sidebar' ) ) {
@@ -1828,7 +1830,7 @@ function wptravel_archive_toolbar() {
 			?>
 			<div class="wp-travel-itinerary-items">
 				<ul class="wp-travel-itinerary-list itinerary-<?php esc_attr_e( $col_per_row, 'wp-travel' ); ?>-per-row">
-			<?php 
+			<?php
 		endif;
 	endif;
 }
