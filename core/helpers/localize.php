@@ -233,7 +233,7 @@ class WpTravel_Helpers_Localize {
 				'_nonce'  => wp_create_nonce( 'wp_travel_nonce' ),
 			);
 
-			if ( WP_Travel::is_page( 'itineraries', true ) ) {
+			if ( $post && WP_Travel::is_page( 'itineraries', true ) ) {
 				$wp_travel_itinerary          = new WP_Travel_Itinerary( $post );
 				$_wp_travel_admin['overview'] = $wp_travel_itinerary->get_content();
 			}

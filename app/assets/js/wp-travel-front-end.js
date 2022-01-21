@@ -672,11 +672,13 @@ function listView() {
   
   
 var container = document.getElementById("wp-travel-view-mode-lists");
-var btns = container.getElementsByClassName("wp-travel-view-mode");
-for (var i = 0; i < btns.length; i++) {
-btns[i].addEventListener("click", function() {
-	var current = document.getElementsByClassName("active-mode");
-	current[0].className = current[0].className.replace(" active-mode", "");
-	this.className += " active-mode";
-});
+if ( container && container.length > 0 ) {
+    var btns = container.getElementsByClassName("wp-travel-view-mode");
+    for (var i = 0; i < btns.length; i++) {
+    btns[i].addEventListener("click", function() {
+        var current = document.getElementsByClassName("active-mode");
+        current[0].className = current[0].className.replace(" active-mode", "");
+        this.className += " active-mode";
+    });
+    }
 }
