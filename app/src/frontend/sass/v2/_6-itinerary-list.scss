@@ -65,13 +65,13 @@
 }
 
 .wp-travel-itinerary-items {
-	ul.wp-travel-itinerary-list {
+	.wp-travel-itinerary-list {
 		position: relative;
 		margin: 0;
 		padding: 0;
 		display: grid;
 		grid-gap: 20px;
-		// grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)) !important;
+		grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
 
 		&.itinerary-1-per-row {
 			grid-template-columns: repeat(1, 1fr);
