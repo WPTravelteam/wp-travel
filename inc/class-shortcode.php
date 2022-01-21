@@ -115,7 +115,7 @@ class Wp_Travel_Shortcodes {
 			'view_mode'    => 'grid',
 			'slug'         => '',
 			'limit'        => 20,
-			'col'          => apply_filters( 'wp_travel_itineraries_col_per_row', '2' ),
+			'col'          => apply_filters( 'wp_travel_itineraries_col_per_row', '3' ),
 			// 'orderby'      => 'trip_date',
 			'order'        => 'asc',
 		);
