@@ -79,7 +79,7 @@ class WP_Travel_Widget_Location extends WP_Widget {
 		<div class="wp-travel-itinerary-items">
 				<?php if ( 'grid' == $view_mode ) : ?> 
 						
-				<ul class="wp-travel-itinerary-list">
+				<ul class="wp-travel-itinerary-list grid-view">
 
 			<?php else : ?>
 

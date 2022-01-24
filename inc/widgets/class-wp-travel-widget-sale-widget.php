@@ -84,7 +84,7 @@ class WP_Travel_Widget_Sale_Itineraries extends WP_Widget { // @phpcs:ignore
 
 		<div class="wp-travel-itinerary-items">
 			<?php if ( 'grid' === $view_mode ) : ?> 
-				<ul class="wp-travel-itinerary-list">
+				<ul class="wp-travel-itinerary-list grid-view">
 			<?php else : ?>
 
 				<div class="wp-travel-itinerary-list">

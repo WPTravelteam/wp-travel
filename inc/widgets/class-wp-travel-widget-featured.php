@@ -74,7 +74,7 @@ class WP_Travel_Widget_Featured extends WP_Widget {
 			
 			<?php if ( 'grid' == $view_mode ) : ?> 
 				
-				<ul class="wp-travel-itinerary-list">
+				<ul class="wp-travel-itinerary-list grid-view">
 
 			<?php else : ?>
 
