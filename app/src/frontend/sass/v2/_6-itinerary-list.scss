@@ -71,7 +71,7 @@
 		padding: 0;
 		display: grid;
 		grid-gap: 20px;
-		grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+		grid-template-columns: repeat(auto-fill, minmax(295px, 1fr));
 
 		&.itinerary-1-per-row {
 			grid-template-columns: repeat(1, 1fr);

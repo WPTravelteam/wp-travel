@@ -164,8 +164,11 @@
 		display: grid;
 		grid-gap: 20px;
 		// grid-template-columns: repeat(2, 1fr);
-		grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+	
 		margin-left: 0;
+		&.grid-view {
+			grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+		}
 		// @media (max-width: 992px) {
 		// 	grid-template-columns: repeat(2, 1fr) !important;
 		// }
@@ -532,6 +535,12 @@
 		}
 	}
 }
+
+// .wp-travel-form-field .wp-travel-info-content table tr td:nth-child(5),
+// .wp-travel-form-field .wp-travel-info-content table tr td:last-child {
+// 	display: none;
+// }
+
 // List Mode
 .wp-travel-default-article {
 	display: block;

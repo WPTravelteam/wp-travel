@@ -595,6 +595,7 @@ ul.availabily-list {
 			float: left;
 			margin: 2px 0;
 			padding: 0 5px;
+			align-items: center;
 
 			@include sidr-view {
 				width: 50%;
