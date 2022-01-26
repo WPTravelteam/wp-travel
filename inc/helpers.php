@@ -158,7 +158,7 @@ function wptravel_settings_default_fields() {
 
 	$user_since = get_option( 'wp_travel_user_since' );
 	// if ( version_compare( $user_since, '4.0.0', '>=' ) ) {
-	// 	$settings_fields['wp_travel_switch_to_react'] = 'yes';
+	// $settings_fields['wp_travel_switch_to_react'] = 'yes';
 	// }
 	if ( version_compare( $user_since, '4.6.1', '>=' ) ) {
 		$settings_fields['trip_date_listing'] = 'dates';
@@ -558,6 +558,7 @@ function wptravel_get_itineraries_array() {
 	$args = array(
 		'post_type'   => WP_TRAVEL_POST_TYPE,
 		'numberposts' => -1,
+		'post_status' => 'publish',
 	);
 
 	$itineraries = get_posts( $args );
@@ -578,6 +579,7 @@ function wptravel_get_tour_extras_array() {
 	$args = array(
 		'post_type'   => 'tour-extras',
 		'numberposts' => -1,
+		'post_status' => 'publish',
 	);
 
 	$itineraries = get_posts( $args );
@@ -594,6 +596,10 @@ function wptravel_get_tour_extras_array() {
  */
 function wptravel_get_itinereries_prices_array() {
 
+	$min_max_price = get_site_transient( 'wptravel_min_max_prices' );
+	if ( $min_max_price ) {
+		return $min_max_price;
+	}
 	$itineraries = wptravel_get_itineraries_array();
 
 	$prices = array();
@@ -601,11 +607,24 @@ function wptravel_get_itinereries_prices_array() {
 	if ( $itineraries ) {
 
 		foreach ( $itineraries as $trip_id => $itinerary ) {
-			$args     = array( 'trip_id' => $trip_id );
-			$prices[] = WP_Travel_Helpers_Pricings::get_price( $args );
+			$args = array( 'trip_id' => $trip_id );
+			// $prices[] = WP_Travel_Helpers_Pricings::get_price( $args );
+			$price = (float) get_post_meta( $trip_id, 'wp_travel_trip_price', true );
+			if ( $price > 0 ) {
+				$prices[] = $price;
+			}
 		}
 		if ( is_array( $prices ) && '' !== $prices ) :
-			return $prices;
+			sort( $prices );
+			$len = count( $prices );
+
+			$min_price = apply_filters( 'wp_travel_multiple_currency', $prices[0] );
+			$max_price = apply_filters( 'wp_travel_multiple_currency', $prices[ $len - 1 ] );
+
+			$min_max_price = array( $min_price, $max_price );
+			set_site_transient( 'wptravel_min_max_prices', $min_max_price ); // Need to delete this transient in case of pricing update in trip.
+
+			return $min_max_price;
 		endif;
 	}
 	return false;
@@ -1776,7 +1795,7 @@ function wptravel_is_react_version_enabled() {
 	// $default    = array( 'wp_travel_switch_to_react' => 'no' );
 	$user_since = get_option( 'wp_travel_user_since' );
 	// if ( version_compare( $user_since, '4.0.0', '>=' ) ) {
-	// 	$default['wp_travel_switch_to_react'] = 'yes';
+	// $default['wp_travel_switch_to_react'] = 'yes';
 	// }
 	// $settings = get_option( 'wp_travel_settings', $default );
 	// return isset( $settings['wp_travel_switch_to_react'] ) && 'yes' === $settings['wp_travel_switch_to_react'];
