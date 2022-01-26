@@ -498,6 +498,8 @@ class WpTravel_Helpers_Trips {
 		do_action( 'wptravel_update_trip_data', $trip_data, $trip_id );
 		$trip = self::get_trip( $trip_id );
 
+		self::clear_data(); // Clear required transient
+
 		if ( is_wp_error( $trip ) || 'WP_TRAVEL_TRIP_INFO' !== $trip['code'] ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
 		}
@@ -508,6 +510,15 @@ class WpTravel_Helpers_Trips {
 				'trip' => $trip['trip'],
 			)
 		);
+	}
+
+	/**
+	 * Delete site transient when trip updated.
+	 *
+	 * @since 5.1.0
+	 */
+	public static function clear_data() {
+		delete_site_transient( 'wptravel_min_max_prices' ); // it consist the price including all trips and filter the min and max price among them.
 	}
 
 	/**
