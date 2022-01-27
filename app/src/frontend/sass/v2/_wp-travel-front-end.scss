@@ -637,7 +637,6 @@ ul.availabily-list {
 	}
 }
 
-
 // Dashboard Booking Details CSS
 #wp-travel-tab-content-bookings {
 	.my-order {
@@ -1152,6 +1151,20 @@ ul.availabily-list {
 	select {
 		@media (max-width: 992px) {
 			color: #6e6e6e;
+		}
+	}
+}
+// Single Trip page booking tab pax selector option
+.wp-travel-list-view {
+	.wptravel-recurring-dates {
+		.components-panel__body.is-opened {
+			table .tbody-table {
+				td:nth-child(2) {
+					@media (max-width: 991px) {
+						display: block !important;
+					}
+				}
+			}
 		}
 	}
 }
