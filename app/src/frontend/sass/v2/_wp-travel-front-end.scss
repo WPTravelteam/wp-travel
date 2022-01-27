@@ -1154,17 +1154,3 @@ ul.availabily-list {
 		}
 	}
 }
-// Single Trip page booking tab pax selector option
-.wp-travel-list-view {
-	.wptravel-recurring-dates {
-		.components-panel__body.is-opened {
-			table .tbody-table {
-				td:nth-child(2) {
-					@media (max-width: 991px) {
-						display: block !important;
-					}
-				}
-			}
-		}
-	}
-}
