@@ -2410,11 +2410,14 @@ li {
 
 	.mfp-close,
 	.close-button {
-		right: -12px !important;
-		top: -12px !important;
+		// right: -12px !important;
+		// top: -12px !important;
+		right: 0 !important;
+		top: 0 !important;
 		margin: 0;
 		display: inline-block;
-		background: #fff;
+		// background: #fff;
+		background: transparent;
 		width: 30px;
 		min-width: 30px;
 		opacity: 1;
@@ -2425,8 +2428,9 @@ li {
 		border-radius: 50%;
 		cursor: pointer;
 		color: #252525;
-		box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18),
-			0 4px 15px 0 rgba(0, 0, 0, 0.15);
+		// box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18),
+		// 	0 4px 15px 0 rgba(0, 0, 0, 0.15);
+		box-shadow: none;
 	}
 
 	form {
@@ -2459,16 +2463,18 @@ li {
 
 @media screen and (max-width: 508px) {
 	.wp-travel-popup {
-		width: 300px;
-		margin-left: calc(50% - 150px);
+		// width: 300px;
+		width: 100%;
+		// margin-left: calc(50% - 150px);
+		margin: auto;
 	}
 }
 
 @media screen and (max-width: 408px) {
-	.wp-travel-popup {
-		width: 300px;
-		margin-left: calc(50% - 150px);
-	}
+	// .wp-travel-popup {
+	// 	width: 300px;
+	// 	margin-left: calc(50% - 150px);
+	// }
 
 	.wp-travel-popup .popup-title {
 		text-align: center;
