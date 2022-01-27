@@ -40,8 +40,11 @@
 		// padding: 10px 0;
 		padding: 10px 0px; //(toolbar issue fix) 10px 25px before
 		// margin: 0 calc(-1 * var(--gap)); (commented this)
+		flex-wrap: wrap;
+		padding-left: 15px;
 		@media (max-width: 767px) {
 			gap: 0;
+			flex-wrap: wrap;
 		}
 		.wp-travel-filter-by-heading {
 			// float: left;

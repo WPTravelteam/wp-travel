@@ -1146,3 +1146,12 @@ ul.availabily-list {
 		font-weight: 700;
 	}
 }
+
+// Mobile menu multiple currency text color
+.sidr-class-wp-travel-multiple-currency {
+	select {
+		@media (max-width: 992px) {
+			color: #6e6e6e;
+		}
+	}
+}
