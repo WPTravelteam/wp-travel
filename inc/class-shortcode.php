@@ -192,7 +192,7 @@ class Wp_Travel_Shortcodes {
 		$query          = new WP_Query( $args );
 		ob_start();
 		?>
-		<div class="wp-travel-itinerary-items">
+		<div class="wp-travel-itinerary-items <?php echo esc_attr( 'grid' === $view_mode ? 'grid-view' : '' ); ?>">
 			<?php if ( $query->have_posts() ) : ?>
 				<?php if ( 'v1' === $layout_version ) : ?>
 					<ul style="" class="wp-travel-itinerary-list itinerary-<?php echo esc_attr( $col_per_row ); ?>-per-row">
@@ -215,7 +215,8 @@ class Wp_Travel_Shortcodes {
 						while ( $query->have_posts() ) :
 							$query->the_post();
 							wptravel_get_template_part( 'v2/content', 'archive-itineraries' );
-						endwhile; ?>
+						endwhile;
+						?>
 					</div>
 				<?php endif; ?>
 			<?php else : ?>
@@ -328,7 +329,7 @@ class Wp_Travel_Shortcodes {
 						<?php foreach ( $wp_travel_trip_facts as $key => $trip_fact ) : ?>
 							<?php
 
-								$icon = array_filter(
+								$icon  = array_filter(
 									$settings['wp_travel_trip_facts_settings'],
 									function( $setting ) use ( $trip_fact ) {
 
