@@ -339,10 +339,10 @@ $defaultColor: #3399ff;
 //Dates Trip Date Listing
 .wp-travel-list-view {
 	.wp-travel-booking__pricing-wrapper {
-		display: none;
-		.wp-travel-booking__pricing-name {
-			display: none;
-		}
+		// display: none;
+		// .wp-travel-booking__pricing-name {
+		// 	display: none;
+		// }
 		.wp-travel-booking__selected-time {
 			margin-bottom: 1rem;
 		}
@@ -400,6 +400,10 @@ $defaultColor: #3399ff;
 			background: #f9f9f9;
 			border: 1px solid #ccc;
 			border-radius: 3px;
+			margin-bottom: .8em;
+			button {
+				margin: 0 .5em;
+			}
 		}
 	}
 	.wp-travel-booking__pax-selector-wrapper {

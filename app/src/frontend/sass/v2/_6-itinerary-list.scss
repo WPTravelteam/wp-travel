@@ -71,20 +71,23 @@
 		padding: 0;
 		display: grid;
 		grid-gap: 20px;
-		grid-template-columns: repeat(auto-fill, minmax(295px, 1fr));
+		// grid-template-columns: repeat(auto-fill, minmax(295px, 1fr));
+		&.grid-view {
+			grid-template-columns: repeat(auto-fill, minmax(295px, 1fr));
+		}
 
-		&.itinerary-1-per-row {
+		&.itinerary-1-per-row.grid-view {
 			grid-template-columns: repeat(1, 1fr);
 		}
 
-		&.itinerary-2-per-row {
+		&.itinerary-2-per-row.grid-view {
 			grid-template-columns: repeat(2, 1fr);
 			@media (max-width: 650px) {
 				grid-template-columns: repeat(1, 1fr);
 			}
 		}
 
-		&.itinerary-3-per-row {
+		&.itinerary-3-per-row.grid-view {
 			grid-template-columns: repeat(3, 1fr);
 			@media (max-width: 991px) {
 				grid-template-columns: repeat(2, 1fr);
@@ -94,7 +97,7 @@
 			}
 		}
 
-		&.itinerary-4-per-row {
+		&.itinerary-4-per-row.grid-view {
 			grid-template-columns: repeat(4, 1fr);
 			@media (max-width: 1199px) {
 				grid-template-columns: repeat(3, 1fr);
@@ -107,7 +110,7 @@
 			}
 		}
 
-		&.itinerary-5-per-row {
+		&.itinerary-5-per-row.grid-view  {
 			grid-template-columns: repeat(5, 1fr);
 			@media (max-width: 1199px) {
 				grid-template-columns: repeat(3, 1fr);
@@ -120,7 +123,7 @@
 			}
 		}
 
-		&.itinerary-6-per-row {
+		&.itinerary-6-per-row.grid-view  {
 			grid-template-columns: repeat(6, 1fr);
 			@media (max-width: 1199px) {
 				grid-template-columns: repeat(3, 1fr);
@@ -133,7 +136,7 @@
 			}
 		}
 
-		&.itinerary-7-per-row {
+		&.itinerary-7-per-row.grid-view  {
 			grid-template-columns: repeat(7, 1fr);
 			@media (max-width: 1199px) {
 				grid-template-columns: repeat(3, 1fr);
@@ -146,7 +149,7 @@
 			}
 		}
 
-		&.itinerary-8-per-row {
+		&.itinerary-8-per-row.grid-view  {
 			grid-template-columns: repeat(8, 1fr);
 			@media (max-width: 1199px) {
 				grid-template-columns: repeat(3, 1fr);
@@ -159,7 +162,7 @@
 			}
 		}
 
-		&.itinerary-9-per-row {
+		&.itinerary-9-per-row.grid-view  {
 			grid-template-columns: repeat(9, 1fr);
 			@media (max-width: 1199px) {
 				grid-template-columns: repeat(3, 1fr);
