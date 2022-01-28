@@ -192,10 +192,10 @@ class Wp_Travel_Shortcodes {
 		$query          = new WP_Query( $args );
 		ob_start();
 		?>
-		<div class="wp-travel-itinerary-items <?php echo esc_attr( 'grid' === $view_mode ? 'grid-view' : '' ); ?>">
+		<div class="wp-travel-itinerary-items">
 			<?php if ( $query->have_posts() ) : ?>
 				<?php if ( 'v1' === $layout_version ) : ?>
-					<ul style="" class="wp-travel-itinerary-list itinerary-<?php echo esc_attr( $col_per_row ); ?>-per-row">
+					<ul style="" class="wp-travel-itinerary-list itinerary-<?php echo esc_attr( $col_per_row ); ?>-per-row  <?php echo esc_attr( 'grid' === $view_mode ? 'grid-view' : '' ); ?>">
 						<?php
 						while ( $query->have_posts() ) :
 							$query->the_post();
