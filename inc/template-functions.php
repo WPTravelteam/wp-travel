@@ -1048,42 +1048,11 @@ function wptravel_frontend_contents( $trip_id ) {
 							case 'faq':
 								?>
 								<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content et_smooth_scroll_disabled"> <!-- class et_smooth_scroll_disabled to fix faq accordion issue with divi theme. -->
-									<div class="panel-group" id="accordion">
 									<?php
-									$faqs = wptravel_get_faqs( $trip_id );
-									if ( is_array( $faqs ) && count( $faqs ) > 0 ) {
-										?>
-										<div class="wp-collapse-open clearfix">
-											<a href="#" class="open-all-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ); ?></span></a>
-											<a href="#" class="close-all-link" style="display:none;"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ); ?></span></a>
-										</div>
-										<?php foreach ( $faqs as $k => $faq ) : ?>
-										<div class="panel panel-default">
-										<div class="panel-heading">
-										<h4 class="panel-title">
-											<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo esc_attr( $k + 1 ); ?>">
-											<?php echo esc_html( $faq['question'] ); ?>
-											<span class="collapse-icon"></span>
-											</a>
-										</h4>
-										</div>
-										<div id="collapse<?php echo esc_attr( $k + 1 ); ?>" class="panel-collapse collapse">
-										<div class="panel-body">
-											<?php echo wp_kses_post( wpautop( $faq['answer'] ) ); ?>
-										</div>
-										</div>
-									</div>
-											<?php
-										endforeach;
-									} else {
-										?>
-										<div class="while-empty">
-											<p class="wp-travel-no-detail-found-msg" >
-												<?php esc_html_e( 'No Details Found', 'wp-travel' ); ?>
-											</p>
-										</div>
-									<?php } ?>
-									</div>
+									// $template = wptravel_get_template( 'content-faqs.php' );
+									// load_template( $template );
+									wptravel_get_template_part( 'content', 'faqs' );
+									?>
 								</div>
 								<?php
 								break;
