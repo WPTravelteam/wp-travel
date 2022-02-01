@@ -2839,7 +2839,7 @@ function wptravel_get_bank_deposit_account_table( $show_description = true ) {
 			?>
 			<p class="description"><?php echo esc_html( $wp_travel_bank_deposit_description ); ?></p>
 		<?php endif; ?>
-
+		<div class="popup-bank-details">
 		<table width="100%">
 			<tr>
 				<?php if ( isset( $account_data[0]['account_name'] ) ) : ?>
@@ -2884,6 +2884,7 @@ function wptravel_get_bank_deposit_account_table( $show_description = true ) {
 				</tr>
 			<?php } ?>
 		</table>
+		</div>
 		<?php
 	} else {
 		esc_html_e( 'No detail found', 'wp-travel' );
@@ -3472,14 +3473,16 @@ function wptravel_get_trip_pricing_option( $trip_id = null ) {
 						foreach ( $pricing_categories as $index => $pricing_category ) {
 
 							if ( $switch_to_react ) {
+								$regular_price = isset( $pricing_category['regular_price'] ) ? $pricing_category['regular_price'] : 0;
+								$sale_price    = isset( $pricing_category['sale_price'] ) ? $pricing_category['sale_price'] : 0;
 								$pricing_category_id = $pricing_category['id'];
 								// $categories[ $pricing_category['id'] ] = $pricing_category;
 								$categories[ $pricing_category_id ]['type']         = 'custom'; // following the tradition.
 								$categories[ $pricing_category_id ]['custom_label'] = isset( $pricing_category['term_info'] ) && isset( $pricing_category['term_info']['title'] ) ? $pricing_category['term_info']['title'] : '';
 								$categories[ $pricing_category_id ]['price_per']    = $pricing_category['price_per'];
 								$categories[ $pricing_category_id ]['enable_sale']  = isset( $pricing_category['is_sale'] ) ? 'yes' : 'no';
-								$categories[ $pricing_category_id ]['regular']      = $pricing_category['regular_price'];
-								$categories[ $pricing_category_id ]['price']        = $pricing_category['sale_price'];
+								$categories[ $pricing_category_id ]['regular']      = $regular_price;
+								$categories[ $pricing_category_id ]['price']        = $sale_price;
 							} else {
 								$category_id                      = $index;
 								$args                             = $args_regular = array(
