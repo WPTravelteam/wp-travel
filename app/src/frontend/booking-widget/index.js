@@ -50,7 +50,8 @@ const WPTravelBookingWidget = ( props ) => {
 		excludedDateTimes,
 		rruleAll,
 		paxCounts,
-		tripExtras,
+		tripExtras, // Selected extras items
+		allTripExtras,
 		inventory,
 		isLoading,
 		pricingUnavailable,
@@ -95,13 +96,28 @@ const WPTravelBookingWidget = ( props ) => {
 		let _state = {
 			pricingUnavailable: false
 		}
+		let pricing = pricings[selectedPricing]
+
+		if (pricing.trip_extras.length > 0) {
+			if ( pricing.trip_extras.length > 0 && ! allTripExtras.length ) {
+				const url = `${wp_travel.ajaxUrl}?action=wp_travel_get_trip_extras&_nonce=${_wp_travel._nonce}`;
+				apiFetch( { url: url, data: {trip_ids:pricing.trip_extras}, method:'post' } ).then( ( result ) => {
+					if ( result.success ) {
+						console.log( 'result.data.trip_extras', result.data.trip_extras );
+						updateState({ allTripExtras: result.data.trip_extras })
+					}
+				} )
+			}
+		}
+
+
 		let times = getPricingTripTimes(selectedPricing, selectedTripDate)
 		// if ( isLoading ) { // Prevent looping request.
 
 			if (isInventoryEnabled && isFixedDeparture) {
 				setInventoryData(selectedPricing, selectedDate, times)
 			} else {
-				let pricing = pricings[selectedPricing]
+				
 				let categories = pricing.categories
 				let _paxCounts = {}
 				categories.forEach(c => {
@@ -112,8 +128,8 @@ const WPTravelBookingWidget = ( props ) => {
 				let _tripExtras = {}
 	
 				if (pricing.trip_extras.length > 0) {
-					pricing.trip_extras.forEach(x => {
-						_tripExtras = { ..._tripExtras, [x.id]: x.is_required ? 1 : 0 }
+					pricing.trip_extras.forEach(id => {
+						_tripExtras = { ..._tripExtras, [id]:0 }
 					})
 				}
 	
@@ -512,8 +528,9 @@ const WPTravelBookingWidget = ( props ) => {
 					let _tripExtras = {}
 					let pricing = pricings[pricingId]
 					if (pricing.trip_extras.length > 0) {
-						pricing.trip_extras.forEach(x => {
-							_tripExtras = { ..._tripExtras, [x.id]: x.is_required ? 1 : 0 }
+						// console.log( pricing );
+						pricing.trip_extras.forEach(id => {
+							_tripExtras = { ..._tripExtras, [id]: 0 }
 						})
 						_state = { ..._state, tripExtras: _tripExtras }
 					}
@@ -610,10 +627,11 @@ const WPTravelBookingWidget = ( props ) => {
 		nomineeTimes:nomineeTimes, // For time picker
 		totalPax:totalPax, // For extras.
 		tripExtras:tripExtras, // For extras.
+		allTripExtras:allTripExtras,
 		updateState:updateState, // For extras.
 		isLoading:isLoading
 	}
-
+	console.log(componentData);
 
     let tripData = allData.tripData;
     const {

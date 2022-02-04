@@ -153,6 +153,7 @@ export const DEFAULT_BOOKING_STATE = () => {
         rruleAll: {},
         paxCounts: {},
         tripExtras: {},
+        allTripExtras:[],
         inventory: [],
         isLoading: false,
         excludedDateTimes: [],

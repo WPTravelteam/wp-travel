@@ -17,6 +17,7 @@ class WP_Travel_Helpers_Trip_Extras {
 
 		$_trip_extras = array();
 		$index        = 0;
+		error_log( print_r( '$trip_extras', true ) );
 		foreach ( $trip_extras as $key => $trip_extra ) {
 			$tour_extras_metas                 = get_post_meta( $trip_extra->ID, 'wp_travel_tour_extras_metas', true );
 			$tour_extras_metas                 = maybe_unserialize( $tour_extras_metas );

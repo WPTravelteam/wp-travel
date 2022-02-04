@@ -70,6 +70,7 @@ const BookingWidget = (props) => {
 		rruleAll,
 		paxCounts,
 		tripExtras,
+		allTripExtras,
 		inventory,
 		isLoading,
 		pricingUnavailable,
@@ -143,6 +144,7 @@ const BookingWidget = (props) => {
 			return total
 		}
 		let _tripExtras = selectedPricing && _.keyBy(pricings[selectedPricing].trip_extras, tx => tx.id)
+		console.log('tripExtras',tripExtras)
 		txTotal = _.size(tripExtras) > 0 && Object.entries(tripExtras).map(([i, count]) => {
 			let tx = _tripExtras[i]
 			if (!tx || typeof tx.tour_extras_metas == 'undefined') {
@@ -317,7 +319,7 @@ const BookingWidget = (props) => {
 								!pricingUnavailable && totalPax > 0 && _.size(pricings[selectedPricing].trip_extras) > 0 && <ErrorBoundry>
 									{/* <Suspense fallback={<Loader />}> */}
 										<TripExtrasListing
-											options={pricings[selectedPricing].trip_extras}
+											options={allTripExtras}
 											onChange={(id, value) => () => updateState({ tripExtras: { ...tripExtras, [id]: parseInt(value) } })}
 											counts={tripExtras}
 										/>

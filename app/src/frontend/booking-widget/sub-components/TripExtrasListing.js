@@ -1,11 +1,17 @@
 import { __ } from '@wordpress/i18n';
 import { wpTravelFormat } from '../functions'
+import apiFetch from '@wordpress/api-fetch';
+import { useState } from '@wordpress/element'
 
 const { currency_symbol: currencySymbol } = _wp_travel
 const __i18n = {
 	..._wp_travel.strings
 }
 const TripExtrasListing = ({ options, onChange, counts }) => {
+console.log( 'options', options );
+
+	// const [allTripExtras, setAllTripExtras] = useState([])
+
 	const handleClick = (index, inc) => () => {
 		let id = options[index].id
 		let _xcount = counts[id] + inc < 0 ? 0 : counts[id] + inc
@@ -13,7 +19,14 @@ const TripExtrasListing = ({ options, onChange, counts }) => {
 			_xcount = 1
 		onChange(id, _xcount)()
 	}
-
+	// if ( options.length > 0 && ! allTripExtras.length ) {
+	// 	const url = `${wp_travel.ajaxUrl}?action=wp_travel_get_trip_extras&_nonce=${_wp_travel._nonce}`;
+	// 	apiFetch( { url: url, data: {trip_ids:options}, method:'post' } ).then( ( result ) => {
+	// 		if ( result.success ) {
+	// 			setAllTripExtras( result.data.trip_extras );
+	// 		}
+	// 	} )
+	// }
 	return <div className="wp-travel-booking__trip-extras-wrapper">
 		{
 			options.length > 0 && <>

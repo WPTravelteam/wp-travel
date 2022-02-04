@@ -191,6 +191,7 @@ const RecurringDates = ({ data, isTourDate, getPricingsByDate, onFixedDepartureP
                                 <PaxSelector
                                     pricing={componentData.pricing ? componentData.pricing : firstPricing }
                                     onPaxChange={componentData.onPaxChange}
+
                                     counts={componentData.counts ? componentData.counts : firstCounts }
                                     inventory={componentData.inventory}
                                 />
@@ -199,7 +200,7 @@ const RecurringDates = ({ data, isTourDate, getPricingsByDate, onFixedDepartureP
                                 // <Suspense fallback={<Loader />}>
                                     <ErrorBoundry>
                                         <TripExtrasListing
-                                            options={componentData.pricing.trip_extras}
+                                            options={componentData.allTripExtras}
                                             onChange={(id, value) => () => componentData.updateState({ tripExtras: { ...componentData.tripExtras, [id]: parseInt(value) } })}
                                             counts={componentData.tripExtras}
                                         />
@@ -397,7 +398,7 @@ const DatesListing = ({ dates, isTourDate, getPricingsByDate, allData, onFixedDe
                                                                         // <Suspense fallback={<Loader />}>
                                                                             <ErrorBoundry>
                                                                                 <TripExtrasListing
-                                                                                    options={componentData.pricing.trip_extras}
+                                                                                    options={componentData.allTripExtras}
                                                                                     onChange={(id, value) => () => componentData.updateState({ tripExtras: { ...componentData.tripExtras, [id]: parseInt(value) } })}
                                                                                     counts={componentData.tripExtras}
                                                                                 />

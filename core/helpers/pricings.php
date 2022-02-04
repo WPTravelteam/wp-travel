@@ -81,15 +81,16 @@ class WpTravel_Helpers_Pricings {
 			}
 			$pricings[ $index ]['trip_extras'] = array();
 			if ( ! empty( $price->trip_extras ) ) {
-				$trip_extras = WP_Travel_Helpers_Trip_Extras::get_trip_extras(
-					array(
-						'post__in' => explode( ',', trim( $price->trip_extras ) ),
-					)
-				);
+				$pricings[ $index ]['trip_extras'] = explode( ',', trim( $price->trip_extras ) );
+				// $trip_extras = WP_Travel_Helpers_Trip_Extras::get_trip_extras(
+				// 	array(
+				// 		'post__in' => explode( ',', trim( $price->trip_extras ) ),
+				// 	)
+				// );
 
-				if ( ! is_wp_error( $trip_extras ) && 'WP_TRAVEL_TRIP_EXTRAS' === $trip_extras['code'] ) {
-					$pricings[ $index ]['trip_extras'] = $trip_extras['trip_extras'];
-				}
+				// if ( ! is_wp_error( $trip_extras ) && 'WP_TRAVEL_TRIP_EXTRAS' === $trip_extras['code'] ) {
+				// 	$pricings[ $index ]['trip_extras'] = $trip_extras['trip_extras'];
+				// }
 			}
 
 			if ( absint( $price->id ) === absint( $pricing_id ) ) {
