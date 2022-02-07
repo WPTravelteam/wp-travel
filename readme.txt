@@ -253,7 +253,6 @@ Enhancement:
 
 Fixes:
 * Group size value not updated if we set it and removed all prices.
-* Overview content not being displayed for v3 trips.
 * Fixed Gallery images not being saved on a new trip.
 * Fixed Booking tab switch to Dashboard tab when clicking booking detail page.
 * Fixed Blocks Plugin not working in windows.
