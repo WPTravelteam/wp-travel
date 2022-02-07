@@ -246,7 +246,7 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
 = 5.1.0 =
-Release Date: 23rd January, 2022
+Release Date: 7th February, 2022
 
 Enhancement:
 * New layout implemented for archive page.
@@ -259,19 +259,14 @@ Fixes:
 * Fixed Blocks Plugin not working in windows.
 * Fixed function `wptravel_account_tab_content` already exists issue.
 * Fixed Custom fields added from field editor value mismatch. If we add Select, Radio, and checkbox as input from the field editor, the value of these inputs is displayed as an index.
-* Fixed HTML entities displaying in privacy policy text in checkout page.
+* Fixed HTML entities displaying in privacy policy text on the checkout page.
 
 Layout Fixes:
 * Issue in user dashboard during bank deposit payment popup fix.
 * Text invisible while viewing bank details in user dashboard fix.
 * Gap between the search button and dropdown in WP Travel search widget fix.
 * Widget area list and grid view fixed in responsive.
-* Single trip page tab section next and previous button not working in a responsive fix.
-* Table border layout fixes in the dashboard page.
-* Gallery section Mansory layout fix.
-
-Removed:
-* Removed switch to v4 option as per pre-notification.
+* Single trip page tab section next and previous button not wo
 
 = 5.0.7 =
 Release Date: 27th December, 2021
