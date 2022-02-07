@@ -164,7 +164,7 @@
 		display: grid;
 		grid-gap: 20px;
 		// grid-template-columns: repeat(2, 1fr);
-	
+
 		margin-left: 0;
 		&.grid-view {
 			grid-template-columns: repeat(auto-fill, minmax(295px, 1fr));
@@ -525,7 +525,10 @@
 	.wp-travel-itinerary-items {
 		.wp-travel-itinerary-list {
 			display: grid !important;
-			grid-template-columns: repeat(auto-fill, minmax(295px, 1fr));   // 275px, 295px previous
+			grid-template-columns: repeat(
+				auto-fill,
+				minmax(295px, 1fr)
+			); // 275px, 295px previous
 			// grid-template-columns: repeat(3, 1fr);
 			// @media (max-width: 991px) {
 			// 	grid-template-columns: repeat(2, 1fr);
@@ -1438,3 +1441,12 @@
 		}
 	}
 }
+
+// Multiple currency widgets table scroll
+.widget_wp_travel_currency_exchange_rates_id {
+	.wptravel-currency-exchange-rates {
+		overflow-x: auto;
+	}
+}
+
+

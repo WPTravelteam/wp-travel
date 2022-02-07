@@ -1255,3 +1255,11 @@
 		}
 	}
 }
+
+// Multiple currency widgets table scroll
+.widget_wp_travel_currency_exchange_rates_id {
+	.wptravel-currency-exchange-rates {
+		overflow-x: auto;
+	}
+}
+
