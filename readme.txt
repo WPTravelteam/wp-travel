@@ -266,7 +266,12 @@ Layout Fixes:
 * Text invisible while viewing bank details in user dashboard fix.
 * Gap between the search button and dropdown in WP Travel search widget fix.
 * Widget area list and grid view fixed in responsive.
-* Single trip page tab section next and previous button not wo
+* Single trip page tab section next and previous button not working.
+* Fixed archive page list view wishlist icon position.
+* Fixed checkout page book now button layout.
+* Fixed Single Trip page trip enquiry popup error message.
+* Fixed Sidebar multiple currency table layout.
+* Fixed Single trip page booking tab pax selector section layout  in responsive and mobile view.
 
 = 5.0.7 =
 Release Date: 27th December, 2021
