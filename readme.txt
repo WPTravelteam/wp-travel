@@ -250,6 +250,7 @@ Release Date: 8th February, 2022
 
 Enhancement:
 * New layout implemented for archive page.
+* Added inventory support for trip duration.
 
 Fixes:
 * Group size value not updated if we set it and removed all prices.

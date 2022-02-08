@@ -98,7 +98,7 @@ const WPTravelBookingWidget = ( props ) => {
 		let times = getPricingTripTimes(selectedPricing, selectedTripDate)
 		// if ( isLoading ) { // Prevent looping request.
 
-			if (isInventoryEnabled && isFixedDeparture) {
+			if (isInventoryEnabled ) {
 				setInventoryData(selectedPricing, selectedDate, times)
 			} else {
 				let pricing = pricings[selectedPricing]
@@ -451,6 +451,7 @@ const WPTravelBookingWidget = ( props ) => {
 		let maxPax = _inventory && _inventory.pax_available
 		// }
 		if (maxPax >= 1) {
+
 			let _totalPax = _.size(paxCounts) > 0 && Object.values(paxCounts).reduce((acc, curr) => acc + curr) || 0
 			if (_totalPax + value > parseInt(maxPax)) {
 				if (e.target.parentElement.querySelector('.error'))
