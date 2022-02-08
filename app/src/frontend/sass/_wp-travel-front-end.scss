@@ -577,24 +577,19 @@ ul.availabily-list {
 	.tour-info-column {
 		width: 100%;
 		float: left;
-		display: -webkit-flex;
-		display: -mox-flex;
-		display: flex;
-		flex-wrap: wrap;
-
-		-webkit-flex-flow: row wrap;
-		-ms-flex-flow: row wrap;
-		-moz-flex-flow: row wrap;
-		justify-content: left;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+		gap: 1em;
 
 		.tour-info-item {
 			display: inline-flex;
 			font-style: italic;
 			color: #595959;
-			width: 33.3333%;
+			// width: 33.3333%;
+			width: 100%;
 			float: left;
 			margin: 2px 0;
-			padding: 0 5px;
+			padding: 0;
 			align-items: center;
 
 			@include sidr-view {

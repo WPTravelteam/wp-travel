@@ -577,24 +577,21 @@ ul.availabily-list {
 
 	.tour-info-column {
 		width: 100%;
-		// float: left;
-		display: flex;
-		flex-wrap: wrap;
-		// justify-content: space-between;
+		// display: flex;
+		// flex-wrap: wrap;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+		gap: 1em;
 
 		.tour-info-item {
 			display: inline-flex;
-			// font-style: italic;
-			// width: 33.3333%;
-			// float: left;
 			margin: 2px 0;
-			// padding: 0 5px;
-			// width: auto;
 			align-items: center;
-			width: 33.3333333%;
+			// width: 33.3333333%;
 			flex-wrap: wrap;
 			align-items: center;
-			// padding: 0 15px 0 0;
+			padding: 0;
+			width: 100%;
 
 			@include sidr-view {
 				width: 50%;
