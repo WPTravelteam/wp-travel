@@ -541,3 +541,13 @@ td {
 		width: 70%;
 	}
 }
+
+// Widget Backend Editor
+.wp-block[data-type="core/widget-area"] .editor-styles-wrapper .wp-block.wp-block.wp-block.wp-block.wp-block {
+	width: 100%;
+}
+.block-editor-block-list__block {
+	.block-list-appender {
+		position: relative;
+	}
+}
