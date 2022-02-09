@@ -10,6 +10,8 @@ project.properties
 /node_modules/
 /deploy/
 /build/
+/bundle/
+svn_folder
 /app/build
 # Docs
 /docs/

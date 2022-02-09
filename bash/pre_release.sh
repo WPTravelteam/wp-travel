@@ -14,7 +14,7 @@ git checkout main
 echo "*********************************"
 
 echo "Assets Tasks"
-yarn build:pre_release
+yarn bundle
 echo "*********************************"
 
 echo "State files"
@@ -29,13 +29,11 @@ echo "Push files"
 git push origin main
 echo "*********************************"
 
-if [ $1 ]; then
-  echo "Tag"
-  git tag $PACKAGE_VERSION
-  echo "*********************************"
 
-  echo "Push tag"
-  git push origin $PACKAGE_VERSION
-  echo "*********************************"
+echo "Tag"
+git tag $PACKAGE_VERSION
+echo "*********************************"
 
-fi
+echo "Push tag"
+git push origin $PACKAGE_VERSION
+echo "*********************************"

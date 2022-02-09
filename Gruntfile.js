@@ -73,7 +73,7 @@ module.exports = function (grunt) {
 				'build'
 			],
 			postx_build: [
-				'build/<%= pkg.name %>'
+				'bundle/<%= pkg.version %>/<%= pkg.name %>'
 			]
 		},
 		copy: {
@@ -83,7 +83,7 @@ module.exports = function (grunt) {
 				},
 				expand: true,
 				src: svn_files_list,
-				dest: 'build/<%= pkg.name %>/'
+				dest: 'bundle/<%= pkg.version %>/<%= pkg.name %>/'
 			},
 			deploy: {
 				src: [
@@ -151,7 +151,7 @@ module.exports = function (grunt) {
 				options: {
 					type: 'wp-plugin',
 					domainPath: 'i18n/languages',
-					exclude: ['deploy/.*', 'node_modules/.*', 'build/.*', 'wordpress/.*', 'vendor/.*'],
+					exclude: ['deploy/.*', 'node_modules/.*', 'bundle/.*', 'wordpress/.*', 'vendor/.*'],
 					updateTimestamp: false,
 					potHeaders: {
 						'report-msgid-bugs-to': '',
@@ -300,7 +300,7 @@ module.exports = function (grunt) {
 					'app/build/wp-travel-frontend.bundle.css': [
 						'app/assets/css/lib/magnific-popup/magnific-popup.css', // wp-travel-popup
 						'app/assets/css/lib/easy-responsive-tabs/easy-responsive-tabs.css', // easy-responsive-tabs
-						'app/assets/css/lib/datepicker/datepicker.css', // 
+						'app/assets/css/lib/datepicker/datepicker.css', //
 						'app/assets/css/lib/slick/slick.min.css',
 						'app/build/wp-travel-front-end.css',
 					],
@@ -352,7 +352,7 @@ module.exports = function (grunt) {
 					archive: 'deploy/<%= pkg.name %>-<%= pkg.version %>.zip'
 				},
 				cwd: 'deploy/<%= pkg.name %>/',
-				src: ['**/*', '!build/**'],
+				src: ['**/*', '!bundle/**'],
 				dest: '<%= pkg.name %>/'
 			}
 		},
@@ -360,9 +360,9 @@ module.exports = function (grunt) {
 		zip: {
 			// 'build/<%= pkg.name %>-<%= pkg.version %>.zip': [svn_files_list]
 			'using-delate': {
-				cwd: 'build/',
-				src: ['build/<%= pkg.name %>/**'],
-				dest: 'build/<%= pkg.name %>-<%= pkg.version %>.zip',
+				cwd: 'bundle/<%= pkg.version %>/',
+				src: ['bundle/<%= pkg.version %>/<%= pkg.name %>/**'],
+				dest: 'bundle/<%= pkg.name %>-<%= pkg.version %>.zip',
 				compression: 'DEFLATE'
 			}
 		},
@@ -391,18 +391,18 @@ module.exports = function (grunt) {
 			}
 		},
 
-		writefile: {
-			options: {
-				// data: 'path/to/data.json',
-				data: package_json,
-			},
-			main: {
-				files: [{
-					src: 'bash/push_dot_org.hbs',
-					dest: `push_dot_org.sh`,
-				}]
-			}
-		}
+		// writefile: {
+		// 	options: {
+		// 		// data: 'path/to/data.json',
+		// 		data: package_json,
+		// 	},
+		// 	main: {
+		// 		files: [{
+		// 			src: 'bash/push_dot_org.hbs',
+		// 			dest: `push_dot_org.sh`,
+		// 		}]
+		// 	}
+		// }
 
 	});
 
@@ -465,7 +465,7 @@ module.exports = function (grunt) {
 	]);
 
 	grunt.registerTask('pre_vcs', ['assets', 'textdomain']);
-	grunt.registerTask('pre_release', ['pre_vcs', 'writefile']);
+	grunt.registerTask('pre_release', ['pre_vcs']);
 	grunt.registerTask('release', ['push_svn']);
 	grunt.registerTask('post_release', ['clean:post_build']);
 
