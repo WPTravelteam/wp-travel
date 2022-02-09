@@ -1,13 +1,19 @@
 #!/bin/bash
 
-VERSION=$1
+# Version key/value should be on his own line
+PACKAGE_VERSION=$(cat package.json \
+  | grep version \
+  | head -1 \
+  | awk -F: '{ print $2 }' \
+  | sed 's/[",]//g' \
+  | tr -d '[[:space:]]')
+
 
 echo "Checkout dev"
-git checkout dev
+git checkout main
 echo "*********************************"
 
 echo "Assets Tasks"
-# grunt pre_release
 yarn build:pre_release
 echo "*********************************"
 
@@ -16,40 +22,20 @@ git add --all
 echo "*********************************"
 
 echo "Commit files"
-git commit -m "Changes for $VERSION"
+git commit -m "Changes for $PACKAGE_VERSION"
 echo "*********************************"
 
 echo "Push files"
-git push origin dev
+git push origin main
 echo "*********************************"
 
 if [ $1 ]; then
   echo "Tag"
-  git tag $VERSION
+  git tag $PACKAGE_VERSION
   echo "*********************************"
 
   echo "Push tag"
-  git push origin $VERSION
-  echo "*********************************"
-
-  echo "Checkout to master"
-  #git checkout master
-  echo "*********************************"
-
-  echo "Pull master"
-  #git pull origin master
-  echo "*********************************"
-
-  echo "Merge with dev"
-  #git merge dev
-  echo "*********************************"
-
-  echo "Push master"
-  #git push origin master
-  echo "*********************************"
-
-  echo "Checkout dev"
-  #git checkout dev
+  git push origin $PACKAGE_VERSION
   echo "*********************************"
 
 fi
