@@ -246,7 +246,7 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
 = 5.1.0 =
-Release Date: 8th February, 2022
+Release Date: 9th February, 2022
 
 Enhancement:
 * New layout implemented for archive page.
