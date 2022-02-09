@@ -21,7 +21,7 @@ class WP_Travel_FW_Field_Textarea {
 			}
 		}
 
-		$output = sprintf( '<textarea id="%s" name="%s" %s %s>', $this->field['id'], $this->field['name'], $validations, $attributes );
+		$output  = sprintf( '<textarea id="%s" name="%s" %s %s>', $this->field['id'], $this->field['name'], $validations, $attributes );
 		$output .= $this->field['default'];
 		$output .= sprintf( '</textarea>' );
 

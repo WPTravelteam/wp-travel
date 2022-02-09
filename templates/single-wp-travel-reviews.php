@@ -9,10 +9,10 @@
  * as little as possible, but it does happen. When this occurs the version of the template file will.
  * be bumped and the readme will list any important changes.
  *
- * @see         http://docs.wensolutions.com/document/template-structure/
- * @author      WenSolutions
- * @package     wp-travel/Templates
- * @since       1.0.0
+ * @see     http://docs.wensolutions.com/document/template-structure/
+ * @author  WenSolutions
+ * @package WP_Travel
+ * @since   1.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -31,7 +31,7 @@ if ( ! comments_open() ) {
 			<?php if ( have_comments() ) : ?>
 
 				<ol class="commentlist">
-					<?php wp_list_comments( apply_filters( 'wp_travel_review_list_args', array( 'callback' => 'wp_travel_comments' ) ) ); ?>
+					<?php wp_list_comments( apply_filters( 'wp_travel_review_list_args', array( 'callback' => 'wptravel_comments' ) ) ); ?>
 				</ol>
 
 				<?php
@@ -80,15 +80,15 @@ if ( ! comments_open() ) {
 				);
 
 
-				$comment_form['must_log_in'] = '<p class="must-log-in">' . sprintf( __( 'You must be <a href="%s">logged in</a> to post a review.', 'wp-travel' ), esc_url( wp_login_url() ) ) . '</p>';
+				$comment_form['must_log_in'] = '<p class="must-log-in">' . sprintf( __( 'You must be <a href="%1s">logged in</a> to post a review.', 'wp-travel' ), esc_url( wp_login_url() ) ) . '</p>';
 
 				// if ( get_option( 'wp-travel_enable_review_rating' ) === 'yes' ) {
 					$comment_form['comment_field'] = '<p class="comment-form-rating"><label for="wp_travel_rate_val">' . __( 'Your Rating', 'wp-travel' ) . '</label><div id="wp-travel_rate" class="clearfix">
-								<a href="#" class="rate_label dashicons dashicons-star-empty" data-id="1"></a>
-								<a href="#" class="rate_label dashicons dashicons-star-empty" data-id="2"></a>
-								<a href="#" class="rate_label dashicons dashicons-star-empty" data-id="3"></a>
-								<a href="#" class="rate_label dashicons dashicons-star-empty" data-id="4"></a>
-								<a href="#" class="rate_label dashicons dashicons-star-empty" data-id="5"></a>
+								<a href="#" class="rate_label far fa-star" data-id="1"></a>
+								<a href="#" class="rate_label far fa-star" data-id="2"></a>
+								<a href="#" class="rate_label far fa-star" data-id="3"></a>
+								<a href="#" class="rate_label far fa-star" data-id="4"></a>
+								<a href="#" class="rate_label far fa-star" data-id="5"></a>
 							</div>
 							<input type="hidden" value="0" name="wp_travel_rate_val" id="wp_travel_rate_val" ></p>';
 				// }

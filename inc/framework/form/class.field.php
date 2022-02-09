@@ -53,7 +53,7 @@ class WP_Travel_FW_Field {
 		);
 
 		$field_types['select'] = array(
-			'label' => __( 'Select', 'wp-travel' ),
+			'label' => __( 'Dropdown', 'wp-travel' ),
 			'class' => 'WP_Travel_FW_Field_Select',
 		);
 
@@ -106,16 +106,16 @@ class WP_Travel_FW_Field {
 			'label' => __( 'Date Range', 'wp-travel' ),
 			'class' => 'WP_Travel_FW_Field_Date_Range',
 		);
-		$field_types['file'] = array(
+		$field_types['file']       = array(
 			'label' => __( 'File', 'wp-travel' ),
 			'class' => 'WP_Travel_FW_Field_File',
 		);
-		$field_types = apply_filters( 'wp_travel_register_field_types', $field_types );
+		$field_types               = apply_filters( 'wp_travel_register_field_types', $field_types );
 		return $field_types;
 	}
 
 	private function field_types() {
-		$fields = $this->register_field_types();
+		$fields        = $this->register_field_types();
 		$field_classes = wp_list_pluck( $fields, 'class' );
 		return $field_classes;
 	}
@@ -136,7 +136,7 @@ class WP_Travel_FW_Field {
 
 	function template( $field, $content ) {
 		ob_start();
-		$classes = ( isset($field['wrapper_class'] ) ) ? $field['wrapper_class'] : '';
+		$classes = ( isset( $field['wrapper_class'] ) ) ? $field['wrapper_class'] : '';
 		$classes = ( 'radio' === $field['type'] ) ? $classes . ' wp-travel-radio-group ' : $classes;
 		?>
 			<div class="wp-travel-form-field <?php echo esc_attr( $classes ); ?>">
@@ -146,7 +146,7 @@ class WP_Travel_FW_Field {
 						<span class="required-label">*</span>
 					<?php } ?>
 				</label>
-				<?php echo $content; ?>
+				<?php echo $content; // @phpcs:ignore ?>
 			</div>
 		<?php
 		$content = ob_get_contents();
@@ -159,7 +159,7 @@ class WP_Travel_FW_Field {
 	}
 
 	function render_input( $field ) {
-		if ( ! $field  ) {
+		if ( ! $field ) {
 			return;
 		}
 		echo $this->process_single( $field );
@@ -168,7 +168,7 @@ class WP_Travel_FW_Field {
 	private function process_single( $field ) {
 		$field = $this->verify_arguments( $field );
 		if ( $field ) {
-			$field_init = new $this->field_types[ $field['type'] ];
+			$field_init = new $this->field_types[ $field['type'] ]();
 			return $field_init->init( $field )->render( false );
 		}
 		return;
@@ -176,15 +176,15 @@ class WP_Travel_FW_Field {
 
 	function verify_arguments( $field ) {
 		if ( ! empty( $field['type'] ) && array_key_exists( $field['type'], $this->field_types ) ) {
-			$field['label'] = isset( $field['label'] ) ? $field['label'] : '';
-			$field['name'] = isset( $field['name'] ) ? $field['name'] : '';
-			$field['id'] = isset( $field['id'] ) ? $field['id'] : $field['name'];
-			$field['class'] = isset( $field['class'] ) ? $field['class'] : '';
-			$field['placeholder'] = isset( $field['placeholder'] ) ? $field['placeholder'] : '';
+			$field['label']         = isset( $field['label'] ) ? $field['label'] : '';
+			$field['name']          = isset( $field['name'] ) ? $field['name'] : '';
+			$field['id']            = isset( $field['id'] ) ? $field['id'] : $field['name'];
+			$field['class']         = isset( $field['class'] ) ? $field['class'] : '';
+			$field['placeholder']   = isset( $field['placeholder'] ) ? $field['placeholder'] : '';
 			$field['wrapper_class'] = isset( $field['wrapper_class'] ) ? $field['wrapper_class'] : '';
 			$field['wrapper_class'] = ( 'text_info' === $field['type'] ) ? $field['wrapper_class'] . ' wp-travel-text-info' : $field['wrapper_class'];
-			$field['default'] = isset( $field['default'] ) ? $field['default'] : '';
-			$field['attributes'] = isset( $field['attributes'] ) ? $field['attributes'] : array();
+			$field['default']       = isset( $field['default'] ) ? $field['default'] : '';
+			$field['attributes']    = isset( $field['attributes'] ) ? $field['attributes'] : array();
 
 			// remove required attr if set false.
 			if ( isset( $field['validations']['required'] ) && ( false === $field['validations']['required'] || '' === $field['validations']['required'] ) ) {

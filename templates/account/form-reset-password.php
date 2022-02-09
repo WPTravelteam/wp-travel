@@ -9,10 +9,10 @@
  * as little as possible, but it does happen. When this occurs the version of the template file will.
  * be bumped and the readme will list any important changes.
  *
- * @see 	    http://docs.wensolutions.com/document/template-structure/
- * @author      WenSolutions
- * @package     wp-travel/Templates
- * @since       1.0.0
+ * @see     http://docs.wensolutions.com/document/template-structure/
+ * @author  WenSolutions
+ * @package WP_Travel
+ * @since   1.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Print Errors / Notices.
-wp_travel_print_notices(); ?>
+wptravel_print_notices(); ?>
 
 
 

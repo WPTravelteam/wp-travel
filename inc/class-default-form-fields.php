@@ -1,5 +1,14 @@
 <?php
-class WP_Travel_Default_Form_Fields {
+/**
+ * Default form fields.
+ *
+ * @package WP_Travel
+ */
+
+/**
+ * Default form fields.
+ */
+class WP_Travel_Default_Form_Fields { // @phpcs:ignore
 
 	/**
 	 * Default field to generate enquiry form fields.
@@ -7,25 +16,33 @@ class WP_Travel_Default_Form_Fields {
 	 * @return array Returns form fields.
 	 */
 	public static function enquiry() {
-		$fields = array(
+
+		$strings                  = WpTravel_Helpers_Strings::get();
+		$label_full_name          = $strings['full_name'];
+		$label_enter_your_name    = $strings['enter_your_name'];
+		$label_email              = $strings['email'];
+		$label_enter_your_email   = $strings['enter_your_email'];
+		$label_enquiry_message    = $strings['enquiry_message'];
+		$label_enter_your_enquiry = $strings['enter_your_enquiry'];
+		$fields                   = array(
 			'full_name' => array(
 				'type'        => 'text',
-				'label'       => __( 'Full Name', 'wp-travel' ),
+				'label'       => $label_full_name,
 				'name'        => 'wp_travel_enquiry_name',
 				'id'          => 'wp-travel-enquiry-name',
-				'placeholder' => __( 'Enter your name', 'wp-travel' ),
+				'placeholder' => $label_enter_your_name,
 				'validations' => array(
 					'required'  => true,
 					'maxlength' => '80',
 				),
 				'attributes'  => array(
-					'placeholder' => __( 'Enter your full name', 'wp-travel' ),
+					'placeholder' => $label_enter_your_name,
 				),
 				'priority'    => 10,
 			),
 			'email'     => array(
 				'type'        => 'email',
-				'label'       => __( 'Email', 'wp-travel' ),
+				'label'       => $label_email,
 				'name'        => 'wp_travel_enquiry_email',
 				'id'          => 'wp-travel-enquiry-email',
 				'validations' => array(
@@ -33,17 +50,17 @@ class WP_Travel_Default_Form_Fields {
 					'maxlength' => '60',
 				),
 				'attributes'  => array(
-					'placeholder' => __( 'Enter your email', 'wp-travel' ),
+					'placeholder' => $label_enter_your_email,
 				),
 				'priority'    => 60,
 			),
 			'note'      => array(
 				'type'          => 'textarea',
-				'label'         => __( 'Enquiry Message', 'wp-travel' ),
+				'label'         => $label_enquiry_message,
 				'name'          => 'wp_travel_enquiry_query',
 				'id'            => 'wp-travel-enquiry-query',
 				'attributes'    => array(
-					'placeholder' => __( 'Enter your enquiry...', 'wp-travel' ),
+					'placeholder' => $label_enter_your_enquiry,
 					'rows'        => 6,
 					'cols'        => 150,
 				),
@@ -132,7 +149,10 @@ class WP_Travel_Default_Form_Fields {
 	 *
 	 * @return array Returns form fields.
 	 */
-	public static function _billing() {
+	public static function _billing() { // @phpcs:ignore
+		if ( ! WP_Travel::verify_nonce( true ) ) {
+			return;
+		}
 		global $post, $wt_cart;
 
 		$trip_id    = isset( $post->ID ) ? $post->ID : 0;
@@ -145,23 +165,25 @@ class WP_Travel_Default_Form_Fields {
 		}
 
 		if ( $trip_id > 0 ) {
-			(int) $max_pax = get_post_meta( $trip_id, 'wp_travel_group_size', true );
+			$max_pax = get_post_meta( $trip_id, 'wp_travel_group_size', true );
+			$max_pax = (int) $max_pax;
 		}
 
 		$pax_size = 1;
-		if ( isset( $_REQUEST['pax'] ) && is_array( $_REQUEST['pax'] ) ) {
-			$booked_pax_size = array_sum( $_REQUEST['pax'] );
+		/**
+		 * We are checking nonce above using WP_Travel::verify_nonce();
+		 */
+		if ( isset( $_REQUEST['pax'] ) && is_array( $_REQUEST['pax'] ) ) { // @phpcs:ignore
+			$booked_pax_size = array_sum( sanitize_text_field( wp_unslash( $_REQUEST['pax'] ) ) ); // @phpcs:ignore
 			if ( $booked_pax_size <= $max_pax ) {
 				$pax_size = $booked_pax_size;
 			}
 		}
-		// if ( isset( $_REQUEST['pax'] ) && ( ! $max_pax || ( $max_pax && $_REQUEST['pax'] <= $max_pax ) ) ) {
-		// 	if ( is_array( $_REQUEST['pax'] ) ) {
-		// 		$pax_size = array_sum( $_REQUEST['pax'] );
-		// 	}
-		// }
 
-		$price_key = isset( $_GET['price_key'] ) && '' != $_GET['price_key'] ? $_GET['price_key'] : '';
+		/**
+		 * We are checking nonce above using WP_Travel::verify_nonce();
+		 */
+		$price_key = isset( $_GET['price_key'] ) && '' != $_GET['price_key'] ? sanitize_text_field( wp_unslash( $_GET['price_key'] ) ) : ''; // @phpcs:ignore
 
 		$booking_fileds = array(
 			'pax'            => array(
@@ -184,12 +206,7 @@ class WP_Travel_Default_Form_Fields {
 				'default'  => $price_key,
 				'priority' => 98,
 			),
-		// 'post_id' => array(
-		// 'type' => 'hidden',
-		// 'name' => 'wp_travel_post_id',
-		// 'id' => 'wp-travel-post-id',
-		// 'default' => $trip_id,
-		// ),
+
 		);
 		if ( isset( $max_pax ) && '' != $max_pax ) {
 			$booking_fileds['pax']['validations']['max'] = $max_pax;
@@ -225,7 +242,6 @@ class WP_Travel_Default_Form_Fields {
 				'validations' => array(
 					'required'  => true,
 					'maxlength' => '50',
-					// 'type' => 'alphanum',
 				),
 				'default'     => '',
 				'priority'    => 20,

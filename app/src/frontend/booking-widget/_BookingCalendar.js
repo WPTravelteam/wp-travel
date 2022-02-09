@@ -45,7 +45,6 @@ const BookingCalender = () => {
 				let selectedDates = data.date_days ? data.date_days.split(",").filter(date => date !== 'every_weekdays' && date !== '') : [];
 				let selectedDays = data.days ? data.days.split(",").filter(day => day !== 'every_date_days' && date !== '') : [];
 
-				// console.log(selectedMonths, selectedDays, selectedDates)
 				if (selectedMonths.length > 0) {
 					ruleArgs.bymonth = selectedMonths;
 				}
@@ -71,7 +70,6 @@ const BookingCalender = () => {
 
 	const dayClicked = date => {
 		let selectedDate = _dates.find(d => moment(moment(d).format("YYYY-MM-DD")).unix() === moment(moment(date).format('YYYY-MM-DD')).unix())
-		console.log(selectedDate)
 		setSelectedDate(selectedDate)
 	}
 

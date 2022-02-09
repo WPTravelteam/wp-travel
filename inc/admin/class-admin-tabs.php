@@ -2,7 +2,7 @@
 /**
  * Admin tabs.
  *
- * @package WP Travel
+ * @package WP_Travel
  * @author WEN Solutions
  */
 
@@ -44,13 +44,13 @@ class WP_Travel_Admin_Tabs {
 	 */
 	public function load( $collection, $args = array() ) {
 		$tabs = self::list_by_collection( $collection );
-		$i = 0;
+		$i    = 0;
 		if ( empty( $tabs ) ) {
 			return false;
 		}
 
-		$tab_hook_prefix = "wp_travel_tabs_content_{$collection}";
-		$tabs            = wp_travel_sort_array_by_priority( $this->list_by_collection( $collection ) );
+		$tab_hook_prefix       = "wp_travel_tabs_content_{$collection}";
+		$tabs                  = wptravel_sort_array_by_priority( $this->list_by_collection( $collection ) );
 		$tab_content_directory = $collection;
 		if ( WP_TRAVEL_POST_TYPE == $collection && 'itineraries' != $collection ) { // directory must remain same if somebody changed their post type.
 			$tab_content_directory = 'itineraries';

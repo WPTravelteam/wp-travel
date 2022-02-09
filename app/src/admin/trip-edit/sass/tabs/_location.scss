@@ -1,14 +1,14 @@
 // Location tab
 .wp-travel-gmap {
-  position: relative;
-  .wp-travel-autocomplete-wrap {
-    position: absolute;
-    top: 10px;
-    left: 190px;
-    z-index: 1111;
-    width: 350px;
-    & > input {
-      padding: 10px;
-    }
-  }
+	position: relative;
+	.wp-travel-autocomplete-wrap {
+		position: absolute;
+		top: 10px;
+		left: 190px;
+		z-index: 1111;
+		width: 350px;
+		& > input {
+			padding: 10px;
+		}
+	}
 }

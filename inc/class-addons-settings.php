@@ -1,25 +1,25 @@
 <?php
 /**
- * This file has the requrired codes for the class WP_Travel_Addons_Settings.
+ * This file has the requrired codes for the class WpTravel_Addons_Settings.
  *
- * @package inc
+ * @package WP_Travel
  * @since 3.0.1
  */
 
-if ( ! class_exists( 'WP_Travel_Addons_Settings' ) ) {
+if ( ! class_exists( 'WpTravel_Addons_Settings' ) ) {
 
 	/**
 	 * Class to generate toggle settings for the addons.
 	 *
 	 * Pass the addon name as the parameter.
 	 * For ex: for the plugin wp travel multiple currency, add name as WP Travel Multiple Currency
-	 *	==Code snipet==
-	 *  $addon_settings = new WP_Travel_Addons_Settings( 'WP Travel Multiple Currency' );
-	 *  if ( ! ( $addon_settings->is_addon_active() ) ) {
-	 * 	  return;
-	 *  }
+	 * ==Code snipet==
+	 * $addon_settings = new WpTravel_Addons_Settings( 'WP Travel Multiple Currency' );
+	 * if ( ! ( $addon_settings->is_addon_active() ) ) {
+	 * return;
+	 * }
 	 */
-	class WP_Travel_Addons_Settings {
+	class WpTravel_Addons_Settings {
 
 		/**
 		 * Plugin name.
@@ -31,7 +31,7 @@ if ( ! class_exists( 'WP_Travel_Addons_Settings' ) ) {
 		/**
 		 * Init class WP_Travel_Addons_Settings
 		 *
-		 * @param [type] $plugin
+		 * @param [type] $plugin Addon data.
 		 */
 		public function __construct( $plugin ) {
 			$this->plugin_name = $plugin;
@@ -51,11 +51,11 @@ if ( ! class_exists( 'WP_Travel_Addons_Settings' ) ) {
 		 * @return boolean
 		 */
 		public function is_addon_active() {
-			$plugin_name = $this->plugin_name;
-			$plugin_name = strtolower( $plugin_name );
-			$plugin_name = str_replace( ' ', '_', $plugin_name );
-			$settings    = wp_travel_get_settings();
-			$enable_addon = isset( $settings['show_' . $plugin_name ] ) ? $settings['show_' . $plugin_name ] : 'yes';
+			$plugin_name  = $this->plugin_name;
+			$plugin_name  = strtolower( $plugin_name );
+			$plugin_name  = str_replace( ' ', '_', $plugin_name );
+			$settings     = wptravel_get_settings();
+			$enable_addon = isset( $settings[ 'show_' . $plugin_name ] ) ? $settings[ 'show_' . $plugin_name ] : 'yes';
 
 			if ( 'yes' !== $enable_addon ) {
 				return false;
@@ -73,7 +73,8 @@ if ( ! class_exists( 'WP_Travel_Addons_Settings' ) ) {
 			$plugin_name = $this->plugin_name;
 			$plugin_name = strtolower( $plugin_name );
 			$plugin_name = str_replace( ' ', '_', $plugin_name );
-			$settings['show_' . $plugin_name ] = 'yes';
+
+			$settings[ 'show_' . $plugin_name ] = 'yes';
 			return $settings;
 		}
 
@@ -81,7 +82,7 @@ if ( ! class_exists( 'WP_Travel_Addons_Settings' ) ) {
 		 * Plugin action to show / hide plugin settings and features.
 		 */
 		public function plugin_action() {
-			$settings    = wp_travel_get_settings();
+			$settings    = wptravel_get_settings();
 			$plugin_name = $this->plugin_name;
 
 			$plugin_name_ucfirst  = ucfirst( $plugin_name );
@@ -89,7 +90,7 @@ if ( ! class_exists( 'WP_Travel_Addons_Settings' ) ) {
 			$plugin_name_replaced = str_replace( ' ', '_', $plugin_name_lower );
 
 			$field_name  = 'show_' . $plugin_name_replaced;
-			$field_label = __( $plugin_name_ucfirst, 'wp-travel' );
+			$field_label = $plugin_name_ucfirst;
 
 			$field_value = isset( $settings[ $field_name ] ) ? $settings[ $field_name ] : 'yes'; ?>
 			<table class="form-table">
@@ -105,7 +106,12 @@ if ( ! class_exists( 'WP_Travel_Addons_Settings' ) ) {
 								<span class="switch"></span>
 							</label>
 						</span>
-						<p class="description"><label for="<?php echo esc_attr( $field_name ); ?>"><?php esc_html_e( sprintf( 'Show all your "%s" settings and enable its feature.', $field_label ), 'wp-travel', 'wp-travel-pro' ); ?></label></p>
+						<p class="description"><label for="<?php echo esc_attr( $field_name ); ?>">
+						<?php
+						// translators: For fiel label.
+						printf( esc_html__( 'Show all your "%s" settings and enable its feature.', 'wp-travel' ), $field_label );
+						?>
+						</label></p>
 					</td>
 				</tr>
 			</table>

@@ -1,0 +1,34 @@
+:root{
+    --itinerary-body-font: 'Spartan', sans-serif;
+    --itinerary-dark-color: #090909;
+    --itinerary-blue-color: #2196f3;
+    --itinerary-green-color: #06c76f;
+    --itinerary-grey-color: #7a7d7f;
+    --itinerary-light-grey-color: #f6f6f6;
+    --itinerary-light-sky-color: #f5fbff;
+}
+
+$itinerary-font: var(--itinerary-body-font);
+$itinerary-font-color: var(--itinerary-dark-color);
+$itinerary-blue-bg: var(--itinerary-blue-color);
+$itinerary-green: var(--itinerary-green-color);
+$itinerary-grey: var(--itinerary-grey-color);
+$itinerary-filter-bg: var(--itinerary-light-grey-color);
+$itinerary-content-bg: var(--itinerary-light-sky-color);
+
+$primary_color: #69C8A7;
+$secondary_color: #9CB8D6;
+$tab-color: #777;
+$primary-font: 26px;
+$seconday-font: 22px;
+$alabaster: #f7f7f1; // Red like color.
+
+
+
+// New Design Color Variables
+// $mainColor: rgb(13, 173, 39);
+$whiteColor: #fff;
+// $textColor: rgb(56, 56, 56);
+// $bookmarkColor: #ffb100;
+$saveColor: #06a10a;
+$offerColor: #f03208;

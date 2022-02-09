@@ -3,14 +3,14 @@ class WP_Travel_FW_Field_Date extends WP_Travel_FW_Field_Text {
 	protected $field;
 	protected $field_type = 'text';
 	function init( $field ) {
-		$this->field = $field;
+		$this->field                               = $field;
 		$this->field['attributes']['autocomplete'] = 'off';
 		return $this;
 	}
 
 	function render( $display = true ) {
-		$js_date_format = wp_travel_date_format_php_to_js();
-		$output = parent::render( false );
+		$js_date_format = wptravel_date_format_php_to_js();
+		$output         = parent::render( false );
 
 		$lang_code = explode( '-', get_bloginfo( 'language' ) );
 		$locale    = $lang_code[0];
@@ -38,7 +38,7 @@ class WP_Travel_FW_Field_Date extends WP_Travel_FW_Field_Text {
 		$output   .= "dateFormat: '" . $js_date_format . "',";
 		if ( '' !== $max_today && true == $max_today ) {
 			$output .= 'maxDate: new Date(),';
-		} else if( '' !== $max_today && false == $max_today ) {
+		} elseif ( '' !== $max_today && false == $max_today ) {
 			$output .= 'minDate: new Date(),';
 		}
 
@@ -59,8 +59,8 @@ class WP_Travel_FW_Field_Date extends WP_Travel_FW_Field_Text {
 	}
 
 	function render_old( $display = true ) {
-		$js_date_format = wp_travel_date_format_php_to_js();
-		$validations = '';
+		$js_date_format = wptravel_date_format_php_to_js();
+		$validations    = '';
 		if ( isset( $this->field['validations'] ) ) {
 			foreach ( $this->field['validations'] as $key => $attr ) {
 				$validations .= sprintf( 'data-parsley-%s="%s"', $key, $attr );

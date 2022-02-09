@@ -8,19 +8,19 @@ const __i18n = {
 	..._wp_travel.strings
 }
 const DiscountTable = ({ groupPricings }) => {
-	return <div className="discount-table" style={{ display: 'none' }}>
+	return <div className="discount-table">
 		<table>
-			<thead>
+			<thead className="discount-thead">
 				<tr>
-					<th colSpan="2">{wp_travel.strings.bookings.pax}</th>
-					<th rowSpan="2">{wp_travel.strings.bookings.price}</th>
+					<th colSpan="2">{__i18n.bookings.pax}</th>
+					<th rowSpan="2">{__i18n.bookings.price}</th>
 				</tr>
 				<tr>
-					<th>{wp_travel.strings.from}</th>
-					<th>{wp_travel.strings.to}</th>
+					<th>{__i18n.from}</th>
+					<th>{__i18n.to}</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody className="discount-tbody">
 				{
 					groupPricings.map((gp, index) => {
 						return <tr key={index}>
@@ -35,8 +35,19 @@ const DiscountTable = ({ groupPricings }) => {
 	</div>
 }
 
-const PaxSelector = ({ pricing, onPaxChange, counts }) => {
+const PaxSelector = ({ pricing, onPaxChange, counts, inventory, selected, isInventoryEnabled }) => {
 	let categories = pricing && pricing.categories || []
+
+	const objectSum = (obj) => {
+		var sum = 0;
+		for( var el in obj ) {
+		  if( obj.hasOwnProperty( el ) ) {
+			sum += parseFloat( obj[el] );
+		  }
+		}
+		return sum;
+	}
+
 	const getCategoryPrice = (categoryId, single) => { // This function handles group discounts as well
 		let category = pricing.categories.find(c => c.id == categoryId)
 		if (!category) {
@@ -45,10 +56,24 @@ const PaxSelector = ({ pricing, onPaxChange, counts }) => {
 		let count = counts[categoryId] || 0
 		let price = category && category.is_sale ? category.sale_price : category.regular_price
 
-		if (category.has_group_price && category.group_prices.length > 0) { // If has group price/discount.
+		if ( 'undefined' != typeof pricing.has_group_price && pricing.has_group_price && pricing.group_prices && pricing.group_prices.length > 0  ) {
+			let totalPax = objectSum(counts);
+			let groupPrices = _.orderBy(pricing.group_prices, gp => parseInt(gp.max_pax))
+			let group_price = groupPrices.find(gp => parseInt(gp.min_pax) <= totalPax && parseInt(gp.max_pax) >= totalPax)
+			if (group_price && group_price.price) {
+				if (single)
+					return parseFloat(group_price.price)
+				// price = 'group' === category.price_per ? (totalPax > 0 ? parseFloat(group_price.price) : 0) : parseFloat(group_price.price) * totalPax
+				price =  parseFloat(group_price.price) * totalPax
+			} else {
+				if (single)
+					return parseFloat(price)
+				// price = 'group' === category.price_per ? (totalPax > 0 ? parseFloat(price) : 0) : parseFloat(price) * totalPax
+				price = parseFloat(price) * totalPax
+			}
+		} else if (category.has_group_price && category.group_prices.length > 0) { // If has group price/discount.
 			// hasGroupPrice = true
 			let groupPrices = _.orderBy(category.group_prices, gp => parseInt(gp.max_pax))
-			// console.log(groupPrices)
 			let group_price = groupPrices.find(gp => parseInt(gp.min_pax) <= count && parseInt(gp.max_pax) >= count)
 			if (group_price && group_price.price) {
 				if (single)
@@ -67,14 +92,14 @@ const PaxSelector = ({ pricing, onPaxChange, counts }) => {
 		return price || 0
 	}
 
-	const groupDiscountClickhandler = e => {
-		let dt = e.target.closest('li').querySelector('.discount-table')
-		if (dt && dt.style.display == 'none') {
-			dt.removeAttribute('style')
-		} else {
-			dt.style.display = 'none'
-		}
-	}
+	// const groupDiscountClickhandler = e => {
+	// 	let dt = e.target.closest('li').querySelector('.discount-table')
+	// 	if (dt && dt.style.display == 'none') {
+	// 		dt.removeAttribute('style')
+	// 	} else {
+	// 		dt.style.display = 'none'
+	// 	}
+	// }
 
 	return <div className="wp-travel-booking__pax-selector-wrapper">
 		<h4>{__i18n.bookings.booking_tab_pax_selector}</h4>
@@ -82,10 +107,29 @@ const PaxSelector = ({ pricing, onPaxChange, counts }) => {
 			{
 				categories.map((c, i) => {
 					let price = c.is_sale ? c.sale_price : c.regular_price
+					if ( 'undefined' == typeof c.term_info ) { // Fixes : index title of undefined.
+						return <></>
+					}
+					let price_per_label = c.price_per;
+					if ( 'undefined' != typeof( __i18n.price_per_labels[price_per_label] ) ) {
+						price_per_label = __i18n.price_per_labels[price_per_label];
+					}
+					let _inventory = inventory.find(i => i.date === moment(selected).format('YYYY-MM-DD[T]HH:mm'));
+					let maxPax = isInventoryEnabled && _inventory && _inventory.pax_available ? _inventory.pax_available : pricing.max_pax; // Temp fixes for inventory disabled case.
+					let minPax = counts[c.id] ? counts[c.id] : 0;
 					return <li key={i}>
 						<div className="text-left">
-							<strong>{`${c.term_info.title}`}</strong>
-							{c.has_group_price && c.group_prices.length > 0 && <span className="tooltip group-discount-button" onClick={groupDiscountClickhandler}>
+							<strong>
+								{`${c.term_info.title}`} &nbsp;
+								{<span className="wp_travel_pax_info">({`${minPax}`}/{maxPax})</span>}
+								{/* {
+									// Currently not supported for time. Need enhancement later.
+									inventory && inventory.length < 2 && 'undefined' != typeof inventory[0] && inventory[0].booked_pax > 0 ?
+									<span className="wp_travel_pax_info">({`${counts[c.id]}`}/{`${inventory[0].pax_available}`})</span> :
+									<span className="wp_travel_pax_info">({`${counts[c.id]}`}/{`${pricing.max_pax}`})</span>
+								} */}
+							</strong>
+							{( ( c.has_group_price && c.group_prices.length > 0 ) || pricing && 'undefined' != typeof pricing.has_group_price && pricing.has_group_price && pricing.group_prices.length > 0 ) && <span className="tooltip group-discount-button">
 								<span>{__i18n.bookings.group_discount_tooltip}</span>
 								<svg version="1.1" x="0px" y="0px" viewBox="0 0 512.003 512.003" style={{ enableBackground: 'new 0 0 512.003 512.003' }}><path d="M477.958,262.633c-2.06-4.215-2.06-9.049,0-13.263l19.096-39.065c10.632-21.751,2.208-47.676-19.178-59.023l-38.41-20.38
                                         c-4.144-2.198-6.985-6.11-7.796-10.729l-7.512-42.829c-4.183-23.846-26.241-39.87-50.208-36.479l-43.053,6.09
@@ -107,22 +151,27 @@ const PaxSelector = ({ pricing, onPaxChange, counts }) => {
                                         c13.569,0,24.609-11.039,24.609-24.609C221.549,163.686,210.51,152.646,196.941,152.646z"></path>
 								</svg>
 								{__i18n.bookings.view_group_discount}
+								{pricing && 'undefined' != typeof pricing.has_group_price && pricing.has_group_price && pricing.group_prices.length > 0 ?
+									<DiscountTable groupPricings={pricing.group_prices} />
+								:
+								<>
+									{c.has_group_price && c.group_prices.length > 0 && <DiscountTable groupPricings={c.group_prices} />}
+								</>
+								}
 							</span>}
 						</div>
 						<div className="text-right">
-							<span className="item-price">{c.is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat(c.regular_price) }}></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCategoryPrice(c.id, true)) }}></span>/{c.price_per}</span>
+							<span className="item-price">{c.is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat(c.regular_price) }}></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCategoryPrice(c.id, true)) }}></span>/{price_per_label}</span>
 							<div className="pricing-area">
 								<div className="qty-spinner">
 									<button onClick={onPaxChange(c.id, -1)}>-</button>
 									<span>{typeof counts[c.id] == 'undefined' ? parseInt(c.default_pax) : counts[c.id]}</span>
 									<button onClick={onPaxChange(c.id, 1)}>+</button>
 								</div>
-								<div className="price" dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCategoryPrice(c.id)) }}></div>
+								{/* <div className="price" dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCategoryPrice(c.id)) }}></div> */}
 							</div>
 						</div>
-						{
-							c.has_group_price && c.group_prices.length > 0 && <DiscountTable groupPricings={c.group_prices} />
-						}
+						
 					</li>
 				})
 			}

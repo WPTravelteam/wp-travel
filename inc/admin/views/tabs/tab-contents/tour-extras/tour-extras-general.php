@@ -1,26 +1,27 @@
 <?php
 /**
  * Tour extras General Tab Contents
- * 
- * @package WP Travel
+ *
+ * @package WP_Travel
  */
 
-function wp_travel_tour_extras_general_tab_callback() {
+function wptravel_tour_extras_general_tab_callback() {
 
 	global $post;
 	$post_id = $post->ID;
 
 	$trip_extras_data = get_post_meta( $post_id, 'wp_travel_tour_extras_metas', true );
 
-	if ( ! $trip_extras_data )
+	if ( ! $trip_extras_data ) {
 		$trip_extras_data = array();
+	}
 
 	/**
 	 * Set Vars.
 	 */
-	$item_desc       = isset( $trip_extras_data['extras_item_description'] ) && ! empty( $trip_extras_data['extras_item_description'] ) ? $trip_extras_data['extras_item_description']  : '';
+	$item_desc = isset( $trip_extras_data['extras_item_description'] ) && ! empty( $trip_extras_data['extras_item_description'] ) ? $trip_extras_data['extras_item_description'] : '';
 
-	?>
+	wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' ); ?>
 	<table class="form-table">
 		<tbody>
 			<tr>
@@ -37,4 +38,4 @@ function wp_travel_tour_extras_general_tab_callback() {
 		</tbody>
 	</table>
 	<?php
- }
+}

@@ -2,7 +2,7 @@
 /**
  * Template file for WP Travel inventory tab.
  *
- * @package WP Travel
+ * @package WP_Travel
  */
 
 /**
@@ -12,16 +12,15 @@
  * @param array  $args arguments function arugments.
  * @return Mixed
  */
-function wp_travel_trip_callback_tabs( $tab, $args ) {
-
+function wptravel_trip_callback_tabs( $tab, $args ) {
 
 	$post_id = $args['post']->ID;
 
 	$wp_travel_use_global_tabs    = get_post_meta( $post_id, 'wp_travel_use_global_tabs', true );
 	$enable_custom_itinerary_tabs = apply_filters( 'wp_travel_custom_itinerary_tabs', false );
 
-	$default_tabs = wp_travel_get_default_trip_tabs();
-	$tabs         = wp_travel_get_admin_trip_tabs( $post_id, $enable_custom_itinerary_tabs );
+	$default_tabs = wptravel_get_default_trip_tabs();
+	$tabs         = wptravel_get_admin_trip_tabs( $post_id, $enable_custom_itinerary_tabs );
 
 	if ( $enable_custom_itinerary_tabs ) { // If utilities is activated.
 		$custom_tabs = get_post_meta( $post_id, 'wp_travel_itinerary_custom_tab_cnt_', true );
@@ -31,14 +30,14 @@ function wp_travel_trip_callback_tabs( $tab, $args ) {
 	}
 	if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) :
 		$args = array(
-			'title'      => __( 'Need Additional Tabs ?', 'wp-travel' ),
-			'content'    => __( 'By upgrading to Pro, you can get trip specific custom tabs addition options with customized content and sorting !', 'wp-travel' ),
-			'link'       => 'https://wptravel.io/wp-travel-pro/',
-        	'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+			'title'       => __( 'Need Additional Tabs ?', 'wp-travel' ),
+			'content'     => __( 'By upgrading to Pro, you can get trip specific custom tabs addition options with customized content and sorting !', 'wp-travel' ),
+			'link'        => 'https://wptravel.io/wp-travel-pro/',
+			'link_label'  => __( 'Get WP Travel Pro', 'wp-travel' ),
 			'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
 			'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
 		);
-		wp_travel_upsell_message( $args );
+		wptravel_upsell_message( $args );
 	endif;
 
 	// Custom itinerary tabs support.
@@ -76,7 +75,7 @@ function wp_travel_trip_callback_tabs( $tab, $args ) {
 			<?php
 			foreach ( $tabs as $key => $tab ) :
 				if ( ! is_array( $tab ) ) {
-					$tab = ( array ) $tab; // @todo need to reset tab.
+					$tab = (array) $tab; // @todo need to reset tab.
 				}
 				$default_label = isset( $default_tabs[ $key ]['label'] ) ? $default_tabs[ $key ]['label'] : $tab['label'];
 				?>

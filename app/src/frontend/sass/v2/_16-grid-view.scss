@@ -1,0 +1,187 @@
+.wp-travel-post-item-wrapper {
+	.wp-travel-post-wrap-bg {
+		position: relative;
+		.wp-travel-post-thumbnail {
+			position: relative;
+			a {
+				img {
+					margin: 0;
+					display: block;
+					width: 100%;
+					max-width: 100%;
+					height: auto;
+				}
+			}
+			.wp-travel-savings {
+				position: absolute;
+				background: #00921d;
+				color: #fff;
+				padding: 5px 8px;
+				text-align: center;
+				z-index: 2;
+				right: -8px;
+				top: 20px;
+				bottom: unset;
+			}
+		}
+		.wp-travel-post-info {
+			display: flex;
+			align-items: center;
+			flex-wrap: nowrap;
+			padding: 10px;
+			h4.post-title {
+				padding: 0 15px;
+				margin-top: 0;
+				margin-bottom: 0;
+				// line-height: 1;
+				width: 60%;
+				margin: 0;
+				vertical-align: top;
+				display: inline-block;
+			}
+			.recent-post-bottom-meta {
+				display: inline-block;
+				position: relative;
+				width: 36%;
+				// box-sizing: border-box;
+				// float: right;
+				.wp-travel-trip-detail {
+					padding: 0 15px;
+					.trip-price {
+						text-align: right;
+						del {
+							margin-right: 0;
+						}
+					}
+				}
+			}
+		}
+		.wp-travel-post-content {
+			padding: 0 15px;
+			.wp-travel-trip-time {
+				span.wp-travel-trip-duration {
+					margin-left: 5px;
+					display: inline-block;
+				}
+			}
+			span.post-category {
+				.entry-meta {
+					padding: 10px 0;
+					display: block !important;
+					.wp-travel-average-review {
+						margin-top: 5px;
+						float: left;
+						padding: 2px 0;
+						margin-right: 15px;
+						vertical-align: middle;
+						// vertical-align: -webkit-baseline-middle;
+						margin-right: 0;
+						padding-right: 0;
+					}
+					span.wp-travel-review-text {
+						margin-top: 8px;
+						// float: left;
+						text-align: center;
+					}
+					.category-list-items {
+						position: relative;
+						float: right;
+						margin-right: 0;
+						padding: 2px 0;
+						.wp-travel-caret {
+							padding-left: 7px;
+							display: inline-block;
+							cursor: pointer;
+							// .sub-category-menu {
+							// 	visibility: hidden;
+							// 	opacity: 0;
+							// 	position: absolute;
+							// 	top: 40px;
+							// 	right: 0px;
+							// 	text-align: left;
+							// 	background: #fff none repeat scroll 0 0;
+							// 	box-shadow: 0 6px 12px #c7c7c7;
+							// 	min-width: 115px;
+							// 	// padding: 10px;
+                            //     padding: 0;
+							// 	width: 100%;
+							// 	transform: translateY(-2em);
+							// 	z-index: 2;
+							// 	transition: all 0.3s ease-in-out 0s,
+							// 		visibility 0s linear 0.3s,
+							// 		z-index 0s linear 0.01s;
+                            //         a {
+							// 			padding: 6px 10px;
+							// 			border-bottom: 1px solid #eee;
+							// 			cursor: pointer;
+							// 			display: block;
+							// 		}
+							// }
+							&:hover {
+								.sub-category-menu {
+									visibility: visible;
+									opacity: 1;
+									z-index: 2;
+									top: 30px;
+									transform: translateY(0%);
+									transition-delay: 0s, 0s, 0.3s;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		.wp-travel-offer {
+			position: absolute;
+			left: -6px;
+			top: 10px;
+			z-index: 1;
+			overflow: hidden;
+			width: 75px;
+			height: 64px;
+			span {
+				font-size: 12px;
+				font-weight: 600;
+				color: #fff;
+				text-transform: uppercase;
+				text-align: center;
+				line-height: 34px;
+				width: 75px;
+				display: block;
+				background: #f83531;
+				position: absolute;
+				top: 10px;
+				left: 0;				
+			}
+		}
+	}
+}
+
+
+
+.sub-category-menu {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 40px;
+    right: 0px;
+    text-align: left;
+    background: #fff none repeat scroll 0 0;
+    box-shadow: 0 6px 12px #c7c7c7;
+    min-width: 115px;
+    // padding: 10px;
+    padding: 0;
+    width: 100%;
+    transform: translateY(-2em);
+    z-index: 2;
+    transition: all 0.3s ease-in-out 0s,
+        visibility 0s linear 0.3s,
+        z-index 0s linear 0.01s;
+        a {
+            padding: 6px 10px;
+            // border-bottom: 1px solid #eee;
+            cursor: pointer;
+            display: block;
+        }
+}

@@ -2,16 +2,15 @@
 /**
  * Admin Tablenav
  *
- * @package inc/admin/
+ * @package WP_Travel
  */
-
 
  /**
   * Display Upsell notice in table nav.
   *
   * @param string $which Which section to display.
   */
-function wp_travel_tablenav( $which ) {
+function wptravel_tablenav( $which ) {
 	if ( ! $which ) {
 		return;
 	}
@@ -24,8 +23,8 @@ function wp_travel_tablenav( $which ) {
 				'edit-itinerary-enquiries',
 				'edit-tour-extras',
 			);
-			$screen = get_current_screen();
-			$screen_id = $screen->id;
+			$screen         = get_current_screen();
+			$screen_id      = $screen->id;
 			if ( ! in_array( $screen_id, $allowed_screen ) ) {
 				return;
 			}
@@ -39,4 +38,4 @@ function wp_travel_tablenav( $which ) {
 	}
 }
 
-add_action( 'manage_posts_extra_tablenav', 'wp_travel_tablenav' );
+add_action( 'manage_posts_extra_tablenav', 'wptravel_tablenav' );

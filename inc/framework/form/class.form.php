@@ -2,13 +2,14 @@
 /**
  * Form Class.
  *
- * @package inc/framework/form/
+ * @package WP_Travel
  */
 
-include WP_TRAVEL_ABSPATH . 'inc/framework/form/class.field.php';
+require WP_TRAVEL_ABSPATH . 'inc/framework/form/class.field.php';
 
 /**
  * WP Travel Form.
+ *
  * @since 1.0.0
  */
 class WP_Travel_FW_Form {
@@ -35,17 +36,17 @@ class WP_Travel_FW_Form {
 	 */
 	function init( $form_options = array() ) {
 		$this->hooks();
-		$this->form_options['id'] = isset( $form_options['id'] ) ? $form_options['id'] : '' ;
-		$this->form_options['class'] = isset( $form_options['class'] ) ? $form_options['class'] : $form_options['id'] ;
-		$this->form_options['wrapper_class'] = isset( $form_options['wrapper_class'] ) ? $form_options['wrapper_class'] : $form_options['id'] . '-wrapper' ;
-		$this->form_options['hook_prefix'] = isset( $form_options['hook_prefix'] ) ? $form_options['hook_prefix'] : $this->slugify( $form_options['id'], array(), '_' );
+		$this->form_options['id']            = isset( $form_options['id'] ) ? $form_options['id'] : '';
+		$this->form_options['class']         = isset( $form_options['class'] ) ? $form_options['class'] : $form_options['id'];
+		$this->form_options['wrapper_class'] = isset( $form_options['wrapper_class'] ) ? $form_options['wrapper_class'] : $form_options['id'] . '-wrapper';
+		$this->form_options['hook_prefix']   = isset( $form_options['hook_prefix'] ) ? $form_options['hook_prefix'] : $this->slugify( $form_options['id'], array(), '_' );
 
-		$this->form_options['submit_button']['id'] = isset( $form_options['submit_button']['id'] ) ? $form_options['submit_button']['id'] : '';
-		$this->form_options['submit_button']['name'] = isset( $form_options['submit_button']['name'] ) ? $form_options['submit_button']['name'] : '';
+		$this->form_options['submit_button']['id']    = isset( $form_options['submit_button']['id'] ) ? $form_options['submit_button']['id'] : '';
+		$this->form_options['submit_button']['name']  = isset( $form_options['submit_button']['name'] ) ? $form_options['submit_button']['name'] : '';
 		$this->form_options['submit_button']['value'] = isset( $form_options['submit_button']['value'] ) ? $form_options['submit_button']['value'] : '';
 		$this->form_options['submit_button']['class'] = isset( $form_options['submit_button']['class'] ) ? $form_options['submit_button']['class'] : '';
 
-		$this->form_options['nonce']['field'] = isset( $form_options['nonce']['field'] ) ? $form_options['nonce']['field'] : '';
+		$this->form_options['nonce']['field']  = isset( $form_options['nonce']['field'] ) ? $form_options['nonce']['field'] : '';
 		$this->form_options['nonce']['action'] = isset( $form_options['nonce']['action'] ) ? $form_options['nonce']['action'] : '';
 
 		$this->form_options['multipart'] = isset( $form_options['multipart'] ) && $form_options['multipart'] ? true : false;
@@ -76,9 +77,9 @@ class WP_Travel_FW_Form {
 	 */
 	function fields( $fields ) {
 		$this->fields = $fields;
-		$priority = array();
+		$priority     = array();
 		foreach ( $fields as $key => $row ) {
-		    $priority[ $key ] = isset( $row['priority'] ) ? $row['priority'] : 1;
+			$priority[ $key ] = isset( $row['priority'] ) ? $row['priority'] : 1;
 		}
 		array_multisort( $priority, SORT_ASC, $this->fields );
 		return $this;
@@ -128,7 +129,8 @@ class WP_Travel_FW_Form {
 			$this->init_assets();
 		}
 		?>
-		<script> jQuery( function( $ ) { if (typeof parsley == "object") { $('#<?php echo esc_attr( $id ); ?>').parsley(); } } ); </script>
+		<script> 
+		jQuery( function( $ ) { if (typeof parsley == "object") { $('#<?php echo esc_attr( $id ); ?>').parsley(); } } ); </script>
 		<?php
 	}
 
@@ -140,7 +142,7 @@ class WP_Travel_FW_Form {
 	function template_new() {
 		wp_enqueue_script( 'jquery-parsley', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/js/lib/parsley/parsley.min.js', array( 'jquery' ) );
 		$multipart = '';
-		if ( $this->form_options['multipart']  ) {
+		if ( $this->form_options['multipart'] ) {
 			$multipart = 'enctype="multipart/form-data"';
 		}
 		?>
@@ -195,11 +197,11 @@ class WP_Travel_FW_Form {
 		}
 
 		if ( ! empty( $replace ) ) {
-			$clean = str_replace( ( array ) $replace, ' ', $clean );
+			$clean = str_replace( (array) $replace, ' ', $clean );
 		}
-		$clean = preg_replace( "/[^a-zA-Z0-9\/_|+ -]/", '', $clean );
+		$clean = preg_replace( '/[^a-zA-Z0-9\/_|+ -]/', '', $clean );
 		$clean = strtolower( $clean );
-		$clean = preg_replace( "/[\/_|+ -]+/", $delimiter, $clean );
+		$clean = preg_replace( '/[\/_|+ -]+/', $delimiter, $clean );
 		$clean = trim( $clean, $delimiter );
 		// Revert back to the old locale.
 		setlocale( LC_ALL, $old_locale );

@@ -5,7 +5,7 @@
  * @param  Array $tab  List of tabs.
  * @param  Array $args Settings arg list.
  */
-function wp_travel_settings_callback_debug( $tab, $args ) {
+function wptravel_settings_callback_debug( $tab, $args ) {
 		$settings = $args['settings'];
 
 		$wt_test_mode  = $settings['wt_test_mode'];

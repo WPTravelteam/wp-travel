@@ -6,17 +6,17 @@
  * @param  Array $tab  List of tabs.
  * @param  Array $args Settings arg list.
  */
-function wp_travel_settings_callback_general( $tab, $args ) {
+function wptravel_settings_callback_general( $tab, $args ) {
 	$settings = $args['settings'];
 
-		$currency_list      = wp_travel_get_currency_list();
+		$currency_list      = wptravel_get_currency_list();
 		$currency           = $settings['currency'];
 		$currency_position  = $settings['currency_position'];
 		$thousand_separator = $settings['thousand_separator'];
 		$decimal_separator  = $settings['decimal_separator'];
 		$number_of_decimals = $settings['number_of_decimals'];
 
-		$wp_travel_switch_to_react = $settings['wp_travel_switch_to_react'];
+		$wp_travel_switch_to_react = wptravel_is_react_version_enabled();
 
 		$google_map_api_key    = $settings['google_map_api_key'];
 		$google_map_zoom_level = $settings['google_map_zoom_level'];
@@ -55,11 +55,11 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 			),
 		);
 
-		$map_data       = wp_travel_get_maps();
+		$map_data       = wptravel_get_maps();
 		$wp_travel_maps = $map_data['maps'];
 		$selected_map   = $map_data['selected'];
 
-		$map_dropdown_args = array(
+		$map_dropdown_args    = array(
 			'id'           => 'wp-travel-map-select',
 			'class'        => 'wp-travel-select2',
 			'name'         => 'wp_travel_map',
@@ -72,20 +72,20 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 				'style' => 'width: 300px;',
 			),
 		);
-		$map_key           = 'google-map';
+		$map_key              = 'google-map';
 		$wp_travel_user_since = get_option( 'wp_travel_user_since', '3.0.0' );
-	?>
+		?>
 		<table class="form-table">
 			<?php
-				if ( version_compare( $wp_travel_user_since, '4.0.0', '<' ) ) { // Hide this option for new user from v4.
-					?>
+			if ( version_compare( $wp_travel_user_since, '4.0.0', '<' ) ) { // Hide this option for new user from v4.
+				?>
 					<tr id="wp-travel-tax-price-options" >
 						<th><label><?php esc_html_e( 'Switch to V4', 'wp-travel' ); ?></label></th>
 						<td>
 							<span class="show-in-frontend checkbox-default-design">
 								<label data-on="ON" data-off="OFF">
 									<input value="no" name="wp_travel_switch_to_react" type="hidden" />
-									<input <?php checked( $wp_travel_switch_to_react, 'yes' ); ?> value="yes" name="wp_travel_switch_to_react" id="wp_travel_switch_to_react" type="checkbox" />
+									<input <?php checked( $wp_travel_switch_to_react, true ); ?> value="yes" name="wp_travel_switch_to_react" id="wp_travel_switch_to_react" type="checkbox" />
 									<span class="switch"></span>
 								</label>
 							</span>
@@ -94,20 +94,20 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 						</td>
 					</tr>
 					<?php
-				}
+			}
 			?>
 			
 			<tr>
 				<th><label for="currency"><?php echo esc_html__( 'Currency', 'wp-travel' ); ?></label></th>
 				<td>
-				<?php echo wp_travel_get_dropdown_currency_list( $currency_args ); ?>
+				<?php echo wptravel_get_dropdown_currency_list( $currency_args ); ?>
 					<p class="description"><?php echo esc_html__( 'Choose currency you accept payments in.', 'wp-travel' ); ?></p>
 				</td>
 			</tr>
 			<tr>
 				<th><label for="currency-position"><?php echo esc_html__( 'Currency Position', 'wp-travel' ); ?></label></th>
 				<td>
-				<?php echo wp_travel_get_dropdown_list( $currency_position_args ); ?>
+				<?php echo wptravel_get_dropdown_list( $currency_position_args ); ?>
 					<p class="description"><?php echo esc_html__( 'Choose currency position.', 'wp-travel' ); ?></p>
 				</td>
 			</tr>
@@ -140,7 +140,7 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 			<tr>
 				<th><label for="wp-travel-map-select"><?php echo esc_html__( 'Select Map', 'wp-travel' ); ?></label></th>
 				<td>
-				<?php echo wp_travel_get_dropdown_list( $map_dropdown_args ); ?>
+				<?php echo wptravel_get_dropdown_list( $map_dropdown_args ); ?>
 					<p class="description"><?php echo esc_html__( 'Choose your map provider to display map in site.', 'wp-travel' ); ?></p>
 				</td>
 			</tr>
@@ -171,7 +171,7 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 				'main_wrapper_class' => array( 'wp-travel-upsell-message-normal' ),
 				'type'               => 'maps',
 			);
-			wp_travel_upsell_message( $upsell_args );
+			wptravel_upsell_message( $upsell_args );
 
 			// if ( apply_filters( 'wp_travel_show_upsell_message', true, 'maps' ) ) {
 			// $upsell_args = array(
@@ -184,7 +184,7 @@ function wp_travel_settings_callback_general( $tab, $args ) {
 			// 'main_wrapper_class' => array( 'wp-travel-upsell-message-normal' ),
 			// 'type'               => 'general',
 			// );
-			// wp_travel_upsell_message( $upsell_args );
+			// wptravel_upsell_message( $upsell_args );
 			// }
 			?>
 

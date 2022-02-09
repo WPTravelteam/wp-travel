@@ -2,21 +2,34 @@
 /**
  * Admin Update Notices.
  *
- * @package inc/admin/
+ * @package WP_Travel
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-class WP_Travel_Admin_Plugin_Screen_Updates {
+
+/**
+ * In Plugin update message.
+ */
+class WpTravel_Admin_Plugin_Screen_Updates {
 	/**
 	 * Constructor.
 	 */
 	public function __construct() {
-		add_action( 'in_plugin_update_message-wp-travel/wp-travel.php', array( $this, 'wp_travel_in_plugin_update_message' ), 10, 2 );
+		add_action( 'in_plugin_update_message-wp-travel/wp-travel.php', array( $this, 'in_plugin_update_message' ), 10, 2 );
 	}
 
-	public function wp_travel_in_plugin_update_message( $args, $response ) {
+	/**
+	 * Add Upgrade Notice in plugin list page.
+	 *
+	 * @param array $args     Plugin info/data.
+	 * @param array $response Plugin response data from wordpress.org plugin repo.
+	 */
+	public function in_plugin_update_message( $args, $response ) {
+		if ( ! $args ) {
+			return;
+		}
 		$version = $response->new_version;
 
 		$transient_name = 'wt_upgrade_notice_' . $version;
@@ -33,6 +46,12 @@ class WP_Travel_Admin_Plugin_Screen_Updates {
 
 	}
 
+	/**
+	 * Parse Notice.
+	 *
+	 * @param string $content     Notice content.
+	 * @param string $new_version New version in repo.
+	 */
 	public function parse_update_notice( $content, $new_version ) {
 
 		$version_parts     = explode( '.', $new_version );
@@ -42,7 +61,7 @@ class WP_Travel_Admin_Plugin_Screen_Updates {
 			$version_parts[0] . '.' . $version_parts[1], // Minor.
 			$version_parts[0] . '.' . $version_parts[1] . '.' . $version_parts[2], // Patch.
 		);
-		$notice_regexp     = '~==\s*Upgrade Notice\s*==\s*=\s*(.*)\s*=(.*)(=\s*' . preg_quote( $new_version ) . '\s*=|$)~Uis';
+		$notice_regexp     = '~==\s*Upgrade Notice\s*==\s*=\s*(.*)\s*=(.*)(=\s*' . preg_quote( $new_version ) . '\s*=|$)~Uis'; // @phpcs:ignore
 		$upgrade_notice    = '';
 		foreach ( $check_for_notices as $check_version ) {
 			if ( version_compare( WP_TRAVEL_VERSION, $check_version, '>' ) ) {
@@ -60,10 +79,12 @@ class WP_Travel_Admin_Plugin_Screen_Updates {
 					}
 					$upgrade_notice .= '<span>';
 				}
-				break;
+				if ( $upgrade_notice ) {
+					break;
+				}
 			}
 		}
 		return $upgrade_notice;
 	}
 }
-new WP_Travel_Admin_Plugin_Screen_Updates();
+new WpTravel_Admin_Plugin_Screen_Updates();

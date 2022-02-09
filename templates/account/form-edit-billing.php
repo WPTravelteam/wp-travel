@@ -12,7 +12,7 @@
  *
  * @see     https://docs.wensolutions.com/document/template-structure/
  * @author  WEN SOLUTIONS
- * @package WP Travel/Templates
+ * @package WP_Travel
  * @version 1.3.7
  */
 
@@ -78,12 +78,13 @@ $billing_phone   = isset( $biling_data['billing_phone'] ) ? $biling_data['billin
 			<label class="col-sm-4 col-md-3 control-label"><?php esc_html_e( 'Country:', 'wp-travel' ); ?></label>
 			<div class="col-sm-8 col-md-9">
 				<select class="selectpicker form-control" name="customer_country">
-					<option value=""><?php esc_html_e( 'Select a Country', 'wp-travel' ) ?></option>
+					<option value=""><?php esc_html_e( 'Select a Country', 'wp-travel' ); ?></option>
 
-					<?php 
-					$country_list = wp_travel_get_countries();
-					foreach ( $country_list as $key => $value ) : ?>
-						<option value="<?php echo esc_html( $key ); ?>" <?php selected( $key, $billing_country ) ?>>
+					<?php
+					$country_list = wptravel_get_countries();
+					foreach ( $country_list as $key => $value ) :
+						?>
+						<option value="<?php echo esc_html( $key ); ?>" <?php selected( $key, $billing_country ); ?>>
 							<?php echo esc_html( $value ); ?>
 						</option>
 					<?php endforeach; ?>

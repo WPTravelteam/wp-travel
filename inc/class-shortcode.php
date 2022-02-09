@@ -2,7 +2,7 @@
 /**
  * Shortcode callbacks.
  *
- * @package wp-travel\inc
+ * @package WP_Travel
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -18,11 +18,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Wp_Travel_Shortcodes {
 
 	public function init() {
-		add_shortcode( 'WP_TRAVEL_ITINERARIES', array( $this, 'wp_travel_get_itineraries_shortcode' ) );
-		add_shortcode( 'wp_travel_itineraries', array( $this, 'wp_travel_get_itineraries_shortcode' ) );
-		add_shortcode( 'wp_travel_trip_filters', array( $this, 'wp_travel_trip_filters_shortcode' ) );
-		add_shortcode( 'wp_travel_trip_facts', array( $this, 'wp_travel_trip_facts_shortcode' ) );
-		add_shortcode( 'wp_travel_trip_enquiry_form', array( $this, 'wp_travel_trip_enquiry_form_shortcode' ) );
+		add_shortcode( 'WP_TRAVEL_ITINERARIES', array( $this, 'get_itineraries_shortcode' ) );
+		add_shortcode( 'wp_travel_itineraries', array( $this, 'get_itineraries_shortcode' ) );
+		add_shortcode( 'wp_travel_trip_filters', array( $this, 'trip_filters_shortcode' ) );
+		add_shortcode( 'wp_travel_trip_facts', array( $this, 'trip_facts_shortcode' ) );
+		add_shortcode( 'wp_travel_trip_enquiry_form', array( $this, 'trip_enquiry_form_shortcode' ) );
 
 		/**
 		 * Checkout Shortcodes.
@@ -89,7 +89,7 @@ class Wp_Travel_Shortcodes {
 			'after'  => null,
 		)
 	) {
-		$wrapper_class     = wp_travel_get_theme_wrapper_class();
+		$wrapper_class     = wptravel_get_theme_wrapper_class();
 		$wrapper['class'] .= ' ' . $wrapper_class;
 		ob_start();
 
@@ -107,7 +107,7 @@ class Wp_Travel_Shortcodes {
 	 *
 	 * @return HTMl Html content.
 	 */
-	public static function wp_travel_get_itineraries_shortcode( $shortcode_atts, $content = '' ) {
+	public static function get_itineraries_shortcode( $shortcode_atts, $content = '' ) {
 		$default = array(
 			'id'           => 0,
 			'type'         => '',
@@ -115,7 +115,7 @@ class Wp_Travel_Shortcodes {
 			'view_mode'    => 'grid',
 			'slug'         => '',
 			'limit'        => 20,
-			'col'          => apply_filters( 'wp_travel_itineraries_col_per_row', '2' ),
+			'col'          => apply_filters( 'wp_travel_itineraries_col_per_row', '3' ),
 			// 'orderby'      => 'trip_date',
 			'order'        => 'asc',
 		);
@@ -187,29 +187,40 @@ class Wp_Travel_Shortcodes {
 					break;
 			}
 		}
-
-		$query = new WP_Query( $args );
+		$col_per_row    = $atts['col'];
+		$layout_version = wptravel_layout_version();
+		$query          = new WP_Query( $args );
 		ob_start();
 		?>
 		<div class="wp-travel-itinerary-items">
-			<?php $col_per_row = $atts['col']; ?>
 			<?php if ( $query->have_posts() ) : ?>
-				<ul style="" class="wp-travel-itinerary-list itinerary-<?php echo esc_attr( $col_per_row ); ?>-per-row">
-				<?php
-				while ( $query->have_posts() ) :
-					$query->the_post();
-					?>
-					<?php
-					if ( 'grid' === $view_mode ) :
-						wp_travel_get_template_part( 'shortcode/itinerary', 'item' );
-					else :
-						wp_travel_get_template_part( 'shortcode/itinerary', 'item-list' );
-					endif;
-					?>
-				<?php endwhile; ?>
-				</ul>
+				<?php if ( 'v1' === $layout_version ) : ?>
+					<ul style="" class="wp-travel-itinerary-list itinerary-<?php echo esc_attr( $col_per_row ); ?>-per-row  <?php echo esc_attr( 'grid' === $view_mode ? 'grid-view' : '' ); ?>">
+						<?php
+						while ( $query->have_posts() ) :
+							$query->the_post();
+							?>
+							<?php
+							if ( 'grid' === $view_mode ) :
+								wptravel_get_template_part( 'shortcode/itinerary', 'item' );
+							else :
+								wptravel_get_template_part( 'shortcode/itinerary', 'item-list' );
+							endif;
+							?>
+						<?php endwhile; ?>
+					</ul>
+				<?php else : ?>
+					<div class="wp-travel-itinerary-items wptravel-archive-wrapper  <?php echo esc_attr( 'grid' === $view_mode ? 'grid-view' : 'list-view' ); ?> itinerary-<?php echo esc_attr( $col_per_row ); ?>-per-row" >
+						<?php
+						while ( $query->have_posts() ) :
+							$query->the_post();
+							wptravel_get_template_part( 'v2/content', 'archive-itineraries' );
+						endwhile;
+						?>
+					</div>
+				<?php endif; ?>
 			<?php else : ?>
-				<?php wp_travel_get_template_part( 'shortcode/itinerary', 'item-none' ); ?>
+				<?php wptravel_get_template_part( 'shortcode/itinerary', 'item-none' ); ?>
 			<?php endif; ?>
 		</div>
 		<?php
@@ -226,8 +237,9 @@ class Wp_Travel_Shortcodes {
 	 * @param [type] $content
 	 * @return String
 	 */
-	public static function wp_travel_trip_filters_shortcode( $atts, $content ) {
-		$search_widget_fields = wp_travel_search_filter_widget_form_fields();
+	public static function trip_filters_shortcode( $atts, $content ) {
+		$sanitized_get        = WP_Travel::get_sanitize_request();
+		$search_widget_fields = wptravel_search_filter_widget_form_fields( $sanitized_get );
 		$defaults             = array(
 			'keyword_search'       => 1,
 			'fact'                 => 1,
@@ -274,7 +286,7 @@ class Wp_Travel_Shortcodes {
 
 		ob_start();
 		echo '<div class="widget_wp_travel_filter_search_widget">';
-		wp_travel_get_search_filter_form( array( 'shortcode' => $defaults ) );
+		wptravel_get_search_filter_form( array( 'shortcode' => $defaults ) );
 		echo '</div>';
 		return ob_get_clean();
 	}
@@ -282,7 +294,7 @@ class Wp_Travel_Shortcodes {
 	/**
 	 * Trip facts Shortcode callback.
 	 */
-	public function wp_travel_trip_facts_shortcode( $atts, $content = '' ) {
+	public function trip_facts_shortcode( $atts, $content = '' ) {
 
 		$trip_id = ( isset( $atts['id'] ) && '' != $atts['id'] ) ? $atts['id'] : false;
 
@@ -291,7 +303,7 @@ class Wp_Travel_Shortcodes {
 			return;
 		}
 
-		$settings = wp_travel_get_settings();
+		$settings = wptravel_get_settings();
 
 		if ( ! isset( $settings['wp_travel_trip_facts_settings'] ) && ! count( $settings['wp_travel_trip_facts_settings'] ) > 0 ) {
 			return '';
@@ -313,25 +325,27 @@ class Wp_Travel_Shortcodes {
 			<!-- TRIP FACTS -->
 			<div class="tour-info">
 				<div class="tour-info-box clearfix">
-					<div class="tour-info-column clearfix">
+					<div class="tour-info-column">
 						<?php foreach ( $wp_travel_trip_facts as $key => $trip_fact ) : ?>
 							<?php
 
-								$icon = array_filter(
+								$icon  = array_filter(
 									$settings['wp_travel_trip_facts_settings'],
 									function( $setting ) use ( $trip_fact ) {
 
 										return $setting['name'] === $trip_fact['label'];
 									}
 								);
-
+							$icon_args = array();
 							foreach ( $icon as $key => $ico ) {
 
-								$icon = $ico['icon'];
+								$icon      = $ico['icon'];
+								$icon_args = $ico;
 							}
 							?>
 							<span class="tour-info-item tour-info-type">
-								<i class="fa <?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i>
+								<?php WpTravel_Helpers_Icon::get( $icon_args ); ?>
+								<!-- <i class="fa <?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i> -->
 								<strong><?php echo esc_html( $trip_fact['label'] ); ?></strong>:
 								<?php
 								if ( $trip_fact['type'] === 'multiple' ) {
@@ -369,9 +383,9 @@ class Wp_Travel_Shortcodes {
 	 *
 	 * @return String
 	 */
-	public function wp_travel_trip_enquiry_form_shortcode() {
+	public function trip_enquiry_form_shortcode() {
 		ob_start();
-		wp_travel_get_enquiries_form( true );
+		wptravel_get_enquiries_form( true );
 		$html = ob_get_clean();
 		return $html;
 	}

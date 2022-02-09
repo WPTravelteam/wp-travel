@@ -2,7 +2,7 @@
 /**
  * Template file for WP Travel inventory tab.
  *
- * @package WP Travel
+ * @package WP_Travel
  */
 
 /**
@@ -12,11 +12,13 @@
  * @param array  $args arguments function arugments.
  * @return Mixed
  */
-function wp_travel_trip_callback_faq( $tab, $args ) {
+function wptravel_trip_callback_faq( $tab, $args ) {
+	if ( 'faq' !== $tab ) {
+		return;
+	}
+	do_action( 'wp_travel_utils_itinerary_global_faq_settings' ); // @phpcs:ignore
 
-	do_action( 'wp_travel_utils_itinerary_global_faq_settings' );
-
-	$post_id       = $args['post']->ID;
+	$post_id = $args['post']->ID;
 
 	if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) :
 		$args = array(
@@ -27,15 +29,15 @@ function wp_travel_trip_callback_faq( $tab, $args ) {
 			'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
 			'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
 		);
-		wp_travel_upsell_message( $args );
+		wptravel_upsell_message( $args );
 	endif;
 	$questions = get_post_meta( $post_id, 'wp_travel_faq_question', true );
-	$faqs = wp_travel_get_faqs( $post_id );
+	$faqs      = wptravel_get_faqs( $post_id );
 	?>
-			
+
 	<div class="wp-travel-tab-content-faq-header clearfix">
 		<?php
-		if ( is_array( $faqs ) && count( $faqs ) != 0 ) :
+		if ( is_array( $faqs ) && 0 !== count( $faqs ) ) :
 			$empty_item_style    = 'display:none';
 			$collapse_link_style = 'display:block';
 		else :
@@ -60,9 +62,9 @@ function wp_travel_trip_callback_faq( $tab, $args ) {
 
 				<?php foreach ( $faqs as $key => $faq ) : ?>
 					<?php
-						$question   = ( isset( $faq['question'] ) && '' !== $faq['question'] ) ? $faq['question'] : __( 'Untitled', 'wp-travel' );
-						$answer     = ( isset( $faq['answer'] ) && '' !== $faq['answer'] ) ? $faq['answer'] : '';
-						$global_faq = ( isset( $faq['global'] ) && '' !== $faq['global'] ) ? $faq['global'] : 'no';
+						$question       = ( isset( $faq['question'] ) && '' !== $faq['question'] ) ? $faq['question'] : __( 'Untitled', 'wp-travel' );
+						$answer         = ( isset( $faq['answer'] ) && '' !== $faq['answer'] ) ? $faq['answer'] : '';
+						$global_faq     = ( isset( $faq['global'] ) && '' !== $faq['global'] ) ? $faq['global'] : 'no';
 						$attr_read_only = ( 'yes' === $global_faq ) ? 'readonly' : '';
 					?>
 					<div class="panel panel-default global-<?php echo esc_attr( $global_faq ); ?>" data-global="<?php echo esc_attr( $global_faq ); ?>" >
@@ -103,7 +105,7 @@ function wp_travel_trip_callback_faq( $tab, $args ) {
 					<div class="wp-travel-sorting-handle"></div>
 					<a role="button" data-toggle="collapse" data-parent="#accordion-faq-data" href="#collapse-faq-{{data.random}}" aria-expanded="true" aria-controls="collapse-faq-{{data.random}}">
 
-						<span bind="faq_question_{{data.random}}"><?php echo esc_html( 'FAQ?', 'wp-travel' ); ?></span>
+						<span bind="faq_question_{{data.random}}"><?php esc_html_e( 'FAQ?', 'wp-travel' ); ?></span>
 
 					<!-- <span class="collapse-faq-icon"></span> -->
 					</a>

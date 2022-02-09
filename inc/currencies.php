@@ -2,7 +2,7 @@
 /**
  *  All Currency Listing Array.
  *
- *  @package wp-pattern-design
+ *  @package WP_Travel
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /** Return All Available Currencies. */
-function wp_travel_get_currency_list() {
+function wptravel_get_currency_list() {
 	$currency = array(
 		'ALL' => 'Albania Lek',
 		'AFN' => 'Afghanistan Afghani',
@@ -138,7 +138,7 @@ function wp_travel_get_currency_list() {
  *
  * @since 4.0.7
  */
-function wp_travel_currency_symbols() {
+function wptravel_currency_symbols() {
 
 	$currency_symbols = array(
 		'AED' => '&#1583;.&#1573;',
@@ -315,13 +315,27 @@ function wp_travel_currency_symbols() {
 
 }
 
-function wp_travel_get_currency_symbol( $currency_code = null ) {
+/**
+ * Function to get currency symbol or name.
+ *
+ * @param String $currency_code Currency code.
+ * @return String.
+ */
+function wptravel_get_currency_symbol( $currency_code = null ) {
+	$settings = wptravel_get_settings();
 	if ( ! $currency_code ) {
-		$settings      = wp_travel_get_settings();
 		$currency_code = ( isset( $settings['currency'] ) ) ? $settings['currency'] : 'USD';
 	}
 
-	$currency_symbols = wp_travel_currency_symbols();
+	/** Added support for displaying currency name like USD, EUR on frontend @since 4.4.5 */
+	$use_currency_name = $settings['use_currency_name'];
+
+	if ( 'yes' === $use_currency_name ) {
+		return apply_filters( 'wp_travel_use_currency_name', $currency_code );
+
+	}
+
+	$currency_symbols = wptravel_currency_symbols();
 
 	if ( array_key_exists( $currency_code, $currency_symbols ) ) {
 		return apply_filters( 'wp_travel_currency_symbol', $currency_symbols[ $currency_code ], $currency_code, $currency_symbols );

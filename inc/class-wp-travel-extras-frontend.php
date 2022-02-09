@@ -2,9 +2,9 @@
 /**
  * Front End Output Class for Tour Extras.
  *
- * @package WP_Travel_Tour_Extras
+ * @package WP_Travel
  */
-class Wp_Travel_Extras_Frontend {
+class WPTravel_Extras_Frontend {
 
 	public function __construct() {
 
@@ -26,7 +26,7 @@ class Wp_Travel_Extras_Frontend {
 	 */
 	public function is_extras_pro() {
 
-		$settings = wp_travel_get_settings();
+		$settings = wptravel_get_settings();
 
 		$enable_tour_extras = isset( $settings['show_wp_travel_tour_extras'] ) ? $settings['show_wp_travel_tour_extras'] : 'yes';
 
@@ -41,27 +41,26 @@ class Wp_Travel_Extras_Frontend {
 	 */
 	public function has_trip_extras( $trip_id, $price_key = false ) {
 
-		// $wp_travel_migrated_400 = 'yes' === get_option( 'wp_travel_migrate_400' );
-		$settings_fields = wp_travel_get_settings();
-		$switch_to_react = $settings_fields['wp_travel_switch_to_react'];
+		$trip_extras = array();
+
+		$switch_to_react = wptravel_is_react_version_enabled();
 
 		if ( empty( $trip_id ) ) {
 			return false;
 		}
-		$pricing_option_type = wp_travel_get_pricing_option_type( $trip_id );
+		$pricing_option_type = wptravel_get_pricing_option_type( $trip_id );
 
-		
 		if ( $price_key && 'multiple-price' === $pricing_option_type ) {
-			if( 'yes' != $switch_to_react ) {
-				$pricing_options = wp_travel_get_pricing_variation( $trip_id, $price_key );
+			if ( ! $switch_to_react ) {
+				$pricing_options = wptravel_get_pricing_variation( $trip_id, $price_key );
 				$pricing_option  = ( is_array( $pricing_options ) && ! empty( $pricing_options ) ) ? reset( $pricing_options ) : false;
-	
+
 				if ( $pricing_option ) {
 					$trip_extras = isset( $pricing_option['tour_extras'] ) ? $pricing_option['tour_extras'] : array();
 				}
 			} else {
 				$pricing_id               = $price_key; // the $price_key param is $pricing_id in the case.
-				$trip_pricings_with_dates = wp_travel_get_trip_pricings_with_dates( $trip_id );
+				$trip_pricings_with_dates = wptravel_get_trip_pricings_with_dates( $trip_id );
 				foreach ( $trip_pricings_with_dates as $pricing ) {
 					if ( $pricing_id === $pricing['id'] ) {
 						$trip_extras = $pricing['trip_extras'];
@@ -91,19 +90,18 @@ class Wp_Travel_Extras_Frontend {
 		$trip_extras = array();
 
 		// $wp_travel_migrated_400 = 'yes' === get_option( 'wp_travel_migrate_400', 'no' );
-		$settings_fields = wp_travel_get_settings();
-		$switch_to_react = $settings_fields['wp_travel_switch_to_react'];
+		$switch_to_react = wptravel_is_react_version_enabled();
 
-		if ( 'yes' == $switch_to_react ) {
+		if ( $switch_to_react ) {
 			$pricing_id               = $price_key; // the $price_key param is $pricing_id in the case.
-			$trip_pricings_with_dates = wp_travel_get_trip_pricings_with_dates( $trip_id );
-			$trip_extras              = array(); //$trip_pricings_with_dates[ $pricing_id ]['trip_extras'];
+			$trip_pricings_with_dates = wptravel_get_trip_pricings_with_dates( $trip_id );
+			$trip_extras              = array(); // $trip_pricings_with_dates[ $pricing_id ]['trip_extras'];
 			return is_array( $trip_extras ) && count( $trip_extras ) > 0 ? $trip_extras : array();
 		}
 
 		if ( $this->has_trip_extras( $trip_id, $price_key ) ) {
 			if ( $price_key ) {
-				$pricing_options = wp_travel_get_pricing_variation( $trip_id, $price_key );
+				$pricing_options = wptravel_get_pricing_variation( $trip_id, $price_key );
 				$pricing_option  = ( is_array( $pricing_options ) && ! empty( $pricing_options ) ) ? reset( $pricing_options ) : false;
 
 				if ( $pricing_option ) {
@@ -167,8 +165,8 @@ class Wp_Travel_Extras_Frontend {
 							<div class="wp_travel_tour_extras_option_single">
 							<div class="wp_travel_tour_extras_option_single_content">
 								<div class="wp_travel_tour_extras_option_top">
-									<input disabled="disabled" checked id="trip_extra_<?php echo esc_attr( $key ) . '_' . $arrival_date; ?>" type="checkbox">
-									<label for="trip_extra_<?php echo esc_attr( $key ) . '_' . $arrival_date; ?>" class="check_icon"></label>
+									<input disabled="disabled" checked id="trip_extra_<?php echo esc_attr( $key ) . '_' . esc_attr( $arrival_date ); ?>" type="checkbox">
+									<label for="trip_extra_<?php echo esc_attr( $key ) . '_' . esc_attr( $arrival_date ); ?>" class="check_icon"></label>
 									<div class="wp_travel_tour_extras_option_label">
 										<div class="wp_travel_tour_extras_title">
 											<h5><?php echo esc_html( get_the_title( $extra ) ); ?></h5>
@@ -203,62 +201,15 @@ class Wp_Travel_Extras_Frontend {
 		endif;
 
 	}
-	/**
-	 * Tour extras Cart Block layout
-	 *
-	 * @param int $trip_id
-	 * @return void
-	 */
-	public function wp_travel_tour_extras_cart_block( $trip_id = null ) {
-
-		/**
-		 * Tour Extras Front End extras HTML
-		 */
-		?>
-		<!-- <div class="wp_travel_tour_extras">
-			<h3>Extras:</h3>
-			<div class="wp_travel_tour_extras_content">
-				<div class="wp_travel_tour_extras_option_single">
-					<div class="wp_travel_tour_extras_option_single_content">
-						<div class="wp_travel_tour_extras_option_top">
-							<input id="test_id1" type="checkbox">
-							<label for="test_id1" class="check_icon"></label>
-							<a href="#" class="check_icon"></a>
-							<div class="wp_travel_tour_extras_option_label">
-								<div class="wp_travel_tour_extras_title">
-									<h5>Additional Night</h5>
-								</div>
-								<div class="wp_travel_tour_extras_price">
-									<span>Price:</span>
-									<ins>$5</ins>
-								</div>
-								<div class="wp_travel_tour_extras_quantity">
-									<span>Qty:</span>
-									<input type="number">
-								</div>
-								<div class="wp_travel_tour_extras_total_price">
-									<span>Total:</span>
-									<strong>$5</strong>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div> -->
-		<?php
-
-	}
-
 
 }
 
-function Wp_Travel_Extras_Frontend() {
+function wptravel_extras_frontend() {
 
-	$Extras_Class = new Wp_Travel_Extras_Frontend();
+	$Extras_Class = new WPTravel_Extras_Frontend();
 	return $Extras_Class->init();
 
 }
 
 // Run the Class. | Construct.
-Wp_Travel_Extras_Frontend();
+wptravel_extras_frontend();

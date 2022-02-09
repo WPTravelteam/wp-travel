@@ -5,29 +5,29 @@
  * @param  Array $tab  List of tabs.
  * @param  Array $args Settings arg list.
  */
-function wp_travel_settings_callback_tabs_global( $tab, $args ) {
-	$settings           = $args['settings'];
+function wptravel_settings_callback_tabs_global( $tab, $args ) {
+	$settings               = $args['settings'];
 		$custom_tab_enabled = apply_filters( 'wp_travel_is_custom_tabs_support_enabled', false );
 
-		$default_tabs = wp_travel_get_default_trip_tabs();
+		$default_tabs = wptravel_get_default_trip_tabs();
 
 		// Global tab.
-		$global_tabs = wp_travel_get_global_tabs( $settings, $custom_tab_enabled );
+		$global_tabs = wptravel_get_global_tabs( $settings, $custom_tab_enabled );
 
-		if ( $custom_tab_enabled ) { // If utilities is activated.
-			$custom_tabs  = isset( $settings['wp_travel_custom_global_tabs'] ) ? $settings['wp_travel_custom_global_tabs'] : array();
-			$default_tabs = array_merge( $default_tabs, $custom_tabs ); // To get Default label of custom tab.
-		}
+	if ( $custom_tab_enabled ) { // If utilities is activated.
+		$custom_tabs  = isset( $settings['wp_travel_custom_global_tabs'] ) ? $settings['wp_travel_custom_global_tabs'] : array();
+		$default_tabs = array_merge( $default_tabs, $custom_tabs ); // To get Default label of custom tab.
+	}
 
 		$upsell_args = array(
-			'title'      => __( 'Need Additional Tabs?', 'wp-travel' ),
-			'content'    => __( 'By upgrading to Pro, you can get global custom tabs addition options with customized content and sorting !', 'wp-travel' ),
+			'title'       => __( 'Need Additional Tabs?', 'wp-travel' ),
+			'content'     => __( 'By upgrading to Pro, you can get global custom tabs addition options with customized content and sorting !', 'wp-travel' ),
 			'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
 			'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
 			'type'        => array( 'wp-travel-utilities', 'wp-travel-pro' ),
 		);
 
-		wp_travel_upsell_message( $upsell_args );
+		wptravel_upsell_message( $upsell_args );
 		// Add custom Tabs Support.
 		do_action( 'wp_travel_custom_global_tabs' );
 

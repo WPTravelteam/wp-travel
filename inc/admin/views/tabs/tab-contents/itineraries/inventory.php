@@ -2,12 +2,21 @@
 /**
  * Template file for WP Travel inventory tab.
  *
- * @package WP Travel
+ * @package WP_Travel
  */
 
-if ( ! function_exists( 'wp_travel_trip_callback_inventory' ) ) {
+if ( ! function_exists( 'wptravel_trip_callback_inventory' ) ) {
 
-	function wp_travel_trip_callback_inventory( $tab, $args ) {
+	/**
+	 * Inventory tab callback.
+	 *
+	 * @param array $tab  Current tab.
+	 * @param array $args Tab args.
+	 */
+	function wptravel_trip_callback_inventory( $tab, $args ) {
+		if ( ! $tab ) {
+			return;
+		}
 		$upsell_args = array();
 		if ( ! class_exists( 'WP_Travel_Inventory_Management_Core' ) ) :
 			$upsell_args = array(
@@ -18,9 +27,9 @@ if ( ! function_exists( 'wp_travel_trip_callback_inventory' ) ) {
 				'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
 				'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
 			);
-			wp_travel_upsell_message( $upsell_args );
+			wptravel_upsell_message( $upsell_args );
 		endif;
 
-		do_action( 'wp_travel_trip_inventory_tab_content', $args );
+		do_action( 'wp_travel_trip_inventory_tab_content', $args ); // @phpcs:ignore
 	}
 }

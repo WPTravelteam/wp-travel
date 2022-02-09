@@ -2,10 +2,9 @@
 /**
  * Adds settings to the permalinks admin settings page
  *
- * @class       WP_Travel_Admin_Permalink_Settings
- * @category    Admin
- * @package     wp-travel/inc/admin
- * @version     1.1.0
+ * @category Admin
+ * @package WP_Travel
+ * @version 1.1.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,125 +13,140 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'WP_Travel_Admin_Permalink_Settings', false ) ) :
 
-/**
- * WP_Travel_Admin_Permalink_Settings Class.
- */
-class WP_Travel_Admin_Permalink_Settings {
-
 	/**
-	 * Permalink settings.
-	 *
-	 * @var array
+	 * WP_Travel_Admin_Permalink_Settings Class.
 	 */
-	private $permalinks = array();
+	class WP_Travel_Admin_Permalink_Settings {
 
-	/**
-	 * Hook in tabs.
-	 */
-	public function __construct() {
-		$this->settings_init();
-		$this->settings_save();
-	}
+		/**
+		 * Permalink settings.
+		 *
+		 * @var array
+		 */
+		private $permalinks = array();
 
-	/**
-	 * Init our settings.
-	 */
-	public function settings_init() {
+		/**
+		 * Hook in tabs.
+		 */
+		public function __construct() {
+			$this->settings_init();
+			$this->settings_save();
+		}
 
-		// Add our settings
-		add_settings_field(
-			'wp_travel_trip_slug',            // id
-			__( 'Trip base', 'wp-travel' ),   // setting title
-			array( $this, 'trip_slug_input' ),  // display callback
-			'permalink',                        // settings page
-			'optional'                          // settings section
-		);
-		add_settings_field(
-			'wp_travel_trip_type_slug',            // id
-			__( 'Trip Type base', 'wp-travel' ),   // setting title
-			array( $this, 'trip_type_slug_input' ),  // display callback
-			'permalink',                        // settings page
-			'optional'                          // settings section
-		);
-		add_settings_field(
-			'wp_travel_destination_slug',            // id
-			__( 'Trip Destination base', 'wp-travel' ),   // setting title
-			array( $this, 'destination_slug_input' ),  // display callback
-			'permalink',                        // settings page
-			'optional'                          // settings section
-		);
-		add_settings_field(
-			'wp_travel_activity_slug',            // id
-			__( 'Trip Activity base', 'wp-travel' ),   // setting title
-			array( $this, 'activity_slug_input' ),  // display callback
-			'permalink',                        // settings page
-			'optional'                          // settings section
-		);
-		$this->permalinks = wp_travel_get_permalink_structure();
-	}
+		/**
+		 * Init our settings.
+		 */
+		public function settings_init() {
 
-	/**
-	 * Show a slug input box.
-	 */
-	public function trip_slug_input() {
-		
-		?>
-		<input name="wp_travel_trip_base" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['wp_travel_trip_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'trip', 'slug', 'wp-travel' ) ?>" />
-		<?php
-	}
+			// Add our settings
+			add_settings_field(
+				'wp_travel_trip_slug',            // id
+				__( 'Trip base', 'wp-travel' ),   // setting title
+				array( $this, 'trip_slug_input' ),  // display callback
+				'permalink',                        // settings page
+				'optional'                          // settings section
+			);
+			add_settings_field(
+				'wp_travel_trip_type_slug',            // id
+				__( 'Trip Type base', 'wp-travel' ),   // setting title
+				array( $this, 'trip_type_slug_input' ),  // display callback
+				'permalink',                        // settings page
+				'optional'                          // settings section
+			);
+			add_settings_field(
+				'wp_travel_destination_slug',            // id
+				__( 'Trip Destination base', 'wp-travel' ),   // setting title
+				array( $this, 'destination_slug_input' ),  // display callback
+				'permalink',                        // settings page
+				'optional'                          // settings section
+			);
+			add_settings_field(
+				'wp_travel_activity_slug',            // id
+				__( 'Trip Activity base', 'wp-travel' ),   // setting title
+				array( $this, 'activity_slug_input' ),  // display callback
+				'permalink',                        // settings page
+				'optional'                          // settings section
+			);
+			$this->permalinks = wptravel_get_permalink_structure();
+		}
 
-	/**
-	 * Show a slug input box.
-	 */
-	public function trip_type_slug_input() {
-		
-		?>
-		<input name="wp_travel_trip_type_base" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['wp_travel_trip_type_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'trip-type', 'slug', 'wp-travel' ) ?>" />
-		<?php
-	}
+		/**
+		 * Show a slug input box.
+		 */
+		public function trip_slug_input() {
 
-	/**
-	 * Show a slug input box.
-	 */
-	public function destination_slug_input() {
-		
-		?>
-		<input name="wp_travel_destination_base" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['wp_travel_destination_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'travel-locations', 'slug', 'wp-travel' ) ?>" />
-		<?php
-	}
+			?>
+		<input name="wp_travel_trip_base" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['wp_travel_trip_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'trip', 'slug', 'wp-travel' ); ?>" />
+			<?php
+		}
 
-	/**
-	 * Show a slug input box.
-	 */
-	public function activity_slug_input() {
-		
-		?>
-		<input name="wp_travel_activity_base" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['wp_travel_activity_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'travel-locations', 'slug', 'wp-travel' ) ?>" />
-		<?php
-	}
+		/**
+		 * Show a slug input box.
+		 */
+		public function trip_type_slug_input() {
 
-	/**
-	 * Save the settings.
-	 */
-	public function settings_save() {
-		if ( ! is_admin() ) {
-			return;
-		}		
-		// We need to save the options ourselves; settings api does not trigger save for the permalinks page.
-		if ( isset( $_POST['permalink_structure'] ) ) {
-			// wc_switch_to_site_locale();
+			?>
+		<input name="wp_travel_trip_type_base" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['wp_travel_trip_type_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'trip-type', 'slug', 'wp-travel' ); ?>" />
+			<?php
+		}
 
-			$permalinks                   = (array) get_option( 'wp_travel_permalinks', array() );
-			$permalinks['wp_travel_trip_base']  =  trim( $_POST['wp_travel_trip_base'] );
-			$permalinks['wp_travel_trip_type_base']  =  trim( $_POST['wp_travel_trip_type_base'] );
-			$permalinks['wp_travel_destination_base']  =  trim( $_POST['wp_travel_destination_base'] );
-			$permalinks['wp_travel_activity_base']  =  trim( $_POST['wp_travel_activity_base'] );
-			
-			update_option( 'wp_travel_permalinks', $permalinks );
-			// wc_restore_locale();
+		/**
+		 * Show a slug input box.
+		 */
+		public function destination_slug_input() {
+
+			?>
+		<input name="wp_travel_destination_base" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['wp_travel_destination_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'travel-locations', 'slug', 'wp-travel' ); ?>" />
+			<?php
+		}
+
+		/**
+		 * Show a slug input box.
+		 */
+		public function activity_slug_input() {
+
+			?>
+		<input name="wp_travel_activity_base" type="text" class="regular-text code" value="<?php echo esc_attr( $this->permalinks['wp_travel_activity_base'] ); ?>" placeholder="<?php echo esc_attr_x( 'travel-locations', 'slug', 'wp-travel' ); ?>" />
+			<?php
+		}
+
+		/**
+		 * Save the settings.
+		 */
+		public function settings_save() {
+			if ( ! is_admin() ) {
+				return;
+			}
+			// We need to save the options ourselves; settings api does not trigger save for the permalinks page.
+			if ( isset( $_POST['permalink_structure'] ) || isset( $_POST['category_base'] ) ) {
+				check_admin_referer( 'update-permalink' );
+
+				$permalinks = (array) get_option( 'wp_travel_permalinks', array() );
+
+				$trip_base = isset( $_POST['wp_travel_trip_base'] ) ? sanitize_text_field( trim( $_POST['wp_travel_trip_base'] ) ) : '';
+				if ( ! empty( $trip_base ) ) {
+					$permalinks['wp_travel_trip_base'] = preg_replace( '#/+#', '', '/' . str_replace( '#', '', $trip_base ) );
+				}
+
+				$trip_type_base = isset( $_POST['wp_travel_trip_type_base'] ) ? sanitize_text_field( trim( $_POST['wp_travel_trip_type_base'] ) ) : '';
+				if ( ! empty( $trip_type_base ) ) {
+					$permalinks['wp_travel_trip_type_base'] = preg_replace( '#/+#', '', '/' . str_replace( '#', '', $trip_type_base ) );
+				}
+
+				$destination_base = isset( $_POST['wp_travel_destination_base'] ) ? sanitize_text_field( trim( $_POST['wp_travel_destination_base'] ) ) : '';
+				if ( ! empty( $destination_base ) ) {
+					$permalinks['wp_travel_destination_base'] = preg_replace( '#/+#', '', '/' . str_replace( '#', '', $destination_base ) );
+				}
+
+				$activity_base = isset( $_POST['wp_travel_activity_base'] ) ? sanitize_text_field( trim( $_POST['wp_travel_activity_base'] ) ) : '';
+				if ( ! empty( $activity_base ) ) {
+					$permalinks['wp_travel_activity_base'] = preg_replace( '#/+#', '', '/' . str_replace( '#', '', $activity_base ) );
+				}
+
+				update_option( 'wp_travel_permalinks', $permalinks );
+			}
 		}
 	}
-}
 
 endif;
 

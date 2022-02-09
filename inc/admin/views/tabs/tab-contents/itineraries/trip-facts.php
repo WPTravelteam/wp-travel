@@ -2,14 +2,17 @@
 /**
  * Fact Tab HTML.
  *
- * @package wp-travel\inc\admin\views\tabs\tab-contents\itineraries
+ * @package WP_Travel
  */
 
-if ( ! function_exists( 'wp_travel_trip_callback_trip_facts' ) ) {
-	function wp_travel_trip_callback_trip_facts() {
+if ( ! function_exists( 'wptravel_trip_callback_trip_facts' ) ) {
+	/**
+	 * Callback Trip facts.
+	 */
+	function wptravel_trip_callback_trip_facts() {
 		global $post;
 
-		$settings = wp_travel_get_settings();
+		$settings = wptravel_get_settings();
 
 		$wp_travel_trip_facts = get_post_meta( $post->ID, 'wp_travel_trip_facts', true );
 
@@ -18,15 +21,13 @@ if ( ! function_exists( 'wp_travel_trip_callback_trip_facts' ) ) {
 			$wp_travel_trip_facts = json_decode( $wp_travel_trip_facts, true );
 		}
 
-
-
 		if ( isset( $settings['wp_travel_trip_facts_settings'] ) && count( $settings['wp_travel_trip_facts_settings'] ) > 0 ) {
 
 			$wp_travel_trip_facts_enable = isset( $settings['wp_travel_trip_facts_enable'] ) ? $settings['wp_travel_trip_facts_enable'] : 'yes';
 
 			if ( 'no' === $wp_travel_trip_facts_enable ) {
 				$settings_url = site_url( 'wp-admin/edit.php?post_type=itinerary-booking&page=settings#wp-travel-tab-content-facts' );
-				printf( __( 'Trip facts are disabled in settings currently. Click %1$1shere%2$2s to enable', 'wp-travel' ), '<a href="' . $settings_url . '"', '</a>' );
+				printf( __( 'Trip facts are disabled in settings currently. Click %1$1shere%2$2s to enable', 'wp-travel' ), '<a href="' . esc_url( $settings_url ) . '"', '</a>' );
 			}
 
 			if ( '' !== $wp_travel_trip_facts ) {
@@ -38,7 +39,7 @@ if ( ! function_exists( 'wp_travel_trip_callback_trip_facts' ) ) {
 							if ( is_array( $wp_travel_trip_facts ) ) :
 								foreach ( $wp_travel_trip_facts as $key => $fact ) :
 									// Saved Facts.
-									echo wp_travel_trip_facts_single_html( $fact, $key );
+									echo wptravel_trip_facts_single_html( $fact, $key ); // @phpcs:ignore
 								endforeach;
 							endif;
 							?>
@@ -112,7 +113,7 @@ if ( ! function_exists( 'wp_travel_trip_callback_trip_facts' ) ) {
 			<?php
 		} else {
 			$settings_url = site_url( 'wp-admin/edit.php?post_type=itinerary-booking&page=settings#wp-travel-tab-content-facts' );
-			printf( __( ' %1$1sThere are no labels set currently. %2$2sAdd label%3$3s.%4$4s', 'wp-travel' ),  '<p id="pass-strength-result" class="good"><i class="fas fa-exclamation-triangle"></i>', '<a href="' . $settings_url . '">', '</a>', '</p>' );
+			printf( __( ' %1$1sThere are no labels set currently. %2$2sAdd label%3$3s.%4$4s', 'wp-travel' ), '<p id="pass-strength-result" class="good"><i class="fas fa-exclamation-triangle"></i>', '<a href="' . $settings_url . '">', '</a>', '</p>' );
 		}
 
 	}
@@ -122,7 +123,7 @@ if ( ! function_exists( 'wp_travel_trip_callback_trip_facts' ) ) {
 /**
  * Fact Type Single.
  */
-function wp_travel_fact_single( $fact, $index, $setting = array() ) {
+function wptravel_fact_single( $fact, $index, $setting = array() ) {
 	?>
 	<select name="wp_travel_trip_facts[<?php echo $index; ?>][value]" id="">
 		<?php
@@ -145,7 +146,7 @@ function wp_travel_fact_single( $fact, $index, $setting = array() ) {
 /**
  * Fact type Multiple.
  */
-function wp_travel_fact_multiple( $fact, $index, $setting = array() ) {
+function wptravel_fact_multiple( $fact, $index, $setting = array() ) {
 	if ( isset( $setting['options'] ) && is_array( $setting['options'] ) ) {
 
 		foreach ( $setting['options'] as $key => $option ) :
@@ -168,7 +169,7 @@ function wp_travel_fact_multiple( $fact, $index, $setting = array() ) {
 /**
  * Fact Type Text.
  */
-function wp_travel_fact_text( $fact, $index, $setings = array() ) {
+function wptravel_fact_text( $fact, $index, $setings = array() ) {
 	?>
 		<input type="text" name="wp_travel_trip_facts[<?php echo $index; ?>][value]" id="" value="<?php echo $fact['value']; ?>">
 	<?php
@@ -176,7 +177,7 @@ function wp_travel_fact_text( $fact, $index, $setings = array() ) {
 /**
  * Fact Defaults.
  */
-function wp_travel_fact_defaults( $fact, $index, $settings = array() ) {
+function wptravel_fact_defaults( $fact, $index, $settings = array() ) {
 	?>
 	<?php if ( isset( $settings['id'] ) ) : ?>
 	<input type="hidden" class="fact-id-<?php echo esc_attr( $index ); ?>" name="wp_travel_trip_facts[<?php echo $index; ?>][fact_id]" id="" value="<?php echo $settings['id']; ?>">
@@ -192,51 +193,45 @@ function wp_travel_fact_defaults( $fact, $index, $settings = array() ) {
  * @param array $fact.
  * @param int   $index.
  */
-function wp_travel_trip_facts_single_html( $fact = array(), $index = false ) {
-	$settings = wp_travel_get_settings();
+function wptravel_trip_facts_single_html( $fact = array(), $index = false ) {
+	$settings = wptravel_get_settings();
 	$settings = isset( $settings['wp_travel_trip_facts_settings'] ) ? array_values( $settings['wp_travel_trip_facts_settings'] ) : array();
 
 	if ( '' === $settings ) {
 		return '';
 	}
-	// $name = array();
-	// foreach ( $settings as $set ) {
-	// 	$name[] = $set['name'];
-	// }
-	// if ( isset( $fact['label'] ) && ! in_array( $fact['label'], $name ) ) {
-	// 	return '';
-	// } else {
-	// 	$label = $fact['label'];
-	// }
-	$fact_id = isset( $fact['fact_id'] ) ? $fact['fact_id'] : null;
-	$selected_fact_setting = array_filter( $settings, function( $setting ) use ( $fact ) {
-		if ( isset( $fact['id'] ) ) {
-			return $fact['id'] === $setting['id'];
+
+	$fact_id               = isset( $fact['fact_id'] ) ? $fact['fact_id'] : null;
+	$selected_fact_setting = array_filter(
+		$settings,
+		function( $setting ) use ( $fact ) {
+			if ( isset( $fact['id'] ) ) {
+				return $fact['id'] === $setting['id'];
+			}
+			return $fact['label'] === $setting['name'] || ( isset( $setting['initial'] ) && $fact['label'] === $setting['initial'] );
 		}
-		return $fact['label'] === $setting['name'] || ( isset( $setting['initial'] ) && $fact['label'] === $setting['initial'] );
-	} );
+	);
 	foreach ( $selected_fact_setting as $set ) {
 		$fact_setting = $set;
 	}
-	if ( empty( $fact_setting  ) || $fact_setting['type'] !== $fact['type'] ) {
+	if ( empty( $fact_setting ) || $fact_setting['type'] !== $fact['type'] ) {
 		return '';
 	}
-	// $fact_setting = $selected_fact_setting[0];
 
 	$label = ! empty( $fact_setting ) ? $fact_setting['name'] : $fact['label'];
 	$type  = $fact['type'];
 	$icon  = ! empty( $fact_setting['icon'] ) ? $fact_setting['icon'] : $fact['icon'];
-	$value = isset( $fact['value'] ) ? $fact['value'] : is_array( $type ) ? [] : '';
+	$val   = is_array( $type ) ? array() : '';
+	$value = isset( $fact['value'] ) ? $fact['value'] : $val;
 
 	ob_start();
-	// is_array( $fact ) && extract( $fact );
 	?>
 	<div class="panel panel-default ">
 			<div class="panel-heading" role="tab" id="heading-<?php echo $index; ?>">
 				<h4 class="panel-title">
 					<div class="wp-travel-sorting-handle"></div>
-					<a class="<?php $index && print_r( 'collapsed' ); ?>" role="button" data-toggle="collapse" data-parent="#accordion-fact-data" href="#collapse-<?php echo $index; ?>" aria-expanded="false" aria-controls="collapse-<?php echo $index; ?>">
-						<span><?php echo esc_html( $label); ?> <span>
+					<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion-fact-data" href="#collapse-<?php echo $index; ?>" aria-expanded="false" aria-controls="collapse-<?php echo $index; ?>">
+						<span><?php echo esc_html( $label ); ?> <span>
 						<!-- <span class="collapse-icon"></span> -->
 					</a>
 					<span class="dashicons dashicons-no-alt hover-icon wt-accordion-close"></span>
@@ -261,9 +256,8 @@ function wp_travel_trip_facts_single_html( $fact = array(), $index = false ) {
 												<?php
 												if ( isset( $label ) && $label == $setting['name'] ) :
 													$settings = $setting;
-													// $selected = $setting['type'];
 													?>
-													 selected <?php endif; ?> value="<?php echo $setting['name']; ?>"><?php echo esc_html( $setting['name'] ); ?></option>
+													selected <?php endif; ?> value="<?php echo $setting['name']; ?>"><?php echo esc_html( $setting['name'] ); ?></option>
 											<?php endforeach; ?>
 										</select>
 									</td>
@@ -273,9 +267,9 @@ function wp_travel_trip_facts_single_html( $fact = array(), $index = false ) {
 										<label><?php echo esc_html( 'Value', 'wp-admin' ); ?></label>
 									</th>
 									<td class="fact-<?php echo $index; ?>">
-										<?php isset( $type ) && call_user_func( 'wp_travel_fact_' . $type, $fact, $index, $settings ); ?>
+										<?php isset( $type ) && call_user_func( 'wptravel_fact_' . $type, $fact, $index, $settings ); ?>
 									</td>
-									<?php call_user_func( 'wp_travel_fact_defaults', $fact, $index, $settings ); ?>
+									<?php call_user_func( 'wptravel_fact_defaults', $fact, $index, $settings ); ?>
 								</tr >
 							</tbody>
 						</table>

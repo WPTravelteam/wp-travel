@@ -4,6 +4,9 @@ import apiFetch from '@wordpress/api-fetch';
 
 import { _n, __} from '@wordpress/i18n';
 
+const __i18n = {
+	..._wp_travel_admin.strings
+}
 
 const SaveTripSection = () => {
     const allData = useSelect((select) => {
@@ -20,21 +23,13 @@ const SaveTripSection = () => {
     }, 2000)
     return <PanelRow className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-no-border wp-travel-save-changes">
         <div>
-            {has_state_changes&&<div className="wp-travel-save-notice">{__('* Please save the changes', 'wp-travel' )}</div>}
+            {has_state_changes&&<div className="wp-travel-save-notice">{__i18n.messages.save_changes}</div>}
             {show_updated_message && <div>
-                <p class="text-success"><strong>{__('Trip Saved', 'wp-travel')}</strong></p>
+                <p className="text-success"><strong>{__i18n.messages.trip_saved}</strong></p>
             </div> }
         </div>
         <Button isPrimary onClick={()=>{
             updateRequestSending(true);
-
-            // if( !is_multiple_dates ){
-            //     let _pricingIds = [];
-            //     allData.pricings.map((_price)=>{
-            //         _pricingIds = (false !== _price.id) ?[..._pricingIds, _price.id]:_pricingIds;
-            //     });
-            //     allData.dates[0]['pricing_ids'] = _pricingIds.join(',');
-            // }
 
             if ( allData.is_fixed_departure ) {
                 let _pricingIds = [];
@@ -78,7 +73,7 @@ const SaveTripSection = () => {
                         url  = url.replace("post-new.php", replaceString );
                         history.pushState(null, '', url);  
 
-                        jQuery('#original_publish, #publish').val('Update')
+                        jQuery('#original_publish, #publish').val( __i18n.update )
                     }
                     displayUpdatedMessage(true)
 
@@ -88,7 +83,7 @@ const SaveTripSection = () => {
             
         }}
         disabled={!has_state_changes}
-        >{__('Save Changes', 'wp-travel' )}</Button>
+        >{__i18n.save_changes}</Button>
     </PanelRow>
 }
 

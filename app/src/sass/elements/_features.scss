@@ -1,0 +1,110 @@
+//offer tag in itinerary post items
+.wp-travel-offer {
+	position: absolute;
+	left: -6px;
+	top: 10px;
+	z-index: 1;
+	overflow: hidden;
+	width: 75px;
+	height: 64px;
+
+	span {
+		font-size: 12px;
+		font-weight: 600;
+		color: #fff;
+		text-transform: uppercase;
+		text-align: center;
+		line-height: 34px;
+		// transform: rotate(45deg);
+		// -webkit-transform: rotate(45deg);
+		width: 75px;
+		display: block;
+		background: #f83531;
+		position: absolute;
+		top: 10px;
+		left: 0;
+		
+
+		&:before {
+			content: "";
+			position: absolute;
+			left: 0px;
+			top: 100%;
+			z-index: -1;
+			border-left: 3px solid transparent;
+			border-right: 3px solid #ad2320;
+			border-bottom: 3px solid transparent;
+			border-top: 3px solid #ad2320;
+		}
+	}
+}
+
+//rating
+.wp-travel-average-review {
+	font-family: "Font Awesome 5 Free";
+	font-size: 1em;
+	height: 1em;
+	line-height: 1;
+	overflow: hidden;
+	position: relative;
+	width: 5.5em;
+	display: inline-block;
+	word-break: normal;
+
+	&:before {
+		color: #f9a032;
+		content: "\f005\f005\f005\f005\f005";
+		float: left;
+		left: 0;
+		position: absolute;
+		top: 0;
+	}
+
+	span {
+		float: left;
+		left: 0;
+		overflow: hidden;
+		padding-top: 1.5em;
+		position: absolute;
+		top: 0;
+		color: #f9a032;
+		font-weight: 900;
+		&::before {
+			content: "\f005\f005\f005\f005\f005";
+			left: 0;
+			position: absolute;
+			top: 0;
+			// font-size: 18px;
+		}
+	}
+}
+
+//savings tag in itinerary post items
+.wp-travel-savings {
+	position: absolute;
+	background: #00921d;
+	// bottom: 0;
+	bottom: unset;
+	color: #fff;
+	right: -8px;
+	padding: 5px 8px;
+	text-align: center;
+	z-index: 2;
+	top: 20px;
+
+	&:after {
+		content: "";
+		position: absolute;
+		right: 0px;
+		top: 100%;
+		z-index: 1;
+		border-left: 4px solid #005d12;
+		border-right: 4px solid transparent;
+		border-bottom: 2px solid transparent;
+		border-top: 3px solid #005d12;
+	}
+
+	span {
+		font-weight: 700;
+	}
+}

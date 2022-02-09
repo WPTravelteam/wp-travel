@@ -3,7 +3,6 @@
  * Lost password form
  *
  * This template can be overridden by copying it to yourtheme/wp-travel/account/form-lostpassword.php.
- *
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -11,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Notices.
-wp_travel_print_notices();
+wptravel_print_notices();
 ?>
 
 
@@ -31,7 +30,7 @@ wp_travel_print_notices();
 				<p class="wp-travel-form-row wp-travel-form-row--first form-row form-row-first clearfix">
 				<span class="user-username">
 					<!-- <label for="user_login"><?php esc_html_e( 'Username or email', 'wp-travel' ); ?></label> -->
-					<input class="wp-travel-Input wp-travel-Input--text input-text" type="text" name="user_login" id="user_login" placeholder="<?php echo esc_attr__('email or username', 'wp-travel'); ?>" />
+					<input class="wp-travel-Input wp-travel-Input--text input-text" type="text" name="user_login" id="user_login" placeholder="<?php echo esc_attr__( 'email or username', 'wp-travel' ); ?>" />
 				</span>	
 				</p>
 
@@ -41,6 +40,7 @@ wp_travel_print_notices();
 
 				<p class="wp-travel-form-row form-row">
 					<input type="hidden" name="wp_travel_reset_password" value="true" />
+					<input type="hidden" name="_nonce" value="<?php echo esc_attr( WP_Travel::create_nonce() ); ?>" />
 					<button type="submit" class="wp-travel-Button button" value="<?php esc_attr_e( 'Reset password', 'wp-travel' ); ?>"><?php esc_html_e( 'Reset password', 'wp-travel' ); ?></button>
 				</p>
 

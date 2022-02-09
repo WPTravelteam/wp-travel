@@ -25,6 +25,25 @@ const wpTravelFormat = (_num, style = 'currency') => {
     return positions[currencyPosition]
 }
 
+// For group discount price display on frontend.
+const wpTravelFormatV2 = (_num, style = 'currency') => {
+    let regEx = new RegExp(`\\d(?=(\\d{3})+\\${decimalSeparator})`, 'gi')
+    let replaceWith = `$&${kiloSeparator}`
+
+    let _formattedNum = parseFloat(_num).toFixed(_toFixed).replace(/\./,decimalSeparator).replace(regEx, replaceWith)
+    // _formattedNum = String(_formattedNum).replace(/\./, ',')
+    if(style == 'decimal') {
+        return _formattedNum
+    }
+    let positions = {
+        'left': `${_currencySymbol}${_formattedNum}`,
+        'left_with_space': `${_currencySymbol} ${_formattedNum}`,
+        'right': `${_formattedNum}${_currencySymbol}`,
+        'right_with_space': `${_formattedNum}${_currencySymbol}`,
+    }
+    return positions[currencyPosition]
+}
+
 const wpTravelTimeout = (promise, ms = 10000) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -39,4 +58,4 @@ const wpTravelPHPtoMomentDateFormat = (dateFormat) => {
         
     }
 }
-export { wpTravelFormat, wpTravelTimeout }
+export { wpTravelFormat, wpTravelFormatV2, wpTravelTimeout }

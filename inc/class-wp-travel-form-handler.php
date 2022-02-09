@@ -6,9 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Handle frontend forms.
  *
- * @class 		Wp_Travel_Form_Handler
- * @version		1.3.3
- * @category	Class
+ * @class       Wp_Travel_Form_Handler
+ * @version     1.3.3
+ * @category    Class
  */
 class Wp_Travel_Form_Handler {
 
@@ -30,20 +30,23 @@ class Wp_Travel_Form_Handler {
 	 */
 	public static function process_login() {
 
-		$nonce_value = isset( $_POST['_wpnonce'] ) ? $_POST['_wpnonce'] : '';
-		$nonce_value = isset( $_POST['wp-travel-login-nonce'] ) ? $_POST['wp-travel-login-nonce'] : $nonce_value;
+		$nonce_value = isset( $_POST['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ) : '';
+		$nonce_value = isset( $_POST['wp-travel-login-nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['wp-travel-login-nonce'] ) ) : $nonce_value;
 
 		if ( ! empty( $_POST['login'] ) && wp_verify_nonce( $nonce_value, 'wp-travel-login' ) ) {
 
+			$username = isset( $_POST['username'] ) ? trim( sanitize_text_field( wp_unslash( $_POST['username'] ) ) ) : '';
+			$password = isset( $_POST['password'] ) ? sanitize_text_field( wp_unslash( $_POST['password'] ) ) : '';
+
 			try {
 				$creds = array(
-					'user_login'    => trim( $_POST['username'] ),
-					'user_password' => $_POST['password'],
+					'user_login'    => $username,
+					'user_password' => $password,
 					'remember'      => isset( $_POST['rememberme'] ),
 				);
 
 				$validation_error = new WP_Error();
-				$validation_error = apply_filters( 'wp_travel_process_login_errors', $validation_error, $_POST['username'], $_POST['password'] );
+				$validation_error = apply_filters( 'wp_travel_process_login_errors', $validation_error, $username, $password );
 
 				if ( $validation_error->get_error_code() ) {
 					throw new Exception( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . $validation_error->get_error_message() );
@@ -72,25 +75,25 @@ class Wp_Travel_Form_Handler {
 				} else {
 
 					if ( ! empty( $_POST['redirect'] ) ) {
-						$redirect = $_POST['redirect'];
-					} elseif ( wp_travel_get_raw_referer() ) {
-						$redirect = wp_travel_get_raw_referer();
+						$redirect = wp_validate_redirect( $_POST['redirect'] ); // @phpcs:ignore
+					} elseif ( wptravel_get_raw_referer() ) {
+						$redirect = wptravel_get_raw_referer();
 					} else {
-						$redirect = wp_travel_get_page_permalink( 'wp-travel-dashboard' );
+						$redirect = wptravel_get_page_permalink( 'wp-travel-dashboard' );
 					}
 
-					wp_redirect( wp_validate_redirect( apply_filters( 'wp_travel_login_redirect', remove_query_arg( 'wp_travel_error', $redirect ), $user ), wp_travel_get_page_permalink( 'wp-travel-dashboard' ) ) );
+					wp_safe_redirect( wp_validate_redirect( apply_filters( 'wp_travel_login_redirect', remove_query_arg( 'wp_travel_error', $redirect ), $user ), wptravel_get_page_permalink( 'wp-travel-dashboard' ) ) );
 
 					exit;
 				}
 			} catch ( Exception $e ) {
 
-				WP_Travel()->notices->add( apply_filters( 'wp_travel_login_errors', __( '<strong>Error :</strong>Invalid Username or Password', 'wp-travel' ) ), 'error' );
+				WPTravel()->notices->add( apply_filters( 'wp_travel_login_errors', __( 'Invalid Username or Password', 'wp-travel' ) ), 'error' );
 
 			}
 		} elseif ( isset( $_POST['username'] ) && empty( $_POST['username'] ) && wp_verify_nonce( $nonce_value, 'wp-travel-login' ) ) {
 
-			WP_Travel()->notices->add( apply_filters( 'wp_travel_login_errors', __( '<strong>Error :</strong>Username can not be empty', 'wp-travel' ) ), 'error' );
+			WPTravel()->notices->add( apply_filters( 'wp_travel_login_errors', __( 'Username can not be empty', 'wp-travel' ) ), 'error' );
 
 		}
 	}
@@ -99,19 +102,18 @@ class Wp_Travel_Form_Handler {
 	 * Process the registration form.
 	 */
 	public static function process_registration() {
-		$nonce_value = isset( $_POST['_wpnonce'] ) ? $_POST['_wpnonce'] : '';
-		$nonce_value = isset( $_POST['wp-travel-register-nonce'] ) ? $_POST['wp-travel-register-nonce'] : $nonce_value;
+		$nonce_value = isset( $_POST['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ) : '';  // @phpcs:ignore
+		$nonce_value = isset( $_POST['wp-travel-register-nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['wp-travel-register-nonce'] ) ) : $nonce_value;  // @phpcs:ignore
 
 		if ( ! empty( $_POST['register'] ) && wp_verify_nonce( $nonce_value, 'wp-travel-register' ) ) {
-			$settings = wp_travel_get_settings();
+			$settings = wptravel_get_settings();
 
 			$generate_username_from_email = isset( $settings['generate_username_from_email'] ) ? $settings['generate_username_from_email'] : 'no';
-			$generate_user_password = isset( $settings['generate_user_password'] ) ? $settings['generate_user_password'] : 'no';
+			$generate_user_password       = isset( $settings['generate_user_password'] ) ? $settings['generate_user_password'] : 'no';
 
-			$username = 'no' === $generate_username_from_email ? $_POST['username'] : '';
-			$password = 'no' === $generate_user_password ? $_POST['password'] : '';
-			$email    = $_POST['email'];
-
+			$username = 'no' === $generate_username_from_email ? trim( sanitize_text_field( wp_unslash( $_POST['username'] ) ) ) : ''; // phpcs:ignore
+			$password = 'no' === $generate_user_password ? sanitize_text_field( wp_unslash( $_POST['password'] ) ) : ''; // phpcs:ignore
+			$email    = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
 			try {
 				$validation_error = new WP_Error();
 				$validation_error = apply_filters( 'wp_travel_process_registration_errors', $validation_error, $username, $password, $email );
@@ -120,29 +122,29 @@ class Wp_Travel_Form_Handler {
 					throw new Exception( $validation_error->get_error_message() );
 				}
 
-				$new_customer = wp_travel_create_new_customer( sanitize_email( $email ), $username, $password );
+				$new_customer = wptravel_create_new_customer( sanitize_email( $email ), $username, $password );
 
 				if ( is_wp_error( $new_customer ) ) {
 					throw new Exception( $new_customer->get_error_message() );
 				}
 
 				if ( apply_filters( 'wp_travel_registration_auth_new_customer', true, $new_customer ) ) {
-					wp_travel_set_customer_auth_cookie( $new_customer );
+					wptravel_set_customer_auth_cookie( $new_customer );
 				}
 
 				if ( ! empty( $_POST['redirect'] ) ) {
 					$redirect = wp_sanitize_redirect( $_POST['redirect'] );
-				} elseif ( wp_travel_get_raw_referer() ) {
-					$redirect = wp_travel_get_raw_referer();
+				} elseif ( wptravel_get_raw_referer() ) {
+					$redirect = wptravel_get_raw_referer();
 				} else {
-					$redirect = wp_travel_get_page_permalink( 'wp-travel-dashboard' );
+					$redirect = wptravel_get_page_permalink( 'wp-travel-dashboard' );
 				}
 
-				wp_redirect( wp_validate_redirect( apply_filters( 'wp_travel_register_redirect', remove_query_arg( 'wp_travel_error', $redirect ), $username ), wp_travel_get_page_permalink( 'wp-travel-dashboard' ) ) );
+				wp_safe_redirect( wp_validate_redirect( apply_filters( 'wp_travel_register_redirect', remove_query_arg( 'wp_travel_error', $redirect ), $username ), wptravel_get_page_permalink( 'wp-travel-dashboard' ) ) );
 				exit;
 
 			} catch ( Exception $e ) {
-				WP_Travel()->notices->add( '<strong>' . __( 'Error:', 'wp-travel' ) . '</strong> ' . $e->getMessage(), 'error' );
+				WPTravel()->notices->add( $e->getMessage(), 'error' );
 			}
 		}
 	}
@@ -151,12 +153,18 @@ class Wp_Travel_Form_Handler {
 	 * Handle lost password form.
 	 */
 	public static function process_lost_password() {
-		if ( isset( $_POST['wp_travel_reset_password'] ) && isset( $_POST['user_login'] ) && isset( $_POST['_wpnonce'] ) && wp_verify_nonce( $_POST['_wpnonce'], 'wp_travel_lost_password' ) ) {
-			$success = Wp_Travel_User_Account::retrieve_password();
+		if ( isset( $_POST['wp_travel_reset_password'] ) && isset( $_POST['user_login'] ) && isset( $_POST['_wpnonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ), 'wp_travel_lost_password' ) ) {
+
+			if ( ! isset( $_POST['user_login'] ) ) {
+				return;
+			}
+			$user_login = is_email( wp_unslash( $_POST['user_login'] ) ) ? sanitize_email( wp_unslash( $_POST['user_login'] ) ) : sanitize_text_field( wp_unslash( $_POST['user_login'] ) );
+
+			$success = Wp_Travel_User_Account::retrieve_password( $user_login );
 
 			// If successful, redirect to my account with query arg set.
 			if ( $success ) {
-				wp_redirect( add_query_arg( 'reset-link-sent', 'true', wp_lostpassword_url() ) );
+				wp_safe_redirect( add_query_arg( 'reset-link-sent', 'true', wptravel_lostpassword_url() ) );
 				exit;
 			}
 		}
@@ -166,42 +174,46 @@ class Wp_Travel_Form_Handler {
 	 * Handle reset password form.
 	 */
 	public static function process_reset_password() {
+
+		if ( ! isset( $_POST['_wpnonce'] ) ) {
+			return;
+		}
+
+		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ), 'wp_travel_reset_password_nonce' ) ) {
+			return;
+		}
 		$posted_fields = array( 'wp_travel_reset_password', 'password_1', 'password_2', 'reset_key', 'reset_login', '_wpnonce' );
 
 		foreach ( $posted_fields as $field ) {
 			if ( ! isset( $_POST[ $field ] ) ) {
 				return;
 			}
-			$posted_fields[ $field ] = $_POST[ $field ];
-		}
-
-		if ( ! wp_verify_nonce( $posted_fields['_wpnonce'], 'wp_travel_reset_password_nonce' ) ) {
-			return;
+			$posted_fields[ $field ] = sanitize_text_field( wp_unslash( $_POST[ $field ] ) );
 		}
 
 		$user = Wp_Travel_User_Account::check_password_reset_key( $posted_fields['reset_key'], $posted_fields['reset_login'] );
 
 		if ( $user instanceof WP_User ) {
 			if ( empty( $posted_fields['password_1'] ) ) {
-				WP_Travel()->notices->add( __( '<strong>Error :</strong>Please enter your password.', 'wp-travel' ), 'error' );
+				WPTravel()->notices->add( __( 'Please enter your password.', 'wp-travel' ), 'error' );
 			}
 
 			if ( $posted_fields['password_1'] !== $posted_fields['password_2'] ) {
-				WP_Travel()->notices->add( __( '<strong>Error :</strong>Passwords do not match', 'wp-travel' ), 'error' );
+				WPTravel()->notices->add( __( 'Passwords do not match', 'wp-travel' ), 'error' );
 			}
 
 			$errors = new WP_Error();
 
 			do_action( 'validate_password_reset', $errors, $user );
 
-			wp_travel_add_wp_error_notices( $errors );
+			wptravel_add_wp_error_notices( $errors );
 
-			if ( 0 === wp_travel_get_notice_count( 'error' ) ) {
+			if ( 0 === wptravel_get_notice_count( 'error' ) ) {
 				Wp_Travel_User_Account::reset_password( $user, $posted_fields['password_1'] );
 
 				do_action( 'wp_travel_customer_reset_password', $user );
 
-				wp_redirect( add_query_arg( 'password-reset', 'true', wp_travel_get_page_permalink( 'wp-travel-dashboard' ) ) );
+				wp_redirect( add_query_arg( 'password-reset', 'true', wptravel_get_page_permalink( 'wp-travel-dashboard' ) ) );
 				exit;
 			}
 		}
@@ -212,13 +224,17 @@ class Wp_Travel_Form_Handler {
 	 */
 	public static function redirect_reset_password_link() {
 
-		if ( wp_travel_is_account_page() && ! empty( $_GET['key'] ) && ! empty( $_GET['login'] ) ) {
+		if ( ! WP_Travel::verify_nonce( true ) ) {
+			return;
+		}
 
-			$value = sprintf( '%s:%s', wp_unslash( $_GET['login'] ), wp_unslash( $_GET['key'] ) );
+		if ( WP_Travel::is_page( 'dashboard' ) && ! empty( $_GET['key'] ) && ! empty( $_GET['login'] ) ) {
+
+			$value = sprintf( '%s:%s', sanitize_text_field( wp_unslash( $_GET['login'] ) ), sanitize_text_field( wp_unslash( $_GET['key'] ) ) );
 
 			Wp_Travel_User_Account::set_reset_password_cookie( $value );
 
-			wp_safe_redirect( add_query_arg( 'show-reset-form', 'true', wp_travel_lostpassword_url() ) );
+			wp_safe_redirect( add_query_arg( 'show-reset-form', 'true', wptravel_lostpassword_url() ) );
 			exit;
 		}
 	}
@@ -227,11 +243,11 @@ class Wp_Travel_Form_Handler {
 	 */
 	public static function update_user_billing_data() {
 
-		if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
+		if ( 'POST' !== strtoupper( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) ) ) {
 			return;
 		}
 
-		if ( empty( $_POST['action'] ) || 'wp_travel_save_user_meta_billing_address' !== $_POST['action'] || empty( $_POST['wp_billing_address_security'] ) || ! wp_verify_nonce( $_POST['wp_billing_address_security'], 'wp_travel_save_user_meta_billing_address' ) ) {
+		if ( empty( $_POST['action'] ) || 'wp_travel_save_user_meta_billing_address' !== $_POST['action'] || empty( $_POST['wp_billing_address_security'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['wp_billing_address_security'] ) ), 'wp_travel_save_user_meta_billing_address' ) ) {
 			return;
 		}
 
@@ -246,31 +262,34 @@ class Wp_Travel_Form_Handler {
 		$current_user = get_user_by( 'id', $user_id );
 
 		// if ( ! in_array( 'wp-travel-customer', (array) $current_user->roles ) ) {
-		// 	return;
+		// return;
 		// }
 
 		// Get Billing Data.
-		$billing_address = ! empty( $_POST['customer_billing_address'] ) ? wp_travel_clean_vars( $_POST['customer_billing_address'] ): '';
-		$billing_city    = ! empty( $_POST['customer_billing_city'] ) ? wp_travel_clean_vars( $_POST['customer_billing_city'] ): '';
-		$billing_company    = ! empty( $_POST['customer_billing_company'] ) ? wp_travel_clean_vars( $_POST['customer_billing_company'] ): '';
-		$billing_zip_code    = ! empty( $_POST['customer_zip_code'] ) ? wp_travel_clean_vars( $_POST['customer_zip_code'] ): '';
-		$billing_country    = ! empty( $_POST['customer_country'] ) ? wp_travel_clean_vars( $_POST['customer_country'] ): '';
-		$billing_phone    = ! empty( $_POST['customer_phone'] ) ? wp_travel_clean_vars( $_POST['customer_phone'] ): '';
+		$billing_address  = ! empty( $_POST['customer_billing_address'] ) ? wptravel_clean_vars( wp_unslash( $_POST['customer_billing_address'] ) ) : '';
+		$billing_city     = ! empty( $_POST['customer_billing_city'] ) ? wptravel_clean_vars( wp_unslash( $_POST['customer_billing_city'] ) ) : '';
+		$billing_company  = ! empty( $_POST['customer_billing_company'] ) ? wptravel_clean_vars( wp_unslash( $_POST['customer_billing_company'] ) ) : '';
+		$billing_zip_code = ! empty( $_POST['customer_zip_code'] ) ? wptravel_clean_vars( wp_unslash( $_POST['customer_zip_code'] ) ) : '';
+		$billing_country  = ! empty( $_POST['customer_country'] ) ? wptravel_clean_vars( wp_unslash( $_POST['customer_country'] ) ) : '';
+		$billing_phone    = ! empty( $_POST['customer_phone'] ) ? wptravel_clean_vars( wp_unslash( $_POST['customer_phone'] ) ) : '';
 
 		// Handle required fields.
-		$required_fields = apply_filters( 'wp_travel_save_customer_billing_details_required_fields', array(
-			'customer_billing_address' => __( 'Billing Address', 'wp-travel' ),
-			'customer_billing_city'  => __( 'Billing City', 'wp-travel' ),
-			'customer_zip_code'      => __( 'ZIP Code', 'wp-travel' ),
-		) );
+		$required_fields = apply_filters(
+			'wp_travel_save_customer_billing_details_required_fields',
+			array(
+				'customer_billing_address' => __( 'Billing Address', 'wp-travel' ),
+				'customer_billing_city'    => __( 'Billing City', 'wp-travel' ),
+				'customer_zip_code'        => __( 'ZIP Code', 'wp-travel' ),
+			)
+		);
 
 		foreach ( $required_fields as $field_key => $field_name ) {
 			if ( empty( $_POST[ $field_key ] ) ) {
-				WP_Travel()->notices->add( sprintf( __( '<strong>Error:</strong> %s is a required field.', 'wp-travel' ), esc_html( $field_name ) ), 'error' );
+				WPTravel()->notices->add( sprintf( __( '%s is a required field.', 'wp-travel' ), esc_html( $field_name ) ), 'error' );
 			}
 		}
 
-		if ( wp_travel_get_notice_count( 'error' ) === 0 ) {
+		if ( wptravel_get_notice_count( 'error' ) === 0 ) {
 
 			$data_array = array(
 				'billing_address'  => $billing_address,
@@ -283,11 +302,11 @@ class Wp_Travel_Form_Handler {
 
 			update_user_meta( $user_id, 'wp_travel_customer_billing_details', $data_array );
 
-			WP_Travel()->notices->add( __( 'Billing Details Updated Successfully', 'wp-travel' ), 'success' );
+			WPTravel()->notices->add( __( 'Billing Details Updated Successfully', 'wp-travel' ), 'success' );
 
 			do_action( 'wp_travel_save_billing_details', $user_id );
 
-			wp_safe_redirect( wp_travel_get_page_permalink( 'wp-travel-dashboard' ) );
+			wp_safe_redirect( wptravel_get_page_permalink( 'wp-travel-dashboard' ) );
 			exit;
 		}
 
@@ -297,11 +316,11 @@ class Wp_Travel_Form_Handler {
 	 * Save the password/account details and redirect back to the my account page.
 	 */
 	public static function save_account_details() {
-		if ( 'POST' !== strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
+		if ( 'POST' !== strtoupper( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_METHOD'] ) ) ) ) {
 			return;
 		}
 
-		if ( empty( $_POST['action'] ) || 'wp_travel_save_account_details' !== $_POST['action'] || empty( $_POST['wp_account_details_security'] ) || ! wp_verify_nonce( $_POST['wp_account_details_security'], 'wp_travel_save_account_details' ) ) {
+		if ( empty( $_POST['action'] ) || 'wp_travel_save_account_details' !== $_POST['action'] || empty( $_POST['wp_account_details_security'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['wp_account_details_security'] ) ), 'wp_travel_save_account_details' ) ) {
 			return;
 		}
 
@@ -318,59 +337,62 @@ class Wp_Travel_Form_Handler {
 		$current_last_name  = $current_user->last_name;
 		$current_email      = $current_user->user_email;
 
-		$account_first_name = ! empty( $_POST['account_first_name'] ) ? wp_travel_clean_vars( $_POST['account_first_name'] ): '';
-		$account_last_name  = ! empty( $_POST['account_last_name'] ) ? wp_travel_clean_vars( $_POST['account_last_name'] )  : '';
-		$account_email      = ! empty( $_POST['account_email'] ) ? wp_travel_clean_vars( $_POST['account_email'] )          : '';
-		$pass_cur           = ! empty( $_POST['password_current'] ) ? $_POST['password_current']                : '';
-		$pass1              = ! empty( $_POST['password_1'] ) ? $_POST['password_1']                            : '';
-		$pass2              = ! empty( $_POST['password_2'] ) ? $_POST['password_2']                            : '';
+		$account_first_name = ! empty( $_POST['account_first_name'] ) ? wptravel_clean_vars( wp_unslash( $_POST['account_first_name'] ) ) : '';
+		$account_last_name  = ! empty( $_POST['account_last_name'] ) ? wptravel_clean_vars( wp_unslash( $_POST['account_last_name'] ) ) : '';
+		$account_email      = ! empty( $_POST['account_email'] ) ? wptravel_clean_vars( wp_unslash( $_POST['account_email'] ) ) : '';
+		$pass_cur           = ! empty( $_POST['password_current'] ) ? wptravel_clean_vars( wp_unslash( $_POST['password_current'] ) ) : '';
+		$pass1              = ! empty( $_POST['password_1'] ) ? wptravel_clean_vars( wp_unslash( $_POST['password_1'] ) ) : '';
+		$pass2              = ! empty( $_POST['password_2'] ) ? wptravel_clean_vars( wp_unslash( $_POST['password_2'] ) ) : '';
 		$save_pass          = true;
 
-		$user               = new stdClass();
-		$user->ID           = $user_id;
-		$user->first_name   = $account_first_name;
-		$user->last_name    = $account_last_name;
+		$user             = new stdClass();
+		$user->ID         = $user_id;
+		$user->first_name = $account_first_name;
+		$user->last_name  = $account_last_name;
 
 		// Prevent emails being displayed, or leave alone.
 		$user->display_name = is_email( $current_user->display_name ) ? $user->first_name : $current_user->display_name;
 
 		// Handle required fields.
-		$required_fields = apply_filters( 'wp_travel_save_account_details_required_fields', array(
-			'account_first_name' => __( 'First name', 'wp-travel' ),
-			'account_last_name'  => __( 'Last name', 'wp-travel' ),
-			'account_email'      => __( 'Email address', 'wp-travel' ),
-		) );
+		$required_fields = apply_filters(
+			'wp_travel_save_account_details_required_fields',
+			array(
+				'account_first_name' => __( 'First name', 'wp-travel' ),
+				'account_last_name'  => __( 'Last name', 'wp-travel' ),
+				'account_email'      => __( 'Email address', 'wp-travel' ),
+			)
+		);
 
 		foreach ( $required_fields as $field_key => $field_name ) {
 			if ( empty( $_POST[ $field_key ] ) ) {
-				WP_Travel()->notices->add( sprintf( __( '<strong>Error:</strong> %s is a required field.', 'wp-travel' ), esc_html( $field_name ) ), 'error' );
+				WPTravel()->notices->add( sprintf( __( '%s is a required field.', 'wp-travel' ), esc_html( $field_name ) ), 'error' );
 			}
 		}
 
 		if ( $account_email ) {
 			$account_email = sanitize_email( $account_email );
 			if ( ! is_email( $account_email ) ) {
-				WP_Travel()->notices->add( __( 'Please Provide a valid email address', 'wp-travel' ), 'error' );
+				WPTravel()->notices->add( __( 'Please Provide a valid email address', 'wp-travel' ), 'error' );
 			} elseif ( email_exists( $account_email ) && $account_email !== $current_user->user_email ) {
-				WP_Travel()->notices->add( __( 'The email address is already registered', 'wp-travel' ), 'error' );
+				WPTravel()->notices->add( __( 'The email address is already registered', 'wp-travel' ), 'error' );
 			}
 			$user->user_email = $account_email;
 		}
 
 		if ( ! empty( $pass_cur ) && empty( $pass1 ) && empty( $pass2 ) ) {
-			WP_Travel()->notices->add( __( 'Please Fill Out All Password Fields.', 'wp-travel' ), 'error' );
+			WPTravel()->notices->add( __( 'Please Fill Out All Password Fields.', 'wp-travel' ), 'error' );
 			$save_pass = false;
 		} elseif ( ! empty( $pass1 ) && empty( $pass_cur ) ) {
-			WP_Travel()->notices->add( __( 'Please Enter Your Current Password', 'wp-travel' ), 'error' );
+			WPTravel()->notices->add( __( 'Please Enter Your Current Password', 'wp-travel' ), 'error' );
 			$save_pass = false;
 		} elseif ( ! empty( $pass1 ) && empty( $pass2 ) ) {
-			WP_Travel()->notices->add( __( 'Please re-enter your password', 'wp-travel' ), 'error' );
+			WPTravel()->notices->add( __( 'Please re-enter your password', 'wp-travel' ), 'error' );
 			$save_pass = false;
 		} elseif ( ( ! empty( $pass1 ) || ! empty( $pass2 ) ) && $pass1 !== $pass2 ) {
-			WP_Travel()->notices->add( __( 'New Passwords do not match', 'wp-travel' ), 'error' );
+			WPTravel()->notices->add( __( 'New Passwords do not match', 'wp-travel' ), 'error' );
 			$save_pass = false;
 		} elseif ( ! empty( $pass1 ) && ! wp_check_password( $pass_cur, $current_user->user_pass, $current_user->ID ) ) {
-			WP_Travel()->notices->add( __( 'Your current password is incorrect', 'wp-travel' ), 'error' );
+			WPTravel()->notices->add( __( 'Your current password is incorrect', 'wp-travel' ), 'error' );
 			$save_pass = false;
 		}
 
@@ -384,18 +406,18 @@ class Wp_Travel_Form_Handler {
 
 		if ( $errors->get_error_messages() ) {
 			foreach ( $errors->get_error_messages() as $error ) {
-				WP_Travel()->notices->add( $error, 'error' );
+				WPTravel()->notices->add( $error, 'error' );
 			}
 		}
 
-		if ( wp_travel_get_notice_count( 'error' ) === 0 ) {
+		if ( wptravel_get_notice_count( 'error' ) === 0 ) {
 			wp_update_user( $user );
 
-			WP_Travel()->notices->add( __( 'Account Details Updated Successfully', 'wp-travel' ), 'success' );
+			WPTravel()->notices->add( __( 'Account Details Updated Successfully', 'wp-travel' ), 'success' );
 
 			do_action( 'wp_travel__save_account_details', $user->ID );
 
-			wp_safe_redirect( wp_travel_get_page_permalink( 'wp-travel-dashboard' ) );
+			wp_safe_redirect( wptravel_get_page_permalink( 'wp-travel-dashboard' ) );
 			exit;
 		}
 	}

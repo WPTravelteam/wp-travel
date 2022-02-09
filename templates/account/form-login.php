@@ -6,20 +6,20 @@
  */
 
 // Print Errors / Notices.
-wp_travel_print_notices();
+wptravel_print_notices();
 
-$nonce_value = isset( $_POST['_wpnonce'] ) ? $_POST['_wpnonce'] : '';
-$nonce_value = isset( $_POST['wp-travel-register-nonce'] ) ? $_POST['wp-travel-register-nonce'] : $nonce_value;
+$nonce_value = isset( $_POST['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ) : '';
+$nonce_value = isset( $_POST['wp-travel-register-nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['wp-travel-register-nonce'] ) ) : $nonce_value;
 
 $login_form_toogle = '';
 $reg_form_toogle   = '';
 
-$settings = wp_travel_get_settings();
+$settings = wptravel_get_settings();
 
 $enable_my_account_customer_registration = isset( $settings['enable_my_account_customer_registration'] ) ? $settings['enable_my_account_customer_registration'] : 'yes';
 
 $generate_username_from_email = isset( $settings['generate_username_from_email'] ) ? $settings['generate_username_from_email'] : 'no';
-$generate_user_password = isset( $settings['generate_user_password'] ) ? $settings['generate_user_password'] : 'no';
+$generate_user_password       = isset( $settings['generate_user_password'] ) ? $settings['generate_user_password'] : 'no';
 
 if ( ! empty( $_POST['register'] ) && wp_verify_nonce( $nonce_value, 'wp-travel-register' ) ) {
 
@@ -40,7 +40,7 @@ if ( ! empty( $_POST['register'] ) && wp_verify_nonce( $nonce_value, 'wp-travel-
 		<?php if ( 'yes' === $enable_my_account_customer_registration ) : ?>
 			<!-- Registration form -->
 			<form method="post" class="register-form" <?php echo $reg_form_toogle; ?> >
-				<h3><?php esc_html_e( 'Register', 'wp-travel' );  ?></h3>
+				<h3><?php esc_html_e( 'Register', 'wp-travel' ); ?></h3>
 				<?php if ( 'no' === $generate_username_from_email ) : ?>
 					<span class="user-name">
 						<input name="username" type="text" placeholder="<?php echo esc_attr__( 'Username', 'wp-travel' ); ?>"/>
@@ -68,7 +68,7 @@ if ( ! empty( $_POST['register'] ) && wp_verify_nonce( $nonce_value, 'wp-travel-
 			</form>
 		<?php endif; ?>
 			<!-- Login Form -->
-			<form method="post" class="login-form" <?php echo $login_form_toogle; ?> >
+			<form method="post" class="login-form" <?php echo esc_attr( $login_form_toogle ); ?> >
 					<h3><?php esc_html_e( 'Login', 'wp-travel' ); ?></h3>
 					<span class="user-username">
 						<input name="username" type="text" placeholder="<?php echo esc_attr__( 'Username', 'wp-travel' ); ?>"/>
@@ -85,7 +85,7 @@ if ( ! empty( $_POST['register'] ) && wp_verify_nonce( $nonce_value, 'wp-travel-
 						</div>
 						<div class="float-right">
 							<p class="info">
-								<a href="<?php echo esc_url( wp_travel_lostpassword_url() ); ?>"><?php echo esc_html__( 'Forgot Password ?', 'wp-travel' ); ?></a>
+								<a href="<?php echo esc_url( wptravel_lostpassword_url() ); ?>"><?php echo esc_html__( 'Forgot Password ?', 'wp-travel' ); ?></a>
 							</p>
 						</div>
 					</div>

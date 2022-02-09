@@ -1,0 +1,28 @@
+{
+	"name": "wp-travel/wp-travel",
+	"description": "The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.",
+	"type": "wordpress-plugin",
+	"license": "GPL-2.0-only",
+	"require": {
+		"php": ">=5.6"
+	},
+	"config": {
+		"platform": {
+			"php": "5.6"
+		}
+	},
+	"require-dev": {
+		"squizlabs/php_codesniffer": "^3.5",
+		"dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
+		"phpcompatibility/phpcompatibility-wp": "^2.1",
+		"wp-coding-standards/wpcs": "^2.1",
+		"phpunit/phpunit": "^5",
+		"wp-cli/wp-cli-bundle": "^2.4",
+		"godaddy-wordpress/json2po": "^1.0",
+		"godaddy-wordpress/pot2json": "^1.0"
+	},
+	"scripts": {
+		"lint": "@php ./vendor/bin/phpcs",
+		"test": "@php ./vendor/bin/phpunit"
+	}
+}

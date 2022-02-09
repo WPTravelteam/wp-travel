@@ -2,10 +2,10 @@
 /**
  * Tour extras General Tab Contents
  *
- * @package WP Travel
+ * @package WP_Travel
  */
 
-function wp_travel_coupons_general_tab_callback() {
+function wptravel_coupons_general_tab_callback() {
 
 	global $post;
 	// General Tab Data.
@@ -20,18 +20,18 @@ function wp_travel_coupons_general_tab_callback() {
 	$coupon_expiry_date = isset( $general_tab['coupon_expiry_date'] ) ? $general_tab['coupon_expiry_date'] : '';
 
 	$date_format    = get_option( 'date_format' );
-	$js_date_format = wp_travel_date_format_php_to_js();
+	$js_date_format = wptravel_date_format_php_to_js();
 
 	$old_date_format = 'm/d/Y';
-	if ( ! empty( $coupon_expiry_date ) && ! wp_travel_is_ymd_date( $coupon_expiry_date ) ) {
-		$coupon_expiry_date = wp_travel_format_ymd_date( $coupon_expiry_date, $old_date_format );
+	if ( ! empty( $coupon_expiry_date ) && ! wptravel_is_ymd_date( $coupon_expiry_date ) ) {
+		$coupon_expiry_date = wptravel_format_ymd_date( $coupon_expiry_date, $old_date_format );
 	}
 
 	$coupon    = new WP_Travel_Coupon();
 	$coupon_id = $coupon->get_coupon_id_by_code( $coupon_code );
 
 	?>
-
+	<?php wp_nonce_field( 'wp_travel_security_action', 'wp_travel_security' ); ?>
 	<table class="form-table">
 		<tbody>
 		<?php if ( $coupon_id ) : ?>
@@ -106,7 +106,7 @@ function wp_travel_coupons_general_tab_callback() {
 				<td>
 					<input required="required" type="number" min="1" <?php echo 'percentage' === $coupon_type ? 'max="100"' : ''; ?> step="0.01" id="coupon-value" name="wp_travel_coupon[general][coupon_value]" placeholder="<?php echo esc_attr__( 'Coupon Value', 'wp-travel' ); ?>" value="<?php echo esc_attr( $coupon_value ); ?>">
 					<span <?php echo 'percentage' === $coupon_type ? 'style="display:none;"' : ''; ?> id="coupon-currency-symbol" class="wp-travel-currency-symbol">
-							<?php echo wp_travel_get_currency_symbol(); ?>
+							<?php echo wptravel_get_currency_symbol(); ?>
 					</span>
 
 					<span <?php echo 'fixed' === $coupon_type ? 'style="display:none;"' : ''; ?> id="coupon-percentage-symbol" class="wp-travel-currency-symbol">

@@ -2,17 +2,13 @@
 /**
  * Template file for WP Travel Misc tab.
  *
- * @package WP Travel
+ * @package WP_Travel
  */
 
 /**
  * Callback Function For Misc Content Tabs
- *
- * @param string $tab  tab name 'misc'.
- * @param array  $args arguments function arugments.
- * @return Mixed
  */
-function wp_travel_trip_callback_misc_options() {
+function wptravel_trip_callback_misc_options() {
 	global $post;
 
 	$enable_trip_enquiry_option = get_post_meta( $post->ID, 'wp_travel_enable_trip_enquiry_option', true );
@@ -22,7 +18,7 @@ function wp_travel_trip_callback_misc_options() {
 		$use_global_trip_enquiry_option = 'yes';
 	}
 	?>
-	<h3><?php _e( 'Trip Enquiry', 'wp-travel' ); ?></h3>
+	<h3><?php esc_html_e( 'Trip Enquiry', 'wp-travel' ); ?></h3>
 	<table class="form-table">
 		<tr>
 			<td><label for="wp-travel-use-global-trip-enquiry"><?php esc_html_e( 'Global Trip Enquiry Option', 'wp-travel' ); ?></label></td>
@@ -33,7 +29,7 @@ function wp_travel_trip_callback_misc_options() {
 						<input name="wp_travel_use_global_trip_enquiry_option" type="checkbox" id="wp-travel-use-global-trip-enquiry" <?php checked( $use_global_trip_enquiry_option, 'yes' ); ?> value="yes" />							
 						<span class="switch">
 					</span>
-					
+
 					</label>
 				</span>
 				<p class="description"><?php esc_html_e( 'Use Global Trip Enquiry Option from setting.', 'wp-travel' ); ?></a>
@@ -47,11 +43,9 @@ function wp_travel_trip_callback_misc_options() {
 						<input name="wp_travel_enable_trip_enquiry_option" type="checkbox" id="wp-travel-enable-trip-enquiry-option" <?php checked( $enable_trip_enquiry_option, 'yes' ); ?> value="yes" />			
 						<span class="switch">
 					</span>
-					
 					</label>
 				</span>
 				<p class="description"><?php esc_html_e( 'Check to enable trip enquiry for this trip.', 'wp-travel' ); ?></p>
-				
 			</td>
 		</tr>
 	</table>

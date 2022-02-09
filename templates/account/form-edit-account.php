@@ -12,7 +12,7 @@
  *
  * @see     https://docs.wensolutions.com/document/template-structure/
  * @author  WEN SOLUTIONS
- * @package WP Travel/Templates
+ * @package WP_Travel
  * @version 1.3.7
  */
 

@@ -25,11 +25,25 @@ class WP_Travel_FW_Field_Select {
 
 		$output = sprintf( '<select id="%s" name="%s" class="%s" %s %s>', $this->field['id'], $this->field['name'], $this->field['class'], $validations, $attributes );
 		if ( ! empty( $this->field['attributes']['placeholder'] ) ) {
-			$this->field['options'] = wp_parse_args( $this->field['options'], array(
-				'' => $this->field['attributes']['placeholder'],
-			));
+			$this->field['options'] = wp_parse_args(
+				$this->field['options'],
+				array(
+					'' => $this->field['attributes']['placeholder'],
+				)
+			);
 		}
-
+		
+		// Custom Fields. [travelers fields have _default ]
+		if ( ! isset( $this->field['_default'] ) || ( isset( $this->field['_default'] ) && ! $this->field['_default'] ) && count( $this->field['options'] ) > 0 ) {
+			$ignore_mapping_fields = array( 'wp_travel_country', 'wp_travel_booking_option', 'wp_travel_payment_mode' );
+			if ( ! in_array( $this->field['name'], $ignore_mapping_fields ) ) {
+				$mapped_options = array();
+				foreach( $this->field['options'] as $option ) {
+					$mapped_options[ $option ] = $option;
+				}
+				$this->field['options'] = $mapped_options;
+			}
+		}
 		if ( ! empty( $this->field['options'] ) ) {
 			foreach ( $this->field['options'] as $key => $value ) {
 
@@ -41,7 +55,7 @@ class WP_Travel_FW_Field_Select {
 						if ( ! is_array( $attr ) ) {
 							$option_attributes .= sprintf( '%s="%s"', $key1, $attr );
 						} else {
-							foreach( $attr as $att ) {
+							foreach ( $attr as $att ) {
 								$option_attributes .= sprintf( '%s="%s"', $key1, $att );
 							}
 						}
@@ -49,7 +63,7 @@ class WP_Travel_FW_Field_Select {
 				}
 
 				$selected = ( $key == $this->field['default'] ) ? 'selected' : '';
-				$output .= sprintf( '<option %s value="%s" %s>%s</option>', $option_attributes, $key, $selected, $value );
+				$output  .= sprintf( '<option %s value="%s" %s>%s</option>', $option_attributes, $key, $selected, $value );
 			}
 		}
 		$output .= sprintf( '</select>' );

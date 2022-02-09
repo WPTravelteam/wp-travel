@@ -30,7 +30,7 @@ class WP_Travel_FW_Field_Date_Range {
 
 		$defaults = $this->field['default'];
 		foreach ( $defaults as $default ) {
-			$js_date_format = wp_travel_date_format_php_to_js();
+			$js_date_format = wptravel_date_format_php_to_js();
 			// $input_class = isset( $default['class'] ) ? $default['class'] : '';
 			$name  = isset( $default['name'] ) ? $default['name'] : '';
 			$label = isset( $default['label'] ) ? $default['label'] : '';

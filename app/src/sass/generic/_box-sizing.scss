@@ -1,0 +1,13 @@
+* {
+	margin: 0;
+	padding: 0;
+    box-sizing: border-box;
+}
+body {
+	font-family: $itinerary-font;
+	color: $itinerary-font-color;
+	font-size: 15px;
+	line-height: 1.55;
+	background-color: #f6f8fa;
+	overflow-x: hidden;
+}

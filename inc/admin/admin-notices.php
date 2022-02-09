@@ -2,13 +2,13 @@
 /**
  * Admin Notices.
  *
- * @package inc/admin/
+ * @package WP_Travel
  */
 
  /**
   * Display critical admin notices.
   */
-function wp_travel_display_critical_admin_notices() {
+function wptravel_display_critical_admin_notices() {
 	$show_notices = apply_filters( 'wp_travel_display_critical_admin_notices', false );
 	if ( ! $show_notices ) {
 		return;
@@ -28,19 +28,19 @@ function wp_travel_display_critical_admin_notices() {
 
 }
 if ( ! is_multisite() ) {
-	add_action( 'admin_notices', 'wp_travel_display_critical_admin_notices' );
+	add_action( 'admin_notices', 'wptravel_display_critical_admin_notices' );
 
 } else {
-	add_action( 'network_admin_notices', 'wp_travel_display_critical_admin_notices' );
+	add_action( 'network_admin_notices', 'wptravel_display_critical_admin_notices' );
 	if ( is_main_site() ) {
-		add_action( 'admin_notices', 'wp_travel_display_critical_admin_notices' );
+		add_action( 'admin_notices', 'wptravel_display_critical_admin_notices' );
 	}
 }
 
  /**
   * Display General admin notices.
   */
-function wp_travel_display_general_admin_notices() {
+function wptravel_display_general_admin_notices() {
 	$screen       = get_current_screen();
 	$screen_id    = $screen->id;
 	$notice_pages = array(
@@ -86,11 +86,12 @@ function wp_travel_display_general_admin_notices() {
 
 }
 
-add_action( 'admin_notices', 'wp_travel_display_general_admin_notices' );
+add_action( 'admin_notices', 'wptravel_display_general_admin_notices' );
 
 // Deprecated notice.
-function wp_travel_display_deprecated_notice() {
+function wptravel_display_deprecated_notice() {
 	$notices = apply_filters( 'wp_travel_deprecated_admin_notice', array() );
+
 	if ( count( $notices ) < 1 ) {
 		return;
 	}
@@ -111,28 +112,34 @@ function wp_travel_display_deprecated_notice() {
 	</div>
 	<?php
 }
-add_action( 'admin_notices', 'wp_travel_display_deprecated_notice' );
+add_action( 'admin_notices', 'wptravel_display_deprecated_notice' );
 
 
 // Single Pricing deprecated notice.
-function wp_travel_display_single_pricing_deprecated_notice( $notices ) {
+function wptravel_display_single_pricing_deprecated_notice( $notices ) {
+
+	if ( ! WP_Travel::verify_nonce( true ) ) {
+		return $notices;
+	}
 
 	$screen  = get_current_screen();
 	$post_id = get_the_ID();
+
+	/**
+	 * Already checking nonces above.
+	 */
 	if ( WP_TRAVEL_POST_TYPE === $screen->post_type && $screen->parent_base == 'edit' && ( isset( $_GET['action'] ) && 'edit' === $_GET['action'] ) && $post_id ) {
-		if ( $post_id ) {
-			$pricing_option_type = wp_travel_get_pricing_option_type( $post_id );
-			if ( 'single-price' === $pricing_option_type ) {
-				$notices[] = __( 'Single Pricing is deprecated and will be removed in future version of WP Travel. Please update your pricing to multiple pricing.', 'wp-travel' );
-			}
+		$pricing_option_type = wptravel_get_pricing_option_type( $post_id );
+		if ( 'single-price' === $pricing_option_type ) {
+			$notices[] = __( 'Single Pricing is deprecated and will be removed in future version of WP Travel. Please update your pricing to multiple pricing.', 'wp-travel' );
 		}
 	}
 	return $notices;
 }
-add_filter( 'wp_travel_deprecated_admin_notice', 'wp_travel_display_single_pricing_deprecated_notice' );
+add_filter( 'wp_travel_deprecated_admin_notice', 'wptravel_display_single_pricing_deprecated_notice' );
 
 // Black Friday Notices.
-function wp_travel_black_friday_notice() {
+function wptravel_black_friday_notice() {
 
 	$user_id = get_current_user_id();
 
@@ -146,14 +153,14 @@ function wp_travel_black_friday_notice() {
 }
 // add_action( 'admin_notices', 'wp_travel_black_friday_notice' );
 
-function wp_travel_black_friday_dismiss_notice_ajax() {
+function wptravel_black_friday_dismiss_notice_ajax() {
 	$user_id = get_current_user_id();
 	$key     = 'wp_travel_black_friday_2019_' . $user_id;
 	update_option( $key, true );
 }
 // add_action( 'wp_ajax_wp_travel_black_friday_dismiss', 'wp_travel_black_friday_dismiss_notice_ajax' );
 
-function wp_travel_pricing_table_created_notice_display( $show ) {
+function wptravel_pricing_table_created_notice_display( $show ) {
 
 	if ( get_option( 'wp_travel_pricing_table_created', 'no' ) != 'yes' ) {
 		$show = true;
@@ -161,10 +168,10 @@ function wp_travel_pricing_table_created_notice_display( $show ) {
 	return $show;
 }
 
-add_filter( 'wp_travel_display_general_admin_notices', 'wp_travel_pricing_table_created_notice_display', 100 );
+// add_filter( 'wp_travel_display_general_admin_notices', 'wptravel_pricing_table_created_notice_display', 100 );
 
 
-function wp_travel_pricing_table_created_notice() {
+function wptravel_pricing_table_created_notice() {
 	if ( get_option( 'wp_travel_pricing_table_created', 'no' ) != 'yes' ) {
 		?>
 		<div class="wp-travel-notification notification-warning notice notice-info is-dismissible"> 
@@ -177,4 +184,33 @@ function wp_travel_pricing_table_created_notice() {
 		<?php
 	}
 }
-add_action( 'admin_notices', 'wp_travel_pricing_table_created_notice', 100 );
+// add_action( 'admin_notices', 'wptravel_pricing_table_created_notice', 100 );
+
+function wptravel_remove_v3_trips_notice() {
+	$settings     = wptravel_get_settings();
+	$user_since   = get_option( 'wp_travel_user_since', '3.0.0' );
+	$switch_to_v4 = wptravel_is_react_version_enabled();
+	if ( version_compare( $user_since, '4.0.0', '<' ) && ! $switch_to_v4 ) {
+		?>
+		<div class="wp-travel-notification notification-warning notice notice-info is-dismissible"> 
+			<div class="notification-content">
+				<ul>
+					<div><p><strong><span style="color:#f00">Note : </span> <?php esc_html_e( "This is the notice for the users who still use previous layout (v3 layout) to migrate all the trips created using WP Travel versions before 4.0.0 through Migrate Pricing and Date option as we are going to remove 'Switch to V4' option in settings page from WP Travel v5.1.0.", 'wp-travel' ); ?> <a href="https://wptravel.io/removal-of-switch-to-v4-option/" target="_blank">More.</a></strong></p></div>
+				</ul>
+			</div>
+		</div>
+		<?php
+	}
+}
+add_action( 'admin_notices', 'wptravel_remove_v3_trips_notice', 100 );
+
+function wptravel_v3_notice_display( $show ) {
+	$user_since   = get_option( 'wp_travel_user_since', '3.0.0' );
+	$switch_to_v4 = wptravel_is_react_version_enabled();
+	if ( version_compare( $user_since, '4.0.0', '<' ) && ! $switch_to_v4 ) {
+		$show = true;
+	}
+	return $show;
+}
+
+add_filter( 'wp_travel_display_general_admin_notices', 'wptravel_v3_notice_display', 100 );

@@ -63,7 +63,6 @@ if ( ! class_exists( 'WP_Travel_Coupon_Pro' ) ) :
 		 */
 		public function __construct() {
 
-			// add_action( 'admin_init', array( $this, 'wp_travel_check_dependency' ) );
 			$this->define_constants();
 			$this->assets_path = plugin_dir_url( WP_TRAVEL_COUPON_PRO_PLUGIN_FILE ) . 'assets/';
 			$this->includes();
@@ -77,10 +76,6 @@ if ( ! class_exists( 'WP_Travel_Coupon_Pro' ) ) :
 			$this->define( 'WP_TRAVEL_COUPON_POST_TYPE', 'wp-travel-coupons' );
 			$this->define( 'WP_TRAVEL_COUPON_PRO_PLUGIN_FILE', __FILE__ );
 			$this->define( 'WP_TRAVEL_COUPON_PRO_ABSPATH', dirname( __FILE__ ) . '/' );
-			// $this->define( 'WP_TRAVEL_COUPON_PRO_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
-			// $this->define( 'WP_TRAVEL_COUPON_PRO_PLUGIN_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
-			// $this->define( 'WP_TRAVEL_COUPON_PRO_VERSION', $this->version );
-			// $this->define( 'WP_TRAVEL_COUPON_PRO_PLUGIN_NAME', __( 'WP Travel Coupon Pro', 'wp-travel' ) );
 		}
 
 		/**
@@ -90,10 +85,10 @@ if ( ! class_exists( 'WP_Travel_Coupon_Pro' ) ) :
 		 * @return void
 		 */
 		private function init_hooks() {
-			// register_activation_hook( __FILE__, array( $this, 'wp_travel_coupons_activation' ) );
+			// register_activation_hook( __FILE__, array( $this, 'coupons_activation' ) );
 			$priority = 10;
-			if ( function_exists( 'wp_travel_get_submenu' ) ) {
-				$sbumenus = wp_travel_get_submenu();
+			if ( function_exists( 'wptravel_get_submenu' ) ) {
+				$sbumenus = wptravel_get_submenu();
 				$priority = isset( $sbumenus['bookings']['coupon']['priority'] ) ? $sbumenus['bookings']['coupon']['priority'] : $priority;
 			}
 			add_action( 'init', array( 'WP_Travel_Coupons_Pro_Install', 'init' ), $priority );
@@ -134,7 +129,7 @@ if ( ! class_exists( 'WP_Travel_Coupon_Pro' ) ) :
 		/**
 		 * Activation Hook.
 		 */
-		public function wp_travel_coupons_activation() {
+		public function coupons_activation() {
 			// Flush Rewrite rule.
 			$coupons_pro_install = new WP_Travel_Coupons_Pro_Install();
 			$coupons_pro_install::init();
@@ -142,20 +137,6 @@ if ( ! class_exists( 'WP_Travel_Coupon_Pro' ) ) :
 			flush_rewrite_rules();
 		}
 
-		/**
-		 * This will uninstall this plugin if parent WP-Travel plugin not found
-		 */
-		// public function wp_travel_check_dependency() {
-		// 	$plugin      = plugin_basename( __FILE__ );
-		// 	$plugin_data = get_plugin_data( __FILE__, false );
-
-		// 	if ( ! class_exists( 'WP_Travel' ) ) {
-		// 		if ( is_plugin_active( $plugin ) ) {
-		// 			deactivate_plugins( $plugin );
-		// 			wp_die( wp_kses_post( '<strong>' . $plugin_data['Name'] . '</strong> requires the WP Travel plugin to work. Please activate it first. <br /><br />Back to the WordPress <a href="' . esc_url( get_admin_url( null, 'plugins.php' ) ) . '">Plugins page</a>.' ) );
-		// 		}
-		// 	}
-		// }
 
 		/**
 		 * What type of request is this?
@@ -186,9 +167,9 @@ endif;
  * @since  1.0.0
  * @return WP Travel Coupons
  */
-function wp_travel_coupon_pro() {
+function wptravel_coupon_pro() {
 	return WP_Travel_Coupon_Pro::instance();
 }
 
 // Start WP Travel Coupons.
-wp_travel_coupon_pro();
+wptravel_coupon_pro();

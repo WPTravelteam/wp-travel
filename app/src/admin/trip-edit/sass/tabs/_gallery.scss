@@ -1,146 +1,204 @@
-.wp-travel-gallery-list{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-auto-rows: 1fr;
-  grid-gap: 15px;
-  margin-bottom: 0;
-  @media(max-width: 1199px){
-        grid-template-columns: 1fr 1fr;
-  }
-  .gallery-item{
-      position: relative;
-      margin: 0;
-      height: 100%;
-      cursor: pointer;
-      border: 1px solid transparent;
-      &:hover{
-          border-color: #f1d375;
-      }
-      figure{
-          margin: 0;
-          height: 100%;
-      }
-      img{
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-      }
-      .components-button{
-          position: absolute;
-          right: 0;
-          top: 0;
-          color: #F44336;
-      }
-      &.featured-image {
-          &:before {
-            content: "★";
-            color: #f1d375;
-            position: absolute;
-            left: 5px;
-            font-family: dashicons;
-            text-shadow: 0px 1px 1px #000;
-            top: -6px;
-            z-index: 1;
-            font-size: 24px;
-          }
-      }
-  }
+.wp-travel-gallery-list {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-auto-rows: 1fr;
+	grid-gap: 15px;
+	margin-bottom: 0;
+	@media (max-width: 1199px) {
+		grid-template-columns: 1fr 1fr;
+	}
+	.gallery-item {
+		position: relative;
+		margin: 0;
+		height: 100%;
+		cursor: pointer;
+		border: 1px solid transparent;
+		&:hover {
+			border-color: #f1d375;
+		}
+		figure {
+			margin: 0;
+			height: 100%;
+		}
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+		.components-button {
+			position: absolute;
+			right: 0;
+			top: 0;
+			color: #f44336;
+		}
+		&.featured-image {
+			&:before {
+				content: "★";
+				color: #f1d375;
+				position: absolute;
+				left: 5px;
+				font-family: dashicons;
+				text-shadow: 0px 1px 1px #000;
+				top: -6px;
+				z-index: 1;
+				font-size: 24px;
+			}
+		}
+	}
 }
 
-.wp-travel-advanced-gallery-title-wrap{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: .5em 0 1em;
-    h3{
-        margin: 0;
-    }
-    .wp-travel-advance-gallery-buttons{
-        button{
-            margin-left: .5em;
-        }
-    }
+// For Gallery image display part gap fix
+.wp-travel-ui-card {
+	.dropzone {
+		margin-top: 25px;
+		border: 2px dashed #d0d0d0;
+		padding: 40px;
+		text-align: center;
+		span.uploader-info {
+			font-size: 20px;
+		}
+		.uploader-buttons {
+			margin-top: 10px;
+			button.components-button.is-secondary {
+				margin-right: 10px;
+			}
+		}
+	}
 }
-.wp-travel-advanced-gallery{
-    ul{
-        margin: 0;
-        padding: 0;
-    }
-    li{
-        &.featured-image{
-            &::before{
-                content: "★";
-                color: #f1d375;
-                position: absolute;
-                left: 30px;
-                font-family: dashicons;
-                text-shadow: 0px 1px 1px #000;
-                top: -6px;
-                z-index: 1;
-                font-size: 24px;
-            }
-            .wptag__media-card{
-                .wptag__thumbnail{
-                    cursor: default;
-                }
-            }
-        }
-        .wptag__dragger{
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 11;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            padding: 2px;
-            .dashicons, .dashicons-menu{
-                &::before{
-                    content: "\f545";
-                }
-            }
-        }
-        .wptag__media-card{
-            flex: 1;
-            display: flex;
-            .wptag__thumbnail{
-                width: 250px;
-                height: unset;
-                margin-right: 1em;
-                cursor: pointer;
-                .components-button{
-                    position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    width: 100%;
-                    background-color: #007cba;
-                    border-radius: 0;
-                    color: #fff;
-                    justify-content: center;
-                    border: 1px solid #007cba;
-                    box-shadow: none;
-                }
-            }
-            .wptag__media-detail-form{
-                flex: 1;
-                .components-base-control{
-                    width: 100% !important;
-                    &:nth-child(2){
-                        margin-bottom: 0;
-                        textarea, .components-base-control__field{
-                            margin-bottom: 0;
-                        }
-                    }
-                }
-                .wptag__card-remove{
-                    padding: 3px 10px;
-                    color: red;
-                    line-height: 26px;
-                    background: none;
-                    top: 5px;
-                    right: 5px;
-                    border-radius: 3px;
-                }
-            }
-        }
-    }
+
+.wp-travel-advanced-gallery-title-wrap {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.5em 0 1em;
+	h3 {
+		margin: 0;
+	}
+	.wp-travel-advance-gallery-buttons {
+		button {
+			margin-left: 0.5em;
+		}
+	}
+}
+.wp-travel-advanced-gallery {
+	ul {
+		margin: 0;
+		padding: 0;
+	}
+	li {
+		&.featured-image {
+			&::before {
+				content: "★";
+				color: #f1d375;
+				position: absolute;
+				left: 30px;
+				font-family: dashicons;
+				text-shadow: 0px 1px 1px #000;
+				top: -6px;
+				z-index: 1;
+				font-size: 24px;
+			}
+			.wptag__media-card {
+				.wptag__thumbnail {
+					cursor: default;
+				}
+			}
+		}
+		.wptravel-swap-list {
+			display: none;
+		}
+		.wptag__dragger {
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 11;
+			background-color: #fff;
+			border: 1px solid #ccc;
+			padding: 2px;
+			.dashicons,
+			.dashicons-menu {
+				&::before {
+					content: "\f545";
+				}
+			}
+		}
+		.wptag__media-card {
+			flex: 1;
+			display: flex;
+			.wptag__thumbnail {
+				width: 250px;
+				height: unset;
+				margin-right: 1em;
+				cursor: pointer;
+				.components-button {
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					width: 100%;
+					background-color: #007cba;
+					border-radius: 0;
+					color: #fff;
+					justify-content: center;
+					border: 1px solid #007cba;
+					box-shadow: none;
+				}
+			}
+			.wptag__media-detail-form {
+				flex: 1;
+				.components-base-control {
+					width: 100% !important;
+					&:nth-child(2) {
+						margin-bottom: 0;
+						textarea,
+						.components-base-control__field {
+							margin-bottom: 0;
+						}
+					}
+				}
+				.wptag__card-remove {
+					padding: 3px 10px;
+					color: red;
+					line-height: 26px;
+					background: none;
+					top: 5px;
+					right: 5px;
+					border-radius: 3px;
+				}
+			}
+		}
+	}
+}
+
+.wp-travel-advanced-gallery {
+	li {
+		&.featured-image {
+			&::before {
+				top: unset;
+				bottom: 5px;
+				left: 220px;
+			}
+			.wptag__media-card {
+				.wptag__thumbnail {
+					position: relative;
+					&::after {
+						content: "";
+						position: absolute;
+						width: 100%;
+						height: 100%;
+						background-color: #000;
+						opacity: 0.3;
+					}
+				}
+			}
+		}
+	}
+}
+
+// Adding Video in gallery section
+.wptag__external-link-form {
+	gap: 1.5em;
+}
+
+.wptag__embed-preview {
+	flex: 1;
 }

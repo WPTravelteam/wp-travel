@@ -5,7 +5,7 @@
  * @param  Array $tab  List of tabs.
  * @param  Array $args Settings arg list.
  */
-function wp_travel_settings_callback_email( $tab, $args ) {
+function wptravel_settings_callback_email( $tab, $args ) {
 	$settings = $args['settings'];
 
 		$send_booking_email_to_admin = $settings['send_booking_email_to_admin'];
@@ -23,17 +23,17 @@ function wp_travel_settings_callback_email( $tab, $args ) {
 		// Enquiry Admin Email.
 		$enquiry_admin_email_settings = $settings['enquiry_admin_template_settings'];
 
-		?>
+	?>
 		<?php do_action( 'wp_travel_tab_content_before_email', $args ); ?>
 		<?php
 		$upsell_args = array(
-			'title'      => __( 'Want to get more e-mail customization options?', 'wp-travel' ),
-			'content'    => __( 'By upgrading to Pro, you can get features like multiple email notifications, email footer powered by text removal options and more !', 'wp-travel' ),
+			'title'       => __( 'Want to get more e-mail customization options?', 'wp-travel' ),
+			'content'     => __( 'By upgrading to Pro, you can get features like multiple email notifications, email footer powered by text removal options and more !', 'wp-travel' ),
 			'link2'       => 'https://wptravel.io/downloads/wp-travel-utilities/',
 			'link2_label' => __( 'Get WP Travel Utilities Addon', 'wp-travel' ),
 			'type'        => array( 'wp-travel-utilities' ),
 		);
-		wp_travel_upsell_message( $upsell_args );
+		wptravel_upsell_message( $upsell_args );
 		?>
 		<table class="form-table">
 			<tr>
@@ -129,7 +129,7 @@ function wp_travel_settings_callback_email( $tab, $args ) {
 											<td>
 												<div class="wp_travel_admin_editor">
 												<?php
-												$content = isset( $booking_admin_email_settings['email_content'] ) && '' !== $booking_admin_email_settings['email_content'] ? $booking_admin_email_settings['email_content'] : wp_travel_booking_admin_default_email_content();
+												$content = isset( $booking_admin_email_settings['email_content'] ) && '' !== $booking_admin_email_settings['email_content'] ? $booking_admin_email_settings['email_content'] : wptravel_booking_admin_default_email_content();
 												wp_editor( $content, 'booking_admin_email_content', $settings = array( 'textarea_name' => 'booking_admin_template_settings[email_content]' ) );
 												?>
 												</div>
@@ -181,7 +181,7 @@ function wp_travel_settings_callback_email( $tab, $args ) {
 											<td>
 												<div class="wp_travel_admin_editor">
 												<?php
-												$content = isset( $booking_client_email_settings['email_content'] ) && '' !== $booking_client_email_settings['email_content'] ? $booking_client_email_settings['email_content'] : wp_travel_booking_client_default_email_content();
+												$content = isset( $booking_client_email_settings['email_content'] ) && '' !== $booking_client_email_settings['email_content'] ? $booking_client_email_settings['email_content'] : wptravel_booking_client_default_email_content();
 												wp_editor( $content, 'booking_client_email_content', $settings = array( 'textarea_name' => 'booking_client_template_settings[email_content]' ) );
 												?>
 												</div>
@@ -253,7 +253,7 @@ function wp_travel_settings_callback_email( $tab, $args ) {
 											<td>
 												<div class="wp_travel_admin_editor">
 												<?php
-												$content = isset( $payment_admin_email_settings['email_content'] ) && '' !== $payment_admin_email_settings['email_content'] ? $payment_admin_email_settings['email_content'] : wp_travel_payment_admin_default_email_content();
+												$content = isset( $payment_admin_email_settings['email_content'] ) && '' !== $payment_admin_email_settings['email_content'] ? $payment_admin_email_settings['email_content'] : wptravel_payment_admin_default_email_content();
 												wp_editor( $content, 'payment_admin_email_content', $settings = array( 'textarea_name' => 'payment_admin_template_settings[email_content]' ) );
 												?>
 												</div>
@@ -305,7 +305,7 @@ function wp_travel_settings_callback_email( $tab, $args ) {
 											<td>
 												<div class="wp_travel_admin_editor">
 												<?php
-												$content = isset( $payment_client_email_settings['email_content'] ) && '' !== $payment_client_email_settings['email_content'] ? $payment_client_email_settings['email_content'] : wp_travel_payment_client_default_email_content();
+												$content = isset( $payment_client_email_settings['email_content'] ) && '' !== $payment_client_email_settings['email_content'] ? $payment_client_email_settings['email_content'] : wptravel_payment_client_default_email_content();
 												wp_editor( $content, 'payment_client_email_content', $settings = array( 'textarea_name' => 'payment_client_template_settings[email_content]' ) );
 												?>
 												</div>
@@ -375,7 +375,7 @@ function wp_travel_settings_callback_email( $tab, $args ) {
 											<td>
 												<div class="wp_travel_admin_editor">
 												<?php
-												$content = isset( $enquiry_admin_email_settings['email_content'] ) && '' !== $enquiry_admin_email_settings['email_content'] ? $enquiry_admin_email_settings['email_content'] : wp_travel_enquiries_admin_default_email_content();
+												$content = isset( $enquiry_admin_email_settings['email_content'] ) && '' !== $enquiry_admin_email_settings['email_content'] ? $enquiry_admin_email_settings['email_content'] : wptravel_enquiries_admin_default_email_content();
 												wp_editor( $content, 'enquiry_admin_email_content', $settings = array( 'textarea_name' => 'enquiry_admin_template_settings[email_content]' ) );
 												?>
 												</div>

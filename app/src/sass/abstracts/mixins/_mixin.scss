@@ -1,0 +1,77 @@
+@mixin clearfix {
+	&::after,
+	&::before {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
+
+@mixin fullwidth {
+	width: 100%;
+}
+
+//media query for theme contents
+@mixin extra-large-screen {
+	@media (max-width: 1199px) {
+		@content;
+	}
+}
+
+@mixin large-screen {
+	@media (max-width: 1000px) {
+		@content;
+	}
+}
+
+@mixin tab {
+	@media (max-width: 1024px) {
+		@content;
+	}
+}
+
+@mixin sidr-view {
+	@media (max-width: 992px) {
+		@content;
+	}
+}
+
+@mixin sidr-view-and-mob {
+	@media (min-width: 768px) and (max-width: 991px) {
+		@content;
+	}
+}
+
+@mixin above-sidr-view {
+	@media (min-width: 993px) {
+		@content;
+	}
+}
+
+@mixin mob {
+	@media (max-width: 767px) {
+		@content;
+	}
+}
+
+@mixin sm {
+	@media (max-width: 640px) {
+		@content;
+	}
+}
+
+@mixin xs {
+	@media (max-width: 567px) {
+		@content;
+	}
+}
+
+@mixin xxs {
+	@media (max-width: 500px) {
+		@content;
+	}
+}
+
+@mixin box-shadow($x-axis: 0, $y-axis: 1px, $blur: 2px, $color: $default) {
+	box-shadow: $x-axis $y-axis $blur $color;
+}

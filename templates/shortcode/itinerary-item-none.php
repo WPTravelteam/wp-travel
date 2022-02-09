@@ -9,10 +9,10 @@
  * as little as possible, but it does happen. When this occurs the version of the template file will.
  * be bumped and the readme will list any important changes.
  *
- * @see 	    http://docs.wensolutions.com/document/template-structure/
- * @author      WenSolutions
- * @package     wp-travel/Templates
- * @since       1.0.2
+ * @see     http://docs.wensolutions.com/document/template-structure/
+ * @author  WenSolutions
+ * @package WP_Travel
+ * @since   1.0.2
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -21,11 +21,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <?php
-	 
- if ( post_password_required() ) {
- 	echo get_the_password_form();
- 	return;
- } ?>
 
-<p class="itinerary-none wp-travel-no-detail-found-msg"><?php esc_html_e( 'Trips not found!', 'wp-travel' ) ?></p>
+if ( post_password_required() ) {
+	echo get_the_password_form();
+	return;
+}
+?>
+
+<p class="itinerary-none wp-travel-no-detail-found-msg"><?php esc_html_e( 'Trips not found!', 'wp-travel' ); ?></p>
 

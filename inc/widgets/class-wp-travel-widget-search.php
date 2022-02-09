@@ -2,7 +2,7 @@
 /**
  * Exit if accessed directly.
  *
- * @package wp-travel\incldues
+ * @package WP_Travel
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @author   WenSolutions
  * @category Widgets
- * @package  wp-travel/Widgets
+ * @package  WP_Travel
  * @extends  WP_Widget
  */
 class WP_Travel_Widget_Search extends WP_Widget {
@@ -23,7 +23,7 @@ class WP_Travel_Widget_Search extends WP_Widget {
 	 */
 	function __construct() {
 		// Instantiate the parent object.
-		parent::__construct( false, __( 'WP Travel Search', 'wp-travel' ) );
+		parent::__construct( false, __( 'WP Travel Search (Deprecated)', 'wp-travel' ) );
 	}
 
 	/**
@@ -36,12 +36,13 @@ class WP_Travel_Widget_Search extends WP_Widget {
 
 		extract( $args );
 		// These are the widget options.
-		$title = apply_filters( 'wp_travel_search_widget_title', $instance['title'] );
+		$title = isset( $instance['title'] ) ? $instance['title'] : '';
+		$title = apply_filters( 'wp_travel_search_widget_title', $title );
 
 		echo $before_widget;
 		echo ( $title ) ? $before_title . $title . $after_title : '';
 
-		wp_travel_search_form();
+		wptravel_search_form();
 		echo $after_widget;
 	}
 	/**
@@ -51,7 +52,7 @@ class WP_Travel_Widget_Search extends WP_Widget {
 	 * @param  Mixed $old_instance Old instance of widget.
 	 */
 	function update( $new_instance, $old_instance ) {
-		$instance = $old_instance;
+		$instance          = $old_instance;
 		$instance['title'] = sanitize_text_field( $new_instance['title'] );
 		return $instance;
 	}
@@ -73,11 +74,11 @@ class WP_Travel_Widget_Search extends WP_Widget {
 			<input type="text" value="<?php echo esc_attr( $title ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" class="widefat">
 		</p>
 			
-	<?php
+		<?php
 	}
 }
 
-function wp_travel_register_search_widgets() {
+function wptravel_register_search_widgets() {
 	register_widget( 'WP_Travel_Widget_Search' );
 }
-add_action( 'widgets_init', 'wp_travel_register_search_widgets' );
+add_action( 'widgets_init', 'wptravel_register_search_widgets' );

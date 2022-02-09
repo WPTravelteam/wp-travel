@@ -2,7 +2,9 @@
 class WP_Travel_Helpers_Trip_Extras {
 	public static function get_trip_extras( $args = array() ) {
 		$default = array(
-			'post_type' => 'tour-extras',
+			'post_type'      => 'tour-extras',
+			'post_status'    => array( 'publish' ),
+			'posts_per_page' => '-1',
 		);
 
 		$args = wp_parse_args( $args, $default );
@@ -26,8 +28,9 @@ class WP_Travel_Helpers_Trip_Extras {
 			// $_trip_extras[$index]['is_sale'] = false;
 			// $_trip_extras[$index]['is_required'] = false;
 			// $_trip_extras[$index]['unit'] = 'unit';
-			if ( false !== $tour_extras_metas ) {
-				$_trip_extras[ $index ]['content'] = $tour_extras_metas['extras_item_description'];
+			if ( false !== $tour_extras_metas && is_array( $tour_extras_metas ) ) {
+				$_trip_extras[ $index ]['content'] = isset( $tour_extras_metas['extras_item_description'] ) ? $tour_extras_metas['extras_item_description'] : '';
+				$_trip_extras[ $index ]['excerpt'] = isset( $tour_extras_metas['extras_item_description'] ) ? wp_trim_words( $tour_extras_metas['extras_item_description'], 15 ) : '';
 				// $_trip_extras[$index]['regular_price'] = money_format( '%i', $tour_extras_metas['extras_item_price'] );
 				if ( class_exists( 'WP_Travel_Tour_Extras_Core' ) ) {
 					$price      = isset( $tour_extras_metas['extras_item_price'] ) ? $tour_extras_metas['extras_item_price'] : 0;
@@ -35,8 +38,8 @@ class WP_Travel_Helpers_Trip_Extras {
 					$sale_price = isset( $tour_extras_metas['extras_item_sale_price'] ) ? $tour_extras_metas['extras_item_sale_price'] : 0;
 					$sale_price = apply_filters( 'wp_travel_multiple_currency', $sale_price );
 
-					$tour_extras_metas['extras_item_price']      = wp_travel_get_formated_price( $price );
-					$tour_extras_metas['extras_item_sale_price'] = wp_travel_get_formated_price( $sale_price );
+					$tour_extras_metas['extras_item_price']      = wptravel_get_formated_price( $price );
+					$tour_extras_metas['extras_item_sale_price'] = wptravel_get_formated_price( $sale_price );
 
 					$_trip_extras[ $index ]['tour_extras_metas'] = $tour_extras_metas;
 					$_trip_extras[ $index ]['link']              = get_permalink( $trip_extra->ID );

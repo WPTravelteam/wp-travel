@@ -3,7 +3,7 @@
  * Update 1.3.7
  */
 
-function wp_travel_maybe_create_new_roles() {
+function wptravel_maybe_create_new_roles() {
 
 	$wp_travel_customer = get_role( 'wp-travel-customer' );
 
@@ -11,13 +11,13 @@ function wp_travel_maybe_create_new_roles() {
 
 		global $wp_roles;
 
-			if ( ! class_exists( 'WP_Roles' ) ) {
-				return;
-			}
+		if ( ! class_exists( 'WP_Roles' ) ) {
+			return;
+		}
 
-			if ( ! isset( $wp_roles ) ) {
-				$wp_roles = new WP_Roles(); // @codingStandardsIgnoreLine
-			}
+		if ( ! isset( $wp_roles ) ) {
+			$wp_roles = new WP_Roles(); // @codingStandardsIgnoreLine
+		}
 
 			// Customer role.
 			add_role(
@@ -34,16 +34,17 @@ function wp_travel_maybe_create_new_roles() {
 /**
  * Create new required pages.
  */
-function wp_travel_maybe_create_pages() {
+function wptravel_maybe_create_pages() {
 
 	include_once sprintf( '%s/inc/admin/admin-helper.php', WP_TRAVEL_ABSPATH );
 
-	$get_dashboard_page = wp_travel_get_page_id( 'wp-travel-dashboard' );
+	$get_dashboard_page = wptravel_get_page_id( 'wp-travel-dashboard' );
 
 	if ( -1 === $get_dashboard_page ) {
 
 		$pages = apply_filters(
-			'wp_travel_create_pages', array(
+			'wp_travel_create_pages',
+			array(
 				'wp-travel-cart'      => array(
 					'name'    => _x( 'wp-travel-cart', 'Page slug', 'wp-travel' ),
 					'title'   => _x( 'WP Travel Cart', 'Page title', 'wp-travel' ),
@@ -63,11 +64,11 @@ function wp_travel_maybe_create_pages() {
 		);
 
 		foreach ( $pages as $key => $page ) {
-			wp_travel_create_page( esc_sql( $page['name'] ), 'wp_travel_' . $key . '_page_id', $page['title'], $page['content'], ! empty( $page['parent'] ) ? wp_travel_get_page_id( $page['parent'] ) : '' );
+			wptravel_create_page( esc_sql( $page['name'] ), 'wp_travel_' . $key . '_page_id', $page['title'], $page['content'], ! empty( $page['parent'] ) ? wptravel_get_page_id( $page['parent'] ) : '' );
 		}
 	}
 
 }
 
-wp_travel_maybe_create_new_roles();
-wp_travel_maybe_create_pages();
+wptravel_maybe_create_new_roles();
+wptravel_maybe_create_pages();

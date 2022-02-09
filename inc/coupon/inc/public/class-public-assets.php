@@ -2,7 +2,7 @@
 /**
  * Public Assets Class.
  *
- * @package WP_Travel_Coupons_Pro
+ * @package WP_Travel
  */
 
 if ( ! class_exists( 'WP_Travel_Coupons_Pro_Public_Assets' ) ) :
@@ -27,7 +27,6 @@ if ( ! class_exists( 'WP_Travel_Coupons_Pro_Public_Assets' ) ) :
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 			// wp_enqueue_script( 'wp-travel-coupons-frontend-js', $this->assets_path . 'assets/js/wp-travel-coupons-frontend' . $suffix . '.js', array( 'jquery' ), '', true );
-
 		}
 		/**
 		 * Load Styles
@@ -37,7 +36,6 @@ if ( ! class_exists( 'WP_Travel_Coupons_Pro_Public_Assets' ) ) :
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 			// wp_enqueue_style( 'wp-travel-coupons-frontend-css', $this->assets_path . 'assets/css/wp-travel-coupons-frontend' . $suffix . '.css' );
-
 		}
 
 

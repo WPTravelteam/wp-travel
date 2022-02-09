@@ -1,12 +1,16 @@
 {
   "name": "wp-travel",
-  "version": "4.1.0",
+  "version": "5.1.0",
   "description": "Travel pluign for WordPress",
   "main": "index.js",
   "scripts": {
-    "build": "wp-scripts build",
-    "start": "wp-scripts start",
-    "build:pre_release": "npx wp-scripts build && npx grunt build"
+    "setup": "composer install && yarn install && yarn run build && wp-scripts env install",
+    "dev": "wp-scripts start --mode development",
+    "build:pre_release": "npx wp-scripts build && npx wp-scripts build --mode development && npx grunt pre_release",
+    "lint:php": "wp-scripts env lint-php",
+    "postinstall": "husky install",
+    "makepot": "wp i18n make-pot . i18n/languages/wp-travel-test.pot --exclude=node_modules,vendor,src,wordpress,build --skip-js",
+    "bundle" : "wp-scripts build && wp-scripts build --mode development && npx grunt build"
   },
   "repository": {
     "type": "git",
@@ -18,19 +22,22 @@
     "hotels",
     "booking"
   ],
-  "author": "WEN Solutions",
+  "author": "WP Travel",
   "license": "GPL-2.0",
   "bugs": {
     "url": "https://gitlab.com/ws-plugins/wp-travel/issues"
   },
   "homepage": "https://gitlab.com/ws-plugins/wp-travel#README",
   "devDependencies": {
+    "@babel/cli": "^7.10.1",
     "@babel/core": "^7.10.2",
     "@babel/preset-env": "^7.10.2",
-    "@babel/cli": "^7.10.1",
-    "grunt-babel": "^8.0.0",
+    "@wordpress/scripts": "^6.2.0",
+    "autoprefixer": "^9.7.4",
+    "css-loader": "^3.4.2",
     "eslint": "^3.13.1",
-    "grunt": "^1.0.4",
+    "grunt": "^1.4.1",
+    "grunt-babel": "^8.0.0",
     "grunt-checktextdomain": "^1.0.1",
     "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-compress": "^1.4.3",
@@ -45,27 +52,41 @@
     "grunt-rtlcss": "^2.0.1",
     "grunt-svn-export": "^0.1.7",
     "grunt-wp-i18n": "^1.0.0",
-    "sass": "^0.5.0",
-    "@wordpress/scripts": "^6.2.0",
-    "autoprefixer": "^9.7.4",
-    "css-loader": "^3.4.2",
-    "mini-css-extract-plugin": "^0.9.0",
-    "node-sass": "^4.13.1",
-    "postcss-loader": "^3.0.0",
-    "sass-loader": "^8.0.2",
-    "style-loader": "^1.1.3",
     "grunt-writefile": "^0.1.4",
     "grunt-zip": "^0.18.1",
-    "node-native-zip": "^1.1.0"
+    "husky": "^5.1.1",
+    "lint-staged": "^10.5.4",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-native-zip": "^1.1.0",
+    "node-sass": "^4.13.1",
+    "postcss-loader": "^3.0.0",
+    "sass": "^0.5.0",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.1.3",
+    "url-loader": "^4.1.1"
   },
   "dependencies": {
+    "@wordpress/env": "^4.0.4",
+    "@wordpress/i18n": "^3.20.0",
     "@wordpress/icons": "^1.3.1",
-    "react-datepicker": "^2.12.1",
+    "date-fns": "^2.22.1",
+    "react-datepicker": "^3.7.0",
     "react-geocode": "^0.2.1",
     "react-gmaps": "^1.9.0",
-    "react-google-autocomplete": "^1.1.2",
+    "react-google-autocomplete": "^2.4.3",
     "react-select": "^3.0.8",
-    "react-sortablejs": "^2.0.11",
-    "rrule": "^2.6.4"
+    "react-sortablejs": "^6.0.0",
+    "rrule": "^2.6.4",
+    "sortablejs": "^1.12.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.php": [
+      "composer run lint"
+    ]
   }
 }

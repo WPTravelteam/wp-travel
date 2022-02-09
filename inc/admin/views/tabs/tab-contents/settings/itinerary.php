@@ -6,18 +6,18 @@
  * @param  Array $tab  List of tabs.
  * @param  Array $args Settings arg list.
  */
-function wp_travel_settings_callback_itinerary( $tab, $args ) {
+function wptravel_settings_callback_itinerary( $tab, $args ) {
 	$settings = $args['settings'];
 
-		$hide_related_itinerary              = $settings['hide_related_itinerary'];
-		$enable_multiple_travellers          = $settings['enable_multiple_travellers'];
-		$wp_travel_switch_to_react			 = $settings['wp_travel_switch_to_react'];
+		$hide_related_itinerary     = $settings['hide_related_itinerary'];
+		$enable_multiple_travellers = $settings['enable_multiple_travellers'];
+		$wp_travel_switch_to_react  = wptravel_is_react_version_enabled();
 
-		$wp_travel_user_since                = get_option( 'wp_travel_user_since' );
+		$wp_travel_user_since = get_option( 'wp_travel_user_since' );
 
-		$trip_pricing_options_layout = wp_travel_get_pricing_option_listing_type( $settings );
+		$trip_pricing_options_layout = wptravel_get_pricing_option_listing_type( $settings );
 		do_action( 'wp_travel_tab_content_before_trips', $args );
-		?>
+	?>
 		<table class="form-table">
 			<tr>
 				<th>
@@ -54,7 +54,7 @@ function wp_travel_settings_callback_itinerary( $tab, $args ) {
 					<p class="description"><label for="enable_multiple_travellers"><?php esc_html_e( 'Collect multiple travelers information from checkout page.', 'wp-travel' ); ?></label></p>
 				</td>
 			<tr>
-			<?php if ( 'no' === $wp_travel_switch_to_react && version_compare( $wp_travel_user_since, '4.0.0', '<' )  )  : ?>
+			<?php if ( ! $wp_travel_switch_to_react && version_compare( $wp_travel_user_since, '4.0.0', '<' ) ) : ?>
 				<tr id="wp-travel-tax-price-options" >
 					<th><label><?php esc_html_e( 'Trip Pricing Options Listing', 'wp-travel' ); ?></label></th>
 					<td>
@@ -72,6 +72,6 @@ function wp_travel_settings_callback_itinerary( $tab, $args ) {
 		</table>
 			<?php
 			do_action( 'wp_travel_tab_content_after_trips', $args );
-	
+
 }
 

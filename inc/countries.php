@@ -1,6 +1,6 @@
 <?php
 
-function wp_travel_get_countries() {
+function wptravel_get_countries() {
 
 	$countries = array(
 		'AF' => __( 'Afghanistan', 'wp-travel' ),
@@ -264,12 +264,12 @@ function wp_travel_get_countries() {
  * @since 1.0.5
  * @return void
  */
-function wp_travel_get_country_by_code( $country_code ) {
+function wptravel_get_country_by_code( $country_code ) {
 	if ( ! $country_code ) {
 		return;
 	}
 
-	$all_countries = wp_travel_get_countries();
+	$all_countries = wptravel_get_countries();
 	if ( ! is_array( $country_code ) ) {
 		return $all_countries[ $country_code ];
 	} else {

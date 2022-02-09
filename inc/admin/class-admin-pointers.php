@@ -2,7 +2,7 @@
 /**
  * Admin Info Pointers
  *
- * @package WP Travel
+ * @package WP_Travel
  * @author WEN Solutions
  */
 
@@ -17,19 +17,15 @@ class WP_Travel_Admin_Info_Pointers {
 	function __construct() {
 		add_action( 'admin_enqueue_scripts', array( $this, 'load_pointers' ), 999 );
 
-		// add_filter( 'wp_travel_admin_pointers-plugins', array( $this, 'add_plugin_pointers' ) );
-		// add_filter( 'wp_travel_admin_pointers-'. WP_TRAVEL_POST_TYPE, array( $this, 'add_single_post_edit_screen_pointers' ) );
-		// add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'add_dashboard_screen_pointers' ) );
 		$after_multiple_pricing = get_option( 'wp_travel_user_after_multiple_pricing_category' );
-		if ( 'yes' === $after_multiple_pricing ) {
+		$user_since             = get_option( 'wp_travel_user_since', '1.0.0' );
+		if ( 'yes' === $after_multiple_pricing && version_compare( $user_since, '3.0.0', '<=' ) ) {
 			add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'menu_order_changed' ) );
 			add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'new_trips_menu' ) );
 		}
-		$user_since = get_option( 'wp_travel_user_since', '1.0.0' );
-		$settings        = wp_travel_get_settings();
-		$switch_to_react = $settings['wp_travel_switch_to_react'];
+		$switch_to_react = wptravel_is_react_version_enabled();
 
-		if ( version_compare( $user_since, '4.0.0', '<' ) && 'no' == $switch_to_react ) {
+		if ( version_compare( $user_since, '4.0.0', '<' ) && ! $switch_to_react ) {
 			add_filter( 'wp_travel_admin_pointers-dashboard', array( $this, 'enable_v4_pointer' ) );
 			add_filter( 'wp_travel_admin_pointers-edit-itinerary-booking', array( $this, 'enable_v4_pointer' ) );
 			add_filter( 'wp_travel_admin_pointers-edit-itineraries', array( $this, 'enable_v4_pointer' ) );
@@ -38,12 +34,11 @@ class WP_Travel_Admin_Info_Pointers {
 		}
 
 		// Admin General Notices.
-		add_action( 'admin_notices', array( $this, 'wp_travel_paypal_merge_notice' ) );
-		add_action( 'admin_notices', array( $this, 'wp_travel_update_payment_gateways_notice' ) );
-		add_action( 'admin_notices', array( $this, 'wp_travel_importer_upsell_notice' ) );
-		add_action( 'admin_init', array( $this, 'wp_travel_get_dismissied_nag_messages' ) );
+		add_action( 'admin_notices', array( $this, 'paypal_merge_notice' ) );
+		add_action( 'admin_notices', array( $this, 'update_payment_gateways_notice' ) );
+		add_action( 'admin_notices', array( $this, 'importer_upsell_notice' ) );
+		add_action( 'admin_init', array( $this, 'get_dismissied_nag_messages' ) );
 
-		// add_filter( 'wp_travel_display_general_admin_notices', array( $this, 'display_general_admin_notices' ) );
 		add_action( 'wp_travel_general_admin_notice', array( $this, 'general_admin_notices' ) );
 	}
 
@@ -101,7 +96,7 @@ class WP_Travel_Admin_Info_Pointers {
 		wp_enqueue_style( 'wp-pointer' );
 
 		// Add pointers script to queue. Add custom script.
-		wp_register_script( 'wp-travel-admin-pointers-js', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . '/assets/js/wp-travel-backend-pointers.js', array( 'wp-pointer' ) );
+		// wp_register_script( 'wp-travel-admin-pointers-js', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . '/assets/js/wp-travel-backend-pointers.js', array( 'wp-pointer' ) );
 
 		// Add pointer options to script.
 		wp_localize_script( 'wp-travel-admin-pointers-js', 'wpctgPointer', $valid_pointers );
@@ -258,7 +253,7 @@ class WP_Travel_Admin_Info_Pointers {
 
 		return $q;
 	}
-	
+
 
 
 	function paypal_addon_admin_notice() {
@@ -296,13 +291,13 @@ class WP_Travel_Admin_Info_Pointers {
 	}
 
 	/**
-	 * wp_travel_paypal_merge_notice
+	 * paypal_merge_notice
 	 *
 	 * WP Travel Standard paypal merge info.
 	 *
 	 * @since 1.2
 	 */
-	function wp_travel_paypal_merge_notice() {
+	function paypal_merge_notice() {
 
 		if ( is_plugin_active( 'wp-travel-standard-paypal/wp-travel-paypal.php' ) ) {
 			$user_id = get_current_user_id();
@@ -321,13 +316,13 @@ class WP_Travel_Admin_Info_Pointers {
 
 
 	/**
-	 * wp_travel_update_payment_gateways_notice
+	 * update_payment_gateways_notice
 	 *
 	 * WP Travel Standard paypal merge info.
 	 *
 	 * @since 1.4.0
 	 */
-	function wp_travel_update_payment_gateways_notice() {
+	function update_payment_gateways_notice() {
 
 		$addons = array( 'wp-travel-instamojo/wp-travel-instamojo-checkout.php', 'wp-travel-paypal-express-checkout/wp-travel-paypal-express-checkout.php', 'wp-travel-razor-pay/wp-travel-razorpay-checkout.php', 'wp-travel-stripe/wp-travel-stripe.php' );
 
@@ -354,7 +349,11 @@ class WP_Travel_Admin_Info_Pointers {
 	/**
 	 * Dismiss info nag message.
 	 */
-	function wp_travel_get_dismissied_nag_messages() {
+	function get_dismissied_nag_messages() {
+
+		if ( ! WP_Travel::verify_nonce( true ) ) {
+			return;
+		}
 
 		$user_id = get_current_user_id();
 
@@ -363,7 +362,7 @@ class WP_Travel_Admin_Info_Pointers {
 		}
 	}
 
-	function wp_travel_importer_upsell_notice() {
+	function importer_upsell_notice() {
 
 		if ( class_exists( 'WP_Travel_Import_Export_Core' ) ) {
 			return;
@@ -376,15 +375,15 @@ class WP_Travel_Admin_Info_Pointers {
 			<div style="margin:34px 20px 10px 10px">
 				<?php
 					$args = array(
-						'title'      => __( 'WP Travel Importer', 'wp-travel' ),
-						'content'    => __( 'Import and Export Trips, Bookings, Enquiries, Coupons, Trip Extras and Payments data with portable CSV file.', 'wp-travel' ),
-						'link'       => 'https://wptravel.io/wp-travel-pro/',
-        				'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+						'title'       => __( 'WP Travel Importer', 'wp-travel' ),
+						'content'     => __( 'Import and Export Trips, Bookings, Enquiries, Coupons, Trip Extras and Payments data with portable CSV file.', 'wp-travel' ),
+						'link'        => 'https://wptravel.io/wp-travel-pro/',
+						'link_label'  => __( 'Get WP Travel Pro', 'wp-travel' ),
 						'link2'       => 'https://wptravel.io/downloads/wp-travel-import-export/',
 						'link2_label' => __( 'Get WP Travel Import/Export Addon', 'wp-travel' ),
 					);
-					wp_travel_upsell_message( $args );
-				?>
+					wptravel_upsell_message( $args );
+					?>
 			</div>
 			<?php
 		}
@@ -400,7 +399,7 @@ class WP_Travel_Admin_Info_Pointers {
 		}
 		// End of Show notices channel if gdpr isn't dismissed.
 		// Test Mode.
-		if ( wp_travel_test_mode() ) {
+		if ( wptravel_test_mode() ) {
 			$display = true;
 		}
 		// Test Mode Ends.
@@ -420,7 +419,7 @@ class WP_Travel_Admin_Info_Pointers {
 		}
 		// GDPR Ends.
 		// Test Mode.
-		if ( wp_travel_test_mode() ) {
+		if ( wptravel_test_mode() ) {
 			?>
 			<div>
 				<p><strong><?php printf( __( '"WP Travel" plugin is currently in test mode. <a href="%1$s">Click here</a> to disable test mode.', 'wp-travel' ), esc_url( admin_url( 'edit.php?post_type=itinerary-booking&page=settings#wp-travel-tab-content-debug' ) ) ); ?></strong></p>

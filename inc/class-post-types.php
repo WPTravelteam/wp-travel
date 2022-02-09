@@ -1,9 +1,14 @@
 <?php
-class WP_Travel_Post_Types {
+/**
+ * WP Travel Post Type class
+ *
+ * @package WP_Travel
+ */
 
-	public function __construct() {
-
-	}
+/**
+ * WP Travel Post Type class
+ */
+class WP_Travel_Post_Types { // @phpcs:ignore
 
 	/**
 	 * Init.
@@ -13,9 +18,8 @@ class WP_Travel_Post_Types {
 	public static function init() {
 		self::register_bookings();
 		self::register_trip();
-		// self::register_enquiries();
 		self::register_payment();
-		// self::register_tour_extras();
+		WP_Travel_Post_Status::init();
 	}
 	/**
 	 * Register Post Type Trip.
@@ -23,10 +27,11 @@ class WP_Travel_Post_Types {
 	 * @return void
 	 */
 	public static function register_trip() {
-		$settings = wp_travel_get_settings();
-		$switch_to_react = $settings['wp_travel_switch_to_react'];
-		$permalink = wp_travel_get_permalink_structure();
-		$labels    = array(
+		if ( ! function_exists( 'is_plugin_active' ) ) {
+			require_once ABSPATH . '/wp-admin/includes/plugin.php';
+		}
+		$permalink       = wptravel_get_permalink_structure();
+		$labels          = array(
 			'name'               => _x( 'Trips', 'post type general name', 'wp-travel' ),
 			'singular_name'      => _x( 'Trip', 'post type singular name', 'wp-travel' ),
 			'menu_name'          => _x( 'Trips', 'admin menu', 'wp-travel' ),
@@ -59,14 +64,13 @@ class WP_Travel_Post_Types {
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => null,
-			'supports'           => array( 'title', 'comments', 'excerpt' ),
+			'supports'           => array( 'title', 'comments', 'excerpt', 'revisions' ),
 			'menu_icon'          => 'dashicons-location',
 			'menu_position'      => 30,
 			'show_in_rest'       => true,
 		);
-		if ( 'yes' === $switch_to_react ) {
+		if ( is_plugin_active( 'elementor/elementor.php' ) ) {
 			$args['supports'][] = 'editor';
-			$args['show_in_rest'] = false;
 		}
 		/**
 		 * Register a itineraries post type.
@@ -74,6 +78,97 @@ class WP_Travel_Post_Types {
 		 * @link http://codex.wordpress.org/Function_Reference/register_post_type
 		 */
 		register_post_type( WP_TRAVEL_POST_TYPE, $args );
+
+		$post_types = array( 'itineraries' );
+		$fields     = array(
+			'wp_travel_lat' => array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'string',
+				'auth_callback' => function () {
+					return current_user_can( 'edit_posts' );
+				},
+			),
+			'wp_travel_lng' => array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'string',
+				'auth_callback' => function () {
+					return current_user_can( 'edit_posts' );
+				},
+			),
+			'wp_travel_trip_map_use_lat_lng' => array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'string',
+				'auth_callback' => function () {
+					return current_user_can( 'edit_posts' );
+				},
+			),
+			'wp_travel_location' => array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'string',
+				'auth_callback' => function () {
+					return current_user_can( 'edit_posts' );
+				},
+			),
+			// 'wp_travel_tabs' => array(
+			// 	'show_in_rest'  => true,
+			// 	'single'        => true,
+			// 	'type'          => 'string',
+			// 	'auth_callback' => function () {
+			// 		return current_user_can( 'edit_posts' );
+			// 	},
+			// ),
+			'wp_travel_overview' => array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'string',
+				'auth_callback' => function () {
+					return current_user_can( 'edit_posts' );
+				},
+			),
+			'wp_travel_outline' => array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'string',
+				'auth_callback' => function () {
+					return current_user_can( 'edit_posts' );
+				},
+			),
+			'wp_travel_trip_include' => array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'string',
+				'auth_callback' => function () {
+					return current_user_can( 'edit_posts' );
+				},
+			),
+			'wp_travel_trip_exclude' => array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'string',
+				'auth_callback' => function () {
+					return current_user_can( 'edit_posts' );
+				},
+			),
+			// 'wp_travel_itinerary_gallery_ids' => array(
+			// 	'show_in_rest'  => true,
+			// 	'single'        => true,
+			// 	'type'          => 'string',
+			// 	'auth_callback' => function () {
+			// 		return current_user_can( 'edit_posts' );
+			// 	},
+			// ),
+		);
+		/**
+		 * Filter to add meta fields for itinerary.
+		 *
+		 * @since 5.0.8
+		 */
+		$fields = apply_filters( 'wptravel_itinerary_meta_fields', $fields ); // Need to change advanced galley key for advanced gallery.
+		self::register_meta_fields( $post_types, $fields );
 	}
 
 	/**
@@ -156,7 +251,6 @@ class WP_Travel_Post_Types {
 			'show_ui'            => true,
 			'show_in_menu'       => 'edit.php?post_type=itinerary-booking',
 			'query_var'          => true,
-			// 'rewrite'            => array( 'slug' => 'itinerary-booking' ),
 			'capability_type'    => 'post',
 			'has_archive'        => false,
 			'hierarchical'       => false,
@@ -262,12 +356,35 @@ class WP_Travel_Post_Types {
 			'show_in_rest'       => true,
 		);
 
-		$args = apply_filters( 'wp_travel_tour_extras_post_type_args', $args );
+		$args = apply_filters( 'wp_travel_tour_extras_post_type_args', $args ); // @phpcs:ignore
 		/**
 		 * Register a WP Travel Tour Extras post type.
 		 *
 		 * @link http://codex.wordpress.org/Function_Reference/register_post_type
 		 */
 		register_post_type( 'tour-extras', $args );
+	}
+
+	/**
+	 * Register meta fields as per post types.
+	 *
+	 * @param array $post_types Collection of post type.
+	 * @param array $fields     Meta fields.
+	 *
+	 * @since 5.0.8
+	 */
+	public static function register_meta_fields( $post_types, $fields ) {
+		if ( ! $post_types || ! $fields ) {
+			return;
+		}
+
+		if ( ! empty( $post_types ) && ! empty( $fields ) ) {
+			foreach ( $post_types as $pt ) {
+				foreach ( $fields as $meta_key => $field ) {
+					register_post_meta( $pt, $meta_key, $field );
+				}
+			}
+		}
+
 	}
 }

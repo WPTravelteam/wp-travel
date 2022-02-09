@@ -2,7 +2,7 @@
 /**
  * Exit if accessed directly.
  *
- * @package wp-travel
+ * @package WP_Travel
  * @subpackage wp-travel/includes/widgets
  */
 
@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @author   WenSolutions
  * @category Widgets
- * @package  wp-travel/Widgets
+ * @package  WP_Travel
  * @extends  WP_Widget
  */
 class WP_Travel_Trip_Enquiry_Form_Widget extends WP_Widget {
@@ -23,7 +23,7 @@ class WP_Travel_Trip_Enquiry_Form_Widget extends WP_Widget {
 	 */
 	public function __construct() {
 		// Instantiate the parent object.
-		parent::__construct( false, __( 'WP Travel Enquiry Form Widget', 'wp-travel' ) );
+		parent::__construct( false, __( 'WP Travel Enquiry Form Widget (Deprecated)', 'wp-travel' ) );
 	}
 
 	/**
@@ -37,11 +37,11 @@ class WP_Travel_Trip_Enquiry_Form_Widget extends WP_Widget {
 			wp_enqueue_script( 'jquery-parsley' );
 			wp_enqueue_script( 'wp-travel-widget-scripts' );
 		}
-		$title = isset( $instance['title'] ) ? $instance['title'] : '';
+		$title = isset( $instance['title'] ) && ! empty( $instance['title'] ) ? $instance['title'] : __( 'Enquiry', 'wp-travel' );
 		extract( $args );
 		echo $before_widget;
 		echo $before_title . $title . $after_title;
-		wp_travel_get_enquiries_form( true );
+		wptravel_get_enquiries_form( true );
 		echo $after_widget;
 	}
 
@@ -75,7 +75,7 @@ class WP_Travel_Trip_Enquiry_Form_Widget extends WP_Widget {
 	}
 }
 
-function wp_travel_register_wp_travel_enquiry_form_widgets() {
+function wptravel_register_wp_travel_enquiry_form_widgets() {
 	register_widget( 'WP_Travel_Trip_Enquiry_Form_Widget' );
 }
-add_action( 'widgets_init', 'wp_travel_register_wp_travel_enquiry_form_widgets' );
+add_action( 'widgets_init', 'wptravel_register_wp_travel_enquiry_form_widgets' );

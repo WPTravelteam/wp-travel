@@ -1,0 +1,255 @@
+.f-partial-payment {
+	.wp-travel-text-info {
+		font-size: 16px;
+		color: #000000;
+	}
+}
+
+.f-full-payment {
+	.wp-travel-text-info {
+		font-weight: 700;
+		font-size: 20px;
+	}
+}
+
+//twentysixteen
+.twentysixteen {
+	ins {
+		background: #007acc;
+	}
+}
+
+/* Error CSS */
+.parsley-errors-list {
+	margin: 0;
+	li {
+		color: #f00;
+		font-size: 12px;
+	}
+}
+
+.payment-row.paid-row .payment-amount .wt-icon {
+	color: #3e8105;
+}
+
+.wp-travel-no-detail-found-msg {
+	font-style: italic;
+	color: #929090;
+}
+
+.wp-travel-notice {
+	color: #fff;
+	padding: 10px 15px;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	padding-left: 45px;
+	&::before {
+		content: "\f00c";
+		font-family: "Font Awesome 5 Free";
+		font-weight: 900;
+		position: absolute;
+		font-size: 16px;
+		top: 12px;
+		left: 19px;
+	}
+}
+
+.wp-travel-notice-success {
+	// background: #049c04;
+	background: #dff2bf;
+	color: #270;
+}
+
+.wp-travel-notice-danger {
+	background: #790200;
+}
+.parsley-errors-list {
+	list-style: none;
+	position: relative;
+	right: 15px;
+	color: #f83531;
+	font-size: 12px;
+}
+
+.wp-travel-sold-out {
+	border: 1px solid;
+	color: #ff4d4d;
+	font-weight: 500;
+	margin-bottom: 0;
+	text-align: center;
+
+	.wp-travel-booking-enquiry {
+		background-color: #ff4d4f;
+		color: #fff;
+		padding: 5px 0;
+		display: flex;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-pack: center;
+		-ms-flex-pack: center;
+		justify-content: center;
+
+		&:hover {
+			opacity: 0.9;
+		}
+
+		> .dashicons {
+			height: 14px;
+		}
+
+		> * {
+			-ms-flex-item-align: center;
+			align-self: center;
+		}
+	}
+}
+
+.wp-travel-error,
+.wp-travel-info,
+.wp-travel-message {
+	padding: 1em 2em 1em 4.5em !important;
+	margin: 0 0 2em !important;
+	position: relative;
+	background-color: #e0e0e0;
+	color: #1b1b1b;
+	border-top: 3px solid #dc8051;
+	list-style: none outside;
+	width: auto;
+	word-wrap: break-word;
+}
+.wp-travel-error::after,
+.wp-travel-info::after,
+.wp-travel-message::after {
+	clear: both;
+}
+.wp-travel-error::after,
+.wp-travel-error::before,
+.wp-travel-info::after,
+.wp-travel-info::before,
+.wp-travel-message::after,
+.wp-travel-message::before {
+	content: " ";
+	display: table;
+}
+.wp-travel-error::before,
+.wp-travel-info::before,
+.wp-travel-message::before {
+	font-family: "wt-icon-solid";
+	font-size: 18px;
+	display: inline-block;
+	position: absolute;
+	top: 13px;
+	left: 1.5em;
+}
+
+.wp-travel-message {
+	border-top-color: #0aa525;
+}
+
+.wp-travel-message::before {
+	content: "\f058";
+	color: #0aa525;
+	font-family: "wt-icon-regular";
+}
+
+.wp-travel-error::before {
+	content: "\f071";
+	color: #b81c23;
+}
+.wp-travel-info {
+	border-top-color: #1e85be;
+}
+
+.wp-travel-info:before {
+	content: "\f05a";
+	color: #1e85be;
+}
+
+ul.wp-travel-error {
+	border-top-color: #b81c24;
+}
+
+.enquiry-success-msg {
+	padding: 5px;
+	border: 2px solid #4fc650;
+	display: block;
+}
+
+.enquiry-error-msg {
+	padding: 5px;
+	display: block;
+	border: 2px solid #f00;
+}
+
+//menu docs and support
+.wp-travel-menu-docs-support {
+	color: #ca4a1f;
+}
+
+span.wp-travel-error,
+span.wp-travel-info,
+span.wp-travel-message {
+	display: inline-block;
+}
+
+.wp-travel-error,
+.wp-travel-info,
+.wp-travel-message {
+	padding: 1em 2em 1em 4.5em !important;
+	margin: 0 0 2em !important;
+	position: relative;
+	background-color: #e0e0e0;
+	color: #1b1b1b;
+	border-top: 3px solid #dc8051;
+	list-style: none outside;
+	width: auto;
+	word-wrap: break-word;
+}
+.wp-travel-error::before,
+.wp-travel-info::before,
+.wp-travel-message::before {
+	font-family: "wp-icon-solid";
+	font-size: 18px;
+	display: inline-block;
+	position: absolute;
+	top: 13px;
+	left: 1.5em;
+}
+
+.wp-travel-message {
+	border-top-color: #0aa525;
+}
+
+.wp-travel-message::before {
+	content: "\f05d";
+	color: #0aa525;
+	font-family: "wp-icon-regular";
+}
+
+.wp-travel-error::before {
+	content: "\f071";
+	color: #b81c23;
+}
+
+.wp-travel-info {
+	border-top-color: #1e85be;
+}
+
+.wp-travel-info:before {
+	content: "\f05a";
+	color: #1e85be;
+}
+
+.wp-travel-info-msg {
+	background-color: #4caf50;
+	color: #fff;
+	padding: 5px 15px;
+}
+
+.wp-travel-error-msg {
+	background-color: #f44336;
+	color: #fff;
+	padding: 5px 15px;
+}

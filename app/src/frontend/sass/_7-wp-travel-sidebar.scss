@@ -1,0 +1,104 @@
+.wp-travel-trips-has-sidebar {
+	width: 66.666667%;
+	padding-right: 15px;
+	float: left;
+
+	& + .wp-travel-widget-area {
+		width: 33.3333%;
+		float: right;
+		padding: 0px 15px;
+		display: block;
+		.wp-travel-itinerary-items {
+			// list view image full width fix in sidebar
+			.wp-travel-itinerary-list {
+				.wp-travel-article-image-wrap {
+					img {
+						width: 100%;
+						height: 250px;
+						object-fit: cover;
+						@media (max-width: 1199px) {
+							height: 200px;
+						}
+						@media (max-width: 992px) {
+							height: auto;
+						}
+					}
+				}
+				.wp-travel-entry-content-wrapper {
+					.description-right {
+						.trip-price {
+							display: flex;
+							flex-wrap: wrap;
+							margin-top: 0;
+							@media (min-width: 768px) and (max-width: 991px) {
+								display: block;
+							}
+						}
+					}
+				}
+			}
+			ul.wp-travel-itinerary-list {
+				grid-template-columns: repeat(1, 1fr) !important;
+				@media (min-width: 651px) and (max-width: 992px) {
+					grid-template-columns: repeat(2, 1fr) !important;
+				}
+				li {
+					margin: 0;
+				}
+			}
+		}
+	}
+
+	@include sidr-view {
+		width: 100%;
+		padding-right: 0;
+
+		& + .wp-travel-widget-area {
+			width: 100%;
+			padding-left: 0;
+		}
+	}
+
+	.wp-travel-default-article {
+		.wp-travel-article-image-wrap {
+			margin-right: 0;
+			img {
+				height: 150px;
+				object-fit: cover;
+				@media (max-width: 1199px) {
+					height: 145px;
+				}
+				@media (max-width: 767px) {
+					height: auto;
+				}
+			}
+		}
+	}
+}
+
+.post-type-archive-itineraries {
+	.wp-travel-trips-has-sidebar {
+		& + .wp-travel-widget-area {
+			@include sidr-view {
+				padding: 0;
+				float: left;
+			}
+
+			@include above-sidr-view {
+				padding-right: 0;
+			}
+		}
+	}
+}
+
+// For Blocks, css for widget area list and grid view
+.widget {
+	.wp-travel-itinerary-items {
+		.wp-travel-itinerary-list {
+			// grid-template-columns: repeat(1, 1fr);
+			@media (min-width: 651px) and (max-width: 992px) {
+				grid-template-columns: repeat(2, 1fr);
+			}
+		}
+	}
+}

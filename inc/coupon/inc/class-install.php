@@ -2,7 +2,7 @@
 /**
  * Installation Class for Coupon Pro
  *
- * @package Wp_Travel_Coupons_Pro
+ * @package WP_Travel
  */
 
 if ( ! class_exists( 'WP_Travel_Coupons_Pro_Install' ) ) :
@@ -65,7 +65,7 @@ if ( ! class_exists( 'WP_Travel_Coupons_Pro_Install' ) ) :
 				'menu_position'      => null,
 				'supports'           => array( 'title' ),
 				'menu_icon'          => 'dashicons-location',
-				'with_front'		 => true,
+				'with_front'         => true,
 			);
 			/**
 			 * Register a itinerary-booking post type.
@@ -84,13 +84,12 @@ if ( ! class_exists( 'WP_Travel_Coupons_Pro_Install' ) ) :
 			/*
 			* ADMIN COLUMN - HEADERS
 			*/
-			add_filter( 'manage_edit-wp-travel-coupons_columns', array( 'WP_Travel_Coupons_Pro_Install','coupon_columns') );
+			add_filter( 'manage_edit-wp-travel-coupons_columns', array( 'WP_Travel_Coupons_Pro_Install', 'coupon_columns' ) );
 
 			/*
 			* ADMIN COLUMN - CONTENT
 			*/
 			add_action( 'manage_wp-travel-coupons_posts_custom_column', array( 'WP_Travel_Coupons_Pro_Install', 'coupons_manage_columns' ), 10, 2 );
-
 
 		}
 
@@ -102,15 +101,15 @@ if ( ! class_exists( 'WP_Travel_Coupons_Pro_Install' ) ) :
 		 */
 		public static function coupon_columns( $booking_columns ) {
 
-			$new_columns['cb'] 			 = '<input type="checkbox" />';
-			$new_columns['title'] 		 = _x( 'Coupon Name', 'column name', 'wp-travel' );
-			$new_columns['coupon_code']  = _x( 'Coupon Code', 'column name', 'wp-travel' );
-			$new_columns['discount_value']  = _x( 'Discount Value', 'column name', 'wp-travel' );
-			$new_columns['max_users']  = _x( 'Max Uses', 'column name', 'wp-travel' );
-			$new_columns['used_so_far']  = _x( 'Usage Count', 'column name', 'wp-travel' );
-			$new_columns['expiration_date']  = _x( 'Expitration Date', 'column name', 'wp-travel' );
-			$new_columns['coupon_status'] = __( 'Coupon Status', 'wp-travel' );
-			$new_columns['date'] 		 = __( 'Coupon Created Date', 'wp-travel' );
+			$new_columns['cb']             = '<input type="checkbox" />';
+			$new_columns['title']          = _x( 'Coupon Name', 'column name', 'wp-travel' );
+			$new_columns['coupon_code']    = _x( 'Coupon Code', 'column name', 'wp-travel' );
+			$new_columns['discount_value'] = _x( 'Discount Value', 'column name', 'wp-travel' );
+			// $new_columns['max_users']  = _x( 'Max Uses', 'column name', 'wp-travel' );
+			$new_columns['used_so_far']     = _x( 'Usage Count', 'column name', 'wp-travel' );
+			$new_columns['expiration_date'] = _x( 'Expitration Date', 'column name', 'wp-travel' );
+			$new_columns['coupon_status']   = __( 'Coupon Status', 'wp-travel' );
+			$new_columns['date']            = __( 'Coupon Created Date', 'wp-travel' );
 			return $new_columns;
 		}
 
@@ -118,92 +117,74 @@ if ( ! class_exists( 'WP_Travel_Coupons_Pro_Install' ) ) :
 		 * Add data to custom column.
 		 *
 		 * @param  String $column_name Custom column name.
-		 * @param  int 	  $id          Post ID.
+		 * @param  int    $id          Post ID.
 		 */
 		public static function coupons_manage_columns( $column_name, $id ) {
 			switch ( $column_name ) {
 				case 'coupon_status':
-
-					$coupon        = WP_Travel()->coupon;
-					$coupon_status = $coupon->get_coupon_status( $id  );
-
+					$coupon        = WPTravel()->coupon;
+					$coupon_status = $coupon->get_coupon_status( $id );
 					if ( 'active' === $coupon_status ) {
 						?>
-
 							<span class="wp-travel-info-msg">
 								<?php echo esc_html( 'Active', 'wp-travel' ); ?>
 							</span>
-
-						<?php 
-
-					}
-					else {
-
+						<?php
+					} elseif ( 'limit_exceed' === $coupon_status ) {
 						?>
-
-							<span class="wp-travel-error-msg">
-								<?php echo esc_html( 'Expired', 'wp-travel' ); ?>
-							</span>
-
-						<?php 
-
-
+						<span class="wp-travel-error-msg">
+							<?php echo esc_html( 'Limit Exceed', 'wp-travel' ); ?>
+						</span>
+						<?php
+					} else {
+						?>
+						<span class="wp-travel-error-msg">
+							<?php echo esc_html( 'Expired', 'wp-travel' ); ?>
+						</span>
+						<?php
 					}
 					break;
-				case 'coupon_code' :
-					$coupon = WP_Travel()->coupon;
+				case 'coupon_code':
+					$coupon = WPTravel()->coupon;
 
 					$coupon_code = get_post_meta( $id, 'wp_travel_coupon_code', true );
 
 					echo '<span><strong>' . $coupon_code . '</strong></span>';
 
-				break;
-				case 'discount_value' :
-
-					$coupon         = WP_Travel()->coupon;
+					break;
+				case 'discount_value':
+					$coupon         = WPTravel()->coupon;
 					$discount_type  = $coupon->get_coupon_meta( $id, 'general', 'coupon_type' );
-					$discount_value = $coupon->get_coupon_meta( $id, 'general', 'coupon_value'  );
-					$symbol         = ( 'percentage' === $discount_type ) ? '%' : wp_travel_get_currency_symbol();
+					$discount_value = $coupon->get_coupon_meta( $id, 'general', 'coupon_value' );
+					$symbol         = ( 'percentage' === $discount_type ) ? '%' : wptravel_get_currency_symbol();
 
 					?>
-						<span><strong><?php echo $discount_value ?> ( <?php echo $symbol; ?> )</strong></span>
+						<span><strong><?php echo $discount_value; ?> ( <?php echo $symbol; ?> )</strong></span>
 
 					<?php
 
-				break;
-				case 'max_users' :
-
-					$coupon         = WP_Travel()->coupon;
-					$max_users  = $coupon->get_coupon_meta( $id, 'restriction', 'coupon_limit_number' );
-
+					break;
+				case 'used_so_far':
+					$coupon      = WPTravel()->coupon;
+					$used_so_far = $coupon->get_usage_count( $id );
+					$max_users   = $coupon->get_coupon_meta( $id, 'restriction', 'coupon_limit_number' );
+					$max_users   = $max_users ? $max_users : __( 'Unlimited', 'wp-travel' );
 					?>
-						<span><strong><?php echo $max_users ?></strong></span>
+						<span title="<?php echo esc_attr( sprintf( __( 'Used %1$1s out of %2$2s', 'wp-travel' ), $used_so_far, $max_users ) ); ?>"><strong><?php echo esc_html( $used_so_far ); ?>/ <?php echo esc_html( $max_users ); ?></strong></span>
 
 					<?php
 
-				break;
-				case 'used_so_far' :
-
-					$coupon         = WP_Travel()->coupon;
-					$used_so_far  = $coupon->get_usage_count( $id );
+					break;
+				case 'expiration_date':
+					$coupon          = WPTravel()->coupon;
+					$expiration_date = $coupon->get_coupon_meta( $id, 'general', 'coupon_expiry_date' );
 
 					?>
-						<span><strong><?php echo $used_so_far ?></strong></span>
+						<span><strong><?php echo $expiration_date; ?></strong></span>
 
 					<?php
 
-				break;
-				case 'expiration_date' :
-
-					$coupon         = WP_Travel()->coupon;
-					$expiration_date  = $coupon->get_coupon_meta( $id, 'general', 'coupon_expiry_date' );
-
-					?>
-						<span><strong><?php echo $expiration_date ?></strong></span>
-
-					<?php
-
-				break;
+					break;
 
 				default:
 					break;

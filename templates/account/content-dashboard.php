@@ -6,11 +6,11 @@
  */
 
 // Print Errors / Notices.
-wp_travel_print_notices();
+wptravel_print_notices();
 
 // Set User.
 $current_user         = $args['current_user'];
-$user_dashboard_menus = wp_travel_sort_array_by_priority( $args['dashboard_menus'] );
+$user_dashboard_menus = wptravel_sort_array_by_priority( $args['dashboard_menus'] );
 $bookings             = get_user_meta( $current_user->ID, 'wp_travel_user_bookings', true );
 $bookings_glance      = false;
 // Resverse Chronological Order For Bookings.
@@ -25,14 +25,14 @@ $biling_glance_data = get_user_meta( $current_user->ID, 'wp_travel_customer_bill
 	<?php if ( ! empty( $user_dashboard_menus ) ) : ?>
 	<ul class="resp-tabs-list ver_1">
 		<?php foreach ( $user_dashboard_menus as $key => $menu ) : ?>
-		<li id="<?php echo $key; ?>"><i class="<?php echo $menu['menu_icon']; ?>" aria-hidden="true"></i><?php echo $menu['menu_title']; ?></li>
+		<li id="<?php echo $key; ?>" class="wp-travel-ert "><i class="<?php echo esc_attr( $menu['menu_icon'] ); ?>" aria-hidden="true"></i><?php echo $menu['menu_title']; ?></li>
 		<?php endforeach; ?>
 	</ul>
 	<?php endif; ?>
 	<?php if ( ! empty( $user_dashboard_menus ) ) : ?>
 	<div class="resp-tabs-container ver_1">
 		<?php foreach ( $user_dashboard_menus as $key => $menu ) : ?>
-		<div id="wp-travel-tab-content-<?php echo $key; ?>">
+		<div id="wp-travel-tab-content-<?php echo $key; ?>" class="tab-list-content" >
 			<?php
 			if ( ! empty( $menu['menu_content_cb'] ) ) {
 				$args['bookings_glance']    = $bookings_glance;

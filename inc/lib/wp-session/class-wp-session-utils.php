@@ -1,4 +1,20 @@
 <?php
+/**
+ * Utility class for sesion utilities
+ *
+ * THIS CLASS SHOULD NEVER BE INSTANTIATED
+ *
+ * @phpcs:disable
+ *
+ * @package WP_Travel
+ */
+
+/**
+ * Exit if accessed directly.
+ */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Utility class for sesion utilities
@@ -16,16 +32,7 @@ class WP_Session_Utils {
 	public static function count_sessions() {
 		global $wpdb;
 
-		$query = "SELECT COUNT(*) FROM $wpdb->options WHERE option_name LIKE '_wp_session_expires_%'";
-
-		/**
-		 * Filter the query in case tables are non-standard.
-		 *
-		 * @param string $query Database count query
-		 */
-		$query = apply_filters( 'wp_session_count_query', $query );
-
-		$sessions = $wpdb->get_var( $query );
+		$sessions = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM $wpdb->options WHERE option_name LIKE '_wp_session_expires_%'" ) );
 
 		return absint( $sessions );
 	}
@@ -77,14 +84,14 @@ class WP_Session_Utils {
 		global $wpdb;
 
 		$limit = absint( $limit );
-		$keys = $wpdb->get_results( "SELECT option_name, option_value FROM $wpdb->options WHERE option_name LIKE '_wp_session_expires_%' ORDER BY option_value ASC LIMIT 0, {$limit}" );
+		$keys  = $wpdb->get_results( "SELECT option_name, option_value FROM $wpdb->options WHERE option_name LIKE '_wp_session_expires_%' ORDER BY option_value ASC LIMIT 0, {$limit}" );
 
-		$now = time();
+		$now     = time();
 		$expired = array();
-		$count = 0;
+		$count   = 0;
 
-		foreach( $keys as $expiration ) {
-			$key = $expiration->option_name;
+		foreach ( $keys as $expiration ) {
+			$key     = $expiration->option_name;
 			$expires = $expiration->option_value;
 
 			if ( $now > $expires ) {
@@ -116,7 +123,7 @@ class WP_Session_Utils {
 	public static function delete_all_sessions() {
 		global $wpdb;
 
-		$count = $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_wp_session_%'" );
+		$count = $wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE '_wp_session_%'" ) );
 
 		return (int) ( $count / 2 );
 	}
@@ -127,9 +134,9 @@ class WP_Session_Utils {
 	 * @return string
 	 */
 	public static function generate_id() {
-		require_once( ABSPATH . 'wp-includes/class-phpass.php' );
+		require_once ABSPATH . 'wp-includes/class-phpass.php';
 		$hash = new PasswordHash( 8, false );
 
 		return md5( $hash->get_random_bytes( 32 ) );
 	}
-} 
+}

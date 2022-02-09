@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Customer Lost Password email Template
  *
@@ -9,10 +9,10 @@
  * as little as possible, but it does happen. When this occurs the version of the template file will.
  * be bumped and the readme will list any important changes.
  *
- * @see 	    http://docs.wensolutions.com/document/template-structure/
- * @author      WenSolutions
- * @package     wp-travel/Templates
- * @since       1.0.0
+ * @see     http://docs.wensolutions.com/document/template-structure/
+ * @author  WenSolutions
+ * @package WP_Travel
+ * @since   1.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -23,6 +23,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 $user_login = $args['user_login'];
 $reset_key  = $args['reset_key'];
 
+
+$url = add_query_arg(
+	array(
+		'action' => 'rp',
+		'key'    => $reset_key,
+		'login'  => rawurlencode( $user_login ),
+	),
+	wp_lostpassword_url()
+);
+
 ?>
 
 <p><?php _e( 'Someone requested that the password be reset for the following account:', 'wp-travel' ); ?></p>
@@ -30,7 +40,7 @@ $reset_key  = $args['reset_key'];
 <p><?php _e( 'If this was a mistake, just ignore this email and nothing will happen.', 'wp-travel' ); ?></p>
 <p><?php _e( 'To reset your password, visit the following address:', 'wp-travel' ); ?></p>
 <p>
-	<a class="link" href="<?php echo esc_url( add_query_arg( array( 'key' => $reset_key, 'login' => rawurlencode( $user_login ) ), wp_lostpassword_url() ) ); ?>">
+	<a class="link" href="<?php echo esc_url( $url ); ?>">
 			<?php _e( 'Click here to reset your password', 'wp-travel' ); ?></a>
 </p>
 <p><?php _e( 'Powered by', 'wp-travel' ); ?><a href="http://wptravel.io" target="_blank"> <?php _e( 'WP Travel', 'wp-travel' ); ?></a></p>

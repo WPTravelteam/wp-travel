@@ -40,11 +40,8 @@ if ( ! class_exists( 'WP_Travel_Cron' ) ) {
 		 * If cron job is not already scheduled then scheduled one and start job in selected schedules.
 		 */
 		public static function set_cron_job() {
-			$settings             = wp_travel_get_settings();
-			$reminder_email_cycle = 'wt_twicedaily';
-
 			if ( ! wp_next_scheduled( 'wp_travel_cron_schedule' ) ) {
-				wp_schedule_event( time(), $reminder_email_cycle, 'wp_travel_cron_schedule' );
+				wp_schedule_event( time(), 'wt_twicedaily', 'wp_travel_cron_schedule' );
 			}
 		}
 
@@ -77,10 +74,16 @@ if ( ! class_exists( 'WP_Travel_Cron' ) ) {
 			$query1           = "SELECT ID from {$wpdb->posts}  where post_type='$custom_post_type' and post_status in( 'publish', 'draft' )";
 			$post_ids         = $wpdb->get_results( $query1 );
 
+			$settings                   = wptravel_get_settings();
+			$enable_expired_trip_option = $settings['enable_expired_trip_option'];
+			$expired_trip_set_to        = $settings['expired_trip_set_to'];
+
 			if ( is_array( $post_ids ) && count( $post_ids ) > 0 ) {
 				foreach ( $post_ids as $custom_post ) {
-					$custom_post_id                = $custom_post->ID;
-					$wp_travel_multiple_trip_dates = get_post_meta( $custom_post_id, 'wp_travel_multiple_trip_dates', true );
+					$trip_id = $custom_post->ID;
+
+					// Legacy before WP Travel 4.0.0
+					$wp_travel_multiple_trip_dates = get_post_meta( $trip_id, 'wp_travel_multiple_trip_dates', true );
 					$trip_dates                    = array();
 					if ( is_array( $wp_travel_multiple_trip_dates ) ) : // @since 4.0.4 To prevent Warning.
 						foreach ( $wp_travel_multiple_trip_dates as $date_key => $date_value ) {
@@ -92,13 +95,65 @@ if ( ! class_exists( 'WP_Travel_Cron' ) ) {
 						}
 						$wp_travel_multiple_trip_dates = ( wp_unslash( $wp_travel_multiple_trip_dates ) );
 						$trip_dates                    = wp_unslash( array_unique( $trip_dates ) ); // Filter unique date.
-						$trip_dates                    = wp_travel_filter_expired_date( $trip_dates );
-						usort( $trip_dates, 'wp_travel_date_sort' );
+						$trip_dates                    = wptravel_filter_expired_date( $trip_dates );
+						usort( $trip_dates, 'wptravel_date_sort' );
 					endif;
 
-					update_post_meta( $custom_post_id, 'trip_dates', $trip_dates );
+					update_post_meta( $trip_id, 'trip_dates', $trip_dates );
 					if ( is_array( $trip_dates ) && isset( $trip_dates[0] ) ) {
-						update_post_meta( $custom_post_id, 'trip_date', $trip_dates[0] ); // Use it in sorting according to trip dates. @since 3.0.5
+						update_post_meta( $trip_id, 'trip_date', $trip_dates[0] ); // Use it in sorting according to trip dates. @since 3.0.5
+					}
+
+					// Update trip to expired if date expired in trips if enabled.
+					if ( 'yes' === $enable_expired_trip_option ) {
+						$trip_dates_data = WP_Travel_Helpers_Trip_Dates::get_dates( $trip_id );
+
+						// Filter only Fixed Departure Trips. [need to check is array because if no trip dates above method will wp error object]
+						if ( is_array( $trip_dates_data ) && isset( $trip_dates_data['code'] ) && 'WP_TRAVEL_TRIP_DATES' === $trip_dates_data['code'] ) {
+
+							$trip_dates = $trip_dates_data['dates'];
+
+							$valid_trip   = false;
+							$current_date = date( 'Y-m-d' );
+							foreach ( $trip_dates as $trip_date ) {
+
+								$start_date = strtotime( $trip_date['start_date'] );
+								$start_date = date( 'Y-m-d', $start_date );
+
+								$end_date = strtotime( $trip_date['end_date'] );
+								$end_date = date( 'Y-m-d', $end_date );
+
+								$is_recurring = $trip_date['is_recurring'];
+
+								if ( $is_recurring ) {
+									if ( '0000-00-00' == $trip_date['end_date'] ) { // Valid if no end date.
+										$valid_trip = true;
+										break;
+									} elseif ( $current_date <= $end_date ) {
+										$valid_trip = true;
+										break;
+									}
+								} else {
+									if ( $current_date <= $start_date ) {
+										$valid_trip = true;
+										break;
+									}
+								}
+							}
+
+							if ( ! $valid_trip ) {
+								// Update Expire status / Delete for invalid trip.
+								if ( 'delete' == $expired_trip_set_to ) {
+									wp_trash_post( $trip_id );
+								} else {
+									$update_data_array = array(
+										'ID'          => $trip_id,
+										'post_status' => 'expired',
+									);
+									wp_update_post( $update_data_array );
+								}
+							}
+						}
 					}
 				}
 			}

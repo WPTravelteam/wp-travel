@@ -1,0 +1,295 @@
+// Filter by Toolbar
+.wp-travel-toolbar {
+	border: 1px solid #eee;
+	// margin-bottom: 20px;
+	background: #fefefe;
+	border-radius: 3px;
+	// overflow: hidden;
+	display: flex;
+	justify-content: space-between;
+	position: relative; //(toolbar issue fix) Position missing before
+	// Vertically center the filter section in itineray page
+	align-items: baseline;
+	@include clearfix;
+	&::after,
+	&::before {
+		content: unset;
+	}
+	
+
+	@include sidr-view {
+		position: relative;
+	}
+
+	.wp-toolbar-content {
+		&.wp-toolbar-left {
+			// float: left;
+
+			@include sidr-view {
+				float: none;
+			}
+		}
+	}
+
+	.wp-travel-post-filter {
+		--gap: 1rem;
+		display: flex;
+		gap: var(--gap);
+		align-items: center;
+		justify-content: flex; //(Space between before)
+		// padding: 10px 0;
+		padding: 10px 0px; //(toolbar issue fix) 10px 25px before
+		// margin: 0 calc(-1 * var(--gap)); (commented this)
+		flex-wrap: wrap;
+		padding-left: 15px;
+		@media (max-width: 767px) {
+			gap: 0;
+			flex-wrap: wrap;
+		}
+		.wp-travel-filter-by-heading {
+			// float: left;
+			// line-height: 1.55;
+
+			@include sidr-view {
+				float: none;
+			}
+
+			h4 {
+				margin: 0;
+				// vertical-align: middle;
+				// display: inline-block;
+				font-size: 14px;
+				// padding: 22px;
+				@media (max-width: 767px) {
+					//(toolbar issue fix)
+					display: none;
+				}
+			}
+			.btn.btn-wptravel-filter-by {
+				display: none !important;
+
+				.fa-chevron-down {
+					//(toolbar issue fix)
+					content: "\f078";
+					margin-left: 16px;
+					transition: 0.2s ease-in;
+				}
+				&.active {
+					.fa-chevron-down {
+						transition: 0.2s ease-in;
+						transform: rotate(180deg);
+					}
+				}
+				@media (max-width: 767px) {
+					//(toolbar issue fix)
+					display: block !important;
+				}
+			}
+			@media (max-width: 1354px) {
+				//(toolbar issue fix)
+				width: 100%;
+				padding: 0;
+			}
+			@media (max-width: 992px) {
+				//(toolbar issue fix)
+				width: 100% !important;
+			}
+			@media (max-width: 767px) {
+				padding: 0;
+			}
+		}
+		&.clearfix::before{
+			display: none;  // (-------------------------------------------none rakhne)
+			content: none;
+		}
+	}
+
+	.wp_travel_input_filters {
+		width: 160px;
+		// padding: 5px 0;
+		// border-radius: 3px;
+		// height: 30px;
+
+		@include extra-large-screen {
+			width: 140px;
+		}
+
+		@include sidr-view {
+			//(toolbar issue fix) width 125px before
+			width: 100%;
+		}
+
+		@include mob {
+			display: block;
+		}
+
+		@include sm {
+			width: 100%;
+		}
+	}
+
+	.wp-toolbar-right {
+		// float: right;
+		// margin-right: 20px;
+		// @include sidr-view {
+		// 	float: none;
+		// 	position: absolute;
+		// 	top: 0;
+		// 	right: 0;
+		// }
+		// @media (min-width: 993px) and (max-width: 1399px) {
+		// 	float: none;
+		// 	position: absolute;
+		// 	top: 8px;
+		// 	right: 0;
+		// }
+		// @media (max-width: 575px) {
+		// 	//(toolbar issue fix)
+		// 	float: none;
+		// 	position: absolute;
+		// 	top: 14px !important;
+		// 	right: 0;
+		// }
+	}
+}
+
+.wp-toolbar-filter-field {
+	// float: left;
+	// padding: 15px 10px 0;
+	@media (min-width: 921px) and (max-width: 991px) {
+		width: 176px;
+	}
+	// @media (min-width: 860px) and (max-width: 920px) {
+	// 	//(toolbar issue fix)
+	// 	width: 200px; // (comment this----------------------------------------)
+	// }
+	@media (min-width: 870px) and (max-width: 920px) {
+		//(toolbar issue fix)
+		width: 160px;
+	}
+	@media (max-width: 869px) {
+		width: 144px;
+	}
+	@media (max-width: 821px) {
+		width: 150px;
+	}
+	@media (max-width: 767px) {
+		//(toolbar issue fix)
+		float: none;
+		width: 100%;
+		display: block;
+	}
+	@media (max-width: 767px) {
+		//(toolbar issue fix)
+		display: none !important;
+	}
+
+	@include mob {
+		padding: 10px;
+	}
+
+	@include sm {
+		float: none;
+		display: block;
+	}
+}
+.wp-toolbar-filter-field.show-in-mobile {
+	@media (max-width: 767px) {
+		//(toolbar issue fix)
+		display: block !important;
+	}
+}
+.wp-travel-filter-button {
+	// display: inline-block;
+	// padding: 12px 10px;
+	&.show-in-mobile {
+		display: block;
+	}
+	.btn-wp-travel-filter {
+		padding: 9px 17px;
+		cursor: pointer;
+	}
+
+	@include mob {
+		padding: 0;
+		margin: 10px;
+	}
+
+	@include sm {
+		margin-top: 0px;
+		text-align: right;
+	}
+	@media (max-width: 767px) {
+		//(toolbar issue fix)
+		display: none;
+	}
+}
+
+.wp-travel-view-mode-lists {
+	list-style: none;
+	margin: 0;
+	// padding: 15px 0;
+	padding: 15px;
+	text-align: center;
+	display: flex;
+	// itinerary page filter section button paddinf top fix
+	padding-top: 10px;
+	@media (max-width: 767px) {
+		display: none;
+	}
+
+	li {
+		display: inline-block;
+		line-height: 1.65;
+		margin-left: 3px;
+
+		&.active-mode a {
+			opacity: 1;
+		}
+	}
+
+	i {
+		padding: 3px 0;
+		font-size: 24px;
+		cursor: pointer;
+		width: 23px;
+		height: 23px;
+	}
+	@media (min-width: 993px) and (max-width: 1399px) {
+		padding: 25px 15px !important;
+	}
+	@media (max-width: 992px) {
+		//(toolbar issue fix)
+		padding: 25px 15px !important;
+	}
+}
+
+.wp-toolbar-filter-field {
+	p {
+		text-transform: capitalize;
+	}
+}
+
+// @media screen and (min-width: 1200px) { //(toolbar issue fix)
+// 	.wp-toolbar-filter-field {
+// 		.wp_travel_input_filters {
+// 			width: 164px;
+// 		}
+// 	}
+// }
+
+// @media screen and (max-width: 1199px) and (min-width: 992px) {
+// 	.wp-toolbar-filter-field {
+// 		.wp_travel_input_filters {
+// 			width: 202px;
+// 		}
+// 	}
+// }
+
+// @media screen and (max-width: 991px) and (min-width: 768px) {
+// 	.wp-toolbar-filter-field {
+// 		.wp_travel_input_filters {
+// 			width: 184px;
+// 		}
+// 	}
+// }

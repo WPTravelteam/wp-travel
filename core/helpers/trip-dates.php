@@ -1,25 +1,43 @@
 <?php
-class WP_Travel_Helpers_Trip_Dates {
+/**
+ * Helper class for the trip dates.
+ *
+ * @package WP_Travel
+ */
+
+/**
+ * Exit if accessed directly.
+ */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Helper class for the trip dates.
+ */
+class WpTravel_Helpers_Trip_Dates {
+
+	/**
+	 * WP Travel table name key.
+	 *
+	 * @var string $table_name.
+	 */
 	private static $table_name = 'wt_dates';
 
+	/**
+	 * Return the trip dates.
+	 *
+	 * @param int $trip_id Trip ID.
+	 */
 	public static function get_dates( $trip_id = false ) {
-		// if ( get_option( 'wp_travel_pricing_table_created', 'no' ) != 'yes' ) {
-		// 	return;
-		// }
+
 		if ( empty( $trip_id ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
 		}
+
 		global $wpdb;
-		$table = $wpdb->prefix . self::$table_name;
-		if ( is_multisite() ) {
-			/**
-			 * @todo Get Table name on Network Activation.
-			 */
-			$blog_id = get_current_blog_id();
-			$table   = $wpdb->base_prefix . $blog_id . '_' . self::$table_name;
-		}
-		$query   = $wpdb->prepare( "SELECT * FROM {$table} WHERE `trip_id` = %d", $trip_id );
-		$results = $wpdb->get_results( $query );
+
+		$results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}wt_dates WHERE `trip_id` = %d", $trip_id ) );
 		if ( empty( $results ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_DATES' );
 		}
@@ -54,6 +72,12 @@ class WP_Travel_Helpers_Trip_Dates {
 		);
 	}
 
+	/**
+	 * Update the trip dates.
+	 *
+	 * @param int   $trip_id Trip ID.
+	 * @param array $dates Trip Dates.
+	 */
 	public static function update_dates( $trip_id, $dates ) {
 		if ( empty( $trip_id ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
@@ -63,11 +87,20 @@ class WP_Travel_Helpers_Trip_Dates {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_DATES' );
 		}
 
-		$result = self::remove_dates( $trip_id );
-
+		$result     = self::remove_dates( $trip_id );
+		$trip_dates = array(); // collection of trip dates to get next departure date.
 		foreach ( $dates as $date ) {
+			if ( $date['start_date'] && gmdate( 'Y-m-d ', strtotime( $date['start_date'] ) ) >= gmdate( 'Y-m-d' ) ) {
+				$trip_dates[] = $date['start_date'];
+			}
 			self::add_individual_date( $trip_id, $date );
 		}
+
+		if ( is_array( $trip_dates ) && count( $trip_dates ) > 0 ) {
+			usort( $trip_dates, 'wptravel_date_sort' );
+			update_post_meta( $trip_id, 'trip_date', $trip_dates[0] ); // To sort trip according to date.
+		}
+
 		return WP_Travel_Helpers_Response_Codes::get_success_response(
 			'WP_TRAVEL_TRIP_DATES',
 			array(
@@ -76,6 +109,12 @@ class WP_Travel_Helpers_Trip_Dates {
 		);
 	}
 
+	/**
+	 * Add individual date to trips.
+	 *
+	 * @param int   $trip_id Trip ID.
+	 * @param array $date Trip date array.
+	 */
 	public static function add_individual_date( $trip_id, $date ) {
 		if ( empty( $trip_id ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
@@ -130,6 +169,11 @@ class WP_Travel_Helpers_Trip_Dates {
 		);
 	}
 
+	/**
+	 * Remove trip dates.
+	 *
+	 * @param int $trip_id Trip ID.
+	 */
 	public static function remove_dates( $trip_id ) {
 		if ( empty( $trip_id ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
@@ -147,6 +191,11 @@ class WP_Travel_Helpers_Trip_Dates {
 
 	}
 
+	/**
+	 * Remove individual trip dates.
+	 *
+	 * @param int $date_id Trip date ID.
+	 */
 	public static function remove_individual_date( $date_id ) {
 		if ( empty( $date_id ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_DATE_ID' );
@@ -164,5 +213,39 @@ class WP_Travel_Helpers_Trip_Dates {
 		WP_Travel_Helpers_Trip_Pricing_Categories::remove_trip_pricing_categories( $date_id );
 
 		return WP_Travel_Helpers_Response_Codes::get_success_response( 'WP_TRAVEL_REMOVED_TRIP_DATE' );
+	}
+
+	/**
+	 * Check whether it is fixed departure trip or not.
+	 *
+	 * @param int     $trip_id Trip id of the trip.
+	 * @param boolean $check_for_multiple_departure Only for Legacy version less than V4.
+	 * @since 4.4.5
+	 */
+	public static function is_fixed_departure( $trip_id, $check_for_multiple_departure = false ) {
+		if ( ! $trip_id ) {
+			return;
+		}
+
+		$post_type = get_post_type( $trip_id );
+		if ( WP_TRAVEL_POST_TYPE !== $post_type ) {
+			return;
+		}
+		$fd = get_post_meta( $trip_id, 'wp_travel_fixed_departure', true );
+		$fd = apply_filters( 'wp_travel_fixed_departure_defalut', $fd ); // @phpcs:ignore
+		$fd = apply_filters( 'wptravel_fixed_departure_defalut', $fd );
+
+		$switch_to_v4         = wptravel_is_react_version_enabled();
+		$wp_travel_user_since = get_option( 'wp_travel_user_since' );
+		if ( version_compare( $wp_travel_user_since, '4.0.0', '>=' ) || $switch_to_v4 ) {
+			return 'yes' === $fd;
+		} else { // Legacy.
+			if ( $check_for_multiple_departure ) { // Check if multiple fixed departure enable along with fixed departure enabled.
+				$multiple_fd = get_post_meta( $trip_id, 'wp_travel_enable_multiple_fixed_departue', true );
+				return ( 'yes' === $fd && 'yes' === $multiple_fd );
+			} else {
+				return 'yes' === $fd;
+			}
+		}
 	}
 }

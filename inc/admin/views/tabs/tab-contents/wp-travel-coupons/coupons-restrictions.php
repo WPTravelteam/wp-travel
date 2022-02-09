@@ -2,10 +2,10 @@
 /**
  * Tab Contents
  *
- * @package WP Travel
+ * @package WP_Travel
  */
 
-function wp_travel_coupons_restrictions_tab_callback() {
+function wptravel_coupons_restrictions_tab_callback() {
 	global $post;
 	// Get Restrictions Tab Data.
 	$coupon_metas     = get_post_meta( $post->ID, 'wp_travel_coupon_metas', true );
@@ -27,7 +27,7 @@ function wp_travel_coupons_restrictions_tab_callback() {
 						  </span>
 			   </td>
 			   <td>
-				   <?php $itineraries = wp_travel_get_itineraries_array(); ?>
+				   <?php $itineraries = wptravel_get_itineraries_array(); ?>
    
 				   <div class="custom-multi-select">
 				   <?php

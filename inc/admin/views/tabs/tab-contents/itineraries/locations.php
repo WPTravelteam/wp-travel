@@ -1,41 +1,46 @@
 <?php
+/**
+ * Template file for WP Travel locations tab.
+ *
+ * @package WP_Travel
+ */
 
-if ( ! function_exists( 'wp_travel_trip_callback_locations' ) ) {
-	function wp_travel_trip_callback_locations() {
+if ( ! function_exists( 'wptravel_trip_callback_locations' ) ) {
+	/**
+	 * Location tab callback.
+	 */
+	function wptravel_trip_callback_locations() {
 		global $post;
 
-		$map_data = get_wp_travel_map_data();
-		$settings = wp_travel_get_settings();
-		add_action( 'wp_travel_admin_map_area', 'wp_travel_google_map', 10, 2 );
-		
+		$map_data = wptravel_get_map_data();
+		$settings = wptravel_get_settings();
+		add_action( 'wp_travel_admin_map_area', 'wptravel_google_map', 10, 2 );
 		?>
-		<h4><?php _e( 'Destination', 'wp-travel' ); ?></h4>
+		<h4><?php esc_html_e( 'Destination', 'wp-travel' ); ?></h4>
 		<div class="location-wrap itineraries-tax-wrap">
 			<?php
 			post_categories_meta_box( $post, array( 'args' => array( 'taxonomy' => 'travel_locations' ) ) );
 			printf( '<div class="tax-edit"><a href="' . esc_url( admin_url( 'edit-tags.php?taxonomy=travel_locations&post_type=itineraries' ) ) . '">%s</a></div>', esc_html__( 'Edit All Locations', 'wp-travel' ) );
 			?>
 		</div>
-		
-		<h4><?php _e( 'Map', 'wp-travel' ); ?></h4>
-		
-			<?php do_action( 'wp_travel_admin_map_area', $settings, $map_data ); ?>
+		<h4><?php esc_html_e( 'Map', 'wp-travel' ); ?></h4>
+			<?php do_action( 'wp_travel_admin_map_area', $settings, $map_data ); //@phpcs:ignore ?>
 			<br>
 			<?php
 				$args = array(
-					'title'      => __( 'Need alternative maps ?', 'wp-travel' ),
-					'content'    => __( 'If you need alternative to current map then you can get free or pro maps for WP Travel.', 'wp-travel' ),
-					'link'       => 'https://wptravel.io/wp-travel-pro/',
-        			'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+					'title'       => __( 'Need alternative maps ?', 'wp-travel' ),
+					'content'     => __( 'If you need alternative to current map then you can get free or pro maps for WP Travel.', 'wp-travel' ),
+					'link'        => 'https://wptravel.io/wp-travel-pro/',
+					'link_label'  => __( 'Get WP Travel Pro', 'wp-travel' ),
 					'link2'       => 'https://wptravel.io/downloads/category/map/',
 					'link2_label' => __( 'View WP Travel Map addons', 'wp-travel' ),
 				);
 				if ( class_exists( 'WP_Travel_Pro' ) ) {
-					$args['link'] = $args['link2'];
+					$args['link']       = $args['link2'];
 					$args['link_label'] = $args['link2_label'];
 					unset( $args['link2'], $args['link2_label'] );
 				}
-				wp_travel_upsell_message( $args );
+				wptravel_upsell_message( $args );
 				?>
 		<style>
 		.map-wrap{
@@ -68,28 +73,32 @@ if ( ! function_exists( 'wp_travel_trip_callback_locations' ) ) {
 			border-color: #4d90fe;
 		}
 		</style>
-		
 		<?php
-		
-		
+
 	}
 
-	function wp_travel_google_map( $settings, $map_data ) {
-		
+	/**
+	 * Google Map callback.
+	 *
+	 * @param array $settings WP Travel Settings.
+	 * @param array $map_data WP Travel Map Data.
+	 */
+	function wptravel_google_map( $settings, $map_data ) {
+
 		$api_key = '';
-	
-		$get_maps    = wp_travel_get_maps();
+
+		$get_maps    = wptravel_get_maps();
 		$current_map = $get_maps['selected'];
-	
+
 		$show_google_map = ( 'google-map' === $current_map ) ? true : false;
-		$show_google_map = apply_filters( 'wp_travel_load_google_maps_api', $show_google_map );
-	
-		if ( isset( $settings['google_map_api_key'] ) && '' != $settings['google_map_api_key'] ) {
+		$show_google_map = apply_filters( 'wp_travel_load_google_maps_api', $show_google_map ); //@phpcs:ignore
+
+		if ( isset( $settings['google_map_api_key'] ) && '' !== $settings['google_map_api_key'] ) {
 			$api_key = $settings['google_map_api_key'];
 		}
-	
+
 		if ( $show_google_map ) {
-			if ( '' != $api_key ) :
+			if ( '' !== $api_key ) :
 				?>
 				<div class="map-wrap">
 					<input id="search-input" name="wp_travel_location" class="controls" type="text" placeholder="Enter a location" value="<?php echo esc_html( $map_data['loc'] ); ?>" >
@@ -101,12 +110,8 @@ if ( ! function_exists( 'wp_travel_trip_callback_locations' ) ) {
 					<div class="map-wrap">
 					<p class="good" id="pass-strength-result"><i class="fas fa-map-pin"></i><?php echo sprintf( 'Please add \'Google Map API Key\' in the %ssettings%s.', '<a href="edit.php?post_type=itinerary-booking&page=settings">', '</a>' ); ?></p>
 				</div>
-			<?php
+						<?php
 		endif;
 		}
 	}
 }
-
-
-
-
