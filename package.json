@@ -5,13 +5,12 @@
   "main": "index.js",
   "scripts": {
     "setup": "composer install && yarn install && yarn run build && wp-scripts env install",
-    "build": "wp-scripts build && wp-scripts build --mode development",
-    "start": "wp-scripts start --mode development",
+    "dev": "wp-scripts start --mode development",
     "build:pre_release": "npx wp-scripts build && npx wp-scripts build --mode development && npx grunt pre_release",
     "lint:php": "wp-scripts env lint-php",
     "postinstall": "husky install",
     "makepot": "wp i18n make-pot . i18n/languages/wp-travel-test.pot --exclude=node_modules,vendor,src,wordpress,build --skip-js",
-    "zip" : "wp-scripts build && wp-scripts build --mode development && npx grunt build"
+    "bundle" : "wp-scripts build && wp-scripts build --mode development && npx grunt build"
   },
   "repository": {
     "type": "git",
