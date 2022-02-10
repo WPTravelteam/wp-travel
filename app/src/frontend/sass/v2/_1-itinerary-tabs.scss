@@ -444,7 +444,7 @@
 
 		p.comment-form-author {
 			width: calc(50% - 5px);
-			float: left;
+			float: right;
 			display: inline-block;
 			// margin-right: 10px;
 			margin-right: 0;
@@ -460,6 +460,7 @@
 			display: inline-block;
 			margin-right: 0;
 			margin-block: 0;
+			float: right;
 
 			@include mob {
 				width: 100%;
@@ -469,9 +470,15 @@
 
 		p.comment-form-cookies-consent {
 			width: 100%;
+			float: left;
+			@include mob {
+				float: none;
+			}
 		}
 
 		p.form-submit {
+			width: 48%;
+			margin-bottom: 0;
 			input {
 				width: auto;
 			}
@@ -485,7 +492,7 @@
 
 		.comment-form-comment {
 			width: 48%;
-			float: right;
+			float: left;
 			@include mob {
 				width: 100%;
 				float: none;
