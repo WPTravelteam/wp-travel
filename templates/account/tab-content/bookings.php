@@ -134,11 +134,13 @@ if ( ! function_exists( 'wptravel_account_tab_content' ) ) {
 									} else {
 										$lname = isset( $ordered_data['wp_travel_lname'] ) ? $ordered_data['wp_travel_lname'] : '';
 									}
+									$detail_link = add_query_arg( 'detail_id', $b_id, $detail_link );
+									$detail_link = add_query_arg( '_nonce', WP_Travel::create_nonce(), $detail_link );
 									?>
 									<tr class="tbody-content">
 										<td class="name" data-title="#<?php echo esc_html( $b_id ); ?>">
 											<div class="name-title">
-												#<?php echo esc_html( $b_id ); ?>
+												<a href="<?php echo esc_url( $detail_link ); ?>">#<?php echo esc_html( $b_id ); ?></a>
 											</div>
 										</td>
 										<td class="name" data-title="<?php esc_html_e( 'Trip', 'wp-travel' ); ?>">
@@ -180,10 +182,6 @@ if ( ! function_exists( 'wptravel_account_tab_content' ) ) {
 										</td>
 										<td class="payment-mode" data-title="<?php esc_html_e( 'Detail', 'wp-travel' ); ?>">
 												<div class="contact-title">
-													<?php
-													$detail_link = add_query_arg( 'detail_id', $b_id, $detail_link );
-													$detail_link = add_query_arg( '_nonce', WP_Travel::create_nonce(), $detail_link );
-													?>
 													<a href="<?php echo esc_url( $detail_link ); ?>"><?php esc_html_e( 'Detail', 'wp-travel' ); ?></a>
 											</div>
 										</td>
