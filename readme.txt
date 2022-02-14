@@ -253,7 +253,7 @@ Tweaks:
 * Added Hide Plugin archive page title option.
 
 Fixes:
-* Fixed Checkout page value not displaying even added value in my account page.
+* Fixed Checkout page traveler info and billing info values not displaying even added value in my account page.
 * Fixed Checkout page stripe not working in PHP 8.0.14.
 
 Layout Fixes:
