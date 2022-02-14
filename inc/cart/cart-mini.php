@@ -365,7 +365,10 @@ if ( wptravel_is_react_version_enabled() ) {
 						</li>
 						<li data-wpt-trip-partial-gross-total="<?php echo esc_attr( $total_partial ); ?>" style="display:none" >
 							<label>
-								<?php printf( __( 'Total upfront (%1s%%)', 'wp-travel' ), esc_html( $payout_percent ) ); ?>
+								<?php
+								esc_html_e( 'Total upfront', 'wp-travel' );
+								echo '(' . esc_html( $payout_percent ) . '%)';
+								?>
 							</label>
 							<div class="price"><strong data-wpt-cart-net-total-partial="<?php echo esc_attr( $total_partial ); ?>"><?php echo wptravel_get_formated_price_currency( $total_partial ); ?></strong></div>
 						</li>

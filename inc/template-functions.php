@@ -80,7 +80,11 @@ function wptravel_load_single_itinerary_hooks() {
 		add_action( 'wp_travel_before_main_content', 'wptravel_archive_before_content' );
 		add_action( 'wp_travel_after_main_content', 'wptravel_archive_v2_wrapper_close' );
 	}
-	add_action( 'wp_travel_before_main_content', 'wptravel_archive_title', 9 );
+	$settings                       = wptravel_get_settings();
+	$hide_plugin_archive_page_title = $settings['hide_plugin_archive_page_title'];
+	if ( 'yes' !== $hide_plugin_archive_page_title ) {
+		add_action( 'wp_travel_before_main_content', 'wptravel_archive_title', 9 );
+	}
 
 }
 

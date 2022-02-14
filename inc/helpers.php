@@ -154,6 +154,9 @@ function wptravel_settings_default_fields() {
 		// Calendar view @since 4.0.7.
 		'calender_view'                           => 'no',
 		'trip_date_listing'                       => 'calendar', // Front view: calendar | dates @since 4.4.5.
+
+		// @since 5.1.1.
+		'hide_plugin_archive_page_title'		  => 'no',
 	);
 
 	$user_since = get_option( 'wp_travel_user_since' );

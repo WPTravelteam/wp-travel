@@ -28,6 +28,7 @@ export default () => {
         // cart_page_id,
         checkout_page_id,
         dashboard_page_id,
+        hide_plugin_archive_page_title,
         options } = allData;
 
     const { updateSettings } = dispatch('WPTravel/Admin');
@@ -332,7 +333,23 @@ export default () => {
                 </div>
             </PanelRow>  
             {applyFilters('wp_travel_settings_after_general_fields', [] )}      
-            
+            <br/><br/>
+            <h4>{ __( 'Archive Page title', 'wp-travel' ) }</h4>
+            <PanelRow>
+                <label>{ __( 'Hide plugin archive page title.', 'wp-travel' ) }</label>
+                <div className="wp-travel-field-value">
+                    <ToggleControl
+                        checked={ hide_plugin_archive_page_title == 'yes' }
+                        onChange={ () => {
+                            updateSettings({
+                                ...allData,
+                                hide_plugin_archive_page_title: 'yes' == hide_plugin_archive_page_title ? 'no': 'yes'
+                            })
+                        } }
+                    />
+                    <p className="description">{__( 'This option will hide archive title displaying from plugin.', 'wp-travel' )}</p>
+                </div>
+            </PanelRow>
         </ErrorBoundary>
     </div>
 }
