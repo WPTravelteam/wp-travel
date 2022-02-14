@@ -251,6 +251,7 @@ Release Date: 14th February, 2022
 
 Tweaks:
 * Added Hide Plugin archive page title option.
+* Added booking details link in booking id of booking list section in WP Travel User Dashboard.
 
 Fixes:
 * Fixed Checkout page traveler info and billing info values not displaying even added value in my account page.
