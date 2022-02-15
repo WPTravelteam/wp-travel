@@ -4,19 +4,19 @@ import apiFetch from '@wordpress/api-fetch';
 export const DEFAULT_BOOKING_STATE = () => {
     let initState = {
         selectedDate: null,
-        selectedTripDate: [],
+        selectedDateIds: [],
+        selectedPricingId: null,
+        selectedTime: null,
+
         nomineePricings: [],
         nomineeTimes: [],
-        selectedPricing: null,
-        selectedTime: null,
-        rruleAll: {},
+        // rruleAll: {},
         paxCounts: {},
         tripExtras: {},
         inventory: [],
         isLoading: false,
         excludedDateTimes: [],
         pricingUnavailable: false,
-        tempExcludeDate: [] // Temp fixes. Just to check exclude date
     };
     return initState;
 }
@@ -29,16 +29,16 @@ registerStore('WPTravelFrontend/BookingData', {
     resolvers: {
     },
     actions: {
-        updateBooking(data){
+        updateStore(data){
             return {
-                type: 'UPDATE_BOOKING',
+                type: 'UPDATE_BOOKING_STORE',
                 data,
             };
         },
     },
     reducer( state = DEFAULT_BOOKING_STATE(), action ) {
         switch ( action.type ) {
-            case 'UPDATE_BOOKING':
+            case 'UPDATE_BOOKING_STORE':
                 return {...state,
                     ...action.data,
                 };

@@ -1,5 +1,5 @@
 // Additional lib
-import ErrorBoundary from '../../ErrorBoundry/ErrorBoundry';
+import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
 
 const CustomBooking = ( props ) => {
 	// Component Props.
@@ -11,8 +11,6 @@ const CustomBooking = ( props ) => {
         custom_booking_link_text:customBookingLinkText,
         custom_booking_form,
     } = props;
-    console.log( 'cs', props );
-	// End of Trip related datas.
     return <ErrorBoundary>
             <>
             {
@@ -25,7 +23,6 @@ const CustomBooking = ( props ) => {
 					'custom-form' === customBookingType && <div className="wp-travel-custom-form" dangerouslySetInnerHTML={{__html: custom_booking_form || ''}}></div>
                 }
                 </>
-		
             }
             </>
     </ErrorBoundary>
