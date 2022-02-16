@@ -1206,3 +1206,17 @@
 .dashboard-tab .partial-payment-info tr.payment-row.ongoing-row i {
 	font-size: 12px;
 }
+
+.mfp-container {
+	.wp-travel-popup {
+		.popup-bank-details {
+			overflow-x: auto;
+		}
+	}
+}
+
+.wp-travel-bank-deposit-wrap {
+	.button {
+		line-height: 50px;
+	}
+}

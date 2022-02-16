@@ -44,7 +44,7 @@ function wptravel_get_checkout_form_fields() {
 	$traveller_fields = apply_filters( 'wp_travel_checkout_traveller_fields', $traveller_fields );
 	// Set default values.
 	$traveller_fields['first_name']['default']   = $user_fname;
-	$traveller_fields['last_name']['default']    = $user_fname;
+	$traveller_fields['last_name']['default']    = $user_lname;
 	$traveller_fields['country']['default']      = $billing_country;
 	$traveller_fields['phone_number']['default'] = $billing_phone;
 	$traveller_fields['email']['default']        = $user_email;

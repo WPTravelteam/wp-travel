@@ -250,7 +250,7 @@ Before updating plugin please check ["our latest release notes"](#developers).
 Release Date: 14th February, 2022
 
 Tweaks:
-* Added Hide Plugin archive page title option.
+* Added Hide Plugin archive page title option. [More info](https://wptravel.io/remove-archive-title-from-the-archive-page/).
 
 Fixes:
 * Fixed Checkout page value not displaying even added value in my account page.
@@ -289,6 +289,7 @@ Layout Fixes:
 * Fixed Single Trip page trip enquiry popup error message.
 * Fixed Sidebar multiple currency table layout.
 * Fixed Single trip page booking tab pax selector section layout  in responsive and mobile view.
+* For more detail, please refer to our [release note](https://wptravel.io/wp-travel-plugin-version-5-1-0-release-note/)
 
 = 5.0.7 =
 Release Date: 27th December, 2021
