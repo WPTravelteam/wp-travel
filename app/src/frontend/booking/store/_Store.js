@@ -7,8 +7,8 @@ export const DEFAULT_BOOKING_STATE = () => {
         selectedDateIds: [],
         selectedPricingId: null,
         selectedTime: null,
+        nomineePricingIds: [],
 
-        nomineePricings: [],
         nomineeTimes: [],
         // rruleAll: {},
         paxCounts: {},

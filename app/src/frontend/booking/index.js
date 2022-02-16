@@ -40,8 +40,8 @@ const WPTravelBooking = ( props ) => {
 
 	// Booking Data/state.
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
-    console.log(bookingData);
-    const { selectedDate } = bookingData;
+    // console.log(bookingData);
+    const { selectedDate, selectedPricingId } = bookingData;
     const { updateStore } = dispatch( bookingStoreName );
     const updateBookingData = ( data ) => {
 		updateStore({ ...bookingData, ...data });
@@ -63,9 +63,7 @@ const WPTravelBooking = ( props ) => {
                                 <DateListing  { ...{ ...props, bookingData, updateBookingData, tripData } } />
                             </div>
                             ||
-                            <div className="wp-travel-booking__datepicker-wrapper">
-                                <CalendarView { ...{ ...props, bookingData, updateBookingData, tripData } } />
-                            </div>
+                            <CalendarView { ...{ ...props, bookingData, updateBookingData, tripData } } />
                         }
 					</Suspense>
                 </ErrorBoundary>
