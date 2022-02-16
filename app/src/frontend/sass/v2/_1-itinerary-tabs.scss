@@ -473,6 +473,7 @@
 			float: left;
 			@include mob {
 				float: none;
+				margin-top: 1em;
 			}
 		}
 
