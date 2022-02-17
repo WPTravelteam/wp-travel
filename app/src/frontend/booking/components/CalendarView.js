@@ -28,7 +28,7 @@ const CalendarView = ( props ) => {
         pricings,
         trip_duration
     } = tripData;
-    const allPricings = pricings && _.keyBy( pricings, p => p.id )
+    const allPricings = pricings && _.keyBy( pricings, p => p.id ) // Need object structure because pricing id may not be in sequencial order.
     const _dates      = 'undefined' !== typeof dates && dates.length > 0 ? dates : [];
     const datesById   = _.keyBy(_dates, d => d.id)
     const duration    = trip_duration.days && parseInt( trip_duration.days ) || 1;
@@ -56,23 +56,20 @@ const CalendarView = ( props ) => {
 
     // Update Selected Trip date in store.
     const selectTripDate = ( date ) => {
-		if ( ! isFixedDeparture ) {
-			updateBookingData({
-				pricingUnavailable: false,
-				selectedDate: date,
-				selectedPricingId:null,
-				isLoading: true,
-			})
-			return
-		} else {
-			// Fixed Departure.
-			let _nomineePricingIds = []; // Pricing ids as per selected date.
-			let _bookingData = {
-				isLoading: true,
-				pricingUnavailable: false,
-				selectedDate: date,
-				selectedPricingId:null,
-			}
+		// Default or Trip duration.
+		let _bookingData = {
+			isLoading: true,
+			pricingUnavailable: false,
+			selectedDate: date,
+			selectedPricingId:null,
+			selectedPricing:null,
+		}
+
+		// Pricing ids as per selected date for fixed departure and all pricing for trip duration.
+		let _nomineePricingIds = []; 
+
+		// Fixed Departure.
+		if ( isFixedDeparture ) {
 	
 			// UTC Offset Fixes.
 			let totalOffsetMin = new Date(date).getTimezoneOffset();
@@ -108,21 +105,25 @@ const CalendarView = ( props ) => {
 					}
 					return moment( _date.start_date ).isSame(moment( date ) )
 				}).map( d => d.id );
-	
+			
 			_nomineePricingIds = _dateIds.map( id => datesById[id].pricing_ids.split(',').map( id => id.trim() ) )
 			_nomineePricingIds = _.chain( _nomineePricingIds ).flatten().uniq().value().filter( p => p != '' && typeof allPricings[p] !== 'undefined' )
-	
+
 			if ( _nomineePricingIds.length <= 0 ) {
 				_bookingData = { ..._bookingData, pricingUnavailable: true }
 			} else if ( _nomineePricingIds.length === 1 ) {
-				_bookingData = { ..._bookingData, selectedPricingId: _nomineePricingIds[0] }
-			} else {
-				_bookingData = { ..._bookingData, nomineePricingIds: _nomineePricingIds }
+				let selectedPricingId = _nomineePricingIds[0];
+				let selectedPricing   = allPricings[ selectedPricingId ].title;
+				_bookingData = { ..._bookingData, selectedPricingId: selectedPricingId, selectedPricing:selectedPricing }
 			}
-
-			_bookingData = { ..._bookingData, selectedDateIds: _dateIds, isLoading: false }
-			updateBookingData( _bookingData  );
+			_bookingData = { ..._bookingData, selectedDateIds: _dateIds }
+		} else {
+			_nomineePricingIds = pricings && pricings.map( pricing => pricing.id );
 		}
+
+		_bookingData = { ..._bookingData, nomineePricingIds: _nomineePricingIds, isLoading: false } // nomineePricingIds
+
+		updateBookingData( _bookingData  );
 	}
     // Date param need to have only Y-M-D date without time.
 	const filteredTripDates = date => {

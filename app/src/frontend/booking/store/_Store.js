@@ -3,9 +3,10 @@ import apiFetch from '@wordpress/api-fetch';
 
 export const DEFAULT_BOOKING_STATE = () => {
     let initState = {
-        selectedDate: null,
+        selectedDate: null, // Just TO Display only.
         selectedDateIds: [],
         selectedPricingId: null,
+        selectedPricing: null, // Just TO Display only.
         selectedTime: null,
         nomineePricingIds: [],
 
