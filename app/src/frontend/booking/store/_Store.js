@@ -5,18 +5,19 @@ export const DEFAULT_BOOKING_STATE = () => {
     let initState = {
         selectedDate: null, // Just TO Display only.
         selectedDateIds: [],
+        nomineePricingIds: [],
         selectedPricingId: null,
         selectedPricing: null, // Just TO Display only.
-        selectedTime: null,
-        nomineePricingIds: [],
-
         nomineeTimes: [],
+        selectedTime: null,
+        selectedTimeObject: null, // just to check selected trip time value. need to remove this latter.
+        excludedDateTimes: [],
+        
         // rruleAll: {},
         paxCounts: {},
         tripExtras: {},
         inventory: [],
         isLoading: false,
-        excludedDateTimes: [],
         pricingUnavailable: false,
     };
     return initState;

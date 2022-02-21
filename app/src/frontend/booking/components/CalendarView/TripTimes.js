@@ -8,19 +8,24 @@ const _ = lodash
 const TripTimes =  ( props ) => {
 	// Component Props.
 	const { tripData, bookingData, updateBookingData } = props;
-	let allPricings = tripData && tripData.pricings && _.keyBy( tripData.pricings, p => p.id );
-
-	const { nomineePricingIds, selectedPricingId } = bookingData;
-let options = []
+	
+	// @todo selectedTime & selectedTimeObject consist same value just type is different. need to remove selectedTimeObject.
+	const { nomineeTimes, selectedTime, selectedTimeObject } = bookingData;
 	return <div className="wp-travel-booking__selected-time">
-		{options.length > 0 && <>
+		{nomineeTimes.length > 0 && <>
 			<h4>{`${__i18n.bookings.available_trip_times}`}</h4>
 			{
-				options.map((timeObject, i) => {
-					// let timeObject = moment(`${selectedDate.toDateString()} ${time}`) // TODO: save times to state as date object.
-					return <button key={i} disabled={timeObject.isSame(selected)} onClick={onTimeSelect(timeObject)}>
-						{timeObject.format('h:mm A')}
-					</button>
+				nomineeTimes.map((timeObject, i) => {
+					return <button key={i} disabled={timeObject.isSame( selectedTimeObject ) } onClick={ () => {
+								updateBookingData( {
+									selectedTime: timeObject.format('HH:mm'),
+									selectedTimeObject: timeObject.toDate() // just to check selected trip time value. need to remove this latter.
+								} );
+							}
+						} >
+							{timeObject.format('h:mm A')}
+						</button>
+					
 				})
 			}
 		</>}

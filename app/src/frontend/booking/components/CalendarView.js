@@ -34,15 +34,60 @@ const CalendarView = ( props ) => {
     const duration    = trip_duration.days && parseInt( trip_duration.days ) || 1;
 
     // Booking Data.
-    const { selectedDate, selectedPricingId } = bookingData;
+    const { selectedDate, selectedDateIds, selectedPricingId, excludedDateTimes } = bookingData;
 
 	// Lifecycles. [ This will only trigger if pricing is selected or changed ]
     useEffect(() => {
 		if ( ! selectedPricingId ) {
 			return
 		}
-		console.log( 'pricing id selected' );
+		let _bookingData = {};
+
+		// after selecting pricing. need to check available time for selected pricing as well.
+		let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
+		if ( times.length > 0 ) {
+			let _times = times
+				.map(time => {
+					return moment(`${selectedDate.toDateString()} ${time}`)
+				})
+				.filter(time => {
+					if (excludedDateTimes.find(et => moment(et).isSame(time))) {
+						return false
+					}
+					return true
+				})
+			_bookingData = {
+				..._bookingData,
+				nomineeTimes: _times,
+			}
+			// add selected trip time if nominee times length is one.
+			if ( 1 === _times.length ) {
+				_bookingData = {
+					..._bookingData,
+					selectedTime: _times[0].format('HH:mm'),
+					selectedTimeObject: _times[0].toDate()  // just to check selected trip time value. need to remove this latter.
+				}
+			}
+		}
+		updateBookingData( _bookingData );
+		
+		// @todo need to check inventory and set inventory data in booking data here.
 	}, [ selectedPricingId ])
+
+	// functions.
+	const getPricingTripTimes = ( pricingId, selectedTripdates ) => {
+		let trip_time = selectedTripdates.map( td => {
+			let date = datesById[td]
+			if (date.pricing_ids && date.pricing_ids.split(',').includes(pricingId)) {
+				let times = date.trip_time && date.trip_time.split(',') || []
+				times = applyFilters( 'wpTravelCutofTimeFilter', times, tripData, selectedDate );
+				return times;
+			}
+			return []
+		})
+		return _.chain(trip_time).flatten().uniq().value()
+
+	}
 
     // Just custom botton. There is no custom onclick event here.
     const DatePickerBtn = forwardRef( ( { value, onClick }, ref ) => (
@@ -156,7 +201,8 @@ const CalendarView = ( props ) => {
 				if (ed.trip_time.length > 0) {
 					let _times = ed.trip_time.split(',')
 					let _datetimes = _times.map(t => moment(`${ed.start_date} ${t}`).toDate())
-					if ( !selectedDateTime || _excludedDatesTimes.includes(moment(ed.start_date).format('YYYY-MM-DD')) ) {
+					if ( ! selectedDate || _excludedDatesTimes.includes(moment(ed.start_date).format('YYYY-MM-DD')) ) {
+						
 						excludedDateTimes.push(_datetimes[0]); // Temp fixes Pushing into direct state is not good.
 					}
 					return false
@@ -190,8 +236,7 @@ const CalendarView = ( props ) => {
 					return
 				}
 				return dateRules.find(da => moment(moment(da).format("YYYY-MM-DD")).unix() === moment(moment(date).format('YYYY-MM-DD')).unix()) instanceof Date
-			}
-			if (data.start_date) {
+			} else if( data.start_date ) {
 				if ( ! applyFilters( 'wpTravelCutofDateFilter', true, tripData, date, data )  ) { // @since 4.3.1
 					return
 				}
@@ -203,12 +248,14 @@ const CalendarView = ( props ) => {
 		return _date && 'undefined' !== typeof _date.id
 	}
 
-
-
-
     // Datepicker Params
-    let _mindate = _.chain( _dates ).sortBy( d => moment( d.start_date).unix() ).value() || [];
-	_mindate     = _mindate.find(md => moment(md.start_date).isAfter(moment(new Date())) || moment(md.start_date).isSame(moment(new Date())));
+    let _mindate = _.chain( _dates ).sortBy( d => moment( d.start_date).unix() ).value() || []; // Sort by date.
+	// Finding min date
+	_mindate = _mindate.find( md => 
+		moment( md.start_date ).isAfter( moment(new Date() ) ) ||
+		( moment( md.start_date ).isBefore( moment(new Date() ) ) && md.is_recurring ) || // @todo need to filter end date condition as well in recurring.
+		moment( md.start_date ).isSame( moment(new Date() ) ) 
+	);
 
 	let minDate = _mindate && moment(_mindate.start_date).toDate() || new Date();
 	let maxDate = new Date( new Date().setFullYear(new Date().getFullYear() + 10 ));
@@ -236,8 +283,16 @@ const CalendarView = ( props ) => {
 			{ calendarInline ? <DatePicker inline { ...params }  /> : <DatePicker { ...params }  /> }
 			{ ! selectedDate && showTooltip && <p>{ tooltipText } </p> || null }
 		</div>
-		<Pricings { ...props } />
-		<TripTimes { ...props } />
+		{/* Pricing and Times are in pricing wrapper */}
+		{ selectedDate &&
+			<div className="wp-travel-booking__pricing-wrapper">
+				<div className="wp-travel-booking__pricing-name"> 
+					<Pricings { ...props } />
+				</div>
+				{ selectedPricingId && <TripTimes { ...props } /> }
+				
+			</div>
+		}
     </ErrorBoundary>
 }
 export default CalendarView;

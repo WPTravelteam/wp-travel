@@ -88,3 +88,4 @@ if (document.getElementById(blockId)) {
 	render(<WPTravelBooking forceCalendarDisplay={true} calendarInline={inline} showTooltip={tooltip} tooltipText={tooltipText} />, elem );
 }
 // @todo calendar button. in trip duration
+// @todo Booking functionality
