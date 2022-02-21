@@ -89,3 +89,4 @@ if (document.getElementById(blockId)) {
 }
 // @todo calendar button. in trip duration
 // @todo Booking functionality
+// @trip extras implementation.

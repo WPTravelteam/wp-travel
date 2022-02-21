@@ -5,6 +5,7 @@ export const DEFAULT_BOOKING_STATE = () => {
     let initState = {
         selectedDate: null, // Just TO Display only.
         selectedDateIds: [],
+        pricingUnavailable: false,
         nomineePricingIds: [],
         selectedPricingId: null,
         selectedPricing: null, // Just TO Display only.
@@ -18,7 +19,6 @@ export const DEFAULT_BOOKING_STATE = () => {
         tripExtras: {},
         inventory: [],
         isLoading: false,
-        pricingUnavailable: false,
     };
     return initState;
 }

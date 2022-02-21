@@ -1,5 +1,6 @@
 import { forwardRef, useEffect } from '@wordpress/element';
-import {  applyFilters } from '@wordpress/hooks';
+import { applyFilters } from '@wordpress/hooks';
+import { Disabled } from '@wordpress/components';
 const __i18n = {
 	..._wp_travel.strings
 }
@@ -13,9 +14,13 @@ import DatePicker, {registerLocale} from "react-datepicker";
 registerLocale( "DPLocale", RDP_Locale() );
 import generateRRule from "../_GenerateRRule";
 
+// WP Travel Functions.
+import { objectSum } from '../_wptravelFunctions';
+
 // WP Travel Components.
 import Pricings from './CalendarView/Pricings';
 import TripTimes from './CalendarView/TripTimes';
+import PaxSelector from './CalendarView/PaxSelector';
 
 const CalendarView = ( props ) => {
 	// Component Props.
@@ -29,12 +34,13 @@ const CalendarView = ( props ) => {
         trip_duration
     } = tripData;
     const allPricings = pricings && _.keyBy( pricings, p => p.id ) // Need object structure because pricing id may not be in sequencial order.
+	console.log(allPricings);
     const _dates      = 'undefined' !== typeof dates && dates.length > 0 ? dates : [];
     const datesById   = _.keyBy(_dates, d => d.id)
     const duration    = trip_duration.days && parseInt( trip_duration.days ) || 1;
 
     // Booking Data.
-    const { selectedDate, selectedDateIds, selectedPricingId, excludedDateTimes } = bookingData;
+    const { selectedDate, selectedDateIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, selectedTimeObject, nomineeTimes, paxCounts } = bookingData;
 
 	// Lifecycles. [ This will only trigger if pricing is selected or changed ]
     useEffect(() => {
@@ -69,10 +75,41 @@ const CalendarView = ( props ) => {
 				}
 			}
 		}
+		
+		// Add default selected pax object values as 0 for all categories as per selected pricing. {'2':0,'3':0} where cat id 2, 3 have default 0 selected pax.
+		const pricing = allPricings[selectedPricingId];
+		let categories = pricing && pricing.categories || []
+		let _paxCounts = {}
+		categories.forEach(c => {
+			_paxCounts = { ..._paxCounts, [c.id]: parseInt(c.default_pax) || 0 }
+		})
+		_bookingData = { ..._bookingData, paxCounts: _paxCounts }
+
+		// @todo need to check inventory and set inventory data in booking data here.
+		let maxPax               = pricing.max_pax || 999
+		let tempSelectedDatetime = selectedDate;
+
+		let selectedHour = 0;
+		let selectedMin  = 0;
+		if ( selectedTimeObject ) {
+			selectedHour = selectedTimeObject.getHours();
+			selectedMin  = selectedTimeObject.getMinutes();
+		}
+		tempSelectedDatetime.setHours(selectedHour)
+		tempSelectedDatetime.setMinutes(selectedMin)
+		
+		_bookingData = {
+			..._bookingData,
+			inventory: [{
+				'date': moment(tempSelectedDatetime).format('YYYY-MM-DD[T]HH:mm'),
+				'pax_available': maxPax,
+				'booked_pax': 0,
+				'pax_limit': maxPax,
+			}],
+		}
 		updateBookingData( _bookingData );
 		
-		// @todo need to check inventory and set inventory data in booking data here.
-	}, [ selectedPricingId ])
+	}, [ selectedPricingId, selectedTime ])
 
 	// functions.
 	const getPricingTripTimes = ( pricingId, selectedTripdates ) => {
@@ -284,7 +321,7 @@ const CalendarView = ( props ) => {
 			{ ! selectedDate && showTooltip && <p>{ tooltipText } </p> || null }
 		</div>
 		{/* Pricing and Times are in pricing wrapper */}
-		{ selectedDate &&
+		{ selectedDate && <>
 			<div className="wp-travel-booking__pricing-wrapper">
 				<div className="wp-travel-booking__pricing-name"> 
 					<Pricings { ...props } />
@@ -292,7 +329,20 @@ const CalendarView = ( props ) => {
 				{ selectedPricingId && <TripTimes { ...props } /> }
 				
 			</div>
+			<div className="wp-travel-booking__pricing-wrapper wptravel-pax-selector">
+				{ ! pricingUnavailable && selectedPricingId && <ErrorBoundary>
+					{ nomineeTimes.length > 1 && ! selectedTime && <Disabled><PaxSelector { ...props } /></Disabled> || <PaxSelector { ...props } /> }
+
+					{ _.size(allPricings[ selectedPricingId ].trip_extras) > 0 && objectSum( paxCounts ) > 0 && <ErrorBoundary> extras </ErrorBoundary> }
+				</ErrorBoundary> }
+			</div>
+			</>
 		}
     </ErrorBoundary>
 }
 export default CalendarView;
+
+// @todo paxselector inventory value check before component call check
+// @todo Extras component inside pax selector
+// @todo inventory unavailable message.
+// @todo Group discount.
