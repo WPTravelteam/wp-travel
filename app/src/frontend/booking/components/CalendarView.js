@@ -50,7 +50,6 @@ const CalendarView = ( props ) => {
 
 		// after selecting pricing. need to check available time for selected pricing as well.
 		let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
-		console.log(times);
 		if ( times.length > 0 ) {
 			let _times = times
 				.map(time => {
@@ -92,7 +91,6 @@ const CalendarView = ( props ) => {
 		let selectedMin  = 0;
 		if ( selectedTime ) { // if time is selected then the selectedDate must have time on it.
 			const selectedDateTime = new Date( `${selectedDate.toDateString()} ${selectedTime}` );
-			// console.log( 'selectedDateTime', selectedDateTime );
 			_bookingData = { ..._bookingData, selectedDate: selectedDateTime } // Updating date state with time if time is selected.
 			selectedHour = selectedDateTime.getHours(); // Date object
 			selectedMin  = selectedDateTime.getMinutes(); // Date object

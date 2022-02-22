@@ -1,7 +1,3 @@
-/**
- * It is important to set global var before any imports.
- * https://stackoverflow.com/questions/39879680/example-of-setting-webpack-public-path-at-runtime
- */
 import { Suspense } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 const __i18n = {
