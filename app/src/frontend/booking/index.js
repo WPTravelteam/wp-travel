@@ -38,7 +38,7 @@ const WPTravelBooking = ( props ) => {
 
 	// Booking Data/state.
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
-    console.log(bookingData);
+
     const { selectedDate } = bookingData;
     const { updateStore } = dispatch( bookingStoreName );
     const updateBookingData = ( data ) => {
@@ -88,5 +88,4 @@ if (document.getElementById(blockId)) {
 	render(<WPTravelBooking forceCalendarDisplay={true} calendarInline={inline} showTooltip={tooltip} tooltipText={tooltipText} />, elem );
 }
 // @todo calendar button. in trip duration
-// @todo Booking functionality
 // @trip extras implementation.

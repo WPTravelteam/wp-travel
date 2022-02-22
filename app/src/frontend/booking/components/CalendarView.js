@@ -72,6 +72,12 @@ const CalendarView = ( props ) => {
 					selectedTime: _times[0].format('HH:mm'),
 				}
 			}
+		} else {
+			_bookingData = {
+				..._bookingData,
+				nomineeTimes: [],
+				selectedTime: null,
+			}
 		}
 		
 		// Add default selected pax object values as 0 for all categories as per selected pricing. {'2':0,'3':0} where cat id 2, 3 have default 0 selected pax.
@@ -145,6 +151,8 @@ const CalendarView = ( props ) => {
 			selectedDate: date,
 			selectedPricingId:null,
 			selectedPricing:null,
+			selectedTime:null,
+			nomineeTimes:[]
 		}
 
 		// Pricing ids as per selected date for fixed departure and all pricing for trip duration.
@@ -194,9 +202,14 @@ const CalendarView = ( props ) => {
 			if ( _nomineePricingIds.length <= 0 ) {
 				_bookingData = { ..._bookingData, pricingUnavailable: true }
 			} else if ( _nomineePricingIds.length === 1 ) {
-				let selectedPricingId = _nomineePricingIds[0];
-				let selectedPricing   = allPricings[ selectedPricingId ].title;
-				_bookingData = { ..._bookingData, selectedPricingId: selectedPricingId, selectedPricing:selectedPricing }
+				let tempSelectedPricingId = _nomineePricingIds[0];
+				let selectedPricing   = allPricings[ tempSelectedPricingId ].title;
+				// if tempSelectedPricingId is equel to previously selected selectedPricingId then this date change will not trigger pricingid change effect. So we may not have time for selected date. so need to reset selected time here to trigger time change lifecycle to update nominee time and selected time here.
+				if ( tempSelectedPricingId === selectedPricingId ) {
+					_bookingData = { ..._bookingData, selectedTime: '00:00'  } // Quick hack to trigger time change effect.
+				}
+				
+				_bookingData = { ..._bookingData, selectedPricingId: tempSelectedPricingId, selectedPricing:selectedPricing }
 			}
 			_bookingData = { ..._bookingData, selectedDateIds: _dateIds }
 		} else {
