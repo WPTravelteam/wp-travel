@@ -840,9 +840,15 @@
 		}
 	}
 }
-//Related Trips
-.wp-travel-related-posts {
-	padding-top: 55px;
+.entry-content {
+	// Trip Map in Single Trip Page
+	.wp-travel-map {
+		margin-block: 20px;
+	}
+	//Related Trips
+	.wp-travel-related-posts {
+		padding-top: 15px;
+	}
 }
 
 // For Blocks, for adding styles to the list and grid view in itinerary page
@@ -1452,5 +1458,3 @@
 		overflow-x: auto;
 	}
 }
-
-
