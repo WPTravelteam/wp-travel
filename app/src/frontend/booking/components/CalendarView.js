@@ -34,13 +34,12 @@ const CalendarView = ( props ) => {
         trip_duration
     } = tripData;
     const allPricings = pricings && _.keyBy( pricings, p => p.id ) // Need object structure because pricing id may not be in sequencial order.
-	console.log(allPricings);
     const _dates      = 'undefined' !== typeof dates && dates.length > 0 ? dates : [];
     const datesById   = _.keyBy(_dates, d => d.id)
     const duration    = trip_duration.days && parseInt( trip_duration.days ) || 1;
 
     // Booking Data.
-    const { selectedDate, selectedDateIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, selectedTimeObject, nomineeTimes, paxCounts } = bookingData;
+    const { selectedDate, selectedDateIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
 
 	// Lifecycles. [ This will only trigger if pricing is selected or changed ]
     useEffect(() => {
@@ -51,6 +50,7 @@ const CalendarView = ( props ) => {
 
 		// after selecting pricing. need to check available time for selected pricing as well.
 		let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
+		console.log(times);
 		if ( times.length > 0 ) {
 			let _times = times
 				.map(time => {
@@ -71,7 +71,6 @@ const CalendarView = ( props ) => {
 				_bookingData = {
 					..._bookingData,
 					selectedTime: _times[0].format('HH:mm'),
-					selectedTimeObject: _times[0].toDate()  // just to check selected trip time value. need to remove this latter.
 				}
 			}
 		}
@@ -91,12 +90,15 @@ const CalendarView = ( props ) => {
 
 		let selectedHour = 0;
 		let selectedMin  = 0;
-		if ( selectedTimeObject ) {
-			selectedHour = selectedTimeObject.getHours();
-			selectedMin  = selectedTimeObject.getMinutes();
+		if ( selectedTime ) { // if time is selected then the selectedDate must have time on it.
+			const selectedDateTime = new Date( `${selectedDate.toDateString()} ${selectedTime}` );
+			// console.log( 'selectedDateTime', selectedDateTime );
+			_bookingData = { ..._bookingData, selectedDate: selectedDateTime } // Updating date state with time if time is selected.
+			selectedHour = selectedDateTime.getHours(); // Date object
+			selectedMin  = selectedDateTime.getMinutes(); // Date object
 		}
-		tempSelectedDatetime.setHours(selectedHour)
-		tempSelectedDatetime.setMinutes(selectedMin)
+		tempSelectedDatetime.setHours( selectedHour )
+		tempSelectedDatetime.setMinutes( selectedMin )
 		
 		_bookingData = {
 			..._bookingData,

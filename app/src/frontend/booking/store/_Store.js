@@ -3,7 +3,7 @@ import apiFetch from '@wordpress/api-fetch';
 
 export const DEFAULT_BOOKING_STATE = () => {
     let initState = {
-        selectedDate: null, // Just TO Display only.
+        selectedDate: null, // Object Date along with time if time is available/selected. This will also for display purpose. Time will display if time is selected [selectedTime]
         selectedDateIds: [],
         pricingUnavailable: false,
         nomineePricingIds: [],
@@ -11,11 +11,10 @@ export const DEFAULT_BOOKING_STATE = () => {
         selectedPricing: null, // Just TO Display only.
         nomineeTimes: [],
         selectedTime: null,
-        selectedTimeObject: null, // just to check selected trip time value. need to remove this latter.
         excludedDateTimes: [],
+        paxCounts: {}, // Total pax object  { categoryid1:noOfPax, categoryid2:noOfPax }
         
         // rruleAll: {},
-        paxCounts: {},
         tripExtras: {},
         inventory: [],
         isLoading: false,

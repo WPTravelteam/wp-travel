@@ -1,9 +1,7 @@
 import { __ } from '@wordpress/i18n'
-import { Fragment } from '@wordpress/element'
-import { DiscountTable } from './_GroupDiscountTable';
+import DiscountTable from './_GroupDiscountTable';
 
 const _ = lodash
-const { currency_symbol: currencySymbol } = _wp_travel
 const __i18n = {
 	..._wp_travel.strings
 }
@@ -13,7 +11,7 @@ import { wpTravelFormat, objectSum } from '../../_wptravelFunctions';
 
 const PaxSelector = ( props ) => {
 	// Component Props.
-	const { calendarInline, showTooltip, tooltipText, tripData, bookingData, updateBookingData } = props;
+	const { tripData, bookingData, updateBookingData } = props;
 
 	// Trip Data.
     const {
@@ -29,7 +27,7 @@ const PaxSelector = ( props ) => {
 	const isInventoryEnabled = tripData.inventory && tripData.inventory.enable_trip_inventory === 'yes';
 
     // Booking Data.
-    const { selectedDate, selectedDateIds, selectedPricingId, selectedTimeObject, excludedDateTimes, pricingUnavailable, inventory, paxCounts } = bookingData;
+    const { selectedDate, selectedDateIds, selectedPricingId, excludedDateTimes, pricingUnavailable, inventory, paxCounts } = bookingData;
 
 
 	const pricing = allPricings[selectedPricingId];
@@ -59,7 +57,6 @@ const PaxSelector = ( props ) => {
 				price = parseFloat(price) * totalPax
 			}
 		} else if (category.has_group_price && category.group_prices.length > 0) { // If has group price/discount.
-			// hasGroupPrice = true
 			let groupPrices = _.orderBy(category.group_prices, gp => parseInt(gp.max_pax))
 			let group_price = groupPrices.find(gp => parseInt(gp.min_pax) <= count && parseInt(gp.max_pax) >= count)
 			if (group_price && group_price.price) {
@@ -81,11 +78,9 @@ const PaxSelector = ( props ) => {
 
 	const handlePaxChange = (id, value) => e => {
 		let count = paxCounts[id] + value < 0 ? 0 : paxCounts[id] + value
-		// console.log(moment(selectedTimeObject).format('YYYY-MM-DD[T]HH:mm'));
-		let _inventory = inventory.find(i => i.date === moment(selectedTimeObject).format('YYYY-MM-DD[T]HH:mm'))
+		let _inventory = inventory.find(i => i.date === moment(selectedDate).format('YYYY-MM-DD[T]HH:mm')); // selectedDate : date along with time.
 		let maxPax = _inventory && _inventory.pax_available
 
-		// console.log('inventory', inventory);
 		if (maxPax >= 1) {
 
 			let _totalPax = _.size(paxCounts) > 0 && Object.values(paxCounts).reduce((acc, curr) => acc + curr) || 0
@@ -121,7 +116,7 @@ const PaxSelector = ( props ) => {
 					if ( 'undefined' != typeof( __i18n.price_per_labels[price_per_label] ) ) {
 						price_per_label = __i18n.price_per_labels[price_per_label];
 					}
-					let _inventory = inventory.find(i => i.date === moment(selectedTimeObject).format('YYYY-MM-DD[T]HH:mm'));
+					let _inventory = inventory.find(i => i.date === moment(selectedDate).format('YYYY-MM-DD[T]HH:mm')); // selectedDate : date along with time.
 					let maxPax = isInventoryEnabled && _inventory && _inventory.pax_available ? _inventory.pax_available : pricing.max_pax; // Temp fixes for inventory disabled case.
 					let minPax = paxCounts[c.id] ? paxCounts[c.id] : 0;
 					return <li key={i}>

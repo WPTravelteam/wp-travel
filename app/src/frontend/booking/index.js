@@ -4,10 +4,7 @@
  */
 __webpack_public_path__ = _wp_travel.build_path;
 import { useSelect, dispatch } from '@wordpress/data';
-import { forwardRef, useEffect, render, lazy, Suspense } from '@wordpress/element';
-import { applyFilters } from '@wordpress/hooks';
-import { DEFAULT_BOOKING_STATE } from './store/_Store'; // Note: This store content 2 stores one for trip data and another for Booking Data.
-import apiFetch from '@wordpress/api-fetch';
+import { render, Suspense } from '@wordpress/element';
 const __i18n = {
 	..._wp_travel.strings
 }
@@ -21,15 +18,16 @@ import ErrorBoundary from './../../ErrorBoundry/ErrorBoundry';
 
 // WP Travel Components.
 import CustomBooking from './components/CustomBooking';
-import ResetBooking from './components/ResetBooking';
+import ResetBooking from './components/ResetBooking'; // Note: this will also import store.
 import CalendarView from './components/CalendarView';
 import DateListing from './components/DateListing';
+import WpTravelBookNow from './components/WpTravelBookNow';
 
 const WPTravelBooking = ( props ) => {
 	// Component Props.
-	const {forceCalendarDisplay } = props;
+	const { forceCalendarDisplay } = props;
 
-	// All Trip Related Data fetched from store. (Not State)
+	// All Trip Related Data(Not State)
     const tripListingType = 'undefined' !== typeof _wp_travel.trip_date_listing ? _wp_travel.trip_date_listing : 'calendar'; // dates | calendar
     let tripData = 'undefined' !== typeof _wp_travel.trip_data ? _wp_travel.trip_data : {};
 	const {
@@ -41,7 +39,7 @@ const WPTravelBooking = ( props ) => {
 	// Booking Data/state.
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     console.log(bookingData);
-    const { selectedDate, selectedPricingId } = bookingData;
+    const { selectedDate } = bookingData;
     const { updateStore } = dispatch( bookingStoreName );
     const updateBookingData = ( data ) => {
 		updateStore({ ...bookingData, ...data });
@@ -65,6 +63,8 @@ const WPTravelBooking = ( props ) => {
                             ||
                             <CalendarView { ...{ ...props, bookingData, updateBookingData, tripData } } />
                         }
+                        {/* Book Now Button at bottom */}
+                        <WpTravelBookNow { ...{ ...props, bookingData, updateBookingData, tripData } } />
 					</Suspense>
                 </ErrorBoundary>
             }
