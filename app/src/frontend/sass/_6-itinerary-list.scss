@@ -1458,3 +1458,23 @@
 		overflow-x: auto;
 	}
 }
+
+
+// Trip List block grid view content to be shown
+.wptravel-block-wrapper {
+	.wp-travel-itinerary-items {
+		ul.wp-travel-itinerary-list {
+			&.itinerary-1-per-row,
+			&.itinerary-2-per-row,
+			&.itinerary-3-per-row,
+			&.itinerary-4-per-row,
+			&.itinerary-5-per-row,
+			&.itinerary-6-per-row,
+			&.itinerary-7-per-row,
+			&.itinerary-8-per-row,
+			&.itinerary-9-per-row {
+				grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+			}
+		}
+	}
+}
