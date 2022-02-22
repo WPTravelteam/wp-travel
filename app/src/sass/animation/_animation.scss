@@ -10,6 +10,18 @@
         transform: translateX(0);
     }
 }
+@keyframes arrowAnimateMobile{
+  0%{
+      transform: translateY(0);
+  }
+  60%{
+      transform: translateY(-5px);
+  }
+  100%{
+      transform: translateY(0);
+  }
+}
+
 @keyframes loader{
     0%{
         transform: rotate(0deg);

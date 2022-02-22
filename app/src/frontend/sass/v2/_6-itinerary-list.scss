@@ -110,7 +110,7 @@
 			}
 		}
 
-		&.itinerary-5-per-row.grid-view  {
+		&.itinerary-5-per-row.grid-view {
 			grid-template-columns: repeat(5, 1fr);
 			@media (max-width: 1199px) {
 				grid-template-columns: repeat(3, 1fr);
@@ -123,7 +123,7 @@
 			}
 		}
 
-		&.itinerary-6-per-row.grid-view  {
+		&.itinerary-6-per-row.grid-view {
 			grid-template-columns: repeat(6, 1fr);
 			@media (max-width: 1199px) {
 				grid-template-columns: repeat(3, 1fr);
@@ -136,7 +136,7 @@
 			}
 		}
 
-		&.itinerary-7-per-row.grid-view  {
+		&.itinerary-7-per-row.grid-view {
 			grid-template-columns: repeat(7, 1fr);
 			@media (max-width: 1199px) {
 				grid-template-columns: repeat(3, 1fr);
@@ -149,7 +149,7 @@
 			}
 		}
 
-		&.itinerary-8-per-row.grid-view  {
+		&.itinerary-8-per-row.grid-view {
 			grid-template-columns: repeat(8, 1fr);
 			@media (max-width: 1199px) {
 				grid-template-columns: repeat(3, 1fr);
@@ -162,7 +162,7 @@
 			}
 		}
 
-		&.itinerary-9-per-row.grid-view  {
+		&.itinerary-9-per-row.grid-view {
 			grid-template-columns: repeat(9, 1fr);
 			@media (max-width: 1199px) {
 				grid-template-columns: repeat(3, 1fr);
@@ -687,9 +687,16 @@
 		}
 	}
 }
-//Related Trips
-.wp-travel-related-posts {
-	padding-top: 55px;
+
+.entry-content {
+	// Trip Map in Single Trip Page
+	.wp-travel-map {
+		margin-block: 20px;
+	}
+	//Related Trips
+	.wp-travel-related-posts {
+		padding-top: 15px;
+	}
 }
 
 // For Blocks, for adding styles to the list and grid view in itinerary page
@@ -1326,7 +1333,6 @@
 					grid-template-columns: repeat(1, 1fr);
 				}
 			}
-			
 		}
 	}
 }

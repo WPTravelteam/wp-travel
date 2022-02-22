@@ -1627,9 +1627,10 @@ $defaultColor: #3399ff;
 				animation: arrowAnimate 1s ease infinite;
 			}
 			@media (max-width: 575px) {
-				margin-top: 15px;
+				// margin-top: 15px;
 				// width: 100%;
 				width: 95%;
+				animation: arrowAnimateMobile 1s ease infinite;
 			}
 			&::before,
 			&::after {
