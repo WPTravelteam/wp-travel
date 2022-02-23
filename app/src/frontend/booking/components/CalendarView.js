@@ -1,6 +1,7 @@
 import { forwardRef, useEffect } from '@wordpress/element';
 import { applyFilters } from '@wordpress/hooks';
 import { Disabled } from '@wordpress/components';
+import apiFetch from '@wordpress/api-fetch';
 const __i18n = {
 	..._wp_travel.strings
 }
@@ -16,11 +17,13 @@ import generateRRule from "../_GenerateRRule";
 
 // WP Travel Functions.
 import { objectSum } from '../_wptravelFunctions';
+import { filteredTripDates } from '../_FilteredDates'; // Filter available dates in calendar.
 
 // WP Travel Components.
 import Pricings from './CalendarView/Pricings';
 import TripTimes from './CalendarView/TripTimes';
 import PaxSelector from './CalendarView/PaxSelector';
+import InventoryNotice, { Notice } from '../_InventoryNotice';
 
 const CalendarView = ( props ) => {
 	// Component Props.
@@ -31,17 +34,18 @@ const CalendarView = ( props ) => {
         is_fixed_departure:isFixedDeparture,
         dates,
         pricings,
-        trip_duration
+        trip_duration:tripDuration
     } = tripData;
-    const allPricings = pricings && _.keyBy( pricings, p => p.id ) // Need object structure because pricing id may not be in sequencial order.
-    const _dates      = 'undefined' !== typeof dates && dates.length > 0 ? dates : [];
-    const datesById   = _.keyBy(_dates, d => d.id)
-    const duration    = trip_duration.days && parseInt( trip_duration.days ) || 1;
+    const allPricings        = pricings && _.keyBy( pricings, p => p.id ) // Need object structure because pricing id may not be in sequencial order.
+    const _dates             = 'undefined' !== typeof dates && dates.length > 0 ? dates : [];
+    const datesById          = _.keyBy(_dates, d => d.id)
+    const duration           = tripDuration.days && parseInt( tripDuration.days ) || 1;
+	const isInventoryEnabled = tripData.inventory && tripData.inventory.enable_trip_inventory === 'yes';
 
     // Booking Data.
     const { selectedDate, selectedDateIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
 
-	// Lifecycles. [ This will only trigger if pricing is selected or changed ]
+	// Lifecycles. [ This will only trigger if pricing and time is selected or changed ]
     useEffect(() => {
 		if ( ! selectedPricingId ) {
 			return
@@ -89,7 +93,6 @@ const CalendarView = ( props ) => {
 		})
 		_bookingData = { ..._bookingData, paxCounts: _paxCounts }
 
-		// @todo need to check inventory and set inventory data in booking data here.
 		let maxPax               = pricing.max_pax || 999
 		let tempSelectedDatetime = selectedDate;
 
@@ -104,6 +107,7 @@ const CalendarView = ( props ) => {
 		tempSelectedDatetime.setHours( selectedHour )
 		tempSelectedDatetime.setMinutes( selectedMin )
 		
+		// Fallback data for inventory.
 		_bookingData = {
 			..._bookingData,
 			inventory: [{
@@ -113,8 +117,12 @@ const CalendarView = ( props ) => {
 				'pax_limit': maxPax,
 			}],
 		}
+		if ( isInventoryEnabled ) {
+			// This will also update above booking Data in store along with inventory data. updateBookingData is already called in setInventoryData function so need to return here.
+			setInventoryData( _bookingData );
+			return;
+		}
 		updateBookingData( _bookingData );
-		
 	}, [ selectedPricingId, selectedTime ])
 
 	// functions.
@@ -129,16 +137,48 @@ const CalendarView = ( props ) => {
 			return []
 		})
 		return _.chain(trip_time).flatten().uniq().value()
+	}
 
+	const setInventoryData = ( _bookingData ) => {
+		let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
+		apiFetch({
+			url: `${_wp_travel.ajax_url}?action=wp_travel_get_inventory&pricing_id=${selectedPricingId}&trip_id=${tripData.id}&selected_date=${moment(selectedDate).format('YYYY-MM-DD')}&times=${times.join()}&_nonce=${_wp_travel._nonce}`
+		}).then(res => {
+			if (res.success && res.data.code === 'WP_TRAVEL_INVENTORY_INFO') {
+				if (res.data.inventory.length <= 0) {
+					return
+				}
+				let _times = res.data.inventory.filter(inventory => {
+					if (inventory.pax_available > 0) {
+						if (excludedDateTimes.find(et => moment(et).isSame(moment(inventory.date)))) {
+							return false
+						}
+						return true
+					}
+					return false
+				}).map(inventory => {
+					return moment(inventory.date)
+				});
+				
+				let _inventory_state = {}
+				_inventory_state = times.length > 0 && { ..._inventory_state, nomineeTimes: _times } || { ..._inventory_state, nomineeTimes: [] }
+				
+				if (_times.length <= 0) {
+					_inventory_state = { ..._inventory_state, pricingUnavailable: true }
+				}
+				_inventory_state = res.data.inventory.length > 0 && { ..._inventory_state, inventory: res.data.inventory } || { ..._inventory_state, pricingUnavailable: true }
+				
+				_bookingData = {..._bookingData, ..._inventory_state }
+				updateBookingData( _bookingData );
+			}
+		})
 	}
 
     // Just custom botton. There is no custom onclick event here.
     const DatePickerBtn = forwardRef( ( { value, onClick }, ref ) => (
 		<button className="wp-travel-date-picker-btn" onClick={ onClick } >
 			{ selectedDate ? ! isFixedDeparture && `${moment(selectedDate).format('MMM D, YYYY')} - ${moment(selectedDate).add(duration - 1, 'days').format('MMM D, YYYY')}` || moment(selectedDate).format('MMM D, YYYY') : __i18n.bookings.date_select}
-			<span>
-				<i className="far fa-calendar-alt"></i>
-			</span>
+			<span><i className="far fa-calendar-alt"></i></span>
 		</button>
 	));
 
@@ -160,7 +200,6 @@ const CalendarView = ( props ) => {
 
 		// Fixed Departure.
 		if ( isFixedDeparture ) {
-	
 			// UTC Offset Fixes.
 			let totalOffsetMin = new Date(date).getTimezoneOffset();
 			let offsetHour = parseInt(totalOffsetMin/60);
@@ -208,7 +247,6 @@ const CalendarView = ( props ) => {
 				if ( tempSelectedPricingId === selectedPricingId ) {
 					_bookingData = { ..._bookingData, selectedTime: '00:00'  } // Quick hack to trigger time change effect.
 				}
-				
 				_bookingData = { ..._bookingData, selectedPricingId: tempSelectedPricingId, selectedPricing:selectedPricing }
 			}
 			_bookingData = { ..._bookingData, selectedDateIds: _dateIds }
@@ -217,85 +255,7 @@ const CalendarView = ( props ) => {
 		}
 
 		_bookingData = { ..._bookingData, nomineePricingIds: _nomineePricingIds, isLoading: false } // nomineePricingIds
-
 		updateBookingData( _bookingData  );
-	}
-    // Date param need to have only Y-M-D date without time.
-	const filteredTripDates = date => {
-		if (moment(date).isBefore(moment(new Date())))
-			return false
-		if ( ! isFixedDeparture )
-			return true
-		let curretYear = date.getFullYear();
-		let currentDate = date.getDate();
-		let currentMonth = date.getMonth();
-
-		// UTC Offset Fixes.
-        let totalOffsetMin = new Date(date).getTimezoneOffset();
-        let offsetHour = parseInt(totalOffsetMin/60);
-        let offsetMin = parseInt(totalOffsetMin%60);
-
-        let currentHours = 0;
-        let currentMin = 0;
-        if ( offsetHour > 0 ) {
-            currentHours = offsetHour;
-            currentMin = offsetMin;
-        }
-		let startDate = moment( new Date( Date.UTC(curretYear, currentMonth, currentDate, currentHours, currentMin, 0 ) ) ).utc();
-
-		// Get all Trip Exclude Date 
-		const _excludedDatesTimes = tripData.excluded_dates_times && tripData.excluded_dates_times.length > 0 && tripData.excluded_dates_times || []
-		let excludedDates = [];
-		excludedDates = _excludedDatesTimes
-			.filter(ed => {
-				if (ed.trip_time.length > 0) {
-					let _times = ed.trip_time.split(',')
-					let _datetimes = _times.map(t => moment(`${ed.start_date} ${t}`).toDate())
-					if ( ! selectedDate || _excludedDatesTimes.includes(moment(ed.start_date).format('YYYY-MM-DD')) ) {
-						
-						excludedDateTimes.push(_datetimes[0]); // Temp fixes Pushing into direct state is not good.
-					}
-					return false
-				}
-				return true
-			});
-		
-		// Seperated exclude date.
-		excludedDates = excludedDates.map(ed => ed.start_date);
-		// End of Get all Trip Exclude Date.
-
-		if ( excludedDates.length > 0 && excludedDates.includes(startDate.format('YYYY-MM-DD'))) {
-			return false
-		}
-
-		const _date = _dates.find(data => {
-			if (data.is_recurring) {
-				let selectedYears = data.years ? data.years.split(",").filter(year => year != 'every_year').map(year => parseInt(year)) : [];
-
-				if (data.end_date && moment(date).toDate().toString().toLowerCase() != 'invalid date' && moment(date).isAfter(moment(data.end_date))) {
-					return false
-				}
-				if (data.start_date && moment(date).toDate().toString().toLowerCase() != 'invalid date' && moment(date).isBefore(moment(data.start_date))) {
-					return false
-				}
-				if (selectedYears.length > 0 && !selectedYears.includes(startDate.year()))
-					return false
-
-				let dateRules = generateRRule(data, startDate)
-				if ( ! applyFilters( 'wpTravelRecurringCutofDateFilter', true, dateRules, tripData, date, data )  ) { // @since 4.3.1
-					return
-				}
-				return dateRules.find(da => moment(moment(da).format("YYYY-MM-DD")).unix() === moment(moment(date).format('YYYY-MM-DD')).unix()) instanceof Date
-			} else if( data.start_date ) {
-				if ( ! applyFilters( 'wpTravelCutofDateFilter', true, tripData, date, data )  ) { // @since 4.3.1
-					return
-				}
-				return moment(date).isSame(moment(data.start_date))
-				
-			}
-			return false
-		})
-		return _date && 'undefined' !== typeof _date.id
 	}
 
     // Datepicker Params
@@ -335,27 +295,30 @@ const CalendarView = ( props ) => {
 		</div>
 		{/* Pricing and Times are in pricing wrapper */}
 		{ selectedDate && <>
-			<div className="wp-travel-booking__pricing-wrapper">
-				<div className="wp-travel-booking__pricing-name"> 
-					<Pricings { ...props } />
+			{ ! pricingUnavailable &&
+				<div className="wp-travel-booking__pricing-wrapper">
+					<div className="wp-travel-booking__pricing-name"> 
+						<Pricings { ...props } />
+					</div>
+					{ selectedPricingId && <TripTimes { ...props } /> }
 				</div>
-				{ selectedPricingId && <TripTimes { ...props } /> }
-				
-			</div>
+			}
 			<div className="wp-travel-booking__pricing-wrapper wptravel-pax-selector">
 				{ ! pricingUnavailable && selectedPricingId && <ErrorBoundary>
 					{ nomineeTimes.length > 1 && ! selectedTime && <Disabled><PaxSelector { ...props } /></Disabled> || <PaxSelector { ...props } /> }
-
 					{ _.size(allPricings[ selectedPricingId ].trip_extras) > 0 && objectSum( paxCounts ) > 0 && <ErrorBoundary> extras </ErrorBoundary> }
 				</ErrorBoundary> }
+				{ pricingUnavailable && 
+					<Notice>
+						{ tripData.inventory &&  tripData.inventory.enable_trip_inventory == 'yes'
+							&& <InventoryNotice inventory={tripData.inventory} />
+						}
+					</Notice>
+				}
 			</div>
 			</>
 		}
     </ErrorBoundary>
 }
 export default CalendarView;
-
-// @todo paxselector inventory value check before component call check
 // @todo Extras component inside pax selector
-// @todo inventory unavailable message.
-// @todo Group discount.
