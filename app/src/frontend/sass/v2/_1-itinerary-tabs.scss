@@ -428,6 +428,12 @@
 }
 //review form
 #review_form_wrapper {
+	// width: 650px;
+	width: 80%;
+	margin-inline: auto;
+	@include mob {
+		width: 100%;
+	}
 	@media (max-width: 481px) {
 		padding-inline: 15px;
 	}
@@ -437,7 +443,7 @@
 		margin-top: 20px;
 
 		@include mob {
-			width: 90%;
+			width: 100%;
 		}
 
 		form {
@@ -449,11 +455,13 @@
 		}
 
 		p.comment-form-author {
-			width: calc(50% - 5px);
+			// width: calc(50% - 5px);
+			width: calc(50% - 15px);
 			float: right;
 			display: inline-block;
 			// margin-right: 10px;
 			margin-right: 0;
+			margin-block: 0;
 
 			@include mob {
 				width: 100%;
@@ -462,11 +470,13 @@
 		}
 
 		p.comment-form-email {
-			width: calc(50% - 5px);
+			// width: calc(50% - 5px);
+			width: calc(50% - 15px);
 			display: inline-block;
 			margin-right: 0;
 			margin-block: 0;
-			float: right;
+			// float: right;
+			float: left;
 
 			@include mob {
 				width: 100%;
@@ -497,12 +507,14 @@
 			padding: 10px 5px;
 		}
 		.comment-form-comment {
-			width: 48%;
-			float: left;
-			@include mob {
-				width: 100%;
-				float: none;
-			}
+			// width: 48%;
+			// float: left;
+			width: 100%;
+			float: none;
+			// @include mob {
+			// 	width: 100%;
+			// 	float: none;
+			// }
 			textarea {
 				overflow: auto;
 				padding-left: 5px;
