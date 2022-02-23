@@ -43,14 +43,16 @@ const CalendarView = ( props ) => {
 	const isInventoryEnabled = tripData.inventory && tripData.inventory.enable_trip_inventory === 'yes';
 
     // Booking Data.
-    const { selectedDate, selectedDateIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
+    const { selectedDate, selectedDateIds, nomineePricingIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
 
 	// Lifecycles. [ This will only trigger if pricing and time is selected or changed ]
     useEffect(() => {
 		if ( ! selectedPricingId ) {
 			return
 		}
-		let _bookingData = {};
+		let _bookingData = {
+			pricingUnavailable:false
+		};
 
 		// after selecting pricing. need to check available time for selected pricing as well.
 		let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
@@ -295,7 +297,7 @@ const CalendarView = ( props ) => {
 		</div>
 		{/* Pricing and Times are in pricing wrapper */}
 		{ selectedDate && <>
-			{ ! pricingUnavailable &&
+			{ ( ! pricingUnavailable || nomineePricingIds.length > 1 ) &&
 				<div className="wp-travel-booking__pricing-wrapper">
 					<div className="wp-travel-booking__pricing-name"> 
 						<Pricings { ...props } />
