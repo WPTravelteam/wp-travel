@@ -1279,60 +1279,72 @@
 .wptravel-block-wrapper {
 	.wp-travel-itinerary-items {
 		ul.wp-travel-itinerary-list {
-			&.itinerary-1-per-row {
-				grid-template-columns: repeat(1, 1fr);
+			&.itinerary-1-per-row,
+			&.itinerary-2-per-row,
+			&.itinerary-3-per-row,
+			&.itinerary-4-per-row,
+			&.itinerary-5-per-row,
+			&.itinerary-6-per-row,
+			&.itinerary-7-per-row,
+			&.itinerary-8-per-row,
+			&.itinerary-9-per-row {
+				grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
 			}
-			&.itinerary-2-per-row {
-				grid-template-columns: repeat(2, 1fr);
-				@media (max-width: 650px) {
-					grid-template-columns: repeat(1, 1fr);
-				}
-			}
-			&.itinerary-3-per-row {
-				grid-template-columns: repeat(3, 1fr);
-				@media (min-width: 651px) and (max-width: 1199px) {
-					grid-template-columns: repeat(2, 1fr);
-				}
-				@media (max-width: 650px) {
-					grid-template-columns: repeat(1, 1fr);
-				}
-			}
-			&.itinerary-4-per-row {
-				grid-template-columns: repeat(4, 1fr);
-				@media (max-width: 1200px) {
-					grid-template-columns: repeat(3, 1fr);
-				}
-				@media (max-width: 991px) {
-					grid-template-columns: repeat(2, 1fr);
-				}
-				@media (max-width: 650px) {
-					grid-template-columns: repeat(1, 1fr);
-				}
-			}
-			&.itinerary-5-per-row {
-				grid-template-columns: repeat(5, 1fr);
-				@media (max-width: 1200px) {
-					grid-template-columns: repeat(4, 1fr);
-				}
-				@media (max-width: 991px) {
-					grid-template-columns: repeat(2, 1fr);
-				}
-				@media (max-width: 650px) {
-					grid-template-columns: repeat(1, 1fr);
-				}
-			}
-			&.itinerary-6-per-row {
-				grid-template-columns: repeat(6, 1fr);
-				@media (max-width: 1200px) {
-					grid-template-columns: repeat(4, 1fr);
-				}
-				@media (max-width: 991px) {
-					grid-template-columns: repeat(2, 1fr);
-				}
-				@media (max-width: 650px) {
-					grid-template-columns: repeat(1, 1fr);
-				}
-			}
+			// &.itinerary-1-per-row {
+			// 	grid-template-columns: repeat(1, 1fr);
+			// }
+			// &.itinerary-2-per-row {
+			// 	grid-template-columns: repeat(2, 1fr);
+			// 	@media (max-width: 650px) {
+			// 		grid-template-columns: repeat(1, 1fr);
+			// 	}
+			// }
+			// &.itinerary-3-per-row {
+			// 	// grid-template-columns: repeat(3, 1fr);
+			// 	grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+			// 	@media (min-width: 651px) and (max-width: 1199px) {
+			// 		grid-template-columns: repeat(2, 1fr);
+			// 	}
+			// 	@media (max-width: 650px) {
+			// 		grid-template-columns: repeat(1, 1fr);
+			// 	}
+			// }
+			// &.itinerary-4-per-row {
+			// 	grid-template-columns: repeat(4, 1fr);
+			// 	@media (max-width: 1200px) {
+			// 		grid-template-columns: repeat(3, 1fr);
+			// 	}
+			// 	@media (max-width: 991px) {
+			// 		grid-template-columns: repeat(2, 1fr);
+			// 	}
+			// 	@media (max-width: 650px) {
+			// 		grid-template-columns: repeat(1, 1fr);
+			// 	}
+			// }
+			// &.itinerary-5-per-row {
+			// 	grid-template-columns: repeat(5, 1fr);
+			// 	@media (max-width: 1200px) {
+			// 		grid-template-columns: repeat(4, 1fr);
+			// 	}
+			// 	@media (max-width: 991px) {
+			// 		grid-template-columns: repeat(2, 1fr);
+			// 	}
+			// 	@media (max-width: 650px) {
+			// 		grid-template-columns: repeat(1, 1fr);
+			// 	}
+			// }
+			// &.itinerary-6-per-row {
+			// 	grid-template-columns: repeat(6, 1fr);
+			// 	@media (max-width: 1200px) {
+			// 		grid-template-columns: repeat(4, 1fr);
+			// 	}
+			// 	@media (max-width: 991px) {
+			// 		grid-template-columns: repeat(2, 1fr);
+			// 	}
+			// 	@media (max-width: 650px) {
+			// 		grid-template-columns: repeat(1, 1fr);
+			// 	}
+			// }
 		}
 	}
 }
