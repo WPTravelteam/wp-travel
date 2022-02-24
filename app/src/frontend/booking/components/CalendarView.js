@@ -17,7 +17,7 @@ import generateRRule from "../_GenerateRRule";
 
 // WP Travel Functions.
 import { objectSum } from '../_wptravelFunctions';
-import { filteredTripDates } from '../_FilteredDates'; // Filter available dates in calendar.
+// import { filteredTripDates } from '../_FilteredDates'; // Filter available dates in calendar.
 
 // WP Travel Components.
 import Pricings from './CalendarView/Pricings';
@@ -51,7 +51,96 @@ const CalendarView = ( props ) => {
 			return
 		}
 		let _bookingData = {
-			pricingUnavailable:false
+			pricingUnavailable:false,
+		};
+
+		// Note: This effect is same as date changes lifecycle effect.
+		// @todo need one common function for this 2 effects.
+		// after selecting pricing. need to check available time for selected pricing as well. Single pricing id case is already checked in date changes lifecycle below.
+		if ( nomineePricingIds.length > 0 ) {
+			let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
+			if ( times.length > 0 ) {
+				let _times = times
+					.map(time => {
+						return moment(`${selectedDate.toDateString()} ${time}`)
+					})
+					.filter(time => {
+						if (excludedDateTimes.find(et => moment(et).isSame(time))) {
+							return false
+						}
+						return true
+					})
+				_bookingData = {
+					..._bookingData,
+					nomineeTimes: _times,
+				}
+				// add selected trip time if nominee times length is one.
+				if ( 1 === _times.length ) {
+					_bookingData = {
+						..._bookingData,
+						selectedTime: _times[0].format('HH:mm'),
+					}
+				}
+			} else {
+				_bookingData = {
+					..._bookingData,
+					nomineeTimes: [],
+					selectedTime: null,
+				}
+			}
+		}
+		
+		// Add default selected pax object values as 0 for all categories as per selected pricing. {'2':0,'3':0} where cat id 2, 3 have default 0 selected pax.
+		const pricing = allPricings[selectedPricingId];
+		let categories = pricing && pricing.categories || []
+		let _paxCounts = {}
+		categories.forEach(c => {
+			_paxCounts = { ..._paxCounts, [c.id]: parseInt(c.default_pax) || 0 }
+		})
+		_bookingData = { ..._bookingData, paxCounts: _paxCounts }
+
+		let maxPax               = pricing.max_pax || 999
+		let tempSelectedDatetime = selectedDate;
+
+		let selectedHour = 0;
+		let selectedMin  = 0;
+		if ( selectedTime ) { // if time is selected then the selectedDate must have time on it.
+			const selectedDateTime = new Date( `${selectedDate.toDateString()} ${selectedTime}` );
+			_bookingData = { ..._bookingData, selectedDate: selectedDateTime } // Updating date state with time if time is selected.
+			selectedHour = selectedDateTime.getHours(); // Date object
+			selectedMin  = selectedDateTime.getMinutes(); // Date object
+		}
+		tempSelectedDatetime.setHours( selectedHour )
+		tempSelectedDatetime.setMinutes( selectedMin )
+		
+		// Fallback data for inventory.
+		_bookingData = {
+			..._bookingData,
+			inventory: [{
+				'date': moment(tempSelectedDatetime).format('YYYY-MM-DD[T]HH:mm'),
+				'pax_available': maxPax,
+				'booked_pax': 0,
+				'pax_limit': maxPax,
+			}],
+		}
+		if ( isInventoryEnabled ) {
+			// This will also update above booking Data in store along with inventory data. updateBookingData is already called in setInventoryData function so need to return here.
+			setInventoryData( _bookingData );
+			return;
+		}
+		updateBookingData( _bookingData );
+	}, [ selectedPricingId, selectedTime ])
+
+	// Date changes Lifecycle.
+	useEffect(() => {
+		// If date changes has selectedPricingId, that mean selected date has only one pricing. So nomineeTimes for single date is calculated from here.
+		if ( ! selectedPricingId ) {
+			return
+		}
+		let _bookingData = {
+			pricingUnavailable:false,
+			nomineeTimes: [],
+			selectedTime: null,
 		};
 
 		// after selecting pricing. need to check available time for selected pricing as well.
@@ -125,7 +214,7 @@ const CalendarView = ( props ) => {
 			return;
 		}
 		updateBookingData( _bookingData );
-	}, [ selectedPricingId, selectedTime ])
+	}, [ selectedDateIds ])
 
 	// functions.
 	const getPricingTripTimes = ( pricingId, selectedTripdates ) => {
@@ -183,6 +272,85 @@ const CalendarView = ( props ) => {
 			<span><i className="far fa-calendar-alt"></i></span>
 		</button>
 	));
+
+	const filteredTripDates = date => {
+		if (moment(date).isBefore(moment(new Date())))
+			return false
+		// if ( moment( date ).isSame(moment( selectedDate ) ) ) {
+		// 	return;
+		// }
+		if ( ! isFixedDeparture )
+			return true
+		let curretYear = date.getFullYear();
+		let currentDate = date.getDate();
+		let currentMonth = date.getMonth();
+	
+		// UTC Offset Fixes.
+		let totalOffsetMin = new Date(date).getTimezoneOffset();
+		let offsetHour = parseInt(totalOffsetMin/60);
+		let offsetMin = parseInt(totalOffsetMin%60);
+	
+		let currentHours = 0;
+		let currentMin = 0;
+		if ( offsetHour > 0 ) {
+			currentHours = offsetHour;
+			currentMin = offsetMin;
+		}
+		let startDate = moment( new Date( Date.UTC(curretYear, currentMonth, currentDate, currentHours, currentMin, 0 ) ) ).utc();
+	
+		// Get all Trip Exclude Date 
+		const _excludedDatesTimes = tripData.excluded_dates_times && tripData.excluded_dates_times.length > 0 && tripData.excluded_dates_times || []
+		let excludedDates = [];
+		excludedDates = _excludedDatesTimes
+			.filter(ed => {
+				if (ed.trip_time.length > 0) {
+					let _times = ed.trip_time.split(',')
+					let _datetimes = _times.map(t => moment(`${ed.start_date} ${t}`).toDate())
+					if ( ! selectedDate || _excludedDatesTimes.includes(moment(ed.start_date).format('YYYY-MM-DD')) ) {
+						
+						excludedDateTimes.push(_datetimes[0]); // Temp fixes Pushing into direct state is not good.
+					}
+					return false
+				}
+				return true
+			});
+		
+		// Seperated exclude date.
+		excludedDates = excludedDates.map(ed => ed.start_date);
+		// End of Get all Trip Exclude Date.
+	
+		if ( excludedDates.length > 0 && excludedDates.includes(startDate.format('YYYY-MM-DD'))) {
+			return false
+		}
+	
+		const _date = _dates.find(data => {
+			if (data.is_recurring) {
+				let selectedYears = data.years ? data.years.split(",").filter(year => year != 'every_year').map(year => parseInt(year)) : [];
+	
+				if (data.end_date && moment(date).toDate().toString().toLowerCase() != 'invalid date' && moment(date).isAfter(moment(data.end_date))) {
+					return false
+				}
+				if (data.start_date && moment(date).toDate().toString().toLowerCase() != 'invalid date' && moment(date).isBefore(moment(data.start_date))) {
+					return false
+				}
+				if (selectedYears.length > 0 && !selectedYears.includes(startDate.year()))
+					return false
+	
+				let dateRules = generateRRule(data, startDate)
+				if ( ! applyFilters( 'wpTravelRecurringCutofDateFilter', true, dateRules, tripData, date, data )  ) { // @since 4.3.1
+					return
+				}
+				return dateRules.find(da => moment(moment(da).format("YYYY-MM-DD")).unix() === moment(moment(date).format('YYYY-MM-DD')).unix()) instanceof Date
+			} else if( data.start_date ) {
+				if ( ! applyFilters( 'wpTravelCutofDateFilter', true, tripData, date, data )  ) { // @since 4.3.1
+					return
+				}
+				return moment(date).isSame(moment(data.start_date))
+			}
+			return false
+		})
+		return _date && 'undefined' !== typeof _date.id
+	}
 
     // Update Selected Trip date in store.
     const selectTripDate = ( date ) => {
@@ -246,9 +414,11 @@ const CalendarView = ( props ) => {
 				let tempSelectedPricingId = _nomineePricingIds[0];
 				let selectedPricing   = allPricings[ tempSelectedPricingId ].title;
 				// if tempSelectedPricingId is equel to previously selected selectedPricingId then this date change will not trigger pricingid change effect. So we may not have time for selected date. so need to reset selected time here to trigger time change lifecycle to update nominee time and selected time here.
-				if ( tempSelectedPricingId === selectedPricingId ) {
-					_bookingData = { ..._bookingData, selectedTime: '00:00'  } // Quick hack to trigger time change effect.
-				}
+				// if ( tempSelectedPricingId === selectedPricingId ) {
+				// 	// if ( ! moment( date ).isSame(moment( selectedDate ) ) ) {
+				// 	// _bookingData = { ..._bookingData, selectedTime: '00:00'  } // Quick hack to trigger time change effect.
+				// 	// }
+				// }
 				_bookingData = { ..._bookingData, selectedPricingId: tempSelectedPricingId, selectedPricing:selectedPricing }
 			}
 			_bookingData = { ..._bookingData, selectedDateIds: _dateIds }
@@ -297,12 +467,12 @@ const CalendarView = ( props ) => {
 		</div>
 		{/* Pricing and Times are in pricing wrapper */}
 		{ selectedDate && <>
-			{ ( ! pricingUnavailable || nomineePricingIds.length > 1 ) &&
+			{ (  ( ! pricingUnavailable && nomineePricingIds.length > 1 ) || nomineeTimes.length > 0 ) &&
 				<div className="wp-travel-booking__pricing-wrapper">
 					<div className="wp-travel-booking__pricing-name"> 
 						<Pricings { ...props } />
 					</div>
-					{ selectedPricingId && <TripTimes { ...props } /> }
+					{ selectedPricingId && nomineeTimes.length > 0 && <TripTimes { ...props } /> }
 				</div>
 			}
 			<div className="wp-travel-booking__pricing-wrapper wptravel-pax-selector">
