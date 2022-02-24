@@ -43,14 +43,16 @@ const CalendarView = ( props ) => {
 	const isInventoryEnabled = tripData.inventory && tripData.inventory.enable_trip_inventory === 'yes';
 
     // Booking Data.
-    const { selectedDate, selectedDateIds, nomineePricingIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
+    const { isLoading, selectedDate, selectedDateIds, nomineePricingIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
 
 	// Lifecycles. [ This will only trigger if pricing and time is selected or changed ]
     useEffect(() => {
 		if ( ! selectedPricingId ) {
+			updateBookingData( { isLoading:false } )
 			return
 		}
 		let _bookingData = {
+			isLoading:false,
 			pricingUnavailable:false,
 		};
 
@@ -135,9 +137,11 @@ const CalendarView = ( props ) => {
 	useEffect(() => {
 		// If date changes has selectedPricingId, that mean selected date has only one pricing. So nomineeTimes for single date is calculated from here.
 		if ( ! selectedPricingId ) {
+			updateBookingData( { isLoading:false } )
 			return
 		}
 		let _bookingData = {
+			isLoading:false,
 			pricingUnavailable:false,
 			nomineeTimes: [],
 			selectedTime: null,
@@ -426,7 +430,7 @@ const CalendarView = ( props ) => {
 			_nomineePricingIds = pricings && pricings.map( pricing => pricing.id );
 		}
 
-		_bookingData = { ..._bookingData, nomineePricingIds: _nomineePricingIds, isLoading: false } // nomineePricingIds
+		_bookingData = { ..._bookingData, nomineePricingIds: _nomineePricingIds } // nomineePricingIds
 		updateBookingData( _bookingData  );
 	}
 
@@ -468,7 +472,7 @@ const CalendarView = ( props ) => {
 		{/* Pricing and Times are in pricing wrapper */}
 		{ selectedDate && <>
 			{ (  ( ! pricingUnavailable && nomineePricingIds.length > 1 ) || nomineeTimes.length > 0 ) &&
-				<div className="wp-travel-booking__pricing-wrapper">
+				<div className={isLoading ? 'wp-travel-booking__pricing-wrapper wptravel-loading' : 'wp-travel-booking__pricing-wrapper'}>
 					<div className="wp-travel-booking__pricing-name"> 
 						<Pricings { ...props } />
 					</div>
