@@ -265,6 +265,16 @@ $defaultColor: #3399ff;
 		}
 	}
 }
+
+.wptravel-block-trip-calendar {
+	.wp-travel-booking__header {
+		border-bottom: none;
+
+	}
+	.wp-travel-booking__pricing-wrapper, .wp-travel-booking__panel-bottom  {
+		color: #333333;
+	}
+}
 .wp-travel-booking__panel-bottom {
 	position: fixed;
 	bottom: 0;
