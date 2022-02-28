@@ -301,11 +301,11 @@
 					justify-content: left;
 				}
 				img {
-					float: left;
-					margin-right: 1.5em;
-					@media (max-width: 992px) {
-						margin-bottom: 1.5em;
-					}
+					// float: left;
+					// margin-right: 1.5em;
+					// @media (max-width: 992px) {
+					// 	margin-bottom: 1.5em;
+					// }
 					@media (max-width: 767px) {
 						margin-right: 0;
 					}
@@ -319,12 +319,12 @@
 					justify-content: left;
 				}
 				img {
-					float: right;
-					margin-left: 1.5em;
-					margin-bottom: 1.5em;
-					@media (max-width: 992px) {
-						margin-bottom: 1.5em;
-					}
+					// float: right;
+					// margin-left: 1.5em;
+					// margin-bottom: 1.5em;
+					// @media (max-width: 992px) {
+					// 	margin-bottom: 1.5em;
+					// }
 					@media (max-width: 767px) {
 						margin-left: 0;
 					}

@@ -345,6 +345,9 @@
 		.parsley-errors-list {
 			width: 100%;
 			margin: -15px 0 0;
+			@include mob {
+				margin: 0;
+			}
 			.parsley-required {
 				list-style-type: none;
 			}

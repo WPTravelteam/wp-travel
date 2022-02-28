@@ -295,8 +295,8 @@
 			}
 			&.right {
 				img {
-					float: left;
-					margin-right: 1.5em;
+					// float: left;
+					// margin-right: 1.5em;
 					@media (max-width: 767px) {
 						margin-right: 0;
 					}
@@ -304,8 +304,8 @@
 			}
 			&.left {
 				img {
-					float: right;
-					margin-left: 1.5em;
+					// float: right;
+					// margin-left: 1.5em;
 					@media (max-width: 767px) {
 						margin-left: 0;
 					}

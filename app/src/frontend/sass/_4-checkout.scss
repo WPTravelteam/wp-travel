@@ -275,6 +275,9 @@
 			width: 100%;
 			margin: -15px 0 0;
 			padding-left: 15px;
+			@include mob {
+				margin: 0;
+			}
 			.parsley-required {
 				list-style-type: none;
 			}
