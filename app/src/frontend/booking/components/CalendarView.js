@@ -1,4 +1,4 @@
-import { forwardRef, useEffect } from '@wordpress/element';
+import { forwardRef, useEffect, useState } from '@wordpress/element';
 import { applyFilters } from '@wordpress/hooks';
 import { Disabled } from '@wordpress/components';
 import apiFetch from '@wordpress/api-fetch';
@@ -23,6 +23,7 @@ import { objectSum } from '../_wptravelFunctions';
 import Pricings from './CalendarView/Pricings';
 import TripTimes from './CalendarView/TripTimes';
 import PaxSelector from './CalendarView/PaxSelector';
+import TripExtras from './CalendarView/TripExtras';
 import InventoryNotice, { Notice } from '../_InventoryNotice';
 
 const CalendarView = ( props ) => {
@@ -45,7 +46,46 @@ const CalendarView = ( props ) => {
     // Booking Data.
     const { isLoading, selectedDate, selectedDateIds, nomineePricingIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
 
+	// Temp/Local state to play with HTTP Request.
+	const [_inventoryData, _setInventoryData] = useState([]);
+	const [_nomineeTripExtras, _setNomineeTripExtras] = useState([]);
+
 	// Lifecycles. [ This will only trigger if pricing and time is selected or changed ]
+	// @todo Need to split pricing id change and time change effect. because extras data from apiFetch is not required for time  change.
+    useEffect(() => {
+		if ( ! selectedPricingId ) {
+			updateBookingData( { isLoading:false } )
+			return
+		}
+		let _bookingData = {
+			isLoading:false,
+			pricingUnavailable:false,
+		};
+		// Note: This effect is same as date changes lifecycle effect.
+		// after selecting pricing. need to check available time for selected pricing as well. Single pricing id case is already checked in date changes lifecycle below.
+		// if ( isLoading ) {
+			bookingWidgetUseEffects( _bookingData );
+		// }
+	}, [ selectedPricingId, selectedTime ]); 
+
+	// Date changes Lifecycle. [Only For fixed Departure which have date id]
+	useEffect(() => {
+		// If date changes has selectedPricingId, that mean selected date has only one pricing. So nomineeTimes for single date is calculated from here.
+		if ( ! selectedPricingId ) {
+			updateBookingData( { isLoading:false } )
+			return
+		}
+		let _bookingData = {
+			isLoading:false,
+			pricingUnavailable:false,
+			nomineeTimes: [],
+			selectedTime: null,
+		};
+		bookingWidgetUseEffects( _bookingData );
+		
+	}, [ selectedDateIds ]);
+
+	// Lifecycles. [ This will only trigger if Inventory Data changed ]. Fix real time store update issue with trip time change.
     useEffect(() => {
 		if ( ! selectedPricingId ) {
 			updateBookingData( { isLoading:false } )
@@ -56,10 +96,39 @@ const CalendarView = ( props ) => {
 			pricingUnavailable:false,
 		};
 
-		// Note: This effect is same as date changes lifecycle effect.
-		// @todo need one common function for this 2 effects.
-		// after selecting pricing. need to check available time for selected pricing as well. Single pricing id case is already checked in date changes lifecycle below.
+		let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
+		let _inventory_state = {}
+		if ( _inventoryData.length > 0 ) {
+			// Add logic if inventory ajax is complete
+			let _times = _inventoryData.filter(inventory => {
+				if (inventory.pax_available > 0) {
+					if (excludedDateTimes.find(et => moment(et).isSame(moment(inventory.date)))) {
+						return false
+					}
+					return true
+				}
+				return false
+			}).map(inventory => {
+				return moment(inventory.date)
+			});
+
+			_inventory_state = times.length > 0 && { ..._inventory_state, nomineeTimes: _times } || { ..._inventory_state, nomineeTimes: [] }
+			if (_times.length <= 0) {
+				_inventory_state = { ..._inventory_state, pricingUnavailable: true }
+			}
+			_inventory_state = { ..._inventory_state, inventory: _inventoryData }
+		}
+		_bookingData = {..._bookingData, ..._inventory_state }
+		
+		updateBookingData( _bookingData );
+	}, [ _inventoryData ]); 
+
+	const bookingWidgetUseEffects = ( _bookingData ) => {
 		if ( nomineePricingIds.length > 0 ) {
+			if ( isInventoryEnabled ) {
+				// This will update local useState if ajax response is success.
+				setInventoryData( _bookingData );
+			}
 			let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
 			if ( times.length > 0 ) {
 				let _times = times
@@ -126,99 +195,45 @@ const CalendarView = ( props ) => {
 			}],
 		}
 		if ( isInventoryEnabled ) {
-			// This will also update above booking Data in store along with inventory data. updateBookingData is already called in setInventoryData function so need to return here.
-			setInventoryData( _bookingData );
-			return;
-		}
-		updateBookingData( _bookingData );
-	}, [ selectedPricingId, selectedTime ])
-
-	// Date changes Lifecycle.
-	useEffect(() => {
-		// If date changes has selectedPricingId, that mean selected date has only one pricing. So nomineeTimes for single date is calculated from here.
-		if ( ! selectedPricingId ) {
-			updateBookingData( { isLoading:false } )
-			return
-		}
-		let _bookingData = {
-			isLoading:false,
-			pricingUnavailable:false,
-			nomineeTimes: [],
-			selectedTime: null,
-		};
-
-		// after selecting pricing. need to check available time for selected pricing as well.
-		let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
-		if ( times.length > 0 ) {
-			let _times = times
-				.map(time => {
-					return moment(`${selectedDate.toDateString()} ${time}`)
-				})
-				.filter(time => {
-					if (excludedDateTimes.find(et => moment(et).isSame(time))) {
-						return false
+			// This will update local useState if ajax response is success.
+			// setInventoryData( _bookingData );
+			let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
+			let _inventory_state = {}
+			if ( _inventoryData.length > 0 ) {
+				// Add logic if inventory ajax is complete
+				let _times = _inventoryData.filter(inventory => {
+					if (inventory.pax_available > 0) {
+						if (excludedDateTimes.find(et => moment(et).isSame(moment(inventory.date)))) {
+							return false
+						}
+						return true
 					}
-					return true
-				})
-			_bookingData = {
-				..._bookingData,
-				nomineeTimes: _times,
-			}
-			// add selected trip time if nominee times length is one.
-			if ( 1 === _times.length ) {
-				_bookingData = {
-					..._bookingData,
-					selectedTime: _times[0].format('HH:mm'),
+					return false
+				}).map(inventory => {
+					return moment(inventory.date)
+				});
+				_inventory_state = times.length > 0 && { ..._inventory_state, nomineeTimes: _times } || { ..._inventory_state, nomineeTimes: [] }
+				if (_times.length <= 0) {
+					_inventory_state = { ..._inventory_state, pricingUnavailable: true }
 				}
+				_inventory_state = { ..._inventory_state, inventory: _inventoryData }
 			}
-		} else {
-			_bookingData = {
-				..._bookingData,
-				nomineeTimes: [],
-				selectedTime: null,
-			}
+			_bookingData = {..._bookingData, ..._inventory_state }
 		}
-		
-		// Add default selected pax object values as 0 for all categories as per selected pricing. {'2':0,'3':0} where cat id 2, 3 have default 0 selected pax.
-		const pricing = allPricings[selectedPricingId];
-		let categories = pricing && pricing.categories || []
-		let _paxCounts = {}
-		categories.forEach(c => {
-			_paxCounts = { ..._paxCounts, [c.id]: parseInt(c.default_pax) || 0 }
-		})
-		_bookingData = { ..._bookingData, paxCounts: _paxCounts }
 
-		let maxPax               = pricing.max_pax || 999
-		let tempSelectedDatetime = selectedDate;
+		// extras Calculation.
+		setTripExtrasData();
+		if ( _nomineeTripExtras.length > 0 ) {
+			// Default extras values.
+			let _tripExtras = {}
+			_nomineeTripExtras.forEach(x => {
+				_tripExtras = { ..._tripExtras, [x.id]: x.is_required ? 1 : 0 }
+			})
+			_bookingData = {..._bookingData, nomineeTripExtras:_nomineeTripExtras, tripExtras: _tripExtras }
 
-		let selectedHour = 0;
-		let selectedMin  = 0;
-		if ( selectedTime ) { // if time is selected then the selectedDate must have time on it.
-			const selectedDateTime = new Date( `${selectedDate.toDateString()} ${selectedTime}` );
-			_bookingData = { ..._bookingData, selectedDate: selectedDateTime } // Updating date state with time if time is selected.
-			selectedHour = selectedDateTime.getHours(); // Date object
-			selectedMin  = selectedDateTime.getMinutes(); // Date object
-		}
-		tempSelectedDatetime.setHours( selectedHour )
-		tempSelectedDatetime.setMinutes( selectedMin )
-		
-		// Fallback data for inventory.
-		_bookingData = {
-			..._bookingData,
-			inventory: [{
-				'date': moment(tempSelectedDatetime).format('YYYY-MM-DD[T]HH:mm'),
-				'pax_available': maxPax,
-				'booked_pax': 0,
-				'pax_limit': maxPax,
-			}],
-		}
-		if ( isInventoryEnabled ) {
-			// This will also update above booking Data in store along with inventory data. updateBookingData is already called in setInventoryData function so need to return here.
-			setInventoryData( _bookingData );
-			return;
 		}
 		updateBookingData( _bookingData );
-	}, [ selectedDateIds ])
+	}
 
 	// functions.
 	const getPricingTripTimes = ( pricingId, selectedTripdates ) => {
@@ -234,39 +249,36 @@ const CalendarView = ( props ) => {
 		return _.chain(trip_time).flatten().uniq().value()
 	}
 
-	const setInventoryData = ( _bookingData ) => {
+	// HTTP Request Calls
+	const setInventoryData = async () => {
 		let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
-		apiFetch({
+		await apiFetch({
 			url: `${_wp_travel.ajax_url}?action=wp_travel_get_inventory&pricing_id=${selectedPricingId}&trip_id=${tripData.id}&selected_date=${moment(selectedDate).format('YYYY-MM-DD')}&times=${times.join()}&_nonce=${_wp_travel._nonce}`
 		}).then(res => {
 			if (res.success && res.data.code === 'WP_TRAVEL_INVENTORY_INFO') {
 				if (res.data.inventory.length <= 0) {
 					return
 				}
-				let _times = res.data.inventory.filter(inventory => {
-					if (inventory.pax_available > 0) {
-						if (excludedDateTimes.find(et => moment(et).isSame(moment(inventory.date)))) {
-							return false
-						}
-						return true
-					}
-					return false
-				}).map(inventory => {
-					return moment(inventory.date)
-				});
-				
-				let _inventory_state = {}
-				_inventory_state = times.length > 0 && { ..._inventory_state, nomineeTimes: _times } || { ..._inventory_state, nomineeTimes: [] }
-				
-				if (_times.length <= 0) {
-					_inventory_state = { ..._inventory_state, pricingUnavailable: true }
-				}
-				_inventory_state = res.data.inventory.length > 0 && { ..._inventory_state, inventory: res.data.inventory } || { ..._inventory_state, pricingUnavailable: true }
-				
-				_bookingData = {..._bookingData, ..._inventory_state }
-				updateBookingData( _bookingData );
+				_setInventoryData( res.data.inventory );
 			}
 		})
+	}
+	const setTripExtrasData = async () => {
+		if ( ! selectedPricingId ) {
+			return;
+		}
+		let extras = allPricings[ selectedPricingId ].trip_extras;
+		if ( extras.length > 0 ) {
+			const url = `${wp_travel.ajaxUrl}?action=wp_travel_get_trip_extras&_nonce=${_wp_travel._nonce}`;
+			await apiFetch( { url: url, data: {trip_ids:extras}, method:'post' } ).then( ( result ) => {
+				if ( result.success ) {
+					if (result.data.trip_extras.length <= 0) {
+						return
+					}
+					_setNomineeTripExtras( result.data.trip_extras );
+				}
+			} )
+		}
 	}
 
     // Just custom botton. There is no custom onclick event here.
@@ -360,7 +372,7 @@ const CalendarView = ( props ) => {
     const selectTripDate = ( date ) => {
 		// Default or Trip duration.
 		let _bookingData = {
-			isLoading: true,
+			isLoading: false, // Default false for trip duration only because date changes effect is not triggered in trip ducation.
 			pricingUnavailable: false,
 			selectedDate: date,
 			selectedPricingId:null,
@@ -425,7 +437,7 @@ const CalendarView = ( props ) => {
 				// }
 				_bookingData = { ..._bookingData, selectedPricingId: tempSelectedPricingId, selectedPricing:selectedPricing }
 			}
-			_bookingData = { ..._bookingData, selectedDateIds: _dateIds }
+			_bookingData = { ..._bookingData, selectedDateIds: _dateIds, isLoading: true }
 		} else {
 			_nomineePricingIds = pricings && pricings.map( pricing => pricing.id );
 		}
@@ -471,24 +483,21 @@ const CalendarView = ( props ) => {
 		</div>
 		{/* Pricing and Times are in pricing wrapper */}
 		{ selectedDate && <>
-			{ (  ( ! pricingUnavailable && nomineePricingIds.length > 1 ) || nomineeTimes.length > 0 ) &&
-				<div className={isLoading ? 'wp-travel-booking__pricing-wrapper wptravel-loading' : 'wp-travel-booking__pricing-wrapper'}>
-					<div className="wp-travel-booking__pricing-name"> 
-						<Pricings { ...props } />
-					</div>
-					{ selectedPricingId && nomineeTimes.length > 0 && <TripTimes { ...props } /> }
+			<div className={isLoading ? 'wp-travel-booking__pricing-wrapper wptravel-loading' : 'wp-travel-booking__pricing-wrapper'}>
+				<div className="wp-travel-booking__pricing-name"> 
+					<Pricings { ...props } />
 				</div>
-			}
+				{ selectedPricingId && nomineeTimes.length > 0 && <TripTimes { ...props } /> }
+			</div>
 			<div className="wp-travel-booking__pricing-wrapper wptravel-pax-selector">
 				{ ! pricingUnavailable && selectedPricingId && <ErrorBoundary>
 					{ nomineeTimes.length > 1 && ! selectedTime && <Disabled><PaxSelector { ...props } /></Disabled> || <PaxSelector { ...props } /> }
-					{ _.size(allPricings[ selectedPricingId ].trip_extras) > 0 && objectSum( paxCounts ) > 0 && <ErrorBoundary> extras </ErrorBoundary> }
+					{ _.size(allPricings[ selectedPricingId ].trip_extras) > 0 && objectSum( paxCounts ) > 0 && <ErrorBoundary> <TripExtras { ...props } /> </ErrorBoundary> }
 				</ErrorBoundary> }
-				{ pricingUnavailable && 
+				
+				{  pricingUnavailable && tripData.inventory && 'yes' === tripData.inventory.enable_trip_inventory && 
 					<Notice>
-						{ tripData.inventory &&  tripData.inventory.enable_trip_inventory == 'yes'
-							&& <InventoryNotice inventory={tripData.inventory} />
-						}
+						<InventoryNotice inventory={tripData.inventory} />
 					</Notice>
 				}
 			</div>

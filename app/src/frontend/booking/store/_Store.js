@@ -13,10 +13,9 @@ export const DEFAULT_BOOKING_STATE = () => {
         selectedTime: null,
         excludedDateTimes: [],
         paxCounts: {}, // Total pax object  { categoryid1:noOfPax, categoryid2:noOfPax }
-        
-        // rruleAll: {},
-        tripExtras: {},
         inventory: [],
+        nomineeTripExtras: [],
+        tripExtras: {}, // object structure for selected extras like paxCounts
         isLoading: false,
     };
     return initState;

@@ -23,7 +23,7 @@ const WpTravelBookNow = ( props ) => {
     const _dates      = 'undefined' !== typeof dates && dates.length > 0 ? dates : [];
 
     // Booking Data.
-    const { selectedPricingId, nomineeTimes, selectedTime, selectedDate, paxCounts, inventory } = bookingData;
+    const { selectedPricingId, nomineeTimes, selectedTime, selectedDate, paxCounts, inventory, nomineeTripExtras, tripExtras } = bookingData;
 
 	let totalPax        = objectSum( paxCounts );
 	let minPaxToBook    = selectedPricingId && allPricings[selectedPricingId].min_pax && parseInt( allPricings[selectedPricingId].min_pax ) || 1
@@ -50,15 +50,15 @@ const WpTravelBookNow = ( props ) => {
 		if ( ! withExtras || tpax <= 0 ) {
 			return total;
 		}
-		let _tripExtras = selectedPricingId && _.keyBy(allPricings[selectedPricingId].trip_extras, tx => tx.id)
-		// txTotal = _.size(tripExtras) > 0 && Object.entries(tripExtras).map(([i, count]) => {
-		// 	let tx = _tripExtras[i]
-		// 	if (!tx || typeof tx.tour_extras_metas == 'undefined') {
-		// 		return 0
-		// 	}
-		// 	let price = tx.is_sale && tx.tour_extras_metas.extras_item_sale_price || tx.tour_extras_metas.extras_item_price
-		// 	return parseFloat(price) * count
-		// }).reduce((acc, curr) => acc + curr) || 0
+		let _tripExtras = selectedPricingId && _.keyBy( nomineeTripExtras, tx => tx.id )
+		txTotal = _.size(tripExtras) > 0 && Object.entries(tripExtras).map(([i, count]) => {
+			let tx = _tripExtras[i]
+			if (!tx || typeof tx.tour_extras_metas == 'undefined') {
+				return 0
+			}
+			let price = tx.is_sale && tx.tour_extras_metas.extras_item_sale_price || tx.tour_extras_metas.extras_item_price
+			return parseFloat(price) * count
+		}).reduce((acc, curr) => acc + curr) || 0
 		return total + txTotal
 	}
 	const getCategoryPrice = ( categoryId, count ) => {
@@ -118,33 +118,31 @@ const WpTravelBookNow = ( props ) => {
 		if (selectedTime)
 			data.trip_time = moment(selectedDate).format('HH:mm')
 
-		// let _txs = {}
-		// Object.entries(tripExtras).forEach(([key, value]) => {
-		// 	if (value > 0) {
-		// 		_txs = { ..._txs, [key]: value }
-		// 	}
-		// })
+		let _txs = {}
+		Object.entries(tripExtras).forEach(([key, value]) => {
+			if (value > 0) {
+				_txs = { ..._txs, [key]: value }
+			}
+		})
 
-		// if (_.size(_txs) > 0) {
-		// 	data.wp_travel_trip_extras = {
-		// 		id: Object.keys(_txs),
-		// 		qty: Object.values(_txs)
-		// 	}
-		// }
+		if (_.size(_txs) > 0) {
+			data.wp_travel_trip_extras = {
+				id: Object.keys(_txs),
+				qty: Object.values(_txs)
+			}
+		}
 		wpTravelTimeout(
 			apiFetch({
 				url: `${wp_travel.ajaxUrl}?action=wp_travel_add_to_cart&_nonce=${_wp_travel._nonce}`,
 				method: 'POST',
 				data
-			})
-				.then(res => {
-					if (true === res.success && 'WP_TRAVEL_ADDED_TO_CART' === res.data.code) {
-						location.href = wp_travel.checkoutUrl; // [only checkout page url]
-					}
-				}), 1000)
-			.catch(error => {
-				alert( '[X] Request Timeout!' )
-			})
+			}).then(res => {
+				if (true === res.success && 'WP_TRAVEL_ADDED_TO_CART' === res.data.code) {
+					location.href = wp_travel.checkoutUrl; // [only checkout page url]
+				}
+			}), 1000 ).catch(error => {
+				alert( '[X] Request Timeout!' );
+		})
 	}
     return <>
         <ErrorBoundary>
