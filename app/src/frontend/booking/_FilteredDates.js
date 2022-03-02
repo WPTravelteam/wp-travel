@@ -1,19 +1,32 @@
+import { useSelect } from '@wordpress/data';
 import { applyFilters } from '@wordpress/hooks';
+
+// Store Names.
+const bookingStoreName = 'WPTravelFrontend/BookingData';
+
 // Additional lib
 import generateRRule from "./_GenerateRRule";
 
-// Trip Data.
-let tripData = 'undefined' !== typeof _wp_travel.trip_data ? _wp_travel.trip_data : {};
-const {
-    is_fixed_departure:isFixedDeparture,
-    dates
-} = tripData;
-const _dates = 'undefined' !== typeof dates && dates.length > 0 ? dates : [];
 
 // Date param need to have only Y-M-D date without time.
-const filteredTripDates = date => {
+const filteredTripDates = ( props ) => date => {
+    const {tripData,bookingData } = props;
+
+    // Trip Data.
+    const {
+        is_fixed_departure:isFixedDeparture,
+        dates
+    } = tripData;
+    const _dates = 'undefined' !== typeof dates && dates.length > 0 ? dates : [];
+
+    // Booking Data/state.
+    const { selectedDate } = bookingData;
+
     if (moment(date).isBefore(moment(new Date())))
         return false
+    // if ( moment( date ).isSame(moment( selectedDate ) ) ) {
+    // 	return;
+    // }
     if ( ! isFixedDeparture )
         return true
     let curretYear = date.getFullYear();
