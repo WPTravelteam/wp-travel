@@ -135,6 +135,29 @@ const CalendarView = ( props ) => {
 		updateBookingData( _bookingData );
 	}, [ _inventoryData ]); 
 
+	// Lifecycles. [ This will only trigger if Extras Data changed ]. Fix real time store update issue with trip time change & single Pricing.
+    useEffect(() => {
+		if ( ! selectedPricingId ) {
+			updateBookingData( { isLoading:false } )
+			return
+		}
+		let _bookingData = {
+			isLoading:false,
+			pricingUnavailable:false,
+		};
+
+		if ( _nomineeTripExtras.length > 0 ) {
+			// Default extras values.
+			let _tripExtras = {}
+			_nomineeTripExtras.forEach(x => {
+				_tripExtras = { ..._tripExtras, [x.id]: x.is_required ? 1 : 0 }
+			})
+			_bookingData = {..._bookingData, nomineeTripExtras:_nomineeTripExtras, tripExtras: _tripExtras }
+		}
+		
+		updateBookingData( _bookingData );
+	}, [ _nomineeTripExtras ]); 
+
 	const bookingWidgetUseEffects = ( _bookingData ) => {
 		if ( nomineePricingIds.length > 0 ) {
 			let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
@@ -231,14 +254,7 @@ const CalendarView = ( props ) => {
 
 		// extras Calculation.
 		setTripExtrasData();
-		if ( _nomineeTripExtras.length > 0 ) {
-			// Default extras values.
-			let _tripExtras = {}
-			_nomineeTripExtras.forEach(x => {
-				_tripExtras = { ..._tripExtras, [x.id]: x.is_required ? 1 : 0 }
-			})
-			_bookingData = {..._bookingData, nomineeTripExtras:_nomineeTripExtras, tripExtras: _tripExtras }
-		}
+		
 		updateBookingData( _bookingData );
 	}
 
