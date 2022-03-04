@@ -20,7 +20,7 @@ const filteredTripDates = ( props ) => date => {
     const _dates = 'undefined' !== typeof dates && dates.length > 0 ? dates : [];
 
     // Booking Data/state.
-    const { selectedDate } = bookingData;
+    const { selectedDate, excludedDateTimes } = bookingData;
 
     if (moment(date).isBefore(moment(new Date())))
         return false
