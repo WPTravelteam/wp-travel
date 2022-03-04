@@ -75,6 +75,13 @@ if ( wptravel_is_react_version_enabled() ) {
 						}
 						$categories  = isset( $cart_pricing['categories'] ) ? wptravel_key_by( $cart_pricing['categories'] ) : array(); // All categories.
 						$trip_extras = isset( $cart_pricing['trip_extras'] ) ? wptravel_key_by( $cart_pricing['trip_extras'] ) : array(); // All trip extras.
+						if ( count( $trip_extras ) > 0 ) {
+							$extras_args = array( 'post__in' => $trip_extras );
+							$result = WP_Travel_Helpers_Trip_Extras::get_trip_extras( $extras_args );
+							if ( is_array( $result ) && 'WP_TRAVEL_TRIP_EXTRAS' === $result['code'] && isset( $result['trip_extras'] ) && count( $result['trip_extras'] ) > 0 ) {
+								$trip_extras = $result['trip_extras'];
+							}
+						}
 
 						$cart_extras = (array) $cart_item['extras'];
 						if ( ! empty( $cart_extras ) ) {
@@ -244,6 +251,7 @@ if ( wptravel_is_react_version_enabled() ) {
 											$category_price = isset( $group_price['price'] ) ? $group_price['price'] : $category_price;
 											$category_price = $category_price ? $category_price : 0; // Temp fixes.
 										}
+										// $category_price = apply_filters( 'wp_travel_multiple_currency', $category_price );
 										if ( $pricing_group_price ) { // Pricing group price treat as price per only
 											$category_total = $pax * (float) $category_price;
 										} else {
