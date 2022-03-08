@@ -86,7 +86,7 @@ class WP_Travel_Helpers_Cart {
 					if ( $temp_pricing['has_group_price'] && count( $temp_pricing['group_prices'] ) > 0 ) {
 						foreach ( $temp_pricing['group_prices'] as $gpi => $gp ) {
 							$group_price = $gp['price'];
-							$trip_data['trip']['pricings']['group_prices'][ $gpi ]['price'] = $group_price;
+							// $trip_data['trip']['pricings']['group_prices'][ $gpi ]['price'] = $group_price;
 						}
 					}
 					foreach ( $temp_pricing['categories'] as $temp_pricing_cat_index => $temp_pricing_cat ) {

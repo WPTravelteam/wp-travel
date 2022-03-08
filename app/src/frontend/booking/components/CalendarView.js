@@ -373,12 +373,6 @@ const CalendarView = ( props ) => {
 			} else if ( _nomineePricingIds.length === 1 ) {
 				let tempSelectedPricingId = _nomineePricingIds[0];
 				let selectedPricing   = allPricings[ tempSelectedPricingId ].title;
-				// if tempSelectedPricingId is equel to previously selected selectedPricingId then this date change will not trigger pricingid change effect. So we may not have time for selected date. so need to reset selected time here to trigger time change lifecycle to update nominee time and selected time here.
-				// if ( tempSelectedPricingId === selectedPricingId ) {
-				// 	// if ( ! moment( date ).isSame(moment( selectedDate ) ) ) {
-				// 	// _bookingData = { ..._bookingData, selectedTime: '00:00'  } // Quick hack to trigger time change effect.
-				// 	// }
-				// }
 				_bookingData = { ..._bookingData, selectedPricingId: tempSelectedPricingId, selectedPricing:selectedPricing }
 			}
 			_bookingData = { ..._bookingData, selectedDateIds: _dateIds, isLoading: true }

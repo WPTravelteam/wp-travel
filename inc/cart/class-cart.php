@@ -190,7 +190,6 @@ class WP_Travel_Cart {
 		);
 		$cart_item_id = $this->get_cart_item_id( $item_id_args );
 
-		// error_log( print_r( $attrs, true ) );
 		// For additional cart item attrs.
 		if ( is_array( $attrs ) && count( $attrs ) > 0 ) {
 			foreach ( $attrs as $key => $attr ) {
@@ -352,6 +351,23 @@ class WP_Travel_Cart {
 				$cart_trip     = $this->items[ $cart_item_id ]['trip'];
 				$max_available = $this->items[ $cart_item_id ]['max_available'];
 
+				// Total Pax calculation for group discount in pricing.
+				$total_pax     = 0;
+				$pricings_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id );
+				if ( 'WP_TRAVEL_TRIP_PRICINGS' === $pricings_data['code'] ) {
+					$pricings = array_filter(
+						$pricings_data['pricings'],
+						function( $p ) use ( $pricing_id ) {
+							return $p['id'] == (int) $pricing_id;
+						}
+					);
+					$pricing  = array_shift( $pricings );
+					foreach ( $pax as $category_id => $pax_value ) {
+						$total_pax += $pax_value;
+					}
+				}
+				// End of Total Pax calculation for group discount in pricing.
+
 				$trip_price         = 0;
 				$trip_price_partial = 0;
 				foreach ( $pax as $category_id => $pax_value ) {
@@ -369,16 +385,16 @@ class WP_Travel_Cart {
 					);
 					$category_price = WP_Travel_Helpers_Pricings::get_price( $args );
 
-					error_log( 'category price ' . print_r( $category_price, true ) );
-
 					if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.
-						$group_trip_price = wp_travel_group_discount_price( $trip_id, $pax_value, $pricing_id, $category_id );
+						$pricing_group_price = isset( $pricing['has_group_price'] ) && $pricing['has_group_price'];
+						$temp_pax            = $pax_value;
+						if ( $pricing_group_price ) {
+							$temp_pax = $total_pax;
+						}
+						$group_trip_price = wp_travel_group_discount_price( $trip_id, $temp_pax, $pricing_id, $category_id );
 
 						if ( $group_trip_price ) {
 							$category_price = $group_trip_price;
-							// $category_price = WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $group_trip_price );
-							error_log( 'category group price  ' . print_r( $category_price, true ) );
-
 						}
 					}
 					$category_price_partial = $category_price;
@@ -508,7 +524,6 @@ class WP_Travel_Cart {
 				$item_total = $this->get_item_total( $cart_item_id ); // Total of individual item including extras.
 				if ( 'fixed' === $discount_type ) {
 					$discount_amount = WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $discount_value );
-					error_log( 'discount apply' . print_r( $discount_amount, true ) );
 				} elseif ( 'percentage' === $discount_type ) {
 					$discount_amount = ( $item_total * $discount_value ) / 100;
 				}
