@@ -5,6 +5,15 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /*WP Travel Cart and Chekcout JS.*/
+function GetConvertedPrice(price) {
+  var conversionRate = 'undefined' !== typeof _wp_travel && 'undefined' !== typeof _wp_travel.conversion_rate ? _wp_travel.conversion_rate : 1;
+
+  var _toFixed = 'undefined' !== typeof _wp_travel && 'undefined' !== typeof _wp_travel.number_of_decimals ? _wp_travel.number_of_decimals : 2;
+
+  conversionRate = parseFloat(conversionRate).toFixed(_toFixed);
+  return parseFloat(price * conversionRate).toFixed(_toFixed);
+}
+
 jQuery(document).ready(function ($) {
   if (typeof parsley !== "undefined") {
     $('.wp-travel-add-to-cart-form').parsley();
@@ -218,13 +227,13 @@ var wp_travel_cart = {};
 
 wp_travel_cart.format = function (_num) {
   var style = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'currency';
-  var _wp_travel = wp_travel,
-      currency = _wp_travel.currency,
-      _currencySymbol = _wp_travel.currency_symbol,
-      currencyPosition = _wp_travel.currency_position,
-      decimalSeparator = _wp_travel.decimal_separator,
-      _toFixed = _wp_travel.number_of_decimals,
-      kiloSeparator = _wp_travel.thousand_separator;
+  var _wp_travel2 = wp_travel,
+      currency = _wp_travel2.currency,
+      _currencySymbol = _wp_travel2.currency_symbol,
+      currencyPosition = _wp_travel2.currency_position,
+      decimalSeparator = _wp_travel2.decimal_separator,
+      _toFixed = _wp_travel2.number_of_decimals,
+      kiloSeparator = _wp_travel2.thousand_separator;
   var regEx = new RegExp("\\d(?=(\\d{3})+\\".concat(decimalSeparator, ")"), 'gi');
   var replaceWith = "$&".concat(kiloSeparator);
 
@@ -326,7 +335,8 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
       var result = a[property] < b[property] ? -1 : a[property] > b[property] ? 1 : 0;
       return result * sortOrder;
     };
-  }
+  } // On Pax Change event listner.
+
 
   var updateItem = function updateItem(id) {
     var _data = {};
@@ -360,20 +370,26 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
         return c.id == parseInt(fg.dataset.wptCategory);
       });
 
-      var _price = _category && _category.is_sale ? parseFloat(_category['sale_price']) : parseFloat(_category['regular_price']);
+      var _price = _category && _category.is_sale ? parseFloat(_category['sale_price']) : parseFloat(_category['regular_price']); // Update price for default pricing without group price.
+
+
+      _price = GetConvertedPrice(_price); // Multiple currency support on edit cart.
+
+      dataCategoryPrice.innerHTML = wp_travel_cart.format(_price); // End of Update price for default pricing without group price.
 
       var _count = dataCategoryCount && parseInt(dataCategoryCount.value) || 0;
 
       if ('undefined' != typeof pricing.has_group_price && pricing.has_group_price && pricing.group_prices && pricing.group_prices.length > 0) {
         var groupPrices = pricing.group_prices;
         groupPrices = groupPrices.sort(dynamicSort('max_pax'));
-        console.log(groupPrices);
         var group_price = groupPrices.find(function (gp) {
           return parseInt(gp.min_pax) <= totalPax && parseInt(gp.max_pax) >= totalPax;
         });
 
         if (group_price && group_price.price) {
           _price = parseFloat(group_price.price);
+          _price = GetConvertedPrice(_price); // Multiple currency support on edit cart.
+
           if (dataCategoryPrice) dataCategoryPrice.innerHTML = wp_travel_cart.format(_price);
         }
       } else if (_category.has_group_price) {
@@ -381,7 +397,11 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
           return _count >= parseInt(gp.min_pax) && _count <= parseInt(gp.max_pax);
         });
 
-        _price = _groupPrice && _groupPrice.price || _price;
+        if (_groupPrice && _groupPrice.price) {
+          _price = _groupPrice.price;
+          _price = GetConvertedPrice(_price); // Multiple currency support on edit cart.
+        }
+
         if (dataCategoryPrice) dataCategoryPrice.innerHTML = wp_travel_cart.format(_price);
       }
 
@@ -407,8 +427,13 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
 
       var txTotalContainer = tx.querySelector('[data-wpt-tx-total]');
       var datatxCount = tx.querySelector('[data-wpt-tx-count-input]');
+      var dataCategoryExtPrice = tx.querySelector('[data-wpt-tx-price]');
 
       var _price = _extra.is_sale && _extra.tour_extras_metas.extras_item_sale_price || _extra.tour_extras_metas.extras_item_price;
+
+      _price = GetConvertedPrice(_price); // Multiple currency support on edit cart.
+
+      dataCategoryExtPrice.innerHTML = wp_travel_cart.format(_price);
 
       var _count = datatxCount && datatxCount.value || 0;
 
@@ -432,11 +457,11 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
         tripTotalWOExtras = 0,
         txTotal = 0,
         tripTotalPartialWOExtras = 0;
-    var cartTotalContainers = document.querySelectorAll('[data-wpt-cart-total]');
+    var cartTotalContainers = document.querySelectorAll('[data-wpt-cart-net-total]');
     var cartTotalPartialContainers = document.querySelectorAll('[data-wpt-cart-partial-total]');
     var cartSubtotalContainer = e.target.querySelector('[data-wpt-cart-subtotal]');
     var cartDiscountContainer = e.target.querySelector('[data-wpt-cart-discount]');
-    var cartTaxContainer = e.target.querySelector('[data-wpt-cart-tax]');
+    var cartTaxContainer = e.target.querySelector('[data-wpt-cart-tax]'); // let cartTaxContainer = e.target.querySelector('[data-wpt-cart-tax]')
 
     var _cartItems = e.target.querySelectorAll('[data-cart-id]');
 

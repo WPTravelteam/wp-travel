@@ -312,6 +312,8 @@ class WpTravel_Helpers_Pricings {
 		}
 
 		$price = $price ? $price : 0;
+		// Add Multiple currency support to get converted price.
+		$price = WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $price );
 		return apply_filters( 'wptravel_get_price', (float) $price, $args ); // filter wptravel_get_price @since 4.6.4.
 	}
 

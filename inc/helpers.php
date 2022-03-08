@@ -621,8 +621,8 @@ function wptravel_get_itinereries_prices_array() {
 			sort( $prices );
 			$len = count( $prices );
 
-			$min_price = apply_filters( 'wp_travel_multiple_currency', $prices[0] );
-			$max_price = apply_filters( 'wp_travel_multiple_currency', $prices[ $len - 1 ] );
+			$min_price = apply_filters( 'wp_travel_multiple_currency1', $prices[0] );
+			$max_price = apply_filters( 'wp_travel_multiple_currency1', $prices[ $len - 1 ] );
 
 			$min_max_price = array( $min_price, $max_price );
 			set_site_transient( 'wptravel_min_max_prices', $min_max_price ); // Need to delete this transient in case of pricing update in trip.

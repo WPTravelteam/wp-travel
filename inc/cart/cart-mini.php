@@ -75,9 +75,10 @@ if ( wptravel_is_react_version_enabled() ) {
 						}
 						$categories  = isset( $cart_pricing['categories'] ) ? wptravel_key_by( $cart_pricing['categories'] ) : array(); // All categories.
 						$trip_extras = isset( $cart_pricing['trip_extras'] ) ? wptravel_key_by( $cart_pricing['trip_extras'] ) : array(); // All trip extras.
+						// error_log( print_r( $categories, true ) );
 						if ( count( $trip_extras ) > 0 ) {
 							$extras_args = array( 'post__in' => $trip_extras );
-							$result = WP_Travel_Helpers_Trip_Extras::get_trip_extras( $extras_args );
+							$result      = WP_Travel_Helpers_Trip_Extras::get_trip_extras( $extras_args );
 							if ( is_array( $result ) && 'WP_TRAVEL_TRIP_EXTRAS' === $result['code'] && isset( $result['trip_extras'] ) && count( $result['trip_extras'] ) > 0 ) {
 								$trip_extras = $result['trip_extras'];
 							}
@@ -87,6 +88,11 @@ if ( wptravel_is_react_version_enabled() ) {
 						if ( ! empty( $cart_extras ) ) {
 							$cart_extras = array_combine( $cart_extras['id'], $cart_extras['qty'] );
 						}
+						// echo '<hr>';
+						// echo '<pre>';
+						// print_r( $cart_item );
+						// echo '</pre>';
+						// echo '<hr>';
 
 						$cart_pax   = (array) $cart_item['trip'];
 						$cart_total = 0;
@@ -99,6 +105,7 @@ if ( wptravel_is_react_version_enabled() ) {
 						$trip_total_partial = $cart_item['trip_total_partial'];
 						$payout_percent     = $cart_item['payout_percent'];
 						$trip_discount      = isset( $cart_item['discount'] ) ? $cart_item['discount'] : 0;
+						// error_log( print_r( $trip_discount, true ) );
 						?>
 						<li class="list-group-item" data-cart-id="<?php echo esc_attr( $cart_id ); ?>">
 							<div id="loader" class="wp-travel-cart-loader" style="display:none;"><svg version="1.1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"><path d="M256.001,0c-8.284,0-15,6.716-15,15v96.4c0,8.284,6.716,15,15,15s15-6.716,15-15V15C271.001,6.716,264.285,0,256.001,0z"></path><path d="M256.001,385.601c-8.284,0-15,6.716-15,15V497c0,8.284,6.716,15,15,15s15-6.716,15-15v-96.399 C271.001,392.316,264.285,385.601,256.001,385.601z"></path><path d="M196.691,123.272l-48.2-83.485c-4.142-7.175-13.316-9.633-20.49-5.49c-7.174,4.142-9.632,13.316-5.49,20.49l48.2,83.485 c2.778,4.813,7.82,7.502,13.004,7.502c2.545,0,5.124-0.648,7.486-2.012C198.375,139.62,200.833,130.446,196.691,123.272z"></path><path d="M389.491,457.212l-48.199-83.483c-4.142-7.175-13.316-9.633-20.49-5.49c-7.174,4.142-9.632,13.316-5.49,20.49 l48.199,83.483c2.778,4.813,7.82,7.502,13.004,7.502c2.545,0,5.124-0.648,7.486-2.012 C391.175,473.56,393.633,464.386,389.491,457.212z"></path><path d="M138.274,170.711L54.788,122.51c-7.176-4.144-16.348-1.685-20.49,5.49c-4.142,7.174-1.684,16.348,5.49,20.49 l83.486,48.202c2.362,1.364,4.941,2.012,7.486,2.012c5.184,0,10.226-2.69,13.004-7.503 C147.906,184.027,145.448,174.853,138.274,170.711z"></path><path d="M472.213,363.51l-83.484-48.199c-7.176-4.142-16.349-1.684-20.49,5.491c-4.142,7.175-1.684,16.349,5.49,20.49 l83.484,48.199c2.363,1.364,4.941,2.012,7.486,2.012c5.184,0,10.227-2.69,13.004-7.502 C481.845,376.825,479.387,367.651,472.213,363.51z"></path><path d="M111.401,241.002H15c-8.284,0-15,6.716-15,15s6.716,15,15,15h96.401c8.284,0,15-6.716,15-15 S119.685,241.002,111.401,241.002z"></path><path d="M497,241.002h-96.398c-8.284,0-15,6.716-15,15s6.716,15,15,15H497c8.284,0,15-6.716,15-15S505.284,241.002,497,241.002z"></path><path d="M143.765,320.802c-4.142-7.175-13.314-9.633-20.49-5.49l-83.486,48.2c-7.174,4.142-9.632,13.316-5.49,20.49 c2.778,4.813,7.82,7.502,13.004,7.502c2.545,0,5.124-0.648,7.486-2.012l83.486-48.2 C145.449,337.15,147.907,327.976,143.765,320.802z"></path><path d="M477.702,128.003c-4.142-7.175-13.315-9.632-20.49-5.49l-83.484,48.2c-7.174,4.141-9.632,13.315-5.49,20.489 c2.778,4.813,7.82,7.503,13.004,7.503c2.544,0,5.124-0.648,7.486-2.012l83.484-48.2 C479.386,144.351,481.844,135.177,477.702,128.003z"></path><path d="M191.201,368.239c-7.174-4.144-16.349-1.685-20.49,5.49l-48.2,83.485c-4.142,7.174-1.684,16.348,5.49,20.49 c2.362,1.364,4.941,2.012,7.486,2.012c5.184,0,10.227-2.69,13.004-7.502l48.2-83.485 C200.833,381.555,198.375,372.381,191.201,368.239z"></path><path d="M384.001,34.3c-7.175-4.144-16.349-1.685-20.49,5.49l-48.199,83.483c-4.143,7.174-1.685,16.348,5.49,20.49 c2.362,1.364,4.941,2.012,7.486,2.012c5.184,0,10.226-2.69,13.004-7.502l48.199-83.483 C393.633,47.616,391.175,38.442,384.001,34.3z"></path></svg></div>
@@ -274,7 +281,7 @@ if ( wptravel_is_react_version_enabled() ) {
 													</span>
 												</div>
 												<span class="prices">
-													<?php echo $price_per_group ? '' : ' x <span data-wpt-category-price="' . $category_price . '">' . wptravel_get_formated_price_currency( $category_price ) . '</span>'; ?>  <strong><?php echo '<span data-wpt-category-total="' . $category_total . '">' . wptravel_get_formated_price_currency( $category_total ) . '</span>'; ?></strong>
+													<?php echo $price_per_group ? '' : ' x <span data-wpt-category-price="' . $category_price . '">' . wptravel_get_formated_price_currency( WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $category_price ) ) . '</span>'; ?>  <strong><?php echo '<span data-wpt-category-total="' . $category_total . '">' . wptravel_get_formated_price_currency( WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $category_total ) ) . '</span>'; ?></strong>
 												</span>
 											</div>
 										</div>
@@ -310,7 +317,7 @@ if ( wptravel_is_react_version_enabled() ) {
 														<input id="<?php echo esc_attr( 'tx_' . $tx['id'] ); ?>" name="<?php echo esc_attr( 'tx_' . $tx['id'] ); ?>" readonly <?php echo $required ? 'required min="1"' : 'min="0"'; ?> type="text" data-wpt-tx-count-input="<?php echo esc_attr( $tx_count ); ?>" name="" class="wp-travel-form-control wp-travel-cart-extras-qty qty form-control" value="<?php echo esc_attr( $tx_count ); ?>" />
 														<span class="input-group-btn input-group-append"><button class="btn" type="button" data-wpt-count-up>+</button></span></div>
 														<span class="prices">
-															<?php echo ' x <span data-wpt-tx-price="' . $tx_price . '">' . wptravel_get_formated_price_currency( $tx_price ) . '</span>' . '<strong><span data-wpt-tx-total="' . $tx_total . '">' . wptravel_get_formated_price_currency( $tx_total ) . '</span>' . '</strong>'; ?>
+															<?php echo ' x <span data-wpt-tx-price="' . $tx_price . '">' . wptravel_get_formated_price_currency( WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $tx_price ) ) . '</span>' . '<strong><span data-wpt-tx-total="' . $tx_total . '">' . wptravel_get_formated_price_currency( WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $tx_total ) ) . '</span>' . '</strong>'; ?>
 														</span>
 												</div>
 												<?php endif; ?>
@@ -330,6 +337,7 @@ if ( wptravel_is_react_version_enabled() ) {
 					?>
 					</ul>
 					<?php
+
 					$subtotal      = $cart['cart']['total']['cart_total'];
 					$discount      = $cart['cart']['total']['discount'] > 0 ? $cart['cart']['total']['discount'] : 0;
 					$total         = $cart['cart']['total']['total'] > 0 ? $cart['cart']['total']['total'] : 0;
