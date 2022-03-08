@@ -143,7 +143,7 @@ const WpTravelBookNow = ( props ) => {
 				data
 			}).then(res => {
 				if (true === res.success && 'WP_TRAVEL_ADDED_TO_CART' === res.data.code) {
-					// location.href = wp_travel.checkoutUrl; // [only checkout page url]
+					location.href = wp_travel.checkoutUrl; // [only checkout page url]
 				}
 			}), 1000 ).catch(error => {
 				alert( '[X] Request Timeout!' );
