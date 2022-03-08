@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n'
-import { wpTravelFormat } from '../../_wptravelFunctions'
+import { wpTravelFormat, GetConvertedPrice } from '../../_wptravelFunctions'
 
 const _ = lodash
 const __i18n = {
@@ -24,7 +24,7 @@ const DiscountTable = ({ groupPricings }) => {
 						return <tr key={index}>
 							<td>{gp.min_pax}</td>
 							<td>{gp.max_pax}</td>
-							<td dangerouslySetInnerHTML={{ __html: wpTravelFormat(gp.price) }}></td>
+							<td dangerouslySetInnerHTML={{ __html: wpTravelFormat( GetConvertedPrice( gp.price ) ) }}></td>
 						</tr>
 					})
 				}
