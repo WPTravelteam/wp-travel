@@ -1,3 +1,4 @@
+import { applyFilters, addFilter } from '@wordpress/hooks';
 const {
     currency,
     currency_symbol: _currencySymbol,
@@ -68,4 +69,19 @@ const wpTravelPHPtoMomentDateFormat = (dateFormat) => {
         
     }
 }
-export { wpTravelFormat, wpTravelFormatV2, wpTravelTimeout, objectSum }
+
+const GetConvertedPrice = ( price ) => {
+    return applyFilters( 'wptravelMultipleCurrency', price );
+}
+
+// Callbacks.
+const GetConvertedPriceCB = ( price ) => {
+    let conversionRate = 'undefined' !== typeof _wp_travel && 'undefined' !== typeof _wp_travel.conversion_rate ? _wp_travel.conversion_rate : 1;
+    conversionRate     = parseFloat( conversionRate ).toFixed( _toFixed );
+    console.log( 'conversionRate', conversionRate );
+    return parseFloat( price * conversionRate ).toFixed( _toFixed );
+}
+// Hooks.
+addFilter( 'wptravelMultipleCurrency', 'WPTravel/Frontend/GetConvertedPrice', GetConvertedPriceCB, 10 );
+
+export { wpTravelFormat, wpTravelFormatV2, wpTravelTimeout, objectSum, GetConvertedPrice }

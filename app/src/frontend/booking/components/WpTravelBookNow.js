@@ -8,7 +8,7 @@ const _ = lodash;
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
 
 // WP Travel Functions.
-import { objectSum, wpTravelFormat, wpTravelTimeout } from '../_wptravelFunctions';
+import { objectSum, wpTravelFormat, wpTravelTimeout, GetConvertedPrice } from '../_wptravelFunctions';
 
 const WpTravelBookNow = ( props ) => {
     // Component Props.
@@ -30,6 +30,11 @@ const WpTravelBookNow = ( props ) => {
 	let activeInventory = inventory.find( i => i.date === moment( selectedDate ).format('YYYY-MM-DD[T]HH:mm') )
 	let maxPaxToBook    = activeInventory && parseInt( activeInventory.pax_available )
 
+	/**
+	 * To get only trip price in add to cart ajax request we don't need withExtras param. Note extras pricing in add  to cart is calculated from php to add it in cart.
+	 * @param { calculate price along with extras } withExtras 
+	 * @returns number
+	 */
     const getCartTotal = ( withExtras ) => {
 		let total   = 0; // Total amount.
 		let txTotal = 0; // Extras total.
@@ -48,7 +53,7 @@ const WpTravelBookNow = ( props ) => {
 		}
 
 		if ( ! withExtras || tpax <= 0 ) {
-			return total;
+			return GetConvertedPrice( total );
 		}
 		let _tripExtras = selectedPricingId && _.keyBy( nomineeTripExtras, tx => tx.id )
 		txTotal = _.size(tripExtras) > 0 && Object.entries(tripExtras).map(([i, count]) => {
@@ -59,7 +64,7 @@ const WpTravelBookNow = ( props ) => {
 			let price = tx.is_sale && tx.tour_extras_metas.extras_item_sale_price || tx.tour_extras_metas.extras_item_price
 			return parseFloat(price) * count
 		}).reduce((acc, curr) => acc + curr) || 0
-		return total + txTotal
+		return GetConvertedPrice( total + txTotal );  // Add Multiple currency support to get converted price.
 	}
 	const getCategoryPrice = ( categoryId, count ) => {
 		let counts              = paxCounts;
@@ -112,7 +117,7 @@ const WpTravelBookNow = ( props ) => {
 			pricing_id: selectedPricingId,
 			pax: paxCounts,
 			category_pax: paxCounts,
-			trip_price: getCartTotal(),
+			trip_price: getCartTotal(), // just trip price without extras.
 		}
 
 		if (selectedTime)
@@ -138,7 +143,7 @@ const WpTravelBookNow = ( props ) => {
 				data
 			}).then(res => {
 				if (true === res.success && 'WP_TRAVEL_ADDED_TO_CART' === res.data.code) {
-					location.href = wp_travel.checkoutUrl; // [only checkout page url]
+					// location.href = wp_travel.checkoutUrl; // [only checkout page url]
 				}
 			}), 1000 ).catch(error => {
 				alert( '[X] Request Timeout!' );

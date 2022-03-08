@@ -7,7 +7,7 @@ const __i18n = {
 }
 
 // WP Travel Functions.
-import { wpTravelFormat, objectSum } from '../../_wptravelFunctions';
+import { wpTravelFormat, objectSum, GetConvertedPrice } from '../../_wptravelFunctions';
 
 const PaxSelector = ( props ) => {
 	// Component Props.
@@ -46,13 +46,17 @@ const PaxSelector = ( props ) => {
 			let groupPrices = _.orderBy(pricing.group_prices, gp => parseInt(gp.max_pax))
 			let group_price = groupPrices.find(gp => parseInt(gp.min_pax) <= totalPax && parseInt(gp.max_pax) >= totalPax)
 			if (group_price && group_price.price) {
-				if (single)
-					return parseFloat(group_price.price)
+				if (single) {
+					price = parseFloat(group_price.price);
+					return  GetConvertedPrice( price ); // Add Multiple currency support to get converted price.
+				}
 				// price = 'group' === category.price_per ? (totalPax > 0 ? parseFloat(group_price.price) : 0) : parseFloat(group_price.price) * totalPax
 				price =  parseFloat(group_price.price) * totalPax
 			} else {
-				if (single)
-					return parseFloat(price)
+				if (single) {
+					price = parseFloat(price);
+					return GetConvertedPrice( price ); // Add Multiple currency support to get converted price.
+				}
 				// price = 'group' === category.price_per ? (totalPax > 0 ? parseFloat(price) : 0) : parseFloat(price) * totalPax
 				price = parseFloat(price) * totalPax
 			}
@@ -60,20 +64,27 @@ const PaxSelector = ( props ) => {
 			let groupPrices = _.orderBy(category.group_prices, gp => parseInt(gp.max_pax))
 			let group_price = groupPrices.find(gp => parseInt(gp.min_pax) <= count && parseInt(gp.max_pax) >= count)
 			if (group_price && group_price.price) {
-				if (single)
-					return parseFloat(group_price.price)
+				if (single) {
+					price = parseFloat(group_price.price)
+					return GetConvertedPrice( price ); // Add Multiple currency support to get converted price.
+				}
 				price = 'group' === category.price_per ? (count > 0 ? parseFloat(group_price.price) : 0) : parseFloat(group_price.price) * count
 			} else {
-				if (single)
-					return parseFloat(price)
+				if (single) {
+					price = parseFloat(price)
+					return GetConvertedPrice( price ); // Add Multiple currency support to get converted price.
+				}
 				price = 'group' === category.price_per ? (count > 0 ? parseFloat(price) : 0) : parseFloat(price) * count
 			}
 		} else {
-			if (single)
-				return parseFloat(price)
+			if (single) {
+				price = parseFloat(price)
+				return GetConvertedPrice( price ); // Add Multiple currency support to get converted price. 
+			}
 			price = 'group' === category.price_per ? (count > 0 ? parseFloat(price) : 0) : parseFloat(price) * count
 		}
-		return price || 0
+		price = price || 0;
+		return GetConvertedPrice( price ); // Add Multiple currency support to get converted price.
 	}
 
 	const handlePaxChange = (id, value) => e => {
