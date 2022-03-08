@@ -3,7 +3,7 @@
 function GetConvertedPrice( price ) {
     var conversionRate = 'undefined' !== typeof _wp_travel && 'undefined' !== typeof _wp_travel.conversion_rate ? _wp_travel.conversion_rate : 1;
     var _toFixed       = 'undefined' !== typeof _wp_travel && 'undefined' !== typeof _wp_travel.number_of_decimals ? _wp_travel.number_of_decimals : 2;
-    conversionRate     = parseFloat( conversionRate ).toFixed( _toFixed );
+    conversionRate     = parseFloat( conversionRate ).toFixed( 2 );
     return parseFloat( price * conversionRate ).toFixed( _toFixed );
 }
 
