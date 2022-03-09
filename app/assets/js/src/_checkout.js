@@ -335,7 +335,7 @@ const wptravelcheckout = (shoppingCart) => {
 
         let tripTotal = 0
         let item = wp_travel_cart.cart && wp_travel_cart.cart.cart_items && wp_travel_cart.cart.cart_items[id]
-        console.log( 'item', item.trip_data.pricings );
+        // console.log( 'item', item.trip_data.pricings );
         let itemNode = shoppingCart.querySelector(`[data-cart-id="${id}"]`)
         let pricing = item.trip_data.pricings.find(p => p.id == parseInt(item.pricing_id))
         let categories = pricing.categories

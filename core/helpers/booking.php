@@ -101,14 +101,14 @@ class WpTravel_Helpers_Booking { // @phpcs:ignore
 											if ( $sale_price ) {
 												$price = $sale_price;
 											}
-
+											$price = WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $price );
 											$qty = isset( $extras['qty'][ $k ] ) && $extras['qty'][ $k ] ? $extras['qty'][ $k ] : 1;
 
 											$total = $price * $qty;
 											?>
 											<div class="my-order-price-breakdown-additional-service-item clearfix">
-												<span class="my-order-head"><?php echo esc_html( get_the_title( $extra_id ) ); ?> (<?php echo esc_attr( $qty ) . ' x ' . wptravel_get_formated_price_currency( $price, false, '', $order_id ); ?>)</span>
-												<span class="my-order-tail my-order-right"><?php echo wptravel_get_formated_price_currency( $total, false, '', $order_id ); //@phpcs:ignore ?></span>
+												<span class="my-order-head"><?php echo esc_html( get_the_title( $extra_id ) ); ?> (<?php echo esc_attr( $qty ) . ' x ' . wptravel_get_formated_price_currency( $price, false, '', $booking_id ); ?>)</span>
+												<span class="my-order-tail my-order-right"><?php echo wptravel_get_formated_price_currency( $total, false, '', $booking_id ); //@phpcs:ignore ?></span>
 											</div>
 										<?php endforeach; ?>
 

@@ -156,7 +156,7 @@ function wptravel_settings_default_fields() {
 		'trip_date_listing'                       => 'calendar', // Front view: calendar | dates @since 4.4.5.
 
 		// @since 5.1.1.
-		'hide_plugin_archive_page_title'		  => 'no',
+		'hide_plugin_archive_page_title'          => 'no',
 	);
 
 	$user_since = get_option( 'wp_travel_user_since' );
@@ -2517,8 +2517,8 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 												if ( $sale_price ) {
 													$price = $sale_price;
 												}
-
-												$qty = isset( $extras['qty'][ $k ] ) && $extras['qty'][ $k ] ? $extras['qty'][ $k ] : 1;
+												$price = WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $price );
+												$qty   = isset( $extras['qty'][ $k ] ) && $extras['qty'][ $k ] ? $extras['qty'][ $k ] : 1;
 
 												$total = $price * $qty;
 												?>
@@ -3476,8 +3476,8 @@ function wptravel_get_trip_pricing_option( $trip_id = null ) {
 						foreach ( $pricing_categories as $index => $pricing_category ) {
 
 							if ( $switch_to_react ) {
-								$regular_price = isset( $pricing_category['regular_price'] ) ? $pricing_category['regular_price'] : 0;
-								$sale_price    = isset( $pricing_category['sale_price'] ) ? $pricing_category['sale_price'] : 0;
+								$regular_price       = isset( $pricing_category['regular_price'] ) ? $pricing_category['regular_price'] : 0;
+								$sale_price          = isset( $pricing_category['sale_price'] ) ? $pricing_category['sale_price'] : 0;
 								$pricing_category_id = $pricing_category['id'];
 								// $categories[ $pricing_category['id'] ] = $pricing_category;
 								$categories[ $pricing_category_id ]['type']         = 'custom'; // following the tradition.

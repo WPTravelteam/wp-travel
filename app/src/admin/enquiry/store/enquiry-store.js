@@ -75,7 +75,6 @@ registerStore('WPTravel/Enquiry', {
             const url = `${ajaxurl}?action=wptravel_get_enquiry&_nonce=${_wp_travel._nonce}&enquiry_id=${enquiry_id}`;
             yield actions.updateRequestSending(true);
             const response = yield actions.getEnquiryFromAPI( url );
-            //console.log('set',response);
             if(false !== response.success && "WP_TRAVEL_ENQUIRY" === response.data.code ) {
                 yield actions.updateRequestSending(false);
                 return actions.setEnquiry( response.data.enquiry );

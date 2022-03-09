@@ -23,7 +23,6 @@ export default () => {
     const coupon_expiry_date = 'undefined' !== typeof general && 'undefined' !== typeof general.coupon_expiry_date ? general.coupon_expiry_date : '';
     // Update Values
     const { updateCoupon, disableSave } = dispatch('WPTravel/Coupon');
-    console.log(allData);
     // Local States
     const initialState = {
         code_exists: false

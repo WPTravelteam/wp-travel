@@ -252,12 +252,6 @@ function wptravel_get_checkout_form_fields() {
 	);
 	$checkout_fields = apply_filters( 'wp_travel_checkout_fields', $checkout_fields ); // sort field after this filter.
 
-	$checkout_fields = array(
-		'traveller_fields' => wptravel_sort_form_fields( $checkout_fields['traveller_fields'] ),
-		'billing_fields'   => wptravel_sort_form_fields( $checkout_fields['billing_fields'] ),
-		'payment_fields'   => wptravel_sort_form_fields( $checkout_fields['payment_fields'] ),
-	);
-
 	if ( isset( $checkout_fields['traveller_fields'] ) ) {
 		$checkout_fields['traveller_fields'] = wptravel_sort_form_fields( $checkout_fields['traveller_fields'] );
 	}

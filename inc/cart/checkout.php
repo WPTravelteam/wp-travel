@@ -110,6 +110,10 @@ $wptravel_form_fw->init_validation( 'wp-travel-booking' );
 												$wptravel_field_name    = sprintf( '%s[%s][%d]', $wptravel_field['name'], $wptravel_cart_id, $i ); // @phpcs:ignore
 												$wptravel_field['name'] = $wptravel_field_name;
 												$wptravel_field['id']   = sprintf( '%s-%s-%d', $wptravel_field['id'], $wptravel_cart_id, $i ); // @phpcs:ignore
+												if ( $i > 0 ) {
+													$wptravel_field['default']   = ''; // make empty default if other than lead traveler.
+												}
+
 
 												if ( ! $wptravel_all_travelers_fields_require ) {
 													// Added to control over required fields for travellers @since 3.1.3.

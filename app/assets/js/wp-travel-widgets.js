@@ -1,3 +1,10 @@
+
+function GetConvertedPrice( price ) {
+    var conversionRate = 'undefined' !== typeof wp_travel && 'undefined' !== typeof wp_travel.conversion_rate ? wp_travel.conversion_rate : 1;
+    var _toFixed       = 'undefined' !== typeof wp_travel && 'undefined' !== typeof wp_travel.number_of_decimals ? wp_travel.number_of_decimals : 2;
+    conversionRate     = parseFloat( conversionRate ).toFixed( 2 );
+    return parseFloat( price * conversionRate ).toFixed( _toFixed );
+}
 jQuery(function($) {
 
     function findGetParameter(parameterName) {
@@ -24,7 +31,9 @@ jQuery(function($) {
         var filteredMax = 0;
         if ( prices.length > 0 ) {
             min = Math.min.apply(null, prices),
-            max = Math.max.apply(null, prices)
+            max = Math.max.apply(null, prices);
+            min = parseInt( GetConvertedPrice( min ) );
+            max = parseInt( GetConvertedPrice( max ) );
         }
 
         if (findGetParameter('min_price')) {
