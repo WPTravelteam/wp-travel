@@ -78,6 +78,7 @@ const GetConvertedPrice = ( price ) => {
 const GetConvertedPriceCB = ( price ) => {
     let conversionRate = 'undefined' !== typeof _wp_travel && 'undefined' !== typeof _wp_travel.conversion_rate ? _wp_travel.conversion_rate : 1;
     conversionRate     = parseFloat( conversionRate ).toFixed( 2 );
+    // console.log('conversionRate', conversionRate);
     return parseFloat( price * conversionRate ).toFixed( _toFixed );
 }
 // Hooks.

@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { wpTravelFormat } from '../../../_wptravelFunctions';
+import { wpTravelFormat, GetConvertedPrice } from '../../../_wptravelFunctions';
 const __i18n = {
 	..._wp_travel.strings
 }
@@ -78,7 +78,7 @@ const TripExtras = ( props ) => {
 									</div>
 								</div>
 								<div className="text-right">
-									<span className="item-price">{tx.is_sale && <del dangerouslySetInnerHTML={{__html: wpTravelFormat(tx.tour_extras_metas.extras_item_price)}}></del>} <span dangerouslySetInnerHTML={{__html: wpTravelFormat(price)}}></span> /{__i18n.unit}</span>
+									<span className="item-price">{tx.is_sale && <del dangerouslySetInnerHTML={{__html: wpTravelFormat( GetConvertedPrice( tx.tour_extras_metas.extras_item_price ) ) }}></del>} <span dangerouslySetInnerHTML={ { __html: wpTravelFormat( GetConvertedPrice( price ) ) }}></span> /{__i18n.unit}</span>
 									<div className="pricing-area">
 										<div className="qty-spinner">
 											<button onClick={ handleClick( i, -1 ) }>-</button>

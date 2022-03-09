@@ -302,13 +302,16 @@ const DateListing = ( props ) => {
                         </div>
                     }
 
-                    { recurringDates.length > 0 &&
-                        <div className="wptravel-recurring-table-wrapper">
-                            <table className="wptravel-recurring-table">
-                                <DateListingTableHead />
-                                {/* <RecurringDates { ...props } /> */}
-                            </table>
-                        </div>
+                    { recurringDates.length > 0 && <>
+						{ recurringDates.map((date, index) => {
+							return <div className="wptravel-recurring-table-wrapper" key={index}>
+								<table className="wptravel-recurring-table">
+									<DateListingTableHead />
+									<RecurringDates { ...{ ...props, date, index } } />
+								</table>
+							</div>
+						} ) }
+					</>
                     }
 
                 </div>

@@ -9,7 +9,7 @@ const _ = lodash;
 
 const Pricings = ( props ) => {
     // Component Props.
-	const { tripData, bookingData, updateBookingData, _nomineePricings, date } = props;
+	const { tripData, bookingData, updateBookingData, _nomineePricings, date, recurrindDate } = props; // where date is row and recurrindDate is the date to select in recurring
     // Trip Data.
     const {
         is_fixed_departure:isFixedDeparture,
@@ -21,8 +21,6 @@ const Pricings = ( props ) => {
     const _dates             = 'undefined' !== typeof dates && dates.length > 0 ? dates : [];
     const datesById          = _.keyBy(_dates, d => d.id); // object structure along with date id.
 
-    let nonRecurringDates = _dates.filter( d => { return !d.is_recurring && d.start_date && '0000-00-00' !== d.start_date && new Date( d.start_date )  > new Date() } )
-
     // Booking Data.
     const { isLoading, selectedDate, selectedDateIds, nomineePricingIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
     return <>
@@ -32,13 +30,17 @@ const Pricings = ( props ) => {
 					return <CheckboxControl
 						key={pricingIndex}
 						label={allPricings[pricingId].title}
-						checked={ selectedPricingId == pricingId && selectedDateIds.includes( date.id ) }
+						checked={ selectedPricingId == pricingId && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && recurrindDate === selectedDate ) ) }
 						onChange={ ( value ) => {
 							if ( value ) {
+								let newSelectedDate = new Date( date.start_date + ' 00:00:00' ); // Non Recurring.
+								if ( 'undefined' !== typeof recurrindDate ) {
+									newSelectedDate = recurrindDate; // Recurring
+								}
 								updateBookingData({
 									selectedPricingId:pricingId,
 									selectedPricing:allPricings[pricingId].title,
-									selectedDate: new Date( date.start_date + ' 00:00:00' ),
+									selectedDate: newSelectedDate,
 									selectedDateIds:[date.id]
 								});
 							} else {

@@ -1,4 +1,5 @@
 import { CheckboxControl, Disabled } from '@wordpress/components';
+import { Fragment } from '@wordpress/element';
 
 const __i18n = {
 	..._wp_travel.strings
@@ -46,43 +47,41 @@ const NonRecurringDates = ( props ) => {
 			let _nomineePricings = date.pricing_ids.split(',').map( id => id.trim() );
 			_nomineePricings = _.chain( _nomineePricings ).flatten().uniq().value().filter( p => p != '' && typeof allPricings[p] !== 'undefined' );
 			if ( ! _nomineePricings.length ) {
-				return <></>
+				return <Fragment key={index}></Fragment>
 			}
-			return <>
-				<tr key={index}>
-					<td data-label={__i18n.bookings.pricings_list_label}>
-						{/* _nomineePricings not updated in store/state because there are multiple _nomineePricings as per date so just a variable. */}
-						<Pricings { ...{ ...props, _nomineePricings, date } }  />
-					</td>
-					<td data-label={__i18n.bookings.person}>
-						<div className ="person-box">
-							{ ! pricingUnavailable && <>
-								{ ( ! selectedPricingId || ( nomineeTimes.length > 1 && ! selectedTime ) || ! selectedDateIds.includes( date.id ) ) && <Disabled><PaxSelector { ...{ ...props, _nomineePricings, date } } /></Disabled> || <PaxSelector { ...{ ...props, _nomineePricings, date } } /> }
-								{ 
-									selectedPricingId && 
-									selectedDateIds.includes( date.id ) && 
-									_.size( allPricings[ selectedPricingId ].trip_extras ) > 0 && 
-									objectSum( paxCounts ) > 0 && 
-									( ! nomineeTimes.length || ( nomineeTimes.length > 0 && selectedTime ) ) &&
-									<> <TripExtras { ...{ ...props, _nomineePricings, date } } /> </> 
-								}
-								</> 
-							}			
-						</div>
-					</td>
-					<td data-label={__i18n.bookings.date}>
-						<div className = "date-box">
-							<div className="date-time-wrapper">
-								<span className="start-date"><span>{__i18n.bookings.start_date}: </span>{moment(date.start_date).format(_wp_travel.date_format_moment)}</span>
-								{date.end_date && '0000-00-00' != date.end_date && <span className="end-date"><span>{__i18n.bookings.end_date}: </span>{moment(date.end_date).format(_wp_travel.date_format_moment)}</span> }
-							</div>
-							{selectedDateIds.includes( date.id ) &&
-								<TripTimes { ...{ ...props, _nomineePricings, date } }  />
+			return <tr key={index}>
+				<td data-label={__i18n.bookings.pricings_list_label}>
+					{/* _nomineePricings not updated in store/state because there are multiple _nomineePricings as per date so just a variable. */}
+					<Pricings { ...{ ...props, _nomineePricings, date } }  />
+				</td>
+				<td data-label={__i18n.bookings.person}>
+					<div className ="person-box">
+						{ ! pricingUnavailable && <>
+							{ ( ! selectedPricingId || ( nomineeTimes.length > 1 && ! selectedTime ) || ! selectedDateIds.includes( date.id ) ) && <Disabled><PaxSelector { ...{ ...props, _nomineePricings, date } } /></Disabled> || <PaxSelector { ...{ ...props, _nomineePricings, date } } /> }
+							{ 
+								selectedPricingId && 
+								selectedDateIds.includes( date.id ) && 
+								_.size( allPricings[ selectedPricingId ].trip_extras ) > 0 && 
+								objectSum( paxCounts ) > 0 && 
+								( ! nomineeTimes.length || ( nomineeTimes.length > 0 && selectedTime ) ) &&
+								<> <TripExtras { ...{ ...props, _nomineePricings, date } } /> </> 
 							}
+							</> 
+						}			
+					</div>
+				</td>
+				<td data-label={__i18n.bookings.date}>
+					<div className = "date-box">
+						<div className="date-time-wrapper">
+							<span className="start-date"><span>{__i18n.bookings.start_date}: </span>{moment(date.start_date).format(_wp_travel.date_format_moment)}</span>
+							{date.end_date && '0000-00-00' != date.end_date && <span className="end-date"><span>{__i18n.bookings.end_date}: </span>{moment(date.end_date).format(_wp_travel.date_format_moment)}</span> }
 						</div>
-					</td>
-				</tr>
-			</>
+						{selectedDateIds.includes( date.id ) &&
+							<TripTimes { ...{ ...props, _nomineePricings, date } }  />
+						}
+					</div>
+				</td>
+			</tr>
         } ) }
 		</tbody>
     }
