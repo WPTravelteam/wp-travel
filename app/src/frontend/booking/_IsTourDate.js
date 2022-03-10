@@ -9,7 +9,7 @@ import generateRRule from "./_GenerateRRule";
 
 
 // Date param need to have only Y-M-D date without time.
-const filteredTripDates = ( props ) => date => {
+const IsTourDate = ( props ) => date => {
     const {tripData,bookingData } = props;
 
     // Trip Data.
@@ -99,4 +99,4 @@ const filteredTripDates = ( props ) => date => {
     })
     return _date && 'undefined' !== typeof _date.id
 }
-export { filteredTripDates }
+export { IsTourDate }

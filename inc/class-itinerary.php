@@ -163,6 +163,10 @@ class WP_Travel_Itinerary {
 				}
 			}
 		}
+		/**
+		 * @since 5.1.2
+		 */
+		$group_size = apply_filters( 'wptravel_group_size', $group_size, $this->post->ID );
 		if ( $group_size ) {
 			return (int) $group_size;
 		}

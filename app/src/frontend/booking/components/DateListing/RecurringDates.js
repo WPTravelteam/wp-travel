@@ -7,6 +7,8 @@ const __i18n = {
 const datePerPage = 5
 // WP Travel Functions.
 import { objectSum } from '../../_wptravelFunctions';
+import { IsTourDate } from '../../_IsTourDate'; // Filter available dates in calendar.
+
 
 // Additional lib
 const _ = lodash;
@@ -21,21 +23,62 @@ import TripTimes from './SubComponents/TripTimes';
 // import generateRRule from "../../_GenerateRRule";
 
 
+const RecurringRepeator = ( props ) =>  {
+    const { index, _nomineePricings, date, recurrindDate, tripData, bookingData } = props;
+
+    // Trip Data.
+    const { pricings } = tripData;
+    const allPricings  = pricings && _.keyBy( pricings, p => p.id ) // Need object structure because pricing id may not be in sequencial order.
+
+    // Booking Data.
+    const { selectedDate, selectedDateIds, selectedPricingId, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
+
+    return <tr key={index}>
+        <td data-label={__i18n.bookings.pricings_list_label}>
+            {/* _nomineePricings not updated in store/state because there are multiple _nomineePricings as per date so just a variable. */}
+            {IsTourDate(props)(recurrindDate) && <Pricings { ...props } /> || <Disabled><Pricings { ...props } /></Disabled> }
+        </td>
+        <td data-label={__i18n.bookings.person}>
+            <div className ="person-box">
+                { ! pricingUnavailable && <>
+                    { ( ! selectedPricingId || ( nomineeTimes.length > 1 && ! selectedTime ) || ! selectedDateIds.includes( date.id ) || recurrindDate !== selectedDate ) && <Disabled><PaxSelector { ...{ ...props, _nomineePricings, date, recurrindDate } } /></Disabled> || <PaxSelector { ...{ ...props, _nomineePricings, date, recurrindDate } } /> }
+                    { 
+                        selectedPricingId && 
+                        selectedDateIds.includes( date.id ) && 
+                        _.size( allPricings[ selectedPricingId ].trip_extras ) > 0 && 
+                        objectSum( paxCounts ) > 0 && 
+                        recurrindDate === selectedDate &&
+                        ( ! nomineeTimes.length || ( nomineeTimes.length > 0 && selectedTime ) ) &&
+                        <> <TripExtras {...props} /> </> 
+                    }
+                    </> 
+                }		
+            </div>
+        </td>
+        <td data-label={__i18n.bookings.date}>
+            <div className = "date-box">
+                <div className="date-time-wrapper">
+                    <span className="start-date"><span>{__i18n.bookings.start_date}: </span>{moment(recurrindDate).format(_wp_travel.date_format_moment)}</span>
+                    {date.end_date && '0000-00-00' != date.end_date && <span className="end-date"><span>{__i18n.bookings.end_date}: </span>{moment(date.end_date).format(_wp_travel.date_format_moment)}</span> }
+                </div>
+                {selectedDateIds.includes( date.id ) &&
+                    <TripTimes { ...props }  />
+                }
+            </div>
+        </td>
+    </tr>
+}
+
 const RecurringDates = ( props ) => {
     // Component Props.
-	const { tripData, bookingData, updateBookingData, date, index } = props;
+	const { tripData, bookingData, date } = props;
 
     // Trip Data.
     const {
-        is_fixed_departure:isFixedDeparture,
         pricings,
-        trip_duration:tripDuration
     } = tripData;
 
     const allPricings        = pricings && _.keyBy( pricings, p => p.id ) // Need object structure because pricing id may not be in sequencial order.
-
-    // Booking Data.
-    const { isLoading, selectedDate, selectedDateIds, nomineePricingIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
 
     // Recurring logic form old components
     const [dates, setRecurringDates] = useState([])
@@ -52,13 +95,14 @@ const RecurringDates = ( props ) => {
         rruleSet.rrule(
             new RRule(rruleArgs)
         );
-        let rule = new RRule(rruleArgs);
-        return rule.all()
+        // let exc = new Date( ' 2022-03-15 00:00:00');
+        // rruleSet.exdate( exc )
+        return rruleSet.all();
     }
     const generateRRUleArgs = date => {
         let startDate = date.start_date && new Date(date.start_date + ' 00:00:00' ) || new Date();
         let currentDate = new Date();
-        currentDate.setHours(0, 0, 0, 0);
+        // currentDate.setHours(0, 0, 0, 0);
 
         let rruleStartDate = currentDate < startDate ? startDate : currentDate;
 
@@ -71,15 +115,15 @@ const RecurringDates = ( props ) => {
             let endDate = new Date(date.end_date)
             ruleArgs.until = endDate
         }
-        rruleStartDate = moment( rruleStartDate ).utc();
+        rruleStartDate    = moment( rruleStartDate );
         let selectedYears = date.years ? date.years.split(",").filter(year => year != 'every_year').map(year => parseInt(year)) : [];
         if (selectedYears.length > 0 && !selectedYears.includes(rruleStartDate.year())) {
             return []
         }
     
         let selectedMonths = date.months ? date.months.split(",").filter(month => month != 'every_month') : [];
-        let selectedDates = date.date_days ? date.date_days.split(",").filter(date => date !== 'every_weekdays' && date !== '') : [];
-        let selectedDays = date.days ? date.days.split(",").filter(day => day !== 'every_date_days' && day !== '') : [];
+        let selectedDates  = date.date_days ? date.date_days.split(",").filter(date => date !== 'every_weekdays' && date !== '') : [];
+        let selectedDays   = date.days ? date.days.split(",").filter(day => day !== 'every_date_days' && day !== '') : [];
     
         if (selectedMonths.length > 0) {
             ruleArgs.bymonth = selectedMonths.map(m => parseInt(m));
@@ -90,11 +134,10 @@ const RecurringDates = ( props ) => {
         else if (selectedDates.length > 0) {
             ruleArgs.bymonthday = selectedDates.map(md => parseInt(md));
         }
-    
         return ruleArgs
     }
-    useEffect(() => {
-        if (!rruleArgs) {
+    useEffect( () => {
+        if ( ! rruleArgs ) {
             let aaa = generateRRUleArgs(date);
             if (Object.keys(aaa).length > 0) {
                 setRRuleArgs(aaa)
@@ -144,40 +187,7 @@ const RecurringDates = ( props ) => {
 			if ( ! _nomineePricings.length ) {
 				return <></>
 			}
-			return <tr key={index}>
-                <td data-label={__i18n.bookings.pricings_list_label}>
-                    {/* _nomineePricings not updated in store/state because there are multiple _nomineePricings as per date so just a variable. */}
-                    <Pricings { ...{ ...props, _nomineePricings, date, recurrindDate } }  />
-                </td>
-                <td data-label={__i18n.bookings.person}>
-                    <div className ="person-box">
-                        { ! pricingUnavailable && <>
-                            { ( ! selectedPricingId || ( nomineeTimes.length > 1 && ! selectedTime ) || ! selectedDateIds.includes( date.id ) ) && <Disabled><PaxSelector { ...{ ...props, _nomineePricings, date, recurrindDate } } /></Disabled> || <PaxSelector { ...{ ...props, _nomineePricings, date, recurrindDate } } /> }
-                            { 
-                                selectedPricingId && 
-                                selectedDateIds.includes( date.id ) && 
-                                _.size( allPricings[ selectedPricingId ].trip_extras ) > 0 && 
-                                objectSum( paxCounts ) > 0 && 
-                                ( ! nomineeTimes.length || ( nomineeTimes.length > 0 && selectedTime ) ) &&
-                                <> <TripExtras { ...{ ...props, _nomineePricings, date, recurrindDate } } /> </> 
-                            }
-                            </> 
-                        }		
-                    </div>
-                </td>
-                <td data-label={__i18n.bookings.date}>
-                    <div className = "date-box">
-                        <div className="date-time-wrapper">
-							<span className="start-date"><span>{__i18n.bookings.start_date}: </span>{moment(date.start_date).format(_wp_travel.date_format_moment)}</span>
-							{date.end_date && '0000-00-00' != date.end_date && <span className="end-date"><span>{__i18n.bookings.end_date}: </span>{moment(date.end_date).format(_wp_travel.date_format_moment)}</span> }
-						</div>
-						{selectedDateIds.includes( date.id ) &&
-							<TripTimes { ...{ ...props, _nomineePricings, date, recurrindDate } }  />
-						}
-                    </div>
-                </td>
-            </tr>
-			
+			return <RecurringRepeator { ...{ ...props, _nomineePricings, date, recurrindDate, index, _nomineePricings } } />
         } ) }
 		</tbody>
     }

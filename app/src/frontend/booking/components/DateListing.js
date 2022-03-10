@@ -17,7 +17,7 @@ import generateRRule from "../_GenerateRRule";
 
 // WP Travel Functions.
 import { objectSum } from '../_wptravelFunctions';
-import { filteredTripDates } from '../_FilteredDates'; // Filter available dates in calendar.
+import { IsTourDate } from '../_IsTourDate'; // Filter available dates in calendar.
 
 // WP Travel Components.
 import DateListingTableHead from './DateListing/DateListingTableHead';

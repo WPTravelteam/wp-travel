@@ -17,7 +17,7 @@ import generateRRule from "../_GenerateRRule";
 
 // WP Travel Functions.
 import { objectSum } from '../_wptravelFunctions';
-import { filteredTripDates } from '../_FilteredDates'; // Filter available dates in calendar.
+import { IsTourDate } from '../_IsTourDate'; // Filter available dates in calendar.
 
 // WP Travel Components.
 import Pricings from './CalendarView/Pricings';
@@ -403,7 +403,7 @@ const CalendarView = ( props ) => {
 		minDate: minDate,
 		maxDate: maxDate,
 		onChange: selectTripDate,
-		filterDate: filteredTripDates( props ),
+		filterDate: IsTourDate( props ),
 		locale:"DPLocale",
         startDate:null,
         endDate:null

@@ -11,7 +11,7 @@ import { wpTravelFormat, objectSum, GetConvertedPrice } from '../../../_wptravel
 
 const PaxSelector = ( props ) => {
 	// Component Props.
-	const { tripData, bookingData, updateBookingData, date } = props;
+	const { tripData, bookingData, updateBookingData, date, recurrindDate } = props;
 
 	// Trip Data.
     const {
@@ -133,6 +133,16 @@ const PaxSelector = ( props ) => {
 					let _inventory = inventory.find(i => i.date === moment(selectedDate).format('YYYY-MM-DD[T]HH:mm')); // selectedDate : date along with time.
 					let maxPax = isInventoryEnabled && _inventory && _inventory.pax_available ? _inventory.pax_available : pricing.max_pax; // Temp fixes for inventory disabled case.
 					let minPax = paxCounts[c.id] && selectedDateIds.includes( date.id ) ? paxCounts[c.id] : 0;
+
+					let selectedPax = typeof paxCounts[c.id] !== 'undefined' && selectedDateIds.includes( date.id ) ? paxCounts[c.id] : parseInt(c.default_pax);
+					if ( recurrindDate && recurrindDate !== selectedDate ) {
+						selectedPax = 0;
+						minPax = 0;
+						// let firstIndex = Object.keys( paxCounts )[0];
+						// maxPax = paxCounts[firstIndex];
+						// console.log( 'paxCounts', paxCounts );
+						// console.log( 'firstIndex', firstIndex );
+					}
 					
 					return <li key={i}>
 						<div className="text-left">
@@ -176,7 +186,7 @@ const PaxSelector = ( props ) => {
 							<div className="pricing-area">
 								<div className="qty-spinner">
 									<button onClick={handlePaxChange(c.id, -1)}>-</button>
-									<span>{typeof paxCounts[c.id] !== 'undefined' && selectedDateIds.includes( date.id ) ? paxCounts[c.id] : parseInt(c.default_pax)}</span>
+									<span>{selectedPax}</span>
 									<button onClick={handlePaxChange(c.id, 1)}>+</button>
 								</div>
 							</div>

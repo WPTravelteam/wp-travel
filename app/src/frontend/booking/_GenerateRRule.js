@@ -2,6 +2,10 @@
 const _ = lodash;
 import RRule from "rrule";
 
+/**]
+ * @param data array Date row form date table.
+ * @param startDate object Moment start date 
+ */
 const generateRRule = ( data, startDate ) => {
 	let ruleArgs = {
 		freq: RRule.DAILY,
