@@ -185,7 +185,7 @@ const PaxSelector = ( props ) => {
 							</span>}
 						</div>
 						<div className="text-right">
-							<span className="item-price">{c.is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat(c.regular_price) }}></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCategoryPrice(c.id, true)) }}></span>/{price_per_label}</span>
+							<span className="item-price">{c.is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat( GetConvertedPrice( c.regular_price ) ) }}></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCategoryPrice(c.id, true)) }}></span>/{price_per_label}</span>
 							<div className="pricing-area">
 								<div className="qty-spinner">
 									<button onClick={handlePaxChange(c.id, -1)}>-</button>
