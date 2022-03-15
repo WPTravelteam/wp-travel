@@ -55,7 +55,7 @@ const RecurringRepeator = ( props ) =>  {
                         selectedDateIds.includes( date.id ) && 
                         _.size( allPricings[ selectedPricingId ].trip_extras ) > 0 && 
                         objectSum( paxCounts ) > 0 && 
-                        recurrindDate === selectedDate &&
+                        ( ! recurrindDate || ( recurrindDate && sd == rd ) ) &&
                         ( ! nomineeTimes.length || ( nomineeTimes.length > 0 && selectedTime ) ) &&
                         <> <TripExtras {...props} /> </> 
                     }
