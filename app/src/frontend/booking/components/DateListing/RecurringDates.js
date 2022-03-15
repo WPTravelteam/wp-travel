@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useState } from '@wordpress/element';
+import { forwardRef, useEffect, useState, Fragment } from '@wordpress/element';
 import { CheckboxControl, Disabled } from '@wordpress/components';
 
 const __i18n = {
@@ -21,10 +21,11 @@ import PaxSelector from './SubComponents/PaxSelector';
 import TripExtras from './SubComponents/TripExtras';
 import TripTimes from './SubComponents/TripTimes';
 // import generateRRule from "../../_GenerateRRule";
+import InventoryNotice, { Notice } from '../../_InventoryNotice';
 
 
 const RecurringRepeator = ( props ) =>  {
-    const { index, _nomineePricings, date, recurrindDate, tripData, bookingData } = props;
+    const { innerIndex:index, _nomineePricings, date, recurrindDate, tripData, bookingData } = props;
 
     // Trip Data.
     const { pricings } = tripData;
@@ -32,6 +33,17 @@ const RecurringRepeator = ( props ) =>  {
 
     // Booking Data.
     const { selectedDate, selectedDateIds, selectedPricingId, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
+    let sd = moment(moment(selectedDate).format('YYYY-MM-DD')).unix();
+    let rd = moment(moment(recurrindDate).format('YYYY-MM-DD')).unix();
+
+    // pricingUnavailable && tripData.inventory && 'yes' === tripData.inventory.enable_trip_inventory && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) && ( ! nomineeTimes.length || ( nomineeTimes.length && selectedTime ) ) )
+    console.log( '---------------'  );
+    console.log( 'selectedDate', selectedDate, 'recurrindDate', recurrindDate  );
+    console.log( 'pricingUnavailable', pricingUnavailable );
+    console.log( 'tripData.inventory', tripData.inventory && 'yes' === tripData.inventory.enable_trip_inventory );
+    console.log( 'selectedDateIds.includes( date.id )', selectedDateIds.includes( date.id ) );
+    console.log( 'sd == rd', sd == rd );
+    console.log( '( nomineeTimes.length < 1 ) or ( nomineeTimes.length && selectedTime )', nomineeTimes.length < 1, nomineeTimes.length && selectedTime  );
 
     return <tr key={index}>
         <td data-label={__i18n.bookings.pricings_list_label}>
@@ -41,7 +53,10 @@ const RecurringRepeator = ( props ) =>  {
         <td data-label={__i18n.bookings.person}>
             <div className ="person-box">
                 { ! pricingUnavailable && <>
-                    { ( ! selectedPricingId || ( nomineeTimes.length > 1 && ! selectedTime ) || ! selectedDateIds.includes( date.id ) || recurrindDate !== selectedDate ) && <Disabled><PaxSelector { ...{ ...props, _nomineePricings, date, recurrindDate } } /></Disabled> || <PaxSelector { ...{ ...props, _nomineePricings, date, recurrindDate } } /> }
+                    { ( 
+                       selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) && ( ! nomineeTimes.length < 1 || ( nomineeTimes.length && selectedTime ) )  ) && 
+                        <PaxSelector { ...{ ...props, _nomineePricings, date, recurrindDate } } /> || 
+                        <Disabled><PaxSelector { ...{ ...props, _nomineePricings, date, recurrindDate } } /></Disabled> }
                     { 
                         selectedPricingId && 
                         selectedDateIds.includes( date.id ) && 
@@ -52,6 +67,9 @@ const RecurringRepeator = ( props ) =>  {
                         <> <TripExtras {...props} /> </> 
                     }
                     </> 
+                }
+                { pricingUnavailable && tripData.inventory && 'yes' === tripData.inventory.enable_trip_inventory && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) && ( ! nomineeTimes.length || ( nomineeTimes.length && selectedTime ) )  ) &&
+                    <Notice><InventoryNotice inventory={tripData.inventory} /></Notice>
                 }		
             </div>
         </td>
@@ -59,9 +77,9 @@ const RecurringRepeator = ( props ) =>  {
             <div className = "date-box">
                 <div className="date-time-wrapper">
                     <span className="start-date"><span>{__i18n.bookings.start_date}: </span>{moment(recurrindDate).format(_wp_travel.date_format_moment)}</span>
-                    {date.end_date && '0000-00-00' != date.end_date && <span className="end-date"><span>{__i18n.bookings.end_date}: </span>{moment(date.end_date).format(_wp_travel.date_format_moment)}</span> }
+                    {date.end_date && '0000-00-00' != date.end_date && ! recurrindDate && <span className="end-date"><span>{__i18n.bookings.end_date}: </span>{moment(date.end_date).format(_wp_travel.date_format_moment)}</span> }
                 </div>
-                {selectedDateIds.includes( date.id ) &&
+                {selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) &&
                     <TripTimes { ...props }  />
                 }
             </div>
@@ -71,7 +89,7 @@ const RecurringRepeator = ( props ) =>  {
 
 const RecurringDates = ( props ) => {
     // Component Props.
-	const { tripData, bookingData, date } = props;
+	const { tripData, bookingData, date, index } = props;
 
     // Trip Data.
     const {
@@ -90,6 +108,29 @@ const RecurringDates = ( props ) => {
         pagesCount: 0
     });
 
+    // Date changes step 1 to add rrule args.
+    useEffect( () => {
+        if ( ! rruleArgs ) {
+            let aaa = generateRRUleArgs(date);
+            if (Object.keys(aaa).length > 0) {
+                setRRuleArgs(aaa)
+            }
+        }
+    }, [date])
+
+    // Set dates if rrule args is set.
+    useEffect(() => {
+        if (rruleArgs) {
+            let _dates = generateRRule(rruleArgs);
+            console.log( 'rruleArgs', rruleArgs );
+            console.log( '_dates', _dates );
+            setRecurringDates(_dates)
+            setActiveRecurringDates(_dates)
+            setPagination(state => ({ ...state, activePage: 1, pagesCount: 1 }))
+        }
+    }, [rruleArgs]);
+
+
     const generateRRule = rruleArgs => {
         const rruleSet = new RRuleSet();
         rruleSet.rrule(
@@ -100,11 +141,35 @@ const RecurringDates = ( props ) => {
         return rruleSet.all();
     }
     const generateRRUleArgs = date => {
-        let startDate = date.start_date && new Date(date.start_date + ' 00:00:00' ) || new Date();
-        let currentDate = new Date();
-        // currentDate.setHours(0, 0, 0, 0);
+        let startDate = date.start_date && new Date( date.start_date + '00:00:00' ) || new Date();
+        let nowDate   = new Date();
+        nowDate.setHours(0, 0, 0, 0);
 
-        let rruleStartDate = currentDate < startDate ? startDate : currentDate;
+        let rruleStartDate = nowDate < startDate ? startDate : nowDate;
+        console.log('rruleStartDate', rruleStartDate);
+
+
+        let curretYear = rruleStartDate.getFullYear();
+        let currentDate = rruleStartDate.getDate();
+        let currentMonth = rruleStartDate.getMonth();
+    
+        // UTC Offset Fixes.
+        let totalOffsetMin = new Date(rruleStartDate).getTimezoneOffset();
+        let offsetHour = parseInt(totalOffsetMin/60);
+        let offsetMin = parseInt(totalOffsetMin%60);
+    
+        let currentHours = 0;
+        let currentMin = 0;
+        if ( offsetHour > 0 ) {
+            currentHours = offsetHour;
+            currentMin = offsetMin;
+        }
+        rruleStartDate = moment( new Date( Date.UTC(curretYear, currentMonth, currentDate, currentHours, currentMin, 0 ) ) ).utc();
+
+        
+        console.log( 'rruleStartDate', rruleStartDate );
+        // rruleStartDate     =  Date.UTC(rruleStartDate.getUTCFullYear(), rruleStartDate.getUTCMonth(), rruleStartDate.getUTCDate() );
+        // console.log( 'rruleStartDate', new Date( rruleStartDate ) );
 
         let ruleArgs = {
             freq: RRule.DAILY,
@@ -134,26 +199,9 @@ const RecurringDates = ( props ) => {
         else if (selectedDates.length > 0) {
             ruleArgs.bymonthday = selectedDates.map(md => parseInt(md));
         }
+        // console.log( 'ruleArgs', ruleArgs );
         return ruleArgs
     }
-    useEffect( () => {
-        if ( ! rruleArgs ) {
-            let aaa = generateRRUleArgs(date);
-            if (Object.keys(aaa).length > 0) {
-                setRRuleArgs(aaa)
-            }
-        }
-    }, [date])
-
-    useEffect(() => {
-        if (rruleArgs) {
-            let _dates = generateRRule(rruleArgs)
-            setRecurringDates(_dates)
-            setActiveRecurringDates(_dates)
-            setPagination(state => ({ ...state, activePage: 1, pagesCount: 1 }))
-        }
-    }, [rruleArgs]);
-
     const loadMoreDates = page => () => {
         let start = page < 0 ? (activePage - 2) * datesPerPage : activePage * datesPerPage
         let end = start + datesPerPage
@@ -170,6 +218,7 @@ const RecurringDates = ( props ) => {
             setRecurringDates([...dates, ..._dates])
             pagination.pagesCount = pagesCount + 1
         }
+        // console.log( '_dates', _dates );
         if (_dates.length > 0) {
             setActiveRecurringDates(_dates)
             pagination.activePage = activePage + page
@@ -178,16 +227,16 @@ const RecurringDates = ( props ) => {
     }
     const nextStartDate = dates.length > 0 && moment( dates[dates.length - 1] ).add(1, 'days').toDate();
 
-    return <>
+    return <Fragment key={index}>
     {
 		activeRecurringDates.length > 0 && <tbody className="tbody-table">
-		{ activeRecurringDates.map( ( recurrindDate, index ) => {
+		{ activeRecurringDates.map( ( recurrindDate, innerIndex ) => {
             let _nomineePricings = date.pricing_ids.split(',').map( id => id.trim() );
 			_nomineePricings = _.chain( _nomineePricings ).flatten().uniq().value().filter( p => p != '' && typeof allPricings[p] !== 'undefined' );
 			if ( ! _nomineePricings.length ) {
 				return <></>
 			}
-			return <RecurringRepeator { ...{ ...props, _nomineePricings, date, recurrindDate, index, _nomineePricings } } />
+			return <RecurringRepeator { ...{ ...props, _nomineePricings, date, recurrindDate, innerIndex, _nomineePricings } } />
         } ) }
 		</tbody>
     }
@@ -198,6 +247,6 @@ const RecurringDates = ( props ) => {
             { ( activePage >= pagesCount && activeRecurringDates.length >= datePerPage ) && <button onClick={loadMoreDates(1)} className="show-more">{__i18n.load_more}</button>}</td>
             </tr>
         </tfoot>
-    </>
+    </Fragment>
 }
 export default RecurringDates;

@@ -19,6 +19,7 @@ const IsTourDate = ( props ) => date => {
     } = tripData;
     const _dates = 'undefined' !== typeof dates && dates.length > 0 ? dates : [];
 
+    // console.log( 'Compare date', date );
     // Booking Data/state.
     const { selectedDate, excludedDateTimes } = bookingData;
 
@@ -70,7 +71,7 @@ const IsTourDate = ( props ) => date => {
     if ( excludedDates.length > 0 && excludedDates.includes(startDate.format('YYYY-MM-DD'))) {
         return false
     }
-
+    // console.log( _dates );
     const _date = _dates.find(data => {
         if (data.is_recurring) {
             let selectedYears = data.years ? data.years.split(",").filter(year => year != 'every_year').map(year => parseInt(year)) : [];
@@ -86,17 +87,19 @@ const IsTourDate = ( props ) => date => {
 
             let dateRules = generateRRule(data, startDate)
             if ( ! applyFilters( 'wpTravelRecurringCutofDateFilter', true, dateRules, tripData, date, data )  ) { // @since 4.3.1
-                return
+                return false;
             }
+            // console.log(dateRules, startDate);
             return dateRules.find(da => moment(moment(da).format("YYYY-MM-DD")).unix() === moment(moment(date).format('YYYY-MM-DD')).unix()) instanceof Date
         } else if( data.start_date ) {
             if ( ! applyFilters( 'wpTravelCutofDateFilter', true, tripData, date, data )  ) { // @since 4.3.1
-                return
+                return false;
             }
             return moment(date).isSame(moment(data.start_date))
         }
         return false
     })
+    // console.log( date, _date );
     return _date && 'undefined' !== typeof _date.id
 }
 export { IsTourDate }

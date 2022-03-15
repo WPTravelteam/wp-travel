@@ -23,6 +23,7 @@ import { IsTourDate } from '../_IsTourDate'; // Filter available dates in calend
 import DateListingTableHead from './DateListing/DateListingTableHead';
 import NonRecurringDates from './DateListing/NonRecurringDates';
 import RecurringDates from './DateListing/RecurringDates';
+import InventoryNotice, { Notice } from '../_InventoryNotice';
 
 const DateListing = ( props ) => {
 	// Component Props.
@@ -137,9 +138,35 @@ const DateListing = ( props ) => {
 		updateBookingData( _bookingData );
 	}, [ _inventoryData ]); 
 
+	// Lifecycles. [ This will only trigger if Extras Data changed ]. Fix real time store update issue with trip time change & single Pricing.
+    useEffect(() => {
+		if ( ! selectedPricingId ) {
+			updateBookingData( { isLoading:false } )
+			return
+		}
+		let _bookingData = {
+			isLoading:false,
+			pricingUnavailable:false,
+		};
+
+		if ( _nomineeTripExtras.length > 0 ) {
+			// Default extras values.
+			let _tripExtras = {}
+			_nomineeTripExtras.forEach(x => {
+				_tripExtras = { ..._tripExtras, [x.id]: x.is_required ? 1 : 0 }
+			})
+			_bookingData = {..._bookingData, nomineeTripExtras:_nomineeTripExtras, tripExtras: _tripExtras }
+		}
+		
+		updateBookingData( _bookingData );
+	}, [ _nomineeTripExtras ]); 
+
 	const bookingWidgetUseEffects = ( _bookingData ) => {
+		// console.log( 'date listing pricing change effect 1' );
+		// console.log( nomineePricingIds );
 		if ( nomineePricingIds.length > 0 ) {
 			let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
+			// console.log( 'times', times );
 			if ( times.length > 0 ) {
 				let _times = times
 					.map(time => {

@@ -23,25 +23,33 @@ const Pricings = ( props ) => {
 
     // Booking Data.
     const { isLoading, selectedDate, selectedDateIds, nomineePricingIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
-    return <>
+	
+	return <>
 		{ 'undefined' != typeof _nomineePricings && _nomineePricings.length > 0 && <>
 			{ 
 				_nomineePricings.map( (pricingId, pricingIndex) => {
+					let sd = moment(moment(selectedDate).format('YYYY-MM-DD')).unix();
+					let rd = moment(moment(recurrindDate).format('YYYY-MM-DD')).unix();
 					return <CheckboxControl
 						key={pricingIndex}
 						label={allPricings[pricingId].title}
-						checked={ selectedPricingId == pricingId && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && recurrindDate === selectedDate ) ) }
+						checked={ selectedPricingId == pricingId && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) }
 						onChange={ ( value ) => {
 							if ( value ) {
 								let newSelectedDate = new Date( date.start_date + ' 00:00:00' ); // Non Recurring.
 								if ( 'undefined' !== typeof recurrindDate ) {
 									newSelectedDate = recurrindDate; // Recurring
 								}
+								let _selectedDateIds   = [date.id];
+								let _nomineePricingIds = _selectedDateIds.map( id => datesById[id].pricing_ids.split(',').map( id => id.trim() ) )
+								_nomineePricingIds     = _.chain( _nomineePricingIds ).flatten().uniq().value().filter( p => p != '' && typeof allPricings[p] !== 'undefined' )
+
 								updateBookingData({
 									selectedPricingId:pricingId,
 									selectedPricing:allPricings[pricingId].title,
 									selectedDate: newSelectedDate,
-									selectedDateIds:[date.id]
+									selectedDateIds:_selectedDateIds,
+									nomineePricingIds:_nomineePricingIds
 								});
 							} else {
 								updateBookingData({

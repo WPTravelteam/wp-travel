@@ -133,9 +133,11 @@ const PaxSelector = ( props ) => {
 					let _inventory = inventory.find(i => i.date === moment(selectedDate).format('YYYY-MM-DD[T]HH:mm')); // selectedDate : date along with time.
 					let maxPax = isInventoryEnabled && _inventory && _inventory.pax_available ? _inventory.pax_available : pricing.max_pax; // Temp fixes for inventory disabled case.
 					let minPax = paxCounts[c.id] && selectedDateIds.includes( date.id ) ? paxCounts[c.id] : 0;
+					let sd     = moment(moment(selectedDate).format('YYYY-MM-DD')).unix();
+					let rd     = moment(moment(recurrindDate).format('YYYY-MM-DD')).unix();
 
 					let selectedPax = typeof paxCounts[c.id] !== 'undefined' && selectedDateIds.includes( date.id ) ? paxCounts[c.id] : parseInt(c.default_pax);
-					if ( recurrindDate && recurrindDate !== selectedDate ) {
+					if ( recurrindDate && sd !== rd ) {
 						selectedPax = 0;
 						minPax = 0;
 						// let firstIndex = Object.keys( paxCounts )[0];
@@ -143,6 +145,7 @@ const PaxSelector = ( props ) => {
 						// console.log( 'paxCounts', paxCounts );
 						// console.log( 'firstIndex', firstIndex );
 					}
+
 					
 					return <li key={i}>
 						<div className="text-left">
