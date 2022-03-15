@@ -47,7 +47,7 @@ const RecurringRepeator = ( props ) =>  {
             <div className ="person-box">
                 { ! pricingUnavailable && <>
                     { ( 
-                       selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) && ( ! nomineeTimes.length < 1 || ( nomineeTimes.length && selectedTime ) )  ) && 
+                       selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) && ( ! nomineeTimes.length || ( nomineeTimes.length && selectedTime ) )  ) && 
                         <PaxSelector { ...{ ...props, _nomineePricings, date, recurrindDate } } /> || 
                         <Disabled><PaxSelector { ...{ ...props, _nomineePricings, date, recurrindDate } } /></Disabled> }
                     { 
