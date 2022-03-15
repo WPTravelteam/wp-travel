@@ -110,7 +110,7 @@ const RecurringDates = ( props ) => {
                 setRRuleArgs(aaa)
             }
 
-            // Total Number of page calculation.
+            // Total Number of page calculation. [ support Upto 50 pages ] Fetching all Data in case of no end date will cause site slow issue.
 			let alldateRruleArgs = generateRRUleArgs( date, true );
             let _tempDates  = generateRRule( alldateRruleArgs );
             let tp = _tempDates.length > 0 ? _tempDates.length / datePerPage : 1; // Total Page
@@ -141,7 +141,7 @@ const RecurringDates = ( props ) => {
         return rruleSet.all();
     }
     const generateRRUleArgs = ( date, showAll ) => {
-        let startDate = date.start_date && new Date( date.start_date + '00:00:00' ) || new Date();
+        let startDate = date.start_date && new Date( date.start_date + ' 00:00:00' ) || new Date();
         let nowDate   = new Date();
         nowDate.setHours(0, 0, 0, 0);
 
@@ -163,19 +163,15 @@ const RecurringDates = ( props ) => {
             currentMin = offsetMin;
         }
         rruleStartDate = moment( new Date( Date.UTC(curretYear, currentMonth, currentDate, currentHours, currentMin, 0 ) ) ).utc();
-
         
-        // console.log( 'rruleStartDate', rruleStartDate );
-        // rruleStartDate     =  Date.UTC(rruleStartDate.getUTCFullYear(), rruleStartDate.getUTCMonth(), rruleStartDate.getUTCDate() );
-        // console.log( 'rruleStartDate', new Date( rruleStartDate ) );
-
         let ruleArgs = {
             freq: RRule.DAILY,
             count: datePerPage,
             dtstart: new Date(rruleStartDate),
         };
-		if ( showAll ) {
-			delete ruleArgs.count;
+		if ( showAll ) { // This args is only For Pagination.
+			// delete ruleArgs.count;
+            ruleArgs.count = ( 50 * datePerPage ); // Support Max 50 pages i.e. 500 records.
 		}
         if ( date.end_date && '0000-00-00' != date.end_date ) { // if has end date.
             let endDate = new Date(date.end_date)
@@ -200,7 +196,6 @@ const RecurringDates = ( props ) => {
         else if (selectedDates.length > 0) {
             ruleArgs.bymonthday = selectedDates.map(md => parseInt(md));
         }
-        // console.log( 'ruleArgs', ruleArgs );
         return ruleArgs
     }
     const loadMoreDates = page => () => {
