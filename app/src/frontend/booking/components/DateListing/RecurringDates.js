@@ -37,14 +37,7 @@ const RecurringRepeator = ( props ) =>  {
     let rd = moment(moment(recurrindDate).format('YYYY-MM-DD')).unix();
 
     // pricingUnavailable && tripData.inventory && 'yes' === tripData.inventory.enable_trip_inventory && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) && ( ! nomineeTimes.length || ( nomineeTimes.length && selectedTime ) ) )
-    console.log( '---------------'  );
-    console.log( 'selectedDate', selectedDate, 'recurrindDate', recurrindDate  );
-    console.log( 'pricingUnavailable', pricingUnavailable );
-    console.log( 'tripData.inventory', tripData.inventory && 'yes' === tripData.inventory.enable_trip_inventory );
-    console.log( 'selectedDateIds.includes( date.id )', selectedDateIds.includes( date.id ) );
-    console.log( 'sd == rd', sd == rd );
-    console.log( '( nomineeTimes.length < 1 ) or ( nomineeTimes.length && selectedTime )', nomineeTimes.length < 1, nomineeTimes.length && selectedTime  );
-
+    
     return <tr key={index}>
         <td data-label={__i18n.bookings.pricings_list_label}>
             {/* _nomineePricings not updated in store/state because there are multiple _nomineePricings as per date so just a variable. */}
@@ -99,13 +92,14 @@ const RecurringDates = ( props ) => {
     const allPricings        = pricings && _.keyBy( pricings, p => p.id ) // Need object structure because pricing id may not be in sequencial order.
 
     // Recurring logic form old components
-    const [dates, setRecurringDates] = useState([])
-    const [activeRecurringDates, setActiveRecurringDates] = useState([])
+    const [dates, setRecurringDates] = useState([]); // New dates will push here when clicking load more.
+    const [activeRecurringDates, setActiveRecurringDates] = useState([]); // curren page dates.
     const [rruleArgs, setRRuleArgs] = useState(null)
-    const [{ activePage, datesPerPage, pagesCount }, setPagination] = useState({
-        activePage: 0,
+    const [{ activePage, datesPerPage, pagesCount, totalPages }, setPagination] = useState({
+        activePage: 0, // Current Page
         datesPerPage: datePerPage,
-        pagesCount: 0
+        pagesCount: 0, // Load more click count [How many times load more clicked]
+        totalPages: 1
     });
 
     // Date changes step 1 to add rrule args.
@@ -115,6 +109,14 @@ const RecurringDates = ( props ) => {
             if (Object.keys(aaa).length > 0) {
                 setRRuleArgs(aaa)
             }
+
+            // Total Number of page calculation.
+			let alldateRruleArgs = generateRRUleArgs( date, true );
+            let _tempDates  = generateRRule( alldateRruleArgs );
+            let tp = _tempDates.length > 0 ? _tempDates.length / datePerPage : 1; // Total Page
+                tp =  Math.ceil(tp);
+            setPagination(state => ({ ...state, totalPages: tp }))
+
         }
     }, [date])
 
@@ -122,8 +124,6 @@ const RecurringDates = ( props ) => {
     useEffect(() => {
         if (rruleArgs) {
             let _dates = generateRRule(rruleArgs);
-            console.log( 'rruleArgs', rruleArgs );
-            console.log( '_dates', _dates );
             setRecurringDates(_dates)
             setActiveRecurringDates(_dates)
             setPagination(state => ({ ...state, activePage: 1, pagesCount: 1 }))
@@ -140,14 +140,12 @@ const RecurringDates = ( props ) => {
         // rruleSet.exdate( exc )
         return rruleSet.all();
     }
-    const generateRRUleArgs = date => {
+    const generateRRUleArgs = ( date, showAll ) => {
         let startDate = date.start_date && new Date( date.start_date + '00:00:00' ) || new Date();
         let nowDate   = new Date();
         nowDate.setHours(0, 0, 0, 0);
 
         let rruleStartDate = nowDate < startDate ? startDate : nowDate;
-        console.log('rruleStartDate', rruleStartDate);
-
 
         let curretYear = rruleStartDate.getFullYear();
         let currentDate = rruleStartDate.getDate();
@@ -167,7 +165,7 @@ const RecurringDates = ( props ) => {
         rruleStartDate = moment( new Date( Date.UTC(curretYear, currentMonth, currentDate, currentHours, currentMin, 0 ) ) ).utc();
 
         
-        console.log( 'rruleStartDate', rruleStartDate );
+        // console.log( 'rruleStartDate', rruleStartDate );
         // rruleStartDate     =  Date.UTC(rruleStartDate.getUTCFullYear(), rruleStartDate.getUTCMonth(), rruleStartDate.getUTCDate() );
         // console.log( 'rruleStartDate', new Date( rruleStartDate ) );
 
@@ -176,6 +174,9 @@ const RecurringDates = ( props ) => {
             count: datePerPage,
             dtstart: new Date(rruleStartDate),
         };
+		if ( showAll ) {
+			delete ruleArgs.count;
+		}
         if ( date.end_date && '0000-00-00' != date.end_date ) { // if has end date.
             let endDate = new Date(date.end_date)
             ruleArgs.until = endDate
@@ -218,7 +219,6 @@ const RecurringDates = ( props ) => {
             setRecurringDates([...dates, ..._dates])
             pagination.pagesCount = pagesCount + 1
         }
-        // console.log( '_dates', _dates );
         if (_dates.length > 0) {
             setActiveRecurringDates(_dates)
             pagination.activePage = activePage + page
@@ -240,11 +240,12 @@ const RecurringDates = ( props ) => {
         } ) }
 		</tbody>
     }
-        <tfoot className="wp-travel-recurring-dates-nav-btns">
-           <tr> 
-               <td colSpan="3">{activePage > 1 && <button onClick={loadMoreDates(-1)} className="prev">{__i18n.previous}</button>}
-            {activePage < pagesCount && activePage >= 1 && <button className="next" onClick={loadMoreDates(1)}>{__i18n.next}</button>}
-            { ( activePage >= pagesCount && activeRecurringDates.length >= datePerPage ) && <button onClick={loadMoreDates(1)} className="show-more">{__i18n.load_more}</button>}</td>
+		<tfoot className="wp-travel-recurring-dates-nav-btns">
+			<tr> 
+				<td colSpan="3">
+					{activePage > 1 && <button onClick={loadMoreDates(-1)} className="prev">{__i18n.previous}</button>}
+					{activePage < pagesCount && activePage >= 1 && <button className="next" onClick={loadMoreDates(1)}>{__i18n.next}</button>}
+					{ ( activePage >= pagesCount && activeRecurringDates.length >= datePerPage && activePage < totalPages ) && <button onClick={loadMoreDates(1)} className="show-more">{__i18n.load_more}</button>}</td>
             </tr>
         </tfoot>
     </Fragment>
