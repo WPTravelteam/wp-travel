@@ -107,6 +107,7 @@ class WpTravel_Admin_Assets {
 			wp_enqueue_style( 'wptravel-admin-enquiry' );
 			wp_enqueue_script( 'wptravel-admin-enquiry' );
 		}
+		wp_enqueue_style( 'wptravel-admin-widgets' );
 	}
 }
 

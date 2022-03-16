@@ -551,3 +551,16 @@ td {
 		position: relative;
 	}
 }
+
+// Trip Facts admin option
+.wp-travel-trip-fact {
+	.wp-travel-sortable-component {
+		.components-panel__row {
+			.wp-travel-checkbox-wrapper {
+				.components-base-control {
+					margin-block: .2em;
+				}
+			}
+		}
+	}
+}
