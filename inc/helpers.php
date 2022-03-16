@@ -2517,7 +2517,13 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 												if ( $sale_price ) {
 													$price = $sale_price;
 												}
-												$price = WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $price );
+												// $price = WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $price );
+												// Quick fix for extras price display in admin booking section. above helper method will not work in admin part.
+												// Note : Conversion of trip extras on every page load will cause wrong extras price. because conversion rate will change everyday.
+												// @todo need to add extras price in cart data while adding it in cart.
+												if ( function_exists( 'wp_travel_multiple_currency_convert_price' ) ) {
+													$price = wp_travel_multiple_currency_convert_price( $price );
+												}
 												$qty   = isset( $extras['qty'][ $k ] ) && $extras['qty'][ $k ] ? $extras['qty'][ $k ] : 1;
 
 												$total = $price * $qty;
