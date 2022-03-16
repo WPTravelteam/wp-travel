@@ -7,8 +7,6 @@ import RRule from "rrule";
  * @param startDate object Moment start date 
  */
 const generateRRule = ( data, startDate ) => {
-	// console.log('test');
-	// console.log( 'startDate', startDate );
 	let ruleArgs = {
 		freq: RRule.DAILY,
 		dtstart: startDate.toDate(),

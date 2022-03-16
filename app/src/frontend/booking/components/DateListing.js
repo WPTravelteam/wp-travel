@@ -162,11 +162,8 @@ const DateListing = ( props ) => {
 	}, [ _nomineeTripExtras ]); 
 
 	const bookingWidgetUseEffects = ( _bookingData ) => {
-		// console.log( 'date listing pricing change effect 1' );
-		// console.log( nomineePricingIds );
 		if ( nomineePricingIds.length > 0 ) {
 			let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
-			// console.log( 'times', times );
 			if ( times.length > 0 ) {
 				let _times = times
 					.map(time => {

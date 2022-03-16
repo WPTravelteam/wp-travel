@@ -11,7 +11,7 @@ import { wpTravelFormat, objectSum, GetConvertedPrice } from '../../../_wptravel
 
 const PaxSelector = ( props ) => {
 	// Component Props.
-	const { tripData, bookingData, updateBookingData, date, recurrindDate } = props;
+	const { tripData, bookingData, updateBookingData, date, recurrindDate, _nomineePricings } = props;
 
 	// Trip Data.
     const {
@@ -29,41 +29,31 @@ const PaxSelector = ( props ) => {
     // Booking Data.
     const { selectedDate, selectedDateIds, selectedPricingId, excludedDateTimes, pricingUnavailable, inventory, paxCounts } = bookingData;
 
-
-	let pricing = allPricings[selectedPricingId];
-	// If Pricing is not selected then Need to display Pax selector as per First Pricing from pricings list.
-	if ( pricings.length > 0 ) {
-		let firstIndex = Object.keys( allPricings )[0];
-		if ( ! selectedPricingId ) {
-			pricing = allPricings[firstIndex];
-		}
-	}
-	
-
-	let categories = pricing && pricing.categories || []
-	const getCategoryPrice = (categoryId, single) => { // This function handles group discounts as well
+	const getCategoryPrice = (categoryId, single, returnFirstPrice ) => { // This function handles group discounts as well
 		let category = pricing.categories.find(c => c.id == categoryId)
 		if (!category) {
 			return
 		}
+
+		let _pricing = pricing;
+		if ( returnFirstPrice ) {
+			_pricing = firstPricing;
+		}
+
 		let count = paxCounts[categoryId] || 0
 		let price = category && category.is_sale ? category.sale_price : category.regular_price
 
-		if ( 'undefined' != typeof pricing.has_group_price && pricing.has_group_price && pricing.group_prices && pricing.group_prices.length > 0  ) {
+		if ( 'undefined' != typeof _pricing.has_group_price && _pricing.has_group_price && _pricing.group_prices && _pricing.group_prices.length > 0  ) {
 			let totalPax = objectSum(paxCounts);
-			let groupPrices = _.orderBy(pricing.group_prices, gp => parseInt(gp.max_pax))
+			let groupPrices = _.orderBy(_pricing.group_prices, gp => parseInt(gp.max_pax))
 			let group_price = groupPrices.find(gp => parseInt(gp.min_pax) <= totalPax && parseInt(gp.max_pax) >= totalPax)
 			if (group_price && group_price.price) {
 				if (single)
 					return  GetConvertedPrice( parseFloat(group_price.price) ); // Add Multiple currency support to get converted price.
-					// return parseFloat(group_price.price)
-				// price = 'group' === category.price_per ? (totalPax > 0 ? parseFloat(group_price.price) : 0) : parseFloat(group_price.price) * totalPax
 				price =  parseFloat(group_price.price) * totalPax
 			} else {
 				if (single)
 					return  GetConvertedPrice( parseFloat(price) ); // Add Multiple currency support to get converted price.
-					// return parseFloat(price)
-				// price = 'group' === category.price_per ? (totalPax > 0 ? parseFloat(price) : 0) : parseFloat(price) * totalPax
 				price = parseFloat(price) * totalPax
 			}
 		} else if (category.has_group_price && category.group_prices.length > 0) { // If has group price/discount.
@@ -77,18 +67,44 @@ const PaxSelector = ( props ) => {
 			} else {
 				if (single)
 					return  GetConvertedPrice( parseFloat(price) ); // Add Multiple currency support to get converted price.
-					// return parseFloat(price)
 				price = 'group' === category.price_per ? (count > 0 ? parseFloat(price) : 0) : parseFloat(price) * count
 			}
 		} else {
 			if (single)
 				return GetConvertedPrice( parseFloat(price) ); // Add Multiple currency support to get converted price.
-				// return parseFloat(price)
 			price = 'group' === category.price_per ? (count > 0 ? parseFloat(price) : 0) : parseFloat(price) * count
 		}
 		price = price || 0;
 		return GetConvertedPrice( price ); // Add Multiple currency support to get converted price.
 	}
+
+	let sd     = moment(moment(selectedDate).format('YYYY-MM-DD')).unix();
+	let rd     = moment(moment(recurrindDate).format('YYYY-MM-DD')).unix();
+
+	let firstIndex = _nomineePricings[0];
+	let pricing    = [];
+	
+	// Pricing Not Selected or ( not recurring date && for not selected rows ) or ( recurring date but not selected rows )
+	if ( ( pricings.length > 0  && ! selectedPricingId ) || ( ! recurrindDate && ! selectedDateIds.includes( date.id ) ) || ( recurrindDate && sd !== rd ) ) {
+		pricing = allPricings[firstIndex];
+	} else {
+		pricing = allPricings[selectedPricingId];
+	}
+	// Fetch Default First Pricing and Category 
+	// let firstPricing    = {};
+	// let firstCagegories = [];
+	// let firstCagegory   = [];
+	// let firstPrice      = 0;
+	// let firstCagegoryId = null;
+	// // If Pricing is not selected then Need to display Pax selector as per First Pricing from pricings list.
+	// if ( pricings.length > 0 ) {
+	// 	firstPricing    = allPricings[firstIndex];
+	// 	firstCagegories = 'undefined' != typeof firstPricing && firstPricing.categories;
+	// 	firstCagegory   = firstCagegories.length > 0 ? firstCagegories[0] : [];
+	// 	firstCagegoryId = firstCagegory && firstCagegory.id ? firstCagegory.id : null;
+	// 	firstPrice      = firstCagegoryId ? getCategoryPrice(  firstCagegoryId, true, true ) : 0;
+	// }
+	let categories = pricing && pricing.categories || []
 
 	const handlePaxChange = (id, value) => e => {
 		let count = paxCounts[id] + value < 0 ? 0 : paxCounts[id] + value
@@ -122,7 +138,7 @@ const PaxSelector = ( props ) => {
 		<ul className="wp-travel-booking__trip-option-list">
 			{
 				categories.map((c, i) => {
-					let price = c.is_sale ? c.sale_price : c.regular_price
+					let price = getCategoryPrice(c.id, true);
 					if ( 'undefined' == typeof c.term_info ) { // Fixes : index title of undefined.
 						return <></>
 					}
@@ -131,22 +147,16 @@ const PaxSelector = ( props ) => {
 						price_per_label = __i18n.price_per_labels[price_per_label];
 					}
 					let _inventory = inventory.find(i => i.date === moment(selectedDate).format('YYYY-MM-DD[T]HH:mm')); // selectedDate : date along with time.
-					let maxPax = isInventoryEnabled && _inventory && _inventory.pax_available ? _inventory.pax_available : pricing.max_pax; // Temp fixes for inventory disabled case.
+					let maxPax = isInventoryEnabled && _inventory && _inventory.pax_available && selectedDateIds.includes( date.id ) ? _inventory.pax_available : pricing.max_pax; // Temp fixes for inventory disabled case.
+					
 					let minPax = paxCounts[c.id] && selectedDateIds.includes( date.id ) ? paxCounts[c.id] : 0;
-					let sd     = moment(moment(selectedDate).format('YYYY-MM-DD')).unix();
-					let rd     = moment(moment(recurrindDate).format('YYYY-MM-DD')).unix();
 
 					let selectedPax = typeof paxCounts[c.id] !== 'undefined' && selectedDateIds.includes( date.id ) ? paxCounts[c.id] : parseInt(c.default_pax);
 					if ( recurrindDate && sd !== rd ) {
 						selectedPax = 0;
-						minPax = 0;
-						// let firstIndex = Object.keys( paxCounts )[0];
-						// maxPax = paxCounts[firstIndex];
-						// console.log( 'paxCounts', paxCounts );
-						// console.log( 'firstIndex', firstIndex );
+						minPax      = 0;
 					}
 
-					
 					return <li key={i}>
 						<div className="text-left">
 							<strong>
@@ -185,7 +195,7 @@ const PaxSelector = ( props ) => {
 							</span>}
 						</div>
 						<div className="text-right">
-							<span className="item-price">{c.is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat( GetConvertedPrice( c.regular_price ) ) }}></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCategoryPrice(c.id, true)) }}></span>/{price_per_label}</span>
+							<span className="item-price">{c.is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat( GetConvertedPrice( c.regular_price ) ) }}></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat( price ) }}></span>/{price_per_label}</span>
 							<div className="pricing-area">
 								<div className="qty-spinner">
 									<button onClick={handlePaxChange(c.id, -1)}>-</button>
