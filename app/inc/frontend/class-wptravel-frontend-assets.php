@@ -327,6 +327,12 @@ class WpTravel_Frontend_Assets {
 				'ver'   => WP_TRAVEL_VERSION,
 				'media' => 'all',
 			),
+			'wptravel-admin-widgets' => array(
+				'src'   => self::$app_path . '/build/wptravel-admin-widgets.css',
+				'deps'  => array(),
+				'ver'   => WP_TRAVEL_VERSION,
+				'media' => 'all',
+			),
 		);
 
 		// for GMAP.

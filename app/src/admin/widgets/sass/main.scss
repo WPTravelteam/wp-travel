@@ -1,0 +1,7 @@
+.block-editor-block-list__block .block-list-appender {
+    position: relative;
+    right: unset;
+    &.wp-block {
+        width: 100%;
+    }
+}
