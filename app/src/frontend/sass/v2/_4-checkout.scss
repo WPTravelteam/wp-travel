@@ -72,6 +72,9 @@
 								cursor: pointer;
 								width: auto;
 							}
+							[id*="error_container-"] {
+								display: inherit;
+							}
 						}
 					}
 				}
@@ -339,7 +342,7 @@
 		select,
 		textarea {
 			width: 100%;
-			margin-bottom: 15px;
+			// margin-bottom: 15px;
 		}
 
 		.parsley-errors-list {

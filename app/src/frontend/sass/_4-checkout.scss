@@ -80,6 +80,9 @@
 									margin-bottom: 15px;
 								}
 							}
+							[id*="error_container-"] {
+								display: inherit;
+							}
 						}
 					}
 				}
