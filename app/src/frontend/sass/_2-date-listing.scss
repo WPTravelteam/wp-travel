@@ -1330,6 +1330,7 @@ $defaultColor: #3399ff;
 		}
 		.components-disabled {
 			opacity: 0.5;
+			position: unset;
 		}
 	}
 	@media (max-width: 575px) {

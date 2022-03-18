@@ -37,7 +37,7 @@
 	//opacity: 0.2;
 	background-color: rgba(200, 200, 200, 0.1);
 	position: relative;
-	&::before {
+	&::after {
 		content: "";
 		position: absolute;
 		width: 100%;
@@ -45,8 +45,8 @@
 		top: 0;
 		right: 0;
 		z-index: 1;
-		background: #000;
-		opacity: .5;
+		background: #ababab;
+		opacity: .1;
 	}
 }
 
