@@ -36,7 +36,7 @@ const Pricings = ( props ) => {
 					return <CheckboxControl
 						key={pricingIndex}
 						label={allPricings[pricingId].title}
-						checked={ selectedPricingId == pricingId && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) }
+						checked={ selectedPricingId == pricingId && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) && ! isLoading}
 						onChange={ ( value ) => {
 							if ( value ) {
 								let newSelectedDate = new Date( date.start_date + ' 00:00:00' ); // Non Recurring.
@@ -53,7 +53,7 @@ const Pricings = ( props ) => {
 									selectedDate: newSelectedDate,
 									selectedDateIds:_selectedDateIds,
 									nomineePricingIds:_nomineePricingIds,
-									isLoading:true
+									isLoading:true,
 								});
 							} else {
 								updateBookingData({
@@ -63,7 +63,8 @@ const Pricings = ( props ) => {
 									selectedDateIds:[],
 									// Additional.
 									nomineeTimes:[],
-									selectedTime:null
+									selectedTime:null,
+									isLoading:true,
 								});
 							}
 						}}

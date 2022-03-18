@@ -54,7 +54,7 @@ const DateListing = ( props ) => {
 	const [_nomineeTripExtras, _setNomineeTripExtras] = useState([]);
 	
     // Lifecycles. [ This will only trigger if pricing is selected or changed ]
-    useEffect(() => {
+    useEffect( async () => {
 		if ( ! selectedPricingId ) {
 			updateBookingData( { isLoading:false } )
 			return
@@ -66,11 +66,11 @@ const DateListing = ( props ) => {
 			selectedTime: null,
 		};
 		// after selecting pricing. need to check available time for selected pricing as well. Single pricing id case is already checked in date changes lifecycle below.
-		bookingWidgetUseEffects( _bookingData );
+		await bookingWidgetUseEffects( _bookingData );
 	}, [ selectedPricingId ]); 
 
 	// Lifecycles. [ This will only trigger if time is selected or changed ]
-    useEffect(() => {
+    useEffect( async () => {
 		if ( ! selectedPricingId ) {
 			updateBookingData( { isLoading:false } )
 			return
@@ -81,10 +81,10 @@ const DateListing = ( props ) => {
 		};
 		// Note: This effect is same as date changes lifecycle effect.
 		// after selecting pricing. need to check available time for selected pricing as well. Single pricing id case is already checked in date changes lifecycle below.
-		bookingWidgetUseEffects( _bookingData );
+		await bookingWidgetUseEffects( _bookingData );
 	}, [ selectedTime ]);
 	// Date changes Lifecycle. [Only For fixed Departure which have date id]
-	useEffect(() => {
+	useEffect( async () => {
 		// If date changes has selectedPricingId, that mean selected date has only one pricing. So nomineeTimes for single date is calculated from here.
 		if ( ! selectedPricingId ) {
 			updateBookingData( { isLoading:false } )
@@ -96,7 +96,7 @@ const DateListing = ( props ) => {
 			nomineeTimes: [],
 			selectedTime: null,
 		};
-		bookingWidgetUseEffects( _bookingData );
+		await bookingWidgetUseEffects( _bookingData );
 		
 	}, [ selectedDateIds ]);
 
@@ -107,8 +107,6 @@ const DateListing = ( props ) => {
 			return
 		}
 		let _bookingData = {
-			// isLoading:false,
-			pricingUnavailable:false,
 		};
 
 		let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
@@ -146,7 +144,6 @@ const DateListing = ( props ) => {
 		}
 		let _bookingData = {
 			isLoading:false,
-			pricingUnavailable:false,
 		};
 
 		if ( _nomineeTripExtras.length > 0 ) {
@@ -161,7 +158,7 @@ const DateListing = ( props ) => {
 		updateBookingData( _bookingData );
 	}, [ _nomineeTripExtras ]); 
 
-	const bookingWidgetUseEffects = ( _bookingData ) => {
+	const bookingWidgetUseEffects = async ( _bookingData ) => {
 		if ( nomineePricingIds.length > 0 ) {
 			let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
 			if ( times.length > 0 ) {
@@ -311,6 +308,8 @@ const DateListing = ( props ) => {
 					_setNomineeTripExtras( result.data.trip_extras );
 				}
 			} )
+		} else {
+			_setNomineeTripExtras( [] );
 		}
 	}
 
