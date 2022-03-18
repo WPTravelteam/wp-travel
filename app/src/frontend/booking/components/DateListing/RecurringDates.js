@@ -37,7 +37,8 @@ const RecurringRepeator = ( props ) =>  {
     let sd = moment(moment(selectedDate).format('YYYY-MM-DD')).unix();
     let rd = moment(moment(recurrindDate).format('YYYY-MM-DD')).unix();
 
-    return <tr key={index} className="">
+    let loadingClass = isLoading && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) ? 'wptravel-loading' : '';
+    return <tr key={index} className={loadingClass}>
         <td data-label={__i18n.bookings.pricings_list_label}>
             {/* _nomineePricings not updated in store/state because there are multiple _nomineePricings as per date so just a variable. */}
             {IsTourDate(props)(recurrindDate) && <Pricings { ...props } /> || <Disabled><Pricings { ...props } /></Disabled> }

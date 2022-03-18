@@ -40,17 +40,18 @@ const NonRecurringDates = ( props ) => {
 
     // Booking Data.
     const { isLoading, selectedDate, selectedDateIds, nomineePricingIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
-
+	
     return <>
     {
 		nonRecurringDates.length > 0 && <tbody className="tbody-table">
 		{ nonRecurringDates.map( ( date, index ) => {
+			let loadingClass = isLoading && selectedDateIds.includes( date.id ) ? 'wptravel-loading' : '';
 			let _nomineePricings = date.pricing_ids.split(',').map( id => id.trim() );
 			_nomineePricings = _.chain( _nomineePricings ).flatten().uniq().value().filter( p => p != '' && typeof allPricings[p] !== 'undefined' );
 			if ( ! _nomineePricings.length ) {
 				return <Fragment key={index}></Fragment>
 			}
-			return <tr key={index}>
+			return <tr key={index} className={loadingClass}>
 				<td data-label={__i18n.bookings.pricings_list_label}>
 					{/* _nomineePricings not updated in store/state because there are multiple _nomineePricings as per date so just a variable. */}
 					<Pricings { ...{ ...props, _nomineePricings, date } }  />
