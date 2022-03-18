@@ -73,12 +73,28 @@
 	font-size: 12px;
 }
 
+.wptravel-recurring-dates {
+	.person-box {
+		.wp-travel-booking__notice.is-info {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			column-gap: .5em;
+			> svg {
+				width: 24px;
+				height: auto;
+			}
+		}
+	}
+}
+
 .wp-travel-sold-out {
 	border: 1px solid;
 	color: #ff4d4d;
 	font-weight: 500;
 	margin-bottom: 0;
 	text-align: center;
+	padding-inline: 5px;
 
 	.wp-travel-booking-enquiry {
 		background-color: #ff4d4f;
