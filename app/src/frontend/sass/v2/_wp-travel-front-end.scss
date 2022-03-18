@@ -149,6 +149,12 @@ $alto: #ddd;
 				border: 1px solid #505050;
 			}
 		}
+		img {
+			width: 125px;
+			height: auto;
+			max-width: 100%;
+			object-fit: cover;
+		}
 	}
 }
 
