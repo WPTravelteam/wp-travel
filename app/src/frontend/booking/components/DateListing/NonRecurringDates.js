@@ -69,7 +69,7 @@ const NonRecurringDates = ( props ) => {
 								<> <TripExtras { ...{ ...props, _nomineePricings, date } } /> </> 
 							}
 						</>
-						{ pricingUnavailable && tripData.inventory && 'yes' === tripData.inventory.enable_trip_inventory && selectedDateIds.includes( date.id ) &&
+						{ ! isLoading && pricingUnavailable && tripData.inventory && 'yes' === tripData.inventory.enable_trip_inventory && selectedDateIds.includes( date.id ) &&
 							<Notice><InventoryNotice inventory={tripData.inventory} /></Notice>
 						}
 					</div>
