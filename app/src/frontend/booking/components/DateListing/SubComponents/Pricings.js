@@ -7,6 +7,9 @@ const __i18n = {
 // Additional lib
 const _ = lodash;
 
+// WP Travel Functions.
+import Loader from '../../../../../GlobalComponents/Loader';
+
 const Pricings = ( props ) => {
     // Component Props.
 	const { tripData, bookingData, updateBookingData, _nomineePricings, date, recurrindDate } = props; // where date is row and recurrindDate is the date to select in recurring
@@ -23,13 +26,13 @@ const Pricings = ( props ) => {
 
     // Booking Data.
     const { isLoading, selectedDate, selectedDateIds, nomineePricingIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
-	
+	let sd = moment(moment(selectedDate).format('YYYY-MM-DD')).unix();
+	let rd = moment(moment(recurrindDate).format('YYYY-MM-DD')).unix();
 	return <>
+		{ isLoading && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) && <Loader /> }
 		{ 'undefined' != typeof _nomineePricings && _nomineePricings.length > 0 && <>
 			{ 
 				_nomineePricings.map( (pricingId, pricingIndex) => {
-					let sd = moment(moment(selectedDate).format('YYYY-MM-DD')).unix();
-					let rd = moment(moment(recurrindDate).format('YYYY-MM-DD')).unix();
 					return <CheckboxControl
 						key={pricingIndex}
 						label={allPricings[pricingId].title}
@@ -49,7 +52,8 @@ const Pricings = ( props ) => {
 									selectedPricing:allPricings[pricingId].title,
 									selectedDate: newSelectedDate,
 									selectedDateIds:_selectedDateIds,
-									nomineePricingIds:_nomineePricingIds
+									nomineePricingIds:_nomineePricingIds,
+									isLoading:true
 								});
 							} else {
 								updateBookingData({

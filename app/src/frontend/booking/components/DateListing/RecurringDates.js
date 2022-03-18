@@ -8,6 +8,7 @@ const datePerPage = 5
 // WP Travel Functions.
 import { objectSum } from '../../_wptravelFunctions';
 import { IsTourDate } from '../../_IsTourDate'; // Filter available dates in calendar.
+import Loader from '../../../../GlobalComponents/Loader';
 
 
 // Additional lib
@@ -32,20 +33,18 @@ const RecurringRepeator = ( props ) =>  {
     const allPricings  = pricings && _.keyBy( pricings, p => p.id ) // Need object structure because pricing id may not be in sequencial order.
 
     // Booking Data.
-    const { selectedDate, selectedDateIds, selectedPricingId, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
+    const { isLoading, selectedDate, selectedDateIds, selectedPricingId, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
     let sd = moment(moment(selectedDate).format('YYYY-MM-DD')).unix();
     let rd = moment(moment(recurrindDate).format('YYYY-MM-DD')).unix();
 
-    // pricingUnavailable && tripData.inventory && 'yes' === tripData.inventory.enable_trip_inventory && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) && ( ! nomineeTimes.length || ( nomineeTimes.length && selectedTime ) ) )
-    
-    return <tr key={index}>
+    return <tr key={index} className="">
         <td data-label={__i18n.bookings.pricings_list_label}>
             {/* _nomineePricings not updated in store/state because there are multiple _nomineePricings as per date so just a variable. */}
             {IsTourDate(props)(recurrindDate) && <Pricings { ...props } /> || <Disabled><Pricings { ...props } /></Disabled> }
         </td>
         <td data-label={__i18n.bookings.person}>
             <div className ="person-box">
-                { ! pricingUnavailable && <>
+                <>
                     { ( 
                        selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) && ( ! nomineeTimes.length || ( nomineeTimes.length && selectedTime ) )  ) && 
                         <PaxSelector { ...{ ...props, _nomineePricings, date, recurrindDate } } /> || 
@@ -59,8 +58,7 @@ const RecurringRepeator = ( props ) =>  {
                         ( ! nomineeTimes.length || ( nomineeTimes.length > 0 && selectedTime ) ) &&
                         <> <TripExtras {...props} /> </> 
                     }
-                    </> 
-                }
+                </> 
                 { pricingUnavailable && tripData.inventory && 'yes' === tripData.inventory.enable_trip_inventory && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) && ( ! nomineeTimes.length || ( nomineeTimes.length && selectedTime ) )  ) &&
                     <Notice><InventoryNotice inventory={tripData.inventory} /></Notice>
                 }		

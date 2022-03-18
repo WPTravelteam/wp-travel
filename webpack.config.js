@@ -17,8 +17,8 @@ module.exports = (env, options) => {
       './app/src/admin/settings/index.js'
     ];
     entries['frontend-booking-widget' + fileSuffix ] = [
-      './app/src/frontend/booking-widget/sass/main.scss',
-      './app/src/frontend/booking-widget/index.js'
+      './app/src/frontend/booking/sass/main.scss',
+      './app/src/frontend/booking/index.js'
     ];
     entries['wp-travel-back-end' + fileSuffix ] = [
       './app/assets/js/wp-travel-back-end.js',
@@ -49,6 +49,10 @@ module.exports = (env, options) => {
     // entries['legacy-widgets' + fileSuffix ] = [
     //   './app/src/LegacyWidgets/BlockWidgets.js',
     // ];
+  entries['wptravel-admin-widgets' + fileSuffix ] = [
+    './app/src/admin/widgets/index.js',
+    './app/src/admin/widgets/sass/main.scss',
+  ];
   return {
     ...defaultConfig,
     entry: entries,

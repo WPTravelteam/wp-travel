@@ -15,6 +15,7 @@ import Pricings from './SubComponents/Pricings';
 import PaxSelector from './SubComponents/PaxSelector';
 import TripExtras from './SubComponents/TripExtras';
 import TripTimes from './SubComponents/TripTimes';
+import InventoryNotice, { Notice } from '../../_InventoryNotice';
 
 const NonRecurringDates = ( props ) => {
     // Component Props.
@@ -56,7 +57,7 @@ const NonRecurringDates = ( props ) => {
 				</td>
 				<td data-label={__i18n.bookings.person}>
 					<div className ="person-box">
-						{ ! pricingUnavailable && <>
+						<>
 							{ ( ! selectedPricingId || ( nomineeTimes.length > 1 && ! selectedTime ) || ! selectedDateIds.includes( date.id ) ) && <Disabled><PaxSelector { ...{ ...props, _nomineePricings, date } } /></Disabled> || <PaxSelector { ...{ ...props, _nomineePricings, date } } /> }
 							{ 
 								selectedPricingId && 
@@ -66,8 +67,10 @@ const NonRecurringDates = ( props ) => {
 								( ! nomineeTimes.length || ( nomineeTimes.length > 0 && selectedTime ) ) &&
 								<> <TripExtras { ...{ ...props, _nomineePricings, date } } /> </> 
 							}
-							</> 
-						}			
+						</>
+						{ pricingUnavailable && tripData.inventory && 'yes' === tripData.inventory.enable_trip_inventory && selectedDateIds.includes( date.id ) &&
+							<Notice><InventoryNotice inventory={tripData.inventory} /></Notice>
+						}
 					</div>
 				</td>
 				<td data-label={__i18n.bookings.date}>

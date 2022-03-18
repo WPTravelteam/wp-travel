@@ -91,7 +91,7 @@ const DateListing = ( props ) => {
 			return
 		}
 		let _bookingData = {
-			isLoading:false,
+			// isLoading:false,
 			pricingUnavailable:false,
 			nomineeTimes: [],
 			selectedTime: null,
@@ -107,7 +107,7 @@ const DateListing = ( props ) => {
 			return
 		}
 		let _bookingData = {
-			isLoading:false,
+			// isLoading:false,
 			pricingUnavailable:false,
 		};
 
