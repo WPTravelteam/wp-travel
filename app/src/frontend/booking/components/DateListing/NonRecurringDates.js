@@ -19,24 +19,18 @@ import InventoryNotice, { Notice } from '../../_InventoryNotice';
 
 const NonRecurringDates = ( props ) => {
     // Component Props.
-	const { tripData, bookingData, updateBookingData } = props;
+	const { tripData, bookingData } = props;
 
     // Trip Data.
     const {
-        is_fixed_departure:isFixedDeparture,
         dates,
         pricings,
-        trip_duration:tripDuration
     } = tripData;
     const allPricings        = pricings && _.keyBy( pricings, p => p.id ) // Need object structure because pricing id may not be in sequencial order.
     const _dates             = 'undefined' !== typeof dates && dates.length > 0 ? dates : [];
-    const datesById          = _.keyBy(_dates, d => d.id); // object structure along with date id.
 
     let nonRecurringDates = _dates.filter( d => { return !d.is_recurring && d.start_date && '0000-00-00' !== d.start_date && new Date( d.start_date )  > new Date() } )
 	nonRecurringDates     = _.chain( nonRecurringDates ).sortBy( d => moment( d.start_date).unix() ).value() || []; // Sort by date.
-
-    const duration           = tripDuration.days && parseInt( tripDuration.days ) || 1;
-	const isInventoryEnabled = tripData.inventory && tripData.inventory.enable_trip_inventory === 'yes';
 
     // Booking Data.
     const { isLoading, selectedDate, selectedDateIds, nomineePricingIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
@@ -58,19 +52,21 @@ const NonRecurringDates = ( props ) => {
 				</td>
 				<td data-label={__i18n.bookings.person}>
 					<div className ="person-box">
-						<>
-							{ ( ! selectedPricingId || ( nomineeTimes.length > 1 && ! selectedTime ) || ! selectedDateIds.includes( date.id ) ) && <Disabled><PaxSelector { ...{ ...props, _nomineePricings, date } } /></Disabled> || <PaxSelector { ...{ ...props, _nomineePricings, date } } /> }
-							{ 
-								selectedPricingId && 
-								selectedDateIds.includes( date.id ) && 
-								_.size( allPricings[ selectedPricingId ].trip_extras ) > 0 && 
-								objectSum( paxCounts ) > 0 && 
-								( ! nomineeTimes.length || ( nomineeTimes.length > 0 && selectedTime ) ) &&
-								<> <TripExtras { ...{ ...props, _nomineePricings, date } } /> </> 
-							}
-						</>
-						{ ! isLoading && pricingUnavailable && tripData.inventory && 'yes' === tripData.inventory.enable_trip_inventory && selectedDateIds.includes( date.id ) &&
-							<Notice><InventoryNotice inventory={tripData.inventory} /></Notice>
+						
+						{ ! isLoading && pricingUnavailable && tripData.inventory && 'yes' === tripData.inventory.enable_trip_inventory && selectedDateIds.includes( date.id ) ? 
+							<Notice><InventoryNotice inventory={tripData.inventory} /></Notice> 
+							:
+							<>
+								{ ( ! selectedPricingId || ( nomineeTimes.length > 0 && ! selectedTime ) || ! selectedDateIds.includes( date.id ) ) && <Disabled><PaxSelector { ...{ ...props, _nomineePricings, date } } /></Disabled> || <PaxSelector { ...{ ...props, _nomineePricings, date } } /> }
+								{ 
+									selectedPricingId && 
+									selectedDateIds.includes( date.id ) && 
+									_.size( allPricings[ selectedPricingId ].trip_extras ) > 0 && 
+									objectSum( paxCounts ) > 0 && 
+									( ! nomineeTimes.length || ( nomineeTimes.length > 0 && selectedTime ) ) &&
+									<> <TripExtras { ...{ ...props, _nomineePricings, date } } /> </> 
+								}
+							</>
 						}
 					</div>
 				</td>

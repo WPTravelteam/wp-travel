@@ -15,32 +15,27 @@ const PaxSelector = ( props ) => {
 
 	// Trip Data.
     const {
-        is_fixed_departure:isFixedDeparture,
-        dates,
         pricings,
-        trip_duration
     } = tripData;
     const allPricings        = pricings && _.keyBy( pricings, p => p.id ) // Need object structure because pricing id may not be in sequencial order.
-    const _dates             = 'undefined' !== typeof dates && dates.length > 0 ? dates : [];
-    const datesById          = _.keyBy(_dates, d => d.id)
-    const duration           = trip_duration.days && parseInt( trip_duration.days ) || 1;
 	const isInventoryEnabled = tripData.inventory && tripData.inventory.enable_trip_inventory === 'yes';
 
     // Booking Data.
     const { selectedDate, selectedDateIds, selectedPricingId, excludedDateTimes, pricingUnavailable, inventory, paxCounts } = bookingData;
 
-	const getCategoryPrice = (categoryId, single, returnFirstPrice ) => { // This function handles group discounts as well
+	/**]
+	 * @param categoryId This is to return price as per category id
+	 * @param single : Either single Price or Price multiplied with total pax for the category.
+	 */
+	const getCategoryPrice = (categoryId, single ) => { // This function handles group discounts as well
 		let category = pricing.categories.find(c => c.id == categoryId)
 		if (!category) {
 			return
 		}
 
 		let _pricing = pricing;
-		if ( returnFirstPrice ) {
-			_pricing = firstPricing;
-		}
 
-		let count = paxCounts[categoryId] || 0
+		let count = paxCounts[categoryId] || 0;
 		let price = category && category.is_sale ? category.sale_price : category.regular_price
 
 		if ( 'undefined' != typeof _pricing.has_group_price && _pricing.has_group_price && _pricing.group_prices && _pricing.group_prices.length > 0  ) {
@@ -98,11 +93,11 @@ const PaxSelector = ( props ) => {
 	// let firstCagegoryId = null;
 	// // If Pricing is not selected then Need to display Pax selector as per First Pricing from pricings list.
 	// if ( pricings.length > 0 ) {
-	// 	firstPricing    = allPricings[firstIndex];
+		// firstPricing    = allPricings[firstIndex];
 	// 	firstCagegories = 'undefined' != typeof firstPricing && firstPricing.categories;
 	// 	firstCagegory   = firstCagegories.length > 0 ? firstCagegories[0] : [];
 	// 	firstCagegoryId = firstCagegory && firstCagegory.id ? firstCagegory.id : null;
-	// 	firstPrice      = firstCagegoryId ? getCategoryPrice(  firstCagegoryId, true, true ) : 0;
+	// 	firstPrice      = firstCagegoryId ? getCategoryPrice(  firstCagegoryId, true ) : 0;
 	// }
 	let categories = pricing && pricing.categories || []
 
@@ -138,7 +133,7 @@ const PaxSelector = ( props ) => {
 		<ul className="wp-travel-booking__trip-option-list">
 			{
 				categories.map((c, i) => {
-					let price = getCategoryPrice(c.id, true);
+					let price = getCategoryPrice(c.id, true );
 					if ( 'undefined' == typeof c.term_info ) { // Fixes : index title of undefined.
 						return <></>
 					}
@@ -163,7 +158,14 @@ const PaxSelector = ( props ) => {
 								{`${c.term_info.title}`} &nbsp;
 								{<span className="wp_travel_pax_info">({`${minPax}`}/{maxPax})</span>}
 							</strong>
-							{( ( c.has_group_price && c.group_prices.length > 0 && selectedDateIds.includes( date.id ) ) || pricing && 'undefined'  != typeof pricing.has_group_price && pricing.has_group_price && pricing.group_prices.length > 0 && selectedDateIds.includes( date.id ) ) && <span className="tooltip group-discount-button">
+							{( 
+								( 
+									( c.has_group_price && c.group_prices.length > 0 && selectedDateIds.includes( date.id ) ) || 
+									pricing && 'undefined'  != typeof pricing.has_group_price && pricing.has_group_price && pricing.group_prices.length > 0 && selectedDateIds.includes( date.id ) 
+								) && 
+								( recurrindDate && sd === rd  ) 
+							) &&
+								<span className="tooltip group-discount-button">
 								<span>{__i18n.bookings.group_discount_tooltip}</span>
 								<svg version="1.1" x="0px" y="0px" viewBox="0 0 512.003 512.003" style={{ enableBackground: 'new 0 0 512.003 512.003' }}><path d="M477.958,262.633c-2.06-4.215-2.06-9.049,0-13.263l19.096-39.065c10.632-21.751,2.208-47.676-19.178-59.023l-38.41-20.38
                                         c-4.144-2.198-6.985-6.11-7.796-10.729l-7.512-42.829c-4.183-23.846-26.241-39.87-50.208-36.479l-43.053,6.09

@@ -83,7 +83,8 @@ const WpTravelBookNow = ( props ) => {
 				// need one additional loop here to get default total price.
 				Object.entries( counts ).map( ( [i, count]) => {
 					let category = pricing.categories.find(c => c.id == i)
-					let p = category && category.is_sale ? category.sale_price : category.regular_price
+					let regular_price = category && 'undefined' != typeof category.regular_price ? category.regular_price : 0;
+					let p = category && category.is_sale ? category.sale_price : regular_price
 					price += parseFloat(p) * count
 				})
 				

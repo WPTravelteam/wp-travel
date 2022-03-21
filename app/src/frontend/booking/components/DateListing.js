@@ -126,8 +126,14 @@ const DateListing = ( props ) => {
 			});
 
 			_inventory_state = times.length > 0 && { ..._inventory_state, nomineeTimes: _times } || { ..._inventory_state, nomineeTimes: [] }
+			// Why This time length check. this is creating issue as pricingUnavailable
 			if (_times.length <= 0) {
 				_inventory_state = { ..._inventory_state, pricingUnavailable: true }
+			} else if( 1 === _times.length ) {
+				_inventory_state = {
+					..._inventory_state,
+					selectedTime: _times[0].format('HH:mm'),
+				}
 			}
 			_inventory_state = { ..._inventory_state, inventory: _inventoryData }
 		}
@@ -244,8 +250,14 @@ const DateListing = ( props ) => {
 					return moment(inventory.date)
 				});
 				_inventory_state = times.length > 0 && { ..._inventory_state, nomineeTimes: _times } || { ..._inventory_state, nomineeTimes: [] }
+				// Why This time length check. this is creating issue as pricingUnavailable
 				if (_times.length <= 0) {
 					_inventory_state = { ..._inventory_state, pricingUnavailable: true }
+				} else if( 1 === _times.length ) {
+					_inventory_state = {
+						..._inventory_state,
+						selectedTime: _times[0].format('HH:mm'),
+					}
 				}
 				_inventory_state = { ..._inventory_state, inventory: _inventoryData }
 			}

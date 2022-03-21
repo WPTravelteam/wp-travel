@@ -38,14 +38,6 @@ const RecurringRepeator = ( props ) =>  {
     let rd = moment(moment(recurrindDate).format('YYYY-MM-DD')).unix();
 
     let loadingClass = isLoading && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) ? 'wptravel-loading' : '';
-    // { pricingUnavailable && tripData.inventory && 'yes' === tripData.inventory.enable_trip_inventory && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) && ( ! nomineeTimes.length || ( nomineeTimes.length && selectedTime ) )  ) 
-    console.log( 'recurrindDate', recurrindDate );
-    console.log( 'pricingUnavailable', pricingUnavailable );
-    console.log( 'tripData.inventory.enable_trip_inventory', tripData.inventory.enable_trip_inventory );
-    console.log( 'selectedDateIds.includes( date.id )', selectedDateIds.includes( date.id ) );
-    console.log( 'recurrindDate && sd == rd ', recurrindDate && sd == rd  );
-    console.log( '! nomineeTimes.length || ( nomineeTimes.length && selectedTime )', ! nomineeTimes.length || ( nomineeTimes.length && selectedTime ) );
-    console.log( '---------------' );
     return <tr key={index} className={loadingClass}>
         <td data-label={__i18n.bookings.pricings_list_label}>
             {/* _nomineePricings not updated in store/state because there are multiple _nomineePricings as per date so just a variable. */}
@@ -53,23 +45,25 @@ const RecurringRepeator = ( props ) =>  {
         </td>
         <td data-label={__i18n.bookings.person}>
             <div className ="person-box">
-                <>
-                    { ( 
-                       ! pricingUnavailable && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) && ( ! nomineeTimes.length || ( nomineeTimes.length && selectedTime ) )  ) && 
-                        <PaxSelector { ...{ ...props, _nomineePricings, date, recurrindDate } } /> || 
-                        <Disabled><PaxSelector { ...{ ...props, _nomineePricings, date, recurrindDate } } /></Disabled> }
-                    { 
-                        selectedPricingId && 
-                        selectedDateIds.includes( date.id ) && 
-                        _.size( allPricings[ selectedPricingId ].trip_extras ) > 0 && 
-                        objectSum( paxCounts ) > 0 && 
-                        ( ! recurrindDate || ( recurrindDate && sd == rd ) ) &&
-                        ( ! nomineeTimes.length || ( nomineeTimes.length > 0 && selectedTime ) ) &&
-                        <> <TripExtras {...props} /> </> 
-                    }
-                </> 
-                { ! isLoading && pricingUnavailable && tripData.inventory && 'yes' === tripData.inventory.enable_trip_inventory && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) && ( ! nomineeTimes.length || ( nomineeTimes.length && selectedTime ) )  ) &&
+                
+                { ! isLoading && pricingUnavailable && tripData.inventory && 'yes' === tripData.inventory.enable_trip_inventory && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) && ( ! nomineeTimes.length || ( nomineeTimes.length && selectedTime ) )  ) ?
                     <Notice><InventoryNotice inventory={tripData.inventory} /></Notice>
+                    :
+                    <>
+                        { ( 
+                        ! pricingUnavailable && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) && ( ! nomineeTimes.length || ( nomineeTimes.length && selectedTime ) )  ) && 
+                            <PaxSelector { ...{ ...props, _nomineePricings, date, recurrindDate } } /> || 
+                            <Disabled><PaxSelector { ...{ ...props, _nomineePricings, date, recurrindDate } } /></Disabled> }
+                        { 
+                            selectedPricingId && 
+                            selectedDateIds.includes( date.id ) && 
+                            _.size( allPricings[ selectedPricingId ].trip_extras ) > 0 && 
+                            objectSum( paxCounts ) > 0 && 
+                            ( ! recurrindDate || ( recurrindDate && sd == rd ) ) &&
+                            ( ! nomineeTimes.length || ( nomineeTimes.length > 0 && selectedTime ) ) &&
+                            <> <TripExtras {...props} /> </> 
+                        }
+                    </> 
                 }		
             </div>
         </td>
