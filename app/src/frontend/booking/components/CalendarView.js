@@ -378,9 +378,17 @@ const CalendarView = ( props ) => {
 			_bookingData = { ..._bookingData, selectedDateIds: _dateIds, isLoading: true }
 		} else {
 			_nomineePricingIds = pricings && pricings.map( pricing => pricing.id );
+
+			if ( _nomineePricingIds.length <= 0 ) {
+				_bookingData = { ..._bookingData, pricingUnavailable: true }
+			} else if ( _nomineePricingIds.length === 1 ) {
+				let tempSelectedPricingId = _nomineePricingIds[0];
+				let selectedPricing   = allPricings[ tempSelectedPricingId ].title;
+				_bookingData = { ..._bookingData, selectedPricingId: tempSelectedPricingId, selectedPricing:selectedPricing }
+			}
+			_bookingData = { ..._bookingData, nomineePricingIds: _nomineePricingIds } // nomineePricingIds
 		}
 
-		_bookingData = { ..._bookingData, nomineePricingIds: _nomineePricingIds } // nomineePricingIds
 		updateBookingData( _bookingData  );
 	}
 
