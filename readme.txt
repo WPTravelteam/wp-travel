@@ -247,7 +247,7 @@ Before updating plugin please check ["our latest release notes"](#developers).
 == Changelog ==
 
 = 5.2.0 =
-Release Date: 21st March, 2022
+Release Date: 22nd March, 2022
 
 Enhancement:
 * Resolved site load speed issue with multiple currency. Reduced server response time by improving in TTFB speed.
@@ -259,6 +259,7 @@ Fixes:
 * Fixed trip time displaying even when pro is disabled.
 * Fixed total pricing in mini cart when updating trip.
 * Fixed sidebar not displaying in the wp travel search result page.
+* Fixed showing multiple booking with same booking id while booking being logged in  through dashboard.
 
 = 5.1.1 =
 Release Date: 14th February, 2022

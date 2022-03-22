@@ -150,6 +150,9 @@ const PaxSelector = ( props ) => {
 					if ( recurrindDate && sd !== rd ) {
 						selectedPax = 0;
 						minPax      = 0;
+						// override inventory for rest of unselected list/ temp fixes.
+					    _inventory = inventory.find(i => i.date === moment(recurrindDate).format('YYYY-MM-DD[T]HH:mm')); // selectedDate : date along with time.
+						maxPax = isInventoryEnabled && _inventory && _inventory.pax_available && selectedDateIds.includes( date.id ) ? _inventory.pax_available : pricing.max_pax; // Temp fixes for inventory disabled case.
 					}
 
 					return <li key={i}>

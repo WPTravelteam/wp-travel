@@ -167,6 +167,8 @@ function wptravel_settings_default_fields() {
 		$settings_fields['trip_date_listing'] = 'dates';
 	}
 
+	$modules                    = apply_filters( 'wptravel_modules', array() );
+	$settings_fields['modules'] = $modules;
 	return apply_filters( 'wp_travel_settings_fields', $settings_fields ); // flter @since 1.9.0.
 }
 

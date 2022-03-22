@@ -1,5 +1,6 @@
 <?php
 $bookings_glance    = $args['bookings_glance'];
+$bookings_glance    = array_unique( $bookings_glance );
 $biling_glance_data = $args['biling_glance_data'];
 ?>
 <div>
@@ -9,7 +10,7 @@ $biling_glance_data = $args['biling_glance_data'];
 	<div class="list-item">
 	  <div class="list-item-wrapper">
 		<div class="item">
-		  <a href="#" class="dashtab-nav" data-tabtitle="bookings"><strong><?php esc_html_e( 'My Bookings', 'wp-travel' ); ?></strong></a>
+		  <a href="#" class="dashtab-nav" data-tabtitle="bookings"><strong><?php esc_html_e( 'Your Bookings', 'wp-travel' ); ?></strong></a>
 		  <div class="box-content">
 			<?php if ( ! empty( $bookings_glance ) && is_array( $bookings_glance ) ) : ?>
 			<ul>

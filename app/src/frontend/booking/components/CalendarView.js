@@ -127,6 +127,11 @@ const CalendarView = ( props ) => {
 			_inventory_state = times.length > 0 && { ..._inventory_state, nomineeTimes: _times } || { ..._inventory_state, nomineeTimes: [] }
 			if (_times.length <= 0) {
 				_inventory_state = { ..._inventory_state, pricingUnavailable: true }
+			} else if( 1 === _times.length ) {
+				_inventory_state = {
+					..._inventory_state,
+					selectedTime: _times[0].format('HH:mm'),
+				}
 			}
 			_inventory_state = { ..._inventory_state, inventory: _inventoryData }
 		}
@@ -246,6 +251,11 @@ const CalendarView = ( props ) => {
 				_inventory_state = times.length > 0 && { ..._inventory_state, nomineeTimes: _times } || { ..._inventory_state, nomineeTimes: [] }
 				if (_times.length <= 0) {
 					_inventory_state = { ..._inventory_state, pricingUnavailable: true }
+				} else if( 1 === _times.length ) {
+					_inventory_state = {
+						..._inventory_state,
+						selectedTime: _times[0].format('HH:mm'),
+					}
 				}
 				_inventory_state = { ..._inventory_state, inventory: _inventoryData }
 			}
@@ -375,7 +385,7 @@ const CalendarView = ( props ) => {
 				let selectedPricing   = allPricings[ tempSelectedPricingId ].title;
 				_bookingData = { ..._bookingData, selectedPricingId: tempSelectedPricingId, selectedPricing:selectedPricing }
 			}
-			_bookingData = { ..._bookingData, selectedDateIds: _dateIds, isLoading: true }
+			_bookingData = { ..._bookingData, selectedDateIds: _dateIds, isLoading: true, nomineePricingIds: _nomineePricingIds }
 		} else {
 			_nomineePricingIds = pricings && pricings.map( pricing => pricing.id );
 
