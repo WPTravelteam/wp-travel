@@ -1742,6 +1742,10 @@ $defaultColor: #3399ff;
 				justify-content: space-between;
 				align-items: center;
 				position: relative;
+				margin-bottom: 1em;
+				&:last-child {
+					margin-bottom: 0;
+				}
 				.discount-table {
 					position: absolute;
 					top: 100%;
