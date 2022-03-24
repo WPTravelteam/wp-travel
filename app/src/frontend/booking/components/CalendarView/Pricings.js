@@ -6,19 +6,21 @@ const __i18n = {
 }
 
 // Additional lib
-const _ = lodash
+const _ = lodash;
+import Loader from '../../../../GlobalComponents/Loader';
 const Pricings =  ( props ) => {
 	// Component Props.
 	const { tripData, bookingData, updateBookingData } = props;
 	let allPricings = tripData && tripData.pricings && _.keyBy( tripData.pricings, p => p.id ); // Need object structure because pricing id may not be in sequencial order.
 
-	const { selectedDate, nomineePricingIds, selectedPricingId } = bookingData;
+	const { isLoading, selectedDate, nomineePricingIds, selectedPricingId } = bookingData;
 	// console.log( 'nomineePricingIds', nomineePricingIds );
 	return <>
 		{
 			nomineePricingIds.length > 1 ?
 				<>
 				<h4>{__i18n.bookings.pricings_list_label}</h4>
+				{ isLoading && <Loader /> }
 				{
 					nomineePricingIds.map(
 						(id, i) => <button key={i}

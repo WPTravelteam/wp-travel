@@ -1,52 +1,55 @@
-import { applyFilters } from '@wordpress/hooks';
-import { useSelect, select, dispatch, withSelect } from '@wordpress/data';
+import { useSelect, dispatch } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
-import { PanelBody, PanelRow, ToggleControl, TextControl, RadioControl } from '@wordpress/components';
+import { PanelRow, ToggleControl } from '@wordpress/components';
 
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
 
 export default () => {
-    const settings = useSelect((select) => {
+    const allData = useSelect((select) => {
         return select('WPTravel/Admin').getAllStore()
     }, []);
 
     const { updateSettings } = dispatch('WPTravel/Admin');
-    const { modules } = settings;
-    // console.log( 'modules', modules );
-   
+    const { modules, options } = allData;
+    const { default_settings, saved_settings } = options;
+    const { modules:defaultModules } = default_settings;
+    
     return <div className="wp-travel-ui wp-travel-ui-card settings-general">
         <h2>{ __( 'Modules Settings', 'wp-travel' ) }</h2>
         <p>{__( 'You can enable or disable modules features from here.', 'wp-travel' )}</p>
         <ErrorBoundary>
-            {modules && modules.length > 0 &&
+            <>
+            {defaultModules && Object.keys( defaultModules ).length > 0 &&
                <>
-                { modules.map( ( module, i ) => {
+                { Object.keys( defaultModules ).map( ( addonsKey, i ) => {
+                    // Do not display pro.
+                    if ( 'show_wp_travel_pro' === addonsKey ) {
+                        return <></>
+                    }
+                    let enabledModule = 'yes' == modules[addonsKey].value; // Saved modules values.
+
                     return <PanelRow key={i}>
-                        <label>{module.title}</label>
+                        <label>{modules[addonsKey].title}</label>
                         <div className="wp-travel-field-value">
                             <ToggleControl
-                                checked={ 'yes' == module.value }
+                                checked={ enabledModule }
                                 onChange={ ( val ) => {
-                                    console.log( 'val', val, 'module.value', module.value );
-                                    let _settings = settings;
-                                    let _modules = _settings.modules;
-                                    _modules[i].value = val ? 'yes' : 'no';
-                                    console.log( _modules );
+                                    let _modules = modules;
+                                    _modules[addonsKey].value = val ? 'yes' : 'no';
+                                    console.log( '_modules', _modules );
                                     updateSettings({
-                                        ...settings,
-                                        // [modules][i][module.value]: module.value && 'yes' == module.value ? 'no': 'yes'
-                                        modules : _modules
+                                        ...allData,
+                                        modules : { ..._modules }
                                     })
                                 } }
                             />
-                            <p className="description">{__( 'Show all your "' + module.title + '" settings and enable its feature', 'wp-travel' )}</p>
+                            <p className="description">{__( 'Show all your "' + modules[addonsKey].title + '" settings and enable its feature', 'wp-travel' )}</p>
                         </div>
                     </PanelRow> 
                 }  ) }
-               
                </>
             }
-            
+            </>
         </ErrorBoundary>
     </div>
 }
