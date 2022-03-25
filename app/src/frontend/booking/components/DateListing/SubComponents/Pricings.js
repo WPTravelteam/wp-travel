@@ -36,7 +36,7 @@ const Pricings = ( props ) => {
 					return <CheckboxControl
 						key={pricingIndex}
 						label={allPricings[pricingId].title}
-						checked={ selectedPricingId == pricingId && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) && ! isLoading}
+						checked={ selectedPricingId == pricingId && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) }
 						onChange={ ( value ) => {
 							if ( value ) {
 								let newSelectedDate = new Date( date.start_date + ' 00:00:00' ); // Non Recurring.

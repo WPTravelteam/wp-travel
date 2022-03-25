@@ -66,7 +66,7 @@ const DateListing = ( props ) => {
 			selectedTime: null,
 		};
 		// after selecting pricing. need to check available time for selected pricing as well. Single pricing id case is already checked in date changes lifecycle below.
-		await bookingWidgetUseEffects( _bookingData );
+		await bookingWidgetUseEffects( _bookingData, 'pricingChange' );
 	}, [ selectedPricingId ]); 
 
 	// Lifecycles. [ This will only trigger if time is selected or changed ]
@@ -81,7 +81,7 @@ const DateListing = ( props ) => {
 		};
 		// Note: This effect is same as date changes lifecycle effect.
 		// after selecting pricing. need to check available time for selected pricing as well. Single pricing id case is already checked in date changes lifecycle below.
-		await bookingWidgetUseEffects( _bookingData );
+		await bookingWidgetUseEffects( _bookingData, 'timeChange' );
 	}, [ selectedTime ]);
 	// Date changes Lifecycle. [Only For fixed Departure which have date id]
 	useEffect( async () => {
@@ -96,7 +96,7 @@ const DateListing = ( props ) => {
 			nomineeTimes: [],
 			selectedTime: null,
 		};
-		await bookingWidgetUseEffects( _bookingData );
+		await bookingWidgetUseEffects( _bookingData, 'dateChange' );
 		
 	}, [ selectedDateIds ]);
 
@@ -135,7 +135,16 @@ const DateListing = ( props ) => {
 					selectedTime: _times[0].format('HH:mm'),
 				}
 			}
-			_inventory_state = { ..._inventory_state, inventory: _inventoryData }
+			// Quick fix. Pax count data is overriding due to async setInventoryData so need to re assign here.
+			// Add default selected pax object values as 0 for all categories as per selected pricing. {'2':0,'3':0} where cat id 2, 3 have default 0 selected pax.
+			let pricing    = allPricings[selectedPricingId];
+			let categories = pricing && pricing.categories || []
+			let _paxCounts = {}
+			categories.forEach(c => {
+				_paxCounts = { ..._paxCounts, [c.id]: parseInt(c.default_pax) || 0 }
+			});
+			// End of pax count re assign here.
+			_inventory_state = { ..._inventory_state, inventory: _inventoryData, paxCounts: _paxCounts }
 		}
 		_bookingData = {..._bookingData, ..._inventory_state }
 		
@@ -164,7 +173,7 @@ const DateListing = ( props ) => {
 		updateBookingData( _bookingData );
 	}, [ _nomineeTripExtras ]); 
 
-	const bookingWidgetUseEffects = async ( _bookingData ) => {
+	const bookingWidgetUseEffects = async ( _bookingData, effectType ) => {
 		if ( nomineePricingIds.length > 0 ) {
 			let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
 			if ( times.length > 0 ) {
@@ -233,7 +242,9 @@ const DateListing = ( props ) => {
 		}
 		if ( isInventoryEnabled ) {
 			// This will update local useState if ajax response is success.
-			setInventoryData( _bookingData );
+			if ( 'timeChange' !== effectType ) { // prevent ajax request on time change.
+				await setInventoryData( _bookingData ); // This will override paxcount value in the inventory changes state so need to re assign
+			}
 			let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
 			let _inventory_state = {}
 			if ( _inventoryData.length > 0 ) {

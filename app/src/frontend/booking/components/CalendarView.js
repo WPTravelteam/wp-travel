@@ -62,8 +62,11 @@ const CalendarView = ( props ) => {
 			nomineeTimes: [],
 			selectedTime: null,
 		};
+		// if ( ! isInventoryEnabled ) {
+		// 	_bookingData.isLoading = false; // Loading issue fixes. if inventory is enabled then loading false when inventory ajax request is complete.
+		// }
 		// after selecting pricing. need to check available time for selected pricing as well. Single pricing id case is already checked in date changes lifecycle below.
-		bookingWidgetUseEffects( _bookingData );
+		bookingWidgetUseEffects( _bookingData, 'pricingChange' );
 	}, [ selectedPricingId ]); 
 
 	// Lifecycles. [ This will only trigger if time is selected or changed ]
@@ -78,7 +81,7 @@ const CalendarView = ( props ) => {
 		};
 		// Note: This effect is same as date changes lifecycle effect.
 		// after selecting pricing. need to check available time for selected pricing as well. Single pricing id case is already checked in date changes lifecycle below.
-		bookingWidgetUseEffects( _bookingData );
+		bookingWidgetUseEffects( _bookingData, 'timeChange' );
 	}, [ selectedTime ]);
 	// Date changes Lifecycle. [Only For fixed Departure which have date id]
 	useEffect(() => {
@@ -93,7 +96,7 @@ const CalendarView = ( props ) => {
 			nomineeTimes: [],
 			selectedTime: null,
 		};
-		bookingWidgetUseEffects( _bookingData );
+		bookingWidgetUseEffects( _bookingData, 'dateChange' );
 		
 	}, [ selectedDateIds ]);
 
@@ -133,7 +136,17 @@ const CalendarView = ( props ) => {
 					selectedTime: _times[0].format('HH:mm'),
 				}
 			}
-			_inventory_state = { ..._inventory_state, inventory: _inventoryData }
+
+			// Quick fix. Pax count data is overriding due to async setInventoryData so need to re assign here.
+			// Add default selected pax object values as 0 for all categories as per selected pricing. {'2':0,'3':0} where cat id 2, 3 have default 0 selected pax.
+			let pricing    = allPricings[selectedPricingId];
+			let categories = pricing && pricing.categories || []
+			let _paxCounts = {}
+			categories.forEach(c => {
+				_paxCounts = { ..._paxCounts, [c.id]: parseInt(c.default_pax) || 0 }
+			});
+			// End of pax count re assign here.
+			_inventory_state = { ..._inventory_state, inventory: _inventoryData, paxCounts: _paxCounts }
 		}
 		_bookingData = {..._bookingData, ..._inventory_state }
 		
@@ -163,7 +176,7 @@ const CalendarView = ( props ) => {
 		updateBookingData( _bookingData );
 	}, [ _nomineeTripExtras ]); 
 
-	const bookingWidgetUseEffects = ( _bookingData ) => {
+	const bookingWidgetUseEffects = async ( _bookingData, effectType ) => {
 		if ( nomineePricingIds.length > 0 ) {
 			let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
 			if ( times.length > 0 ) {
@@ -232,9 +245,12 @@ const CalendarView = ( props ) => {
 		}
 		if ( isInventoryEnabled ) {
 			// This will update local useState if ajax response is success.
-			setInventoryData( _bookingData );
+			if ( 'timeChange' !== effectType ) { // prevent ajax request on time change.
+				await setInventoryData( _bookingData ); // This will override paxcount value in the inventory changes state so need to re assign
+			}
+
 			let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
-			let _inventory_state = {}
+			let _inventory_state = {isLoading:false }
 			if ( _inventoryData.length > 0 ) {
 				// Add logic if inventory ajax is complete
 				let _times = _inventoryData.filter(inventory => {
@@ -260,12 +276,12 @@ const CalendarView = ( props ) => {
 				_inventory_state = { ..._inventory_state, inventory: _inventoryData }
 			}
 			_bookingData = {..._bookingData, ..._inventory_state }
+		} else {
+			_bookingData = {..._bookingData, isLoading:false }
 		}
-
 		// extras Calculation.
 		setTripExtrasData();
-		
-		updateBookingData( _bookingData );
+		await updateBookingData( _bookingData );
 	}
 
 	// functions.
@@ -294,7 +310,8 @@ const CalendarView = ( props ) => {
 				}
 				_setInventoryData( res.data.inventory );
 			}
-		})
+		});
+		// return true;
 	}
 	const setTripExtrasData = async () => {
 		if ( ! selectedPricingId ) {
@@ -326,7 +343,7 @@ const CalendarView = ( props ) => {
     const selectTripDate = ( date ) => {
 		// Default or Trip duration.
 		let _bookingData = {
-			isLoading: false, // Default false for trip duration only because date changes effect is not triggered in trip ducation.
+			// isLoading: false, // Default false for trip duration only because date changes effect is not triggered in trip ducation.
 			pricingUnavailable: false,
 			selectedDate: date,
 			selectedPricingId:null,
@@ -385,7 +402,7 @@ const CalendarView = ( props ) => {
 				let selectedPricing   = allPricings[ tempSelectedPricingId ].title;
 				_bookingData = { ..._bookingData, selectedPricingId: tempSelectedPricingId, selectedPricing:selectedPricing }
 			}
-			_bookingData = { ..._bookingData, selectedDateIds: _dateIds, isLoading: true, nomineePricingIds: _nomineePricingIds }
+			_bookingData = { ..._bookingData, selectedDateIds: _dateIds, nomineePricingIds: _nomineePricingIds }
 		} else {
 			_nomineePricingIds = pricings && pricings.map( pricing => pricing.id );
 
@@ -445,16 +462,18 @@ const CalendarView = ( props ) => {
 				</div>
 				{ selectedPricingId && nomineeTimes.length > 0 && <TripTimes { ...props } /> }
 			</div>
-			<div className="wp-travel-booking__pricing-wrapper wptravel-pax-selector">
-				{ ! pricingUnavailable && selectedPricingId && <ErrorBoundary>
-					{ nomineeTimes.length > 1 && ! selectedTime && <Disabled><PaxSelector { ...props } /></Disabled> || <PaxSelector { ...props } /> }
-					{ _.size(allPricings[ selectedPricingId ].trip_extras) > 0 && objectSum( paxCounts ) > 0 && <ErrorBoundary> <TripExtras { ...props } /> </ErrorBoundary> }
-				</ErrorBoundary> }
-				
-				{  pricingUnavailable && tripData.inventory && 'yes' === tripData.inventory.enable_trip_inventory && 
-					<Notice><InventoryNotice inventory={tripData.inventory} /></Notice>
-				}
-			</div>
+			{ ! isLoading &&
+				<div className="wp-travel-booking__pricing-wrapper wptravel-pax-selector">
+					{ ! pricingUnavailable && selectedPricingId && <ErrorBoundary>
+						{ nomineeTimes.length > 1 && ! selectedTime && <Disabled><PaxSelector { ...props } /></Disabled> || <PaxSelector { ...props } /> }
+						{ _.size(allPricings[ selectedPricingId ].trip_extras) > 0 && objectSum( paxCounts ) > 0 && <ErrorBoundary> <TripExtras { ...props } /> </ErrorBoundary> }
+					</ErrorBoundary> }
+					
+					{  pricingUnavailable && tripData.inventory && 'yes' === tripData.inventory.enable_trip_inventory && 
+						<Notice><InventoryNotice inventory={tripData.inventory} /></Notice>
+					}
+				</div>
+			}
 			</>
 		}
     </ErrorBoundary>
