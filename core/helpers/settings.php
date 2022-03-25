@@ -353,6 +353,12 @@ class WP_Travel_Helpers_Settings {
 		// unset( $settings['modules'] );
 
 		update_option( 'wp_travel_settings', $settings );
+		/**
+		 * Hook to trigger after settings saved.
+		 *
+		 * @since 5.2.0
+		 */
+		do_action( 'wptravel_action_after_settings_saved', $settings, $settings_data );
 		return WP_Travel_Helpers_Response_Codes::get_success_response(
 			'WP_TRAVEL_UPDATED_SETTINGS',
 			array(

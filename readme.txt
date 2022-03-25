@@ -247,7 +247,7 @@ Before updating plugin please check ["our latest release notes"](#developers).
 == Changelog ==
 
 = 5.2.0 =
-Release Date: 22nd March, 2022
+Release Date: 27th March, 2022
 
 Enhancement:
 * Resolved site load speed issue with multiple currency. Reduced server response time by improving in TTFB speed.

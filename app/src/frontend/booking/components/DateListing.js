@@ -240,6 +240,16 @@ const DateListing = ( props ) => {
 				'pax_limit': maxPax,
 			}],
 		}
+		// extras Calculation.
+		setTripExtrasData();
+		if ( _nomineeTripExtras.length > 0 ) {
+			// Default extras values.
+			let _tripExtras = {}
+			_nomineeTripExtras.forEach(x => {
+				_tripExtras = { ..._tripExtras, [x.id]: x.is_required ? 1 : 0 }
+			})
+			_bookingData = {..._bookingData, nomineeTripExtras:_nomineeTripExtras, tripExtras: _tripExtras }
+		}
 		if ( isInventoryEnabled ) {
 			// This will update local useState if ajax response is success.
 			if ( 'timeChange' !== effectType ) { // prevent ajax request on time change.
@@ -275,16 +285,6 @@ const DateListing = ( props ) => {
 			_bookingData = {..._bookingData, ..._inventory_state }
 		}
 
-		// extras Calculation.
-		setTripExtrasData();
-		if ( _nomineeTripExtras.length > 0 ) {
-			// Default extras values.
-			let _tripExtras = {}
-			_nomineeTripExtras.forEach(x => {
-				_tripExtras = { ..._tripExtras, [x.id]: x.is_required ? 1 : 0 }
-			})
-			_bookingData = {..._bookingData, nomineeTripExtras:_nomineeTripExtras, tripExtras: _tripExtras }
-		}
 		updateBookingData( _bookingData );
 	}
 

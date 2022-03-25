@@ -54,7 +54,7 @@ const Pricings = ( props ) => {
 									selectedDateIds:_selectedDateIds,
 									nomineePricingIds:_nomineePricingIds,
 									isLoading:true,
-									// pricingUnavailable:false
+									pricingUnavailable:false
 								});
 							} else {
 								updateBookingData({
@@ -66,7 +66,7 @@ const Pricings = ( props ) => {
 									nomineeTimes:[],
 									selectedTime:null,
 									isLoading:true,
-									// pricingUnavailable:false
+									pricingUnavailable:false
 								});
 							}
 						}}
