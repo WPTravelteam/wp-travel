@@ -243,6 +243,8 @@ const CalendarView = ( props ) => {
 				'pax_limit': maxPax,
 			}],
 		}
+		// extras Calculation.
+		setTripExtrasData();
 		if ( isInventoryEnabled ) {
 			// This will update local useState if ajax response is success.
 			if ( 'timeChange' !== effectType ) { // prevent ajax request on time change.
@@ -279,8 +281,7 @@ const CalendarView = ( props ) => {
 		} else {
 			_bookingData = {..._bookingData, isLoading:false }
 		}
-		// extras Calculation.
-		setTripExtrasData();
+		
 		await updateBookingData( _bookingData );
 	}
 
