@@ -1676,10 +1676,10 @@ $defaultColor: #3399ff;
 		background-color: #f4f4f8;
 		border: 1px solid #eee;
 		// border-radius: 4px;
-		padding: 1em 1.5em;
 		position: relative;
 		.wp-travel-booking__pricing-name {
 			margin-bottom: 2em;
+			padding: 1em 1.5em;
 			h4 {
 				margin-bottom: 1em;
 				color: #444;
@@ -1701,6 +1701,9 @@ $defaultColor: #3399ff;
 					background-color: rgba($defaultColor, 0.2);
 				}
 			}
+		}
+		&.wptravel-pax-selector {
+			padding: 1em 1.5em;
 		}
 
 		.wp-travel-booking__selected-time {
