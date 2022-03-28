@@ -1,29 +1,16 @@
 import { forwardRef, useEffect, useState } from '@wordpress/element';
 import { applyFilters } from '@wordpress/hooks';
-import { Disabled } from '@wordpress/components';
 import apiFetch from '@wordpress/api-fetch';
-const __i18n = {
-	..._wp_travel.strings
-}
 
 // Additional lib
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
 const _ = lodash;
 import moment from 'moment';
-import RDP_Locale from '../_Locale'
-import DatePicker, {registerLocale} from "react-datepicker";
-registerLocale( "DPLocale", RDP_Locale() );
-import generateRRule from "../_GenerateRRule";
-
-// WP Travel Functions.
-import { objectSum } from '../_wptravelFunctions';
-import { IsTourDate } from '../_IsTourDate'; // Filter available dates in calendar.
 
 // WP Travel Components.
 import DateListingTableHead from './DateListing/DateListingTableHead';
 import NonRecurringDates from './DateListing/NonRecurringDates';
 import RecurringDates from './DateListing/RecurringDates';
-import InventoryNotice, { Notice } from '../_InventoryNotice';
 
 const DateListing = ( props ) => {
 	// Component Props.
@@ -43,11 +30,10 @@ const DateListing = ( props ) => {
     let nonRecurringDates = _dates.filter( d => { return !d.is_recurring && d.start_date && '0000-00-00' !== d.start_date && new Date( d.start_date )  > new Date() } )
     let recurringDates    = _dates.filter( d => { return d.is_recurring && ( '0000-00-00' === d.end_date || ( d.end_date && new Date( d.end_date )  > new Date() ) ) } )
 
-    const duration           = tripDuration.days && parseInt( tripDuration.days ) || 1;
 	const isInventoryEnabled = tripData.inventory && tripData.inventory.enable_trip_inventory === 'yes';
 
     // Booking Data.
-    const { isLoading, selectedDate, selectedDateIds, nomineePricingIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
+    const { isLoading, stateUpdated, selectedDate, selectedDateIds, nomineePricingIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
 	
     // Temp/Local state to play with HTTP Request. [same as Calendar View] @todo need to optimize by using only one.
 	const [_inventoryData, _setInventoryData] = useState([]);
@@ -60,13 +46,16 @@ const DateListing = ( props ) => {
 			return
 		}
 		let _bookingData = {
-			isLoading:false,
+			// isLoading:false,
 			pricingUnavailable:false,
 			nomineeTimes: [],
 			selectedTime: null,
 		};
+		if ( ! isInventoryEnabled ) {
+			_bookingData.isLoading = false; // maybe not reqd.
+		}
 		// after selecting pricing. need to check available time for selected pricing as well. Single pricing id case is already checked in date changes lifecycle below.
-		await bookingWidgetUseEffects( _bookingData, 'pricingChange' );
+		bookingWidgetUseEffects( _bookingData, 'pricingChange' );
 	}, [ selectedPricingId ]); 
 
 	// Lifecycles. [ This will only trigger if time is selected or changed ]
@@ -76,12 +65,12 @@ const DateListing = ( props ) => {
 			return
 		}
 		let _bookingData = {
-			isLoading:false,
+			// isLoading:false,
 			pricingUnavailable:false,
 		};
 		// Note: This effect is same as date changes lifecycle effect.
 		// after selecting pricing. need to check available time for selected pricing as well. Single pricing id case is already checked in date changes lifecycle below.
-		await bookingWidgetUseEffects( _bookingData, 'timeChange' );
+		bookingWidgetUseEffects( _bookingData, 'timeChange' );
 	}, [ selectedTime ]);
 	// Date changes Lifecycle. [Only For fixed Departure which have date id]
 	useEffect( async () => {
@@ -96,10 +85,13 @@ const DateListing = ( props ) => {
 			nomineeTimes: [],
 			selectedTime: null,
 		};
-		await bookingWidgetUseEffects( _bookingData, 'dateChange' );
+		if ( ! isInventoryEnabled ) {
+			_bookingData.isLoading = false; // maybe not reqd.
+		}
+		bookingWidgetUseEffects( _bookingData, 'dateChange' );
 		
 	}, [ selectedDateIds ]);
-
+ 
 	// Lifecycles. [ This will only trigger if Inventory Data changed ]. Fix real time store update issue with trip time change.
     useEffect(() => {
 		if ( ! selectedPricingId ) {
@@ -107,6 +99,7 @@ const DateListing = ( props ) => {
 			return
 		}
 		let _bookingData = {
+			isLoading:false
 		};
 
 		let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
@@ -157,9 +150,10 @@ const DateListing = ( props ) => {
 			updateBookingData( { isLoading:false } )
 			return
 		}
-		let _bookingData = {
-			isLoading:false,
-		};
+		let _bookingData = { };
+		if ( ! isInventoryEnabled ) {
+			_bookingData.isLoading = false; // maybe not reqd.
+		}
 
 		if ( _nomineeTripExtras.length > 0 ) {
 			// Default extras values.
@@ -171,7 +165,7 @@ const DateListing = ( props ) => {
 		}
 		
 		updateBookingData( _bookingData );
-	}, [ _nomineeTripExtras ]); 
+	}, [ _nomineeTripExtras ]);
 
 	const bookingWidgetUseEffects = async ( _bookingData, effectType ) => {
 		if ( nomineePricingIds.length > 0 ) {
@@ -256,7 +250,7 @@ const DateListing = ( props ) => {
 				await setInventoryData( _bookingData ); // This will override paxcount value in the inventory changes state so need to re assign
 			}
 			let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
-			let _inventory_state = {}
+			let _inventory_state = {isLoading:false }
 			if ( _inventoryData.length > 0 ) {
 				// Add logic if inventory ajax is complete
 				let _times = _inventoryData.filter(inventory => {
@@ -283,10 +277,22 @@ const DateListing = ( props ) => {
 				_inventory_state = { ..._inventory_state, inventory: _inventoryData }
 			}
 			_bookingData = {..._bookingData, ..._inventory_state }
+		} else {
+			_bookingData = {..._bookingData, isLoading:false }
 		}
 
-		updateBookingData( _bookingData );
+		_bookingData = {..._bookingData, stateUpdated:'yes' }
+		await updateBookingData( _bookingData );
 	}
+
+	// Lifecycles. quick fix [just to re render updated state.]
+    useEffect(() => {
+		if ( 'yes' === stateUpdated ) {
+			updateBookingData( { stateUpdated:'no' } )
+			return
+		}
+		
+	}, [ stateUpdated ]);
 
 	// functions.
 	const getPricingTripTimes = ( pricingId, selectedTripdates ) => {

@@ -44,7 +44,7 @@ const CalendarView = ( props ) => {
 	const isInventoryEnabled = tripData.inventory && tripData.inventory.enable_trip_inventory === 'yes';
 
     // Booking Data.
-    const { isLoading, selectedDate, selectedDateIds, nomineePricingIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
+    const { isLoading, stateUpdated, selectedDate, selectedDateIds, nomineePricingIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
 
 	// Temp/Local state to play with HTTP Request.
 	const [_inventoryData, _setInventoryData] = useState([]);
@@ -57,14 +57,14 @@ const CalendarView = ( props ) => {
 			return
 		}
 		let _bookingData = {
-			isLoading:false,
+			// isLoading:false,
 			pricingUnavailable:false,
 			nomineeTimes: [],
 			selectedTime: null,
 		};
-		// if ( ! isInventoryEnabled ) {
-		// 	_bookingData.isLoading = false; // Loading issue fixes. if inventory is enabled then loading false when inventory ajax request is complete.
-		// }
+		if ( ! isInventoryEnabled ) {
+			_bookingData.isLoading = false; // maybe not reqd.
+		}
 		// after selecting pricing. need to check available time for selected pricing as well. Single pricing id case is already checked in date changes lifecycle below.
 		bookingWidgetUseEffects( _bookingData, 'pricingChange' );
 	}, [ selectedPricingId ]); 
@@ -76,7 +76,7 @@ const CalendarView = ( props ) => {
 			return
 		}
 		let _bookingData = {
-			isLoading:false,
+			// isLoading:false,
 			pricingUnavailable:false,
 		};
 		// Note: This effect is same as date changes lifecycle effect.
@@ -96,6 +96,9 @@ const CalendarView = ( props ) => {
 			nomineeTimes: [],
 			selectedTime: null,
 		};
+		if ( ! isInventoryEnabled ) {
+			_bookingData.isLoading = false; // maybe not reqd.
+		}
 		bookingWidgetUseEffects( _bookingData, 'dateChange' );
 		
 	}, [ selectedDateIds ]);
@@ -160,10 +163,12 @@ const CalendarView = ( props ) => {
 			return
 		}
 		let _bookingData = {
-			isLoading:false,
+			// isLoading:false,
 			pricingUnavailable:false,
 		};
-
+		if ( ! isInventoryEnabled ) {
+			_bookingData.isLoading = false; // maybe not reqd.
+		}
 		if ( _nomineeTripExtras.length > 0 ) {
 			// Default extras values.
 			let _tripExtras = {}
@@ -244,7 +249,7 @@ const CalendarView = ( props ) => {
 			}],
 		}
 		// extras Calculation.
-		setTripExtrasData();
+		await setTripExtrasData();
 		if ( isInventoryEnabled ) {
 			// This will update local useState if ajax response is success.
 			if ( 'timeChange' !== effectType ) { // prevent ajax request on time change.
