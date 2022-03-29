@@ -47,6 +47,13 @@
 		z-index: 1;
 		background: #ababab;
 		opacity: .1;
+		background: linear-gradient(
+			110deg,
+			#fbfafa99 8%,
+			#fbfafa99 18%,
+			#fbfafaab 33%
+		);
+		background-size: 200% 100%;
 	}
 }
 
