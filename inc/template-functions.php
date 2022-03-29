@@ -1842,7 +1842,7 @@ function wptravel_archive_wrapper_close() {
 
 function wptravel_archive_listing_sidebar() {
 
-	if ( WP_Travel::is_page( 'archive' ) && ! is_admin() && is_active_sidebar( 'wp-travel-archive-sidebar' ) ) :
+	if ( ( WP_Travel::is_page( 'archive' ) || WP_Travel::is_page( 'search' ) ) && ! is_admin() && is_active_sidebar( 'wp-travel-archive-sidebar' ) ) :
 		?>
 
 		<div id="wp-travel-secondary" class="wp-travel-widget-area widget-area" role="complementary">

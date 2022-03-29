@@ -1118,3 +1118,50 @@
 .partial-payment-info tr.trip-total th:first-child {
 	border-right: 1px solid #ececec;
 }
+
+// Checkout page date of birth
+.datepickers-container {
+	.datepicker--nav {
+		.datepicker--nav-title {
+			background: #f0f0f0;
+			position: relative;
+			transition: all 500ms ease-in-out;
+			&::before {
+				content: none;
+				display: inline;
+				position: absolute;
+				width: 250px;
+				height: auto;
+				top: -40px;
+				left: 0;
+				background: #515151;
+				color: #fff;
+				padding: 5px 0px;
+				text-align: center;
+				transition: all 500ms ease-in-out;
+				border-radius: 5px;
+				@media (max-width: 410px) {
+					left: 50%;
+					transform: translateX(-50%);
+				}
+			}
+			&::after {
+				content: none;
+				border-top: 15px solid #515151;
+				border-left: 10px solid transparent;
+				border-right: 10px solid transparent;
+				position: absolute;
+				top: -15px;
+				left: 35px;
+			}
+			&:hover {
+				&::before {
+					content: "Click Me To Select Your Birth Year";
+				}
+				&::after {
+					content: "";
+				}
+			}
+		}
+	}
+}

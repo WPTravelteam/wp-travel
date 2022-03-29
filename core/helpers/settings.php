@@ -166,7 +166,9 @@ class WP_Travel_Helpers_Settings {
 			),
 		);
 		// is multisite.
-		$settings_options['is_multisite'] = is_multisite();
+		$settings_options['is_multisite']     = is_multisite();
+		$settings_options['default_settings'] = wptravel_settings_default_fields(); // default settings values. [this will help to display only available values rather than saved values.]
+		$settings_options['saved_settings']   = get_option( 'wp_travel_settings', array() ); // default settings values.
 
 		$settings         = apply_filters( 'wp_travel_settings_values', $settings ); // main settings value filter.
 		$settings_options = apply_filters( 'wp_travel_settings_options', $settings_options, $settings ); // additional values like dropdown options etc.
@@ -348,8 +350,15 @@ class WP_Travel_Helpers_Settings {
 		}
 
 		$settings = apply_filters( 'wp_travel_block_before_save_settings', $settings, $settings_data );
+		// unset( $settings['modules'] );
 
 		update_option( 'wp_travel_settings', $settings );
+		/**
+		 * Hook to trigger after settings saved.
+		 *
+		 * @since 5.2.0
+		 */
+		do_action( 'wptravel_action_after_settings_saved', $settings, $settings_data );
 		return WP_Travel_Helpers_Response_Codes::get_success_response(
 			'WP_TRAVEL_UPDATED_SETTINGS',
 			array(

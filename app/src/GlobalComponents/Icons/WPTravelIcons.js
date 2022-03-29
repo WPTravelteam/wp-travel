@@ -39,7 +39,6 @@ const WPTravelIcons = (props) => {
     //Update tab settings.
     const updateTabSettings = (index) => {
         const lastSelectedTab = sessionStorage.getItem('WPTravelLastSelectedTab');
-        // console.log('lastSelectedTab', lastSelectedTab);
         if ( 'fontawesome-icon' == lastSelectedTab ) {
 
             let FAIconValue = sessionStorage.getItem('WPTravelFAIconValue');

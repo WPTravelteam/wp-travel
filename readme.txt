@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 5.4.1
 Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 5.1.1
+Stable tag: 5.2.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -245,6 +245,21 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 5.2.0 =
+Release Date: 29th March, 2022
+
+Enhancement:
+* Resolved site load speed issue with multiple currency. Reduced server response time by improving in TTFB speed.
+
+Fixes:
+* Display sold out notice in calendar if one date has been sold out and other dates has been selected.
+* Recurring dates not displaying if trip has multiple dates one with recurring and another with non recurring.
+* Amount conversion not working in checkout page while editing cart with multiple currency.
+* Fixed trip time displaying even when pro is disabled.
+* Fixed total pricing in mini cart when updating trip.
+* Fixed sidebar not displaying in the wp travel search result page.
+* Fixed showing multiple booking with same booking id while booking being logged in  through dashboard.
 
 = 5.1.1 =
 Release Date: 14th February, 2022

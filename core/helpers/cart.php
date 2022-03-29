@@ -22,12 +22,13 @@ class WP_Travel_Helpers_Cart {
 			$cart_total_regular = $item['trip_price_regular'] + $cart_total_regular;
 		}
 		$is_coupon_applied = false;
-		if ( isset( $cart_items['coupon']['type'] ) ) {
-			if ( 'percentage' === $cart_items['coupon']['type'] ) {
 
-				$cart_total = isset( $cart_items['coupon']['value'] ) ? $cart_total * ( 100 - (float) $cart_items['coupon']['value'] ) / 100 : $cart_total;
-			} else {
-				$cart_total = isset( $cart_items['coupon']['value'] ) ? $cart_total - (float) $cart_items['coupon']['value'] : $cart_total;
+		if ( isset( $cart_items['discount']['type'] ) ) {
+			if ( 'percentage' === $cart_items['discount']['type'] ) {
+				$cart_total = isset( $cart_items['discount']['value'] ) ? $cart_total * ( 100 - (float) $cart_items['discount']['value'] ) / 100 : $cart_total;
+			} elseif ( isset( $cart_items['discount']['value'] ) ) {
+				$discount_amount = WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $cart_items['discount']['value'] );
+				$cart_total      = $cart_total - (float) $discount_amount;
 			}
 			$is_coupon_applied = true;
 		}
@@ -77,6 +78,35 @@ class WP_Travel_Helpers_Cart {
 			$trip_data     = WP_Travel_Helpers_Trips::get_trip( absint( $item['trip_id'] ) );
 			$is_item_valid = true;
 			if ( ! is_wp_error( $trip_data ) && 'WP_TRAVEL_TRIP_INFO' === $trip_data['code'] ) {
+
+				// Temporary fixes for multiple currency.
+				$temp_pricings = $trip_data['trip']['pricings'];
+				foreach ( $temp_pricings as $temp_pricing_index => $temp_pricing ) {
+					// Group Price.
+					if ( $temp_pricing['has_group_price'] && count( $temp_pricing['group_prices'] ) > 0 ) {
+						foreach ( $temp_pricing['group_prices'] as $gpi => $gp ) {
+							$group_price = $gp['price'];
+							// $trip_data['trip']['pricings']['group_prices'][ $gpi ]['price'] = $group_price;
+						}
+					}
+					foreach ( $temp_pricing['categories'] as $temp_pricing_cat_index => $temp_pricing_cat ) {
+						$temp_regular_price = $temp_pricing_cat['regular_price'];
+						$temp_sale_price    = $temp_pricing_cat['sale_price'];
+
+						$trip_data['trip']['pricings'][ $temp_pricing_index ]['categories'][ $temp_pricing_cat_index ]['regular_price'] = $temp_regular_price;
+						$trip_data['trip']['pricings'][ $temp_pricing_index ]['categories'][ $temp_pricing_cat_index ]['sale_price']    = $temp_sale_price;
+
+						// Group Price.
+						if ( $temp_pricing_cat['has_group_price'] && count( $temp_pricing_cat['group_prices'] ) > 0 ) {
+							foreach ( $temp_pricing_cat['group_prices'] as $gpi => $gp ) {
+								$group_price2 = $gp['price'];
+								$trip_data['trip']['pricings'][ $temp_pricing_index ]['categories'][ $temp_pricing_cat_index ]['group_prices'][ $gpi ]['price'] = $group_price2;
+							}
+						}
+					}
+				}
+				// End of Temporary fixes for multiple currency.
+
 				$trip_items = ! empty( $item['trip'] ) ? $item['trip'] : array();
 				if ( is_array( $trip_items ) && count( $trip_items ) > 0 ) {
 					foreach ( $trip_items as $cat_id => $cat_value ) {

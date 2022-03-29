@@ -29,7 +29,6 @@ const  swapList = (data, old_index, new_index) => {
     return data;
 };
 const Gallery = ( props ) => {
-    // console.log( props );
     const {
         images: gallery,
         featuredImage,

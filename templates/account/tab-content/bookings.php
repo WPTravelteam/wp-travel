@@ -12,8 +12,9 @@
  */
 if ( ! function_exists( 'wptravel_account_tab_content' ) ) {
 	function wptravel_account_tab_content( $args ) {
-	
+
 		$bookings = $args['bookings'];
+		$bookings = array_unique( $bookings );
 		global $wp;
 		$detail_link  = home_url( $wp->request ) . '#bookings';
 		$back_link    = $detail_link;

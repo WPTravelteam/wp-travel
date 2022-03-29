@@ -102,7 +102,7 @@
 		.css-b8ldur-Input {
 			margin: 0;
 			padding: 0;
-			input{
+			input {
 				box-shadow: none;
 			}
 		}
@@ -333,6 +333,14 @@ td {
 			border-top: 1px solid #eee !important;
 			margin: 0 !important;
 			padding: 15px !important;
+			.wp-travel-save-notice {
+				color: #f44336;
+				font-weight: bold;
+			}
+			p.text-success {
+				color: green;
+				font-weight: bold;
+			}
 		}
 
 		&.wp-travel-ui-card-top-border {
@@ -412,7 +420,11 @@ td {
 // 	}
 // }
 
-.wp-travel-block-tabs .components-tab-panel__tab-content .wp-travel-ui.wp-travel-ui-card .components-panel__body.is-opened h4 {
+.wp-travel-block-tabs
+	.components-tab-panel__tab-content
+	.wp-travel-ui.wp-travel-ui-card
+	.components-panel__body.is-opened
+	h4 {
 	// padding-left: 30px;
 	padding-left: 0;
 }
@@ -558,7 +570,7 @@ td {
 		.components-panel__row {
 			.wp-travel-checkbox-wrapper {
 				.components-base-control {
-					margin-block: .2em;
+					margin-block: 0.2em;
 				}
 			}
 		}

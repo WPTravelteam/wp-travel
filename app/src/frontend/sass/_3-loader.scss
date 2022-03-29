@@ -33,21 +33,40 @@
 		}
 	}
 }
+
 .wptravel-loading {
 	//opacity: 0.2;
-	background-color: rgba(200,200,200, 0.1);
-	
+	// background-color: rgba(200, 200, 200, 0.1);
+	position: relative;
+	&::after {
+		content: "";
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		right: 0;
+		z-index: 1;
+		background: linear-gradient(
+			110deg,
+			#fbfafa99 8%,
+			#fbfafa99 18%,
+			#fbfafaab 33%
+		);
+		background-size: 200% 100%;
+		// animation: 1.5s shine linear infinite;
+	}
 }
 
 // Datepicker loader hack.
 .wp-travel-booking__pricing-wrapper.wptravel-loading{
+	position: relative;
 	.wptravel-loader {
 		top: calc( 50% - 40px );
 	}
-	&:before{
+	&::before{
 		width: 100%;
 		height: 100%;
-		content: ' ';
+		content: "";
 		display: block;
 		position: absolute;
 		z-index: 11;

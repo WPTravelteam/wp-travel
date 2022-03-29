@@ -34,9 +34,7 @@ class WP_Travel_Helpers_Trip_Extras {
 				// $_trip_extras[$index]['regular_price'] = money_format( '%i', $tour_extras_metas['extras_item_price'] );
 				if ( class_exists( 'WP_Travel_Tour_Extras_Core' ) ) {
 					$price      = isset( $tour_extras_metas['extras_item_price'] ) ? $tour_extras_metas['extras_item_price'] : 0;
-					$price      = apply_filters( 'wp_travel_multiple_currency', $price );
 					$sale_price = isset( $tour_extras_metas['extras_item_sale_price'] ) ? $tour_extras_metas['extras_item_sale_price'] : 0;
-					$sale_price = apply_filters( 'wp_travel_multiple_currency', $sale_price );
 
 					$tour_extras_metas['extras_item_price']      = wptravel_get_formated_price( $price );
 					$tour_extras_metas['extras_item_sale_price'] = wptravel_get_formated_price( $sale_price );

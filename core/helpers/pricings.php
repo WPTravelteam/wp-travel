@@ -81,14 +81,19 @@ class WpTravel_Helpers_Pricings {
 			}
 			$pricings[ $index ]['trip_extras'] = array();
 			if ( ! empty( $price->trip_extras ) ) {
-				$trip_extras = WP_Travel_Helpers_Trip_Extras::get_trip_extras(
-					array(
-						'post__in' => explode( ',', trim( $price->trip_extras ) ),
-					)
-				);
+				// Temp fixes for extras for admin trip edit section.
+				if ( is_admin() ) {
 
-				if ( ! is_wp_error( $trip_extras ) && 'WP_TRAVEL_TRIP_EXTRAS' === $trip_extras['code'] ) {
-					$pricings[ $index ]['trip_extras'] = $trip_extras['trip_extras'];
+					$trip_extras = WP_Travel_Helpers_Trip_Extras::get_trip_extras(
+						array(
+							'post__in' => explode( ',', trim( $price->trip_extras ) ),
+						)
+					);
+					if ( ! is_wp_error( $trip_extras ) && 'WP_TRAVEL_TRIP_EXTRAS' === $trip_extras['code'] ) {
+						$pricings[ $index ]['trip_extras'] = $trip_extras['trip_extras'];
+					}
+				} else {
+					$pricings[ $index ]['trip_extras'] = explode( ',', trim( $price->trip_extras ) );
 				}
 			}
 
@@ -307,6 +312,8 @@ class WpTravel_Helpers_Pricings {
 		}
 
 		$price = $price ? $price : 0;
+		// Add Multiple currency support to get converted price.
+		$price = WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $price );
 		return apply_filters( 'wptravel_get_price', (float) $price, $args ); // filter wptravel_get_price @since 4.6.4.
 	}
 

@@ -54,7 +54,7 @@ class WpTravel_Helpers_Trip_Dates {
 			$dates[ $index ]['start_date']              = $result->start_date;
 			$dates[ $index ]['end_date']                = $result->end_date;
 			$dates[ $index ]['is_recurring']            = ! empty( $result->recurring ) ? true : false;
-			$dates[ $index ]['trip_time']               = ! empty( $result->trip_time ) ? $result->trip_time : '';
+			$dates[ $index ]['trip_time']               = ! empty( $result->trip_time && class_exists( 'WP_Travel_Utilities_Core' ) ) ? $result->trip_time : ''; // Time is utilities features.
 			$dates[ $index ]['pricing_ids']             = ! empty( $result->pricing_ids ) ? $result->pricing_ids : '';
 			$dates[ $index ]['recurring_weekdays_type'] = '';
 			if ( ! empty( $result->days ) ) {

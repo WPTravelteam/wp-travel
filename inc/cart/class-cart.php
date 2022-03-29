@@ -351,12 +351,30 @@ class WP_Travel_Cart {
 				$cart_trip     = $this->items[ $cart_item_id ]['trip'];
 				$max_available = $this->items[ $cart_item_id ]['max_available'];
 
+				// Total Pax calculation for group discount in pricing.
+				$total_pax     = 0;
+				$pricings_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id );
+				if ( 'WP_TRAVEL_TRIP_PRICINGS' === $pricings_data['code'] ) {
+					$pricings = array_filter(
+						$pricings_data['pricings'],
+						function( $p ) use ( $pricing_id ) {
+							return $p['id'] == (int) $pricing_id;
+						}
+					);
+					$pricing  = array_shift( $pricings );
+					foreach ( $pax as $category_id => $pax_value ) {
+						$total_pax += $pax_value;
+					}
+				}
+				// End of Total Pax calculation for group discount in pricing.
+
 				$trip_price         = 0;
 				$trip_price_partial = 0;
 				foreach ( $pax as $category_id => $pax_value ) {
 					if ( $pax_value < 1 ) {
-						unset( $this->items[ $cart_item_id ]['trip'][ $category_id ] );
-						continue;
+						// unset( $this->items[ $cart_item_id ]['trip'][ $category_id ] );
+						// continue;
+						// do not remove category. if removed this will not available to edit after update.
 					}
 					$this->items[ $cart_item_id ]['trip'][ $category_id ]['pax'] = $pax_value;
 
@@ -368,7 +386,12 @@ class WP_Travel_Cart {
 					$category_price = WP_Travel_Helpers_Pricings::get_price( $args );
 
 					if ( function_exists( 'wp_travel_group_discount_price' ) ) { // From Group Discount addons.
-						$group_trip_price = wp_travel_group_discount_price( $trip_id, $pax_value, $pricing_id, $category_id );
+						$pricing_group_price = isset( $pricing['has_group_price'] ) && $pricing['has_group_price'];
+						$temp_pax            = $pax_value;
+						if ( $pricing_group_price ) {
+							$temp_pax = $total_pax;
+						}
+						$group_trip_price = wp_travel_group_discount_price( $trip_id, $temp_pax, $pricing_id, $category_id );
 
 						if ( $group_trip_price ) {
 							$category_price = $group_trip_price;
@@ -381,11 +404,13 @@ class WP_Travel_Cart {
 						$category_price_partial = ( $category_price * $percent ) / 100;
 					}
 					// Updating individual category price. [ Price may change if group discount applies. so need to update individual category price as well].
-					$this->items[ $cart_item_id ]['trip'][ $category_id ]['price']         = $category_price;
-					$this->items[ $cart_item_id ]['trip'][ $category_id ]['price_partial'] = $category_price_partial;
+					// $category_price         = WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $category_price );
+					// $category_price_partial = WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $category_price_partial );
+					$this->items[ $cart_item_id ]['trip'][ $category_id ]['price']         = $category_price; // Already converted price while adding into cart, so do not need to convert price.
+					$this->items[ $cart_item_id ]['trip'][ $category_id ]['price_partial'] = $category_price_partial;  // Already converted price while adding into cart, so do not need to convert price.
 
 					// multiply category_price by pax to add in trip price if price per is person.
-					if ( 'person' === $cart_trip[ $category_id ]['price_per'] ) {
+					if ( isset( $cart_trip[ $category_id ]['price_per'] ) && 'person' === $cart_trip[ $category_id ]['price_per'] ) {
 						$category_price         *= $pax_value;
 						$category_price_partial *= $pax_value;
 					}
@@ -498,7 +523,7 @@ class WP_Travel_Cart {
 			if ( WPTravel()->coupon->is_discountable( $coupon_id, $trip_id ) ) {
 				$item_total = $this->get_item_total( $cart_item_id ); // Total of individual item including extras.
 				if ( 'fixed' === $discount_type ) {
-					$discount_amount = $discount_value;
+					$discount_amount = WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $discount_value );
 				} elseif ( 'percentage' === $discount_type ) {
 					$discount_amount = ( $item_total * $discount_value ) / 100;
 				}
@@ -637,6 +662,8 @@ class WP_Travel_Cart {
 				if ( $discount_amount_partial >= $discount_applicable_total_partial ) {
 					$discount_amount_partial = 0;
 				}
+				$discount_amount         = WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $discount_amount );
+				$discount_amount_partial = WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $discount_amount_partial );
 			} elseif ( 'percentage' === $d_typ ) {
 				$discount_amount         = ( $discount_applicable_total * $d_val ) / 100;
 				$discount_amount_partial = ( $discount_applicable_total_partial * $d_val ) / 100; // Need to deprecate this.
@@ -763,6 +790,9 @@ class WP_Travel_Cart {
 				if ( $sale_price ) {
 					$price = $sale_price;
 				}
+				// Multiple Currency Support for trip Extras. @todo Nee to calculate extras from js like pricing calculation.
+				$price = WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $price );
+
 				$qty         = isset( $trip_extras['qty'][ $k ] ) ? (int) $trip_extras['qty'][ $k ] : 1;
 				$extra_price = wptravel_get_formated_price( $price * $qty );
 

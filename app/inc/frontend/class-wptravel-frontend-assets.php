@@ -123,7 +123,7 @@ class WpTravel_Frontend_Assets {
 			wp_enqueue_script( 'wp-travel-payment-frontend-script' );
 		}
 
-		if ( is_singular( 'itineraries' ) ) {
+		if ( WP_Travel::is_page( 'single' ) || WP_Travel::is_page( 'checkout' ) ) {
 			// Localize the script with new data.
 			if ( $switch_to_v4 ) {
 				$_wp_travel = isset( $all_localized['_wp_travel'] ) ? $all_localized['_wp_travel'] : array();

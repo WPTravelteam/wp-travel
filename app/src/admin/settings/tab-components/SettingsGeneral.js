@@ -336,7 +336,7 @@ export default () => {
             <br/><br/>
             <h4>{ __( 'Archive Page title', 'wp-travel' ) }</h4>
             <PanelRow>
-                <label>{ __( 'Hide plugin archive page title.', 'wp-travel' ) }</label>
+                <label>{ __( 'Hide Plugin Archive Page Title', 'wp-travel' ) }</label>
                 <div className="wp-travel-field-value">
                     <ToggleControl
                         checked={ hide_plugin_archive_page_title == 'yes' }

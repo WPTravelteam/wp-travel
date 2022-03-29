@@ -26,6 +26,7 @@ import SettingsInvoice from './tab-components/SettingsInvoice';
 import SettingsMisc from './tab-components/SettingsMisc';
 import SettingsDebug from './tab-components/SettingsDebug';
 import SettingsLicense from './tab-components/SettingsLicense';
+import SettingsModules from './tab-components/SettingsModules';
 
 const WPTravelTripSettings = () => {
     const settingsData = useSelect((select) => {
@@ -109,6 +110,12 @@ const WPTravelTripSettings = () => {
             className: 'tab-addons-settings',
             content: SettingsAddons
         },
+        // {
+        //     name: 'modules-settings',
+        //     title: __('Modules Settings', 'wp-travel'),
+        //     className: 'tab-modules-settings',
+        //     content: SettingsModules
+        // },
         {
             name: 'invoice',
             title: __('Invoice', 'wp-travel'),

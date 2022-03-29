@@ -261,6 +261,7 @@ $defaultColor: #3399ff;
 			margin-right: 5px;
 			path {
 				fill: rgb(233, 41, 41);
+				// fill: rgb(255, 255, 255);
 			}
 		}
 	}
@@ -1330,6 +1331,7 @@ $defaultColor: #3399ff;
 		}
 		.components-disabled {
 			opacity: 0.5;
+			position: unset;
 		}
 	}
 	@media (max-width: 575px) {
@@ -1675,10 +1677,10 @@ $defaultColor: #3399ff;
 		background-color: #f4f4f8;
 		border: 1px solid #eee;
 		// border-radius: 4px;
-		padding: 1em 1.5em;
 		position: relative;
 		.wp-travel-booking__pricing-name {
 			margin-bottom: 2em;
+			padding: 1em 1.5em;
 			h4 {
 				margin-bottom: 1em;
 				color: #444;
@@ -1700,6 +1702,9 @@ $defaultColor: #3399ff;
 					background-color: rgba($defaultColor, 0.2);
 				}
 			}
+		}
+		&.wptravel-pax-selector {
+			padding: 1em 1.5em;
 		}
 
 		.wp-travel-booking__selected-time {
@@ -1741,6 +1746,10 @@ $defaultColor: #3399ff;
 				justify-content: space-between;
 				align-items: center;
 				position: relative;
+				margin-bottom: 1em;
+				&:last-child {
+					margin-bottom: 0;
+				}
 				.discount-table {
 					position: absolute;
 					top: 100%;

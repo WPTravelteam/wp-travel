@@ -1,6 +1,6 @@
 {
   "name": "wp-travel",
-  "version": "5.1.1",
+  "version": "5.2.0",
   "description": "Travel pluign for WordPress",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "lint:php": "wp-scripts env lint-php",
     "postinstall": "husky install",
     "makepot": "wp i18n make-pot . i18n/languages/wp-travel-test.pot --exclude=node_modules,vendor,src,wordpress,build --skip-js",
-    "bundle" : "wp-scripts build && wp-scripts build --mode development && npx grunt build"
+    "bundle": "wp-scripts build && wp-scripts build --mode development && npx grunt build"
   },
   "repository": {
     "type": "git",
@@ -76,7 +76,7 @@
     "react-google-autocomplete": "^2.4.3",
     "react-select": "^3.0.8",
     "react-sortablejs": "^6.0.0",
-    "rrule": "^2.6.4",
+    "rrule": "^2.6.9",
     "sortablejs": "^1.12.0"
   },
   "husky": {

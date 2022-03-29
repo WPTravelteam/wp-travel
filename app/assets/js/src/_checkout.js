@@ -1,4 +1,12 @@
 /*WP Travel Cart and Chekcout JS.*/
+
+function GetConvertedPrice( price ) {
+    var conversionRate = 'undefined' !== typeof _wp_travel && 'undefined' !== typeof _wp_travel.conversion_rate ? _wp_travel.conversion_rate : 1;
+    var _toFixed       = 'undefined' !== typeof _wp_travel && 'undefined' !== typeof _wp_travel.number_of_decimals ? _wp_travel.number_of_decimals : 2;
+    conversionRate     = parseFloat( conversionRate ).toFixed( 2 );
+    return parseFloat( price * conversionRate ).toFixed( _toFixed );
+}
+
 jQuery(document).ready(function ($) {
 
     if (typeof parsley !== "undefined") {
@@ -320,12 +328,14 @@ const wptravelcheckout = (shoppingCart) => {
             return result * sortOrder;
         }
     }
+    // On Pax Change event listner.
     const updateItem = id => {
         let _data = {}
         let tripTotalWOExtras = 0, tripTotalPartialWOExtras = 0, extrasTotal = 0
 
         let tripTotal = 0
         let item = wp_travel_cart.cart && wp_travel_cart.cart.cart_items && wp_travel_cart.cart.cart_items[id]
+        // console.log( 'item', item.trip_data.pricings );
         let itemNode = shoppingCart.querySelector(`[data-cart-id="${id}"]`)
         let pricing = item.trip_data.pricings.find(p => p.id == parseInt(item.pricing_id))
         let categories = pricing.categories
@@ -350,20 +360,27 @@ const wptravelcheckout = (shoppingCart) => {
             let _category = categories.find(c => c.id == parseInt(fg.dataset.wptCategory))
 
             let _price = _category && _category.is_sale ? parseFloat(_category['sale_price']) : parseFloat(_category['regular_price'])
+            // Update price for default pricing without group price.
+            _price = GetConvertedPrice( _price ); // Multiple currency support on edit cart.
+            dataCategoryPrice.innerHTML = wp_travel_cart.format(_price);
+            // End of Update price for default pricing without group price.
             let _count = dataCategoryCount && parseInt(dataCategoryCount.value) || 0
             if ( 'undefined' != typeof pricing.has_group_price && pricing.has_group_price && pricing.group_prices && pricing.group_prices.length > 0  ) {
                 let groupPrices = pricing.group_prices
                 groupPrices = groupPrices.sort(dynamicSort('max_pax'))
-                console.log( groupPrices);
                 let group_price = groupPrices.find(gp => parseInt(gp.min_pax) <= totalPax && parseInt(gp.max_pax) >= totalPax)
                 if (group_price && group_price.price) {
                     _price =  parseFloat(group_price.price)
+                    _price = GetConvertedPrice( _price ); // Multiple currency support on edit cart.
                     if (dataCategoryPrice)
                     dataCategoryPrice.innerHTML = wp_travel_cart.format(_price)
                 }
             }else if (_category.has_group_price) {
                 let _groupPrice = _category.group_prices.find(gp => _count >= parseInt(gp.min_pax) && _count <= parseInt(gp.max_pax))
-                _price = _groupPrice && _groupPrice.price || _price
+                if ( _groupPrice && _groupPrice.price ) {
+                    _price = _groupPrice.price
+                    _price = GetConvertedPrice( _price ); // Multiple currency support on edit cart.
+                }
                 if (dataCategoryPrice)
                     dataCategoryPrice.innerHTML = wp_travel_cart.format(_price)
             }
@@ -379,8 +396,8 @@ const wptravelcheckout = (shoppingCart) => {
             tripTotalWOExtras += parseFloat(categoryTotal)
             tripTotalPartialWOExtras += parseFloat(categoryTotal) * parseFloat(payoutPercentage) / 100
         })
-        // Extras.
 
+        // Extras.
         let formGroupsTx = itemNode.querySelectorAll('[data-wpt-tx]')
         formGroupsTx && formGroupsTx.forEach(tx => {
             let _extra = _tripExtras.find(c => c.id == parseInt(tx.dataset.wptTx))
@@ -389,7 +406,12 @@ const wptravelcheckout = (shoppingCart) => {
             }
             let txTotalContainer = tx.querySelector('[data-wpt-tx-total]')
             let datatxCount = tx.querySelector('[data-wpt-tx-count-input]')
+            let dataCategoryExtPrice = tx.querySelector('[data-wpt-tx-price]')
+
             let _price = _extra.is_sale && _extra.tour_extras_metas.extras_item_sale_price || _extra.tour_extras_metas.extras_item_price
+            _price = GetConvertedPrice( _price ); // Multiple currency support on edit cart.
+            dataCategoryExtPrice.innerHTML = wp_travel_cart.format(_price)
+
             let _count = datatxCount && datatxCount.value || 0
             let itemTotal = parseFloat(_price) * parseInt(_count)
             if (txTotalContainer)
@@ -411,11 +433,12 @@ const wptravelcheckout = (shoppingCart) => {
 
     shoppingCart && shoppingCart.addEventListener('wptcartchange', e => {
         let cartTotal = 0, tripTotalWOExtras = 0, txTotal = 0, tripTotalPartialWOExtras = 0;
-        let cartTotalContainers = document.querySelectorAll('[data-wpt-cart-total]')
+        let cartTotalContainers = document.querySelectorAll('[data-wpt-cart-net-total]')
         let cartTotalPartialContainers = document.querySelectorAll('[data-wpt-cart-partial-total]')
         let cartSubtotalContainer = e.target.querySelector('[data-wpt-cart-subtotal]')
         let cartDiscountContainer = e.target.querySelector('[data-wpt-cart-discount]')
         let cartTaxContainer = e.target.querySelector('[data-wpt-cart-tax]')
+        // let cartTaxContainer = e.target.querySelector('[data-wpt-cart-tax]')
         let _cartItems = e.target.querySelectorAll('[data-cart-id]')
         _cartItems && _cartItems.forEach(ci => {
             let totals = updateItem(ci.dataset.cartId)

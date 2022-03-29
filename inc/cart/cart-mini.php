@@ -75,6 +75,13 @@ if ( wptravel_is_react_version_enabled() ) {
 						}
 						$categories  = isset( $cart_pricing['categories'] ) ? wptravel_key_by( $cart_pricing['categories'] ) : array(); // All categories.
 						$trip_extras = isset( $cart_pricing['trip_extras'] ) ? wptravel_key_by( $cart_pricing['trip_extras'] ) : array(); // All trip extras.
+						if ( count( $trip_extras ) > 0 ) {
+							$extras_args = array( 'post__in' => $trip_extras );
+							$result      = WP_Travel_Helpers_Trip_Extras::get_trip_extras( $extras_args );
+							if ( is_array( $result ) && 'WP_TRAVEL_TRIP_EXTRAS' === $result['code'] && isset( $result['trip_extras'] ) && count( $result['trip_extras'] ) > 0 ) {
+								$trip_extras = $result['trip_extras'];
+							}
+						}
 
 						$cart_extras = (array) $cart_item['extras'];
 						if ( ! empty( $cart_extras ) ) {
@@ -185,10 +192,13 @@ if ( wptravel_is_react_version_enabled() ) {
 											<span><?php echo $trip_date . $trip_time; ?></span>
 										</span>
 										<?php
+										// This will only for displaying purpose. Need to change this in update method[wp_travel_group_discount_price] of cart class also to update cart data.
+										$total_pricing_pax = 0; // Total Pax for group discount in Pricing need total pax from the pricing.
 										foreach ( $cart_pax as $category_id => $detail ) {
 											$category = isset( $categories[ $category_id ] ) ? $categories[ $category_id ] : array(); // undefined offset fixes.
 											$ctitle   = isset( $category['term_info']['title'] ) ? esc_html( $category['term_info']['title'] ) : '';
 											$pax      = (int) $detail['pax'];
+											$total_pricing_pax += $pax;
 											if ( $pax < 1 ) {
 												continue;
 											}
@@ -225,7 +235,7 @@ if ( wptravel_is_react_version_enabled() ) {
 											$group_prices = $cart_pricing['group_prices'];
 											$group_price  = array();
 											foreach ( $group_prices as $gp ) {
-												if ( $pax >= $gp['min_pax'] && $pax <= $gp['max_pax'] ) {
+												if ( $total_pricing_pax >= $gp['min_pax'] && $total_pricing_pax <= $gp['max_pax'] ) {
 													$group_price = $gp;
 													break;
 												}
@@ -244,6 +254,7 @@ if ( wptravel_is_react_version_enabled() ) {
 											$category_price = isset( $group_price['price'] ) ? $group_price['price'] : $category_price;
 											$category_price = $category_price ? $category_price : 0; // Temp fixes.
 										}
+										// $category_price = apply_filters( 'wp_travel_multiple_currency', $category_price );
 										if ( $pricing_group_price ) { // Pricing group price treat as price per only
 											$category_total = $pax * (float) $category_price;
 										} else {
@@ -266,7 +277,7 @@ if ( wptravel_is_react_version_enabled() ) {
 													</span>
 												</div>
 												<span class="prices">
-													<?php echo $price_per_group ? '' : ' x <span data-wpt-category-price="' . $category_price . '">' . wptravel_get_formated_price_currency( $category_price ) . '</span>'; ?>  <strong><?php echo '<span data-wpt-category-total="' . $category_total . '">' . wptravel_get_formated_price_currency( $category_total ) . '</span>'; ?></strong>
+													<?php echo $price_per_group ? '' : ' x <span data-wpt-category-price="' . $category_price . '">' . wptravel_get_formated_price_currency( WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $category_price ) ) . '</span>'; ?>  <strong><?php echo '<span data-wpt-category-total="' . $category_total . '">' . wptravel_get_formated_price_currency( WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $category_total ) ) . '</span>'; ?></strong>
 												</span>
 											</div>
 										</div>
@@ -302,7 +313,7 @@ if ( wptravel_is_react_version_enabled() ) {
 														<input id="<?php echo esc_attr( 'tx_' . $tx['id'] ); ?>" name="<?php echo esc_attr( 'tx_' . $tx['id'] ); ?>" readonly <?php echo $required ? 'required min="1"' : 'min="0"'; ?> type="text" data-wpt-tx-count-input="<?php echo esc_attr( $tx_count ); ?>" name="" class="wp-travel-form-control wp-travel-cart-extras-qty qty form-control" value="<?php echo esc_attr( $tx_count ); ?>" />
 														<span class="input-group-btn input-group-append"><button class="btn" type="button" data-wpt-count-up>+</button></span></div>
 														<span class="prices">
-															<?php echo ' x <span data-wpt-tx-price="' . $tx_price . '">' . wptravel_get_formated_price_currency( $tx_price ) . '</span>' . '<strong><span data-wpt-tx-total="' . $tx_total . '">' . wptravel_get_formated_price_currency( $tx_total ) . '</span>' . '</strong>'; ?>
+															<?php echo ' x <span data-wpt-tx-price="' . $tx_price . '">' . wptravel_get_formated_price_currency( WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $tx_price ) ) . '</span>' . '<strong><span data-wpt-tx-total="' . $tx_total . '">' . wptravel_get_formated_price_currency( WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $tx_total ) ) . '</span>' . '</strong>'; ?>
 														</span>
 												</div>
 												<?php endif; ?>
@@ -322,6 +333,7 @@ if ( wptravel_is_react_version_enabled() ) {
 					?>
 					</ul>
 					<?php
+
 					$subtotal      = $cart['cart']['total']['cart_total'];
 					$discount      = $cart['cart']['total']['discount'] > 0 ? $cart['cart']['total']['discount'] : 0;
 					$total         = $cart['cart']['total']['total'] > 0 ? $cart['cart']['total']['total'] : 0;
