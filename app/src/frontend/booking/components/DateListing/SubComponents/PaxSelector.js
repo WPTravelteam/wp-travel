@@ -166,7 +166,7 @@ const PaxSelector = ( props ) => {
 									( c.has_group_price && c.group_prices.length > 0 && selectedDateIds.includes( date.id ) ) || 
 									pricing && 'undefined'  != typeof pricing.has_group_price && pricing.has_group_price && pricing.group_prices.length > 0 && selectedDateIds.includes( date.id ) 
 								) && 
-								( recurrindDate && sd === rd  ) 
+								( ! recurrindDate || ( recurrindDate && sd === rd ) ) 
 							) &&
 								<span className="tooltip group-discount-button">
 								<span>{__i18n.bookings.group_discount_tooltip}</span>
