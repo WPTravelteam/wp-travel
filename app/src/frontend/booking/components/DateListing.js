@@ -33,7 +33,7 @@ const DateListing = ( props ) => {
 	const isInventoryEnabled = tripData.inventory && tripData.inventory.enable_trip_inventory === 'yes';
 
     // Booking Data.
-    const { isLoading, stateUpdated, selectedDate, selectedDateIds, nomineePricingIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
+    const { dateListingChangeType, selectedDate, selectedDateIds, nomineePricingIds, selectedPricingId, excludedDateTimes, selectedTime } = bookingData;
 	
     // Temp/Local state to play with HTTP Request. [same as Calendar View] @todo need to optimize by using only one.
 	const [_inventoryData, _setInventoryData] = useState([]);
@@ -46,14 +46,11 @@ const DateListing = ( props ) => {
 			return
 		}
 		let _bookingData = {
-			// isLoading:false,
 			pricingUnavailable:false,
 			nomineeTimes: [],
 			selectedTime: null,
 		};
-		if ( ! isInventoryEnabled ) {
-			_bookingData.isLoading = false; // maybe not reqd.
-		}
+		
 		// after selecting pricing. need to check available time for selected pricing as well. Single pricing id case is already checked in date changes lifecycle below.
 		bookingWidgetUseEffects( _bookingData, 'pricingChange' );
 	}, [ selectedPricingId ]); 
@@ -65,7 +62,6 @@ const DateListing = ( props ) => {
 			return
 		}
 		let _bookingData = {
-			// isLoading:false,
 			pricingUnavailable:false,
 		};
 		// Note: This effect is same as date changes lifecycle effect.
@@ -80,14 +76,11 @@ const DateListing = ( props ) => {
 			return
 		}
 		let _bookingData = {
-			// isLoading:false,
-			pricingUnavailable:false,
+			// pricingUnavailable:false,
 			nomineeTimes: [],
 			selectedTime: null,
 		};
-		if ( ! isInventoryEnabled ) {
-			_bookingData.isLoading = false; // maybe not reqd.
-		}
+		
 		bookingWidgetUseEffects( _bookingData, 'dateChange' );
 		
 	}, [ selectedDateIds ]);
@@ -126,7 +119,10 @@ const DateListing = ( props ) => {
 				_inventory_state = {
 					..._inventory_state,
 					selectedTime: _times[0].format('HH:mm'),
+					pricingUnavailable: false
 				}
+			} else {
+				_inventory_state = { ..._inventory_state, pricingUnavailable: false }
 			}
 			// Quick fix. Pax count data is overriding due to async setInventoryData so need to re assign here.
 			// Add default selected pax object values as 0 for all categories as per selected pricing. {'2':0,'3':0} where cat id 2, 3 have default 0 selected pax.
@@ -152,7 +148,7 @@ const DateListing = ( props ) => {
 		}
 		let _bookingData = { };
 		if ( ! isInventoryEnabled ) {
-			_bookingData.isLoading = false; // maybe not reqd.
+			_bookingData.isLoading = false;
 		}
 
 		if ( _nomineeTripExtras.length > 0 ) {
@@ -163,7 +159,6 @@ const DateListing = ( props ) => {
 			})
 			_bookingData = {..._bookingData, nomineeTripExtras:_nomineeTripExtras, tripExtras: _tripExtras }
 		}
-		
 		updateBookingData( _bookingData );
 	}, [ _nomineeTripExtras ]);
 
@@ -235,7 +230,7 @@ const DateListing = ( props ) => {
 			}],
 		}
 		// extras Calculation.
-		setTripExtrasData();
+		setTripExtrasData(effectType);
 		if ( _nomineeTripExtras.length > 0 ) {
 			// Default extras values.
 			let _tripExtras = {}
@@ -244,13 +239,10 @@ const DateListing = ( props ) => {
 			})
 			_bookingData = {..._bookingData, nomineeTripExtras:_nomineeTripExtras, tripExtras: _tripExtras }
 		}
+		
 		if ( isInventoryEnabled ) {
-			// This will update local useState if ajax response is success.
-			if ( 'timeChange' !== effectType ) { // prevent ajax request on time change.
-				await setInventoryData( _bookingData ); // This will override paxcount value in the inventory changes state so need to re assign
-			}
 			let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
-			let _inventory_state = {isLoading:false }
+			let _inventory_state = { }
 			if ( _inventoryData.length > 0 ) {
 				// Add logic if inventory ajax is complete
 				let _times = _inventoryData.filter(inventory => {
@@ -277,22 +269,10 @@ const DateListing = ( props ) => {
 				_inventory_state = { ..._inventory_state, inventory: _inventoryData }
 			}
 			_bookingData = {..._bookingData, ..._inventory_state }
-		} else {
-			_bookingData = {..._bookingData, isLoading:false }
 		}
-
-		_bookingData = {..._bookingData, stateUpdated:'yes' }
-		await updateBookingData( _bookingData );
+		updateBookingData( _bookingData );
+		// console.log(effectType, bookingData, _bookingData );
 	}
-
-	// Lifecycles. quick fix [just to re render updated state.]
-    useEffect(() => {
-		if ( 'yes' === stateUpdated ) {
-			updateBookingData( { stateUpdated:'no' } )
-			return
-		}
-		
-	}, [ stateUpdated ]);
 
 	// functions.
 	const getPricingTripTimes = ( pricingId, selectedTripdates ) => {
@@ -322,8 +302,10 @@ const DateListing = ( props ) => {
 			}
 		})
 	}
-	const setTripExtrasData = async () => {
-		if ( ! selectedPricingId ) {
+	const setTripExtrasData = async (effectType) => {
+
+		// In date listing pricing and date are selected at once so need to prevent multiple ajax requst of extras and inventory.
+		if ( ( ! selectedPricingId || 'timeChange' === effectType ) || (  'dateChange' === effectType && 'dateOnly' !== dateListingChangeType ) ) {
 			return;
 		}
 		let extras = allPricings[ selectedPricingId ].trip_extras;
@@ -336,9 +318,19 @@ const DateListing = ( props ) => {
 					}
 					_setNomineeTripExtras( result.data.trip_extras );
 				}
+				if ( isInventoryEnabled ) {
+					setInventoryData();
+				} else {
+					updateBookingData( {isLoading:false} );
+				}
 			} )
 		} else {
 			_setNomineeTripExtras( [] );
+			if ( isInventoryEnabled ) {
+				setInventoryData();
+			} else {
+				await updateBookingData( {isLoading:false} );
+			}
 		}
 	}
 

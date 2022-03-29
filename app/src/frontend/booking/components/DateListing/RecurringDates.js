@@ -73,7 +73,7 @@ const RecurringRepeator = ( props ) =>  {
                     <span className="start-date"><span>{__i18n.bookings.start_date}: </span>{moment(recurrindDate).format(_wp_travel.date_format_moment)}</span>
                     {date.end_date && '0000-00-00' != date.end_date && ! recurrindDate && <span className="end-date"><span>{__i18n.bookings.end_date}: </span>{moment(date.end_date).format(_wp_travel.date_format_moment)}</span> }
                 </div>
-                {selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) &&
+                {selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) && ! isLoading &&
                     <TripTimes { ...props }  />
                 }
             </div>

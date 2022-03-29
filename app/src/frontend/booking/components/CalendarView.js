@@ -44,7 +44,7 @@ const CalendarView = ( props ) => {
 	const isInventoryEnabled = tripData.inventory && tripData.inventory.enable_trip_inventory === 'yes';
 
     // Booking Data.
-    const { isLoading, stateUpdated, selectedDate, selectedDateIds, nomineePricingIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
+    const { isLoading, selectedDate, selectedDateIds, nomineePricingIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
 
 	// Temp/Local state to play with HTTP Request.
 	const [_inventoryData, _setInventoryData] = useState([]);
@@ -57,7 +57,6 @@ const CalendarView = ( props ) => {
 			return
 		}
 		let _bookingData = {
-			// isLoading:false,
 			pricingUnavailable:false,
 			nomineeTimes: [],
 			selectedTime: null,
@@ -76,7 +75,6 @@ const CalendarView = ( props ) => {
 			return
 		}
 		let _bookingData = {
-			// isLoading:false,
 			pricingUnavailable:false,
 		};
 		// Note: This effect is same as date changes lifecycle effect.
@@ -91,14 +89,11 @@ const CalendarView = ( props ) => {
 			return
 		}
 		let _bookingData = {
-			isLoading:false,
-			pricingUnavailable:false,
+			// isLoading:false,
+			// pricingUnavailable:false,
 			nomineeTimes: [],
 			selectedTime: null,
 		};
-		if ( ! isInventoryEnabled ) {
-			_bookingData.isLoading = false; // maybe not reqd.
-		}
 		bookingWidgetUseEffects( _bookingData, 'dateChange' );
 		
 	}, [ selectedDateIds ]);
@@ -249,13 +244,16 @@ const CalendarView = ( props ) => {
 			}],
 		}
 		// extras Calculation.
-		await setTripExtrasData();
+		await setTripExtrasData(effectType);
+		if ( _nomineeTripExtras.length > 0 ) {
+			// Default extras values.
+			let _tripExtras = {}
+			_nomineeTripExtras.forEach(x => {
+				_tripExtras = { ..._tripExtras, [x.id]: x.is_required ? 1 : 0 }
+			})
+			_bookingData = {..._bookingData, nomineeTripExtras:_nomineeTripExtras, tripExtras: _tripExtras }
+		}
 		if ( isInventoryEnabled ) {
-			// This will update local useState if ajax response is success.
-			if ( 'timeChange' !== effectType ) { // prevent ajax request on time change.
-				await setInventoryData( _bookingData ); // This will override paxcount value in the inventory changes state so need to re assign
-			}
-
 			let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
 			let _inventory_state = {isLoading:false }
 			if ( _inventoryData.length > 0 ) {
@@ -286,8 +284,9 @@ const CalendarView = ( props ) => {
 		} else {
 			_bookingData = {..._bookingData, isLoading:false }
 		}
-		
-		await updateBookingData( _bookingData );
+		_bookingData = {..._bookingData }
+		updateBookingData( _bookingData );
+		// console.log( effectType, _bookingData );
 	}
 
 	// functions.
@@ -319,8 +318,8 @@ const CalendarView = ( props ) => {
 		});
 		// return true;
 	}
-	const setTripExtrasData = async () => {
-		if ( ! selectedPricingId ) {
+	const setTripExtrasData = async ( effectType ) => {
+		if ( ( ! selectedPricingId || 'timeChange' === effectType ) ) {
 			return;
 		}
 		let extras = allPricings[ selectedPricingId ].trip_extras;
@@ -333,7 +332,20 @@ const CalendarView = ( props ) => {
 					}
 					_setNomineeTripExtras( result.data.trip_extras );
 				}
+				_setNomineeTripExtras( [] );
+				if ( isInventoryEnabled ) {
+					setInventoryData();
+				} else {
+					updateBookingData( {isLoading:false} );
+				}
 			} )
+		} else {
+			_setNomineeTripExtras( [] );
+			if ( isInventoryEnabled ) {
+				setInventoryData();
+			} else {
+				await updateBookingData( {isLoading:false} );
+			}
 		}
 	}
 
@@ -349,7 +361,7 @@ const CalendarView = ( props ) => {
     const selectTripDate = ( date ) => {
 		// Default or Trip duration.
 		let _bookingData = {
-			// isLoading: false, // Default false for trip duration only because date changes effect is not triggered in trip ducation.
+			isLoading: true, // Default false for trip duration only because date changes effect is not triggered in trip ducation.
 			pricingUnavailable: false,
 			selectedDate: date,
 			selectedPricingId:null,
@@ -406,7 +418,7 @@ const CalendarView = ( props ) => {
 			} else if ( _nomineePricingIds.length === 1 ) {
 				let tempSelectedPricingId = _nomineePricingIds[0];
 				let selectedPricing   = allPricings[ tempSelectedPricingId ].title;
-				_bookingData = { ..._bookingData, selectedPricingId: tempSelectedPricingId, selectedPricing:selectedPricing }
+				_bookingData = { ..._bookingData, selectedPricingId: tempSelectedPricingId, selectedPricing:selectedPricing, isLoading:true }
 			}
 			_bookingData = { ..._bookingData, selectedDateIds: _dateIds, nomineePricingIds: _nomineePricingIds }
 		} else {
@@ -417,7 +429,7 @@ const CalendarView = ( props ) => {
 			} else if ( _nomineePricingIds.length === 1 ) {
 				let tempSelectedPricingId = _nomineePricingIds[0];
 				let selectedPricing   = allPricings[ tempSelectedPricingId ].title;
-				_bookingData = { ..._bookingData, selectedPricingId: tempSelectedPricingId, selectedPricing:selectedPricing }
+				_bookingData = { ..._bookingData, selectedPricingId: tempSelectedPricingId, selectedPricing:selectedPricing, isLoading:true }
 			}
 			_bookingData = { ..._bookingData, nomineePricingIds: _nomineePricingIds } // nomineePricingIds
 		}
@@ -471,7 +483,7 @@ const CalendarView = ( props ) => {
 			{ ! isLoading &&
 				<div className="wp-travel-booking__pricing-wrapper wptravel-pax-selector">
 					{ ! pricingUnavailable && selectedPricingId && <ErrorBoundary>
-						{ nomineeTimes.length > 1 && ! selectedTime && <Disabled><PaxSelector { ...props } /></Disabled> || <PaxSelector { ...props } /> }
+						{ nomineeTimes.length > 0 && ! selectedTime && <Disabled><PaxSelector { ...props } /></Disabled> || <PaxSelector { ...props } /> }
 						{ _.size(allPricings[ selectedPricingId ].trip_extras) > 0 && objectSum( paxCounts ) > 0 && <ErrorBoundary> <TripExtras { ...props } /> </ErrorBoundary> }
 					</ErrorBoundary> }
 					

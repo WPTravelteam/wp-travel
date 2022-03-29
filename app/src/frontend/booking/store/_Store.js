@@ -17,7 +17,7 @@ export const DEFAULT_BOOKING_STATE = () => {
         nomineeTripExtras: [],
         tripExtras: {}, // object structure for selected extras like paxCounts
         isLoading: false,
-        stateUpdated:'no', // just to trigger state cahnges. quick fix.
+        dateListingChangeType:null // To prevent multiple ajax request on pricing select. [only used in date listing]
     };
     return initState;
 }

@@ -76,7 +76,7 @@ const NonRecurringDates = ( props ) => {
 							<span className="start-date"><span>{__i18n.bookings.start_date}: </span>{moment(date.start_date).format(_wp_travel.date_format_moment)}</span>
 							{date.end_date && '0000-00-00' != date.end_date && <span className="end-date"><span>{__i18n.bookings.end_date}: </span>{moment(date.end_date).format(_wp_travel.date_format_moment)}</span> }
 						</div>
-						{selectedDateIds.includes( date.id ) &&
+						{selectedDateIds.includes( date.id ) && ! isLoading &&
 							<TripTimes { ...{ ...props, _nomineePricings, date } }  />
 						}
 					</div>

@@ -16,11 +16,12 @@ const Pricings =  ( props ) => {
 	const { isLoading, selectedDate, nomineePricingIds, selectedPricingId } = bookingData;
 	// console.log( 'nomineePricingIds', nomineePricingIds );
 	return <>
+		{ isLoading && <Loader /> }
 		{
 			nomineePricingIds.length > 1 ?
 				<>
 				<h4>{__i18n.bookings.pricings_list_label}</h4>
-				{ isLoading && <Loader /> }
+				
 				{
 					nomineePricingIds.map(
 						(id, i) => <button key={i}

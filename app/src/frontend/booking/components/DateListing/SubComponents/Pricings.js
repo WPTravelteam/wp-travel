@@ -6,6 +6,7 @@ const __i18n = {
 
 // Additional lib
 const _ = lodash;
+import moment from 'moment';
 
 // WP Travel Functions.
 import Loader from '../../../../../GlobalComponents/Loader';
@@ -25,7 +26,7 @@ const Pricings = ( props ) => {
     const datesById          = _.keyBy(_dates, d => d.id); // object structure along with date id.
 
     // Booking Data.
-    const { isLoading, selectedDate, selectedDateIds, nomineePricingIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
+    const { isLoading, dateListingChangeType, selectedDate, selectedDateIds, nomineePricingIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
 	let sd = moment(moment(selectedDate).format('YYYY-MM-DD')).unix();
 	let rd = moment(moment(recurrindDate).format('YYYY-MM-DD')).unix();
 	return <>
@@ -47,6 +48,16 @@ const Pricings = ( props ) => {
 								let _nomineePricingIds = _selectedDateIds.map( id => datesById[id].pricing_ids.split(',').map( id => id.trim() ) )
 								_nomineePricingIds     = _.chain( _nomineePricingIds ).flatten().uniq().value().filter( p => p != '' && typeof allPricings[p] !== 'undefined' )
 
+								let changeType = null;
+								let pricingChange = selectedPricingId !== pricingId;
+								let dateChange    = ! moment( selectedDate).isSame( moment( newSelectedDate) )
+								if ( pricingChange && dateChange ) {
+									changeType = 'priceDate';
+								} else if( dateChange ) {
+									changeType = 'dateOnly';
+								} else {
+									changeType = 'priceOnly';
+								}
 								updateBookingData({
 									selectedPricingId:pricingId,
 									selectedPricing:allPricings[pricingId].title,
@@ -54,7 +65,9 @@ const Pricings = ( props ) => {
 									selectedDateIds:_selectedDateIds,
 									nomineePricingIds:_nomineePricingIds,
 									isLoading:true,
-									pricingUnavailable:false
+									pricingUnavailable:false,
+									dateListingChangeType:changeType
+
 								});
 							} else {
 								updateBookingData({
