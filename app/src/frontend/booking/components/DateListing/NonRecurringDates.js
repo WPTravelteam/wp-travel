@@ -57,7 +57,7 @@ const NonRecurringDates = ( props ) => {
 							<Notice><InventoryNotice inventory={tripData.inventory} /></Notice> 
 							:
 							<>
-								{ ( ! selectedPricingId || ( nomineeTimes.length > 0 && ! selectedTime ) || ! selectedDateIds.includes( date.id ) ) && <Disabled><PaxSelector { ...{ ...props, _nomineePricings, date } } /></Disabled> || <PaxSelector { ...{ ...props, _nomineePricings, date } } /> }
+								{ ( ! selectedPricingId || ( nomineeTimes.length > 0 && ! selectedTime ) || ! selectedDateIds.includes( date.id ) || isLoading ) && <Disabled><PaxSelector { ...{ ...props, _nomineePricings, date } } /></Disabled> || <PaxSelector { ...{ ...props, _nomineePricings, date } } /> }
 								{ 
 									selectedPricingId && 
 									selectedDateIds.includes( date.id ) && 
