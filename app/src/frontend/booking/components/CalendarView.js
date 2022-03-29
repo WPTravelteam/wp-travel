@@ -271,7 +271,6 @@ const CalendarView = ( props ) => {
 					return moment(inventory.date)
 				});
 				_inventory_state = times.length > 0 && { ..._inventory_state, nomineeTimes: _times } || { ..._inventory_state, nomineeTimes: [] }
-				console.log( '_times', _times, times );
 				if (_times.length <= 0) {
 					_inventory_state = { ..._inventory_state, pricingUnavailable: true }
 				} else if( 1 === _times.length ) {
@@ -288,7 +287,7 @@ const CalendarView = ( props ) => {
 		}
 		_bookingData = {..._bookingData }
 		updateBookingData( _bookingData );
-		console.log( effectType, _bookingData );
+		// console.log( effectType, _bookingData );
 	}
 
 	// functions.
