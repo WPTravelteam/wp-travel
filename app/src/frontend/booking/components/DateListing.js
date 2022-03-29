@@ -261,10 +261,10 @@ const DateListing = ( props ) => {
 				if (_times.length <= 0) {
 					_inventory_state = { ..._inventory_state, pricingUnavailable: true }
 				} else if( 1 === _times.length ) {
-					_inventory_state = {
-						..._inventory_state,
-						selectedTime: _times[0].format('HH:mm'),
-					}
+					// _inventory_state = {
+					// 	..._inventory_state,
+					// 	selectedTime: _times[0].format('HH:mm'),
+					// }
 				}
 				_inventory_state = { ..._inventory_state, inventory: _inventoryData }
 			}

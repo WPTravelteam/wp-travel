@@ -194,6 +194,7 @@ const CalendarView = ( props ) => {
 					..._bookingData,
 					nomineeTimes: _times,
 				}
+				// console.log( '_times', _times );
 				// add selected trip time if nominee times length is one.
 				if ( 1 === _times.length ) {
 					_bookingData = {
@@ -270,13 +271,14 @@ const CalendarView = ( props ) => {
 					return moment(inventory.date)
 				});
 				_inventory_state = times.length > 0 && { ..._inventory_state, nomineeTimes: _times } || { ..._inventory_state, nomineeTimes: [] }
+				console.log( '_times', _times, times );
 				if (_times.length <= 0) {
 					_inventory_state = { ..._inventory_state, pricingUnavailable: true }
 				} else if( 1 === _times.length ) {
-					_inventory_state = {
-						..._inventory_state,
-						selectedTime: _times[0].format('HH:mm'),
-					}
+					// _inventory_state = {
+					// 	..._inventory_state,
+					// 	selectedTime: _times[0].format('HH:mm'),
+					// }
 				}
 				_inventory_state = { ..._inventory_state, inventory: _inventoryData }
 			}
@@ -286,7 +288,7 @@ const CalendarView = ( props ) => {
 		}
 		_bookingData = {..._bookingData }
 		updateBookingData( _bookingData );
-		// console.log( effectType, _bookingData );
+		console.log( effectType, _bookingData );
 	}
 
 	// functions.
