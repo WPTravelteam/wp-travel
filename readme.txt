@@ -252,7 +252,7 @@ Release Date: 30th March, 2022
 Fixes:
 * Fixed pricing loading issue in case of trip duration.
 * Fixed search filter not working while enabling load combined scripts.
-* Fixed minor layout issue with trip time.
+* Fixed minor layout issue with trip time in calendar view.
 
 = 5.2.0 =
 Release Date: 29th March, 2022
