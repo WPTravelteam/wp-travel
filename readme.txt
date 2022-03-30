@@ -252,7 +252,11 @@ Release Date: 30th March, 2022
 Fixes:
 * Fixed pricing loading issue in case of trip duration.
 * Fixed search filter not working while enabling load combined scripts.
+
+Layout Fixes:
 * Fixed minor layout issue with trip time in calendar view.
+* Fixed Pax selector not visible in mobile version.
+* Fixed loader layout in mobile version.
 
 = 5.2.0 =
 Release Date: 29th March, 2022
