@@ -1,11 +1,11 @@
 jQuery(document).ready(function($) {
     $('.btn-wp-travel-filter').on('click', function() {
         var view_mode = $('.wp-travel-view-mode.active-mode').data('mode');
-        pathname = $('#wp-travel-archive-url').val();
+        var pathname = $('#wp-travel-archive-url').val();
         if (!pathname) {
             pathname = window.location.pathname;
         }
-        query_string = '';
+        var query_string = '';
         if ( window.location.search ) {
             query_string = window.location.search;
         }
@@ -13,8 +13,8 @@ jQuery(document).ready(function($) {
         var search_params  = full_url.searchParams;
 
         $('.wp_travel_input_filters').each(function() {
-            filterby     = $(this).attr('name');
-            filterby_val = $(this).val();
+            var filterby     = $(this).attr('name');
+            var filterby_val = $(this).val();
 
             search_params.set( filterby, filterby_val );
             full_url.search = search_params.toString();
