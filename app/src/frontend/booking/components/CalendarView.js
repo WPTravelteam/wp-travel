@@ -362,13 +362,16 @@ const CalendarView = ( props ) => {
     const selectTripDate = ( date ) => {
 		// Default or Trip duration.
 		let _bookingData = {
-			isLoading: true, // Default false for trip duration only because date changes effect is not triggered in trip ducation.
+			isLoading: true,
 			pricingUnavailable: false,
 			selectedDate: date,
 			selectedPricingId:null,
 			selectedPricing:null,
 			selectedTime:null,
 			nomineeTimes:[]
+		}
+		if ( ! isFixedDeparture ) {
+			_bookingData.isLoading = false;  // Default false for trip duration only because date changes effect is not triggered in trip ducation.
 		}
 
 		// Pricing ids as per selected date for fixed departure and all pricing for trip duration.
