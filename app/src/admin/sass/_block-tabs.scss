@@ -576,3 +576,25 @@ td {
 		}
 	}
 }
+
+// Addons settings new.
+.wptravel-ui-title-container{
+	background: #f7f7f7;
+    padding: 20px;
+    border-bottom: 4px solid #ccc;
+}
+.wptravel-ui-content.wptravel-modules{
+	display:grid;
+	grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+
+	.components-panel__row{
+		padding: 15px 20px;
+		background: #f7f7f7;
+		border-right: 1px solid #ccc;
+    	border-bottom: 1px solid #ccc;
+		margin: 0;
+		&:nth-of-type(even){
+			border-right: none;
+		}
+	}
+}

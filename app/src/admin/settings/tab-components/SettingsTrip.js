@@ -28,7 +28,7 @@ export default () => {
     return <div className="wp-travel-ui wp-travel-ui-card settings-general">
         <h2>{ __( 'Trip Settings', 'wp-travel' ) }</h2>
         <ErrorBoundary>
-            {applyFilters( 'wp_travel_tab_content_before_trips', [] ) }
+            {applyFilters( 'wp_travel_tab_content_before_trips', [], allData ) }
             <PanelRow>
                 <label>{ __( 'Hide related trips', 'wp-travel' ) }</label>
                 <div className="wp-travel-field-value">
