@@ -15,10 +15,18 @@ export default () => {
     const { modules:defaultModules } = default_settings;
 
     let _modules          = modules;
+    if ( ! _modules.length ) {
+        _modules = defaultModules
+    }
     let enableAallModules = true;
     Object.keys( defaultModules ).map( ( addonsKey, i ) => {
         if ( enableAallModules ) {
-            let enabled = modules[addonsKey].value;
+            let enabled = false;
+            if ( 'undefined' !== typeof modules[addonsKey] ) {
+                enabled =  modules[addonsKey].value;
+            } else {
+                enabled =  defaultModules[addonsKey].value;
+            }
             if ( 'no' == enabled ) {
                 enableAallModules = false;
             }
@@ -59,17 +67,22 @@ export default () => {
                         if ( 'show_wp_travel_pro' === addonsKey ) {
                             return <></>
                         }
-                        let enabledModule = 'yes' == modules[addonsKey].value; // Saved modules values.
+                        let enabledModule = false;
+                        if ( 'undefined' !== typeof modules[addonsKey] ) {
+                            enabledModule = 'yes' == modules[addonsKey].value; // Saved modules values.
+                        } else {
+                            enabledModule = 'yes' == defaultModules[addonsKey].value;
+                        }
 
                         return <PanelRow key={i}>
                             <div>
                                 <div>
-                                    <label>{modules[addonsKey].title}</label>
+                                    <label>{defaultModules[addonsKey].title}</label>
                                     <div className="wp-travel-field-value">
                                         <ToggleControl
                                             checked={ enabledModule }
                                             onChange={ ( val ) => {
-                                                let _modules = modules;
+                                                // let _modules = modules;
                                                 _modules[addonsKey].value = val ? 'yes' : 'no';
                                                 updateSettings({
                                                     ...allData,
@@ -79,7 +92,7 @@ export default () => {
                                         />
                                     </div>
                                 </div>
-                                <p className="description">{__( 'Show all your "' + modules[addonsKey].title + '" settings and enable its feature', 'wp-travel' )}</p>
+                                <p className="description">{__( 'Show all your "' + defaultModules[addonsKey].title + '" settings and enable its feature', 'wp-travel' )}</p>
                             </div>
                         </PanelRow> 
                     }  ) }
