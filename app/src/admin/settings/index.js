@@ -104,12 +104,12 @@ const WPTravelTripSettings = () => {
             className: 'tab-cart-checkout',
             content: SettingsCartCheckout
         },
-        {
-            name: 'addons-settings',
-            title: __('Addons Settings', 'wp-travel'),
-            className: 'tab-addons-settings',
-            content: SettingsAddons
-        },
+        // {
+        //     name: 'addons-settings',
+        //     title: __('Addons Settings', 'wp-travel'),
+        //     className: 'tab-addons-settings',
+        //     content: SettingsAddons
+        // },
         {
             name: 'modules-settings',
             title: __('Modules Settings', 'wp-travel'),

@@ -287,6 +287,16 @@ function wptravel_get_download_upsell() {
 			'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
 		);
 		wptravel_upsell_message( $args );
+		$settings = wptravel_get_settings();
+		$modules  = $settings['modules'];
+		if ( isset( $modules['show_wp_travel_downloads'] ) ) {
+			$active = 'yes' === $modules['show_wp_travel_downloads'];
+			if ( ! $active ) {
+				?>
+				<p>WP Travel Downloads is currently disabled please go to Modules Settings to enable it and reload the page.</p>
+				<?php
+			}
+		}
 	endif;
 }
 
@@ -306,6 +316,16 @@ function wptravel_custom_filters_upsell() {
 		);
 		wptravel_upsell_message( $args );
 	endif;
+	$settings = wptravel_get_settings();
+	$modules  = $settings['modules'];
+	if ( isset( $modules['show_wp_travel_custom_filters'] ) ) {
+		$active = 'yes' === $modules['show_wp_travel_custom_filters'];
+		if ( ! $active ) {
+			?>
+			<p>WP Travel Custom Filters is currently disabled please go to Modules Settings to enable it and reload the page.</p>
+			<?php
+		}
+	}
 }
 
 /**

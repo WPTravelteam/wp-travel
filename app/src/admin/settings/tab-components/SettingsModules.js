@@ -1,6 +1,6 @@
 import { useSelect, dispatch } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
-import { PanelRow, ToggleControl } from '@wordpress/components';
+import { PanelRow, ToggleControl, Notice } from '@wordpress/components';
 
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
 
@@ -33,11 +33,15 @@ export default () => {
         }
     });
     return <div className="wp-travel-ui wp-travel-ui-card settings-modules">
+        <Notice isDismissible={false} status="warning">
+            <p><b>Note:</b> Please reload page after enabling/disabling modules.</p>
+        </Notice><br />
         <div className="wptravel-ui-title-container">
             <div className="wptravel-ui-title">
                 <h2>{ __( 'Modules Settings', 'wp-travel' ) }</h2>
                 <p>{__( 'You can enable or disable modules features from here.', 'wp-travel' )}</p>
             </div>
+            
             <label>
                 <ToggleControl
                     checked={enableAallModules }
@@ -56,6 +60,7 @@ export default () => {
                 />
                 <p className="description">{__( 'Enable/Disable All', 'wp-travel' )}</p>
             </label>
+            
         </div>
         <div className="wptravel-ui-content wptravel-modules" >
             <ErrorBoundary>
@@ -101,5 +106,8 @@ export default () => {
                 </>
             </ErrorBoundary>
         </div>
+        <Notice isDismissible={false} status="warning">
+            <p><b>Note:</b> Please reload page after enabling/disabling modules.</p>
+        </Notice><br />
     </div>
 }

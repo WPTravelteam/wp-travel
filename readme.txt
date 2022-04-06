@@ -246,6 +246,15 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
 
+= 5.2.2 =
+Release Date: 15th April, 2022
+
+Tweaks:
+* Renamed Addons settings to modules settings and added all modules enable/disable options.
+
+Fixes:
+* Fixed Invalid post type in enquiry shortcode form.
+
 = 5.2.1 =
 Release Date: 30th March, 2022
 
