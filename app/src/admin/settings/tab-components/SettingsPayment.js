@@ -121,7 +121,7 @@ export default () => {
                 </div>
             </PanelRow>
             
-            {applyFilters( 'wp_travel_before_minimum_partial_payout', [] )}
+            {applyFilters( 'wp_travel_before_minimum_partial_payout', [], allData )}
             { 'yes' == partial_payment && partial_payouts.length > 0 ? 
                 <>
                     
@@ -216,7 +216,7 @@ export default () => {
                     }
                 </>
                 : '' }
-            {applyFilters( 'wp_travel_after_minimum_partial_payout', [] )} 
+            {applyFilters( 'wp_travel_after_minimum_partial_payout', [], allData )} 
 
 
             <h3>
@@ -298,7 +298,7 @@ export default () => {
                     </ReactSortable>
                 </div>
             }
-            {applyFilters( 'wp_travel_after_payment_fields', [] )}
+            {applyFilters( 'wp_travel_after_payment_fields', [], allData )}
 
             <h3>{__( 'Tax Options', 'wp-travel' )}</h3>
             <PanelRow>

@@ -254,6 +254,7 @@ Tweaks:
 
 Fixes:
 * Fixed Invalid post type in enquiry shortcode form.
+* Fixed Warning: array_unique() expects parameter 1 to be array in dashboard and booking Page of user dashboard.
 
 = 5.2.1 =
 Release Date: 30th March, 2022

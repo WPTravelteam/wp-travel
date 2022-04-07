@@ -1,6 +1,6 @@
 <?php
 $bookings_glance    = $args['bookings_glance'];
-$bookings_glance    = array_unique( $bookings_glance );
+$bookings_glance    = is_array( $bookings_glance ) ? array_unique( $bookings_glance ) : $bookings_glance;
 $biling_glance_data = $args['biling_glance_data'];
 ?>
 <div>

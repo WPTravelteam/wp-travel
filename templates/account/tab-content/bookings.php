@@ -14,32 +14,32 @@ if ( ! function_exists( 'wptravel_account_tab_content' ) ) {
 	function wptravel_account_tab_content( $args ) {
 
 		$bookings = $args['bookings'];
-		$bookings = array_unique( $bookings );
+		$bookings = is_array( $bookings ) ? array_unique( $bookings ) : $bookings;
 		global $wp;
 		$detail_link  = home_url( $wp->request ) . '#bookings';
 		$back_link    = $detail_link;
 		$request_data = WP_Travel::get_sanitize_request();
-	
+
 		if ( $request_data ) { // @phpcs:ignore
 			wptravel_print_notices();
 			$booking_id    = isset( $request_data['detail_id'] ) ? absint( $request_data['detail_id'] ) : 0;
 			$details       = wptravel_booking_data( $booking_id );
 			$payment_data  = wptravel_payment_data( $booking_id );
 			$order_details = get_post_meta( $booking_id, 'order_items_data', true ); // Multiple Trips.
-	
+
 			$customer_note = get_post_meta( $booking_id, 'wp_travel_note', true );
 			$travel_date   = get_post_meta( $booking_id, 'wp_travel_arrival_date', true );
 			$trip_id       = get_post_meta( $booking_id, 'wp_travel_post_id', true );
-	
+
 			$title = get_the_title( $trip_id );
 			$pax   = get_post_meta( $booking_id, 'wp_travel_pax', true );
-	
+
 			// Billing fields.
 			$billing_address = get_post_meta( $booking_id, 'wp_travel_address', true );
 			$billing_city    = get_post_meta( $booking_id, 'billing_city', true );
 			$billing_country = get_post_meta( $booking_id, 'wp_travel_country', true );
 			$billing_postal  = get_post_meta( $booking_id, 'billing_postal', true );
-	
+
 			// Travelers info.
 			$fname       = get_post_meta( $booking_id, 'wp_travel_fname_traveller', true );
 			$lname       = get_post_meta( $booking_id, 'wp_travel_lname_traveller', true );
@@ -86,7 +86,7 @@ if ( ! function_exists( 'wptravel_account_tab_content' ) ) {
 								foreach ( $bookings as $key => $b_id ) :
 									$bkd_trip_id    = get_post_meta( $b_id, 'wp_travel_post_id', true );
 									$booking_status = get_post_status( $b_id );
-	
+
 									if ( ! $bkd_trip_id ) {
 										// Quick fix booking list hide from dashboard if booking updated form admin [ meta - wp_travel_post_id is not updated ].
 										$order_details = get_post_meta( $b_id, 'order_items_data', true ); // Multiple Trips.
@@ -98,39 +98,39 @@ if ( ! function_exists( 'wptravel_account_tab_content' ) ) {
 											endforeach;
 										endif;
 									}
-	
+
 									if ( 'publish' !== $booking_status ) {
 										continue;
 									}
-	
+
 									$payment_info = wptravel_booking_data( $b_id );
-	
+
 									$booking_status = $payment_info['booking_status'];
 									$payment_status = $payment_info['payment_status'];
 									$payment_mode   = $payment_info['payment_mode'];
 									$total_price    = $payment_info['total'];
 									$paid_amount    = $payment_info['paid_amount'];
 									$due_amount     = $payment_info['due_amount'];
-	
+
 									$ordered_data = get_post_meta( $b_id, 'order_data', true );
-	
+
 									$fname = isset( $ordered_data['wp_travel_fname_traveller'] ) ? $ordered_data['wp_travel_fname_traveller'] : '';
-	
+
 									if ( '' !== $fname && is_array( $fname ) ) {
 										reset( $fname );
 										$first_key = key( $fname );
-	
+
 										$fname = isset( $fname[ $first_key ][0] ) ? $fname[ $first_key ][0] : '';
 									} else {
 										$fname = isset( $ordered_data['wp_travel_fname'] ) ? $ordered_data['wp_travel_fname'] : '';
 									}
-	
+
 									$lname = isset( $ordered_data['wp_travel_lname_traveller'] ) ? $ordered_data['wp_travel_lname_traveller'] : '';
-	
+
 									if ( '' !== $lname && is_array( $lname ) ) {
 										reset( $lname );
 										$first_key = key( $lname );
-	
+
 										$lname = isset( $lname[ $first_key ][0] ) ? $lname[ $first_key ][0] : '';
 									} else {
 										$lname = isset( $ordered_data['wp_travel_lname'] ) ? $ordered_data['wp_travel_lname'] : '';
