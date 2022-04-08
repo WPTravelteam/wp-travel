@@ -75,8 +75,10 @@ export default () => {
                     { proModules.length > 0 &&
                         <PanelBody
                             title="Pro Modules"
-                            initialOpen={true}
+                            initialOpen={false}
                         >
+                            <div className="wptravel-modules-list">
+
                             { proModules.map( ( addonsKey, i ) => {
                                 // Do not display pro.
                                 if ( 'show_wp_travel_pro' === addonsKey ) {
@@ -111,14 +113,15 @@ export default () => {
                                     </div>
                                 </PanelRow> 
                             }  ) }
-                        
+                            </div>
                         </PanelBody>
                     }
                     { paymentModules.length > 0 &&
                         <PanelBody
                             title="Payment Modules"
-                            initialOpen={true}
+                            initialOpen={false}
                         >
+                            <div className="wptravel-modules-list">
                             { paymentModules.map( ( addonsKey, i ) => {
                                 // Do not display pro.
                                 if ( 'show_wp_travel_pro' === addonsKey ) {
@@ -153,15 +156,16 @@ export default () => {
                                     </div>
                                 </PanelRow> 
                             }  ) }
-                        
+                            </div>
                         </PanelBody>
                     }
 
                     { mapModules.length > 0 &&
                         <PanelBody
                             title="Map Modules"
-                            initialOpen={true}
+                            initialOpen={false}
                         >
+                            <div className="wptravel-modules-list">
                             { mapModules.map( ( addonsKey, i ) => {
                                 // Do not display pro.
                                 if ( 'show_wp_travel_pro' === addonsKey ) {
@@ -196,7 +200,7 @@ export default () => {
                                     </div>
                                 </PanelRow> 
                             }  ) }
-                        
+                            </div>
                         </PanelBody>
                     }
                     
