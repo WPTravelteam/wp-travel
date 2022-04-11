@@ -787,19 +787,24 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			$support_plugins = apply_filters( 'wp_travel_reject_checkout_cache_plugin', $support_plugins ); // phpcs:ignore
 			$support_plugins = apply_filters( 'wptravel_reject_checkout_cache_plugin', $support_plugins );
 
-			// For WP Rocket Plugin.
-			if ( in_array( $support_plugins['wp_rocket'], $active_plugins, true ) ) {
-				$options = get_option( 'wp_rocket_settings' );
+			if ( is_array( $active_plugins ) ) {
+				if ( in_array( $support_plugins['wp_rocket'], $active_plugins, true ) ) {
+					$options = get_option( 'wp_rocket_settings' );
 
-				// For checkout page.
-				if ( ! in_array( '/' . $slug['checkout'] . '/', $options['cache_reject_uri'], true ) ) {
-					$options['cache_reject_uri'][] = '/' . $slug['checkout'] . '/';
-					update_option( 'wp_rocket_settings', $options );
-				}
-				// For cart page in cookies.
-				if ( ! in_array( $slug['cart'], $options['cache_reject_cookies'], true ) ) {
-					$options['cache_reject_cookies'][] = $slug['cart'];
-					update_option( 'wp_rocket_settings', $options );
+					// For checkout page.
+					if ( isset( $options['cache_reject_uri'] ) && is_array( $options['cache_reject_uri'] ) ) {
+						if ( ! in_array( '/' . $slug['checkout'] . '/', $options['cache_reject_uri'], true ) ) {
+							$options['cache_reject_uri'][] = '/' . $slug['checkout'] . '/';
+							update_option( 'wp_rocket_settings', $options );
+						}
+					}
+					// For cart page in cookies.
+					if ( isset( $options['cache_reject_cookies'] ) && is_array( $options['cache_reject_cookies'] ) ) {
+						if ( ! in_array( $slug['cart'], $options['cache_reject_cookies'], true ) ) {
+							$options['cache_reject_cookies'][] = $slug['cart'];
+							update_option( 'wp_rocket_settings', $options );
+						}
+					}
 				}
 			}
 
