@@ -135,8 +135,8 @@ export default () => {
                                 }
                                 let moduleName = defaultModules[addonsKey].title.replace( 'WP Travel ', ' ' );
                                 return <PanelRow key={i}>
-                                    <div>
-                                        <div>
+                                    <div className="wptravel-modules-row">
+                                        <div className="wptravel-modules-input">
                                             <label><strong>{moduleName}</strong></label>
                                             <div className="wp-travel-field-value">
                                                 <ToggleControl
@@ -179,8 +179,8 @@ export default () => {
                                 }
                                 let moduleName = defaultModules[addonsKey].title.replace( 'WP Travel ', ' ' );
                                 return <PanelRow key={i}>
-                                    <div>
-                                        <div>
+                                    <div className="wptravel-modules-row">
+                                        <div className="wptravel-modules-input">
                                             <label><strong>{moduleName}</strong></label>
                                             <div className="wp-travel-field-value">
                                                 <ToggleControl
