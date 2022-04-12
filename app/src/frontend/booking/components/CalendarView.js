@@ -51,7 +51,7 @@ const CalendarView = ( props ) => {
 	const [_nomineeTripExtras, _setNomineeTripExtras] = useState([]);
 
 	// Lifecycles. [ This will only trigger if pricing is selected or changed ]
-    useEffect(() => {
+    useEffect(async() => {
 		if ( ! selectedPricingId ) {
 			updateBookingData( { isLoading:false } )
 			return
@@ -61,9 +61,9 @@ const CalendarView = ( props ) => {
 			nomineeTimes: [],
 			selectedTime: null,
 		};
-		if ( ! isInventoryEnabled ) {
-			_bookingData.isLoading = false; // maybe not reqd.
-		}
+		// if ( ! isInventoryEnabled ) {
+		// 	_bookingData.isLoading = false; // maybe not reqd.
+		// }
 		// after selecting pricing. need to check available time for selected pricing as well. Single pricing id case is already checked in date changes lifecycle below.
 		bookingWidgetUseEffects( _bookingData, 'pricingChange' );
 	}, [ selectedPricingId ]); 
@@ -89,8 +89,6 @@ const CalendarView = ( props ) => {
 			return
 		}
 		let _bookingData = {
-			// isLoading:false,
-			// pricingUnavailable:false,
 			nomineeTimes: [],
 			selectedTime: null,
 		};
@@ -152,17 +150,16 @@ const CalendarView = ( props ) => {
 	}, [ _inventoryData ]); 
 
 	// Lifecycles. [ This will only trigger if Extras Data changed ]. Fix real time store update issue with trip time change & single Pricing.
-    useEffect(() => {
+    useEffect(async() => {
 		if ( ! selectedPricingId ) {
 			updateBookingData( { isLoading:false } )
 			return
 		}
 		let _bookingData = {
-			// isLoading:false,
 			pricingUnavailable:false,
 		};
 		if ( ! isInventoryEnabled ) {
-			_bookingData.isLoading = false; // maybe not reqd.
+			_bookingData.isLoading = false;  // IsLoading will be false if inventory is disable othrewise this will false after fetching inventory data. Fixes for trip duration with extras as well.
 		}
 		if ( _nomineeTripExtras.length > 0 ) {
 			// Default extras values.
@@ -177,117 +174,123 @@ const CalendarView = ( props ) => {
 	}, [ _nomineeTripExtras ]); 
 
 	const bookingWidgetUseEffects = async ( _bookingData, effectType ) => {
-		if ( nomineePricingIds.length > 0 ) {
-			let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
-			if ( times.length > 0 ) {
-				let _times = times
-					.map(time => {
-						return moment(`${selectedDate.toDateString()} ${time}`)
-					})
-					.filter(time => {
-						if (excludedDateTimes.find(et => moment(et).isSame(time))) {
-							return false
-						}
-						return true
-					})
-				_bookingData = {
-					..._bookingData,
-					nomineeTimes: _times,
-				}
-				// console.log( '_times', _times );
-				// add selected trip time if nominee times length is one.
-				if ( 1 === _times.length ) {
+		if ( selectedPricingId ) {
+			if ( nomineePricingIds.length > 0 ) {
+				let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
+				if ( times.length > 0 ) {
+					let _times = times
+						.map(time => {
+							return moment(`${selectedDate.toDateString()} ${time}`)
+						})
+						.filter(time => {
+							if (excludedDateTimes.find(et => moment(et).isSame(time))) {
+								return false
+							}
+							return true
+						})
 					_bookingData = {
 						..._bookingData,
-						selectedTime: _times[0].format('HH:mm'),
+						nomineeTimes: _times,
 					}
-				}
-			} else {
-				_bookingData = {
-					..._bookingData,
-					nomineeTimes: [],
-					selectedTime: null,
-				}
-			}
-		}
-		
-		// Add default selected pax object values as 0 for all categories as per selected pricing. {'2':0,'3':0} where cat id 2, 3 have default 0 selected pax.
-		const pricing = allPricings[selectedPricingId];
-		let categories = pricing && pricing.categories || []
-		let _paxCounts = {}
-		categories.forEach(c => {
-			_paxCounts = { ..._paxCounts, [c.id]: parseInt(c.default_pax) || 0 }
-		})
-		_bookingData = { ..._bookingData, paxCounts: _paxCounts }
-
-		let maxPax               = pricing.max_pax || 999
-		let tempSelectedDatetime = selectedDate;
-
-		let selectedHour = 0;
-		let selectedMin  = 0;
-		if ( selectedTime ) { // if time is selected then the selectedDate must have time on it.
-			const selectedDateTime = new Date( `${selectedDate.toDateString()} ${selectedTime}` );
-			_bookingData = { ..._bookingData, selectedDate: selectedDateTime } // Updating date state with time if time is selected.
-			selectedHour = selectedDateTime.getHours(); // Date object
-			selectedMin  = selectedDateTime.getMinutes(); // Date object
-		}
-		tempSelectedDatetime.setHours( selectedHour )
-		tempSelectedDatetime.setMinutes( selectedMin )
-		
-		// Fallback data for inventory.
-		_bookingData = {
-			..._bookingData,
-			inventory: [{
-				'date': moment(tempSelectedDatetime).format('YYYY-MM-DD[T]HH:mm'),
-				'pax_available': maxPax,
-				'booked_pax': 0,
-				'pax_limit': maxPax,
-			}],
-		}
-		// extras Calculation.
-		await setTripExtrasData(effectType);
-		if ( _nomineeTripExtras.length > 0 ) {
-			// Default extras values.
-			let _tripExtras = {}
-			_nomineeTripExtras.forEach(x => {
-				_tripExtras = { ..._tripExtras, [x.id]: x.is_required ? 1 : 0 }
-			})
-			_bookingData = {..._bookingData, nomineeTripExtras:_nomineeTripExtras, tripExtras: _tripExtras }
-		}
-		if ( isInventoryEnabled ) {
-			let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
-			let _inventory_state = {isLoading:false }
-			if ( _inventoryData.length > 0 ) {
-				// Add logic if inventory ajax is complete
-				let _times = _inventoryData.filter(inventory => {
-					if (inventory.pax_available > 0) {
-						if (excludedDateTimes.find(et => moment(et).isSame(moment(inventory.date)))) {
-							return false
+					// add selected trip time if nominee times length is one.
+					if ( 1 === _times.length ) {
+						_bookingData = {
+							..._bookingData,
+							selectedTime: _times[0].format('HH:mm'),
 						}
-						return true
 					}
-					return false
-				}).map(inventory => {
-					return moment(inventory.date)
-				});
-				_inventory_state = times.length > 0 && { ..._inventory_state, nomineeTimes: _times } || { ..._inventory_state, nomineeTimes: [] }
-				if (_times.length <= 0) {
-					_inventory_state = { ..._inventory_state, pricingUnavailable: true }
-				} else if( 1 === _times.length ) {
-					// _inventory_state = {
-					// 	..._inventory_state,
-					// 	selectedTime: _times[0].format('HH:mm'),
-					// }
+				} else {
+					_bookingData = {
+						..._bookingData,
+						nomineeTimes: [],
+						selectedTime: null,
+					}
 				}
-				_inventory_state = { ..._inventory_state, inventory: _inventoryData }
 			}
-			_bookingData = {..._bookingData, ..._inventory_state }
-		} else {
-			_bookingData = {..._bookingData, isLoading:false }
+		
+			// Add default selected pax object values as 0 for all categories as per selected pricing. {'2':0,'3':0} where cat id 2, 3 have default 0 selected pax.
+			const pricing = allPricings[selectedPricingId];
+			let categories = pricing && pricing.categories || []
+			let _paxCounts = {}
+			categories.forEach(c => {
+				_paxCounts = { ..._paxCounts, [c.id]: parseInt(c.default_pax) || 0 }
+			})
+			_bookingData = { ..._bookingData, paxCounts: _paxCounts }
+	
+			let maxPax               = pricing.max_pax || 999
+			let tempSelectedDatetime = selectedDate;
+	
+			let selectedHour = 0;
+			let selectedMin  = 0;
+			if ( selectedTime ) { // if time is selected then the selectedDate must have time on it.
+				const selectedDateTime = new Date( `${selectedDate.toDateString()} ${selectedTime}` );
+				_bookingData = { ..._bookingData, selectedDate: selectedDateTime } // Updating date state with time if time is selected.
+				selectedHour = selectedDateTime.getHours(); // Date object
+				selectedMin  = selectedDateTime.getMinutes(); // Date object
+			}
+			tempSelectedDatetime.setHours( selectedHour )
+			tempSelectedDatetime.setMinutes( selectedMin )
+			
+			// Fallback data for inventory.
+			_bookingData = {
+				..._bookingData,
+				inventory: [{
+					'date': moment(tempSelectedDatetime).format('YYYY-MM-DD[T]HH:mm'),
+					'pax_available': maxPax,
+					'booked_pax': 0,
+					'pax_limit': maxPax,
+				}],
+			}
+			// extras Calculation.
+			if ( ! isFixedDeparture && ! isInventoryEnabled ) {
+				// await updateBookingData( {_bookingData, isLoading:true });
+				setTripExtrasData(effectType); // quick fix trip not displaying if no inventory. [price change effect is overriding extras Data.]
+			} else {
+				await setTripExtrasData(effectType);
+			}
+			
+			if ( _nomineeTripExtras.length > 0 ) {
+				// Default extras values.
+				let _tripExtras = {}
+				_nomineeTripExtras.forEach(x => {
+					_tripExtras = { ..._tripExtras, [x.id]: x.is_required ? 1 : 0 }
+				})
+				_bookingData = {..._bookingData, nomineeTripExtras:_nomineeTripExtras, tripExtras: _tripExtras }
+			}
+			if ( isInventoryEnabled ) {
+				let times = getPricingTripTimes( selectedPricingId, selectedDateIds );
+				let _inventory_state = {isLoading:false }
+				if ( _inventoryData.length > 0 ) {
+					// Add logic if inventory ajax is complete
+					let _times = _inventoryData.filter(inventory => {
+						if (inventory.pax_available > 0) {
+							if (excludedDateTimes.find(et => moment(et).isSame(moment(inventory.date)))) {
+								return false
+							}
+							return true
+						}
+						return false
+					}).map(inventory => {
+						return moment(inventory.date)
+					});
+					_inventory_state = times.length > 0 && { ..._inventory_state, nomineeTimes: _times } || { ..._inventory_state, nomineeTimes: [] }
+					if (_times.length <= 0) {
+						_inventory_state = { ..._inventory_state, pricingUnavailable: true }
+					} else if( 1 === _times.length ) {
+						// _inventory_state = {
+						// 	..._inventory_state,
+						// 	selectedTime: _times[0].format('HH:mm'),
+						// }
+					}
+					_inventory_state = { ..._inventory_state, inventory: _inventoryData }
+				}
+				_bookingData = {..._bookingData, ..._inventory_state }
+			} else {
+				// _bookingData = {..._bookingData, isLoading:false }
+			}
+			_bookingData = {..._bookingData }
 		}
-		_bookingData = {..._bookingData }
 		updateBookingData( _bookingData );
-		// console.log( effectType, _bookingData );
 	}
 
 	// functions.
@@ -333,7 +336,6 @@ const CalendarView = ( props ) => {
 					}
 					_setNomineeTripExtras( result.data.trip_extras );
 				}
-				_setNomineeTripExtras( [] );
 				if ( isInventoryEnabled ) {
 					setInventoryData();
 				} else {
@@ -359,7 +361,7 @@ const CalendarView = ( props ) => {
 	));
 
     // Update Selected Trip date in store.
-    const selectTripDate = ( date ) => {
+    const selectTripDate = async ( date ) => {
 		// Default or Trip duration.
 		let _bookingData = {
 			isLoading: true,
@@ -370,9 +372,11 @@ const CalendarView = ( props ) => {
 			selectedTime:null,
 			nomineeTimes:[]
 		}
-		if ( ! isFixedDeparture ) {
-			_bookingData.isLoading = false;  // Default false for trip duration only because date changes effect is not triggered in trip ducation.
-		}
+
+		// Not required because it is false from extras ajas request.
+		// if ( ! isFixedDeparture ) {
+		// 	_bookingData.isLoading = false;  // Default false for trip duration only because date changes effect is not triggered in trip ducation.
+		// }
 
 		// Pricing ids as per selected date for fixed departure and all pricing for trip duration.
 		let _nomineePricingIds = []; 
@@ -434,11 +438,14 @@ const CalendarView = ( props ) => {
 				let tempSelectedPricingId = _nomineePricingIds[0];
 				let selectedPricing   = allPricings[ tempSelectedPricingId ].title;
 				_bookingData = { ..._bookingData, selectedPricingId: tempSelectedPricingId, selectedPricing:selectedPricing, isLoading:true }
+			} else {
+				_bookingData = { ..._bookingData, isLoading:false } // For multiple pricing.
 			}
 			_bookingData = { ..._bookingData, nomineePricingIds: _nomineePricingIds } // nomineePricingIds
 		}
 
-		updateBookingData( _bookingData  );
+		updateBookingData( _bookingData  ); // isLoadting true
+		bookingWidgetUseEffects( _bookingData, 'dateChange' ); // isloading false [quick fixes for loader displaying issue on date change]
 	}
 
     // Datepicker Params
