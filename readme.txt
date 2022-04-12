@@ -253,11 +253,9 @@ Tweaks:
 * Renamed Addons settings to modules settings and added all modules enable/disable options.
 
 Fixes:
-* Fixed conflit with wp rocket on first setup.
+* Fixed conflict with wp rocket on first setup.
 * Fixed Loading issue on trip duration while selecting date 2nd time.
-* Fixed Trip extras not being displayed in case of calender view with trip duration.
-
-Fixes:
+* Fixed Trip extras not being displayed in case of calendar view with trip duration.
 * Fixed Invalid post type in enquiry shortcode form.
 * Fixed Warning: array_unique() expects parameter 1 to be array in dashboard and booking Page of user dashboard.
 
