@@ -1,3 +1,4 @@
+import { DEFAULT_BOOKING_STATE } from '../store/_Store'; // Note: This store content 2 stores one for trip data and another for Booking Data.
 import { forwardRef, useEffect, useState } from '@wordpress/element';
 import { applyFilters } from '@wordpress/hooks';
 import { Disabled } from '@wordpress/components';
@@ -25,6 +26,7 @@ import TripTimes from './CalendarView/TripTimes';
 import PaxSelector from './CalendarView/PaxSelector';
 import TripExtras from './CalendarView/TripExtras';
 import InventoryNotice, { Notice } from '../_InventoryNotice';
+const initialState = DEFAULT_BOOKING_STATE();
 
 const CalendarView = ( props ) => {
 	// Component Props.
@@ -362,6 +364,7 @@ const CalendarView = ( props ) => {
 
     // Update Selected Trip date in store.
     const selectTripDate = async ( date ) => {
+		await updateBookingData( initialState ); // Quick hack to fix loader issue and store update.
 		// Default or Trip duration.
 		let _bookingData = {
 			isLoading: true,
