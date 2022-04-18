@@ -263,7 +263,7 @@ addFilter("wp_travel_after_dates_options", "WPTravel/TripEdit/PriceDates/MoreDat
 	return content;
 });
 
-addFilter("wp_travel_trip_extras_notice", "wp_travel", (content) => {
+addFilter("wp_travel_trip_extras_notice", "WPTravel/TripEdit/TripExtrasNotice", (content) => {
 	content = [
 		<p className="description">
 			{__i18n.notices.need_extras_option.title}
