@@ -36,7 +36,7 @@ export default () => {
     // All Modules
     if ( defaultModules && Object.keys( defaultModules ).length > 0 ) {
 
-        const proModules = Object.keys( defaultModules ).filter( k => 'Pro' === defaultModules[k].category );
+        const proModules = Object.keys( defaultModules ).filter( k => ( ! defaultModules[k].category || 'Pro' === defaultModules[k].category ) );
         const paymentModules = Object.keys( defaultModules ).filter( k => 'Payment' === defaultModules[k].category );
         const mapModules = Object.keys( defaultModules ).filter( k => 'Map' === defaultModules[k].category );
         
