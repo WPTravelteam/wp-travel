@@ -31,9 +31,7 @@ const TripCode = ({allData}) => {
                     onChange={() => false}
                     disabled={true}
                     name="" />
-                    <p className="description">
-                        {__i18n.notices.trip_code_option.description}<br/><a href="https://wptravel.io/downloads/wp-travel-utilities/" target="_blank" className="wp-travel-upsell-badge">{__i18n.notice_button_text.get_pro}</a>
-                    </p>
+                    {applyFilters('wptravel_trip_edit_trip_code_notice', [], allData.settings )}
             </div>
         </PanelRow>
     </>;
@@ -327,6 +325,15 @@ const Itinerary = ({allData}) => {
 const TripCodeCB = ( content, allData ) => {
     return [ ...content, <TripCode allData={allData} key="TripCode" /> ];
 }
+
+// Callbacks.
+const TripCodeNoticeCB = ( content, allData ) => {
+    return [ 
+        ...content, 
+        <p className="description"> {__i18n.notices.trip_code_option.description}<br/><a href="https://wptravel.io/downloads/wp-travel-utilities/" target="_blank" className="wp-travel-upsell-badge">{__i18n.notice_button_text.get_pro}</a></p> 
+    ];
+}
+
 const TripOutlineCB = ( content, allData ) => {
     return [ ...content, <TripOutline allData={allData} key="TripOutline" /> ];
 }
@@ -336,6 +343,8 @@ const ItineraryCB = ( content, allData ) => {
 
 // Hooks.
 addFilter( 'wptravel_trip_edit_tab_content_itinerary', 'WPTravel/TripEdit/TripCode', TripCodeCB, 10 );
+addFilter( 'wptravel_trip_edit_trip_code_notice', 'WPTravel/TripEdit/TripCodeNotice', TripCodeNoticeCB, 10 );
+
 addFilter( 'wptravel_trip_edit_tab_content_itinerary', 'WPTravel/TripEdit/TripOutline', TripOutlineCB, 20 );
 addFilter( 'wptravel_trip_edit_tab_content_itinerary', 'WPTravel/TripEdit/Itinerary', ItineraryCB, 30 );
 
