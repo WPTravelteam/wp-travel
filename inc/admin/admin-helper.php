@@ -928,11 +928,11 @@ function wptravel_extras_pro_option_fields() {
 	if ( class_exists( 'WP_Travel_Pro' ) ) {
 		$settings = wptravel_get_settings();
 		$modules  = $settings['modules'];
-		if ( isset( $modules['show_wp_travel_downloads'] ) ) {
-			$active = 'yes' === $modules['show_wp_travel_downloads'];
+		if ( isset( $modules['show_wp_travel_tour_extras'] ) ) {
+			$active = 'yes' === $modules['show_wp_travel_tour_extras'];
 			if ( ! $active ) {
 				?>
-				<tr><td colspan="2"><p>Trip Extras is currently disabled please go to Modules Settings to enable it and reload the page.</p></td></tr>
+				<tr class="pro-options-note"><td colspan="2"><p>Trip Extras is currently disabled please go to Modules Settings to enable it and reload the page.</p></td></tr>
 				<?php
 			}
 		}
