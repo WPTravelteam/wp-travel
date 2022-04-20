@@ -244,8 +244,7 @@ const CalendarView = ( props ) => {
 				}],
 			}
 			// extras Calculation.
-			if ( ! isFixedDeparture && ! isInventoryEnabled ) {
-				// await updateBookingData( {_bookingData, isLoading:true });
+			if ( ! isInventoryEnabled ) {
 				setTripExtrasData(effectType); // quick fix trip not displaying if no inventory. [price change effect is overriding extras Data.]
 			} else {
 				await setTripExtrasData(effectType);
@@ -447,7 +446,7 @@ const CalendarView = ( props ) => {
 			_bookingData = { ..._bookingData, nomineePricingIds: _nomineePricingIds } // nomineePricingIds
 		}
 
-		updateBookingData( _bookingData  ); // isLoadting true
+		updateBookingData( _bookingData  ); // isLoadting true + quick hack for issue creating from initialState update at the start.
 		bookingWidgetUseEffects( _bookingData, 'dateChange' ); // isloading false [quick fixes for loader displaying issue on date change]
 	}
 
