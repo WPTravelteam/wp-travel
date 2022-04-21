@@ -1,6 +1,7 @@
 #wp-travel-tab-wrapper {
 	position: relative;
-	z-index: 200;
+	// z-index: 200;
+	z-index: 5;
 	@media screen and (min-width: 769px) and (max-width: 991px) {
 		.resp-tabs-list {
 			display: flex;
@@ -569,6 +570,24 @@
 				}
 				a {
 					margin-right: 5px;
+				}
+			}
+		}
+	}
+}
+
+
+
+
+// Trip Tab Gallery Section
+@media (max-width: 575px) {
+	.wp-travel-tab-wrapper {
+		#gallery.tab-list-content {
+			padding: 0;
+			.wp-travel-advanced-gallery-items-list {
+				padding: 20px 0;
+				.item {
+					padding-inline: 25px;
 				}
 			}
 		}
