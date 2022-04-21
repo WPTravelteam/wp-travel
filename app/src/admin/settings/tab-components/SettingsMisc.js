@@ -87,7 +87,7 @@ export default () => {
                 </div>
             </PanelRow>
             
-            {applyFilters( 'wp_travel_settings_tab_misc_options_fields', [] )}
+            {applyFilters( 'wp_travel_settings_tab_misc_options_fields', [], allData )}
         </ErrorBoundary>
     </div>
 }

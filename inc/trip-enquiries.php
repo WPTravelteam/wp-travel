@@ -340,7 +340,11 @@ function wptravel_save_user_enquiry() {
 
 	$settings = wptravel_get_settings();
 
-	$post_id = $formdata['wp_travel_enquiry_post_id'];
+	$post_id = (int) $formdata['wp_travel_enquiry_post_id'];
+	if ( ! $post_id ) {
+		$errors['message'] = __( 'Please select trip', 'wp-travel' );
+		wp_send_json_error( $errors );
+	}
 
 	$post_type = get_post_type( $post_id );
 

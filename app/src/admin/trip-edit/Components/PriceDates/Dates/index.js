@@ -149,7 +149,7 @@ const Dates = ( {allData} ) => {
 
             </>
         }
-        {applyFilters('wp_travel_after_dates_options', [])}
+        {applyFilters('wp_travel_after_dates_options', [], allData)}
     </div>
     {applyFilters('wp_travel_itinerary_price_tab_table_last_row', '', allData )}
     {/* <ExcludedDates /> */}

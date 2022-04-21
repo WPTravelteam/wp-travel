@@ -28,7 +28,7 @@ export default () => {
     return <div className="wp-travel-ui wp-travel-ui-card settings-general">
         <h2>{ __( 'Email Settings', 'wp-travel' ) }</h2>
         <ErrorBoundary>
-            {applyFilters( 'wp_travel_tab_content_before_email', [] ) }
+            {applyFilters( 'wp_travel_tab_content_before_email', [], allData ) }
 
             <h3>{ __( 'General Options', 'wp-travel' ) }</h3>
             
@@ -49,7 +49,7 @@ export default () => {
                     <p className="description">{__( 'Email address to send email from.', 'wp-travel' )}</p>
                 </div>
             </PanelRow>
-            {applyFilters( 'wp_travel_tab_content_before_booking_tamplate', [] )}
+            {applyFilters( 'wp_travel_tab_content_before_booking_tamplate', [], allData )}
             <h3>{ __( 'Email Templates', 'wp-travel' ) }</h3>
 
 
@@ -58,7 +58,7 @@ export default () => {
             <EnquiryEmailTemplates />
           
 
-            {applyFilters( 'wp_travel_tab_content_after_email', [] )}
+            {applyFilters( 'wp_travel_tab_content_after_email', [], allData )}
         </ErrorBoundary>
     </div>
 }
@@ -106,7 +106,7 @@ const BookingEmailTemplates = () => {
                 </div>
             </PanelRow>
             
-            {applyFilters( 'wp_travel_utils_booking_notif', [] )}
+            {applyFilters( 'wp_travel_utils_booking_notif', [], allData )}
 
             <PanelRow>
                 <label>{ __( 'Booking Email Subject', 'wp-travel' ) }</label>
@@ -226,7 +226,7 @@ const PaymentEmailTemplates = () => {
       <PanelBody title={__( 'Payment Email Templates', 'wp-travel' )} initialOpen={false} >
             <h4>{__( 'Admin Email Template Options', 'wp-travel' )}</h4>
 
-            {applyFilters( 'wp_travel_utils_payment_notif', [] )}
+            {applyFilters( 'wp_travel_utils_payment_notif', [], allData )}
 
             <PanelRow>
                 <label>{ __( 'Payment Email Subject', 'wp-travel' ) }</label>
@@ -339,7 +339,7 @@ const EnquiryEmailTemplates = () => {
       <PanelBody title={__( 'Enquiry Email Templates', 'wp-travel' )} initialOpen={false} >
             <h4>{__( 'Admin Email Template Options', 'wp-travel' )}</h4>
 
-            {applyFilters( 'wp_travel_utils_enquiry_notif', [] )}
+            {applyFilters( 'wp_travel_utils_enquiry_notif', [], allData )}
 
             <PanelRow>
                 <label>{ __( 'Enquiry Email Subject', 'wp-travel' ) }</label>

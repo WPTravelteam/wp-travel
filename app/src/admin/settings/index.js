@@ -104,18 +104,18 @@ const WPTravelTripSettings = () => {
             className: 'tab-cart-checkout',
             content: SettingsCartCheckout
         },
-        {
-            name: 'addons-settings',
-            title: __('Addons Settings', 'wp-travel'),
-            className: 'tab-addons-settings',
-            content: SettingsAddons
-        },
         // {
-        //     name: 'modules-settings',
-        //     title: __('Modules Settings', 'wp-travel'),
-        //     className: 'tab-modules-settings',
-        //     content: SettingsModules
+        //     name: 'addons-settings',
+        //     title: __('Addons Settings', 'wp-travel'),
+        //     className: 'tab-addons-settings',
+        //     content: SettingsAddons
         // },
+        {
+            name: 'modules-settings',
+            title: __('Modules Settings', 'wp-travel'),
+            className: 'tab-modules-settings',
+            content: SettingsModules
+        },
         {
             name: 'invoice',
             title: __('Invoice', 'wp-travel'),
@@ -196,91 +196,9 @@ addFilter('wp_travel_settings_after_maps_upsell', 'wp_travel', (content, allData
     return content
 });
 
-addFilter('wp_travel_tab_content_before_email', 'wp_travel', (content, allData) => {
-    content = [
-        <>
-            <Notice isDismissible={false} status="informational">
-                <strong>{__('Want to get more e-mail customization options?', 'wp-travel')}</strong>
-                <br />
-                {__('By upgrading to Pro, you can get features like multiple email notifications, email footer powered by text removal options and more !', 'wp-travel')}
-                <br />
-                <br />
-                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
-            </Notice><br />
-        </>,
-        ...content,
-    ]
-    return content
-});
-
-addFilter('wp_travel_custom_global_tabs', 'wp_travel', (content, allData) => {
-    content = [
-        <>
-            <Notice isDismissible={false} status="informational">
-                <strong>{__('Need Additional Tabs?', 'wp-travel')}</strong>
-                <br />
-                {__('By upgrading to Pro, you can get global custom tabs addition options with customized content and sorting !', 'wp-travel')}
-                <br />
-                <br />
-                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
-            </Notice><br />
-        </>,
-        ...content,
-    ]
-    return content
-});
-
-addFilter('wp_travel_settings_tab_field_editor_fields', 'wp_travel', (content, allData) => {
-    content = [
-        <>
-            <Notice isDismissible={false} status="informational">
-                <strong>{__('Want to customize your Traveler fields, billing fields and more?', 'wp-travel')}</strong>
-                <br />
-                {__('By upgrading to Pro, you can customize your Fields for Trip enquiry, Billing and travelers fields.!', 'wp-travel')}
-                <br />
-                <br />
-                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
-            </Notice><br />
-        </>,
-        ...content,
-    ]
-    return content
-});
 
 
-addFilter('wp_travel_settings_tab_faq_fields', 'wp_travel', (content, allData) => {
-    content = [
-        <>
-            <Notice isDismissible={false} status="informational">
-                <strong>{__('Need Additional Global FAQs ?', 'wp-travel')}</strong>
-                <br />
-                {__('By upgrading to Pro, you can get Global FAQs to display it in trips !', 'wp-travel')}
-                <br />
-                <br />
-                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
-            </Notice><br />
-        </>,
-        ...content,
-    ]
-    return content
-});
 
-addFilter('wp_travel_settings_tab_cart_checkout_fields', 'wp_travel', (content, allData) => {
-    content = [
-        <>
-            <Notice isDismissible={false} status="informational">
-                <strong>{__('Need Checkout options ?', 'wp-travel')}</strong>
-                <br />
-                {__('By upgrading to Pro, you can get checkout option features and more !', 'wp-travel')}
-                <br />
-                <br />
-                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
-            </Notice><br />
-        </>,
-        ...content,
-    ]
-    return content
-});
 
 
 addFilter('wp_travel_addons_setings_tab_fields', 'wp_travel', (content, allData) => {
@@ -321,7 +239,110 @@ addFilter('wp_travel_after_payment_fields', 'wp_travel', (content, allData) => {
     return content
 });
 
-addFilter('wp_travel_settings_tab_misc_options_fields', 'wp_travel', (content, allData) => {
+// Utilities Notices.
+addFilter('wp_travel_tab_content_before_email', 'WPTravel/Settings/Email/Notice', (content, allData) => {
+    content = [
+        <>
+            <Notice isDismissible={false} status="informational">
+                <strong>{__('Want to get more e-mail customization options?', 'wp-travel')}</strong>
+                <br />
+                {__('By upgrading to Pro, you can get features like multiple email notifications, email footer powered by text removal options and more !', 'wp-travel')}
+                <br />
+                <br />
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
+            </Notice><br />
+        </>,
+        ...content,
+    ]
+    return content
+});
+addFilter('wp_travel_custom_global_tabs', 'WPTravel/Settings/Tabs/Notice', (content, allData) => {
+    content = [
+        <>
+            <Notice isDismissible={false} status="informational">
+                <strong>{__('Need Additional Tabs?', 'wp-travel')}</strong>
+                <br />
+                {__('By upgrading to Pro, you can get global custom tabs addition options with customized content and sorting !', 'wp-travel')}
+                <br />
+                <br />
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
+            </Notice><br />
+        </>,
+        ...content,
+    ]
+    return content
+});
+addFilter('wp_travel_settings_tab_faq_fields', 'WPTravel/Settings/Faqs/Notice', (content, allData) => {
+    content = [
+        <>
+            <Notice isDismissible={false} status="informational">
+                <strong>{__('Need Additional Global FAQs ?', 'wp-travel')}</strong>
+                <br />
+                {__('By upgrading to Pro, you can get Global FAQs to display it in trips !', 'wp-travel')}
+                <br />
+                <br />
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
+            </Notice><br />
+        </>,
+        ...content,
+    ]
+    return content
+});
+addFilter('wp_travel_settings_tab_cart_checkout_fields', 'WPTravel/Settings/Checkout/Notice', (content, allData) => {
+    content = [
+        <>
+            <Notice isDismissible={false} status="informational">
+                <strong>{__('Need Checkout options ?', 'wp-travel')}</strong>
+                <br />
+                {__('By upgrading to Pro, you can get checkout option features and more !', 'wp-travel')}
+                <br />
+                <br />
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
+            </Notice><br />
+        </>,
+        ...content,
+    ]
+    return content
+});
+
+// Field Editor Notice.
+addFilter('wp_travel_settings_tab_field_editor_fields', 'WPTravel/Settings/FieldEditor/Notice', (content, allData) => {
+    content = [
+        <>
+            <Notice isDismissible={false} status="informational">
+                <strong>{__('Want to customize your Traveler fields, billing fields and more?', 'wp-travel')}</strong>
+                <br />
+                {__('By upgrading to Pro, you can customize your Fields for Trip enquiry, Billing and travelers fields.!', 'wp-travel')}
+                <br />
+                <br />
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
+            </Notice><br />
+        </>,
+        ...content,
+    ]
+    return content
+});
+
+// Invoice Notice.
+addFilter('wp_travel_settings_tab_invoice_fields', 'WPTravel/Settings/Invoice/Notice', (content, allData) => {
+    content = [
+        <>
+            <Notice isDismissible={false} status="informational">
+                <strong>{__('Need invoice options ?', 'wp-travel')}</strong>
+                <br />
+                    {__('By upgrading to Pro, you can get invoice options and more !', 'wp-travel')}
+                <br />
+                <br />
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
+            </Notice><br />
+        </>,
+        ...content,
+    ]
+    return content
+});
+
+// Misc Notices.
+addFilter('wp_travel_settings_tab_misc_options_fields', 'WPTravel/Settings/Misc/Notices', (content, allData) => {
 
     let miscNocice = {
         currencyExchange: <>
@@ -359,7 +380,7 @@ addFilter('wp_travel_settings_tab_misc_options_fields', 'wp_travel', (content, a
             </>,
     }
 
-    miscNocice = applyFilters( 'wp_travel_misc_addons_notices', miscNocice );
+    miscNocice = applyFilters( 'wp_travel_misc_addons_notices', miscNocice, allData );
     if ( Object.keys(miscNocice).length > 0 ) {
         let AllNotices = Object.keys(miscNocice).map( (index) => {
             return miscNocice[ index ]
@@ -371,8 +392,7 @@ addFilter('wp_travel_settings_tab_misc_options_fields', 'wp_travel', (content, a
         ]
     }
     return content
-});
-
+}); 
 
 domReady(function () {
     if ('undefined' !== typeof document.getElementById('wp-travel-settings-block') && null !== document.getElementById('wp-travel-settings-block')) {

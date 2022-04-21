@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 5.4.1
 Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 5.2.1
+Stable tag: 5.2.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -245,6 +245,27 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 5.2.2 =
+Release Date: 25th April, 2022
+
+Tweaks:
+* Renamed `Addons settings` to `Modules settings` and added all modules enable/disable options.
+
+Fixes:
+* Fixed conflict with wp rocket on first setup.
+* Fixed Loading issue on trip duration while selecting date 2nd time.
+* Fixed Trip extras not being displayed in case of calendar view with trip duration.
+* Fixed Invalid post type in enquiry shortcode form.
+* Fixed Warning: array_unique() expects parameter 1 to be array in dashboard and booking Page of user dashboard.
+* Fixed Inventory not working for booking only trips in case of all payment addons disabled.
+* Fixed issue related to recurring feature being available if pro is not activated.
+* Fixed issue related to displaying booking details section in dashboard page when logging in using customer login credentials.
+
+Layout Fixes:
+* Fixed Single Trip page trip tabs section gallery issue in mobile screen.
+* Fixed Trip Search responsive in Elementor.
+* Fixed Single Trip Page enquiry popup form checkbox unclickable issue.
 
 = 5.2.1 =
 Release Date: 30th March, 2022

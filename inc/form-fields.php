@@ -96,6 +96,19 @@ function wptravel_get_checkout_form_fields() {
 		);
 	}
 
+	// Default Booking option.
+	$payment_fields['booking_option'] = array(
+		'type'        => 'hidden',
+		'label'       => '',
+		'name'        => 'wp_travel_booking_option',
+		'id'          => 'wp-travel-option',
+		'validations' => array(
+			'required' => true,
+		),
+		'default'     => 'booking_only',
+		'priority'    => 140,
+	);
+
 	global $wt_cart;
 
 	$cart_amounts = $wt_cart->get_total();

@@ -198,7 +198,7 @@ const Pricings = ( {allData} ) => {
                                             defaultValue={tripExtrasDefaultData}
                                             />
                                         </div>
-                                        {applyFilters('wp_travel_trip_extras_notice', [])}
+                                        {applyFilters('wp_travel_trip_extras_notice', [] , allData.settings)}
                                     </div>
                                 </PanelRow>
                             

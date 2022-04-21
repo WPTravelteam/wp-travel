@@ -287,6 +287,18 @@ function wptravel_get_download_upsell() {
 			'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
 		);
 		wptravel_upsell_message( $args );
+		if ( class_exists( 'WP_Travel_Pro' ) ) {
+			$settings = wptravel_get_settings();
+			$modules  = $settings['modules'];
+			if ( isset( $modules['show_wp_travel_downloads'] ) ) {
+				$active = 'yes' === $modules['show_wp_travel_downloads'];
+				if ( ! $active ) {
+					?>
+					<p>Downloads is currently disabled please go to Modules Settings to enable it and reload the page.</p>
+					<?php
+				}
+			}
+		}
 	endif;
 }
 
@@ -305,6 +317,19 @@ function wptravel_custom_filters_upsell() {
 			'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
 		);
 		wptravel_upsell_message( $args );
+	
+		if ( class_exists( 'WP_Travel_Pro' ) ) {
+			$settings = wptravel_get_settings();
+			$modules  = $settings['modules'];
+			if ( isset( $modules['show_wp_travel_custom_filters'] ) ) {
+				$active = 'yes' === $modules['show_wp_travel_custom_filters'];
+				if ( ! $active ) {
+					?>
+					<p>Custom Filters is currently disabled please go to Modules Settings to enable it and reload the page.</p>
+					<?php
+				}
+			}
+		}
 	endif;
 }
 
@@ -898,6 +923,19 @@ function wptravel_extras_pro_option_fields() {
 	if ( $is_pro_enabled ) {
 		do_action( 'wp_travel_extras_pro_single_options' ); // @phpcs:ignore
 		do_action( 'wptravel_extras_pro_single_options' );
+		return;
+	}
+	if ( class_exists( 'WP_Travel_Pro' ) ) {
+		$settings = wptravel_get_settings();
+		$modules  = $settings['modules'];
+		if ( isset( $modules['show_wp_travel_tour_extras'] ) ) {
+			$active = 'yes' === $modules['show_wp_travel_tour_extras'];
+			if ( ! $active ) {
+				?>
+				<tr class="pro-options-note"><td colspan="2"><p>Trip Extras is currently disabled please go to Modules Settings to enable it and reload the page.</p></td></tr>
+				<?php
+			}
+		}
 		return;
 	}
 	?>

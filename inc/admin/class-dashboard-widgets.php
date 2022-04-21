@@ -22,7 +22,7 @@ class WP_Travel_Admin_Dashboard_Widgets {
 
 		$bookings = wp_count_posts( 'itinerary-booking' );
 		// latest Bookings Widget.
-		if ( 0 !== $bookings->publish ) {
+		if ( 0 !== $bookings->publish && current_user_can( 'administrator' ) ) {
 			add_meta_box( 'wp-travel-recent-bookings', __( 'WP Travel: Bookings', 'wp-travel' ), array( $this, 'new_booking_callback' ), 'dashboard', 'side', 'high' );
 		}
 	}
