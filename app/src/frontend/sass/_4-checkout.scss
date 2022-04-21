@@ -1,3 +1,15 @@
+.wp-travel-form-field {
+	.parsley-errors-list {
+		// padding-left: 0px;
+		list-style: none;
+		color: #ff0000;
+		display: inline;
+		li {
+			display: inline;
+		}
+	}
+}
+
 .checkout-page-wrap {
 	display: grid;
 	// grid-template-columns: 1fr 35%;
