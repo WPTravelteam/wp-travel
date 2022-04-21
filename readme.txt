@@ -247,10 +247,10 @@ Before updating plugin please check ["our latest release notes"](#developers).
 == Changelog ==
 
 = 5.2.2 =
-Release Date: 15th April, 2022
+Release Date: 25th April, 2022
 
 Tweaks:
-* Renamed Addons settings to modules settings and added all modules enable/disable options.
+* Renamed `Addons settings` to `Modules settings` and added all modules enable/disable options.
 
 Fixes:
 * Fixed conflict with wp rocket on first setup.
@@ -258,6 +258,13 @@ Fixes:
 * Fixed Trip extras not being displayed in case of calendar view with trip duration.
 * Fixed Invalid post type in enquiry shortcode form.
 * Fixed Warning: array_unique() expects parameter 1 to be array in dashboard and booking Page of user dashboard.
+* Fixed Inventory not working for booking only trips in case of all payment addons disabled.
+* Fixed issue related to recurring feature being available if pro is not activated.
+
+Layout Fixes:
+* Fixed Single Trip page trip tabs section gallery issue in mobile screen.
+* Fixed Trip Search responsive in Elementor.
+* Fixed Single Trip Page enquiry popup form checkbox unclickable issue.
 
 = 5.2.1 =
 Release Date: 30th March, 2022
