@@ -42,5 +42,8 @@
 .react-datepicker__tab-loop {
 	.react-datepicker-popper {
 		z-index: 11;
+		@media (max-width: 330px) {
+			left: -50px !important;
+		}
 	}
 }

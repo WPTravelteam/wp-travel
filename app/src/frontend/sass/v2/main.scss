@@ -41,6 +41,10 @@
 
 @import "./16-grid-view";
 
+html, body {
+	overflow-x: hidden;
+}
+
 .wp-travel-grid-mode {
 	.site-content {
 		@media (max-width: 1199px) {
