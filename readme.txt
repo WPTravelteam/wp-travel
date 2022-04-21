@@ -260,6 +260,7 @@ Fixes:
 * Fixed Warning: array_unique() expects parameter 1 to be array in dashboard and booking Page of user dashboard.
 * Fixed Inventory not working for booking only trips in case of all payment addons disabled.
 * Fixed issue related to recurring feature being available if pro is not activated.
+* Fixed issue related to displaying booking details section in dashboard page when logging in using customer login credentials.
 
 Layout Fixes:
 * Fixed Single Trip page trip tabs section gallery issue in mobile screen.
