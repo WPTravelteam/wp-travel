@@ -247,7 +247,7 @@ Before updating plugin please check ["our latest release notes"](#developers).
 == Changelog ==
 
 = 5.2.2 =
-Release Date: 25th April, 2022
+Release Date: 27th April, 2022
 
 Tweaks:
 * Renamed `Addons settings` to `Modules settings` and added all modules enable/disable options.
@@ -266,6 +266,7 @@ Layout Fixes:
 * Fixed Single Trip page trip tabs section gallery issue in mobile screen.
 * Fixed Trip Search responsive in Elementor.
 * Fixed Single Trip Page enquiry popup form checkbox unclickable issue.
+* For more detail, please refer to our [release note](https://wptravel.io/wp-travel-plugin-version-5-2-2-release-note/)
 
 = 5.2.1 =
 Release Date: 30th March, 2022
