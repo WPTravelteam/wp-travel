@@ -97,14 +97,17 @@
 	}
 	p {
 		margin-bottom: 1em;
+		width: 100% !important;
 		label {
 			display: inline-block;
-			width: 24%;
+			// width: 24%;
+			width: 100%;
 		}
 
 		input[type="text"],
 		select {
-			width: 74%;
+			// width: 74%;
+			width: 100%;
 			// padding: 3px;
 			// border-radius: 3px;
 		}
