@@ -6,7 +6,7 @@
  * Version: 5.2.2
  * Author: WP Travel
  * Author URI: http://wptravel.io/
- * Requires at least: 5.4.1
+ * Requires at least: 5.9
  * Requires PHP: 5.6
  * Tested up to: 5.9
  *

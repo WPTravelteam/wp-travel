@@ -2,7 +2,7 @@
 Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=WP%20Plugin
-Requires at least: 5.4.1
+Requires at least: 5.9
 Tested up to: 5.9
 Requires PHP: 5.6
 Stable tag: 5.2.2
@@ -245,6 +245,17 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 5.2.3 =
+Release Date: 
+
+Tweaks:
+* Changed Gallery image size to `wp_travel_thumbnail` form `thumbnail`.
+* Updated Required WordPress version to `5.9` from `5.4.1`.
+
+Fixes:
+* Undefined wp_travel in front page in case of WP Travel Pro activated.
+* Fixed Displaying itinerary date displaying in the itinerary lists even there is no date.
 
 = 5.2.2 =
 Release Date: 27th April, 2022
