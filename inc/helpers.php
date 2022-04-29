@@ -3164,7 +3164,7 @@ function wptravel_frontend_tab_gallery( $gallery_ids ) {
 	}
 	ob_start();
 	if ( is_array( $gallery_ids ) && count( $gallery_ids ) > 0 ) :
-		$image_size = apply_filters( 'wp_travel_gallery_image', 'thumbnail' ); // previously using 'medium' before 1.9.0
+		$image_size = apply_filters( 'wp_travel_gallery_image', 'wp_travel_thumbnail' ); // previously using 'medium' before 1.9.0
 		?>
 		<div class="wp-travel-gallery wp-travel-container-wrap">
 			<div class="wp-travel-row-wrap">
