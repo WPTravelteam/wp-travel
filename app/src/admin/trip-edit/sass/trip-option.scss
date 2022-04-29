@@ -285,27 +285,20 @@ i.fa-times-circle {
 						right: unset;
 						display: block !important;
 						.components-button {
-							&:first-child {
+							&:first-child, &:last-child {
 								background: #fff;
 								padding: 5px;
 								color: #2f2c2c;
 								position: absolute;
 								left: 7px;
 								top: 7px;
+								width: 35px;
 								&:hover {
 									color: #007cba;
 								}
 							}
 							&:last-child {
-								background: #fff;
-								padding: 5px;
-								color: #2f2c2c;
-								position: absolute;
 								left: 46px;
-								top: 7px;
-								&:hover {
-									color: #007cba;
-								}
 							}
 						}
 					}
