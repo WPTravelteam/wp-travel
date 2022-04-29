@@ -7,14 +7,14 @@
 
 global $post;
 $wptravel_trip_id     = $post->ID;
-$wptravel_itineraries = get_post_meta( $wptravel_trip_id, 'wp_travel_trip_itinerary_data' );
-if ( isset( $wptravel_itineraries[0] ) && ! empty( $wptravel_itineraries[0] ) ) : ?>
+$wptravel_itineraries = get_post_meta( $wptravel_trip_id, 'wp_travel_trip_itinerary_data', true );
+if ( isset( $wptravel_itineraries ) && ! empty( $wptravel_itineraries ) ) : ?>
 	<div class="itenary clearfix">
 		<div class="timeline-contents clearfix">
 			<h2><?php esc_html_e( 'Itineraries', 'wp-travel' ); ?></h2>
 				<?php
 				$wptravel_index = 1;
-				foreach ( $wptravel_itineraries[0] as $wptravel_itinerary ) :
+				foreach ( $wptravel_itineraries as $wptravel_itinerary ) :
 					if ( 0 === $wptravel_index % 2 ) :
 						$wptravel_first_class  = 'right';
 						$wptravel_second_class = 'left';
@@ -40,7 +40,7 @@ if ( isset( $wptravel_itineraries[0] ) && ! empty( $wptravel_itineraries[0] ) ) 
 					if ( isset( $wptravel_itinerary['desc'] ) && '' !== $wptravel_itinerary['desc'] ) {
 						$wptravel_itinerary_desc = stripslashes( $wptravel_itinerary['desc'] );
 					}
-					if ( isset( $wptravel_itinerary['date'] ) && '' !== $wptravel_itinerary['date'] ) {
+					if ( isset( $wptravel_itinerary['date'] ) && '' !== $wptravel_itinerary['date'] && 'invalid date' !== strtolower( $wptravel_itinerary['date'] ) ) {
 						$wptravel_itinerary_date = wptravel_format_date( $wptravel_itinerary['date'] );
 					}
 					if ( isset( $wptravel_itinerary['time'] ) && '' !== $wptravel_itinerary['time'] ) {
