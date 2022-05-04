@@ -18,9 +18,9 @@ export default () => {
     if ( ! _modules.length ) {
         _modules = defaultModules
     }
-    let enableAallModules = true;
+    let enableAllModules = true;
     Object.keys( defaultModules ).map( ( addonsKey, i ) => {
-        if ( enableAallModules ) {
+        if ( enableAllModules ) {
             let enabled = false;
             if ( 'undefined' !== typeof modules[addonsKey] ) {
                 enabled =  modules[addonsKey].value;
@@ -28,7 +28,7 @@ export default () => {
                 enabled =  defaultModules[addonsKey].value;
             }
             if ( 'no' == enabled ) {
-                enableAallModules = false;
+                enableAllModules = false;
             }
         }
     });
@@ -40,6 +40,35 @@ export default () => {
         const paymentModules = Object.keys( defaultModules ).filter( k => 'Payment' === defaultModules[k].category );
         const mapModules = Object.keys( defaultModules ).filter( k => 'Map' === defaultModules[k].category );
         
+
+        let enableProModules = true;
+        proModules.map( ( addonsKey, i ) => {
+            if ( enableProModules ) {
+                let enabled = false;
+                if ( 'undefined' !== typeof modules[addonsKey] ) {
+                    enabled =  modules[addonsKey].value;
+                } else {
+                    enabled =  defaultModules[addonsKey].value;
+                }
+                if ( 'no' == enabled ) {
+                    enableProModules = false;
+                }
+            }
+        });
+        let enablePaymentModules = true;
+        paymentModules.map( ( addonsKey, i ) => {
+            if ( enablePaymentModules ) {
+                let enabled = false;
+                if ( 'undefined' !== typeof modules[addonsKey] ) {
+                    enabled =  modules[addonsKey].value;
+                } else {
+                    enabled =  defaultModules[addonsKey].value;
+                }
+                if ( 'no' == enabled ) {
+                    enablePaymentModules = false;
+                }
+            }
+        });
         return <div className="wp-travel-ui wp-travel-ui-card settings-modules">
             <Notice isDismissible={false} status="warning">
                 <p><b>Note:</b> Please reload page after enabling/disabling modules.</p>
@@ -52,7 +81,7 @@ export default () => {
                 
                 <label>
                     <ToggleControl
-                        checked={enableAallModules }
+                        checked={enableAllModules }
                         onChange={ (value) => {
                             let mapDataAction = Object.keys( defaultModules ).map( ( addonsKey, i ) => {
                                 _modules[addonsKey].value = value ? 'yes' :'no'
@@ -77,6 +106,24 @@ export default () => {
                             title="Pro Modules"
                             initialOpen={false}
                         >
+                            <label>
+                                <ToggleControl
+                                    checked={enableProModules }
+                                    onChange={ (value) => {
+                                        let mapDataAction = proModules.map( ( addonsKey, i ) => {
+                                            _modules[addonsKey].value = value ? 'yes' :'no'
+                                        });
+                                        // Wait for all mapDataAction, and then updateSettings
+                                        Promise.all(mapDataAction).then(() => {
+                                            updateSettings({
+                                                ...allData,
+                                                modules: {..._modules}
+                                            })
+                                        });
+                                    } }
+                                />
+                                <p className="description">{__( 'Enable/Disable All Pro Modules', 'wp-travel' )}</p>
+                            </label>
                             <div className="wptravel-modules-list">
 
                             { proModules.map( ( addonsKey, i ) => {
@@ -121,6 +168,24 @@ export default () => {
                             title="Payment Modules"
                             initialOpen={false}
                         >
+                            <label>
+                                <ToggleControl
+                                    checked={enablePaymentModules }
+                                    onChange={ (value) => {
+                                        let mapDataAction = paymentModules.map( ( addonsKey, i ) => {
+                                            _modules[addonsKey].value = value ? 'yes' :'no'
+                                        });
+                                        // Wait for all mapDataAction, and then updateSettings
+                                        Promise.all(mapDataAction).then(() => {
+                                            updateSettings({
+                                                ...allData,
+                                                modules: {..._modules}
+                                            })
+                                        });
+                                    } }
+                                />
+                                <p className="description">{__( 'Enable/Disable All Payment Modules', 'wp-travel' )}</p>
+                            </label>
                             <div className="wptravel-modules-list">
                             { paymentModules.map( ( addonsKey, i ) => {
                                 // Do not display pro.
