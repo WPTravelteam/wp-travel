@@ -59,9 +59,9 @@
 	font-size: 12px;
 	line-height: 1;
 	margin-left: 5px;
-	@media (max-width: 767px) {
-		display: none;
-	}
+	// @media (max-width: 767px) {
+	// 	display: none;
+	// }
 }
 
 .wp-travel-itinerary-items {
@@ -451,9 +451,9 @@
 
 			.wp-travel-average-review {
 				display: inline-block;
-				@media (max-width: 767px) {
-					display: none;
-				}
+				// @media (max-width: 767px) {
+				// 	display: none;
+				// }
 			}
 
 			.travel-info {
@@ -483,9 +483,9 @@
 			// 	text-align: left;
 			// 	clear: both;
 			// }
-			.wp-travel-average-review {
-				display: none;
-			}
+			// .wp-travel-average-review {
+			// 	display: none;
+			// }
 
 			.trip-price {
 				margin: 35px 0 25px;
@@ -563,9 +563,9 @@
 	// padding: 10px 0;
 	// display: block;
 	// @include clearfix();
-	@media (max-width: 767px) {
-		display: none !important;
-	}
+	// @media (max-width: 767px) {
+	// 	display: none !important;
+	// }
 
 	.travel-info {
 		float: left;
@@ -1059,7 +1059,8 @@
 					.offer {
 						padding: 5px 12px;
 						left: 15px;
-						bottom: -10px;
+						// bottom: -10px;
+						bottom: 10px;
 						&::before {
 							content: none;
 						}
@@ -1345,6 +1346,61 @@
 			// 		grid-template-columns: repeat(1, 1fr);
 			// 	}
 			// }
+		}
+	}
+}
+
+
+// Layout V2 itinerary page grid view CSS
+.wptravel-layout-v2.wp-travel-grid-mode .site-content {
+	.wp-travel-archive-content {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+		gap: 1.5em;
+		li {
+			list-style: none;
+			// border: 1px solid #e9e9e9;
+			// margin-bottom: 20px;
+			display: flex;
+			flex-wrap: nowrap;
+			align-items: flex-start;
+			background: #fff;
+			// padding-left: 25px;
+			border-radius: 4px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+			transition: all ease 0.3s;
+			@media (max-width: 991px) {
+				padding-left: 10px;
+			}
+			@media (max-width: 575px) {
+				flex-direction: column;
+				padding: 15px;
+			}
+			.discount {
+				background: #f83531;
+				color: #fff;
+				padding: 8px 12px;
+				position: absolute;
+				bottom: 0;
+			}
+				.wp-travel-post-info {
+					align-items: baseline;
+					justify-content: space-between;
+					position: relative;
+					.favourite {
+						position: absolute;
+						top: -10px;
+					}
+					.recent-post-bottom-meta {
+						.trip-price {
+							text-align: right;
+							del {
+								margin-right: 0;
+							}
+						}
+					}
+				}
+			
 		}
 	}
 }

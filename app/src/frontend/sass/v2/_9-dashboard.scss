@@ -1390,3 +1390,17 @@
 		line-height: 50px;
 	}
 }
+
+
+// Dashboard Wishlist tab 
+.resp-vtabs {
+	.wp-travel-wishlists-contents {		
+		@media (min-width: 1200px) {
+			overflow-x: unset !important;
+		}
+		td:nth-of-type(3) {
+			min-width: 645px !important;
+			
+		}
+	}
+}
