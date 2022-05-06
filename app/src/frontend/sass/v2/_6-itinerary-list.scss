@@ -712,7 +712,7 @@
 .wp-travel-widget-area {
 	// width: 33.333333333%;
 	float: right;
-	width: 100%;
+	// width: 100%;
 }
 
 // Itinerary Page List and Grid View New Design SCSS
@@ -1059,8 +1059,8 @@
 					.offer {
 						padding: 5px 12px;
 						left: 15px;
-						// bottom: -10px;
-						bottom: 10px;
+						bottom: -10px;
+						// bottom: 10px;
 						&::before {
 							content: none;
 						}
@@ -1354,7 +1354,7 @@
 // Layout V2 itinerary page grid view CSS
 .wptravel-layout-v2.wp-travel-grid-mode .site-content {
 	.wp-travel-archive-content {
-		display: grid;
+		// display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
 		gap: 1.5em;
 		li {
