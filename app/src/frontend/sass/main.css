@@ -4497,18 +4497,6 @@ ul.availabily-list .availabily-content.sold-out > div.date-from:after {
           align-items: center;
 }
 
-@media (max-width: 992px) {
-  .tour-info .tour-info-column .tour-info-item {
-    width: 50%;
-  }
-}
-
-@media (max-width: 767px) {
-  .tour-info .tour-info-column .tour-info-item {
-    width: 100%;
-  }
-}
-
 .tour-info .tour-info-column .tour-info-item i {
   font-size: 16px;
   width: 30px;
