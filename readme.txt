@@ -252,10 +252,15 @@ Release Date:
 Tweaks:
 * Changed Gallery image size to `wp_travel_thumbnail` form `thumbnail`.
 * Updated Required WordPress version to `5.9` from `5.4.1`.
+* Added Enable/disable all modules settings as per module category.
+* Sorted trip types as per trip title in WP Travel Search Form.
+* Added filter `wptravel_trip_dates` to modify trip dates.
 
 Fixes:
 * Undefined wp_travel in front page in case of WP Travel Pro activated.
 * Fixed Displaying itinerary date displaying in the itinerary lists even there is no date.
+* Fixed future date option can also able to select past date in field editor option.
+* Fixed ubable to select trip time in case of no trip extras.
 
 = 5.2.2 =
 Release Date: 27th April, 2022
