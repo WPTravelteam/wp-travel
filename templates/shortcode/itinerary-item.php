@@ -38,8 +38,8 @@ $enable_sale = WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => $po
 			<?php wptravel_save_offer( $post_id ); ?>
 		</div>
 		<div class="wp-travel-post-info clearfix">
-			<?php do_action( 'wp_travel_before_item_title', get_the_ID() ); ?>
-			<?php wptravel_do_deprecated_action( 'wp_tarvel_before_archive_title', array( get_the_ID() ), '2.0.4', 'wp_travel_before_item_title' ); ?>
+			<?php do_action( 'wp_travel_before_archive_content_title', get_the_ID() ); ?>
+			<?php wptravel_do_deprecated_action( 'wp_tarvel_before_archive_title', array( get_the_ID() ), '2.0.4', 'wp_travel_before_archive_content_title' ); ?>
 			<h4 class="post-title">
 				<a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to: ', 'wp-travel' ) ) ); ?>">
 					<?php the_title(); ?>

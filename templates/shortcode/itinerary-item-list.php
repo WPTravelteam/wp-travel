@@ -44,9 +44,12 @@ $end_date    = get_post_meta( get_the_ID(), 'wp_travel_end_date', true );
 	<div class="wp-travel-entry-content-wrapper">
 		<div class="description-left">
 			<header class="entry-header">
+				<?php do_action( 'wp_travel_before_item_title', get_the_ID() ); ?>
+				<?php wptravel_do_deprecated_action( 'wp_tarvel_before_archive_title', array( get_the_ID() ), '2.0.4', 'wp_travel_before_item_title' ); ?>
 				<h2 class="entry-title">
 					<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 				</h2>
+				<?php do_action( 'wp_travel_after_archive_title', get_the_ID() ); ?>
 			</header><!-- .entry-header -->
 			<div class="entry-content">
 				<?php the_excerpt(); ?>
