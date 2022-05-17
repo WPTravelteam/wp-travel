@@ -581,6 +581,16 @@ function wptravel_single_excerpt( $trip_id ) {
 	$empty_group_size_text = isset( $strings['empty_results']['group_size'] ) ? $strings['empty_results']['group_size'] : __( 'No Size Limit', 'wp-travel' );
 
 	$wp_travel_itinerary = new WP_Travel_Itinerary();
+
+	// Additoinal trip data.
+	$pricing_type    = 'multiple-price'; // default.
+	$booking_type    = get_post_meta( $trip_id, 'wp_travel_custom_booking_type', true );
+	$custom_link     = get_post_meta( $trip_id, 'wp_travel_custom_booking_link', true );
+	$open_in_new_tab = get_post_meta( $trip_id, 'wp_travel_custom_booking_link_open_in_new_tab', true );
+
+	if ( class_exists( 'WP_Travel_Utilities_Core' ) ) {
+		$pricing_type = get_post_meta( $trip_id, 'wp_travel_pricing_option_type', true );
+	}
 	?>
 	<div class="trip-short-desc">
 		<?php the_excerpt(); ?>
@@ -684,10 +694,22 @@ function wptravel_single_excerpt( $trip_id ) {
 		<div class="wp-travel-booking-wrapper">
 			<?php
 			$trip_enquiry_text = isset( $strings['featured_trip_enquiry'] ) ? $strings['featured_trip_enquiry'] : __( 'Trip Enquiry', 'wp-travel' );
-			if ( wptravel_tab_show_in_menu( 'booking' ) ) :
-				$book_now_text = isset( $strings['featured_book_now'] ) ? $strings['featured_book_now'] : __( 'Book Now', 'wp-travel' );
+			$book_now_text     = isset( $strings['featured_book_now'] ) ? $strings['featured_book_now'] : __( 'Book Now', 'wp-travel' );
+			if ( 'custom-booking' === $pricing_type && 'custom-link' === $booking_type && $custom_link ) :
 				?>
-				<button class="wp-travel-booknow-btn"><?php echo esc_html( apply_filters( 'wp_travel_template_book_now_text', $book_now_text ) ); // @phpcs:ignore ?></button>
+				<a href="<?php echo esc_url( $custom_link ); ?>" target="<?php echo $open_in_new_tab ? esc_attr( 'new' ) : ''; ?>" class="wp-travel-booknow-btn"><?php echo esc_html( apply_filters( 'wp_travel_template_book_now_text', $book_now_text ) ); // @phpcs:ignore ?></a>
+				<?php
+			elseif ( wptravel_tab_show_in_menu( 'booking' ) ) :
+				if ( 'custom-booking' === $pricing_type && 'custom-link' === $booking_type && $custom_link ) {
+					?>
+					<a href="<?php echo esc_url( $custom_link ); ?>" target="<?php echo $open_in_new_tab ? esc_attr( 'new' ) : ''; ?>" class="wp-travel-booknow-btn"><?php echo esc_html( apply_filters( 'wp_travel_template_book_now_text', $book_now_text ) ); // @phpcs:ignore ?></a>
+					<?php
+				} else {
+					?>
+					<button class="wp-travel-booknow-btn"><?php echo esc_html( apply_filters( 'wp_travel_template_book_now_text', $book_now_text ) ); // @phpcs:ignore ?></button>
+					<?php
+				}
+				?>
 			<?php endif; ?>
 			<?php if ( 'yes' === $enable_enquiry ) : ?>
 				<a id="wp-travel-send-enquiries" class="wp-travel-send-enquiries" data-effect="mfp-move-from-top" href="#wp-travel-enquiries">

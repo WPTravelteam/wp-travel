@@ -957,6 +957,20 @@ function wptravel_get_frontend_tabs( $show_in_menu_query = false, $frontend_hide
 			$show_in_menu = isset( $tab['show_in_menu'] ) ? $tab['show_in_menu'] : 'yes';
 			$show_in_menu = apply_filters( 'wp_travel_frontend_tab_show_in_menu', $show_in_menu, $trip_id, $key ); // @since 1.9.3.
 
+			if ( 'booking' === $key ) {
+				$pricing_type    = 'multiple-price'; // default.
+				$booking_type    = get_post_meta( $trip_id, 'wp_travel_custom_booking_type', true );
+				$custom_link     = get_post_meta( $trip_id, 'wp_travel_custom_booking_link', true );
+				$open_in_new_tab = get_post_meta( $trip_id, 'wp_travel_custom_booking_link_open_in_new_tab', true );
+
+				if ( class_exists( 'WP_Travel_Utilities_Core' ) ) {
+					$pricing_type = get_post_meta( $trip_id, 'wp_travel_pricing_option_type', true );
+				}
+				if ( 'custom-booking' === $pricing_type && 'custom-link' === $booking_type && $custom_link ) {
+					$show_in_menu = 'no';
+				}
+			}
+
 			if ( ! $frontend_hide_content ) {  // this var is passed to check value whether current tab show in frontend or not. so content is not required
 				$tab_content = isset( $wp_travel_itinerary_tabs[ $key ]['content'] ) ? $wp_travel_itinerary_tabs[ $key ]['content'] : '';
 
