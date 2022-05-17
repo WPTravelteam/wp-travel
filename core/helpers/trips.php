@@ -368,6 +368,9 @@ class WpTravel_Helpers_Trips {
 		update_post_meta( $trip_id, 'wp_travel_faq_question', $question );
 		update_post_meta( $trip_id, 'wp_travel_faq_answer', $answer );
 
+		// new meta since wp travel 5.2.3
+		update_post_meta( $trip_id, 'wptravel_trip_faqs', $trip_data->faqs );
+
 		// trip duration.
 		if ( ! empty( $trip_data->trip_duration ) ) {
 			$days   = isset( $trip_data->trip_duration['days'] ) ? $trip_data->trip_duration['days'] : 0;

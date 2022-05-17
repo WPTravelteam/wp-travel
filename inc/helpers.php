@@ -716,6 +716,8 @@ function wptravel_search_form( $args = array() ) {
 					'taxonomy'        => $taxonomy,
 					'selected'        => ( isset( $submission_get[ $taxonomy ] ) ) ? esc_textarea( $submission_get[ $taxonomy ] ) : 0,
 					'value_field'     => 'slug',
+					'order'           => 'asc',
+					'orderby'         => 'title',
 				);
 
 				wp_dropdown_categories( $args, $taxonomy );
@@ -1236,6 +1238,45 @@ function wptravel_get_admin_trip_tabs( $post_id, $custom_tab_enabled = false, $f
 }
 
 /**
+ * Get global FAQ's
+ *
+ * @since 5.2.3
+ */
+function wptravel_get_global_faqs() {
+	$settings = wptravel_get_settings();
+
+	$faqs = array();
+	if ( ! isset( $settings['global_faqs'] ) ) { // Legacy value since WP Travel 5.2.3
+		if ( isset( $settings['wp_travel_utils_global_faq_answer'] ) && ! empty( $settings['wp_travel_utils_global_faq_answer'] ) ) {
+			$questions = $settings['wp_travel_utils_global_faq_question'];
+			$answers   = $settings['wp_travel_utils_global_faq_answer'];
+
+			foreach ( $questions as $index => $question ) {
+				$faq    = array(
+					'question' => $question,
+					'answer'   => $answers[ $index ],
+				);
+				$faqs[] = $faq;
+			}
+		}
+	} else {
+		$faqs = $settings['global_faqs'];
+	}
+
+	// No global faqs if utilities is disabled.
+	if ( ! class_exists( 'WP_Travel_Utilities_Core' ) ) {
+		$faqs = array();
+	}
+
+	/**
+	 * Filter to modify global FAQ's.
+	 *
+	 * @since 5.2.3
+	 */
+	$faqs = apply_filters( 'wptravel_global_faqs', $faqs, $settings );
+	return $faqs;
+}
+/**
  * Return FAQs
  *
  * @param Int $post_id Post ID.
@@ -1247,16 +1288,15 @@ function wptravel_get_faqs( $post_id ) {
 	if ( ! $post_id ) {
 		return;
 	}
-	$faq = array();
-
-	$questions = get_post_meta( $post_id, 'wp_travel_faq_question', true );
-	$questions = ( $questions ) ? $questions : array();
-	$questions = apply_filters( 'wp_travel_itinerary_faq_questions', $questions, $post_id ); // Modified in 2.0.7
-
-	$settings         = wptravel_get_settings();
-	$is_global_faq    = get_post_meta( $post_id, 'wp_travel_is_global_faq', true );
-	$global_questions = isset( $settings['wp_travel_utils_global_faq_question'] ) ? $settings['wp_travel_utils_global_faq_question'] : array(); // value to check whether trip faq exists in gloabl on not.
-	$global_answers   = isset( $settings['wp_travel_utils_global_faq_answer'] ) ? $settings['wp_travel_utils_global_faq_answer'] : array(); // value to check whether trip faq exists in gloabl on not.
+	$faqs        = array();
+	$global_faqs = wptravel_get_global_faqs();
+	$trip_faqs   = get_post_meta( $post_id, 'wptravel_trip_faqs', true );
+	/**
+	 * To add newly added Global faqs in the trip faq list.
+	 *
+	 * @since 5.2.3
+	 */
+	$trip_faqs = apply_filters( 'wptravel_trip_faqs', $trip_faqs, $post_id );
 
 	$use_global_faq = get_post_meta( $post_id, 'wp_travel_utils_use_global_faq_for_trip', true );
 	$use_global_faq = ( $use_global_faq ) ? $use_global_faq : 'no';
@@ -1264,51 +1304,111 @@ function wptravel_get_faqs( $post_id ) {
 	$use_trip_faq = get_post_meta( $post_id, 'wp_travel_utils_use_trip_faq_for_trip', true );
 	$use_trip_faq = ( $use_trip_faq ) ? $use_trip_faq : 'no';
 
-	if ( is_array( $questions ) && count( $questions ) > 0 ) :
-		$answers = get_post_meta( $post_id, 'wp_travel_faq_answer', true );
-		$answers = apply_filters( 'wp_travel_itinerary_faq_answers', $answers, $post_id ); // Modified in 2.0.7
-		foreach ( $questions as $key => $question ) :
-			$answer = ''; // initiallize empty answer.
-			// This will check the current question exists in global question or not. if yes then set this as global. This will work for initial check.
-			$global_faq = 'no';
-			if ( ! empty( $global_questions ) && in_array( $question, $global_questions ) ) {
-				$global_faq = 'yes';
-				$answer     = isset( $global_answers[ $key ] ) ? $global_answers[ $key ] : ''; // Global answer index may vary if we sort the global faq along with trip faq.
-			}
+	if ( ! $trip_faqs ) {  // Legacy value since WP Travel 5.2.3.
+		$questions = get_post_meta( $post_id, 'wp_travel_faq_question', true );
+		$questions = ( $questions ) ? $questions : array();
+		$questions = apply_filters( 'wp_travel_itinerary_faq_questions', $questions, $post_id ); // Modified in 2.0.7
 
-			// with only above condition if faq is saved and after that delete global settings, it will treat as trip faq because global faq are saved along with trip faq. so we need to seperate faq type (global or individual).
-			if ( isset( $is_global_faq[ $key ] ) && ! empty( $is_global_faq[ $key ] ) ) {
-				$global_faq = $is_global_faq[ $key ];
-			}
+		$settings         = wptravel_get_settings();
+		$is_global_faq    = get_post_meta( $post_id, 'wp_travel_is_global_faq', true );
+		// $global_questions = isset( $settings['wp_travel_utils_global_faq_question'] ) ? $settings['wp_travel_utils_global_faq_question'] : array(); // value to check whether trip faq exists in gloabl on not.
+		// $global_answers   = isset( $settings['wp_travel_utils_global_faq_answer'] ) ? $settings['wp_travel_utils_global_faq_answer'] : array(); // value to check whether trip faq exists in gloabl on not.
+		$global_questions = array_column($global_faqs, 'question');
+		$global_answers   = array_column($global_faqs, 'answer');
+		$global_faq_ids   = array_keys( $global_faqs );
 
-			if ( isset( $answers[ $key ] ) && ( ! empty( $answers[ $key ] ) || 'yes' !== $global_faq ) ) { // Do not override global faq answers in initial load.. $answers empty refer to new trips without saved.
-				$answer = $answers[ $key ];
-			}
+		$temp_global_faq_index = 0; // This will help to set global faqs id in new wptravel_trip_faqs meta.
 
-			// remove global if utilities is not exists.
-			if ( ! class_exists( 'WP_Travel_Utilities_Core' ) && 'yes' == $global_faq ) {
-				continue;
-			}
+		if ( is_array( $questions ) && count( $questions ) > 0 ) :
+			$answers = get_post_meta( $post_id, 'wp_travel_faq_answer', true );
+			$answers = apply_filters( 'wp_travel_itinerary_faq_answers', $answers, $post_id ); // Modified in 2.0.7
+			foreach ( $questions as $key => $question ) :
+				$answer        = ''; // initiallize empty answer.
+				$global_faq_id = '';
+				// This will check the current question exists in global question or not. if yes then set this as global. This will work for initial check.
+				$global_faq = 'no';
+				if ( ! empty( $global_questions ) && in_array( $question, $global_questions ) ) {
+					$global_faq    = 'yes';
+					// Global answer index may vary if we sort the global faq along with trip faq.
+					$answer        = isset( $global_answers[ $temp_global_faq_index ] ) ? $global_answers[ $temp_global_faq_index ] : ''; 
+					$global_faq_id = $global_faq_ids[ $temp_global_faq_index ]; // temp faq_id;
+					$temp_global_faq_index++;
+				}
 
-			if ( ! is_admin() ) { // filter for frontend.
-				if ( 'no' === $use_global_faq && 'yes' == $global_faq ) { // Trip faq.
-					continue;
-				} elseif ( 'yes' == $use_global_faq && 'no' == $use_trip_faq && 'no' == $global_faq ) { // only global
+				// with only above condition if faq is saved and after that delete global settings, it will treat as trip faq because global faq are saved along with trip faq. so we need to seperate faq type (global or individual).
+				if ( isset( $is_global_faq[ $key ] ) && ! empty( $is_global_faq[ $key ] ) ) {
+					$global_faq = $is_global_faq[ $key ];
+				}
+	
+				if ( isset( $answers[ $key ] ) && ( ! empty( $answers[ $key ] ) || 'yes' !== $global_faq ) ) { // Do not override global faq answers in initial load.. $answers empty refer to new trips without saved.
+					$answer = $answers[ $key ];
+				}
+	
+				// remove global if utilities is not exists.
+				if ( ! class_exists( 'WP_Travel_Utilities_Core' ) && 'yes' == $global_faq ) {
 					continue;
 				}
-			}
+	
+				if ( ! is_admin() ) { // filter for frontend.
+					if ( 'no' === $use_global_faq && 'yes' == $global_faq ) { // Trip faq.
+						continue;
+					} elseif ( 'yes' == $use_global_faq && 'no' == $use_trip_faq && 'no' == $global_faq ) { // only global
+						continue;
+					}
+				}
+	
+				if ( 'yes' === $global_faq && is_array( $global_questions ) && ! in_array( $question, $global_questions ) ) { // If this is global faq and deleted this faq from global then need to remove this faq.
+					continue;
+				}
+				$faqs[] = array(
+					'question'      => $question,
+					'answer'        => $answer,
+					'global'        => $global_faq,
+					'global_faq_id' => $global_faq_id,
+				);
+			endforeach;
+		endif;
+	} else {
+		if ( is_array( $trip_faqs ) && count( $trip_faqs ) > 0 ) {
+			foreach ( $trip_faqs as $index => $trip_faq ) {
+				$is_global_faq = $trip_faq['global'];
+				$question      = $trip_faq['question'];
+				$answer        = $trip_faq['answer'];
+				$global_faq_id = isset( $trip_faq['global_faq_id'] ) ? $trip_faq['global_faq_id'] : '';
+				// remove global if utilities is not exists.
+				if ( ! class_exists( 'WP_Travel_Utilities_Core' ) && 'yes' == $is_global_faq ) {
+					continue;
+				}
 
-			if ( 'yes' === $global_faq && is_array( $global_questions ) && ! in_array( $question, $global_questions ) ) { // If this is global faq and deleted this faq from global then need to remove this faq.
-				continue;
+				if ( ! is_admin() ) { // filter for frontend.
+					if ( 'no' === $use_global_faq && 'yes' == $is_global_faq ) { // Trip faq.
+						continue;
+					} elseif ( 'yes' == $use_global_faq && 'no' == $use_trip_faq && 'no' == $is_global_faq ) { // only global
+						continue;
+					}
+				}
+
+				if ( $global_faq_id ) {
+					if ( ! isset( $global_faqs[ $global_faq_id ] ) ) {
+						// In case of global faq deleted.
+						continue;
+					}
+					// set all global question and answers.
+					$question      = $global_faqs[ $global_faq_id ]['question']; 
+					$answer        = $global_faqs[ $global_faq_id ]['answer'];
+				}
+
+				$faqs[] = array(
+					'question'      => $question,
+					'answer'        => $answer,
+					'global'        => $is_global_faq,
+					'global_faq_id' => $global_faq_id,
+				);
 			}
-			$faq[] = array(
-				'question' => $question,
-				'answer'   => $answer,
-				'global'   => $global_faq,
-			);
-		endforeach;
-	endif;
-	return $faq;
+		}
+	}
+
+	return $faqs;
 }
 
 
@@ -2950,33 +3050,13 @@ function wptravel_get_submenu() {
 		),
 	);
 
-	$react_settings_enable = apply_filters( 'wp_travel_settings_react_enabled', true ); // need to remove if no queries made for old settings page.
-
-	if ( ! $react_settings_enable ) {
-		$all_submenus['bookings']['settings'] = array(
-			'priority'   => '130',
-			'page_title' => __( 'WP Travel Settings', 'wp-travel' ),
-			'menu_title' => __( 'Settings', 'wp-travel' ),
-			'menu_slug'  => 'settings',
-			'callback'   => array( 'WP_Travel_Admin_Settings', 'setting_page_callback' ),
-		);
-	} else {
-		$all_submenus['bookings']['settings'] = array(
-			'priority'   => '130',
-			'page_title' => __( 'WP Travel Settings', 'wp-travel' ),
-			'menu_title' => __( 'Settings', 'wp-travel' ),
-			'menu_slug'  => 'settings',
-			'callback'   => array( 'WP_Travel_Admin_Settings', 'setting_page_callback_new' ),
-		);
-		// Temporary page [Need to remove in a while]
-		$all_submenus['bookings']['settings2'] = array(
-			'priority'   => '130',
-			'page_title' => __( 'WP Travel Settings', 'wp-travel' ),
-			'menu_title' => __( 'Settings', 'wp-travel' ),
-			'menu_slug'  => 'settings2',
-			'callback'   => array( 'WP_Travel_Admin_Settings', 'setting_page_callback_new' ),
-		);
-	}
+	$all_submenus['bookings']['settings'] = array(
+		'priority'   => '130',
+		'page_title' => __( 'WP Travel Settings', 'wp-travel' ),
+		'menu_title' => __( 'Settings', 'wp-travel' ),
+		'menu_slug'  => 'settings',
+		'callback'   => array( 'WP_Travel_Admin_Settings', 'setting_page_callback_new' ),
+	);
 
 	if ( ! class_exists( 'WP_Travel_Downloads_Core' ) ) :
 		$all_submenus['bookings']['downloads']['page_title'] = __( 'Downloads', 'wp-travel' );
