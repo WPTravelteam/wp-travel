@@ -64,6 +64,13 @@ class WpTravel_Helpers_Trip_Dates {
 			}
 			$index++;
 		}
+		/**
+		 * Filter to change available dates data as per trip.
+		 *
+		 * @since 5.2.3
+		 */
+		$dates = apply_filters( 'wptravel_trip_dates', $dates, $trip_id );
+
 		return WP_Travel_Helpers_Response_Codes::get_success_response(
 			'WP_TRAVEL_TRIP_DATES',
 			array(
