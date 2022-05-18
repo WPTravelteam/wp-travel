@@ -8550,7 +8550,7 @@ label.radio-checkbox-label input[type="checkbox"], label.radio-checkbox-label .w
 
 @media (max-width: 992px) {
   .wp-travel-default-article .wp-travel-entry-content-wrapper .description-left .wp-travel-add-to-wishlists {
-    top: 25px;
+    top: 5px;
   }
 }
 

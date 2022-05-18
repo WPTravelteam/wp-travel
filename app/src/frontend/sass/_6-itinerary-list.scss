@@ -376,6 +376,7 @@
 			margin-top: 0;
 			margin-bottom: 0;
 			line-height: 1;
+			padding-left: 20px;
 
 			a {
 				font-size: 14px;
@@ -616,12 +617,14 @@
 				width: 100%;
 			}
 			.entry-header {
-				padding-left: 22px;
+				// padding-left: 22px;
+				position: relative;
 			}
 
 			.entry-title {
 				margin-top: 0;
 				margin-bottom: 15px;
+				padding-left: 25px;
 			}
 
 			.entry-content {
@@ -1041,8 +1044,9 @@
 							// }
 						}
 						.favourite {
-							display: contents;
+							// display: contents;
 							width: 10%;
+							text-align: right;
 
 							i {
 								color: $offerColor;

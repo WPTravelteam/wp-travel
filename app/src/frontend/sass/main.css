@@ -12068,6 +12068,7 @@ label.radio-checkbox-label input[type="checkbox"], label.radio-checkbox-label .w
   margin-top: 0;
   margin-bottom: 0;
   line-height: 1;
+  padding-left: 20px;
 }
 
 .wp-travel-itinerary-items .wp-travel-post-item-wrapper .post-title a {
@@ -12299,12 +12300,13 @@ label.radio-checkbox-label input[type="checkbox"], label.radio-checkbox-label .w
 }
 
 .wp-travel-default-article .wp-travel-entry-content-wrapper .description-left .entry-header {
-  padding-left: 22px;
+  position: relative;
 }
 
 .wp-travel-default-article .wp-travel-entry-content-wrapper .description-left .entry-title {
   margin-top: 0;
   margin-bottom: 15px;
+  padding-left: 25px;
 }
 
 .wp-travel-default-article .wp-travel-entry-content-wrapper .description-left .entry-content {
