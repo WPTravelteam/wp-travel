@@ -2671,22 +2671,26 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 							?>
 
 							<div class="my-order-price-breakdown-summary clearfix">
-								<div class="my-order-price-breakdown-sub-total">
-									<span class="my-order-head"><?php esc_html_e( 'Sub Total Price', 'wp-travel' ); ?></span>
-									<span class="my-order-tail my-order-right"><?php echo wptravel_get_formated_price_currency( $details['sub_total'], false, '', $booking_id ); //@phpcs:ignore ?></span>
-								</div>
+								<?php if ( $details['sub_total'] > $details['total'] ) : ?>
+									<div class="my-order-price-breakdown-sub-total">
+										<span class="my-order-head"><?php esc_html_e( 'Sub Total Price', 'wp-travel' ); ?></span>
+										<span class="my-order-tail my-order-right"><?php echo wptravel_get_formated_price_currency( $details['sub_total'], false, '', $booking_id ); //@phpcs:ignore ?></span>
+									</div>
+								<?php endif; ?>
 
-								<?php if ( $details['discount'] ) : ?>
+								<?php if ( $details['discount'] && $details['discount'] > 0 ) : ?>
 									<div class="my-order-price-breakdown-coupon-amount">
 										<span class="my-order-head"><?php esc_html_e( 'Discount Price', 'wp-travel' ); ?></span>
 										<span class="my-order-tail my-order-right">- <?php echo wptravel_get_formated_price_currency( $details['discount'], false, '', $booking_id ); //@phpcs:ignore ?></span>
 									</div>
 								<?php endif; ?>
-
-								<div class="my-order-price-breakdown-tax-due">
-									<span class="my-order-head"><?php esc_html_e( 'Tax', 'wp-travel' ); ?> </span>
-									<span class="my-order-tail my-order-right"><?php echo wptravel_get_formated_price_currency( $details['tax'], false, '', $booking_id ); //@phpcs:ignore ?></span>
-								</div>
+								<?php if ( $details['tax'] && $details['tax'] > 0 ) : ?>
+									<div class="my-order-price-breakdown-tax-due">
+										<span class="my-order-head"><?php esc_html_e( 'Tax', 'wp-travel' ); ?> </span>
+										<span class="my-order-tail my-order-right"><?php echo wptravel_get_formated_price_currency( $details['tax'], false, '', $booking_id ); //@phpcs:ignore ?></span>
+									</div>
+								<?php endif; ?>
+								
 							</div>
 						</div>
 						<div class="my-order-single-total-price clearfix">
