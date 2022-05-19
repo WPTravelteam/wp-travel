@@ -53,30 +53,4 @@
 			}
 		}
 	}
-
-	// WP Travel Settings > Modules Settings enable/disable button CSS
-	.components-tab-panel__tab-content {
-		.wptravel-modules {
-			position: relative;
-			label.enable-all-btn {
-				position: absolute;
-				top: 17px;
-				left: 18px;
-				display: flex;
-				.components-base-control__field {
-					margin-bottom: 0;
-				}
-				p.description {
-					font-size: 0;
-				}
-			}
-			.components-panel__body {
-				h2.components-panel__body-title {
-					.components-panel__body-toggle.components-button {
-						padding-left: 65px;
-					}
-				}
-			}
-		}
-	}
 }
