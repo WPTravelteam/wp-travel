@@ -35,7 +35,7 @@
 		// text-align: center;
 		background: #f9f9f9;
 		display: flex;
-		padding: 0;
+		padding: 0 !important;
 		border: 1px solid #ececec;
 		@include clearfix;
 
@@ -69,7 +69,7 @@
 			}
 
 			@include sidr-view {
-				padding: 15px;
+				// padding: 15px;
 			}
 		}
 	}
