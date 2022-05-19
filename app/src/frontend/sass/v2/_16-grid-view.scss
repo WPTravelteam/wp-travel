@@ -12,6 +12,15 @@
 					height: auto;
 				}
 			}
+			.discount {
+				background: #06a10a;
+				padding: 5px 15px;
+				font-size: 13px;
+				color: #fff;
+				font-weight: 500;
+				position: absolute;
+				bottom: 0;
+			}
 			.wp-travel-savings {
 				position: absolute;
 				background: #00921d;
@@ -26,9 +35,11 @@
 		}
 		.wp-travel-post-info {
 			display: flex;
-			align-items: center;
+			// align-items: center;
 			flex-wrap: nowrap;
 			padding: 10px;
+			align-items: flex-start;
+			justify-content: space-between;
 			h4.post-title {
 				padding: 0 15px;
 				margin-top: 0;
@@ -38,6 +49,10 @@
 				margin: 0;
 				vertical-align: top;
 				display: inline-block;
+			}
+			.favourite {
+				position: absolute;
+				top: 0;
 			}
 			.recent-post-bottom-meta {
 				display: inline-block;
