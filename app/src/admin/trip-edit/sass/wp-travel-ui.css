@@ -1,0 +1,81 @@
+.wp-travel-ui.wp-travel-ui-card {
+  border: 1px solid #e0e0e0;
+  padding: 16px;
+  margin-bottom: 15px;
+  padding-top: 7px;
+  padding-bottom: 0 !important;
+}
+
+.wp-travel-ui.wp-travel-ui-card.wp-travel-save-changes {
+  border-top: 1px solid #eee !important;
+  margin: 0 !important;
+  padding: 15px !important;
+}
+
+.wp-travel-ui.wp-travel-ui-card.wp-travel-ui-card-top-border {
+  border-top: 5px solid #e0e0e0;
+}
+
+.wp-travel-ui.wp-travel-ui-card.wp-travel-ui-card-no-border {
+  border: 0;
+}
+
+.wp-travel-ui.wp-travel-ui-card.wp-travel-ui-card-no-border .itinerary-sortable .wp-travel-itinerary-image {
+  text-align: right;
+}
+
+.wp-travel-ui.wp-travel-ui-card.wp-travel-ui-card-no-border .itinerary-sortable .wp-travel-itinerary-image .media-preview img {
+  max-width: 100%;
+  width: 25%;
+  height: auto;
+}
+
+.wp-travel-ui.wp-travel-ui-card h3,
+.wp-travel-ui.wp-travel-ui-card h4 {
+  margin-top: 0;
+  margin-bottom: 50px;
+}
+
+.wp-traval-button-danger {
+  color: #f44336 !important;
+  border-color: #f44336 !important;
+  margin-top: 13px !important;
+}
+
+.wp-traval-button-danger:not(:disabled):not([aria-disabled="true"]):hover {
+  color: #f44336 !important;
+  border-color: #f44336 !important;
+}
+
+#wp-travel-trip-options-wrap .components-button {
+  height: auto;
+  min-height: auto;
+}
+
+#wp-travel-trip-options-wrap .components-button.is-small {
+  margin-top: 15px;
+}
+
+.wp-travel-map-wrap {
+  width: 100%;
+}
+
+.wp-travel-map-wrap .wp-travel-map__container {
+  position: relative;
+}
+
+.wp-travel-map-wrap .wp-travel-map__search {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 100%;
+  max-width: 240px;
+}
+
+.wp-travel-map-wrap .wp-travel-map__search input[type="search"] {
+  border: none;
+  height: 35px;
+  padding: 0 15px;
+  width: 100%;
+}
+/*# sourceMappingURL=wp-travel-ui.css.map */
