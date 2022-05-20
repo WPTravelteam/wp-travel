@@ -155,26 +155,16 @@
 
 	.wptravel-book-your-trip {
 		padding: 5px 50px;
-		font-size: 22px;
 		box-shadow: none;
 		margin-right: 15px;
-		&:hover {
-			background-color: #df1814;
-			color: #ffffff;
-		}
+		background: #c1c1c1;
 		@media (max-width: 305px) {
 			padding: 8px 25px;
 			font-size: 18px;
 		}
 	}
 	// for custom link in the book now button css
-	a.wptravel-book-your-trip {
-		border: 0;
-		border-color: #ccc #ccc #bbb;
-		border-radius: 3px;
-		background: #f83531;
-		color: #fff;
-		line-height: 2.5;
+	a.wptravel-book-your-trip {		
 		padding: 8px 50px;
 		@media (max-width: 305px) {
 			padding: 8px 25px;
