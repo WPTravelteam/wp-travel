@@ -588,7 +588,7 @@ td {
 		margin-top: 1em;
 	}
 }
-.wptravel-ui-content .wptravel-modules {
+.wptravel-ui-content.wptravel-modules {
 	position: relative;
 	.wptravel-modules-list {
 		display: grid;
@@ -630,22 +630,23 @@ td {
 
 	// WP Travel Settings > Modules Settings enable/disable button CSS
 	label.enable-all-btn {
-		position: absolute;
-		top: 17px;
-		left: 18px;
 		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 2em;
+		background: #fef8ee;
+		padding-block: 30px;
+		border-left: 4px solid #f0b849;
+		padding-left: 10px;
+		p.description {
+			text-align: left;
+			margin-block: 0;
+			font-weight: 700;
+		}
 		.components-base-control__field {
 			margin-bottom: 0;
-		}
-		p.description {
-			font-size: 0;
-		}
-	}
-	.components-panel__body {
-		h2.components-panel__body-title {
-			.components-panel__body-toggle.components-button {
-				padding-left: 65px;
-			}
+			margin-right: 1.5em;
 		}
 	}
 }
