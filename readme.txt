@@ -247,20 +247,22 @@ Before updating plugin please check ["our latest release notes"](#developers).
 == Changelog ==
 
 = 5.2.3 =
-Release Date: 
+Release Date: 23rd May, 2022
 
 Tweaks:
-* Changed Gallery image size to `wp_travel_thumbnail` form `thumbnail`.
-* Updated Required WordPress version to `5.9` from `5.4.1`.
-* Added Enable/disable all modules settings as per module category.
-* Sorted trip types as per trip title in WP Travel Search Form.
+* Changed Gallery image size to `wp_travel_thumbnail` from `thumbnail`.
+* Updated Required WordPress version to `5.9` from `5.4.1` in respective file.
+* Added Enable/Disable all module options under settings as per module category.
+* Sorted trip types options as per trip title in WP Travel Search Form.
 * Added filter `wptravel_trip_dates` to modify trip dates.
+* Added Option to rename Days and Nights in single trip page.
 
 Fixes:
-* Undefined wp_travel in front page in case of WP Travel Pro activated.
-* Fixed Displaying itinerary date displaying in the itinerary lists even there is no date.
-* Fixed future date option can also able to select past date in field editor option.
-* Fixed ubable to select trip time in case of no trip extras.
+* Undefined wp_travel on the front page in case of WP Travel Pro is activated.
+* Fixed Displaying itinerary date under trip outline, even date is deleted.
+* Fixed past date also been able to select when selecting future date for date field type in the field editor option.
+* Fixed unable to select a trip time in case of no trip extras.
+* Fixed appearance of same Trip code when cloning trip.
 
 = 5.2.2 =
 Release Date: 27th April, 2022

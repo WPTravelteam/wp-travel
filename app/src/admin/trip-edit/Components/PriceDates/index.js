@@ -11,12 +11,6 @@ const __i18n = {
 	..._wp_travel_admin.strings
 }
 
-// @todo Need to remove this in future.
-// const WPTravelTripOptionsPriceDates = () => {
-//     return <></>;
-// }
-// export default WPTravelTripOptionsPriceDates;
-
 // Single Components for hook callbacks.
 const PriceDates = ( {allData} ) => {
     return <TabPanel className="wp-travel-trip-edit-menu wp-travel-trip-edit-menu-horizontal wp-travel-trip-edit-menu-add-gap"

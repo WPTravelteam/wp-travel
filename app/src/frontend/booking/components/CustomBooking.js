@@ -23,6 +23,7 @@ const CustomBooking = ( props ) => {
 						<a href={customBookingLink || '#'} target={customBookingLinkOpenInNewTab ? 'new' : ''}>{linkText}</a>
 					</div> 
 					: 
+                    // need to support shortcode
 					'custom-form' === customBookingType && <div className="wp-travel-custom-form" dangerouslySetInnerHTML={{__html: custom_booking_form || ''}}></div>
                 }
                 </>

@@ -799,6 +799,8 @@ function wptravel_single_location( $trip_id ) {
 	$locations_text       = isset( $strings['locations'] ) ? $strings['locations'] : __( 'Locations', 'wp-travel' );
 	$fixed_departure_text = isset( $strings['fixed_departure'] ) ? $strings['fixed_departure'] : __( 'Fixed departure', 'wp-travel' );
 	$trip_duration_text   = isset( $strings['trip_duration'] ) ? $strings['trip_duration'] : __( 'Trip duration', 'wp-travel' );
+	$days_text            = isset( $strings['days'] ) ? $strings['days'] : __( 'Day(s)', 'wp-travel' );
+	$nights_text          = isset( $strings['nights'] ) ? $strings['nights'] : __( 'Night(s)', 'wp-travel' );
 
 	if ( is_array( $terms ) && count( $terms ) > 0 ) :
 		?>
@@ -853,7 +855,7 @@ function wptravel_single_location( $trip_id ) {
 				</div>
 				<div class="travel-info">
 					<span class="value">
-						<?php printf( __( '%1$s Day(s) %2$s Night(s)', 'wp-travel' ), esc_html( $trip_duration ), esc_html( $trip_duration_night ) ); // @phpcs:ignore ?>
+						<?php printf( '%1$s %2$s %3$s %4$s', esc_html( $trip_duration ), esc_html( $days_text ),  esc_html( $trip_duration_night ), esc_html( $nights_text ) ); // @phpcs:ignore ?>
 					</span>
 				</div>
 			</li>
