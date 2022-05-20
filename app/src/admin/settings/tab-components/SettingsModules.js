@@ -99,11 +99,15 @@ export default () => {
                 </label>
                 
             </div>
-            <div className="wptravel-ui-content" >
+            <div className="wptravel-ui-content wptravel-modules" >
                 <ErrorBoundary>
                     { proModules.length > 0 &&
-                        <div className="wptravel-modules">
+                        <PanelBody
+                            title="Pro Modules"
+                            initialOpen={false}
+                        >
                             <label className="enable-all-btn">
+                                <p className="description">{__( 'Enable/Disable All Pro Modules', 'wp-travel' )}</p>
                                 <ToggleControl
                                     checked={enableProModules }
                                     onChange={ (value) => {
@@ -119,56 +123,54 @@ export default () => {
                                         });
                                     } }
                                 />
-                                <p className="description">{__( 'Enable/Disable All Pro Modules', 'wp-travel' )}</p>
                             </label>
-                            <PanelBody
-                                title="Pro Modules"
-                                initialOpen={false}
-                            >
-                                
-                                <div className="wptravel-modules-list">
+                            <div className="wptravel-modules-list">
 
-                                { proModules.map( ( addonsKey, i ) => {
-                                    // Do not display pro.
-                                    if ( 'show_wp_travel_pro' === addonsKey ) {
-                                        return <></>
-                                    }
-                                    let enabledModule = false;
-                                    if ( 'undefined' !== typeof modules[addonsKey] ) {
-                                        enabledModule = 'yes' == modules[addonsKey].value; // Saved modules values.
-                                    } else {
-                                        enabledModule = 'yes' == defaultModules[addonsKey].value;
-                                    }
-                                    let moduleName = defaultModules[addonsKey].title.replace( 'WP Travel ', ' ' );
-                                    return <PanelRow key={i}>
-                                        <div className="wptravel-modules-row">
-                                            <div className="wptravel-modules-input">
-                                                <label><strong>{moduleName}</strong></label>
-                                                <div className="wp-travel-field-value">
-                                                    <ToggleControl
-                                                        checked={ enabledModule }
-                                                        onChange={ ( val ) => {
-                                                            // let _modules = modules;
-                                                            _modules[addonsKey].value = val ? 'yes' : 'no';
-                                                            updateSettings({
-                                                                ...allData,
-                                                                modules : { ..._modules }
-                                                            })
-                                                        } }
-                                                    />
-                                                </div>
+                            { proModules.map( ( addonsKey, i ) => {
+                                // Do not display pro.
+                                if ( 'show_wp_travel_pro' === addonsKey ) {
+                                    return <></>
+                                }
+                                let enabledModule = false;
+                                if ( 'undefined' !== typeof modules[addonsKey] ) {
+                                    enabledModule = 'yes' == modules[addonsKey].value; // Saved modules values.
+                                } else {
+                                    enabledModule = 'yes' == defaultModules[addonsKey].value;
+                                }
+                                let moduleName = defaultModules[addonsKey].title.replace( 'WP Travel ', ' ' );
+                                return <PanelRow key={i}>
+                                    <div className="wptravel-modules-row">
+                                        <div className="wptravel-modules-input">
+                                            <label><strong>{moduleName}</strong></label>
+                                            <div className="wp-travel-field-value">
+                                                <ToggleControl
+                                                    checked={ enabledModule }
+                                                    onChange={ ( val ) => {
+                                                        // let _modules = modules;
+                                                        _modules[addonsKey].value = val ? 'yes' : 'no';
+                                                        updateSettings({
+                                                            ...allData,
+                                                            modules : { ..._modules }
+                                                        })
+                                                    } }
+                                                />
                                             </div>
-                                            <p className="description">{__( 'Show all your "' + moduleName + '" settings and enable its feature', 'wp-travel' )}</p>
                                         </div>
-                                    </PanelRow> 
-                                }  ) }
-                                </div>
-                            </PanelBody>
-                        </div>
+                                        <p className="description">{__( 'Show all your "' + moduleName + '" settings and enable its feature', 'wp-travel' )}</p>
+                                    </div>
+                                </PanelRow> 
+                            }  ) }
+                            </div>
+                        </PanelBody>
                     }
                     { paymentModules.length > 0 &&
-                        <div className="wptravel-modules">
+                            
+                        <PanelBody
+                            title="Payment Modules"
+                            initialOpen={false}
+                        >
                             <label className="enable-all-btn">
+                                <p className="description">{__( 'Enable/Disable All Payment Modules', 'wp-travel' )}</p>
                                 <ToggleControl
                                     checked={enablePaymentModules }
                                     onChange={ (value) => {
@@ -184,51 +186,45 @@ export default () => {
                                         });
                                     } }
                                 />
-                                <p className="description">{__( 'Enable/Disable All Payment Modules', 'wp-travel' )}</p>
                             </label>
-                            <PanelBody
-                                title="Payment Modules"
-                                initialOpen={false}
-                            >
-                                
-                                <div className="wptravel-modules-list">
-                                { paymentModules.map( ( addonsKey, i ) => {
-                                    // Do not display pro.
-                                    if ( 'show_wp_travel_pro' === addonsKey ) {
-                                        return <></>
-                                    }
-                                    let enabledModule = false;
-                                    if ( 'undefined' !== typeof modules[addonsKey] ) {
-                                        enabledModule = 'yes' == modules[addonsKey].value; // Saved modules values.
-                                    } else {
-                                        enabledModule = 'yes' == defaultModules[addonsKey].value;
-                                    }
-                                    let moduleName = defaultModules[addonsKey].title.replace( 'WP Travel ', ' ' );
-                                    return <PanelRow key={i}>
-                                        <div className="wptravel-modules-row">
-                                            <div className="wptravel-modules-input">
-                                                <label><strong>{moduleName}</strong></label>
-                                                <div className="wp-travel-field-value">
-                                                    <ToggleControl
-                                                        checked={ enabledModule }
-                                                        onChange={ ( val ) => {
-                                                            // let _modules = modules;
-                                                            _modules[addonsKey].value = val ? 'yes' : 'no';
-                                                            updateSettings({
-                                                                ...allData,
-                                                                modules : { ..._modules }
-                                                            })
-                                                        } }
-                                                    />
-                                                </div>
+                            
+                            <div className="wptravel-modules-list">
+                            { paymentModules.map( ( addonsKey, i ) => {
+                                // Do not display pro.
+                                if ( 'show_wp_travel_pro' === addonsKey ) {
+                                    return <></>
+                                }
+                                let enabledModule = false;
+                                if ( 'undefined' !== typeof modules[addonsKey] ) {
+                                    enabledModule = 'yes' == modules[addonsKey].value; // Saved modules values.
+                                } else {
+                                    enabledModule = 'yes' == defaultModules[addonsKey].value;
+                                }
+                                let moduleName = defaultModules[addonsKey].title.replace( 'WP Travel ', ' ' );
+                                return <PanelRow key={i}>
+                                    <div className="wptravel-modules-row">
+                                        <div className="wptravel-modules-input">
+                                            <label><strong>{moduleName}</strong></label>
+                                            <div className="wp-travel-field-value">
+                                                <ToggleControl
+                                                    checked={ enabledModule }
+                                                    onChange={ ( val ) => {
+                                                        // let _modules = modules;
+                                                        _modules[addonsKey].value = val ? 'yes' : 'no';
+                                                        updateSettings({
+                                                            ...allData,
+                                                            modules : { ..._modules }
+                                                        })
+                                                    } }
+                                                />
                                             </div>
-                                            <p className="description">{__( 'Show all your "' + moduleName + '" settings and enable its feature', 'wp-travel' )}</p>
                                         </div>
-                                    </PanelRow> 
-                                }  ) }
-                                </div>
-                            </PanelBody>
-                        </div>
+                                        <p className="description">{__( 'Show all your "' + moduleName + '" settings and enable its feature', 'wp-travel' )}</p>
+                                    </div>
+                                </PanelRow> 
+                            }  ) }
+                            </div>
+                        </PanelBody>
                     }
 
                     { mapModules.length > 0 &&
