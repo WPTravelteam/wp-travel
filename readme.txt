@@ -262,6 +262,12 @@ Fixes:
 * Fixed past date also been able to select when selecting future date for date field type in the field editor option.
 * Fixed unable to select a trip time in case of no trip extras.
 * Fixed appearance of same Trip code when cloning trip.
+* Fixed issue regarding restoration of previous FAQs in case of deletion of FAQ and addition of same question as deleted FAQ.
+
+Layout Fixes:
+* Fixed issue related to Wishlist icon on Archive Page in list view, grid view and sidebar widget section.
+* Fixed gallery section layout in Single Trip page.
+* For more detail, please refer to our [release note](https://wptravel.io/wp-travel-plugin--version-5-2-3-release-note/)
 
 = 5.2.2 =
 Release Date: 27th April, 2022
