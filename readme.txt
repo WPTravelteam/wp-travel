@@ -252,7 +252,6 @@ Release Date: 23rd May, 2022
 Tweaks:
 * Changed Gallery image size to `wp_travel_thumbnail` from `thumbnail`.
 * Updated Required WordPress version to `5.9` from `5.4.1` in respective file.
-* Added Enable/Disable all module options under settings as per module category.
 * Sorted trip types options as per trip title in WP Travel Search Form.
 * Added filter `wptravel_trip_dates` to modify trip dates.
 * Added Option to rename Days and Nights in single trip page.
