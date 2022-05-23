@@ -105,7 +105,8 @@
 
 			.wp-travel-advanced-gallery-items-list {
 				display: grid;
-				grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+				// grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+				grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
 				column-gap: 0.5em;
 				&.wp-travel-advanced-gallery-items-list-masonry {
 					.item {
