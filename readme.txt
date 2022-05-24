@@ -247,7 +247,7 @@ Before updating plugin please check ["our latest release notes"](#developers).
 == Changelog ==
 
 = 5.2.3 =
-Release Date: 23rd May, 2022
+Release Date: 24th May, 2022
 
 Tweaks:
 * Changed Gallery image size to `wp_travel_thumbnail` from `thumbnail`.
