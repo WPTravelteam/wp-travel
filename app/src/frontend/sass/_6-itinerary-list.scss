@@ -561,11 +561,12 @@
 	.description-left {
 		.wp-travel-add-to-wishlists {
 			@media (max-width: 992px) {
-				top: 20px !important;
-			}
-			@media (max-width: 768px) {
+				// top: 20px !important;
 				top: 5px !important;
 			}
+			// @media (max-width: 768px) {
+			// 	top: 5px !important;
+			// }
 		}
 	}
 
@@ -1479,6 +1480,21 @@
 			&.itinerary-8-per-row,
 			&.itinerary-9-per-row {
 				grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+			}
+		}
+	}
+}
+
+
+// itinerary page main section wishlist icon
+.wp-travel-itinerary-items {
+	.wp-travel-itinerary-list {
+		&.grid-view {
+			.wp-travel-post-info {
+				.wp-travel-add-to-wishlists {
+					left: 13px;
+					top: 14px;
+				}
 			}
 		}
 	}

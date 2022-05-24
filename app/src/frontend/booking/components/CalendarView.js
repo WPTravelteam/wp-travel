@@ -346,7 +346,7 @@ const CalendarView = ( props ) => {
 		} else {
 			_setNomineeTripExtras( [] );
 			if ( isInventoryEnabled ) {
-				setInventoryData();
+				await setInventoryData();
 			} else {
 				await updateBookingData( {isLoading:false} );
 			}

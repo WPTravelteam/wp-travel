@@ -2,10 +2,10 @@
 Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=WP%20Plugin
-Requires at least: 5.4.1
+Requires at least: 5.9
 Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 5.2.2
+Stable tag: 5.2.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -245,6 +245,29 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 5.2.3 =
+Release Date: 23rd May, 2022
+
+Tweaks:
+* Changed Gallery image size to `wp_travel_thumbnail` from `thumbnail`.
+* Updated Required WordPress version to `5.9` from `5.4.1` in respective file.
+* Sorted trip types options as per trip title in WP Travel Search Form.
+* Added filter `wptravel_trip_dates` to modify trip dates.
+* Added Option to rename Days and Nights in single trip page.
+
+Fixes:
+* Undefined wp_travel on the front page in case of WP Travel Pro is activated.
+* Fixed Displaying itinerary date under trip outline, even date is deleted.
+* Fixed past date also been able to select when selecting future date for date field type in the field editor option.
+* Fixed unable to select a trip time in case of no trip extras.
+* Fixed appearance of same Trip code when cloning trip.
+* Fixed issue regarding restoration of previous FAQs in case of deletion of FAQ and addition of same question as deleted FAQ.
+
+Layout Fixes:
+* Fixed issue related to Wishlist icon on Archive Page in list view, grid view and sidebar widget section.
+* Fixed gallery section layout in Single Trip page.
+* For more detail, please refer to our [release note](https://wptravel.io/wp-travel-plugin--version-5-2-3-release-note/)
 
 = 5.2.2 =
 Release Date: 27th April, 2022

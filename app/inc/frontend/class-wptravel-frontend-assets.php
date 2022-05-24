@@ -112,8 +112,8 @@ class WpTravel_Frontend_Assets {
 				wp_enqueue_style( 'wp-travel-slick' );
 			}
 		} else {
+			wp_localize_script( 'wp-travel-frontend-bundle', 'wp_travel', $wp_travel ); // Fix wp_travel undefined in frontpage in case of pro activate.
 			if ( WP_Travel::is_pages() ) {
-				wp_localize_script( 'wp-travel-frontend-bundle', 'wp_travel', $wp_travel );
 				wp_enqueue_script( 'wp-travel-frontend-bundle' );
 			}
 		}

@@ -61,6 +61,9 @@ class WpTravel_Helpers_Clone {
 				if ( '' !== $meta_value ) {
 					$meta_value = maybe_unserialize( $meta_value );
 				}
+				if ( 'wp_travel_trip_code' === $meta_key ) {
+					$meta_value = str_replace( $trip_id, $new_trip_id, $meta_value );
+				}
 				update_post_meta( $new_trip_id, $meta_key, $meta_value );
 			}
 		}

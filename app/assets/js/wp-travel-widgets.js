@@ -112,7 +112,7 @@ jQuery(function($) {
 
     // Enquiry Submission.
     var handleEnquirySubmission = function(e) {
-
+alert( 'enq submit' );
         e.preventDefault();
 
         //Remove any previous errors.

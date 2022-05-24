@@ -170,6 +170,10 @@ class WP_Travel_Actions_Activation { // @phpcs:ignore
 				'name'    => '505',
 				'version' => '5.0.5',
 			),
+			array(
+				'name'    => '523',
+				'version' => '5.2.3',
+			),
 		);
 		self::migration_includes( $migrations );
 	}

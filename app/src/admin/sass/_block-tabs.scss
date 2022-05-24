@@ -578,28 +578,29 @@ td {
 }
 
 // Addons settings new.
-.wptravel-ui-title-container{
+.wptravel-ui-title-container {
 	background: #f7f7f7;
-    padding: 20px;
-    border-bottom: 4px solid #ccc;
+	padding: 20px;
+	border-bottom: 4px solid #ccc;
 	display: flex;
 	justify-content: space-between;
-	label{
+	label {
 		margin-top: 1em;
 	}
 }
-.wptravel-ui-content.wptravel-modules{
-	.wptravel-modules-list{
-		display:grid;
+.wptravel-ui-content.wptravel-modules {
+	position: relative;
+	.wptravel-modules-list {
+		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-	
-		.components-panel__row{
+
+		.components-panel__row {
 			padding: 15px 20px;
 			background: #f7f7f7;
 			border-right: 1px solid #ccc;
 			border-bottom: 1px solid #ccc;
 			margin: 0;
-			&:nth-of-type(even){
+			&:nth-of-type(even) {
 				border-right: none;
 			}
 		}
@@ -608,10 +609,10 @@ td {
 			justify-content: space-between;
 			margin-bottom: 15px;
 		}
-		.wptravel-modules-row{
+		.wptravel-modules-row {
 			width: 100%;
 
-			p{
+			p {
 				text-align: left;
 			}
 		}
@@ -619,11 +620,33 @@ td {
 		.components-panel__row .components-base-control {
 			width: auto !important;
 		}
-		@media (max-width:1832px){
-			grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));	
+		@media (max-width: 1832px) {
+			grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 		}
-		@media (max-width:1582px){
-			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));	
+		@media (max-width: 1582px) {
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		}
+	}
+
+	// WP Travel Settings > Modules Settings enable/disable button CSS
+	label.enable-all-btn {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 2em;
+		background: #fef8ee;
+		padding-block: 30px;
+		border-left: 4px solid #f0b849;
+		padding-left: 10px;
+		p.description {
+			text-align: left;
+			margin-block: 0;
+			font-weight: 700;
+		}
+		.components-base-control__field {
+			margin-bottom: 0;
+			margin-right: 1.5em;
 		}
 	}
 }
