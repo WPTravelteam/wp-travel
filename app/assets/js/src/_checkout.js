@@ -667,11 +667,14 @@ const wptravelcheckout = (shoppingCart) => {
                     .then(result => {
                         loader.style.display = 'none'
                         if (result.success) {
-                            wp_travel_cart.cart = result.data.cart
-                            let total = result.data.cart.total
+                            wp_travel_cart.cart    = result.data.cart
+                            var totalData          = result.data.cart && 'undefined' != typeof result.data.cart.total ? result.data.cart.total : [];
+                            var trip_total         = 'undefined' != typeof totalData.total ? totalData.total : 0;
+                            var trip_total_partial = 'undefined' != typeof totalData.total_partial ? totalData.total_partial : 0;
+
                             if (wp_travel.payment) {
-                                wp_travel.payment.trip_price = parseFloat(total.total)
-                                wp_travel.payment.payment_amount = parseFloat(total.total_partial)
+                                wp_travel.payment.trip_price = parseFloat(trip_total);
+                                wp_travel.payment.payment_amount = parseFloat(trip_total_partial);
                             }
                             toggleBookNowBtn()
                             ci.querySelector('h5 a').removeAttribute('style')

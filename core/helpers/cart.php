@@ -217,8 +217,8 @@ class WP_Travel_Helpers_Cart {
 		if ( ! $response ) {
 			return new WP_Error( 'WP_TRAVEL_CART_ITEM_NOT_UPDATED', __( 'Cart item not updated.', 'wp-travel' ) );
 		}
-		$cart = self::get_cart();
-		$cart = 'WP_TRAVEL_CART' === $cart['code'] ? $cart['cart'] : array();
+		$cart_data = self::get_cart();
+		$cart      = is_array( $cart_data ) && 'WP_TRAVEL_CART' === $cart_data['code'] ? $cart_data['cart'] : array();
 		return array(
 			'code'    => 'WP_TRAVEL_CART_ITEM_UPDATED',
 			'message' => __( 'Cart item updated.', 'wp-travel' ),
