@@ -3,7 +3,7 @@ Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 5.9
-Tested up to: 5.9
+Tested up to: 6.0
 Requires PHP: 5.6
 Stable tag: 5.2.3
 License: GPLv3
@@ -247,7 +247,7 @@ Before updating plugin please check ["our latest release notes"](#developers).
 == Changelog ==
 
 = 5.2.3 =
-Release Date: 23rd May, 2022
+Release Date: 25th May, 2022
 
 Tweaks:
 * Changed Gallery image size to `wp_travel_thumbnail` from `thumbnail`.
@@ -263,6 +263,7 @@ Fixes:
 * Fixed unable to select a trip time in case of no trip extras.
 * Fixed appearance of same Trip code when cloning trip.
 * Fixed issue regarding restoration of previous FAQs in case of deletion of FAQ and addition of same question as deleted FAQ.
+* Fixed issue regarding booking when pax is zero while editing through minicart. 
 
 Layout Fixes:
 * Fixed issue related to Wishlist icon on Archive Page in list view, grid view and sidebar widget section.

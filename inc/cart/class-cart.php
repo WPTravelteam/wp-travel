@@ -325,16 +325,19 @@ class WP_Travel_Cart {
 	 * @return boolean
 	 */
 	public function update( $cart_item_id, $pax, $trip_extras = false, $attr = array() ) {
-
+		error_log( print_r( $pax, true ) );
 		// Remove from cart if qty is 0 or less than 1.
 		if ( is_array( $pax ) || is_object( $pax ) ) {
 			$pax = (array) $pax;
-			if ( empty( $pax ) ) {
-				return $this->remove( $cart_item_id );
+			$total_pax = count( $pax ) > 0 ? array_sum( array_values( $pax ) ) : 0;
+			if ( $total_pax < 1 ) {
+				$this->remove( $cart_item_id );
+				return true;
 			}
 		} else {
 			if ( $pax < 1 ) {
-				return $this->remove( $cart_item_id );
+				$this->remove( $cart_item_id );
+				return true;
 			}
 		}
 
