@@ -625,7 +625,7 @@
 			.entry-title {
 				margin-top: 0;
 				margin-bottom: 15px;
-				padding-left: 25px;
+				// padding-left: 25px;
 			}
 
 			.entry-content {
@@ -1504,7 +1504,7 @@
 		.wp-travel-entry-content-wrapper {
 			.description-left {
 				.entry-title {
-					padding-left: 0;
+					// padding-left: 0;
 				}
 			}
 		}
@@ -1536,4 +1536,18 @@
 			}
 		}
 	}
+}
+
+
+// user since 2.0
+.wp-travel-add-to-wishlists ~ header.entry-header {
+	padding-left: 0 !important;
+}
+.wp-travel-add-to-wishlists ~ .entry-title {
+	padding-left: 25px;
+}
+
+// user since 5.1.1
+.wp-travel-default-article .entry-title {
+	padding-left: 25px;
 }
