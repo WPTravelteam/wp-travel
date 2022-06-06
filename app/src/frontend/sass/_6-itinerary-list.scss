@@ -625,7 +625,7 @@
 			.entry-title {
 				margin-top: 0;
 				margin-bottom: 15px;
-				padding-left: 25px;
+				// padding-left: 25px;
 			}
 
 			.entry-content {
@@ -1465,7 +1465,6 @@
 	}
 }
 
-
 // Trip List block grid view content to be shown
 .wptravel-block-wrapper {
 	.wp-travel-itinerary-items {
@@ -1485,7 +1484,6 @@
 	}
 }
 
-
 // itinerary page main section wishlist icon
 .wp-travel-itinerary-items {
 	.wp-travel-itinerary-list {
@@ -1498,4 +1496,58 @@
 			}
 		}
 	}
+}
+
+// Old Layout archive page trip list wishlist icon position fixed
+.wptravel-layout-v1 {
+	.wp-travel-default-article {
+		.wp-travel-entry-content-wrapper {
+			.description-left {
+				.entry-title {
+					// padding-left: 0;
+				}
+			}
+		}
+	}
+
+	.wp-travel-itinerary-items {
+		.wp-travel-itinerary-list.grid-view {
+			.wp-travel-post-item-wrapper {
+				.wp-travel-add-to-wishlists {
+					top: 17px;
+				}
+				.post-title {
+					padding-left: 10px !important;
+				}
+			}
+		}
+	}
+	.widget {
+		.wp-travel-itinerary-items {
+			.wp-travel-itinerary-list.grid-view {
+				.wp-travel-post-item-wrapper {
+					.wp-travel-add-to-wishlists {
+						top: 14px;
+					}
+					.post-title {
+						padding-left: 0 !important;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+// user since 2.0
+.wp-travel-add-to-wishlists ~ header.entry-header {
+	padding-left: 0 !important;
+}
+.wp-travel-add-to-wishlists ~ .entry-title {
+	padding-left: 25px;
+}
+
+// user since 5.1.1
+.wp-travel-default-article .entry-title {
+	padding-left: 25px;
 }
