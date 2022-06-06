@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 5.9
 Tested up to: 6.0
 Requires PHP: 5.6
-Stable tag: 5.2.3
+Stable tag: 5.2.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -245,6 +245,20 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 5.2.4 =
+Release Date: 6th June, 2022
+
+Tweaks:
+* WP Travel dates insert data for new and update for existing dates on saving instead of removing all and inserting again.
+
+Fixes:
+* WP Travel review schema fixes to support it with rich result test.
+* Fixed WP Travel trip date showing same date even after update while using new filter hook.
+
+Layout Fixes:
+* Fixed Archive page wishlist icon in old and new layout.
+* Fixed Single Trip Page book now button with custom link layout.
 
 = 5.2.3 =
 Release Date: 25th May, 2022
