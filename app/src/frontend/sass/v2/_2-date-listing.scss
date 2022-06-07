@@ -641,11 +641,11 @@ $defaultColor: #3399ff;
 				color: #fff;
 				float: right;
 			}
-			&:last-child {
-				margin-right: 0;
-				width: 128px;
-				padding: 10px;
-			}
+			// &:last-child {
+			// 	// margin-right: 0;
+			// 	// width: 128px;
+			// 	// padding: 10px;
+			// }
 		}
 		@media (max-width: 991px) {
 			text-align: right;
@@ -986,6 +986,7 @@ $defaultColor: #3399ff;
 	}
 	.wp-travel-booking__selected-time {
 		button {
+			margin-bottom: 0.5em;
 			&:nth-child(2) {
 				margin-bottom: 0.5rem;
 			}
@@ -998,12 +999,12 @@ $defaultColor: #3399ff;
 			}
 			&:last-child {
 				margin-bottom: 0;
-				margin-right: 0;
 			}
+
 		}
-		button + button {
-			margin-left: 0.5rem;
-		}
+		// button + button {
+		// 	margin-left: 0.5rem;
+		// }
 	}
 	.wptravel-recurring-dates {
 		width: 100%;
