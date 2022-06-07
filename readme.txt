@@ -259,6 +259,8 @@ Fixes:
 Layout Fixes:
 * Fixed Archive page wishlist icon in old and new layout.
 * Fixed Single Trip Page book now button with custom link layout.
+* Fixed Single Trip page booking tab select time layout.
+* Fixed Single Trip page booking tab calendar disabled date layout.
 
 = 5.2.3 =
 Release Date: 25th May, 2022
