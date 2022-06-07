@@ -2,7 +2,7 @@
 Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=WP%20Plugin
-Requires at least: 5.9
+Requires at least: 5.4.1
 Tested up to: 6.0
 Requires PHP: 5.6
 Stable tag: 5.2.4
@@ -247,7 +247,7 @@ Before updating plugin please check ["our latest release notes"](#developers).
 == Changelog ==
 
 = 5.2.4 =
-Release Date: 6th June, 2022
+Release Date: 7th June, 2022
 
 Tweaks:
 * WP Travel dates insert data for new and update for existing dates on saving instead of removing all and inserting again.
