@@ -40,7 +40,7 @@ const DateListing = ( props ) => {
 	const [_nomineeTripExtras, _setNomineeTripExtras] = useState([]);
 	
     // Lifecycles. [ This will only trigger if pricing is selected or changed ]
-    useEffect( async () => {
+    useEffect( () => {  // removed async to compatible with legacy.
 		if ( ! selectedPricingId ) {
 			updateBookingData( { isLoading:false } )
 			return
@@ -56,7 +56,7 @@ const DateListing = ( props ) => {
 	}, [ selectedPricingId ]); 
 
 	// Lifecycles. [ This will only trigger if time is selected or changed ]
-    useEffect( async () => {
+    useEffect( () => {  // removed async to compatible with legacy.
 		if ( ! selectedPricingId ) {
 			updateBookingData( { isLoading:false } )
 			return
@@ -69,7 +69,7 @@ const DateListing = ( props ) => {
 		bookingWidgetUseEffects( _bookingData, 'timeChange' );
 	}, [ selectedTime ]);
 	// Date changes Lifecycle. [Only For fixed Departure which have date id]
-	useEffect( async () => {
+	useEffect( () => {  // removed async to compatible with legacy.
 		// If date changes has selectedPricingId, that mean selected date has only one pricing. So nomineeTimes for single date is calculated from here.
 		if ( ! selectedPricingId ) {
 			updateBookingData( { isLoading:false } )
