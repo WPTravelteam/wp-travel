@@ -64,12 +64,16 @@ class WpTravel_Helpers_Trip_Dates {
 			}
 			$index++;
 		}
-		/**
-		 * Filter to change available dates data as per trip.
-		 *
-		 * @since 5.2.3
-		 */
-		$dates = apply_filters( 'wptravel_trip_dates', $dates, $trip_id );
+
+		if ( ! is_admin() ) {
+			/**
+			 * Filter to change available dates data as per trip.
+			 *
+			 * @since 5.2.3
+			 * @since 5.2.4 Only availble this hook for frontend.
+			 */
+			$dates = apply_filters( 'wptravel_trip_dates', $dates, $trip_id );
+		}
 
 		return WP_Travel_Helpers_Response_Codes::get_success_response(
 			'WP_TRAVEL_TRIP_DATES',
@@ -94,7 +98,6 @@ class WpTravel_Helpers_Trip_Dates {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_DATES' );
 		}
 
-		$result     = self::remove_dates( $trip_id );
 		$trip_dates = array(); // collection of trip dates to get next departure date.
 		foreach ( $dates as $date ) {
 			if ( $date['start_date'] && gmdate( 'Y-m-d ', strtotime( $date['start_date'] ) ) >= gmdate( 'Y-m-d' ) ) {
@@ -132,40 +135,77 @@ class WpTravel_Helpers_Trip_Dates {
 		}
 		global $wpdb;
 		$table = $wpdb->prefix . self::$table_name;
-		$wpdb->insert(
-			$table,
-			array(
-				'trip_id'     => $trip_id,
-				'title'       => ! empty( $date['title'] ) ? $date['title'] : '',
-				'recurring'   => ! empty( $date['is_recurring'] ) ? absint( $date['is_recurring'] ) : 0,
-				'years'       => ! empty( $date['years'] ) ? $date['years'] : '',
-				'months'      => ! empty( $date['months'] ) ? $date['months'] : '',
-				'weeks'       => ! empty( $date['weeks'] ) ? $date['weeks'] : '',
-				'days'        => ! empty( $date['days'] ) ? $date['days'] : '',
-				'date_days'   => ! empty( $date['date_days'] ) ? $date['date_days'] : '',
-				'start_date'  => ! empty( $date['start_date'] ) ? $date['start_date'] : '',
-				'end_date'    => ! empty( $date['end_date'] ) ? $date['end_date'] : '',
-				'trip_time'   => ! empty( $date['trip_time'] ) ? $date['trip_time'] : '',
-				'pricing_ids' => ! empty( $date['pricing_ids'] ) ? $date['pricing_ids'] : '',
-			),
-			array(
-				'%d',
-				'%s',
-				'%s',
-				'%s',
-				'%s',
-				'%s',
-				'%s',
-				'%s',
-				'%s',
-				'%s',
-				'%s',
-				'%s',
-			)
-		);
-		$inserted_id = $wpdb->insert_id;
-		if ( empty( $inserted_id ) ) {
-			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_ERROR_ADDING_TRIP_DATE' );
+		$date_id = ! empty( $date['id'] ) ? $date['id'] : '';
+		if ( $date_id ) {
+			$wpdb->update(
+				$table,
+				array(
+					'trip_id'     => $trip_id,
+					'title'       => ! empty( $date['title'] ) ? $date['title'] : '',
+					'recurring'   => ! empty( $date['is_recurring'] ) ? absint( $date['is_recurring'] ) : 0,
+					'years'       => ! empty( $date['years'] ) ? $date['years'] : '',
+					'months'      => ! empty( $date['months'] ) ? $date['months'] : '',
+					'weeks'       => ! empty( $date['weeks'] ) ? $date['weeks'] : '',
+					'days'        => ! empty( $date['days'] ) ? $date['days'] : '',
+					'date_days'   => ! empty( $date['date_days'] ) ? $date['date_days'] : '',
+					'start_date'  => ! empty( $date['start_date'] ) ? $date['start_date'] : '',
+					'end_date'    => ! empty( $date['end_date'] ) ? $date['end_date'] : '',
+					'trip_time'   => ! empty( $date['trip_time'] ) ? $date['trip_time'] : '',
+					'pricing_ids' => ! empty( $date['pricing_ids'] ) ? $date['pricing_ids'] : '',
+				),
+				array( 'id' => $date_id ),
+				array(
+					'%d',
+					'%s',
+					'%s',
+					'%s',
+					'%s',
+					'%s',
+					'%s',
+					'%s',
+					'%s',
+					'%s',
+					'%s',
+					'%s',
+				),
+				array( '%d' )
+			);
+		} else {
+			$wpdb->insert(
+				$table,
+				array(
+					'trip_id'     => $trip_id,
+					'title'       => ! empty( $date['title'] ) ? $date['title'] : '',
+					'recurring'   => ! empty( $date['is_recurring'] ) ? absint( $date['is_recurring'] ) : 0,
+					'years'       => ! empty( $date['years'] ) ? $date['years'] : '',
+					'months'      => ! empty( $date['months'] ) ? $date['months'] : '',
+					'weeks'       => ! empty( $date['weeks'] ) ? $date['weeks'] : '',
+					'days'        => ! empty( $date['days'] ) ? $date['days'] : '',
+					'date_days'   => ! empty( $date['date_days'] ) ? $date['date_days'] : '',
+					'start_date'  => ! empty( $date['start_date'] ) ? $date['start_date'] : '',
+					'end_date'    => ! empty( $date['end_date'] ) ? $date['end_date'] : '',
+					'trip_time'   => ! empty( $date['trip_time'] ) ? $date['trip_time'] : '',
+					'pricing_ids' => ! empty( $date['pricing_ids'] ) ? $date['pricing_ids'] : '',
+				),
+				array(
+					'%d',
+					'%s',
+					'%s',
+					'%s',
+					'%s',
+					'%s',
+					'%s',
+					'%s',
+					'%s',
+					'%s',
+					'%s',
+					'%s',
+				)
+			);
+			$inserted_id = $wpdb->insert_id;
+			if ( empty( $inserted_id ) ) {
+				return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_ERROR_ADDING_TRIP_DATE' );
+			}
 		}
 
 		return WP_Travel_Helpers_Response_Codes::get_success_response(

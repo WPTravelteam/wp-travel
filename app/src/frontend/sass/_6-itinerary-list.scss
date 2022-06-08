@@ -877,6 +877,8 @@
 		width: 100%;
 	}
 }
+
+// For new layout in archive page
 .wptravel-layout-v2 {
 	.wptravel-archive-wrapper {
 		li {
@@ -1016,7 +1018,8 @@
 							flex-wrap: nowrap;
 						}
 						> .wp-travel-add-to-wishlists {
-							display: none;
+							// display: none;
+							position: unset;
 						}
 						.favourite {
 							.wp-travel-add-to-wishlists {

@@ -53,7 +53,7 @@ const CalendarView = ( props ) => {
 	const [_nomineeTripExtras, _setNomineeTripExtras] = useState([]);
 
 	// Lifecycles. [ This will only trigger if pricing is selected or changed ]
-    useEffect(async() => {
+    useEffect(() => { // removed async to compatible with legacy.
 		if ( ! selectedPricingId ) {
 			updateBookingData( { isLoading:false } )
 			return
@@ -152,7 +152,7 @@ const CalendarView = ( props ) => {
 	}, [ _inventoryData ]); 
 
 	// Lifecycles. [ This will only trigger if Extras Data changed ]. Fix real time store update issue with trip time change & single Pricing.
-    useEffect(async() => {
+    useEffect(() => { // removed async to compatible with legacy.
 		if ( ! selectedPricingId ) {
 			updateBookingData( { isLoading:false } )
 			return
@@ -446,8 +446,9 @@ const CalendarView = ( props ) => {
 			_bookingData = { ..._bookingData, nomineePricingIds: _nomineePricingIds } // nomineePricingIds
 		}
 
+		console.log( _bookingData );
 		updateBookingData( _bookingData  ); // isLoadting true + quick hack for issue creating from initialState update at the start.
-		bookingWidgetUseEffects( _bookingData, 'dateChange' ); // isloading false [quick fixes for loader displaying issue on date change]
+		// bookingWidgetUseEffects( _bookingData, 'dateChange' ); // isloading false [quick fixes for loader displaying issue on date change]
 	}
 
     // Datepicker Params
