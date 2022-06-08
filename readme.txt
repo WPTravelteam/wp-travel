@@ -247,7 +247,7 @@ Before updating plugin please check ["our latest release notes"](#developers).
 == Changelog ==
 
 = 5.2.4 =
-Release Date: 7th June, 2022
+Release Date: 8th June, 2022
 
 Tweaks:
 * WP Travel dates insert data for new and update for existing dates on saving instead of removing all and inserting again.
