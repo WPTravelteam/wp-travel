@@ -2,10 +2,10 @@
 Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=WP%20Plugin
-Requires at least: 5.9
+Requires at least: 5.4.1
 Tested up to: 6.0
 Requires PHP: 5.6
-Stable tag: 5.2.3
+Stable tag: 5.2.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -245,6 +245,22 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 5.2.4 =
+Release Date: 8th June, 2022
+
+Tweaks:
+* WP Travel dates insert data for new and update for existing dates on saving instead of removing all and inserting again.
+
+Fixes:
+* WP Travel review schema fixes to support it with rich result test.
+* Fixed WP Travel trip date showing same date even after update while using new filter hook.
+
+Layout Fixes:
+* Fixed Archive page wishlist icon in old and new layout.
+* Fixed Single Trip Page book now button with custom link layout.
+* Fixed Single Trip page booking tab select time layout.
+* Fixed Single Trip page booking tab calendar disabled date layout.
 
 = 5.2.3 =
 Release Date: 25th May, 2022

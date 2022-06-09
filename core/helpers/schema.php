@@ -112,19 +112,27 @@ class WpTravel_Helpers_Schema {
 		if ( ! self::$trip ) {
 			return;
 		}
-		$trip    = self::$trip;
-		$trip_id = $trip['id'];
+		$trip         = self::$trip;
+		$trip_id      = $trip['id'];
+		$review_count = wptravel_get_rating_count();
 
+		if ( ! $review_count ) {
+			return;
+		}
 		$schema = array(
-			'@context' => 'https://schema.org',
-			'@type'    => 'Review', // Fixed.
-			'name'     => isset( $trip['title'] ) ? ucwords( $trip['title'] ) : '',
+			'@context'    => 'https://schema.org',
+			'@type'       => 'Product', // Fixed.
+			'name'        => isset( $trip['title'] ) ? ucwords( $trip['title'] ) : '',
+			'sku'         => wptravel_get_trip_code( $trip_id ),
+			'description' => wp_strip_all_tags( $trip['trip_overview'] ),
+			'image'       => wptravel_get_post_thumbnail_url( $trip_id ),
 		);
 
 		// Rating Data.
 		$schema['aggregateRating'] = array(
 			'@type'       => 'AggregateRating', // Fixed.
-			'ratingValue' => wptravel_get_average_rating( $trip_id ),
+			'bestRating'  => 100,
+			'ratingValue' => wptravel_get_average_rating( $trip_id ) * 20,
 			'reviewCount' => wptravel_get_rating_count(),
 		);
 
