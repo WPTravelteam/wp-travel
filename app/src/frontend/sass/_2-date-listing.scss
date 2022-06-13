@@ -1496,6 +1496,7 @@ $defaultColor: #3399ff;
 		}
 		.react-datepicker-wrapper {
 			margin-right: 1em;
+			width: auto;
 			@media (max-width: 575px) {
 				flex: unset;
 			}

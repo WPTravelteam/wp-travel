@@ -1191,7 +1191,8 @@ a {
 			}
 		}
 		.react-datepicker-wrapper {
-			width: 100%;
+			// width: 100%;
+			width: auto;
 			.react-datepicker__input-container {
 				position: relative;
 				display: inline-block;
