@@ -1,12 +1,12 @@
 const defaultConfig = require("@wordpress/scripts/config/webpack.config");
-// const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // for wordpress script 18
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 module.exports = (env, options) => {
   const devMode    = options.mode && 'development' === options.mode;
-  const fileSuffix = devMode ? '' : '.min';
-  // const fileSuffix = ''; // temp fixes.
+  // const fileSuffix = devMode ? '' : '.min';
+  const fileSuffix = ''; // temp fixes.
   let entries = {};
     entries['admin-trip-options' + fileSuffix ] = [
       './app/src/admin/trip-edit/sass/main.scss',
@@ -62,10 +62,10 @@ module.exports = (env, options) => {
       },
     plugins: [
       ...defaultConfig.plugins,
-      // new CleanWebpackPlugin({
-      //   cleanStaleWebpackAssets: false,
-      //   protectWebpackAssets: false,
-      // }),
+      new CleanWebpackPlugin({
+        cleanStaleWebpackAssets: false,
+        protectWebpackAssets: false,
+      }),
       new MiniCssExtractPlugin({
         // Options similar to the same options in webpackOptions.output
         // all options are optional
@@ -78,27 +78,26 @@ module.exports = (env, options) => {
       ...defaultConfig.module,
       rules: [
         ...defaultConfig.module.rules,
-        {
+        { 
           test: /\.(png|woff|woff2|eot|ttf|svg)$/,
           use: [
             {
-              loader: 'url-loader?limit=100000'
+              loader: 'url-loader?limit=100000' 
             }
           ]
         },
         {
           test: /\.scss$/,
           use: [
-            { loader: 'style-loader' },
-            MiniCssExtractPlugin.loader,
-            { loader: 'css-loader' },
-            { loader: 'postcss-loader' },
             {
-              loader: 'sass-loader', options: { sourceMap: true }
+              loader: 'sass-loader', options: { sourceMap: devMode }
             }
           ],
         },
       ]
+    },
+    resolve: {
+      fallback: { "querystring": require.resolve("querystring-es3") } // Backward compatibility for node 14
     }
   }
 };

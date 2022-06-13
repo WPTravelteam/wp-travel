@@ -310,13 +310,13 @@ class WpTravel_Frontend_Assets {
 				'media' => 'all',
 			),
 			'wp-travel-frontend'        => array(
-				'src'   => self::$app_path . '/build/wp-travel-front-end' . $suffix . '.css',
+				'src'   => self::$app_path . '/build/wp-travel-front-end.css',
 				'deps'  => array(),
 				'ver'   => WP_TRAVEL_VERSION,
 				'media' => 'all',
 			),
 			'wp-travel-frontend-v2'     => array(
-				'src'   => self::$app_path . '/build/wp-travel-front-end-v2' . $suffix . '.css',
+				'src'   => self::$app_path . '/build/wp-travel-front-end-v2.css',
 				'deps'  => array(),
 				'ver'   => WP_TRAVEL_VERSION,
 				'media' => 'all',
@@ -327,7 +327,7 @@ class WpTravel_Frontend_Assets {
 				'ver'   => WP_TRAVEL_VERSION,
 				'media' => 'all',
 			),
-			'wptravel-admin-widgets' => array(
+			'wptravel-admin-widgets'    => array(
 				'src'   => self::$app_path . '/build/wptravel-admin-widgets.css',
 				'deps'  => array(),
 				'ver'   => WP_TRAVEL_VERSION,
@@ -426,7 +426,7 @@ class WpTravel_Frontend_Assets {
 			$booking_widget_deps = $all_dependencies['frontend-booking-widget'];
 
 			$scripts['wp-travel-frontend-booking-widget'] = array(
-				'src'       => self::$app_path . '/build/frontend-booking-widget' . $suffix . '.js',
+				'src'       => self::$app_path . '/build/frontend-booking-widget.js',
 				'deps'      => $booking_widget_deps['dependencies'],
 				'ver'       => $booking_widget_deps['version'],
 				'in_footer' => true,
@@ -434,7 +434,7 @@ class WpTravel_Frontend_Assets {
 
 			// Block Styles.
 			$styles['wp-travel-frontend-booking-widget-style'] = array(
-				'src'   => self::$app_path . '/build/frontend-booking-widget' . $suffix . '.css',
+				'src'   => self::$app_path . '/build/frontend-booking-widget.css',
 				'deps'  => array(),
 				'ver'   => $booking_widget_deps['version'],
 				'media' => 'all',
@@ -449,7 +449,7 @@ class WpTravel_Frontend_Assets {
 				if ( isset( $screen->is_block_editor ) && ! $screen->is_block_editor ) {
 					// Main Styles for all admin pages.
 					$styles['wp-travel-back-end'] = array(
-						'src'   => self::$app_path . '/build/wp-travel-back-end' . $suffix . '.css',
+						'src'   => self::$app_path . '/build/wp-travel-back-end.css',
 						'deps'  => array(),
 						'ver'   => WP_TRAVEL_VERSION,
 						'media' => 'all',
@@ -458,7 +458,7 @@ class WpTravel_Frontend_Assets {
 			}
 
 			$styles['wptravel-admin'] = array(
-				'src'   => self::$app_path . '/build/admin' . $suffix . '.css',
+				'src'   => self::$app_path . '/build/admin.css',
 				'deps'  => array(),
 				'ver'   => WP_TRAVEL_VERSION,
 				'media' => 'all',
@@ -523,13 +523,13 @@ class WpTravel_Frontend_Assets {
 			// Trip Edit.
 			$trip_edit_deps                               = $all_dependencies['admin-trip-options'];
 			$scripts['wp-travel-admin-trip-options']      = array(
-				'src'       => self::$app_path . '/build/admin-trip-options' . $suffix . '.js',
+				'src'       => self::$app_path . '/build/admin-trip-options.js',
 				'deps'      => $trip_edit_deps['dependencies'],
 				'ver'       => $trip_edit_deps['version'],
 				'in_footer' => true,
 			);
 			$styles['wp-travel-admin-trip-options-style'] = array(
-				'src'   => self::$app_path . '/build/admin-trip-options' . $suffix . '.css',
+				'src'   => self::$app_path . '/build/admin-trip-options.css',
 				'deps'  => array( 'wp-components' ),
 				'ver'   => $trip_edit_deps['version'],
 				'media' => 'all',
@@ -538,13 +538,13 @@ class WpTravel_Frontend_Assets {
 			// Settings.
 			$trip_edit_deps                           = $all_dependencies['admin-settings'];
 			$scripts['wp-travel-admin-settings']      = array(
-				'src'       => self::$app_path . '/build/admin-settings' . $suffix . '.js',
+				'src'       => self::$app_path . '/build/admin-settings.js',
 				'deps'      => $trip_edit_deps['dependencies'],
 				'ver'       => $trip_edit_deps['version'],
 				'in_footer' => true,
 			);
 			$styles['wp-travel-admin-settings-style'] = array(
-				'src'   => self::$app_path . '/build/admin-settings' . $suffix . '.css',
+				'src'   => self::$app_path . '/build/admin-settings.css',
 				'deps'  => array( 'wp-components', 'font-awesome-css' ),
 				'ver'   => $trip_edit_deps['version'],
 				'media' => 'all',
@@ -553,14 +553,14 @@ class WpTravel_Frontend_Assets {
 			// Coupon.
 			$coupon_deps                      = $all_dependencies['admin-coupon'];
 			$scripts['wptravel-admin-coupon'] = array(
-				'src'       => self::$app_path . '/build/admin-coupon' . $suffix . '.js',
+				'src'       => self::$app_path . '/build/admin-coupon.js',
 				'deps'      => $coupon_deps['dependencies'],
 				'ver'       => $coupon_deps['version'],
 				'in_footer' => true,
 			);
 
 			$styles['wptravel-admin-coupon'] = array(
-				'src'   => self::$app_path . '/build/admin-coupon' . $suffix . '.css',
+				'src'   => self::$app_path . '/build/admin-coupon.css',
 				'deps'  => array( 'wp-components', 'font-awesome-css' ),
 				'ver'   => $coupon_deps['version'],
 				'media' => 'all',
@@ -568,7 +568,7 @@ class WpTravel_Frontend_Assets {
 			// enquiry
 			$enquiry_deps                      = $all_dependencies['admin-enquiry'];
 			$scripts['wptravel-admin-enquiry'] = array(
-				'src'       => self::$app_path . '/build/admin-enquiry' . $suffix . '.js',
+				'src'       => self::$app_path . '/build/admin-enquiry.js',
 				'deps'      => $coupon_deps['dependencies'],
 				'ver'       => $coupon_deps['version'],
 				'in_footer' => true,
