@@ -5,8 +5,8 @@ const path = require('path');
 
 module.exports = (env, options) => {
   const devMode    = options.mode && 'development' === options.mode;
-  const fileSuffix = devMode ? '' : '.min';
-  // const fileSuffix = ''; // temp fixes.
+  // const fileSuffix = devMode ? '' : '.min';
+  const fileSuffix = ''; // temp fixes.
   let entries = {};
     entries['admin-trip-options' + fileSuffix ] = [
       './app/src/admin/trip-edit/sass/main.scss',
