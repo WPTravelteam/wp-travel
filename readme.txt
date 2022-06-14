@@ -251,7 +251,7 @@ Release Date: 14th June, 2022
 
 Tweaks:
 * WP Travel dates insert data for new and update for existing dates on saving instead of removing all and inserting again.
-* JS script optimization to reduce zip size and wp travel pages size.
+* JS script optimization to reduce zip size and WP Travel pages size.
 
 Fixes:
 * WP Travel review schema fixes to support it with rich result test.
