@@ -102,9 +102,19 @@ const PaxSelector = ( props ) => {
 	let categories = pricing && pricing.categories || []
 
 	const handlePaxChange = (id, value) => e => {
+		let pricing    = [];
+		// Pricing Not Selected or ( not recurring date && for not selected rows ) or ( recurring date but not selected rows )
+		if ( ( pricings.length > 0  && ! selectedPricingId ) || ( ! recurrindDate && ! selectedDateIds.includes( date.id ) ) || ( recurrindDate && sd !== rd ) ) {
+			pricing = allPricings[firstIndex];
+		} else {
+			pricing = allPricings[selectedPricingId];
+		}
 		let count = paxCounts[id] + value < 0 ? 0 : paxCounts[id] + value
 		let _inventory = inventory.find(i => i.date === moment(selectedDate).format('YYYY-MM-DD[T]HH:mm')); // selectedDate : date along with time.
-		let maxPax = _inventory && _inventory.pax_available
+		let maxPax = _inventory && _inventory.pax_available;
+		if ( ! maxPax ) {
+			maxPax = pricing && pricing.max_pax ? pricing.max_pax : 1;
+		}
 
 		if (maxPax >= 1) {
 

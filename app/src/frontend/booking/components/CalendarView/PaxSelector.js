@@ -90,7 +90,10 @@ const PaxSelector = ( props ) => {
 	const handlePaxChange = (id, value) => e => {
 		let count = paxCounts[id] + value < 0 ? 0 : paxCounts[id] + value
 		let _inventory = inventory.find(i => i.date === moment(selectedDate).format('YYYY-MM-DD[T]HH:mm')); // selectedDate : date along with time.
-		let maxPax = _inventory && _inventory.pax_available
+		let maxPax = _inventory && _inventory.pax_available;
+		if ( ! maxPax ) {
+			maxPax = pricing && pricing.max_pax ? pricing.max_pax : 1;
+		}
 
 		if (maxPax >= 1) {
 
