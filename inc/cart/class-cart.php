@@ -325,7 +325,6 @@ class WP_Travel_Cart {
 	 * @return boolean
 	 */
 	public function update( $cart_item_id, $pax, $trip_extras = false, $attr = array() ) {
-		error_log( print_r( $pax, true ) );
 		// Remove from cart if qty is 0 or less than 1.
 		if ( is_array( $pax ) || is_object( $pax ) ) {
 			$pax = (array) $pax;
