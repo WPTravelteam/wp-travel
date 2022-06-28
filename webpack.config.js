@@ -26,7 +26,7 @@ module.exports = (env, options) => {
     ];
     entries['admin' + fileSuffix ] = [
       './app/assets/js/wp-travel-backend-pointers.js', // just to add js entry point. temp fixes
-      './app/src/admin/sass/style.scss', // style which need to inclued in all admin pages. it contents admin menu logo icon class
+      './app/src/admin/sass/admin.scss', // style which need to inclued in all admin pages. it contents admin menu logo icon class
     ];
     entries['wp-travel-front-end' + fileSuffix ] = [
       './app/assets/js/wp-travel-front-end.js',
@@ -78,14 +78,14 @@ module.exports = (env, options) => {
       ...defaultConfig.module,
       rules: [
         ...defaultConfig.module.rules,
-        { 
-          test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-          use: [
-            {
-              loader: 'url-loader?limit=100000' 
-            }
-          ]
-        },
+        // { 
+        //   test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+        //   use: [
+        //     {
+        //       loader: 'url-loader?limit=100000' 
+        //     }
+        //   ]
+        // },
         {
           test: /\.scss$/,
           use: [

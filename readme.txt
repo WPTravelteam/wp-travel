@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 5.4.1
 Tested up to: 6.0
 Requires PHP: 5.6
-Stable tag: 5.2.5
+Stable tag: 5.2.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -245,6 +245,12 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 5.2.6 =
+Release Date: 28th June, 2022
+
+Fixes:
+* Fixed not displaying menu icon for WP Travel.
 
 = 5.2.5 =
 Release Date: 21st June, 2022
