@@ -1453,7 +1453,7 @@
 				z-index: 1;
 				display: grid;
 				grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
-				a {
+				.dropdown-list {
 					color: #555;
 					padding: 12px 16px;
 					position: relative;
@@ -1462,6 +1462,7 @@
 					transition: all .3s ease;
 					z-index: 1;
 					font-size: 14px;
+					cursor: pointer;
 					&::before {
 						content: none;
 						background: #838383;
@@ -1485,7 +1486,7 @@
 					visibility: visible;
 					opacity: 1;
 					transition: all .3s ease;
-					a:hover::before {
+					.dropdown-list:hover::before {
 						transition: all .3s ease;
 						content: "";
 					}

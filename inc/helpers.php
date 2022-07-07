@@ -3170,7 +3170,7 @@ function wptravel_get_fixed_departure_date( $trip_id ) {
 									<?php
 								}
 								?>
-								<a href="#"> <?php  echo esc_html( date_i18n( $date_format, strtotime( $date ) ) ); ?></a>
+								<span class="dropdown-list"> <?php  echo esc_html( date_i18n( $date_format, strtotime( $date ) ) ); ?></span>
 								<?php
 								if ( count( $dates ) === ( $index + 1 ) ) {
 									?>
