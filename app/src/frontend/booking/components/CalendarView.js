@@ -446,9 +446,9 @@ const CalendarView = ( props ) => {
 			_bookingData = { ..._bookingData, nomineePricingIds: _nomineePricingIds } // nomineePricingIds
 		}
 
-		// console.log( _bookingData );
 		updateBookingData( _bookingData  ); // isLoadting true + quick hack for issue creating from initialState update at the start.
 		// bookingWidgetUseEffects( _bookingData, 'dateChange' ); // isloading false [quick fixes for loader displaying issue on date change]
+		jQuery( document.body ).trigger( 'selectedTripDate', [ _bookingData ] );
 	}
 
     // Datepicker Params
