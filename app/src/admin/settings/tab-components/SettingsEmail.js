@@ -46,7 +46,7 @@ export default () => {
                             }
                         }
                     />
-                    <p className="description">{__( 'Email address to send email from.', 'wp-travel' )}</p>
+                    <p className="description">{__( 'Email address to send email from.', 'wp-travel' )}<strong>{__( ' Preferred to use webmail like: sales@yoursite.com', 'wp-travel' )}</strong></p>
                 </div>
             </PanelRow>
             {applyFilters( 'wp_travel_tab_content_before_booking_tamplate', [], allData )}

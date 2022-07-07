@@ -40,7 +40,7 @@ class WpTravel_Helpers_Pricings {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
 		}
 		global $wpdb;
-		$results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}wt_pricings WHERE trip_id=%d", $trip_id ) );
+		$results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}wt_pricings WHERE trip_id=%d order by sort_order asc", $trip_id ) );
 
 		if ( empty( $results ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_PRICINGS' );
@@ -124,8 +124,9 @@ class WpTravel_Helpers_Pricings {
 		}
 
 		$responses = array();
-		foreach ( $pricings as $pricing ) {
-			$pricing_id = isset( $pricing['id'] ) ? absint( $pricing['id'] ) : 0;
+		foreach ( $pricings as $index => $pricing ) {
+			$pricing_id            = isset( $pricing['id'] ) ? absint( $pricing['id'] ) : 0;
+			$pricing['sort_order'] = ( $index + 1 );
 			if ( empty( $pricing_id ) ) {
 				$result = self::add_individual_pricing( $trip_id, $pricing );
 				if ( ! is_wp_error( $result ) && 'WP_TRAVEL_ADDED_TRIP_PRICING' === $result['code'] && ! empty( $pricing['categories'] ) ) {
@@ -182,6 +183,7 @@ class WpTravel_Helpers_Pricings {
 				'has_group_price' => ! empty( $pricing_data['has_group_price'] ) ? absint( $pricing_data['has_group_price'] ) : 0,
 				'group_prices'    => ! empty( $pricing_data['has_group_price'] ) && ! empty( $pricing_data['group_prices'] ) ? maybe_serialize( wptravel_sanitize_array( wp_unslash( $pricing_data['group_prices'] ) ) ) : maybe_serialize( array() ),
 				'trip_extras'     => esc_attr( $trip_extras ),
+				'sort_order'      => ! empty( $pricing_data['sort_order'] ) ? absint( $pricing_data['sort_order'] ) : 1,
 			),
 			array( 'id' => $pricing_id ),
 			array(
@@ -191,6 +193,7 @@ class WpTravel_Helpers_Pricings {
 				'%d',
 				'%s',
 				'%s',
+				'%d',
 			),
 			array( '%d' )
 		);
@@ -242,6 +245,7 @@ class WpTravel_Helpers_Pricings {
 				'group_prices'    => ! empty( $pricing_data['has_group_price'] ) && ! empty( $pricing_data['group_prices'] ) ? maybe_serialize( $pricing_data['group_prices'] ) : maybe_serialize( array() ),
 				'trip_id'         => $trip_id,
 				'trip_extras'     => ! empty( $pricing_data['trip_extras'] ) ? esc_attr( $pricing_data['trip_extras'] ) : '',
+				'sort_order'      => ! empty( $pricing_data['sort_order'] ) ? absint( $pricing_data['sort_order'] ) : 1,
 			),
 			array(
 				'%s',
@@ -251,6 +255,7 @@ class WpTravel_Helpers_Pricings {
 				'%s',
 				'%d',
 				'%s',
+				'%d',
 			)
 		);
 		$inserted_id = $wpdb->insert_id;
