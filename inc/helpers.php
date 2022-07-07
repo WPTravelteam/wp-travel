@@ -3149,18 +3149,39 @@ function wptravel_get_fixed_departure_date( $trip_id ) {
 			}
 			$dates = array_unique( $dates );
 			usort( $dates, 'wptravel_date_sort' );
-			$show_multiple = apply_filters( 'wp_travel_show_multiple_fixed_departure_dates', false );
+			$show_multiple = apply_filters( 'wp_travel_show_multiple_fixed_departure_dates', true );
 
 			$date_found = false;
 			if ( $show_multiple ) {
-				echo '<ul>';
-				foreach ( $dates as $date ) {
-					if ( date( 'Y-m-d ', strtotime( $date ) ) >= date( 'Y-m-d' ) ) {
-						$date_found = true;
-						printf( '<li>%s</li>', esc_html( date_i18n( $date_format, strtotime( $date ) ) ) );
-					}
-				}
-				echo '</ul>';
+				?>
+				<div class="fixed-date-dropdown">
+					<?php
+						foreach ( $dates as $index => $date ) {
+							if ( date( 'Y-m-d ', strtotime( $date ) ) >= date( 'Y-m-d' ) ) {
+								$date_found = true;
+								?>
+								
+								<?php
+								if ( 0 === $index ) {
+									?>
+									<div class="dropbtn"><?php echo esc_html( date_i18n( $date_format, strtotime( $date ) ) ); ?></div> <!--selected -->
+									<!-- loop wrapper -->
+									<div class="dropdown-content"> 
+									<?php
+								}
+								?>
+								<span class="dropdown-list"> <?php  echo esc_html( date_i18n( $date_format, strtotime( $date ) ) ); ?></span>
+								<?php
+								if ( count( $dates ) === ( $index + 1 ) ) {
+									?>
+									</div> <!-- /loop wrapper -->
+									<?php
+								}
+							}
+						}
+					?>
+				</div>
+				<?php
 			} else {
 				if ( is_array( $dates ) && count( $dates ) > 0 ) {
 					foreach ( $dates as $date ) {

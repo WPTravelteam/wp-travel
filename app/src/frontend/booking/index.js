@@ -5,6 +5,7 @@
 __webpack_public_path__ = _wp_travel.build_path;
 import { useSelect, dispatch } from '@wordpress/data';
 import { render, Suspense } from '@wordpress/element';
+import { applyFilters } from '@wordpress/hooks';
 const __i18n = {
 	..._wp_travel.strings
 }
@@ -72,6 +73,7 @@ const WPTravelBooking = ( props ) => {
     </>
 }
 let bookingWidgetElementId = _wp_travel.itinerary_v2 ? 'wti__booking' : 'booking';
+bookingWidgetElementId     = applyFilters( 'wptravel_booking_widget_id', bookingWidgetElementId );
 if (document.getElementById(bookingWidgetElementId)) {
     const tooltipText = __i18n.bookings.date_select_to_view_options;
     render(<WPTravelBooking forceCalendarDisplay={false} calendarInline={false} showTooltip={true} tooltipText={tooltipText} />, document.getElementById(bookingWidgetElementId));

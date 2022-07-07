@@ -838,21 +838,7 @@ function wptravel_single_location( $trip_id ) {
 					<strong class="title"><?php echo esc_html( $fixed_departure_text ); ?></strong>
 				</div>
 				<div class="travel-info fixed-date-options">
-					<span class="value">
 					<?php echo $dates; // @phpcs:ignore ?>
-					</span>
-					<div class="fixed-date-dropdown">
-						<div class="dropbtn">July 15, 2022</div>
-						<div class="dropdown-content">
-							<a href="#">January 10, 2022</a>
-							<a href="#">February 20, 2022</a>
-							<a href="#">August 25, 2022</a>
-							<a href="#">September 26, 2022</a>
-							<a href="#">October 24, 2022</a>
-							<a href="#">November 28, 2022</a>
-							<a href="#">December 29, 2022</a>
-						</div>
-					</div>
 				</div>
 				
 			</li>
@@ -868,7 +854,13 @@ function wptravel_single_location( $trip_id ) {
 				</div>
 				<div class="travel-info">
 					<span class="value">
-						<?php printf( '%1$s %2$s %3$s %4$s', esc_html( $trip_duration ), esc_html( $days_text ),  esc_html( $trip_duration_night ), esc_html( $nights_text ) ); // @phpcs:ignore ?>
+						<?php 
+						if ( $trip_duration_night > 0 ) {
+							printf( '%1$s %2$s %3$s %4$s', esc_html( $trip_duration ), esc_html( $days_text ),  esc_html( $trip_duration_night ), esc_html( $nights_text ) ); // @phpcs:ignore 
+						} else {
+							printf( '%1$s %2$s', esc_html( $trip_duration ), esc_html( $days_text ) ); // @phpcs:ignore 
+						}
+						?>
 					</span>
 				</div>
 			</li>
