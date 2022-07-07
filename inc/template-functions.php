@@ -837,11 +837,24 @@ function wptravel_single_location( $trip_id ) {
 				<div class="travel-info">
 					<strong class="title"><?php echo esc_html( $fixed_departure_text ); ?></strong>
 				</div>
-				<div class="travel-info">
+				<div class="travel-info fixed-date-options">
 					<span class="value">
 					<?php echo $dates; // @phpcs:ignore ?>
 					</span>
+					<div class="fixed-date-dropdown">
+						<div class="dropbtn">July 15, 2022</div>
+						<div class="dropdown-content">
+							<a href="#">January 10, 2022</a>
+							<a href="#">February 20, 2022</a>
+							<a href="#">August 25, 2022</a>
+							<a href="#">September 26, 2022</a>
+							<a href="#">October 24, 2022</a>
+							<a href="#">November 28, 2022</a>
+							<a href="#">December 29, 2022</a>
+						</div>
+					</div>
 				</div>
+				
 			</li>
 			<?php
 		}
