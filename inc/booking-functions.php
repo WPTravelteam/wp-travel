@@ -260,6 +260,13 @@ function wptravel_book_now() {
 	// delete_site_transient( "_transient_wt_booking_count_{$trip_id}" );.
 	delete_post_meta( $trip_id, 'wp_travel_booking_count' );
 
+	// Inc case of 100% discount.
+	$cart_total = $wt_cart->get_total();
+	if ( $cart_total['discount'] > 0 && ! $cart_total['total'] ) {
+		update_post_meta( $booking_id, 'wp_travel_booking_status', 'booked' );
+		update_post_meta( $payment_id, 'wp_travel_payment_status', 'paid' );
+	}
+
 	// Clear Cart After process is complete.
 	$wt_cart->clear();
 
