@@ -1509,3 +1509,18 @@
 		margin-top: 8px;
 	}
 }
+
+// Checkbox hide in single trip page trip extras section
+.wp-travel-tab-wrapper {
+	.wp-travel-booking__content-wrapper {
+		.person-box {
+			.wp-travel-booking__trip-option-list {
+				li {
+					.checkbox {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+}
