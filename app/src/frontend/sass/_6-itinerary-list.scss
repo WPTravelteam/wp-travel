@@ -1541,7 +1541,6 @@
 	}
 }
 
-
 // user since 2.0
 .wp-travel-add-to-wishlists ~ header.entry-header {
 	padding-left: 0 !important;
@@ -1559,84 +1558,79 @@
 	padding-left: 25px;
 }
 
-
-// Fixed Departure Date Dropdown List
-.wp-travel-fixed-departure {
-	.fixed-date-options {
-		.fixed-date-dropdown {
+// Fixed Departure Date Dropdown List in archive and single trip page
+.fixed-date-dropdown {
+	position: relative;
+	display: inline-block;
+	.dropbtn {
+		color: #555;
+		border: none;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		&::after {
+			content: "\f107";
+			font-family: "Font Awesome 5 Free";
+			font-weight: 900;
+			margin-left: 8px;
+			color: #555;
+			transition: all 0.3s ease;
+		}
+	}
+	.dropdown-content {
+		visibility: hidden;
+		opacity: 0;
+		position: absolute;
+		background-color: #f1f1f1;
+		min-width: 200px;
+		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+		z-index: 3;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+		.dropdown-list {
+			color: #555;
+			padding: 12px 16px;
 			position: relative;
-			display: inline-block;
-			.dropbtn {
-				color: #555;
-				border: none;
-				cursor: pointer;
-				display: flex;
-				align-items: center;
-				&::after {
-					content: "\f107";
-					font-family: "Font Awesome 5 Free";
-					font-weight: 900;
-					margin-left: 8px;
-					color: #555;
-					transition: all 0.3s ease;
-				}
-			}
-			.dropdown-content {
-				visibility: hidden;
-				opacity: 0;
+			text-decoration: none;
+			display: block;
+			transition: all 0.3s ease;
+			z-index: 1;
+			font-size: 14px;
+			cursor: pointer;
+			margin-left: 0;
+			&::before {
+				content: none;
+				background: #838383;
+				width: 3px;
+				height: 100%;
 				position: absolute;
-				background-color: #f1f1f1;
-				min-width: 200px;
-				box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-				z-index: 1;
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
-				.dropdown-list {
-					color: #555;
-					padding: 12px 16px;
-					position: relative;
-					text-decoration: none;
-					display: block;
-					transition: all .3s ease;
-					z-index: 1;
-					font-size: 14px;
-					cursor: pointer;
-					&::before {
-						content: none;
-						background: #838383;
-						width: 3px;
-						height: 100%;
-						position: absolute;
-						top: 0;
-						left: 0;
-						transition: all .3s ease;
-					}
-					&:hover {
-						background: #ddd;
-						padding-left: 20px;
-						color: #282828;
-						transition: all .3s ease;
-					}
-				}
+				top: 0;
+				left: 0;
+				transition: all 0.3s ease;
 			}
 			&:hover {
-				.dropdown-content {
-					visibility: visible;
-					opacity: 1;
-					transition: all .3s ease;
-					.dropdown-list:hover::before {
-						transition: all .3s ease;
-						content: "";
-					}
-				}
-				.dropbtn::after {
-					transform: rotate(180deg);
-				}
+				background: #ddd;
+				padding-left: 20px;
+				color: #282828;
+				transition: all 0.3s ease;
 			}
 		}
 	}
+	&:hover {
+		.dropdown-content {
+			visibility: visible;
+			opacity: 1;
+			transition: all 0.3s ease;
+			.dropdown-list:hover::before {
+				transition: all 0.3s ease;
+				content: "";
+			}
+		}
+		.dropbtn::after {
+			transform: rotate(180deg);
+		}
+	}
 }
-
 
 // Checkbox hide in single trip page trip extras section
 .wp-travel-tab-wrapper {
