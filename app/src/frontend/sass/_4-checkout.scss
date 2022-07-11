@@ -603,8 +603,15 @@
 							// border-radius: 12px;
 
 							// New Change
+							// object-fit: cover;
+							// height: 100%;
+							// border-radius: 5px;
+						}
+						img {
 							object-fit: cover;
-							height: 100%;
+							height: 95px;
+							width: 130px;
+							max-width: unset;
 							border-radius: 5px;
 						}
 					}
