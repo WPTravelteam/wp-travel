@@ -250,7 +250,7 @@ Before updating plugin please check ["our latest release notes"](#developers).
 Release Date: 12th July, 2022
 
 Fixes:
-* Fixed Dropdown date display layout issue in archive page.
+* Fixed dropdown date display layout issue in WP Travel pages and sections.
 
 = 5.2.7 =
 Release Date: 7th July, 2022
