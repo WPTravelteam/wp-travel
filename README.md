@@ -50,6 +50,13 @@ Incase ```phpcs``` is not showing error in editor then:
 ```
 
 ### Start development
+This will start development mode to edit script to make changes in JS and CSS. 
 ```sh
-yarn start
+yarn dev
+```
+
+### Start production
+This will Make and comple JS, CSS for production build and also make the final zip for production. Zip file is in the bundle/wp-travel-{version}.zip
+```sh
+yarn bundle
 ```
