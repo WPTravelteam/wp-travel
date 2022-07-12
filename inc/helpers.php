@@ -772,13 +772,11 @@ function wptravel_get_trip_duration( $post_id ) {
 		<div class="wp-travel-trip-time trip-duration">
 			<i class="far fa-calendar-alt"></i>
 			<span class="wp-travel-trip-duration">
-				<?php echo wptravel_get_fixed_departure_date( $post_id ); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped ?>
+				<?php echo wptravel_get_fixed_departure_date( $post_id ); ?>
 			</span>
 		</div>
 		<?php
 	else :
-		?>
-		<?php
 		$trip_duration = get_post_meta( $post_id, 'wp_travel_trip_duration', true );
 		$trip_duration = ( $trip_duration ) ? $trip_duration : 0;
 		?>
@@ -3152,11 +3150,17 @@ function wptravel_get_fixed_departure_date( $trip_id ) {
 			$show_multiple = apply_filters( 'wp_travel_show_multiple_fixed_departure_dates', true );
 
 			$date_found = false;
-			if ( $show_multiple ) {
+			$available_dates = array();
+			foreach ( $dates as $index => $date ) {
+				if ( date( 'Y-m-d ', strtotime( $date ) ) >= date( 'Y-m-d' ) ) {
+					$available_dates[] = $date;
+				}
+			}
+			if ( $show_multiple && count( $available_dates ) > 1 ) {
 				?>
 				<div class="fixed-date-dropdown">
 					<?php
-						foreach ( $dates as $index => $date ) {
+						foreach ( $available_dates as $index => $date ) {
 							if ( date( 'Y-m-d ', strtotime( $date ) ) >= date( 'Y-m-d' ) ) {
 								$date_found = true;
 								?>
@@ -3172,7 +3176,7 @@ function wptravel_get_fixed_departure_date( $trip_id ) {
 								?>
 								<span class="dropdown-list"> <?php  echo esc_html( date_i18n( $date_format, strtotime( $date ) ) ); ?></span>
 								<?php
-								if ( count( $dates ) === ( $index + 1 ) ) {
+								if ( count( $available_dates ) === ( $index + 1 ) ) {
 									?>
 									</div> <!-- /loop wrapper -->
 									<?php

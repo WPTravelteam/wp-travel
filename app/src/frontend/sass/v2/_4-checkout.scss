@@ -582,7 +582,9 @@
 						}
 						img {
 							object-fit: cover;
-							height: 100%;
+							height: 95px;
+							width: 130px;
+							max-width: unset;
 							border-radius: 5px;
 						}
 					}
