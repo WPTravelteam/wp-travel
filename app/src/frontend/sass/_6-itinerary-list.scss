@@ -1519,9 +1519,9 @@
 				.wp-travel-add-to-wishlists {
 					top: 17px;
 				}
-				.post-title {
-					padding-left: 10px !important;
-				}
+				// .post-title {
+				// 	padding-left: 10px !important;
+				// }
 			}
 		}
 	}
@@ -1532,9 +1532,9 @@
 					.wp-travel-add-to-wishlists {
 						top: 14px;
 					}
-					.post-title {
-						padding-left: 0 !important;
-					}
+					// .post-title {
+					// 	padding-left: 0 !important;
+					// }
 				}
 			}
 		}
@@ -1631,7 +1631,7 @@
 			}
 		}
 		.dropbtn::after {
-			transform: rotate(180deg);
+			transform: rotate(0deg);
 		}
 	}
 }
