@@ -25,6 +25,7 @@ To increase the productivity developers need to have common development setup.
 - [XDebug extension](https://github.com/pixeljar/local-addon-xdebug-vscode) for ```Local (By flywheel)```. Check [this for help](https://localwp.com/community/t/localbyflywheel-xdebug-vscode/11950/2).
 
 ### 🛠 Setup plugin
+Before Setup the plugin you need to setup SSH [More Info](https://docs.gitlab.com/ee/user/ssh.html)
 ```sh
 # Clone WP Travel Repo 
 git clone git@gitlab.com:ws-plugins/wp-travel.git
