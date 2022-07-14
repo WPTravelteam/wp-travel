@@ -400,6 +400,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			require WP_TRAVEL_ABSPATH . '/core/ajax/enquiry.php';
 			require WP_TRAVEL_ABSPATH . '/core/ajax/clone.php';
 			require WP_TRAVEL_ABSPATH . '/core/ajax/trips.php';
+			require WP_TRAVEL_ABSPATH . '/core/ajax/view-mode.php';
 
 			/**
 			 * App Part.
@@ -747,8 +748,11 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @param string $method Request method.
 		 * @return boolean
 		 */
-		public static function get_sanitize_request( $method = 'get' ) {
+		public static function get_sanitize_request( $method = 'get', $bypass_nonce = false ) {
 			if ( ! self::verify_nonce( true ) ) { // verify nonce.
+				if ( 'get' === $method && $bypass_nonce ) {
+					return wptravel_sanitize_array( ( $_GET ) ); // @phpcs:ignore
+				}
 				return array();
 			}
 			$data = array();

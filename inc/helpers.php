@@ -2276,7 +2276,7 @@ function wptravel_get_search_filter_form( $args ) {
 						$form_field->init( $search_field, array( 'single' => true ) )->render();
 					}
 				}
-				$sanitized_get = WP_Travel::get_sanitize_request();
+				$sanitized_get = WP_Travel::get_sanitize_request( 'get', true );
 				$view_mode     = wptravel_get_archive_view_mode( $sanitized_get );
 
 				?>

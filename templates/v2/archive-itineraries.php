@@ -16,7 +16,7 @@
  */
 $template      = get_option( 'template' );
 $current_theme = wp_get_theme();
-$sanitized_get = WP_Travel::get_sanitize_request();
+$sanitized_get = WP_Travel::get_sanitize_request( 'get', true );
 $view_mode     = wptravel_get_archive_view_mode( $sanitized_get );
 get_header( 'itinerary' );
 
