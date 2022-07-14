@@ -410,7 +410,7 @@
 		.description-left {
 			width: 70%;
 			float: left;
-			padding: 0 10px 0px 10px;
+			padding: 0 20px;
 
 			@media (max-width: 640px) {
 				width: 100%;
@@ -436,7 +436,6 @@
 			}
 
 			.entry-header {
-				padding-left: 22px;
 				position: relative;
 			}
 
@@ -1467,7 +1466,6 @@
 			display: block;
 			transition: all 0.3s ease;
 			z-index: 1;
-			font-size: 14px;
 			cursor: pointer;
 			margin-left: 0;
 			&::before {
@@ -1527,5 +1525,13 @@
 				}
 			}
 		}
+	}
+}
+
+.wptravel-layout-v2 {
+	.wp-travel-itinerary-items .wp-travel-post-item-wrapper .favourite {
+		position: absolute;
+		top: 0;
+		left: 0;
 	}
 }
