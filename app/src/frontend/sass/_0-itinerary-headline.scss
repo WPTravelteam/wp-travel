@@ -107,9 +107,9 @@
 	// 	font-size: 22px;
 	// 	box-shadow: none;
 	// 	margin-right: 15px;
-		
+
 	// }
-	
+
 	.wptravel-book-your-trip {
 		padding: 5px 50px;
 		box-shadow: none;
@@ -120,7 +120,7 @@
 		}
 	}
 	// for custom link in the book now button css
-	a.wptravel-book-your-trip {		
+	a.wptravel-book-your-trip {
 		padding: 8px 50px;
 		background: #c1c1c1;
 		@media (max-width: 305px) {
@@ -405,6 +405,18 @@ label.radio-checkbox-label {
 			&:hover {
 				color: #f83531;
 			}
+		}
+	}
+}
+
+// Multiple Currency Dropdown width
+.main-navigation ul {
+	align-items: center;
+}
+.wp-travel-multiple-currency {
+	form {
+		select {
+			width: 100px;
 		}
 	}
 }

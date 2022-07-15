@@ -612,6 +612,7 @@
 			width: 70%;
 			float: left;
 			padding: 0 20px;
+			// position: relative;
 
 			@include mob {
 				width: 100%;
@@ -1657,3 +1658,8 @@
 		left: 0;
 	}
 }
+
+// .description-left .wp-travel-add-to-wishlists {
+// 	top: 10px !important;
+// 	left: auto !important;
+// }

@@ -519,3 +519,15 @@ label.radio-checkbox-label {
 		}
 	}
 }
+
+// Multiple Currency Dropdown width
+.main-navigation ul {
+	align-items: center;
+}
+.wp-travel-multiple-currency {
+	form {
+		select {
+			width: 100px;
+		}
+	}
+}
