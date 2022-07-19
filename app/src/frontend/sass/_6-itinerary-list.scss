@@ -935,6 +935,7 @@
 			.view-image {
 				position: relative;
 				width: 30%;
+				height: 230px;
 				margin: 30px 0;
 				@media (max-width: 575px) {
 					width: 100%;
@@ -954,8 +955,10 @@
 				}
 				.offer {
 					position: absolute;
-					bottom: 7px;
+					bottom: 0;
 					left: 0;
+					display: flex;
+					align-items: center;
 					background: $offerColor;
 					padding: 5px 15px;
 					@media (max-width: 575px) {
@@ -1053,7 +1056,7 @@
 							text-align: right;
 
 							i {
-								color: $offerColor;
+								// color: $offerColor;
 								font-size: 20px;
 							}
 						}
@@ -1254,7 +1257,8 @@
 						padding: 5px 12px;
 						left: 15px;
 						// bottom: -10px;
-						bottom: 10px;
+						bottom: -15px;
+						
 						&::before {
 							content: none;
 						}
@@ -1274,7 +1278,7 @@
 				.view-content {
 					flex-direction: column;
 					margin: 10px 0;
-					padding: 10px 15px 0;
+					padding: 15px 15px 0;
 					// width: 100%;
 					width: auto;
 					.left-content {
