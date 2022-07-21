@@ -166,7 +166,7 @@
 									$.post(
 											wp_travel_drag_drop_uploader.ajax,
 											{
-													action:  'envira_gallery_load_image',
+													action:  'wptravel_load_gallery',
 													nonce:   wp_travel_drag_drop_uploader.drag_drop_nonce,
 													id:      info.response
 											},

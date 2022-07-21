@@ -24,6 +24,9 @@ class Wp_Travel_Shortcodes {
 		add_shortcode( 'wp_travel_trip_facts', array( $this, 'trip_facts_shortcode' ) );
 		add_shortcode( 'wp_travel_trip_enquiry_form', array( $this, 'trip_enquiry_form_shortcode' ) );
 
+		add_shortcode( 'WP_TRAVEL_TRIP_TAXONOMIES', array( $this, 'get_taxonomy_shortcode' ) );
+		add_shortcode( 'wp_travel_trip_taxonomies', array( $this, 'get_taxonomy_shortcode' ) );
+
 		/**
 		 * Checkout Shortcodes.
 		 *

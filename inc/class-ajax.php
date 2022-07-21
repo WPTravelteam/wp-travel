@@ -2,14 +2,22 @@
 class WP_Travel_Ajax {
 
 	public function __construct() {
-		add_action( 'wp_ajax_envira_gallery_load_image', array( $this, 'post_gallery_ajax_load_image' ) );
+		add_action( 'wp_ajax_wptravel_load_gallery', array( $this, 'post_gallery_ajax_load_image' ) );
 
 		// Ajax for cart
-		// Add
+		/**
+		 * Add to cart ajax callback. Not used by WP Travel. may be used by customization.
+		 *
+		 * @deprecated 5.2.9
+		 */
 		add_action( 'wp_ajax_wt_add_to_cart', array( $this, 'add_to_cart' ) );
 		add_action( 'wp_ajax_nopriv_wt_add_to_cart', array( $this, 'add_to_cart' ) );
 
-		// Update
+		/**
+		 * Update cart ajax callback.
+		 *
+		 * @deprecated 5.2.9
+		 */
 		add_action( 'wp_ajax_wt_update_cart', array( $this, 'update_cart' ) );
 		add_action( 'wp_ajax_nopriv_wt_update_cart', array( $this, 'update_cart' ) );
 
@@ -48,6 +56,97 @@ class WP_Travel_Ajax {
 
 		wp_send_json_error( $coupon_code );
 
+	}
+
+	public function apply_coupon() {
+		check_ajax_referer( 'wp_travel_nonce', '_nonce' );
+		if ( ! isset( $_POST['CouponCode'] ) ) {
+			return;
+		}
+
+		if ( ! isset( $_POST['trip_ids'] ) ) {
+			return;
+		}
+
+		if ( empty( $_POST['CouponCode'] ) ) {
+
+			WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( 'Coupon Code cannot be empty', 'wp-travel' ) ), 'error' );
+
+			return;
+		}
+
+		$coupon_code = sanitize_text_field( wp_unslash( $_POST['CouponCode'] ) );
+
+		$coupon_id = WPTravel()->coupon->get_coupon_id_by_code( $coupon_code );
+
+		if ( ! $coupon_id ) {
+
+			WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( 'Invalid Coupon Code', 'wp-travel' ) ), 'error' );
+
+			return;
+
+		}
+
+		$date_validity = WPTravel()->coupon->is_coupon_valid( $coupon_id );
+
+		if ( ! $date_validity ) {
+
+			WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( 'The coupoun is either inactive or has expired. Coupon Code could not be applied.', 'wp-travel' ) ), 'error' );
+
+			return;
+
+		}
+
+		$trip_ids = wptravel_sanitize_array( $_POST['trip_ids'] ); // @phpcs:ignore
+
+		$trips_validity = WPTravel()->coupon->trip_ids_allowed( $coupon_id, $trip_ids );
+
+		if ( ! $trips_validity ) {
+
+			WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( 'This coupon cannot be applied to the selected trip', 'wp-travel' ) ), 'error' );
+
+			return;
+
+		}
+
+		$coupon_metas        = get_post_meta( $coupon_id, 'wp_travel_coupon_metas', true );
+		$restrictions_tab    = isset( $coupon_metas['restriction'] ) ? $coupon_metas['restriction'] : array();
+		$coupon_limit_number = isset( $restrictions_tab['coupon_limit_number'] ) ? $restrictions_tab['coupon_limit_number'] : '';
+
+		if ( ! empty( $coupon_limit_number ) ) {
+
+			$usage_count = WPTravel()->coupon->get_usage_count( $coupon_id );
+
+			if ( absint( $usage_count ) >= absint( $coupon_limit_number ) ) {
+
+				WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( 'Coupon Expired. Maximum no. of coupon usage exceeded.', 'wp-travel' ) ), 'error' );
+
+				return;
+
+			}
+		}
+
+		// Prepare Coupon Application.
+		global $wt_cart;
+
+		$discount_type   = WPTravel()->coupon->get_discount_type( $coupon_id );
+		$discount_amount = WPTravel()->coupon->get_discount_amount( $coupon_id );
+
+		if ( 'fixed' === $discount_type ) {
+			$cart_amounts = $wt_cart->get_total( $with_discount = false );
+			$total        = $cart_amounts['total'];
+			if ( $discount_amount >= $total ) {
+				WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( 'Cannot apply coupon for this trip.', 'wp-travel' ) ), 'error' );
+				return;
+			}
+		}
+
+		$wt_cart->add_discount_values( $coupon_id, $discount_type, $discount_amount, sanitize_text_field( $_POST['CouponCode'] ) ); // $_POST['CouponCode'] @since 3.1.7
+
+		WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( 'Coupon applied succesfully.', 'wp-travel' ) ), 'success' );
+
+		echo true;
+		die;
 	}
 
 	public function post_gallery_ajax_load_image() {
@@ -303,8 +402,9 @@ class WP_Travel_Ajax {
 	}
 
 	/**
-	 * Updates Cart.
+	 * Updates Cart. Do not use this method.
 	 *
+	 * @deprecated 5.2.9
 	 * @return void
 	 */
 	public function update_cart() {
@@ -334,97 +434,11 @@ class WP_Travel_Ajax {
 		die;
 	}
 
-	public function apply_coupon() {
-		check_ajax_referer( 'wp_travel_nonce', '_nonce' );
-		if ( ! isset( $_POST['CouponCode'] ) ) {
-			return;
-		}
-
-		if ( ! isset( $_POST['trip_ids'] ) ) {
-			return;
-		}
-
-		if ( empty( $_POST['CouponCode'] ) ) {
-
-			WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( 'Coupon Code cannot be empty', 'wp-travel' ) ), 'error' );
-
-			return;
-		}
-
-		$coupon_code = sanitize_text_field( wp_unslash( $_POST['CouponCode'] ) );
-
-		$coupon_id = WPTravel()->coupon->get_coupon_id_by_code( $coupon_code );
-
-		if ( ! $coupon_id ) {
-
-			WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( 'Invalid Coupon Code', 'wp-travel' ) ), 'error' );
-
-			return;
-
-		}
-
-		$date_validity = WPTravel()->coupon->is_coupon_valid( $coupon_id );
-
-		if ( ! $date_validity ) {
-
-			WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( 'The coupoun is either inactive or has expired. Coupon Code could not be applied.', 'wp-travel' ) ), 'error' );
-
-			return;
-
-		}
-
-		$trip_ids = wptravel_sanitize_array( $_POST['trip_ids'] ); // @phpcs:ignore
-
-		$trips_validity = WPTravel()->coupon->trip_ids_allowed( $coupon_id, $trip_ids );
-
-		if ( ! $trips_validity ) {
-
-			WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( 'This coupon cannot be applied to the selected trip', 'wp-travel' ) ), 'error' );
-
-			return;
-
-		}
-
-		$coupon_metas        = get_post_meta( $coupon_id, 'wp_travel_coupon_metas', true );
-		$restrictions_tab    = isset( $coupon_metas['restriction'] ) ? $coupon_metas['restriction'] : array();
-		$coupon_limit_number = isset( $restrictions_tab['coupon_limit_number'] ) ? $restrictions_tab['coupon_limit_number'] : '';
-
-		if ( ! empty( $coupon_limit_number ) ) {
-
-			$usage_count = WPTravel()->coupon->get_usage_count( $coupon_id );
-
-			if ( absint( $usage_count ) >= absint( $coupon_limit_number ) ) {
-
-				WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( 'Coupon Expired. Maximum no. of coupon usage exceeded.', 'wp-travel' ) ), 'error' );
-
-				return;
-
-			}
-		}
-
-		// Prepare Coupon Application.
-		global $wt_cart;
-
-		$discount_type   = WPTravel()->coupon->get_discount_type( $coupon_id );
-		$discount_amount = WPTravel()->coupon->get_discount_amount( $coupon_id );
-
-		if ( 'fixed' === $discount_type ) {
-			$cart_amounts = $wt_cart->get_total( $with_discount = false );
-			$total        = $cart_amounts['total'];
-			if ( $discount_amount >= $total ) {
-				WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( 'Cannot apply coupon for this trip.', 'wp-travel' ) ), 'error' );
-				return;
-			}
-		}
-
-		$wt_cart->add_discount_values( $coupon_id, $discount_type, $discount_amount, sanitize_text_field( $_POST['CouponCode'] ) ); // $_POST['CouponCode'] @since 3.1.7
-
-		WPTravel()->notices->add( apply_filters( 'wp_travel_apply_coupon_errors', __( 'Coupon applied succesfully.', 'wp-travel' ) ), 'success' );
-
-		echo true;
-		die;
-	}
-
+	/**
+	 * Remove from Cart. Do not use this method.
+	 * 
+	 * @deprecated 5.2.9
+	 */
 	public function remove_from_cart() {
 		check_ajax_referer( 'wp_travel_nonce', '_nonce' );
 		if ( ! isset( $_REQUEST['cart_id'] ) ) {
