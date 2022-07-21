@@ -1482,7 +1482,9 @@ function wptravel_get_checkout_url() {
 function wptravel_is_itinerary( $post_id = null ) {
 	if ( ! $post_id ) {
 		global $post;
-		$post_id = $post->ID;
+		if ( $post ) {
+			$post_id = $post->ID;
+		}
 	}
 
 	if ( ! $post_id ) {
