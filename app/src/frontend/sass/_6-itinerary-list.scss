@@ -376,7 +376,6 @@
 			margin-top: 0;
 			margin-bottom: 0;
 			line-height: 1;
-			padding-left: 20px;
 
 			a {
 				font-size: 14px;
@@ -612,7 +611,8 @@
 		.description-left {
 			width: 70%;
 			float: left;
-			padding: 0 10px 0px 10px;
+			padding: 0 20px;
+			// position: relative;
 
 			@include mob {
 				width: 100%;
@@ -935,6 +935,7 @@
 			.view-image {
 				position: relative;
 				width: 30%;
+				height: 230px;
 				margin: 30px 0;
 				@media (max-width: 575px) {
 					width: 100%;
@@ -954,8 +955,10 @@
 				}
 				.offer {
 					position: absolute;
-					bottom: 7px;
+					bottom: 0;
 					left: 0;
+					display: flex;
+					align-items: center;
 					background: $offerColor;
 					padding: 5px 15px;
 					@media (max-width: 575px) {
@@ -1029,6 +1032,7 @@
 						.entry-title {
 							width: 90%;
 							margin: 5px 0;
+							text-align: left;
 
 							.heading-link {
 								font-size: 28px;
@@ -1053,7 +1057,7 @@
 							text-align: right;
 
 							i {
-								color: $offerColor;
+								// color: $offerColor;
 								font-size: 20px;
 							}
 						}
@@ -1254,7 +1258,8 @@
 						padding: 5px 12px;
 						left: 15px;
 						// bottom: -10px;
-						bottom: 10px;
+						bottom: -15px;
+						
 						&::before {
 							content: none;
 						}
@@ -1274,7 +1279,7 @@
 				.view-content {
 					flex-direction: column;
 					margin: 10px 0;
-					padding: 10px 15px 0;
+					padding: 15px 15px 0;
 					// width: 100%;
 					width: auto;
 					.left-content {
@@ -1519,9 +1524,9 @@
 				.wp-travel-add-to-wishlists {
 					top: 17px;
 				}
-				.post-title {
-					padding-left: 10px !important;
-				}
+				// .post-title {
+				// 	padding-left: 10px !important;
+				// }
 			}
 		}
 	}
@@ -1532,9 +1537,9 @@
 					.wp-travel-add-to-wishlists {
 						top: 14px;
 					}
-					.post-title {
-						padding-left: 0 !important;
-					}
+					// .post-title {
+					// 	padding-left: 0 !important;
+					// }
 				}
 			}
 		}
@@ -1542,21 +1547,21 @@
 }
 
 // user since 2.0
-.wp-travel-add-to-wishlists ~ header.entry-header {
-	padding-left: 0 !important;
-}
-.wp-travel-add-to-wishlists ~ .entry-title {
-	padding-left: 25px;
-}
+// .wp-travel-add-to-wishlists ~ header.entry-header {
+// 	padding-left: 0 !important;
+// }
+// .wp-travel-add-to-wishlists ~ .entry-title {
+// 	padding-left: 25px;
+// }
 
-.entry-content .wp-travel-add-to-wishlists ~ header.entry-header {
-	padding-left: 25px !important;
-}
+// .entry-content .wp-travel-add-to-wishlists ~ header.entry-header {
+// 	padding-left: 25px !important;
+// }
 
 // user since 5.1.1
-.wp-travel-default-article .entry-title {
-	padding-left: 25px;
-}
+// .wptravel-layout-v2 .wp-travel-default-article .entry-title {
+// 	padding-left: 25px;
+// }
 
 // Fixed Departure Date Dropdown List in archive and single trip page
 .fixed-date-dropdown {
@@ -1599,7 +1604,6 @@
 			display: block;
 			transition: all 0.3s ease;
 			z-index: 1;
-			font-size: 14px;
 			cursor: pointer;
 			margin-left: 0;
 			&::before {
@@ -1631,7 +1635,7 @@
 			}
 		}
 		.dropbtn::after {
-			transform: rotate(180deg);
+			transform: rotate(0deg);
 		}
 	}
 }
@@ -1650,3 +1654,17 @@
 		}
 	}
 }
+
+
+.wptravel-layout-v2 {
+	.wp-travel-itinerary-items .wp-travel-post-item-wrapper .favourite {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+}
+
+// .description-left .wp-travel-add-to-wishlists {
+// 	top: 10px !important;
+// 	left: auto !important;
+// }

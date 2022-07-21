@@ -410,7 +410,8 @@
 		.description-left {
 			width: 70%;
 			float: left;
-			padding: 0 10px 0px 10px;
+			padding: 0 20px;
+			// position: relative;
 
 			@media (max-width: 640px) {
 				width: 100%;
@@ -436,7 +437,6 @@
 			}
 
 			.entry-header {
-				padding-left: 22px;
 				position: relative;
 			}
 
@@ -746,6 +746,7 @@
 			.view-image {
 				position: relative;
 				width: 30%;
+				height: 230px;
 				margin: 30px 0;
 				@media (max-width: 575px) {
 					width: 100%;
@@ -765,7 +766,9 @@
 				}
 				.offer {
 					position: absolute;
-					bottom: 7px;
+					bottom: 0;
+					display: flex;
+					align-items: center;
 					left: 0;
 					background: $offerColor;
 					padding: 5px 15px;
@@ -840,6 +843,7 @@
 						.entry-title {
 							width: 90%;
 							margin: 5px 0;
+							text-align: left;
 
 							.heading-link {
 								font-size: 28px;
@@ -863,7 +867,7 @@
 							width: 10%;
 
 							i {
-								color: $offerColor;
+								// color: $offerColor;
 								font-size: 20px;
 							}
 						}
@@ -1063,7 +1067,7 @@
 					.offer {
 						padding: 5px 12px;
 						left: 15px;
-						bottom: -10px;
+						bottom: -15px;
 						// bottom: 10px;
 						&::before {
 							content: none;
@@ -1084,7 +1088,7 @@
 				.view-content {
 					flex-direction: column;
 					margin: 10px 0;
-					padding: 10px 15px 0;
+					padding: 15px 15px 0;
 					// width: 100%;
 					width: auto;
 					.left-content {
@@ -1421,6 +1425,12 @@
 // 	}
 // }
 
+.wp-travel-itinerary-list .wp-travel-post-info .wp-travel-add-to-wishlists,
+.wp-travel-itinerary-list.grid-view .wp-travel-add-to-wishlists,
+.widget .wp-travel-itinerary-list.grid-view .wp-travel-add-to-wishlists {
+	left: 15px !important;
+}
+
 // Fixed Departure Date Dropdown List in archive page and single trip page
 .fixed-date-dropdown {
 	position: relative;
@@ -1463,7 +1473,6 @@
 			display: block;
 			transition: all 0.3s ease;
 			z-index: 1;
-			font-size: 14px;
 			cursor: pointer;
 			margin-left: 0;
 			&::before {
@@ -1525,3 +1534,16 @@
 		}
 	}
 }
+
+.wptravel-layout-v2 {
+	.wp-travel-itinerary-items .wp-travel-post-item-wrapper .favourite {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+}
+
+// .description-left .wp-travel-add-to-wishlists {
+// 	top: 10px !important;
+// 	left: auto !important;
+// }

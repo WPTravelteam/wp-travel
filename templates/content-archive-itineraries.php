@@ -30,7 +30,7 @@ if ( post_password_required() ) {
 	$group_size    = wptravel_get_group_size( get_the_ID() );
 	$start_date    = get_post_meta( get_the_ID(), 'wp_travel_start_date', true );
 	$end_date      = get_post_meta( get_the_ID(), 'wp_travel_end_date', true );
-	$sanitized_get = WP_Travel::get_sanitize_request();
+	$sanitized_get = WP_Travel::get_sanitize_request( 'get', true );
 ?>
 	<?php $view_mode = wptravel_get_archive_view_mode( $sanitized_get ); ?>
 	<?php if ( 'list' === $view_mode ) : ?>
@@ -47,9 +47,10 @@ if ( post_password_required() ) {
 			</div>
 			<div class="wp-travel-entry-content-wrapper">
 				<div class="description-left">
+					
+					<header class="entry-header">
 					<?php do_action( 'wp_travel_before_archive_content_title', get_the_ID() ); ?>
 					<?php wptravel_do_deprecated_action( 'wp_tarvel_before_archive_title', array( get_the_ID() ), '2.0.4', 'wp_travel_before_archive_content_title' ); ?>
-					<header class="entry-header">
 						<h2 class="entry-title">
 							<a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to: ', 'wp-travel' ) ) ); ?>">
 								<?php the_title(); ?>

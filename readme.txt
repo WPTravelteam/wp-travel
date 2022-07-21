@@ -3,9 +3,9 @@ Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 5.4.1
-Tested up to: 6.0
+Tested up to: 6.0.1
 Requires PHP: 5.6
-Stable tag: 5.2.8
+Stable tag: 5.2.9
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -246,14 +246,30 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
 
+= 5.2.9 =
+Release Date: 21st July 2022
+
+Tweaks:
+* Removed Canonical page URL like `view_mode=grid` in trip archive page.
+* Added DOM event before and after adding the trip in a cart and also removing trip from a cart.
+* Code optimized and cleanup.
+
+Deprecated:
+* Functions `wptravel_booking_default_princing_list_content` and `wptravel_booking_fixed_departure_list_content` have been deprecated.
+
+Layout Fixes:
+* Archive and single trip page wishlist icon CSS removed from WP Travel.
+* Wishlist icon fixed when using shortcodes.
+* Multiple currency drop-down in navbar layout fixed.
+
 = 5.2.8 =
-Release Date: 12th July, 2022
+Release Date: 12th July 2022
 
 Fixes:
 * Fixed dropdown date display layout issue in WP Travel pages and sections.
 
 = 5.2.7 =
-Release Date: 7th July, 2022
+Release Date: 7th July 2022
 
 Tweaks:
 * Hide Nights text if there is no nights.
@@ -265,13 +281,13 @@ Fixes:
 * Fixed 100% coupon code with booking status booked.
 
 = 5.2.6 =
-Release Date: 28th June, 2022
+Release Date: 28th June 2022
 
 Fixes:
 * Fixed not displaying menu icon for WP Travel.
 
 = 5.2.5 =
-Release Date: 21st June, 2022
+Release Date: 21st June 2022
 
 Fixes:
 * Fixed max pax can be selectable more than max pax in case of inventory disabled.

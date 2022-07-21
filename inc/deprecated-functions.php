@@ -103,3 +103,4 @@ require sprintf( '%s/inc/deprecated/442.php', WP_TRAVEL_ABSPATH );
 require sprintf( '%s/inc/deprecated/447.php', WP_TRAVEL_ABSPATH );
 require sprintf( '%s/inc/deprecated/449.php', WP_TRAVEL_ABSPATH );
 require sprintf( '%s/inc/deprecated/466.php', WP_TRAVEL_ABSPATH );
+require sprintf( '%s/inc/deprecated/529.php', WP_TRAVEL_ABSPATH );

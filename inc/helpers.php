@@ -1482,7 +1482,9 @@ function wptravel_get_checkout_url() {
 function wptravel_is_itinerary( $post_id = null ) {
 	if ( ! $post_id ) {
 		global $post;
-		$post_id = $post->ID;
+		if ( $post ) {
+			$post_id = $post->ID;
+		}
 	}
 
 	if ( ! $post_id ) {
@@ -1505,7 +1507,9 @@ function wptravel_can_load_payment_scripts() {
 	global $wt_cart;
 	$cart_amounts = $wt_cart->get_total();
 	$cart_total   = isset( $cart_amounts['total'] ) ? $cart_amounts['total'] : 0;
-	return ( WP_Travel::is_page( 'dashboard' ) || ( WP_Travel::is_page( 'checkout' ) && $cart_total > 0 ) ) && wptravel_is_payment_enabled();
+	$can_load_payment_script = ( WP_Travel::is_page( 'dashboard' ) || ( WP_Travel::is_page( 'checkout' ) && $cart_total > 0 ) ) && wptravel_is_payment_enabled();
+	$can_load_payment_script = apply_filters( 'wptravel_can_load_payment_scripts', $can_load_payment_script );
+	return $can_load_payment_script;
 }
 
 // WP Travel Pricing Varition options.
@@ -2276,7 +2280,7 @@ function wptravel_get_search_filter_form( $args ) {
 						$form_field->init( $search_field, array( 'single' => true ) )->render();
 					}
 				}
-				$sanitized_get = WP_Travel::get_sanitize_request();
+				$sanitized_get = WP_Travel::get_sanitize_request( 'get', true );
 				$view_mode     = wptravel_get_archive_view_mode( $sanitized_get );
 
 				?>

@@ -14,15 +14,18 @@ To increase the productivity developers need to have common development setup.
 
 ### ✅ Requirements
 
-- [Node](https://nodejs.org/en/)
-- [Yarn](https://yarnpkg.com/) : We will be using this to run commands. ```Don't use: npm install```
-- [Composer](https://getcomposer.org/)
+| Package | Version |
+| ----------- | ----------- |
+| [Node](https://nodejs.org/en/) | `14.5.0 (Recommended) or above` |
+| [Yarn](https://yarnpkg.com/) | `1.21.1 (Recommended) or above`  We will be using this to run commands. ```Don't use: npm install``` |
+| [Composer](https://getcomposer.org/) | `1.6.3 (Recommended) or above` |
 
 ### ☁ Recommended
 - [Local (By flywheel)](https://localwp.com/) for Local server
 - [XDebug extension](https://github.com/pixeljar/local-addon-xdebug-vscode) for ```Local (By flywheel)```. Check [this for help](https://localwp.com/community/t/localbyflywheel-xdebug-vscode/11950/2).
 
 ### 🛠 Setup plugin
+Before Setup the plugin you need to setup SSH [More Info](https://docs.gitlab.com/ee/user/ssh.html)
 ```sh
 # Clone WP Travel Repo 
 git clone git@gitlab.com:ws-plugins/wp-travel.git

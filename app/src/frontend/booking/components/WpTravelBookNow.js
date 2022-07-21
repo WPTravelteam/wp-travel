@@ -1,5 +1,7 @@
 import { Suspense } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
+import { applyFilters } from '@wordpress/hooks';
+
 const __i18n = {
 	..._wp_travel.strings
 }
@@ -137,15 +139,22 @@ const WpTravelBookNow = ( props ) => {
 				qty: Object.values(_txs)
 			}
 		}
+		
+		jQuery( document.body ).trigger( 'wptravel_adding_to_cart', [ data ] );
+
 		wpTravelTimeout(
 			apiFetch({
 				url: `${wp_travel.ajaxUrl}?action=wp_travel_add_to_cart&_nonce=${_wp_travel._nonce}`,
 				method: 'POST',
 				data
 			}).then(res => {
-				if (true === res.success && 'WP_TRAVEL_ADDED_TO_CART' === res.data.code) {
+
+				if ( applyFilters( 'wptravel_redirect_to_checkout', true ) && true === res.success && 'WP_TRAVEL_ADDED_TO_CART' === res.data.code) {
 					location.href = wp_travel.checkoutUrl; // [only checkout page url]
 				}
+
+				jQuery( document.body ).trigger( 'wptravel_added_to_cart', [ data ] );
+
 			}), 1000 ).catch(error => {
 				alert( '[X] Request Timeout!' );
 		})

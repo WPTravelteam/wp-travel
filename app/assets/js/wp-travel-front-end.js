@@ -669,6 +669,28 @@ function listView() {
 	var element = document.getElementById("wptravel-archive-wrapper");
 	element.classList.remove("grid-view");
 }
+
+function viewMode( mode ) {
+    
+    var formData = [];
+    formData.push({name:'_nonce',value: wp_travel._nonce});
+    formData.push({name:'action',value: 'wptravel_view_mode'});
+    formData.push({name:'mode',value: mode});
+    jQuery.ajax({
+        type: "POST",
+        url: wp_travel.ajaxUrl,
+        data: formData,
+        beforeSend: function() {
+            // $('#wp-travel-enquiry-submit').addClass('loading-bar loading-bar-striped active').val(text_processing).attr('disabled', 'disabled');
+        },
+        success: function(data) {
+
+            if( data.success ) {
+                window.location.reload();
+            }
+        }
+    });
+}
   
   
 var container = document.getElementById("wp-travel-view-mode-lists");
