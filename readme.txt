@@ -250,7 +250,7 @@ Before updating plugin please check ["our latest release notes"](#developers).
 Release Date: 21st July 2022
 
 Tweaks:
-* Removed Canonical page in trip archive page.
+* Removed Canonical page URL like `view_mode=grid` in trip archive page.
 * Added DOM event before and after adding the trip in a cart and also removing trip from a cart.
 * Code optimized and cleanup.
 
