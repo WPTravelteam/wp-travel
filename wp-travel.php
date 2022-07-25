@@ -209,7 +209,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @return void
 		 */
 		public function network_menu() {
-			add_menu_page( __( 'Settings', 'wp-travel' ), __( 'WP Travel', 'wp-travel' ), 'manae_options', 'wp_travel_network_settings', array( 'WpTravel_Network_Settings', 'setting_page_callback' ), 'dashicons-wp-travel', 10 );
+			add_menu_page( __( 'Settings', 'wp-travel' ), __( 'WP Travel', 'wp-travel' ), 'manae_options', 'wp_travel_network_settings', array( 'WpTravel_Network_Settings', 'setting_page_callback_new' ), 'dashicons-wp-travel', 10 );
 		}
 
 		/**

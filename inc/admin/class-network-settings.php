@@ -88,6 +88,22 @@ class WpTravel_Network_Settings {
 		echo '</div>';
 	}
 
+	public static function setting_page_callback_new() {
+
+		?>
+			<div id="wp-travel-settings-block-wrapper">
+				<div id="wp-travel-network-settings-block"></div>
+				<div id="aside-wrap" class="single-module-side">
+					<?php
+					wptravel_meta_box_support();
+					wptravel_meta_box_documentation();
+					wptravel_meta_box_review();
+					?>
+				</div>
+			</div>
+		<?php
+	}
+
 	/**
 	 * Add Tabs to settings page.
 	 *

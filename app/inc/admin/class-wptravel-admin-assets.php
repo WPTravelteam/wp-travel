@@ -94,8 +94,8 @@ class WpTravel_Admin_Assets {
 
 		// Block Settings.
 		if ( WP_Travel::is_page( 'settings', true ) ) {
-			wp_enqueue_style( 'wp-travel-admin-settings-style' );
 		}
+		wp_enqueue_style( 'wp-travel-admin-settings-style' );
 		wp_enqueue_script( 'wp-travel-admin-settings' ); // temp fixes to use localized data.
 		// Block Coupon.
 		if ( WP_Travel::is_page( 'coupon', true ) ) {

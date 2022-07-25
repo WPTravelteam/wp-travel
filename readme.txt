@@ -246,6 +246,12 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
 
+= 5.3.0 =
+Release Date: 
+
+Fixes:
+* Fixed License tab not working in case of multisite network activate.
+
 = 5.2.9 =
 Release Date: 21st July 2022
 
