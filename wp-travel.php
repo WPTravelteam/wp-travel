@@ -37,7 +37,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '5.2.9';
+		public $version = '5.3.0';
 
 		/**
 		 * WP Travel API version.
