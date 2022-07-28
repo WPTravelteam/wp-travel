@@ -1669,14 +1669,125 @@
 // 	left: auto !important;
 // }
 .wp-travel-itinerary-items{
+	&.grid-view {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(295px, 1fr));
+		gap: 2em;
+		.view-box {
+			display: block;
+			margin-bottom: 0;
+			padding-left: 0;
+			@media (max-width: 575px) {
+				padding: 0;
+			}
+		}
+		&.itinerary-1-per-row {
+			grid-template-columns: repeat(1, 1fr);
+		}
+
+		&.itinerary-2-per-row {
+			grid-template-columns: repeat(2, 1fr);
+			@media (max-width: 650px) {
+				grid-template-columns: repeat(1, 1fr);
+			}
+		}
+
+		&.itinerary-3-per-row {
+			grid-template-columns: repeat(3, 1fr);
+			@media (max-width: 991px) {
+				grid-template-columns: repeat(2, 1fr);
+			}
+			@media (max-width: 650px) {
+				grid-template-columns: repeat(1, 1fr);
+			}
+		}
+
+		&.itinerary-4-per-row {
+			grid-template-columns: repeat(4, 1fr);
+			@media (max-width: 1199px) {
+				grid-template-columns: repeat(3, 1fr);
+			}
+			@media (max-width: 991px) {
+				grid-template-columns: repeat(2, 1fr);
+			}
+			@media (max-width: 650px) {
+				grid-template-columns: repeat(1, 1fr);
+			}
+		}
+
+		&.itinerary-5-per-row {
+			grid-template-columns: repeat(5, 1fr);
+			@media (max-width: 1199px) {
+				grid-template-columns: repeat(3, 1fr);
+			}
+			@media (max-width: 991px) {
+				grid-template-columns: repeat(2, 1fr);
+			}
+			@media (max-width: 650px) {
+				grid-template-columns: repeat(1, 1fr);
+			}
+		}
+
+		&.itinerary-6-per-row {
+			grid-template-columns: repeat(6, 1fr);
+			@media (max-width: 1199px) {
+				grid-template-columns: repeat(3, 1fr);
+			}
+			@media (max-width: 991px) {
+				grid-template-columns: repeat(2, 1fr);
+			}
+			@media (max-width: 650px) {
+				grid-template-columns: repeat(1, 1fr);
+			}
+		}
+
+		&.itinerary-7-per-row {
+			grid-template-columns: repeat(7, 1fr);
+			@media (max-width: 1199px) {
+				grid-template-columns: repeat(3, 1fr);
+			}
+			@media (max-width: 991px) {
+				grid-template-columns: repeat(2, 1fr);
+			}
+			@media (max-width: 650px) {
+				grid-template-columns: repeat(1, 1fr);
+			}
+		}
+
+		&.itinerary-8-per-row {
+			grid-template-columns: repeat(8, 1fr);
+			@media (max-width: 1199px) {
+				grid-template-columns: repeat(3, 1fr);
+			}
+			@media (max-width: 991px) {
+				grid-template-columns: repeat(2, 1fr);
+			}
+			@media (max-width: 650px) {
+				grid-template-columns: repeat(1, 1fr);
+			}
+		}
+
+		&.itinerary-9-per-row {
+			grid-template-columns: repeat(9, 1fr);
+			@media (max-width: 1199px) {
+				grid-template-columns: repeat(3, 1fr);
+			}
+			@media (max-width: 991px) {
+				grid-template-columns: repeat(2, 1fr);
+			}
+			@media (max-width: 650px) {
+				grid-template-columns: repeat(1, 1fr);
+			}
+		}
+	}
 	// Style from travel log.
 	.post-item-wrapper {
 		overflow: hidden;
 		position: relative;
 		background: #fff;
 		margin-bottom: 30px;
+		padding-bottom: 25px;
 		cursor: default;
-		padding-bottom: 0px;
 		box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
 		.post-thumb {
 			position: relative;
@@ -1702,7 +1813,7 @@
 		}
 		.post-content {
 			padding: 20px 15px;
-			position: relative;
+			// position: relative;
 			width: 100%;
 			bottom: 0;
 			left: 0;
@@ -1727,7 +1838,14 @@
 					text-decoration: none;
 					margin-bottom: 10px;
 				}
+				
+			}
+			.post-meta{
+				position: absolute;
+				bottom: 15px;
+				width:calc( 100% - 30px );
 				span{
+					float: left;
 					font-size: 14px;
 					display: block;
 					color: #666;
@@ -1735,23 +1853,24 @@
 						padding-right: 5px;
 					}
 				}
-			}
-			.read-more-link {
-				position: absolute;
-				bottom: 20px;
-				right:20px;
-				font-size: 12px;
-				font-weight: bold;
-				letter-spacing: 1px;
-				&:after {
-					content: '\f105';
-					font-family: "wt-icon-solid";
-					padding-left: 8px;
+				.read-more-link {
+					float: right;
+					// position: absolute;
+					bottom: 20px;
+					right:20px;
+					font-size: 12px;
+					font-weight: bold;
+					letter-spacing: 1px;
+					&:after {
+						content: '\f105';
+						font-family: "wt-icon-solid";
+						padding-left: 8px;
+					}
 				}
-			}
-			
-			.read-more-link:hover {
-				color: #b0b0b0;
+				
+				.read-more-link:hover {
+					color: #b0b0b0;
+				}
 			}
 			h4:hover,
 			.read-more-link:hover {
