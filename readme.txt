@@ -249,6 +249,9 @@ Before updating plugin please check ["our latest release notes"](#developers).
 = 5.3.0 =
 Release Date: 28th July 2022
 
+Enhancement:
+* Added Shortcode `WP_TRAVEL_TRIP_CATEGORY_ITEMS` to display the trips under selected terms.
+
 Fixes:
 * Fixed License tab not working in case of multisite network activate.
 
