@@ -276,22 +276,17 @@ class Wp_Travel_Shortcodes {
 		if ( count( $terms ) > 0 ) {
 			?>
 				<div class="wp-travel-itinerary-items">
-					<div class="wp-travel-itinerary-items wptravel-archive-wrapper grid-view itinerary-<?php echo esc_attr( $col_per_row ); ?>-per-row" >
+					<div class="wp-travel-itinerary-items wptravel-archive-wrapper grid-view itinerary-3-per-row" >
 						<?php
 						foreach ( $terms as $term ) {
 							?>
 							<div class="post-item-wrapper">
-								<a href="<?php echo esc_url( get_term_link( $term->term_id ) ); ?>">
-									<div class="post-thumb">
-										<?php echo wptravel_get_term_thumbnail( $term->term_id ); // @phpcs:ignore ?>
-									</div>
-									<span class="effect"></span>
-									<div class="post-content">
-										<h4 class="post-title"><?php echo esc_html( $term->name . ' (' . $term->count . ')' ); ?></h4>
-										<div class="read-more-link">View</div>
-									</div>
-								</a>
-							</div>
+								<div class="post-thumb">
+									<a href="<?php echo esc_url( get_term_link( $term->term_id ) ); ?>"><?php echo wptravel_get_term_thumbnail( $term->term_id ); // @phpcs:ignore ?></a>
+								</div>
+								<div class="post-content">
+									<h4 class="post-title"><a href="<?php echo esc_url( get_term_link( $term->term_id ) ); ?>"><?php echo esc_html( $term->name ); ?></a><span><i class="fas fa-suitcase-rolling"></i> <?php printf( _n( '%s Trip available', '%s Trips available', $term->count, 'wp-travel' ), esc_html( $term->count ) ); // @phpcs:ignore ?></span></h4>
+									<div class="read-more-link"><a href="<?php echo esc_url( get_term_link( $term->term_id ) ); ?>"><?php esc_html_e( 'View', 'wp-travel' ); ?></a></div></div></div>
 							<?php
 						}
 						?>
@@ -299,7 +294,7 @@ class Wp_Travel_Shortcodes {
 				</div>
 			<?php
 		} else {
-
+			echo esc_html( 'Trips not found !!', 'wp-travel' );
 		}
 		$content = ob_get_contents();
 		ob_end_clean();
