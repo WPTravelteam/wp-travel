@@ -1781,7 +1781,7 @@
 		}
 	}
 	// Style from travel log.
-	.post-item-wrapper {
+	.taxonomy-item-wrapper {
 		overflow: hidden;
 		position: relative;
 		background: #fff;
@@ -1789,7 +1789,7 @@
 		padding-bottom: 25px;
 		cursor: default;
 		box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
-		.post-thumb {
+		.taxonomy-thumb {
 			position: relative;
 			overflow: hidden;
 			a{display: block; color:#fff}
@@ -1811,7 +1811,7 @@
 				}
 			}
 		}
-		.post-content {
+		.taxonomy-content {
 			padding: 20px 15px;
 			// position: relative;
 			width: 100%;
@@ -1840,7 +1840,7 @@
 				}
 				
 			}
-			.post-meta{
+			.taxonomy-meta{
 				position: absolute;
 				bottom: 15px;
 				width:calc( 100% - 30px );
@@ -1853,7 +1853,7 @@
 						padding-right: 5px;
 					}
 				}
-				.read-more-link {
+				.taxonomy-read-more-link {
 					float: right;
 					// position: absolute;
 					bottom: 20px;
@@ -1868,12 +1868,12 @@
 					}
 				}
 				
-				.read-more-link:hover {
+				.taxonomy-read-more-link:hover {
 					color: #b0b0b0;
 				}
 			}
 			h4:hover,
-			.read-more-link:hover {
+			.taxonomy-read-more-link:hover {
 				-webkit-transition: all 0.4s ease-in;
 				-moz-transition: all 0.4s ease-in;
 				-ms-transition: all 0.4s ease-in;

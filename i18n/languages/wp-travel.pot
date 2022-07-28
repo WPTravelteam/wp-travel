@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 5.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-28 06:14:30+00:00\n"
+"POT-Creation-Date: 2022-07-28 08:12:37+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2748,13 +2748,13 @@ msgstr ""
 msgid "No Trip Extras found in Trash."
 msgstr ""
 
-#: inc/class-shortcode.php:288
+#: inc/class-shortcode.php:290
 msgid "%s Trip available"
 msgid_plural "%s Trips available"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/class-shortcode.php:289
+#: inc/class-shortcode.php:291
 msgid "View"
 msgstr ""
 

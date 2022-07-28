@@ -280,15 +280,15 @@ class Wp_Travel_Shortcodes {
 						<?php
 						foreach ( $terms as $term ) {
 							?>
-							<div class="post-item-wrapper">
-								<div class="post-thumb">
+							<div class="taxonomy-item-wrapper">
+								<div class="taxonomy-thumb">
 									<a href="<?php echo esc_url( get_term_link( $term->term_id ) ); ?>"><?php echo wptravel_get_term_thumbnail( $term->term_id ); // @phpcs:ignore ?></a>
 								</div>
-								<div class="post-content">
-									<h4 class="post-title"><a href="<?php echo esc_url( get_term_link( $term->term_id ) ); ?>"><?php echo esc_html( $term->name ); ?></a></h4>
-									<div class="post-meta">
+								<div class="taxonomy-content">
+									<h4 class="taxonomy-title"><a href="<?php echo esc_url( get_term_link( $term->term_id ) ); ?>"><?php echo esc_html( $term->name ); ?></a></h4>
+									<div class="taxonomy-meta">
 										<span><i class="fas fa-suitcase-rolling"></i> <?php printf( _n( '%s Trip available', '%s Trips available', $term->count, 'wp-travel' ), esc_html( $term->count ) ); // @phpcs:ignore ?></span>
-										<div class="read-more-link"><a href="<?php echo esc_url( get_term_link( $term->term_id ) ); ?>"><?php esc_html_e( 'View', 'wp-travel' ); ?></a></div></div></div>
+										<div class="taxonomy-read-more-link"><a href="<?php echo esc_url( get_term_link( $term->term_id ) ); ?>"><?php esc_html_e( 'View', 'wp-travel' ); ?></a></div></div></div>
 									</div>
 							<?php
 						}
