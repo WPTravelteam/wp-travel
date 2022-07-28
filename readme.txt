@@ -255,6 +255,9 @@ Enhancement:
 Fixes:
 * Fixed License tab not working in case of multisite network activate.
 
+Layout Fixes:
+* Fixed Trip archive page pagination style in grid view.
+
 = 5.2.9 =
 Release Date: 21st July 2022
 
