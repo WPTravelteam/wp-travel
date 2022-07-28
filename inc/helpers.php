@@ -435,6 +435,34 @@ function wptravel_get_post_thumbnail( $post_id, $size = 'wp_travel_thumbnail' ) 
 }
 
 /**
+ * Get term thumbnail.
+ *
+ * @param  int    $term_id term ID.
+ * @param  string $size    Image size.
+ * @since 5.3.0
+ * @return string          Image tag.
+ */
+function wptravel_get_term_thumbnail( $term_id, $size = 'wp_travel_thumbnail' ) {
+	if ( ! $term_id ) {
+		return;
+	}
+	$thumbnail_id = get_term_meta( $term_id, 'wp_travel_trip_type_image_id', true ); // @todo Meta name for the image is wrong. it must not be named with trip type. must be generic. 
+
+	$image_src = '';
+	if ( $thumbnail_id ) {
+		$size     = apply_filters( 'wp_travel_itinerary_thumbnail_size', $size );
+		$img_data = wp_get_attachment_image_src( $thumbnail_id, $size );
+		if ( is_array( $img_data ) && count( $img_data ) > 0 ) {
+			$image_src = $img_data[0];
+		}
+	}
+	if ( ! $image_src ) {
+		$image_src = wptravel_get_post_placeholder_image_url();
+	}
+	return '<img width="100%" height="100%" src="' . $image_src . '">';
+}
+
+/**
  * Get post thumbnail URL.
  *
  * @param  int    $post_id Post ID.

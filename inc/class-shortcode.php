@@ -24,8 +24,8 @@ class Wp_Travel_Shortcodes {
 		add_shortcode( 'wp_travel_trip_facts', array( $this, 'trip_facts_shortcode' ) );
 		add_shortcode( 'wp_travel_trip_enquiry_form', array( $this, 'trip_enquiry_form_shortcode' ) );
 
-		add_shortcode( 'WP_TRAVEL_TRIP_TAXONOMIES', array( $this, 'get_taxonomy_shortcode' ) );
-		add_shortcode( 'wp_travel_trip_taxonomies', array( $this, 'get_taxonomy_shortcode' ) );
+		add_shortcode( 'WP_TRAVEL_TRIP_CATEGORY_ITEMS', array( $this, 'get_category_items_shortcode' ) );
+		add_shortcode( 'wp_travel_trip_category_items', array( $this, 'get_category_items_shortcode' ) );
 
 		/**
 		 * Checkout Shortcodes.
@@ -106,7 +106,7 @@ class Wp_Travel_Shortcodes {
 	}
 
 	/**
-	 * Booking Form.
+	 * List of trips as per shortcode attrs.
 	 *
 	 * @return HTMl Html content.
 	 */
@@ -228,6 +228,77 @@ class Wp_Travel_Shortcodes {
 		</div>
 		<?php
 		wp_reset_query();
+		$content = ob_get_contents();
+		ob_end_clean();
+		return $content;
+	}
+
+	/**
+	 * List of taxonomies along with number of trips.
+	 *
+	 * @since 5.3.0
+	 * @return HTMl Html content.
+	 */
+	public static function get_category_items_shortcode( $shortcode_atts, $content = '' ) {
+
+		$default = array(
+			'taxonomy'   => 'travel_locations',
+			'orderby'    => 'name',
+			'order'      => 'ASC',
+			'hide_empty' => false,
+			'number'     => '',
+			'include'    => array(),
+			'exclude'    => array(),
+		);
+
+		$atts = shortcode_atts( $default, $shortcode_atts, 'WP_TRAVEL_ITINERARIES' );
+
+		// Convert string attr into bool.
+		if ( 'string' === gettype( $atts['hide_empty'] ) ) {
+			$atts['hide_empty'] = 'true' === $atts['hide_empty'] ? true : false;
+		}
+
+		$args = array(
+			'taxonomy'   => $atts['taxonomy'],
+			'orderby'    => $atts['orderby'],
+			'order'      => $atts['order'],
+			'hide_empty' => $atts['hide_empty'],
+			'number'     => $atts['number'],
+			'include'    => $atts['include'],
+			'exclude'    => $atts['exclude'],
+		);
+
+		$the_query = new WP_Term_Query( $args );
+		$terms     = $the_query->get_terms();
+
+		ob_start();
+
+		if ( count( $terms ) > 0 ) {
+			?>
+				<div class="wp-travel-itinerary-items">
+					<div class="wp-travel-itinerary-items wptravel-archive-wrapper grid-view itinerary-3-per-row" >
+						<?php
+						foreach ( $terms as $term ) {
+							?>
+							<div class="taxonomy-item-wrapper">
+								<div class="taxonomy-thumb">
+									<a href="<?php echo esc_url( get_term_link( $term->term_id ) ); ?>"><?php echo wptravel_get_term_thumbnail( $term->term_id ); // @phpcs:ignore ?></a>
+								</div>
+								<div class="taxonomy-content">
+									<h4 class="taxonomy-title"><a href="<?php echo esc_url( get_term_link( $term->term_id ) ); ?>"><?php echo esc_html( $term->name ); ?></a></h4>
+									<div class="taxonomy-meta">
+										<span><i class="fas fa-suitcase-rolling"></i> <?php printf( _n( '%s Trip available', '%s Trips available', $term->count, 'wp-travel' ), esc_html( $term->count ) ); // @phpcs:ignore ?></span>
+										<div class="taxonomy-read-more-link"><a href="<?php echo esc_url( get_term_link( $term->term_id ) ); ?>"><?php esc_html_e( 'View', 'wp-travel' ); ?></a></div></div></div>
+									</div>
+							<?php
+						}
+						?>
+					</div>
+				</div>
+			<?php
+		} else {
+			echo esc_html( 'Trips not found !!', 'wp-travel' );
+		}
 		$content = ob_get_contents();
 		ob_end_clean();
 		return $content;

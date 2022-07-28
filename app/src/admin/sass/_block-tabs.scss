@@ -1,7 +1,8 @@
 #wp-travel-settings-block-wrapper {
 	display: flex;
 	padding-right: 18px;
-	#wp-travel-settings-block {
+	#wp-travel-settings-block,
+	#wp-travel-network-settings-block {
 		flex: 1;
 	}
 	.wp-travel-setting-system-info {

@@ -3,7 +3,7 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 5.2.9
+ * Version: 5.3.0
  * Author: WP Travel
  * Author URI: http://wptravel.io/
  * Requires at least: 5.4.1
@@ -37,7 +37,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '5.2.9';
+		public $version = '5.3.0';
 
 		/**
 		 * WP Travel API version.
@@ -209,7 +209,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @return void
 		 */
 		public function network_menu() {
-			add_menu_page( __( 'Settings', 'wp-travel' ), __( 'WP Travel', 'wp-travel' ), 'manae_options', 'wp_travel_network_settings', array( 'WpTravel_Network_Settings', 'setting_page_callback' ), 'dashicons-wp-travel', 10 );
+			add_menu_page( __( 'Settings', 'wp-travel' ), __( 'WP Travel', 'wp-travel' ), 'manae_options', 'wp_travel_network_settings', array( 'WpTravel_Network_Settings', 'setting_page_callback_new' ), 'dashicons-wp-travel', 10 );
 		}
 
 		/**
