@@ -246,7 +246,7 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
 
-= 5.3.0 =
+= 5.3.1 =
 Release Date:
 
 Fixes:

@@ -265,7 +265,15 @@ function wptravel_enabled_payment_gateways() {
 /** Return true if Payment checked */
 function wptravel_is_payment_enabled() {
 	$enabled_payment_gateways = wptravel_enabled_payment_gateways();
-	return ! empty( $enabled_payment_gateways ) ? true : false;
+
+	$enabled = ! empty( $enabled_payment_gateways ) ? true : false;
+	/**
+	 * Filter to customize whether payment enabled or not.
+	 *
+	 * @since 5.3.1
+	 */
+	$enabled = apply_filters( 'wptravel_is_payment_enabled', $enabled );
+	return $enabled;
 }
 
 /** Return true if Payment checked */
