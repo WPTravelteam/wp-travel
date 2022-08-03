@@ -144,15 +144,6 @@ function wptravel_book_now() {
 		}
 	}
 
-	// Insert/Update Booking IDs in user meta to fetch bookings of those user.
-	if ( is_user_logged_in() ) {
-		$user              = wp_get_current_user();
-		$saved_booking_ids = get_user_meta( $user->ID, 'wp_travel_user_bookings', true );
-		$saved_booking_ids = ! $saved_booking_ids ? array() : $saved_booking_ids;
-		array_push( $saved_booking_ids, $booking_id );
-		update_user_meta( $user->ID, 'wp_travel_user_bookings', $saved_booking_ids );
-	}
-
 	$settings       = wptravel_get_settings();
 	$customer_email = isset( $_POST['wp_travel_email_traveller'] ) ? wptravel_sanitize_array( wp_unslash( $_POST['wp_travel_email_traveller'] ) ) : array(); // @phpcs:ignore
 	reset( $customer_email );
@@ -171,25 +162,6 @@ function wptravel_book_now() {
 		$booking_count     = ( isset( $booking_count ) && '' !== $booking_count ) ? $booking_count : 0;
 		$new_booking_count = $booking_count + 1;
 		update_post_meta( $trip_id, 'wp_travel_booking_count', sanitize_text_field( $new_booking_count ) );
-
-		if ( is_user_logged_in() ) {
-
-			$user = wp_get_current_user();
-
-			if ( in_array( 'wp-travel-customer', (array) $user->roles, true ) ) {
-
-				$saved_booking_ids = get_user_meta( $user->ID, 'wp_travel_user_bookings', true );
-
-				if ( ! $saved_booking_ids ) {
-					$saved_booking_ids = array();
-				}
-
-				array_push( $saved_booking_ids, $booking_id );
-
-				update_user_meta( $user->ID, 'wp_travel_user_bookings', $saved_booking_ids );
-
-			}
-		}
 
 		/**
 		 * Add Support for invertory addon options.
@@ -253,8 +225,20 @@ function wptravel_book_now() {
 
 	$require_login_to_checkout = isset( $settings['enable_checkout_customer_registration'] ) ? $settings['enable_checkout_customer_registration'] : 'no'; // if required login then there is registration option as well. so we continue if this is no.
 	$create_user_while_booking = isset( $settings['create_user_while_booking'] ) ? $settings['create_user_while_booking'] : 'no';
-	if ( 'no' === $require_login_to_checkout && 'yes' === $create_user_while_booking && ! is_user_logged_in() ) {
-		wptravel_create_new_customer( $customer_email );
+
+	if ( is_user_logged_in() ) {
+		$user    = wp_get_current_user();
+		$user_id = $user->ID;
+	} elseif ( 'no' === $require_login_to_checkout && 'yes' === $create_user_while_booking && ! is_user_logged_in() ) {
+		$user_id = wptravel_create_new_customer( $customer_email );
+	} else {
+		$user_id = null;
+	}
+	if ( $user_id && ! is_wp_error( $user_id ) ) {
+		$saved_booking_ids = get_user_meta( $user_id, 'wp_travel_user_bookings', true );
+		$saved_booking_ids = ! $saved_booking_ids ? array() : $saved_booking_ids;
+		array_push( $saved_booking_ids, $booking_id );
+		update_user_meta( $user_id, 'wp_travel_user_bookings', $saved_booking_ids );
 	}
 	// Clear Transient To update booking Count.
 	// delete_site_transient( "_transient_wt_booking_count_{$trip_id}" );.

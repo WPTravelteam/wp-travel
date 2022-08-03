@@ -249,13 +249,14 @@ Before updating plugin please check ["our latest release notes"](#developers).
 = 5.3.1 =
 Release Date:
 
+Tweaks:
+* Hooks added `wptravel_send_booking_email_to_client`.
+* Hooks modified `wp_travel_payment_email_tags` added new `booking id` param in the hook.
+
 Fixes:
 * Fixed Trip enquiry showing alert message.
 * Fixed Trip enquiry data not showing in admin enquiry detail page.
-
-Tweaks:
-Hooks added
-Hooks modified `wp_travel_payment_email_tags` added new booking id param in the hook.
+* Fixed User dashboard not showing booking when enable registration on booking is enabled.
 
 = 5.3.0 =
 Release Date: 28th July 2022
