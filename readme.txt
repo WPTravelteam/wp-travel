@@ -254,6 +254,7 @@ Tweaks:
 * Hooks modified `wp_travel_payment_email_tags` added new `booking id` param in the hook.
 
 Fixes:
+* Fixed WPML Compatibility with WP Travel Checkout Page. Now Mini cart section edit, remove trip are working along with all payment methods.
 * Fixed Trip enquiry showing alert message.
 * Fixed Trip enquiry data not showing in admin enquiry detail page.
 * Fixed User dashboard not showing booking when enable registration on booking is enabled.

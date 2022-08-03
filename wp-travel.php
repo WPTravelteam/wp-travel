@@ -618,7 +618,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 						return (int) $cart_page_id === $page_id;
 					case 'checkout':
 						$checkout_page_id = isset( $settings['checkout_page_id'] ) ? (int) $settings['checkout_page_id'] : 0;
-						return (int) $checkout_page_id === $page_id;
+						return ( (int) $checkout_page_id === $page_id || wptravel_post_content_has_shortcode( 'wp_travel_checkout' ) );
 					case 'dashboard':
 						$dashboard_page_id = isset( $settings['dashboard_page_id'] ) ? (int) $settings['dashboard_page_id'] : 0;
 						$is_account_page   = apply_filters( 'wp_travel_is_account_page', false ); // phpcs:ignore
