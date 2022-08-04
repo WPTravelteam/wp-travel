@@ -1446,53 +1446,59 @@ function wptravel_excerpt_length( $length ) {
  *
  * @param  Int    $range range.
  * @param  String $pages Number of pages.
+ * 
+ * @since 1.0.0
+ * @since 5.3.1 added Query and hashlink param.
  * @return HTML
  */
-function wptravel_pagination( $range = 2, $pages = '' ) {
-	if ( get_post_type() !== WP_TRAVEL_POST_TYPE ) {
-		return;
-	}
-
-	$showitems = ( $range * 2 ) + 1;
-
-	global $paged;
-	if ( empty( $paged ) ) {
-		$paged = 1;
-	}
-
-	if ( '' == $pages ) {
-		global $wp_query;
-		$pages = $wp_query->max_num_pages;
-		if ( ! $pages ) {
-			$pages = 1;
+function wptravel_pagination( $range = 2, $pages = '', $the_query = null, $hashlink = '' ) {
+	if ( get_post_type() === WP_TRAVEL_POST_TYPE || get_post_type() === 'itinerary-booking' ) {
+		$showitems = ( $range * 2 ) + 1;
+	
+		global $paged;
+		if ( empty( $paged ) ) {
+			$paged = 1;
 		}
-	}
-	$pagination = '';
-	if ( 1 != $pages ) {
-		$pagination .= '<nav class="wp-travel-navigation navigation wp-paging-navigation">';
-		$pagination .= '<ul class="wp-page-numbers">';
-		if ( $paged > 1 && $showitems < $pages ) {
-			$pagination .= sprintf( '<li><a class="prev wp-page-numbers" href="%s">&laquo; </a></li>', get_pagenum_link( $paged - 1 ) );
-		}
-
-		for ( $i = 1; $i <= $pages; $i++ ) {
-			if ( 1 != $pages && ( ! ( $i >= $paged + $range + 1 || $i <= $paged - $range - 1 ) || $pages <= $showitems ) ) {
-				if ( $paged == $i ) {
-
-					$pagination .= sprintf( '<li><a class="wp-page-numbers current" href="javascript:void(0)">%d</a></li>', $i );
-				} else {
-					$pagination .= sprintf( '<li><a class="wp-page-numbers" href="%s">%d</a></li>', get_pagenum_link( $i ), $i );
+	
+		if ( '' == $pages ) {
+			if ( $the_query ) {
+				$pages = $the_query->max_num_pages;
+			} else {
+				global $wp_query;
+				$pages = $wp_query->max_num_pages;
+				if ( ! $pages ) {
+					$pages = 1;
 				}
 			}
 		}
-
-		if ( $paged < $pages && $showitems < $pages ) {
-			$pagination .= sprintf( '<li><a class="next wp-page-numbers" href="%s">&raquo; </a></li>', get_pagenum_link( $paged + 1 ) );
+		$pagination = '';
+		if ( 1 != $pages ) {
+			$pagination .= '<nav class="wp-travel-navigation navigation wp-paging-navigation">';
+			$pagination .= '<ul class="wp-page-numbers">';
+			if ( $paged > 1 && $showitems < $pages ) {
+				$pagination .= sprintf( '<li><a class="prev wp-page-numbers" href="%s">&laquo; </a></li>', get_pagenum_link( $paged - 1 ) . $hashlink );
+			}
+	
+			for ( $i = 1; $i <= $pages; $i++ ) {
+				if ( 1 != $pages && ( ! ( $i >= $paged + $range + 1 || $i <= $paged - $range - 1 ) || $pages <= $showitems ) ) {
+					if ( $paged == $i ) {
+	
+						$pagination .= sprintf( '<li><a class="wp-page-numbers current" href="javascript:void(0)">%d</a></li>', $i );
+					} else {
+						$pagination .= sprintf( '<li><a class="wp-page-numbers" href="%s">%d</a></li>', get_pagenum_link( $i ) . $hashlink, $i );
+					}
+				}
+			}
+	
+			if ( $paged < $pages && $showitems < $pages ) {
+				$pagination .= sprintf( '<li><a class="next wp-page-numbers" href="%s">&raquo; </a></li>', get_pagenum_link( $paged + 1 ) . $hashlink );
+			}
+	
+			$pagination .= "</nav>\n";
+			echo $pagination; // @phpcs:ignore
 		}
-
-		$pagination .= "</nav>\n";
-		echo $pagination; // @phpcs:ignore
 	}
+
 }
 
 /**

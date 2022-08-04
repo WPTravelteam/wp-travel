@@ -249,6 +249,9 @@ Before updating plugin please check ["our latest release notes"](#developers).
 = 5.3.1 =
 Release Date:
 
+Enhancement:
+* Added All trips booking list for admin in WP Travel Dashboard.
+
 Tweaks:
 * Hooks added `wptravel_send_booking_email_to_client`.
 * Hooks modified `wp_travel_payment_email_tags` added new `booking id` param in the hook.
