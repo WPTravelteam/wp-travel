@@ -25,16 +25,16 @@ global $comment;
 
 $rating = intval( get_comment_meta( $comment->comment_ID, '_wp_travel_rating', true ) ); ?>
 
-<li itemprop="review" itemscope itemtype="http://schema.org/Review" <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
+<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
 
 	<div id="comment-<?php comment_ID(); ?>" class="comment_container">
 
 		<?php echo get_avatar( $comment, apply_filters( 'wp_travel_review_gravatar_size', '60' ), '' ); ?>
 
 		<div class="comment-text">
-			<div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="wp-travel-average-review" title="<?php echo sprintf( __( 'Rated %d out of 5', 'wp-travel' ), $rating ); ?>">
+			<div class="wp-travel-average-review" title="<?php echo sprintf( __( 'Rated %d out of 5', 'wp-travel' ), $rating ); ?>">
 				<a>
-				 <span style="width:<?php echo esc_attr( ( $rating / 5 ) * 100 ); ?>%"><strong itemprop="ratingValue"><?php echo $rating; ?></strong> <?php _e( 'out of 5', 'wp-travel' ); ?></span>
+				 <span style="width:<?php echo esc_attr( ( $rating / 5 ) * 100 ); ?>%"><strong><?php echo $rating; ?></strong> <?php _e( 'out of 5', 'wp-travel' ); ?></span>
 				</a>
 			</div>
 
@@ -47,14 +47,14 @@ $rating = intval( get_comment_meta( $comment->comment_ID, '_wp_travel_rating', t
 			<?php else : ?>
 
 				<p class="meta">
-					<strong itemprop="author"><?php comment_author(); ?></strong>&ndash; <time itemprop="datePublished" datetime="<?php echo get_comment_date( 'c' ); ?>"><?php echo get_comment_date( get_option( 'date_format' ) ); ?></time>:
+					<strong><?php comment_author(); ?></strong>&ndash; <time datetime="<?php echo get_comment_date( 'c' ); ?>"><?php echo get_comment_date( get_option( 'date_format' ) ); ?></time>:
 				</p>
 
 			<?php endif; ?>
 
 			<?php do_action( 'wp_travel_review_before_comment_text', $comment ); ?>
 
-			<div itemprop="description" class="description"><?php comment_text(); ?></div>
+			<div class="description"><?php comment_text(); ?></div>
 			<div class="reply">
 			<?php
 			// Reply Link.
