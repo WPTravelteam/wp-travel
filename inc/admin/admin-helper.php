@@ -33,7 +33,7 @@ function wptravel_marketplace_page() {
 			'name'       => __( 'Travel Base Pro', 'wp-travel' ),
 			'type'       => 'premium',
 			'img_url'    => plugins_url( '/wp-travel/assets/images/themes/travel-base-pro.png' ),
-			'demo_url'   => 'https://wptravel.io/demo/?demo=travel-base-pro',
+			'demo_url'   => 'https://themepalace.com/downloads/travel-base-pro/',
 			'detail_url' => 'https://themepalace.com/downloads/travel-base-pro/',
 		),
 		'travel-base'         => array(
