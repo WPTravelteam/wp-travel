@@ -60,31 +60,27 @@ if ( ! function_exists( 'wptravel_account_tab_content' ) ) {
 				<?php
 			}
 		} else {
+			$is_administrator = current_user_can( 'administrator' );
 			?>
 			<div class="my-order">
-				<?php if ( ( ! empty( $bookings ) && is_array( $bookings ) ) || WP_USER_ADMIN ) : ?>
+				<?php if ( ( ! empty( $bookings ) && is_array( $bookings ) ) || $is_administrator ) : ?>
 					<div class="view-order">
 						<div class="order-list">
 							<div class="order-wrapper">
-								
 								<?php
 								$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 								$args  = array(
 									'post_type' => 'itinerary-booking',
 									'paged'     => $paged,
 								);
-								if ( ! WP_USER_ADMIN ) {
-									$args[ 'post__in' ] = $bookings;
+								if ( ! $is_administrator ) {
+									$args['post__in'] = $bookings;
 								}
 								// The Query
 								$the_query = new WP_Query( $args );
-								// echo '<hr>';
-								// echo '<pre>';
-								// print_r( $the_query );
-								// echo '</pre>';
-								// echo '<hr>';
+
 								?>
-								<h3><?php esc_html_e( 'Your Bookings', 'wp-travel' ); ?> (<?php echo esc_html($the_query->found_posts); ?>)</h3>
+								<h3><?php esc_html_e( 'Your Bookings', 'wp-travel' ); ?> (<?php echo esc_html( $the_query->found_posts ); ?>)</h3>
 								<div class="table-wrp">
 								<table class="order-list-table">
 									<thead>
@@ -230,7 +226,7 @@ if ( ! function_exists( 'wptravel_account_tab_content' ) ) {
 						wptravel_pagination( $pagination_range, $max_num_pages, $the_query, '#bookings' );
 						wp_reset_postdata();
 
-						 ?>
+						?>
 						<div class="book-more">
 							<a href="<?php echo esc_url( get_post_type_archive_link( WP_TRAVEL_POST_TYPE ) ); ?>"><?php esc_html_e( 'Book more ?', 'wp-travel' ); ?></a>
 						</div>

@@ -251,6 +251,7 @@ Release Date:
 
 Enhancement:
 * Added All trips booking list for admin in WP Travel Dashboard.
+* Added All Payment information under Payments tabs in WP Travel Dashboard.
 
 Tweaks:
 * Hooks added `wptravel_send_booking_email_to_client`.

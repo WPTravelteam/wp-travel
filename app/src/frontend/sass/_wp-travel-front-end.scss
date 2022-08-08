@@ -1878,8 +1878,10 @@ li {
 	}
 }
 
-#wp-travel-tab-content-bookings {
+#wp-travel-tab-content-bookings,
+.mfp-content {
 	.my-order {
+		background-color: #fff;
 		.order-wrapper {
 			> h3 {
 				display: block;
