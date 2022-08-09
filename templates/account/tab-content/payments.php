@@ -82,27 +82,27 @@ if ( ! function_exists( 'wptravel_payments_tab_content' ) ) {
 											$ajax_url = add_query_arg( '_nonce', WP_Travel::create_nonce(), $ajax_url );
 											?>
 											<tr class="tbody-content">
-												<td class="name" data-title="#<?php echo esc_html( get_the_date() ); ?>">
+												<td class="name" data-title="<?php esc_html_e( 'Payment Date', 'wp-travel' ); ?>">
 													<div class="name-title">
 														<?php echo esc_html( get_the_date() ); ?>
 													</div>
 												</td>
-												<td class="name" data-title="#<?php echo esc_html( $payment_id ); ?>">
+												<td class="name" data-title="<?php esc_html_e( 'Payment ID', 'wp-travel' ); ?>">
 													<div class="name-title">
 														#<?php echo esc_html( $payment_id ); ?>
 													</div>
 												</td>
-												<td class="booking-status" data-title="<?php esc_html_e( 'Booking Status', 'wp-travel' ); ?>">
+												<td class="booking-status" data-title="<?php esc_html_e( 'Payment Method', 'wp-travel' ); ?>">
 													<div class="contact-title">
 														<?php echo esc_html( $payment_method ); ?>
 													</div>
 												</td>
-												<td class="payment-status" data-title="<?php esc_html_e( 'Payment Status', 'wp-travel' ); ?>">
+												<td class="payment-status" data-title="<?php esc_html_e( 'Payment Amount', 'wp-travel' ); ?>">
 													<div class="contact-title">
 														<?php echo wptravel_get_formated_price_currency( $payment_amount ); // @phpcs:ignore ?>
 													</div>
 												</td>
-												<td class="payment-status" data-title="<?php esc_html_e( 'Payment Status', 'wp-travel' ); ?>">
+												<td class="payment-status" data-title="<?php esc_html_e( 'Action', 'wp-travel' ); ?>">
 													<div class="contact-title">
 														<a class="wptravel-payment-popup" href="<?php echo esc_url( $ajax_url ); ?>">
 															<?php esc_html_e( 'Detail', 'wp-travel' ); ?>
