@@ -40,6 +40,12 @@ class Wp_Travel_User_Account {
 				'menu_content_cb' => array( __CLASS__, 'dashboard_menu_bookings_tab' ),
 				'priority'        => 20,
 			),
+			'payments'  => array(
+				'menu_title'      => __( 'Payments', 'wp-travel' ),
+				'menu_icon'       => 'wt-icon wt-icon-credit-card',
+				'menu_content_cb' => array( __CLASS__, 'dashboard_menu_payments_tab' ),
+				'priority'        => 20,
+			),
 			'address'   => array(
 				'menu_title'      => __( 'Address', 'wp-travel' ),
 				'menu_icon'       => 'wt-icon-regular wt-icon-address-book',
@@ -70,6 +76,9 @@ class Wp_Travel_User_Account {
 
 	public static function dashboard_menu_bookings_tab( $args ) {
 		echo wptravel_get_template_html( 'account/tab-content/bookings.php', $args ); //@phpcs:ignore
+	}
+	public static function dashboard_menu_payments_tab( $args ) {
+		echo wptravel_get_template_html( 'account/tab-content/payments.php', $args ); //@phpcs:ignore
 	}
 
 	public static function dashboard_menu_address_tab( $args ) {

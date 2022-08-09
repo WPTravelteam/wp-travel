@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 5.4.1
 Tested up to: 6.0.1
 Requires PHP: 5.6
-Stable tag: 5.3.0
+Stable tag: 5.3.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -245,6 +245,24 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 5.3.1 =
+Release Date:  9th August 2022
+
+Enhancement:
+* Added all trips booking list for admin in WP Travel User Dashboard.
+* Added all payment information under Payments tabs in WP Travel User Dashboard.
+
+Tweaks:
+* Hooks added `wptravel_send_booking_email_to_client`.
+* Hooks modified `wp_travel_payment_email_tags` added new `booking id` param in the hook.
+
+Fixes:
+* Fixed WPML Compatibility with WP Travel Checkout Page. Now Mini cart section edit, and remove trip are working along with all payment methods.
+* Fixed Trip Enquiry showing an alert message.
+* Fixed Trip Enquiry data not showing on admin enquiry detail page.
+* Fixed WP Travel User Dashboard not showing booking when `enable registration` on booking is `enabled`.
+* Fixed Voucher Submit from WP Travel User Dashboard not submitting the voucher issue. 
 
 = 5.3.0 =
 Release Date: 28th July 2022

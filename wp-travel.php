@@ -3,7 +3,7 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 5.3.0
+ * Version: 5.3.1
  * Author: WP Travel
  * Author URI: http://wptravel.io/
  * Requires at least: 5.4.1
@@ -37,7 +37,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '5.3.0';
+		public $version = '5.3.1';
 
 		/**
 		 * WP Travel API version.
@@ -262,7 +262,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/core/helpers/dev.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/core/helpers/layout.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/core/helpers/localize.php', WP_TRAVEL_ABSPATH );
-			
+
 			include sprintf( '%s/inc/class-assets.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-default-form-fields.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-wp-travel-emails.php', WP_TRAVEL_ABSPATH );
@@ -401,6 +401,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			require WP_TRAVEL_ABSPATH . '/core/ajax/clone.php';
 			require WP_TRAVEL_ABSPATH . '/core/ajax/trips.php';
 			require WP_TRAVEL_ABSPATH . '/core/ajax/view-mode.php';
+			require WP_TRAVEL_ABSPATH . '/core/ajax/payments.php';
 
 			/**
 			 * App Part.
@@ -618,7 +619,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 						return (int) $cart_page_id === $page_id;
 					case 'checkout':
 						$checkout_page_id = isset( $settings['checkout_page_id'] ) ? (int) $settings['checkout_page_id'] : 0;
-						return (int) $checkout_page_id === $page_id;
+						return ( (int) $checkout_page_id === $page_id || wptravel_post_content_has_shortcode( 'wp_travel_checkout' ) );
 					case 'dashboard':
 						$dashboard_page_id = isset( $settings['dashboard_page_id'] ) ? (int) $settings['dashboard_page_id'] : 0;
 						$is_account_page   = apply_filters( 'wp_travel_is_account_page', false ); // phpcs:ignore

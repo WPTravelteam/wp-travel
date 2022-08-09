@@ -156,38 +156,12 @@ function wptravel_add_enquiries_data_metaboxes() {
  * WP Travel Enquiries Info
  */
 function wptravel_enquiries_info() {
-	include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
-
-	global $post_id;
-
-	$enquiry_data = get_post_meta( $post_id, 'wp_travel_trip_enquiry_data', true );
-	$form_fields  = wptravel_enquiries_form_fields();
-
-	$priority = array();
-	foreach ( $form_fields as $key => $row ) {
-		$form_fields[ $key ]['default'] = ! empty( $enquiry_data[ $row['name'] ] ) ? $enquiry_data[ $row['name'] ] : '';
-		$priority[ $key ]               = isset( $row['priority'] ) ? $row['priority'] : 1;
-	}
-	array_multisort( $priority, SORT_ASC, $form_fields );
-
-	$wp_travel_post_id = isset( $enquiry_data['post_id'] ) ? $enquiry_data['post_id'] : '';
-
-	$wp_travel_itinerary_list = wptravel_get_itineraries_array(); ?>
-
+	?>
 	<div class="wp-travel-booking-form-wrapper">
-	
-	  <script>
-	  jQuery(function($){
-		$('#post').parsley();
-	  });
-	  </script>
-
 		<div id="wp_travel_enquiries">
+		</div>
 	</div>
-	</div>
-
 	<?php
-
 }
 
 /*

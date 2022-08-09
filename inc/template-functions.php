@@ -852,7 +852,7 @@ function wptravel_single_location( $trip_id ) {
 				</div>
 				<div class="travel-info">
 					<span class="value">
-						<?php 
+						<?php
 						if ( $trip_duration_night > 0 ) {
 							printf( '%1$s %2$s %3$s %4$s', esc_html( $trip_duration ), esc_html( $days_text ),  esc_html( $trip_duration_night ), esc_html( $nights_text ) ); // @phpcs:ignore 
 						} else {
@@ -1446,53 +1446,60 @@ function wptravel_excerpt_length( $length ) {
  *
  * @param  Int    $range range.
  * @param  String $pages Number of pages.
+ *
+ * @since 1.0.0
+ * @since 5.3.1 added Query and hashlink param.
  * @return HTML
  */
-function wptravel_pagination( $range = 2, $pages = '' ) {
-	if ( get_post_type() !== WP_TRAVEL_POST_TYPE ) {
-		return;
-	}
+function wptravel_pagination( $range = 2, $pages = '', $the_query = null, $hashlink = '' ) {
+	$pagination_allowed = array( WP_TRAVEL_POST_TYPE, 'itinerary-booking', 'wp-travel-payment' );
+	if ( in_array( get_post_type(), $pagination_allowed, true ) ) {
+		$showitems = ( $range * 2 ) + 1;
 
-	$showitems = ( $range * 2 ) + 1;
-
-	global $paged;
-	if ( empty( $paged ) ) {
-		$paged = 1;
-	}
-
-	if ( '' == $pages ) {
-		global $wp_query;
-		$pages = $wp_query->max_num_pages;
-		if ( ! $pages ) {
-			$pages = 1;
-		}
-	}
-	$pagination = '';
-	if ( 1 != $pages ) {
-		$pagination .= '<nav class="wp-travel-navigation navigation wp-paging-navigation">';
-		$pagination .= '<ul class="wp-page-numbers">';
-		if ( $paged > 1 && $showitems < $pages ) {
-			$pagination .= sprintf( '<li><a class="prev wp-page-numbers" href="%s">&laquo; </a></li>', get_pagenum_link( $paged - 1 ) );
+		global $paged;
+		if ( empty( $paged ) ) {
+			$paged = 1;
 		}
 
-		for ( $i = 1; $i <= $pages; $i++ ) {
-			if ( 1 != $pages && ( ! ( $i >= $paged + $range + 1 || $i <= $paged - $range - 1 ) || $pages <= $showitems ) ) {
-				if ( $paged == $i ) {
-
-					$pagination .= sprintf( '<li><a class="wp-page-numbers current" href="javascript:void(0)">%d</a></li>', $i );
-				} else {
-					$pagination .= sprintf( '<li><a class="wp-page-numbers" href="%s">%d</a></li>', get_pagenum_link( $i ), $i );
+		if ( '' == $pages ) {
+			if ( $the_query ) {
+				$pages = $the_query->max_num_pages;
+			} else {
+				global $wp_query;
+				$pages = $wp_query->max_num_pages;
+				if ( ! $pages ) {
+					$pages = 1;
 				}
 			}
 		}
+		$pagination = '';
+		if ( 1 != $pages ) {
+			$pagination .= '<nav class="wp-travel-navigation navigation wp-paging-navigation">';
+			$pagination .= '<ul class="wp-page-numbers">';
+			if ( $paged > 1 && $showitems < $pages ) {
+				$pagination .= sprintf( '<li><a class="prev wp-page-numbers" href="%s">&laquo; </a></li>', get_pagenum_link( $paged - 1 ) . $hashlink );
+			}
 
-		if ( $paged < $pages && $showitems < $pages ) {
-			$pagination .= sprintf( '<li><a class="next wp-page-numbers" href="%s">&raquo; </a></li>', get_pagenum_link( $paged + 1 ) );
+			for ( $i = 1; $i <= $pages; $i++ ) {
+				if ( 1 != $pages && ( ! ( $i >= $paged + $range + 1 || $i <= $paged - $range - 1 ) || $pages <= $showitems ) ) {
+					if ( $paged == $i ) {
+
+						$pagination .= sprintf( '<li><a class="wp-page-numbers current" href="javascript:void(0)">%d</a></li>', $i );
+					} else {
+						$pagination .= sprintf( '<li><a class="wp-page-numbers" href="%s">%d</a></li>', get_pagenum_link( $i ) . $hashlink, $i );
+					}
+				}
+			}
+
+			if ( $paged < $pages && $showitems < $pages ) {
+				$pagination .= sprintf( '<li><a class="next wp-page-numbers" href="%s">&raquo; </a></li>', get_pagenum_link( $paged + 1 ) . $hashlink );
+			}
+
+			$pagination .= "</nav>\n";
+			echo $pagination; // @phpcs:ignore
 		}
-
-		$pagination .= "</nav>\n";
-		echo $pagination; // @phpcs:ignore
 	}
+
 }
 
 /**
@@ -2080,7 +2087,7 @@ function wptravel_get_archive_view_mode( $sanitized_get = array() ) {
 	if ( isset( $sanitized_get['view_mode'] ) && ( 'grid' === $sanitized_get['view_mode'] || 'list' === $sanitized_get['view_mode'] ) ) {
 		$view_mode = sanitize_text_field( wp_unslash( $sanitized_get['view_mode'] ) );
 	}
-	$view_mode = isset( $_COOKIE[ 'wptravel_view_mode' ] ) && $_COOKIE[ 'wptravel_view_mode' ] ? $_COOKIE[ 'wptravel_view_mode' ] : $view_mode;
+	$view_mode = isset( $_COOKIE['wptravel_view_mode'] ) && $_COOKIE['wptravel_view_mode'] ? $_COOKIE['wptravel_view_mode'] : $view_mode;
 	return $view_mode;
 }
 

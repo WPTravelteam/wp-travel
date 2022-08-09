@@ -64,11 +64,13 @@ function wptravel_submit_bank_deposit_slip() {
 
 		$ext = strtolower( pathinfo( $target_file, PATHINFO_EXTENSION ) );
 
+		$upload_ok = false;
 		if ( in_array( $ext, $allowed_ext ) ) {
-
-			$move = move_uploaded_file( $tmp_name, $target_file );
-			if ( $move ) {
-				$upload_ok = true;
+			if ( isset( $_FILES['wp_travel_bank_deposit_slip']['tmp_name'] ) ) {
+				$move = move_uploaded_file( $_FILES['wp_travel_bank_deposit_slip']['tmp_name'], $target_file );
+				if ( $move ) {
+					$upload_ok = true;
+				}
 			}
 		} else {
 

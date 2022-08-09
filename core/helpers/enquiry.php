@@ -33,11 +33,18 @@ class WpTravel_Helpers_Enquiry {
 			);
 
 		}
-		$enquiry_name    = get_post_meta( $enquiry_id, 'wp_travel_enquiry_name', true );
-		$enquiry_email   = get_post_meta( $enquiry_id, 'wp_travel_enquiry_email', true );
-		$enquiry_query   = get_post_meta( $enquiry_id, 'wp_travel_enquiry_query', true );
-		$enquiry_trip    = get_post_meta( $enquiry_id, 'wp_travel_trip_enquiry_data', true );
-		$enquiry_trip_id = isset( $enquiry_trip['post_id'] ) ? $enquiry_trip['post_id'] : '';
+		$enquiry_data     = get_post_meta( $enquiry_id, 'wp_travel_trip_enquiry_data', true );
+
+		if ( is_array( $enquiry_data ) && count( $enquiry_data ) > 0 ) {
+			$enquiry_name    = $enquiry_data['wp_travel_enquiry_name'];
+			$enquiry_email   = $enquiry_data['wp_travel_enquiry_email'];
+			$enquiry_query   = $enquiry_data['wp_travel_enquiry_query'];
+			$enquiry_trip_id = isset( $enquiry_data['post_id'] ) ? $enquiry_data['post_id'] : '';
+		} else {
+			$enquiry_name    = get_post_meta( $enquiry_id, 'wp_travel_enquiry_name', true );
+			$enquiry_email   = get_post_meta( $enquiry_id, 'wp_travel_enquiry_email', true );
+			$enquiry_trip_id = isset( $enquiry_data['post_id'] ) ? $enquiry_data['post_id'] : '';
+		}
 		$enq_data        = array(
 			'trips'                   => $mapped_trip,
 			'wp_travel_enquiry_name'  => $enquiry_name,

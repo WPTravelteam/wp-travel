@@ -265,7 +265,15 @@ function wptravel_enabled_payment_gateways() {
 /** Return true if Payment checked */
 function wptravel_is_payment_enabled() {
 	$enabled_payment_gateways = wptravel_enabled_payment_gateways();
-	return ! empty( $enabled_payment_gateways ) ? true : false;
+
+	$enabled = ! empty( $enabled_payment_gateways ) ? true : false;
+	/**
+	 * Filter to customize whether payment enabled or not.
+	 *
+	 * @since 5.3.1
+	 */
+	$enabled = apply_filters( 'wptravel_is_payment_enabled', $enabled );
+	return $enabled;
 }
 
 /** Return true if Payment checked */
@@ -483,7 +491,13 @@ function wptravel_send_email_payment( $booking_id ) {
 		'{payment_details}'        => WpTravel_Helpers_Payment::render_payment_details( $booking_id ),
 	);
 
-	$email_tags = apply_filters( 'wp_travel_payment_email_tags', $email_tags );
+	/**
+	 * Hook To modify payment email Tag
+	 *
+	 * @since 2.0.1
+	 * @since 5.3.1 Added booking id Param.
+	 */
+	$email_tags = apply_filters( 'wp_travel_payment_email_tags', $email_tags, $booking_id );
 
 	$email          = new WP_Travel_Emails();
 	$reply_to_email = isset( $settings['wp_travel_from_email'] ) ? $settings['wp_travel_from_email'] : $site_admin_email;
