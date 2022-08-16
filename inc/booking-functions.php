@@ -68,8 +68,8 @@ function wptravel_book_now() {
 		$price_key              = isset( $price_keys[0] ) ? $price_keys[0] : '';
 		$arrival_date           = $arrival_date[0];
 		$departure_date         = $departure_date[0];
-		$pricing_id             = $pricing_id[0];
-		$trip_time              = $trip_time[0];
+		// $pricing_id             = $pricing_id[0];
+		// $trip_time              = $trip_time[0];
 		$arrival_date_email_tag = wptravel_format_date( $arrival_date_email_tag[0], true, 'Y-m-d' );
 	}
 	$trip_id = isset( $trip_ids[0] ) ? $trip_ids[0] : 0;
@@ -151,6 +151,7 @@ function wptravel_book_now() {
 	$customer_email = isset( $customer_email[ $first_key ][0] ) ? $customer_email[ $first_key ][0] : '';
 
 	// Update single trip vals. // Need Enhancement. lots of loop with this $items in this functions.
+	$i = 0; // need this to catch respective pricing_id and trip_id of the item in items loop
 	foreach ( $items as $item_key => $trip ) {
 
 		$trip_id      = $trip['trip_id'];
@@ -171,10 +172,10 @@ function wptravel_book_now() {
 		$args = array(
 			'trip_id'       => $trip_id,
 			'booking_id'    => $booking_id,
-			'pricing_id'    => $pricing_id,
+			'pricing_id'    => $pricing_id[ $i ],
 			'pax'           => $pax,
 			'selected_date' => $arrival_date, // [used in inventory].
-			'time'          => $trip_time,
+			'time'          => $trip_time[ $i ],
 			'price_key'     => $price_key, // Just for legacy. Note: Not used for inventory [For Email].
 		);
 		/**
@@ -189,6 +190,8 @@ function wptravel_book_now() {
 		do_action( 'wp_travel_trip_inventory', $inventory_args ); // phpcs:ignore
 		do_action( 'wptravel_trip_inventory', $inventory_args );
 		// End of Inventory.
+
+		$i++;
 	}
 
 	/**
