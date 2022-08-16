@@ -9,6 +9,10 @@
 	"config": {
 		"platform": {
 			"php": "5.6"
+		},
+		"allow-plugins": {
+			"cweagans/composer-patches": true,
+			"dealerdirect/phpcodesniffer-composer-installer": true
 		}
 	},
 	"require-dev": {

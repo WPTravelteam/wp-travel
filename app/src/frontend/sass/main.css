@@ -5229,7 +5229,8 @@ ul.availabily-list .availabily-content.sold-out > div.date-from:after {
 }
 
 .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li.pricing_unavailable .trip_list_by_fixed_departure_dates_price .minus_ribbon {
-  border-color: transparent #c7d0d9 transparent transparent;
+  border-color: transparent #c7d0d9 transparent
+ transparent;
 }
 
 .trip_list_by_fixed_departure_dates .trip_list_by_fixed_departure_dates_list > li:hover:not(.pricing_unavailable) {
@@ -12496,8 +12497,10 @@ label.radio-checkbox-label input[type="checkbox"], label.radio-checkbox-label .w
   -webkit-transform: translateY(-2em);
           transform: translateY(-2em);
   z-index: 2;
-  -webkit-transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
-  transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+  -webkit-transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s,
+ z-index 0s linear 0.01s;
+  transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s,
+ z-index 0s linear 0.01s;
 }
 
 .entry-meta .category-list-items .sub-category-menu a {
@@ -13069,7 +13072,8 @@ label.radio-checkbox-label input[type="checkbox"], label.radio-checkbox-label .w
 .wptravel-layout-v2 .wptravel-archive-wrapper.grid-view .view-box .view-content .right-content {
   width: 100%;
   text-align: left;
-  margin: 20px 0;
+  /* margin: 20px 0; */
+  margin: 5px 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

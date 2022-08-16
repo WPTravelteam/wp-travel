@@ -1765,3 +1765,27 @@
 		
 	}
 }
+
+.related-trips-arrange-frontend {
+	.view-box {
+		.left-content {
+			header {
+				// width: 324px;
+				height: 100px;
+			}
+		}
+		.right-content {
+			.footer-wrapper {
+				width: 324px;
+				height: 46px;
+			}
+		}
+	}
+}
+
+.view-box{
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
