@@ -110,6 +110,20 @@ class WpTravel_Helpers_Trips {
 		if ( empty( $trip_facts ) ) {
 			$trip_facts = array();
 		}
+
+		$new_trip_facts = array();
+		# don't display those facts which have been removed from global setting
+		if( count( $trip_facts ) > 0 ){
+			foreach( $trip_facts as $f ){
+				$id = $f[ 'fact_id' ];
+				if( isset( $settings_facts[ $id ] ) ){
+					$new_trip_facts[] = $f;
+				}
+			}
+		}
+
+		$trip_facts = $new_trip_facts;
+
 		foreach ( $trip_facts as $key => $trip_fact ) {
 			$trip_fact_id = $trip_fact['fact_id'];
 			if ( isset( $settings_facts[ $trip_fact_id ] ) ) { // To check if current trip facts id matches the settings trip facts id. If matches then get icon and label.

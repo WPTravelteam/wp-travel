@@ -247,6 +247,8 @@ Before updating plugin please check ["our latest release notes"](#developers).
 == Changelog ==
 
 = 5.3.2 =
+* Fixed inventory issue in multiple checkout mode 
+* Fixed general issue in trip facts
 
 = 5.3.1 =
 Release Date:  9th August 2022
