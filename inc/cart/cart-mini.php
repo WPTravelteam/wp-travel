@@ -367,18 +367,32 @@ if ( wptravel_is_react_version_enabled() ) {
 						$tax      = $cart['cart']['tax'] ? $cart['cart']['total']['tax'] : 0;
 						?>
 						<li style="<?php echo esc_attr( $display ); ?>" data-wpt-extra-field>
-							<label><?php echo sprintf( esc_html__( 'Tax(%s):', 'wp-travel' ), $tax_rate . '%' ); ?></label>
+							<label>
+								<?php 
+									$tax_label = apply_filters( 'wptravel_checkout_tax_label', esc_html__( 'Tax', 'wp-travel' ), $tax_rate, $cart );
+									echo sprintf( '%s(%s%%)',
+										$tax_label,
+										$tax_rate
+									);
+								?>							
+							</label>
 							<div class="price"><strong data-wpt-cart-tax="<?php echo esc_attr( $tax ); ?>"><?php echo '+ ' . wptravel_get_formated_price_currency( $tax ); ?></strong></div>
 						</li>
 
 						<li data-wpt-trip-total="<?php echo esc_attr( $total ); ?>" class="wp-travel-payable-amount selected-payable-amount" >
-							<label><?php echo esc_html__( 'Total:', 'wp-travel' ); ?></label>
+							<label>
+								<?php 
+									$total_label = apply_filters( 'wptravel_checkout_total_label', esc_html__( 'Total:', 'wp-travel' ), $cart );
+									echo esc_html( $total_label );
+								?>									
+							</label>
 							<div class="price"><strong data-wpt-cart-net-total="<?php echo esc_attr( $total ); ?>"><?php echo wptravel_get_formated_price_currency( $total ); ?></strong></div>
 						</li>
 						<li data-wpt-trip-partial-gross-total="<?php echo esc_attr( $total_partial ); ?>" style="display:none" >
 							<label>
 								<?php
-								esc_html_e( 'Total upfront', 'wp-travel' );
+								$total_upfront_label = apply_filters( 'wptravel_checkout_total_upfront_label', esc_html__( 'Total upfront', 'wp-travel' ), $cart );
+								echo esc_html( $total_upfront_label );
 								echo '(' . esc_html( $payout_percent ) . '%)';
 								?>
 							</label>
