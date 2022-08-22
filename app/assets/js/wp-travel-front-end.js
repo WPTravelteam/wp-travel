@@ -704,13 +704,3 @@ if ( container && container.length > 0 ) {
     });
     }
 }
-
-//related trips 
-// jQuery(document).ready(function($){
- 
-//     $(".wp-travel-related-posts").addClass("related-trips-arrange-frontend");
-//     // $(".price-here").addClass("left-content-margin-reset");
-
-    
-  
-// });
