@@ -206,3 +206,14 @@
         margin-left: 16px;
     }
 }
+
+//wishlist icon for sidebar
+.grid-view .favourite .fa-bookmark:before {
+    position: relative;
+    left: -12px;
+}
+
+.description-left .favourite .fa-bookmark:before {
+    position: relative;
+    left: -16px !important;
+}

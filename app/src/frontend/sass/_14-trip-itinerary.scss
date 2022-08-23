@@ -206,3 +206,18 @@
         margin-left: 16px;
     }
 }
+
+.grid-view .favourite .fa-bookmark:before {
+    position: relative;
+    left: -12px;
+}
+
+.grid-view  .fa-bookmark:before {
+    position: relative;
+    left: -12px;
+}
+
+.description-left  .fa-bookmark:before {
+    position: relative;
+    left: -16px !important;
+}
