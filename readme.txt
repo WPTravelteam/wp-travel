@@ -249,6 +249,7 @@ Before updating plugin please check ["our latest release notes"](#developers).
 = 5.3.2 =
 * Fixed inventory issue in multiple checkout mode 
 * Fixed general issue in trip facts
+* Fixed magnific popup issue for payment receipt 
 
 = 5.3.1 =
 Release Date:  9th August 2022

@@ -420,7 +420,7 @@ jQuery(function ($) {
 
     // popup
     $('.wp-travel-magnific-popup').magnificPopup({
-        type: 'inline',
+        type: 'image',
     });
 
     // Pax Picker for categorized pricing
