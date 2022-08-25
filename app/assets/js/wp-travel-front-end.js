@@ -420,6 +420,10 @@ jQuery(function ($) {
 
     // popup
     $('.wp-travel-magnific-popup').magnificPopup({
+        type: 'inline',
+    });
+
+    $('.wp-travel-payment-receipt').magnificPopup({
         type: 'image',
     });
 

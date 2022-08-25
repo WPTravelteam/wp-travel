@@ -899,8 +899,8 @@
         }
     });
 
-    if( $('.wp-travel-magnific-popup').length > 0 && $().magnificPopup ){
-        $('.wp-travel-magnific-popup').magnificPopup({
+    if( $('.wp-travel-payment-receipt').length > 0 && $().magnificPopup ){
+        $('.wp-travel-payment-receipt').magnificPopup({
             type: 'image',
         });
     }
