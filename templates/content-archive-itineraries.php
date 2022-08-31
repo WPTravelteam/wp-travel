@@ -35,6 +35,7 @@ if ( post_password_required() ) {
 	<?php $view_mode = wptravel_get_archive_view_mode( $sanitized_get ); ?>
 	<?php if ( 'list' === $view_mode ) : ?>
 		<article class="wp-travel-default-article">
+			<?php wptravel_save_offer( get_the_ID() ); ?>
 			<div class="wp-travel-article-image-wrap">
 				<a href="<?php the_permalink(); ?>">
 					<?php echo wptravel_get_post_thumbnail( get_the_ID() ); ?>

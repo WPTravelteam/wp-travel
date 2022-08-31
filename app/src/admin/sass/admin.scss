@@ -25,4 +25,14 @@
 	.mfp-bg {
 		background: transparent;
 	}
+
+	.mfp-image-holder{
+		.mfp-content{
+			max-width: 80%;
+		}
+
+		.mfp-close{
+			cursor:pointer;
+		}
+	}
 }

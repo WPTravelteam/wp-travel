@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP Travel 5.3.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-24 10:15:43+00:00\n"
+"POT-Creation-Date: 2022-08-25 08:52:34+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -371,35 +371,35 @@ msgstr ""
 msgid "Select Files from Your Computer"
 msgstr ""
 
-#: core/helpers/payment.php:40 inc/helpers.php:2762
+#: core/helpers/payment.php:39 inc/helpers.php:2762
 msgid "Payment Details"
 msgstr ""
 
-#: core/helpers/payment.php:44 core/helpers/strings.php:222
+#: core/helpers/payment.php:43 core/helpers/strings.php:222
 #: inc/admin/admin-helper.php:454 inc/admin/class-dashboard-widgets.php:57
 #: inc/framework/form/class.field.php:76 inc/helpers.php:2765
 #: templates/itineraries-list.php:57 upgrade/400.php:390 upgrade/400.php:425
 msgid "Date"
 msgstr ""
 
-#: core/helpers/payment.php:45 inc/helpers.php:2766
+#: core/helpers/payment.php:44 inc/helpers.php:2766
 msgid "Payment ID / Txn ID"
 msgstr ""
 
-#: core/helpers/payment.php:46 inc/helpers.php:2767
+#: core/helpers/payment.php:45 inc/helpers.php:2767
 #: templates/account/tab-content/payments.php:60
 #: templates/account/tab-content/payments.php:95
 msgid "Payment Method"
 msgstr ""
 
-#: core/helpers/payment.php:47 inc/email-template-functions.php:1328
+#: core/helpers/payment.php:46 inc/email-template-functions.php:1328
 #: inc/email-template-functions.php:1534 inc/form-fields.php:210
 #: inc/helpers.php:2768 templates/account/tab-content/payments.php:61
 #: templates/account/tab-content/payments.php:100
 msgid "Payment Amount"
 msgstr ""
 
-#: core/helpers/payment.php:84 inc/helpers.php:2803
+#: core/helpers/payment.php:83 inc/helpers.php:2803
 msgid "View Payment Receipt"
 msgstr ""
 
