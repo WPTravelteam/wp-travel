@@ -235,6 +235,13 @@ class WpTravel_Helpers_Pricings {
 		}
 		global $wpdb;
 		$table = $wpdb->prefix . 'wt_pricings';
+
+		$results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$table} WHERE trip_id=%d AND title=%s", $trip_id, $pricing_data['title'] ) );
+		
+		if( $results ){
+			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_DUPLICATE_PRICING' );
+		}
+
 		$wpdb->insert(
 			$table,
 			array(

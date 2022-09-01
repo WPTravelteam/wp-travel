@@ -153,6 +153,9 @@ class WP_Travel_Helpers_Error_Codes {
 			'WP_TRAVEL_ATTACHMENT_NOT_FOUND'              => array(
 				'message' => __( 'The Attachment not found.', 'wp-travel' ),
 			),
+			'WP_TRAVEL_DUPLICATE_PRICING' => array(
+				'message' => __( 'Duplicate pricing for the trip.', 'wp-travel' ),
+			),
 		);
 
 		return apply_filters( 'wp_travel_error_codes', $error_codes, $args );
