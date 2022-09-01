@@ -253,7 +253,6 @@ Before updating plugin please check ["our latest release notes"](#developers).
 * Fixed duplicate price issue when publishing the trip directly
 * Fixed Payment detail not showing in booking while paid through Bank deposit
 
-
 = 5.3.1 =
 Release Date:  9th August 2022
 
