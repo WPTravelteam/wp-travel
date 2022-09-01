@@ -113,15 +113,18 @@ class WpTravel_Helpers_Trips {
 
 		$new_trip_facts = array();
 		# don't display those facts which have been removed from global setting
-		if( count( $trip_facts ) > 0 ){
+		if( is_array( $trip_facts ) && count( $trip_facts ) > 0 ){
 			foreach( $trip_facts as $f ){
-				$id = $f[ 'fact_id' ];
-				if( isset( $settings_facts[ $id ] ) ){
-					$new_trip_facts[] = $f;
+				$name = strtolower( $f[ 'label' ] );
+				foreach( $settings_facts as $s ){
+					$s_name = strtolower( $s[ 'name' ] );
+					if( $name == $s_name ){
+						$new_trip_facts[] = $f;
+					}
 				}
 			}
 		}
-
+		
 		$trip_facts = $new_trip_facts;
 
 		foreach ( $trip_facts as $key => $trip_fact ) {

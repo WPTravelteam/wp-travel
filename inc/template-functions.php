@@ -900,12 +900,16 @@ function wptravel_frontend_trip_facts( $trip_id ) {
 
 	$settings_facts = $settings['wp_travel_trip_facts_settings'];
 	$new_trip_facts = array();
+
 	# don't display those facts which have been removed from global setting
 	if( is_array( $wp_travel_trip_facts ) && count( $wp_travel_trip_facts ) > 0 ){
 		foreach( $wp_travel_trip_facts as $f ){
-			$id = $f[ 'fact_id' ];
-			if( isset( $settings_facts[ $id ] ) ){
-				$new_trip_facts[] = $f;
+			$name = strtolower( $f[ 'label' ] );
+			foreach( $settings_facts as $s ){
+				$s_name = strtolower( $s[ 'name' ] );
+				if( $name == $s_name ){
+					$new_trip_facts[] = $f;
+				}
 			}
 		}
 	}
