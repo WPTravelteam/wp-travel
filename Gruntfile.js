@@ -229,11 +229,9 @@ module.exports = function (grunt) {
 			my_target: {
 				files: {
 					'app/assets/js/wp-travel-frontend.bundle.js': [
-						// 'app/assets/js/lib/easy-responsive-tabs/easy-responsive-tabs.js',//easy-responsive-tabs ['jquery']
 						'app/assets/js/lib/datepicker/datepicker.js', // jquery-datepicker-lib
 						'app/assets/js/lib/jquery.magnific-popup/jquery.magnific-popup.min.js',
 						'app/assets/js/lib/slick/slick.min.js',
-						// 'app/assets/js/lib/modernizer/modernizr.min.js',
 						'app/assets/js/wp-travel-accordion.js',//wp-travel-accordion ['jquery','jquery-ui-accordion']
 						'app/assets/js/lib/parsley/parsley.min.js',
 						'app/assets/js/booking.js',//wp-travel-booking ['jquery']
@@ -245,15 +243,12 @@ module.exports = function (grunt) {
 						'app/assets/js/collapse.js',//collapse-js ['jquery]
 						'app/assets/js/lib/hc-sticky/hc-sticky.js',
 						'app/assets/js/wp-travel-front-end-map.js',
-						// 'app/assets/js/moment.min.js',
 					],
 					'app/assets/js/booking.min.js': ['app/assets/js/booking.js'],
-					// 'app/assets/js/moment.min.js': ['app/assets/js/moment.js'],
 					'app/assets/js/wp-travel-widgets.min.js': ['app/assets/js/wp-travel-widgets.js'],
 					'app/assets/js/wp-travel-accordion.min.js': ['app/assets/js/wp-travel-accordion.js'],
 					'app/assets/js/lib/easy-responsive-tabs/easy-responsive-tabs.min.js': ['app/assets/js/lib/easy-responsive-tabs/easy-responsive-tabs.js'],
 					'app/assets/js/collapse.min.js': ['app/assets/js/collapse.js'],
-					// 'app/assets/js/cart.min.js': ['app/assets/js/cart.js'],
 					'app/assets/js/wp-travel-view-mode.min.js': ['app/assets/js/wp-travel-view-mode.js'],
 					'app/assets/js/payment.min.js': ['app/assets/js/payment.js'],
 					'app/assets/js/booking.min.js': ['app/assets/js/booking.js'],

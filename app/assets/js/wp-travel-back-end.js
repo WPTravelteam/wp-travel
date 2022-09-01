@@ -899,4 +899,10 @@
         }
     });
 
+    if( $('.wp-travel-payment-receipt').length > 0 && $().magnificPopup ){
+        $('.wp-travel-payment-receipt').magnificPopup({
+            type: 'image',
+        });
+    }
+
 }(jQuery));

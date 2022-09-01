@@ -1,3 +1,38 @@
 // This file need to enqued in all pages
 @import "../../sass/abstracts/variables/variables";
 @import "../../sass/typography/wt-icon"; // Contents Menu logo icon class here.
+.wp-admin.post-type-itinerary-booking{
+	.mfp-wrap{
+		z-index: 9999;
+		position: fixed;
+	  top: 0;
+	  left: 0;
+	  right: 0;
+	  bottom: 30px;
+	  width: 100%;
+	  height: 100%;	
+	}
+
+	.mfp-container {
+		background: rgba(0, 0, 0, 0.7803921569);
+	}
+
+	.mfp-figure:after {
+		display: none;
+	}
+
+	.mfp-content,
+	.mfp-bg {
+		background: transparent;
+	}
+
+	.mfp-image-holder{
+		.mfp-content{
+			max-width: 80%;
+		}
+
+		.mfp-close{
+			cursor:pointer;
+		}
+	}
+}

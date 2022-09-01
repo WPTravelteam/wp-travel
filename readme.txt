@@ -3,9 +3,9 @@ Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 5.4.1
-Tested up to: 6.0.1
+Tested up to: 6.0.2
 Requires PHP: 5.6
-Stable tag: 5.3.1
+Stable tag: 5.3.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -245,6 +245,18 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 5.3.2 =
+Release Date:  1st September 2022
+
+Fixes:
+* Fixed Trip name and trip code not displaying in dashboard while booking directly
+* Fixed Payment detail not showing in booking while paid through Bank deposit
+* Fixed save % tag not displayed in List view in v1 layout
+* Fixed duplicate price issue when publishing the trip directly
+* Fixed general issue in trip facts
+* Fixed inventory issue in multiple checkout mode 
+* Fixed magnific popup issue for payment receipt 
 
 = 5.3.1 =
 Release Date:  9th August 2022

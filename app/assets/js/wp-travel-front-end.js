@@ -423,6 +423,10 @@ jQuery(function ($) {
         type: 'inline',
     });
 
+    $('.wp-travel-payment-receipt').magnificPopup({
+        type: 'image',
+    });
+
     // Pax Picker for categorized pricing
     $(document).on('click', '.paxpicker .icon-users', function (e) {
         if ($(this).closest('.paxpicker').hasClass('is-active')) {

@@ -35,16 +35,6 @@ class WpTravel_Helpers_Payment { // @phpcs:ignore
 		if ( $payment_data && count( $payment_data ) > 0 ) {
 			$payment_id   = wptravel_get_payment_id( $booking_id );
 			$payment_slip = get_post_meta( $payment_id, 'wp_travel_payment_slip_name', true );
-			if ( ! empty( $payment_slip ) ) {
-				$img_url = content_url( WP_TRAVEL_SLIP_UPLOAD_DIR . '/' . $payment_slip );
-				?>
-				<div class="wp-travel-bank-deposit-wrap">
-					<div id="wp-travel-magnific-popup-image" class="wp-travel-magnific-popup-image wp-travel-popup">
-						<img src="<?php echo esc_url( $img_url ); ?>" alt="Payment slip">
-					</div>
-				</div>
-				<?php
-			}
 			?>
 			<h3><?php esc_html_e( 'Payment Details', 'wp-travel' ); ?></h3>
 			<table class="wp-travel-table-content my-order-payment-details"  cellpadding="0" cellspacing="0" height="100%" width="100%" style="text-align: left;">
@@ -90,15 +80,7 @@ class WpTravel_Helpers_Payment { // @phpcs:ignore
 										if ( ! empty( $payment_slip ) ) {
 											$img_url = content_url( WP_TRAVEL_SLIP_UPLOAD_DIR . '/' . $payment_slip );
 											?>
-											<a href="#wp-travel-magnific-popup-image-payment-table" class="wp-travel-magnific-popup" ><span class="dashicons dashicons-media-document"></span> <?php esc_html_e( 'View Payment Receipt', 'wp-travel' ); ?></a>
-											<div id="wp-travel-magnific-popup-image-payment-table" class="wp-travel-magnific-popup-image wp-travel-popup">
-												<img src="<?php echo esc_url( $img_url ); ?>" alt="Payment slip">
-											</div>
-											<style>
-												td #wp-travel-magnific-popup-image-payment-table.wp-travel-popup{
-													display:none;
-												}
-											</style>
+											<a href="<?php echo esc_url( $img_url ); ?>" class="wp-travel-payment-receipt"><span class="dashicons dashicons-media-document"></span> <?php esc_html_e( 'View Payment Receipt', 'wp-travel' ); ?></a>
 											<?php
 										}
 									}

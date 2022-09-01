@@ -893,12 +893,28 @@ function wptravel_frontend_trip_facts( $trip_id ) {
 	$wp_travel_trip_facts = get_post_meta( $trip_id, 'wp_travel_trip_facts', true );
 
 	if ( is_string( $wp_travel_trip_facts ) && $wp_travel_trip_facts ) {
-
 		$wp_travel_trip_facts = json_decode( $wp_travel_trip_facts, true );
 	}
 
 	$i = 0;
 
+	$settings_facts = $settings['wp_travel_trip_facts_settings'];
+	$new_trip_facts = array();
+
+	# don't display those facts which have been removed from global setting
+	if( is_array( $wp_travel_trip_facts ) && count( $wp_travel_trip_facts ) > 0 ){
+		foreach( $wp_travel_trip_facts as $f ){
+			$name = strtolower( $f[ 'label' ] );
+			foreach( $settings_facts as $s ){
+				$s_name = strtolower( $s[ 'name' ] );
+				if( $name == $s_name ){
+					$new_trip_facts[] = $f;
+				}
+			}
+		}
+	}
+
+	$wp_travel_trip_facts = $new_trip_facts;
 	if ( is_array( $wp_travel_trip_facts ) && count( $wp_travel_trip_facts ) > 0 ) {
 		?>
 		<!-- TRIP FACTS -->
@@ -911,7 +927,6 @@ function wptravel_frontend_trip_facts( $trip_id ) {
 					 *
 					 * Modified @since v4.4.1
 					 */
-					$settings_facts = $settings['wp_travel_trip_facts_settings'];
 					foreach ( $wp_travel_trip_facts as $key => $trip_fact ) :
 						?>
 						<?php
