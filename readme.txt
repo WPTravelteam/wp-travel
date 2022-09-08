@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 5.4.1
 Tested up to: 6.0.2
 Requires PHP: 5.6
-Stable tag: 5.3.2
+Stable tag: 5.3.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -246,12 +246,22 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
 
+= 5.3.3 =
+Release Date: 
+
+Fixes:
+
 = 5.3.2 =
-* Fixed inventory issue in multiple checkout mode 
-* Fixed general issue in trip facts
-* Fixed magnific popup issue for payment receipt 
-* Fixed duplicate price issue when publishing the trip directly
+Release Date:  1st September 2022
+
+Fixes:
+* Fixed Trip name and trip code not displaying in dashboard while booking directly
 * Fixed Payment detail not showing in booking while paid through Bank deposit
+* Fixed save % tag not displayed in List view in v1 layout
+* Fixed duplicate price issue when publishing the trip directly
+* Fixed general issue in trip facts
+* Fixed inventory issue in multiple checkout mode 
+* Fixed magnific popup issue for payment receipt 
 
 = 5.3.1 =
 Release Date:  9th August 2022
