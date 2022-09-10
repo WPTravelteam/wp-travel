@@ -10,7 +10,7 @@
     "lint:php": "wp-scripts env lint-php",
     "postinstall": "husky install",
     "makepot": "wp i18n make-pot . i18n/languages/wp-travel-test.pot --exclude=node_modules,vendor,src,wordpress,build --skip-js",
-    "bundle": "wp-scripts build && npx grunt build"
+    "bundle": "wp-scripts build && npx grunt build_svn"
   },
   "repository": {
     "type": "git",

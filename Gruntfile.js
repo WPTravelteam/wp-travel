@@ -465,6 +465,7 @@ module.exports = function (grunt) {
 	grunt.registerTask('post_release', ['clean:post_build']);
 
 	grunt.registerTask('build', ['clean:deploy', 'pre_release', 'copy:build_it', 'zip']);
+	grunt.registerTask('build_svn', ['clean:deploy', 'assets', 'copy:build_it', 'zip']);
 };
 
 /**
