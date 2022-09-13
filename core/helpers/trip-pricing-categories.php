@@ -45,6 +45,7 @@ class WpTravel_Helpers_Trip_Pricing_Categories {
 		}
 
 		$results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}wt_price_category_relation WHERE `pricing_id` = %d", $pricing_id ) );
+
 		if ( empty( $results ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_PRICING_CATEGORIES' );
 		}
@@ -52,6 +53,12 @@ class WpTravel_Helpers_Trip_Pricing_Categories {
 		$categories = array();
 		$index      = 0;
 		foreach ( $results as $result ) {
+			
+			$pricing_category_id = absint( $result->pricing_category_id );
+			if( ! term_exists( $pricing_category_id, 'itinerary_pricing_category' ) ){
+				continue;
+			}
+
 			$regular_price = $result->regular_price;
 			$sale_price    = $result->sale_price;
 
@@ -66,7 +73,7 @@ class WpTravel_Helpers_Trip_Pricing_Categories {
 				}
 			}
 
-			$categories[ $index ]['id']              = absint( $result->pricing_category_id );
+			$categories[ $index ]['id']              = $pricing_category_id;
 			$categories[ $index ]['price_per']       = $result->price_per;
 			// $categories[ $index ]['regular_price']   = self::get_converted_price( $regular_price );
 			$categories[ $index ]['regular_price']   = $regular_price;
@@ -82,7 +89,7 @@ class WpTravel_Helpers_Trip_Pricing_Categories {
 			}
 
 			$categories[ $index ]['default_pax'] = ! empty( $result->default_pax ) ? absint( $result->default_pax ) : '0';
-			$term_info                           = WP_Travel_Helpers_Trip_Pricing_Categories_Taxonomy::get_trip_pricing_categories_term( absint( $result->pricing_category_id ) );
+			$term_info                           = WP_Travel_Helpers_Trip_Pricing_Categories_Taxonomy::get_trip_pricing_categories_term( $pricing_category_id );
 			if ( ! is_wp_error( $term_info ) && 'WP_TRAVEL_TRIP_PRICING_CATEGORIES_TAXONOMY_TERM' === $term_info['code'] ) {
 				$categories[ $index ]['term_info'] = $term_info['pricing_category_term_info'];
 			}

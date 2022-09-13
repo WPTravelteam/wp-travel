@@ -250,6 +250,7 @@ Before updating plugin please check ["our latest release notes"](#developers).
 Release Date: 
 
 Fixes:
+* Fixed Price not deleted when deleting pricing category
 
 = 5.3.2 =
 Release Date:  1st September 2022
