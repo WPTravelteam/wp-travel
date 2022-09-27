@@ -1,7 +1,7 @@
 {
   "name": "wp-travel",
   "version": "5.3.4",
-  "description": "Travel pluign for WordPress",
+  "description": "Travel plugin for WordPress",
   "main": "index.js",
   "scripts": {
     "setup": "composer install && yarn install && yarn bundle && wp-scripts env install",

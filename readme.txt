@@ -250,11 +250,11 @@ Before updating plugin please check ["our latest release notes"](#developers).
 Release Date: 27th September 2022
 
 Enhancement:
-* Added Shortcode `wptravel_trip_type` to display the Trip Type of trip. 
-* Added Shortcode `wptravel_activities` to display the Activity of trip. 
-* Added Shortcode `wptravel_group_size` to display the Group Size of trip. 
-* Added Shortcode `wptravel_reviews` to display the Review of trip. 
-* Added a hooks for remove Trip Type , Activity , Group Size and Review in a single trip page.
+* Added Shortcode `[wptravel_trip_type]` to display the Trip Type of trip. 
+* Added Shortcode `[wptravel_activities]` to display the Activity of trip. 
+* Added Shortcode `[wptravel_group_size]` to display the Group Size of trip. 
+* Added Shortcode `[wptravel_reviews]` to display the Review of trip. 
+* Added a hooks for remove `Trip Type` , `Activity` , `Group Size` and `Review` in a single trip page.
 
 = 5.3.3 =
 Release Date: 27th September 2022 
