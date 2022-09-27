@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 5.4.1
 Tested up to: 6.0.2
 Requires PHP: 5.6
-Stable tag: 5.3.3
+Stable tag: 5.3.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -246,8 +246,18 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
 
+= 5.3.4 =
+Release Date: 27th September 2022
+
+Enhancement:
+* Added Shortcode `wptravel_trip_type` to display the Trip Type of trip. 
+* Added Shortcode `wptravel_activities` to display the Activity of trip. 
+* Added Shortcode `wptravel_group_size` to display the Group Size of trip. 
+* Added Shortcode `wptravel_reviews` to display the Review of trip. 
+* Added a hooks for remove Trip Type , Activity , Group Size and Review in a single trip page.
+
 = 5.3.3 =
-Release Date: 
+Release Date: 27th September 2022 
 
 Fixes:
 * Fixed Price not deleted when deleting pricing category

@@ -1,6 +1,6 @@
 {
   "name": "wp-travel",
-  "version": "5.3.3",
+  "version": "5.3.4",
   "description": "Travel pluign for WordPress",
   "main": "index.js",
   "scripts": {
