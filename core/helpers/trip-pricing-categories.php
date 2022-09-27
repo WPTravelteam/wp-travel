@@ -55,6 +55,7 @@ class WpTravel_Helpers_Trip_Pricing_Categories {
 		foreach ( $results as $result ) {
 			
 			$pricing_category_id = absint( $result->pricing_category_id );
+			# pricing categories may be got deleted
 			if( ! term_exists( $pricing_category_id, 'itinerary_pricing_category' ) ){
 				continue;
 			}
