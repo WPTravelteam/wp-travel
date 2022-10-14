@@ -408,7 +408,7 @@ class WpTravel_Helpers_Trips {
 		}
 		update_post_meta( $trip_id, 'wp_travel_trip_facts', $trip_facts );
 
-		if ( ! empty( $trip_data->trip_overview ) ) {
+		if ( ! empty( $trip_data->trip_overview ) || empty( $trip_data->trip_overview ) ) {
 			/**
 			 * Save trip outline.
 			 *
@@ -417,7 +417,7 @@ class WpTravel_Helpers_Trips {
 			update_post_meta( $trip_id, 'wp_travel_overview', wp_kses_post( $trip_data->trip_overview ) );
 		}
 
-		if ( ! empty( $trip_data->trip_outline ) ) {
+		if ( ! empty( $trip_data->trip_outline ) || empty( $trip_data->trip_outline ) ) {
 			/**
 			 * Save trip outline.
 			 *
@@ -425,7 +425,7 @@ class WpTravel_Helpers_Trips {
 			 */
 			update_post_meta( $trip_id, 'wp_travel_outline', wp_kses_post( $trip_data->trip_outline ) );
 		}
-		if ( ! empty( $trip_data->trip_include ) ) {
+		if ( ! empty( $trip_data->trip_include ) || empty( $trip_data->trip_include ) ) {
 			/**
 			 * Save trip includes.
 			 *
@@ -433,7 +433,7 @@ class WpTravel_Helpers_Trips {
 			 */
 			update_post_meta( $trip_id, 'wp_travel_trip_include', wp_kses_post( $trip_data->trip_include ) );
 		}
-		if ( ! empty( $trip_data->trip_exclude ) ) {
+		if ( ! empty( $trip_data->trip_exclude ) || empty( $trip_data->trip_exclude ) ) {
 			/**
 			 * Save trip excludes.
 			 *

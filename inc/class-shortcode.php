@@ -131,6 +131,7 @@ class Wp_Travel_Shortcodes {
 		$id        = absint( $atts['id'] );
 		$slug      = $atts['slug'];
 		$limit     = absint( $atts['limit'] );
+		$order     = $atts['order'];
 
 		$args = array(
 			'post_type'      => WP_TRAVEL_POST_TYPE,
@@ -189,6 +190,15 @@ class Wp_Travel_Shortcodes {
 						// @todo: on v4
 					break;
 			}
+		}
+		if ( isset( $shortcode_atts['order'] ) )  {
+			$args = array(
+				'post_type'      => WP_TRAVEL_POST_TYPE,
+				'posts_per_page' => $limit,
+				'orderby' 		 => 'post_title' ,
+				'order'			 => $order ,
+				'status'         => 'published',
+			);
 		}
 		$col_per_row    = $atts['col'];
 		$layout_version = wptravel_layout_version();
