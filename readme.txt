@@ -257,6 +257,7 @@ Fixes:
 * Removed Dots (.) displaying in mail Footer section.
 * Fixed Empty data not saved in Overview , Itinerary (Trip Outline), and Include/Excludes Tabs
 * Fixed {booking_departure_date} email tag not working.
+* Trip duration in search filter widget not working
 
 Layout Fixes:
 * Fixed save % tag  issue in responsive.
