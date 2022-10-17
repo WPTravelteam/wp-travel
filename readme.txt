@@ -247,7 +247,7 @@ Before updating plugin please check ["our latest release notes"](#developers).
 == Changelog ==
 
 = 5.3.5 =
-Release Date: 17th October 2022
+Release Date: 18th October 2022
 
 Enhancement:
 * Added Shortcode `[WP_TRAVEL_ITINERARIES order="asc"]`to display the Trips in Ascending order.
@@ -255,9 +255,9 @@ Enhancement:
 
 Fixes:
 * Removed Dots (.) displaying in mail Footer section.
-* Fixed Empty data not saved in Overview , Itinerary (Trip Outline), and Include/Excludes Tabs
+* Fixed Empty data not saved in Overview , Itinerary (Trip Outline), and Include/Excludes Tabs.
 * Fixed {booking_departure_date} email tag not working.
-* Trip duration in search filter widget not working
+* Fixed Trip duration in search filter widget/Shortcode not working.
 
 Layout Fixes:
 * Fixed save % tag  issue in responsive.
