@@ -177,7 +177,7 @@ function wptravel_posts_clauses_filter( $post_clauses, $object ) {
 		$where .= ' ) ';
 
 		$post_clauses['join']     = $post_clauses['join'] . $join;
-		$post_clauses['fields']   = $post_clauses['fields'] . $fields;
+		$post_clauses['fields']   = $post_clauses['fields'] ;
 		$post_clauses['where']    = $post_clauses['where'] . $where;
 		$post_clauses['distinct'] = 'DISTINCT';
 	}

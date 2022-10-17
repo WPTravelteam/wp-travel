@@ -554,7 +554,7 @@ function wptravel_admin_email_template() {
 			</tr>
 			<tr class="wp-travel-footer" style="background: #fff;">
 				<td align="center" style="background: #eaebed;box-sizing: border-box;font-size: 14px;padding: 10px 25px;">
-					<p>{sitename} - <?php esc_html_e( 'Powered By', 'wp-travel' ); ?>: <a href="http://wptravel.io/" target="_blank" style="color: #5a418b;text-decoration: none;"><?php esc_html_e( 'WP Travel', 'wp-travel' ); ?>.</a></p>
+					<p>{sitename} - <?php esc_html_e( 'Powered By', 'wp-travel' ); ?>: <a href="http://wptravel.io/" target="_blank" style="color: #5a418b;text-decoration: none;"><?php esc_html_e( 'WP Travel', 'wp-travel' ); ?></a></p>
 				</td>
 			</tr>
 		</table><!-- /Wrapper -->
@@ -855,7 +855,7 @@ function wptravel_customer_email_template() {
 			</tr>			
 			<tr class="wp-travel-footer" style="background: #fff;">
 				<td align="center" style="background: #eaebed;box-sizing: border-box;font-size: 14px;padding: 10px 25px;">
-					<p>{sitename} - <?php esc_html_e( 'Powered By', 'wp-travel' ); ?>: <a href="http://wptravel.io/" target="_blank" style="color: #5a418b;text-decoration: none;"><?php esc_html_e( 'WP Travel', 'wp-travel' ); ?>.</a></p>
+					<p>{sitename} - <?php esc_html_e( 'Powered By', 'wp-travel' ); ?>: <a href="http://wptravel.io/" target="_blank" style="color: #5a418b;text-decoration: none;"><?php esc_html_e( 'WP Travel', 'wp-travel' ); ?></a></p>
 				</td>
 			</tr>
 		</table><!-- /Wrapper -->
@@ -1062,7 +1062,7 @@ function wptravel_enqueries_admin_email_template() {
 			</tr>
 			<tr class="wp-travel-footer" style="background: #fff;">
 				<td align="center" style="background: #eaebed;box-sizing: border-box;font-size: 14px;padding: 10px 25px;">
-					<p>{sitename} - <?php esc_html_e( 'Powered By', 'wp-travel' ); ?>: <a href="http://wptravel.io/" target="_blank" style="color: #5a418b;text-decoration: none;"><?php esc_html_e( 'WP Travel', 'wp-travel' ); ?>.</a></p>
+					<p>{sitename} - <?php esc_html_e( 'Powered By', 'wp-travel' ); ?>: <a href="http://wptravel.io/" target="_blank" style="color: #5a418b;text-decoration: none;"><?php esc_html_e( 'WP Travel', 'wp-travel' ); ?></a></p>
 				</td>
 			</tr>
 		</table><!-- /Wrapper -->
@@ -1346,7 +1346,7 @@ function wptravel_payment_email_template_admin() {
 			</tr>
 			<tr class="wp-travel-footer" style="background: #fff;">
 				<td align="center" style="background: #eaebed;box-sizing: border-box;font-size: 14px;padding: 10px 25px;">
-					<p>{sitename} - <?php esc_html_e( 'Powered By', 'wp-travel' ); ?>: <a href="http://wptravel.io/" target="_blank" style="color: #5a418b;text-decoration: none;"><?php esc_html_e( 'WP Travel', 'wp-travel' ); ?>.</a></p>
+					<p>{sitename} - <?php esc_html_e( 'Powered By', 'wp-travel' ); ?>: <a href="http://wptravel.io/" target="_blank" style="color: #5a418b;text-decoration: none;"><?php esc_html_e( 'WP Travel', 'wp-travel' ); ?></a></p>
 				</td>
 			</tr>
 		</table><!-- /Wrapper -->
@@ -1546,7 +1546,7 @@ function wptravel_payment_email_template_customer() {
 			<!-- /Payment ends -->
 			<tr class="wp-travel-footer" style="background: #fff;">
 				<td align="center" style="background: #eaebed;box-sizing: border-box;font-size: 14px;padding: 10px 25px;">
-					<p>{sitename} - <?php esc_html_e( 'Powered By', 'wp-travel' ); ?>: <a href="http://wptravel.io/" target="_blank" style="color: #5a418b;text-decoration: none;"><?php esc_html_e( 'WP Travel', 'wp-travel' ); ?>.</a></p>
+					<p>{sitename} - <?php esc_html_e( 'Powered By', 'wp-travel' ); ?>: <a href="http://wptravel.io/" target="_blank" style="color: #5a418b;text-decoration: none;"><?php esc_html_e( 'WP Travel', 'wp-travel' ); ?></a></p>
 				</td>
 			</tr>
 		</table><!-- /Wrapper -->

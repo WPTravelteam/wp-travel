@@ -455,7 +455,7 @@ i.fa-times-circle {
 				display: flex;
 				flex-wrap: wrap;
 				flex-direction: column;
-				align-items: end;
+				align-items: flex-end;
 				.components-base-control__field {
 					display: block;
 					.components-form-toggle {
