@@ -34,7 +34,7 @@ git clone git@gitlab.com:ws-plugins/wp-travel.git
 cd wp-travel
 
 # Checkout to dev branch
-git checkout dev
+git checkout sn
 
 # Install all required packages.
 yarn setup
