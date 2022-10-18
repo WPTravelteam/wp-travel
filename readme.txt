@@ -251,7 +251,7 @@ Release Date: 18th October 2022
 
 Enhancement:
 * Added Shortcode `[WP_TRAVEL_ITINERARIES order="asc"]`to display the Trips in Ascending order.
-* Added Shortcode `[WP_TRAVEL_ITINERARIES order="desc]` to display the Trips in Descending order.
+* Added Shortcode `[WP_TRAVEL_ITINERARIES order="desc"]` to display the Trips in Descending order.
 
 Fixes:
 * Removed Dots (.) displaying in mail Footer section.
