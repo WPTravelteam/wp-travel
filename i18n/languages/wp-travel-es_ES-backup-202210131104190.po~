@@ -2,20 +2,14 @@
 # This file is distributed under the same license as the Plugins - WP Travel &#8211; Best Travel Booking WordPress Plugin, Tour Management Engine - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-10-13 11:04+0000\n"
+"PO-Revision-Date: 2021-11-15 06:40:43+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Loco https://localise.biz/\n"
-"Language: es_ES\n"
-"Project-Id-Version: Plugins - WP Travel &#8211; Best Travel Booking "
-"WordPress Plugin, Tour Management Engine - Stable (latest release)\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-13 11:03+0000\n"
-"Last-Translator: \n"
-"Language-Team: Spanish (Spain)\n"
-"X-Loco-Version: 2.6.2; wp-6.0.2"
+"X-Generator: GlotPress/3.0.0-alpha.2\n"
+"Language: es\n"
+"Project-Id-Version: Plugins - WP Travel &#8211; Best Travel Booking WordPress Plugin, Tour Management Engine - Stable (latest release)\n"
 
 #: core/helpers/booking.php:195
 msgid "Traveler Name"
@@ -62,17 +56,8 @@ msgid "Customer Note"
 msgstr "Nota del cliente"
 
 #: inc/admin/admin-notices.php:198
-msgid ""
-"This is the notice for the users who still use previous layout (v3 layout) "
-"to migrate all the trips created using WP Travel versions before 4.0.0 "
-"through Migrate Pricing and Date option as we are going to remove 'Switch to "
-"V4' option in settings page from WP Travel v5.1.0."
-msgstr ""
-"Este es el aviso para los usuarios que todavía utilizan el diseño anterior "
-"(diseño v3) para migrar todos los viajes creados usando las versiones de WP "
-"Travel anteriores a la 4.0.0 a través de la opción de Migrar Precios y "
-"Fechas, ya que vamos a eliminar la opción 'Cambiar a V4' en la página de "
-"configuración de WP Travel v5.1.0."
+msgid "This is the notice for the users who still use previous layout (v3 layout) to migrate all the trips created using WP Travel versions before 4.0.0 through Migrate Pricing and Date option as we are going to remove 'Switch to V4' option in settings page from WP Travel v5.1.0."
+msgstr "Este es el aviso para los usuarios que todavía utilizan el diseño anterior (diseño v3) para migrar todos los viajes creados usando las versiones de WP Travel anteriores a la 4.0.0 a través de la opción de Migrar Precios y Fechas, ya que vamos a eliminar la opción 'Cambiar a V4' en la página de configuración de WP Travel v5.1.0."
 
 #: core/helpers/error_codes.php:139
 msgid "You are not allowed to use this coupon"
@@ -83,12 +68,8 @@ msgid "DOB"
 msgstr "Fecha de nacimiento"
 
 #: core/helpers/strings.php:342
-msgid ""
-"You can add 'Google Map API Key' in the %1$ssettings%2$s to use additional "
-"features."
-msgstr ""
-"Puedes añadir 'Google Map API Key' en los %1$sajustes%2$s para utilizar "
-"funciones adicionales."
+msgid "You can add 'Google Map API Key' in the %1$ssettings%2$s to use additional features."
+msgstr "Puedes añadir 'Google Map API Key' en los %1$sajustes%2$s para utilizar funciones adicionales."
 
 #: core/helpers/response_codes.php:86
 msgid "Migrate to V4 Sussessfully."
@@ -172,9 +153,7 @@ msgstr "Total por adelantado (%1s%%)"
 
 #: core/helpers/error_codes.php:133
 msgid "Discount applicable trip amount must be higher than discount amount."
-msgstr ""
-"El importe del viaje aplicable al descuento debe ser superior al importe del "
-"descuento."
+msgstr "El importe del viaje aplicable al descuento debe ser superior al importe del descuento."
 
 #: inc/admin/views/tabs/tab-contents/itineraries/detail.php:51
 msgid "Learn more about manual excerpts"
@@ -187,10 +166,8 @@ msgstr "Muestra todos tus ajustes \"%s\" y activa su función."
 
 #. translators: 1: PHP class name, 2: version number.
 #: inc/deprecated-class/trait/class-wp-travel-deprecated-trait.php:67
-msgid ""
-"The called class %1$s is <strong>deprecated</strong> since version %2$s!"
-msgstr ""
-"La clase llamada %1$s está <strong>obsoleta</strong> desde la versión %2$s!"
+msgid "The called class %1$s is <strong>deprecated</strong> since version %2$s!"
+msgstr "La clase llamada %1$s está <strong>obsoleta</strong> desde la versión %2$s!"
 
 #: inc/widgets/class-wp-travel-trip-enquiry-form-widget.php:40
 msgid "Enquiry"
@@ -209,12 +186,8 @@ msgid "This coupon cannot be applied to the selected trip"
 msgstr "Este cupón no se puede aplicar al viaje seleccionado"
 
 #: inc/class-ajax.php:370
-msgid ""
-"The coupoun is either inactive or has expired. Coupon Code could not be "
-"applied."
-msgstr ""
-"El cupón está inactivo o ha caducado. No se ha podido aplicar el código del "
-"cupón."
+msgid "The coupoun is either inactive or has expired. Coupon Code could not be applied."
+msgstr "El cupón está inactivo o ha caducado. No se ha podido aplicar el código del cupón."
 
 #: inc/class-ajax.php:360
 msgid "Invalid Coupon Code"
@@ -246,11 +219,8 @@ msgid "%1$d %2$s"
 msgstr "%1$d %2$s"
 
 #: core/helpers/strings.php:164 app/build/admin-trip-options.dev.js:336
-msgid ""
-"Note: In case of multiple cart items checkout, global payout will be used."
-msgstr ""
-"Nota: En el caso de que haya varios artículos en el carro de la compra, se "
-"utilizará el pago global."
+msgid "Note: In case of multiple cart items checkout, global payout will be used."
+msgstr "Nota: En el caso de que haya varios artículos en el carro de la compra, se utilizará el pago global."
 
 #: inc/coupon/inc/class-install.php:173
 msgid "Used %1$1s out of %2$2s"
@@ -350,8 +320,7 @@ msgstr "Scripts y estilos optimizados"
 #: inc/admin/views/tabs/tab-contents/settings/debug.php:60
 #: app/build/admin-settings.dev.js:264
 msgid "Enabling this will load the optimized bundled scripts files."
-msgstr ""
-"Al activar esta opción, se cargarán los archivos de scripts optimizados."
+msgstr "Al activar esta opción, se cargarán los archivos de scripts optimizados."
 
 #: core/helpers/response_codes.php:71
 msgid "Trip ID loaded successfully."
@@ -641,8 +610,7 @@ msgstr "El código del cupón no es válido."
 
 #: core/helpers/error_codes.php:113
 msgid "No trip pricing category term found."
-msgstr ""
-"No se ha encontrado ningún término en la categoría de precios del viaje."
+msgstr "No se ha encontrado ningún término en la categoría de precios del viaje."
 
 #: core/helpers/error_codes.php:103
 msgid "No trip extras found."
@@ -742,9 +710,7 @@ msgstr "Opciones de viaje"
 
 #: inc/admin/views/tabs/tab-contents/settings/general.php:92
 msgid "This options will switch your trip edit page layout to new layout."
-msgstr ""
-"Esta opción cambiará el diseño de la página de edición del viaje a un nuevo "
-"diseño."
+msgstr "Esta opción cambiará el diseño de la página de edición del viaje a un nuevo diseño."
 
 #: inc/admin/views/tabs/tab-contents/settings/general.php:83
 #: app/build/admin-settings.dev.js:324 app/build/admin-settings.js:324
@@ -969,18 +935,12 @@ msgstr "Clonar %s"
 
 #: inc/admin/class-admin-booking.php:187
 #: inc/admin/class-admin-metaboxes.php:155
-msgid ""
-"Booking Detail <span class=\"wp-travel-view-bookings\"><a href=\"edit.php?"
-"post_type=itinerary-booking&wp_travel_post_id="
-msgstr ""
-"Detalle de la reserva <span class=\"wp-travel-view-bookings\"><a href=\"edit."
-"php?post_type=itinerary-booking&wp_travel_post_id="
+msgid "Booking Detail <span class=\"wp-travel-view-bookings\"><a href=\"edit.php?post_type=itinerary-booking&wp_travel_post_id="
+msgstr "Detalle de la reserva <span class=\"wp-travel-view-bookings\"><a href=\"edit.php?post_type=itinerary-booking&wp_travel_post_id="
 
 #: inc/class-ajax.php:331
 msgid "<strong> </strong>Cart updated succesfully.Please Proceed to Checkout"
-msgstr ""
-"<strong> </strong>El carrito se ha actualizado correctamente. Por favor, "
-"proceda al pago"
+msgstr "<strong> </strong>El carrito se ha actualizado correctamente. Por favor, proceda al pago"
 
 #: inc/framework/form/class.field.php:110
 msgid "File"
@@ -1877,9 +1837,7 @@ msgstr "Valor del cupón"
 
 #: inc/admin/views/tabs/tab-contents/wp-travel-coupons/coupons-general.php:119
 msgid "Coupon expiration date. Leave blank to disable expiration."
-msgstr ""
-"Fecha de vencimiento del cupón. Déjelo en blanco para desactivar la "
-"caducidad."
+msgstr "Fecha de vencimiento del cupón. Déjelo en blanco para desactivar la caducidad."
 
 #: inc/admin/admin-helper.php:843
 #: inc/admin/views/tabs/tab-contents/wp-travel-coupons/coupons-restrictions.php:55
@@ -4828,12 +4786,8 @@ msgid "%1$s - Recommend  PHP version of 5.6. See: %2$s"
 msgstr "%1$s - Recomendar la versión de PHP 5.6. Ver: %2$s"
 
 #: inc/admin/class-admin-status.php:65 inc/admin/views/status.php:56
-msgid ""
-"%1$s - For better performance, we recommend setting memory to at least 64MB. "
-"See: %2$s"
-msgstr ""
-"%1$s - Para un mejor rendimiento, se recomienda ajustar la memoria a un "
-"mínimo de 64MB. Ver: %2$s"
+msgid "%1$s - For better performance, we recommend setting memory to at least 64MB. See: %2$s"
+msgstr "%1$s - Para un mejor rendimiento, se recomienda ajustar la memoria a un mínimo de 64MB. Ver: %2$s"
 
 #: inc/admin/views/tabs/tab-contents/wp-travel-coupons/coupons-general.php:118
 msgid "Coupon Expiry Date"
@@ -4895,15 +4849,12 @@ msgstr " Generar automáticamente la contraseña del cliente"
 
 #: inc/admin/views/tabs/tab-contents/settings/account-options-global.php:60
 msgid " Automatically generate username from customer email."
-msgstr ""
-" Generar automáticamente el nombre de usuario del correo electrónico del "
-"cliente."
+msgstr " Generar automáticamente el nombre de usuario del correo electrónico del cliente."
 
 #: inc/admin/views/tabs/tab-contents/settings/account-options-global.php:30
 #: app/build/admin-settings.dev.js:228 app/build/admin-settings.js:228
 msgid "Require Customer login or register before booking."
-msgstr ""
-"Se requiere que el cliente inicie sesión o se registre antes de reservar."
+msgstr "Se requiere que el cliente inicie sesión o se registre antes de reservar."
 
 #: inc/admin/views/tabs/tab-contents/settings/payment.php:140
 #: app/build/admin-settings.dev.js:372 app/build/admin-settings.js:372
@@ -4951,8 +4902,7 @@ msgstr "Nivel de zoom"
 
 #: inc/admin/views/tabs/tab-contents/settings/general.php:152
 msgid "To get your Google map API keys %1$sclick here%2$s"
-msgstr ""
-"Para obtener las claves API de los mapas de Google %1$shacer clic aquí%2$s"
+msgstr "Para obtener las claves API de los mapas de Google %1$shacer clic aquí%2$s"
 
 #: inc/admin/views/tabs/tab-contents/settings/general.php:149
 #: app/build/admin-settings.dev.js:324 app/build/admin-settings.js:324
@@ -5042,9 +4992,7 @@ msgstr "Título de la pestaña por defecto"
 #: inc/admin/views/tabs/tab-contents/settings/itinerary.php:67
 #: app/build/admin-settings.dev.js:396 app/build/admin-settings.js:396
 msgid "This options will control how you display trip dates and prices."
-msgstr ""
-"Estas opciones controlarán la forma de mostrar las fechas y los precios de "
-"los viajes."
+msgstr "Estas opciones controlarán la forma de mostrar las fechas y los precios de los viajes."
 
 #: inc/admin/views/tabs/tab-contents/settings/itinerary.php:65
 #: app/build/admin-settings.dev.js:396 app/build/admin-settings.js:396
@@ -5088,22 +5036,14 @@ msgstr "Descripción breve"
 #: core/helpers/strings.php:316
 #: inc/admin/views/tabs/tab-contents/itineraries/inventory.php:24
 #: app/build/admin-trip-options.dev.js:145
-msgid ""
-"By upgrading to Pro, you can add your inventory options in all of your trips "
-"!"
-msgstr ""
-"Al pasar a Pro, ¡puedes añadir tus opciones de inventario en todos tus "
-"viajes!"
+msgid "By upgrading to Pro, you can add your inventory options in all of your trips !"
+msgstr "Al pasar a Pro, ¡puedes añadir tus opciones de inventario en todos tus viajes!"
 
 #: core/helpers/strings.php:332
 #: inc/admin/views/tabs/tab-contents/itineraries/faq.php:26
 #: app/build/admin-trip-options.dev.js:228
-msgid ""
-"By upgrading to Pro, you can create and use Global FAQs in all of your trips "
-"!"
-msgstr ""
-"Si te pasas a Pro, ¡podrás crear y utilizar las FAQs globales en todos tus "
-"viajes!"
+msgid "By upgrading to Pro, you can create and use Global FAQs in all of your trips !"
+msgstr "Si te pasas a Pro, ¡podrás crear y utilizar las FAQs globales en todos tus viajes!"
 
 #: core/helpers/strings.php:331
 #: inc/admin/views/tabs/tab-contents/itineraries/faq.php:25
@@ -5187,11 +5127,8 @@ msgstr "Etiqueta del itinerario"
 #: core/helpers/strings.php:312
 #: inc/admin/views/tabs/tab-contents/itineraries/cart-checkout.php:22
 #: app/build/admin-trip-options.dev.js:145
-msgid ""
-"By upgrading to Pro, you can add your checkout options for all of your trips "
-"!"
-msgstr ""
-"Al pasar a Pro, ¡puedes añadir tus opciones de pago para todos tus viajes!"
+msgid "By upgrading to Pro, you can add your checkout options for all of your trips !"
+msgstr "Al pasar a Pro, ¡puedes añadir tus opciones de pago para todos tus viajes!"
 
 #: inc/admin/admin-notices.php:77
 msgid "WP Travel Notifications"
@@ -5317,20 +5254,12 @@ msgid " item selected"
 msgstr " elemento seleccionado"
 
 #: inc/admin/admin-helper.php:316
-msgid ""
-"Love %1$1s, Consider leaving us a %2$2s rating, also checkout %3$3s . A huge "
-"thanks in advance!"
-msgstr ""
-"Me encanta %1$1s, considera dejarnos una valoración de %2$2s, también revisa "
-"%3$3s . ¡Un enorme agradecimiento de antemano!"
+msgid "Love %1$1s, Consider leaving us a %2$2s rating, also checkout %3$3s . A huge thanks in advance!"
+msgstr "Me encanta %1$1s, considera dejarnos una valoración de %2$2s, también revisa %3$3s . ¡Un enorme agradecimiento de antemano!"
 
 #: inc/admin/admin-helper.php:303
-msgid ""
-"By upgrading to Pro, you can add your custom search filter fields to search "
-"trips !"
-msgstr ""
-"Al pasar a Pro, ¡puedes añadir tus campos de filtro de búsqueda "
-"personalizados a los viajes de búsqueda!"
+msgid "By upgrading to Pro, you can add your custom search filter fields to search trips !"
+msgstr "Al pasar a Pro, ¡puedes añadir tus campos de filtro de búsqueda personalizados a los viajes de búsqueda!"
 
 #: core/helpers/strings.php:320 inc/admin/admin-helper.php:285
 #: inc/admin/views/tabs/tab-contents/itineraries/downloads.php:21
@@ -5379,9 +5308,7 @@ msgstr "Desde el correo electrónico"
 #: inc/admin/views/tabs/tab-contents/settings/facts.php:33
 #: app/build/admin-settings.dev.js:288 app/build/admin-settings.js:288
 msgid "Enable Trip Facts display on trip single page."
-msgstr ""
-"Activar la visualización de los datos del viaje en una página única del "
-"viaje."
+msgstr "Activar la visualización de los datos del viaje en una página única del viaje."
 
 #: core/helpers/strings.php:244 inc/admin/class-admin-metaboxes.php:70
 #: inc/admin/class-admin-settings.php:143 app/build/admin-settings.dev.js:181
@@ -5514,17 +5441,11 @@ msgstr "Detalles del viajero"
 
 #: inc/class-wp-travel-user-account.php:103
 msgid "Your Password has been updated successfully. Please Log in to continue."
-msgstr ""
-"Su contraseña se ha actualizado correctamente. Por favor inicie sesión para "
-"continuar."
+msgstr "Su contraseña se ha actualizado correctamente. Por favor inicie sesión para continuar."
 
 #: inc/class-wp-travel-user-account.php:189
-msgid ""
-"This key is invalid or has already been used. Please reset your password "
-"again if needed."
-msgstr ""
-"Esta clave no es válida o ya ha sido utilizada. Restablezca su contraseña "
-"nuevamente si es necesario."
+msgid "This key is invalid or has already been used. Please reset your password again if needed."
+msgstr "Esta clave no es válida o ya ha sido utilizada. Restablezca su contraseña nuevamente si es necesario."
 
 #: inc/class-wp-travel-user-account.php:208
 msgid "Enter an email or username."
@@ -5631,8 +5552,7 @@ msgstr "Guardar"
 
 #: templates/emails/customer-lost-password.php:38
 msgid "Someone requested that the password be reset for the following account:"
-msgstr ""
-"Alguien solicitó que se restablezca la contraseña para la siguiente cuenta:"
+msgstr "Alguien solicitó que se restablezca la contraseña para la siguiente cuenta:"
 
 #: templates/emails/customer-lost-password.php:39
 msgid "Username: %s"
@@ -5813,12 +5733,8 @@ msgid "Bank Detail"
 msgstr "Detalles bancarios"
 
 #: inc/trip-enquiries.php:151
-msgid ""
-"Enquiry Details <span class=\"wp-travel-view-enquiries\"><a href=\"edit.php?"
-"post_type=itinerary-enquiries&wp_travel_post_id="
-msgstr ""
-"Detalles de consulta <span class=\"wp-travel-view-enquiries\"><a href=\"edit."
-"php?post_type=itinerary-enquiries&wp_travel_post_id="
+msgid "Enquiry Details <span class=\"wp-travel-view-enquiries\"><a href=\"edit.php?post_type=itinerary-enquiries&wp_travel_post_id="
+msgstr "Detalles de consulta <span class=\"wp-travel-view-enquiries\"><a href=\"edit.php?post_type=itinerary-enquiries&wp_travel_post_id="
 
 #: inc/trip-enquiries.php:101
 msgid "Trips"
@@ -6103,15 +6019,8 @@ msgid "WP Travel Customer"
 msgstr "Cliente de WP Travel"
 
 #: templates/account/lostpassword-confirm.php:24
-msgid ""
-"A password reset email has been sent to the email address for your account, "
-"but may take several minutes to show up in your inbox. Please wait at least "
-"10 minutes before attempting another reset."
-msgstr ""
-"Se ha enviado un correo electrónico para restablecer la contraseña a la "
-"dirección de correo electrónico de su cuenta, pero puede tardar varios "
-"minutos en aparecer en su bandeja de entrada. Por favor, espera al menos 10 "
-"minutos antes de intentar otro restablecimiento."
+msgid "A password reset email has been sent to the email address for your account, but may take several minutes to show up in your inbox. Please wait at least 10 minutes before attempting another reset."
+msgstr "Se ha enviado un correo electrónico para restablecer la contraseña a la dirección de correo electrónico de su cuenta, pero puede tardar varios minutos en aparecer en su bandeja de entrada. Por favor, espera al menos 10 minutos antes de intentar otro restablecimiento."
 
 #: inc/class-default-form-fields.php:83
 #: inc/class-wp-travel-form-handler.php:280
@@ -6210,8 +6119,7 @@ msgstr "Quitar este tour"
 
 #: templates/emails/customer-lost-password.php:40
 msgid "If this was a mistake, just ignore this email and nothing will happen."
-msgstr ""
-"Si se trata de un error, ignora este correo electrónico y no pasará nada."
+msgstr "Si se trata de un error, ignora este correo electrónico y no pasará nada."
 
 #: templates/emails/customer-lost-password.php:46
 #: templates/emails/customer-new-account.php:39
@@ -6225,13 +6133,8 @@ msgid "Permalink to: "
 msgstr "Enlace permanente a: "
 
 #: templates/account/tab-content/dashboard.php:7
-msgid ""
-"From your account dashboard you can view your recent Bookings, manage your "
-"billing address and edit your password and account details."
-msgstr ""
-"Desde el panel de su cuenta, puede ver sus Reservas recientes, administrar "
-"su dirección de facturación y editar su contraseña y los detalles de su "
-"cuenta."
+msgid "From your account dashboard you can view your recent Bookings, manage your billing address and edit your password and account details."
+msgstr "Desde el panel de su cuenta, puede ver sus Reservas recientes, administrar su dirección de facturación y editar su contraseña y los detalles de su cuenta."
 
 #: inc/admin/class-admin-settings.php:151
 #: inc/admin/class-network-settings.php:99 app/build/admin-settings.dev.js:181
@@ -6533,13 +6436,8 @@ msgid "Trips not found!"
 msgstr "¡Viajes no encontrados!"
 
 #: upgrade/update-121.php:21
-msgid ""
-"We have merge WP Travel Standard Paypal in WP Travel due to user request. "
-"Please  Delete your WP Travel Standard Paypal addons from Plugin Directory."
-msgstr ""
-"Hemos unido WP Travel Standard Paypal a WP Travel por petición de los "
-"usuarios. Por favor, borra la extensión WP Travel Standard Paypal del "
-"directorio de plugins."
+msgid "We have merge WP Travel Standard Paypal in WP Travel due to user request. Please  Delete your WP Travel Standard Paypal addons from Plugin Directory."
+msgstr "Hemos unido WP Travel Standard Paypal a WP Travel por petición de los usuarios. Por favor, borra la extensión WP Travel Standard Paypal del directorio de plugins."
 
 #: inc/trip-enquiries.php:220
 msgid "Contact Email"
@@ -6594,11 +6492,8 @@ msgid "SUBMIT ENQUIRY"
 msgstr "ENVIAR CONSULTA"
 
 #: inc/payments/wp-travel-payments.php:602
-msgid ""
-"We've received your booking and payment details. We'll contact you soon."
-msgstr ""
-"Hemos recibido tu reserva y datos de pago. Nos pondremos en contacto contigo "
-"en breve."
+msgid "We've received your booking and payment details. We'll contact you soon."
+msgstr "Hemos recibido tu reserva y datos de pago. Nos pondremos en contacto contigo en breve."
 
 #: core/helpers/strings.php:171
 msgid "Enter your enquiry..."
@@ -6687,8 +6582,7 @@ msgstr "Nuevo pago de reserva"
 
 #: inc/class-sidebars.php:33
 msgid "Widgets in this area will be shown on WP Travel Trip Archives"
-msgstr ""
-"Los widgets en este área se mostrarán en los archivos de WP Travel Trip"
+msgstr "Los widgets en este área se mostrarán en los archivos de WP Travel Trip"
 
 #: inc/class-post-types.php:196
 msgid "All Payments"
@@ -6863,9 +6757,7 @@ msgstr "Pago de prueba"
 #: inc/admin/views/tabs/tab-contents/settings/debug.php:38
 #: app/build/admin-settings.dev.js:264 app/build/admin-settings.js:264
 msgid "Test email address will get test mode payment emails."
-msgstr ""
-"La dirección de correo electrónico de prueba recibirá correos electrónicos "
-"de pagos del modo de prueba."
+msgstr "La dirección de correo electrónico de prueba recibirá correos electrónicos de pagos del modo de prueba."
 
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:908
 #: inc/admin/views/tabs/tab-contents/itineraries/price.php:1757
@@ -7054,9 +6946,7 @@ msgstr "Utiliza el diseño Global Tabs"
 
 #: inc/admin/views/tabs/tab-contents/itineraries/tabs.php:64
 msgid "Uncheck above checkbox to add custom tab settings for this trip."
-msgstr ""
-"Desmarca la casilla de verificación anterior para agregar configuraciones de "
-"pestañas personalizadas para este viaje."
+msgstr "Desmarca la casilla de verificación anterior para agregar configuraciones de pestañas personalizadas para este viaje."
 
 #: inc/admin/views/tabs/tab-contents/itineraries/tabs.php:70
 msgid "Sorting"
@@ -7309,9 +7199,7 @@ msgstr "Base de viaje"
 
 #: inc/admin/class-admin-pointers.php:149
 msgid "\"Trip Code\" has been moved to sidebar \"Trip Info\" metabox. "
-msgstr ""
-"\"Código de viaje \" se ha movido a la barra lateral \"Información de viaje "
-"\" cuadro especial. "
+msgstr "\"Código de viaje \" se ha movido a la barra lateral \"Información de viaje \" cuadro especial. "
 
 #: inc/class-post-types.php:39
 msgid "Add New Trip"
@@ -7433,12 +7321,8 @@ msgid "View details on site"
 msgstr "Ver detalles en el sitio"
 
 #: inc/email-template-functions.php:66 inc/email-template-functions.php:685
-msgid ""
-"Your booking has been received and is now being processed. Your order "
-"details are shown below for your reference"
-msgstr ""
-"Tu reserva ha sido recibida y ahora está siendo procesada. Los detalles de "
-"tu pedido se muestran a continuación para tu referencia"
+msgid "Your booking has been received and is now being processed. Your order details are shown below for your reference"
+msgstr "Tu reserva ha sido recibida y ahora está siendo procesada. Los detalles de tu pedido se muestran a continuación para tu referencia"
 
 #: inc/widgets/class-wp-travel-widget-featured.php:166
 #: inc/widgets/class-wp-travel-widget-location.php:175
@@ -7666,8 +7550,7 @@ msgstr "Incrementando la memoria asignada a PHP"
 
 #: inc/admin/class-admin-status.php:83 inc/admin/views/status.php:132
 msgid "Couldn't determine PHP version because phpversion() doesn't exist."
-msgstr ""
-"No se pudo determinar la versión de PHP porque phpversion () no existe."
+msgstr "No se pudo determinar la versión de PHP porque phpversion () no existe."
 
 #: inc/admin/class-admin-status.php:107 inc/admin/views/status.php:191
 msgid "WordPress Requirements"
@@ -7710,50 +7593,28 @@ msgid "PHP Max Input Vars"
 msgstr "PHP Max Entrada Vars"
 
 #: inc/admin/views/status.php:250
-msgid ""
-"Your server does not have the %s class enabled - some gateway plugins which "
-"use SOAP may not work as expected."
-msgstr ""
-"Tu servidor no tiene habilitada la clase %s ; algunos complementos de puerta "
-"de enlace que usan SOAP pueden no funcionar como se esperaba."
+msgid "Your server does not have the %s class enabled - some gateway plugins which use SOAP may not work as expected."
+msgstr "Tu servidor no tiene habilitada la clase %s ; algunos complementos de puerta de enlace que usan SOAP pueden no funcionar como se esperaba."
 
 #: inc/admin/views/status.php:261
-msgid ""
-"Your server does not have the %s class enabled - HTML/Multipart emails, and "
-"also some extensions, will not work without DOMDocument."
-msgstr ""
-"Tu servidor no tiene activada la clase %s : los correos electrónicos "
-"HTML/Multipart, y también algunas extensiones, no funcionarán sin "
-"DOMDocument."
+msgid "Your server does not have the %s class enabled - HTML/Multipart emails, and also some extensions, will not work without DOMDocument."
+msgstr "Tu servidor no tiene activada la clase %s : los correos electrónicos HTML/Multipart, y también algunas extensiones, no funcionarán sin DOMDocument."
 
 #: inc/admin/views/status.php:272
-msgid ""
-"Your server does not support the %s function - this is required to use the "
-"GeoIP database from MaxMind."
-msgstr ""
-"Tu servidor no es compatible con la función %s ; esto es necesario para usar "
-"la base de datos GeoIP de MaxMind."
+msgid "Your server does not support the %s function - this is required to use the GeoIP database from MaxMind."
+msgstr "Tu servidor no es compatible con la función %s ; esto es necesario para usar la base de datos GeoIP de MaxMind."
 
 #: inc/admin/views/status.php:283
-msgid ""
-"Your server does not support the %s functions - this is required for better "
-"character encoding. Some fallbacks will be used instead for it."
-msgstr ""
-"Tu servidor no es compatible con las funciones %s ; esto es necesario para "
-"una mejor codificación de caracteres. Algunas sustituciones se utilizarán en "
-"su lugar."
+msgid "Your server does not support the %s functions - this is required for better character encoding. Some fallbacks will be used instead for it."
+msgstr "Tu servidor no es compatible con las funciones %s ; esto es necesario para una mejor codificación de caracteres. Algunas sustituciones se utilizarán en su lugar."
 
 #: inc/admin/views/status.php:325
 msgid "Current Theme"
 msgstr "Tema actual"
 
 #: inc/admin/views/status.php:359
-msgid ""
-"If you're want to modifying a theme, it safe to create a child theme.  See: "
-"<a href=\"%s\" target=\"_blank\">How to create a child theme</a>"
-msgstr ""
-"Si deseas modificar un tema, es más  crear un tema hijo. Ver: <a href=\"%s\" "
-"target=\"_blank\"> Cómo crear un tema hijo</a>"
+msgid "If you're want to modifying a theme, it safe to create a child theme.  See: <a href=\"%s\" target=\"_blank\">How to create a child theme</a>"
+msgstr "Si deseas modificar un tema, es más  crear un tema hijo. Ver: <a href=\"%s\" target=\"_blank\"> Cómo crear un tema hijo</a>"
 
 #: inc/admin/class-admin-status.php:175 inc/admin/views/status.php:184
 msgid "MySQL Version"
@@ -9037,13 +8898,8 @@ msgid "Your Review"
 msgstr "Tu reseña"
 
 #. Description of the plugin
-msgid ""
-"The best choice for a Travel Agency, Tour Operator or Destination Management "
-"Company, wanting to manage packages more efficiently & increase sales."
-msgstr ""
-"La mejor opción para una agencia de viajes, un operador turístico o una "
-"empresa de gestión de destinos, que desean administrar paquetes de manera "
-"más eficiente y aumentar las ventas."
+msgid "The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales."
+msgstr "La mejor opción para una agencia de viajes, un operador turístico o una empresa de gestión de destinos, que desean administrar paquetes de manera más eficiente y aumentar las ventas."
 
 #: inc/admin/admin-helper.php:425
 msgid "Featured"
@@ -9397,8 +9253,7 @@ msgstr "Tipo de viaje"
 
 #: inc/template-functions.php:1521 inc/trip-enquiries.php:458
 msgid "Possible reason: your host may have disabled the mail() function."
-msgstr ""
-"Posible motivo: su Proveedor puede haber deshabilitado la función mail() ."
+msgstr "Posible motivo: su Proveedor puede haber deshabilitado la función mail() ."
 
 #: inc/class-post-types.php:92
 msgctxt "add new on admin bar"
@@ -9426,8 +9281,7 @@ msgstr "Buscar reservas"
 
 #: inc/template-functions.php:1521
 msgid "Your Item has been added but the email could not be sent."
-msgstr ""
-"Su artículo ha sido agregado pero el correo electrónico no pudo ser enviado."
+msgstr "Su artículo ha sido agregado pero el correo electrónico no pudo ser enviado."
 
 #. Plugin Name of the plugin
 #. Author of the plugin
@@ -9437,7 +9291,7 @@ msgstr ""
 #: templates/emails/customer-lost-password.php:46
 #: templates/emails/customer-new-account.php:39 wp-travel.php:212
 msgid "WP Travel"
-msgstr "WP Travelss"
+msgstr "WP Travel"
 
 #: core/helpers/booking.php:198 core/helpers/strings.php:168
 #: inc/admin/class-admin-settings.php:113 inc/class-default-form-fields.php:272

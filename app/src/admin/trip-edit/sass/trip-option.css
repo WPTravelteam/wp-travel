@@ -408,9 +408,9 @@ i.fa-times-circle {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: end;
+  -webkit-box-align: flex-end;
+      -ms-flex-align: flex-end;
+          align-items: flex-end;
 }
 
 .wp-travel-ui .wp-travel-trip-location .components-panel__row .components-base-control .components-base-control__field {
@@ -606,8 +606,8 @@ i.fa-times-circle {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
+  -webkit-box-align: flex-end;
+      -ms-flex-align: flex-end;
           align-items: flex-end;
 }
 
@@ -625,8 +625,8 @@ i.fa-times-circle {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
+  -webkit-box-align: flex-end;
+      -ms-flex-align: flex-end;
           align-items: flex-end;
   width: 250px;
 }
@@ -686,8 +686,8 @@ i.fa-times-circle {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
+  -webkit-box-align: flex-end;
+      -ms-flex-align: flex-end;
           align-items: flex-end;
 }
 

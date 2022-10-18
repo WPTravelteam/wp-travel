@@ -308,7 +308,7 @@ class WP_Travel_Emails {
 			<table class="wp-travel-wrapper" width="100%" cellpadding="0" cellspacing="0" style="color: #5d5d5d;font-family: Roboto, sans-serif;margin: auto;">
 				<tr class="wp-travel-footer" style="background: #fff;">
 					<td colspan="2" align="center" style="background: #eaebed;box-sizing: border-box;font-size: 14px;padding: 20px 25px;">
-						<p><?php echo apply_filters( 'wp_travel_email_template_footer_text', sprintf( __( 'Powered By: %1$1sWP Travel.%2$2s', 'wp-travel' ), '<a href="http://wptravel.io/" target="_blank" style="color: #5a418b;text-decoration: none;">', '</a>' ) ); //@phpcs:ignore ?>.</p>
+						<p><?php echo apply_filters( 'wp_travel_email_template_footer_text', sprintf( __( 'Powered By: %1$1sWP Travel%2$2s', 'wp-travel' ), '<a href="http://wptravel.io/" target="_blank" style="color: #5a418b;text-decoration: none;">', '</a>' ) ); //@phpcs:ignore ?></p>
 					</td>
 				</tr>
 			</table><!-- /Wrapper -->

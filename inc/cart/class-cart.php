@@ -170,6 +170,9 @@ class WP_Travel_Cart {
 	 * @return boolean
 	 */
 	public function add( $args, $trip_price = 0, $trip_price_partial = 0, $pax = 1, $price_key = '', $attrs = array() ) {
+		global $wpdb ;
+		$table = $wpdb->prefix . 'wt_dates' ;
+
 		if ( is_array( $args ) ) { // add to cart args. $args since WP Travel 4.4.2.
 			$trip_id            = isset( $args['trip_id'] ) ? $args['trip_id'] : 0;
 			$trip_price         = isset( $args['trip_price'] ) ? $args['trip_price'] : 0;
@@ -182,10 +185,14 @@ class WP_Travel_Cart {
 		}
 
 		$arrival_date = isset( $attrs['arrival_date'] ) ? $attrs['arrival_date'] : '';
+		$departure_date = ! empty( $wpdb->get_col( " SELECT end_date FROM $table WHERE trip_id = $trip_id " ) ) ? ( $wpdb->get_col( " SELECT end_date FROM $table WHERE trip_id = $trip_id " ) ) : '' ;
+		$attrs['departure_date'] = $departure_date[0] != '0000-00-00' ? $departure_date[0] : '';
+		
 		$item_id_args = array(
 			'trip_id'    => $trip_id,
 			'price_key'  => $price_key,
 			'start_date' => $arrival_date,
+			'departure_date'	=> $departure_date,
 			'pricing_id' => $attrs['pricing_id'],
 		);
 		$cart_item_id = $this->get_cart_item_id( $item_id_args );

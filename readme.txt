@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 5.4.1
 Tested up to: 6.0.2
 Requires PHP: 5.6
-Stable tag: 5.3.2
+Stable tag: 5.3.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -245,6 +245,38 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 5.3.5 =
+Release Date: 18th October 2022
+
+Enhancement:
+* Added Shortcode `[WP_TRAVEL_ITINERARIES order="asc"]`to display the Trips in Ascending order.
+* Added Shortcode `[WP_TRAVEL_ITINERARIES order="desc"]` to display the Trips in Descending order.
+
+Fixes:
+* Removed Dots (.) displaying in mail Footer section.
+* Fixed Empty data not saved in Overview , Itinerary (Trip Outline), and Include/Excludes Tabs.
+* Fixed {booking_departure_date} email tag not working.
+* Fixed Trip duration in search filter widget/Shortcode not working.
+
+Layout Fixes:
+* Fixed save % tag  issue in responsive.
+
+= 5.3.4 =
+Release Date: 27th September 2022
+
+Enhancement:
+* Added Shortcode `[wptravel_trip_type]` to display the Trip Type of trip. 
+* Added Shortcode `[wptravel_activities]` to display the Activity of trip. 
+* Added Shortcode `[wptravel_group_size]` to display the Group Size of trip. 
+* Added Shortcode `[wptravel_reviews]` to display the Review of trip. 
+* Added a hooks for remove `Trip Type` , `Activity` , `Group Size` and `Review` in a single trip page.
+
+= 5.3.3 =
+Release Date: 27th September 2022 
+
+Fixes:
+* Fixed Price not deleted when deleting pricing category
 
 = 5.3.2 =
 Release Date:  1st September 2022
