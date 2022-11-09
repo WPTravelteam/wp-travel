@@ -1,8 +1,11 @@
 jQuery(document).ready(function ($) {
 
-	$('input[name=wp_travel_book_now]').removeAttr('disabled');
-	$('#wp-travel-book-now').click(function () {
-		$(this).slideUp('slow').siblings('form').slideToggle('slow');
+	// $('input[name=wp_travel_book_now]').removeAttr('disabled');
+	// $('#wp-travel-book-now').click(function () {
+	// 	$(this).slideUp('slow').siblings('form').slideToggle('slow');
+	// });
+	$(window).on('beforeunload', function () {
+		$("input[name=wp_travel_book_now]").prop("disabled", "disabled");
 	});
 
 	$('.wp-travel-booking-reset').click(function () {
