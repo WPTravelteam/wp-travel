@@ -1205,7 +1205,8 @@ function wptravel_frontend_contents( $trip_id ) {
 								?>
 								<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
 									<?php
-										echo wp_kses_post( $tab_info['content'] );
+										echo wpautop( do_shortcode( $tab_info['content'] ) );
+										// echo wp_kses_post( $tab_info['content'] );
 										wptravel_get_template_part( 'itineraries', 'list' );
 										// $itinerary_list_template = wptravel_get_template( 'itineraries-list.php' );
 										// load_template( $itinerary_list_template );
