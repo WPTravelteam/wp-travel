@@ -177,7 +177,7 @@ function wptravel_posts_clauses_filter( $post_clauses, $object ) {
 		$where .= ' ) ';
 
 		$post_clauses['join']     = $post_clauses['join'] . $join;
-		$post_clauses['fields']   = $post_clauses['fields'] ;
+		$post_clauses['fields']   = $post_clauses['fields'];
 		$post_clauses['where']    = $post_clauses['where'] . $where;
 		$post_clauses['distinct'] = 'DISTINCT';
 	}
@@ -545,19 +545,18 @@ function wptravel_trip_rating( $trip_id ) {
 
 /**
  * Shortcode create for trip type in single trip page
- * 
  */
-if( ! shortcode_exists( 'wptravel_trip_type' ) ) {
-	add_shortcode('wptravel_trip_type', 'wptravel_trip_type' ) ;
+if ( ! shortcode_exists( 'wptravel_trip_type' ) ) {
+	add_shortcode( 'wptravel_trip_type', 'wptravel_trip_type' );
 }
 function wptravel_trip_type( $attr ) {
 	$strings = WpTravel_Helpers_Strings::get();
 	// Strings.
-	$trip_type_text  = isset( $strings['trip_type'] ) ? $strings['trip_type'] : __( 'Trip Type', 'wp-travel' );
+	$trip_type_text = isset( $strings['trip_type'] ) ? $strings['trip_type'] : __( 'Trip Type', 'wp-travel' );
 	// Empty string
-	$empty_trip_type_text  = isset( $strings['empty_results']['trip_type'] ) ? $strings['empty_results']['trip_type'] : __( 'No Trip Type', 'wp-travel' );
-	//get trip_Id from user
-	$trip_id = shortcode_atts(array( 'trip_id' => null ) , $attr );
+	$empty_trip_type_text = isset( $strings['empty_results']['trip_type'] ) ? $strings['empty_results']['trip_type'] : __( 'No Trip Type', 'wp-travel' );
+	// get trip_Id from user
+	$trip_id = shortcode_atts( array( 'trip_id' => null ), $attr );
 
 	if ( ! is_null( $trip_id['trip_id'] ) ) {
 		$wp_travel_itinerary = new WP_Travel_Itinerary( get_post( $trip_id['trip_id'] ) );
@@ -566,92 +565,89 @@ function wptravel_trip_type( $attr ) {
 	}
 
 	$trip_types_list = $wp_travel_itinerary->get_trip_types_list();
-	$trip_type_data = ( '<div class="travel-info">
+	$trip_type_data  = ( '<div class="travel-info">
 								<strong class="title">' . esc_html( $trip_type_text ) . '</strong>
 							</div>
 							<div class="travel-info">
-								<span class="value">' . (( $trip_types_list ) ? wp_kses(  $trip_types_list  , wptravel_allowed_html( array( 'a' ) ) )  : (esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_trip_type_text ) ) ) ) .
+								<span class="value">' . ( ( $trip_types_list ) ? wp_kses( $trip_types_list, wptravel_allowed_html( array( 'a' ) ) ) : ( esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_trip_type_text ) ) ) ) .
 								'</span>
 							</div>' );
-	return $trip_type_data ;
+	return $trip_type_data;
 }
 
 /**
  * Shortcode create for activities in single trip page
- * 
  */
-if( ! shortcode_exists( 'wptravel_activities' ) ) {
-	add_shortcode( 'wptravel_activities' , 'wptravel_activities' ) ;
+if ( ! shortcode_exists( 'wptravel_activities' ) ) {
+	add_shortcode( 'wptravel_activities', 'wptravel_activities' );
 }
 function wptravel_activities( $attr ) {
 	$strings = WpTravel_Helpers_Strings::get();
 	// Strings.
-	$activities_text  = isset( $strings['activities'] ) ? $strings['activities'] : __( 'Activities', 'wp-travel' );
+	$activities_text = isset( $strings['activities'] ) ? $strings['activities'] : __( 'Activities', 'wp-travel' );
 	// Empty string
-	$empty_activities_text  = isset( $strings['empty_results']['activities'] ) ? $strings['empty_results']['activities'] : __( 'No Activities', 'wp-travel' );
-	//get trip_Id from user
-	$trip_id = shortcode_atts(array( 'trip_id' => null ) , $attr );
+	$empty_activities_text = isset( $strings['empty_results']['activities'] ) ? $strings['empty_results']['activities'] : __( 'No Activities', 'wp-travel' );
+	// get trip_Id from user
+	$trip_id = shortcode_atts( array( 'trip_id' => null ), $attr );
 
 	if ( ! is_null( $trip_id['trip_id'] ) ) {
 		$wp_travel_itinerary = new WP_Travel_Itinerary( get_post( $trip_id['trip_id'] ) );
 	} else {
 		$wp_travel_itinerary = new WP_Travel_Itinerary( get_post( get_the_ID() ) );
 	}
-	
+
 	$activity_list = $wp_travel_itinerary->get_activities_list();
 	$activity_data = ( '<div class="travel-info">
 								<strong class="title">' . esc_html( $activities_text ) . '</strong>
 							</div>
 							<div class="travel-info">
-								<span class="value">' . ( ( $activity_list ) ? wp_kses(  $activity_list  , wptravel_allowed_html( array( 'a' ) ) )  : (esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_activities_text ) ) ) ) .
+								<span class="value">' . ( ( $activity_list ) ? wp_kses( $activity_list, wptravel_allowed_html( array( 'a' ) ) ) : ( esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_activities_text ) ) ) ) .
 								'</span>
 							</div>' );
-	return $activity_data ;
+	return $activity_data;
 }
 
 /**
  * Shortcode create for group size in single trip page
- * 
  */
-if( ! shortcode_exists( 'wptravel_group_size' ) ) {
-	add_shortcode('wptravel_group_size', 'wptravel_group_size' ) ;
+if ( ! shortcode_exists( 'wptravel_group_size' ) ) {
+	add_shortcode( 'wptravel_group_size', 'wptravel_group_size' );
 }
 function wptravel_group_size( $attr ) {
-	$wptravel_enable_group_size_text 	= apply_filters( 'wptravel_show_group_size_text_single_itinerary', true );
-	$strings = WpTravel_Helpers_Strings::get();
+	$wptravel_enable_group_size_text = apply_filters( 'wptravel_show_group_size_text_single_itinerary', true );
+	$strings                         = WpTravel_Helpers_Strings::get();
 	// Strings.
 	$group_size_text = isset( $strings['group_size'] ) ? $strings['group_size'] : __( 'Group size', 'wp-travel' );
 	$pax_text        = isset( $strings['bookings']['pax'] ) ? $strings['bookings']['pax'] : __( 'Pax', 'wp-travel' );
 	// Empty string
 	$empty_group_size_text = isset( $strings['empty_results']['group_size'] ) ? $strings['empty_results']['group_size'] : __( 'No Size Limit', 'wp-travel' );
-	//get trip_Id from user
-	$trip_id = shortcode_atts(array( 'trip_id' => null ) , $attr );
-	$group_size = wptravel_get_group_size( $trip_id['trip_id'] );
-	$group_size_data = (($wptravel_enable_group_size_text) ? (
+	// get trip_Id from user
+	$trip_id         = shortcode_atts( array( 'trip_id' => null ), $attr );
+	$group_size      = wptravel_get_group_size( $trip_id['trip_id'] );
+	$group_size_data = ( ( $wptravel_enable_group_size_text ) ? (
 								'<div class="travel-info">
 										<strong class="title">' . esc_html( $group_size_text ) . '</strong>
 									</div>
 									<div class="travel-info">
-										<span class="value">' . (( (int) $group_size && $group_size < 999 ) ? ( sprintf( apply_filters( 'wp_travel_template_group_size_text', __( '%1$d %2$s', 'wp-travel' ) ), esc_html( $group_size ), esc_html( ( $pax_text ) ) ) )  : (esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_group_size_text ) ) ) ) .
+										<span class="value">' . ( ( (int) $group_size && $group_size < 999 ) ? ( sprintf( apply_filters( 'wp_travel_template_group_size_text', __( '%1$d %2$s', 'wp-travel' ) ), esc_html( $group_size ), esc_html( ( $pax_text ) ) ) ) : ( esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_group_size_text ) ) ) ) .
 										'</span>
-									</div>') : '<div style=" display:none; " ></div>'  );
-	return $group_size_data ;
+									</div>' ) : '<div style=" display:none; " ></div>' );
+	return $group_size_data;
 }
 
 /**
  * Shortcode create for reviews in single trip page
- * 
  */
-if( ! shortcode_exists( 'wptravel_reviews' ) ) {
-	add_shortcode('wptravel_reviews', 'wptravel_reviews' ) ;
+if ( ! shortcode_exists( 'wptravel_reviews' ) ) {
+	add_shortcode( 'wptravel_reviews', 'wptravel_reviews' );
 }
 function wptravel_reviews( $attr ) {
 
 	$strings = WpTravel_Helpers_Strings::get();
 	// Strings.
-	$reviews_text    = isset( $strings['reviews'] ) ? $strings['reviews'] : __( 'Reviews', 'wp-travel' );
-	//get trip_Id from user
-	$trip_id = shortcode_atts(array( 'trip_id' => null ) , $attr );
+	$reviews_text = isset( $strings['reviews'] ) ? $strings['reviews'] : __( 'Reviews', 'wp-travel' );
+	// get trip_Id from user
+	$trip_id = shortcode_atts( array( 'trip_id' => null ), $attr );
 
 	if ( ! is_null( $trip_id['trip_id'] ) ) {
 		$count = (int) get_comments_number( $trip_id['trip_id'] );
@@ -662,10 +658,10 @@ function wptravel_reviews( $attr ) {
 							<strong class="title">' . esc_html( $reviews_text ) . '</strong>
 						</div>
 						<div class="travel-info">
-							<span class="value"> <a href="javascript:void(0)" class="wp-travel-count-info">' . ( sprintf( _n( '%s Review', '%s Reviews', $count, 'wp-travel' ), esc_html( $count ) ) ).
+							<span class="value"> <a href="javascript:void(0)" class="wp-travel-count-info">' . ( sprintf( _n( '%s Review', '%s Reviews', $count, 'wp-travel' ), esc_html( $count ) ) ) .
 							'</a></span>
 						</div> ' );
-	return $review_data ;
+	return $review_data;
 }
 
 /**
@@ -731,67 +727,65 @@ function wptravel_single_excerpt( $trip_id ) {
 				wptravel_do_deprecated_action( 'wp_travel_single_itinerary_before_trip_meta_list', array( $trip_id ), '2.0.4', 'wp_travel_single_trip_meta_list' );  // @since 1.0.4 and deprecated in 2.0.4
 				/**
 				 * Variable declear for Hooks parameter
-				 * 
 				 */
-				$trip_types_list 					= $wp_travel_itinerary->get_trip_types_list();
-				$activity_list 						= $wp_travel_itinerary->get_activities_list();
-				$wptravel_enable_group_size_text 	= apply_filters( 'wptravel_show_group_size_text_single_itinerary', true );
-				$group_size 						= wptravel_get_group_size( $trip_id );
-				$count 								= (int) get_comments_number();
+				$trip_types_list                 = $wp_travel_itinerary->get_trip_types_list();
+				$activity_list                   = $wp_travel_itinerary->get_activities_list();
+				$wptravel_enable_group_size_text = apply_filters( 'wptravel_show_group_size_text_single_itinerary', true );
+				$group_size                      = wptravel_get_group_size( $trip_id );
+				$count                           = (int) get_comments_number();
 
 				/**
 				 * Hooks parameter array varible declear
-				 * 
 				 */
 				$wptravel_after_excerpt_single_trip_page = array(
-					'trip_type' => '<li>
+					'trip_type'  => '<li>
 										<div class="travel-info">
 											<strong class="title">' . esc_html( $trip_type_text ) . '</strong>
 										</div>
 										<div class="travel-info">
-											<span class="value">' . (($trip_types_list ) ? wp_kses( $trip_types_list, wptravel_allowed_html( array( 'a' ) ) )  : (esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_trip_type_text ) ) ) ) .
+											<span class="value">' . ( ( $trip_types_list ) ? wp_kses( $trip_types_list, wptravel_allowed_html( array( 'a' ) ) ) : ( esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_trip_type_text ) ) ) ) .
 											'</span>
 										</div>
-									</li>' , 
-					'activity' => '<li>
+									</li>',
+					'activity'   => '<li>
 										<div class="travel-info">
 											<strong class="title">' . esc_html( $activities_text ) . '</strong>
 										</div>
 										<div class="travel-info">
-											<span class="value">' . (($activity_list ) ? wp_kses( $activity_list, wptravel_allowed_html( array( 'a' ) ) )  : (esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_activities_text ) ) ) ) .
+											<span class="value">' . ( ( $activity_list ) ? wp_kses( $activity_list, wptravel_allowed_html( array( 'a' ) ) ) : ( esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_activities_text ) ) ) ) .
 											'</span>
 										</div>
-									</li>' , 
-					'group_size' => (($wptravel_enable_group_size_text) ? (
+									</li>',
+					'group_size' => ( ( $wptravel_enable_group_size_text ) ? (
 									'<li>
 										<div class="travel-info">
 											<strong class="title">' . esc_html( $group_size_text ) . '</strong>
 										</div>
 										<div class="travel-info">
-											<span class="value">' . (( (int) $group_size && $group_size < 999 ) ? ( sprintf( apply_filters( 'wp_travel_template_group_size_text', __( '%1$d %2$s', 'wp-travel' ) ), esc_html( $group_size ), esc_html( ( $pax_text ) ) ) )  : (esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_group_size_text ) ) ) ) .
+											<span class="value">' . ( ( (int) $group_size && $group_size < 999 ) ? ( sprintf( apply_filters( 'wp_travel_template_group_size_text', __( '%1$d %2$s', 'wp-travel' ) ), esc_html( $group_size ), esc_html( ( $pax_text ) ) ) ) : ( esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_group_size_text ) ) ) ) .
 											'</span>
 										</div>
-									</li>') : ''  ) ,
-					'reviews' => '<li>
+									</li>' ) : '' ),
+					'reviews'    => '<li>
 									<div class="travel-info">
 										<strong class="title">' . esc_html( $reviews_text ) . '</strong>
 									</div>
 									<div class="travel-info">
-										<span class="value"> <a href="javascript:void(0)" class="wp-travel-count-info">' . ( sprintf( _n( '%s Review', '%s Reviews', $count, 'wp-travel' ), esc_html( $count ) ) ).
+										<span class="value"> <a href="javascript:void(0)" class="wp-travel-count-info">' . ( sprintf( _n( '%s Review', '%s Reviews', $count, 'wp-travel' ), esc_html( $count ) ) ) .
 										'</a></span>
 									</div>
-								</li>' ,
+								</li>',
 				);
 
 				$wptravel_after_excerpt_single_trip_page = apply_filters( 'wptravel_after_excerpt_single_trip_page', $wptravel_after_excerpt_single_trip_page );
-				
-				foreach( $wptravel_after_excerpt_single_trip_page as $key => $value ){
+
+				foreach ( $wptravel_after_excerpt_single_trip_page as $key => $value ) {
 					echo $value;
 				}
 
 				wptravel_do_deprecated_action( 'wp_travel_single_itinerary_after_trip_meta_list', array( $trip_id ), '2.0.4', 'wp_travel_single_trip_meta_list' );  // @since 1.0.4 and deprecated in 2.0.4
 				do_action( 'wp_travel_single_trip_meta_list', $trip_id ); // @phpcs:ignore
-			?>
+				?>
 		</ul>
 	</div>
 
@@ -1008,13 +1002,13 @@ function wptravel_frontend_trip_facts( $trip_id ) {
 	$settings_facts = $settings['wp_travel_trip_facts_settings'];
 	$new_trip_facts = array();
 
-	# don't display those facts which have been removed from global setting
-	if( is_array( $wp_travel_trip_facts ) && count( $wp_travel_trip_facts ) > 0 ){
-		foreach( $wp_travel_trip_facts as $f ){
-			$name = strtolower( $f[ 'label' ] );
-			foreach( $settings_facts as $s ){
-				$s_name = strtolower( $s[ 'name' ] );
-				if( $name == $s_name ){
+	// don't display those facts which have been removed from global setting
+	if ( is_array( $wp_travel_trip_facts ) && count( $wp_travel_trip_facts ) > 0 ) {
+		foreach ( $wp_travel_trip_facts as $f ) {
+			$name = strtolower( $f['label'] );
+			foreach ( $settings_facts as $s ) {
+				$s_name = strtolower( $s['name'] );
+				if ( $name == $s_name ) {
 					$new_trip_facts[] = $f;
 				}
 			}
@@ -1205,8 +1199,7 @@ function wptravel_frontend_contents( $trip_id ) {
 								?>
 								<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
 									<?php
-										$trip_outline_tab = str_replace( '<pre class="wp-block-preformatted">', '<div>', wpautop( do_shortcode( $tab_info['content'] ) ) );
-										echo $trip_outline_tab;
+										echo wpautop( do_shortcode( $tab_info['content'] ) );
 										wptravel_get_template_part( 'itineraries', 'list' );
 										// $itinerary_list_template = wptravel_get_template( 'itineraries-list.php' );
 										// load_template( $itinerary_list_template );
@@ -1217,10 +1210,7 @@ function wptravel_frontend_contents( $trip_id ) {
 							default:
 								?>
 								<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
-									<?php 
-										$trip_overview_tab = str_replace( '<pre class="wp-block-preformatted">', '<div>', wpautop( do_shortcode( $tab_info['content'] ) ) );
-										echo $trip_overview_tab; // @phpcs:ignore 
-									?>
+									<?php echo wpautop( do_shortcode( $tab_info['content'] ) ); // @phpcs:ignore ?>
 								</div>
 								<?php
 								break;
