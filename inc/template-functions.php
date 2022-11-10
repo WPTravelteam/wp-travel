@@ -1205,8 +1205,8 @@ function wptravel_frontend_contents( $trip_id ) {
 								?>
 								<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
 									<?php
-										echo wpautop( do_shortcode( $tab_info['content'] ) );
-										// echo wp_kses_post( $tab_info['content'] );
+										$trip_outline_tab = str_replace( '<pre class="wp-block-preformatted">', '<div>', wpautop( do_shortcode( $tab_info['content'] ) ) );
+										echo $trip_outline_tab;
 										wptravel_get_template_part( 'itineraries', 'list' );
 										// $itinerary_list_template = wptravel_get_template( 'itineraries-list.php' );
 										// load_template( $itinerary_list_template );
@@ -1217,7 +1217,10 @@ function wptravel_frontend_contents( $trip_id ) {
 							default:
 								?>
 								<div id="<?php echo esc_attr( $tab_key ); ?>" class="tab-list-content">
-									<?php echo wpautop( do_shortcode( $tab_info['content'] ) ); // @phpcs:ignore ?>
+									<?php 
+										$trip_overview_tab = str_replace( '<pre class="wp-block-preformatted">', '<div>', wpautop( do_shortcode( $tab_info['content'] ) ) );
+										echo $trip_overview_tab; // @phpcs:ignore 
+									?>
 								</div>
 								<?php
 								break;
