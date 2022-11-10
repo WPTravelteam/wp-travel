@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 5.3.2\n"
+"Project-Id-Version: WP Travel 5.3.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-01 07:46:42+00:00\n"
+"POT-Creation-Date: 2022-11-09 10:22:02+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -532,7 +532,8 @@ msgid "Multiple Select"
 msgstr ""
 
 #: core/helpers/strings.php:25 inc/class-taxonomies.php:115
-#: inc/itinerary-v2-functions.php:733 inc/template-functions.php:572
+#: inc/itinerary-v2-functions.php:733 inc/template-functions.php:589
+#: inc/template-functions.php:704
 msgid "Activities"
 msgstr ""
 
@@ -543,7 +544,7 @@ msgstr ""
 #: core/helpers/strings.php:29 core/helpers/strings.php:45
 #: core/helpers/strings.php:208 core/helpers/strings.php:216
 #: inc/cart/checkout.php:178 inc/deprecated/440.php:98
-#: inc/template-functions.php:695
+#: inc/template-functions.php:802
 msgid "Book Now"
 msgstr ""
 
@@ -600,7 +601,7 @@ msgid "Fact"
 msgstr ""
 
 #: core/helpers/strings.php:46 core/helpers/strings.php:89 inc/helpers.php:2259
-#: inc/itinerary-v2-functions.php:244 inc/template-functions.php:694
+#: inc/itinerary-v2-functions.php:244 inc/template-functions.php:801
 msgid "Trip Enquiry"
 msgstr ""
 
@@ -660,7 +661,7 @@ msgstr ""
 
 #: core/helpers/strings.php:60 core/helpers/strings.php:247
 #: inc/admin/class-admin-metaboxes.php:84
-#: inc/admin/class-admin-metaboxes.php:85 inc/template-functions.php:797
+#: inc/admin/class-admin-metaboxes.php:85 inc/template-functions.php:904
 msgid "Locations"
 msgstr ""
 
@@ -728,7 +729,8 @@ msgid "Pricing Name"
 msgstr ""
 
 #: core/helpers/strings.php:75 inc/admin/admin-helper.php:244
-#: inc/helpers.php:1097 inc/template-functions.php:575
+#: inc/helpers.php:1097 inc/template-functions.php:652
+#: inc/template-functions.php:707
 msgid "Reviews"
 msgstr ""
 
@@ -795,7 +797,7 @@ msgid "Trip Name"
 msgstr ""
 
 #: core/helpers/strings.php:91 inc/itinerary-v2-functions.php:731
-#: inc/template-functions.php:571
+#: inc/template-functions.php:556 inc/template-functions.php:703
 msgid "Trip Type"
 msgstr ""
 
@@ -967,11 +969,11 @@ msgstr ""
 msgid "Enable Fixed Departure"
 msgstr ""
 
-#: core/helpers/strings.php:139 inc/template-functions.php:801
+#: core/helpers/strings.php:139 inc/template-functions.php:908
 msgid "Night(s)"
 msgstr ""
 
-#: core/helpers/strings.php:140 inc/template-functions.php:800
+#: core/helpers/strings.php:140 inc/template-functions.php:907
 msgid "Day(s)"
 msgstr ""
 
@@ -1113,7 +1115,8 @@ msgstr ""
 #: inc/class-default-form-fields.php:191 inc/deprecated/440.php:368
 #: inc/email-template-functions.php:408 inc/email-template-functions.php:714
 #: inc/email-template-functions.php:1223 inc/itinerary-v2-functions.php:736
-#: inc/template-functions.php:574 templates/content-cart.php:28
+#: inc/template-functions.php:624 inc/template-functions.php:706
+#: templates/content-cart.php:28
 msgid "Pax"
 msgstr ""
 
@@ -1305,7 +1308,7 @@ msgid "Pax is required."
 msgstr ""
 
 #: core/helpers/strings.php:290 inc/itinerary-v2-functions.php:734
-#: inc/template-functions.php:578
+#: inc/template-functions.php:591 inc/template-functions.php:710
 msgid "No Activities"
 msgstr ""
 
@@ -1338,7 +1341,7 @@ msgid "No pricing found."
 msgstr ""
 
 #: core/helpers/strings.php:298 inc/itinerary-v2-functions.php:732
-#: inc/template-functions.php:577
+#: inc/template-functions.php:558 inc/template-functions.php:709
 msgid "No Trip Type"
 msgstr ""
 
@@ -1425,14 +1428,14 @@ msgid ""
 msgstr ""
 
 #: core/lib/cart.php:219 core/lib/cart.php:370 core/lib/cart.php:414
-#: inc/cart/class-cart.php:224 inc/cart/class-cart.php:440
-#: inc/cart/class-cart.php:489
+#: inc/cart/class-cart.php:231 inc/cart/class-cart.php:447
+#: inc/cart/class-cart.php:496
 msgid ""
 "Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for "
 "this trip. Available pax is set for booking."
 msgstr ""
 
-#: core/lib/cart.php:457 inc/cart/class-cart.php:583
+#: core/lib/cart.php:457 inc/cart/class-cart.php:590
 msgid "Your cart is empty please <a href=\"%s\"> click here </a> to add trips."
 msgstr ""
 
@@ -2757,13 +2760,13 @@ msgstr ""
 msgid "No Trip Extras found in Trash."
 msgstr ""
 
-#: inc/class-shortcode.php:290
+#: inc/class-shortcode.php:300
 msgid "%s Trip available"
 msgid_plural "%s Trips available"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/class-shortcode.php:291
+#: inc/class-shortcode.php:301
 msgid "View"
 msgstr ""
 
@@ -2942,7 +2945,7 @@ msgid "TO %s"
 msgstr ""
 
 #: inc/class-wp-travel-emails.php:311
-msgid "Powered By: %1$1sWP Travel.%2$2s"
+msgid "Powered By: %1$1sWP Travel%2$2s"
 msgstr ""
 
 #: inc/class-wp-travel-form-handler.php:56
@@ -4281,11 +4284,11 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: inc/form-fields.php:405 inc/template-functions.php:1734
+#: inc/form-fields.php:405 inc/template-functions.php:1841
 msgid "Price low to high"
 msgstr ""
 
-#: inc/form-fields.php:406 inc/template-functions.php:1735
+#: inc/form-fields.php:406 inc/template-functions.php:1842
 msgid "Price high to low"
 msgstr ""
 
@@ -8155,7 +8158,7 @@ msgstr ""
 msgid "Full"
 msgstr ""
 
-#: inc/helpers.php:1049 inc/template-functions.php:1012
+#: inc/helpers.php:1049 inc/template-functions.php:1119
 msgid "No details found."
 msgstr ""
 
@@ -8316,12 +8319,13 @@ msgstr ""
 msgid "Related Trips"
 msgstr ""
 
-#: inc/itinerary-v2-functions.php:735 inc/template-functions.php:573
+#: inc/itinerary-v2-functions.php:735 inc/template-functions.php:623
+#: inc/template-functions.php:705
 msgid "Group size"
 msgstr ""
 
-#: inc/itinerary-v2-functions.php:737 inc/template-functions.php:579
-#: inc/template-functions.php:1650
+#: inc/itinerary-v2-functions.php:737 inc/template-functions.php:626
+#: inc/template-functions.php:711 inc/template-functions.php:1757
 msgid "No Size Limit"
 msgstr ""
 
@@ -8330,12 +8334,12 @@ msgid "%d %s"
 msgstr ""
 
 #: inc/itinerary-v2-functions.php:891 inc/itinerary-v2-functions.php:935
-#: inc/template-functions.php:1772 inc/template-functions.php:1779
+#: inc/template-functions.php:1879 inc/template-functions.php:1886
 msgid "Ascending"
 msgstr ""
 
 #: inc/itinerary-v2-functions.php:892 inc/itinerary-v2-functions.php:936
-#: inc/template-functions.php:1773 inc/template-functions.php:1780
+#: inc/template-functions.php:1880 inc/template-functions.php:1887
 msgid "Descending"
 msgstr ""
 
@@ -8382,45 +8386,45 @@ msgstr ""
 msgid "Clone %s"
 msgstr ""
 
-#: inc/template-functions.php:652
+#: inc/template-functions.php:635 inc/template-functions.php:771
 msgid "%1$d %2$s"
 msgstr ""
 
-#: inc/template-functions.php:677
+#: inc/template-functions.php:665 inc/template-functions.php:780
 msgid "%s Review"
 msgid_plural "%s Reviews"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/template-functions.php:747
+#: inc/template-functions.php:854
 msgid "Keywords : "
 msgstr ""
 
-#: inc/template-functions.php:798
+#: inc/template-functions.php:905
 msgid "Fixed departure"
 msgstr ""
 
-#: inc/template-functions.php:799
+#: inc/template-functions.php:906
 msgid "Trip duration"
 msgstr ""
 
-#: inc/template-functions.php:981
+#: inc/template-functions.php:1088
 msgid ","
 msgstr ""
 
-#: inc/template-functions.php:1610
+#: inc/template-functions.php:1717
 msgid "We've received your booking details. We'll contact you soon."
 msgstr ""
 
-#: inc/template-functions.php:1619
+#: inc/template-functions.php:1726
 msgid "Your Item has been added but the email could not be sent."
 msgstr ""
 
-#: inc/template-functions.php:1619 inc/trip-enquiries.php:425
+#: inc/template-functions.php:1726 inc/trip-enquiries.php:425
 msgid "Possible reason: your host may have disabled the mail() function."
 msgstr ""
 
-#: inc/template-functions.php:1647
+#: inc/template-functions.php:1754
 msgid "%d pax"
 msgstr ""
 
