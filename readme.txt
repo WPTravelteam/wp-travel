@@ -254,6 +254,10 @@ Fixes:
 * Fixed Shortcodes not working in Trip Outline Tab.
 * Fixed double booking created with the same detail while clicking Book and Pay button twice in the checkout page.
 
+Enhancement:
+* Added Shortcode `WP_TRAVEL_TRIP_CATEGORY_ITEMS child='yes'` to display only the child destination.
+* Added Shortcode `WP_TRAVEL_TRIP_CATEGORY_ITEMS parent='yes'` to display only the parent destination.
+
 Layout Fixes:
 * Fixed Calendar issue in the backend section with WordPress v6.1.
 
