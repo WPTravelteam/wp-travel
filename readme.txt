@@ -3,9 +3,9 @@ Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 5.4.1
-Tested up to: 6.0.2
+Tested up to: 6.1
 Requires PHP: 5.6
-Stable tag: 5.3.5
+Stable tag: 5.3.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -245,6 +245,17 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 5.3.6 =
+Release Date: 9th November 2022
+
+Fixes:
+* Fixed Feature image not deleted when deleting the image from the backend.
+* Fixed Shortcodes not working in Trip Outline Tab.
+* Fixed double booking created with the same detail while clicking Book and Pay button twice in the checkout page.
+
+Layout Fixes:
+* Fixed Calendar issue in the backend section with WordPress v6.1.
 
 = 5.3.5 =
 Release Date: 18th October 2022
