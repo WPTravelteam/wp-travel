@@ -446,7 +446,7 @@ function wptravel_get_term_thumbnail( $term_id, $size = 'wp_travel_thumbnail' ) 
 	if ( ! $term_id ) {
 		return;
 	}
-	$thumbnail_id = get_term_meta( $term_id, 'wp_travel_trip_type_image_id', true ); // @todo Meta name for the image is wrong. it must not be named with trip type. must be generic. 
+	$thumbnail_id = get_term_meta( $term_id, 'wp_travel_trip_type_image_id', true ); // @todo Meta name for the image is wrong. it must not be named with trip type. must be generic.
 
 	$image_src = '';
 	if ( $thumbnail_id ) {
@@ -1349,12 +1349,12 @@ function wptravel_get_faqs( $post_id ) {
 		$questions = ( $questions ) ? $questions : array();
 		$questions = apply_filters( 'wp_travel_itinerary_faq_questions', $questions, $post_id ); // Modified in 2.0.7
 
-		$settings         = wptravel_get_settings();
-		$is_global_faq    = get_post_meta( $post_id, 'wp_travel_is_global_faq', true );
+		$settings      = wptravel_get_settings();
+		$is_global_faq = get_post_meta( $post_id, 'wp_travel_is_global_faq', true );
 		// $global_questions = isset( $settings['wp_travel_utils_global_faq_question'] ) ? $settings['wp_travel_utils_global_faq_question'] : array(); // value to check whether trip faq exists in gloabl on not.
 		// $global_answers   = isset( $settings['wp_travel_utils_global_faq_answer'] ) ? $settings['wp_travel_utils_global_faq_answer'] : array(); // value to check whether trip faq exists in gloabl on not.
-		$global_questions = array_column($global_faqs, 'question');
-		$global_answers   = array_column($global_faqs, 'answer');
+		$global_questions = array_column( $global_faqs, 'question' );
+		$global_answers   = array_column( $global_faqs, 'answer' );
 		$global_faq_ids   = array_keys( $global_faqs );
 
 		$temp_global_faq_index = 0; // This will help to set global faqs id in new wptravel_trip_faqs meta.
@@ -1368,9 +1368,9 @@ function wptravel_get_faqs( $post_id ) {
 				// This will check the current question exists in global question or not. if yes then set this as global. This will work for initial check.
 				$global_faq = 'no';
 				if ( ! empty( $global_questions ) && in_array( $question, $global_questions ) ) {
-					$global_faq    = 'yes';
+					$global_faq = 'yes';
 					// Global answer index may vary if we sort the global faq along with trip faq.
-					$answer        = isset( $global_answers[ $temp_global_faq_index ] ) ? $global_answers[ $temp_global_faq_index ] : ''; 
+					$answer        = isset( $global_answers[ $temp_global_faq_index ] ) ? $global_answers[ $temp_global_faq_index ] : '';
 					$global_faq_id = $global_faq_ids[ $temp_global_faq_index ]; // temp faq_id;
 					$temp_global_faq_index++;
 				}
@@ -1379,16 +1379,16 @@ function wptravel_get_faqs( $post_id ) {
 				if ( isset( $is_global_faq[ $key ] ) && ! empty( $is_global_faq[ $key ] ) ) {
 					$global_faq = $is_global_faq[ $key ];
 				}
-	
+
 				if ( isset( $answers[ $key ] ) && ( ! empty( $answers[ $key ] ) || 'yes' !== $global_faq ) ) { // Do not override global faq answers in initial load.. $answers empty refer to new trips without saved.
 					$answer = $answers[ $key ];
 				}
-	
+
 				// remove global if utilities is not exists.
 				if ( ! class_exists( 'WP_Travel_Utilities_Core' ) && 'yes' == $global_faq ) {
 					continue;
 				}
-	
+
 				if ( ! is_admin() ) { // filter for frontend.
 					if ( 'no' === $use_global_faq && 'yes' == $global_faq ) { // Trip faq.
 						continue;
@@ -1396,7 +1396,7 @@ function wptravel_get_faqs( $post_id ) {
 						continue;
 					}
 				}
-	
+
 				if ( 'yes' === $global_faq && is_array( $global_questions ) && ! in_array( $question, $global_questions ) ) { // If this is global faq and deleted this faq from global then need to remove this faq.
 					continue;
 				}
@@ -1434,8 +1434,8 @@ function wptravel_get_faqs( $post_id ) {
 						continue;
 					}
 					// set all global question and answers.
-					$question      = $global_faqs[ $global_faq_id ]['question']; 
-					$answer        = $global_faqs[ $global_faq_id ]['answer'];
+					$question = $global_faqs[ $global_faq_id ]['question'];
+					$answer   = $global_faqs[ $global_faq_id ]['answer'];
 				}
 
 				$faqs[] = array(
@@ -1533,8 +1533,8 @@ function wptravel_is_itinerary( $post_id = null ) {
  */
 function wptravel_can_load_payment_scripts() {
 	global $wt_cart;
-	$cart_amounts = $wt_cart->get_total();
-	$cart_total   = isset( $cart_amounts['total'] ) ? $cart_amounts['total'] : 0;
+	$cart_amounts            = $wt_cart->get_total();
+	$cart_total              = isset( $cart_amounts['total'] ) ? $cart_amounts['total'] : 0;
 	$can_load_payment_script = ( WP_Travel::is_page( 'dashboard' ) || ( WP_Travel::is_page( 'checkout' ) && $cart_total > 0 ) ) && wptravel_is_payment_enabled();
 	$can_load_payment_script = apply_filters( 'wptravel_can_load_payment_scripts', $can_load_payment_script );
 	return $can_load_payment_script;
@@ -2276,7 +2276,120 @@ function wptravel_get_inquiry_link() {
 	return $data;
 
 }
+/**
+ * Adding form for itinerary shortcode
+ *
+ * @since 5.3.8
+ */
+function wptravel_itinerary_filter_by( $submission_get = array() ) {
+	$index   = uniqid();
+	$strings = WpTravel_Helpers_Strings::get();
 
+	$filter_by_text = $strings['filter_by'];
+	$price_text     = $strings['price'];
+	$trip_type_text = $strings['trip_type'];
+	$location_text  = $strings['location'];
+	$show_text      = $strings['show'];
+	$trip_date_text = $strings['trip_date'];
+	$trip_name_text = $strings['trip_name'];
+
+	?>
+	<div class="wp-travel-post-filter clearfix">
+		<div class="wp-travel-filter-by-heading">
+			<h4><?php echo esc_html( $filter_by_text ); ?></h4>
+			<button class="btn btn-wptravel-filter-by"><?php echo esc_html( $filter_by_text ); ?><i class="fas fa-chevron-down"></i></button>
+		</div>
+		<?php
+			$price     = ( isset( $submission_get['price'] ) ) ? $submission_get['price'] : '';
+			$type      = ! empty( $submission_get['itinerary_types'] ) ? $submission_get['itinerary_types'] : '';
+			$location  = ! empty( $submission_get['travel_locations'] ) ? $submission_get['travel_locations'] : '';
+			$trip_date = ! empty( $submission_get['trip_date'] ) ? $submission_get['trip_date'] : '';
+			$trip_name = ! empty( $submission_get['trip_name'] ) ? $submission_get['trip_name'] : '';
+
+		if ( is_tax( array( 'itinerary_types', 'travel_locations', 'travel_keywords', 'activity' ) ) ) {
+
+			$wt_taxonomy = get_query_var( 'taxonomy' );
+			$wt_term     = get_query_var( 'term' );
+
+			switch ( $wt_taxonomy ) {
+				case 'travel_locations':
+					$location = $wt_term;
+					break;
+				case 'itinerary_types':
+					$type = $wt_term;
+					break;
+				default:
+					break;
+			}
+		}
+		?>
+		<?php $enable_filter_price = apply_filters( 'wp_travel_post_filter_by_price', true ); ?>
+		<?php if ( $enable_filter_price ) : ?>
+			<div class="wp-toolbar-filter-field wt-filter-by-price">
+				<select name="price" class="wp_travel_input_filters price  wp_travel_search_filters_input<?php echo esc_attr( $index ); ?>">
+					<option value=""><?php echo esc_html( $price_text ); ?></option>
+					<option value="low_high" <?php selected( $price, 'low_high' ); ?> data-type="meta" ><?php esc_html_e( 'Price low to high', 'wp-travel' ); ?></option>
+					<option value="high_low" <?php selected( $price, 'high_low' ); ?> data-type="meta" ><?php esc_html_e( 'Price high to low', 'wp-travel' ); ?></option>
+				</select>
+			</div>
+		<?php endif; ?>
+		<div class="wp-toolbar-filter-field wt-filter-by-itinerary-types">
+			<?php
+			wp_dropdown_categories(
+				array(
+					'taxonomy'          => 'itinerary_types',
+					'name'              => 'itinerary_types',
+					'class'             => 'wp_travel_input_filters type wp_travel_search_filters_input' . $index,
+					'show_option_none'  => esc_html( $trip_type_text ),
+					'option_none_value' => '',
+					'selected'          => $type,
+					'value_field'       => 'slug',
+				)
+			);
+			?>
+		</div>
+		<div class="wp-toolbar-filter-field wt-filter-by-travel-locations">
+			<?php
+			wp_dropdown_categories(
+				array(
+					'taxonomy'          => 'travel_locations',
+					'name'              => 'travel_locations',
+					'class'             => 'wp_travel_input_filters location wp_travel_search_filters_input' . $index,
+					'show_option_none'  => esc_html( $location_text ),
+					'option_none_value' => '',
+					'selected'          => $location,
+					'value_field'       => 'slug',
+				)
+			);
+			$sanitized_get = WP_Travel::get_sanitize_request( 'get', true );
+			$view_mode     = wptravel_get_archive_view_mode( $sanitized_get );
+			?>
+		</div>
+		<div class="wp-toolbar-filter-field wt-filter-by-trip-date">
+				<select name="trip_date" class="wp_travel_input_filters wp_travel_search_filters_input<?php echo esc_attr( $index ); ?>  trip-date">
+					<option value=""><?php echo esc_html( $trip_date_text ); ?></option>
+					<option value="asc" <?php selected( $trip_date, 'asc' ); ?> data-type="meta" ><?php esc_html_e( 'Ascending', 'wp-travel' ); ?></option>
+					<option value="desc" <?php selected( $trip_date, 'desc' ); ?> data-type="meta" ><?php esc_html_e( 'Descending', 'wp-travel' ); ?></option>
+				</select>
+			</div>
+		<div class="wp-toolbar-filter-field wt-filter-by-trip-name">
+				<select name="trip_name" class="wp_travel_input_filters wp_travel_search_filters_input<?php echo esc_attr( $index ); ?>  trip-name">
+					<option value=""><?php echo esc_html( $trip_name_text ); ?></option>
+					<option value="asc" <?php selected( $trip_name, 'asc' ); ?> data-type="meta" ><?php esc_html_e( 'Ascending', 'wp-travel' ); ?></option>
+					<option value="desc" <?php selected( $trip_name, 'desc' ); ?> data-type="meta" ><?php esc_html_e( 'Descending', 'wp-travel' ); ?></option>
+				</select>
+			</div>
+		<div class="wp-travel-filter-button">
+			<input class="wp_travel_search_filters_input<?php echo esc_attr( $index ); ?>" type="hidden" name="_nonce"  value="<?php echo esc_attr( WP_Travel::create_nonce() ); ?>" >
+			<input class="wptravel_filter-data-index" type="hidden" data-index="<?php echo esc_attr( $index ); ?>">
+			<input class="wp-travel-filter-view-mode" type="hidden" name="view_mode" data-mode="<?php echo esc_attr( $view_mode ); ?>" value="<?php echo esc_attr( $view_mode ); ?>" >
+			<input type="hidden" class="wp-travel-filter-archive-url" value="<?php echo esc_url( get_post_type_archive_link( WP_TRAVEL_POST_TYPE ) ); ?>" />
+			<button class="wp-travel-filter-submit"><?php echo esc_html( $show_text ); ?></button>
+		</div>
+		<?php do_action( 'wp_travel_after_post_filter' ); ?>
+	</div>
+	<?php
+}
 
 function wptravel_get_search_filter_form( $args ) {
 
@@ -2670,7 +2783,7 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 												if ( function_exists( 'wp_travel_multiple_currency_convert_price' ) ) {
 													$price = wp_travel_multiple_currency_convert_price( $price );
 												}
-												$qty   = isset( $extras['qty'][ $k ] ) && $extras['qty'][ $k ] ? $extras['qty'][ $k ] : 1;
+												$qty = isset( $extras['qty'][ $k ] ) && $extras['qty'][ $k ] ? $extras['qty'][ $k ] : 1;
 
 												$total = $price * $qty;
 												?>
@@ -3181,7 +3294,7 @@ function wptravel_get_fixed_departure_date( $trip_id ) {
 			usort( $dates, 'wptravel_date_sort' );
 			$show_multiple = apply_filters( 'wp_travel_show_multiple_fixed_departure_dates', true );
 
-			$date_found = false;
+			$date_found      = false;
 			$available_dates = array();
 			foreach ( $dates as $index => $date ) {
 				if ( date( 'Y-m-d ', strtotime( $date ) ) >= date( 'Y-m-d' ) ) {
@@ -3192,29 +3305,29 @@ function wptravel_get_fixed_departure_date( $trip_id ) {
 				?>
 				<div class="fixed-date-dropdown">
 					<?php
-						foreach ( $available_dates as $index => $date ) {
-							if ( date( 'Y-m-d ', strtotime( $date ) ) >= date( 'Y-m-d' ) ) {
-								$date_found = true;
-								?>
+					foreach ( $available_dates as $index => $date ) {
+						if ( date( 'Y-m-d ', strtotime( $date ) ) >= date( 'Y-m-d' ) ) {
+							$date_found = true;
+							?>
 								
-								<?php
-								if ( 0 === $index ) {
-									?>
+							<?php
+							if ( 0 === $index ) {
+								?>
 									<div class="dropbtn"><?php echo esc_html( date_i18n( $date_format, strtotime( $date ) ) ); ?></div> <!--selected -->
 									<!-- loop wrapper -->
 									<div class="dropdown-content"> 
 									<?php
-								}
-								?>
-								<span class="dropdown-list"> <?php  echo esc_html( date_i18n( $date_format, strtotime( $date ) ) ); ?></span>
+							}
+							?>
+								<span class="dropdown-list"> <?php echo esc_html( date_i18n( $date_format, strtotime( $date ) ) ); ?></span>
 								<?php
 								if ( count( $available_dates ) === ( $index + 1 ) ) {
 									?>
 									</div> <!-- /loop wrapper -->
 									<?php
 								}
-							}
 						}
+					}
 					?>
 				</div>
 				<?php
@@ -4166,9 +4279,9 @@ function wptravel_php_to_moment_format( $format ) {
  *
  * @return boolean default true.
  */
-function wptravel_use_itinerary_v2_layout() { 
+function wptravel_use_itinerary_v2_layout() {
 	$wptravel_dev_mode_enabled = wptravel_dev_mode();
-	
+
 	if ( $wptravel_dev_mode_enabled ) {
 		return apply_filters( 'wptravel_use_itinerary_layout_v2', false );
 	} else {
