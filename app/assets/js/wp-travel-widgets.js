@@ -68,6 +68,33 @@ jQuery(function($) {
 
     });
 
+    $('.wp-travel-filter-submit').on('click', function() {
+        var view_mode = $(this).siblings('.wp-travel-filter-view-mode').data('mode');
+        var pathname = $(this).siblings('.wp-travel-filter-archive-url').val();
+        if (!pathname) {
+            pathname = window.location.pathname;
+        }
+
+        query_string = '';
+        if ( window.location.search ) {
+            query_string = window.location.search;
+        }
+        
+        var full_url       = new URL( pathname + query_string );
+        var search_params  = full_url.searchParams;
+        var data_index = $(this).siblings('.wptravel_filter-data-index').data('index');
+
+        $('.wp_travel_search_filters_input' + data_index).each(function() {
+            var filterby = $(this).attr('name');
+            var filterby_val = $(this).val();
+            search_params.set( filterby, filterby_val );
+            full_url.search = search_params.toString();
+        });
+
+        var new_url     = full_url.toString();
+        window.location = new_url;
+    });
+
     $('.wp-travel-filter-search-submit').on('click', function() {
         var view_mode = $(this).siblings('.wp-travel-widget-filter-view-mode').data('mode');
         var pathname = $(this).siblings('.wp-travel-widget-filter-archive-url').val();

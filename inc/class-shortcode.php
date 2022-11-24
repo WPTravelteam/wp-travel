@@ -26,6 +26,8 @@ class Wp_Travel_Shortcodes {
 
 		add_shortcode( 'WP_TRAVEL_TRIP_CATEGORY_ITEMS', array( $this, 'get_category_items_shortcode' ) );
 		add_shortcode( 'wp_travel_trip_category_items', array( $this, 'get_category_items_shortcode' ) );
+		add_shortcode( 'wptravel_itinerary_filter', array( $this, 'wptravel_filter_itinerary' ) );
+		add_shortcode( 'WPTRAVEL_ITINERARY_FILTER', array( $this, 'wptravel_filter_itinerary' ) );
 
 		/**
 		 * Checkout Shortcodes.
@@ -348,6 +350,24 @@ class Wp_Travel_Shortcodes {
 		return $content;
 	}
 
+	/**
+	 * Adding itinerary shortcode
+	 *
+	 * @since 5.3.8
+	 */
+	public static function wptravel_filter_itinerary( $atts, $content ) {
+		$sanitized_get = WP_Travel::get_sanitize_request();
+		// $search_widget_fields = wptravel_search_filter_widget_form_fields( $sanitized_get );
+		ob_start();
+		?>
+		<div class="wp-travel-toolbar clearfix">
+			<div class="wp-toolbar-content wp-toolbar-left">
+			   <?php wptravel_itinerary_filter_by( $sanitized_get ); ?>
+			</div>
+		</div>
+		<?php
+		return ob_get_clean();
+	}
 	/**
 	 * WP Travel Trip Filters Shortcode.
 	 *
