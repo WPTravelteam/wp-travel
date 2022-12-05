@@ -255,7 +255,7 @@ Fixes:
 * Fixed View System Information text made translation ready.
 
 Enhancement:
-* Added Shortcode `[WPTRAVEL_ITINERARY_FILTER]` or `[wptravel_itinerary_filter]` to display Itinerary Filter.
+* Added Shortcode `[WP_TRAVEL_ITINERARY_FILTER]` or `[wp_travel_itinerary_filter]` to display Itinerary Filter.
 * Added Shortcode `[WP_TRAVEL_TRIP_CATEGORY_ITEMS taxonomy='itinerary_types' child='yes']` to display only the child Trip Type.
 * Added Shortcode `[WP_TRAVEL_TRIP_CATEGORY_ITEMS taxonomy='itinerary_types' parent='yes']` to display only the parent Trip Type.
 
