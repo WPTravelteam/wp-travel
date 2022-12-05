@@ -26,8 +26,8 @@ class Wp_Travel_Shortcodes {
 
 		add_shortcode( 'WP_TRAVEL_TRIP_CATEGORY_ITEMS', array( $this, 'get_category_items_shortcode' ) );
 		add_shortcode( 'wp_travel_trip_category_items', array( $this, 'get_category_items_shortcode' ) );
-		add_shortcode( 'wptravel_itinerary_filter', array( $this, 'wptravel_filter_itinerary' ) );
-		add_shortcode( 'WPTRAVEL_ITINERARY_FILTER', array( $this, 'wptravel_filter_itinerary' ) );
+		add_shortcode( 'wp_travel_itinerary_filter', array( $this, 'wptravel_filter_itinerary' ) );
+		add_shortcode( 'WP_TRAVEL_ITINERARY_FILTER', array( $this, 'wptravel_filter_itinerary' ) );
 
 		/**
 		 * Checkout Shortcodes.
