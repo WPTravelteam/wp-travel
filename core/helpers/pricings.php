@@ -237,11 +237,22 @@ class WpTravel_Helpers_Pricings {
 		$table = $wpdb->prefix . 'wt_pricings';
 
 		$results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$table} WHERE trip_id=%d AND title=%s", $trip_id, $pricing_data['title'] ) );
-		
-		if( $results ){
+
+		if ( $results ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_DUPLICATE_PRICING' );
 		}
+		/**
+		 * @since 5.3.6
+		 */
+		$trip_extras = ! empty( $pricing_data['trip_extras'] ) ? $pricing_data['trip_extras'] : '';
+		if ( ! empty( $trip_extras ) && is_array( $trip_extras ) ) {
+			$_trip_extras = array();
+			foreach ( $trip_extras as $extra ) {
+				$_trip_extras[] = $extra['id'];
+			}
 
+			$trip_extras = implode( ',', $_trip_extras );
+		}
 		$wpdb->insert(
 			$table,
 			array(
@@ -251,7 +262,7 @@ class WpTravel_Helpers_Pricings {
 				'has_group_price' => ! empty( $pricing_data['has_group_price'] ) ? absint( $pricing_data['has_group_price'] ) : 0,
 				'group_prices'    => ! empty( $pricing_data['has_group_price'] ) && ! empty( $pricing_data['group_prices'] ) ? maybe_serialize( $pricing_data['group_prices'] ) : maybe_serialize( array() ),
 				'trip_id'         => $trip_id,
-				'trip_extras'     => ! empty( $pricing_data['trip_extras'] ) ? esc_attr( $pricing_data['trip_extras'] ) : '',
+				'trip_extras'     => ! empty( $trip_extras ) ? esc_attr( $trip_extras ) : '',
 				'sort_order'      => ! empty( $pricing_data['sort_order'] ) ? absint( $pricing_data['sort_order'] ) : 1,
 			),
 			array(

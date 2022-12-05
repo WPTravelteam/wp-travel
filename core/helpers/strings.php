@@ -11,7 +11,8 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 4.6.4
  */
-class WpTravel_Helpers_Strings { // @phpcs:ignore
+class WpTravel_Helpers_Strings {
+ // @phpcs:ignore
 
 	/**
 	 * Get all strings used in WP Travel.
@@ -82,6 +83,8 @@ class WpTravel_Helpers_Strings { // @phpcs:ignore
 			'save_settings'             => __( 'Save Settings', 'wp-travel' ),
 			'show'                      => __( 'Show', 'wp-travel' ),
 			'system_information'        => __( 'System Information', 'wp-travel' ),
+			'view_system_information'   => __( 'View system information', 'wp-travel' ),
+			'general_setting'			=> __( 'General Settings', 'wp-travel' ),
 			'to'                        => __( 'To', 'wp-travel' ),
 			'trip_code'                 => __( 'Trip code', 'wp-travel' ),
 			'trip_date'                 => __( 'Trip date', 'wp-travel' ),

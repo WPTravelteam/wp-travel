@@ -49,3 +49,11 @@ jQuery(window).resize(sidebarSticky);
 // document.addEventListener("DOMContentLoaded", function() {
 // 	sidebarSticky();
 // });
+
+
+//fixing pre tag issue while using shortcode
+// $('.single-itineraries #trip_outline pre').each(function() {
+//     document.write("hello");
+// 	$(this).replaceWith($('<div>' + this.innerHTML + '</div>'));
+//   });
+
