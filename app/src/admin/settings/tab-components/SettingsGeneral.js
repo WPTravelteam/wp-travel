@@ -8,6 +8,9 @@ import Select from 'react-select'
 import {VersionCompare} from '../../fields/VersionCompare'
 
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
+const __i18n = {
+	..._wp_travel_admin.strings
+}
 
 export default () => {
 
@@ -66,7 +69,7 @@ export default () => {
     let switch_to_react = 'undefined' != typeof wp_travel_switch_to_react ? wp_travel_switch_to_react : 'no'
     
     return <div className="wp-travel-ui wp-travel-ui-card settings-general">
-        <h2>{ __( 'General Settings', 'wp-travel' ) }</h2>
+        <h2>{__i18n.general_setting}</h2>
         <ErrorBoundary>
             {/* { 'undefined' != typeof options && 'undefined' != typeof options.wp_travel_user_since && VersionCompare( options.wp_travel_user_since, '4.0.0', '<' ) &&
             

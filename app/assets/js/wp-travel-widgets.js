@@ -187,5 +187,18 @@ jQuery(function($) {
     }
     $('body').off('submit', '#wp-travel-enquiries')
     $('#wp-travel-enquiries').submit(handleEnquirySubmission);
+    
+    $(document).on( 'click', '.btn-wptravel-filter-by', function(){
+        var parent = $(this).parent( '.wp-travel-filter-by-heading' );
+        if ( parent &&  parent.siblings( '.wp-toolbar-filter-field' ) ) {
+            parent.siblings( '.wp-toolbar-filter-field, .wp-travel-filter-button' ).toggleClass( 'show-in-mobile' );
+
+            if ( parent.siblings( '.wp-toolbar-filter-field' ).hasClass( 'show-in-mobile' ) ) {
+                $(this).addClass( 'active' );
+            } else {
+                $(this).removeClass( 'active' );
+            }
+        }
+    } );
 
 });

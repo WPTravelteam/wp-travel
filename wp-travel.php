@@ -8,7 +8,7 @@
  * Author URI: http://wptravel.io/
  * Requires at least: 5.4.1
  * Requires PHP: 5.6
- * Tested up to: 6.1
+ * Tested up to: 6.1.1
  *
  * Text Domain: wp-travel
  * Domain Path: /i18n/languages/
@@ -30,7 +30,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 	 *
 	 * @since 1.0.0
 	 */
-	final class WP_Travel { // @phpcs:ignore
+	final class WP_Travel {
+ // @phpcs:ignore
 
 		/**
 		 * WP Travel version.
