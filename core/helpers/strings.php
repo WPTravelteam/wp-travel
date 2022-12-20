@@ -254,6 +254,7 @@ class WpTravel_Helpers_Strings {
 			'downloads'         => __( 'Downloads', 'wp-travel' ),
 			'misc'              => __( 'Misc', 'wp-travel' ),
 			'tabs'              => __( 'Tabs', 'wp-travel' ),
+			'guides'              => __( 'Guides', 'wp-travel' ),
 		);
 	}
 
