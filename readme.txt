@@ -3,9 +3,9 @@ Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 5.4.1
-Tested up to: 6.1
+Tested up to: 6.1.1
 Requires PHP: 5.6
-Stable tag: 5.3.7
+Stable tag: 5.3.9
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -245,6 +245,30 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 5.3.9 =
+Release Date: 26th December 2022
+
+Fixes:
+* Fixed Cutoff Time issue in Date Listing View.
+
+Enhancements:
+* Added Routing number field in Bank Deposit payment system.
+* Added payment Method and Payment status message in Booking success message while using WP Travel Free only.
+* Modified the code so that Pax can be renamed through function code.
+
+= 5.3.8 =
+Release Date: 5th December 2022
+
+Fixes:
+* Fixed Trip extras not being saved.
+* Fixed issue in Departure Date while adding multiple date.
+* Fixed View System Information text made translation ready.
+
+Enhancement:
+* Added Shortcode `[WP_TRAVEL_ITINERARY_FILTER]` or `[wp_travel_itinerary_filter]` to display Itinerary Filter.
+* Added Shortcode `[WP_TRAVEL_TRIP_CATEGORY_ITEMS taxonomy='itinerary_types' child='yes']` to display only the child Trip Type.
+* Added Shortcode `[WP_TRAVEL_TRIP_CATEGORY_ITEMS taxonomy='itinerary_types' parent='yes']` to display only the parent Trip Type.
 
 = 5.3.7 =
 Release Date: 9th November 2022

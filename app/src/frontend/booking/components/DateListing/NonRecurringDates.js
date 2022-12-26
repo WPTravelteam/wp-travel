@@ -1,9 +1,24 @@
 import { CheckboxControl, Disabled } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
+import { Fragment, useState, useEffect } from '@wordpress/element';
 
 const __i18n = {
 	..._wp_travel.strings
 }
+
+/**
+ * it fixe olny start date giving
+ * 
+ * @since 5.3.9
+ */
+const datePerPage = 1
+/**
+ * in thise file use cuttOffTime
+ * 
+ * @since 5.3.9
+ */
+import { IsTourDates } from '../../_IsTourDate'; // Filter available dates in calendar.
+import { RRule, RRuleSet } from "rrule";
+
 // WP Travel Functions.
 import { objectSum } from '../../_wptravelFunctions';
 
@@ -16,6 +31,124 @@ import PaxSelector from './SubComponents/PaxSelector';
 import TripExtras from './SubComponents/TripExtras';
 import TripTimes from './SubComponents/TripTimes';
 import InventoryNotice, { Notice } from '../../_InventoryNotice';
+
+/**
+ * git trip data as props like date, price id and use IsTourDate component to check cuttOffTime of starting one by one
+ * 
+ * @param  props like date, price id and trip data etc
+ * @returns price list
+ * @since 5.3.9
+ */
+const NonRecorringRepeater = ( props ) => {
+    const { date, _nomineePricings } = props;
+    // console.log('ppp');
+    // console.log(date);
+    const [dates, setRecurringDates] = useState([]); // New dates will push here when clicking load more.
+    const [activeRecurringDates, setActiveRecurringDates] = useState([]); // curren page dates.
+    const [rruleArgs, setRRuleArgs] = useState(null)
+
+    useEffect( () => {
+        if ( ! rruleArgs ) {
+            let aaa = generateRRUleArgs(date);
+            if (Object.keys(aaa).length > 0) {
+                setRRuleArgs(aaa)
+			}
+        }
+    }, [date]);
+
+    useEffect(() => {
+        if (rruleArgs) {
+            let _dates = generateRRule(rruleArgs);
+            setRecurringDates(_dates)
+            setActiveRecurringDates(_dates)
+        }
+    }, [rruleArgs]);
+    
+    
+
+    const generateRRule = rruleArgs => {
+        const rruleSet = new RRuleSet();
+        rruleSet.rrule(
+            new RRule(rruleArgs)
+        );
+        return rruleSet.all();
+    }
+
+	/**
+	 * 
+	 * @param {*} date 
+	 * @param {*} showAll 
+	 * @returns Wed Dec 21 2022 05:45:00 GMT+0545 (Nepal Time) 
+	 * @since 5.3.9
+	 */
+    const generateRRUleArgs = ( date, showAll ) => {
+        let startDate = date.start_date && new Date( date.start_date + ' 00:00:00' ) || new Date();
+        let nowDate   = new Date();
+        nowDate.setHours(0, 0, 0, 0);
+
+        let rruleStartDate = nowDate < startDate ? startDate : nowDate;
+
+        let curretYear = rruleStartDate.getFullYear();
+        let currentDate = rruleStartDate.getDate();
+        let currentMonth = rruleStartDate.getMonth();
+    
+        // UTC Offset Fixes.
+        let totalOffsetMin = new Date(rruleStartDate).getTimezoneOffset();
+        let offsetHour = parseInt(totalOffsetMin/60);
+        let offsetMin = parseInt(totalOffsetMin%60);
+    
+        let currentHours = 0;
+        let currentMin = 0;
+        if ( offsetHour > 0 ) {
+            currentHours = offsetHour;
+            currentMin = offsetMin;
+        }
+        rruleStartDate = moment( new Date( Date.UTC(curretYear, currentMonth, currentDate, currentHours, currentMin, 0 ) ) ).utc();
+        
+        let ruleArgs = {
+            freq: RRule.DAILY,
+            count: datePerPage,
+            dtstart: new Date(rruleStartDate),
+        };
+		if ( showAll ) { // This args is only For Pagination.
+			// delete ruleArgs.count;
+            ruleArgs.count = ( 50 * datePerPage ); // Support Max 50 pages i.e. 500 records.
+		}
+        if ( date.end_date && '0000-00-00' != date.end_date ) { // if has end date.
+            let endDate = new Date(date.end_date)
+            ruleArgs.until = endDate
+        }
+        rruleStartDate    = moment( rruleStartDate );
+        let selectedYears = date.years ? date.years.split(",").filter(year => year != 'every_year').map(year => parseInt(year)) : [];
+        if (selectedYears.length > 0 && !selectedYears.includes(rruleStartDate.year())) {
+            return []
+        }
+    
+        let selectedMonths = date.months ? date.months.split(",").filter(month => month != 'every_month') : [];
+        let selectedDates  = date.date_days ? date.date_days.split(",").filter(date => date !== 'every_weekdays' && date !== '') : [];
+        let selectedDays   = date.days ? date.days.split(",").filter(day => day !== 'every_date_days' && day !== '') : [];
+    
+        if (selectedMonths.length > 0) {
+            ruleArgs.bymonth = selectedMonths.map(m => parseInt(m));
+        }
+        if (selectedDays.length > 0) {
+            ruleArgs.byweekday = selectedDays.map(sd => RRule[sd]);
+        }
+        else if (selectedDates.length > 0) {
+            ruleArgs.bymonthday = selectedDates.map(md => parseInt(md));
+        }
+        return ruleArgs
+    }
+    return <>
+            { activeRecurringDates.map( esx => {
+            // { console.log('mmmm') }
+            // { console.log(props) } 
+            	return  <div key={12} > {IsTourDates(props)(esx) && <Pricings { ...props } /> || <Disabled><Pricings { ...props } /></Disabled>} </div>; 
+                       
+            })}
+
+    </>
+}
 
 const NonRecurringDates = ( props ) => {
     // Component Props.
@@ -48,7 +181,13 @@ const NonRecurringDates = ( props ) => {
 			return <tr key={index} className={loadingClass}>
 				<td data-label={__i18n.bookings.pricings_list_label}>
 					{/* _nomineePricings not updated in store/state because there are multiple _nomineePricings as per date so just a variable. */}
-					<Pricings { ...{ ...props, _nomineePricings, date } }  />
+					{/* <Pricings { ...{ ...props, _nomineePricings, date } }  /> */}
+					{/**
+					 * @param props, date , and price id
+					 * @return price name
+					 * @since 5.3.9
+					 */}
+					 <NonRecorringRepeater { ...{ ...props, _nomineePricings, date } } />
 				</td>
 				<td data-label={__i18n.bookings.person}>
 					<div className ="person-box">

@@ -122,6 +122,7 @@ class WP_Travel_Helpers_Settings {
 					'sort_code'      => isset( $bank_deposits['sort_code'][ $key ] ) ? $bank_deposits['sort_code'][ $key ] : '',
 					'iban'           => isset( $bank_deposits['iban'][ $key ] ) ? $bank_deposits['iban'][ $key ] : '',
 					'swift'          => isset( $bank_deposits['swift'][ $key ] ) ? $bank_deposits['swift'][ $key ] : '',
+					'routing_number' => isset( $bank_deposits['routing_number'][ $key ] ) ? $bank_deposits['routing_number'][ $key ] : '',
 					'enable'         => isset( $bank_deposits['enable'][ $key ] ) ? $bank_deposits['enable'][ $key ] : '',
 				);
 
@@ -230,6 +231,7 @@ class WP_Travel_Helpers_Settings {
 				$bank_deposits['sort_code'][ $i ]      = $bank_deposit['sort_code'];
 				$bank_deposits['iban'][ $i ]           = $bank_deposit['iban'];
 				$bank_deposits['swift'][ $i ]          = $bank_deposit['swift'];
+				$bank_deposits['routing_number'][ $i ] = $bank_deposit['routing_number'] ? $bank_deposit['routing_number'] : '';
 				$bank_deposits['enable'][ $i ]         = $bank_deposit['enable'];
 				$i++;
 			}
