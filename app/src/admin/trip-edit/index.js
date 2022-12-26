@@ -39,6 +39,7 @@ import "./Components/Faqs";
 import "./Components/Downloads";
 import "./Components/Misc";
 import "./Components/Tabs";
+import "./Components/Guide";
 
 const toggleDisablePostUpdate = (isDisabled = false) => {
 	if (
@@ -209,35 +210,17 @@ addFilter("wp_travel_trip_options_tabs", "wp_travel", (tabs) => {
 				className: "tab-misc",
 				// content: WPTravelTripOptionsMisc
 			},
+			{
+				name: "guides",
+				title: __i18n.admin_tabs.guides,
+				className: "tab-guides",
+				// content: WPTravelTripOptionsTripGuide
+			},
 		],
 	];
 });
 
-// Just added this for backward compatibility. need to remove after removing content.splice from pro options.
-addFilter(
-	"wp_travel_trip_cart_checkout_tab_content",
-	"wp_travel",
-	(content) => {
-		content = [<> </>, ...content];
-		return content;
-	}
-);
-addFilter("wp_travel_trip_inventory_tab_content", "wp_travel", (content) => {
-	content = [<> </>, ...content];
-	return content;
-});
-addFilter("wp_travel_trip_faq_tab_content", "wp_travel", (content) => {
-	content = [<> </>, ...content];
-	return content;
-});
-addFilter("wp_travel_trip_downloads_tab_content", "wp_travel", (content) => {
-	content = [<> </>, ...content];
-	return content;
-});
-addFilter("wp_travel_itinerary_custom_tabs", "wp_travel", (content) => {
-	content = [<> </>, ...content];
-	return content;
-});
+
 
 addFilter("wp_travel_after_dates_options", "WPTravel/TripEdit/PriceDates/MoreDatesNotice", (content, allData) => {
 	content = [

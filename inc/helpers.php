@@ -1114,6 +1114,7 @@ function wptravel_get_default_trip_tabs( $is_show_in_menu_query = false, $fronte
 			'use_global'   => 'yes',
 			'show_in_menu' => 'yes',
 		),
+		
 	);
 
 	$return_tabs = apply_filters( 'wp_travel_default_trip_tabs', $return_tabs ); // Added in 1.9.3
