@@ -11,7 +11,8 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 5.0.0
  */
-class WpTravel_Helpers_Booking { // @phpcs:ignore
+class WpTravel_Helpers_Booking {
+ // @phpcs:ignore
 
 	/**
 	 * Generate HTML for Booking Details.
@@ -21,7 +22,9 @@ class WpTravel_Helpers_Booking { // @phpcs:ignore
 	 * @return mixed
 	 */
 	public static function render_booking_details( $booking_id ) {
-
+		if ( class_exists( 'WpTravel_Helpers_Strings' ) ) {
+			$strings = WpTravel_Helpers_Strings::get();
+		}
 		global $wt_cart;
 		$items = $wt_cart->getItems();
 
@@ -40,7 +43,7 @@ class WpTravel_Helpers_Booking { // @phpcs:ignore
 			<thead>
 				<tr>
 					<th><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></th>
-					<th><?php esc_html_e( 'PAX', 'wp-travel' ); ?></th>
+					<th><?php echo ( $strings['bookings']['pax'] ? $strings['bookings']['pax'] : 'Pax' ); ?></th>
 					<th><?php esc_html_e( 'Arrival Date', 'wp-travel' ); ?></th>
 					<th><?php esc_html_e( 'Departure Date', 'wp-travel' ); ?></th>
 				</tr>
@@ -102,7 +105,7 @@ class WpTravel_Helpers_Booking { // @phpcs:ignore
 												$price = $sale_price;
 											}
 											$price = WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $price );
-											$qty = isset( $extras['qty'][ $k ] ) && $extras['qty'][ $k ] ? $extras['qty'][ $k ] : 1;
+											$qty   = isset( $extras['qty'][ $k ] ) && $extras['qty'][ $k ] ? $extras['qty'][ $k ] : 1;
 
 											$total = $price * $qty;
 											?>

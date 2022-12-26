@@ -456,6 +456,7 @@ addFilter('wp_travel_payment_gateway_fields_bank_deposit', 'wp_travel', (content
             sort_code: '',
             iban: '',
             swift: '',
+            routing_number : '',
             enable: 'no',
         } )
     }
@@ -575,6 +576,15 @@ addFilter('wp_travel_payment_gateway_fields_bank_deposit', 'wp_travel', (content
                                                     placeholder={__( 'BIC/Swift', 'wp-travel' )}
                                                     onChange={ 
                                                         (value) => { updateBankDeposit( 'swift', value, index ) }
+                                                    }
+                                                />
+                                            </td>
+                                            <td>
+                                                <TextControl
+                                                    value={bankDeposite.routing_number}
+                                                    placeholder={__( 'Routing Number', 'wp-travel' )}
+                                                    onChange={ 
+                                                        (value) => { updateBankDeposit( 'routing_number', value, index ) }
                                                     }
                                                 />
                                             </td>

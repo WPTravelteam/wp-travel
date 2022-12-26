@@ -9,9 +9,9 @@ const DEFAULT_STATE = () => {
         addons: [],
         galleryIds: [],
         group_size:'',
+        highest_price : '',
         pricing_type: 'multiple-price',
         pricings:[],
-        pricing_categories:[],
         _thumbnail_id: 0,
 
         // Dates states

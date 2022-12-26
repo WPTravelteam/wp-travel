@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 5.4.1
 Tested up to: 6.1.1
 Requires PHP: 5.6
-Stable tag: 5.3.8
+Stable tag: 5.3.9
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -245,6 +245,17 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 5.3.9 =
+Release Date: 26th December 2022
+
+Fixes:
+* Fixed Cutoff Time issue in Date Listing View.
+
+Enhancements:
+* Added Routing number field in Bank Deposit payment system.
+* Added payment Method and Payment status message in Booking success message while using WP Travel Free only.
+* Modified the code so that Pax can be renamed through function code.
 
 = 5.3.8 =
 Release Date: 5th December 2022
