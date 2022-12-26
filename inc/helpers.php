@@ -1114,6 +1114,7 @@ function wptravel_get_default_trip_tabs( $is_show_in_menu_query = false, $fronte
 			'use_global'   => 'yes',
 			'show_in_menu' => 'yes',
 		),
+		
 	);
 
 	$return_tabs = apply_filters( 'wp_travel_default_trip_tabs', $return_tabs ); // Added in 1.9.3
@@ -3066,6 +3067,7 @@ function wptravel_get_bank_deposit_account_details( $display_all_row = false ) {
 		'sort_code',
 		'iban',
 		'swift',
+		'routing_number',
 	);
 	$display_fields = apply_filters( 'wp_travel_filter_bank_deposit_account_fields', $display_fields );
 
@@ -3083,6 +3085,7 @@ function wptravel_get_bank_deposit_account_details( $display_all_row = false ) {
 			$sort_code      = isset( $bank_deposits['sort_code'][ $i ] ) ? $bank_deposits['sort_code'][ $i ] : '';
 			$iban           = isset( $bank_deposits['iban'][ $i ] ) ? $bank_deposits['iban'][ $i ] : '';
 			$swift          = isset( $bank_deposits['swift'][ $i ] ) ? $bank_deposits['swift'][ $i ] : '';
+			$routing_number = isset( $bank_deposits['routing_number'][ $i ] ) ? $bank_deposits['routing_number'][ $i ] : '';
 
 			$field = array();
 			foreach ( $display_fields as $field_name ) {
@@ -3132,6 +3135,9 @@ function wptravel_get_bank_deposit_account_table( $show_description = true ) {
 				<?php if ( isset( $account_data[0]['swift'] ) ) : ?>
 					<td><?php esc_html_e( 'Swift', 'wp-travel' ); ?></td>
 				<?php endif; ?>
+				<?php if ( isset( $account_data[0]['routing_number'] ) ) : ?>
+					<td><?php esc_html_e( 'Routing Number', 'wp-travel' ); ?></td>
+				<?php endif; ?>
 			</tr>
 			<?php foreach ( $account_data as $data ) { ?>
 				<tr>
@@ -3152,6 +3158,9 @@ function wptravel_get_bank_deposit_account_table( $show_description = true ) {
 					<?php endif; ?>
 					<?php if ( isset( $data['swift'] ) ) : ?>
 						<td><?php echo esc_html( $data['swift'] ); ?></td>
+					<?php endif; ?>
+					<?php if ( isset( $data['routing_number'] ) ) : ?>
+						<td><?php echo esc_html( $data['routing_number'] ); ?></td>
 					<?php endif; ?>
 				</tr>
 			<?php } ?>
