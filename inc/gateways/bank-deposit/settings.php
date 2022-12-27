@@ -76,6 +76,7 @@ function wptravel_settings_bank_deposit( $args ) {
 								<th><?php esc_html_e( 'Sort Code', 'wp-travel' ); ?></th>
 								<th><?php esc_html_e( 'IBAN', 'wp-travel' ); ?></th>
 								<th><?php esc_html_e( 'BIC/Swift', 'wp-travel' ); ?></th>
+								<th><?php esc_html_e( 'Routing Number', 'wp-travel' ); ?></th>
 								<th colspan="2"><?php esc_html_e( 'Action', 'wp-travel' ); ?></th>
 							</tr>
 						</thead>
@@ -89,6 +90,7 @@ function wptravel_settings_bank_deposit( $args ) {
 									$sort_code      = isset( $bank_deposits['sort_code'][ $i ] ) ? $bank_deposits['sort_code'][ $i ] : '';
 									$iban           = isset( $bank_deposits['iban'][ $i ] ) ? $bank_deposits['iban'][ $i ] : '';
 									$swift          = isset( $bank_deposits['swift'][ $i ] ) ? $bank_deposits['swift'][ $i ] : '';
+									$routing_number = isset( $bank_deposits['routing_number'][ $i ] ) ? $bank_deposits['routing_number'][ $i ] : '';
 									$enable         = isset( $bank_deposits['enable'][ $i ] ) ? $bank_deposits['enable'][ $i ] : 'no';
 									?>
 									<tr data-index="<?php echo esc_attr( $i ); ?>">
@@ -115,6 +117,10 @@ function wptravel_settings_bank_deposit( $args ) {
 
 										<td>
 											<input type="text" name="wp_travel_bank_deposits[swift][<?php echo esc_attr( $i ); ?>]" class="wp_travel_bank_deposit_swift" value="<?php echo esc_attr( $swift ); ?>">
+										</td>
+
+										<td>
+											<input type="text" name="wp_travel_bank_deposits[swift][<?php echo esc_attr( $i ); ?>]" class="wp_travel_bank_deposit_swift" value="<?php echo esc_attr( $routing_number ); ?>">
 										</td>
 										<td>
 											<span class="show-in-frontend checkbox-default-design">

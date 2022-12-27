@@ -84,7 +84,7 @@ class WpTravel_Helpers_Strings {
 			'show'                      => __( 'Show', 'wp-travel' ),
 			'system_information'        => __( 'System Information', 'wp-travel' ),
 			'view_system_information'   => __( 'View system information', 'wp-travel' ),
-			'general_setting'			=> __( 'General Settings', 'wp-travel' ),
+			'general_setting'           => __( 'General Settings', 'wp-travel' ),
 			'to'                        => __( 'To', 'wp-travel' ),
 			'trip_code'                 => __( 'Trip code', 'wp-travel' ),
 			'trip_date'                 => __( 'Trip date', 'wp-travel' ),
@@ -163,9 +163,10 @@ class WpTravel_Helpers_Strings {
 			'map'                       => __( 'Map', 'wp-travel' ),
 
 			'help_text'                 => array(
-				'date_pricing'      => __( 'Type Pricing option and enter', 'wp-travel' ),
-				'enable_location'   => __( 'Enable/Disable latitude-longitude option', 'wp-travel' ),
-				'use_global_payout' => __( 'Note: In case of multiple cart items checkout, global payout will be used.', 'wp-travel' ),
+				'date_pricing'       => __( 'Type Pricing option and enter', 'wp-travel' ),
+				'enable_location'    => __( 'Enable/Disable latitude-longitude option', 'wp-travel' ),
+				'use_global_payout'  => __( 'Note: In case of multiple cart items checkout, global payout will be used.', 'wp-travel' ),
+				'show_highest_price' => __( 'This option will display the highest price..', 'wp-travel' ),
 			),
 			'full_name'                 => __( 'Full Name', 'wp-travel' ),
 			'enter_your_name'           => __( 'Enter your name', 'wp-travel' ),

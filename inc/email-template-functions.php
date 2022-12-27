@@ -266,6 +266,9 @@ function wptravel_payment_client_default_email_content() {
  * @return HTML
  */
 function wptravel_admin_email_template() {
+	if ( class_exists( 'WpTravel_Helpers_Strings' ) ) {
+		$strings = WpTravel_Helpers_Strings::get();
+	}
 	ob_start();
 	?>
 	<!DOCTYPE html>
@@ -405,7 +408,7 @@ function wptravel_admin_email_template() {
 				<td align="left">
 					<table class="wp-travel-content-head" align="left" cellspacing="0" cellpadding="0" style="width: 24%;">
 						<tr style="background: #fff;">
-							<td style="font-size: 14px;background: #fff;box-sizing: border-box;margin: 0;padding: 0px 0px 8px 25px;"><b><?php esc_html_e( 'Pax', 'wp-travel' ); ?></b></td>
+							<td style="font-size: 14px;background: #fff;box-sizing: border-box;margin: 0;padding: 0px 0px 8px 25px;"><b><?php esc_html_e( $strings['bookings']['pax'] ? $strings['bookings']['pax'] : 'Pax', 'wp-travel' ); ?></b></td>
 						</tr>
 					</table>
 					<table class="wp-travel-content-info" align="left" cellspacing="0" cellpadding="0" style="width: 76%;">
@@ -573,6 +576,9 @@ function wptravel_admin_email_template() {
  * @return HTML
  */
 function wptravel_customer_email_template() {
+	if ( class_exists( 'WpTravel_Helpers_Strings' ) ) {
+		$strings = WpTravel_Helpers_Strings::get();
+	}
 	ob_start();
 	?>
 	<!DOCTYPE html>
@@ -711,7 +717,7 @@ function wptravel_customer_email_template() {
 				<td align="left">
 					<table class="wp-travel-content-head" align="left" cellspacing="0" cellpadding="0" style="width: 24%;">
 						<tr style="background: #fff;">
-							<td style="font-size: 14px;background: #fff;box-sizing: border-box;margin: 0;padding: 0px 0px 8px 25px;"><b><?php esc_html_e( 'Pax', 'wp-travel' ); ?></b></td>
+							<td style="font-size: 14px;background: #fff;box-sizing: border-box;margin: 0;padding: 0px 0px 8px 25px;"><b><?php esc_html_e( $strings['bookings']['pax'] ? $strings['bookings']['pax'] : 'Pax', 'wp-travel' ); ?></b></td>
 						</tr>
 					</table>
 					<table class="wp-travel-content-info" align="left" cellspacing="0" cellpadding="0" style="width: 76%;">
@@ -1082,6 +1088,9 @@ function wptravel_enqueries_admin_email_template() {
  * @return HTML
  */
 function wptravel_payment_email_template_admin() {
+	if ( class_exists( 'WpTravel_Helpers_Strings' ) ) {
+		$strings = WpTravel_Helpers_Strings::get();
+	}
 	ob_start();
 	?>
 	<!DOCTYPE html>
@@ -1220,7 +1229,7 @@ function wptravel_payment_email_template_admin() {
 				<td align="left">
 					<table class="wp-travel-content-head" align="left" cellspacing="0" cellpadding="0" style="width: 24%;">
 						<tr style="background: #fff;">
-							<td style="font-size: 14px;background: #fff;box-sizing: border-box;margin: 0;padding: 0px 0px 8px 25px;"><b><?php esc_html_e( 'Pax', 'wp-travel' ); ?></b></td>
+							<td style="font-size: 14px;background: #fff;box-sizing: border-box;margin: 0;padding: 0px 0px 8px 25px;"><b><?php esc_html_e( $strings['bookings']['pax'] ? $strings['bookings']['pax'] : 'Pax', 'wp-travel' ); ?></b></td>
 						</tr>
 					</table>
 					<table class="wp-travel-content-info" align="left" cellspacing="0" cellpadding="0" style="width: 76%;">

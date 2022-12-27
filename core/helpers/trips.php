@@ -49,7 +49,7 @@ class WpTravel_Helpers_Trips {
 		if ( empty( $trip_id ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
 		}
-		$trip = get_post( $trip_id );
+		$trip                = get_post( $trip_id );
 		$wp_travel_itinerary = new WP_Travel_Itinerary( $trip );
 		$group_size          = $wp_travel_itinerary->get_group_size();
 
@@ -60,6 +60,7 @@ class WpTravel_Helpers_Trips {
 
 		$extras            = WP_Travel_Helpers_Trip_Extras::get_trip_extras();
 		$has_extras        = is_array( $extras ) && isset( $extras['code'] ) && 'WP_TRAVEL_TRIP_EXTRAS' == $extras['code'] && isset( $extras['trip_extras'] ) && count( $extras['trip_extras'] ) > 0 ? true : false;
+		$highest_price     = get_post_meta( $trip_id, 'wp_travel_show_highest_price', true );
 		$trip_default_data = array(
 			'pricing_type'                        => 'multiple-price',
 			'custom_booking_type'                 => 'custom-link',
@@ -93,7 +94,7 @@ class WpTravel_Helpers_Trips {
 		$tabs = array();
 		foreach ( $trip_tabs as $key => $tab ) :
 			$default_label               = isset( $default_tabs[ $key ]['label'] ) ? $default_tabs[ $key ]['label'] : $tab['label'];
-			$tabs[ $i ]['id'] = $i;
+			$tabs[ $i ]['id']            = $i;
 			$tabs[ $i ]['default_label'] = $default_label;
 			$tabs[ $i ]['label']         = $tab['label'];
 			$tabs[ $i ]['show_in_menu']  = $tab['show_in_menu'];
@@ -112,19 +113,19 @@ class WpTravel_Helpers_Trips {
 		}
 
 		$new_trip_facts = array();
-		# don't display those facts which have been removed from global setting
-		if( is_array( $trip_facts ) && count( $trip_facts ) > 0 ){
-			foreach( $trip_facts as $f ){
-				$name = strtolower( $f[ 'label' ] );
-				foreach( $settings_facts as $s ){
-					$s_name = strtolower( $s[ 'name' ] );
-					if( $name == $s_name ){
+		// don't display those facts which have been removed from global setting
+		if ( is_array( $trip_facts ) && count( $trip_facts ) > 0 ) {
+			foreach ( $trip_facts as $f ) {
+				$name = strtolower( $f['label'] );
+				foreach ( $settings_facts as $s ) {
+					$s_name = strtolower( $s['name'] );
+					if ( $name == $s_name ) {
 						$new_trip_facts[] = $f;
 					}
 				}
 			}
 		}
-		
+
 		$trip_facts = $new_trip_facts;
 
 		foreach ( $trip_facts as $key => $trip_fact ) {
@@ -176,7 +177,6 @@ class WpTravel_Helpers_Trips {
 		$iframe_height           = ! empty( get_post_meta( $trip_id, 'wp_travel_map_iframe_height', true ) ) ? absint( get_post_meta( $trip_id, 'wp_travel_map_iframe_height', true ) ) : 400;
 		$map_data['zoomlevel']   = $zoomlevel;
 		$map_data['use_lat_lng'] = $use_lat_lng;
-
 
 		$minimum_partial_payout_use_global = get_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_use_global', true );
 		$minimum_partial_payout_percent    = get_post_meta( $trip_id, 'wp_travel_minimum_partial_payout_percent', true );
@@ -243,7 +243,6 @@ class WpTravel_Helpers_Trips {
 		if ( ! is_wp_error( $pricings ) && 'WP_TRAVEL_TRIP_PRICINGS' === $pricings['code'] ) {
 			$trip_data['pricings'] = (array) $pricings['pricings'];
 
-
 			$args                             = array( 'trip_id' => $trip_id );
 			$args_regular                     = $args;
 			$args_regular['is_regular_price'] = true;
@@ -263,7 +262,7 @@ class WpTravel_Helpers_Trips {
 
 		$dates = WP_Travel_Helpers_Trip_Dates::get_dates( $trip->ID );
 		if ( ! is_wp_error( $dates ) && 'WP_TRAVEL_TRIP_DATES' === $dates['code'] ) {
-			$trip_data['dates'] = (array) $dates['dates'];
+			$trip_data['dates']         = (array) $dates['dates'];
 			$trip_data['display_dates'] = wptravel_get_fixed_departure_date( $trip->ID ); // This date is only for display in Blocks component.
 		}
 
@@ -464,9 +463,9 @@ class WpTravel_Helpers_Trips {
 		}
 
 		// Update trip gallery meta.
-		if ( isset( $trip_data->gallery )  ) {
+		if ( isset( $trip_data->gallery ) ) {
 			$data = array();
-			if ( $trip_data->gallery  ) {
+			if ( $trip_data->gallery ) {
 				$data = (array) $trip_data->gallery;
 				$data = array_map(
 					function( $el ) {
@@ -477,16 +476,15 @@ class WpTravel_Helpers_Trips {
 				);
 			}
 			if ( ! empty( $trip_data->_thumbnail_id && ! empty( $data ) ) ) {
-				$_thumbnail_id = ( in_array( (int) $trip_data->_thumbnail_id, $data ) ||  wp_attachment_is( 'image', $trip_data->_thumbnail_id ) ) ? (int) $trip_data->_thumbnail_id : 0;
-				foreach( $data as $datas ) {
-					if ( $datas === $_thumbnail_id ) { 
-						update_post_meta( $trip_id, '_thumbnail_id', $_thumbnail_id);
+				$_thumbnail_id = ( in_array( (int) $trip_data->_thumbnail_id, $data ) || wp_attachment_is( 'image', $trip_data->_thumbnail_id ) ) ? (int) $trip_data->_thumbnail_id : 0;
+				foreach ( $data as $datas ) {
+					if ( $datas === $_thumbnail_id ) {
+						update_post_meta( $trip_id, '_thumbnail_id', $_thumbnail_id );
 						break;
 					} else {
 						update_post_meta( $trip_id, '_thumbnail_id', isset( $data[0] ) ? $data[0] : 0 );
 					}
 				}
-				
 			} else {
 				update_post_meta( $trip_id, '_thumbnail_id', isset( $data[0] ) ? $data[0] : 0 );
 			}
@@ -517,10 +515,9 @@ class WpTravel_Helpers_Trips {
 		 * Update Meta for sale widget.
 		 * if trip has enable sale for any one price then the trip is assume as sale enabled trip.
 		 */
-		$args = array( 'trip_id' => $trip_id );
+		$args         = array( 'trip_id' => $trip_id );
 		$sale_enabled = self::is_sale_enabled( $args );
 		update_post_meta( $trip_id, 'wptravel_enable_sale', $sale_enabled );
-
 
 		do_action( 'wp_travel_update_trip_data', $trip_data, $trip_id ); // @phpcs:ignore
 		do_action( 'wptravel_update_trip_data', $trip_data, $trip_id );
@@ -563,7 +560,7 @@ class WpTravel_Helpers_Trips {
 		// $permission = WP_Travel::verify_nonce();
 
 		// if ( ! $permission || is_wp_error( $permission ) ) {
-		// 	WP_Travel_Helpers_REST_API::response( $permission );
+		// WP_Travel_Helpers_REST_API::response( $permission );
 		// }
 
 		global $wpdb;
@@ -652,19 +649,19 @@ class WpTravel_Helpers_Trips {
 			}
 		}
 		// Meta Query args. @since 5.0.8
-		$display_sale_trip  = isset( $args['sale_trip'] ) ? $args['sale_trip'] : false;
-		$display_featured_trip  = isset( $args['featured_trip'] ) ? $args['featured_trip'] : false;
+		$display_sale_trip     = isset( $args['sale_trip'] ) ? $args['sale_trip'] : false;
+		$display_featured_trip = isset( $args['featured_trip'] ) ? $args['featured_trip'] : false;
 		if ( $display_sale_trip || $display_featured_trip ) {
 			$query_args['meta_query'] = array();
 
-			if ( $display_sale_trip  ) {
+			if ( $display_sale_trip ) {
 				$query_args['meta_query'][] = array(
 					'key'     => 'wptravel_enable_sale',
 					'value'   => '1',
 					'compare' => '=',
 				);
 			}
-			if ( $display_featured_trip  ) {
+			if ( $display_featured_trip ) {
 				$query_args['meta_query'][] = array(
 					'key'     => 'wp_travel_featured',
 					'value'   => 'yes',
@@ -672,16 +669,15 @@ class WpTravel_Helpers_Trips {
 				);
 			}
 		}
-		
 
 		if ( isset( $args['numberposts'] ) ) {
 			$query_args['posts_per_page'] = $args['numberposts'];
 		}
 
 		if ( isset( $args['orderby'] ) ) {
-			$order  = $args['order'] ? $args['order'] : 'desc';
+			$order                 = $args['order'] ? $args['order'] : 'desc';
 			$query_args['orderby'] = $args['orderby'];
-			$query_args['order'] = $order;
+			$query_args['order']   = $order;
 		}
 		$the_query = new WP_Query( $query_args );
 		$trips     = array();
@@ -744,10 +740,10 @@ class WpTravel_Helpers_Trips {
 		$sql = "select distinct DATES.trip_id from {$date_table}";
 
 		// Order By qyery.
-		$orderby_sql = " ORDER BY post_date desc";
+		$orderby_sql = ' ORDER BY post_date desc';
 		if ( isset( $args['orderby'] ) && $args['orderby'] ) {
-			$orderby = $args['orderby'];
-			$order = isset( $args['order'] ) && $args['order'] ? $args['order'] : 'desc';
+			$orderby     = $args['orderby'];
+			$order       = isset( $args['order'] ) && $args['order'] ? $args['order'] : 'desc';
 			$orderby_sql = " ORDER BY ${orderby} {$order}";
 		}
 
@@ -806,12 +802,12 @@ class WpTravel_Helpers_Trips {
 			// Trip ID's From Dates table.
 			$results  = $wpdb->get_results( $wpdb->prepare( "select pricing_id, pricing_category_id,regular_price,is_sale,sale_price, trip_id, TRIPS.post_date, TRIPS.post_title from {$wpdb->prefix}wt_price_category_relation PC join {$wpdb->prefix}wt_pricings P on PC.pricing_id=P.id join {$wpdb->prefix}posts TRIPS on P.trip_id = TRIPS.ID where P.trip_id IN(%s) {$orderby_sql}", $sql ) );
 			$results2 = $wpdb->get_results( $duration_query );
-		
+
 			if ( empty( $results && empty( $results2 ) ) ) {
 				return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIPS' );
 			}
-	
-			$results = array_unique (array_merge ( $results, $results2 ) );
+
+			$results = array_unique( array_merge( $results, $results2 ) );
 
 			// return form here if min and max price.
 			$post_ids = array();
@@ -847,12 +843,12 @@ class WpTravel_Helpers_Trips {
 		$sql      = "select TRIPS.ID as trip_id, TRIPS.post_date, TRIPS.post_title from {$wpdb->prefix}posts TRIPS where TRIPS.ID IN({$sql}) {$orderby_sql}";
 		$results  = $wpdb->get_results( $sql ); // @phpcs:ignore
 		$results2 = $wpdb->get_results( $duration_query );
-		
+
 		if ( empty( $results && empty( $results2 ) ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIPS' );
 		}
 
-		$results = array_merge ( $results, $results2 );
+		$results  = array_merge( $results, $results2 );
 		$post_ids = array();
 		foreach ( $results as $result ) {
 			$post_ids[] = $result->trip_id;
