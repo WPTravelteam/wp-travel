@@ -33,6 +33,7 @@ class WpTravel_Admin_Assets {
 		$_wp_travel_admin             = isset( $all_localized['_wp_travel_admin'] ) ? $all_localized['_wp_travel_admin'] : array();
 
 		$screen = get_current_screen();
+
 		if ( WP_Travel::is_pages( true ) ) {
 			// Styles.
 			wp_enqueue_media();

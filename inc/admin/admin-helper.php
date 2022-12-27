@@ -273,6 +273,36 @@ function wptravel_meta_box_review() {
 }
 
 /**
+ * Upsell Message Callback for Tour Guide submenu. WP Travel > Tour Guide.
+ */
+function wptravel_get_tour_guide_upsell(){
+	?>
+	<h2><?php echo esc_html( 'Tour Guide' ); ?></h2>
+	<?php
+	if ( ! class_exists( 'WP_Travel_Tour_Guide_Core' ) ) :
+		$args = array(
+			'title'      => __( 'Need to add your tour guide ?', 'wp-travel' ),
+			'content'    => __( 'By upgrading to Pro, you can add your tour guide in all of your trips !', 'wp-travel' ),
+			'link'       => 'https://wptravel.io/wp-travel-pro/',
+			'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
+		);
+		wptravel_upsell_message( $args );
+		if ( class_exists( 'WP_Travel_Pro' ) ) {
+			$settings = wptravel_get_settings();
+			$modules  = $settings['modules'];
+			if ( isset( $modules['show_wp_travel_tour_guide'] ) ) {
+				$active = 'yes' === $modules['show_wp_travel_tour_guide'];
+				if ( ! $active ) {
+					?>
+					<p>Tour Guide is currently disabled please go to Modules Settings to enable it and reload the page.</p>
+					<?php
+				}
+			}
+		}
+	endif;
+}
+
+/**
  * Upsell Message Callback for Download submenu. WP Travel > Downloads.
  */
 function wptravel_get_download_upsell() {

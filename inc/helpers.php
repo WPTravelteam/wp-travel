@@ -3181,6 +3181,7 @@ function wptravel_get_submenu() {
 			'enquiries'      => array( 'priority' => '30' ), // post types.
 			'extras'         => array( 'priority' => '40' ), // post types.
 			'downloads'      => array( 'priority' => '100' ), // post types.
+			'tour_guide'     => array( 'priority' => '150' ), // post types.
 
 			'system_info'    => array(
 				'priority'   => '100',
@@ -3225,6 +3226,13 @@ function wptravel_get_submenu() {
 		$all_submenus['bookings']['downloads']['menu_title'] = __( 'Downloads', 'wp-travel' );
 		$all_submenus['bookings']['downloads']['menu_slug']  = 'download_upsell_page';
 		$all_submenus['bookings']['downloads']['callback']   = 'wptravel_get_download_upsell';
+	endif;
+
+	if ( ! class_exists( 'WP_Travel_Tour_Guide_Core' ) ) :
+		$all_submenus['bookings']['tour_guide']['page_title'] = __( 'Tour Guide', 'wp-travel' );
+		$all_submenus['bookings']['tour_guide']['menu_title'] = __( 'Tour Guide', 'wp-travel' );
+		$all_submenus['bookings']['tour_guide']['menu_slug']  = 'wp-travel-tour-guide';
+		$all_submenus['bookings']['tour_guide']['callback']   = 'wptravel_get_tour_guide_upsell';
 	endif;
 
 	if ( ! class_exists( 'WP_Travel_Custom_Filters_Core' ) ) {
