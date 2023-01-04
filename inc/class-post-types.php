@@ -19,6 +19,8 @@ class WP_Travel_Post_Types { // @phpcs:ignore
 		self::register_bookings();
 		self::register_trip();
 		self::register_payment();
+		self::register_tour_guide();
+		
 		WP_Travel_Post_Status::init();
 	}
 	/**
@@ -363,6 +365,42 @@ class WP_Travel_Post_Types { // @phpcs:ignore
 		 * @link http://codex.wordpress.org/Function_Reference/register_post_type
 		 */
 		register_post_type( 'tour-extras', $args );
+	}
+
+	public static function register_tour_guide() {
+		$guide_labels = array(
+            'name'                  => _x( 'Tour Guide', 'Post type general name', 'wp-travel-pro' ),
+            'singular_name'         => _x( 'Tour Guide', 'Post type singular name', 'wp-travel-pro' ),
+            'menu_name'             => _x( 'Tour Guide', 'Admin Menu text', 'wp-travel-pro' ),
+            'name_admin_bar'        => _x( 'Tour Guide', 'Add New on Toolbar', 'wp-travel-pro' ),
+            'add_new'               => __( 'Add New', 'wp-travel-pro' ),
+            'add_new_item'          => __( 'Add New Tour Guide', 'wp-travel-pro' ),
+            'new_item'              => __( 'New Tour Tour Guide', 'wp-travel-pro' ),
+            'edit_item'             => __( 'Edit Tour Guide', 'wp-travel-pro' ),
+            'view_item'             => __( 'View Tour Guide', 'wp-travel-pro' ),
+            'all_items'             => __( 'All Tour Guide', 'wp-travel-pro' ),
+            'search_items'          => __( 'Search Tour Guide', 'wp-travel-pro' ),
+            'parent_item_colon'     => __( 'Parent Tour Guide:', 'wp-travel-pro' ),
+            'not_found'             => __( 'No guides found.', 'wp-travel-pro' ),
+            'not_found_in_trash'    => __( 'No guides found in Trash.', 'wp-travel-pro' ),
+        );
+
+        $guide_args = array(
+            'labels'             => $guide_labels,
+            'public'             => true,
+            'publicly_queryable' => true,
+            'show_ui'            => true,
+            'show_in_menu'       => false,
+            'query_var'          => true,
+            'rewrite'            => array( 'slug' => 'tour-guide' ),
+            'capability_type'    => 'post',
+            'has_archive'        => true,
+            'hierarchical'       => false,
+            'menu_position'      => null,
+            'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
+        );
+
+        register_post_type( 'tour-guide', $guide_args );
 	}
 
 	/**

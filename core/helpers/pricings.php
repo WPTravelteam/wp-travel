@@ -489,6 +489,7 @@ class WpTravel_Helpers_Pricings {
 
 		$price         = 0;
 		$pricings_data = self::get_pricings( $trip_id );
+		$highest_price = get_post_meta( $trip_id, 'wp_travel_show_highest_price', true );
 		if ( ! empty( $pricing_id ) && ! empty( $category_id ) && is_array( $pricings_data ) ) { // Quick Fix here. Pricing data may be WP Error object.
 
 			$pricings = array_filter(
@@ -520,12 +521,27 @@ class WpTravel_Helpers_Pricings {
 
 				$regular = 0; // Init regular price.
 				if ( is_array( $category_data ) ) {
-					foreach ( $category_data as $pricing_categories ) {
-						foreach ( $pricing_categories as $pricing_category ) {
-							$current_price = ( $pricing_category['is_sale'] && $pricing_category['sale_price'] > 0 ) ? $pricing_category['sale_price'] : $pricing_category['regular_price'];
-							if ( ! (float) $price || (float) $current_price < (float) $price && (float) $current_price > 0 ) { // init / update min price.
-								$price   = $current_price;
-								$regular = $pricing_category['regular_price'];
+					/**
+					 * @version 6.0.0
+					 */
+					if ( 'yes' == $highest_price ) {
+						foreach ( $category_data as $pricing_categories ) {
+							foreach ( $pricing_categories as $pricing_category ) {
+								$current_price = ( $pricing_category['is_sale'] && $pricing_category['sale_price'] > 0 ) ? $pricing_category['sale_price'] : $pricing_category['regular_price'];
+								if ( ! (float) $price || (float) $current_price > (float) $price && (float) $current_price > 0 ) { // init / update min price.
+									$price   = $current_price;
+									$regular = $pricing_category['regular_price'];
+								}
+							}
+						}
+					} else {
+						foreach ( $category_data as $pricing_categories ) {
+							foreach ( $pricing_categories as $pricing_category ) {
+								$current_price = ( $pricing_category['is_sale'] && $pricing_category['sale_price'] > 0 ) ? $pricing_category['sale_price'] : $pricing_category['regular_price'];
+								if ( ! (float) $price || (float) $current_price < (float) $price && (float) $current_price > 0 ) { // init / update min price.
+									$price   = $current_price;
+									$regular = $pricing_category['regular_price'];
+								}
 							}
 						}
 					}

@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 5.4.1
 Tested up to: 6.1.1
 Requires PHP: 5.6
-Stable tag: 5.3.9
+Stable tag: 6.0.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -53,7 +53,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * [WP Travel Import Export](https://wptravel.io/downloads/wp-travel-import-export/?utm_source=addons&utm_medium=import-export&utm_campaign=WP%20Plugin)
 * [WP Travel Advanced Gallery](https://wptravel.io/downloads/wp-travel-advanced-gallery/?utm_source=addons&utm_medium=advanced-gallery&utm_campaign=WP%20Plugin)
 * [WP Travel Blocks](https://wptravel.io/downloads/wp-travel-blocks/?utm_source=addons&utm_medium=blocks&utm_campaign=WP%20Plugin)
-
+* [WP Travel Tour Guide](https://wptravel.io/docs/wp-travel-user-documentation/tour-guide/)
 
 = WP TRAVEL MAP MODULES =
 * [WP Travel Here Map](https://wptravel.io/downloads/wp-travel-here-map/?utm_source=addons&utm_medium=heremap&utm_campaign=WP%20Plugin)
@@ -150,6 +150,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * Customizable
 * Compatible Themes
 * Clone Trips
+* Tour Guide
 * Multiple Travelers info
 [And much more ...](https://wptravel.io/features/?utm_source=features&utm_medium=morefeatures&utm_campaign=WP%20Plugin)
 
@@ -245,6 +246,17 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 6.0.0 =
+Release Date:  4th January 2023
+
+Enhancements:
+* Provides compatibility for the Tour Guide feature in WP Travel Pro.
+* Provides compatibility for showing high prices on trips.
+
+Fixes:
+* Fixed Ascending/Descending issue while using oderby trip_date option.
+* For more detail, please refer to our [release note](https://wptravel.io/wp-travel-plugin-version-6-0-0-release-note/)
 
 = 5.3.9 =
 Release Date: 26th December 2022

@@ -177,7 +177,15 @@ class Wp_Travel_Shortcodes {
 			}
 
 		endif;
-
+		if ( isset( $shortcode_atts['order'] ) ) {
+			$args = array(
+				'post_type'      => WP_TRAVEL_POST_TYPE,
+				'posts_per_page' => $limit,
+				'orderby'        => 'post_title',
+				'order'          => $order,
+				'status'         => 'published',
+			);
+		}
 		// Sorting Start.
 		if ( isset( $shortcode_atts['orderby'] ) ) { // if attribute passed from shortcode.
 
@@ -193,15 +201,7 @@ class Wp_Travel_Shortcodes {
 					break;
 			}
 		}
-		if ( isset( $shortcode_atts['order'] ) ) {
-			$args = array(
-				'post_type'      => WP_TRAVEL_POST_TYPE,
-				'posts_per_page' => $limit,
-				'orderby'        => 'post_title',
-				'order'          => $order,
-				'status'         => 'published',
-			);
-		}
+
 		$col_per_row    = $atts['col'];
 		$layout_version = wptravel_layout_version();
 		$query          = new WP_Query( $args );
