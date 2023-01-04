@@ -68,6 +68,7 @@ class WpTravel_Helpers_Trips {
 			'custom_booking_link'                 => '',
 			'custom_booking_link_text'            => '',
 			'custom_booking_link_open_in_new_tab' => '',
+			'highest_price'                       => ! empty( $highest_price ) ? $highest_price : '',
 			'pricings'                            => array(),
 			'trip_price'                          => 0,
 			'regular_price'                       => 0,
@@ -324,6 +325,9 @@ class WpTravel_Helpers_Trips {
 		if ( ! empty( $trip_data->pricings ) ) {
 			WP_Travel_Helpers_Pricings::update_pricings( $trip_id, $trip_data->pricings );
 		}
+
+		$highest_price = ! empty( $trip_data->highest_price ) ? 'yes' : '';
+		update_post_meta( $trip_id, 'wp_travel_show_highest_price', $highest_price );
 
 		$is_fixed_departure = ! empty( $trip_data->is_fixed_departure ) ? 'yes' : 'no';
 		update_post_meta( $trip_id, 'wp_travel_fixed_departure', $is_fixed_departure );
