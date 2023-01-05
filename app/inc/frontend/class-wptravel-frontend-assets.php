@@ -446,6 +446,7 @@ class WpTravel_Frontend_Assets {
 		if ( self::is_request( 'admin' ) ) {
 			if ( function_exists( 'get_current_screen' ) ) {
 				$screen = get_current_screen();
+	
 				if ( isset( $screen->is_block_editor ) && ! $screen->is_block_editor ) {
 					// Main Styles for all admin pages.
 					$styles['wp-travel-back-end'] = array(

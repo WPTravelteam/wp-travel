@@ -56,7 +56,7 @@ const Pricings = ( {allData} ) => {
         return select('WPTravel/TripEdit').getSettings()
     }, []);
 
-    const { pricing_type, pricings, has_extras, minimum_partial_payout_use_global, minimum_partial_payout_percent } = allData;
+    const { pricing_type, pricings, has_extras, minimum_partial_payout_use_global, minimum_partial_payout_percent, highest_price } = allData;
     const { options } = settings;
     const { updateTripPricing, addTripPricing, updateTripPrices, updateTripData } = dispatch('WPTravel/TripEdit');
 
@@ -96,6 +96,7 @@ const Pricings = ( {allData} ) => {
                 
                     <Notice status="warning" isDismissible={false}>{__i18n.messages.pricing_message}</Notice>
                     <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addTripPrice()}>{__i18n.add_price }</Button></PanelRow>
+                    {applyFilters( 'show_heighest_price_after_add_price', [], allData )}
                     <div className="wp-travel-sortable-component">
                     <ReactSortable
                         list={tripPrices}
