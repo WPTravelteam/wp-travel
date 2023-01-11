@@ -9,7 +9,12 @@
 		}
 	}
 }
- 
+table .wp_travel_payment_detail_show_on_frontend {
+	background-color: #efefef ;
+  }
+table tr td a.wp_travel_bank_deposit_link{
+	color: #f83531;
+}
 .checkout-page-wrap {
 	display: grid;
 	grid-template-columns: 1fr 42%;

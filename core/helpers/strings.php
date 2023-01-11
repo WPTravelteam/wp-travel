@@ -73,6 +73,7 @@ class WpTravel_Helpers_Strings {
 			'price'                     => __( 'Price', 'wp-travel' ),
 			'price_range'               => __( 'Price Range', 'wp-travel' ),
 			'pricing_name'              => __( 'Pricing Name', 'wp-travel' ),
+			'highest_price'             => __( 'Show Highest Price', 'wp-travel' ),
 			'reviews'                   => __( 'Reviews', 'wp-travel' ),
 			'sale_price'                => __( 'Sale Price', 'wp-travel' ),
 			'search'                    => __( 'Search', 'wp-travel' ),
@@ -167,6 +168,7 @@ class WpTravel_Helpers_Strings {
 				'enable_location'    => __( 'Enable/Disable latitude-longitude option', 'wp-travel' ),
 				'use_global_payout'  => __( 'Note: In case of multiple cart items checkout, global payout will be used.', 'wp-travel' ),
 				'show_highest_price' => __( 'This option will display the highest price..', 'wp-travel' ),
+				'show_highest_price' => __( 'This option will display the highest price..', 'wp-travel' ),
 			),
 			'full_name'                 => __( 'Full Name', 'wp-travel' ),
 			'enter_your_name'           => __( 'Enter your name', 'wp-travel' ),
@@ -255,7 +257,7 @@ class WpTravel_Helpers_Strings {
 			'downloads'         => __( 'Downloads', 'wp-travel' ),
 			'misc'              => __( 'Misc', 'wp-travel' ),
 			'tabs'              => __( 'Tabs', 'wp-travel' ),
-			'guides'              => __( 'Guides', 'wp-travel' ),
+			'guides'            => __( 'Guides', 'wp-travel' ),
 		);
 	}
 
