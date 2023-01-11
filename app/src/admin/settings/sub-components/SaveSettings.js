@@ -9,7 +9,7 @@ const __i18n = {
 }
 
 const adminUrl = _wp_travel.admin_url;
-console.log( adminUrl );
+
 const SaveSettings = (props) => {
     const allData = useSelect((select) => {
         return select('WPTravel/Admin').getAllStore()

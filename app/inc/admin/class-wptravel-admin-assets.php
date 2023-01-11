@@ -53,6 +53,10 @@ class WpTravel_Admin_Assets {
 			}
 		}
 
+		if ( get_current_screen()->base == 'dashboard_page_wp-travel-setup-page' ) {
+			wp_enqueue_style( 'wp-travel-setup-page' );
+		}
+
 		if ( WP_Travel::is_page( 'reports', true ) ) {
 			wp_localize_script( 'jquery-chart-custom', 'wp_travel_chart_data', $wp_travel_chart_data );
 			wp_enqueue_script( 'jquery-chart-custom' );

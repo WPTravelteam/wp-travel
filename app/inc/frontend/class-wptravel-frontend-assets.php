@@ -260,6 +260,18 @@ class WpTravel_Frontend_Assets {
 
 		);
 
+		if ( self::is_request( 'admin' ) ) {
+			if ( get_current_screen()->base == 'dashboard_page_wp-travel-setup-page' ) {
+				$scripts['wp-travel-setup-page-js'] = array(
+					'src'       => self::$app_path . '/build/admin-setup-page.js',
+					'deps'      => array( 'wp-editor', 'jquery', 'wp-element' ),
+					'ver'       => WP_TRAVEL_VERSION,
+					'in_footer' => true,
+				);
+			}
+		}
+
+
 		$styles = array(
 			'wp-travel-slick'           => array(
 				'src'   => self::$app_path . '/assets/css/lib/slick/slick.min.css',
@@ -458,6 +470,13 @@ class WpTravel_Frontend_Assets {
 				}
 			}
 
+			$styles['wp-travel-setup-page'] = array(
+				'src'   => self::$app_path . '/build/admin-setup-page.css',
+				'deps'  => array(),
+				'ver'   => WP_TRAVEL_VERSION,
+				'media' => 'all',
+			);
+
 			$styles['wptravel-admin'] = array(
 				'src'   => self::$app_path . '/build/admin.css',
 				'deps'  => array(),
@@ -507,9 +526,16 @@ class WpTravel_Frontend_Assets {
 			if ( '' !== $api_key && true === $show_google_map ) {
 				$admin_depencency[] = 'jquery-gmaps';
 			}
+
+
+			$admin_script_handler = array( 'jquery', 'jquery-ui-sortable', 'jquery-ui-accordion' );
+			if ( get_current_screen()->base == 'dashboard_page_wp-travel-setup-page' ) {
+				$admin_script_handler[] = 'wp-travel-setup-page-js';
+			}
+
 			$scripts['wp-travel-admin-script'] = array(
 				'src'       => self::$app_path . '/assets/js/wp-travel-back-end' . $suffix . '.js',
-				'deps'      => array( 'jquery', 'jquery-ui-sortable', 'jquery-ui-accordion' ),
+				'deps'      => $admin_script_handler,
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,
 			);

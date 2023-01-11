@@ -9,9 +9,9 @@ const __i18n = {
 const GuideNotice = ( {settingsData, map_data } ) => {
     return <>
         <Notice isDismissible={false} status="informational">
-            <strong>{__i18n.notices.checkout_option.title}</strong>
+            <strong>{__i18n.notices.guide_option.title}</strong>
             <br />
-            {__i18n.notices.checkout_option.description}
+            {__i18n.notices.guide_option.description}
             <br />
             <br />
             <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__i18n.notice_button_text.get_pro}</a>
