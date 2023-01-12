@@ -43,7 +43,7 @@ class WpTravel_Helpers_Booking {
 			<thead>
 				<tr>
 					<th><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></th>
-					<th><?php echo ( $strings['bookings']['pax'] ? $strings['bookings']['pax'] : 'Pax' ); ?></th>
+					<th><?php esc_html_e( ! empty( $strings ) ? strtoupper( $strings['bookings']['pax'] ) : 'PAX', 'wp-travel' ); ?></th>
 					<th><?php esc_html_e( 'Arrival Date', 'wp-travel' ); ?></th>
 					<th><?php esc_html_e( 'Departure Date', 'wp-travel' ); ?></th>
 				</tr>

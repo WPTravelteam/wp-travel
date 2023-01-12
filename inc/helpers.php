@@ -1114,7 +1114,7 @@ function wptravel_get_default_trip_tabs( $is_show_in_menu_query = false, $fronte
 			'use_global'   => 'yes',
 			'show_in_menu' => 'yes',
 		),
-		
+
 	);
 
 	$return_tabs = apply_filters( 'wp_travel_default_trip_tabs', $return_tabs ); // Added in 1.9.3
@@ -2468,6 +2468,10 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 
 	$details = wptravel_booking_data( $booking_id );
 
+	$strings = array();
+	if ( 'WpTravel_Helpers_Strings' ) {
+		$strings = WpTravel_Helpers_Strings::get();
+	}
 	$order_details = get_post_meta( $booking_id, 'order_items_data', true ); // Multiple Trips.
 
 	$customer_note = get_post_meta( $booking_id, 'wp_travel_note', true );
@@ -2830,7 +2834,7 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 								<?php endif; ?>
 								<?php if ( $details['tax'] && $details['tax'] > 0 ) : ?>
 									<div class="my-order-price-breakdown-tax-due">
-										<span class="my-order-head"><?php esc_html_e( 'Tax', 'wp-travel' ); ?> </span>
+										<span class="my-order-head"><?php esc_html_e( ! empty( $strings ) ? $strings['bookings']['price_tax'] : 'Tax', 'wp-travel' ); ?> </span>
 										<span class="my-order-tail my-order-right"><?php echo wptravel_get_formated_price_currency( $details['tax'], false, '', $booking_id ); //@phpcs:ignore ?></span>
 									</div>
 								<?php endif; ?>

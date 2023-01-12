@@ -195,9 +195,9 @@ if ( wptravel_is_react_version_enabled() ) {
 										// This will only for displaying purpose. Need to change this in update method[wp_travel_group_discount_price] of cart class also to update cart data.
 										$total_pricing_pax = 0; // Total Pax for group discount in Pricing need total pax from the pricing.
 										foreach ( $cart_pax as $category_id => $detail ) {
-											$category = isset( $categories[ $category_id ] ) ? $categories[ $category_id ] : array(); // undefined offset fixes.
-											$ctitle   = isset( $category['term_info']['title'] ) ? esc_html( $category['term_info']['title'] ) : '';
-											$pax      = (int) $detail['pax'];
+											$category           = isset( $categories[ $category_id ] ) ? $categories[ $category_id ] : array(); // undefined offset fixes.
+											$ctitle             = isset( $category['term_info']['title'] ) ? esc_html( $category['term_info']['title'] ) : '';
+											$pax                = (int) $detail['pax'];
 											$total_pricing_pax += $pax;
 											if ( $pax < 1 ) {
 												continue;
@@ -368,23 +368,26 @@ if ( wptravel_is_react_version_enabled() ) {
 						?>
 						<li style="<?php echo esc_attr( $display ); ?>" data-wpt-extra-field>
 							<label>
-								<?php 
-									$tax_label = apply_filters( 'wptravel_checkout_tax_label', esc_html__( 'Tax', 'wp-travel' ), $tax_rate, $cart );
-									echo sprintf( '%s(%s%%)',
+								<?php
+									$tax_label = apply_filters( 'wptravel_checkout_tax_label', esc_html__( ! empty($strings) ? $strings['bookings']['price_tax'] : 'Tax', 'wp-travel' ), $tax_rate, $cart );
+									echo sprintf(
+										'%s(%s%%)',
 										$tax_label,
 										$tax_rate
 									);
-								?>							
+								?>
+															
 							</label>
 							<div class="price"><strong data-wpt-cart-tax="<?php echo esc_attr( $tax ); ?>"><?php echo '+ ' . wptravel_get_formated_price_currency( $tax ); ?></strong></div>
 						</li>
 
 						<li data-wpt-trip-total="<?php echo esc_attr( $total ); ?>" class="wp-travel-payable-amount selected-payable-amount" >
 							<label>
-								<?php 
+								<?php
 									$total_label = apply_filters( 'wptravel_checkout_total_label', esc_html__( 'Total:', 'wp-travel' ), $cart );
 									echo esc_html( $total_label );
-								?>									
+								?>
+																	
 							</label>
 							<div class="price"><strong data-wpt-cart-net-total="<?php echo esc_attr( $total ); ?>"><?php echo wptravel_get_formated_price_currency( $total ); ?></strong></div>
 						</li>
@@ -402,13 +405,30 @@ if ( wptravel_is_react_version_enabled() ) {
 					<div class="cart-summary-bottom">
 						<div class="flex-wrapper">
 							<form id="wp-travel-coupon-form" action="" class="update-cart-form">
-
-								<div class="field-inline">
-									<input type="text" <?php echo esc_attr( $readonly ); ?> value="<?php echo esc_attr( $coupon_code ); ?>" class="coupon-input-field" placeholder="<?php esc_attr_e( 'Enter promo code', 'wp-travel' ); ?>">
-									<button type="submit" <?php echo esc_attr( $disabled ); ?> class="btn btn-primary" data-success-l10n="<?php esc_attr_e( 'Coupon Applied.', 'wp-travel' ); ?>">
-										<?php $coupon_applied ? esc_html_e( 'Coupon Applied', 'wp-travel' ) : esc_html_e( 'Apply Coupon', 'wp-travel' ); ?>
-									</button>
-								</div>
+								<?php
+									$coupon_args  = array(
+										'post_type'   => 'wp-travel-coupons',
+										'post_status' => 'published',
+									);
+									$coupon_query = new WP_Query( $coupon_args );
+									$coupons      = false;
+									while ( $coupon_query->have_posts() ) {
+										$coupon_query->the_post();
+										$coupon_data = get_post_status();
+										if ( $coupon_data == 'publish' ) {
+											$coupons = true;
+											break;
+										}
+									}
+									if ( $coupons == true ) {
+										?>
+									<div class="field-inline">
+										<input type="text" <?php echo esc_attr( $readonly ); ?> value="<?php echo esc_attr( $coupon_code ); ?>" class="coupon-input-field" placeholder="<?php esc_attr_e( 'Enter promo code', 'wp-travel' ); ?>">
+										<button type="submit" <?php echo esc_attr( $disabled ); ?> class="btn btn-primary" data-success-l10n="<?php esc_attr_e( 'Coupon Applied.', 'wp-travel' ); ?>">
+											<?php $coupon_applied ? esc_html_e( 'Coupon Applied', 'wp-travel' ) : esc_html_e( 'Apply Coupon', 'wp-travel' ); ?>
+										</button>
+									</div>
+								<?php } ?>
 							</form>
 						</div>
 						<!-- <a href="javascript:void(0);" class="btn btn-dark checkout-btn"><?php esc_html_e( 'Proceed to Pay', 'wp-travel' ); ?></a> -->
@@ -501,7 +521,7 @@ $per_person_text = wptravel_get_price_per_text( $trip_id );
 						$single_trip_total         = wptravel_get_formated_price( $trip_price );
 						$single_trip_total_partial = wptravel_get_formated_price( $trip_price_partial );
 
-						$price_per_label = '( ' . $pax . __( ' Pax', 'wp-travel' ) . ' )';
+						$price_per_label = '( ' . $pax . __( $strings['bookings']['pax'], 'wp-travel' ) . ' )';
 
 					} else {
 						$price_per_label = ' × ' . $pax . ' /' . $pax_label;
@@ -612,7 +632,9 @@ $per_person_text = wptravel_get_price_per_text( $trip_id );
 					<tr>
 						<th>
 							<p><strong><?php esc_html_e( 'Subtotal', 'wp-travel' ); ?></strong></p>
-							<p><strong><?php esc_html_e( 'Tax: ', 'wp-travel' ); ?>
+							<p><strong>
+							<?php esc_html_e( $strings['bookings']['price_tax'], 'wp-travel' );esc_html_e( ': ', 'wp-travel' );
+							?>
 							<span class="tax-percent">
 								<?php
 								echo esc_html( $tax_rate );
