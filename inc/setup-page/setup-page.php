@@ -23,16 +23,19 @@ class WP_Travel_Setup_Page{
 	function add_custom_users_api(){
 	    register_rest_route( 'wp-travel/v1', '/theme-install/(?P<slug>\w+)', array(
 	        'methods' => 'GET',
+	        'permission_callback' => '__return_true',
 	        'callback' => array( $this, 'wp_travel_install_theme' ),
 	    ));
 
 	    register_rest_route( 'wp-travel/v1', '/theme-switch/(?P<slug>\w+)', array(
 	        'methods' => 'GET',
+	        'permission_callback' => '__return_true',
 	        'callback' => array( $this, 'wp_travel_switch_theme' ),
 	    ));
 
 	    register_rest_route( 'wp-travel/v1', '/trip-import', array(
 	        'methods' => 'POST',
+	        'permission_callback' => '__return_true',
 	        'callback' => array( $this, 'wp_travel_import_trip' ),
 	    ));
 	}
