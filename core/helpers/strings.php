@@ -327,6 +327,10 @@ class WpTravel_Helpers_Strings {
 				'title'       => __( 'Need to add your downloads?', 'wp-travel' ),
 				'description' => __( 'By upgrading to Pro, you can add your downloads in all of your trips !', 'wp-travel' ),
 			),
+			'guide_option'   => array(
+				'title'       => __( 'Need to add trip guides?', 'wp-travel' ),
+				'description' => __( 'By upgrading to Pro, you can add trip guides in all of your trips !', 'wp-travel' ),
+			),
 			'need_more_option'   => array(
 				'title'       => __( 'Need More Options ?', 'wp-travel' ),
 				'description' => __( 'By upgrading to Pro, you can get additional trip specific features like Inventory Options, Custom Sold out action/message and Group size limits. !', 'wp-travel' ),

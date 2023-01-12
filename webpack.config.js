@@ -12,6 +12,10 @@ module.exports = (env, options) => {
       './app/src/admin/trip-edit/sass/main.scss',
       './app/src/admin/trip-edit/index.js'
     ];
+    entries['admin-setup-page' + fileSuffix ] = [
+      './app/src/admin/setup-page/sass/main.scss',
+      './app/src/admin/setup-page/index.js'
+    ];
     entries['admin-settings' + fileSuffix ] = [
       './app/src/admin/settings/sass/main.scss',
       './app/src/admin/settings/index.js'

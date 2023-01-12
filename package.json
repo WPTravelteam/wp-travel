@@ -60,8 +60,10 @@
     "node-native-zip": "^1.1.0",
     "node-sass": "^6.0.1",
     "postcss-loader": "^6.1.1",
+    "react-step-progress-bar": "^1.0.3",
     "sass": "^1.39.2",
     "sass-loader": "^12.1.0",
+    "state-pool": "^0.9.0",
     "style-loader": "^3.2.1",
     "url-loader": "^4.1.1"
   },

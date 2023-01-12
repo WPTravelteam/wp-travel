@@ -108,8 +108,11 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @since 1.0.0
 		 * @return void
 		 */
+
+
 		private function init_hooks() {
 			register_activation_hook( __FILE__, array( 'WP_Travel_Actions_Activation', 'init' ) );
+
 			add_action( 'activated_plugin', array( $this, 'plugin_load_first_order' ) );
 			add_action( 'after_setup_theme', array( $this, 'setup_environment' ) );
 
@@ -264,6 +267,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/core/helpers/layout.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/core/helpers/localize.php', WP_TRAVEL_ABSPATH );
 
+			include sprintf( '%s/inc/setup-page/setup-page.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-assets.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-default-form-fields.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-wp-travel-emails.php', WP_TRAVEL_ABSPATH );
@@ -838,3 +842,6 @@ function wptravel() {
 
 // Start WP Travel.
 wptravel();
+
+
+
