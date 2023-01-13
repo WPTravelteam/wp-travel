@@ -167,7 +167,12 @@ const NonRecurringDates = ( props ) => {
 
     // Booking Data.
     const { isLoading, selectedDate, selectedDateIds, nomineePricingIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
-	
+	let enable_time = '';
+	_dates.map( ( dateData ) => {
+		if( selectedDateIds[0] == dateData.id ) {
+			enable_time = dateData.enable_time;
+		}
+	})
     return <>
     {
 		nonRecurringDates.length > 0 && <tbody className="tbody-table">
@@ -196,7 +201,7 @@ const NonRecurringDates = ( props ) => {
 							<Notice><InventoryNotice inventory={tripData.inventory} /></Notice> 
 							:
 							<>
-								{ ( ! selectedPricingId || ( nomineeTimes.length > 0 && ! selectedTime ) || ! selectedDateIds.includes( date.id ) || isLoading ) && <Disabled><PaxSelector { ...{ ...props, _nomineePricings, date } } /></Disabled> || <PaxSelector { ...{ ...props, _nomineePricings, date } } /> }
+								{ ( ! selectedPricingId || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) || ! selectedDateIds.includes( date.id ) || isLoading ) && <Disabled><PaxSelector { ...{ ...props, _nomineePricings, date } } /></Disabled> || <PaxSelector { ...{ ...props, _nomineePricings, date } } /> }
 								{ 
 									selectedPricingId && 
 									selectedDateIds.includes( date.id ) && 

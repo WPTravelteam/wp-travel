@@ -481,6 +481,12 @@ const CalendarView = ( props ) => {
 		params.startDate = selectedDate;
 		params.endDate   = moment( selectedDate ).add( duration - 1, 'days' ).toDate();
 	}
+	let enable_time = '';
+	_dates.map( ( dateData ) => {
+		if( selectedDateIds[0] == dateData.id ) {
+			enable_time = dateData.enable_time;
+		}
+	})
     return <ErrorBoundary>
 		<div className="wp-travel-booking__datepicker-wrapper">
 			{ calendarInline ? <DatePicker inline { ...params }  /> : <DatePicker { ...params }  /> }
@@ -497,7 +503,7 @@ const CalendarView = ( props ) => {
 			{ ! isLoading &&
 				<div className="wp-travel-booking__pricing-wrapper wptravel-pax-selector">
 					{ ! pricingUnavailable && selectedPricingId && <ErrorBoundary>
-						{ nomineeTimes.length > 0 && ! selectedTime && <Disabled><PaxSelector { ...props } /></Disabled> || <PaxSelector { ...props } /> }
+						{ enable_time && nomineeTimes.length > 0 && ! selectedTime && <Disabled><PaxSelector { ...props } /></Disabled> || <PaxSelector { ...props } /> }
 						{ _.size(allPricings[ selectedPricingId ].trip_extras) > 0 && objectSum( paxCounts ) > 0 && <ErrorBoundary> <TripExtras { ...props } /> </ErrorBoundary> }
 					</ErrorBoundary> }
 					

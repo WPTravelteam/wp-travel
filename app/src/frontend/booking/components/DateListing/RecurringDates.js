@@ -38,6 +38,7 @@ const RecurringRepeator = ( props ) =>  {
     let rd = moment(moment(recurrindDate).format('YYYY-MM-DD')).unix();
 
     let loadingClass = isLoading && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) ? 'wptravel-loading' : '';
+    const { enable_time } = date;
     return <tr key={index} className={loadingClass}>
         <td data-label={__i18n.bookings.pricings_list_label}>
             {/* _nomineePricings not updated in store/state because there are multiple _nomineePricings as per date so just a variable. */}
@@ -51,7 +52,7 @@ const RecurringRepeator = ( props ) =>  {
                     :
                     <>
                         { ( 
-                        ! pricingUnavailable && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) && ( ! nomineeTimes.length || ( nomineeTimes.length && selectedTime ) )  ) && 
+                        ! pricingUnavailable && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) && ( ! nomineeTimes.length || (  enable_time && ( nomineeTimes.length && selectedTime ) || !enable_time ) )  ) && 
                             <PaxSelector { ...{ ...props, _nomineePricings, date, recurrindDate } } /> || 
                             <Disabled><PaxSelector { ...{ ...props, _nomineePricings, date, recurrindDate } } /></Disabled> }
                         { 

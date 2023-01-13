@@ -321,7 +321,7 @@ const Body = () => {
 					<li id="currency-tab-item" className="tab-item">{ __('Currency', 'wp-travel') }</li>
 					<li id="page-tab-item" className="tab-item">{ __('Page', 'wp-travel') }</li>
 					<li id="email-tab-item"  className="tab-item">{ __('Email', 'wp-travel') }</li>
-					<li id="payment-tab-item" className="tab-item">{ __('Payemnt', 'wp-travel') }</li>
+					<li id="payment-tab-item" className="tab-item">{ __('Payment', 'wp-travel') }</li>
 					<li id="theme-tab-item" className="tab-item">{ __('Compatible Themes', 'wp-travel') }</li>
 					<li id="finished-tab-item" className="tab-item">{ __('Finished Setup', 'wp-travel') }</li>
 				</ul>
@@ -883,7 +883,7 @@ const Body = () => {
 					<li id="currency-tab-item" className="tab-item">{ __('Currency', 'wp-travel') }</li>
 					<li id="page-tab-item" className="tab-item">{ __('Page', 'wp-travel') }</li>
 					<li id="email-tab-item"  className="tab-item">{ __('Email', 'wp-travel') }</li>
-					<li id="payment-tab-item" className="tab-item">{ __('Payemnt', 'wp-travel') }</li>
+					<li id="payment-tab-item" className="tab-item">{ __('Payment', 'wp-travel') }</li>
 					<li id="theme-tab-item" className="tab-item">{ __('Compatible Themes', 'wp-travel') }</li>
 					<li id="finished-tab-item" className="tab-item">{ __('Finished Setup', 'wp-travel') }</li>
 				</ul>

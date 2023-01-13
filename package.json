@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "setup": "composer install && yarn install && yarn bundle && wp-scripts env install",
-    "dev": "wp-scripts start --mode development",
+    "start": "wp-scripts start --mode development",
     "build:pre_release": "npx wp-scripts build && npx wp-scripts build --mode development && npx grunt pre_release",
     "lint:php": "wp-scripts env lint-php",
     "postinstall": "husky install",
