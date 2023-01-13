@@ -48,7 +48,7 @@ function wptravel_marketplace_page() {
 			'type'       => 'premium',
 			'img_url'    => 'https://i0.wp.com/themes.svn.wordpress.org/travel-buzz/2.0/screenshot.png?w=572&strip=all',
 			'demo_url'   => 'http://demo.wensolutions.com/travel-buzz/',
-			'detail_url' => 'https://demo.wensolutions.com/travel-buzz-pro/',
+			'detail_url' => 'https://wensolutions.com/themes/travel-buzz-pro/',
 		),
 		'travel-buzz'         => array(
 			'name'       => __( 'Travel Buzz', 'wp-travel' ),

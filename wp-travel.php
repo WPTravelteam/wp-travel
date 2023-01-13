@@ -843,5 +843,5 @@ function wptravel() {
 // Start WP Travel.
 wptravel();
 
-
-
+// var_dump( property_exists( themes_api( 'theme_information', array( 'slug' => 'travel-joy' ) ), 'errors' ));
+// 			die;

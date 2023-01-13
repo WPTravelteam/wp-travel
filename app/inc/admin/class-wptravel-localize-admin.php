@@ -126,30 +126,34 @@ class WpTravel_Localize_Admin {
 		);
 
 		$theme_datas = array();
+		if( property_exists( themes_api( 'theme_information', array( 'slug' => 'travel-joy' ) ), 'errors' ) == false ){
+			foreach ( $theme_lists as $data ) {
 
-		foreach ( $theme_lists as $data ) {
+				$is_installed = in_array( $data['slug'], array_keys( wp_get_themes() ) ) ? 'yes' : 'no';
+				$is_active = $data['slug'] == wp_get_theme()->get( 'TextDomain' ) ? 'yes' : 'no';
+				
+				$get_theme_data = themes_api(
+					'theme_information',
+					array(
+						'slug'   => $data['slug'],
+						'fields' => array( 'sections' => false ),
+					)
+				);
+				
+				$theme_data['title'] = $get_theme_data->name;
+				$theme_data['theme_page'] = $data['theme_page'];
+				$theme_data['slug'] = str_replace( '-', '_', $get_theme_data->slug );
+				$theme_data['screenshot_url'] = $get_theme_data->screenshot_url;
+				$theme_data['download_link'] = $get_theme_data->download_link;
+				$theme_data['is_installed'] = $is_installed; 
+				$theme_data['is_active'] = $is_active;				
 
-			$is_installed = in_array( $data['slug'], array_keys( wp_get_themes() ) ) ? 'yes' : 'no';
-			$is_active = $data['slug'] == wp_get_theme()->get( 'TextDomain' ) ? 'yes' : 'no';
-			
-			$get_theme_data = themes_api(
-				'theme_information',
-				array(
-					'slug'   => $data['slug'],
-					'fields' => array( 'sections' => false ),
-				)
-			);
-
-			$theme_data['title'] = $get_theme_data->name;
-			$theme_data['theme_page'] = $data['theme_page'];
-			$theme_data['slug'] = str_replace( '-', '_', $get_theme_data->slug );
-			$theme_data['screenshot_url'] = $get_theme_data->screenshot_url;
-			$theme_data['download_link'] = $get_theme_data->download_link;
-			$theme_data['is_installed'] = $is_installed; 
-			$theme_data['is_active'] = $is_active;
-
-			array_push($theme_datas, $theme_data);
+				array_push($theme_datas, $theme_data);
+			}
+		}else{
+			$theme_datas = 1;
 		}
+		
 
 		$translation_array = array(
 			'_nonce'             => wp_create_nonce( 'wp_travel_nonce' ),

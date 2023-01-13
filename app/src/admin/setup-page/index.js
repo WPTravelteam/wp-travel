@@ -26,7 +26,6 @@ const WPTravelSetupPage = () => {
 
 }
 
-
 {/* 
     rendering template to target id
 */} 

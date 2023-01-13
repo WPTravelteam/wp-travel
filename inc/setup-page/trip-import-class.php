@@ -340,11 +340,11 @@ class WP_Travel_Import_Dummy_Trip {
 			foreach ( $terms as $term ) {
 				$term_exists = term_exists( $term->slug, $tax );
 				$term_id     = is_array( $term_exists ) ? $term_exists['term_id'] : $term_exists;
-				if ( 'travel_keywords' === $tax ) {
-					$term_obj = is_array( $term_exists ) ? get_term( $term_exists['term_id'], $tax ) : get_term( $term_exists, $tax );
+				// if ( 'travel_keywords' === $tax ) {
+				// 	$term_obj = is_array( $term_exists ) ? get_term( $term_exists['term_id'], $tax ) : get_term( $term_exists, $tax );
 
-					$term_id = $term_obj->name;
-				}
+				// 	$term_id = $term_obj->name;
+				// }
 				if ( ! $term_id ) {
 					$t = wp_insert_term( $term->name, $tax, array( 'slug' => $term->slug ) );
 					if ( ! is_wp_error( $t ) ) {
