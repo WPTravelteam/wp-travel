@@ -85,15 +85,15 @@ const Body = () => {
 
 	}
 	
-	function manageNext() {
-	    if ( stepCount != 6 ) {
-	      setStepCount(stepCount + 1 );
-	    }
-	    else if ( setStepCount = 6 ) {
-	      setStepCount(6);
-	    }
-	    return stepCount;
-	}
+	// function manageNext() {
+	//     if ( stepCount != 6 ) {
+	//       setStepCount(stepCount + 1 );
+	//     }
+	//     else if ( setStepCount = 6 ) {
+	//       setStepCount(6);
+	//     }
+	//     return stepCount;
+	// }
 
 	const settingsData = useSelect((select) => {
         return select('WPTravel/Admin').getSettings()
@@ -105,6 +105,24 @@ const Body = () => {
     	document.body.scrollTop = 0;
   		document.documentElement.scrollTop = 0;
     	// return stepCount;
+    }
+
+    const backStep = () => {
+    	setStepCount(stepCount - 1);
+    	document.body.scrollTop = 0;
+  		document.documentElement.scrollTop = 0;
+    	// return stepCount;
+    }
+
+    const importTrip = () => {
+
+		document.getElementById("trip-import-loader").classList.add( 'active' );
+    	document.getElementById("finished-tab-content").classList.add( 'inactive' );
+
+    	apiFetch( { path: '/wp-travel/v1/trip-import/', method: 'POST' } ).then( ( response ) => {
+    		
+		    location.replace( _wp_travel.admin_url + 'edit.php?post_type=itineraries' );
+		} );
     }
 
     const allData = useSelect((select) => {
@@ -138,7 +156,7 @@ const Body = () => {
 
 		document.getElementById("setup-page-loader").classList.add( 'active' );
 		document.getElementById("setup-page-form").classList.add( 'inactive' );
-		document.getElementById("next-step").style.display = 'none';
+		document.getElementById("btn-group").style.display = 'none';
 		document.getElementById("setting-save-notice").classList.add( 'active' );
 
 		apiFetch( { url: `${ajaxurl}?action=wp_travel_update_settings&_nonce=${_wp_travel._nonce}`, data:allData, method:'post' } ).then( res => {       
@@ -148,8 +166,8 @@ const Body = () => {
                	
                	setStepCount(stepCount + 1);
                	document.getElementById("setup-page-form").classList.remove( 'inactive' );
-               	document.getElementById("next-step").style.display = 'block';
-               	document.getElementById("next-step").style.margin = '20px auto';
+               	document.getElementById("btn-group").style.display = 'flex';
+               	// document.getElementById("next-step").style.margin = '20px auto';
             }
         } );
 	}
@@ -283,7 +301,7 @@ const Body = () => {
 
 	    	document.getElementById("setup-page-loader").classList.add( 'active' );
 			document.getElementById("wp-travel-theme-lists").classList.add( 'inactive' );
-			document.getElementById("next-step").style.display = 'none';
+			document.getElementById("btn-group").style.display = 'none';
 			let targetDiv = document.getElementById('setting-save-notice');        
 	        let noticeText = document.createTextNode ( __( 'Installing and activating ', 'wp-travel' ) + title + __( ' theme ...', 'wp-travel' ) );
 	        targetDiv.appendChild(noticeText);
@@ -299,7 +317,7 @@ const Body = () => {
 
 	    	document.getElementById("setup-page-loader").classList.add( 'active' );
 			document.getElementById("wp-travel-theme-lists").classList.add( 'inactive' );
-			document.getElementById("next-step").style.display = 'none';
+			document.getElementById("btn-group").style.display = 'none';
 			let targetDiv = document.getElementById('setting-save-notice');        
 	        let noticeText = document.createTextNode ( __( 'Installing and activating ', 'wp-travel' ) + title + __( ' theme ...', 'wp-travel' ) );
 	        targetDiv.appendChild(noticeText);
@@ -314,14 +332,14 @@ const Body = () => {
 
 	    return(
 			<div id="wp-travel-setup-page-body">
-				<ProgressBar percent={stepCountValue} filledBackground="#159F84">
+				<ProgressBar percent={stepCountValue} filledBackground="#079812">
 		        </ProgressBar>
 				<ul id="wp-travel-setup-page-tab-list">
 					<li id="ready-tab-item" className="tab-item active">{ __('Ready To Setup', 'wp-travel') }</li>
 					<li id="currency-tab-item" className="tab-item">{ __('Currency', 'wp-travel') }</li>
 					<li id="page-tab-item" className="tab-item">{ __('Page', 'wp-travel') }</li>
 					<li id="email-tab-item"  className="tab-item">{ __('Email', 'wp-travel') }</li>
-					<li id="payment-tab-item" className="tab-item">{ __('Payemnt', 'wp-travel') }</li>
+					<li id="payment-tab-item" className="tab-item">{ __('Payment', 'wp-travel') }</li>
 					<li id="theme-tab-item" className="tab-item">{ __('Compatible Themes', 'wp-travel') }</li>
 					<li id="finished-tab-item" className="tab-item">{ __('Finished Setup', 'wp-travel') }</li>
 				</ul>
@@ -449,14 +467,17 @@ const Body = () => {
 					            </PanelRow>
 					            <button 
 									type="submit"
-									className="regis-btn" 
+									className="dashboard-btn"
 								>
 									{ 
 										__( 'Continue', 'wp-travel-pro' )
 									}
 								</button>
 							</form>
-							<button id="next-step" onClick={nextStep} >{__( 'Skip this step', 'wp-travel' )}</button>
+							<div id="btn-group">
+								<button id="back-step" onClick={backStep} >{__( 'Go Back', 'wp-travel' )}</button>
+								<button id="next-step" onClick={nextStep} >{__( 'Skip this step', 'wp-travel' )}</button>
+							</div>							
 						</div>
 					}
 					{ stepCount == 2 && 
@@ -507,14 +528,17 @@ const Body = () => {
 					            </PanelRow>  
 					            <button 
 									type="submit"
-									className="regis-btn" 
+									className="dashboard-btn"
 								>
 									{ 
 										__( 'Continue', 'wp-travel-pro' )
 									}
 								</button>
 							</form>
-							<button id="next-step" onClick={nextStep} >{ __( 'Skip this step', 'wp-travel' ) }</button>
+							<div id="btn-group">
+								<button id="back-step" onClick={backStep} >{__( 'Go Back', 'wp-travel' )}</button>
+								<button id="next-step" onClick={nextStep} >{__( 'Skip this step', 'wp-travel' )}</button>
+							</div>	
 						</div>
 					}
 					{ stepCount == 3 && 
@@ -559,14 +583,17 @@ const Body = () => {
 					            </PanelRow>
 					            <button 
 									type="submit"
-									className="regis-btn" 
+									className="dashboard-btn"
 								>
 									{ 
 										__( 'Continue', 'wp-travel-pro' )
 									}
 								</button>
 							</form>
-							<button id="next-step" onClick={nextStep} >{ __( 'Skip this step', 'wp-travel' ) }</button>
+							<div id="btn-group">
+								<button id="back-step" onClick={backStep} >{__( 'Go Back', 'wp-travel' )}</button>
+								<button id="next-step" onClick={nextStep} >{__( 'Skip this step', 'wp-travel' )}</button>
+							</div>	
 						</div>
 					}
 					{ stepCount == 4 && ( 'undefined' !== typeof partial_payment ) && ( 'undefined' !== typeof sorted_gateways ) && ( 'undefined' !== typeof minimum_partial_payout ) &&
@@ -811,14 +838,17 @@ const Body = () => {
 					            }
 					            <button 
 									type="submit"
-									className="regis-btn" 
+									className="dashboard-btn"
 								>
 									{ 
 										__( 'Continue', 'wp-travel-pro' )
 									}
 								</button>
 							</form>
-							<button id="next-step" onClick={nextStep} >Skip this step</button>
+							<div id="btn-group">
+								<button id="back-step" onClick={backStep} >{__( 'Go Back', 'wp-travel' )}</button>
+								<button id="next-step" onClick={nextStep} >{__( 'Skip this step', 'wp-travel' )}</button>
+							</div>	
 						</div>
 					}
 					{ stepCount == 5 &&
@@ -828,47 +858,112 @@ const Body = () => {
 							
 							<div id="wp-travel-theme-lists">
 								<h1>{ __('Compatible Themes', 'wp-travel') }</h1>
-								<div className="wp-travel-theme-lists">									
-									{  _wp_travel.theme_datas.map( ( { title, slug, screenshot_url, is_active, is_installed, theme_page } ) => {
-					                    return <div className="wp-travel-theme-item">
-					                                <img id="theme-image" src={screenshot_url} />
-					                                <div className="wp-travel-theme-item-wrapper">
-					                                	<h3>{title}</h3>
-					                                	<div className="btns">
-					                                		{	
-					                           				
-					                                			is_active == 'yes' &&
-					                                			<p>{ __('Curently Active', 'wp-travel') }</p>
-					                                			||
-					                                			is_installed == 'yes' &&
-					                                			<button onClick={ () =>{
-						                                			switchTheme( slug, title )
-						                                			}
-						                                		} >
-						                                			{ __('Active', 'wp-travel') }
-						                                		</button>
-						                                		||
-						                                		<button onClick={ () =>{
-						                                			installTheme( slug, title )
-						                                			}
-						                                		} >
-						                                			{ __('Install & Active', 'wp-travel') }
-						                                		</button>
-					                                		}
-					                                		<a className="dashboard-btn" href={ theme_page } target="_blank">
-					                                			{ __('Theme Page', 'wp-travel') }
-					                                		</a>
-					                                	</div>
-					                                </div>
-					                            </div>;
-					                    
-					                } ) }
-					            </div>
+								{
+									_wp_travel.theme_datas == 1 &&
+											<div className="wp-travel-theme-item">
+					                        	<p>{__( 'Need internet connection for this step', 'wp-travel' )}</p>
+					                        </div>
+
+											||
+											<div className="wp-travel-theme-lists">		
+
+												{ _wp_travel.theme_datas == 1 &&
+														<div className="wp-travel-theme-item">
+								                        	<p>{__( 'Need internet connection for this step', 'wp-travel' )}</p>
+								                        </div>
+
+														||
+
+														_wp_travel.theme_datas.map( ( { title, slug, screenshot_url, is_active, is_installed, theme_page } ) => {
+									                    return <div className="wp-travel-theme-item">
+									                                <img id="theme-image" src={screenshot_url} />
+									                                <div className="wp-travel-theme-item-wrapper">
+									                                	<h3>{title}</h3>
+									                                	<div className="btns">
+									                                		{										                           				
+									                                			is_active == 'yes' &&
+									                                			<p>{ __('Curently Active', 'wp-travel') }</p>
+									                                			||
+									                                			is_installed == 'yes' &&
+									                                			<button onClick={ () =>{
+										                                			switchTheme( slug, title )
+										                                			}
+										                                		} >
+										                                			{ __('Active', 'wp-travel') }
+										                                		</button>
+										                                		||
+										                                		<button onClick={ () =>{
+										                                			installTheme( slug, title )
+										                                			}
+										                                		} >
+										                                			{ __('Install & Active', 'wp-travel') }
+										                                		</button>
+									                                		}
+									                                		<a className="dashboard-btn" href={ theme_page } target="_blank">
+									                                			{ __('Theme Page', 'wp-travel') }
+									                                		</a>
+									                                	</div>
+									                                </div>
+									                            </div>
+								                    
+								                } ) }
+								            </div>
+								}
+								
 							</div>
-							<button id="next-step" onClick={nextStep} >{ __('Skip this step', 'wp-travel') }</button>
+							<div id="btn-group">
+								<button id="back-step" onClick={backStep} >{__( 'Go Back', 'wp-travel' )}</button>
+								<button id="next-step" onClick={nextStep} >{__( 'Skip this step', 'wp-travel' )}</button>
+							</div>	
 						</div>
 					}
-					{ stepCount == 6 && <FinishedTab /> }
+					{ stepCount == 6 && 
+						<div id="finished-tab" className="tab">
+							<div id="trip-import-loader">
+								<p>{ __('Importing demo trips ...', 'wp-travel') }</p>
+								<img id="setup-page-loader" src={ _wp_travel.plugin_url + 'assets/images/loader.gif' } className="active" />				
+							</div>
+							<section className="wptravel-site-ready">
+						        <div className="wptravel-wrapper">
+						        	<img src={ _wp_travel.plugin_url + 'assets/images/travel-site-ready.png' } />
+						            <h1 className="wp-entity-title">{ __('Your Site Is Ready!', 'wp-travel') }</h1>
+						            <ul className="wp-travel-social-links">
+						            	<li>
+						            		<a href="https://www.facebook.com/wptravel.io/" target="_blank">
+						            			<svg width="40" height="41" fill="none" xmlns="http://www.w3.org/2000/svg">
+						            				<circle cx="19.858" cy="19.873" r="19.858" fill="#3B5998"/>
+						            				<path d="M24.85 20.65h-3.544v12.981h-5.368v-12.98h-2.553v-4.563h2.553v-2.952c0-2.111 1.003-5.417 5.416-5.417l3.977.016v4.429h-2.885c-.474 0-1.14.236-1.14 1.243v2.685h4.013l-.47 4.558z" fill="#fff"/>
+						            			</svg>
+						            		</a>
+						            	</li>
+						            	<li>
+						            		<a href="https://twitter.com/wptravel_io" target="_blank">
+						            			<svg width="40" height="41" fill="none" xmlns="http://www.w3.org/2000/svg">
+						            				<circle cx="20.188" cy="19.873" r="19.858" fill="#55ACEE"/>
+						            				<path d="M32.352 14.286a9.47 9.47 0 01-2.726.747 4.759 4.759 0 002.087-2.626A9.502 9.502 0 0128.7 13.56a4.747 4.747 0 00-8.088 4.33 13.474 13.474 0 01-9.784-4.96 4.746 4.746 0 001.469 6.337 4.713 4.713 0 01-2.15-.594v.06a4.75 4.75 0 003.807 4.654 4.73 4.73 0 01-2.143.082 4.752 4.752 0 004.434 3.296 9.524 9.524 0 01-5.896 2.032c-.382 0-.76-.022-1.131-.066a13.427 13.427 0 007.275 2.132c8.73 0 13.505-7.232 13.505-13.505 0-.206-.004-.41-.014-.614a9.625 9.625 0 002.37-2.457z" fill="#F1F2F2"/>
+						            			</svg>
+						            		</a>
+						            	</li>
+						            	<li>
+						            		<a href="https://www.youtube.com/channel/UCJx51UI1H73clCxBCTHuEjA" target="_blank">
+						            			<svg width="40" height="41" fill="none" xmlns="http://www.w3.org/2000/svg">
+						            				<circle cx="20.66" cy="20.015" r="20" fill="#D42428"/>
+						            				<path d="M34.76 5.63c7.866 7.866 7.866 20.62 0 28.486s-20.62 7.866-28.487 0L34.76 5.629z" fill="#CC202D"/><path fill-rule="evenodd" clip-rule="evenodd" d="M28.145 12.998c1.68 0 3.042 1.375 3.042 3.072v8.24c0 1.698-1.362 3.074-3.042 3.074H13.877c-1.68 0-3.041-1.376-3.041-3.073v-8.24c0-1.697 1.361-3.073 3.04-3.073h14.27zm-9.17 2.93v7.739l5.813-3.87-5.812-3.87z" fill="#fff"/>
+						            			</svg>
+						            		</a>
+						            	</li>
+						            </ul>
+						            <a className="dashboard-btn" href="https://wptravel.io/wp-travel-docs/" target="_blank">{ __('Documentation', 'wp-travel') }</a>
+						            <a className="dashboard-btn" href={_wp_travel.admin_url + 'edit.php?post_type=itineraries'}>{ __('Create Trip', 'wp-travel') }</a>
+						            <button  className="dashboard-btn" id="next-step" onClick={importTrip}>{ __('Import Trip', 'wp-travel') }</button>
+						        </div>
+						        <button id="back-step" onClick={backStep} >{__( 'Go Back', 'wp-travel' )}</button>
+						        <a className="secondary-btn" href={ _wp_travel.admin_url }>{ __('Go To Dashboard', 'wp-travel') }</a>
+						    </section>
+			
+							<FinishedTab /> 
+						</div>
+					}
 				</div>
 				
 			</div>
@@ -883,7 +978,7 @@ const Body = () => {
 					<li id="currency-tab-item" className="tab-item">{ __('Currency', 'wp-travel') }</li>
 					<li id="page-tab-item" className="tab-item">{ __('Page', 'wp-travel') }</li>
 					<li id="email-tab-item"  className="tab-item">{ __('Email', 'wp-travel') }</li>
-					<li id="payment-tab-item" className="tab-item">{ __('Payemnt', 'wp-travel') }</li>
+					<li id="payment-tab-item" className="tab-item">{ __('Payment', 'wp-travel') }</li>
 					<li id="theme-tab-item" className="tab-item">{ __('Compatible Themes', 'wp-travel') }</li>
 					<li id="finished-tab-item" className="tab-item">{ __('Finished Setup', 'wp-travel') }</li>
 				</ul>
