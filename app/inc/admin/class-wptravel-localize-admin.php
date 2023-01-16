@@ -170,7 +170,6 @@ class WpTravel_Localize_Admin {
 			'thousand_separator' => $settings['thousand_separator'] ? $settings['thousand_separator'] : ',',
 		);
 
-		//print_r($screen->id);die;
 		// trip edit page.
 		if ( in_array( $screen->id, $allowed_screen, true ) ) {
 			$translation_array['postID'] = get_the_ID();

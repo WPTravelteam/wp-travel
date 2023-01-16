@@ -16,7 +16,7 @@ class WP_Travel_Setup_Page{
 		
 		add_action('admin_menu', array( $this, 'wp_travel_welcome_screen_pages' ) );
 		add_action( 'admin_init', array( $this, 'wp_travel_setup_page_redirect' ) );
-		// add_action( 'admin_head', array( $this, 'wp_travel_welcome_screen_remove_menus' ) );
+		add_action( 'admin_head', array( $this, 'wp_travel_welcome_screen_remove_menus' ) );
 		add_action( 'rest_api_init', array( $this, 'add_custom_users_api' ) );
 	}
 
@@ -72,7 +72,7 @@ class WP_Travel_Setup_Page{
 			global $wp_filesystem;
 
 			$status['errorCode']    = 'unable_to_connect_to_filesystem';
-			$status['errorMessage'] = __( 'Unable to connect to the filesystem. Please confirm your credentials.' );
+			$status['errorMessage'] = __( 'Unable to connect to the filesystem. Please confirm your credentials.', 'wp-travel' );
 
 			// Pass through the error from WP_Filesystem if one was raised.
 			if ( $wp_filesystem instanceof WP_Filesystem_Base && is_wp_error( $wp_filesystem->errors ) && $wp_filesystem->errors->has_errors() ) {
