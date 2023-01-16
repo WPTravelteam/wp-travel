@@ -381,7 +381,7 @@ class WP_Travel_Import_Dummy_Trip {
 			fclose( $handle );
 		}
 		if ( ! is_array( $data ) || empty( $data ) ) {
-			$this->send_json_error( __( 'Invalid CSV file or bad format.', 'wp-travel-pro' ) );
+			$this->send_json_error( __( 'Invalid CSV file or bad format.', 'wp-travel' ) );
 		}
 
 		$this->data = $data;
