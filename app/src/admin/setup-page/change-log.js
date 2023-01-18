@@ -1,5 +1,19 @@
 const changeLog = [
 	{
+		version: "6.1.0",
+		log: <p>
+				Release Date:  5th January 2023
+				<br/><br/>
+				Tweaks:
+				<br/>
+				* Hook added to rename Tax.
+				<br/><br/>
+				Enhancement:
+				<br/>
+				* Added  WP Travel Initial Setup step to make admin easier to setup site.
+			</p>
+	},
+	{
 		version: "6.0.1",
 		log: <p>
 				Release Date:  5th January 2023

@@ -8,6 +8,7 @@ import domReady from '@wordpress/dom-ready';
 
 import './store/enquiry-store';
 import SaveEnquiry from './sub-components/SaveEnquiry'
+// import EnquiryForm from './sub-components/EnquiryForm';
 
 //for disabling the publish button before saving the enquiry
 const toggleDisablePostUpdate = (isDisabled = false) => {
@@ -31,7 +32,7 @@ const App = () => {
     const allData = useSelect((select) => {
         return select('WPTravel/Enquiry').getAllStore()
 }, []);
-console.log('allData', allData)
+// console.log('allData', allData)
     //change the publish button state as per the data changes
     toggleDisablePostUpdate(allData.has_state_changes);
 
@@ -45,6 +46,7 @@ console.log('allData', allData)
     }
     let tripnames = tripNames.map(tripSuggestion => { return { label: tripSuggestion.title, value: tripSuggestion.id } }); 
     const { updateEnquiry } = dispatch('WPTravel/Enquiry'); 
+    // console.log(wp_travel_trip_id, wp_travel_form_field);
     return (
         <div>
 
@@ -66,6 +68,7 @@ console.log('allData', allData)
                     />
                 </div>
             </PanelRow>
+            {/* { wp_travel_form_field !== [''] && typeof wp_travel_form_field !== 'undefined' && <EnquiryForm allData={allData} /> || <> */}
             <PanelRow>
                 <label><strong>{__('*Full Name', 'wp-travel')}</strong></label>
                 <div >
@@ -114,7 +117,8 @@ console.log('allData', allData)
 
                     />
                 </div>
-            </PanelRow>
+            </PanelRow> 
+            {/* </> } */}
             {allData.is_sending_request}
             <SaveEnquiry position="bottom" />
         </div>

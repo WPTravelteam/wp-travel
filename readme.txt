@@ -247,6 +247,16 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
 
+= 6.1.0 =
+Release Date:  18th January 2023
+
+Tweaks:
+* Hook added to rename Tax.
+
+Enhancement:
+* Added WP Travel Initial Setup steps to make it admin easier to set up the site.
+* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-1-0-release-note/ ).
+
 = 6.0.1 =
 Release Date:  5th January 2023
 

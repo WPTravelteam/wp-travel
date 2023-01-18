@@ -204,6 +204,7 @@ class WpTravel_Helpers_Strings {
 			'group_size'                    => __( 'Group (Min-Max)', 'wp-travel' ),
 			'seats_left'                    => __( 'Seats left', 'wp-travel' ),
 			'pax'                           => __( 'Pax', 'wp-travel' ),
+			'price_tax'                     => __( 'Tax', 'wp-travel' ),
 			'select_pax'                    => __( 'Select Pax', 'wp-travel' ),
 			'price'                         => __( 'Price', 'wp-travel' ),
 			'arrival_date'                  => __( 'Arrival date', 'wp-travel' ),

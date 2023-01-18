@@ -369,7 +369,7 @@ if ( wptravel_is_react_version_enabled() ) {
 						<li style="<?php echo esc_attr( $display ); ?>" data-wpt-extra-field>
 							<label>
 								<?php
-									$tax_label = apply_filters( 'wptravel_checkout_tax_label', esc_html__( ! empty($strings) ? $strings['bookings']['price_tax'] : 'Tax', 'wp-travel' ), $tax_rate, $cart );
+									$tax_label = apply_filters( 'wptravel_checkout_tax_label', esc_html__( ! empty($strings) ? $strings['bookings']['price_tax'] : 'Tax ', 'wp-travel' ) . ' ', $tax_rate, $cart );
 									echo sprintf(
 										'%s(%s%%)',
 										$tax_label,
@@ -633,7 +633,7 @@ $per_person_text = wptravel_get_price_per_text( $trip_id );
 						<th>
 							<p><strong><?php esc_html_e( 'Subtotal', 'wp-travel' ); ?></strong></p>
 							<p><strong>
-							<?php esc_html_e( $strings['bookings']['price_tax'], 'wp-travel' );esc_html_e( ': ', 'wp-travel' );
+							<?php esc_html_e( $strings['bookings']['price_tax'] ? $strings['bookings']['price_tax'] : 'Tax', 'wp-travel' );esc_html_e( ' : ', 'wp-travel' );
 							?>
 							<span class="tax-percent">
 								<?php
