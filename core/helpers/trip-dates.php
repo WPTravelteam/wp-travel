@@ -45,15 +45,19 @@ class WpTravel_Helpers_Trip_Dates {
 		$dates = array();
 		$index = 0;
 		foreach ( $results as $result ) {
-			$dates[ $index ]['id']                      = absint( $result->id );
-			$dates[ $index ]['title']                   = $result->title;
-			$dates[ $index ]['years']                   = empty( $result->years ) ? 'every_year' : $result->years;
-			$dates[ $index ]['months']                  = empty( $result->months ) ? 'every_month' : $result->months;
-			$dates[ $index ]['days']                    = empty( $result->days ) ? '' : $result->days;
-			$dates[ $index ]['date_days']               = empty( $result->date_days ) ? '' : $result->date_days;
-			$dates[ $index ]['start_date']              = $result->start_date;
-			$dates[ $index ]['end_date']                = $result->end_date;
-			$dates[ $index ]['is_recurring']            = ! empty( $result->recurring ) && class_exists( 'WP_Travel_Pro' ) ? true : false;
+			$dates[ $index ]['id']           = absint( $result->id );
+			$dates[ $index ]['title']        = $result->title;
+			$dates[ $index ]['years']        = empty( $result->years ) ? 'every_year' : $result->years;
+			$dates[ $index ]['months']       = empty( $result->months ) ? 'every_month' : $result->months;
+			$dates[ $index ]['days']         = empty( $result->days ) ? '' : $result->days;
+			$dates[ $index ]['date_days']    = empty( $result->date_days ) ? '' : $result->date_days;
+			$dates[ $index ]['start_date']   = $result->start_date;
+			$dates[ $index ]['end_date']     = $result->end_date;
+			$dates[ $index ]['is_recurring'] = ! empty( $result->recurring ) && class_exists( 'WP_Travel_Pro' ) ? true : false;
+			/**
+			 * @since 6.1.0
+			 */
+			$dates[ $index ] ['enable_time']            = ! empty( absint( $result->id ) ) && class_exists( 'WP_Travel_Utilities_Core' ) ? get_post_meta( absint( $result->id ), 'wp_travel_trip_time_enable', true ) : false;
 			$dates[ $index ]['trip_time']               = ! empty( $result->trip_time ) && class_exists( 'WP_Travel_Utilities_Core' ) ? $result->trip_time : ''; // Time is utilities features.
 			$dates[ $index ]['pricing_ids']             = ! empty( $result->pricing_ids ) ? $result->pricing_ids : '';
 			$dates[ $index ]['recurring_weekdays_type'] = '';
@@ -141,7 +145,7 @@ class WpTravel_Helpers_Trip_Dates {
 			$result      = $wpdb->get_row( $wpdb->prepare( "SELECT GROUP_CONCAT( id ORDER BY sort_order ASC ) AS pricing_ids FROM {$wpdb->prefix}wt_pricings WHERE trip_id=%d AND id IN( $pricing_ids )", $trip_id ) ); // @phpcs:ignore
 			$pricing_ids = $result->pricing_ids;
 		}
-		$dates_data      = array(
+		$dates_data = array(
 			'trip_id'     => $trip_id,
 			'title'       => ! empty( $date['title'] ) ? $date['title'] : '',
 			'recurring'   => ! empty( $date['is_recurring'] ) ? absint( $date['is_recurring'] ) : 0,
@@ -176,6 +180,10 @@ class WpTravel_Helpers_Trip_Dates {
 				),
 				array( '%d' )
 			);
+			/**
+			 * @since 6.1.0
+			 */
+			update_post_meta( $date_id, 'wp_travel_trip_time_enable', ! empty( $date['enable_time'] ) ? $date['enable_time'] : false );
 		} else {
 			$wpdb->insert(
 				$table,
@@ -199,6 +207,10 @@ class WpTravel_Helpers_Trip_Dates {
 			if ( empty( $inserted_id ) ) {
 				return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_ERROR_ADDING_TRIP_DATE' );
 			}
+			/**
+			 * @since 6.1.0
+			 */
+			update_post_meta( $inserted_id, 'wp_travel_trip_time_enable', ! empty( $date['enable_time'] ) ? $date['enable_time'] : false );
 		}
 
 		return WP_Travel_Helpers_Response_Codes::get_success_response(
@@ -221,6 +233,15 @@ class WpTravel_Helpers_Trip_Dates {
 
 		global $wpdb;
 		$table = $wpdb->prefix . self::$table_name;
+		/**
+		 * @since 6.1.0
+		 */
+		$results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table WHERE `trip_id` = %d", $trip_id ) );
+		if ( ! empty( $results ) ) {
+			foreach ( $results as $date_result ) {
+				delete_post_meta( $date_result->id, 'wp_travel_trip_time_enable' );
+			}
+		}
 
 		$result = $wpdb->delete( $table, array( 'trip_id' => absint( $trip_id ) ), array( '%d' ) );
 
@@ -243,7 +264,10 @@ class WpTravel_Helpers_Trip_Dates {
 
 		global $wpdb;
 		$table = $wpdb->prefix . self::$table_name;
-
+		/**
+		 * @since 6.1.0
+		 */
+		delete_post_meta( $date_id, 'wp_travel_trip_time_enable' );
 		$result = $wpdb->delete( $table, array( 'id' => $date_id ), array( '%d' ) );
 
 		if ( false === $result ) {

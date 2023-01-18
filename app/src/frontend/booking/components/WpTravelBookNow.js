@@ -25,7 +25,7 @@ const WpTravelBookNow = ( props ) => {
     const _dates      = 'undefined' !== typeof dates && dates.length > 0 ? dates : [];
 
     // Booking Data.
-    const { selectedPricingId, nomineeTimes, selectedTime, selectedDate, paxCounts, inventory, nomineeTripExtras, tripExtras } = bookingData;
+    const { selectedPricingId, nomineeTimes, selectedTime, selectedDate, paxCounts, inventory, nomineeTripExtras, tripExtras, selectedDateIds } = bookingData;
 
 	let totalPax        = objectSum( paxCounts );
 	let minPaxToBook    = selectedPricingId && allPricings[selectedPricingId].min_pax && parseInt( allPricings[selectedPricingId].min_pax ) || 1
@@ -159,6 +159,12 @@ const WpTravelBookNow = ( props ) => {
 				alert( '[X] Request Timeout!' );
 		})
 	}
+	let enable_time = '';
+	_dates.map( res => {
+		if( res.id == selectedDateIds[0] ) {
+			enable_time =  res.enable_time;
+		}
+	});
     return <>
         <ErrorBoundary>
             <Suspense>
@@ -178,7 +184,7 @@ const WpTravelBookNow = ( props ) => {
                         
                         <div className="right-info" >
                             <p>{__i18n.bookings.booking_tab_cart_total}<strong dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCartTotal(true)) }}></strong></p>
-                            <button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook || ( nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">{__i18n.bookings.booking_tab_booking_btn_label}</button>
+                            <button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">{__i18n.bookings.booking_tab_booking_btn_label}</button>
                         </div>
                     </div>
                 }

@@ -47,6 +47,7 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
             start_date: null,
             end_date: null,
             is_recurring: false,
+            enable_time: false,
             trip_time: '',
             recurring_weekdays_type: '',
         })

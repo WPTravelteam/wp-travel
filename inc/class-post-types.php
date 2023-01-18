@@ -369,20 +369,20 @@ class WP_Travel_Post_Types { // @phpcs:ignore
 
 	public static function register_tour_guide() {
 		$guide_labels = array(
-            'name'                  => _x( 'Tour Guide', 'Post type general name', 'wp-travel-pro' ),
-            'singular_name'         => _x( 'Tour Guide', 'Post type singular name', 'wp-travel-pro' ),
-            'menu_name'             => _x( 'Tour Guide', 'Admin Menu text', 'wp-travel-pro' ),
-            'name_admin_bar'        => _x( 'Tour Guide', 'Add New on Toolbar', 'wp-travel-pro' ),
-            'add_new'               => __( 'Add New', 'wp-travel-pro' ),
-            'add_new_item'          => __( 'Add New Tour Guide', 'wp-travel-pro' ),
-            'new_item'              => __( 'New Tour Tour Guide', 'wp-travel-pro' ),
-            'edit_item'             => __( 'Edit Tour Guide', 'wp-travel-pro' ),
-            'view_item'             => __( 'View Tour Guide', 'wp-travel-pro' ),
-            'all_items'             => __( 'All Tour Guide', 'wp-travel-pro' ),
-            'search_items'          => __( 'Search Tour Guide', 'wp-travel-pro' ),
-            'parent_item_colon'     => __( 'Parent Tour Guide:', 'wp-travel-pro' ),
-            'not_found'             => __( 'No guides found.', 'wp-travel-pro' ),
-            'not_found_in_trash'    => __( 'No guides found in Trash.', 'wp-travel-pro' ),
+            'name'                  => _x( 'Tour Guide', 'Post type general name', 'wp-travel' ),
+            'singular_name'         => _x( 'Tour Guide', 'Post type singular name', 'wp-travel' ),
+            'menu_name'             => _x( 'Tour Guide', 'Admin Menu text', 'wp-travel' ),
+            'name_admin_bar'        => _x( 'Tour Guide', 'Add New on Toolbar', 'wp-travel' ),
+            'add_new'               => __( 'Add New', 'wp-travel' ),
+            'add_new_item'          => __( 'Add New Tour Guide', 'wp-travel' ),
+            'new_item'              => __( 'New Tour Tour Guide', 'wp-travel' ),
+            'edit_item'             => __( 'Edit Tour Guide', 'wp-travel' ),
+            'view_item'             => __( 'View Tour Guide', 'wp-travel' ),
+            'all_items'             => __( 'All Tour Guide', 'wp-travel' ),
+            'search_items'          => __( 'Search Tour Guide', 'wp-travel' ),
+            'parent_item_colon'     => __( 'Parent Tour Guide:', 'wp-travel' ),
+            'not_found'             => __( 'No guides found.', 'wp-travel' ),
+            'not_found_in_trash'    => __( 'No guides found in Trash.', 'wp-travel' ),
         );
 
         $guide_args = array(

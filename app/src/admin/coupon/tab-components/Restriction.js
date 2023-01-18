@@ -34,7 +34,14 @@ export default () => {
             }
         })
     }
-    let allUsers = users.map( userData => {return {label:userData.data.user_login, value:userData.data.ID }} );
+    let userTravel = Array()
+    let allUsers = users.map( userData => {
+        if( userData.roles[0] !== 'travel-guide' ) { 
+           userTravel = Array( {label:userData.data.user_login, value:userData.data.ID} )
+         }
+         return {label:userData.data.user_login, value:userData.data.ID }
+    } );
+    userTravel.unshift({label: 'Select User', value:'' }); 
     allUsers.unshift({label: 'Select User', value:'' }); 
     // Update Values
     const { updateCoupon } = dispatch('WPTravel/Coupon');
@@ -92,7 +99,7 @@ export default () => {
                 <div className="wp-travel-field-value">
                     <SelectControl
                         value={coupon_user_id}
-                        options={allUsers}
+                        options={userTravel}
                         onChange={ ( value ) => {
                             updateCoupon({
                                 ...allData,

@@ -204,6 +204,7 @@ class WpTravel_Helpers_Strings {
 			'group_size'                    => __( 'Group (Min-Max)', 'wp-travel' ),
 			'seats_left'                    => __( 'Seats left', 'wp-travel' ),
 			'pax'                           => __( 'Pax', 'wp-travel' ),
+			'price_tax'                     => __( 'Tax', 'wp-travel' ),
 			'select_pax'                    => __( 'Select Pax', 'wp-travel' ),
 			'price'                         => __( 'Price', 'wp-travel' ),
 			'arrival_date'                  => __( 'Arrival date', 'wp-travel' ),
@@ -326,6 +327,10 @@ class WpTravel_Helpers_Strings {
 			'downloads_option'   => array(
 				'title'       => __( 'Need to add your downloads?', 'wp-travel' ),
 				'description' => __( 'By upgrading to Pro, you can add your downloads in all of your trips !', 'wp-travel' ),
+			),
+			'guide_option'   => array(
+				'title'       => __( 'Need to add trip guides?', 'wp-travel' ),
+				'description' => __( 'By upgrading to Pro, you can add trip guides in all of your trips !', 'wp-travel' ),
 			),
 			'need_more_option'   => array(
 				'title'       => __( 'Need More Options ?', 'wp-travel' ),
