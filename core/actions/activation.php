@@ -30,6 +30,7 @@ class WP_Travel_Actions_Activation { // @phpcs:ignore
 	 * @param bool $network_enabled Whether network enabled or not.
 	 */
 	public static function init( $network_enabled ) {
+
 		self::compatibility();
 		self::add_default_pricing_categories();
 		self::add_db_tables( $network_enabled );
@@ -40,9 +41,28 @@ class WP_Travel_Actions_Activation { // @phpcs:ignore
 		self::migrations();
 		WP_Travel::create_roles(); // @since 1.3.7
 		self::update_db_version();
+
+		self::wp_travel_check_for_plugin_activation();
+
 		// Flush Rewrite rule.
 		flush_rewrite_rules();
 
+	}
+
+	/**
+	 * Check for multile plugin activation.
+	 *
+	 *
+	 */
+	public static function wp_travel_check_for_plugin_activation() {
+		// Don't do redirects when multiple plugins are bulk activated
+		if (
+			( isset( $_REQUEST['action'] ) && 'activate-selected' === $_REQUEST['action'] ) &&
+			( isset( $_POST['checked'] ) && count( $_POST['checked'] ) > 1 ) ) {
+			return;
+		}
+		add_option( 'wp_travel_setup_page_redirect', wp_get_current_user()->ID );
+		
 	}
 
 	/**

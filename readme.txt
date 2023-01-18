@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 5.4.1
 Tested up to: 6.1.1
 Requires PHP: 5.6
-Stable tag: 6.0.1
+Stable tag: 6.1.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -246,6 +246,16 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 6.1.0 =
+Release Date:  18th January 2023
+
+Tweaks:
+* Hook added to rename Tax.
+
+Enhancement:
+* Added WP Travel Initial Setup steps to make it admin easier to set up the site.
+* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-1-0-release-note/ ).
 
 = 6.0.1 =
 Release Date:  5th January 2023

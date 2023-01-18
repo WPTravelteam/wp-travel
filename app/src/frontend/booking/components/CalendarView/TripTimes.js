@@ -9,8 +9,15 @@ const TripTimes =  ( props ) => {
 	// Component Props.
 	const { tripData, bookingData, updateBookingData } = props;
 	
-	const { selectedDate, nomineeTimes, selectedTime } = bookingData;
-	return <div className="wp-travel-booking__selected-time">
+	const { selectedDate, nomineeTimes, selectedTime, selectedDateIds } = bookingData;
+	const { dates }	= tripData;
+	let enable_time = '';
+	dates.map( res => {
+		if( res.id == selectedDateIds[0] ) {
+			enable_time =  res.enable_time;
+		}
+	});
+	return enable_time && <div className="wp-travel-booking__selected-time">
 		{nomineeTimes.length > 0 && <>
 			<h4>{`${__i18n.bookings.available_trip_times}`}</h4>
 			{

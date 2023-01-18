@@ -7,10 +7,11 @@ const __i18n = {
 const _ = lodash
 const TripTimes =  ( props ) => {
 	// Component Props.
-	const { bookingData, updateBookingData } = props;
-	
+	const { bookingData, updateBookingData, date  } = props;
+
+	const { enable_time } = date;
 	const { selectedDate, nomineeTimes } = bookingData;
-	return <div className="wp-travel-booking__selected-time">
+	return enable_time  && <div className="wp-travel-booking__selected-time">
 		{nomineeTimes.length > 0 && <>
 			<h4>{`${__i18n.bookings.available_trip_times}`}</h4>
 			{

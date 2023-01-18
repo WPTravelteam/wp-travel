@@ -3,7 +3,7 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 6.0.1
+ * Version: 6.1.0
  * Author: WP Travel
  * Author URI: http://wptravel.io/
  * Requires at least: 5.4.1
@@ -38,7 +38,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '6.0.1';
+		public $version = '6.1.0';
 
 		/**
 		 * WP Travel API version.
@@ -108,8 +108,11 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @since 1.0.0
 		 * @return void
 		 */
+
+
 		private function init_hooks() {
 			register_activation_hook( __FILE__, array( 'WP_Travel_Actions_Activation', 'init' ) );
+
 			add_action( 'activated_plugin', array( $this, 'plugin_load_first_order' ) );
 			add_action( 'after_setup_theme', array( $this, 'setup_environment' ) );
 
@@ -264,6 +267,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/core/helpers/layout.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/core/helpers/localize.php', WP_TRAVEL_ABSPATH );
 
+			include sprintf( '%s/inc/setup-page/setup-page.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-assets.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-default-form-fields.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-wp-travel-emails.php', WP_TRAVEL_ABSPATH );

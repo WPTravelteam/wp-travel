@@ -31,6 +31,7 @@ export default () => {
             partial_payouts = [minimum_partial_payout]
         }
     }
+    
     let enableAllGateway = true
     sorted_gateways.map((gateway, index) => {
         if ( enableAllGateway ) {
