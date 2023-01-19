@@ -248,7 +248,7 @@ Before updating plugin please check ["our latest release notes"](#developers).
 == Changelog ==
 
 = 6.1.0 =
-Release Date:  18th January 2023
+Release Date:  19th January 2023
 
 Tweaks:
 * Hook added to rename Tax.
