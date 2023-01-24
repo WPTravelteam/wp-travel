@@ -1,8 +1,20 @@
 const changeLog = [
 	{
+		version: "6.1.1",
+		log: <p>
+				Release Date:  24th January 2023
+				<br/><br/>
+				Fixes: 
+				<br/>
+				* Fixed slow performance in admin Dashboard with latest version of WP Travel.
+				<br/>
+				* Fixed media upload issue.
+			</p>
+	},
+	{
 		version: "6.1.0",
 		log: <p>
-				Release Date:  5th January 2023
+				Release Date:  19th January 2023
 				<br/><br/>
 				Tweaks:
 				<br/>
