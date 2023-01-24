@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 5.4.1
 Tested up to: 6.1.1
 Requires PHP: 5.6
-Stable tag: 6.1.0
+Stable tag: 6.1.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -246,6 +246,13 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 6.1.1 =
+Release Date:  24th January 2023
+
+Fixes: 
+* Fixed slow performance in admin Dashboard with latest version of WP Travel.
+* Fixed media upload issue. 
 
 = 6.1.0 =
 Release Date:  19th January 2023
