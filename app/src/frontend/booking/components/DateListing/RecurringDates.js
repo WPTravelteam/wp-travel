@@ -7,7 +7,7 @@ const __i18n = {
 const datePerPage = 5
 // WP Travel Functions.
 import { objectSum } from '../../_wptravelFunctions';
-import { IsTourDate } from '../../_IsTourDate'; // Filter available dates in calendar.
+import { IsTourDates } from '../../_IsTourDate'; // Filter available dates in calendar.
 import Loader from '../../../../GlobalComponents/Loader';
 
 
@@ -42,7 +42,7 @@ const RecurringRepeator = ( props ) =>  {
     return <tr key={index} className={loadingClass}>
         <td data-label={__i18n.bookings.pricings_list_label}>
             {/* _nomineePricings not updated in store/state because there are multiple _nomineePricings as per date so just a variable. */}
-            {IsTourDate(props)(recurrindDate) && <Pricings { ...props } /> || <Disabled><Pricings { ...props } /></Disabled> }
+            {IsTourDates(props)(recurrindDate) && <Pricings { ...props } /> || <Disabled><Pricings { ...props } /></Disabled> }
         </td>
         <td data-label={__i18n.bookings.person}>
             <div className ="person-box">

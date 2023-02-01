@@ -6,6 +6,7 @@ const bookingStoreName = 'WPTravelFrontend/BookingData';
 
 // Additional lib
 import generateRRule from "./_GenerateRRule";
+import './components/isDatesAvailables';
 
 
 // Date param need to have only Y-M-D date without time.
@@ -162,7 +163,7 @@ const IsTourDates = ( props ) => date => {
         return false
     }
     const _date = _dates.find(data => {
-        if ( !data.is_recurring ) {
+        if ( !data.is_recurring || data.is_recurring ) {
             let selectedYears = data.years ? data.years.split(",").filter(year => year != 'every_year').map(year => parseInt(year)) : [];
 
             if (data.end_date && moment(date).toDate().toString().toLowerCase() != 'invalid date' && moment(date).isAfter(moment(data.end_date))) {
@@ -175,12 +176,12 @@ const IsTourDates = ( props ) => date => {
                 return false
 
             let dateRules = generateRRule(data, startDate)
-            if ( ! applyFilters( 'wpTravelRecurringCutofDateFilter', true, dateRules, tripData, date, data )  ) { // @since 4.3.1
+            if ( ! applyFilters( 'wpTravelRecurringCutofDateFilterDateListView', true, dateRules, tripData, date, data )  ) { // @since 4.3.1
                 return false;
             }
             return dateRules.find(da => moment(moment(da).format("YYYY-MM-DD")).unix() === moment(moment(date).format('YYYY-MM-DD')).unix()) instanceof Date
         } else if( data.start_date ) {
-            if ( ! applyFilters( 'wpTravelCutofDateFilter', true, tripData, date, data )  ) { // @since 4.3.1
+            if ( ! applyFilters( 'wpTravelCutofDateFilterDateListViewNonRecurring', true, tripData, date, data )  ) { // @since 4.3.1
                 return false;
             }
             return moment(date).isSame(moment(data.start_date))

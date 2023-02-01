@@ -68,7 +68,7 @@ jQuery(function($) {
 
     });
 
-    $('.wp-travel-filter-submit').on('click', function() {
+    $('.wp-travel-filter-submit-shortcode').on('click', function() {
         var view_mode = $(this).siblings('.wp-travel-filter-view-mode').data('mode');
         var pathname = $(this).siblings('.wp-travel-filter-archive-url').val();
         if (!pathname) {
@@ -188,7 +188,7 @@ jQuery(function($) {
     $('body').off('submit', '#wp-travel-enquiries')
     $('#wp-travel-enquiries').submit(handleEnquirySubmission);
     
-    $(document).on( 'click', '.btn-wptravel-filter-by', function(){
+    $(document).on( 'click', '.btn-wptravel-filter-by-shortcodes', function(){
         var parent = $(this).parent( '.wp-travel-filter-by-heading' );
         if ( parent &&  parent.siblings( '.wp-toolbar-filter-field' ) ) {
             parent.siblings( '.wp-toolbar-filter-field, .wp-travel-filter-button' ).toggleClass( 'show-in-mobile' );

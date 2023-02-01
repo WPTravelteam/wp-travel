@@ -29,131 +29,132 @@ class WpTravel_Localize_Admin {
 		$screen         = get_current_screen();
 		$allowed_screen = array( WP_TRAVEL_POST_TYPE, 'edit-' . WP_TRAVEL_POST_TYPE, 'itinerary-enquiries', 'wptravel_template', 'edit-wptravel_template' );
 		$settings       = wptravel_get_settings();
+		$theme_datas    = array();
+		if ( get_current_screen()->base == 'dashboard_page_wp-travel-setup-page' ) {
 
-		$theme_lists = array(
-			array(
-				'slug' => 'travel-log',
-				'theme_page' => 'https://wensolutions.com/themes/travel-log/'
-			),
-			array(
-				'slug' => 'travel-buzz',
-				'theme_page' => 'https://wensolutions.com/themes/travel-buzz/'
-			),
-			array(
-				'slug' => 'travel-joy',
-				'theme_page' => 'https://wensolutions.com/themes/travel-joy/'
-			),
-			array(
-				'slug' => 'travel-one',
-				'theme_page' => 'https://wensolutions.com/themes/travel-one/'
-			),
-			array(
-				'slug' => 'travelstore',
-				'theme_page' => 'https://wensolutions.com/themes/travelstore/'
-			),
-			array(
-				'slug' => 'travel-ocean',
-				'theme_page' => 'https://wensolutions.com/themes/travel-ocean/'
-			),
-			array(
-				'slug' => 'travel-escape',
-				'theme_page' => 'https://wensolutions.com/themes/travel-escape/'
-			),
-			array(  
-				'slug' => 'bloguide',
-				'theme_page' => 'https://themepalace.com/downloads/bloguide/'
-			),
-			array(  
-				'slug' => 'ultravel',
-				'theme_page' => 'https://themepalace.com/downloads/ultravel/'
-			),
-			array(  
-				'slug' => 'travelism',
-				'theme_page' => 'https://themepalace.com/downloads/travelism/'
-			),
-			array(  
-				'slug' => 'swingpress',
-				'theme_page' => 'https://themepalace.com/downloads/swingpress/'
-			),
-			array(  
-				'slug' => 'wen-travel',
-				'theme_page' => 'https://themepalace.com/downloads/wen-travel/'
-			),
-			array(  
-				'slug' => 'travel-life',
-				'theme_page' => 'https://themepalace.com/downloads/travel-life/'
-			),
-			array(  
-				'slug' => 'top-travel',
-				'theme_page' => 'https://themepalace.com/downloads/top-travel/'
-			),
-			array(  
-				'slug' => 'next-travel',
-				'theme_page' => 'https://themepalace.com/downloads/next-travel/'
-			),
-			array(  
-				'slug' => 'travel-master',
-				'theme_page' => 'https://themepalace.com/downloads/travel-master/'
-			),
-			array(  
-				'slug' => 'tale-travel',
-				'theme_page' => 'https://themepalace.com/downloads/tale-travel/'
-			),
-			array(  
-				'slug' => 'travel-ultimate',
-				'theme_page' => 'https://themepalace.com/downloads/travel-ultimate/'
-			),
-			array(  
-				'slug' => 'travel-gem',
-				'theme_page' => 'https://themepalace.com/downloads/travel-gem/'
-			),
-			array(  
-				'slug' => 'tourable',
-				'theme_page' => 'https://themepalace.com/downloads/tourable/'
-			),
-			array(  
-				'slug' => 'travel-base',
-				'theme_page' => 'https://themepalace.com/downloads/travel-base/'
-			),
-			array(  
-				'slug' => 'pleased',
-				'theme_page' => 'https://themepalace.com/downloads/pleased/'
-			),
-			array(  
-				'slug' => 'travel-insight',
-				'theme_page' => 'https://themepalace.com/downloads/travel-insight/'
-			)
-		);
+			$theme_lists = array(
+				array(
+					'slug'       => 'travel-log',
+					'theme_page' => 'https://wensolutions.com/themes/travel-log/',
+				),
+				array(
+					'slug'       => 'travel-buzz',
+					'theme_page' => 'https://wensolutions.com/themes/travel-buzz/',
+				),
+				array(
+					'slug'       => 'travel-joy',
+					'theme_page' => 'https://wensolutions.com/themes/travel-joy/',
+				),
+				array(
+					'slug'       => 'travel-one',
+					'theme_page' => 'https://wensolutions.com/themes/travel-one/',
+				),
+				array(
+					'slug'       => 'travelstore',
+					'theme_page' => 'https://wensolutions.com/themes/travelstore/',
+				),
+				array(
+					'slug'       => 'travel-ocean',
+					'theme_page' => 'https://wensolutions.com/themes/travel-ocean/',
+				),
+				array(
+					'slug'       => 'travel-escape',
+					'theme_page' => 'https://wensolutions.com/themes/travel-escape/',
+				),
+				array(
+					'slug'       => 'bloguide',
+					'theme_page' => 'https://themepalace.com/downloads/bloguide/',
+				),
+				array(
+					'slug'       => 'ultravel',
+					'theme_page' => 'https://themepalace.com/downloads/ultravel/',
+				),
+				array(
+					'slug'       => 'travelism',
+					'theme_page' => 'https://themepalace.com/downloads/travelism/',
+				),
+				array(
+					'slug'       => 'swingpress',
+					'theme_page' => 'https://themepalace.com/downloads/swingpress/',
+				),
+				array(
+					'slug'       => 'wen-travel',
+					'theme_page' => 'https://themepalace.com/downloads/wen-travel/',
+				),
+				array(
+					'slug'       => 'travel-life',
+					'theme_page' => 'https://themepalace.com/downloads/travel-life/',
+				),
+				array(
+					'slug'       => 'top-travel',
+					'theme_page' => 'https://themepalace.com/downloads/top-travel/',
+				),
+				array(
+					'slug'       => 'next-travel',
+					'theme_page' => 'https://themepalace.com/downloads/next-travel/',
+				),
+				array(
+					'slug'       => 'travel-master',
+					'theme_page' => 'https://themepalace.com/downloads/travel-master/',
+				),
+				array(
+					'slug'       => 'tale-travel',
+					'theme_page' => 'https://themepalace.com/downloads/tale-travel/',
+				),
+				array(
+					'slug'       => 'travel-ultimate',
+					'theme_page' => 'https://themepalace.com/downloads/travel-ultimate/',
+				),
+				array(
+					'slug'       => 'travel-gem',
+					'theme_page' => 'https://themepalace.com/downloads/travel-gem/',
+				),
+				array(
+					'slug'       => 'tourable',
+					'theme_page' => 'https://themepalace.com/downloads/tourable/',
+				),
+				array(
+					'slug'       => 'travel-base',
+					'theme_page' => 'https://themepalace.com/downloads/travel-base/',
+				),
+				array(
+					'slug'       => 'pleased',
+					'theme_page' => 'https://themepalace.com/downloads/pleased/',
+				),
+				array(
+					'slug'       => 'travel-insight',
+					'theme_page' => 'https://themepalace.com/downloads/travel-insight/',
+				),
+			);
 
-		$theme_datas = array();
-		if( property_exists( themes_api( 'theme_information', array( 'slug' => 'travel-joy' ) ), 'errors' ) == false ){
-			foreach ( $theme_lists as $data ) {
+			if ( property_exists( themes_api( 'theme_information', array( 'slug' => 'travel-joy' ) ), 'errors' ) == false ) {
+				foreach ( $theme_lists as $data ) {
 
-				$is_installed = in_array( $data['slug'], array_keys( wp_get_themes() ) ) ? 'yes' : 'no';
-				$is_active = $data['slug'] == wp_get_theme()->get( 'TextDomain' ) ? 'yes' : 'no';
-				
-				$get_theme_data = themes_api(
-					'theme_information',
-					array(
-						'slug'   => $data['slug'],
-						'fields' => array( 'sections' => false ),
-					)
-				);
-				
-				$theme_data['title'] = $get_theme_data->name;
-				$theme_data['theme_page'] = $data['theme_page'];
-				$theme_data['slug'] = str_replace( '-', '_', $get_theme_data->slug );
-				$theme_data['screenshot_url'] = $get_theme_data->screenshot_url;
-				$theme_data['download_link'] = $get_theme_data->download_link;
-				$theme_data['is_installed'] = $is_installed; 
-				$theme_data['is_active'] = $is_active;				
+					$is_installed = in_array( $data['slug'], array_keys( wp_get_themes() ) ) ? 'yes' : 'no';
+					$is_active    = $data['slug'] == wp_get_theme()->get( 'TextDomain' ) ? 'yes' : 'no';
 
-				array_push($theme_datas, $theme_data);
+					$get_theme_data = themes_api(
+						'theme_information',
+						array(
+							'slug'   => $data['slug'],
+							'fields' => array( 'sections' => false ),
+						)
+					);
+
+					$theme_data['title']          = $get_theme_data->name;
+					$theme_data['theme_page']     = $data['theme_page'];
+					$theme_data['slug']           = str_replace( '-', '_', $get_theme_data->slug );
+					$theme_data['screenshot_url'] = $get_theme_data->screenshot_url;
+					$theme_data['download_link']  = $get_theme_data->download_link;
+					$theme_data['is_installed']   = $is_installed;
+					$theme_data['is_active']      = $is_active;
+
+					array_push( $theme_datas, $theme_data );
+				}
+			} else {
+				$theme_datas = 1;
 			}
-		}else{
-			$theme_datas = 1;
 		}
-		
 
 		$translation_array = array(
 			'_nonce'             => wp_create_nonce( 'wp_travel_nonce' ),
@@ -161,7 +162,7 @@ class WpTravel_Localize_Admin {
 			'plugin_url'         => plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ),
 			'plugin_name'        => 'WP Travel',
 			'dev_mode'           => wptravel_dev_mode(),
-			'theme_datas'		 => $theme_datas,
+			'theme_datas'        => $theme_datas,
 			'currency'           => $settings['currency'],
 			'currency_position'  => $settings['currency_position'],
 			'currency_symbol'    => wptravel_get_currency_symbol(),
@@ -189,7 +190,7 @@ class WpTravel_Localize_Admin {
 		wp_localize_script( 'wp-travel-admin-settings', '_wp_travel', $translation_array );  // temp fixes to use localized data.
 
 		if ( get_current_screen()->base == 'dashboard_page_wp-travel-setup-page' ) {
-			wp_localize_script( 'wp-travel-setup-page-js', '_wp_travel', $translation_array );  // temp fixes to use 
+			wp_localize_script( 'wp-travel-setup-page-js', '_wp_travel', $translation_array );  // temp fixes to use
 		}
 	}
 }

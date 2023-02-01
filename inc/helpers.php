@@ -424,7 +424,7 @@ function wptravel_get_post_thumbnail( $post_id, $size = 'wp_travel_thumbnail' ) 
 		global $post;
 		$post_id = $post->ID;
 	}
-	$size      = apply_filters( 'wp_travel_itinerary_thumbnail_size', $size );
+	$size      = apply_filters( 'wp_travel_itinerary_thumbnail_size', 'large' );
 	$thumbnail = get_the_post_thumbnail( $post_id, $size );
 
 	if ( ! $thumbnail ) {
@@ -2298,7 +2298,7 @@ function wptravel_itinerary_filter_by( $submission_get = array() ) {
 	<div class="wp-travel-post-filter clearfix">
 		<div class="wp-travel-filter-by-heading">
 			<h4><?php echo esc_html( $filter_by_text ); ?></h4>
-			<button class="btn btn-wptravel-filter-by"><?php echo esc_html( $filter_by_text ); ?><i class="fas fa-chevron-down"></i></button>
+			<button class="btn btn-wptravel-filter-by-shortcodes"><?php echo esc_html( $filter_by_text ); ?><i class="fas fa-chevron-down"></i></button>
 		</div>
 		<?php
 			$price     = ( isset( $submission_get['price'] ) ) ? $submission_get['price'] : '';
@@ -2385,7 +2385,7 @@ function wptravel_itinerary_filter_by( $submission_get = array() ) {
 			<input class="wptravel_filter-data-index" type="hidden" data-index="<?php echo esc_attr( $index ); ?>">
 			<input class="wp-travel-filter-view-mode" type="hidden" name="view_mode" data-mode="<?php echo esc_attr( $view_mode ); ?>" value="<?php echo esc_attr( $view_mode ); ?>" >
 			<input type="hidden" class="wp-travel-filter-archive-url" value="<?php echo esc_url( get_post_type_archive_link( WP_TRAVEL_POST_TYPE ) ); ?>" />
-			<button class="wp-travel-filter-submit"><?php echo esc_html( $show_text ); ?></button>
+			<button class="wp-travel-filter-submit-shortcode"><?php echo esc_html( $show_text ); ?></button>
 		</div>
 		<?php do_action( 'wp_travel_after_post_filter' ); ?>
 	</div>
