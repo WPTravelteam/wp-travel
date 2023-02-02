@@ -157,6 +157,9 @@ function wptravel_settings_default_fields() {
 
 		// @since 5.1.1.
 		'hide_plugin_archive_page_title'          => 'no',
+
+		// @since 6.2.0.
+		'disable_admin_review'          			=> 'no',
 	);
 
 	$user_since = get_option( 'wp_travel_user_since' );

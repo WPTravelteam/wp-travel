@@ -501,6 +501,7 @@ function wptravel_single_trip_rating( $trip_id, $hide_rating = false ) {
 		return;
 	}
 	$average_rating = wptravel_get_average_rating( $trip_id );
+
 	?>
 	<div class="wp-travel-average-review" title="<?php printf( __( 'Rated %s out of 5', 'wp-travel' ), esc_attr( $average_rating ) ); // @phpcs:ignore ?>">
 		<a href="#">
@@ -1413,7 +1414,30 @@ function wptravel_get_average_rating( $trip_id = null ) {
 	if ( ! $trip_id ) {
 		$trip_id = $post->ID;
 	}
-	$count                = (int) get_comments_number( $trip_id );
+	$count = (int) get_comments_number( $trip_id );
+
+	// @since 6.2.0
+	$settings   = wptravel_get_settings();
+
+
+	if ( $settings['disable_admin_review'] == 'yes' ) {
+		$get_reviews  = get_comments( array( 'post_id' => $trip_id ) );
+
+		$admin_count = 0;
+		foreach ( $get_reviews as $review ) {
+
+			if ( get_user_by('login', $review->comment_author) ) {
+				if ( in_array( get_user_by('login', $review->comment_author)->roles[0], array( 'administrator', 'editor', 'author' )) ) {
+					$admin_count = $admin_count + 1;
+				}
+				
+			}
+			
+		}
+		$count = $count - $admin_count;
+	}	
+
+
 	$average_rating_query = "SELECT SUM(meta_value) FROM $wpdb->commentmeta
 	LEFT JOIN $wpdb->comments ON $wpdb->commentmeta.comment_id = $wpdb->comments.comment_ID
 	WHERE meta_key = '_wp_travel_rating'
@@ -1421,8 +1445,9 @@ function wptravel_get_average_rating( $trip_id = null ) {
 	AND comment_approved = '1'
 	AND meta_value > 0";
 
-	// No meta data? Do the calculation.
-	if ( ! metadata_exists( 'post', $trip_id, '_wpt_average_rating' ) ) {
+
+	// // No meta data? Do the calculation.
+	// if ( ! metadata_exists( 'post', $trip_id, '_wpt_average_rating' ) ) {
 		if ( $count ) {
 			$ratings = $wpdb->get_var(
 				$wpdb->prepare( $average_rating_query, $trip_id ) // @phpcs:ignore
@@ -1432,26 +1457,25 @@ function wptravel_get_average_rating( $trip_id = null ) {
 			$average = 0;
 		}
 		update_post_meta( $trip_id, '_wpt_average_rating', $average );
-	} else {
+	// } else {
 
-		$average = get_post_meta( $trip_id, '_wpt_average_rating', true );
+	// 	$average = get_post_meta( $trip_id, '_wpt_average_rating', true );
 
-		if ( ! $average && $count > 0 ) { // re update average meta if there is number of reviews but no average ratings value.
-			if ( $count = (int) get_comments_number( $trip_id ) ) {
-				$ratings = $wpdb->get_var(
-					$wpdb->prepare( $average_rating_query, $trip_id ) // @phpcs:ignore
-				);
-				$average = number_format( $ratings / $count, 2, '.', '' );
-			} else {
-				$average = 0;
-			}
-			update_post_meta( $trip_id, '_wpt_average_rating', $average );
-		}
-	}
+	// 	if ( ! $average && $count > 0 ) { // re update average meta if there is number of reviews but no average ratings value.
+	// 		if ( $count ) {
+	// 			$ratings = $wpdb->get_var(
+	// 				$wpdb->prepare( $average_rating_query, $trip_id ) // @phpcs:ignore
+	// 			);
+	// 			$average = number_format( $ratings / $count, 2, '.', '' );
+	// 		} else {
+	// 			$average = 0;
+	// 		}
+	// 		update_post_meta( $trip_id, '_wpt_average_rating', $average );
+	// 	}
 
+	// }
 	return (string) floatval( $average );
 }
-
 /**
  * Get the total amount (COUNT) of ratings.
  *

@@ -3,6 +3,7 @@
  * Admin Localize file.
  *
  * @package WP_Travel
+ *
  */
 
 /**
@@ -30,8 +31,12 @@ class WpTravel_Localize_Admin {
 		$allowed_screen = array( WP_TRAVEL_POST_TYPE, 'edit-' . WP_TRAVEL_POST_TYPE, 'itinerary-enquiries', 'wptravel_template', 'edit-wptravel_template' );
 		$settings       = wptravel_get_settings();
 		$theme_datas    = array();
-		if ( get_current_screen()->base == 'dashboard_page_wp-travel-setup-page' ) {
 
+		/**
+		 * @since 6.1.0
+		 * added condition for loading theme only setup page
+		 */
+		if ( get_current_screen()->base == 'dashboard_page_wp-travel-setup-page' ) {
 			$theme_lists = array(
 				array(
 					'slug'       => 'travel-log',
@@ -127,6 +132,7 @@ class WpTravel_Localize_Admin {
 				),
 			);
 
+			$theme_datas = array();
 			if ( property_exists( themes_api( 'theme_information', array( 'slug' => 'travel-joy' ) ), 'errors' ) == false ) {
 				foreach ( $theme_lists as $data ) {
 
