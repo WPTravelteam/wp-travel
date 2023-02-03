@@ -248,12 +248,11 @@ Before updating plugin please check ["our latest release notes"](#developers).
 == Changelog ==
 
 = 6.2.0. =
-Release Date: 2nd February 2023
+Release Date: 6th February 2023
 
 Fixes: 
 * Fixed Trip placeholder image being cropped.
 * Fixed filter by option not being clickable in small screen size.
-* Fixed Trip extra gallery not save in backend.
 
 Enhancement: 
 * Added option to disable rating star option for admin.

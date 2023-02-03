@@ -2,15 +2,13 @@ const changeLog = [
 	{
 		version: "6.2.0",
 		log: <p>
-				Release Date: 2nd February 2023
+				Release Date: 3rd February 2023
 				<br/><br/>
 				Fixes:
 				<br/>
 				* Fixed Trip placeholder image being cropped.
 				<br/>
 				* Fixed filter by option not being clickable in small screen size.
-				<br/>
-				* Fixed Trip extra gallery not save in backend.
 				<br/><br/>
 				Enhancement:
 				<br/>

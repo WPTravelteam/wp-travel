@@ -159,7 +159,7 @@ function wptravel_settings_default_fields() {
 		'hide_plugin_archive_page_title'          => 'no',
 
 		// @since 6.2.0.
-		'disable_admin_review'          			=> 'no',
+		'disable_admin_review'                    => 'no',
 	);
 
 	$user_since = get_option( 'wp_travel_user_since' );
@@ -2301,7 +2301,7 @@ function wptravel_itinerary_filter_by( $submission_get = array() ) {
 	<div class="wp-travel-post-filter clearfix">
 		<div class="wp-travel-filter-by-heading">
 			<h4><?php echo esc_html( $filter_by_text ); ?></h4>
-			<button class="btn btn-wptravel-filter-by-shortcodes"><?php echo esc_html( $filter_by_text ); ?><i class="fas fa-chevron-down"></i></button>
+			<button class="btn btn-wptravel-filter-by-shortcodes-itinerary"><?php echo esc_html( $filter_by_text ); ?><i class="fas fa-chevron-down"></i></button>
 		</div>
 		<?php
 			$price     = ( isset( $submission_get['price'] ) ) ? $submission_get['price'] : '';
@@ -2621,6 +2621,7 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 					$traveller_infos  = get_post_meta( $booking_id );
 					$order_items_data = get_post_meta( $booking_id, 'order_items_data', true );
 					if ( is_array( $fname ) && count( $fname ) > 0 ) :
+						$indexs = 0;
 						foreach ( $fname as $cart_id => $first_names ) :
 							if ( is_array( $first_names ) && count( $first_names ) > 0 ) :
 								$trip_id = $order_items_data[ $cart_id ]['trip_id'];
@@ -2635,33 +2636,83 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 										?>
 									</h3>
 									<div class="row">
-										<?php foreach ( $first_names as $key => $first_name ) : ?>
-											<div class="col-md-6">
+
+										<?php
+											foreach ( $first_names as $key => $first_name ) :
+												?>
+												<div class="col-md-6">
 												<h3 class="my-order-single-title"><?php printf( esc_html__( 'Traveler %d :', 'wp-travel' ), $key + 1 ); ?></h3>
-												<?php
-												$traveller_fields = isset( $checkout_fields['traveller_fields'] ) ? $checkout_fields['traveller_fields'] : array();
-												$traveller_fields = wptravel_sort_form_fields( $traveller_fields );
-												if ( ! empty( $traveller_fields ) ) {
-													foreach ( $traveller_fields as $field ) {
-														if ( 'heading' === $field['type'] ) {
-															// Do nothing.
-														} elseif ( in_array( $field['type'], array( 'hidden' ) ) ) {
-															// Do nothing.
+													<?php
+													$traveller_fields = isset( $checkout_fields['traveller_fields'] ) ? $checkout_fields['traveller_fields'] : array();
+													$traveller_fields = wptravel_sort_form_fields( $traveller_fields );
+													if ( ! empty( $traveller_fields ) ) {
+														if ( $indexs == 0 ) {
+															foreach ( $traveller_fields as $field ) {
+																if ( 'heading' === $field['type'] ) {
+																	// Do nothing.
+																} elseif ( in_array( $field['type'], array( 'hidden' ) ) ) {
+																	// Do nothing.
+																} else {
+																	$value = isset( $traveller_infos[ $field['name'] ] ) && isset( $traveller_infos[ $field['name'] ][0] ) ? maybe_unserialize( $traveller_infos[ $field['name'] ][0] ) : '';
+																	// $value = is_array( $value ) ? array_values( $value ) : $value;
+																	// $value = is_array( $value ) ? array_shift( $value ) : $value;
+																	// $value = is_array( $value ) ? $value[ $key ] : $value;
+																	echo '<div class="my-order-single-field clearfix">';
+																	printf( '<span class="my-order-head">%s:</span>', $field['label'] ); // @phpcs:ignore
+																	printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? $value[ $cart_id ][ $key ] : '' ); // @phpcs:ignore
+																	echo '</div>';
+																}
+															}
+															$indexs = $indexs + 1;
 														} else {
-															$value = isset( $traveller_infos[ $field['name'] ] ) && isset( $traveller_infos[ $field['name'] ][0] ) ? maybe_unserialize( $traveller_infos[ $field['name'] ][0] ) : '';
-															$value = is_array( $value ) ? array_values( $value ) : $value;
-															$value = is_array( $value ) ? array_shift( $value ) : $value;
-															$value = is_array( $value ) ? $value[ $key ] : $value;
-															echo '<div class="my-order-single-field clearfix">';
-															printf( '<span class="my-order-head">%s:</span>', $field['label'] ); // @phpcs:ignore
-															printf( '<span class="my-order-tail">%s</span>', $value ); // @phpcs:ignore
-															echo '</div>';
-														}
+														foreach ( $traveller_fields as $field ) {
+															if ( array_key_exists( 'remove_field', $field ) ) {
+
+																if ( $field['remove_field'] == false ) {
+																	if ( 'heading' === $field['type'] ) {
+																		// Do nothing.
+																	} elseif ( in_array( $field['type'], array( 'hidden' ) ) ) {
+																		// Do nothing.
+																	} else {
+																		$value = isset( $traveller_infos[ $field['name'] ] ) && isset( $traveller_infos[ $field['name'] ][0] ) ? maybe_unserialize( $traveller_infos[ $field['name'] ][0] ) : '';
+																		/**
+																		 * remove @since 6.2.0 
+																		 * for fixes multicart multitraveler info..
+																		 */
+																		// $value = is_array( $value ) ? array_values( $value ) : $value;
+																		// $value = is_array( $value ) ? array_shift( $value ) : $value;
+																		// $value = is_array( $value ) ? $value[ $key ] : $value;
+																		echo '<div class="my-order-single-field clearfix">';
+																		printf( '<span class="my-order-head">%s:</span>', $field['label'] ); // @phpcs:ignore
+																		printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? $value[ $cart_id ][ $key ] : ''   ); // @phpcs:ignore
+																		echo '</div>';
+																	}
+																}
+															} else {
+																if ( 'heading' === $field['type'] ) {
+																	// Do nothing.
+																} elseif ( in_array( $field['type'], array( 'hidden' ) ) ) {
+																	// Do nothing.
+																} else {
+																	$value = isset( $traveller_infos[ $field['name'] ] ) && isset( $traveller_infos[ $field['name'] ][0] ) ? maybe_unserialize( $traveller_infos[ $field['name'] ][0] ) : '';
+																	/**
+																	 * remove @since 6.2.0 
+																	 * for fixes multicart multitraveler info..
+																	 */
+																	// $value = is_array( $value ) ? array_values( $value ) : $value;
+																	// $value = is_array( $value ) ? array_shift( $value ) : $value;
+																	// $value = is_array( $value ) ? $value[ $key ] : $value;
+																	echo '<div class="my-order-single-field clearfix">';
+																	printf( '<span class="my-order-head">%s:</span>', $field['label'] ); // @phpcs:ignore
+																	printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? $value[ $cart_id ][ $key ] : '' ); // @phpcs:ignore
+																	echo '</div>';
+																}
+															}
+														} }
 													}
-												}
 												?>
 											</div>
-										<?php endforeach; ?>
+										<?php endforeach;  ?>
 									</div>
 								</div>
 								<?php
