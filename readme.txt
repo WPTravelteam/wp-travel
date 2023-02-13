@@ -248,11 +248,12 @@ Before updating plugin please check ["our latest release notes"](#developers).
 == Changelog ==
 
 = 6.2.0. =
-Release Date: 6th February 2023
+Release Date: 13th February 2023
 
 Fixes: 
 * Fixed Trip placeholder image being cropped.
 * Fixed filter by option not being clickable in small screen size.
+* Fixed shortcode `[WP_TRAVEL_ITINERARIES limit=50 type='itinerary_types' slug="term-slug" ]` not working.
 
 Enhancement: 
 * Added option to disable rating star option for admin.
