@@ -118,6 +118,8 @@ const Body = () => {
 
 		document.getElementById("trip-import-loader").classList.add( 'active' );
     	document.getElementById("finished-tab-content").classList.add( 'inactive' );
+    	document.getElementById("wptravel-site-ready").classList.add( 'inactive' );
+
 
     	apiFetch( { path: '/wp-travel/v1/trip-import/', method: 'POST' } ).then( ( response ) => {
     		
@@ -923,7 +925,7 @@ const Body = () => {
 								<p>{ __('Importing demo trips ...', 'wp-travel') }</p>
 								<img id="setup-page-loader" src={ _wp_travel.plugin_url + 'assets/images/loader.gif' } className="active" />				
 							</div>
-							<section className="wptravel-site-ready">
+							<section id="wptravel-site-ready">
 						        <div className="wptravel-wrapper">
 						        	<img src={ _wp_travel.plugin_url + 'assets/images/travel-site-ready.png' } />
 						            <h1 className="wp-entity-title">{ __('Your Site Is Ready!', 'wp-travel') }</h1>

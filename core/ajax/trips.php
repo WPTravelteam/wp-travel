@@ -33,6 +33,31 @@ class WP_Travel_Ajax_Trips {
 		// Trip tab.
 		add_action( 'wp_ajax_wp_travel_get_trip_tabs', array( __CLASS__, 'trip_tabs' ) );
 		add_action( 'wp_ajax_nopriv_wp_travel_get_trip_tabs', array( __CLASS__, 'trip_tabs' ) );
+		/**
+		 * Fixed Trip extra gallery image in backend
+		 *
+		 * @since 6.2.0
+		 */
+		add_action( 'wp_ajax_envira_gallery_load_image', array( __CLASS__, 'get_extra_gallery' ) );
+		add_action( 'wp_ajax_nopriv_envira_gallery_load_image', array( __CLASS__, 'get_extra_gallery' ) );
+	}
+
+	public static function get_extra_gallery() {
+		if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
+			$nonce_trip_extra  = $_POST['nonce'];
+			$gallery_id        = $_POST['id'];
+			$gallerys_data     = wp_get_attachment_image_src( (int) $gallery_id );
+			$gallery_thumnails = wp_json_encode(
+				array(
+					'id'  => $gallery_id,
+					'url' => $gallerys_data[0],
+
+				)
+			);
+
+			print_r( $gallery_thumnails );
+			die;
+		}
 	}
 
 	/**
@@ -226,10 +251,10 @@ class WP_Travel_Ajax_Trips {
 		/**
 		 * Return list of filtered trips according to conditions.
 		 */
-		$start_date       = ! empty( $_GET['start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['start_date'] ) ) : ''; // @phpcs:ignore
-		$end_date         = ! empty( $_GET['end_date'] ) ? sanitize_text_field( wp_unslash( $_GET['end_date'] ) ) : ''; // @phpcs:ignore
-		$min_price        = ! empty( $_GET['min_price'] ) ? sanitize_text_field( wp_unslash( $_GET['min_price'] ) ) : 0; // @phpcs:ignore
-		$max_price        = ! empty( $_GET['max_price'] ) ? sanitize_text_field( wp_unslash( $_GET['max_price'] ) ) : 0; // @phpcs:ignore
+		$start_date = ! empty( $_GET['start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['start_date'] ) ) : ''; // @phpcs:ignore
+		$end_date   = ! empty( $_GET['end_date'] ) ? sanitize_text_field( wp_unslash( $_GET['end_date'] ) ) : ''; // @phpcs:ignore
+		$min_price  = ! empty( $_GET['min_price'] ) ? sanitize_text_field( wp_unslash( $_GET['min_price'] ) ) : 0; // @phpcs:ignore
+		$max_price  = ! empty( $_GET['max_price'] ) ? sanitize_text_field( wp_unslash( $_GET['max_price'] ) ) : 0; // @phpcs:ignore
 
 		// Not used yet to get trip id.
 		$travel_locations = ! empty( $_GET['travel_locations'] ) ? sanitize_text_field( wp_unslash( $_GET['travel_locations'] ) ) : ''; // @phpcs:ignore

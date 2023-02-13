@@ -81,8 +81,39 @@ if ( ! comments_open() ) {
 
 
 				$comment_form['must_log_in'] = '<p class="must-log-in">' . sprintf( __( 'You must be <a href="%1s">logged in</a> to post a review.', 'wp-travel' ), esc_url( wp_login_url() ) ) . '</p>';
+				$settings                       = wptravel_get_settings();
 
-				// if ( get_option( 'wp-travel_enable_review_rating' ) === 'yes' ) {
+				if ( is_user_logged_in() ) {
+					global $current_user;
+
+					if ( $settings['disable_admin_review'] == 'no' ) {
+						$comment_form['comment_field'] = '<p class="comment-form-rating"><label for="wp_travel_rate_val">' . __( 'Your Rating', 'wp-travel' ) . '</label><div id="wp-travel_rate" class="clearfix">
+									<a href="#" class="rate_label far fa-star" data-id="1"></a>
+									<a href="#" class="rate_label far fa-star" data-id="2"></a>
+									<a href="#" class="rate_label far fa-star" data-id="3"></a>
+									<a href="#" class="rate_label far fa-star" data-id="4"></a>
+									<a href="#" class="rate_label far fa-star" data-id="5"></a>
+								</div>
+								<input type="hidden" value="0" name="wp_travel_rate_val" id="wp_travel_rate_val" ></p>';
+
+						$comment_form['comment_field'] .= '<p class="comment-form-comment"><label for="comment">' . __( 'Your Review', 'wp-travel' ) . '</label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>';
+					}else{
+						if ( !in_array( get_user_by('login', $current_user->user_login )->roles[0], array( 'administrator', 'editor', 'author' )) ) { 
+							$comment_form['comment_field'] = '<p class="comment-form-rating"><label for="wp_travel_rate_val">' . __( 'Your Rating', 'wp-travel' ) . '</label><div id="wp-travel_rate" class="clearfix">
+								<a href="#" class="rate_label far fa-star" data-id="1"></a>
+								<a href="#" class="rate_label far fa-star" data-id="2"></a>
+								<a href="#" class="rate_label far fa-star" data-id="3"></a>
+								<a href="#" class="rate_label far fa-star" data-id="4"></a>
+								<a href="#" class="rate_label far fa-star" data-id="5"></a>
+							</div>
+							<input type="hidden" value="0" name="wp_travel_rate_val" id="wp_travel_rate_val" ></p>';
+
+							$comment_form['comment_field'] .= '<p class="comment-form-comment"><label for="comment">' . __( 'Your Review', 'wp-travel' ) . '</label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>';
+						}else{
+							$comment_form['comment_field'] .= '<p class="comment-form-comment"><label for="comment">' . __( 'Your Reply', 'wp-travel' ) . '</label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>';
+						}
+					}
+				}else{
 					$comment_form['comment_field'] = '<p class="comment-form-rating"><label for="wp_travel_rate_val">' . __( 'Your Rating', 'wp-travel' ) . '</label><div id="wp-travel_rate" class="clearfix">
 								<a href="#" class="rate_label far fa-star" data-id="1"></a>
 								<a href="#" class="rate_label far fa-star" data-id="2"></a>
@@ -91,9 +122,10 @@ if ( ! comments_open() ) {
 								<a href="#" class="rate_label far fa-star" data-id="5"></a>
 							</div>
 							<input type="hidden" value="0" name="wp_travel_rate_val" id="wp_travel_rate_val" ></p>';
-				// }
-				$comment_form['comment_field'] .= '<p class="comment-form-comment"><label for="comment">' . __( 'Your Review', 'wp-travel' ) . '</label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>';
 
+					$comment_form['comment_field'] .= '<p class="comment-form-comment"><label for="comment">' . __( 'Your Review', 'wp-travel' ) . '</label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>';
+				}
+				
 				comment_form( apply_filters( 'wp_travel_product_review_comment_form_args', $comment_form ) );
 				?>
 			</div>

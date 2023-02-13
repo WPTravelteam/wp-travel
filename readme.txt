@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 5.4.1
 Tested up to: 6.1.1
 Requires PHP: 5.6
-Stable tag: 6.1.1
+Stable tag: 6.2.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -246,6 +246,17 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 6.2.0. =
+Release Date: 13th February 2023
+
+Fixes: 
+* Fixed Trip placeholder image being cropped.
+* Fixed filter by option not being clickable in small screen size.
+* Fixed shortcode `[WP_TRAVEL_ITINERARIES limit=50 type='itinerary_types' slug="term-slug" ]` not working.
+
+Enhancement: 
+* Added option to disable rating star option for admin.
 
 = 6.1.1 =
 Release Date:  24th January 2023

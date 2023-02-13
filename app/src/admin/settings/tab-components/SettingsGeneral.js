@@ -32,6 +32,7 @@ export default () => {
         checkout_page_id,
         dashboard_page_id,
         hide_plugin_archive_page_title,
+        disable_admin_review,
         options } = allData;
 
     const { updateSettings } = dispatch('WPTravel/Admin');
@@ -351,6 +352,21 @@ export default () => {
                         } }
                     />
                     <p className="description">{__( 'This option will hide archive title displaying from plugin.', 'wp-travel' )}</p>
+                </div>
+            </PanelRow>
+             <PanelRow>
+                <label>{ __( 'Disable Star Rating For Admin', 'wp-travel' ) }</label>
+                <div className="wp-travel-field-value">
+                    <ToggleControl
+                        checked={ disable_admin_review == 'yes' }
+                        onChange={ () => {
+                            updateSettings({
+                                ...allData,
+                                disable_admin_review: 'yes' == disable_admin_review ? 'no': 'yes'
+                            })
+                        } }
+                    />
+                    <p className="description">{__( 'Enable to not allow star rating to admin', 'wp-travel' )}</p>
                 </div>
             </PanelRow>
         </ErrorBoundary>

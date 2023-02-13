@@ -21,6 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 global $comment;
+$settings = wptravel_get_settings();
 
 
 $rating = intval( get_comment_meta( $comment->comment_ID, '_wp_travel_rating', true ) ); ?>
@@ -32,11 +33,38 @@ $rating = intval( get_comment_meta( $comment->comment_ID, '_wp_travel_rating', t
 		<?php echo get_avatar( $comment, apply_filters( 'wp_travel_review_gravatar_size', '60' ), '' ); ?>
 
 		<div class="comment-text">
-			<div class="wp-travel-average-review" title="<?php echo sprintf( __( 'Rated %d out of 5', 'wp-travel' ), $rating ); ?>">
-				<a>
-				 <span style="width:<?php echo esc_attr( ( $rating / 5 ) * 100 ); ?>%"><strong><?php echo $rating; ?></strong> <?php _e( 'out of 5', 'wp-travel' ); ?></span>
-				</a>
-			</div>
+			<!-- since 6.2 -->
+			<?php if ( $settings['disable_admin_review'] == 'yes' ):
+
+				if ( get_user_by('login', $comment->comment_author) ) {
+					if ( in_array( get_user_by('login', $comment->comment_author)->roles[0], array( 'administrator', 'editor', 'author' )) ) { ?>
+						<div class="wp-travel-admin-review">
+							<?php _e( 'Admin', 'wp-travel' ); ?>
+						</div>
+					<?php }else{
+					?>
+						<div class="wp-travel-average-review" title="<?php echo sprintf( __( 'Rated %d out of 5', 'wp-travel' ), $rating ); ?>">
+							<a>
+							 <span style="width:<?php echo esc_attr( ( $rating / 5 ) * 100 ); ?>%"><strong><?php echo $rating; ?></strong> <?php _e( 'out of 5', 'wp-travel' ); ?></span>
+							</a>
+						</div>
+					<?php
+					}
+				}else{ ?>
+					<div class="wp-travel-average-review" title="<?php echo sprintf( __( 'Rated %d out of 5', 'wp-travel' ), $rating ); ?>">
+						<a>
+						 <span style="width:<?php echo esc_attr( ( $rating / 5 ) * 100 ); ?>%"><strong><?php echo $rating; ?></strong> <?php _e( 'out of 5', 'wp-travel' ); ?></span>
+						</a>
+					</div>
+				<?php	} ?>
+				
+				<?php else: ?>
+					<div class="wp-travel-average-review" title="<?php echo sprintf( __( 'Rated %d out of 5', 'wp-travel' ), $rating ); ?>">
+						<a>
+						 <span style="width:<?php echo esc_attr( ( $rating / 5 ) * 100 ); ?>%"><strong><?php echo $rating; ?></strong> <?php _e( 'out of 5', 'wp-travel' ); ?></span>
+						</a>
+					</div>
+			<?php endif ?>
 
 			<?php do_action( 'wp_travel_review_before_comment_meta', $comment ); ?>
 

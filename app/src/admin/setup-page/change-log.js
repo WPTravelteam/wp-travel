@@ -1,5 +1,23 @@
 const changeLog = [
 	{
+		version: "6.2.0",
+		log: <p>
+				Release Date: 13th February 2023
+				<br/><br/>
+				Fixes:
+				<br/>
+				* Fixed Trip placeholder image being cropped.
+				<br/>
+				* Fixed filter by option not being clickable in small screen size.
+				<br />
+				* Fixed shortcode `[WP_TRAVEL_ITINERARIES limit=50 type='itinerary_types' slug="term-slug" ]` not working.
+				<br/><br/>
+				Enhancement:
+				<br/>
+				* Added option to disable rating star option for admin.
+			</p>
+	},
+	{
 		version: "6.1.1",
 		log: <p>
 				Release Date:  24th January 2023

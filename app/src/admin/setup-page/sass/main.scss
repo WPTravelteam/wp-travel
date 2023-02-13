@@ -16,11 +16,11 @@ html.wp-toolbar {
 #change-log .wptravel-wrapper .grid-container {
     display: block;
 }
+
+#wptravel-site-ready.inactive,
+#trip-import-loader,
 #finished-tab-content.inactive{
     display:none;
-}
-#trip-import-loader{
-    display: none;
 }
 
 #btn-group{
