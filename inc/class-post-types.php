@@ -19,7 +19,7 @@ class WP_Travel_Post_Types { // @phpcs:ignore
 		self::register_bookings();
 		self::register_trip();
 		self::register_payment();
-		self::register_tour_guide();
+		self::register_travel_guide();
 		
 		WP_Travel_Post_Status::init();
 	}
@@ -367,20 +367,20 @@ class WP_Travel_Post_Types { // @phpcs:ignore
 		register_post_type( 'tour-extras', $args );
 	}
 
-	public static function register_tour_guide() {
+	public static function register_travel_guide() {
 		$guide_labels = array(
-            'name'                  => _x( 'Tour Guide', 'Post type general name', 'wp-travel' ),
-            'singular_name'         => _x( 'Tour Guide', 'Post type singular name', 'wp-travel' ),
-            'menu_name'             => _x( 'Tour Guide', 'Admin Menu text', 'wp-travel' ),
-            'name_admin_bar'        => _x( 'Tour Guide', 'Add New on Toolbar', 'wp-travel' ),
+            'name'                  => _x( 'Travel Guide', 'Post type general name', 'wp-travel' ),
+            'singular_name'         => _x( 'Travel Guide', 'Post type singular name', 'wp-travel' ),
+            'menu_name'             => _x( 'Travel Guide', 'Admin Menu text', 'wp-travel' ),
+            'name_admin_bar'        => _x( 'Travel Guide', 'Add New on Toolbar', 'wp-travel' ),
             'add_new'               => __( 'Add New', 'wp-travel' ),
-            'add_new_item'          => __( 'Add New Tour Guide', 'wp-travel' ),
-            'new_item'              => __( 'New Tour Tour Guide', 'wp-travel' ),
-            'edit_item'             => __( 'Edit Tour Guide', 'wp-travel' ),
-            'view_item'             => __( 'View Tour Guide', 'wp-travel' ),
-            'all_items'             => __( 'All Tour Guide', 'wp-travel' ),
-            'search_items'          => __( 'Search Tour Guide', 'wp-travel' ),
-            'parent_item_colon'     => __( 'Parent Tour Guide:', 'wp-travel' ),
+            'add_new_item'          => __( 'Add New Travel Guide', 'wp-travel' ),
+            'new_item'              => __( 'New Tour Travel Guide', 'wp-travel' ),
+            'edit_item'             => __( 'Edit Travel Guide', 'wp-travel' ),
+            'view_item'             => __( 'View Travel Guide', 'wp-travel' ),
+            'all_items'             => __( 'All Travel Guide', 'wp-travel' ),
+            'search_items'          => __( 'Search Travel Guide', 'wp-travel' ),
+            'parent_item_colon'     => __( 'Parent Travel Guide:', 'wp-travel' ),
             'not_found'             => __( 'No guides found.', 'wp-travel' ),
             'not_found_in_trash'    => __( 'No guides found in Trash.', 'wp-travel' ),
         );
@@ -392,7 +392,7 @@ class WP_Travel_Post_Types { // @phpcs:ignore
             'show_ui'            => true,
             'show_in_menu'       => false,
             'query_var'          => true,
-            'rewrite'            => array( 'slug' => 'tour-guide' ),
+            'rewrite'            => array( 'slug' => 'travel-guide' ),
             'capability_type'    => 'post',
             'has_archive'        => true,
             'hierarchical'       => false,
@@ -400,7 +400,7 @@ class WP_Travel_Post_Types { // @phpcs:ignore
             'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
         );
 
-        register_post_type( 'tour-guide', $guide_args );
+        register_post_type( 'travel-guide', $guide_args );
 	}
 
 	/**

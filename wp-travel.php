@@ -590,8 +590,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 						return 'tour-extras' === $screen->id || 'edit-tour-extras' === $screen->id;
 					case 'downloads':
 						return 'itinerary-booking_page_download_upsell_page' === $screen->id || 'wp_travel_downloads' === $screen->id || 'edit-wp_travel_downloads' === $screen->id;
-					case 'tour_guide':
-						return 'itinerary-booking_page_wp-travel-tour-guide' === $screen->id;
+					case 'travel_guide':
+						return 'itinerary-booking_page_wp-travel-travel-guide' === $screen->id;
 					case 'reports':
 						return 'itinerary-booking_page_booking_chart' === $screen->id;
 					case 'custom_filters':
@@ -665,7 +665,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 					'enquiry',
 					'extras',
 					'downloads',
-					'tour_guide',
+					'travel_guide',
 					'reports',
 					'custom_filters',
 					'marketplace',

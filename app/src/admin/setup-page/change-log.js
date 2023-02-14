@@ -60,7 +60,7 @@ const changeLog = [
 				<br/><br/>
 				Enhancement:
 				<br/>
-				* Provides compatibility for the Tour Guide feature in WP Travel Pro.<br/>
+				* Provides compatibility for the Travel Guide feature in WP Travel Pro.<br/>
                 * Provides compatibility for showing high prices on trips.improving in TTFB speed.
 				<br/><br/>
 				Fixes:

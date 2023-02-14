@@ -53,7 +53,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * [WP Travel Import Export](https://wptravel.io/downloads/wp-travel-import-export/?utm_source=addons&utm_medium=import-export&utm_campaign=WP%20Plugin)
 * [WP Travel Advanced Gallery](https://wptravel.io/downloads/wp-travel-advanced-gallery/?utm_source=addons&utm_medium=advanced-gallery&utm_campaign=WP%20Plugin)
 * [WP Travel Blocks](https://wptravel.io/downloads/wp-travel-blocks/?utm_source=addons&utm_medium=blocks&utm_campaign=WP%20Plugin)
-* [WP Travel Tour Guide](https://wptravel.io/docs/wp-travel-user-documentation/tour-guide/)
+* [WP Travel Travel Guide](https://wptravel.io/docs/wp-travel-user-documentation/travel-guide/)
 
 = WP TRAVEL MAP MODULES =
 * [WP Travel Here Map](https://wptravel.io/downloads/wp-travel-here-map/?utm_source=addons&utm_medium=heremap&utm_campaign=WP%20Plugin)
@@ -150,7 +150,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * Customizable
 * Compatible Themes
 * Clone Trips
-* Tour Guide
+* Travel Guide
 * Multiple Travelers info
 [And much more ...](https://wptravel.io/features/?utm_source=features&utm_medium=morefeatures&utm_campaign=WP%20Plugin)
 
@@ -285,7 +285,7 @@ Fixes:
 Release Date:  4th January 2023
 
 Enhancements:
-* Provides compatibility for the Tour Guide feature in WP Travel Pro.
+* Provides compatibility for the Travel Guide feature in WP Travel Pro.
 * Provides compatibility for showing high prices on trips.
 
 Fixes:

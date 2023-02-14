@@ -1719,11 +1719,11 @@ msgid "Leave a Review"
 msgstr ""
 
 #: inc/admin/admin-helper.php:508
-msgid "Need to add your tour guide ?"
+msgid "Need to add your Travel Guide ?"
 msgstr ""
 
 #: inc/admin/admin-helper.php:509
-msgid "By upgrading to Pro, you can add your tour guide in all of your trips !"
+msgid "By upgrading to Pro, you can add your Travel Guide in all of your trips !"
 msgstr ""
 
 #: inc/admin/admin-helper.php:538
@@ -2916,31 +2916,31 @@ msgid "Add New"
 msgstr ""
 
 #: inc/class-post-types.php:377
-msgid "Add New Tour Guide"
+msgid "Add New Travel Guide"
 msgstr ""
 
 #: inc/class-post-types.php:378
-msgid "New Tour Tour Guide"
+msgid "New Tour Travel Guide"
 msgstr ""
 
 #: inc/class-post-types.php:379
-msgid "Edit Tour Guide"
+msgid "Edit Travel Guide"
 msgstr ""
 
 #: inc/class-post-types.php:380
-msgid "View Tour Guide"
+msgid "View Travel Guide"
 msgstr ""
 
 #: inc/class-post-types.php:381
-msgid "All Tour Guide"
+msgid "All Travel Guide"
 msgstr ""
 
 #: inc/class-post-types.php:382
-msgid "Search Tour Guide"
+msgid "Search Travel Guide"
 msgstr ""
 
 #: inc/class-post-types.php:383
-msgid "Parent Tour Guide:"
+msgid "Parent Travel Guide:"
 msgstr ""
 
 #: inc/class-post-types.php:384
@@ -8492,7 +8492,7 @@ msgid "Settings"
 msgstr ""
 
 #: inc/helpers.php:3240 inc/helpers.php:3241
-msgid "Tour Guide"
+msgid "Travel Guide"
 msgstr ""
 
 #: inc/helpers.php:3475 inc/helpers.php:4231
@@ -9509,22 +9509,22 @@ msgstr ""
 
 #: inc/class-post-types.php:372
 msgctxt "Post type general name"
-msgid "Tour Guide"
+msgid "Travel Guide"
 msgstr ""
 
 #: inc/class-post-types.php:373
 msgctxt "Post type singular name"
-msgid "Tour Guide"
+msgid "Travel Guide"
 msgstr ""
 
 #: inc/class-post-types.php:374
 msgctxt "Admin Menu text"
-msgid "Tour Guide"
+msgid "Travel Guide"
 msgstr ""
 
 #: inc/class-post-types.php:375
 msgctxt "Add New on Toolbar"
-msgid "Tour Guide"
+msgid "Travel Guide"
 msgstr ""
 
 #: inc/class-taxonomies.php:53
