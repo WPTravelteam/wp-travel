@@ -4,15 +4,15 @@ import apiFetch from '@wordpress/api-fetch';
 const DEFAULT_STATE = () => {
     let initState = {
         // Additional states
-        has_state_changes:false,
-        is_sending_request:true
+        has_state_changes: false,
+        is_sending_request: true,
+        previous_state: null
     };
 
     return initState;
 }
 
 const actions = {
-    
     updateStateChange(isChanged) {
         return {
             type: 'UPDATE_STATE_CHANGE',
@@ -31,8 +31,7 @@ const actions = {
             requesting
         };
     },
-
-    updateSettings(data){
+    updateSettings(data) {
         return {
             type: 'UPDATE_SETTINGS',
             data,
@@ -62,51 +61,47 @@ const actions = {
             settings,
         };
     }
-    
-    
 };
 
 registerStore('WPTravel/Admin', {
     reducer(state = DEFAULT_STATE(), action) {
         switch (action.type) {
             case 'UPDATE_REQUEST_SENDING':
-                return {...state,is_sending_request:action.requesting};
+                return { ...state, is_sending_request: action.requesting };
             case 'UPDATE_STATE_CHANGE':
-                return {...state,has_state_changes:action.isChanged, show_updated_message:true};
+                console.log("STATE CHANGE::::::", state)
+                return { ...state, has_state_changes: action.isChanged, show_updated_message: true };
             case 'DATA_UPDATED':
-                return {...state, show_updated_message:action.isUpdated};
-                
+                return { ...state, show_updated_message: action.isUpdated };
             case 'SET_SETTINGS':
+                console.log(action.settings)
                 return {
                     ...state,
+                    previous_state: action.settings,
                     ...action.settings,
-                    is_sending_request:false
+                    is_sending_request: false
                 };
             case 'UPDATE_SETTINGS':
-                return {...state,
+                return {
+                    ...state,
                     ...action.data,
-                    has_state_changes:true
+                    has_state_changes: true
                 };
             case 'ADD_NEW_BANK_DETAIL':
-                let addNewBank = [...state.wp_travel_bank_deposits,action.bankData];
-                
+                let addNewBank = [...state.wp_travel_bank_deposits, action.bankData];
                 return {
                     ...state,
                     wp_travel_bank_deposits: addNewBank,
-                    has_state_changes:true
+                    has_state_changes: true
                 };
             case 'ADD_NEW_FACT':
-                let addNewData = [...state.wp_travel_trip_facts_settings,action.newData];
-                
+                let addNewData = [...state.wp_travel_trip_facts_settings, action.newData];
                 return {
                     ...state,
                     wp_travel_trip_facts_settings: addNewData,
-                    has_state_changes:true
+                    has_state_changes: true
                 };
-                
-                
         }
-
         return state;
     },
 
@@ -114,28 +109,27 @@ registerStore('WPTravel/Admin', {
 
     selectors: { // store selector
         getAllStore(store) {
-            return {...store};
+            return { ...store };
         },
         getSettings(state) {
-            return {...state.settings}
+            return { ...state.settings }
         },
     },
 
     controls: {
-        FETCH_FROM_API( action ) {
-            return apiFetch( { url: action.url } );
+        FETCH_FROM_API(action) {
+            return apiFetch({ url: action.url });
         },
     },
- 
+
     resolvers: {
         * getSettings() {
             const url = `${ajaxurl}?action=wptravel_get_settings&_nonce=${_wp_travel._nonce}`;
-            
             yield actions.updateRequestSending(true);
-            const response = yield actions.getSettingsFromAPI( url );
-            if(false !== response.success && "WP_TRAVEL_SETTINGS" === response.data.code ) {
+            const response = yield actions.getSettingsFromAPI(url);
+            if (false !== response.success && "WP_TRAVEL_SETTINGS" === response.data.code) {
                 yield actions.updateRequestSending(false);
-                return actions.setSettings( response.data.settings );
+                return actions.setSettings(response.data.settings);
             }
         },
     },
