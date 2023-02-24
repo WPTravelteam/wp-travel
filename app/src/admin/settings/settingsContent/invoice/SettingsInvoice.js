@@ -1,4 +1,4 @@
-import { applyFilters } from '@wordpress/hooks';
+import { applyFilters, addFilter } from '@wordpress/hooks';
 import { useSelect } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
 
@@ -27,3 +27,21 @@ export default () => {
         </>
     )
 }
+
+// Invoice Notice.
+addFilter('wp_travel_settings_tab_invoice_fields', 'WPTravel/Settings/Invoice/Notice', (content, allData) => {
+    content = [
+        <>
+            <Notice isDismissible={false} status="informational">
+                <strong>{__('Need invoice options ?', 'wp-travel')}</strong>
+                <br />
+                {__('By upgrading to Pro, you can get invoice options and more !', 'wp-travel')}
+                <br />
+                <br />
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
+            </Notice><br />
+        </>,
+        ...content,
+    ]
+    return content
+});

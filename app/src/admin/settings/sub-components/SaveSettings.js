@@ -1,4 +1,5 @@
 import { useSelect, dispatch } from '@wordpress/data';
+import { useRef, useState, useEffect, useMemo } from '@wordpress/element'
 import { PanelRow, Button, Snackbar } from '@wordpress/components';
 import apiFetch from '@wordpress/api-fetch';
 
@@ -29,19 +30,52 @@ const SaveSettings = (props) => {
         sysInfoUrl = adminUrl + sysInfoUrl;
     }
 
+    const panelRef = useRef();
+
+    const [isSaveChangeActive, setSaveChangesActive] = useState(false)
+    const [isSticky, setIsSticky] = useState(false)
+
+    useEffect(() => {
+        window.addEventListener('click', checkViewport)
+        window.addEventListener('scroll', checkViewport)
+
+        return () => {
+            window.addEventListener('click', checkViewport)
+            window.addEventListener('scroll', checkViewport)
+        }
+    }, [])
+
+
+    const checkViewport = () => {
+        let SaveSettingsBottom = panelRef.current.getBoundingClientRect().bottom
+        console.log("Sticky : ", SaveSettingsBottom >= window.innerHeight)
+        SaveSettingsBottom >= window.innerHeight
+            ? setIsSticky(true)
+            :setIsSticky(false)
+        
+            props.settingsRef.current.getBoundingClientRect().bottom + (panelRef.current.getBoundingClientRect().bottom - panelRef.current.getBoundingClientRect().top) > window.innerHeight
+                ? setIsSticky(true)
+                : setIsSticky(false)
+
+        console.log("Settings BOTTOM : ", props.settingsRef.current.getBoundingClientRect().bottom)
+        console.log("SIZE OF SAVE SETTINGS : ", panelRef.current.getBoundingClientRect().bottom - panelRef.current.getBoundingClientRect().top)
+        console.log("TOTAL : ", props.settingsRef.current.getBoundingClientRect().bottom + panelRef.current.getBoundingClientRect().bottom - panelRef.current.getBoundingClientRect().top)
+    }
+
     return <>
         {'top' == props.position &&
             <div className="wp-travel-setting-system-info">
                 <a href={sysInfoUrl} title={__i18n.view_system_information} ><span className="dashicons dashicons-info"></span>{__i18n.system_information}</a>
             </div>
         }
-        <PanelRow className={`wp-travel-save-changes ${has_state_changes && "is-active"}`}>
+        <PanelRow ref={panelRef} className={`wp-travel-save-changes ${has_state_changes ? "is-active" : ""} ${isSticky ? "is-sticky" : "asdasd"} `}>
             <div>
                 {has_state_changes && <div className="wp-travel-save-notice"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>{__('Unsaved changes', 'wp-travel')}</div>}
                 {show_updated_message &&
                     <div>
                         <p className="text-success"><strong>{__('Settings Saved', 'wp-travel')}</strong></p>
-                    </div>}
+                    </div>
+                }
             </div>
             <Button isPrimary onClick={() => {
                 updateRequestSending(true);

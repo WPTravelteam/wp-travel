@@ -46,7 +46,6 @@ import SettingsLicense from "./settingsContent/license/SettingsLicense";
 import SearchButton from "./helpers/search-component/SearchButton";
 import SettingsAdvancedGallery from "./settingsContent/misc/SettingsAdvancedGallery";
 import SettingsReCaptchaV2 from "./settingsContent/misc/SettingsReCaptchaV2";
-import SettingsPWA from "./settingsContent/advanced/SettingsPWA";
 
 const WPTravelSettings = () => {
     const settingsData = useSelect((select) => {
@@ -193,12 +192,6 @@ const WPTravelSettings = () => {
                 content: SettingsModules,
             },
             {
-                name: "pwa",
-                title: __("PWA", "wp-travel"),
-                className: "tab-advanced",
-                content: SettingsPWA,
-            },
-            {
                 name: "debug",
                 title: __("Debug", "wp-travel"),
                 className: "tab-advanced",
@@ -212,10 +205,6 @@ const WPTravelSettings = () => {
 
     const handleTabClick = (tab) => {
         setActiveTab(tab);
-        if (window.innerWidth < 768) {
-            setIsMobileNavOpen(false)
-            document.body.style.overflow = "unset"
-        }
     };
 
     const selectOptions = [
@@ -252,7 +241,6 @@ const WPTravelSettings = () => {
 
     const myRef = useRef();
     const stickyRef = useRef();
-    const settingsRef = useRef();
 
     useEffect(() => {
         window.addEventListener("scroll", handleScroll);
@@ -265,6 +253,7 @@ const WPTravelSettings = () => {
     const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
     const handleScroll = () => {
+        console.log(window.innerWidth)
         window.innerWidth < 768 ?
             window.scrollY >= stickyRef.current.getBoundingClientRect().top + 30
                 ? setIsSticky(true)
@@ -276,39 +265,36 @@ const WPTravelSettings = () => {
     const handleMenuOpen = () => {
         setIsMobileNavOpen(true)
         document.body.style.overflow = "hidden"
-    }
+        if (window.innerWidth < 768) {
+            createPortal(
+                <Menu
+                    ref={myRef}
+                    className={`${window.innerWidth < 768 ? "wp-travel-active" : ""}`}
+                    tabs={tabs}
+                    handleTabClick={handleTabClick}
+                    isMobileNavOpen={isMobileNavOpen}
+                    setNav={setIsMobileNavOpen}
+                />,
+                document.querySelector('body'))
+        }
 
-    const handleMenuClose = () => {
-        setIsMobileNavOpen(false)
-        document.body.style.overflow = "unset"
     }
 
     return (
         <>
             <div id="wp-travel-mobile-navbar" className={isSticky ? "wp-travel-nav-sticky" : "wp-travel-nav"}>
-                <button className="wp-travel-nav-menu-button" onClick={handleMenuOpen}><i class="fa fa-bars" aria-hidden="true"></i></button>
-                {isMobileNavOpen && window.innerWidth < 768 && createPortal(
-                    <Menu
-                        ref={myRef}
-                        className={`${window.innerWidth < 768 ? "wp-travel-active" : ""}`}
-                        tabs={tabs}
-                        handleTabClick={handleTabClick}
-                        isMobileNavOpen={isMobileNavOpen}
-                        closeMenu={handleMenuClose}
-                        activeTab={activeTab}
-                    />,
-                    document.getElementById('wpwrap')
-                )}
+                <button className="wp-travel-nav-menu-button" onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}><i class="fa fa-bars" aria-hidden="true"></i></button>
+                {isMobileNavOpen && handleMenuOpen}
             </div>
             <div className={wrapperClasses}>
                 <div ref={stickyRef} className="wp-travel-main-container">
                     <div className="wp-travel-settings-container">
                         {/* Side Menu */}
-                        <Menu ref={myRef} tabs={tabs} handleTabClick={handleTabClick} activeTab={activeTab} />
+                        <Menu ref={myRef} tabs={tabs} handleTabClick={handleTabClick} />
 
                         {/* Settings Section */}
                         <div className="wp-travel-settings-section-wrapper">
-                            <div ref={settingsRef} className="wp-travel-settings-section">
+                            <div className="wp-travel-settings-section">
                                 {/* Render tab contents from the tabs object */}
                                 {tabs.map((tab) => (
                                     <ErrorBoundary>
@@ -317,9 +303,7 @@ const WPTravelSettings = () => {
                                             isValidElement(<tab.content />) && <tab.content />}
                                     </ErrorBoundary>
                                 ))}
-                            </div>
-                            <div id="wp-travel-save-changes-container">
-                                <SaveSettings position="bottom" settingsRef={settingsRef} />
+                                <SaveSettings position="bottom" />
                             </div>
                         </div>
                     </div>
@@ -328,6 +312,66 @@ const WPTravelSettings = () => {
         </>
     );
 };
+
+// const WPTravelNetworkSettings = () => {
+//     const settingsData = useSelect((select) => {
+//         return select("WPTravel/Admin").getSettings();
+//     }, []);
+
+//     const allData = useSelect((select) => {
+//         return select("WPTravel/Admin").getAllStore();
+//     }, []);
+
+//     const { options } = allData;
+
+//     let wrapperClasses = "wp-travel-block-tabs-wrapper wp-travel-trip-settings";
+//     wrapperClasses = allData.is_sending_request
+//         ? wrapperClasses + " wp-travel-sending-request"
+//         : wrapperClasses;
+
+//     // Add filter to tabs.
+//     let tabs = applyFilters(
+//         "wp_travel_network_settings_tabs",
+//         [
+//             {
+//                 name: "license",
+//                 title: __("License", "wp-travel"),
+//                 className: "tab-license",
+//                 content: SettingsLicense,
+//             },
+//         ],
+//         allData
+//     );
+//     return (
+//         <div className={wrapperClasses}>
+//             {allData.is_sending_request && <Spinner />}
+//             <SaveSettings position="top" />
+//             <TabPanel
+//                 className="wp-travel-block-tabs"
+//                 activeClass="active-tab"
+//                 onSelect={() => false}
+//                 tabs={tabs}
+//             >
+//                 {(tab) => (
+//                     <ErrorBoundary>
+//                         {tab.content && isValidElement(<tab.content />) ? (
+//                             <tab.content />
+//                         ) : (
+//                             ""
+//                         )}{" "}
+//                         {/* Need to remove this latter. add all content with filter instead */}
+//                         {applyFilters(
+//                             `wptravel_settings_tab_content_${tab.name.replaceAll("-", "_")}`,
+//                             [],
+//                             allData
+//                         )}
+//                     </ErrorBoundary>
+//                 )}
+//             </TabPanel>
+//             <SaveSettings position="bottom" />
+//         </div>
+//     );
+// };
 
 // Filters
 
@@ -461,3 +505,16 @@ domReady(function () {
         );
     }
 });
+
+// domReady(function () {
+//     if (
+//         "undefined" !==
+//         typeof document.getElementById("wp-travel-network-settings-block") &&
+//         null !== document.getElementById("wp-travel-network-settings-block")
+//     ) {
+//         render(
+//             <WPTravelNetworkSettings />,
+//             document.getElementById("wp-travel-network-settings-block")
+//         );
+//     }
+// });

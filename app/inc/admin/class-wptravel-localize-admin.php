@@ -166,6 +166,7 @@ class WpTravel_Localize_Admin {
 			'_nonce'             => wp_create_nonce( 'wp_travel_nonce' ),
 			'admin_url'          => admin_url(),
 			'plugin_url'         => plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ),
+			'is_pro_enable'      => class_exists( 'WP_Travel_Pro' ) ? 'yes' : 'no',
 			'plugin_name'        => 'WP Travel',
 			'dev_mode'           => wptravel_dev_mode(),
 			'theme_datas'        => $theme_datas,

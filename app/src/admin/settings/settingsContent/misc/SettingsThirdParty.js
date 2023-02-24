@@ -1,4 +1,5 @@
-import { applyFilters } from '@wordpress/hooks';
+import { applyFilters, addFilter } from '@wordpress/hooks';
+import { Notice } from "@wordpress/components";
 import { useSelect } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
 
@@ -35,3 +36,91 @@ export default () => {
         </>
     )
 }
+
+// Currency Exchange Notice
+addFilter('wp_travel_settings_tab_misc_currency_exchange', 'WPTravel/Settings/Misc/Notices', (content, allData) => {
+    let miscNocice = {
+        currencyExchange:
+            <>
+                <h3>{__('Currency Exchange Rate API', 'wp-travel')}</h3>
+                <Notice isDismissible={false} status="informational">
+                    <strong>{__('Display current exchange rate in your site.', 'wp-travel')}</strong>
+                    <br />
+                    {__('You can display current exchange rate for different currency in pages or sidebar of your site. Checkout out', 'wp-travel')}
+                    <br />
+                    <br />
+                    <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('WP Travel Pro', 'wp-travel')}</a>
+                </Notice><br />
+            </>,
+    }
+    miscNocice = applyFilters('wp_travel_misc_addons_notices', miscNocice, allData);
+    if (Object.keys(miscNocice).length > 0) {
+        let notices = Object.keys(miscNocice).map((index) => {
+            return miscNocice[index]
+        })
+        content = [
+            notices
+            ,
+            ...content,
+        ]
+    }
+    return content
+});
+
+// Mailchimp Notice
+addFilter('wp_travel_settings_tab_misc_mailchimp', 'WPTravel/Settings/Misc/Notices', (content, allData) => {
+    let mailchimpNotice = {
+        mailchimp: <>
+            <h3>{__('Mailchimp Settings', 'wp-travel')}</h3>
+            <Notice isDismissible={false} status="informational">
+                <strong>{__('Using Mailchimp for email marketing?', 'wp-travel')}</strong>
+                <br />
+                {__('You can import customer email from booking and inquiry to Mailchimp. That help you grow your business.', 'wp-travel')}
+                <br />
+                <br />
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('WP Travel Pro', 'wp-travel')}</a>
+            </Notice><br />
+        </>,
+    }
+    mailchimpNotice = applyFilters('wp_travel_misc_addons_notices', mailchimpNotice, allData);
+    if (Object.keys(mailchimpNotice).length > 0) {
+        let notices = Object.keys(mailchimpNotice).map((index) => {
+            return mailchimpNotice[index]
+        })
+        content = [
+            notices
+            ,
+            ...content,
+        ]
+    }
+    return content
+});
+
+// Mailchimp Notice
+addFilter('wp_travel_settings_tab_misc_mailchimp', 'WPTravel/Settings/Misc/Notices', (content, allData) => {
+    let wishlistsNotice = {
+        wishlists: <>
+            <h3>{__('Wishlists Options', 'wp-travel')}</h3>
+            <Notice isDismissible={false} status="informational">
+                <strong>{__('Allow customers to save trip for future.', 'wp-travel')}</strong>
+                <br />
+                {__('Whishlists helps user to save trip they like for future, so that they can book them later. ', 'wp-travel')}
+                <br />
+                <br />
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('WP Travel Pro', 'wp-travel')}</a>
+            </Notice><br />
+        </>,
+    }
+    wishlistsNotice = applyFilters('wp_travel_misc_addons_notices', wishlistsNotice, allData);
+    if (Object.keys(wishlistsNotice).length > 0) {
+        let notices = Object.keys(wishlistsNotice).map((index) => {
+            return wishlistsNotice[index]
+        })
+        content = [
+            notices
+            ,
+            ...content,
+        ]
+    }
+    return content
+});

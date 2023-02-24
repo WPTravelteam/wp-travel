@@ -21,6 +21,7 @@ export default () => {
         expired_trip_set_to,
         trip_pricing_options_layout,
         trip_date_listing,
+        disable_admin_review,
         options
     } = allData;
 
@@ -198,6 +199,21 @@ export default () => {
                             </div>
                         </PanelRow>
                     }
+                    <PanelRow>
+                        <label>{__('Disable Star Rating For Admin', 'wp-travel')}</label>
+                        <div className="wp-travel-field-value">
+                            <ToggleControl
+                                checked={disable_admin_review == 'yes'}
+                                onChange={() => {
+                                    updateSettings({
+                                        ...allData,
+                                        disable_admin_review: 'yes' == disable_admin_review ? 'no' : 'yes'
+                                    })
+                                }}
+                            />
+                            <p className="description">{__('Enable to not allow star rating to admin', 'wp-travel')}</p>
+                        </div>
+                    </PanelRow>
 
                     {applyFilters('wp_travel_tab_content_after_trips', [])}
                 </ErrorBoundary>
