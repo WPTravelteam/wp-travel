@@ -46,6 +46,9 @@ const App = () => {
     }
     let tripnames = tripNames.map(tripSuggestion => { return { label: tripSuggestion.title, value: tripSuggestion.id } }); 
     const { updateEnquiry } = dispatch('WPTravel/Enquiry');
+    const __i18n = {
+        ..._wp_travel_admin.strings,
+    };
     return (
         <div>
 
@@ -102,7 +105,7 @@ const App = () => {
                 </div>
             </PanelRow>
             <PanelRow>
-                <label><strong>{__('*Enquiry Message', 'wp-travel')}</strong></label>
+                <label><strong>{ typeof __i18n.enquiry != 'undefined' && __(`*${__i18n.enquiry} Message`, 'wp-travel')}</strong></label>
                 <div >
                     <TextareaControl value={wp_travel_enquiry_query} required rows ="6"
                         onChange={
