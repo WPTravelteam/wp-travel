@@ -8,7 +8,7 @@ import {
 } from "@wordpress/element"; // [ useeffect : used on onload, component update ]
 import { TabPanel, Spinner, Notice } from "@wordpress/components";
 import { useSelect, select, dispatch } from "@wordpress/data"; // redux [and also for hook / filter] | dispatch : send data to store
-import { applyFilters, addFilter } from "@wordpress/hooks";
+import { applyFilters, addFilter, hasFilter } from "@wordpress/hooks";
 import { sprintf, _n, __ } from "@wordpress/i18n";
 import domReady from "@wordpress/dom-ready";
 import ErrorBoundary from "../../ErrorBoundry/ErrorBoundry";
@@ -21,11 +21,11 @@ import SaveSettings from "./sub-components/SaveSettings";
 // Menu
 import Menu from './menu'
 
-import AllComponent from "./settingsContent/AllComponent";
 import SettingsCurrency from "./settingsContent/general/SettingsCurrency";
 import SettingsMaps from "./settingsContent/general/SettingsMaps";
 import SettingsPages from "./settingsContent/general/SettingsPages";
 import SettingsArchivePageTitle from "./settingsContent/general/SettingsArchivePageTitle";
+import SettingsLicense from "./settingsContent/license/SettingsLicense";
 import SettingsFacts from "./settingsContent/trips/SettingsFacts";
 import SettingsFAQs from "./settingsContent/trips/SettingsFAQs";
 import SettingsFieldEditor from "./settingsContent/trips/SettingsFieldEditor";
@@ -38,15 +38,14 @@ import SettingsCheckout from "./settingsContent/checkout/SettingsCheckout";
 import SettingsPayment from "./settingsContent/payment/SettingsPayment";
 import SettingsInvoice from "./settingsContent/invoice/SettingsInvoice";
 import SettingsMisc from "./settingsContent/misc/SettingsMisc";
-import SettingsThirdParty from "./settingsContent/misc/SettingsThirdParty";
-import SettingsModules from "./settingsContent/advanced/SettingsModules";
-import SettingsDebug from "./settingsContent/advanced/SettingsDebug";
-import SettingsLicense from "./settingsContent/license/SettingsLicense";
-
-import SearchButton from "./helpers/search-component/SearchButton";
 import SettingsAdvancedGallery from "./settingsContent/misc/SettingsAdvancedGallery";
 import SettingsReCaptchaV2 from "./settingsContent/misc/SettingsReCaptchaV2";
+import SettingsThirdParty from "./settingsContent/misc/SettingsThirdParty";
+import SettingsModules from "./settingsContent/advanced/SettingsModules";
 import SettingsPWA from "./settingsContent/advanced/SettingsPWA";
+import SettingsDebug from "./settingsContent/advanced/SettingsDebug";
+
+import Transition from "./UI/Transition";
 
 const WPTravelSettings = () => {
     const settingsData = useSelect((select) => {
@@ -59,14 +58,42 @@ const WPTravelSettings = () => {
         return select("WPTravel/Admin").getAllStore();
     }, []);
 
-    // console.log(allData);
-
     const { options } = allData;
 
     let wrapperClasses = "wp-travel-block-tabs-wrapper wp-travel-trip-settings";
     wrapperClasses = allData.is_sending_request
         ? wrapperClasses + " wp-travel-sending-request"
         : wrapperClasses;
+
+    let blockTab = {}
+
+    if (_wp_travel.is_blocks_enable) {
+
+        const SettingBlocks = () => {
+            return (
+                <>
+                    <div className="wp-travel-section-header">
+                        <h2 className="wp-travel-section-header-title">
+                            {__("Block Settings", "wp-travel")}
+                        </h2>
+                        <p className="wp-travel-section-header-description">
+                            {__("WP Travel Block settings according to your choice.", "wp-travel")}
+                        </p>
+                    </div>
+                    <div className='wp-travel-section-content'>
+                        {applyFilters('wptravel_settings_tab_content_block_settings', [], allData)}
+                    </div>
+                </>
+            )
+        }
+
+        blockTab = {
+            name: "block-settings",
+            title: __("Block Setting", "wp-travel"),
+            className: "tab-advanced",
+            content: SettingBlocks,
+        }
+    }
 
     // Add filter to tabs.
     let tabs = applyFilters(
@@ -204,11 +231,12 @@ const WPTravelSettings = () => {
                 className: "tab-advanced",
                 content: SettingsDebug,
             },
+            blockTab
         ],
         allData
     );
 
-    const [activeTab, setActiveTab] = useState("currency");
+    const [activeTab, setActiveTab] = useState("pages");
 
     const handleTabClick = (tab) => {
         setActiveTab(tab);
@@ -217,36 +245,6 @@ const WPTravelSettings = () => {
             document.body.style.overflow = "unset"
         }
     };
-
-    const selectOptions = [
-        {
-            label: 'Currency',
-            options: [
-                // { value: 'currency', label: 'Currency', tab: 'currency' },
-                { value: 'decimal-separator', label: 'Decimal separator', tab: 'currency', tabName: 'Currency' },
-                { value: 'currency-position', label: 'Currency Position', tab: 'currency', tabName: 'Currency Position' },
-            ]
-        },
-        {
-            label: 'Maps',
-            options: [
-                { value: 'select-map', label: 'Select Map', tab: 'maps', tabName: 'Select Map' },
-                { value: 'api-key', label: 'Api Key', tab: 'maps', tabName: 'API Key' },
-            ]
-        },
-        {
-            label: 'Trips Settings',
-            options: [
-                { value: 'enable-expired-trip', label: 'Enable Expired Trip Options', tab: 'trips-settings' },
-            ]
-        },
-        // { value: 'decimal-separator', label: 'Decimal separator', tab: 'currency' },
-        // { value: 'currency-position', label: 'Currency Position', tab: 'currency' },
-        // { value: 'select-map', label: 'Select Map', tab: 'maps' },
-        // { value: 'api-key', label: 'Api Key', tab: 'maps' },
-    ];
-
-    const [selectedOption, setSelectedOption] = useState({ value: 'currency', label: 'Currency' });
 
     const [isSticky, setIsSticky] = useState(false);
 
@@ -285,8 +283,10 @@ const WPTravelSettings = () => {
 
     return (
         <>
+            {allData.is_sending_request && <div className="wp-travel-spinner-overlay"><Spinner /></div>}
             <div id="wp-travel-mobile-navbar" className={isSticky ? "wp-travel-nav-sticky" : "wp-travel-nav"}>
                 <button className="wp-travel-nav-menu-button" onClick={handleMenuOpen}><i class="fa fa-bars" aria-hidden="true"></i></button>
+                {/* Mobile Menu */}
                 {isMobileNavOpen && window.innerWidth < 768 && createPortal(
                     <Menu
                         ref={myRef}
@@ -314,7 +314,11 @@ const WPTravelSettings = () => {
                                     <ErrorBoundary>
                                         {activeTab == tab.name &&
                                             tab.content &&
-                                            isValidElement(<tab.content />) && <tab.content />}
+                                            isValidElement(<tab.content />) &&
+                                            <Transition duration={300} translateX={0} translateY={25}>
+                                                <tab.content />
+                                            </Transition>
+                                        }
                                     </ErrorBoundary>
                                 ))}
                             </div>
@@ -346,19 +350,6 @@ addFilter('wp_travel_secondary_tabs', 'wp_travel', (content, allData) => {
     }
     return content
 });
-
-addFilter('wp_travel_settings_downloads_section_header', 'wp-travel', () => {
-    return (
-        <div className="wp-travel-section-header">
-            <h2 className="wp-travel-section-header-title">
-                {__("Downloads", "wp-travel")}
-            </h2>
-            <p className="wp-travel-section-header-description">
-                {__("More downloads settings according to your choice.", "wp-travel")}
-            </p>
-        </div>
-    )
-})
 
 addFilter('wp_travel_settings_after_maps_upsell', 'wp_travel', (content, allData) => {
     content = [
@@ -432,6 +423,7 @@ addFilter('wp_travel_tab_content_before_email', 'WPTravel/Settings/Email/Notice'
     ]
     return content
 });
+
 addFilter('wp_travel_custom_global_tabs', 'WPTravel/Settings/Tabs/Notice', (content, allData) => {
     content = [
         <>

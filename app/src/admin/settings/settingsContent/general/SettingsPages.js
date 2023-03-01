@@ -1,8 +1,9 @@
 import React from 'react'
-import { applyFilters } from '@wordpress/hooks';
+import { applyFilters, addFilter } from '@wordpress/hooks';
 import { useSelect, dispatch } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
 import { PanelRow } from '@wordpress/components';
+import Tooltip from '../../UI/Tooltip';
 
 import Select from './../../helpers/select-component/Select'
 
@@ -42,7 +43,16 @@ export default () => {
             </div>
             <div className='wp-travel-section-content'>
                 <PanelRow>
-                    <label>{__('Checkout Page', 'wp-travel')}</label>
+                    <label>
+                        {__('Checkout Page', 'wp-travel')}
+                        <Tooltip
+                            text={__('Choose the page to use as checkout page for booking which contents checkout page shortcode [wp_travel_checkout].', 'wp-travel')}
+                        >
+                            <span>
+                                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            </span>
+                        </Tooltip>
+                    </label>
                     <div className="wp-travel-field-value">
                         <div className="wp-travel-select-wrapper">
                             <Select
@@ -58,11 +68,31 @@ export default () => {
                                 }}
                             />
                         </div>
-                        <p className="description">{__('Choose the page to use as checkout page for booking which contents checkout page shortcode [wp_travel_checkout].', 'wp-travel')}</p>
+                        {/* <p className="description">
+                            <Tooltip
+                                text={__('Choose the page to use as checkout page for booking which contents checkout page shortcode [wp_travel_checkout].', 'wp-travel')}
+                            >
+                                <span>
+                                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                </span>
+                            </Tooltip>
+                        </p> */}
                     </div>
                 </PanelRow>
                 <PanelRow>
-                    <label>{__('Dashboard Page', 'wp-travel')}</label>
+                    <label>
+                        {__('Dashboard Page', 'wp-travel')}
+                        <Tooltip
+                            text={__(
+                                "Choose the page to use as dashboard page which contents dashboard page shortcode [wp_travel_user_account].",
+                                "wp-travel"
+                            )}
+                        >
+                            <span>
+                                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            </span>
+                        </Tooltip>
+                    </label>
                     <div className="wp-travel-field-value">
                         <div className="wp-travel-select-wrapper">
                             <Select
@@ -78,7 +108,18 @@ export default () => {
                                 }}
                             />
                         </div>
-                        <p className="description">{__('Choose the page to use as dashboard page which contents dashboard page shortcode [wp_travel_user_account].', 'wp-travel')}</p>
+                        {/* <p className="description">
+                            <Tooltip
+                                text={__(
+                                    "Choose the page to use as dashboard page which contents dashboard page shortcode [wp_travel_user_account].",
+                                    "wp-travel"
+                                )}
+                            >
+                                <span>
+                                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                </span>
+                            </Tooltip>
+                        </p> */}
                     </div>
                 </PanelRow>
                 {applyFilters('wp_travel_settings_after_general_fields', [])}
@@ -86,3 +127,16 @@ export default () => {
         </>
     )
 }
+
+// Custom Tooltip for Thank You Page
+addFilter('wp_travel_settings_after_pages_fields', 'wp_travel', () => {
+    return (
+        <Tooltip
+            text={__('Choose the page to use as thankyou page which contents thankyou page shortcode [wp_travel_thankyou].', 'wp-travel')}
+        >
+            <span>
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+            </span>
+        </Tooltip>
+    )
+})

@@ -1,5 +1,5 @@
 import { applyFilters, addFilter } from '@wordpress/hooks';
-
+import { Notice } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
 

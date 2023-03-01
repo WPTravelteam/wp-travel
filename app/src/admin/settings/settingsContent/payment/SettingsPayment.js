@@ -226,13 +226,15 @@ export default () => {
                                 </PanelRow>
                             }
                         </>
-                        : ''}
+                        : <></>}
                     {applyFilters('wp_travel_after_minimum_partial_payout', [], allData)}
 
 
-                    <h3>
-                        {__('Payment Gateways', 'wp-travel')}
-                        <label>
+                    <PanelRow>
+                        <h3>
+                            {__('Payment Gateways', 'wp-travel')}
+                        </h3>
+                        <label className="wp-travel-section-header-label">
                             <ToggleControl
                                 checked={enableAllGateway}
                                 onChange={(value) => {
@@ -261,7 +263,8 @@ export default () => {
                             />
                             <p className="description">{__('Enable/Disable All', 'wp-travel')}</p>
                         </label>
-                    </h3>
+                    </PanelRow>
+
                     {
                         <div className="wp-travel-block-section wp-travel-block-sortable">
                             <ReactSortable

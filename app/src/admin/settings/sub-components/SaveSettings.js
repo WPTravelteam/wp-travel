@@ -48,7 +48,6 @@ const SaveSettings = (props) => {
 
     const checkViewport = () => {
         let SaveSettingsBottom = panelRef.current.getBoundingClientRect().bottom
-        console.log("Sticky : ", SaveSettingsBottom >= window.innerHeight)
         SaveSettingsBottom >= window.innerHeight
             ? setIsSticky(true)
             :setIsSticky(false)
@@ -56,10 +55,6 @@ const SaveSettings = (props) => {
             props.settingsRef.current.getBoundingClientRect().bottom + (panelRef.current.getBoundingClientRect().bottom - panelRef.current.getBoundingClientRect().top) > window.innerHeight
                 ? setIsSticky(true)
                 : setIsSticky(false)
-
-        console.log("Settings BOTTOM : ", props.settingsRef.current.getBoundingClientRect().bottom)
-        console.log("SIZE OF SAVE SETTINGS : ", panelRef.current.getBoundingClientRect().bottom - panelRef.current.getBoundingClientRect().top)
-        console.log("TOTAL : ", props.settingsRef.current.getBoundingClientRect().bottom + panelRef.current.getBoundingClientRect().bottom - panelRef.current.getBoundingClientRect().top)
     }
 
     return <>

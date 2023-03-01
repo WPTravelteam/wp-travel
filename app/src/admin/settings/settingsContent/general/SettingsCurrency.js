@@ -2,6 +2,7 @@ import { useRef, forwardRef } from '@wordpress/element'
 import { PanelRow, ToggleControl, TextControl } from '@wordpress/components';
 import { _n, __ } from '@wordpress/i18n';
 import { useSelect, dispatch } from '@wordpress/data'; // redux [and also for hook / filter] | dispatch : send data to store
+import Tooltip from '../../UI/Tooltip';
 
 import Select from 'react-select'
 
@@ -80,7 +81,12 @@ export default forwardRef((props) => {
                     </div>
                 </PanelRow>
                 <PanelRow>
-                    <label>{__('Use Currency Name', 'wp-travel')}</label>
+                    <label>
+                        {__('Use Currency Name', 'wp-travel')}
+                        <Tooltip text={__('This option will display currency name instead of symbol in frontend. ( E.g USD instead of $. )', 'wp-travel')}>
+                            <span><i className='fa fa-info-circle'></i></span>
+                        </Tooltip>
+                    </label>
                     <div className="wp-travel-field-value">
                         <ToggleControl
                             checked={use_currency_name == 'yes'}
@@ -91,7 +97,8 @@ export default forwardRef((props) => {
                                 })
                             }}
                         />
-                        <p className="description">{__('This option will display currency name instead of symbol in frontend. ( E.g USD instead of $. )', 'wp-travel')}</p>
+                        <p className="description">
+                        </p>
                     </div>
                 </PanelRow>
                 <PanelRow>

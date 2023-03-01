@@ -1,14 +1,14 @@
 {
-            "name": "WP Travelll",
-            "short_name": "WPTVLasd",
-            "start_url": "http://wpmain.testue",
+            "name": "WP Travel",
+            "short_name": "WPTVL",
+            "start_url": "http://wpmain.test",
             "display": "standalone",
             "background_color": "#fdfdfd",
             "theme_color": "#db4938",
             "orientation": "portrait-primary",
             "icons": [
             {
-                "src": "http://wpmain.test/wp-content/uploads/2023/02/1.webp",
+                "src": "http://wpmain.test/wp-content/uploads/2023/02/logo1.png",
                 "type": "image/png", 
                 "sizes": "192x192"
             }

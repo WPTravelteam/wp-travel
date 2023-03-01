@@ -386,22 +386,24 @@ function wptravel_marketplace_page() {
  */
 function wptravel_meta_box_support() {
 	?>
-	<div id="wp_travel_support_block_id" class="postbox ">
-		<button type="button" class="handlediv" aria-expanded="true">
-			<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Support', 'wp-travel' ); ?></span>
-			<span class="toggle-indicator-acc" aria-hidden="true"></span>
-		</button>
-		<h2 class="hndle ui-sortable-handle">
-			<span><?php esc_html_e( 'Support', 'wp-travel' ); ?></span>
-		</h2>
-		<div class="inside">
+	<div class="wp_travel_support_block_wrapper">
+		<div id="wp_travel_support_block_id" class="postbox ">
+			<button type="button" class="handlediv" aria-expanded="true">
+				<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Support', 'wp-travel' ); ?></span>
+				<span class="toggle-indicator-acc" aria-hidden="true"></span>
+			</button>
+			<h2 class="hndle ui-sortable-handle">
+				<span><?php esc_html_e( 'Support', 'wp-travel' ); ?></span>
+			</h2>
+			<div class="inside">
 
-			<div class="thumbnail">
-				<img src="<?php echo esc_url( plugins_url( '/wp-travel/assets/images/support-image.png' ) ); ?>">
-					<p class="text-justify"><?php esc_html_e( 'Click Below for support.', 'wp-travel' ); ?> </p>
-					<p class="text-center"><a href="http://wptravel.io/support/" target="_blank" class="button button-primary"><?php esc_html_e( 'Get Support Here', 'wp-travel' ); ?></a></p>
+				<div class="thumbnail">
+					<img src="<?php echo esc_url( plugins_url( '/wp-travel/assets/images/support-image.png' ) ); ?>">
+						<p class="text-justify"><?php esc_html_e( 'Click Below for support.', 'wp-travel' ); ?> </p>
+						<p class="text-center"><a href="http://wptravel.io/support/" target="_blank" class="button button-primary"><?php esc_html_e( 'Get Support Here', 'wp-travel' ); ?></a></p>
+				</div>
+
 			</div>
-
 		</div>
 	</div>
 	<?php
@@ -416,22 +418,24 @@ function wptravel_meta_box_support() {
 function wptravel_meta_box_documentation() {
 
 	?>
-	<div id="wp_travel_doc_block_id" class="postbox ">
-		<button type="button" class="handlediv" aria-expanded="true">
-			<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Documentation', 'wp-travel' ); ?></span>
-			<span class="toggle-indicator" aria-hidden="true"></span>
-		</button>
-		<h2 class="hndle ui-sortable-handle">
-			<span><?php esc_html_e( 'Documentation', 'wp-travel' ); ?></span>
-		</h2>
-		<div class="inside">
+	<div class="wp_travel_support_block_wrapper">
+		<div id="wp_travel_doc_block_id" class="postbox ">
+			<button type="button" class="handlediv" aria-expanded="true">
+				<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Documentation', 'wp-travel' ); ?></span>
+				<span class="toggle-indicator" aria-hidden="true"></span>
+			</button>
+			<h2 class="hndle ui-sortable-handle">
+				<span><?php esc_html_e( 'Documentation', 'wp-travel' ); ?></span>
+			</h2>
+			<div class="inside">
 
-			<div class="thumbnail">
-				<img src="<?php echo esc_url( plugins_url( '/wp-travel/assets/images/docico.png' ) ); ?>">
-					<p class="text-justify"><?php esc_html_e( 'Click Below for our full Documentation about logo slider.', 'wp-travel' ); ?> </p>
-					<p class="text-center"><a href="http://wptravel.io/documentations/" target="_blank" class="button button-primary"><?php esc_html_e( 'Get Documentation Here', 'wp-travel' ); ?></a></p>
+				<div class="thumbnail">
+					<img src="<?php echo esc_url( plugins_url( '/wp-travel/assets/images/docico.png' ) ); ?>">
+						<p class="text-justify"><?php esc_html_e( 'Click Below for our full Documentation about logo slider.', 'wp-travel' ); ?> </p>
+						<p class="text-center"><a href="http://wptravel.io/documentations/" target="_blank" class="button button-primary"><?php esc_html_e( 'Get Documentation Here', 'wp-travel' ); ?></a></p>
+				</div>
+
 			</div>
-
 		</div>
 	</div>
 	<?php
@@ -459,36 +463,38 @@ function wptravel_meta_box_review() {
 		),
 	);
 	?>
-	<div id="wp_travel_review_block_id" class="postbox ">
-		<button type="button" class="handlediv" aria-expanded="true">
-			<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Reviews', 'wp-travel' ); ?></span>
-			<span class="toggle-indicator" aria-hidden="true"></span>
-		</button>
-		<h2 class="hndle ui-sortable-handle">
-			<span><?php esc_html_e( 'Reviews', 'wp-travel' ); ?></span>
-		</h2>
-		<div class="inside">
-			<?php
-			foreach ( $wp_travel_reviews as $wp_travel_review ) {
+	<div class="wp_travel_support_block_wrapper">
+		<div id="wp_travel_review_block_id" class="postbox ">
+			<button type="button" class="handlediv" aria-expanded="true">
+				<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Reviews', 'wp-travel' ); ?></span>
+				<span class="toggle-indicator" aria-hidden="true"></span>
+			</button>
+			<h2 class="hndle ui-sortable-handle">
+				<span><?php esc_html_e( 'Reviews', 'wp-travel' ); ?></span>
+			</h2>
+			<div class="inside">
+				<?php
+				foreach ( $wp_travel_reviews as $wp_travel_review ) {
+					?>
+						<div class="thumbnail">
+							<p class="text-center">
+								<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+								<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+								<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+								<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+								<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
+							</p>
+							<h4><?php echo esc_html( $wp_travel_review['title'] ); ?></h4>
+							<h5><?php echo esc_html( $wp_travel_review['description'] ); ?></h5>
+							<span class="by"><strong> <a href="https://profiles.wordpress.org/<?php echo esc_attr( $wp_travel_review['profile'] ); ?>" target="_blank"><?php echo esc_html( $wp_travel_review['profile'] ); ?></a></strong></span>
+						</div>
+						<?php
+				}
 				?>
-					<div class="thumbnail">
-						<p class="text-center">
-							<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-							<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-							<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-							<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-							<i class="dashicons dashicons-star-filled" aria-hidden="true"></i>
-						</p>
-						<h4><?php echo esc_html( $wp_travel_review['title'] ); ?></h4>
-						<h5><?php echo esc_html( $wp_travel_review['description'] ); ?></h5>
-						<span class="by"><strong> <a href="https://profiles.wordpress.org/<?php echo esc_attr( $wp_travel_review['profile'] ); ?>" target="_blank"><?php echo esc_html( $wp_travel_review['profile'] ); ?></a></strong></span>
-					</div>
-					<?php
-			}
-			?>
-			<div class="thumbnail last">
-				<h5><?php esc_html_e( '"Please fill free to leave us a review, if you found this plugin helpful."', 'wp-travel' ); ?></h5>
-				<p class="text-center"><a href="https://wordpress.org/plugins/wp-travel/#reviews" target="_blank" class="button button-primary"><?php esc_html_e( 'Leave a Review', 'wp-travel' ); ?></a></p>
+				<div class="thumbnail last">
+					<h5><?php esc_html_e( '"Please fill free to leave us a review, if you found this plugin helpful."', 'wp-travel' ); ?></h5>
+					<p class="text-center"><a href="https://wordpress.org/plugins/wp-travel/#reviews" target="_blank" class="button button-primary"><?php esc_html_e( 'Leave a Review', 'wp-travel' ); ?></a></p>
+				</div>
 			</div>
 		</div>
 	</div>

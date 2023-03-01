@@ -1,7 +1,8 @@
 import { forwardRef, useState } from '@wordpress/element'
 import { _n, __ } from "@wordpress/i18n";
+import Transition from '../../UI/Transition';
 
-export default forwardRef((props, ref) => {
+export default forwardRef((props, ref, children) => {
   const [modalOpened, setModalOpened] = useState(false);
 
   const modalToggle = () => {
@@ -24,19 +25,24 @@ export default forwardRef((props, ref) => {
           {__("Quick Search...", "wp-travel")}
         </span>
       </button>
-      {modalOpened && <Modal coverClass={coverClass} containerClass={containerClass} modalToggle={modalToggle} />}
+      {modalOpened &&
+        <Modal children={children} coverClass={coverClass} containerClass={containerClass} modalToggle={modalToggle} />
+      }
     </>
   )
 })
 
-const Modal = ({ modalToggle, containerClass, coverClass }) => {
+const Modal = ({ modalToggle, containerClass, coverClass, children }) => {
   return (
     <div className="wp-travel-modal">
-      <div className={containerClass}>
-        <div style={{color: 'black', zIndex: '1060'}}>
-          <i className="fa fa-close"></i>
+      <Transition duration={300} translateX={0} translateY={25} className="wp-travel-modal-wrapper">
+        <div className={containerClass}>
+          <div style={{ color: 'black', zIndex: '1060' }} onClick={modalToggle}>
+            <i style={{ color: "black" }} className="fa fa-times"></i>
+          </div>
+          {children}
         </div>
-      </div>
+      </Transition>
       <div className={coverClass} onClick={modalToggle}></div>
     </div>
   );

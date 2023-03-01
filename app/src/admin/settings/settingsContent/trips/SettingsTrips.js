@@ -2,8 +2,9 @@ import { applyFilters } from '@wordpress/hooks';
 import { useSelect, dispatch } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
 import { PanelRow, ToggleControl, RadioControl, SelectControl } from '@wordpress/components';
-import Select from 'react-select';
 import { VersionCompare } from '../../../fields/VersionCompare'
+import Select from 'react-select';
+import Tooltip from '../../UI/Tooltip';
 
 import ErrorBoundary from '../../../../ErrorBoundry/ErrorBoundry';
 
@@ -103,7 +104,12 @@ export default () => {
                     }
                     {/* {  _wp_travel.dev_mode && */}
                     <PanelRow>
-                        <label>{__('Trip date listing', 'wp-travel')}</label>
+                        <label>
+                            {__('Trip date listing', 'wp-travel')}
+                            <Tooltip text={__('List date while booking or display calendar with available dates. Note: Date option only works for fixed departure trips.', 'wp-travel')}>
+                                <span><i className='fa fa-info-circle'></i></span>
+                            </Tooltip>
+                        </label>
 
                         <div className="wp-travel-field-value">
                             <SelectControl
@@ -155,7 +161,7 @@ export default () => {
                                     }
                                 }
                             /> */}
-                            <p className="description">{__('List date while booking or display calendar with available dates. Note: Date option only works for fixed departure trips.', 'wp-travel')}</p>
+                            <p className="description"></p>
                         </div>
                     </PanelRow>
                     {/* } */}

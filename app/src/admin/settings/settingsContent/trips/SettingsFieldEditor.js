@@ -1,5 +1,5 @@
 import { applyFilters, addFilter } from '@wordpress/hooks';
-
+import { Notice } from '@wordpress/components';
 import { useSelect, select, dispatch, withSelect } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
 import { PanelRow, ToggleControl, RadioControl } from '@wordpress/components';
@@ -7,6 +7,7 @@ import Select from 'react-select'
 import { VersionCompare } from '../../../fields/VersionCompare'
 
 import ErrorBoundary from '../../../../ErrorBoundry/ErrorBoundry';
+import Tooltip from '../../UI/Tooltip';
 
 export default () => {
     const allData = useSelect((select) => {
@@ -28,7 +29,7 @@ export default () => {
                     {applyFilters('wp_travel_settings_tab_field_editor_fields', [], allData)}
                 </ErrorBoundary>
             </div>
-    </>);
+        </>);
 }
 
 // Field Editor Notice.
@@ -48,3 +49,17 @@ addFilter('wp_travel_settings_tab_field_editor_fields', 'WPTravel/Settings/Field
     ]
     return content
 });
+
+// Custom Tooltip for Field Editor
+addFilter('wp_travel_settings_tab_field_editor_fields_tooltip', 'wp_travel', () => {
+    return (
+        <Tooltip
+            text={(__('Use traveler info fields pattern.<br />', 'wp-travel'),
+                __('Enable to use field pattern (Like required or not required) set in "Traveler info fields" and disable to make multiple traveler fields unrequired except first one.', 'wp-travel'))}
+        >
+            <span>
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+            </span>
+        </Tooltip>
+    )
+})

@@ -2,8 +2,9 @@ import {useRef} from '@wordpress/element'
 import { applyFilters } from "@wordpress/hooks";
 import { useSelect, dispatch } from "@wordpress/data";
 import { _n, __ } from "@wordpress/i18n";
-import { PanelRow, TextControl, Tooltip, Icon } from "@wordpress/components";
+import { PanelRow, TextControl, Icon } from "@wordpress/components";
 import { info } from "@wordpress/icons";
+import Tooltip from '../../UI/Tooltip';
 
 import Select from "react-select";
 
@@ -102,8 +103,7 @@ export default () => {
                   )}
                 >
                   <span>
-                    {" "}
-                    <Icon icon={info} size="16" />
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
                   </span>
                 </Tooltip>
               </label>
