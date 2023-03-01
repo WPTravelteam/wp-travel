@@ -6,8 +6,8 @@
  * Version: 6.3.0
  * Author: WP Travel
  * Author URI: http://wptravel.io/
- * Requires at least: 5.4.1
- * Requires PHP: 5.6
+ * Requires at least: 6.0.0
+ * Requires PHP: 7.4
  * Tested up to: 6.1.1
  *
  * Text Domain: wp-travel

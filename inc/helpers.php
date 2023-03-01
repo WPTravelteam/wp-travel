@@ -3529,7 +3529,7 @@ function wptravel_frontend_tab_gallery( $gallery_ids ) {
 							?>
 							<li>
 								<a title="<?php echo esc_attr( wp_get_attachment_caption( $gallery_id ) ); ?>" href="<?php echo esc_url( wp_get_attachment_url( $gallery_id ) ); ?>">
-								<img alt="" src="<?php echo esc_attr( $gallery_image[0] ); ?>" />
+								<img alt="" src="<?php echo esc_attr( isset( $gallery_image[0] ) ? $gallery_image[0] : '' ); ?>" />
 								</a>
 							</li>
 							<?php

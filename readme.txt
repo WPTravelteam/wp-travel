@@ -2,9 +2,9 @@
 Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=WP%20Plugin
-Requires at least: 5.4.1
+Requires at least: 6.0.0
 Tested up to: 6.1.1
-Requires PHP: 5.6
+Requires PHP: 7.4
 Stable tag: 6.3.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -248,11 +248,24 @@ Before updating plugin please check ["our latest release notes"](#developers).
 == Changelog ==
 
 = 6.3.0. =
-Release Date: 13th February 2023
+Release Date: 1st March 2023
 
-Enhancement:
-* Added Hook to rename days to hours.
-* Added Hook to Rename spelling of "Enquiry" to "Inquiry on a single trip page.
+Tweaks:
+* Added hook 'wp_travel_strings'.
+* Renamed 'Tour Guide' as 'Travel Guide'.(PRO)
+
+Fixes:
+* Fixed heading Tag not working while adding Custom Field through the Field Editor.(PRO)
+* Fixed FAQ shortcode not working in case of Global FAQ.(PRO)
+* Fixed last date not selectable while enabling the recurring feature.(PRO)
+* Fixed displaying a small box instead of typing cursor under the paypal express checkout option in the admin dashboard.(PRO)
+* Fixed payment issue while selecting the VISA option while payment through PayPal express checkout.(PRO)
+* Fixed PayPal express button not displaying on the checkout page while choosing a black color in the backend.(PRO)
+* Fixed multiple traveler custom field information not sent in email while using email tag.(PRO)
+* Fixed empty Traveler field in incase of multiple checkout while multiple travelers is disable.(PRO)
+
+Style Fixes:
+* Fixed layout issue in itinerary download PDF.(PRO)
 
 = 6.2.0. =
 Release Date: 13th February 2023
