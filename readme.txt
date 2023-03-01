@@ -252,20 +252,6 @@ Release Date: 1st March 2023
 
 Tweaks:
 * Added hook 'wp_travel_strings'.
-* Renamed 'Tour Guide' as 'Travel Guide'.(PRO)
-
-Fixes:
-* Fixed heading Tag not working while adding Custom Field through the Field Editor.(PRO)
-* Fixed FAQ shortcode not working in case of Global FAQ.(PRO)
-* Fixed last date not selectable while enabling the recurring feature.(PRO)
-* Fixed displaying a small box instead of typing cursor under the paypal express checkout option in the admin dashboard.(PRO)
-* Fixed payment issue while selecting the VISA option while payment through PayPal express checkout.(PRO)
-* Fixed PayPal express button not displaying on the checkout page while choosing a black color in the backend.(PRO)
-* Fixed multiple traveler custom field information not sent in email while using email tag.(PRO)
-* Fixed empty Traveler field in incase of multiple checkout while multiple travelers is disable.(PRO)
-
-Style Fixes:
-* Fixed layout issue in itinerary download PDF.(PRO)
 
 = 6.2.0. =
 Release Date: 13th February 2023

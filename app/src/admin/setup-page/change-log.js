@@ -7,30 +7,11 @@ const changeLog = [
 				Tweaks:
 				<br/>
 				* Added hook 'wp_travel_strings'.
-				<br/>
-				* Renamed 'Tour Guide' as 'Travel Guide'.(PRO)
 				<br/><br/>
 				Fixes:
 				<br/>
-				* Fixed heading tag not working while adding custom field through the field editor.(PRO)
+				* For additional compatible bug fixes with WP Travel Pro please see this [changelog]( https://wptravel.io/changelog-wp-travel-pro/ ).
 				<br/>
-				* Fixed FAQ shortcode not working in case of Global FAQ.(PRO)
-				<br/>
-				* Fixed last date not selectable while enabling the recurring feature.(PRO)
-				<br/>
-				* Fixed displaying a small box instead of typing cursor under the PayPal express checkout option in the admin dashboard.(PRO)
-				<br/>
-				* Fixed payment issue while selecting the VISA option while payment through Paypal express checkout.(PRO)
-				<br/>
-				* Fixed PayPal express button not displaying on the checkout page while choosing a black color in the backend.(PRO)
-				<br/>
-				* Fixed multiple traveler custom field information not sent in email while using email tag.(PRO)
-				<br/>
-				* Fixed empty traveler field in incase of multiple checkout while multiple travelers is disable.(PRO)
-				<br/><br/>
-				Style Fixes:
-				<br/>
-				* Fixed layout issue in itinerary download pdf.(PRO)
 			</p>
 	},
 	{
