@@ -497,31 +497,31 @@ function wptravel_meta_box_review() {
 }
 
 /**
- * Upsell Message Callback for Tour Guide submenu. WP Travel > Tour Guide.
+ * Upsell Message Callback for Travel Guide submenu. WP Travel > Travel Guide.
  */
-function wptravel_get_tour_guide_upsell(){
+function wptravel_get_travel_guide_upsell(){
 	?>
-	<h2><?php echo esc_html( 'Tour Guide' ); ?></h2>
+	<h2><?php echo esc_html( 'Travel Guide' ); ?></h2>
 	<?php
-	if ( ! class_exists( 'WP_Travel_Tour_Guide_Core' ) ) :
+	if ( ! class_exists( 'WP_Travel_Travel_Guide_Core' ) ) :
 		$args = array(
-			'title'      => __( 'Need to add your tour guide ?', 'wp-travel' ),
-			'content'    => __( 'By upgrading to Pro, you can add your tour guide in all of your trips !', 'wp-travel' ),
+			'title'      => __( 'Need to add your Travel Guide ?', 'wp-travel' ),
+			'content'    => __( 'By upgrading to Pro, you can add your Travel Guide in all of your trips !', 'wp-travel' ),
 			'link'       => 'https://wptravel.io/wp-travel-pro/',
 			'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
 		);
 		wptravel_upsell_message( $args );
 		if ( class_exists( 'WP_Travel_Pro' ) ) {
-			$settings = wptravel_get_settings();
-			$modules  = $settings['modules'];
-			if ( isset( $modules['show_wp_travel_tour_guide'] ) ) {
-				$active = 'yes' === $modules['show_wp_travel_tour_guide'];
-				if ( ! $active ) {
-					?>
-					<p>Tour Guide is currently disabled please go to Modules Settings to enable it and reload the page.</p>
-					<?php
-				}
-			}
+		?>	
+		<div class="components-notice is-warning">
+			<div class="components-notice__content">
+				<p>Travel Guides is currently disabled please go to Modules Settings to enable it and reload the page. </p>
+				<div class="components-notice__actions">
+
+				</div>
+			</div>
+		</div>
+		<?php
 		}
 	endif;
 }

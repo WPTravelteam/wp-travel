@@ -15,13 +15,19 @@ function wptravel_enquiries_form_fields() {
 	// Default enquiry fields.
 	$enquiry_fields = WP_Travel_Default_Form_Fields::enquiry();
 	$enquiry_fields = apply_filters( 'wp_travel_enquiries_form_fields', $enquiry_fields );
+	$strings = array();
+	if ( class_exists( 'WpTravel_Helpers_Strings' ) ) {
+		$string = WpTravel_Helpers_Strings::get(); 
+	}
+	$strings = isset( $string['enquiry'] ) ? $string['enquiry'] : apply_filters( 'wp_travel_trip_enquiry_label', __( 'Enquiry', 'wp-travel' ) ) ;
+
 	if ( ! is_admin() ) {
 		$enquiry_fields['label_submit_enquiry'] = array(
 			'type'    => 'hidden',
 			'label'   => '',
 			'name'    => 'wp_travel_label_submit_enquiry',
 			'id'      => 'wp_travel_label_submit_enquiry',
-			'default' => __( 'SUBMIT ENQUIRY', 'wp-travel' ),
+			'default' => __( 'SUBMIT ', 'wp-travel' ) . $strings,
 		);
 		$enquiry_fields['label_processing']     = array(
 			'type'    => 'hidden',
@@ -63,6 +69,13 @@ function wptravel_get_enquiries_form( $trips_dropdown = false ) {
 	}
 
 	include_once WP_TRAVEL_ABSPATH . 'inc/framework/form/class.form.php';
+	$enquiry_fields = WP_Travel_Default_Form_Fields::enquiry();
+	$enquiry_fields = apply_filters( 'wp_travel_enquiries_form_fields', $enquiry_fields );
+	$strings = array();
+	if ( class_exists( 'WpTravel_Helpers_Strings' ) ) {
+		$string = WpTravel_Helpers_Strings::get(); 
+	}
+	$strings = isset( $string['enquiry'] ) ? $string['enquiry'] : apply_filters( 'wp_travel_trip_enquiry_label', __( 'Enquiry', 'wp-travel' ) ) ;
 
 	$form_options = array(
 		'id'            => 'wp-travel-enquiries',
@@ -72,7 +85,7 @@ function wptravel_get_enquiries_form( $trips_dropdown = false ) {
 			'name'  => 'wp_travel_enquiry_submit',
 			'class' => 'button wp-block-button__link',
 			'id'    => 'wp-travel-enquiry-submit',
-			'value' => apply_filters( 'wp_travel_enquiry_submit_button_label', __( 'SUBMIT ENQUIRY', 'wp-travel' ) ),
+			'value' => apply_filters( 'wp_travel_enquiry_submit_button_label', __( 'SUBMIT ', 'wp-travel' ) ) . $strings,
 		),
 		'nonce'         => array(
 			'action' => 'wp_travel_security_action',
@@ -147,8 +160,12 @@ function wptravel_add_enquiries_data_metaboxes() {
 	global $wp_travel_itinerary;
 
 	$wp_travel_post_id = get_post_meta( $post->ID, 'wp_travel_post_id', true );
-
-	add_meta_box( 'wp-travel-enquiries-info', __( 'Enquiry Details <span class="wp-travel-view-enquiries"><a href="edit.php?post_type=itinerary-enquiries&wp_travel_post_id=' . $wp_travel_post_id . '">View All ' . get_the_title( $wp_travel_post_id ) . ' enquiries</a></span>', 'wp-travel' ), 'wptravel_enquiries_info', 'itinerary-enquiries', 'normal', 'default' );
+	$string	= array();
+	if ( class_exists( 'WpTravel_Helpers_Strings' ) ) {
+		$string = WpTravel_Helpers_Strings::get();
+	}
+	$strings = isset( $string['enquiry'] ) ? $string['enquiry'] : __( 'Enquiry', 'wp-travel' );
+	add_meta_box( 'wp-travel-enquiries-info', __( $strings . ' Details <span class="wp-travel-view-enquiries"><a href="edit.php?post_type=itinerary-enquiries&wp_travel_post_id=' . $wp_travel_post_id . '">View All ' . get_the_title( $wp_travel_post_id ) . ' enquiries</a></span>', 'wp-travel' ), 'wptravel_enquiries_info', 'itinerary-enquiries', 'normal', 'default' );
 
 }
 
@@ -331,7 +348,11 @@ function wptravel_save_user_enquiry() {
 
 		return;
 	}
-
+	$string = array();
+	if ( class_exists( 'WpTravel_Helpers_Strings' ) ) {
+		$string = WpTravel_Helpers_Strings::get();
+	}
+	$strings = isset( $string['enquiry'] ) ? $string['enquiry'] : __( 'Enquiry', 'wp-travel' );
 	$enquiry_data = array();
 
 	$enquiry_data['post_id'] = isset( $formdata['wp_travel_enquiry_post_id'] ) ? $formdata['wp_travel_enquiry_post_id'] : '';
@@ -432,7 +453,7 @@ function wptravel_save_user_enquiry() {
 	// If we reach here, Send Success message !!
 	$trip_name = get_the_title( $post_id );
 	$success   = array(
-		'message' => __( 'Enquiry sent succesfully !!', 'wp-travel' ),
+		'message' => __( $strings . ' sent succesfully !!', 'wp-travel' ),
 	);
 
 	// Send Success Message.
@@ -456,9 +477,15 @@ function wptravel_enquiry_form_header() {
 	if ( is_blog() ) {
 		return;
 	}
+	$strings = array();
+	if ( class_exists( 'WpTravel_Helpers_Strings' ) ) {
+		$string = WpTravel_Helpers_Strings::get(); 
+	}
+	$strings = isset( $string['trip_enquiry'] ) ? $string['trip_enquiry'] : apply_filters( 'wp_travel_trip_enquiry_title', __( 'Trip Enquiry', 'wp-travel' ) ) ;
+	$enquiry = isset( $string['enquiry'] ) ? $string['enquiry'] : apply_filters( 'wp_travel_enquiry_labels', __( 'Enquiry', 'wp-travel' ) ) ;
 	?>
 		<div class="wp-travel-inquiry__form-header">
-			<h3><?php echo esc_html( sprintf( _x( 'Enquiry: %s', 'Trip Enquiry Form Title', 'wp-travel' ), get_the_title() ) ); ?></h3>
+			<h3><?php echo esc_html( sprintf( _x( $enquiry .': %s', $strings . ' Form Title', 'wp-travel' ), get_the_title() ) ); ?></h3>
 		</div>
 	<?php
 }

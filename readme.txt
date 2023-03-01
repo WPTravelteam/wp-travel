@@ -2,10 +2,10 @@
 Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=WP%20Plugin
-Requires at least: 5.4.1
+Requires at least: 6.0.0
 Tested up to: 6.1.1
-Requires PHP: 5.6
-Stable tag: 6.2.0
+Requires PHP: 7.4
+Stable tag: 6.3.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -53,7 +53,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * [WP Travel Import Export](https://wptravel.io/downloads/wp-travel-import-export/?utm_source=addons&utm_medium=import-export&utm_campaign=WP%20Plugin)
 * [WP Travel Advanced Gallery](https://wptravel.io/downloads/wp-travel-advanced-gallery/?utm_source=addons&utm_medium=advanced-gallery&utm_campaign=WP%20Plugin)
 * [WP Travel Blocks](https://wptravel.io/downloads/wp-travel-blocks/?utm_source=addons&utm_medium=blocks&utm_campaign=WP%20Plugin)
-* [WP Travel Tour Guide](https://wptravel.io/docs/wp-travel-user-documentation/tour-guide/)
+* [WP Travel Travel Guide](https://wptravel.io/docs/wp-travel-user-documentation/travel-guide/)
 
 = WP TRAVEL MAP MODULES =
 * [WP Travel Here Map](https://wptravel.io/downloads/wp-travel-here-map/?utm_source=addons&utm_medium=heremap&utm_campaign=WP%20Plugin)
@@ -150,7 +150,7 @@ View [Demo of Best Travel & Tour Plugin ](http://wptravel.io/demo/?utm_source=de
 * Customizable
 * Compatible Themes
 * Clone Trips
-* Tour Guide
+* Travel Guide
 * Multiple Travelers info
 [And much more ...](https://wptravel.io/features/?utm_source=features&utm_medium=morefeatures&utm_campaign=WP%20Plugin)
 
@@ -247,6 +247,12 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
 
+= 6.3.0. =
+Release Date: 1st March 2023
+
+Tweaks:
+* Added hook 'wp_travel_strings'.
+
 = 6.2.0. =
 Release Date: 13th February 2023
 
@@ -285,7 +291,7 @@ Fixes:
 Release Date:  4th January 2023
 
 Enhancements:
-* Provides compatibility for the Tour Guide feature in WP Travel Pro.
+* Provides compatibility for the Travel Guide feature in WP Travel Pro.
 * Provides compatibility for showing high prices on trips.
 
 Fixes:

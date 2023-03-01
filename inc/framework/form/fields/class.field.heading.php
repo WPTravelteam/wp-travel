@@ -8,7 +8,8 @@ class WP_Travel_FW_Field_Heading {
 	}
 
 	function render( $display = true ) {
-		$tag          = isset( $this->field['heading_tag'] ) ? esc_attr( $this->field['heading_tag'] ) : 'h1';
+		$attribute	  = isset( $this->field['attributes'] ) ? $this->field['attributes'] : array();
+		$tag          = isset( $attribute['heading_tag'] ) ? esc_attr( $attribute['heading_tag'] ) : 'h1';
 		$before_field = isset( $this->field['before_field'] ) ? $this->field['before_field'] : '';
 		$after_field  = isset( $this->field['after_field'] ) ? $this->field['after_field'] : '';
 		$class        = empty( $this->field['class'] ) ? $this->field['wrapper_class'] : $this->field['class'];
