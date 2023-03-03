@@ -15,9 +15,10 @@ $wp-travel-faded: rgb(121, 136, 158);
 $wp-travel-active: rgb(30, 41, 59);
 $wp-travel-active-background: rgb(235, 235, 235);
 $wp-travel-inactive: rgb(66 78 98);
-$wp-travel-ash: hsl(0, 0%, 80%);
+$wp-travel-ash: rgb(204, 204, 204);
 $wp-travel-alice-blue: rgb(223, 229, 236);
 $wp-travel-warning: rgb(241, 180, 47);
+$wp-travel-danger: rgb(200, 42, 42);
 
 $wp-travel-shadow: rgba(0, 0, 0, 0.3);
 $wp-travel-input-border: rgb(31, 150, 75);
@@ -94,7 +95,7 @@ $wp-travel-input-border: rgb(31, 150, 75);
 
 /* PWA */
 .wp-travel-field-value img {
-	width: 192px;
+	width: 100px;
 }
 
 #wp-travel-settings-block-wrapper {
@@ -102,8 +103,6 @@ $wp-travel-input-border: rgb(31, 150, 75);
 		width: 100%;
 		min-width: 250px;
 		max-width: 300px;
-		display: grid;
-		gap: 1rem;
 		padding: 1rem;
 		margin: 20px;
 	}
@@ -156,6 +155,38 @@ $wp-travel-input-border: rgb(31, 150, 75);
 		&::before {
 			background-color: $wp-travel-green;
 		}
+	}
+
+	.components-form-token-field__token {
+		border-radius: 0.5rem;
+		overflow: hidden;
+	}
+
+	.components-form-token-field__remove-token.components-button {
+		&:hover {
+			cursor: pointer;
+			color: $wp-travel-danger;
+		}
+	}
+
+	.components-form-token-field__input-container {
+		box-shadow: 0 0 0 transparent;
+		transition: box-shadow 0.1s linear;
+		border-radius: 0.5rem;
+		border: 1px solid $wp-travel-ash;
+		font-size: 16px;
+		background: $wp-travel-white;
+		line-height: normal;
+		width: 100%;
+		margin: 0 0 8px;
+		padding: 0.25rem;
+		cursor: text;
+	}
+
+	.components-form-token-field__input-container.is-active {
+		border-color: $wp-travel-green;
+		box-shadow: 0 0 0 1px $wp-travel-green;
+		outline: 2px solid transparent;
 	}
 
 	.components-checkbox-control__input-container {
@@ -242,11 +273,11 @@ $wp-travel-input-border: rgb(31, 150, 75);
 	#wpcontent {
 		padding: 0;
 
-		.wp-travel-ui.wp-travel-ui-card{
+		.wp-travel-ui.wp-travel-ui-card {
 			padding: 0;
 			margin: 0;
 
-			h2{
+			h2 {
 				display: none;
 			}
 		}
@@ -289,6 +320,12 @@ $wp-travel-input-border: rgb(31, 150, 75);
 					outline: 2px solid transparent;
 					outline-offset: 3px;
 				}
+			}
+
+			.components-button.is-secondary {
+				display: flex;
+				margin: auto;
+				margin-left: 0;
 			}
 		}
 	}
@@ -464,6 +501,21 @@ $wp-travel-input-border: rgb(31, 150, 75);
 	transform: translateX(1.5rem);
 }
 
+.components-radio-control__input[type="radio"] {
+	&:focus {
+		box-shadow: 0 0 0 2px #fff, 0 0 0 4px $wp-travel-green;
+		outline: 2px solid transparent;
+	}
+	&:checked {
+		background: $wp-travel-green;
+		border-color: $wp-travel-green;
+
+		&:before {
+			transform: translate(5px, 5px);
+		}
+	}
+}
+
 .components-form-toggle input[type="checkbox"]:focus,
 input[type="color"]:focus,
 input[type="date"]:focus,
@@ -489,6 +541,48 @@ textarea:focus {
 
 .wp-travel-settings-section {
 	.wp-travel-section-content {
+		.components-panel__body.ws-gateway.gateway-disabled {
+			.components-panel__body-title button::before {
+				font-family: dashicons;
+				content: "\f159";
+				font-size: 20px;
+				left: 40px;
+				margin-right: 1rem;
+				color: $wp-travel-ash;
+			}
+		}
+		.wp-travel-block-section {
+			.components-panel__body.ws-gateway.gateway-disabled {
+				.components-panel__body-title button::before {
+					font-family: dashicons;
+					content: "\f159";
+					font-size: 20px;
+					left: 40px;
+					margin-right: 1rem;
+					color: $wp-travel-ash;
+				}
+			}
+			.components-panel__body.ws-gateway.gateway-disabled.is-opened {
+				.components-panel__body-title button::before {
+					color: $wp-travel-white;
+				}
+			}
+			.components-panel__body.ws-gateway.gateway-enabled {
+				.components-panel__body-title button::before {
+					font-family: dashicons;
+					content: "\f12a";
+					font-size: 20px;
+					left: 40px;
+					margin-right: 1rem;
+					color: $wp-travel-green;
+				}
+			}
+			.components-panel__body.ws-gateway.gateway-enabled.is-opened {
+				.components-panel__body-title button::before {
+					color: $wp-travel-white;
+				}
+			}
+		}
 		.wptravel-ui-content.wptravel-modules {
 			.wptravel-modules-list {
 				.components-panel__row {
@@ -728,7 +822,7 @@ textarea:focus {
 	display: inline-flex;
 	justify-content: flex-end;
 	position: relative;
-	margin-left: 1rem;
+	margin-left: 0.5rem;
 	color: $wp-travel-green;
 }
 
@@ -736,12 +830,12 @@ textarea:focus {
 	text-align: left;
 	border-radius: 0.25rem;
 	position: absolute;
-	background-color: rgba(black, 0.8);
+	background-color: rgba(black, 0.9);
 	color: $wp-travel-white;
 	box-shadow: 0 1px 3px $wp-travel-shadow;
 	padding: 0.5rem 0.75rem;
 	margin-top: 0.25rem;
-	left: -3rem;
+	left: -5rem;
 	top: 1.5rem;
 	width: 300px;
 	transition-delay: 500ms;
@@ -801,15 +895,16 @@ textarea:focus {
 		padding: 2rem;
 
 		.components-panel__body {
-			border: none;
+			border: unset;
 			border-radius: 0.5rem;
 			margin-bottom: 0.5rem;
 
 			.components-panel__body-title {
 				border-radius: 0.5rem;
+				border: 1px solid $wp-travel-ash;
+
 				&:hover {
 					background: $wp-travel-active-background;
-					border: none;
 				}
 			}
 		}
@@ -821,7 +916,7 @@ textarea:focus {
 				border-radius: 0.5rem 0.5rem 0 0;
 				background: $wp-travel-green;
 				color: $wp-travel-white;
-				border: none;
+				border: 1px solid $wp-travel-green;
 
 				.components-panel__body-toggle.components-button {
 					color: $wp-travel-white;
@@ -1125,6 +1220,12 @@ textarea:focus {
 				.wp-travel-field-value {
 					width: 250px;
 
+					.components-button.is-secondary {
+						display: flex;
+						margin: auto !important;
+						margin-right: 0 !important;
+					}
+
 					.media-preview {
 						display: flex;
 						justify-content: flex-end;
@@ -1193,6 +1294,12 @@ textarea:focus {
 				.wp-travel-field-value {
 					width: 100%;
 
+					.components-button.is-secondary {
+						display: flex;
+						margin: auto !important;
+						margin-left: 0 !important;
+					}
+
 					.media-preview {
 						display: flex;
 						justify-content: flex-start;
@@ -1246,6 +1353,12 @@ textarea:focus {
 				.wp-travel-field-value {
 					width: 250px;
 
+					.components-button.is-secondary {
+						display: flex;
+						margin: auto !important;
+						margin-right: 0 !important;
+					}
+
 					.media-preview {
 						display: flex;
 						justify-content: flex-end;
@@ -1268,7 +1381,7 @@ textarea:focus {
 	}
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1366px) {
 	#aside-wrap {
 		display: block;
 	}
@@ -1280,7 +1393,7 @@ textarea:focus {
 
 	.wp-travel-trip-settings {
 		.wp-travel-save-changes.is-active.is-sticky {
-			margin-right: 336px;
+			margin-right: 388px;
 		}
 	}
 

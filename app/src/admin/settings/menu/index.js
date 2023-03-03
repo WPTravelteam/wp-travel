@@ -431,43 +431,6 @@ export default (props) => {
                                 )}
                             </div>
                         </div>
-                        {/* Block Settings */}
-                        <div className="wp-travel-primary-tab-container">
-                            <button
-                                className="wp-travel-primary-tab"
-                                onClick={() => setShowAdvancedTab(!showAdvancedTab)}
-                            >
-                                <span className="wp-travel-primary-tab-info">
-                                    <i class="fa fa-wrench wp-travel-tab-icon"></i>
-                                    <p className="wp-travel-primary-tab-title">
-                                        {__("Advanced", "wp-travel")}
-                                    </p>
-                                </span>
-                                <i
-                                    class={`fa fa-chevron-${showAdvancedTab ? "up" : "down"}`}
-                                ></i>
-                            </button>
-                            <div className="wp-travel-secondary-tabs-container">
-                                {/* Render tab conditionally with respect to the className in tabs object */}
-                                {showAdvancedTab && (
-                                    <div>
-                                        {tabs.map(
-                                            (tab) => (
-                                                tab.className == "tab-block-settings" && (
-                                                    <div
-                                                        className={`wp-travel-secondary-tab ${activeTab == tab.name ? "is-active" : ""
-                                                            }`}
-                                                        onClick={() => handleTabClick(tab.name)}
-                                                    >
-                                                        {tab.title}
-                                                    </div>
-                                                )
-                                            )
-                                        )}
-                                    </div>
-                                )}
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

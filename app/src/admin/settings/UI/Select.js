@@ -5,12 +5,12 @@ export default ({options, value, onChange}) => {
         ...theme,
         borderRadius: ".5rem",
         colors: {
-            ...theme.colors,
-            primary25: 'rgb(231, 236, 243)',
-            primary50: 'rgb(174, 186, 202)',
-            primary: 'rgb(31, 150, 75)',
-        },
-    })
+          ...theme.colors,
+          primary25: "rgb(236 248 244)",
+          primary50: "rgb(204, 204, 204)",
+          primary: "rgb(7 152 18)"
+        }
+      })
 
     return (
         <>

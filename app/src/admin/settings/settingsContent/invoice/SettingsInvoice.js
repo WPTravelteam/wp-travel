@@ -2,6 +2,7 @@ import { applyFilters, addFilter } from '@wordpress/hooks';
 import { Notice } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
+import Tooltip from '../../UI/Tooltip';
 
 import ErrorBoundary from '../../../../ErrorBoundry/ErrorBoundry';
 
@@ -46,3 +47,16 @@ addFilter('wp_travel_settings_tab_invoice_fields', 'WPTravel/Settings/Invoice/No
     ]
     return content
 });
+
+// Custom Tooltip for Thank You Page
+addFilter('wp_travel_settings_tab_invoice_fields_tooltip', 'wp_travel', () => {
+    return (
+        <Tooltip
+            text={__('Use image path as var/www/html... instead of http to generate pdf invoice.', 'wp-travel-pro')}
+        >
+            <span>
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+            </span>
+        </Tooltip>
+    )
+})

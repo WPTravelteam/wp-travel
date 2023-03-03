@@ -46,6 +46,7 @@ import SettingsPWA from "./settingsContent/advanced/SettingsPWA";
 import SettingsDebug from "./settingsContent/advanced/SettingsDebug";
 
 import Transition from "./UI/Transition";
+import Tooltip from "./UI/Tooltip";
 
 const WPTravelSettings = () => {
     const settingsData = useSelect((select) => {
@@ -236,7 +237,7 @@ const WPTravelSettings = () => {
         allData
     );
 
-    const [activeTab, setActiveTab] = useState("pages");
+    const [activeTab, setActiveTab] = useState("currency");
 
     const handleTabClick = (tab) => {
         setActiveTab(tab);
@@ -332,6 +333,95 @@ const WPTravelSettings = () => {
         </>
     );
 };
+
+// Tooltips
+addFilter('wp_travel_submodule_currency_exchange_use_api_layer_tooltip', 'wp_travel', () => {
+    return (
+        <Tooltip
+            text={__('Requires API Layer Fixer API Key instead of regular Fixer API Key', 'wp-travel-authorizenet')}
+        >
+            <span>
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+            </span>
+        </Tooltip>
+    )
+})
+
+addFilter('wp_travel_submodule_google_calendar_redirectUrl_tooltip', 'wp_travel', () => {
+    return (
+        <Tooltip
+            text={__(`Your redirect url i.e: ${window.location.href}`, 'wp-travel')}
+        >
+            <span>
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+            </span>
+        </Tooltip>
+    )
+})
+
+addFilter('wp_travel_submodule_multiple_currency_use_geolocation_tooltip', 'wp_travel', () => {
+    return (
+        <Tooltip
+            text={__('If enabled, the manual currency selector option will be disabled from the frontend.', 'wp-travel-multiple-currency')}
+        >
+            <span>
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+            </span>
+        </Tooltip>
+    )
+})
+
+addFilter('wp_travel_submodule_multiple_currency_menu_location_tooltip', 'wp_travel', () => {
+    return (
+        <Tooltip
+            text={__('Select the menu location where you want to display the currency selector.', 'wp-travel-multiple-currency')}
+        >
+            <span>
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+            </span>
+        </Tooltip>
+    )
+})
+
+addFilter('wp_travel_submodule_multiple_currency_reset_cache_tooltip', 'wp_travel', () => {
+    return (
+        <Tooltip
+            text={__('Cache automatically replaced with new data in every 4 hours, to force reset click "Reset" button.', 'wp-travel-multiple-currency')}
+        >
+            <span>
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+            </span>
+        </Tooltip>
+    )
+})
+
+addFilter('wp_travel_submodule_mailchimp_optin_tooltip', 'wp_travel', () => {
+    return (
+        <Tooltip
+            text={
+                __('Enabling this option will enable the Mailchimp double opt-in option i.e sends contact an opt-in confirmation email when they subscribe. For details ', 'wp-travel-mailchimp')
+                + <a href="https://mailchimp.com/help/set-signup-preferences/" target="__blank">
+                    "Choose Opt-In Settings"
+                </a>}
+        >
+            <span>
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+            </span>
+        </Tooltip>
+    )
+})
+
+addFilter('wp_travel_submodule_multiple_currency_reset_cache_tooltip', 'wp_travel', () => {
+    return (
+        <Tooltip
+            text={__('Cache automatically replaced with new data in every 4 hours, to force reset click "Reset" button.', 'wp-travel-multiple-currency')}
+        >
+            <span>
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+            </span>
+        </Tooltip>
+    )
+})
 
 // Filters
 

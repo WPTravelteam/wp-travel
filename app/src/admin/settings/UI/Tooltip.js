@@ -8,7 +8,7 @@ const Tooltip = ({ children, text, className }) => {
     }
 
     const handleHoverOut = () => {
-        setShowTooltip(true)
+        setShowTooltip(false)
     }
 
     return (

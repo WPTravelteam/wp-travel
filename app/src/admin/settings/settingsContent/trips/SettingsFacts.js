@@ -1,7 +1,7 @@
 import { useSelect, dispatch } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
 import { PanelBody, PanelRow, ToggleControl, TextControl, FormTokenField, Button, Disabled, Spinner, Modal, TabPanel, Notice } from '@wordpress/components';
-import Select from 'react-select'
+import Select from '../../UI/Select';
 import { useState } from '@wordpress/element';
 
 import ErrorBoundary from '../../../../ErrorBoundry/ErrorBoundry';
@@ -109,6 +109,16 @@ export default () => {
             <div className="wp-travel-field-value">
                 <div className="wp-travel-select-wrapper">
                     <Select
+                        theme={(theme) => ({
+                            ...theme,
+                            borderRadius: ".5rem",
+                            colors: {
+                                ...theme.colors,
+                                primary25: "rgb(236 248 244)",
+                                primary50: "rgb(204, 204, 204)",
+                                primary: "rgb(7 152 18)"
+                            }
+                        })}
                         options={factOptions}
                         value={'undefined' != typeof selectedFactOptions[0] && 'undefined' != typeof selectedFactOptions[0].label ? selectedFactOptions[0] : []}
                         onChange={(data) => {
@@ -156,79 +166,81 @@ export default () => {
                         {'undefined' != typeof wp_travel_trip_facts_settings &&
                             <>
                                 {wp_travel_trip_facts_settings.map((fact, index) => {
-                                    return <PanelBody key={index}
-                                        title={'undefined' != typeof fact.name && fact.name ? fact.name : __(`Fact ${index + 1} `, 'wp-travel')}
-                                        initialOpen={false}
-                                        onToggle={() => panelTabChanged(index)}
-                                        opened={isTabOpen && index == tabData.index ? true : false}
-                                    >
-                                        <PanelRow>
-                                            <label>{__('Field Name', 'wp-travel')}</label>
-                                            <TextControl
-                                                placeholder={__('Enter Field name', 'wp-travel')}
-                                                value={fact.name}
-                                                onChange={(value) => {
-                                                    updateFact('name', value, index)
-                                                }}
-                                            />
-                                        </PanelRow>
-
-                                        {('undefined' != typeof fact.key) ? <Disabled><FieldTypeContent fact={fact} index={index} /></Disabled> : <FieldTypeContent fact={fact} index={index} />}
-
-                                        {(fact.type == 'single' || fact.type == 'multiple') &&
+                                    return (
+                                        <PanelBody key={index}
+                                            title={'undefined' != typeof fact.name && fact.name ? fact.name : __(`Fact ${index + 1} `, 'wp-travel')}
+                                            initialOpen={false}
+                                            onToggle={() => panelTabChanged(index)}
+                                            opened={isTabOpen && index == tabData.index ? true : false}
+                                        >
                                             <PanelRow>
-                                                <label>{__('Values', 'wp-travel')}</label>
-                                                <div className="wp-travel-field-value">
-                                                    <FormTokenField
-                                                        label=""
-                                                        value={fact.options}
-                                                        suggestions={[]}
-                                                        onChange={tokens => {
-                                                            updateFact('options', tokens, index)
-                                                        }}
-                                                        placeholder={__('Add an option and press Enter', 'wp-travel')}
-                                                    />
-                                                </div>
+                                                <label>{__('Field Name', 'wp-travel')}</label>
+                                                <TextControl
+                                                    placeholder={__('Enter Field name', 'wp-travel')}
+                                                    value={fact.name}
+                                                    onChange={(value) => {
+                                                        updateFact('name', value, index)
+                                                    }}
+                                                />
                                             </PanelRow>
-                                        }
-                                        {/** Icon Start here. */}
-                                        <PanelRow>
-                                            <label>{__('Icon', 'wp-travel')}</label>
-                                            <div className="wti_icon_btn_wrapper">
-                                                {
-                                                    'fontawesome-icon' == fact.selected_icon_type && '' != fact.icon &&
-                                                    <i className={fact.icon}></i>
-                                                }
-                                                {
-                                                    'custom-upload' == fact.selected_icon_type && '' != fact.icon_img &&
-                                                    <img src={fact.icon_img} style={{ width: '60px' }} />
-                                                }
-                                                {
-                                                    'icon-class' == fact.selected_icon_type && '' != fact.icon &&
-                                                    <p>{__('Icon Class: ', 'wp-travel')}<strong>[ {fact.icon} ]</strong></p>
-                                                }
-                                                <Button isSecondary onClick={openModal}>{__('Choose Icon', 'wp-travel')}</Button>
-                                            </div>
-                                            {
-                                                isOpenModal &&
-                                                <WPTravelIcons factData={fact} factIndex={index} modalHandleClick={setIsOpenModal} />
+
+                                            {('undefined' != typeof fact.key) ? <Disabled><FieldTypeContent fact={fact} index={index} /></Disabled> : <FieldTypeContent fact={fact} index={index} />}
+
+                                            {(fact.type == 'single' || fact.type == 'multiple') &&
+                                                <PanelRow>
+                                                    <label>{__('Values', 'wp-travel')}</label>
+                                                    <div className="wp-travel-field-value">
+                                                        <FormTokenField
+                                                            label=""
+                                                            value={fact.options}
+                                                            suggestions={[]}
+                                                            onChange={tokens => {
+                                                                updateFact('options', tokens, index)
+                                                            }}
+                                                            placeholder={__('Add an option and press Enter', 'wp-travel')}
+                                                        />
+                                                    </div>
+                                                </PanelRow>
                                             }
-                                        </PanelRow>
-
-                                        <PanelRow className="wp-travel-action-section">
-                                            <span></span>
-                                            <Button isSecondary onClick={() => {
-                                                if (!confirm(__('Are you sure to delete Fact?', 'wp-travel'))) {
-                                                    return false;
+                                            {/** Icon Start here. */}
+                                            <PanelRow>
+                                                <label>{__('Icon', 'wp-travel')}</label>
+                                                <div className="wti_icon_btn_wrapper">
+                                                    {
+                                                        'fontawesome-icon' == fact.selected_icon_type && '' != fact.icon &&
+                                                        <i className={fact.icon}></i>
+                                                    }
+                                                    {
+                                                        'custom-upload' == fact.selected_icon_type && '' != fact.icon_img &&
+                                                        <img src={fact.icon_img} style={{ width: '60px' }} />
+                                                    }
+                                                    {
+                                                        'icon-class' == fact.selected_icon_type && '' != fact.icon &&
+                                                        <p>{__('Icon Class: ', 'wp-travel')}<strong>[ {fact.icon} ]</strong></p>
+                                                    }
+                                                    <Button isSecondary onClick={openModal}>{__('Choose Icon', 'wp-travel')}</Button>
+                                                </div>
+                                                {
+                                                    isOpenModal &&
+                                                    <WPTravelIcons factData={fact} factIndex={index} modalHandleClick={setIsOpenModal} />
                                                 }
-                                                let factData = [];
-                                                factData = wp_travel_trip_facts_settings.filter((data, newIndex) => {
-                                                    return newIndex != index;
-                                                });
-                                                removeFact(factData);
-                                            }} className="wp-traval-button-danger">{__('- Remove Fact', 'wp-travel')}</Button></PanelRow>
+                                            </PanelRow>
 
-                                    </PanelBody>
+                                            <PanelRow className="wp-travel-action-section">
+                                                <span></span>
+                                                <Button isSecondary onClick={() => {
+                                                    if (!confirm(__('Are you sure to delete Fact?', 'wp-travel'))) {
+                                                        return false;
+                                                    }
+                                                    let factData = [];
+                                                    factData = wp_travel_trip_facts_settings.filter((data, newIndex) => {
+                                                        return newIndex != index;
+                                                    });
+                                                    removeFact(factData);
+                                                }} className="wp-traval-button-danger">{__('- Remove Fact', 'wp-travel')}</Button></PanelRow>
+
+                                        </PanelBody>
+                                    )
                                 })}
 
                                 {wp_travel_trip_facts_settings.length > 2 && <PanelRow className="wp-travel-action-section"><span></span><Button isSecondary onClick={() => addNewFactData()}>{__('+ Add New', 'wp-travel')}</Button></PanelRow>}

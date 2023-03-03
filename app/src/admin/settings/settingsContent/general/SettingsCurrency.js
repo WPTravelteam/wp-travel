@@ -2,9 +2,9 @@ import { useRef, forwardRef } from '@wordpress/element'
 import { PanelRow, ToggleControl, TextControl } from '@wordpress/components';
 import { _n, __ } from '@wordpress/i18n';
 import { useSelect, dispatch } from '@wordpress/data'; // redux [and also for hook / filter] | dispatch : send data to store
-import Tooltip from '../../UI/Tooltip';
 
-import Select from 'react-select'
+import Tooltip from '../../UI/Tooltip';
+import Select from '../../UI/Select';
 
 export default forwardRef((props) => {
     const allData = useSelect((select) => {
@@ -55,16 +55,6 @@ export default forwardRef((props) => {
                         <div className="wp-travel-select-wrapper">
                             <Select
                                 ref={ref => !currencyRef.current.includes(ref) && currencyRef.current.push(ref)}
-                                theme={(theme) => ({
-                                    ...theme,
-                                    borderRadius: ".5rem",
-                                    colors: {
-                                        ...theme.colors,
-                                        primary25: 'rgb(231, 236, 243)',
-                                        primary50: 'rgb(174, 186, 202)',
-                                        primary: 'rgb(31, 150, 75)',
-                                    },
-                                })}
                                 options={currencyOptions}
                                 value={'undefined' != typeof selectedCurrency[0] && 'undefined' != typeof selectedCurrency[0].label ? selectedCurrency[0] : []}
                                 onChange={(data) => {
@@ -106,16 +96,6 @@ export default forwardRef((props) => {
                     <div id="currency-position" className="wp-travel-field-value">
                         <div className="wp-travel-select-wrapper">
                             <Select
-                                theme={(theme) => ({
-                                    ...theme,
-                                    borderRadius: ".5rem",
-                                    colors: {
-                                        ...theme.colors,
-                                        primary25: 'rgb(231, 236, 243)',
-                                        primary50: 'rgb(174, 186, 202)',
-                                        primary: 'rgb(31, 150, 75)',
-                                    },
-                                })}
                                 options={currencyPositionOptions}
                                 value={'undefined' != typeof selectedCurrencyPosition[0] && 'undefined' != typeof selectedCurrencyPosition[0].label ? selectedCurrencyPosition[0] : []}
                                 onChange={(data) => {

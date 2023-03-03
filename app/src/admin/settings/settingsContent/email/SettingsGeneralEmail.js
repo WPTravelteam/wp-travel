@@ -2,6 +2,7 @@ import { applyFilters } from '@wordpress/hooks';
 import { useSelect, dispatch } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
 import { PanelRow, TextControl } from '@wordpress/components';
+import Tooltip from '../../UI/Tooltip';
 
 export default () => {
     const allData = useSelect((select) => {
@@ -24,7 +25,16 @@ export default () => {
             </div>
             <div className='wp-travel-section-content'>
                 <PanelRow>
-                    <label>{__('From Email', 'wp-travel')}</label>
+                    <label>
+                        {__('From Email', 'wp-travel')}
+                        <Tooltip
+                            text={<strong>{__('Preferred to use webmail like: sales@yoursite.com', 'wp-travel')}</strong>}
+                        >
+                            <span>
+                                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            </span>
+                        </Tooltip>
+                    </label>
                     <div className="wp-travel-field-value">
                         <TextControl
                             value={wp_travel_from_email}
@@ -37,7 +47,7 @@ export default () => {
                                 }
                             }
                         />
-                        <p className="description">{__('Email address to send email from.', 'wp-travel')}<strong>{__(' Preferred to use webmail like: sales@yoursite.com', 'wp-travel')}</strong></p>
+                        <p className="description"></p>
                     </div>
                 </PanelRow>
                 {applyFilters('wp_travel_tab_content_before_booking_tamplate', [], allData)}

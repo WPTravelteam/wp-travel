@@ -270,7 +270,7 @@ export default () => {
                             <ReactSortable
                                 list={sorted_gateways}
                                 setList={sorted => sortGateways(sorted)}
-                                handle=".settings-general .components-panel__icon"
+                                handle=".wp-travel-block-sortable .components-panel__icon"
                             >
                                 {
                                     sorted_gateways.map((gateway, tabIndex) => {

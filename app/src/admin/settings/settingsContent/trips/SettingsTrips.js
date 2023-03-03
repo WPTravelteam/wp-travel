@@ -3,7 +3,7 @@ import { useSelect, dispatch } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
 import { PanelRow, ToggleControl, RadioControl, SelectControl } from '@wordpress/components';
 import { VersionCompare } from '../../../fields/VersionCompare'
-import Select from 'react-select';
+import Select from '../../UI/Select';
 import Tooltip from '../../UI/Tooltip';
 
 import ErrorBoundary from '../../../../ErrorBoundry/ErrorBoundry';
@@ -112,7 +112,7 @@ export default () => {
                         </label>
 
                         <div className="wp-travel-field-value">
-                            <SelectControl
+                            <Select
                                 value={trip_date_listing}
                                 options={[
                                     {
@@ -184,7 +184,7 @@ export default () => {
                         <PanelRow>
                             <label>{__('If expired, trip set to expired/delete', 'wp-travel')}</label>
                             <div className="wp-travel-field-value">
-                                <SelectControl
+                                <Select
                                     value={expired_trip_set_to}
                                     options={[
                                         {

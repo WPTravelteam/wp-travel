@@ -5,7 +5,7 @@ import { _n, __ } from '@wordpress/i18n';
 import { PanelRow } from '@wordpress/components';
 import Tooltip from '../../UI/Tooltip';
 
-import Select from './../../helpers/select-component/Select'
+import Select from '../../UI/Select'
 
 export default () => {
     const allData = useSelect((select) => {

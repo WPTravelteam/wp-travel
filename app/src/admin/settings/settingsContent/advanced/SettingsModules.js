@@ -282,25 +282,29 @@ export default () => {
         )
     } else {
         return (
-            <div className="wp-travel-section-header wp-travel-custom-section-header">
-                <div className='wp-travel-section-info'>
-                    <h2 className="wp-travel-section-header-title">
-                        {__("Modules", "wp-travel")}
-                    </h2>
-                    <p className="wp-travel-section-header-description">
-                        {__('You can enable or disable modules features from here.', 'wp-travel')}
+            <>
+                <div className="wp-travel-section-header">
+                    <div className='wp-travel-section-info'>
+                        <h2 className="wp-travel-section-header-title">
+                            {__("Modules", "wp-travel")}
+                        </h2>
+                        <p className="wp-travel-section-header-description">
+                            {__('You can enable or disable modules features from here.', 'wp-travel')}
 
-                    </p>
+                        </p>
+                    </div>
                 </div>
-                <Notice isDismissible={false} status="informational">
-                    <strong>{__('Want to add more features in WP Travel?', 'wp-travel')}</strong>
-                    <br />
-                    {__('Get WP Travel Pro modules for Payment, Trip Extras, Inventory Management, Field Editor and other premium features.', 'wp-travel')}
-                    <br />
-                    <br />
-                    <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
-                </Notice><br />
-            </div>
+                <div className='wp-travel-section-content'>
+                    <Notice isDismissible={false} status="informational">
+                        <strong>{__('Want to add more features in WP Travel?', 'wp-travel')}</strong>
+                        <br />
+                        {__('Get WP Travel Pro modules for Payment, Trip Extras, Inventory Management, Field Editor and other premium features.', 'wp-travel')}
+                        <br />
+                        <br />
+                        <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
+                    </Notice><br />
+                </div>
+            </>
         )
     }
 }
