@@ -14,39 +14,43 @@ import domReady from "@wordpress/dom-ready";
 import ErrorBoundary from "../../ErrorBoundry/ErrorBoundry";
 import Select from 'react-select'
 
+
+import SettingsCurrency from "./components/settingsContent/general/SettingsCurrency";
+import SettingsMaps from "./components/settingsContent/general/SettingsMaps";
+import SettingsPages from "./components/settingsContent/general/SettingsPages";
+import SettingsArchivePageTitle from "./components/settingsContent/general/SettingsArchivePageTitle";
+import SettingsLicense from "./components/settingsContent/license/SettingsLicense";
+import SettingsFacts from "./components/settingsContent/trips/SettingsFacts";
+import SettingsFAQs from "./components/settingsContent/trips/SettingsFAQs";
+import SettingsFieldEditor from "./components/settingsContent/trips/SettingsFieldEditor";
+import SettingsTabs from "./components/settingsContent/trips/SettingsTabs";
+import SettingsTrips from "./components/settingsContent/trips/SettingsTrips";
+import SettingsEmailTemplates from "./components/settingsContent/email/SettingsEmailTemplates";
+import SettingsGeneralEmail from "./components/settingsContent/email/SettingsGeneralEmail";
+import SettingsAccount from "./components/settingsContent/account/SettingsAccount";
+import SettingsCheckout from "./components/settingsContent/checkout/SettingsCheckout";
+import SettingsPayment from "./components/settingsContent/payment/SettingsPayment";
+import SettingsInvoice from "./components/settingsContent/invoice/SettingsInvoice";
+import SettingsMisc from "./components/settingsContent/misc/SettingsMisc";
+import SettingsAdvancedGallery from "./components/settingsContent/misc/SettingsAdvancedGallery";
+import SettingsReCaptchaV2 from "./components/settingsContent/misc/SettingsReCaptchaV2";
+import SettingsThirdParty from "./components/settingsContent/misc/SettingsThirdParty";
+import SettingsModules from "./components/settingsContent/advanced/SettingsModules";
+import SettingsPWA from "./components/settingsContent/advanced/SettingsPWA";
+import SettingsDebug from "./components/settingsContent/advanced/SettingsDebug";
+
+// Settings from Redux Store
 import "./store/settings-store";
 
-import SaveSettings from "./sub-components/SaveSettings";
+// Menu Component
+import Menu from './components/menu'
 
-// Menu
-import Menu from './menu'
+// Save Changes Component
+import SaveSettings from "./components/sub-components/SaveSettings";
 
-import SettingsCurrency from "./settingsContent/general/SettingsCurrency";
-import SettingsMaps from "./settingsContent/general/SettingsMaps";
-import SettingsPages from "./settingsContent/general/SettingsPages";
-import SettingsArchivePageTitle from "./settingsContent/general/SettingsArchivePageTitle";
-import SettingsLicense from "./settingsContent/license/SettingsLicense";
-import SettingsFacts from "./settingsContent/trips/SettingsFacts";
-import SettingsFAQs from "./settingsContent/trips/SettingsFAQs";
-import SettingsFieldEditor from "./settingsContent/trips/SettingsFieldEditor";
-import SettingsTabs from "./settingsContent/trips/SettingsTabs";
-import SettingsTrips from "./settingsContent/trips/SettingsTrips";
-import SettingsEmailTemplates from "./settingsContent/email/SettingsEmailTemplates";
-import SettingsGeneralEmail from "./settingsContent/email/SettingsGeneralEmail";
-import SettingsAccount from "./settingsContent/account/SettingsAccount";
-import SettingsCheckout from "./settingsContent/checkout/SettingsCheckout";
-import SettingsPayment from "./settingsContent/payment/SettingsPayment";
-import SettingsInvoice from "./settingsContent/invoice/SettingsInvoice";
-import SettingsMisc from "./settingsContent/misc/SettingsMisc";
-import SettingsAdvancedGallery from "./settingsContent/misc/SettingsAdvancedGallery";
-import SettingsReCaptchaV2 from "./settingsContent/misc/SettingsReCaptchaV2";
-import SettingsThirdParty from "./settingsContent/misc/SettingsThirdParty";
-import SettingsModules from "./settingsContent/advanced/SettingsModules";
-import SettingsPWA from "./settingsContent/advanced/SettingsPWA";
-import SettingsDebug from "./settingsContent/advanced/SettingsDebug";
-
-import Transition from "./UI/Transition";
-import Tooltip from "./UI/Tooltip";
+// UI Components
+import Transition from "./components/UI/Transition";
+import Tooltip from "./components/UI/Tooltip";
 
 const WPTravelSettings = () => {
     const settingsData = useSelect((select) => {
@@ -61,15 +65,9 @@ const WPTravelSettings = () => {
 
     const { options } = allData;
 
-    let wrapperClasses = "wp-travel-block-tabs-wrapper wp-travel-trip-settings";
-    wrapperClasses = allData.is_sending_request
-        ? wrapperClasses + " wp-travel-sending-request"
-        : wrapperClasses;
-
     let blockTab = {}
 
     if (_wp_travel.is_blocks_enable) {
-
         const SettingBlocks = () => {
             return (
                 <>
@@ -249,7 +247,7 @@ const WPTravelSettings = () => {
 
     const [isSticky, setIsSticky] = useState(false);
 
-    const myRef = useRef();
+    const menuRef = useRef();
     const stickyRef = useRef();
     const settingsRef = useRef();
 
@@ -290,7 +288,7 @@ const WPTravelSettings = () => {
                 {/* Mobile Menu */}
                 {isMobileNavOpen && window.innerWidth < 768 && createPortal(
                     <Menu
-                        ref={myRef}
+                        ref={menuRef}
                         className={`${window.innerWidth < 768 ? "wp-travel-active" : ""}`}
                         tabs={tabs}
                         handleTabClick={handleTabClick}
@@ -301,11 +299,11 @@ const WPTravelSettings = () => {
                     document.getElementById('wpwrap')
                 )}
             </div>
-            <div className={wrapperClasses}>
+            <div className="wp-travel-block-tabs-wrapper wp-travel-trip-settings">
                 <div ref={stickyRef} className="wp-travel-main-container">
                     <div className="wp-travel-settings-container">
                         {/* Side Menu */}
-                        <Menu ref={myRef} tabs={tabs} handleTabClick={handleTabClick} activeTab={activeTab} />
+                        <Menu ref={menuRef} tabs={tabs} handleTabClick={handleTabClick} activeTab={activeTab} />
 
                         {/* Settings Section */}
                         <div className="wp-travel-settings-section-wrapper">
@@ -316,7 +314,7 @@ const WPTravelSettings = () => {
                                         {activeTab == tab.name &&
                                             tab.content &&
                                             isValidElement(<tab.content />) &&
-                                            <Transition duration={300} translateX={0} translateY={25}>
+                                            <Transition style={{zIndex: 30}} duration={300} translateX={0} translateY={25}>
                                                 <tab.content />
                                             </Transition>
                                         }
@@ -398,11 +396,7 @@ addFilter('wp_travel_submodule_multiple_currency_reset_cache_tooltip', 'wp_trave
 addFilter('wp_travel_submodule_mailchimp_optin_tooltip', 'wp_travel', () => {
     return (
         <Tooltip
-            text={
-                __('Enabling this option will enable the Mailchimp double opt-in option i.e sends contact an opt-in confirmation email when they subscribe. For details ', 'wp-travel-mailchimp')
-                + <a href="https://mailchimp.com/help/set-signup-preferences/" target="__blank">
-                    "Choose Opt-In Settings"
-                </a>}
+            text={__('Enabling this option will enable the Mailchimp double opt-in option i.e sends contact an opt-in confirmation email when they subscribe.', 'wp-travel-mailchimp')}
         >
             <span>
                 <i class="fa fa-info-circle" aria-hidden="true"></i>
