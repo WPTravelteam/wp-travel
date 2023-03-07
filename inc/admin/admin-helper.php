@@ -333,45 +333,80 @@ function wptravel_marketplace_page() {
 	);
 
 	$info_btn_text     = __( 'View Demo', 'wp-travel' );
+	$install_btn_text     = __( 'Install', 'wp-travel' );
 	$download_btn_text = __( 'View Detail', 'wp-travel' );
 
 	?>
 	<div class="wrap">
+		
 		<div id="poststuff">
 			<h1 class="wp-heading-inline"><?php esc_html_e( 'Marketplace', 'wp-travel' ); ?></h1>
 			<div id="post-body">
-				<div class="wp-travel-marketplace-tab-wrap">
-					<div id="tabs-2" class="tab-pannel">
-						<div class="marketplace-module clearfix">
-							<?php foreach ( $themes_data as $theme ) : ?>
-								<div class="single-module">
-									<div class="single-module-image">
-										<a href="<?php echo esc_url( $theme['demo_url'] ); ?>" target="_blank">
-										<img width="423" height="237" src="<?php echo esc_url( $theme['img_url'] ); ?>" class="" alt="" >
-										</a>
+				<div id="wptravel-theme-install-loader">
+					<svg style="margin: auto; background: rgb(255, 255, 255); display: block; shape-rendering: auto;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+						<circle cx="50" cy="50" fill="none" stroke="#079812" stroke-width="16" r="41" stroke-dasharray="193.20794819577225 66.40264939859075">
+						  <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="2s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+						</circle>
+					</svg>
+					<div style="text-align: center; margin-top: 10px;">
+						<?php echo __( 'Installing Theme...' ) ?>
+					</div>
+				</div>
+				<div id="wptravel-market-content">
+					<div class="wp-travel-marketplace-tab-wrap">
+						<div id="tabs-2" class="tab-pannel">
+							<div class="marketplace-module clearfix">
+								<?php foreach ( $themes_data as $key => $theme ) : ?>
+									<div class="single-module">
+										<div class="single-module-image">
+											<a href="<?php echo esc_url( $theme['demo_url'] ); ?>" target="_blank">
+											<img width="423" height="237" src="<?php echo esc_url( $theme['img_url'] ); ?>" class="" alt="" >
+											</a>
+										</div>
+										<div class="single-module-content clearfix">
+											<h4 class="text-title"><a href="<?php echo esc_url( $theme['detail_url'] ); ?>" target="_blank">
+											<span class="dashicons-wp-travel">
+											</span><?php echo esc_html( $theme['name'] ); ?></a></h4>
+											<a class="btn-default pull-left" href="<?php echo esc_url( $theme['demo_url'] ); ?>" target="_blank"><?php echo esc_html( $info_btn_text ); ?></a>
+											<?php if ( $theme['type'] == 'free' && !in_array( $key, array_keys( wp_get_themes() ) ) ): ?>
+												<a class="btn-default pull-left" href="#" onclick="wptravel_install_theme('<?php echo str_replace( '-', '_', $key ) ?>')" ><?php echo esc_html( $install_btn_text ); ?></a>
+											<?php endif ?>										
+											<a class="btn-default pull-right" href="<?php echo esc_url( $theme['detail_url'] ); ?>" target="_blank"><?php echo esc_html( $download_btn_text ); ?></a>
+										</div>
 									</div>
-									<div class="single-module-content clearfix">
-										<h4 class="text-title"><a href="<?php echo esc_url( $theme['detail_url'] ); ?>" target="_blank">
-										<span class="dashicons-wp-travel">
-										</span><?php echo esc_html( $theme['name'] ); ?></a></h4>
-										<a class="btn-default pull-left" href="<?php echo esc_url( $theme['demo_url'] ); ?>" target="_blank"><?php echo esc_html( $info_btn_text ); ?></a>
-										<a class="btn-default pull-right" href="<?php echo esc_url( $theme['detail_url'] ); ?>" target="_blank"><?php echo esc_html( $download_btn_text ); ?></a>
-									</div>
-								</div>
-							<?php endforeach; ?>
+								<?php endforeach; ?>
+							</div>
 						</div>
+
 					</div>
 
+					<script type="text/javascript">
+						var site_url = '<?php get_site_url() ?>';
+
+						function wptravel_install_theme( slug ){
+	
+							document.getElementById("wptravel-theme-install-loader").style.display = 'block';
+							document.getElementById("wptravel-market-content").style.display = 'none';
+
+							fetch( site_url + '/wp-json/wp-travel/v1/theme-install/' + slug )
+							.then(response => {
+								document.getElementById("wptravel-theme-install-loader").style.display = 'none';
+								document.getElementById("wptravel-market-content").style.display = 'block';
+							});
+
+						}
+
+					</script>
+
+					<div id="aside-wrap" class="single-module-side">
+						<?php
+						wptravel_meta_box_support();
+						wptravel_meta_box_documentation();
+						wptravel_meta_box_review();
+						?>
+					</div>
 				</div>
 
-
-				<div id="aside-wrap" class="single-module-side">
-					<?php
-					wptravel_meta_box_support();
-					wptravel_meta_box_documentation();
-					wptravel_meta_box_review();
-					?>
-				</div>
 			</div>
 		</div>
 	</div>
