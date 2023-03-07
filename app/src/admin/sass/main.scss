@@ -18,3 +18,10 @@
 @import "./wp-travel-admin";
 @import "./system-information";
 @import "./_order-detail";
+
+.wp-travel-flex-full-width{
+    width: 100%;
+}
+.meta-box-sortables input{
+    box-shadow: none !important;
+}

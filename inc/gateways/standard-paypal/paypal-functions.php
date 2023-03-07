@@ -179,7 +179,7 @@ function wptravel_paypal_ipn_process() {
 				'subject' => 'Verified IPN',
 				'message' => $message . "\n" . $listener->getTextReport(),
 			);
-
+			
 			wp_mail( $email['to'], $email['subject'], $email['message'] );
 
 		}

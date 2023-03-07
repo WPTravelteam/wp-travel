@@ -436,20 +436,22 @@ function wptravel_save_user_enquiry() {
 
 	$reply_to_email = isset( $settings['wp_travel_from_email'] ) ? $settings['wp_travel_from_email'] : $site_admin_email;
 
-		// To send HTML mail, the Content-type header must be set.
-		$headers = $email->email_headers( $reply_to_email, $customer_email );
+	// To send HTML mail, the Content-type header must be set.
+	$headers = $email->email_headers( $reply_to_email, $customer_email );
+	$trip_enquiry_mail = apply_filters( 'wp_travel_trip_enquiry_mail', true ) ;
+	if (  $trip_enquiry_mail == true ) {
+		if ( ! wp_mail( $admin_email, $enquiry_subject, $enquiry_message, $headers ) ) {
 
-	if ( ! wp_mail( $admin_email, $enquiry_subject, $enquiry_message, $headers ) ) {
+			$errors = array(
+				'result'  => 0,
+				'message' => __( 'Your Enquiry has been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
+			);
 
-		$errors = array(
-			'result'  => 0,
-			'message' => __( 'Your Enquiry has been added but the email could not be sent.', 'wp-travel' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.', 'wp-travel' ),
-		);
-
-		wp_send_json_error( $errors );
-		return;
+			wp_send_json_error( $errors );
+			return;
+		}
 	}
-		do_action( 'wp_travel_after_enquiries_email_sent', $admin_email, $customer_email, $formdata, $enquiry_id );
+	do_action( 'wp_travel_after_enquiries_email_sent', $admin_email, $customer_email, $formdata, $enquiry_id );
 	// If we reach here, Send Success message !!
 	$trip_name = get_the_title( $post_id );
 	$success   = array(

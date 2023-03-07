@@ -1777,10 +1777,13 @@ function wptravel_user_new_account_created( $customer_id, $new_customer_data, $p
 		$user_subject    = ! empty( $user_email_data['user_subject'] ) ? $user_email_data['user_subject'] : $user_subject;
 		$email_content   = ! empty( $user_email_data['email_content'] ) ? $user_email_data['email_content'] : $email_content;
 		$headers         = ! empty( $user_email_data['headers'] ) ? $user_email_data['headers'] : $headers;
-		if ( ! wp_mail( $user_user_email, $user_subject, $email_content, $headers ) ) {
+		$user_account_mail = apply_filters( 'wp_travel_user_account_mail', true );
+		if ( $user_account_mail == true ) {
+			if ( ! wp_mail( $user_user_email, $user_subject, $email_content, $headers ) ) {
 
-			return false;
+				return false;
 
+			}
 		}
 	}
 }
