@@ -53,7 +53,7 @@ export default () => {
                             </span>
                         </Tooltip>
                     </label>
-                    <div className="wp-travel-field-value">
+                    <div id="wp-travel-checkout-page" className="wp-travel-field-value">
                         <div className="wp-travel-select-wrapper">
                             <Select
                                 options={pageOptions}
@@ -84,7 +84,7 @@ export default () => {
                             </span>
                         </Tooltip>
                     </label>
-                    <div className="wp-travel-field-value">
+                    <div id="wp-travel-dashboard-page" className="wp-travel-field-value">
                         <div className="wp-travel-select-wrapper">
                             <Select
                                 options={pageOptions}

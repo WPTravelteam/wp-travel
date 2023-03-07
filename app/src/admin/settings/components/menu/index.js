@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from '@wordpress/element'
 import { _n, __ } from "@wordpress/i18n";
 
-import SearchModal from '../sub-components/SearchModal';
+import Search from '../sub-components/Search';
 import Select from 'react-select'
 
 export default (props) => {
@@ -39,10 +39,6 @@ export default (props) => {
                 { value: 'enable-expired-trip', label: 'Enable Expired Trip Options', tab: 'trips-settings' },
             ]
         },
-        // { value: 'decimal-separator', label: 'Decimal separator', tab: 'currency' },
-        // { value: 'currency-position', label: 'Currency Position', tab: 'currency' },
-        // { value: 'select-map', label: 'Select Map', tab: 'maps' },
-        // { value: 'api-key', label: 'Api Key', tab: 'maps' },
     ];
 
     const [selectedOption, setSelectedOption] = useState({ value: 'currency', label: 'Currency' });
@@ -57,7 +53,7 @@ export default (props) => {
                     && <div className="wp-travel-mobile-menu-close" onClick={closeMenu}><i className='fa fa-times wp-travel-icon-close'></i></div>
                 }
                 <div className="wp-travel-logo-container">{__("WP Travel", "wp-travel")}</div>
-                <SearchModal ref={ref}>
+                <Search ref={ref} handleTabClick={handleTabClick} />
                     {/* 
                         <button className="wp-travel-quick-search">
                             <i
@@ -71,7 +67,7 @@ export default (props) => {
                             </span>
                         </button> 
                     */}
-                    <Select
+                    {/* <Select
                         defaultValue={selectedOption}
                         onChange={e => {
                             // document.querySelectorAll('.all-tab-component').forEach(function (item) {
@@ -98,11 +94,11 @@ export default (props) => {
                             document.getElementById('wp-travel-tab-' + e.tab).classList.add('is-active');
 
                             document.getElementById(e.value).scrollIntoView({ behavior: 'smooth' }, true)
-                            options
+                            // options
                         }}
                         options={selectOptions}
-                    />
-                </SearchModal>
+                    /> */}
+                {/* </SearchModal> */}
                 <div className="wp-travel-tabs-container">
                     <div className="wp-travel-tabs">
                         {/* General */}

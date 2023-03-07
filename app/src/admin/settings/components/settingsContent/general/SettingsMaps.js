@@ -52,7 +52,7 @@ export default () => {
       <div className='wp-travel-section-content'>
         <PanelRow>
           <label>{__("Select Map", "wp-travel")}</label>
-          <div className="wp-travel-field-value">
+          <div id="wp-travel-select-map" className="wp-travel-field-value">
             <div id="select-map" className="wp-travel-select-wrapper">
               <Select
                 theme={(theme) => ({
@@ -107,7 +107,7 @@ export default () => {
                   </span>
                 </Tooltip>
               </label>
-              <div className="wp-travel-field-value">
+              <div id="wp-travel-api-key" className="wp-travel-field-value">
                 <TextControl
                     ref={thisRef}
                     id="api-key"
@@ -133,7 +133,7 @@ export default () => {
             </PanelRow>
             <PanelRow>
               <label>{__("Zoom Level", "wp-travel")}</label>
-              <div className="wp-travel-field-value">
+              <div id="wp-travel-zoom-level" className="wp-travel-field-value">
                 <TextControl
                   // help={__( 'Set default zoom level of map.', 'wp-travel' )}
                   type="number"

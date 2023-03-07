@@ -145,7 +145,7 @@ export default () => {
             <ErrorBoundary>
                 <PanelRow>
                     <label>{__('Trip Facts', 'wp-travel')}</label>
-                    <div className="wp-travel-field-value">
+                    <div id="wp-travel-trip-facts" className="wp-travel-field-value">
                         <ToggleControl
                             checked={wp_travel_trip_facts_enable == 'yes'}
                             onChange={() => {

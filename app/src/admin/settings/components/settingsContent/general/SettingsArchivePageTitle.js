@@ -27,7 +27,7 @@ export default () => {
             <div className='wp-travel-section-content'>
             <PanelRow>
                 <label>{__('Hide Plugin Archive Page Title', 'wp-travel')}</label>
-                <div className="wp-travel-field-value">
+                <div id="wp-travel-hide-plugin-archive-page-title" className="wp-travel-field-value">
                     <ToggleControl
                         checked={hide_plugin_archive_page_title == 'yes'}
                         onChange={() => {

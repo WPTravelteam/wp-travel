@@ -51,7 +51,7 @@ export default forwardRef((props) => {
             <div className='wp-travel-section-content'>
                 <PanelRow>
                     <label>{__('Currency', 'wp-travel')}</label>
-                    <div className="wp-travel-field-value">
+                    <div id="wp-travel-currency" className="wp-travel-field-value">
                         <div className="wp-travel-select-wrapper">
                             <Select
                                 ref={ref => !currencyRef.current.includes(ref) && currencyRef.current.push(ref)}
@@ -77,7 +77,7 @@ export default forwardRef((props) => {
                             <span><i className='fa fa-info-circle'></i></span>
                         </Tooltip>
                     </label>
-                    <div className="wp-travel-field-value">
+                    <div id="wp-travel-use-currency-name" className="wp-travel-field-value">
                         <ToggleControl
                             checked={use_currency_name == 'yes'}
                             onChange={() => {
@@ -93,7 +93,7 @@ export default forwardRef((props) => {
                 </PanelRow>
                 <PanelRow>
                     <label>{__('Currency Position', 'wp-travel')}</label>
-                    <div id="currency-position" className="wp-travel-field-value">
+                    <div id="wp-travel-currency-position" className="wp-travel-field-value">
                         <div className="wp-travel-select-wrapper">
                             <Select
                                 options={currencyPositionOptions}
@@ -113,7 +113,7 @@ export default forwardRef((props) => {
                 </PanelRow>
                 <PanelRow>
                     <label>{__('Thousand separator', 'wp-travel')}</label>
-                    <div className="wp-travel-field-value">
+                    <div id="wp-travel-thousand-separator" className="wp-travel-field-value">
                         <TextControl
                             // help={__( 'This sets the thousand separator of displayed prices.', 'wp-travel' )}
                             value={thousand_separator}
@@ -131,7 +131,7 @@ export default forwardRef((props) => {
                 </PanelRow>
                 <PanelRow>
                     <label>{__('Decimal separator', 'wp-travel')}</label>
-                    <div id="decimal-separator" className="wp-travel-field-value">
+                    <div id="wp-travel-decimal-separator" className="wp-travel-field-value">
                         <TextControl
                             // help={__( 'This sets the decimal separator of displayed prices.', 'wp-travel' )}
                             value={decimal_separator}
@@ -149,7 +149,7 @@ export default forwardRef((props) => {
                 </PanelRow>
                 <PanelRow>
                     <label>{__('Number of decimals', 'wp-travel')}</label>
-                    <div className="wp-travel-field-value">
+                    <div id="wp-travel-number-decimals" className="wp-travel-field-value">
                         <TextControl
                             // help={__( 'This sets the number of decimal of displayed prices.', 'wp-travel' )}
                             value={number_of_decimals}
