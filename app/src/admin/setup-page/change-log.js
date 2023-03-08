@@ -1,5 +1,20 @@
 const changeLog = [
 	{
+		version: "6.3.0",
+		log: <p>
+				Release Date: 1st March 2023
+				<br/><br/>
+				Tweaks:
+				<br/>
+				* Added hook 'wp_travel_strings'.
+				<br/><br/>
+				Fixes:
+				<br/>
+				* For additional compatible bug fixes with WP Travel Pro please see this [changelog]( https://wptravel.io/changelog-wp-travel-pro/ ).
+				<br/>
+			</p>
+	},
+	{
 		version: "6.2.0",
 		log: <p>
 				Release Date: 13th February 2023

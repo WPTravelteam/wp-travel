@@ -101,6 +101,11 @@ function wptravel_booking_client_default_email_content() {
  * Enqueries Admin Default Email.
  */
 function wptravel_enquiries_admin_default_email_content() {
+	$strings = array();
+	if ( class_exists( 'WpTravel_Helpers_Strings' ) ) {
+		$string = WpTravel_Helpers_Strings::get(); 
+	}
+	$strings = isset( $string['enquiry'] ) ? $string['enquiry'] : apply_filters( 'wp_travel_trip_enquiry_label', __( 'Enquiry', 'wp-travel' ) ) ;
 
 	ob_start();
 
@@ -109,12 +114,12 @@ function wptravel_enquiries_admin_default_email_content() {
 			<tr class="wp-travel-content" style="background: #fff;">
 				<td colspan="2" align="left" class="wp-travel-content-top" style="background: #fff;box-sizing: border-box;margin: 0;padding: 20px 25px;">
 					<p style="line-height: 1.55;font-size: 14px;"><?php esc_html_e( 'Hello', 'wp-travel' ); ?> {sitename} <?php esc_html_e( 'Admin', 'wp-travel' ); ?>,</p>
-					<p style="line-height: 1.55;font-size: 14px;"><?php esc_html_e( 'You have received trip enquiry from', 'wp-travel' ); ?> {customer_name}:</p>
+					<p style="line-height: 1.55;font-size: 14px;"><?php esc_html_e( 'You have received trip ' . strtolower( $strings ) . ' from', 'wp-travel' ); ?> {customer_name}:</p>
 				</td>
 			</tr>
 			<tr class="wp-travel-content" style="background: #fff;">
 				<td colspan="2" align="left" class="wp-travel-content-title" style="background: #fff;box-sizing: border-box;margin: 0;padding: 0px 0px 8px 25px;">				
-					<h3 style="font-size: 16px;line-height: 1;margin: 0;margin-top: 30px;"><b><?php esc_html_e( 'Enquiry Details', 'wp-travel' ); ?>:</b></h3>
+					<h3 style="font-size: 16px;line-height: 1;margin: 0;margin-top: 30px;"><b><?php esc_html_e( $strings . ' Details', 'wp-travel' ); ?>:</b></h3>
 				</td>
 			</tr>
 			<tr class="wp-travel-content" style="background: #fff;">
@@ -149,7 +154,7 @@ function wptravel_enquiries_admin_default_email_content() {
 
 			<tr class="wp-travel-content" style="background: #fff;">
 				<td align="left" style="font-size: 14px;background: #fff;box-sizing: border-box;margin: 0;padding: 0px 0px 8px 25px;">
-					<b><?php esc_html_e( 'Enquiry Message', 'wp-travel' ); ?></b>
+					<b><?php esc_html_e( $strings . ' Message', 'wp-travel' ); ?></b>
 
 				</td>
 				<td align="left" style="font-size: 14px;background: #fff;box-sizing: border-box;margin: 0;padding: 0px 0px 8px 25px;">
@@ -880,6 +885,12 @@ function wptravel_customer_email_template() {
  * @return HTML
  */
 function wptravel_enqueries_admin_email_template() {
+	$strings = array();
+	if ( class_exists( 'WpTravel_Helpers_Strings' ) ) {
+		$string = WpTravel_Helpers_Strings::get(); 
+	}
+	$strings = isset( $string['enquiry'] ) ? $string['enquiry'] : apply_filters( 'wp_travel_trip_enquiry_label', __( 'Enquiry', 'wp-travel' ) ) ;
+
 	ob_start();
 	?>
 	<!DOCTYPE html>
@@ -989,7 +1000,7 @@ function wptravel_enqueries_admin_email_template() {
 			<tr class="wp-travel-content" style="background: #fff;">
 				<td align="left" class="wp-travel-content-top" style="background: #fff;box-sizing: border-box;margin: 0;padding: 20px 25px;">
 					<p style="line-height: 1.55;font-size: 14px;"><?php esc_html_e( 'Hello', 'wp-travel' ); ?> {sitename} <?php esc_html_e( 'Admin', 'wp-travel' ); ?>,</p>
-					<p style="line-height: 1.55;font-size: 14px;"><?php esc_html_e( 'You have received trip enquiry from', 'wp-travel' ); ?> {customer_name}:</p>
+					<p style="line-height: 1.55;font-size: 14px;"><?php esc_html_e( 'You have received trip ' . strtolower( $strings ) . ' from', 'wp-travel' ); ?> {customer_name}:</p>
 				</td>
 			</tr>
 			<tr class="wp-travel-content" style="background: #fff;">
@@ -1050,7 +1061,7 @@ function wptravel_enqueries_admin_email_template() {
 				<td align="left">
 					<table class="wp-travel-content-head full-width" align="left" cellspacing="0" cellpadding="0" style="width: 100%!important;">
 						<tr style="background: #fff;">
-							<td style="font-size: 14px;background: #fff;box-sizing: border-box;margin: 0;padding: 0px 0px 8px 25px;"><b><?php esc_html_e( 'Enquiry Message', 'wp-travel' ); ?></b></td>
+							<td style="font-size: 14px;background: #fff;box-sizing: border-box;margin: 0;padding: 0px 0px 8px 25px;"><b><?php esc_html_e( $strings . ' Message', 'wp-travel' ); ?></b></td>
 						</tr>
 					</table>
 					<table class="wp-travel-content-info full-width" align="left" cellspacing="0" cellpadding="0" style="width: 100%!important;">

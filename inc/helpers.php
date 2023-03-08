@@ -804,6 +804,11 @@ function wptravel_get_trip_duration( $post_id ) {
 		return;
 	}
 	$fixed_departure = WP_Travel_Helpers_Trip_Dates::is_fixed_departure( $post_id );
+	$strings = array();
+	if ( class_exists( 'WpTravel_Helpers_Strings' ) ) {
+		$strings = WpTravel_Helpers_Strings::get();
+	}
+	$days = isset( $strings['days'] ) ? $strings['days'] : __('Days', 'wp-travel' );
 	ob_start();
 	if ( $fixed_departure ) :
 		?>
@@ -822,7 +827,7 @@ function wptravel_get_trip_duration( $post_id ) {
 			<i class="far fa-clock"></i>
 			<span class="wp-travel-trip-duration">
 				<?php if ( (int) $trip_duration > 0 ) : ?>
-					<?php echo esc_html( $trip_duration . __( ' Days', 'wp-travel' ) ); ?>
+					<?php echo esc_html( $trip_duration . ' ' .  $days ); ?>
 				<?php else : ?>
 					<?php esc_html_e( 'N/A', 'wp-travel' ); ?>
 				<?php endif; ?>
@@ -1779,10 +1784,13 @@ function wptravel_user_new_account_created( $customer_id, $new_customer_data, $p
 		$user_subject    = ! empty( $user_email_data['user_subject'] ) ? $user_email_data['user_subject'] : $user_subject;
 		$email_content   = ! empty( $user_email_data['email_content'] ) ? $user_email_data['email_content'] : $email_content;
 		$headers         = ! empty( $user_email_data['headers'] ) ? $user_email_data['headers'] : $headers;
-		if ( ! wp_mail( $user_user_email, $user_subject, $email_content, $headers ) ) {
+		$user_account_mail = apply_filters( 'wp_travel_user_account_mail', true );
+		if ( $user_account_mail == true ) {
+			if ( ! wp_mail( $user_user_email, $user_subject, $email_content, $headers ) ) {
 
-			return false;
+				return false;
 
+			}
 		}
 	}
 }
@@ -2061,8 +2069,12 @@ function wptravel_get_date_diff( $start_date, $end_date ) {
 	$date22       = strtotime( $end_date );
 	$diff         = $date22 - $date11;
 	$diff_in_days = floor( $diff / ( 60 * 60 * 24 ) ) + 1;
-
-	return sprintf( __( '%s days', 'wp-travel' ), $diff_in_days );
+	$strings = array();
+	if ( class_exists( 'WpTravel_Helpers_Strings' ) ) {
+		$strings = WpTravel_Helpers_Strings::get();
+	}
+	$days = isset( $strings['days'] ) ? $strings['days'] : __('Days', 'wp-travel' );
+	return sprintf( __( '%s ' . $days, 'wp-travel' ), $diff_in_days );
 
 }
 
@@ -2264,18 +2276,19 @@ function wptravel_sort_form_fields( $fields ) {
  * Get Inquiry Link.
  */
 function wptravel_get_inquiry_link() {
+	$strings = array();
+	if ( class_exists( 'WpTravel_Helpers_Strings' ) ) {
+		$string = WpTravel_Helpers_Strings::get(); 
+	}
+	$strings = isset( $string['trip_enquiry'] ) ? $string['trip_enquiry'] : apply_filters( 'wp_travel_trip_enquiry_label', __( 'Trip Enquiry', 'wp-travel' ) ) ;
 
 	ob_start();
-
-	$enquiry_text = apply_filters( 'wp_travel_trip_enquiry_label', __( 'Trip Enquiry', 'wp-travel' ) );
-
 	?>
-
 		<a id="wp-travel-send-enquiries" class="wp-travel-send-enquiries" data-effect="mfp-move-from-top" href="#wp-travel-enquiries">
 			<span class="wp-travel-booking-enquiry">
 				<span class="dashicons dashicons-editor-help"></span>
 				<span>
-					<?php echo esc_html( $enquiry_text ); ?>
+					<?php echo esc_html( $strings ); ?>
 				</span>
 			</span>
 		</a>
@@ -3526,7 +3539,7 @@ function wptravel_frontend_tab_gallery( $gallery_ids ) {
 							?>
 							<li>
 								<a title="<?php echo esc_attr( wp_get_attachment_caption( $gallery_id ) ); ?>" href="<?php echo esc_url( wp_get_attachment_url( $gallery_id ) ); ?>">
-								<img alt="" src="<?php echo esc_attr( $gallery_image[0] ); ?>" />
+								<img alt="" src="<?php echo esc_attr( isset( $gallery_image[0] ) ? $gallery_image[0] : '' ); ?>" />
 								</a>
 							</li>
 							<?php

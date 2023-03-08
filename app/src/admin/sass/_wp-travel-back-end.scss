@@ -1768,6 +1768,12 @@ a.wp-travel-tablenav{
 		border: 1px solid #ddd;
 	}
 }
+#wptravel-theme-install-loader {
+    display: none;
+}
+#wptravel-theme-install-loader svg{
+    background: transparent !important;
+}
 
 .marketplace-module {
 	display: flex;

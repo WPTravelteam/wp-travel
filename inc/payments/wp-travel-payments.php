@@ -519,9 +519,11 @@ function wptravel_send_email_payment( $booking_id ) {
 
 		// To send HTML mail, the Content-type header must be set.
 		$headers = $email->email_headers( $reply_to_email, $client_email );
-
-		if ( ! wp_mail( $admin_email, $admin_payment_subject, $admin_payment_message, $headers ) ) {
-			WPTravel()->notices->add( __( 'Your Payment has been received but the email could not be sent. Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
+		$payment_admin_mail = apply_filters( 'wp_travel_payment_admin_mail', true );
+		if ( $payment_admin_mail == true ) {
+			if ( ! wp_mail( $admin_email, $admin_payment_subject, $admin_payment_message, $headers ) ) {
+				WPTravel()->notices->add( __( 'Your Payment has been received but the email could not be sent. Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
+			}
 		}
 	}
 
@@ -541,9 +543,11 @@ function wptravel_send_email_payment( $booking_id ) {
 
 	// To send HTML mail, the Content-type header must be set.
 	$headers = $email->email_headers( $reply_to_email, $reply_to_email );
-
-	if ( ! wp_mail( $client_email, $client_payment_subject, $client_payment_message, $headers ) ) {
-		WPTravel()->notices->add( __( 'Your Payment has been received but the email could not be sent. Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
+	$payment_client_mail = apply_filters( 'wp_travel_payment_admin_mail', true );
+	if ( $payment_client_mail == true ) {
+		if ( ! wp_mail( $client_email, $client_payment_subject, $client_payment_message, $headers ) ) {
+			WPTravel()->notices->add( __( 'Your Payment has been received but the email could not be sent. Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
+		}
 	}
 
 	$email_data = array(

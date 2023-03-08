@@ -1,6 +1,6 @@
 // Additional lib
 const _ = lodash;
-import RRule from "rrule";
+import { RRule } from "rrule";
 
 /**]
  * @param data array Date row form date table.

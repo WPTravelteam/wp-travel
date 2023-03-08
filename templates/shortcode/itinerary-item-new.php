@@ -153,7 +153,11 @@ $wptravel_enable_sale                      = WP_Travel_Helpers_Trips::is_sale_en
 					?>
 						<span><img src="<?php echo plugins_url( '/wp-travel/assets/images/hiking.svg' ); ?>" alt="">
 						<?php if ( (int) $wptravel_trip_duration > 0 ) : ?>
+<<<<<<< HEAD
 								<?php echo esc_html( $wptravel_trip_duration . __( ' Days', 'wp-travel' ) ); ?>
+=======
+								<?php echo esc_html( $wptravel_trip_duration . ' ' . isset( $wptravel_strings['days'] ) ? $wptravel_strings['days'] : __( ' Days', 'wp-travel' ) ); ?>
+>>>>>>> wensanchay
 							<?php else : ?>
 								<?php esc_html_e( 'N/A', 'wp-travel' ); ?>
 							<?php endif; ?>

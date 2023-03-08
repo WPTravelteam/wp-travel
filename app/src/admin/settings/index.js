@@ -507,7 +507,6 @@ addFilter('wp_travel_tab_content_before_email', 'WPTravel/Settings/Email/Notice'
     ]
     return content
 });
-
 addFilter('wp_travel_custom_global_tabs', 'WPTravel/Settings/Tabs/Notice', (content, allData) => {
     content = [
         <>

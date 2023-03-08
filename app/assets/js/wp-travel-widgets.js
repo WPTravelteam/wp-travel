@@ -202,6 +202,7 @@ jQuery(function($) {
     } );
 
 });
+<<<<<<< HEAD
 
 // PWA
 if ("serviceWorker" in navigator) {
@@ -212,3 +213,5 @@ if ("serviceWorker" in navigator) {
         .catch(err => console.log("service worker not registered", err))
     })
   }
+=======
+>>>>>>> wensanchay

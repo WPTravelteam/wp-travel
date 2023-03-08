@@ -29,7 +29,6 @@ $wp-travel-input-border: rgb(31, 150, 75);
 			.components-panel__body-toggle {
 				padding-left: 70px !important;
 			}
-
 			button:after {
 				font-family: dashicons;
 				content: "\f12a";
@@ -38,7 +37,6 @@ $wp-travel-input-border: rgb(31, 150, 75);
 				left: 40px;
 			}
 		}
-
 		&.gateway-enabled {
 			.components-panel__body-title {
 				button:after {
@@ -48,14 +46,12 @@ $wp-travel-input-border: rgb(31, 150, 75);
 		}
 	}
 }
-
 .license-details__item {
 	margin-bottom: 20px;
 	padding: 20px;
 	background: #fcfcfc;
 	border-bottom: 1px solid #e6e6e6;
 }
-
 .wp-travel-block-payment {
 }
 
@@ -71,7 +67,6 @@ $wp-travel-input-border: rgb(31, 150, 75);
 			left: 50%;
 			transform: translate(-50%, -50%);
 		}
-
 		&.wp-travel-sending-request {
 			&::before {
 				content: "";

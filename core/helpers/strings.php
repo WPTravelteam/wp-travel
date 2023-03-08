@@ -91,6 +91,7 @@ class WpTravel_Helpers_Strings {
 			'trip_date'                 => __( 'Trip date', 'wp-travel' ),
 			'trip_duration'             => __( 'Trip Duration', 'wp-travel' ),
 			'trip_enquiry'              => __( 'Trip Enquiry', 'wp-travel' ),
+			'enquiry'					=> __( 'Enquiry', 'wp-travel' ),
 			'trip_name'                 => __( 'Trip Name', 'wp-travel' ),
 			'trip_type'                 => __( 'Trip Type', 'wp-travel' ),
 			'unit'                      => __( 'Unit', 'wp-travel' ),

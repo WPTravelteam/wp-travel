@@ -69,12 +69,10 @@ registerStore('WPTravel/Admin', {
             case 'UPDATE_REQUEST_SENDING':
                 return { ...state, is_sending_request: action.requesting };
             case 'UPDATE_STATE_CHANGE':
-                console.log("STATE CHANGE::::::", state)
                 return { ...state, has_state_changes: action.isChanged, show_updated_message: true };
             case 'DATA_UPDATED':
                 return { ...state, show_updated_message: action.isUpdated };
             case 'SET_SETTINGS':
-                console.log(action.settings)
                 return {
                     ...state,
                     previous_state: action.settings,
