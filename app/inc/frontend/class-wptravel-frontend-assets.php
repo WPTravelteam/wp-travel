@@ -135,7 +135,7 @@ class WpTravel_Frontend_Assets {
 
 		// Styles for all Pages.
 		wp_enqueue_style( 'dashicons' );
-		wp_enqueue_style( 'jquery-datepicker-lib' );
+		// wp_enqueue_style( 'jquery-datepicker-lib' );
 
 		// Scripts for all .
 		wp_localize_script( 'jquery-datepicker-lib', 'wp_travel', $wp_travel );
@@ -415,6 +415,7 @@ class WpTravel_Frontend_Assets {
 				'jquery-ui-accordion',
 				'jquery-datepicker-lib-eng',
 				'jquery-ui-slider',
+				'easy-responsive-tabs', //prashant
 			);
 
 			if ( '' !== $api_key && true === $show_google_map ) {

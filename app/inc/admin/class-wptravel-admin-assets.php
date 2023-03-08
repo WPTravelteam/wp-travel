@@ -42,6 +42,7 @@ class WpTravel_Admin_Assets {
 			wp_enqueue_style( 'select2-style' );
 			wp_enqueue_style( 'wp-travel-popup' );
 			wp_enqueue_style( 'jquery-datepicker-lib' );
+			
 
 			// Scripts.
 			wp_enqueue_script( 'wp-travel-fields-scripts' );

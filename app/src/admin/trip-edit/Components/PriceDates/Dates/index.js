@@ -11,6 +11,7 @@ import TripDatesTimes from './dates-times';
 
 
 import ErrorBoundary from '../../../../../ErrorBoundry/ErrorBoundry';
+import DurationValidation from './DurationValidation';
 
 const __i18n = {
 	..._wp_travel_admin.strings
@@ -94,7 +95,7 @@ const Dates = ( {allData} ) => {
             [storeKey]:[...data]
         })
     }
-    
+    const durationValidation = document.getElementById( 'wp-travel-trip-duration-validation' );
 
     return <ErrorBoundary key="1">
     <div className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-top-border">
@@ -146,7 +147,7 @@ const Dates = ( {allData} ) => {
                     </div>
                 </PanelRow>
                 {/* <Notice status="warning" isDismissible={false}>{__( 'Inventory option will only work in fixed departure date.', 'wp-travel')}</Notice> */}
-
+                { typeof durationValidation != 'undefined' && durationValidation != null && <DurationValidation allData={allData} /> }
             </>
         }
         {applyFilters('wp_travel_after_dates_options', [], allData)}
