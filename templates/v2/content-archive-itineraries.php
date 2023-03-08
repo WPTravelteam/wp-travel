@@ -37,10 +37,7 @@ $trip_price                       = WP_Travel_Helpers_Pricings::get_price( $args
 $regular_price                    = WP_Travel_Helpers_Pricings::get_price( $args_regular );
 
 $locations     = get_the_terms( $trip_id, 'travel_locations' );
-<<<<<<< HEAD
-=======
 $trip_locations     = get_the_terms( $trip_id, 'travel_locations' );
->>>>>>> wensanchay
 $location_name = '';
 $location_link = '';
 if ( $locations && is_array( $locations ) ) {
@@ -54,17 +51,10 @@ if ( $locations && is_array( $locations ) ) {
 		<div class="view-image">
 			<a href="<?php the_permalink(); ?>" class="image-thumb">
 				<div class="image-overlay"></div>
-<<<<<<< HEAD
-				<?php echo wptravel_get_post_thumbnail( $trip_id ); ?>
-			</a>
-			<div class="offer">
-				<span>#<?php echo esc_html( $wp_travel_itinerary->get_trip_code() ); ?></span>
-=======
 				<?php echo apply_filters( 'wp_travel_archive_page_trip_image', wptravel_get_post_thumbnail( $trip_id ), $trip_id ); ?>
 			</a>
 			<div class="offer">
 				<span>#<?php echo esc_html( apply_filters( 'wp_travel_archive_page_trip_code', $wp_travel_itinerary->get_trip_code(), $wp_travel_itinerary, $trip_id ) ); ?></span>
->>>>>>> wensanchay
 			</div>
 		</div>
 
@@ -74,11 +64,7 @@ if ( $locations && is_array( $locations ) ) {
 					<?php do_action( 'wp_travel_before_archive_content_title', $trip_id ); ?>
 					<h2 class="entry-title">
 						<a class="heading-link" href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to: ', 'wp-travel' ) ) ); ?>">
-<<<<<<< HEAD
-							<?php the_title(); ?>
-=======
 							<?php apply_filters( 'wp_travel_archives_page_trip_title', the_title(), $trip_id ); ?>
->>>>>>> wensanchay
 						</a>
 					</h2>
 					<?php do_action( 'wp_travel_after_archive_title', $trip_id ); ?>
@@ -89,51 +75,26 @@ if ( $locations && is_array( $locations ) ) {
 						<i class="fas fa-map-marker-alt"></i>
 						<span>
 							<?php if ( $location_name ) : ?>
-<<<<<<< HEAD
-								<a href="<?php echo esc_url( $location_link ); ?>" ><?php echo esc_html( $location_name ); ?></a>
-								<?php
-							else :
-								esc_html_e( 'N/A', 'wp-travel' );
-=======
 								<a href="<?php echo esc_url( $location_link ); ?>" ><?php echo apply_filters( 'wp_travel_archives_page_trip_location', esc_html( $location_name ), $trip_id ); ?></a>
 								<?php
 							else :
 								esc_html_e( apply_filters( 'wp_travel_archives_page_trip_location', 'N/A', $trip_id), 'wp-travel' );
->>>>>>> wensanchay
 							endif;
 							?>
 						</span>
 					</div>
 					<div class="group-size">
 						<i class="fas fa-users"></i>
-<<<<<<< HEAD
-						<span><?php echo esc_html( wptravel_get_group_size( $trip_id ) ); ?></span>
-					</div>
-				</div>
-				<div class="trip-desc">
-					<?php the_excerpt(); ?>
-=======
 						<span><?php echo esc_html( apply_filters( 'wp_travel_archives_page_trip_group_size', wptravel_get_group_size( $trip_id ), $trip_id ) ); ?></span>
 					</div>
 				</div>
 				<div class="trip-desc">
 					<?php apply_filters( 'wp_travel_archives_page_trip_excerpt', the_excerpt(), $trip_id ); ?>
->>>>>>> wensanchay
 				</div>
 			</div>
 			<div class="right-content">
 				<div class="footer-wrapper">
 					<div class="trip-price">
-<<<<<<< HEAD
-						<?php wptravel_save_offer( $trip_id ); ?>
-						<?php if ( $trip_price > 0 ) : ?>
-							<span class="price-here">
-								<?php echo wptravel_get_formated_price_currency( $trip_price ); //phpcs:ignore ?>
-							</span>
-						<?php endif; ?>
-						<?php if ( $enable_sale ) : ?>
-							<del><?php echo wptravel_get_formated_price_currency( $regular_price, true ); //phpcs:ignore ?></del>
-=======
 						<?php apply_filters( 'wp_trave_archives_page_trip_save_offer', wptravel_save_offer( $trip_id ), $trip_id ); ?>
 						<?php if ( $trip_price > 0 ) : ?>
 							<span class="price-here">
@@ -142,7 +103,6 @@ if ( $locations && is_array( $locations ) ) {
 						<?php endif; ?>
 						<?php if ( $enable_sale ) : ?>
 							<del><?php echo apply_filters('wp_travel_archives_page_trip_price_sale', wptravel_get_formated_price_currency( $regular_price, true ), $trip_id ); //phpcs:ignore ?></del>
->>>>>>> wensanchay
 						<?php endif; ?>
 
 					</div>
@@ -157,11 +117,7 @@ if ( $locations && is_array( $locations ) ) {
 					</div>
 				</div>
 
-<<<<<<< HEAD
-				<a class="wp-block-button__link explore-btn" href="<?php the_permalink(); ?>"><span><?php esc_html_e( 'Explore', 'wp-travel' ); ?></span></a>
-=======
 				<a class="wp-block-button__link explore-btn" href="<?php the_permalink(); ?>"><span><?php esc_html_e( apply_filters( 'wp_travel_archives_page_trip_explore_btn', 'Explore', $trip_id ), 'wp-travel' ); ?></span></a>
->>>>>>> wensanchay
 			</div>
 		</div>
 	</div>
