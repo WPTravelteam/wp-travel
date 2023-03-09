@@ -8,8 +8,9 @@ import options from './Search/options'
 const { colors } = defaultTheme;
 
 const selectStyles = {
-  control: (provided) => ({ ...provided, minWidth: 240, margin: 8 }),
-  menu: () => ({ boxShadow: "inset 0 1px 0 rgba(0, 0, 0, 0.1)" })
+  control: (provided) => ({ ...provided, margin: 8 }),
+  menu: () => ({ boxShadow: "inset 0 1px 0 rgba(0, 0, 0, 0.1)" }),
+  menuPortal: () => ({ zIndex: "1000", width: "240px", position: "absolute", top: "214px", backgroundColor: "white", left: "17px", boxShadow: "inset 0 1px 0 rgba(0, 0, 0, 0.1)" })
 };
 
 export default (props) => {
@@ -27,8 +28,8 @@ export default (props) => {
       let offsetValue = 30
 
       window.innerWidth < 1024 &&
-        window.innerWidth < 768 
-        ? window.innerWidth < 576 
+        window.innerWidth < 768
+        ? window.innerWidth < 576
           ? offsetValue = 150
           : offsetValue = 130
         : offsetValue = 50
@@ -42,38 +43,50 @@ export default (props) => {
   };
 
   return (
-    <Dropdown
-      isOpen={isOpen}
-      onClose={toggleOpen}
-      target={
-        <button className="wp-travel-quick-search" onClick={toggleOpen}>
-          <i
-            className="fa fa-search wp-travel-search-icon"
-            aria-hidden="true"
-          ></i>
-          <span
-            id="wp-travel-quick-search-text"
-          >
-            {__("Quick Search...", "wp-travel")}
-          </span>
-        </button>
-      }
-    >
-      <Select
-        autoFocus
-        backspaceRemovesValue={false}
-        components={{ DropdownIndicator, IndicatorSeparator: null }}
-        controlShouldRenderValue={false}
-        hideSelectedOptions={false}
-        isClearable={false}
-        onChange={e => onSelectChange(e)}
-        options={options}
-        placeholder="Search..."
-        styles={selectStyles}
-        tabSelectsValue={false}
-        value={value}
-      />
-    </Dropdown>
+      <Dropdown
+        isOpen={isOpen}
+        className="wp-travel-quick-search-container"
+        onClose={toggleOpen}
+        target={
+          <button className="wp-travel-quick-search" onClick={toggleOpen}>
+            <i
+              className="fa fa-search wp-travel-search-icon"
+              aria-hidden="true"
+            ></i>
+            <span
+              id="wp-travel-quick-search-text"
+            >
+              {__("Quick Search...", "wp-travel")}
+            </span>
+          </button>
+        }
+      >
+        <Select
+          theme={(theme) => ({
+            ...theme,
+            borderRadius: ".5rem",
+            colors: {
+              ...theme.colors,
+              primary25: "rgb(236 248 244)",
+              primary50: "rgb(204, 204, 204)",
+              primary: "rgb(7 152 18)"
+            }
+          })}
+          className="wp-travel-searchbox-container"
+          autoFocus
+          backspaceRemovesValue={false}
+          components={{ DropdownIndicator, IndicatorSeparator: null }}
+          controlShouldRenderValue={false}
+          hideSelectedOptions={false}
+          isClearable={false}
+          onChange={e => onSelectChange(e)}
+          options={options}
+          placeholder="Search..."
+          styles={selectStyles}
+          tabSelectsValue={false}
+          value={value}
+        />
+      </Dropdown>
   );
 };
 
@@ -91,6 +104,7 @@ const Menu = (props) => {
         left: '20%',
         right: '20%',
         width: '60%',
+        maxWidth: '800px',
         zIndex: 1000
       }}
       {...props}
@@ -105,7 +119,7 @@ const Backdrop = (props) => (
       top: 0,
       right: 0,
       position: "fixed",
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      backgroundColor: 'rgba(0, 0, 0, 0.7)',
       zIndex: 200
     }}
     {...props}

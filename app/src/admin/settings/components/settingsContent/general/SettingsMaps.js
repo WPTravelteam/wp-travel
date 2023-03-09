@@ -1,9 +1,7 @@
-import {useRef} from '@wordpress/element'
 import { applyFilters } from "@wordpress/hooks";
 import { useSelect, dispatch } from "@wordpress/data";
 import { _n, __ } from "@wordpress/i18n";
-import { PanelRow, TextControl, Icon } from "@wordpress/components";
-import { info } from "@wordpress/icons";
+import { PanelRow, TextControl } from "@wordpress/components";
 import Tooltip from '../../UI/Tooltip';
 
 import Select from "react-select";
@@ -18,8 +16,6 @@ export default () => {
     google_map_zoom_level,
     options,
   } = allData;
-
-  console.log(allData)
 
   const { updateSettings } = dispatch("WPTravel/Admin");
 
@@ -36,8 +32,6 @@ export default () => {
   let selectedMap = mapOptions.filter((opt) => {
     return opt.value == wp_travel_map;
   });
-
-  let thisRef = useRef();
 
   return (
     <>
@@ -109,8 +103,7 @@ export default () => {
               </label>
               <div id="wp-travel-api-key" className="wp-travel-field-value">
                 <TextControl
-                    ref={thisRef}
-                    id="api-key"
+                  id="api-key"
                   // help={__( 'To get your Google map API keys click here', 'wp-travel' )}
                   value={google_map_api_key}
                   onChange={(value) => {

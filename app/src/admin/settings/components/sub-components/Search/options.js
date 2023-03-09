@@ -487,7 +487,7 @@ const options = [
         tab: "third-party",
       },
       {
-        value: "icon-color",
+        value: "wishlists-icon-color",
         label: "Icon color",
         tab: "third-party",
       },

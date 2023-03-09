@@ -91,10 +91,34 @@ $wp-travel-input-border: rgb(31, 150, 75);
 #wp-travel-settings-block-wrapper {
 	#aside-wrap {
 		width: 100%;
-		min-width: 250px;
-		max-width: 300px;
 		padding: 1rem;
-		margin: 20px;
+		margin: 0;
+		max-width: 350px;
+
+		#aside-buttons-container {
+			display: flex;
+			flex-direction: column;
+		}
+
+		#wp-travel-aside-block-button {
+			width: 100%;
+			display: inline-block;
+			border-radius: 0.5rem;
+			background-color: $wp-travel-green;
+			color: $wp-travel-white;
+			padding: 0.75rem 0.5rem;
+			text-decoration: none;
+			font-size: 14px;
+			max-width: 350px;
+		}
+
+		#wp_travel_support_block_id {
+			width: 100%;
+		}
+
+		#wp_travel_doc_block_id {
+			width: 100%;
+		}
 	}
 }
 
@@ -863,6 +887,14 @@ $wp-travel-input-border: rgb(31, 150, 75);
 	box-shadow: 0px 1px 3px $wp-travel-shadow;
 	transition: all 0.25s ease-in-out;
 
+	input:focus,
+	select:focus,
+	textarea:focus {
+		border-color: $wp-travel-green;
+		box-shadow: none;
+		outline: 2px solid transparent;
+	}
+
 	.wp-travel-logo-container {
 		display: flex;
 		justify-content: center;
@@ -871,6 +903,11 @@ $wp-travel-input-border: rgb(31, 150, 75);
 		font-size: 1.5rem;
 		font-weight: 600;
 		color: $wp-travel-green;
+	}
+
+	.wp-travel-searchbox-container{
+		border-radius: .5rem;
+    	overflow: hidden;
 	}
 
 	.wp-travel-quick-search {
@@ -882,6 +919,7 @@ $wp-travel-input-border: rgb(31, 150, 75);
 		background-color: $wp-travel-white;
 		box-shadow: 0 1px 3px 0px $wp-travel-shadow;
 		width: 100%;
+		min-width: 200px;
 		transition: 0.2s ease-in-out;
 
 		.wp-travel-search-icon {
@@ -1369,6 +1407,35 @@ $wp-travel-input-border: rgb(31, 150, 75);
 }
 
 @media screen and (min-width: 640px) {
+	#wp-travel-settings-block-wrapper {
+		#aside-wrap {
+			padding: 2rem;
+
+			#aside-buttons-container {
+				flex-direction: row;
+				gap: 2rem;
+
+				#wp-travel-aside-block-button {
+					width: 100%;
+					display: inline-block;
+					border-radius: 0.5rem;
+					background-color: $wp-travel-green;
+					color: $wp-travel-white;
+					padding: 0.75rem 0.5rem;
+					text-decoration: none;
+					font-size: 14px;
+					max-width: 350px;
+				}
+			}
+
+			#aside-reviews-container {
+				#wp_travel_review_block_id {
+					width: 520px;
+				}
+			}
+		}
+	}
+
 	.wp-admin.itinerary-booking_page_settings {
 		#wpbody-content {
 			.components-base-control__field .components-flex {
