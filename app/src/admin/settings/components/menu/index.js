@@ -16,6 +16,7 @@ export default (props) => {
 
     const { activeTab, handleTabClick, tabs, className, isMobileNavOpen, closeMenu } = props
 
+
     return (
         <>
             {isMobileNavOpen && window.innerWidth < 768
@@ -25,7 +26,10 @@ export default (props) => {
                 {isMobileNavOpen && window.innerWidth < 768
                     && <div className="wp-travel-mobile-menu-close" onClick={closeMenu}><i className='fa fa-times wp-travel-icon-close'></i></div>
                 }
-                <div className="wp-travel-logo-container">{__("WP Travel", "wp-travel")}</div>
+                <div className="wp-travel-logo-container">
+                    <img id="wp-travel-logo" src={_wp_travel.plugin_url + "assets/images/wp-travel-log.png"}></img>
+                    {__("WP Travel", "wp-travel")}
+                </div>
 
                 <Search handleTabClick={handleTabClick} />
                 

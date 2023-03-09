@@ -30,8 +30,8 @@ export default (props) => {
       window.innerWidth < 1024 &&
         window.innerWidth < 768
         ? window.innerWidth < 576
-          ? offsetValue = 150
-          : offsetValue = 130
+          ? offsetValue = 130
+          : offsetValue = 150
         : offsetValue = 50
 
       let element = document.getElementById("wp-travel-" + selectedOption.value)

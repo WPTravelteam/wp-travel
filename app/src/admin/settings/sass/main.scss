@@ -89,6 +89,8 @@ $wp-travel-input-border: rgb(31, 150, 75);
 }
 
 #wp-travel-settings-block-wrapper {
+	margin-top: 3rem;
+
 	#aside-wrap {
 		width: 100%;
 		padding: 1rem;
@@ -903,11 +905,16 @@ $wp-travel-input-border: rgb(31, 150, 75);
 		font-size: 1.5rem;
 		font-weight: 600;
 		color: $wp-travel-green;
+
+		#wp-travel-logo {
+			width: 40px;
+			margin-right: 10px;
+		}
 	}
 
-	.wp-travel-searchbox-container{
-		border-radius: .5rem;
-    	overflow: hidden;
+	.wp-travel-searchbox-container {
+		border-radius: 0.5rem;
+		overflow: hidden;
 	}
 
 	.wp-travel-quick-search {
