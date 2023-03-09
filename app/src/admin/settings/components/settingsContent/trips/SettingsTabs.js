@@ -64,7 +64,7 @@ export default () => {
                 <ErrorBoundary>
                     {applyFilters('wp_travel_custom_global_tabs', [], allData)}
 
-                    <div className="wp-travel-block-section wp-travel-block-sortable">
+                    <div id="wp-travel-tabs" className="wp-travel-block-section wp-travel-block-sortable">
                         <ReactSortable
                             list={global_tab_settings}
                             setList={sorted => SortTabs(sorted)}

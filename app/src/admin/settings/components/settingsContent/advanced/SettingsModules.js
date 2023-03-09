@@ -107,7 +107,7 @@ export default () => {
                                     title="Pro Modules"
                                     initialOpen={false}
                                 >
-                                    <label className="enable-all-btn">
+                                    <label id="wp-travel-modules-pro" className="enable-all-btn">
                                         <p className="description">{__('Enable/Disable All Pro Modules', 'wp-travel')}</p>
                                         <ToggleControl
                                             checked={enableProModules}
@@ -170,7 +170,7 @@ export default () => {
                                     title="Payment Modules"
                                     initialOpen={false}
                                 >
-                                    <label className="enable-all-btn">
+                                    <label id="wp-travel-modules-payment" className="enable-all-btn">
                                         <p className="description">{__('Enable/Disable All Payment Modules', 'wp-travel')}</p>
                                         <ToggleControl
                                             checked={enablePaymentModules}
@@ -233,7 +233,7 @@ export default () => {
                                     title="Map Modules"
                                     initialOpen={false}
                                 >
-                                    <div className="wptravel-modules-list">
+                                    <div id="wp-travel-modules-map" className="wptravel-modules-list">
                                         {mapModules.map((addonsKey, i) => {
                                             // Do not display pro.
                                             if ('show_wp_travel_pro' === addonsKey) {

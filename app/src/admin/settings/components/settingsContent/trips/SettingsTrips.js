@@ -61,7 +61,7 @@ export default () => {
                     {applyFilters('wp_travel_tab_content_before_trips', [], allData)}
                     <PanelRow>
                         <label>{__('Hide related trips', 'wp-travel')}</label>
-                        <div id="wp-travel-hide-related-trips" className="wp-travel-field-value">
+                        <div id="wp-travel-trips-settings-hide-related-trips" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={hide_related_itinerary == 'yes'}
                                 onChange={() => {
@@ -111,7 +111,7 @@ export default () => {
                             </Tooltip>
                         </label>
 
-                        <div id="wp-travel-trip-date-listing" className="wp-travel-field-value">
+                        <div id="wp-travel-trips-settings-trip-date-listing" className="wp-travel-field-value">
                             <SelectControl
                                 value={trip_date_listing}
                                 options={[
@@ -130,44 +130,13 @@ export default () => {
                                     })
                                 }}
                             />
-                            {/* <Select
-                                theme={(theme) => ({
-                                    ...theme,
-                                    borderRadius: ".5rem",
-                                    colors: {
-                                        ...theme.colors,
-                                        primary25: 'rgb(231, 236, 243)',
-                                        primary50: 'rgb(174, 186, 202)',
-                                        primary: 'rgb(31, 150, 75)',
-                                    },
-                                })}
-                                options={[
-                                    {
-                                        label: __('Calendar', 'wp-travel'),
-                                        value: 'calendar',
-                                        init : returnParent
-                                    }, {
-                                        label: __('Dates', 'wp-travel'),
-                                        value: 'dates',
-                                        init : returnParent
-                                    }
-                                ]}
-                                value={trip_date_listing == "dates" && trip_date_listing}
-                                onChange={(value) => {
-                                        updateSettings({
-                                            ...allData,
-                                            trip_date_listing: value
-                                        })
-                                    }
-                                }
-                            /> */}
                             <p className="description"></p>
                         </div>
                     </PanelRow>
                     {/* } */}
                     <PanelRow>
                         <label>{__('Enable Expired Trip Option', 'wp-travel')}</label>
-                        <div id="wp-travel-enable-expired-trip" className="wp-travel-field-value">
+                        <div id="wp-travel-trips-settings-enable-expired-trip" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={enable_expired_trip_option == 'yes'}
                                 onChange={() => {
@@ -183,7 +152,7 @@ export default () => {
                     {'undefined' !== typeof enable_expired_trip_option && 'yes' === enable_expired_trip_option &&
                         <PanelRow>
                             <label>{__('If expired, trip set to expired/delete', 'wp-travel')}</label>
-                            <div id="wp-travel-if-expired-trip" className="wp-travel-field-value">
+                            <div id="wp-travel-trips-settings-if-expired-trip" className="wp-travel-field-value">
                                 <SelectControl
                                     value={expired_trip_set_to}
                                     options={[
@@ -207,7 +176,7 @@ export default () => {
                     }
                     <PanelRow>
                         <label>{__('Disable Star Rating For Admin', 'wp-travel')}</label>
-                        <div id="wp-travel-disable-star-rating" className="wp-travel-field-value">
+                        <div id="wp-travel-trips-settings-disable-star-rating" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={disable_admin_review == 'yes'}
                                 onChange={() => {

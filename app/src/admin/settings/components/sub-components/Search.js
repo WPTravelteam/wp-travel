@@ -20,12 +20,20 @@ export default (props) => {
     setIsOpen((prevIsOpen) => !prevIsOpen);
   };
 
-  const onSelectChange = (tab) => {
+  const onSelectChange = (selectedOption) => {
     toggleOpen();
-    props.handleTabClick(tab.tab)
+    props.handleTabClick(selectedOption.tab)
     setTimeout(() => {
-      let element = document.getElementById("wp-travel-" + tab.value)
-      let offsetValue = 50
+      let offsetValue = 30
+
+      window.innerWidth < 1024 &&
+        window.innerWidth < 768 
+        ? window.innerWidth < 576 
+          ? offsetValue = 150
+          : offsetValue = 130
+        : offsetValue = 50
+
+      let element = document.getElementById("wp-travel-" + selectedOption.value)
       if (element != undefined) {
         let offsetPosition = element.getBoundingClientRect().top + window.scrollY - offsetValue
         window.scrollTo({ top: offsetPosition, behavior: "smooth" })
@@ -89,7 +97,7 @@ const Menu = (props) => {
     />
   );
 };
-const Blanket = (props) => (
+const Backdrop = (props) => (
   <div
     style={{
       bottom: 0,
@@ -97,7 +105,7 @@ const Blanket = (props) => (
       top: 0,
       right: 0,
       position: "fixed",
-      backgroundColor: 'rgba(255, 255, 255, 0.7)',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
       zIndex: 200
     }}
     {...props}
@@ -107,7 +115,7 @@ const Dropdown = ({ children, isOpen, target, onClose }) => (
   <div style={{ position: "relative" }}>
     {target}
     {isOpen ? <Menu>{children}</Menu> : null}
-    {isOpen ? <Blanket onClick={onClose} /> : null}
+    {isOpen ? <Backdrop onClick={onClose} /> : null}
   </div>
 );
 const Svg = (p) => (
