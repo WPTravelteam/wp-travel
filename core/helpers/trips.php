@@ -185,12 +185,16 @@ class WpTravel_Helpers_Trips {
 			$minimum_partial_payout_percent = $settings['minimum_partial_payout'];
 		}
 
-		$days  = get_post_meta( $trip_id, 'wp_travel_trip_duration', true );
-		$night = get_post_meta( $trip_id, 'wp_travel_trip_duration_night', true );
+		$days                = get_post_meta( $trip_id, 'wp_travel_trip_duration', true );
+		$night               = get_post_meta( $trip_id, 'wp_travel_trip_duration_night', true );
+		$duration_start_date = get_post_meta( $trip_id, 'wp_travel_trip_duration_start_date', true );
+		$duration_end_date = get_post_meta( $trip_id, 'wp_travel_trip_duration_end_date', true );
 
 		$trip_duration = array(
-			'days'   => $days,
-			'nights' => $night,
+			'days'   		=> $days,
+			'nights' 		=> $night,
+			// 'start_date' 	=> isset( $duration_start_date ) ? $duration_start_date : '',
+			// 'end_date'   	=> isset( $duration_end_date ) ? $duration_end_date : '',
 		);
 		$trip_data     = array(
 			'id'                                => $trip->ID,
@@ -395,8 +399,13 @@ class WpTravel_Helpers_Trips {
 		if ( ! empty( $trip_data->trip_duration ) ) {
 			$days   = isset( $trip_data->trip_duration['days'] ) ? $trip_data->trip_duration['days'] : 0;
 			$nights = isset( $trip_data->trip_duration['nights'] ) ? $trip_data->trip_duration['nights'] : 0;
+			$duration_start_date = isset( $trip_data->trip_duration['start_date'] ) ? $trip_data->trip_duration['start_date'] : '';
+			$duration_end_date = isset( $trip_data->trip_duration['end_date'] ) ? $trip_data->trip_duration['end_date'] : '';
 			update_post_meta( $trip_id, 'wp_travel_trip_duration', $days );
 			update_post_meta( $trip_id, 'wp_travel_trip_duration_night', $nights );
+
+			update_post_meta( $trip_id, 'wp_travel_trip_duration_start_date', $duration_start_date );
+			update_post_meta( $trip_id, 'wp_travel_trip_duration_end_date', $duration_end_date );
 		}
 		$trip_facts = array();
 		if ( ! empty( $trip_data->trip_facts ) ) {

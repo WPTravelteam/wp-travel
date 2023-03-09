@@ -44,6 +44,7 @@ class WpTravel_Frontend_Assets {
 		$all_localized = WpTravel_Helpers_Localize::get();
 		$wp_travel     = isset( $all_localized['wp_travel'] ) ? $all_localized['wp_travel'] : array(); // localized data for WP Travel below V 4.0.
 
+
 		$settings     = wptravel_get_settings();
 		$switch_to_v4 = wptravel_is_react_version_enabled();
 
@@ -135,7 +136,7 @@ class WpTravel_Frontend_Assets {
 
 		// Styles for all Pages.
 		wp_enqueue_style( 'dashicons' );
-		// wp_enqueue_style( 'jquery-datepicker-lib' );
+		wp_enqueue_style( 'jquery-datepicker-lib' );
 
 		// Scripts for all .
 		wp_localize_script( 'jquery-datepicker-lib', 'wp_travel', $wp_travel );

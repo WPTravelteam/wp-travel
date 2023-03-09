@@ -813,7 +813,7 @@ function wptravel_get_trip_duration( $post_id ) {
 	if ( $fixed_departure ) :
 		?>
 		<div class="wp-travel-trip-time trip-duration">
-			<i class="far fa-calendar-alt"></i>
+			<?php echo apply_filters( 'wp_travel_archive_page_duration_icon', '<i class="far fa-calendar-alt"></i>' ); ?>
 			<span class="wp-travel-trip-duration">
 				<?php echo wptravel_get_fixed_departure_date( $post_id ); ?>
 			</span>
@@ -824,7 +824,7 @@ function wptravel_get_trip_duration( $post_id ) {
 		$trip_duration = ( $trip_duration ) ? $trip_duration : 0;
 		?>
 		<div class="wp-travel-trip-time trip-duration">
-			<i class="far fa-clock"></i>
+			<?php echo apply_filters( 'wp_travel_archive_page_duration_icon', '<i class="far fa-clock"></i>' ); ?>
 			<span class="wp-travel-trip-duration">
 				<?php if ( (int) $trip_duration > 0 ) : ?>
 					<?php echo esc_html( $trip_duration . ' ' .  $days ); ?>
