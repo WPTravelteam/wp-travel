@@ -72,7 +72,7 @@ if ( $locations && is_array( $locations ) ) {
 				<div class="trip-icons">
 					<?php wptravel_get_trip_duration( $trip_id ); ?>
 					<div class="trip-location">
-						<i class="fas fa-map-marker-alt"></i>
+						<?php echo apply_filters( 'wp_travel_archive_page_location_icon', '<i class="fas fa-map-marker-alt"></i>' ); ?>
 						<span>
 							<?php if ( $location_name ) : ?>
 								<a href="<?php echo esc_url( $location_link ); ?>" ><?php echo apply_filters( 'wp_travel_archives_page_trip_location', esc_html( $location_name ), $trip_id ); ?></a>
@@ -84,7 +84,7 @@ if ( $locations && is_array( $locations ) ) {
 						</span>
 					</div>
 					<div class="group-size">
-						<i class="fas fa-users"></i>
+						<?php echo apply_filters( 'wp_travel_archive_page_group_size_icon', '<i class="fas fa-users"></i>' ); ?>
 						<span><?php echo esc_html( apply_filters( 'wp_travel_archives_page_trip_group_size', wptravel_get_group_size( $trip_id ), $trip_id ) ); ?></span>
 					</div>
 				</div>
