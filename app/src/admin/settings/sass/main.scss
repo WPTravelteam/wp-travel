@@ -1680,6 +1680,8 @@ $wp-travel-input-border: rgb(31, 150, 75);
 @media screen and (min-width: 1366px) {
 	#aside-wrap {
 		display: block;
+		max-width: 340px;
+		padding-top: 0;
 	}
 
 	#wp-travel-settings-menu {
