@@ -479,7 +479,7 @@ function wptravel_meta_box_review() {
 			<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Reviews', 'wp-travel' ); ?></span>
 			<span class="toggle-indicator" aria-hidden="true"></span>
 		</button>
-		<h2 class="hndle ui-sortable-handle">
+		<h2 class="wp-travel-aside-wrap-block-title">
 			<span><?php esc_html_e( 'Reviews', 'wp-travel' ); ?></span>
 		</h2>
 		<div class="inside">
@@ -501,7 +501,7 @@ function wptravel_meta_box_review() {
 					<?php
 			}
 			?>
-			<div class="thumbnail">
+			<div class="thumbnail last">
 				<h5><?php esc_html_e( '"Please fill free to leave us a review, if you found this plugin helpful."', 'wp-travel' ); ?></h5>
 				<p class="text-center">
 					<a id="wp-travel-aside-block-button" href="https://wordpress.org/plugins/wp-travel/#reviews" target="_blank">

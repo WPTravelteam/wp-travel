@@ -77,10 +77,14 @@ class WP_Travel_Admin_Settings { // @phpcs:ignore
 			<div id="wp-travel-settings-block-wrapper">
 				<div id="wp-travel-settings-block"></div>
 				<div id="aside-wrap" class="single-module-side">
+					<div class="aside-wrap-buttons-container">
+						<?php
+						wptravel_meta_box_support();
+						wptravel_meta_box_documentation();
+					?>
+					</div>
 					<?php
-					wptravel_meta_box_support();
-					wptravel_meta_box_documentation();
-					wptravel_meta_box_review();
+						wptravel_meta_box_review();
 					?>
 				</div>
 			</div>
