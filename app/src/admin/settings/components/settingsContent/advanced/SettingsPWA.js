@@ -146,9 +146,10 @@ export default () => {
                                         <PanelRow>
                                             <label>{__('APP Logo', 'wp-travel')}</label>
                                             <div id="wp-travel-pwa-app-logo" className="wp-travel-field-value">
-                                                <img src={pwa_app_logo} />
-                                                <br />
-                                                <button className="components-button" href="#" id="upload-app-logo" onClick={onClick}>{__('Change Image')}</button>
+                                                <div className="wp-travel-field-image-container">
+                                                    <img src={pwa_app_logo} />
+                                                </div>
+                                                <button className="components-button is-secondary" href="#" id="upload-app-logo" onClick={onClick}>{__('Change Image')}</button>
                                                 <p className="description">{__('The image must be of size 192px*192px', 'wp-travel')}</p>
                                             </div>
                                         </PanelRow>

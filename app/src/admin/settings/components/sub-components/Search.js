@@ -43,50 +43,54 @@ export default (props) => {
   };
 
   return (
-      <Dropdown
-        isOpen={isOpen}
-        className="wp-travel-quick-search-container"
-        onClose={toggleOpen}
-        target={
-          <button className="wp-travel-quick-search" onClick={toggleOpen}>
-            <i
-              className="fa fa-search wp-travel-search-icon"
-              aria-hidden="true"
-            ></i>
-            <span
-              id="wp-travel-quick-search-text"
-            >
-              {__("Quick Search...", "wp-travel")}
-            </span>
-          </button>
-        }
-      >
-        <Select
-          theme={(theme) => ({
-            ...theme,
-            borderRadius: ".5rem",
-            colors: {
-              ...theme.colors,
-              primary25: "rgb(236 248 244)",
-              primary50: "rgb(204, 204, 204)",
-              primary: "rgb(7 152 18)"
-            }
-          })}
-          className="wp-travel-searchbox-container"
-          autoFocus
-          backspaceRemovesValue={false}
-          components={{ DropdownIndicator, IndicatorSeparator: null }}
-          controlShouldRenderValue={false}
-          hideSelectedOptions={false}
-          isClearable={false}
-          onChange={e => onSelectChange(e)}
-          options={options}
-          placeholder="Search..."
-          styles={selectStyles}
-          tabSelectsValue={false}
-          value={value}
-        />
-      </Dropdown>
+    <Dropdown
+      isOpen={isOpen}
+      className="wp-travel-quick-search-container"
+      onClose={toggleOpen}
+      target={
+        <button className="wp-travel-quick-search" onClick={toggleOpen}>
+          <i
+            className="fa fa-search wp-travel-search-icon"
+            aria-hidden="true"
+          ></i>
+          <span
+            id="wp-travel-quick-search-text"
+          >
+            {__("Quick Search...", "wp-travel")}
+          </span>
+        </button>
+      }
+    >
+      <div className="wp-travel-modal-wrapper">
+        <div className="wp-travel-modal">
+          <Select
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: ".5rem",
+              colors: {
+                ...theme.colors,
+                primary25: "rgb(236 248 244)",
+                primary50: "rgb(204, 204, 204)",
+                primary: "rgb(7 152 18)"
+              }
+            })}
+            className="wp-travel-searchbox-container"
+            autoFocus
+            backspaceRemovesValue={false}
+            components={{ DropdownIndicator, IndicatorSeparator: null }}
+            controlShouldRenderValue={false}
+            hideSelectedOptions={false}
+            isClearable={false}
+            onChange={e => onSelectChange(e)}
+            options={options}
+            placeholder="Search..."
+            styles={selectStyles}
+            tabSelectsValue={false}
+            value={value}
+          />
+        </div>
+      </div>
+    </Dropdown>
   );
 };
 
