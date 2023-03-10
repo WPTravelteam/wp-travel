@@ -57,7 +57,7 @@ export default () => {
                     <h3 className='wp-travel-option-header'>{__('Test Payment')}</h3>
                     <PanelRow>
                         <label>{__('Test Mode', 'wp-travel')}</label>
-                        <div className="wp-travel-field-value">
+                        <div id="wp-travel-debug-test-mode" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={wt_test_mode == 'yes'}
                                 onChange={() => {
@@ -72,7 +72,7 @@ export default () => {
                     </PanelRow>
                     <PanelRow>
                         <label>{__('Test Email', 'wp-travel')}</label>
-                        <div className="wp-travel-field-value">
+                        <div id="wp-travel-debug-test-email" className="wp-travel-field-value">
                             <TextControl
                                 value={wt_test_email}
                                 onChange={
@@ -91,7 +91,7 @@ export default () => {
                     <h3 className='wp-travel-option-header'>{__('Optimized Scripts and Styles', 'wp-travel')}</h3>
                     <PanelRow>
                         <label>{__('Load Combined Scripts', 'wp-travel')}</label>
-                        <div className="wp-travel-field-value">
+                        <div id="wp-travel-debug-load-combined-scripts" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={wt_load_optimized_script == 'yes'}
                                 onChange={() => {
@@ -106,7 +106,7 @@ export default () => {
                     </PanelRow>
                     <PanelRow>
                         <label>{__('Load Minified Scripts', 'wp-travel')}</label>
-                        <div className="wp-travel-field-value">
+                        <div id="wp-travel-debug-load-minified-scripts" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={load_minified_scripts == 'yes'}
                                 onChange={() => {

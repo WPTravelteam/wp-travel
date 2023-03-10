@@ -421,23 +421,13 @@ function wptravel_marketplace_page() {
  */
 function wptravel_meta_box_support() {
 	?>
-	<div id="wp_travel_support_block_id" class="postbox ">
-		<button type="button" class="handlediv" aria-expanded="true">
-			<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Support', 'wp-travel' ); ?></span>
-			<span class="toggle-indicator-acc" aria-hidden="true"></span>
-		</button>
-		<h2 class="hndle ui-sortable-handle">
-			<span><?php esc_html_e( 'Support', 'wp-travel' ); ?></span>
-		</h2>
-		<div class="inside">
-
-			<div class="thumbnail">
-				<img src="<?php echo esc_url( plugins_url( '/wp-travel/assets/images/support-image.png' ) ); ?>">
-					<p class="text-justify"><?php esc_html_e( 'Click Below for support.', 'wp-travel' ); ?> </p>
-					<p class="text-center"><a href="http://wptravel.io/support/" target="_blank" class="button button-primary"><?php esc_html_e( 'Get Support Here', 'wp-travel' ); ?></a></p>
-			</div>
-
-		</div>
+	<div id="wp_travel_support_block_id">
+		<p class="text-center">
+			<a id="wp-travel-aside-block-button" href="http://wptravel.io/support/" target="_blank">
+				<i class="fa fa-question-circle"></i>
+				<?php esc_html_e( 'Support', 'wp-travel' ); ?>
+			</a>
+		</p>
 	</div>
 	<?php
 }
@@ -451,23 +441,13 @@ function wptravel_meta_box_support() {
 function wptravel_meta_box_documentation() {
 
 	?>
-	<div id="wp_travel_doc_block_id" class="postbox ">
-		<button type="button" class="handlediv" aria-expanded="true">
-			<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Documentation', 'wp-travel' ); ?></span>
-			<span class="toggle-indicator" aria-hidden="true"></span>
-		</button>
-		<h2 class="hndle ui-sortable-handle">
-			<span><?php esc_html_e( 'Documentation', 'wp-travel' ); ?></span>
-		</h2>
-		<div class="inside">
-
-			<div class="thumbnail">
-				<img src="<?php echo esc_url( plugins_url( '/wp-travel/assets/images/docico.png' ) ); ?>">
-					<p class="text-justify"><?php esc_html_e( 'Click Below for our full Documentation about logo slider.', 'wp-travel' ); ?> </p>
-					<p class="text-center"><a href="http://wptravel.io/documentations/" target="_blank" class="button button-primary"><?php esc_html_e( 'Get Documentation Here', 'wp-travel' ); ?></a></p>
-			</div>
-
-		</div>
+	<div id="wp_travel_doc_block_id">
+		<p class="text-center">
+			<a  id="wp-travel-aside-block-button" href="http://wptravel.io/documentations/" target="_blank">
+				<i class="fa fa-book"></i>
+				<?php esc_html_e( 'Documentation', 'wp-travel' ); ?>
+			</a>
+		</p>
 	</div>
 	<?php
 
@@ -494,12 +474,12 @@ function wptravel_meta_box_review() {
 		),
 	);
 	?>
-	<div id="wp_travel_review_block_id" class="postbox ">
+	<div id="wp_travel_review_block_id">
 		<button type="button" class="handlediv" aria-expanded="true">
 			<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Reviews', 'wp-travel' ); ?></span>
 			<span class="toggle-indicator" aria-hidden="true"></span>
 		</button>
-		<h2 class="hndle ui-sortable-handle">
+		<h2 class="wp-travel-aside-wrap-block-title">
 			<span><?php esc_html_e( 'Reviews', 'wp-travel' ); ?></span>
 		</h2>
 		<div class="inside">
@@ -523,7 +503,11 @@ function wptravel_meta_box_review() {
 			?>
 			<div class="thumbnail last">
 				<h5><?php esc_html_e( '"Please fill free to leave us a review, if you found this plugin helpful."', 'wp-travel' ); ?></h5>
-				<p class="text-center"><a href="https://wordpress.org/plugins/wp-travel/#reviews" target="_blank" class="button button-primary"><?php esc_html_e( 'Leave a Review', 'wp-travel' ); ?></a></p>
+				<p class="text-center">
+					<a id="wp-travel-aside-block-button" href="https://wordpress.org/plugins/wp-travel/#reviews" target="_blank">
+						<?php esc_html_e( 'Leave a Review', 'wp-travel' ); ?>
+					</a>
+				</p>
 			</div>
 		</div>
 	</div>

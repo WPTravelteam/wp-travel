@@ -47,7 +47,7 @@ export default () => {
                 <ErrorBoundary>
                     <PanelRow>
                         <label>{__('Require Login', 'wp-travel')}</label>
-                        <div className="wp-travel-field-value">
+                        <div id="wp-travel-account-require-login" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={enableCheckoutCustomerRegistration == 'yes'}
                                 onChange={() => {
@@ -63,7 +63,7 @@ export default () => {
 
                     <PanelRow>
                         <label>{__('Enable Registration', 'wp-travel')}</label>
-                        <div className="wp-travel-field-value">
+                        <div id="wp-travel-account-enable-registration" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={enableMyAccountCustomerRegistration == 'yes'}
                                 onChange={() => {
@@ -78,7 +78,7 @@ export default () => {
                     </PanelRow>
                     <PanelRow>
                         <label>{__('Create customer on booking', 'wp-travel')}</label>
-                        <div className="wp-travel-field-value">
+                        <div id="wp-travel-account-create-customer-booking" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={createUserWhileBooking == 'yes'}
                                 onChange={() => {
@@ -95,7 +95,7 @@ export default () => {
                         <>
                             <PanelRow>
                                 <label>{__('Automatically generate username', 'wp-travel')}</label>
-                                <div className="wp-travel-field-value">
+                                <div id="wp-travel-account-automatically-generate-username" className="wp-travel-field-value">
                                     <ToggleControl
                                         checked={generateUsernameFromEmail == 'yes'}
                                         onChange={() => {
@@ -110,7 +110,7 @@ export default () => {
                             </PanelRow>
                             <PanelRow>
                                 <label>{__('Automatically generate password', 'wp-travel')}</label>
-                                <div className="wp-travel-field-value">
+                                <div id="wp-travel-account-automatically-generate-password" className="wp-travel-field-value">
                                     <ToggleControl
                                         checked={generateUserPassword == 'yes'}
                                         onChange={() => {

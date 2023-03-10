@@ -32,7 +32,7 @@ export default () => {
 
                     <PanelRow>
                         <label>{__('Enable multiple travelers', 'wp-travel')}</label>
-                        <div className="wp-travel-field-value">
+                        <div id="wp-travel-checkout-enable-multiple-travelers" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={enable_multiple_travellers == 'yes'}
                                 onChange={() => {

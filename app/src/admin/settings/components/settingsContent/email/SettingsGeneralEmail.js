@@ -35,7 +35,7 @@ export default () => {
                             </span>
                         </Tooltip>
                     </label>
-                    <div className="wp-travel-field-value">
+                    <div id="wp-travel-general-email-settings-from-email" className="wp-travel-field-value">
                         <TextControl
                             value={wp_travel_from_email}
                             onChange={

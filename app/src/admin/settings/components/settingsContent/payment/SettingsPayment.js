@@ -118,7 +118,7 @@ export default () => {
                 <ErrorBoundary>
                     <PanelRow>
                         <label>{__('Partial Payment', 'wp-travel')}</label>
-                        <div className="wp-travel-field-value">
+                        <div id="wp-travel-payment-partial" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={partial_payment == 'yes'}
                                 onChange={() => {
@@ -142,7 +142,7 @@ export default () => {
                                         partial_payouts.length >= 1 && <>
                                             <PanelRow>
                                                 <label>Partial Payout 1 (%)</label>
-                                                <div className="wp-travel-field-value">
+                                                <div id="wp-travel-payment-partial-payout" className="wp-travel-field-value">
                                                     <RangeControl
                                                         value={'undefined' != typeof partial_payouts[0] ? parseFloat(partial_payouts[0]) : 0}
                                                         onChange={
@@ -234,7 +234,7 @@ export default () => {
                         <h3>
                             {__('Payment Gateways', 'wp-travel')}
                         </h3>
-                        <label className="wp-travel-section-header-label">
+                        <label id="wp-travel-payment-gateways" className="wp-travel-section-header-label">
                             <ToggleControl
                                 checked={enableAllGateway}
                                 onChange={(value) => {
@@ -317,7 +317,7 @@ export default () => {
                     <h3>{__('Tax Options', 'wp-travel')}</h3>
                     <PanelRow>
                         <label>{__('Enable Tax', 'wp-travel')}</label>
-                        <div className="wp-travel-field-value">
+                        <div id="wp-travel-payment-tax-options" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={trip_tax_enable == 'yes'}
                                 onChange={() => {
@@ -335,7 +335,7 @@ export default () => {
                         <>
                             <PanelRow>
                                 <label>{__('Tax on Trip prices', 'wp-travel')}</label>
-                                <div className="wp-travel-field-value">
+                                <div id="wp-travel-payment-tax-on-trip" className="wp-travel-field-value">
                                     <RadioControl
                                         selected={trip_tax_price_inclusive}
                                         options={[
@@ -356,7 +356,7 @@ export default () => {
                                 <>
                                     <PanelRow>
                                         <label>{__('Tax Percentage', 'wp-travel')}</label>
-                                        <div className="wp-travel-field-value">
+                                        <div id="wp-travel-payment-tax-percentage" className="wp-travel-field-value">
 
                                             <TextControl
                                                 type="number"

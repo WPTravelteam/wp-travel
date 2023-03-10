@@ -31,7 +31,7 @@ export default () => {
                 <ErrorBoundary>
                     <PanelRow>
                         <label>{__('Enable Trip Enquiry', 'wp-travel')}</label>
-                        <div className="wp-travel-field-value">
+                        <div id="wp-travel-misc-enable-trip-inquiry" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={enable_trip_enquiry_option == 'yes'}
                                 onChange={() => {
@@ -61,7 +61,7 @@ export default () => {
 
                     <PanelRow>
                         <label>{__('GDPR Message', 'wp-travel')}</label>
-                        <div className="wp-travel-field-value">
+                        <div id="wp-travel-misc-gdpr-message" className="wp-travel-field-value">
                             <TextareaControl
                                 value={wp_travel_gdpr_message}
                                 onChange={
@@ -77,7 +77,7 @@ export default () => {
                     </PanelRow>
                     <PanelRow>
                         <label>{__('Open GDPR in new tab', 'wp-travel')}</label>
-                        <div className="wp-travel-field-value">
+                        <div id="wp-travel-misc-open-gdpr-tab" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={open_gdpr_in_new_tab == 'yes'}
                                 onChange={() => {

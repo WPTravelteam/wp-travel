@@ -247,7 +247,6 @@ const WPTravelSettings = () => {
 
     const [isSticky, setIsSticky] = useState(false);
 
-    const menuRef = useRef();
     const stickyRef = useRef();
     const settingsRef = useRef();
 
@@ -288,7 +287,6 @@ const WPTravelSettings = () => {
                 {/* Mobile Menu */}
                 {isMobileNavOpen && window.innerWidth < 768 && createPortal(
                     <Menu
-                        ref={menuRef}
                         className={`${window.innerWidth < 768 ? "wp-travel-active" : ""}`}
                         tabs={tabs}
                         handleTabClick={handleTabClick}
@@ -303,7 +301,7 @@ const WPTravelSettings = () => {
                 <div ref={stickyRef} className="wp-travel-main-container">
                     <div className="wp-travel-settings-container">
                         {/* Side Menu */}
-                        <Menu ref={menuRef} tabs={tabs} handleTabClick={handleTabClick} activeTab={activeTab} />
+                        <Menu tabs={tabs} handleTabClick={handleTabClick} activeTab={activeTab} />
 
                         {/* Settings Section */}
                         <div className="wp-travel-settings-section-wrapper">
@@ -314,7 +312,7 @@ const WPTravelSettings = () => {
                                         {activeTab == tab.name &&
                                             tab.content &&
                                             isValidElement(<tab.content />) &&
-                                            <Transition style={{zIndex: 30}} duration={300} translateX={0} translateY={25}>
+                                            <Transition zIndex={30} duration={300} translateX={0} translateY={25}>
                                                 <tab.content />
                                             </Transition>
                                         }
