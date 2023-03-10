@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { PanelRow } from  '@wordpress/components'
 import { dispatch } from '@wordpress/data'
+const __i18n = {
+	..._wp_travel_admin
+}
 const DurationValidation = ( {allData } ) => {
   const [mydate, MyDate ] = useState('');
   const [myend, MyEnd ] = useState('');
   const { updateTripData } = dispatch('WPTravel/TripEdit');
 
   const { trip_duration } = typeof allData != 'undefined' ? allData : [];
-
+  console.log('date string', _wp_travel);
   const startParams =  {
 		showMonthDropdown: true,
 		// customInput: <DatePickerBtn />, // Just button with custom html.
