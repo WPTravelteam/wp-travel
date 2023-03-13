@@ -1,7 +1,7 @@
-import { useState, useEffect } from '@wordpress/element'
+import { useState, useEffect, createPortal } from '@wordpress/element'
 import { _n, __ } from "@wordpress/i18n";
 
-import Select from "react-select";
+import Select from "../UI/Select";
 import { defaultTheme } from "react-select";
 import options from './Search/options'
 
@@ -10,7 +10,6 @@ const { colors } = defaultTheme;
 const selectStyles = {
   control: (provided) => ({ ...provided, margin: 8 }),
   menu: () => ({ boxShadow: "inset 0 1px 0 rgba(0, 0, 0, 0.1)" }),
-  menuPortal: () => ({ zIndex: "1000", width: "240px", position: "absolute", top: "214px", backgroundColor: "white", left: "17px", boxShadow: "inset 0 1px 0 rgba(0, 0, 0, 0.1)" })
 };
 
 export default (props) => {
@@ -61,79 +60,62 @@ export default (props) => {
         </button>
       }
     >
-      <div className="wp-travel-modal-wrapper">
-        <div className="wp-travel-modal">
-          <Select
-            theme={(theme) => ({
-              ...theme,
-              borderRadius: ".5rem",
-              colors: {
-                ...theme.colors,
-                primary25: "rgb(236 248 244)",
-                primary50: "rgb(204, 204, 204)",
-                primary: "rgb(7 152 18)"
-              }
-            })}
-            className="wp-travel-searchbox-container"
-            autoFocus
-            backspaceRemovesValue={false}
-            components={{ DropdownIndicator, IndicatorSeparator: null }}
-            controlShouldRenderValue={false}
-            hideSelectedOptions={false}
-            isClearable={false}
-            onChange={e => onSelectChange(e)}
-            options={options}
-            placeholder="Search..."
-            styles={selectStyles}
-            tabSelectsValue={false}
-            value={value}
-          />
-        </div>
+      <div className="wp-travel-modal">
+        <Select
+          theme={(theme) => ({
+            ...theme,
+            borderRadius: ".5rem",
+            colors: {
+              ...theme.colors,
+              primary25: "rgb(236 248 244)",
+              primary50: "rgb(204, 204, 204)",
+              primary: "rgb(7 152 18)"
+            }
+          })}
+          className="wp-travel-searchbox-container"
+          autoFocus
+          backspaceRemovesValue={false}
+          components={{ DropdownIndicator, IndicatorSeparator: null }}
+          controlShouldRenderValue={false}
+          hideSelectedOptions={false}
+          isClearable={false}
+          onChange={e => onSelectChange(e)}
+          options={options}
+          placeholder="Search..."
+          styles={selectStyles}
+          tabSelectsValue={false}
+          value={value}
+        />
       </div>
     </Dropdown>
   );
 };
 
 const Menu = (props) => {
-  const shadow = "hsla(218, 50%, 10%, 0.1)";
   return (
     <div
-      style={{
-        backgroundColor: "white",
-        borderRadius: '.5rem',
-        boxShadow: `0 0 0 1px ${shadow}, 0 4px 11px ${shadow}`,
-        marginTop: 8,
-        position: "fixed",
-        top: '20%',
-        left: '20%',
-        right: '20%',
-        width: '60%',
-        maxWidth: '800px',
-        zIndex: 1000
-      }}
+      className="wp-travel-search-modal-menu"
       {...props}
     />
   );
 };
 const Backdrop = (props) => (
   <div
-    style={{
-      bottom: 0,
-      left: 0,
-      top: 0,
-      right: 0,
-      position: "fixed",
-      backgroundColor: 'rgba(0, 0, 0, 0.7)',
-      zIndex: 200
-    }}
+    className='wp-travel-search-modal-backdrop'
     {...props}
   />
 );
 const Dropdown = ({ children, isOpen, target, onClose }) => (
   <div style={{ position: "relative" }}>
     {target}
-    {isOpen ? <Menu>{children}</Menu> : null}
-    {isOpen ? <Backdrop onClick={onClose} /> : null}
+    {isOpen &&
+      createPortal(
+          <div id="wp-travel-search-modal-wrapper">
+            <Menu>{children}</Menu>
+            <Backdrop onClick={onClose} />
+          </div>
+        , document.getElementById('wpwrap'))
+    }
   </div>
 );
 const Svg = (p) => (

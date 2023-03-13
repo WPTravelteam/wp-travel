@@ -1,6 +1,6 @@
 import Select from 'react-select'
 
-export default ({options, value, onChange}) => {
+export default (props) => {
     const theme = (theme) => ({
         ...theme,
         borderRadius: ".5rem",
@@ -16,9 +16,7 @@ export default ({options, value, onChange}) => {
         <>
             <Select
                 theme={theme}
-                options={options}
-                value={value}
-                onChange={onChange}
+                {...props}
             />
         </>
     );
