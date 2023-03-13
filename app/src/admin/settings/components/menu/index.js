@@ -1,7 +1,7 @@
 import { useState } from '@wordpress/element'
 import { _n, __ } from "@wordpress/i18n";
 
-import Search from '../sub-components/Search';
+import Search from '../sub-components/Search/Search';
 
 export default (props) => {
     const [showGeneralTab, setShowGeneralTab] = useState(true);

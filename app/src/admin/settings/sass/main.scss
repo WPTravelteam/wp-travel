@@ -1885,8 +1885,19 @@ $wp-travel-input-border: rgb(7, 152, 18);
 			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 		}
 	}
-}
 
-.wp-travel-full {
-	width: 100%;
+	#wp-travel-settings-block-wrapper {
+		#aside-wrap-container {
+			#aside-wrap {
+				max-width: 350px;
+			}
+		}
+	}
+
+	
+	.wp-travel-trip-settings {
+		.wp-travel-save-changes.is-active.is-sticky {
+			margin-right: 366px;
+		}
+	}
 }

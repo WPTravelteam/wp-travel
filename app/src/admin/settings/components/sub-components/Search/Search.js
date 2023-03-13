@@ -1,9 +1,9 @@
 import { useState, useEffect, createPortal } from '@wordpress/element'
 import { _n, __ } from "@wordpress/i18n";
 
-import Select from "../UI/Select";
+import Select from "../../UI/Select";
 import { defaultTheme } from "react-select";
-import options from './Search/options'
+import options from './options'
 
 const { colors } = defaultTheme;
 
