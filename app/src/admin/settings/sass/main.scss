@@ -170,7 +170,7 @@ $wp-travel-input-border: rgb(7, 152, 18);
 				border-bottom: 1px solid $wp-travel-background;
 			}
 
-			.wp-travel-aside-help-block{
+			.wp-travel-aside-help-block {
 				padding: 1rem;
 			}
 		}
@@ -634,14 +634,13 @@ $wp-travel-input-border: rgb(7, 152, 18);
 				margin: auto;
 				margin-left: 0;
 			}
-
-			.wp-travel-ui.wp-travel-ui-card {
-				border: none;
-				padding: 16px;
-				margin-bottom: 15px;
-				padding-top: 7px;
-				padding-bottom: 0 !important;
-			}
+		}
+		.wp-travel-ui.wp-travel-ui-card {
+			border: none !important;
+			padding: 16px;
+			margin-bottom: 15px;
+			padding-top: 7px;
+			padding-bottom: 0 !important;
 		}
 	}
 }
@@ -808,15 +807,15 @@ $wp-travel-input-border: rgb(7, 152, 18);
 			flex-direction: column;
 			box-sizing: border-box;
 
-			.wp-travel-setting-system-info{
+			.wp-travel-setting-system-info {
 				a {
 					color: $wp-travel-green;
 
-					&:hover{
+					&:hover {
 						color: $wp-travel-green-hover;
 					}
 
-					&:focus{
+					&:focus {
 						outline: none;
 						box-shadow: none;
 					}
@@ -830,7 +829,7 @@ $wp-travel-input-border: rgb(7, 152, 18);
 					border-radius: 0.5rem;
 					align-items: center;
 					justify-content: center;
-	
+
 					&:hover {
 						background-color: $wp-travel-green-hover;
 					}
@@ -1453,7 +1452,7 @@ $wp-travel-input-border: rgb(7, 152, 18);
 		z-index: 100;
 		max-width: 1024px;
 
-		.wp-travel-settings-section{
+		.wp-travel-settings-section {
 			border-radius: 0;
 		}
 	}
@@ -1559,7 +1558,7 @@ $wp-travel-input-border: rgb(7, 152, 18);
 					}
 				}
 
-				.wp-travel-aside-help-block{
+				.wp-travel-aside-help-block {
 					display: flex;
 				}
 			}
@@ -1835,7 +1834,7 @@ $wp-travel-input-border: rgb(7, 152, 18);
 					}
 				}
 
-				.wp-travel-aside-help-block{
+				.wp-travel-aside-help-block {
 					flex-direction: column;
 				}
 			}
