@@ -398,12 +398,23 @@ function wptravel_marketplace_page() {
 
 					</script>
 
-					<div id="aside-wrap" class="single-module-side">
-						<?php
-						wptravel_meta_box_support();
-						wptravel_meta_box_documentation();
-						wptravel_meta_box_review();
-						?>
+					<div id="aside-wrap-container">
+						<div id="aside-wrap" class="single-module-side">
+							<div class="aside-wrap-buttons-container">
+								<h2 class="wp-travel-aside-wrap-block-title">
+									<span><?php esc_html_e( 'Need Help?', 'wp-travel' ); ?></span>
+								</h2>
+								<div class="wp-travel-aside-help-block">
+									<?php
+									wptravel_meta_box_support();
+									wptravel_meta_box_documentation();
+									?>
+								</div>
+							</div>
+							<?php
+								wptravel_meta_box_review();
+							?>
+						</div>
 					</div>
 				</div>
 
@@ -423,7 +434,7 @@ function wptravel_meta_box_support() {
 	?>
 	<div id="wp_travel_support_block_id">
 		<p class="text-center">
-			<a id="wp-travel-aside-block-button" href="http://wptravel.io/support/" target="_blank">
+			<a class="wp-travel-aside-block-button" href="http://wptravel.io/support/" target="_blank">
 				<i class="fa fa-question-circle"></i>
 				<?php esc_html_e( 'Support', 'wp-travel' ); ?>
 			</a>
@@ -443,7 +454,7 @@ function wptravel_meta_box_documentation() {
 	?>
 	<div id="wp_travel_doc_block_id">
 		<p class="text-center">
-			<a  id="wp-travel-aside-block-button" href="http://wptravel.io/documentations/" target="_blank">
+			<a class="wp-travel-aside-block-button" href="http://wptravel.io/documentations/" target="_blank">
 				<i class="fa fa-book"></i>
 				<?php esc_html_e( 'Documentation', 'wp-travel' ); ?>
 			</a>
@@ -496,18 +507,16 @@ function wptravel_meta_box_review() {
 						</p>
 						<h4><?php echo esc_html( $wp_travel_review['title'] ); ?></h4>
 						<h5><?php echo esc_html( $wp_travel_review['description'] ); ?></h5>
-						<span class="by"><strong> <a href="https://profiles.wordpress.org/<?php echo esc_attr( $wp_travel_review['profile'] ); ?>" target="_blank"><?php echo esc_html( $wp_travel_review['profile'] ); ?></a></strong></span>
+						<span class="by"><strong> <a class="wp-travel-anchor" href="https://profiles.wordpress.org/<?php echo esc_attr( $wp_travel_review['profile'] ); ?>" target="_blank"><?php echo esc_html( $wp_travel_review['profile'] ); ?></a></strong></span>
 					</div>
 					<?php
 			}
 			?>
 			<div class="thumbnail last">
-				<h5><?php esc_html_e( '"Please fill free to leave us a review, if you found this plugin helpful."', 'wp-travel' ); ?></h5>
-				<p class="text-center">
-					<a id="wp-travel-aside-block-button" href="https://wordpress.org/plugins/wp-travel/#reviews" target="_blank">
+				<h5><?php esc_html_e( 'Enjoying WP-Travel? Feel free to leave us a review.', 'wp-travel' ); ?></h5>
+					<a class="wp-travel-aside-block-button fit" href="https://wordpress.org/plugins/wp-travel/#reviews" target="_blank">
 						<?php esc_html_e( 'Leave a Review', 'wp-travel' ); ?>
 					</a>
-				</p>
 			</div>
 		</div>
 	</div>

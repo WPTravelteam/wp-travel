@@ -12,7 +12,6 @@ const Transition = ({
 }) => {
     const [styles, setStyles] = useState({
         opacity: 0,
-        zIndex: zIndex,
         transform: `translate(${translateX}, ${translateY}px)`,
         transition: `${property} ${duration}ms ease-in-out`,
         transitionDelay: `${delay}s`
@@ -21,6 +20,7 @@ const Transition = ({
     useEffect(() => {
         setStyles({
             opacity: 1,
+            zIndex: zIndex,
             transform: `translate(${0}, ${0})`,
             transition: `${property} ${duration}ms ease-in-out ${delay}s`,
         })

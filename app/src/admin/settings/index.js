@@ -331,6 +331,18 @@ const WPTravelSettings = () => {
 };
 
 // Tooltips
+addFilter('wp_travel_submodule_downloads_use_relative_path', 'wp_travel', () => {
+    return (
+        <Tooltip
+            text={__('Use image path as var/www/html... instead of http to generate pdf itinerary.', 'wp-travel-authorizenet')}
+        >
+            <span>
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+            </span>
+        </Tooltip>
+    )
+})
+
 addFilter('wp_travel_submodule_currency_exchange_use_api_layer_tooltip', 'wp_travel', () => {
     return (
         <Tooltip

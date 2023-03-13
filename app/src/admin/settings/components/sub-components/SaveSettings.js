@@ -63,7 +63,7 @@ const SaveSettings = (props) => {
                 <a href={sysInfoUrl} title={__i18n.view_system_information} ><span className="dashicons dashicons-info"></span>{__i18n.system_information}</a>
             </div>
         }
-        <PanelRow ref={panelRef} className={`wp-travel-save-changes ${has_state_changes ? "is-active" : ""} ${isSticky ? "is-sticky" : "asdasd"} `}>
+        <PanelRow ref={panelRef} className={`wp-travel-save-changes ${has_state_changes ? "is-active" : ""} ${isSticky ? "is-sticky" : ""} `}>
             <div>
                 {has_state_changes && <div className="wp-travel-save-notice"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>{__('Unsaved changes', 'wp-travel')}</div>}
                 {show_updated_message &&

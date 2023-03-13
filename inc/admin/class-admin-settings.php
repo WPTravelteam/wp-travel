@@ -76,16 +76,23 @@ class WP_Travel_Admin_Settings { // @phpcs:ignore
 		?>
 			<div id="wp-travel-settings-block-wrapper">
 				<div id="wp-travel-settings-block"></div>
-				<div id="aside-wrap" class="single-module-side">
-					<div class="aside-wrap-buttons-container">
+				<div id="aside-wrap-container">
+					<div id="aside-wrap" class="single-module-side">
+						<div class="aside-wrap-buttons-container">
+							<h2 class="wp-travel-aside-wrap-block-title">
+								<span><?php esc_html_e( 'Need Help?', 'wp-travel' ); ?></span>
+							</h2>
+							<div class="wp-travel-aside-help-block">
+							<?php
+							wptravel_meta_box_support();
+							wptravel_meta_box_documentation();
+							?>
+							</div>
+						</div>
 						<?php
-						wptravel_meta_box_support();
-						wptravel_meta_box_documentation();
-					?>
+							wptravel_meta_box_review();
+						?>
 					</div>
-					<?php
-						wptravel_meta_box_review();
-					?>
 				</div>
 			</div>
 		<?php
