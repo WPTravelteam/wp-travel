@@ -48,6 +48,7 @@ const DurationValidation = ( {allData } ) => {
               selected={ typeof trip_duration != 'undefined' && typeof trip_duration.start_date != 'undefined' && trip_duration.start_date || '' }
               { ...startParams }
               onChange={ ( val ) =>{
+                const fomatedDate = moment( val ).fo
                 const newDuration = { ...trip_duration, start_date : val }
                 updateTripData({ ...allData, trip_duration : newDuration });
               }}
