@@ -57,7 +57,7 @@ export default () => {
             <div className='wp-travel-section-content'>
                 <ErrorBoundary>
                     {
-                        _wp_travel.is_pro_enable == 'yes' &&
+                        _wp_travel.is_pro_enable == 'yes' && _wp_travel.pro_version >= 5.4 &&
                         <>
                             <PanelRow>
                                 <label>{__('Enable PWA', 'wp-travel')}</label>

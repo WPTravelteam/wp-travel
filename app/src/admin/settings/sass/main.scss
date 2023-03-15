@@ -808,6 +808,11 @@ $wp-travel-input-border: rgb(7, 152, 18);
 
 					&:hover {
 						background-color: $wp-travel-green-hover;
+						border-color: $wp-travel-green-hover;
+					}
+		
+					&:focus {
+						box-shadow: 0 0 0 1px #fff, 0 0 0 3px $wp-travel-green;
 					}
 				}
 			}

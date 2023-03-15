@@ -23,14 +23,24 @@ export default () => {
             </div>
             <div className='wp-travel-section-content'>
                 <ErrorBoundary>
-                    { applyFilters('wp_travel_settings_tab_misc_fixer_api', [], allData) }
-                    { applyFilters('wp_travel_settings_tab_misc_currency_exchange', [], allData) }
-                    { applyFilters('wp_travel_settings_tab_misc_google_calendar', [], allData) }
-                    { applyFilters('wp_travel_settings_tab_misc_trip_weather_forecast', [], allData) }
-                    { applyFilters('wp_travel_settings_tab_misc_wishlists', [], allData) }
-                    { applyFilters('wp_travel_settings_tab_misc_zapier', [], allData) }
-                    { applyFilters('wp_travel_settings_tab_misc_multiple_currency', [], allData) }
-                    { applyFilters('wp_travel_settings_tab_misc_mailchimp', [], allData) }
+                    {_wp_travel.pro_version < 5.4 && _wp_travel.pro_version != null &&
+                        <Notice isDismissible={false} status="informational">
+                            <strong>{__('Looks like you haven\'t updated your WP Travel Pro plugin.', 'wp-travel')}</strong>
+                            <br />
+                            {__('Update WP Travel Pro to gain access to additional settings.', 'wp-travel')}
+                            <br />
+                            <br />
+                            <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Update WP Travel Pro', 'wp-travel')}</a>
+                        </Notice>
+                    }
+                    {applyFilters('wp_travel_settings_tab_misc_fixer_api', [], allData)}
+                    {applyFilters('wp_travel_settings_tab_misc_currency_exchange', [], allData)}
+                    {applyFilters('wp_travel_settings_tab_misc_google_calendar', [], allData)}
+                    {applyFilters('wp_travel_settings_tab_misc_trip_weather_forecast', [], allData)}
+                    {applyFilters('wp_travel_settings_tab_misc_wishlists', [], allData)}
+                    {applyFilters('wp_travel_settings_tab_misc_zapier', [], allData)}
+                    {applyFilters('wp_travel_settings_tab_misc_multiple_currency', [], allData)}
+                    {applyFilters('wp_travel_settings_tab_misc_mailchimp', [], allData)}
                 </ErrorBoundary>
             </div>
         </>

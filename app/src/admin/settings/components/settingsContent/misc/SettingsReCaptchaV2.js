@@ -18,7 +18,7 @@ export default () => {
                     {__("reCaptcha V2", "wp-travel")}
                 </h2>
                 <p className="wp-travel-section-header-description">
-                    {__("ReCaptcha options according to your choice.", "wp-travel")}
+                    {__("More ReCaptcha options according to your choice.", "wp-travel")}
                 </p>
             </div>
             <div className='wp-travel-section-content'>
