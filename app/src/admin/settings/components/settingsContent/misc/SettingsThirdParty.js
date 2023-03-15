@@ -1,4 +1,4 @@
-import { applyFilters, addFilter } from '@wordpress/hooks';
+import { applyFilters, addFilter, removeFilter } from '@wordpress/hooks';
 import { Notice } from "@wordpress/components";
 import { useSelect } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
@@ -23,23 +23,24 @@ export default () => {
             </div>
             <div className='wp-travel-section-content'>
                 <ErrorBoundary>
-                    {applyFilters('wp_travel_settings_tab_misc_fixer_api', [], allData)}
-                    {applyFilters('wp_travel_settings_tab_misc_currency_exchange', [], allData)}
-                    {applyFilters('wp_travel_settings_tab_misc_google_calendar', [], allData)}
-                    {applyFilters('wp_travel_settings_tab_misc_trip_weather_forecast', [], allData)}
-                    {applyFilters('wp_travel_settings_tab_misc_wishlists', [], allData)}
-                    {applyFilters('wp_travel_settings_tab_misc_zapier', [], allData)}
-                    {applyFilters('wp_travel_settings_tab_misc_multiple_currency', [], allData)}
-                    {applyFilters('wp_travel_settings_tab_misc_mailchimp', [], allData)}
+                    { applyFilters('wp_travel_settings_tab_misc_fixer_api', [], allData) }
+                    { applyFilters('wp_travel_settings_tab_misc_currency_exchange', [], allData) }
+                    { applyFilters('wp_travel_settings_tab_misc_google_calendar', [], allData) }
+                    { applyFilters('wp_travel_settings_tab_misc_trip_weather_forecast', [], allData) }
+                    { applyFilters('wp_travel_settings_tab_misc_wishlists', [], allData) }
+                    { applyFilters('wp_travel_settings_tab_misc_zapier', [], allData) }
+                    { applyFilters('wp_travel_settings_tab_misc_multiple_currency', [], allData) }
+                    { applyFilters('wp_travel_settings_tab_misc_mailchimp', [], allData) }
                 </ErrorBoundary>
             </div>
         </>
     )
 }
 
+
 // Currency Exchange Notice
 addFilter('wp_travel_settings_tab_misc_currency_exchange', 'WPTravel/Settings/Misc/Notices', (content, allData) => {
-    let miscNocice = {
+    let currencyExchangeNotice = {
         currencyExchange:
             <>
                 <h3>{__('Currency Exchange Rate API', 'wp-travel')}</h3>
@@ -53,10 +54,10 @@ addFilter('wp_travel_settings_tab_misc_currency_exchange', 'WPTravel/Settings/Mi
                 </Notice><br />
             </>,
     }
-    miscNocice = applyFilters('wp_travel_misc_addons_notices', miscNocice, allData);
-    if (Object.keys(miscNocice).length > 0) {
-        let notices = Object.keys(miscNocice).map((index) => {
-            return miscNocice[index]
+    currencyExchangeNotice = applyFilters('wp_travel_misc_addons_notices', currencyExchangeNotice, allData);
+    if (Object.keys(currencyExchangeNotice).length > 0) {
+        let notices = Object.keys(currencyExchangeNotice).map((index) => {
+            return currencyExchangeNotice[index]
         })
         content = [
             notices
@@ -96,8 +97,8 @@ addFilter('wp_travel_settings_tab_misc_mailchimp', 'WPTravel/Settings/Misc/Notic
     return content
 });
 
-// Mailchimp Notice
-addFilter('wp_travel_settings_tab_misc_mailchimp', 'WPTravel/Settings/Misc/Notices', (content, allData) => {
+// Wishlists Notice
+addFilter('wp_travel_settings_tab_misc_wishlists', 'WPTravel/Settings/Misc/Notices', (content, allData) => {
     let wishlistsNotice = {
         wishlists: <>
             <h3>{__('Wishlists Options', 'wp-travel')}</h3>

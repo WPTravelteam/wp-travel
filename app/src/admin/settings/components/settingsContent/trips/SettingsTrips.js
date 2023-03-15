@@ -26,25 +26,6 @@ export default () => {
         options
     } = allData;
 
-    // let tripDataListingOptions = [];
-
-    // if ("undefined" != typeof options) {
-    //     if ("undefined" != typeof options.trips) {
-    //         tripDataListingOptions = options.trips;
-    //     }
-    // }
-    // console.log(options)
-
-    // let selectedTripDataListing = tripDataListingOptions.filter((opt) => {
-    //     return opt.value == trip_date_listing;
-    // });
-
-    // const returnParent = () => {
-    //         this.child.parent = this;
-    //         delete this.init;
-    //         return this;
-    // }
-
     let switch_to_react = 'undefined' != typeof wp_travel_switch_to_react ? wp_travel_switch_to_react : 'no'
     return (
         <>
