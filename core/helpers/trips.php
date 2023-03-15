@@ -359,7 +359,7 @@ class WpTravel_Helpers_Trips {
 			foreach ( $trip_data->trip_tabs as  $trip_tab ) {
 				$tab_key                               = $trip_tab['tab_key']; // quick fix.
 				$trip_tabs[ $tab_key ]['label']        = $trip_tab['label'];
-				$trip_tabs[ $tab_key ]['show_in_menu'] = $trip_tab['show_in_menu'];
+				$trip_tabs[ $tab_key ]['show_in_menu'] = $trip_tab['show_in_menu'] == 'yes' ? true : ( $trip_tab['show_in_menu'] == 'no' || $trip_tab['show_in_menu'] == false || empty( $trip_tab['show_in_menu'] ) ? false : true );
 			}
 			update_post_meta( $trip_id, 'wp_travel_tabs', $trip_tabs );
 
