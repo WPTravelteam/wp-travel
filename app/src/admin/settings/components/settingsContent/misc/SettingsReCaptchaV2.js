@@ -23,7 +23,17 @@ export default () => {
             </div>
             <div className='wp-travel-section-content'>
                 <ErrorBoundary>
-                    {applyFilters('wp_travel_settings_tab_misc_recaptcha_v2', [], allData)}
+                    {_wp_travel.pro_version < 5.4 && _wp_travel.pro_version != null &&
+                        <Notice isDismissible={false} status="informational">
+                            <strong>{__('Looks like you haven\'t updated your WP Travel Pro plugin.', 'wp-travel')}</strong>
+                            <br />
+                            {__('Update WP Travel Pro to gain access to additional settings.', 'wp-travel')}
+                            <br />
+                            <br />
+                            <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Update WP Travel Pro', 'wp-travel')}</a>
+                        </Notice>
+                    ||
+                    applyFilters('wp_travel_settings_tab_misc_recaptcha_v2', [], allData)}
                 </ErrorBoundary>
             </div>
         </>
