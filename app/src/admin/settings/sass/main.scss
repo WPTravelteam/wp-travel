@@ -1299,8 +1299,12 @@ $wp-travel-input-border: rgb(7, 152, 18);
 			}
 			.components-button.components-tab-panel__tabs-item.active-tab {
 				color: white;
-				background-color: $wp-travel-green-hover;
+				background-color: $wp-travel-green;
 				border-radius: 0.5rem;
+
+				&:hover{
+					background-color: $wp-travel-green-hover;
+				}
 			}
 		}
 
