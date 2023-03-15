@@ -65,27 +65,36 @@ const SaveSettings = (props) => {
         }
         <PanelRow ref={panelRef} className={`wp-travel-save-changes ${has_state_changes ? "is-active" : ""} ${isSticky ? "is-sticky" : ""} `}>
             <div>
-                {has_state_changes && <div className="wp-travel-save-notice"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>{__('Unsaved changes', 'wp-travel')}</div>}
+                {
+                    has_state_changes && 
+                    <div className="wp-travel-save-notice">
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        {__('Unsaved changes', 'wp-travel')}
+                    </div>
+                }
                 {show_updated_message &&
                     <div>
                         <p className="text-success"><strong>{__('Settings Saved', 'wp-travel')}</strong></p>
                     </div>
                 }
             </div>
-            <Button isPrimary onClick={() => {
-                updateRequestSending(true);
-                apiFetch({ url: `${ajaxurl}?action=wp_travel_update_settings&_nonce=${_wp_travel._nonce}`, data: allData, method: 'post' }).then(res => {
-                    updateRequestSending(false);
+            <Button 
+                isPrimary 
+                onClick={() => {
+                    updateRequestSending(true);
+                    apiFetch({ url: `${ajaxurl}?action=wp_travel_update_settings&_nonce=${_wp_travel._nonce}`, data: allData, method: 'post' }).then(res => {
+                        updateRequestSending(false);
 
-                    if (res.success && "WP_TRAVEL_UPDATED_SETTINGS" === res.data.code) {
-                        updateStateChange(false)
-                        displaySavedMessage(true)
-                    }
-                });
-
-            }}
+                        if (res.success && "WP_TRAVEL_UPDATED_SETTINGS" === res.data.code) {
+                            updateStateChange(false)
+                            displaySavedMessage(true)
+                        }
+                    });
+                }}
                 disabled={!has_state_changes}
-            >{__('Save Settings', 'wp-travel')}</Button>
+            >
+                {__('Save Settings', 'wp-travel')}
+            </Button>
         </PanelRow>
         {'bottom' == props.position &&
             <div className="wp-travel-setting-system-info">

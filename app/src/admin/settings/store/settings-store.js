@@ -6,7 +6,6 @@ const DEFAULT_STATE = () => {
         // Additional states
         has_state_changes: false,
         is_sending_request: true,
-        previous_state: null
     };
 
     return initState;
@@ -75,7 +74,6 @@ registerStore('WPTravel/Admin', {
             case 'SET_SETTINGS':
                 return {
                     ...state,
-                    previous_state: action.settings,
                     ...action.settings,
                     is_sending_request: false
                 };
@@ -125,7 +123,7 @@ registerStore('WPTravel/Admin', {
             const url = `${ajaxurl}?action=wptravel_get_settings&_nonce=${_wp_travel._nonce}`;
             yield actions.updateRequestSending(true);
             const response = yield actions.getSettingsFromAPI(url);
-            if (false !== response.success && "WP_TRAVEL_SETTINGS" === response.data.code) {
+            if (response.success && "WP_TRAVEL_SETTINGS" === response.data.code) {
                 yield actions.updateRequestSending(false);
                 return actions.setSettings(response.data.settings);
             }

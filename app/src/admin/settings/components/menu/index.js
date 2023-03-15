@@ -1,9 +1,10 @@
+import {memo} from 'react'
 import { useState } from '@wordpress/element'
 import { _n, __ } from "@wordpress/i18n";
 
 import Search from '../sub-components/Search/Search';
 
-export default (props) => {
+export default memo((props) => {
     const [showGeneralTab, setShowGeneralTab] = useState(true);
     const [showTripsTab, setShowTripsTab] = useState(false);
     const [showEmailTab, setShowEmailTab] = useState(false);
@@ -15,7 +16,6 @@ export default (props) => {
     const [showAdvancedTab, setShowAdvancedTab] = useState(false);
 
     const { activeTab, handleTabClick, tabs, className, isMobileNavOpen, closeMenu } = props
-
 
     return (
         <>
@@ -366,4 +366,4 @@ export default (props) => {
             </div>
         </>
     )
-}
+})

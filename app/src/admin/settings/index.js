@@ -6,14 +6,12 @@ import {
     isValidElement,
     createPortal,
 } from "@wordpress/element"; // [ useeffect : used on onload, component update ]
-import { TabPanel, Spinner, Notice } from "@wordpress/components";
+import { Spinner, Notice } from "@wordpress/components";
 import { useSelect, select, dispatch } from "@wordpress/data"; // redux [and also for hook / filter] | dispatch : send data to store
-import { applyFilters, addFilter, hasFilter } from "@wordpress/hooks";
-import { sprintf, _n, __ } from "@wordpress/i18n";
+import { applyFilters, addFilter } from "@wordpress/hooks";
+import { _n, __ } from "@wordpress/i18n";
 import domReady from "@wordpress/dom-ready";
 import ErrorBoundary from "../../ErrorBoundry/ErrorBoundry";
-import Select from 'react-select'
-
 
 import SettingsCurrency from "./components/settingsContent/general/SettingsCurrency";
 import SettingsMaps from "./components/settingsContent/general/SettingsMaps";
@@ -313,7 +311,7 @@ const WPTravelSettings = () => {
                                             tab.content &&
                                             isValidElement(<tab.content />) &&
                                             <Transition zIndex={30} duration={300} translateX={0} translateY={25}>
-                                                <tab.content />
+                                                <tab.content key={tab.className + "-" + tab.name} />
                                             </Transition>
                                         }
                                     </ErrorBoundary>

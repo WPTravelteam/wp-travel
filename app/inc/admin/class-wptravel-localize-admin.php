@@ -154,14 +154,14 @@ class WpTravel_Localize_Admin {
 					$theme_data['download_link']  = $get_theme_data->download_link;
 					$theme_data['is_installed']   = $is_installed;
 					$theme_data['is_active']      = $is_active;
-
+					
 					array_push( $theme_datas, $theme_data );
 				}
 			} else {
 				$theme_datas = 1;
 			}
 		}
-
+		
 		require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		$translation_array = array(
 			'_nonce'             => wp_create_nonce( 'wp_travel_nonce' ),
@@ -169,7 +169,7 @@ class WpTravel_Localize_Admin {
 			'plugin_url'         => plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ),
 			'is_pro_enable'      => class_exists( 'WP_Travel_Pro' ) ? 'yes' : 'no',
 			'plugin_name'        => 'WP Travel',
-			'is_blocks_enable'	=> class_exists( 'WPTravel_Blocks' ) ? true : false,
+			'is_blocks_enable'	 => class_exists( 'WPTravel_Blocks' ) ? true : false,
 			'dev_mode'           => wptravel_dev_mode(),
 			'theme_datas'        => $theme_datas,
 			'currency'           => $settings['currency'],

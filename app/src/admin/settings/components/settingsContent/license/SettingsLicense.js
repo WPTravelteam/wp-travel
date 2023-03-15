@@ -41,7 +41,7 @@ addFilter('wp_travel_license_tab_fields', 'wp_travel', (content, allData) => {
                 <div className={`license-details__item license-details__item__${'undefined' != typeof license._option_prefix ? license._option_prefix : ''}`}>
                     <h3>{license.item_name}</h3>
                     {!license.status ?
-                        <a href={license.license_link} title="Add License & Activate">Add License & Activate</a>
+                        <a href={license.license_link} title="Add License & Activate" className='button button-primary'>Add License & Activate</a>
                         :
                         <a href={license.account_link} title="Manage License">Manage License</a>
                     }
