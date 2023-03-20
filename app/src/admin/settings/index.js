@@ -64,6 +64,7 @@ const WPTravelSettings = () => {
     const { options } = allData;
 
     let blockTab = {}
+    let downloadsTab ={}
 
     if (_wp_travel.is_blocks_enable) {
         const SettingBlocks = () => {
@@ -89,6 +90,15 @@ const WPTravelSettings = () => {
             title: __("Block Setting", "wp-travel"),
             className: "tab-advanced",
             content: SettingBlocks,
+        }
+    }
+
+    if(_wp_travel.pro_version == null || _wp_travel.pro_version < 5.4) {
+        downloadsTab = {
+            name: "downloads",
+            title: __("Downloads", "wp-travel"),
+            className: "tab-trip",
+            content: SettingsDownloadsTemp,
         }
     }
 
@@ -228,7 +238,8 @@ const WPTravelSettings = () => {
                 className: "tab-advanced",
                 content: SettingsDebug,
             },
-            blockTab
+            blockTab,
+            downloadsTab
         ],
         allData
     );
@@ -327,6 +338,31 @@ const WPTravelSettings = () => {
         </>
     );
 };
+
+const SettingsDownloadsTemp = (allData) => {
+    return (
+        <>                    
+        <div className="wp-travel-section-header">
+            <h2 className="wp-travel-section-header-title">
+                {__("Downloads", "wp-travel")}
+            </h2>
+            <p className="wp-travel-section-header-description">
+                {__("More Downloads settings according to your choice.", "wp-travel")}
+            </p>
+        </div>
+        <div className='wp-travel-section-content'>
+            <Notice isDismissible={false} status="informational">
+                <strong>{__('Looks like you haven\'t updated your WP Travel Pro plugin.', 'wp-travel')}</strong>
+                <br />
+                {__('Update WP Travel Pro to gain access to additional settings.', 'wp-travel')}
+                <br />
+                <br />
+                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Update WP Travel Pro', 'wp-travel')}</a>
+            </Notice>
+        </div>
+    </>
+    )
+}
 
 // Tooltips
 addFilter('wp_travel_submodule_downloads_use_relative_path', 'wp_travel', () => {
