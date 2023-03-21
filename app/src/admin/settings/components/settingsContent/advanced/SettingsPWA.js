@@ -148,12 +148,12 @@ export default () => {
                         </>
                         ||
                         <Notice isDismissible={false} status="informational">
-                            <strong>{__('Want to add PWA?', 'wp-travel')}</strong>
+                            <strong>{__('Looks like you haven\'t updated your WP Travel Pro plugin.', 'wp-travel')}</strong>
                             <br />
-                            {__('Get WP Travel Pro modules for PWA features.', 'wp-travel')}
+                            {__('Update WP Travel Pro to gain access to the new PWA feature as well as other additional settings.', 'wp-travel')}
                             <br />
                             <br />
-                            <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
+                            <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Update WP Travel Pro', 'wp-travel')}</a>
                         </Notice>
                     }
                 </ErrorBoundary>
