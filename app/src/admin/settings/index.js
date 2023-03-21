@@ -64,7 +64,7 @@ const WPTravelSettings = () => {
     const { options } = allData;
 
     let blockTab = {}
-    let downloadsTab ={}
+    let downloadsTab = {}
 
     if (_wp_travel.is_blocks_enable) {
         const SettingBlocks = () => {
@@ -93,7 +93,7 @@ const WPTravelSettings = () => {
         }
     }
 
-    if(_wp_travel.pro_version == null || _wp_travel.pro_version < 5.4) {
+    if (_wp_travel.pro_version == null || _wp_travel.pro_version < 5.4) {
         downloadsTab = {
             name: "downloads",
             title: __("Downloads", "wp-travel"),
@@ -339,28 +339,50 @@ const WPTravelSettings = () => {
     );
 };
 
-const SettingsDownloadsTemp = (allData) => {
+const SettingsDownloadsTemp = () => {
     return (
-        <>                    
-        <div className="wp-travel-section-header">
-            <h2 className="wp-travel-section-header-title">
-                {__("Downloads", "wp-travel")}
-            </h2>
-            <p className="wp-travel-section-header-description">
-                {__("More Downloads settings according to your choice.", "wp-travel")}
-            </p>
-        </div>
-        <div className='wp-travel-section-content'>
-            <Notice isDismissible={false} status="informational">
-                <strong>{__('Looks like you haven\'t updated your WP Travel Pro plugin.', 'wp-travel')}</strong>
-                <br />
-                {__('Update WP Travel Pro to gain access to additional settings.', 'wp-travel')}
-                <br />
-                <br />
-                <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Update WP Travel Pro', 'wp-travel')}</a>
-            </Notice>
-        </div>
-    </>
+        _wp_travel.pro_version < 5.4 && _wp_travel.pro_version != null &&
+        <>
+            <div className="wp-travel-section-header">
+                <h2 className="wp-travel-section-header-title">
+                    {__("Downloads", "wp-travel")}
+                </h2>
+                <p className="wp-travel-section-header-description">
+                    {__("More Downloads settings according to your choice.", "wp-travel")}
+                </p>
+            </div>
+            <div className='wp-travel-section-content'>
+                <Notice isDismissible={false} status="informational">
+                    <strong>{__('Looks like you haven\'t updated your WP Travel Pro plugin.', 'wp-travel')}</strong>
+                    <br />
+                    {__('Update WP Travel Pro to gain access to additional settings.', 'wp-travel')}
+                    <br />
+                    <br />
+                    <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Update WP Travel Pro', 'wp-travel')}</a>
+                </Notice>
+            </div>
+        </>
+        ||
+        <>
+            <div className="wp-travel-section-header">
+                <h2 className="wp-travel-section-header-title">
+                    {__("Downloads", "wp-travel")}
+                </h2>
+                <p className="wp-travel-section-header-description">
+                    {__("More Downloads settings according to your choice.", "wp-travel")}
+                </p>
+            </div>
+            <div className='wp-travel-section-content'>
+                <Notice isDismissible={false} status="informational">
+                    <strong>{__('Want features for Itinerary Downloads?', 'wp-travel')}</strong>
+                    <br />
+                    {__('By upgrading to Pro, you will get access to additional features including itinerary downloads.', 'wp-travel')}
+                    <br />
+                    <br />
+                    <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('WP Travel Pro', 'wp-travel')}</a>
+                </Notice><br />
+            </div>
+        </>
     )
 }
 
