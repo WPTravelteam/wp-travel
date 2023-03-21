@@ -608,7 +608,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 			right: 0;
 			height: 100%;
 			background-color: $wp-travel-backdrop;
-			z-index: 1090;
+			z-index: 99999;
 			backdrop-filter: blur(5px);
 		}
 
@@ -968,6 +968,17 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 			}
 
 			.wp-travel-section-content {
+				#wp-travel-invoice-logo {
+					.media-preview {
+						display: inline-flex;
+						flex-direction: column;
+						gap: .75rem;
+
+						img{
+							width: unset;
+						}
+					}
+				}
 				.components-panel__body.ws-gateway.gateway-disabled {
 					.components-panel__body-title button::before {
 						font-family: dashicons;
@@ -1077,11 +1088,6 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 						}
 					}
 				}
-			}
-
-			.components-base-control__field .components-flex {
-				display: flex;
-				justify-content: flex-start;
 			}
 
 			.css-yk16xz-control {
@@ -1600,18 +1606,21 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 					}
 				}
 
-				.wp-admin.itinerary-booking_page_settings {
-					#wpbody-content {
-						.components-base-control__field .components-flex {
-							display: flex;
-							justify-content: flex-end;
-						}
-					}
-				}
-
+				
 				.wp-travel-settings-container {
+					.components-base-control__field .components-flex {
+						display: flex;
+						justify-content: flex-end;
+					}
+
 					.wp-travel-settings-section-wrapper {
 						padding: 2rem;
+					}
+
+					#wp-travel-invoice-logo {
+						.media-preview {
+							float: right;
+						}
 					}
 				}
 
@@ -1711,6 +1720,12 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 				.wp-travel-settings-container {
 					.wp-travel-settings-section-wrapper {
 						padding: 0;
+					}
+
+					#wp-travel-invoice-logo {
+						.media-preview {
+							float: left;
+						}
 					}
 				}
 
@@ -1812,6 +1827,12 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 					.wp-travel-section-content {
 						.wp-travel-field-image-container {
 							justify-content: flex-end;
+						}
+
+						#wp-travel-invoice-logo {
+							.media-preview {
+								float: right;
+							}
 						}
 
 						.components-panel__row {
