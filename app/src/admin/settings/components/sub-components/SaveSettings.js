@@ -48,14 +48,16 @@ const SaveSettings = (props) => {
 
 
     const checkViewport = () => {
-        let SaveSettingsBottom = panelRef.current.getBoundingClientRect().bottom
-        SaveSettingsBottom >= window.innerHeight
-            ? setIsSticky(true)
-            : setIsSticky(false)
-        
-        props.settingsRef.current.getBoundingClientRect().bottom + (panelRef.current.getBoundingClientRect().bottom - panelRef.current.getBoundingClientRect().top) > window.innerHeight
-            ? setIsSticky(true)
-            : setIsSticky(false)
+        if (panelRef.current) {
+            let SaveSettingsBottom = panelRef.current.getBoundingClientRect().bottom
+            SaveSettingsBottom >= window.innerHeight
+                ? setIsSticky(true)
+                : setIsSticky(false)
+
+            props.settingsRef.current.getBoundingClientRect().bottom + (panelRef.current.getBoundingClientRect().bottom - panelRef.current.getBoundingClientRect().top) > window.innerHeight
+                ? setIsSticky(true)
+                : setIsSticky(false)
+        }
     }
 
     return <>
