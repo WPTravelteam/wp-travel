@@ -17,117 +17,8 @@ $wp-travel-alice-blue: rgb(223, 229, 236);
 $wp-travel-warning: rgb(243, 153, 34);
 $wp-travel-danger: rgb(200, 42, 42);
 $wp-travel-success: rgb(7, 152, 18);
-
 $wp-travel-shadow: rgba(0, 0, 0, 0.1);
 $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
-
-#wp-travel-settings-block-wrapper {
-	margin-top: 3rem;
-
-	#aside-wrap-container {
-		display: flex;
-		justify-content: center;
-
-		#aside-wrap {
-			width: 100%;
-			padding: 1rem;
-			margin: 0;
-			box-sizing: border-box;
-
-			.aside-wrap-buttons-container {
-				display: flex;
-				flex-direction: column;
-				margin-bottom: 2rem;
-				background-color: $wp-travel-white;
-				border-radius: 0.5rem;
-				box-shadow: 0 1px 3px ($wp-travel-shadow);
-			}
-
-			.wp-travel-aside-block-button {
-				width: 100%;
-				display: inline-block;
-				border-radius: 0.5rem;
-				background-color: $wp-travel-green;
-				color: $wp-travel-white;
-				padding: 0.5rem 1rem;
-				text-decoration: none;
-				font-size: 13px;
-				max-width: 350px;
-				box-shadow: 0 1px 3px $wp-travel-shadow;
-				box-sizing: border-box;
-
-				&.fit {
-					width: fit-content;
-					max-width: fit-content;
-				}
-
-				&:hover {
-					background-color: $wp-travel-green-hover;
-				}
-			}
-
-			#wp_travel_support_block_id {
-				width: 100%;
-			}
-
-			#wp_travel_doc_block_id {
-				width: 100%;
-			}
-
-			#wp_travel_review_block_id {
-				border-radius: 0.5rem;
-				background-color: $wp-travel-white;
-				box-shadow: 0 1px 3px $wp-travel-shadow;
-				overflow: hidden;
-
-				.thumbnail {
-					padding: 1rem;
-
-					.wp-travel-anchor {
-						color: $wp-travel-green;
-					}
-
-					&.last {
-						display: flex;
-						flex-direction: column;
-						align-items: center;
-					}
-				}
-			}
-
-			.wp-travel-aside-wrap-block-title {
-				margin: 0;
-				padding: 1rem;
-				border-bottom: 1px solid $wp-travel-background;
-				text-align: center;
-			}
-
-			.wp-travel-aside-help-block {
-				padding: 1rem;
-			}
-		}
-	}
-}
-
-.wp-travel-spinner-overlay {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background-color: $wp-travel-backdrop;
-	backdrop-filter: blur(5px);
-	z-index: 99999;
-	transition: all 0.25s ease-in-out;
-
-	.components-spinner {
-		transform: scale(1.5);
-		color: $wp-travel-green;
-	}
-}
 
 .wp-admin.itinerary-booking_page_settings {
 	#wpwrap {
@@ -492,6 +383,98 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 		padding: 0;
 		box-sizing: border-box;
 
+		#wp-travel-settings-block-wrapper {
+			margin-top: 3rem;
+			padding-right: 0;
+			margin-bottom: 5rem;
+			gap: 4rem;
+			flex-direction: column;
+		
+			#aside-wrap-container {
+				display: flex;
+				justify-content: center;
+		
+				#aside-wrap {
+					width: 100%;
+					padding: 1rem;
+					margin: 0;
+					box-sizing: border-box;
+		
+					.aside-wrap-buttons-container {
+						display: flex;
+						flex-direction: column;
+						margin-bottom: 2rem;
+						background-color: $wp-travel-white;
+						border-radius: 0.5rem;
+						box-shadow: 0 1px 3px ($wp-travel-shadow);
+					}
+		
+					.wp-travel-aside-block-button {
+						width: 100%;
+						display: inline-block;
+						border-radius: 0.5rem;
+						background-color: $wp-travel-green;
+						color: $wp-travel-white;
+						padding: 0.5rem 1rem;
+						text-decoration: none;
+						font-size: 13px;
+						max-width: 350px;
+						box-shadow: 0 1px 3px $wp-travel-shadow;
+						box-sizing: border-box;
+		
+						&.fit {
+							width: fit-content;
+							max-width: fit-content;
+						}
+		
+						&:hover {
+							background-color: $wp-travel-green-hover;
+						}
+					}
+		
+					#wp_travel_support_block_id {
+						width: 100%;
+					}
+		
+					#wp_travel_doc_block_id {
+						width: 100%;
+					}
+		
+					#wp_travel_review_block_id {
+						border-radius: 0.5rem;
+						background-color: $wp-travel-white;
+						box-shadow: 0 1px 3px $wp-travel-shadow;
+						overflow: hidden;
+		
+						.thumbnail {
+							padding: 1rem;
+		
+							.wp-travel-anchor {
+								color: $wp-travel-green;
+							}
+		
+							&.last {
+								display: flex;
+								flex-direction: column;
+								align-items: center;
+							}
+						}
+					}
+		
+					.wp-travel-aside-wrap-block-title {
+						margin: 0;
+						padding: 1rem;
+						border-bottom: 1px solid $wp-travel-background;
+						text-align: center;
+					}
+		
+					.wp-travel-aside-help-block {
+						padding: 1rem;
+					}
+				}
+			}
+		}		
+
 		.wp-travel-ui.wp-travel-ui-card {
 			padding: 0;
 			margin: 0;
@@ -580,13 +563,6 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 			margin: 0;
 		}
 	}
-}
-
-#wp-travel-settings-block-wrapper {
-	padding-right: 0;
-	margin-bottom: 5rem;
-	gap: 2rem;
-	flex-direction: column;
 }
 
 .wp-admin.itinerary-booking_page_settings {
@@ -1496,6 +1472,26 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 
 			#wp-travel-settings-block {
 				position: relative;
+				
+				.wp-travel-spinner-overlay {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					position: fixed;
+					top: 0;
+					bottom: 0;
+					left: 0;
+					right: 0;
+					background-color: $wp-travel-backdrop;
+					backdrop-filter: blur(5px);
+					z-index: 99999;
+					transition: all 0.25s ease-in-out;
+				
+					.components-spinner {
+						transform: scale(1.5);
+						color: $wp-travel-green;
+					}
+				}
 			}
 
 			.wp-travel-nav {
