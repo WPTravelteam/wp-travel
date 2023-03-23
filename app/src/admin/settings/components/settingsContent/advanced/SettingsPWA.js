@@ -146,6 +146,15 @@ export default () => {
                                 </>
                             }
                         </>
+                        || _wp_travel.pro_version < 5.4 && _wp_travel.pro_version != null &&
+                        <Notice isDismissible={false} status="informational">
+                            <strong>{__('Looks like you haven\'t updated your WP Travel Pro plugin.', 'wp-travel')}</strong>
+                            <br />
+                            {__('Update WP Travel Pro to gain access to the new PWA feature as well as other additional settings.', 'wp-travel')}
+                            <br />
+                            <br />
+                            <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Update WP Travel Pro', 'wp-travel')}</a>
+                        </Notice>
                         ||
                         <Notice isDismissible={false} status="informational">
                             <strong>{__('Want to add PWA?', 'wp-travel')}</strong>

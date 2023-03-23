@@ -24,14 +24,14 @@ export default (props) => {
     toggleOpen();
     props.handleTabClick(selectedOption.tab)
     setTimeout(() => {
-      let offsetValue = 30
+      let offsetValue = 45
 
       window.innerWidth < 1024 &&
         window.innerWidth < 768
         ? window.innerWidth < 576
           ? offsetValue = 130
           : offsetValue = 150
-        : offsetValue = 50
+        : offsetValue = 80
 
       let element = document.getElementById("wp-travel-" + selectedOption.value)
       if (element != undefined) {
