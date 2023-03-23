@@ -358,6 +358,14 @@ class WP_Travel_Helpers_Settings {
 		$settings['set_trip_itinerary_pdf_secondary_color'] = isset( $settings_data['set_trip_itinerary_pdf_secondary_color'] ) ? $settings_data['set_trip_itinerary_pdf_secondary_color'] : '#FF9671';
 
 		$settings = apply_filters( 'wp_travel_block_before_save_settings', $settings, $settings_data );
+
+		/**
+		 * set setting wpml_migration for compatible with wpml
+		 * @since 6.4.0
+		 */
+		if ( isset( $settings_data['wpml_migrations'] ) ) {
+			$settings['wpml_migrations'] = $settings_data['wpml_migrations'];
+		}
 		// unset( $settings['modules'] );
 		update_option( 'wp_travel_settings', $settings );
 		/**

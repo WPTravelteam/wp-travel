@@ -267,7 +267,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/core/helpers/layout.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/core/helpers/localize.php', WP_TRAVEL_ABSPATH );
 
-			include sprintf( '%s/inc/setup-page/setup-page.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-assets.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-default-form-fields.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-wp-travel-emails.php', WP_TRAVEL_ABSPATH );
@@ -423,7 +422,9 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 				require WP_TRAVEL_ABSPATH . '/core/helpers/network.php';
 			}
-
+			if ( !is_multisite() ) {
+				include sprintf( '%s/inc/setup-page/setup-page.php', WP_TRAVEL_ABSPATH );
+			}
 		}
 
 		/**

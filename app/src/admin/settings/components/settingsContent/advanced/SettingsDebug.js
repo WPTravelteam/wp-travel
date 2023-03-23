@@ -1,7 +1,7 @@
 import { applyFilters } from '@wordpress/hooks';
 import { useSelect, dispatch } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
-import { PanelRow, ToggleControl, TextControl, CheckboxControl, Spinner } from '@wordpress/components';
+import { PanelRow, ToggleControl, TextControl, CheckboxControl, Spinner, Button } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 
@@ -41,7 +41,15 @@ export default () => {
             })
         }
     }, 5000)
+    const [valWPML , setValWPML ] = useState( typeof allData.wpml_migrations != 'undefined' && allData.wpml_migrations || false );
 
+    const updateMigrate = () => {
+        apiFetch({ url: `${ajaxurl}?action=wptravel_wpml_migrate&_nonce=${_wp_travel_admin._nonce}`, data: allData, method: 'post' }).then(res => {
+            if (res.success && "WP_TRAVEL_UPDATED_SETTINGS" === res.data.code) {
+
+            }
+        });
+    }
     return (
         <>
             <div className="wp-travel-section-header">
@@ -119,7 +127,30 @@ export default () => {
                             <p className="description">{__('Enabling this will load minified scripts.', 'wp-travel')}</p>
                         </div>
                     </PanelRow>
-
+                    <PanelRow>
+                        <label>{ __( 'WPML Migrations', 'wp-travel' ) }</label>
+                        <div className="wp-travel-field-value">
+                            <ToggleControl
+                                checked={  valWPML  }
+                                help={ __( 'Use to migrate Wp Travel compatible with WPML. After enable please save setting and then click migration button.', 'wp-travel' ) }
+                                onChange={ () => {
+                                    const wpml = valWPML == true ? false : true;
+                                    setValWPML( wpml );
+                                    updateSettings({
+                                        ...allData,
+                                        wpml_migrations: wpml
+                                    })
+                                } }
+                            />
+                            { typeof allData.wpml_migrations != 'undefined' && allData.wpml_migrations == true &&<Button 
+                                className='wp-travel-wpml-migrate-button' 
+                                variant="primary" 
+                                onClick={ () => {
+                                    updateMigrate()
+                                }}>Migrate</Button>
+                            }
+                        </div>
+                    </PanelRow>
                     {VersionCompare(wp_travel_user_since, '4.0.0', '<') &&
                         <PanelRow>
                             <label>{__('Migrate Pricing and Date', 'wp-travel')} {migrating && <Spinner />}{showMigrateCompleteNotice && <p className="text-success" >Migration completed! Please Do not check it again</p>}</label>
