@@ -1787,6 +1787,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 					display: flex;
 					position: relative;
 					padding: 1rem;
+					padding-top: 0;
 					box-shadow: unset;
 				}
 
@@ -1907,6 +1908,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 				#wp-travel-settings-menu {
 					width: 350px;
 					padding: 2rem;
+					padding-top: 0;
 				}
 
 				.wp-travel-trip-settings {

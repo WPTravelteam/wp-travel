@@ -19,6 +19,7 @@ class WP_Travel_Ajax_Settings {
 
 		add_action( 'wp_ajax_wptravel_wpml_migrate', array( __CLASS__, 'force_migrate_wpml' ) );
 		add_action( 'wp_ajax_nopriv_wptravel_wpml_migrate', array( __CLASS__, 'force_migrate_wpml' ) );
+		// add_action( 'init', array( __CLASS__, 'wp_travel_trip_date_price' ) );
 	}
 
 	public static function get_settings() {
@@ -99,11 +100,17 @@ class WP_Travel_Ajax_Settings {
 					}
 					echo 'sanchay';
 					// echo get_the_ID();
-					print_r( $trip_data['trip']['pricings'] );
+					print_r( $price_cat );
+					$date_price_cat = array(
+						'trip_price' => $price,
+						'trip_date' => $date,
+						'trip_price_cat' => $price_cat
+					);
+					update_post_meta( $trip_id, 'wp_travel_trip_date_price_category', $date_price_cat );
 				}
-				die;
 			}
 		}
+		die;
 	}
 }
 

@@ -211,8 +211,4 @@ if ("serviceWorker" in navigator) {
         .then(res => console.log("service worker registered"))
         .catch(err => console.log("service worker not registered", err))
     })
-<<<<<<< HEAD
   }
-=======
-  }
->>>>>>> e0fdb79fac5c36fa4000d29a844beea0efdb346c

@@ -164,6 +164,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			 */
 			add_filter( 'option_wp_travel_settings', array( $this, 'filter_wp_travel_settings' ), 11, 2 );
 			self::reject_cache_in_checkout();
+			add_action( 'init', array( 'WpTravel_Helpers_Trips', 'wp_travel_trip_date_price' ) );
 		}
 
 		/**
