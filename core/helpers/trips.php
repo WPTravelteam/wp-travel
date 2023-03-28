@@ -541,13 +541,13 @@ class WpTravel_Helpers_Trips {
 		}
 		$settings = wptravel_get_settings();
 		if ( $settings['wpml_migrations'] ) {
-			if ( ! empty( $trip_data->pricings ) ) {
-				update_post_meta( $trip_id, 'wp_travel_trip_price_category', $trip_data->pricings);
+			if ( isset( $trip['trip']['pricings'] ) && ! empty( $trip['trip']['pricings'] ) ) {
+				update_post_meta( $trip_id, 'wp_travel_trip_price_categorys', $trip['trip']['pricings'] );
 			} else {
-				update_post_meta( $trip_id, 'wp_travel_trip_price_category', array() );
+				update_post_meta( $trip_id, 'wp_travel_trip_price_categorys', array() );
 			}
-			if ( ! empty( $dates ) ) {
-				update_post_meta( $trip_id, 'wp_travel_trips_dates', $trip_data->dates );
+			if ( ! empty( $dates ) && isset( $trip['trip']['dates'] ) && ! empty( $trip['trip']['dates'] ) ) {
+				update_post_meta( $trip_id, 'wp_travel_trips_dates', $trip['trip']['dates'] );
 			} else {
 				update_post_meta( $trip_id, 'wp_travel_trips_dates', array() );
 			}
@@ -1162,111 +1162,52 @@ class WpTravel_Helpers_Trips {
 					'posts_per_page' => -1,	
 				)
 			);
-			$price = $wpdb->get_results( "select * from {$price_table}" );
-			$date = $wpdb->get_results( "select * from {$date_table}" );
 			while ( $post->have_posts() ) {
 				$post->the_post();
 				$trip_id = get_the_ID();
 				$price_d = $wpdb->get_results( "select * from {$price_table} where trip_id={$trip_id}" );
 				$date_w = $wpdb->get_results( "select * from {$date_table} where trip_id={$trip_id}" );
 				$new_price_id = array();
+				$new_date_id = array();
+				$price_cat = get_post_meta( $trip_id, 'wp_travel_trip_price_categorys', true ); 
+				$new_pr_id = get_post_meta( $trip_id, 'wp_trivel_new_price_id', true );
 				if ( empty( $price_d ) ) {
-					$price_cat = get_post_meta( $trip_id, 'wp_travel_trip_price_category', true ); 
 					if ( ! empty( $price_cat ) ) {
 						foreach ( $price_cat as $key => $val ) {
-							$title = isset( $val['title'] ) ? $val['title'] : '' ;
-							$max_pax = isset( $val['max_pax'] ) ? $val['max_pax'] : 0 ;
-							$min_pax = isset( $val['min_pax'] ) ? $val['min_pax'] : 0 ;
-							$has_group_price = isset( $val['has_group_price'] ) ? $val['has_group_price'] : 0;
-							$group_prices = isset( $val['group_prices'] ) ? $val['group_prices'] : '' ;
-							$trip_extras = isset( $val['trip_extras'] ) ? $val['trip_extras'] : '' ;
-							$sort_order = isset( $val['sort_order'] ) ? $val['sort_order'] : 1 ;
-							$wpdb->insert( 
-								$price_table,
-								array(
-									'title'           => $title,
-									'max_pax'         => $max_pax,
-									'min_pax'         => $min_pax,
-									'has_group_price' => $has_group_price,
-									'group_prices'    => $group_prices,
-									'trip_id'		  => $trip_id,
-									'trip_extras'     => esc_attr( $trip_extras ),
-									'sort_order'      => $key + 1,
-								),
-								array(
-									'%s',
-									'%d',
-									'%d',
-									'%d',
-									'%s',
-									'%d',
-									'%s',
-									'%d',
-								),
-							);
-							$price_cat['migrate_price_id'] = isset( $wpdb->insert_id ) ? $wpdb->insert_id : 0;
-							$new_price_id[] = array( $val['id'] => isset( $wpdb->insert_id ) ? $wpdb->insert_id : 0 );
-							if ( $wpdb->insert_id ) {
-								if ( ! empty( $val['categories'] ) ) {
-									foreach ( $val['categories'] as $cat => $catVal ) {
-										$price_id = $wpdb->insert_id;
-										$price_per = isset( $catVal['price_per'] ) ? $catVal['price_per'] : 'person';
-										$regular_price = isset( $catVal['regular_price'] ) ? $catVal['regular_price'] : 0;
-										$is_sale = isset( $catVal['is_sale'] ) ? $catVal['is_sale'] : '';
-										$sale_price = isset( $catVal['sale_price'] ) ? $catVal['sale_price'] : 0;
-										$cat_has_group_price = isset( $catVal['has_group_price'] ) ? $catVal['has_group_price'] : 0;
-										$cat_group_prices = isset( $catVal['group_prices'] ) ? $catVal['group_prices'] : '';
-										$default_pax = isset( $catVal['default_pax'] ) ? $catVal['default_pax'] : 0;
-										$price_cat_data = isset( $catVal['id'] ) ? $catVal['id'] : 0;
-										$wpdb->insert( 
-											$price_cat_table,
-											array(
-												'pricing_id'           => $price_id,
-												'pricing_category_id'   => $price_cat_data,
-												'price_per'         => $price_per,
-												'regular_price' => $regular_price,
-												'is_sale'    => $is_sale,
-												'sale_price'		  => $sale_price,
-												'has_group_price'     => $cat_has_group_price,
-												'group_prices'      => $cat_group_prices,
-												'default_pax'		=> $default_pax
-											),
-											array(
-												'%d',
-												'%d',
-												'%s',
-												'%d',
-												'%s',
-												'%d',
-												'%d',
-												'%s',
-												'%d'
-											),
-										);
-									}
-								}
+							$result = WpTravel_Helpers_Pricings::add_individual_pricing( $trip_id, $val );
+							if ( ! is_wp_error( $result ) && 'WP_TRAVEL_ADDED_TRIP_PRICING' === $result['code'] && ! empty( $val['categories'] ) ) {
+								WP_Travel_Helpers_Trip_Pricing_Categories::update_pricing_categories( $result['pricing_id'], $val['categories'] );
 							}
-							update_post_meta( $trip_id, 'wp_travel_trip_price_category', $price_cat );
+							$new_price_id[] = array( $val['id'] => isset( $result['pricing_id'] ) ? $result['pricing_id'] : 0 );
+							
+						}
+						update_post_meta( $trip_id, 'wp_trivel_new_price_id', $new_price_id );
+					}
+				} else { 
+					if ( ! empty( $new_pr_id ) ) {
+						if ( ! empty( $price_cat ) ) {
+							foreach ( $price_cat as $keys => $values ) {
+								foreach (  $new_pr_id as $key => $value ) {
+									foreach ( $value as $old_id => $new_id ) {
+										if ( $old_id == $values['id'] ) {
+											$values['id']  = $new_id;
+											$result = WpTravel_Helpers_Pricings::update_individual_pricing( $new_id, $values );
+											if ( ! is_wp_error( $result ) && 'WP_TRAVEL_UPDATED_TRIP_PRICING' === $result['code'] && ! empty( $values['categories'] ) ) {
+												WP_Travel_Helpers_Trip_Pricing_Categories::update_pricing_categories( $new_id, $values['categories'] );
+											} elseif ( empty( $values['categories'] ) ) {
+												WP_Travel_Helpers_Trip_Pricing_Categories::remove_trip_pricing_categories( $new_id );
+											}
+										}
+									}
+								} 
+							}
 						}
 					}
 				}
+				$date_departure = get_post_meta( $trip_id, 'wp_travel_trips_dates', true ); 
 				if ( empty( $date_w ) ) {
-					$date_departure = get_post_meta( $trip_id, 'wp_travel_trips_dates', true ); 
-					$price_data = get_post_meta( $trip_id, 'wp_travel_trip_price_category', true );
 					if ( ! empty( $date_departure ) ) {
 						foreach ( $date_departure as $key => $val ) {
-							$date_title  = isset( $val['title'] ) ? $val['title'] : '';
-							$recurring	= isset( $val['is_recurring'] ) ? $val['is_recurring'] : '';
-							$years      = isset( $val['years'] ) ? $val['years'] : '';
-							$months      = isset( $val['months'] ) ? $val['months'] : '';
-							$weeks      = isset( $val['weeks'] ) ? $val['weeks'] : '';
-							$days      = isset( $val['days'] ) ? $val['days'] : '';
-							$date_days      = isset( $val['date_days'] ) ? $val['date_days'] : '';
-							$start_date      = isset( $val['start_date'] ) ? $val['start_date'] : '';
-							$end_date      = isset( $val['end_date'] ) ? $val['end_date'] : '';
-							$enable_time      = isset( $val['enable_time'] ) ? $val['enable_time'] : '';
-							$trip_time      = isset( $val['trip_time'] ) ? $val['trip_time'] : '';
-							$recurring_weekdays_type      = isset( $val['recurring_weekdays_type'] ) ? $val['recurring_weekdays_type'] : '';
 							$pricing_ids      = isset( $val['pricing_ids'] ) ? $val['pricing_ids'] : '';
 							$price_id_array = ! empty( $pricing_ids ) ? explode( ',', $pricing_ids ) : array();
 							$migrate_pr_id_array = array();
@@ -1284,38 +1225,46 @@ class WpTravel_Helpers_Trips {
 								}
 							}
 							$migrate_pr_id = ! empty( $migrate_pr_id_array ) ? implode( ',', $migrate_pr_id_array ) : '0';
-							$dates_data = array(
-								'trip_id'     => $trip_id,
-								'title'       => $date_title,
-								'recurring'   => $recurring,
-								'years'       => $years,
-								'months'      => $months,
-								'weeks'       => $weeks,
-								'days'        => $days,
-								'date_days'   => $date_days,
-								'start_date'  => $start_date,
-								'end_date'    => $end_date,
-								'trip_time'   => $trip_time,
-								'pricing_ids' => $migrate_pr_id,
-							);
-							$wpdb->insert(
-								$date_table,
-								$dates_data,
-								array(
-									'%d',
-									'%s',
-									'%s',
-									'%s',
-									'%s',
-									'%s',
-									'%s',
-									'%s',
-									'%s',
-									'%s',
-									'%s',
-									'%s',
-								)
-							);
+							$date_id = $val['id'] ? $val['id'] : 0;
+							$val['id'] = '';
+							$val['pricings_id'] = $migrate_pr_id ? $migrate_pr_id : 0;
+							$res = WpTravel_Helpers_Trip_Dates::add_individual_date( $trip_id, $val ); 
+							$new_date_id[] = array( $date_id => isset( $res['ids'] ) ? $res['ids'] : 0 );
+						}
+						update_post_meta( $trip_id, 'wp_travel_new_date_id', $new_date_id );
+					}
+				} else { 
+					$date_ids = get_post_meta( $trip_id, 'wp_travel_new_date_id', true );
+					if ( ! empty( $date_ids ) ) {
+						if ( ! empty( $date_departure ) ) {
+							foreach ( $date_departure as $index => $data ) {
+								foreach ( $date_ids as $indx => $val ) {
+									foreach ( $val as $old_id => $new_id ) {
+										if ( $old_id == $data['id'] ) {
+											$data['id'] = $new_id;
+											$pricing_ids      = isset( $data['pricing_ids'] ) ? $data['pricing_ids'] : '';
+											$price_id_array = ! empty( $pricing_ids ) ? explode( ',', $pricing_ids ) : array();
+											$migrate_pr_id_array = array();
+											if ( ! empty( $new_pr_id ) ) {
+												foreach ( $new_pr_id as $pri => $pr ) {
+													foreach ( $pr as $final => $mr_pr_id ) {
+														if ( ! empty( $price_id_array ) ) {
+															foreach ( $price_id_array as $index => $pr_id ) {
+																if ( $pr_id == $final ) {
+																	$migrate_pr_id_array[] = $mr_pr_id;
+																}
+															}
+														}
+													}
+												}
+											}
+											$migrate_pr_id = ! empty( $migrate_pr_id_array ) ? implode( ',', $migrate_pr_id_array ) : '0';
+											$data['pricings_ids'] = $migrate_pr_id;
+											$res = WpTravel_Helpers_Trip_Dates::add_individual_date( $trip_id, $data ); 
+										}
+									}
+								}
+							}
 						}
 					}
 				}
