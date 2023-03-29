@@ -42,14 +42,18 @@ export default () => {
         }
     }, 5000)
     const [valWPML , setValWPML ] = useState( typeof allData.wpml_migrations != 'undefined' && allData.wpml_migrations || false );
-
+    const [ loader, setLoader ]     = useState({display : 'none', wpml_active : false });
     const updateMigrate = () => {
+        const responce = '';
+        setLoader({ display : 'block'});
         apiFetch({ url: `${ajaxurl}?action=wptravel_wpml_migrate&_nonce=${_wp_travel_admin._nonce}`, data: allData, method: 'post' }).then(res => {
-            if (res.success && "WP_TRAVEL_UPDATED_SETTINGS" === res.data.code) {
-
+            if ( typeof res['success'] != 'undefined' && res['success'] ) {
+                setLoader({ display : 'none'});
             }
         });
     }
+    const plugins = typeof _wp_travel.activated_plugins != 'undefined' && _wp_travel.activated_plugins != '' && ( Object.values(_wp_travel.activated_plugins) ).length > 0 && Object.values(_wp_travel.activated_plugins)
+    const wpml_plugins = plugins.includes( "sitepress-multilingual-cms/sitepress.php" ) || plugins.includes( "wpml-string-translation/plugin.php" ) || plugins.includes( "wpml-media-translation/plugin.php" ) && true || false;
     return (
         <>
             <div className="wp-travel-section-header">
@@ -127,12 +131,12 @@ export default () => {
                             <p className="description">{__('Enabling this will load minified scripts.', 'wp-travel')}</p>
                         </div>
                     </PanelRow>
-                    <PanelRow>
-                        <label>{ __( 'WPML Migrations', 'wp-travel' ) }</label>
+                    { wpml_plugins && <PanelRow>
+                        <label>{ typeof _wp_travel.wpml_label != 'undefined' && _wp_travel.wpml_label }</label>
                         <div className="wp-travel-field-value">
                             <ToggleControl
                                 checked={  valWPML  }
-                                help={ __( 'Use to migrate Wp Travel compatible with WPML. After enable please save setting and then click migration button.', 'wp-travel' ) }
+                                help={ typeof _wp_travel.wpml_migratio_dicription != 'undefined' && _wp_travel.wpml_migratio_dicription }
                                 onChange={ () => {
                                     const wpml = valWPML == true ? false : true;
                                     setValWPML( wpml );
@@ -142,15 +146,16 @@ export default () => {
                                     })
                                 } }
                             />
-                            { typeof allData.wpml_migrations != 'undefined' && allData.wpml_migrations == true &&<Button 
+                            { typeof allData.wpml_migrations != 'undefined' && allData.wpml_migrations == true && <div className='wp-travel-wpml-migrations-spinner'><Button 
                                 className='wp-travel-wpml-migrate-button' 
                                 variant="primary" 
                                 onClick={ () => {
                                     updateMigrate()
-                                }}>Migrate</Button>
+                                }}>{ typeof _wp_travel.wpml_btn_label != 'undefined' && _wp_travel.wpml_btn_label }</Button>
+                                <img id="wp-travel-migratios-loader" src={ _wp_travel.plugin_url + 'assets/images/Spinner.gif' } style={{ display: typeof loader.display != 'undefined' && loader.display }} /> </div>
                             }
                         </div>
-                    </PanelRow>
+                    </PanelRow> }
                     {VersionCompare(wp_travel_user_since, '4.0.0', '<') &&
                         <PanelRow>
                             <label>{__('Migrate Pricing and Date', 'wp-travel')} {migrating && <Spinner />}{showMigrateCompleteNotice && <p className="text-success" >Migration completed! Please Do not check it again</p>}</label>

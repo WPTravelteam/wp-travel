@@ -617,7 +617,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				global $post;
 				$page_id  = (int) get_the_ID();
 				$settings = wptravel_get_settings();
-
 				switch ( $slug ) {
 					case 'cart':
 						$cart_page_id = isset( $settings['cart_page_id'] ) ? (int) $settings['cart_page_id'] : 0;

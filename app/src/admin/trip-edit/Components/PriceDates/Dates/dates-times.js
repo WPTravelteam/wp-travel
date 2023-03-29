@@ -107,7 +107,7 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
 
                 let selectedTimes = 'undefined' !== typeof _date.trip_time && '' !== _date.trip_time ? _date.trip_time.split(',') : [];
                 
-                return <PanelBody title={_date.title || `${__i18n.fixed_departure} ${_dateIndex + 1}`} className="wp-travel-panelbody-add-top-gap" key={`${storeKey}-date-times-${_dateIndex}`}>
+                return <PanelBody title={_date.title || `${__i18n.fixed_departure} ${_dateIndex + 1}`} className="wp-travel-panelbody-add-top-gap wp-travel-callendar-leyout-fixed-6-4-0" key={`${storeKey}-date-times-${_dateIndex}`}>
                     <PanelRow>
                         <label>{__i18n.date_label}</label>
                         <TextControl value={_date.title} placeholder={_date.title || `${__i18n.fixed_departure} ${_dateIndex + 1}`} onChange={value => updateDatesTimes({ title: value }, _dateIndex)} />

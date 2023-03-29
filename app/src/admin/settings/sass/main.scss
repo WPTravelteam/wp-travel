@@ -770,6 +770,8 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 				width: 100%;
 				border-radius: 0.25rem;
 				margin-bottom: 0 !important;
+				min-width: 250px;
+				max-width: 250px; 
 			}
 
 			.components-base-control__field {
@@ -1971,4 +1973,17 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 			}
 		}
 	}
+}
+.wp-travel-wpml-migrations-spinner {
+    display: flex;
+	align-items: center;
+	img {
+		max-height: 40px;
+	}
+}
+.wp-travel-section-header .wp-travel-section-header-description {
+	margin: 0 0 0.25rem 0;
+	color: $wp-travel-faded;
+	font-size: 0.85rem;
+	display: none;
 }

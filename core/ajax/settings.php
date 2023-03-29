@@ -64,7 +64,11 @@ class WP_Travel_Ajax_Settings {
 			WP_Travel_Helpers_REST_API::response( $response );
 		}
 	}
-
+	/**
+	 * @since 6.4.0
+	 * when click migrate button in in setting of debug page button 
+	 * migrate all price and date in to post meta 
+	 */
 	public static function force_migrate_wpml() {
 		/**
 		 * Permission Check
@@ -75,42 +79,40 @@ class WP_Travel_Ajax_Settings {
 		$post_data = json_decode( file_get_contents( 'php://input' ), true ); // Added 2nd Parameter to resolve issue with objects.
 		$post_data = wptravel_sanitize_array( $post_data, true );
 		global $wpdb;
-		$db_prefix = $wpdb->prefix;
-		$date_table = $db_prefix . 'wt_dates';
-		$price_table = $db_prefix . 'wt_pricings';
+		$db_prefix       = $wpdb->prefix;
+		$date_table      = $db_prefix . 'wt_dates';
+		$price_table     = $db_prefix . 'wt_pricings';
 		$price_cat_table = $db_prefix . 'wt_price_category_relation';
 		if ( isset( $post_data['wpml_migrations'] ) ) {
 			if ( $post_data['wpml_migrations'] == true ) {
 				$posts = new WP_Query(
-					array( 
-						'post_type' => WP_TRAVEL_POST_TYPE,
-						'posts_per_page' => -1,	
+					array(
+						'post_type'      => WP_TRAVEL_POST_TYPE,
+						'posts_per_page' => -1,
 					)
 				);
-
 				while ( $posts->have_posts() ) {
 					$posts->the_post();
-					$trip_data = WpTravel_Helpers_Trips::get_trip( get_the_ID() );
-					$trip_id = get_the_ID();
-					$price = $wpdb->get_results( "select * from {$price_table} where trip_id={$trip_id}" );
-					$date = $wpdb->get_results( "select * from {$date_table} where trip_id={$trip_id}" );
-					$price_cat = '';
-					if ( ! empty( $price[0]->id ) )  {
-						$price_cat = $wpdb->get_results( "select * from {$price_cat_table} where pricing_id={$price[0]->id}" );
+					$trip_data  = WpTravel_Helpers_Trips::get_trip( get_the_ID() );
+					$trip_id    = get_the_ID();
+					$date       = $wpdb->get_results( "select * from {$date_table} where trip_id={$trip_id}" );
+					$trips      = isset( $trip_data['trip'] ) ? $trip_data['trip'] : array();
+					$trip_price = ! empty( $trips ) && isset( $trips['pricings'] ) ? $trips['pricings'] : array();
+					$res        = update_post_meta( $trip_id, 'wp_travel_trip_price_categorys', $trip_price );
+					$trip_date  = ! empty( $trips ) && isset( $trips['dates'] ) ? $trips['dates'] : array();
+					if ( ! empty( $date ) && count( $date ) > 0 ) {
+						foreach ( $date as $key => $value ) {
+							if ( ! empty( $trip_date ) && count( $trip_date ) > 0 ) {
+								$trip_date[ $key ]['years']  = isset( $value->years ) ? $value->years : '';
+								$trip_date[ $key ]['months'] = isset( $value->months ) ? $value->monthes : '';
+							}
+						}
 					}
-					echo 'sanchay';
-					// echo get_the_ID();
-					print_r( $price_cat );
-					$date_price_cat = array(
-						'trip_price' => $price,
-						'trip_date' => $date,
-						'trip_price_cat' => $price_cat
-					);
-					update_post_meta( $trip_id, 'wp_travel_trip_date_price_category', $date_price_cat );
+					$responce = update_post_meta( $trip_id, 'wp_travel_trips_dates', $trip_date );
 				}
 			}
 		}
-		die;
+		return wp_send_json_success( 'success' );
 	}
 }
 

@@ -185,6 +185,10 @@ class WpTravel_Localize_Admin {
 			'number_of_decimals' => $settings['number_of_decimals'] ? $settings['number_of_decimals'] : 0,
 			'decimal_separator'  => $settings['decimal_separator'] ? $settings['decimal_separator'] : '.',
 			'thousand_separator' => $settings['thousand_separator'] ? $settings['thousand_separator'] : ',',
+			'activated_plugins'			=> get_option( 'active_plugins' ),
+			'wpml_migratio_dicription'	=> __( 'Use to migrate Wp Travel compatible with WPML. After enable please save setting and then click migration button.', 'wp-travel' ),
+			'wpml_label'				=> __( 'WPML Migrations', 'wp-travel' ),
+			'wpml_btn_label'			=> __( 'Migrate', 'wp-travel' ),
 		);
 
 		// trip edit page.

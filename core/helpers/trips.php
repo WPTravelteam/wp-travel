@@ -547,7 +547,13 @@ class WpTravel_Helpers_Trips {
 				update_post_meta( $trip_id, 'wp_travel_trip_price_categorys', array() );
 			}
 			if ( ! empty( $dates ) && isset( $trip['trip']['dates'] ) && ! empty( $trip['trip']['dates'] ) ) {
-				update_post_meta( $trip_id, 'wp_travel_trips_dates', $trip['trip']['dates'] );
+				$new_dates = $trip['trip']['dates'];
+				foreach ( $trip_data->dates as $keys => $new_date ) {
+					$new_dates[$keys]['years'] = isset( $new_date['years'] ) ? $new_date['years'] : '';
+					$new_dates[$keys]['months'] = isset( $new_date['months'] ) ? $new_date['months'] : '';
+				}
+				
+				update_post_meta( $trip_id, 'wp_travel_trips_dates', $new_dates );
 			} else {
 				update_post_meta( $trip_id, 'wp_travel_trips_dates', array() );
 			}
@@ -1150,12 +1156,12 @@ class WpTravel_Helpers_Trips {
 
 	public static function wp_travel_trip_date_price() {
 		$settings = wptravel_get_settings();
-		if ( $settings['wpml_migrations'] ) {
-			global $wpdb;
-			$db_prefix = $wpdb->prefix;
-			$date_table = $db_prefix . 'wt_dates';
-			$price_table = $db_prefix . 'wt_pricings';
-			$price_cat_table = $db_prefix . 'wt_price_category_relation';
+		global $wpdb;
+		$db_prefix = $wpdb->prefix;
+		$date_table = $db_prefix . 'wt_dates';
+		$price_table = $db_prefix . 'wt_pricings';
+		$price_cat_table = $db_prefix . 'wt_price_category_relation';
+		if ( isset( $settings['wpml_migrations'] ) && $settings['wpml_migrations'] ) {
 			$post = new WP_Query(
 				array( 
 					'post_type' => WP_TRAVEL_POST_TYPE,
@@ -1179,6 +1185,7 @@ class WpTravel_Helpers_Trips {
 								WP_Travel_Helpers_Trip_Pricing_Categories::update_pricing_categories( $result['pricing_id'], $val['categories'] );
 							}
 							$new_price_id[] = array( $val['id'] => isset( $result['pricing_id'] ) ? $result['pricing_id'] : 0 );
+							update_post_meta( $trip_id, 'wp_travel_fixed_departure', 'yes' );
 							
 						}
 						update_post_meta( $trip_id, 'wp_trivel_new_price_id', $new_price_id );
@@ -1190,17 +1197,37 @@ class WpTravel_Helpers_Trips {
 								foreach (  $new_pr_id as $key => $value ) {
 									foreach ( $value as $old_id => $new_id ) {
 										if ( $old_id == $values['id'] ) {
-											$values['id']  = $new_id;
-											$result = WpTravel_Helpers_Pricings::update_individual_pricing( $new_id, $values );
-											if ( ! is_wp_error( $result ) && 'WP_TRAVEL_UPDATED_TRIP_PRICING' === $result['code'] && ! empty( $values['categories'] ) ) {
-												WP_Travel_Helpers_Trip_Pricing_Categories::update_pricing_categories( $new_id, $values['categories'] );
-											} elseif ( empty( $values['categories'] ) ) {
-												WP_Travel_Helpers_Trip_Pricing_Categories::remove_trip_pricing_categories( $new_id );
+											if ( $new_id > 0 ) {
+												$values['id']  = $new_id;
+												$values['sort_order'] = $keys + 1 ;
+												$result = WpTravel_Helpers_Pricings::update_individual_pricing( $new_id, $values );
+												if ( ! is_wp_error( $result ) && 'WP_TRAVEL_UPDATED_TRIP_PRICING' === $result['code'] && ! empty( $values['categories'] ) ) {
+													WP_Travel_Helpers_Trip_Pricing_Categories::update_pricing_categories( $new_id, $values['categories'] );
+												} elseif ( empty( $values['categories'] ) ) {
+													WP_Travel_Helpers_Trip_Pricing_Categories::remove_trip_pricing_categories( $new_id );
+												}
+												$new_price_id[] = array( $old_id => $new_id );
+											}
+										} else {
+											if ( ! empty( $new_id ) && $new_id > 0 ) {
+												WpTravel_Helpers_Pricings::remove_individual_pricing( $new_id );
+											}
+											if ( ! empty( $values ) ) {
+												$result = WpTravel_Helpers_Pricings::add_individual_pricing( $trip_id, $values );
+												if ( ! is_wp_error( $result ) && 'WP_TRAVEL_ADDED_TRIP_PRICING' === $result['code'] && ! empty( $values['categories'] ) ) {
+													WP_Travel_Helpers_Trip_Pricing_Categories::update_pricing_categories( $result['pricing_id'], $values['categories'] );
+												}
+												if ( ! is_wp_error( $result ) && 'WP_TRAVEL_ADDED_TRIP_PRICING' === $result['code'] ) {
+													$new_price_id[] = array( $values['id'] => isset( $result['pricing_id'] ) ? $result['pricing_id'] : 0 );
+												}
 											}
 										}
 									}
 								} 
-							}
+								update_post_meta( $trip_id, 'wp_trivel_new_price_id', $new_price_id );
+							} 
+						} else {
+							update_post_meta( $trip_id, 'wp_travel_fixed_departure', 'no' );
 						}
 					}
 				}
@@ -1227,47 +1254,69 @@ class WpTravel_Helpers_Trips {
 							$migrate_pr_id = ! empty( $migrate_pr_id_array ) ? implode( ',', $migrate_pr_id_array ) : '0';
 							$date_id = $val['id'] ? $val['id'] : 0;
 							$val['id'] = '';
-							$val['pricings_id'] = $migrate_pr_id ? $migrate_pr_id : 0;
+							$val['pricing_ids'] = $migrate_pr_id ? $migrate_pr_id : 0;
 							$res = WpTravel_Helpers_Trip_Dates::add_individual_date( $trip_id, $val ); 
-							$new_date_id[] = array( $date_id => isset( $res['ids'] ) ? $res['ids'] : 0 );
+							$new_date_id[] = array( $date_id => isset( $res['date'] ) && isset( $res['date']['ids'] ) ? $res['date']['ids'] : 0 );
 						}
 						update_post_meta( $trip_id, 'wp_travel_new_date_id', $new_date_id );
 					}
 				} else { 
 					$date_ids = get_post_meta( $trip_id, 'wp_travel_new_date_id', true );
+					$new_date_ids = array();
 					if ( ! empty( $date_ids ) ) {
 						if ( ! empty( $date_departure ) ) {
 							foreach ( $date_departure as $index => $data ) {
 								foreach ( $date_ids as $indx => $val ) {
 									foreach ( $val as $old_id => $new_id ) {
-										if ( $old_id == $data['id'] ) {
-											$data['id'] = $new_id;
-											$pricing_ids      = isset( $data['pricing_ids'] ) ? $data['pricing_ids'] : '';
-											$price_id_array = ! empty( $pricing_ids ) ? explode( ',', $pricing_ids ) : array();
-											$migrate_pr_id_array = array();
-											if ( ! empty( $new_pr_id ) ) {
-												foreach ( $new_pr_id as $pri => $pr ) {
-													foreach ( $pr as $final => $mr_pr_id ) {
-														if ( ! empty( $price_id_array ) ) {
-															foreach ( $price_id_array as $index => $pr_id ) {
-																if ( $pr_id == $final ) {
-																	$migrate_pr_id_array[] = $mr_pr_id;
+										$ids = isset( $data['id'] ) ? $data['id'] : 0;
+										if ( $old_id == $ids ) {
+											if ( $new_id > 0 ) {
+												$data['id'] = $new_id;
+												$pricing_ids      = isset( $data['pricing_ids'] ) ? $data['pricing_ids'] : '';
+												$price_id_array = ! empty( $pricing_ids ) ? explode( ',', $pricing_ids ) : array();
+												$migrate_pr_id_array = array();
+												if ( ! empty( $new_price_id ) ) {
+													foreach ( $new_price_id as $pri => $pr ) {
+														foreach ( $pr as $final => $mr_pr_id ) {
+															if ( ! empty( $price_id_array ) ) {
+																foreach ( $price_id_array as $index => $pr_id ) {
+																	if ( $pr_id == $final ) {
+																		$migrate_pr_id_array[] = $mr_pr_id;
+																	}
 																}
 															}
 														}
 													}
 												}
+												$migrate_pr_id = ! empty( $migrate_pr_id_array ) ? implode( ',', $migrate_pr_id_array ) : '0';
+												$data['pricing_ids'] = $migrate_pr_id;
+												$res = WpTravel_Helpers_Trip_Dates::add_individual_date( $trip_id, $data ); 
+												$new_date_ids[] = array( $old_id =>  $new_id );
 											}
-											$migrate_pr_id = ! empty( $migrate_pr_id_array ) ? implode( ',', $migrate_pr_id_array ) : '0';
-											$data['pricings_ids'] = $migrate_pr_id;
-											$res = WpTravel_Helpers_Trip_Dates::add_individual_date( $trip_id, $data ); 
+										} else {
+											if ( $new_id > 0 ) {
+												WpTravel_Helpers_Trip_Dates::remove_dates( $new_id );
+											}
 										}
 									}
 								}
 							}
+							update_post_meta( $trip_id, 'wp_travel_new_date_id', $new_date_ids );
 						}
 					}
 				}
+			}
+		} else {
+			$posts = new WP_Query(
+				array( 
+					'post_type' => WP_TRAVEL_POST_TYPE,
+					'posts_per_page' => -1,	
+				)
+			);
+			while ( $posts->have_posts() ) {
+				$posts->the_post();
+				$trip_id = get_the_ID();
+				update_post_meta( $trip_id, 'wp_travel_trip_price_categorys', array() );
 			}
 		}
 	}
