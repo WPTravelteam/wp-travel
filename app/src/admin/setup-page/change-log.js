@@ -4,13 +4,11 @@ const changeLog = [
 		log: <p>
 				Release Date: 29th March 2023
 				<br/><br/>
-				Fixes:
-				<br/>
-				* Fixed translation issue with the WPML plugin.
-				<br/><br/>
 				Enhancement: 
 				<br/>
-				* Changed UI of the WP Travel setting from the admin Dashboard.
+				* Implemented new design and interface of the Settings page.
+				<br/>
+				* Added compatibility with WPML plugin for translations.
 				<br/>
 				* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-4-0-release-note/ ).
 				<br/>

@@ -250,11 +250,9 @@ Before updating plugin please check ["our latest release notes"](#developers).
 = 6.4.0. =
 Release Date: 29th March 2023
 
-Fixes:
-* Fixed translation issue with the WPML plugin.
-
 Enhancement: 
-* Changed UI of the WP Travel setting from the admin Dashboard.
+* Implemented new design and interface of the Settings page.
+* Added compatibility with WPML plugin for translations.
 * For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-4-0-release-note/ ).
 
 
