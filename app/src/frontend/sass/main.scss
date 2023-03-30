@@ -35,5 +35,15 @@
 @import "./14-trip-itinerary";
 @import "./15-wptravel-addons";
 
+.single-itineraries.wptravel-layout-v2 .wptravel-recurring-table-wrapper tr{
+	color: black;
+}
+.single-itineraries.wptravel-layout-v2 .wptravel-recurring-table-wrapper tr:nth-child(odd) {
+    background-color: #FAF8F8;
+}
+.single-itineraries.wptravel-layout-v2 .wptravel-recurring-table-wrapper tr:nth-child(even) {
+    background-color: #e5e5e68a;
+}
+
 
 

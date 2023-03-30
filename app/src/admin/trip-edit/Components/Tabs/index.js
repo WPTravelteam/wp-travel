@@ -163,9 +163,9 @@ const TripTabs = ( {allData} ) => {
                                 <PanelRow>
                                     <label>{__i18n.display}</label>
                                     <ToggleControl
-                                        checked={tab.show_in_menu == 'yes'}
+                                        checked={ tab.show_in_menu == 'yes' || tab.show_in_menu === true }
                                         onChange={
-                                            (e) => updateTabOption('show_in_menu', tab.show_in_menu == 'yes' ? 'no' : 'yes', tabIndex)
+                                            (e) => updateTabOption('show_in_menu', tab.show_in_menu == 'yes' || tab.show_in_menu === true ? false : true, tabIndex)
                                         }
                                         disabled={use_global_tabs == 'yes' ? true : false}
                                     />

@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: WP Travel old
+ * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
  * Version: 6.4.0
@@ -38,7 +38,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '6.3.0';
+		public $version = '6.4.0';
 
 		/**
 		 * WP Travel API version.
@@ -164,6 +164,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			 */
 			add_filter( 'option_wp_travel_settings', array( $this, 'filter_wp_travel_settings' ), 11, 2 );
 			self::reject_cache_in_checkout();
+			add_action( 'init', array( 'WpTravel_Helpers_Trips', 'wp_travel_trip_date_price' ) );
 		}
 
 		/**
@@ -267,7 +268,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/core/helpers/layout.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/core/helpers/localize.php', WP_TRAVEL_ABSPATH );
 
-			include sprintf( '%s/inc/setup-page/setup-page.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-assets.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-default-form-fields.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-wp-travel-emails.php', WP_TRAVEL_ABSPATH );
@@ -423,7 +423,9 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 				require WP_TRAVEL_ABSPATH . '/core/helpers/network.php';
 			}
-
+			if ( !is_multisite() ) {
+				include sprintf( '%s/inc/setup-page/setup-page.php', WP_TRAVEL_ABSPATH );
+			}
 		}
 
 		/**
@@ -615,7 +617,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				global $post;
 				$page_id  = (int) get_the_ID();
 				$settings = wptravel_get_settings();
-
 				switch ( $slug ) {
 					case 'cart':
 						$cart_page_id = isset( $settings['cart_page_id'] ) ? (int) $settings['cart_page_id'] : 0;

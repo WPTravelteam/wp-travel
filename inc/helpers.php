@@ -160,6 +160,13 @@ function wptravel_settings_default_fields() {
 
 		// @since 6.2.0.
 		'disable_admin_review'                    => 'no',
+
+		// @since 6.2.0 - PWA
+		'enable_pwa'                    		=> 'no',
+		'pwa_app_name'                    		=> __( 'WP Travel', 'wp-travel' ),
+		'pwa_app_short_name'                    => __( 'WPTVL', 'wp-travel' ),
+		'pwa_app_start_url'                    	=> home_url(),
+		'pwa_app_logo'                    		=>  plugin_dir_url( __FILE__ ) . 'assets/images/logo1.png',
 	);
 
 	$user_since = get_option( 'wp_travel_user_since' );
@@ -806,7 +813,7 @@ function wptravel_get_trip_duration( $post_id ) {
 	if ( $fixed_departure ) :
 		?>
 		<div class="wp-travel-trip-time trip-duration">
-			<i class="far fa-calendar-alt"></i>
+			<?php echo apply_filters( 'wp_travel_archive_page_duration_icon', '<i class="far fa-calendar-alt"></i>' ); ?>
 			<span class="wp-travel-trip-duration">
 				<?php echo wptravel_get_fixed_departure_date( $post_id ); ?>
 			</span>
@@ -817,7 +824,7 @@ function wptravel_get_trip_duration( $post_id ) {
 		$trip_duration = ( $trip_duration ) ? $trip_duration : 0;
 		?>
 		<div class="wp-travel-trip-time trip-duration">
-			<i class="far fa-clock"></i>
+			<?php echo apply_filters( 'wp_travel_archive_page_duration_icon', '<i class="far fa-clock"></i>' ); ?>
 			<span class="wp-travel-trip-duration">
 				<?php if ( (int) $trip_duration > 0 ) : ?>
 					<?php echo esc_html( $trip_duration . ' ' .  $days ); ?>
@@ -1071,56 +1078,56 @@ function wptravel_get_default_trip_tabs( $is_show_in_menu_query = false, $fronte
 			'label_class'  => '',
 			'content'      => $trip_content,
 			'use_global'   => 'yes',
-			'show_in_menu' => 'yes',
+			'show_in_menu' => true,
 		),
 		'trip_outline'  => array(
 			'label'        => __( 'Trip Outline', 'wp-travel' ),
 			'label_class'  => '',
 			'content'      => $trip_outline,
 			'use_global'   => 'yes',
-			'show_in_menu' => 'yes',
+			'show_in_menu' => true,
 		),
 		'trip_includes' => array(
 			'label'        => __( 'Trip Includes', 'wp-travel' ),
 			'label_class'  => '',
 			'content'      => $trip_include,
 			'use_global'   => 'yes',
-			'show_in_menu' => 'yes',
+			'show_in_menu' => true,
 		),
 		'trip_excludes' => array(
 			'label'        => __( 'Trip Excludes', 'wp-travel' ),
 			'label_class'  => '',
 			'content'      => $trip_exclude,
 			'use_global'   => 'yes',
-			'show_in_menu' => 'yes',
+			'show_in_menu' => true,
 		),
 		'gallery'       => array(
 			'label'        => __( 'Gallery', 'wp-travel' ),
 			'label_class'  => 'wp-travel-tab-gallery-contnet',
 			'content'      => wptravel_use_itinerary_v2_layout() ? wptravel_itinerary_v2_frontend_tab_gallery( $gallery_ids ) : wptravel_frontend_tab_gallery( $gallery_ids ),
 			'use_global'   => 'yes',
-			'show_in_menu' => 'yes',
+			'show_in_menu' => true,
 		),
 		'reviews'       => array(
 			'label'        => __( 'Reviews', 'wp-travel' ),
 			'label_class'  => 'wp-travel-review',
 			'content'      => '',
 			'use_global'   => 'yes',
-			'show_in_menu' => 'yes',
+			'show_in_menu' => true,
 		),
 		'booking'       => array(
 			'label'        => __( 'Booking', 'wp-travel' ),
 			'label_class'  => 'wp-travel-booking-form',
 			'content'      => '',
 			'use_global'   => 'yes',
-			'show_in_menu' => 'yes',
+			'show_in_menu' => true,
 		),
 		'faq'           => array(
 			'label'        => __( 'FAQ', 'wp-travel' ),
 			'label_class'  => '',
 			'content'      => $faqs,
 			'use_global'   => 'yes',
-			'show_in_menu' => 'yes',
+			'show_in_menu' => true,
 		),
 
 	);

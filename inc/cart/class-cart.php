@@ -187,7 +187,6 @@ class WP_Travel_Cart {
 
 		$arrival_date            = isset( $attrs['arrival_date'] ) ? $attrs['arrival_date'] : '';
 		$departure_date          = ! empty( $wpdb->get_col( " SELECT end_date FROM $table WHERE trip_id = $trip_id AND pricing_ids = $price_ids " ) ) ? ( $wpdb->get_col( " SELECT end_date FROM $table WHERE trip_id = $trip_id  AND pricing_ids = $price_ids " ) ) : '';
-		print_r($departure_date);
 		$attrs['departure_date'] = $departure_date[0] != '0000-00-00' ? $departure_date[0] : '';
 
 		$item_id_args = array(
