@@ -1145,6 +1145,7 @@ function wptravel_frontend_contents( $trip_id ) {
 				<?php
 				$index = 1;
 				foreach ( $wp_travel_itinerary_tabs as $tab_key => $tab_info ) :
+					$tab_info['show_in_menu'] = $tab_info['show_in_menu'] === 'yes' ? 'yes' : ( $tab_info['show_in_menu'] === 'no' || empty( $tab_info['show_in_menu'] ) ? 'no' : 'yes' );
 					if ( 'reviews' === $tab_key && ! comments_open() ) :
 						continue;
 					endif;
@@ -1164,6 +1165,7 @@ function wptravel_frontend_contents( $trip_id ) {
 				if ( is_array( $wp_travel_itinerary_tabs ) && count( $wp_travel_itinerary_tabs ) > 0 ) :
 					$index = 1;
 					foreach ( $wp_travel_itinerary_tabs as $tab_key => $tab_info ) :
+						$tab_info['show_in_menu'] = $tab_info['show_in_menu'] === 'yes' ? 'yes' : ( $tab_info['show_in_menu'] === 'no' || empty( $tab_info['show_in_menu'] ) ? 'no' : 'yes' );
 						if ( 'reviews' === $tab_key && ! comments_open() ) :
 							continue;
 						endif;

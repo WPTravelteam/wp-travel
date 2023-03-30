@@ -175,7 +175,6 @@ class WP_Travel_Helpers_Settings {
 		$settings_options = apply_filters( 'wp_travel_settings_options', $settings_options, $settings ); // additional values like dropdown options etc.
 		// Asign Additional option values.
 		$settings['options'] = $settings_options;
-
 		return WP_Travel_Helpers_Response_Codes::get_success_response(
 			'WP_TRAVEL_SETTINGS',
 			array(
@@ -350,10 +349,24 @@ class WP_Travel_Helpers_Settings {
 		if ( ! isset( $settings_data['wp_travel_bank_deposits'] ) ) {
 			$settings['wp_travel_bank_deposits'] = array();
 		}
+		/**
+		 * @since 6.4.0
+		 * set pdf primary color
+		 */
+		$settings['set_trip_itinerary_pdf_primary_color'] = isset( $settings_data['set_trip_itinerary_pdf_primary_color'] ) ? $settings_data['set_trip_itinerary_pdf_primary_color'] : '#28B951';
+		
+		$settings['set_trip_itinerary_pdf_secondary_color'] = isset( $settings_data['set_trip_itinerary_pdf_secondary_color'] ) ? $settings_data['set_trip_itinerary_pdf_secondary_color'] : '#FF9671';
 
 		$settings = apply_filters( 'wp_travel_block_before_save_settings', $settings, $settings_data );
-		// unset( $settings['modules'] );
 
+		/**
+		 * set setting wpml_migration for compatible with wpml
+		 * @since 6.4.0
+		 */
+		if ( isset( $settings_data['wpml_migrations'] ) ) {
+			$settings['wpml_migrations'] = $settings_data['wpml_migrations'];
+		}
+		// unset( $settings['modules'] );
 		update_option( 'wp_travel_settings', $settings );
 		/**
 		 * Hook to trigger after settings saved.

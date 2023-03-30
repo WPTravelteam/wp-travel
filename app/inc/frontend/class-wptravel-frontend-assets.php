@@ -44,6 +44,7 @@ class WpTravel_Frontend_Assets {
 		$all_localized = WpTravel_Helpers_Localize::get();
 		$wp_travel     = isset( $all_localized['wp_travel'] ) ? $all_localized['wp_travel'] : array(); // localized data for WP Travel below V 4.0.
 
+
 		$settings     = wptravel_get_settings();
 		$switch_to_v4 = wptravel_is_react_version_enabled();
 
@@ -415,6 +416,7 @@ class WpTravel_Frontend_Assets {
 				'jquery-ui-accordion',
 				'jquery-datepicker-lib-eng',
 				'jquery-ui-slider',
+				'easy-responsive-tabs', //prashant
 			);
 
 			if ( '' !== $api_key && true === $show_google_map ) {

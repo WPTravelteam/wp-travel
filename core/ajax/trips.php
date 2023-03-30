@@ -54,9 +54,6 @@ class WP_Travel_Ajax_Trips {
 
 				)
 			);
-
-			print_r( $gallery_thumnails );
-			die;
 		}
 	}
 

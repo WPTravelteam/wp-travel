@@ -210,6 +210,7 @@ class WpTravel_Helpers_Trip_Dates {
 			/**
 			 * @since 6.1.0
 			 */
+			$date['ids'] = $inserted_id ? $inserted_id : 0;
 			update_post_meta( $inserted_id, 'wp_travel_trip_time_enable', ! empty( $date['enable_time'] ) ? $date['enable_time'] : false );
 		}
 

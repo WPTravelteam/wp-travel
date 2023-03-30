@@ -37,6 +37,7 @@ class WpTravel_Admin_Metabox_Trip_Edit {
 	 * @return void
 	 */
 	public static function meta_box_callback() {
+		do_action( 'wp_travel_trip_durations_valitions' );
 		?>
 		<div id="wp-travel-trip-options-wrap"></div>
 		<?php

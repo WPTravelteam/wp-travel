@@ -154,7 +154,7 @@ class WpTravel_Localize_Admin {
 					$theme_data['download_link']  = $get_theme_data->download_link;
 					$theme_data['is_installed']   = $is_installed;
 					$theme_data['is_active']      = $is_active;
-
+					
 					array_push( $theme_datas, $theme_data );
 				}
 			} else {
@@ -162,11 +162,21 @@ class WpTravel_Localize_Admin {
 			}
 		}
 
+		function get_pro_version() {
+			$all_plugins = get_plugins();
+			$pro_version = $all_plugins['wp-travel-pro/wp-travel-pro.php']['Version'];
+			return (float)$pro_version;
+		}
+		
+		require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		$translation_array = array(
 			'_nonce'             => wp_create_nonce( 'wp_travel_nonce' ),
 			'admin_url'          => admin_url(),
 			'plugin_url'         => plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ),
+			'is_pro_enable'      => class_exists( 'WP_Travel_Pro' ) ? 'yes' : 'no',
+			'pro_version'		 => class_exists( 'WP_Travel_Pro') ? get_pro_version() : null,
 			'plugin_name'        => 'WP Travel',
+			'is_blocks_enable'	 => class_exists( 'WPTravel_Blocks' ) ? true : false,
 			'dev_mode'           => wptravel_dev_mode(),
 			'theme_datas'        => $theme_datas,
 			'currency'           => $settings['currency'],
@@ -175,6 +185,10 @@ class WpTravel_Localize_Admin {
 			'number_of_decimals' => $settings['number_of_decimals'] ? $settings['number_of_decimals'] : 0,
 			'decimal_separator'  => $settings['decimal_separator'] ? $settings['decimal_separator'] : '.',
 			'thousand_separator' => $settings['thousand_separator'] ? $settings['thousand_separator'] : ',',
+			'activated_plugins'			=> get_option( 'active_plugins' ),
+			'wpml_migratio_dicription'	=> __( 'Use to migrate Wp Travel compatible with WPML. After enable please save setting and then click migration button.', 'wp-travel' ),
+			'wpml_label'				=> __( 'WPML Migrations', 'wp-travel' ),
+			'wpml_btn_label'			=> __( 'Migrate', 'wp-travel' ),
 		);
 
 		// trip edit page.

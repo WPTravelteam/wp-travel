@@ -120,7 +120,7 @@ class WP_Travel_Actions_Activation { // @phpcs:ignore
 			'wp_travel_create_pages', // phpcs:ignore
 			array(
 				'wp-travel-checkout'  => array(
-					'name'    => _x( 'wp-travel-checkout', 'Page slug', 'wp-travel' ),
+					'name'    => _x( 'wp-travel-checkoutssss', 'Page slug', 'wp-travel' ),
 					'title'   => _x( 'WP Travel Checkout', 'Page title', 'wp-travel' ),
 					'content' => '[' . $checkout_shortcode_tag . ']',
 				),

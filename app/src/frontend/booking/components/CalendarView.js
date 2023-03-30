@@ -489,6 +489,7 @@ const CalendarView = ( props ) => {
 	})
     return <ErrorBoundary>
 		<div className="wp-travel-booking__datepicker-wrapper">
+			{console.log('sanchay date',params)}
 			{ calendarInline ? <DatePicker inline { ...params }  /> : <DatePicker { ...params }  /> }
 			{ ! selectedDate && showTooltip && <p>{ tooltipText } </p> || null }
 		</div>

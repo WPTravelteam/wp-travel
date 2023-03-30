@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 6.0.0
 Tested up to: 6.1.1
 Requires PHP: 7.4
-Stable tag: 6.3.0
+Stable tag: 6.4.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -247,11 +247,23 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
 
+= 6.4.0. =
+Release Date: 30th March 2023
+
+Enhancement: 
+* Implemented new design and interface of the Settings page.
+* Added compatibility with WPML plugin for translations.
+* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-4-0-release-note/ ).
+
+
 = 6.3.0. =
 Release Date: 1st March 2023
 
 Tweaks:
 * Added hook 'wp_travel_strings'.
+
+Fixes:
+* For additional compatible bug fixes with WP Travel Pro please see this [changelog]( https://wptravel.io/changelog-wp-travel-pro/ ).
 
 = 6.2.0. =
 Release Date: 13th February 2023
