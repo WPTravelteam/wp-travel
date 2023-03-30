@@ -83,8 +83,9 @@ class WP_Travel_Ajax_Settings {
 		$date_table      = $db_prefix . 'wt_dates';
 		$price_table     = $db_prefix . 'wt_pricings';
 		$price_cat_table = $db_prefix . 'wt_price_category_relation';
-		if ( isset( $post_data['wpml_migrations'] ) ) {
-			if ( $post_data['wpml_migrations'] == true ) {
+		$settings  = WP_Travel_Helpers_Settings::get_settings();
+		if ( isset( $settings['settings'] ) && isset( $settings['settings']['wpml_migrations'] ) ) {
+			if ( $settings['settings']['wpml_migrations'] == true ) {
 				$posts = new WP_Query(
 					array(
 						'post_type'      => WP_TRAVEL_POST_TYPE,

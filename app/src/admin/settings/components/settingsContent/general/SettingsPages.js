@@ -49,7 +49,7 @@ export default () => {
                             text={__('Choose the page to use as checkout page for booking which contents checkout page shortcode [wp_travel_checkout].', 'wp-travel')}
                         >
                             <span>
-                                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                <i className="fa fa-info-circle" aria-hidden="true"></i>
                             </span>
                         </Tooltip>
                     </label>
@@ -80,7 +80,7 @@ export default () => {
                             )}
                         >
                             <span>
-                                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                <i className="fa fa-info-circle" aria-hidden="true"></i>
                             </span>
                         </Tooltip>
                     </label>
@@ -114,7 +114,7 @@ addFilter('wp_travel_settings_after_pages_fields', 'wp_travel', () => {
             text={__('Choose the page to use as thankyou page which contents thankyou page shortcode [wp_travel_thankyou].', 'wp-travel')}
         >
             <span>
-                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                <i className="fa fa-info-circle" aria-hidden="true"></i>
             </span>
         </Tooltip>
     )

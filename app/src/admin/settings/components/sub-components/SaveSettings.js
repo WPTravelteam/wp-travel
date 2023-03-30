@@ -15,6 +15,7 @@ const SaveSettings = (props) => {
     const allData = useSelect((select) => {
         return select('WPTravel/Admin').getAllStore()
     }, []);
+    const { updateSettings } = dispatch('WPTravel/Admin');
     const { updateRequestSending, updateStateChange, displaySavedMessage } = dispatch('WPTravel/Admin');
 
     const { has_state_changes, show_updated_message } = allData;
@@ -66,7 +67,7 @@ const SaveSettings = (props) => {
                 <div className='wp-travel-save-notice-container'>
                     <div className="wp-travel-save-notice">
                         <p className="wp-travel-text-danger">
-                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            <i className="fa fa-exclamation-triangle" aria-hidden="true"></i>
                             {__('Unsaved changes', 'wp-travel')}
                         </p>
                     </div>
@@ -79,6 +80,11 @@ const SaveSettings = (props) => {
                             updateRequestSending(false);
 
                             if (res.success && "WP_TRAVEL_UPDATED_SETTINGS" === res.data.code) {
+                                const wpml_enable = typeof res.data.settings != 'undefined' && typeof res.data.settings.wpml_enable != 'undefined' && res.data.settings.wpml_enable;
+                                updateSettings({
+                                    ...allData,
+                                    wpml_enable: wpml_enable
+                                })
                                 updateStateChange(false)
                                 displaySavedMessage(true)
                             }
@@ -95,7 +101,7 @@ const SaveSettings = (props) => {
                 <div className='wp-travel-save-notice-container'>
                     <div className="wp-travel-save-notice">
                         <p className="wp-travel-text-success">
-                            <i class="fa fa-check" aria-hidden="true"></i>
+                            <i className="fa fa-check" aria-hidden="true"></i>
                             {__('Settings Saved', 'wp-travel')}
                         </p>
                     </div>

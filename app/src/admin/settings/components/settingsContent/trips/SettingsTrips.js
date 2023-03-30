@@ -18,6 +18,7 @@ export default () => {
     const {
         wp_travel_switch_to_react,
         hide_related_itinerary,
+        enable_trip_enquiry_option,
         enable_expired_trip_option,
         expired_trip_set_to,
         trip_pricing_options_layout,
@@ -40,6 +41,21 @@ export default () => {
             <div className='wp-travel-section-content'>
                 <ErrorBoundary>
                     {applyFilters('wp_travel_tab_content_before_trips', [], allData)}
+                    <PanelRow>
+                        <label>{__('Enable Trip Enquiry', 'wp-travel')}</label>
+                        <div id="wp-travel-misc-enable-trip-inquiry" className="wp-travel-field-value">
+                            <ToggleControl
+                                checked={enable_trip_enquiry_option == 'yes'}
+                                onChange={() => {
+                                    updateSettings({
+                                        ...allData,
+                                        enable_trip_enquiry_option: 'yes' == enable_trip_enquiry_option ? 'no' : 'yes'
+                                    })
+                                }}
+                            />
+                            {/* <p className="description">{__( 'Enable test mode to make test payment.', 'wp-travel' )}</p> */}
+                        </div>
+                    </PanelRow>
                     <PanelRow>
                         <label>{__('Hide related trips', 'wp-travel')}</label>
                         <div id="wp-travel-trips-settings-hide-related-trips" className="wp-travel-field-value">

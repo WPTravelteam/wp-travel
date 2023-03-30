@@ -31,7 +31,7 @@ export default () => {
                             text={<strong>{__('Preferred to use webmail like: sales@yoursite.com', 'wp-travel')}</strong>}
                         >
                             <span>
-                                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                <i className="fa fa-info-circle" aria-hidden="true"></i>
                             </span>
                         </Tooltip>
                     </label>
