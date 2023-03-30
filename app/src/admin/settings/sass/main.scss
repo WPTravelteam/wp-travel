@@ -769,9 +769,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 			.components-base-control .components-base-control__field {
 				width: 100%;
 				border-radius: 0.25rem;
-				margin-bottom: 0 !important;
-				min-width: 250px;
-				max-width: 250px; 
+				margin-bottom: 0 !important; 
 			}
 
 			.components-base-control__field {
@@ -1465,6 +1463,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 					label {
 						margin-bottom: 1rem;
 						font-weight: 500;
+						flex-grow: 0;
 					}
 					.wp-travel-section-header-label {
 						align-items: flex-start;
@@ -1977,8 +1976,12 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 .wp-travel-wpml-migrations-spinner {
     display: flex;
 	align-items: center;
+	margin-top: 20px;
 	img {
 		max-height: 40px;
+	}
+	.wp-travel-wpml-migrate-button.disables {
+		background-color: rgb(162 223 167) !important;
 	}
 }
 .wp-travel-section-header .wp-travel-section-header-description {
@@ -1986,4 +1989,16 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 	color: $wp-travel-faded;
 	font-size: 0.85rem;
 	display: none;
+}
+#wp-travel-partial-payment-pays .css-mr3zno{
+	position: relative;
+    top: 0;
+    left: 0;
+    width: unset !important;
+}
+#wp-travel-currency-exchange-set-api-timer .css-mr3zno {
+	position: relative;
+    top: 0;
+    left: 0;
+    width: unset !important;
 }

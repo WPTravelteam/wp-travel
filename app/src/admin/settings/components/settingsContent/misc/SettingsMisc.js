@@ -30,36 +30,6 @@ export default () => {
             <div className='wp-travel-section-content'>
                 <ErrorBoundary>
                     <PanelRow>
-                        <label>{__('Enable Trip Enquiry', 'wp-travel')}</label>
-                        <div id="wp-travel-misc-enable-trip-inquiry" className="wp-travel-field-value">
-                            <ToggleControl
-                                checked={enable_trip_enquiry_option == 'yes'}
-                                onChange={() => {
-                                    updateSettings({
-                                        ...allData,
-                                        enable_trip_enquiry_option: 'yes' == enable_trip_enquiry_option ? 'no' : 'yes'
-                                    })
-                                }}
-                            />
-                            {/* <p className="description">{__( 'Enable test mode to make test payment.', 'wp-travel' )}</p> */}
-                        </div>
-                    </PanelRow>
-                    {/* <PanelRow>
-                <label>{ __( 'Enable OG Tags', 'wp-travel' ) }</label>
-                <div className="wp-travel-field-value">
-                    <ToggleControl
-                        checked={ enable_og_tags == 'yes' }
-                        onChange={ () => {
-                            updateSettings({
-                                ...allData,
-                                enable_og_tags: 'yes' == enable_og_tags ? 'no': 'yes'
-                            })
-                        } }
-                    />
-                </div>
-            </PanelRow> */}
-
-                    <PanelRow>
                         <label>{__('GDPR Message', 'wp-travel')}</label>
                         <div id="wp-travel-misc-gdpr-message" className="wp-travel-field-value">
                             <TextareaControl

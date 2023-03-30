@@ -1,7 +1,7 @@
 import { applyFilters } from '@wordpress/hooks';
 import { useSelect, dispatch } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
-import { PanelRow, ToggleControl, TextControl, CheckboxControl, Spinner, Button } from '@wordpress/components';
+import { PanelRow, ToggleControl, TextControl, CheckboxControl, Spinner, Button, Disabled } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 
@@ -136,7 +136,6 @@ export default () => {
                         <div className="wp-travel-field-value">
                             <ToggleControl
                                 checked={  valWPML  }
-                                help={ typeof _wp_travel.wpml_migratio_dicription != 'undefined' && _wp_travel.wpml_migratio_dicription }
                                 onChange={ () => {
                                     const wpml = valWPML == true ? false : true;
                                     setValWPML( wpml );
@@ -146,12 +145,22 @@ export default () => {
                                     })
                                 } }
                             />
-                            { typeof allData.wpml_migrations != 'undefined' && allData.wpml_migrations == true && <div className='wp-travel-wpml-migrations-spinner'><Button 
+                            <label>{ typeof _wp_travel.wpml_migratio_dicription != 'undefined' && _wp_travel.wpml_migratio_dicription }</label>
+                            { typeof allData.wpml_migrations != 'undefined' && allData.wpml_migrations == true && <div className='wp-travel-wpml-migrations-spinner'>{ typeof allData.wpml_enable != 'undefined' && allData.wpml_enable && <Button 
                                 className='wp-travel-wpml-migrate-button' 
                                 variant="primary" 
                                 onClick={ () => {
                                     updateMigrate()
-                                }}>{ typeof _wp_travel.wpml_btn_label != 'undefined' && _wp_travel.wpml_btn_label }</Button>
+                                }}>{ typeof _wp_travel.wpml_btn_label != 'undefined' && _wp_travel.wpml_btn_label }</Button> || <Disabled>
+                                    <Button 
+                                        className='wp-travel-wpml-migrate-button disables' 
+                                        variant="primary" 
+                                        onClick={ () => {
+                                            updateMigrate()
+                                        }}>
+                                    { typeof _wp_travel.wpml_btn_label != 'undefined' && _wp_travel.wpml_btn_label }</Button>
+                                    <br /><label>{ typeof _wp_travel.diable_wpml_text != 'undefined' && _wp_travel.diable_wpml_text }</label>
+                                </Disabled> }
                                 <img id="wp-travel-migratios-loader" src={ _wp_travel.plugin_url + 'assets/images/Spinner.gif' } style={{ display: typeof loader.display != 'undefined' && loader.display }} /> </div>
                             }
                         </div>

@@ -58,7 +58,7 @@ addFilter('wp_travel_settings_tab_field_editor_fields_tooltip', 'wp_travel', () 
                 __('Enable to use field pattern (Like required or not required) set in "Traveler info fields" and disable to make multiple traveler fields unrequired except first one.', 'wp-travel'))}
         >
             <span>
-                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                <i className="fa fa-info-circle" aria-hidden="true"></i>
             </span>
         </Tooltip>
     )

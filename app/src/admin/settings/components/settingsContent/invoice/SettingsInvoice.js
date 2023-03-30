@@ -55,7 +55,7 @@ addFilter('wp_travel_settings_tab_invoice_fields_tooltip', 'wp_travel', () => {
             text={__('Use image path as var/www/html... instead of http to generate pdf invoice.', 'wp-travel-pro')}
         >
             <span>
-                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                <i className="fa fa-info-circle" aria-hidden="true"></i>
             </span>
         </Tooltip>
     )

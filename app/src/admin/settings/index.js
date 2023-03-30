@@ -292,7 +292,7 @@ const WPTravelSettings = () => {
         <>
             {allData.is_sending_request && <div className="wp-travel-spinner-overlay"><Spinner /></div>}
             <div id="wp-travel-mobile-navbar" className={isSticky ? "wp-travel-nav-sticky" : "wp-travel-nav"}>
-                <button className="wp-travel-nav-menu-button" onClick={handleMenuOpen}><i class="fa fa-bars" aria-hidden="true"></i></button>
+                <button className="wp-travel-nav-menu-button" onClick={handleMenuOpen}><i className="fa fa-bars" aria-hidden="true"></i></button>
                 {/* Mobile Menu */}
                 {isMobileNavOpen && window.innerWidth < 768 && createPortal(
                     <Menu
@@ -393,7 +393,7 @@ addFilter('wp_travel_submodule_downloads_use_relative_path', 'wp_travel', () => 
             text={__('Use image path as var/www/html... instead of http to generate pdf itinerary.', 'wp-travel-authorizenet')}
         >
             <span>
-                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                <i className="fa fa-info-circle" aria-hidden="true"></i>
             </span>
         </Tooltip>
     )
@@ -405,7 +405,7 @@ addFilter('wp_travel_submodule_currency_exchange_use_api_layer_tooltip', 'wp_tra
             text={__('Requires API Layer Fixer API Key instead of regular Fixer API Key', 'wp-travel-authorizenet')}
         >
             <span>
-                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                <i className="fa fa-info-circle" aria-hidden="true"></i>
             </span>
         </Tooltip>
     )
@@ -417,7 +417,7 @@ addFilter('wp_travel_submodule_google_calendar_redirectUrl_tooltip', 'wp_travel'
             text={__(`Your redirect url i.e: ${window.location.href}`, 'wp-travel')}
         >
             <span>
-                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                <i className="fa fa-info-circle" aria-hidden="true"></i>
             </span>
         </Tooltip>
     )
@@ -429,7 +429,7 @@ addFilter('wp_travel_submodule_multiple_currency_use_geolocation_tooltip', 'wp_t
             text={__('If enabled, the manual currency selector option will be disabled from the frontend.', 'wp-travel-multiple-currency')}
         >
             <span>
-                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                <i className="fa fa-info-circle" aria-hidden="true"></i>
             </span>
         </Tooltip>
     )
@@ -441,7 +441,7 @@ addFilter('wp_travel_submodule_multiple_currency_menu_location_tooltip', 'wp_tra
             text={__('Select the menu location where you want to display the currency selector.', 'wp-travel-multiple-currency')}
         >
             <span>
-                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                <i className="fa fa-info-circle" aria-hidden="true"></i>
             </span>
         </Tooltip>
     )
@@ -453,7 +453,7 @@ addFilter('wp_travel_submodule_multiple_currency_reset_cache_tooltip', 'wp_trave
             text={__('Cache automatically replaced with new data in every 4 hours, to force reset click "Reset" button.', 'wp-travel-multiple-currency')}
         >
             <span>
-                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                <i className="fa fa-info-circle" aria-hidden="true"></i>
             </span>
         </Tooltip>
     )
@@ -465,7 +465,7 @@ addFilter('wp_travel_submodule_mailchimp_optin_tooltip', 'wp_travel', () => {
             text={__('Enabling this option will enable the Mailchimp double opt-in option i.e sends contact an opt-in confirmation email when they subscribe.', 'wp-travel-mailchimp')}
         >
             <span>
-                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                <i className="fa fa-info-circle" aria-hidden="true"></i>
             </span>
         </Tooltip>
     )
@@ -477,7 +477,7 @@ addFilter('wp_travel_submodule_multiple_currency_reset_cache_tooltip', 'wp_trave
             text={__('Cache automatically replaced with new data in every 4 hours, to force reset click "Reset" button.', 'wp-travel-multiple-currency')}
         >
             <span>
-                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                <i className="fa fa-info-circle" aria-hidden="true"></i>
             </span>
         </Tooltip>
     )

@@ -114,7 +114,7 @@ export default () => {
                     {__("More payment settings according to your choice.", "wp-travel")}
                 </p>
             </div>
-            <div className='wp-travel-section-content'>
+            <div className='wp-travel-section-content' id='wp-travel-partial-payment-pays'>
                 <ErrorBoundary>
                     <PanelRow>
                         <label>{__('Partial Payment', 'wp-travel')}</label>

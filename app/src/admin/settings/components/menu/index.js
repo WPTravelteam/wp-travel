@@ -48,7 +48,7 @@ export default memo((props) => {
                                     </p>
                                 </span>
                                 <i
-                                    class={`fa fa-chevron-${showGeneralTab ? "up" : "down"}`}
+                                    className={`fa fa-chevron-${showGeneralTab ? "up" : "down"}`}
                                 ></i>
                             </button>
                             <div className="wp-travel-secondary-tabs-container">
@@ -85,7 +85,7 @@ export default memo((props) => {
                                     </p>
                                 </span>
                                 <i
-                                    class={`fa fa-chevron-${showTripsTab ? "up" : "down"}`}
+                                    className={`fa fa-chevron-${showTripsTab ? "up" : "down"}`}
                                 ></i>
                             </button>
                             <div className="wp-travel-secondary-tabs-container">
@@ -121,7 +121,7 @@ export default memo((props) => {
                                     </p>
                                 </span>
                                 <i
-                                    class={`fa fa-chevron-${showEmailTab ? "up" : "down"}`}
+                                    className={`fa fa-chevron-${showEmailTab ? "up" : "down"}`}
                                 ></i>
                             </button>
                             <div className="wp-travel-secondary-tabs-container">
@@ -157,7 +157,7 @@ export default memo((props) => {
                                     </p>
                                 </span>
                                 <i
-                                    class={`fa fa-chevron-${showAccountTab ? "up" : "down"}`}
+                                    className={`fa fa-chevron-${showAccountTab ? "up" : "down"}`}
                                 ></i>
                             </button>
                             <div className="wp-travel-secondary-tabs-container">
@@ -193,7 +193,7 @@ export default memo((props) => {
                                     </p>
                                 </span>
                                 <i
-                                    class={`fa fa-chevron-${showCheckoutTab ? "up" : "down"}`}
+                                    className={`fa fa-chevron-${showCheckoutTab ? "up" : "down"}`}
                                 ></i>
                             </button>
                             <div className="wp-travel-secondary-tabs-container">
@@ -223,13 +223,13 @@ export default memo((props) => {
                                 onClick={() => setShowPaymentTab(!showPaymentTab)}
                             >
                                 <span className="wp-travel-primary-tab-info">
-                                    <i class="fa fa-credit-card wp-travel-tab-icon"></i>
+                                    <i className="fa fa-credit-card wp-travel-tab-icon"></i>
                                     <p className="wp-travel-primary-tab-title">
                                         {__("Payment", "wp-travel")}
                                     </p>
                                 </span>
                                 <i
-                                    class={`fa fa-chevron-${showPaymentTab ? "up" : "down"}`}
+                                    className={`fa fa-chevron-${showPaymentTab ? "up" : "down"}`}
                                 ></i>
                             </button>
                             <div className="wp-travel-secondary-tabs-container">
@@ -259,13 +259,13 @@ export default memo((props) => {
                                 onClick={() => setShowInvoiceTab(!showInvoiceTab)}
                             >
                                 <span className="wp-travel-primary-tab-info">
-                                    <i class="fa fa-receipt wp-travel-tab-icon"></i>
+                                    <i className="fa fa-receipt wp-travel-tab-icon"></i>
                                     <p className="wp-travel-primary-tab-title">
                                         {__("Invoice", "wp-travel")}
                                     </p>
                                 </span>
                                 <i
-                                    class={`fa fa-chevron-${showInvoiceTab ? "up" : "down"}`}
+                                    className={`fa fa-chevron-${showInvoiceTab ? "up" : "down"}`}
                                 ></i>
                             </button>
                             <div className="wp-travel-secondary-tabs-container">
@@ -295,13 +295,13 @@ export default memo((props) => {
                                 onClick={() => setShowMiscTab(!showMiscTab)}
                             >
                                 <span className="wp-travel-primary-tab-info">
-                                    <i class="fa fa-folder-open wp-travel-tab-icon"></i>
+                                    <i className="fa fa-folder-open wp-travel-tab-icon"></i>
                                     <p className="wp-travel-primary-tab-title">
                                         {__("Miscellaneous", "wp-travel")}
                                     </p>
                                 </span>
                                 <i
-                                    class={`fa fa-chevron-${showMiscTab ? "up" : "down"}`}
+                                    className={`fa fa-chevron-${showMiscTab ? "up" : "down"}`}
                                 ></i>
                             </button>
                             <div className="wp-travel-secondary-tabs-container">
@@ -331,13 +331,13 @@ export default memo((props) => {
                                 onClick={() => setShowAdvancedTab(!showAdvancedTab)}
                             >
                                 <span className="wp-travel-primary-tab-info">
-                                    <i class="fa fa-wrench wp-travel-tab-icon"></i>
+                                    <i className="fa fa-wrench wp-travel-tab-icon"></i>
                                     <p className="wp-travel-primary-tab-title">
                                         {__("Advanced", "wp-travel")}
                                     </p>
                                 </span>
                                 <i
-                                    class={`fa fa-chevron-${showAdvancedTab ? "up" : "down"}`}
+                                    className={`fa fa-chevron-${showAdvancedTab ? "up" : "down"}`}
                                 ></i>
                             </button>
                             <div className="wp-travel-secondary-tabs-container">

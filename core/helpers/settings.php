@@ -175,6 +175,7 @@ class WP_Travel_Helpers_Settings {
 		$settings_options = apply_filters( 'wp_travel_settings_options', $settings_options, $settings ); // additional values like dropdown options etc.
 		// Asign Additional option values.
 		$settings['options'] = $settings_options;
+		$settings['wpml_enable'] = isset( $settings['wpml_migrations'] ) ? $settings['wpml_migrations'] : '';
 		return WP_Travel_Helpers_Response_Codes::get_success_response(
 			'WP_TRAVEL_SETTINGS',
 			array(
@@ -354,13 +355,14 @@ class WP_Travel_Helpers_Settings {
 		 * set pdf primary color
 		 */
 		$settings['set_trip_itinerary_pdf_primary_color'] = isset( $settings_data['set_trip_itinerary_pdf_primary_color'] ) ? $settings_data['set_trip_itinerary_pdf_primary_color'] : '#28B951';
-		
+
 		$settings['set_trip_itinerary_pdf_secondary_color'] = isset( $settings_data['set_trip_itinerary_pdf_secondary_color'] ) ? $settings_data['set_trip_itinerary_pdf_secondary_color'] : '#FF9671';
 
 		$settings = apply_filters( 'wp_travel_block_before_save_settings', $settings, $settings_data );
 
 		/**
 		 * set setting wpml_migration for compatible with wpml
+		 *
 		 * @since 6.4.0
 		 */
 		if ( isset( $settings_data['wpml_migrations'] ) ) {
@@ -374,6 +376,7 @@ class WP_Travel_Helpers_Settings {
 		 * @since 5.2.0
 		 */
 		do_action( 'wptravel_action_after_settings_saved', $settings, $settings_data );
+		$settings['wpml_enable'] = isset( $settings['wpml_migrations'] ) ? $settings['wpml_migrations'] : '';
 		return WP_Travel_Helpers_Response_Codes::get_success_response(
 			'WP_TRAVEL_UPDATED_SETTINGS',
 			array(
