@@ -1,4 +1,3 @@
-@import "../../sass/block-tabs";
 
 $wp-travel-background: rgb(240 240 241);
 $wp-travel-white: rgb(255, 255, 255);
@@ -20,7 +19,9 @@ $wp-travel-success: rgb(7, 152, 18);
 $wp-travel-shadow: rgba(0, 0, 0, 0.1);
 $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 
+
 .wp-admin.itinerary-booking_page_settings {
+@import "../../sass/block-tabs";
 	#wpwrap {
 		#wp-travel-search-modal-wrapper {
 			display: flex;
