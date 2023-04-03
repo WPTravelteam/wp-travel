@@ -1,6 +1,6 @@
 {
   "name": "wp-travel",
-  "version": "6.4.0",
+  "version": "6.4.1",
   "description": "Travel plugin for WordPress",
   "main": "index.js",
   "scripts": {
