@@ -1,5 +1,20 @@
 const changeLog = [
 	{
+		version: "6.4.1",
+		log: <p>
+				Release Date: 3rd April 2023
+				<br/><br/>
+				Fixes: 
+				<br/>
+				* Fixed js issue in the gallery backend.
+				<br/>
+				* Fixed thank you page not set while activate WPML plugin.
+				<br/>
+				* Fixed custom filter label not translate while translating using WPML.
+				<br/>
+			</p>
+	},
+	{
 		version: "6.4.0",
 		log: <p>
 				Release Date: 30th March 2023

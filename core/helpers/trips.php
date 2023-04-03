@@ -1306,6 +1306,7 @@ class WpTravel_Helpers_Trips {
 					}
 				}
 			}
+			register_taxonomy( 'wp_travel_custom_filters', apply_filters( 'wp_travel_itinerary_filters', array( 'itinerary-booking' ) ), array( 'show_in_menu' => false , 'label' => 'Custom Filter') );
 		} else {
 			$posts = new WP_Query(
 				array( 

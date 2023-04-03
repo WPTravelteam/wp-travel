@@ -111,6 +111,29 @@ class WP_Travel_Ajax_Settings {
 					}
 					$responce = update_post_meta( $trip_id, 'wp_travel_trips_dates', $trip_date );
 				}
+				/**
+				 * @since 6.4.1
+                 * migrate custom filter
+                 */
+                $custom_filter = get_option( 'wp_travel_custom_filters_option' );
+                if ( ! empty( $custom_filter ) && count( $custom_filter ) > 0 ) {
+                    $new_term_options = $custom_filter;
+                    foreach ( $custom_filter as $slug => $val ) {
+                        $term_id = isset( $val['term_id'] ) ? $val['term_id'] : 0;
+                        $term_name = isset( $val['label'] ) ? $val['label'] : '';
+                        if ( empty( $term_id ) && $term_id == 0 ) {
+                            $term_array = array(
+                                'slug'          => $slug,
+                                'description'   => '',
+                            );
+                            $term_res = wp_insert_term( $term_name, 'wp_travel_custom_filters', $term_array );
+                            if ( ! is_wp_error( $term_res ) && ! empty( $term_res ) ) { 
+                                $new_term_options[$slug]['term_id'] = isset( $term_res['term_id'] ) ? $term_res['term_id'] : 0;
+                            }
+                        }
+                    }
+                    update_option('wp_travel_custom_filters_option', $new_term_options );
+                }
 			}
 		}
 		return wp_send_json_success( 'success' );

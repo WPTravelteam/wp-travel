@@ -204,13 +204,15 @@ class WP_Travel_Helpers_Settings {
 					$page_id = $settings_data[ $settings_field ];
 					/**
 					 * @since 3.1.8.
-					 */
-					if ( defined( 'ICL_LANGUAGE_CODE' ) ) {
-						update_option( 'wp_travel_' . $settings_field . '_' . ICL_LANGUAGE_CODE, $page_id );
-						continue;
-					} else {
-						update_option( 'wp_travel_' . $settings_field, $page_id );
-					}
+					 * 
+					 * @remove ICL_LANGUAGE_CODE in @since 6.4.0
+					 */ 
+					// if ( defined( 'ICL_LANGUAGE_CODE' ) ) {
+					// 	update_option( 'wp_travel_' . $settings_field . '_' . ICL_LANGUAGE_CODE, $page_id );
+					// 	continue;
+					// } else {
+					update_option( 'wp_travel_' . $settings_field, $page_id );
+					// }
 				}
 
 				$settings[ $settings_field ] = wp_unslash( $settings_data[ $settings_field ] );
