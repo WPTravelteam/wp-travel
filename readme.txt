@@ -255,6 +255,10 @@ Fixes:
 * Fixed thank you page not set while activate WPML plugin.
 * Fixed custom filter label not translate while translating using WPML.
 
+others: 
+* Sets the WordPress tested up to version to 6.2.
+
+
 = 6.4.0. =
 Release Date: 30th March 2023
 

@@ -11,6 +11,10 @@ const changeLog = [
 				* Fixed thank you page not set while activate WPML plugin.
 				<br/>
 				* Fixed custom filter label not translate while translating using WPML.
+				<br/><br/>
+				others:
+				<br/>
+				* Sets the WordPress tested up to version to 6.2
 				<br/>
 			</p>
 	},
