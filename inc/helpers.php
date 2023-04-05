@@ -1038,7 +1038,6 @@ function wptravel_get_frontend_tabs( $show_in_menu_query = false, $frontend_hide
 		}
 		$return_tabs = $new_tabs;
 	}
-
 	return $return_tabs = apply_filters( 'wp_travel_itinerary_tabs', $return_tabs );
 }
 
