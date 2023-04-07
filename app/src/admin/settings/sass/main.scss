@@ -1,4 +1,3 @@
-
 $wp-travel-background: rgb(240 240 241);
 $wp-travel-white: rgb(255, 255, 255);
 $wp-travel-light: rgb(250, 250, 250);
@@ -19,9 +18,8 @@ $wp-travel-success: rgb(7, 152, 18);
 $wp-travel-shadow: rgba(0, 0, 0, 0.1);
 $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 
-
 .wp-admin.itinerary-booking_page_settings {
-@import "../../sass/block-tabs";
+	@import "../../sass/block-tabs";
 	#wpwrap {
 		#wp-travel-search-modal-wrapper {
 			display: flex;
@@ -391,17 +389,17 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 			margin-bottom: 5rem;
 			gap: 4rem;
 			flex-direction: column;
-		
+
 			#aside-wrap-container {
 				display: flex;
 				justify-content: center;
-		
+
 				#aside-wrap {
 					width: 100%;
 					padding: 1rem;
 					margin: 0;
 					box-sizing: border-box;
-		
+
 					.aside-wrap-buttons-container {
 						display: flex;
 						flex-direction: column;
@@ -410,7 +408,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 						border-radius: 0.5rem;
 						box-shadow: 0 1px 3px ($wp-travel-shadow);
 					}
-		
+
 					.wp-travel-aside-block-button {
 						width: 100%;
 						display: inline-block;
@@ -423,38 +421,38 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 						max-width: 350px;
 						box-shadow: 0 1px 3px $wp-travel-shadow;
 						box-sizing: border-box;
-		
+
 						&.fit {
 							width: fit-content;
 							max-width: fit-content;
 						}
-		
+
 						&:hover {
 							background-color: $wp-travel-green-hover;
 						}
 					}
-		
+
 					#wp_travel_support_block_id {
 						width: 100%;
 					}
-		
+
 					#wp_travel_doc_block_id {
 						width: 100%;
 					}
-		
+
 					#wp_travel_review_block_id {
 						border-radius: 0.5rem;
 						background-color: $wp-travel-white;
 						box-shadow: 0 1px 3px $wp-travel-shadow;
 						overflow: hidden;
-		
+
 						.thumbnail {
 							padding: 1rem;
-		
+
 							.wp-travel-anchor {
 								color: $wp-travel-green;
 							}
-		
+
 							&.last {
 								display: flex;
 								flex-direction: column;
@@ -462,20 +460,20 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 							}
 						}
 					}
-		
+
 					.wp-travel-aside-wrap-block-title {
 						margin: 0;
 						padding: 1rem;
 						border-bottom: 1px solid $wp-travel-background;
 						text-align: center;
 					}
-		
+
 					.wp-travel-aside-help-block {
 						padding: 1rem;
 					}
 				}
 			}
-		}		
+		}
 
 		.wp-travel-ui.wp-travel-ui-card {
 			padding: 0;
@@ -841,7 +839,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 			.components-base-control .components-base-control__field {
 				width: 100%;
 				border-radius: 0.25rem;
-				margin-bottom: 0 !important; 
+				margin-bottom: 0 !important;
 			}
 
 			.components-base-control__field {
@@ -867,7 +865,6 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 				border: 1px solid $wp-travel-ash;
 				padding: 0.5rem;
 				border-radius: 0.5rem;
-				min-width: 250px;
 
 				&:focus {
 					border: 1px solid $wp-travel-green;
@@ -1017,14 +1014,24 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 			}
 
 			.wp-travel-section-content {
+				#wp-travel-tabs {
+					.components-base-control {
+						&.css-qy3gpb {
+							&.ej5x27r4 {
+								width: 250px;
+							}
+						}
+					}
+				}
+
 				#wp-travel-invoice-logo {
 					.media-preview {
 						display: inline-flex;
 						flex-direction: column;
 						align-items: flex-start;
-						gap: .75rem;
+						gap: 0.75rem;
 
-						img{
+						img {
 							width: unset;
 						}
 					}
@@ -1548,7 +1555,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 
 			#wp-travel-settings-block {
 				position: relative;
-				
+
 				.wp-travel-spinner-overlay {
 					display: flex;
 					align-items: center;
@@ -1563,7 +1570,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 					backdrop-filter: blur(5px);
 					z-index: 99999;
 					transition: all 0.25s ease-in-out;
-				
+
 					.components-spinner {
 						transform: scale(1.5);
 						color: $wp-travel-green;
@@ -1679,7 +1686,6 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 					}
 				}
 
-				
 				.wp-travel-settings-container {
 					.components-base-control__field .components-flex {
 						display: flex;
@@ -2047,7 +2053,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 	}
 }
 .wp-travel-wpml-migrations-spinner {
-    display: flex;
+	display: flex;
 	align-items: center;
 	margin-top: 20px;
 	img {
