@@ -60,6 +60,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 				right: 0;
 				position: fixed;
 				background-color: $wp-travel-backdrop;
+				-webkit-backdrop-filter: blur(5px);
 				backdrop-filter: blur(5px);
 			}
 		}
@@ -586,6 +587,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 			height: 100%;
 			background-color: $wp-travel-backdrop;
 			z-index: 99999;
+			-webkit-backdrop-filter: blur(5px);
 			backdrop-filter: blur(5px);
 		}
 
@@ -748,10 +750,79 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 
 		#wpbody-content {
 			.wp-travel-field-value {
+				.components-range-control {
+					.css-l9lx82 {
+						display: block;
+						flex: 1 1 0%;
+						position: relative;
+						width: 100%;
+						color: $wp-travel-green;
+						height: 30px;
+						min-height: 30px;
+					}
+
+					.css-10282dw {
+						border-radius: 4px;
+						height: 4px;
+						pointer-events: none;
+						display: block;
+						position: absolute;
+						margin-top: 13px;
+						top: 0px;
+						background: $wp-travel-green;
+					}
+
+					.css-1nzgp6g {
+						-webkit-box-align: center;
+						align-items: center;
+						border-radius: 50%;
+						height: 100%;
+						outline: 0px;
+						position: absolute;
+						-webkit-user-select: none;
+						user-select: none;
+						width: 100%;
+						background-color: $wp-travel-green;
+					}
+
+					.css-19h143v {
+						-webkit-box-align: center;
+						align-items: center;
+						border-radius: 50%;
+						height: 100%;
+						outline: 0px;
+						position: absolute;
+						-webkit-user-select: none;
+						user-select: none;
+						width: 100%;
+						background-color: $wp-travel-green;
+					}
+
+					.css-azwfbw {
+						-webkit-box-align: center;
+						align-items: center;
+						display: flex;
+						height: 12px;
+						-webkit-box-pack: center;
+						justify-content: center;
+						margin-top: 9px;
+						outline: 0px;
+						pointer-events: none;
+						position: absolute;
+						top: 0px;
+						-webkit-user-select: none;
+						user-select: none;
+						width: 12px;
+						border-radius: 50%;
+						background-color: $wp-travel-green;
+						margin-left: -10px;
+						transform: translateX(4.5px);
+					}
+				}
 				.components-base-control {
 					display: flex;
 					justify-content: flex-end;
-					width: 100% !important;
+					width: 100%;
 				}
 
 				.components-color-picker {
@@ -796,6 +867,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 				border: 1px solid $wp-travel-ash;
 				padding: 0.5rem;
 				border-radius: 0.5rem;
+				min-width: 250px;
 
 				&:focus {
 					border: 1px solid $wp-travel-green;
@@ -949,6 +1021,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 					.media-preview {
 						display: inline-flex;
 						flex-direction: column;
+						align-items: flex-start;
 						gap: .75rem;
 
 						img{
@@ -1259,6 +1332,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 				margin: 0 0 0.25rem 0;
 				color: $wp-travel-faded;
 				font-size: 0.85rem;
+				display: none;
 			}
 
 			.wp-travel-settings-section {
@@ -1485,6 +1559,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 					left: 0;
 					right: 0;
 					background-color: $wp-travel-backdrop;
+					-webkit-backdrop-filter: blur(5px);
 					backdrop-filter: blur(5px);
 					z-index: 99999;
 					transition: all 0.25s ease-in-out;
@@ -1655,7 +1730,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 
 								.media-preview {
 									display: flex;
-									justify-content: flex-end;
+									align-items: flex-end;
 								}
 
 								.components-base-control
@@ -1723,6 +1798,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 					#wp-travel-invoice-logo {
 						.media-preview {
 							float: left;
+							align-items: flex-start;
 						}
 					}
 				}
@@ -1831,6 +1907,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 						#wp-travel-invoice-logo {
 							.media-preview {
 								float: right;
+								align-items: flex-end;
 							}
 						}
 
@@ -1849,11 +1926,6 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 									display: flex;
 									margin: auto !important;
 									margin-right: 0 !important;
-								}
-
-								.media-preview {
-									display: flex;
-									justify-content: flex-end;
 								}
 
 								.components-base-control.components-toggle-control {
@@ -1984,22 +2056,4 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 	.wp-travel-wpml-migrate-button.disables {
 		background-color: rgb(162 223 167) !important;
 	}
-}
-.wp-travel-section-header .wp-travel-section-header-description {
-	margin: 0 0 0.25rem 0;
-	color: $wp-travel-faded;
-	font-size: 0.85rem;
-	display: none;
-}
-#wp-travel-partial-payment-pays .css-mr3zno{
-	position: relative;
-    top: 0;
-    left: 0;
-    width: unset !important;
-}
-#wp-travel-currency-exchange-set-api-timer .css-mr3zno {
-	position: relative;
-    top: 0;
-    left: 0;
-    width: unset !important;
 }
