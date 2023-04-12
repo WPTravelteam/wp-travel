@@ -251,12 +251,12 @@ Before updating plugin please check ["our latest release notes"](#developers).
 Release Date: 12th April 2023
 
 Fixes:
-* Fixed calendar layout issue.
+* Fixed calendar layout issue in backend trip edit dashboard.
 * Fixed when changing Payment Status to paid, Payment Mode status will also be changed to full.  
 
 Enhancement: 
 * Added hook `[wp_travel_email_itinerary_pdf_attachment]` to attach itinerary PDF in the booking email. (in Pro)
-* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-5.0-release-note/ ).
+* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-5-0-release-note/ ).
 
 = 6.4.1. =
 Release Date: 3rd April 2023
