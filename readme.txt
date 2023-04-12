@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 6.0.0
 Tested up to: 6.2
 Requires PHP: 7.4
-Stable tag: 6.4.1
+Stable tag: 6.5.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -246,6 +246,17 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 6.5.0. =
+Release Date: 12th April 2023
+
+Fixes:
+* Fixed calendar layout issue in backend trip edit dashboard.
+* Fixed when changing Payment Status to paid, Payment Mode status will also be changed to full.  
+
+Enhancement: 
+* Added hook `[wp_travel_email_itinerary_pdf_attachment]` to attach itinerary PDF in the booking email. (in Pro)
+* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-5-0-release-note/ ).
 
 = 6.4.1. =
 Release Date: 3rd April 2023

@@ -2254,7 +2254,7 @@ function wptravel_tab_show_in_menu( $tab_name ) {
 		return false;
 	}
 
-	if ( 'yes' === $tabs[ $tab_name ]['show_in_menu'] ) {
+	if ( 'yes' === $tabs[ $tab_name ]['show_in_menu'] || $tabs[ $tab_name ]['show_in_menu'] == 1 ) {
 		return true;
 	}
 	return false;

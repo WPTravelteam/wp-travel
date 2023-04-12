@@ -33,6 +33,10 @@ jQuery(document).ready(function ($) {
 			}, 1200);
 		}
 	});
+	$( "input[name=wp_travel_payment_gateway]").click(function () {
+		console.log('clik mes', wp_travel );
+		inventory_testing();
+	})
 
 });
 
@@ -56,4 +60,48 @@ jQuery(window).resize(sidebarSticky);
 //     document.write("hello");
 // 	$(this).replaceWith($('<div>' + this.innerHTML + '</div>'));
 //   });
+
+var inventory_testing = function () {
+    if ( typeof wp_travel.inventory != 'undefined' && wp_travel.inventory == 'yes' ) {
+        fetch(wp_travel.ajaxUrl + "?action=inventory_testing", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+            wp_travel_trip:
+                (typeof wp_travel.items != "undefined" && wp_travel.items) || Array(),
+            nonce: wp_travel.nonce,
+            }),
+        }).then(function (resp) {
+            resp.json().then((responces) => {
+                if (responces.success == true) {
+                    if (
+                        typeof responces.data != "undefined" &&
+                        typeof responces.data.code != "undefined" &&
+                        typeof responces.data.inventory_available != "undefined" &&
+                        responces.data.code == "WP_TRAVEL_INVENTORY_TESTING" &&
+                        responces.data.inventory_available == "no_pax"
+                    ) {
+                        alert( "Sorry your booking can't proceed, booking is full." )
+                        fetch(
+                            wp_travel.ajaxUrl + "?action=wp_travel_use_inventory_empty_cart",
+                            {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify({
+                                wp_travel_empty_cart:
+                                    (typeof wp_travel.items != "undefined" && wp_travel.items) ||
+                                    Array(),
+                                }),
+                            }
+                            ).then((results) =>
+                            results.json().then((resu) => {
+                                location.reload();
+                            })
+                        );
+                    } 
+                } 
+            });
+        });
+    }
+}
 

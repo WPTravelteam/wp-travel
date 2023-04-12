@@ -44,7 +44,6 @@ class WpTravel_Frontend_Assets {
 		$all_localized = WpTravel_Helpers_Localize::get();
 		$wp_travel     = isset( $all_localized['wp_travel'] ) ? $all_localized['wp_travel'] : array(); // localized data for WP Travel below V 4.0.
 
-
 		$settings     = wptravel_get_settings();
 		$switch_to_v4 = wptravel_is_react_version_enabled();
 
@@ -272,7 +271,6 @@ class WpTravel_Frontend_Assets {
 			}
 		}
 
-
 		$styles = array(
 			'wp-travel-slick'           => array(
 				'src'   => self::$app_path . '/assets/css/lib/slick/slick.min.css',
@@ -416,7 +414,7 @@ class WpTravel_Frontend_Assets {
 				'jquery-ui-accordion',
 				'jquery-datepicker-lib-eng',
 				'jquery-ui-slider',
-				'easy-responsive-tabs', //prashant
+				'easy-responsive-tabs', // prashant
 			);
 
 			if ( '' !== $api_key && true === $show_google_map ) {
@@ -459,7 +457,7 @@ class WpTravel_Frontend_Assets {
 		if ( self::is_request( 'admin' ) ) {
 			if ( function_exists( 'get_current_screen' ) ) {
 				$screen = get_current_screen();
-	
+
 				if ( isset( $screen->is_block_editor ) && ! $screen->is_block_editor ) {
 					// Main Styles for all admin pages.
 					$styles['wp-travel-back-end'] = array(
@@ -527,7 +525,6 @@ class WpTravel_Frontend_Assets {
 			if ( '' !== $api_key && true === $show_google_map ) {
 				$admin_depencency[] = 'jquery-gmaps';
 			}
-
 
 			$admin_script_handler = array( 'jquery', 'jquery-ui-sortable', 'jquery-ui-accordion' );
 			if ( get_current_screen()->base == 'dashboard_page_wp-travel-setup-page' ) {

@@ -1,5 +1,24 @@
 const changeLog = [
 	{
+		version: "6.5.0",
+		log: <p>
+				Release Date: 12th April 2023
+				<br/><br/>
+				Fixes: 
+				<br/>
+				* Fixed when changing Payment Status to paid, Payment Mode status will also be changed to full..
+				<br/>
+				* Fixed calendar layout issue in backend trip edit dashboard.
+				<br/><br/>
+				Enhancement:
+				<br/>
+				* Added hook `[wp_travel_email_itinerary_pdf_attachment]` to attach itinerary PDF in the booking email
+				<br/>
+				* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-5-0-release-note/ ).
+				<br/>
+			</p>
+	},
+	{
 		version: "6.4.1",
 		log: <p>
 				Release Date: 3rd April 2023

@@ -230,6 +230,13 @@ i.fa-times-circle {
 						}
 					}
 				}
+				.components-base-control {
+					&.css-qy3gpb {
+						&.ej5x27r4 {
+							width: 250px;
+						}
+					}
+				}
 			}
 		}
 		#tab-panel-0-price-dates-view {
@@ -869,6 +876,18 @@ div[aria-labelledby="0-includes-excludes"] {
 		left: 0% !important;
 		top: 100% !important;
 		z-index: 999999;
+
+		.components-popover__content{
+			.wp-travel-datetimepicker{
+				.components-datetime{
+					.components-datetime__time{
+						.components-base-control{
+							width: unset;
+						}
+					}
+				}
+			}
+		}
 	}
 }
 
