@@ -85,7 +85,10 @@ class WpTravel_Helpers_Localize {
 			if ( wptravel_can_load_payment_scripts() ) {
 
 				global $wt_cart;
-
+				if ( WP_Travel::is_page( 'checkout' ) ) {
+					$trip_item = $wt_cart->getitems();
+					$wp_travel['items'] = $trip_item;
+				}
 				$cart_amounts   = $wt_cart->get_total();
 				$trip_price     = isset( $cart_amounts['total'] ) ? $cart_amounts['total'] : '';
 				$payment_amount = isset( $cart_amounts['total_partial'] ) ? $cart_amounts['total_partial'] : '';
