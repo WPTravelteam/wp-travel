@@ -1,5 +1,44 @@
 var gateway_change = function() {
     const func = jQuery('[name=wp_travel_payment_gateway]:checked').val();
+    fetch(wp_travel.ajaxUrl + "?action=inventory_testing", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          wp_travel_trip:
+            (typeof wp_travel.items != "undefined" && wp_travel.items) || Array(),
+          nonce: wp_travel.nonce,
+        }),
+    }).then(function (resp) {
+        resp.json().then((responces) => {
+            if (responces.success == true) {
+                if (
+                    typeof responces.data != "undefined" &&
+                    typeof responces.data.code != "undefined" &&
+                    typeof responces.data.inventory_available != "undefined" &&
+                    responces.data.code == "WP_TRAVEL_INVENTORY_TESTING" &&
+                    responces.data.inventory_available == "no_pax"
+                ) {
+                    alert( "Sorry your booking can't proceed, booking is full." )
+                    fetch(
+                        wp_travel.ajaxUrl + "?action=wp_travel_use_inventory_empty_cart",
+                        {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                            wp_travel_empty_cart:
+                                (typeof wp_travel.items != "undefined" && wp_travel.items) ||
+                                Array(),
+                            }),
+                        }
+                        ).then((results) =>
+                        results.json().then((resu) => {
+                            location.reload();
+                        })
+                    );
+                } 
+            } 
+        });
+    });
     const executor = payments[func];
     executor && executor();
 
@@ -138,3 +177,5 @@ function get_payable_price(payment_mode, no_of_pax) {
     amount['trip_price'] = trip_price;
     return amount;
 }
+
+console.log( 'hekr', wp_travel );
