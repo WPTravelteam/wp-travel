@@ -91,7 +91,7 @@ class WpTravel_Helpers_Localize {
 					foreach ( $trip_item as $key => $val ) {
 						$id_trip = $val['trip_id'];
 						$inventorys  = get_post_meta( $id_trip, 'enable_trip_inventory' );
-						if ( $inventorys == 'yes' ) {
+						if ( $inventorys[0] == 'yes' ) {
 							$invent = 'yes';
 						}
 					}
