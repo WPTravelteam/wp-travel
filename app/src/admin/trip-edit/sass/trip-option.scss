@@ -869,6 +869,18 @@ div[aria-labelledby="0-includes-excludes"] {
 		left: 0% !important;
 		top: 100% !important;
 		z-index: 999999;
+
+		.components-popover__content{
+			.wp-travel-datetimepicker{
+				.components-datetime{
+					.components-datetime__time{
+						.components-base-control{
+							width: unset;
+						}
+					}
+				}
+			}
+		}
 	}
 }
 
