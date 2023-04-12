@@ -1,5 +1,13 @@
 var gateway_change = function() {
     const func = jQuery('[name=wp_travel_payment_gateway]:checked').val();
+    const executor = payments[func];
+    executor && executor();
+
+    bank_deposit_field();
+   
+};
+
+var inventory_testing = function () {
     if ( typeof wp_travel.inventory != 'undefined' && wp_travel.inventory == 'yes' ) {
         fetch(wp_travel.ajaxUrl + "?action=inventory_testing", {
             method: "POST",
@@ -41,13 +49,7 @@ var gateway_change = function() {
             });
         });
     }
-    const executor = payments[func];
-    executor && executor();
-
-    bank_deposit_field();
-   
-};
-
+}
 var bank_deposit_field = function() {
 
     jQuery( '.f-bank-deposit' ).hide();
@@ -140,7 +142,7 @@ jQuery(document).ready(function($) {
     $('[name=wp_travel_booking_option]').change(booking_option_change);
     $('[name=wp_travel_payment_gateway]').change(gateway_change);
     $('[name=wp_travel_payment_mode]').change(payment_mode_change);
-
+    $('[name=wp_travel_payment_gateway]').change(inventory_testing);
     // Trigger change For Gateway.
     if ('booking_with_payment' == $('[name=wp_travel_booking_option]').val()) {
         $('[name=wp_travel_payment_gateway]').trigger('change');
