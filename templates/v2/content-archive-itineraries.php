@@ -107,7 +107,7 @@ if ( $locations && is_array( $locations ) ) {
 
 					</div>
 					<div class="trip-rating">
-						<?php if ( wptravel_tab_show_in_menu( 'reviews' ) ) : ?>
+						<?php $reviewed = apply_filters( 'wp_travel_trip_archive_list_review', wptravel_tab_show_in_menu( 'reviews' ) ); if ( $reviewed ) : ?>
 							<div class="wp-travel-average-review">
 								<?php wptravel_trip_rating( $trip_id ); ?>
 								<?php $count = (int) wptravel_get_review_count(); ?>

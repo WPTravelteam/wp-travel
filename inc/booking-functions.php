@@ -289,6 +289,21 @@ function wptravel_book_now() {
 	if ( $cart_total['discount'] > 0 && ! $cart_total['total'] ) {
 		update_post_meta( $booking_id, 'wp_travel_booking_status', 'booked' );
 		update_post_meta( $payment_id, 'wp_travel_payment_status', 'paid' );
+		
+	}
+	/**
+	* Change payment mode N/A to full while payment full.
+	* @since 6.6.0
+	*/
+	$payment_data = wptravel_booking_data( $booking_id );
+	$total_price = isset( $payment_data['total'] ) ? $payment_data['total'] : 0;
+	$payment_paid = get_post_meta( $payment_id, 'wp_travel_payment_status', true );
+	$booking_paid = get_post_meta( $booking_id, 'wp_travel_payment_status', true );
+	$partial_enable = get_post_meta( $payment_id, 'wp_travel_is_partial_payment', true );
+	
+	if ( $booking_paid == 'paid' && $payment_paid == 'paid' && $partial_enable == 'no' &&  $total_price > 0 ) {
+		update_post_meta( $payment_id, 'wp_travel_payment_mode', 'full' );
+		update_post_meta( $payment_id, 'wp_travel_payment_amount', $total_price );
 	}
 
 	// Clear Cart After process is complete.

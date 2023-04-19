@@ -28,7 +28,7 @@ class WpTravel_Helpers_Strings {
 			'alert'                     => self::alert_strings(),
 			'book_n_pay'                => __( 'Book and Pay', 'wp-travel' ),
 			'book_now'                  => __( 'Book Now', 'wp-travel' ),
-			'booking_tab_content_label' => __( 'Select Date and Pricing Options', 'wp-travel' ),
+			'booking_tab_content_label' => __( 'Select Date and Pricing Options for this trip in the Trip Options setting.', 'wp-travel' ),
 			'bookings'                  => self::booking_strings(),
 			'category'                  => __( 'Category', 'wp-travel' ),
 			'close'                     => __( 'Close', 'wp-travel' ),
