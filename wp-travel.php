@@ -419,7 +419,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			// Front End.
 			require WP_TRAVEL_ABSPATH . '/app/inc/frontend/class-wptravel-single-itinerary-hooks.php';
 			require WP_TRAVEL_ABSPATH . '/app/inc/frontend/class-wptravel-frontend-assets.php';
-
+			include sprintf( '%s/core/api/include.php', WP_TRAVEL_ABSPATH ); // for api include file.
 			include sprintf( '%s/inc/deprecated-class/trait/class-wp-travel-deprecated-trait.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/deprecated-class/trait/deprecated-includes.php', WP_TRAVEL_ABSPATH );
 

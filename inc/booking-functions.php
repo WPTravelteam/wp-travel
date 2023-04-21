@@ -109,7 +109,7 @@ function wptravel_book_now() {
 		$arrival_date_email_tag = wptravel_format_date( $arrival_date_email_tag[0], true, 'Y-m-d' );
 	}
 	$trip_id = isset( $trip_ids[0] ) ? $trip_ids[0] : 0;
-	$new_trip_id = isset( $trip_ids[0] ) ? $trip_ids[0] : 0;
+	$new_trip_id =  $trip_ids;
 
 	if ( empty( $trip_id ) ) {
 		return;

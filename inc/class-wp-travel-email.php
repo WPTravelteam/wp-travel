@@ -159,15 +159,31 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 			 * 
 			 */
 			$attachments = apply_filters( 'wp_travel_email_itinerary_pdf_attachment', false );
-			$attachment = '';
+			$attachment = array();
+			$wt_settings_send_pdf = get_option( 'itinerary_pdf_send_booking_mail' );
+			if ( $wt_settings_send_pdf ||  $attachments ) {
+				foreach ( $new_trip_id as $indexs => $id ) {
+					if ( class_exists( 'WP_Travel_Downloads_Core' ) ) {
+						WP_Travel_Downloads_Core::generate_pdf( $id, false );
+						$dir                   = trailingslashit( WP_TRAVEL_ITINERARY_PATH );
+						$trips_name            = get_the_title( $id );
+						$downloadable_filename = $trips_name . '.pdf';
+						$attachment[]            = $dir . $downloadable_filename;
+					}
+				}
 
-			if ( $attachments ) {
-				if ( class_exists( 'WP_Travel_Downloads_Core' ) ) {
-					WP_Travel_Downloads_Core::generate_pdf( $new_trip_id, false );
-					$dir                   = trailingslashit( WP_TRAVEL_ITINERARY_PATH );
-					$trips_name            = get_the_title( $new_trip_id );
-					$downloadable_filename = $trips_name . '.pdf';
-					$attachment            = $dir . $downloadable_filename;
+			} else {
+				foreach ( $new_trip_id as $indexs => $id ) {
+					$wt_trip_email_itineray_pdf = get_post_meta( $id, 'send_booking_maile_attached_itinerary_pdf', true );
+					if ( $wt_trip_email_itineray_pdf ) {
+						if ( class_exists( 'WP_Travel_Downloads_Core' ) ) {
+							WP_Travel_Downloads_Core::generate_pdf( $id, false );
+							$dir                   = trailingslashit( WP_TRAVEL_ITINERARY_PATH );
+							$trips_name            = get_the_title( $id );
+							$downloadable_filename = $trips_name . '.pdf';
+							$attachment[]            = $dir . $downloadable_filename;
+						}
+					}
 				}
 			}
 			$send_email_to_admin = $this->settings['send_booking_email_to_admin']; // 'yes' By default.
@@ -187,7 +203,7 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 				$email_content      = str_replace( array_keys( $email_tags ), $email_tags, $email_content );
 				$amdin_send_booking = apply_filters( 'wp_travel_booking_mail_sent_to_admin', true );
 				if ( $amdin_send_booking == true ) {
-					if ( ! wp_mail( $this->admin_email, $email_subject, $email_content, $headers, array( $attachment ) ) ) {
+					if ( ! wp_mail( $this->admin_email, $email_subject, $email_content, $headers, $attachment ) ) {
 						WPTravel()->notices->add( __( 'Your trip has been booked but the email could not be sent. Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
 					}
 				}
@@ -215,7 +231,7 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 				// Email Content.
 				$email_content = str_replace( array_keys( $email_tags ), $email_tags, $email_content );
 
-				if ( ! wp_mail( $customer_email, $email_subject, $email_content, $headers, array( $attachment ) ) ) {
+				if ( ! wp_mail( $customer_email, $email_subject, $email_content, $headers, $attachment ) ) {
 					WPTravel()->notices->add( __( 'Your trip has been booked but the email could not be sent. Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
 				}
 			}
