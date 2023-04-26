@@ -29,6 +29,7 @@ import InventoryNotice, { Notice } from '../_InventoryNotice';
 const initialState = DEFAULT_BOOKING_STATE();
 
 const CalendarView = ( props ) => {
+	console.log('dfjsdkljf', props)
 	// Component Props.
 	const { calendarInline, showTooltip, tooltipText, tripData, bookingData, updateBookingData } = props;
 
@@ -480,8 +481,9 @@ const CalendarView = ( props ) => {
 	}
     if ( ! isFixedDeparture ) {
 		delete params.filterDate;
-		let durations_dates = typeof trip_duration != 'undefined' && typeof trip_duration.start_date != 'undefined' && new Date( trip_duration.start_date ) || new Date();
+		let durations_dates = typeof trip_duration != 'undefined' && typeof trip_duration.start_date != 'undefined' && trip_duration.start_date != '' && new Date( trip_duration.start_date ) || new Date();
 		let duration_end_dates = typeof trip_duration != 'undefined' && typeof trip_duration.end_date != 'undefined' && new Date( trip_duration.end_date ) || null;
+		// const finalDates = durations_dates < new Date() ? new Date() : durations_dates;
 		params.minDate   = durations_dates;
 		params.maxDate	 = duration_end_dates;
 		params.startDate = selectedDate;
