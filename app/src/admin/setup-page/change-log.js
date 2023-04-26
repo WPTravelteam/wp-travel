@@ -1,18 +1,37 @@
 const changeLog = [
 	{
+		version: "6.6.0",
+		log: <p>
+				Release Date: 26th April 2023
+				<br/><br/>
+				Fixes: 
+				<br/>
+				* Fixed N/A in payment mode while the partial payment is disabled.
+				<br/><br/>
+				Enhancement:
+				<br/>
+				* Sending an email to the client when Payment Info is changed to Paid by the admin manually.
+				<br/>
+				* Added option to add hourly Trips in case of Trip duration.
+				<br/>
+				* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-6-0-release-note/ ).
+				<br/>
+			</p>
+	},
+	{
 		version: "6.5.0",
 		log: <p>
 				Release Date: 12th April 2023
 				<br/><br/>
 				Fixes: 
 				<br/>
-				* Fixed when changing Payment Status to paid, Payment Mode status will also be changed to full..
+				* Fixed when changing Payment Status to paid, Payment Mode status will also be changed to full.
 				<br/>
 				* Fixed calendar layout issue in backend trip edit dashboard.
 				<br/><br/>
 				Enhancement:
 				<br/>
-				* Added hook `[wp_travel_email_itinerary_pdf_attachment]` to attach itinerary PDF in the booking email
+				* Added hook `[wp_travel_email_itinerary_pdf_attachment]` to attach itinerary PDF in the booking email.
 				<br/>
 				* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-5-0-release-note/ ).
 				<br/>
@@ -33,7 +52,7 @@ const changeLog = [
 				<br/><br/>
 				others:
 				<br/>
-				* Sets the WordPress tested up to version to 6.2
+				* Sets the WordPress tested up to version to 6.2.
 				<br/>
 			</p>
 	},

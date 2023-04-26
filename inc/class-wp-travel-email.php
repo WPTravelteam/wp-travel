@@ -164,7 +164,7 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 			if ( $wt_settings_send_pdf ||  $attachments ) {
 				foreach ( $new_trip_id as $indexs => $id ) {
 					if ( class_exists( 'WP_Travel_Downloads_Core' ) ) {
-						WP_Travel_Downloads_Core::generate_pdf( $id, false );
+						WP_Travel_Downloads_Core::email_attachment_generate_pdf( $id, false );
 						$dir                   = trailingslashit( WP_TRAVEL_ITINERARY_PATH );
 						$trips_name            = get_the_title( $id );
 						$downloadable_filename = $trips_name . '.pdf';
@@ -177,7 +177,7 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 					$wt_trip_email_itineray_pdf = get_post_meta( $id, 'send_booking_maile_attached_itinerary_pdf', true );
 					if ( $wt_trip_email_itineray_pdf ) {
 						if ( class_exists( 'WP_Travel_Downloads_Core' ) ) {
-							WP_Travel_Downloads_Core::generate_pdf( $id, false );
+							WP_Travel_Downloads_Core::email_attachment_generate_pdf( $id, false );
 							$dir                   = trailingslashit( WP_TRAVEL_ITINERARY_PATH );
 							$trips_name            = get_the_title( $id );
 							$downloadable_filename = $trips_name . '.pdf';

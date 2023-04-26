@@ -39,6 +39,9 @@ const CalendarView = ( props ) => {
         pricings,
         trip_duration:tripDuration
     } = tripData;
+	console.log( 'trip data', tripDuration );
+	const { trip_duration } = typeof tripData != 'undefined' && tripData || {};
+	// const { start_date, end_date } = typeof trip_duration != 'undefined' && trip_duration || '';
     const allPricings        = pricings && _.keyBy( pricings, p => p.id ) // Need object structure because pricing id may not be in sequencial order.
     const _dates             = 'undefined' !== typeof dates && dates.length > 0 ? dates : [];
     const datesById          = _.keyBy(_dates, d => d.id)
@@ -459,7 +462,7 @@ const CalendarView = ( props ) => {
 		( moment( md.start_date ).isBefore( moment(new Date() ) ) && md.is_recurring ) || // @todo need to filter end date condition as well in recurring.
 		moment( md.start_date ).isSame( moment(new Date() ) ) 
 	);
-
+		console.log( 'hekdfsdf',isFixedDeparture );
 	let minDate = _mindate && moment(_mindate.start_date).toDate() || new Date();
 	let maxDate = new Date( new Date().setFullYear(new Date().getFullYear() + 10 ));
     let params = {
@@ -477,7 +480,10 @@ const CalendarView = ( props ) => {
 	}
     if ( ! isFixedDeparture ) {
 		delete params.filterDate;
-		params.minDate   = new Date();
+		let durations_dates = typeof trip_duration != 'undefined' && typeof trip_duration.start_date != 'undefined' && new Date( trip_duration.start_date ) || new Date();
+		let duration_end_dates = typeof trip_duration != 'undefined' && typeof trip_duration.end_date != 'undefined' && new Date( trip_duration.end_date ) || null;
+		params.minDate   = durations_dates;
+		params.maxDate	 = duration_end_dates;
 		params.startDate = selectedDate;
 		params.endDate   = moment( selectedDate ).add( duration - 1, 'days' ).toDate();
 	}

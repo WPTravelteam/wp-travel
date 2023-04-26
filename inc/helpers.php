@@ -808,7 +808,7 @@ function wptravel_get_trip_duration( $post_id ) {
 	if ( class_exists( 'WpTravel_Helpers_Strings' ) ) {
 		$strings = WpTravel_Helpers_Strings::get();
 	}
-	$days = isset( $strings['days'] ) ? $strings['days'] : __('Days', 'wp-travel' );
+	
 	ob_start();
 	if ( $fixed_departure ) :
 		?>
@@ -820,19 +820,14 @@ function wptravel_get_trip_duration( $post_id ) {
 		</div>
 		<?php
 	else :
-		$trip_duration = get_post_meta( $post_id, 'wp_travel_trip_duration', true );
-		$trip_duration = ( $trip_duration ) ? $trip_duration : 0;
+		$trip_duration  = wp_travel_get_trip_durations( $post_id );
 		?>
-		<div class="wp-travel-trip-time trip-duration">
-			<?php echo apply_filters( 'wp_travel_archive_page_duration_icon', '<i class="far fa-clock"></i>' ); ?>
-			<span class="wp-travel-trip-duration">
-				<?php if ( (int) $trip_duration > 0 ) : ?>
-					<?php echo esc_html( $trip_duration . ' ' .  $days ); ?>
-				<?php else : ?>
-					<?php esc_html_e( 'N/A', 'wp-travel' ); ?>
-				<?php endif; ?>
-			</span>
-		</div>
+			<div class="wp-travel-trip-time trip-duration">
+				<?php echo apply_filters( 'wp_travel_archive_page_duration_icon', '<i class="far fa-clock"></i>' ); ?>
+				<span class="wp-travel-trip-duration">
+					<?php echo apply_filters( 'wp_travel_trip_duration_trip_list', esc_html( $trip_duration ), $post_id ); ?>
+				</span>
+			</div>
 		<?php
 	endif;
 	$content = ob_get_contents();
@@ -840,7 +835,68 @@ function wptravel_get_trip_duration( $post_id ) {
 	$content = apply_filters( 'wp_travel_trip_duration', $content, $post_id );
 	echo $content; // phpcs:ignore
 }
+/**
+ * get trip duration
+ * @since 6.6 
+ */
+function wp_travel_get_trip_durations( $trip_id ) {
+	$strings = WpTravel_Helpers_Strings::get();
+	$trip_duration_formating = get_post_meta( $trip_id, 'wp_travel_trip_duration_formating', true);
+	$days = isset( $strings['days'] ) 		? apply_filters( 'wp_travel_list_archive_page_trip_duration_day', $strings['days'] ) 	: __('Days', 'wp-travel' );
+	$hours = isset( $strings['hour'] ) 		? apply_filters( 'wp_travel_list_archive_page_trip_duration_hour', $strings['hour'] ) 	: __('Hour', 'wp-travel' );
+	$nights = isset( $strings['nights'] ) 	? apply_filters( 'wp_travel_list_archive_page_trip_duration_night', $strings['nights'] ) 	: __('Nights', 'wp-travel' );
+	$minutes = isset( $strings['minutes'] ) ? apply_filters( 'wp_travel_list_archive_page_trip_duration_minute', $strings['minutes'] ) : __('Minutes', 'wp-travel' );
+	$trip_duration = '';
+	$trip_duration_days = get_post_meta( $trip_id, 'wp_travel_trip_duration', true );
+	$duration_na = apply_filters( 'wp_travel_list_archive_duration_na' ,  __( 'N/A', 'wp-travel' ) );
+	$trip_duration_nights = get_post_meta( $trip_id, 'wp_travel_trip_duration_night', true );
+	$trip_duration_nights = ( $trip_duration_nights ) ? $trip_duration_nights : 0;
 
+	$old_duration_select = isset( $trip_duration_formating['duration_format'] ) ? $trip_duration_formating['duration_format'] : '';
+	if ( ! empty( $old_duration_select ) && $old_duration_select == 'hour' ) {
+		$duration_selected_date = $old_duration_select;
+	} else {
+		$duration_selected_date = 'day_night';
+	}
+	$new_duration_date = array(
+		'days'				=> isset( $trip_duration_formating['days'] ) ? $trip_duration_formating['days'] : '',
+		'nights'			=> isset( $trip_duration_formating['nights'] ) ? $trip_duration_formating['nights'] : '',
+		'hours'				=> isset( $trip_duration_formating['hours'] ) ? $trip_duration_formating['hours'] : '',
+		'duration_format'	=> $duration_selected_date,
+	);
+	$get_Duration = apply_filters( 'wp_travel_trip_duration_formating_selects', $new_duration_date, $trip_duration_formating );
+	if ( ! empty( $get_Duration ) ) {
+		$duration_format = isset( $get_Duration['duration_format'] ) ? $get_Duration['duration_format'] : '';
+		$hour 			= isset( $get_Duration['hours'] ) ? $get_Duration['hours'] : 0;
+		$date_day 			= isset( $get_Duration['days'] ) ? $get_Duration['days'] : 0;
+		$date_minute	= isset( $get_Duration['minutes'] ) ? $get_Duration['minutes'] : 0;
+		$date_night 			= isset( $get_Duration['nights'] ) ? $get_Duration['nights'] : 0;
+		if ( $duration_format == 'hour' ) {
+			$trip_duration = $hour > 0 ? $hour . ' ' . $hours : '';
+		} elseif ( $duration_format == 'day_hour' ) {
+			$trip_day = $date_day > 0 ? $date_day . ' ' . $days : '';
+			$trip_hour = $hour > 0 ? $hour . ' ' . $hours : '';
+			$trip_duration = $trip_day . ' ' . $trip_hour;
+		} elseif ( $duration_format == 'hour_minute' ) {
+			$trip_hour 		= $hour > 0 ? $hour . ' ' . $hours : '';
+			$trip_minute	= $date_minute > 0 ? $date_minute . ' ' . $minutes : '';
+			$trip_duration = $trip_hour . ' ' . $trip_minute;
+		} elseif ( $duration_format == 'day' ) {
+			$trip_duration = $date_day > 0 ? $date_day . ' ' . $days : '';
+		} elseif ( $duration_format == 'night' ) {
+			$trip_duration = $date_night > 0 ? $date_night . ' ' . $nights : '';
+		} else {
+			$trip_night = $date_night > 0 ? $date_night . ' ' . $nights : '';
+			$trip_day = $date_day > 0 ? $date_day . ' ' . $days : '';
+			$trip_duration = $date_day > 0 || $date_night > 0 ? $trip_day . ' ' . $trip_night : $duration_na;
+		}
+	} else {
+		$old_night = $trip_duration_nights > 0 ? $trip_duration_nights . ' ' . $nights . '(s)' : '';
+		$old_day = $trip_duration_days > 0  ? $trip_duration_days . ' ' .  $days : '';
+		$trip_duration = ! empty( $old_night ) || ! empty( $old_day ) ? $old_day . ' ' . $old_night : $duration_na;
+	}
+	return $trip_duration;
+}
 /**
  * Get Payment Status List.
  *

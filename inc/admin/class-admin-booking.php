@@ -509,7 +509,7 @@ class WP_Travel_Admin_Booking {
 				$email_headers = "Content-Type: text/html; charset=UTF-8\r\n";
 				foreach ( $traveler_email as $trip_key => $email_detail ) {
 					$fname_traveller = isset( $traveler_name[$trip_key] ) && isset( $traveler_name[$trip_key][0] ) ? $traveler_name[$trip_key][0] : '';
-					$message = "<h2>Dear " . $fname_traveller . ",</h2><h4>We've acknowledged receiving your payment detail for your trip booking. Your payment status has now been updated from " . $pmt_status . " to " . $payment_status_change .".</h4><br><h3>Thank you.</h3>";
+					$message = "<h2>Dear " . $fname_traveller . ",</h2><p>We've acknowledged receiving your payment detail for your trip booking. Your payment status has now been updated from " . $pmt_status . " to " . $payment_status_change .".</p><br><h3>Thank you.</h3>";
 					if ( ! wp_mail( $email_detail[0], $subject, $message, $email_headers ) ) {
 
 					}

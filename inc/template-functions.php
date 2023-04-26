@@ -947,7 +947,8 @@ function wptravel_single_location( $trip_id ) {
 		?>
 
 	<?php else : ?>
-		<?php if ( $trip_duration || $trip_duration_night ) : ?>
+		<?php $new_trip_duration  = wp_travel_get_trip_durations( $trip_id ); ?>
+		<?php if ( ! empty( $new_trip_duration ) ) : ?>
 			<li class="wp-travel-trip-duration">
 				<div class="travel-info">
 					<strong class="title"><?php echo esc_html( $trip_duration_text ); ?></strong>
@@ -955,11 +956,7 @@ function wptravel_single_location( $trip_id ) {
 				<div class="travel-info">
 					<span class="value">
 						<?php
-						if ( $trip_duration_night > 0 ) {
-							printf( '%1$s %2$s %3$s %4$s', esc_html( $trip_duration ), esc_html( $days_text ), esc_html( $trip_duration_night ), esc_html( $nights_text ) ); // @phpcs:ignore
-						} else {
-							printf( '%1$s %2$s', esc_html( $trip_duration ), esc_html( $days_text ) ); // @phpcs:ignore
-						}
+							printf( '%1$s', esc_html( $new_trip_duration) ); // @phpcs:ignore
 						?>
 					</span>
 				</div>

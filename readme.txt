@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 6.0.0
 Tested up to: 6.2
 Requires PHP: 7.4
-Stable tag: 6.5.0
+Stable tag: 6.6.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -246,6 +246,17 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 6.6.0. =
+Release Date: 26th April 2023
+
+Fixes:
+* Fixed N/A in payment mode while the partial payment is disabled.
+
+Enhancement: 
+* Sending an email to the client when Payment Info is changed to Paid by the admin manually.
+* Added option to add hourly Trips in case of Trip duration.
+* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-6-0-release-note/ ).
 
 = 6.5.0. =
 Release Date: 12th April 2023
