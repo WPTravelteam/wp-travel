@@ -3,6 +3,7 @@ import { useSelect, select, dispatch, withSelect } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
 import { PanelBody, PanelRow, ToggleControl, RadioControl, TextControl, ColorPicker, Button } from '@wordpress/components';
 import WPEditor from '../../../../fields/WPEditor';
+import ErrorBoundary from '../../../../../ErrorBoundry/ErrorBoundry';
 
 export default () => {
     const allData = useSelect((select) => {
@@ -53,7 +54,7 @@ const BookingEmailTemplates = () => {
     //         updateSettings({ ...allData, [storeName]: { ...allData[storeName], [storeKey]: 'jagat2' } })
     //     }
     // }
-    return <>
+    return <ErrorBoundary>
         <PanelBody title={__('Booking Email Templates', 'wp-travel')} initialOpen={true} >
             <h4>{__('Admin Email Template Options', 'wp-travel')}</h4>
             <PanelRow>
@@ -71,7 +72,8 @@ const BookingEmailTemplates = () => {
                     />
                     <p className="description">{__('Enable or disable Email notification to admin.', 'wp-travel')}</p>
                 </div>
-            </PanelRow>
+            </PanelRow> 
+            {applyFilters( 'wp_travel_email_template_content_after_send_email', [], allData ) }
 
             {applyFilters('wp_travel_utils_booking_notif', [], allData)}
 
@@ -171,7 +173,7 @@ const BookingEmailTemplates = () => {
 
         </PanelBody>
 
-    </>
+    </ErrorBoundary>
 }
 
 const PaymentEmailTemplates = () => {

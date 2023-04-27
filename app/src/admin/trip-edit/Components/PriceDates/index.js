@@ -13,7 +13,7 @@ const __i18n = {
 
 // Single Components for hook callbacks.
 const PriceDates = ( {allData} ) => {
-    return <TabPanel className="wp-travel-trip-edit-menu wp-travel-trip-edit-menu-horizontal wp-travel-trip-edit-menu-add-gap"
+    return <TabPanel className="wp-travel-trip-edit-menu wp-travel-trip-edit-menu-horizontal wp-travel-trip-edit-menu-add-gap wp-travel-trip-edit-price-date-react"
         activeClass="active-tab"
         onSelect={() => false}
         tabs={[

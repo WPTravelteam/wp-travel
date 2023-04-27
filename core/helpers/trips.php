@@ -185,17 +185,33 @@ class WpTravel_Helpers_Trips {
 			$minimum_partial_payout_percent = $settings['minimum_partial_payout'];
 		}
 
-		$days                = get_post_meta( $trip_id, 'wp_travel_trip_duration', true );
-		$night               = get_post_meta( $trip_id, 'wp_travel_trip_duration_night', true );
-		$duration_start_date = get_post_meta( $trip_id, 'wp_travel_trip_duration_start_date', true );
-		$duration_end_date = get_post_meta( $trip_id, 'wp_travel_trip_duration_end_date', true );
-
-		$trip_duration = array(
-			'days'   		=> $days,
-			'nights' 		=> $night,
-			// 'start_date' 	=> isset( $duration_start_date ) ? $duration_start_date : '',
-			// 'end_date'   	=> isset( $duration_end_date ) ? $duration_end_date : '',
-		);
+		$days                		= get_post_meta( $trip_id, 'wp_travel_trip_duration', true );
+		$night               		= get_post_meta( $trip_id, 'wp_travel_trip_duration_night', true );
+		$duration_start_date 		= get_post_meta( $trip_id, 'wp_travel_trip_duration_start_date', true );
+		$duration_end_date 	 		= get_post_meta( $trip_id, 'wp_travel_trip_duration_end_date', true );
+		$trip_duration_formating	= get_post_meta( $trip_id, 'wp_travel_trip_duration_formating', true);
+		if ( empty( $trip_duration_formating ) ) {
+			$trip_duration = array(
+				'days'   		=> $days,
+				'nights' 		=> $night,
+				// 'start_date' 	=> isset( $duration_start_date ) ? $duration_start_date : '',
+				// 'end_date'   	=> isset( $duration_end_date ) ? $duration_end_date : '',
+			);
+		} else {
+			$old_duration_select = isset( $trip_duration_formating['duration_format'] ) ? $trip_duration_formating['duration_format'] : '';
+			if ( ! empty( $old_duration_select ) && $old_duration_select == 'hour' ) {
+				$duration_selected_date = $old_duration_select;
+			} else {
+				$duration_selected_date = 'day_night';
+			}
+			$new_duration_date = array(
+				'days'				=> isset( $trip_duration_formating['days'] ) ? $trip_duration_formating['days'] : '',
+				'nights'			=> isset( $trip_duration_formating['nights'] ) ? $trip_duration_formating['nights'] : '',
+				'hours'				=> isset( $trip_duration_formating['hours'] ) ? $trip_duration_formating['hours'] : '',
+				'duration_format'	=> $duration_selected_date,
+			);
+			$trip_duration = apply_filters( 'wp_travel_trip_duration_formating_select', $new_duration_date, $trip_duration_formating );
+		}
 		$trip_data     = array(
 			'id'                                => $trip->ID,
 			'title'                             => $trip->post_title,
@@ -404,6 +420,7 @@ class WpTravel_Helpers_Trips {
 
 			update_post_meta( $trip_id, 'wp_travel_trip_duration_start_date', $duration_start_date );
 			update_post_meta( $trip_id, 'wp_travel_trip_duration_end_date', $duration_end_date );
+			update_post_meta( $trip_id, 'wp_travel_trip_duration_formating', $trip_data->trip_duration );
 		}
 		$trip_facts = array();
 		if ( ! empty( $trip_data->trip_facts ) ) {
@@ -540,7 +557,7 @@ class WpTravel_Helpers_Trips {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
 		}
 		$settings = wptravel_get_settings();
-		if ( $settings['wpml_migrations'] ) {
+		if ( isset( $settings['wpml_migrations'] ) && $settings['wpml_migrations'] ) {
 			if ( isset( $trip['trip']['pricings'] ) && ! empty( $trip['trip']['pricings'] ) ) {
 				update_post_meta( $trip_id, 'wp_travel_trip_price_categorys', $trip['trip']['pricings'] );
 			} else {

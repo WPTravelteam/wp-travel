@@ -187,7 +187,7 @@ export default () => {
                         </div>
                     </PanelRow>
 
-                    {applyFilters('wp_travel_tab_content_after_trips', [])}
+                    {applyFilters('wp_travel_trip_setting_content_after_trips', [], allData)}
                 </ErrorBoundary>
             </div>
         </>

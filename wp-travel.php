@@ -3,7 +3,7 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 6.5.0
+ * Version: 6.6.0
  * Author: WP Travel
  * Author URI: http://wptravel.io/
  * Requires at least: 6.0.0
@@ -38,7 +38,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '6.5.0';
+		public $version = '6.6.0';
 
 		/**
 		 * WP Travel API version.
@@ -164,7 +164,10 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			 */
 			add_filter( 'option_wp_travel_settings', array( $this, 'filter_wp_travel_settings' ), 11, 2 );
 			self::reject_cache_in_checkout();
-			add_action( 'init', array( 'WpTravel_Helpers_Trips', 'wp_travel_trip_date_price' ) );
+			$settings = wptravel_get_settings();
+			if ( isset( $settings['wpml_migrations'] ) && $settings['wpml_migrations'] ) {
+				add_action( 'init', array( 'WpTravel_Helpers_Trips', 'wp_travel_trip_date_price' ) );
+			}
 		}
 
 		/**
@@ -416,14 +419,14 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			// Front End.
 			require WP_TRAVEL_ABSPATH . '/app/inc/frontend/class-wptravel-single-itinerary-hooks.php';
 			require WP_TRAVEL_ABSPATH . '/app/inc/frontend/class-wptravel-frontend-assets.php';
-
+			// include sprintf( '%s/core/api/include.php', WP_TRAVEL_ABSPATH ); // for api include file.
 			include sprintf( '%s/inc/deprecated-class/trait/class-wp-travel-deprecated-trait.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/deprecated-class/trait/deprecated-includes.php', WP_TRAVEL_ABSPATH );
 
 			if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 				require WP_TRAVEL_ABSPATH . '/core/helpers/network.php';
 			}
-			if ( !is_multisite() ) {
+			if ( ! is_multisite() ) {
 				include sprintf( '%s/inc/setup-page/setup-page.php', WP_TRAVEL_ABSPATH );
 			}
 		}
