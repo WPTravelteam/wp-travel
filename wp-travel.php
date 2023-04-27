@@ -166,7 +166,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			self::reject_cache_in_checkout();
 			$settings = wptravel_get_settings();
 			if ( isset( $settings['wpml_migrations'] ) && $settings['wpml_migrations'] ) {
-				add_action( 'init', array( 'WpTravel_Helpers_Trips', 'wp_travel_trip_date_price' ) ); 
+				add_action( 'init', array( 'WpTravel_Helpers_Trips', 'wp_travel_trip_date_price' ) );
 			}
 		}
 
@@ -426,7 +426,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 				require WP_TRAVEL_ABSPATH . '/core/helpers/network.php';
 			}
-			if ( !is_multisite() ) {
+			if ( ! is_multisite() ) {
 				include sprintf( '%s/inc/setup-page/setup-page.php', WP_TRAVEL_ABSPATH );
 			}
 		}
