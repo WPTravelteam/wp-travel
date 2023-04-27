@@ -2,7 +2,7 @@ const changeLog = [
 	{
 		version: "6.6.0",
 		log: <p>
-				Release Date: 26th April 2023
+				Release Date: 27th April 2023
 				<br/><br/>
 				Fixes: 
 				<br/>

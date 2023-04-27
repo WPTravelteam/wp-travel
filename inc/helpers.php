@@ -865,7 +865,8 @@ function wp_travel_get_trip_durations( $trip_id ) {
 		'duration_format'	=> $duration_selected_date,
 	);
 	$get_Duration = apply_filters( 'wp_travel_trip_duration_formating_selects', $new_duration_date, $trip_duration_formating );
-	if ( ! empty( $get_Duration ) ) {
+
+	if ( ! empty( $trip_duration_formating ) ) {
 		$duration_format = isset( $get_Duration['duration_format'] ) ? $get_Duration['duration_format'] : '';
 		$hour 			= isset( $get_Duration['hours'] ) ? $get_Duration['hours'] : 0;
 		$date_day 			= isset( $get_Duration['days'] ) ? $get_Duration['days'] : 0;
@@ -891,7 +892,7 @@ function wp_travel_get_trip_durations( $trip_id ) {
 			$trip_duration = $date_day > 0 || $date_night > 0 ? $trip_day . ' ' . $trip_night : $duration_na;
 		}
 	} else {
-		$old_night = $trip_duration_nights > 0 ? $trip_duration_nights . ' ' . $nights . '(s)' : '';
+		$old_night = $trip_duration_nights > 0 ? $trip_duration_nights . ' ' . $nights  : '';
 		$old_day = $trip_duration_days > 0  ? $trip_duration_days . ' ' .  $days : '';
 		$trip_duration = ! empty( $old_night ) || ! empty( $old_day ) ? $old_day . ' ' . $old_night : $duration_na;
 	}

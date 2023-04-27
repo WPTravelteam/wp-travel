@@ -481,10 +481,14 @@ const CalendarView = ( props ) => {
 	}
     if ( ! isFixedDeparture ) {
 		delete params.filterDate;
+		let dateformat = /^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/;
+		let oldDates  = typeof trip_duration.start_date != 'undefined' && trip_duration.start_date != '' && new Date(trip_duration.start_date) || new Date();
+		// let validateChecking = oldDates.match(dateformat ) ? oldDates : new Date();
+		let validateChecking = moment( oldDates, 'MM/DD/YYYY',true).isValid() ? oldDates : new Date();
 		let durations_dates = typeof trip_duration != 'undefined' && typeof trip_duration.start_date != 'undefined' && trip_duration.start_date != '' && new Date( trip_duration.start_date ) || new Date();
-		let duration_end_dates = typeof trip_duration != 'undefined' && typeof trip_duration.end_date != 'undefined' && new Date( trip_duration.end_date ) || null;
-		// const finalDates = durations_dates < new Date() ? new Date() : durations_dates;
-		params.minDate   = durations_dates;
+		let duration_end_dates = typeof trip_duration != 'undefined' && typeof trip_duration.end_date != 'undefined' && trip_duration.end_date != '' && new Date( trip_duration.end_date ) || '';
+		const finalDates = validateChecking < new Date() ? new Date() : oldDates;
+		params.minDate   = finalDates;
 		params.maxDate	 = duration_end_dates;
 		params.startDate = selectedDate;
 		params.endDate   = moment( selectedDate ).add( duration - 1, 'days' ).toDate();

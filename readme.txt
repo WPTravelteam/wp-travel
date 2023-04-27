@@ -248,7 +248,7 @@ Before updating plugin please check ["our latest release notes"](#developers).
 == Changelog ==
 
 = 6.6.0. =
-Release Date: 26th April 2023
+Release Date: 27th April 2023
 
 Fixes:
 * Fixed N/A in payment mode while the partial payment is disabled.
