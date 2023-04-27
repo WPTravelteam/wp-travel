@@ -52,7 +52,6 @@ addFilter( 'wpTravelRecurringCutofDateFilterDateListView', 'wp-travel', (availab
     let cutOffTime = 'undefined' != typeof tripData.cuttOffTime ? parseInt( tripData.cuttOffTime ) : 0; // in hours
     if ( dateRules.find(da => moment(moment(da).format("YYYY-MM-DD")).unix() === moment(moment(date).format('YYYY-MM-DD')).unix()) instanceof Date && cutOffTime ) {
         let times = data.trip_time && data.trip_time.split(',') || []
-        console.log( 'date', date );
         return isDateAvailables( date, cutOffTime, times )
     }
     return available

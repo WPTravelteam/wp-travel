@@ -29,7 +29,6 @@ import InventoryNotice, { Notice } from '../_InventoryNotice';
 const initialState = DEFAULT_BOOKING_STATE();
 
 const CalendarView = ( props ) => {
-	console.log('dfjsdkljf', props)
 	// Component Props.
 	const { calendarInline, showTooltip, tooltipText, tripData, bookingData, updateBookingData } = props;
 
