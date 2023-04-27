@@ -106,28 +106,61 @@ $wptravel_form_fw->init_validation( 'wp-travel-booking' );
 										</div>
 										<div class="payment-traveller">
 											<?php
-											foreach ( $wptravel_traveller_fields as $wptravel_field_group => $wptravel_field ) :
-												$wptravel_field_name    = sprintf( '%s[%s][%d]', $wptravel_field['name'], $wptravel_cart_id, $i ); // @phpcs:ignore
-												$wptravel_field['name'] = $wptravel_field_name;
-												$wptravel_field['id']   = sprintf( '%s-%s-%d', $wptravel_field['id'], $wptravel_cart_id, $i ); // @phpcs:ignore
-												if ( $i > 0 ) {
-													$wptravel_field['default']   = ''; // make empty default if other than lead traveler.
-												}
-
-
-												if ( ! $wptravel_all_travelers_fields_require ) {
-													// Added to control over required fields for travellers @since 3.1.3.
-													if ( isset( $wptravel_field['validations']['required_for_all'] ) && $wptravel_field['validations']['required_for_all'] ) {
-														$wptravel_field['validations']['required'] = $i > 0 ? true : $wptravel_field['validations']['required'];
-													} else {
-														// Set required false to extra travellers.
-														$wptravel_field['validations']['required'] = ! empty( $wptravel_field['validations']['required'] ) ? $wptravel_field['validations']['required'] : false;
-														$wptravel_field['validations']['required'] = $i > 0 ? false : $wptravel_field['validations']['required'];
+											if ( 0 === $i ) {
+												foreach ( $wptravel_traveller_fields as $wptravel_field_group => $wptravel_field ) :
+													$wptravel_field_name    = sprintf( '%s[%s][%d]', $wptravel_field['name'], $wptravel_cart_id, $i ); // @phpcs:ignore
+													$wptravel_field['name'] = $wptravel_field_name;
+													$wptravel_field['id']   = sprintf( '%s-%s-%d', $wptravel_field['id'], $wptravel_cart_id, $i ); // @phpcs:ignore
+													if ( $i > 0 ) {
+														$wptravel_field['default'] = ''; // make empty default if other than lead traveler.
 													}
-												}
+													if ( ! $wptravel_all_travelers_fields_require ) {
+														// Added to control over required fields for travellers @since 3.1.3.
+														if ( isset( $wptravel_field['validations']['required_for_all'] ) && $wptravel_field['validations']['required_for_all'] ) {
+															// if ( $wptravel_field['validations']['required'] ) {
+																$wptravel_field['validations']['required'] = $i == 0 ? true : $wptravel_field['validations']['required'];
+															// }
+														} else {
+															// Set required false to extra travellers.
+															$wptravel_field['validations']['required'] = ! empty( $wptravel_field['validations']['required'] ) ? $wptravel_field['validations']['required'] : false;
+															$wptravel_field['validations']['required'] = $i > 0 ? false : $wptravel_field['validations']['required'];
+														}
+													}
 
-												$wptravel_form_field->init( array( $wptravel_field ) )->render();
-											endforeach;
+													$wptravel_form_field->init( array( $wptravel_field ) )->render();
+												endforeach;
+											} else {
+												foreach ( $wptravel_traveller_fields as $wptravel_field_group => $wptravel_field ) :
+													$field_remove = false;
+													foreach ( $wptravel_field as $field_key => $field_value ) {
+														if ( $field_key == 'remove_field' ) {
+															if ( $field_value == true ) {
+																$field_remove = true;
+															}
+														}
+													}
+													if ( $field_remove == false ) {
+														$wptravel_field_name    = sprintf( '%s[%s][%d]', $wptravel_field['name'], $wptravel_cart_id, $i ); // @phpcs:ignore
+														$wptravel_field['name'] = $wptravel_field_name;
+														$wptravel_field['id']   = sprintf( '%s-%s-%d', $wptravel_field['id'], $wptravel_cart_id, $i ); // @phpcs:ignore
+														if ( $i > 0 ) {
+															$wptravel_field['default'] = ''; // make empty default if other than lead traveler.
+														}
+														if ( ! $wptravel_all_travelers_fields_require ) {
+															// Added to control over required fields for travellers @since 3.1.3.
+															if ( isset( $wptravel_field['validations']['required_for_all'] ) && $wptravel_field['validations']['required_for_all'] ) {
+																$wptravel_field['validations']['required'] = $i > 0 ? true : $wptravel_field['validations']['required'];
+															} else {
+																// Set required false to extra travellers.
+																$wptravel_field['validations']['required'] = ! empty( $wptravel_field['validations']['required'] ) ? $wptravel_field['validations']['required'] : false;
+																$wptravel_field['validations']['required'] = $i > 0 ? false : $wptravel_field['validations']['required'];
+															}
+														}
+
+														$wptravel_form_field->init( array( $wptravel_field ) )->render();
+													}
+												endforeach;
+											}
 											?>
 										</div>
 									</div>
@@ -170,7 +203,8 @@ $wptravel_form_fw->init_validation( 'wp-travel-booking' );
 					 *
 					 * @since 4.3.0
 					 */
-					do_action( 'wp_travel_action_before_book_now' ); // @phpcs:ignore  ?>
+					do_action( 'wp_travel_action_before_book_now' ); // @phpcs:ignore
+					?>
 					<div class="wp-travel-form-field button-field">
 						<?php
 						WP_Travel::create_nonce_field();

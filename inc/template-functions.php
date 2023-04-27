@@ -501,6 +501,7 @@ function wptravel_single_trip_rating( $trip_id, $hide_rating = false ) {
 		return;
 	}
 	$average_rating = wptravel_get_average_rating( $trip_id );
+
 	?>
 	<div class="wp-travel-average-review" title="<?php printf( __( 'Rated %s out of 5', 'wp-travel' ), esc_attr( $average_rating ) ); // @phpcs:ignore ?>">
 		<a href="#">
@@ -792,7 +793,7 @@ function wptravel_single_excerpt( $trip_id ) {
 	<div class="booking-form">
 		<div class="wp-travel-booking-wrapper">
 			<?php
-			$trip_enquiry_text = isset( $strings['featured_trip_enquiry'] ) ? $strings['featured_trip_enquiry'] : __( 'Trip Enquiry', 'wp-travel' );
+			$trip_enquiry_text = isset( $strings['trip_enquiry'] ) ? $strings['trip_enquiry'] : __( 'Trip Enquiry', 'wp-travel' );
 			$book_now_text     = isset( $strings['featured_book_now'] ) ? $strings['featured_book_now'] : __( 'Book Now', 'wp-travel' );
 			if ( 'custom-booking' === $pricing_type && 'custom-link' === $booking_type && $custom_link ) :
 				?>
@@ -946,7 +947,8 @@ function wptravel_single_location( $trip_id ) {
 		?>
 
 	<?php else : ?>
-		<?php if ( $trip_duration || $trip_duration_night ) : ?>
+		<?php $new_trip_duration  = wp_travel_get_trip_durations( $trip_id ); ?>
+		<?php if ( ! empty( $new_trip_duration ) ) : ?>
 			<li class="wp-travel-trip-duration">
 				<div class="travel-info">
 					<strong class="title"><?php echo esc_html( $trip_duration_text ); ?></strong>
@@ -954,11 +956,7 @@ function wptravel_single_location( $trip_id ) {
 				<div class="travel-info">
 					<span class="value">
 						<?php
-						if ( $trip_duration_night > 0 ) {
-							printf( '%1$s %2$s %3$s %4$s', esc_html( $trip_duration ), esc_html( $days_text ), esc_html( $trip_duration_night ), esc_html( $nights_text ) ); // @phpcs:ignore
-						} else {
-							printf( '%1$s %2$s', esc_html( $trip_duration ), esc_html( $days_text ) ); // @phpcs:ignore
-						}
+							printf( '%1$s', esc_html( $new_trip_duration) ); // @phpcs:ignore
 						?>
 					</span>
 				</div>
@@ -1144,6 +1142,7 @@ function wptravel_frontend_contents( $trip_id ) {
 				<?php
 				$index = 1;
 				foreach ( $wp_travel_itinerary_tabs as $tab_key => $tab_info ) :
+					$tab_info['show_in_menu'] = $tab_info['show_in_menu'] === 'yes' ? 'yes' : ( $tab_info['show_in_menu'] === 'no' || empty( $tab_info['show_in_menu'] ) ? 'no' : 'yes' );
 					if ( 'reviews' === $tab_key && ! comments_open() ) :
 						continue;
 					endif;
@@ -1163,6 +1162,7 @@ function wptravel_frontend_contents( $trip_id ) {
 				if ( is_array( $wp_travel_itinerary_tabs ) && count( $wp_travel_itinerary_tabs ) > 0 ) :
 					$index = 1;
 					foreach ( $wp_travel_itinerary_tabs as $tab_key => $tab_info ) :
+						$tab_info['show_in_menu'] = $tab_info['show_in_menu'] === 'yes' ? 'yes' : ( $tab_info['show_in_menu'] === 'no' || empty( $tab_info['show_in_menu'] ) ? 'no' : 'yes' );
 						if ( 'reviews' === $tab_key && ! comments_open() ) :
 							continue;
 						endif;
@@ -1413,7 +1413,30 @@ function wptravel_get_average_rating( $trip_id = null ) {
 	if ( ! $trip_id ) {
 		$trip_id = $post->ID;
 	}
-	$count                = (int) get_comments_number( $trip_id );
+	$count = (int) get_comments_number( $trip_id );
+
+	// @since 6.2.0
+	$settings   = wptravel_get_settings();
+
+
+	if ( $settings['disable_admin_review'] == 'yes' ) {
+		$get_reviews  = get_comments( array( 'post_id' => $trip_id ) );
+
+		$admin_count = 0;
+		foreach ( $get_reviews as $review ) {
+
+			if ( get_user_by('login', $review->comment_author) ) {
+				if ( in_array( get_user_by('login', $review->comment_author)->roles[0], array( 'administrator', 'editor', 'author' )) ) {
+					$admin_count = $admin_count + 1;
+				}
+				
+			}
+			
+		}
+		$count = $count - $admin_count;
+	}	
+
+
 	$average_rating_query = "SELECT SUM(meta_value) FROM $wpdb->commentmeta
 	LEFT JOIN $wpdb->comments ON $wpdb->commentmeta.comment_id = $wpdb->comments.comment_ID
 	WHERE meta_key = '_wp_travel_rating'
@@ -1421,8 +1444,9 @@ function wptravel_get_average_rating( $trip_id = null ) {
 	AND comment_approved = '1'
 	AND meta_value > 0";
 
-	// No meta data? Do the calculation.
-	if ( ! metadata_exists( 'post', $trip_id, '_wpt_average_rating' ) ) {
+
+	// // No meta data? Do the calculation.
+	// if ( ! metadata_exists( 'post', $trip_id, '_wpt_average_rating' ) ) {
 		if ( $count ) {
 			$ratings = $wpdb->get_var(
 				$wpdb->prepare( $average_rating_query, $trip_id ) // @phpcs:ignore
@@ -1432,26 +1456,25 @@ function wptravel_get_average_rating( $trip_id = null ) {
 			$average = 0;
 		}
 		update_post_meta( $trip_id, '_wpt_average_rating', $average );
-	} else {
+	// } else {
 
-		$average = get_post_meta( $trip_id, '_wpt_average_rating', true );
+	// 	$average = get_post_meta( $trip_id, '_wpt_average_rating', true );
 
-		if ( ! $average && $count > 0 ) { // re update average meta if there is number of reviews but no average ratings value.
-			if ( $count = (int) get_comments_number( $trip_id ) ) {
-				$ratings = $wpdb->get_var(
-					$wpdb->prepare( $average_rating_query, $trip_id ) // @phpcs:ignore
-				);
-				$average = number_format( $ratings / $count, 2, '.', '' );
-			} else {
-				$average = 0;
-			}
-			update_post_meta( $trip_id, '_wpt_average_rating', $average );
-		}
-	}
+	// 	if ( ! $average && $count > 0 ) { // re update average meta if there is number of reviews but no average ratings value.
+	// 		if ( $count ) {
+	// 			$ratings = $wpdb->get_var(
+	// 				$wpdb->prepare( $average_rating_query, $trip_id ) // @phpcs:ignore
+	// 			);
+	// 			$average = number_format( $ratings / $count, 2, '.', '' );
+	// 		} else {
+	// 			$average = 0;
+	// 		}
+	// 		update_post_meta( $trip_id, '_wpt_average_rating', $average );
+	// 	}
 
+	// }
 	return (string) floatval( $average );
 }
-
 /**
  * Get the total amount (COUNT) of ratings.
  *
@@ -2228,7 +2251,7 @@ function wptravel_tab_show_in_menu( $tab_name ) {
 		return false;
 	}
 
-	if ( 'yes' === $tabs[ $tab_name ]['show_in_menu'] ) {
+	if ( 'yes' === $tabs[ $tab_name ]['show_in_menu'] || $tabs[ $tab_name ]['show_in_menu'] == 1 ) {
 		return true;
 	}
 	return false;

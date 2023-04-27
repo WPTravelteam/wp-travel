@@ -6,7 +6,6 @@ var gateway_change = function() {
     bank_deposit_field();
    
 };
-
 var bank_deposit_field = function() {
 
     jQuery( '.f-bank-deposit' ).hide();
@@ -99,7 +98,6 @@ jQuery(document).ready(function($) {
     $('[name=wp_travel_booking_option]').change(booking_option_change);
     $('[name=wp_travel_payment_gateway]').change(gateway_change);
     $('[name=wp_travel_payment_mode]').change(payment_mode_change);
-
     // Trigger change For Gateway.
     if ('booking_with_payment' == $('[name=wp_travel_booking_option]').val()) {
         $('[name=wp_travel_payment_gateway]').trigger('change');

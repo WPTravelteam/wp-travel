@@ -4,3 +4,17 @@
 	@import "trip-option";
 }
 
+
+@import "./react-date-picker.scss";
+// @import "mixins.scss";
+.wp-travel-trip-duration-date-validation-date-picker {
+	.react-datepicker-wrapper {
+		width: unset;
+	}
+}
+.wp-travel-trip-edit-price-date-react {
+	.wp-travel-ui .components-panel__row .components-base-control{
+		width: unset;
+	}
+}
+

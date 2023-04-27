@@ -37,6 +37,7 @@ $trip_price                       = WP_Travel_Helpers_Pricings::get_price( $args
 $regular_price                    = WP_Travel_Helpers_Pricings::get_price( $args_regular );
 
 $locations     = get_the_terms( $trip_id, 'travel_locations' );
+$trip_locations     = get_the_terms( $trip_id, 'travel_locations' );
 $location_name = '';
 $location_link = '';
 if ( $locations && is_array( $locations ) ) {
@@ -50,10 +51,10 @@ if ( $locations && is_array( $locations ) ) {
 		<div class="view-image">
 			<a href="<?php the_permalink(); ?>" class="image-thumb">
 				<div class="image-overlay"></div>
-				<?php echo wptravel_get_post_thumbnail( $trip_id ); ?>
+				<?php echo apply_filters( 'wp_travel_archive_page_trip_image', wptravel_get_post_thumbnail( $trip_id ), $trip_id ); ?>
 			</a>
 			<div class="offer">
-				<span>#<?php echo esc_html( $wp_travel_itinerary->get_trip_code() ); ?></span>
+				<span>#<?php echo esc_html( apply_filters( 'wp_travel_archive_page_trip_code', $wp_travel_itinerary->get_trip_code(), $wp_travel_itinerary, $trip_id ) ); ?></span>
 			</div>
 		</div>
 
@@ -63,7 +64,7 @@ if ( $locations && is_array( $locations ) ) {
 					<?php do_action( 'wp_travel_before_archive_content_title', $trip_id ); ?>
 					<h2 class="entry-title">
 						<a class="heading-link" href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title_attribute( array( 'before' => __( 'Permalink to: ', 'wp-travel' ) ) ); ?>">
-							<?php the_title(); ?>
+							<?php apply_filters( 'wp_travel_archives_page_trip_title', the_title(), $trip_id ); ?>
 						</a>
 					</h2>
 					<?php do_action( 'wp_travel_after_archive_title', $trip_id ); ?>
@@ -71,42 +72,42 @@ if ( $locations && is_array( $locations ) ) {
 				<div class="trip-icons">
 					<?php wptravel_get_trip_duration( $trip_id ); ?>
 					<div class="trip-location">
-						<i class="fas fa-map-marker-alt"></i>
+						<?php echo apply_filters( 'wp_travel_archive_page_location_icon', '<i class="fas fa-map-marker-alt"></i>' ); ?>
 						<span>
 							<?php if ( $location_name ) : ?>
-								<a href="<?php echo esc_url( $location_link ); ?>" ><?php echo esc_html( $location_name ); ?></a>
+								<a href="<?php echo esc_url( $location_link ); ?>" ><?php echo apply_filters( 'wp_travel_archives_page_trip_location', esc_html( $location_name ), $trip_id ); ?></a>
 								<?php
 							else :
-								esc_html_e( 'N/A', 'wp-travel' );
+								esc_html_e( apply_filters( 'wp_travel_archives_page_trip_location', 'N/A', $trip_id), 'wp-travel' );
 							endif;
 							?>
 						</span>
 					</div>
 					<div class="group-size">
-						<i class="fas fa-users"></i>
-						<span><?php echo esc_html( wptravel_get_group_size( $trip_id ) ); ?></span>
+						<?php echo apply_filters( 'wp_travel_archive_page_group_size_icon', '<i class="fas fa-users"></i>' ); ?>
+						<span><?php echo esc_html( apply_filters( 'wp_travel_archives_page_trip_group_size', wptravel_get_group_size( $trip_id ), $trip_id ) ); ?></span>
 					</div>
 				</div>
 				<div class="trip-desc">
-					<?php the_excerpt(); ?>
+					<?php apply_filters( 'wp_travel_archives_page_trip_excerpt', the_excerpt(), $trip_id ); ?>
 				</div>
 			</div>
 			<div class="right-content">
 				<div class="footer-wrapper">
 					<div class="trip-price">
-						<?php wptravel_save_offer( $trip_id ); ?>
+						<?php apply_filters( 'wp_trave_archives_page_trip_save_offer', wptravel_save_offer( $trip_id ), $trip_id ); ?>
 						<?php if ( $trip_price > 0 ) : ?>
 							<span class="price-here">
-								<?php echo wptravel_get_formated_price_currency( $trip_price ); //phpcs:ignore ?>
+								<?php echo apply_filters('wp_travel_archives_page_trip_price', wptravel_get_formated_price_currency( $trip_price ), $trip_id ); //phpcs:ignore ?>
 							</span>
 						<?php endif; ?>
 						<?php if ( $enable_sale ) : ?>
-							<del><?php echo wptravel_get_formated_price_currency( $regular_price, true ); //phpcs:ignore ?></del>
+							<del><?php echo apply_filters('wp_travel_archives_page_trip_price_sale', wptravel_get_formated_price_currency( $regular_price, true ), $trip_id ); //phpcs:ignore ?></del>
 						<?php endif; ?>
 
 					</div>
 					<div class="trip-rating">
-						<?php if ( wptravel_tab_show_in_menu( 'reviews' ) ) : ?>
+						<?php $reviewed = apply_filters( 'wp_travel_trip_archive_list_review', wptravel_tab_show_in_menu( 'reviews' ) ); if ( $reviewed ) : ?>
 							<div class="wp-travel-average-review">
 								<?php wptravel_trip_rating( $trip_id ); ?>
 								<?php $count = (int) wptravel_get_review_count(); ?>
@@ -116,7 +117,7 @@ if ( $locations && is_array( $locations ) ) {
 					</div>
 				</div>
 
-				<a class="wp-block-button__link explore-btn" href="<?php the_permalink(); ?>"><span><?php esc_html_e( 'Explore', 'wp-travel' ); ?></span></a>
+				<a class="wp-block-button__link explore-btn" href="<?php the_permalink(); ?>"><span><?php esc_html_e( apply_filters( 'wp_travel_archives_page_trip_explore_btn', 'Explore', $trip_id ), 'wp-travel' ); ?></span></a>
 			</div>
 		</div>
 	</div>

@@ -16,11 +16,11 @@ html.wp-toolbar {
 #change-log .wptravel-wrapper .grid-container {
     display: block;
 }
+
+#wptravel-site-ready.inactive,
+#trip-import-loader,
 #finished-tab-content.inactive{
     display:none;
-}
-#trip-import-loader{
-    display: none;
 }
 
 #btn-group{
@@ -114,7 +114,7 @@ html.wp-toolbar {
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background-color: rgb(21, 159, 132);
+    background-color: rgb(7, 152, 18);
     position: absolute;
     top: -47px;
     left: 0;

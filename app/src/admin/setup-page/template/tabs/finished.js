@@ -1105,7 +1105,7 @@ const FinishedTab = () => {
 			                                            <i class="fa fa-check" aria-hidden="true"></i>
 			                                        </td>
 			                                        <td>
-			                                            
+														{__('Unlimited Trips', 'wp-travel')}
 			                                        </td>
 			                                        <td>
 			                                            <i class="fa fa-check" aria-hidden="true"></i>

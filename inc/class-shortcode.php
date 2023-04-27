@@ -184,6 +184,8 @@ class Wp_Travel_Shortcodes {
 				'orderby'        => 'post_title',
 				'order'          => $order,
 				'status'         => 'published',
+				'tax_query'		=> isset( $args['tax_query' ] ) ? $args['tax_query'] : '',
+				
 			);
 		}
 		// Sorting Start.

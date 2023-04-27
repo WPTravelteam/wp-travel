@@ -33,6 +33,37 @@ class WP_Travel_Ajax_Trips {
 		// Trip tab.
 		add_action( 'wp_ajax_wp_travel_get_trip_tabs', array( __CLASS__, 'trip_tabs' ) );
 		add_action( 'wp_ajax_nopriv_wp_travel_get_trip_tabs', array( __CLASS__, 'trip_tabs' ) );
+		/**
+		 * Fixed Trip extra gallery image in backend
+		 *
+		 * @since 6.2.0
+		 */
+		add_action( 'wp_ajax_envira_gallery_load_image', array( __CLASS__, 'get_extra_gallery' ) );
+		add_action( 'wp_ajax_nopriv_envira_gallery_load_image', array( __CLASS__, 'get_extra_gallery' ) );
+		/**
+		 * Inventory testing
+		 * @since 6.5.0
+		 */
+		add_action( 'wp_ajax_inventory_testing', array( __CLASS__, 'wp_travel_inventory_checking' ) );
+		add_action( 'wp_ajax_nopriv_inventory_testing', array( __CLASS__, 'wp_travel_inventory_checking' ) );
+
+		add_action( 'wp_ajax_wp_travel_use_inventory_empty_cart', array( __CLASS__, 'wp_travel_cart_empty_for_inventory' ) );
+		add_action( 'wp_ajax_nopriv_wp_travel_use_inventory_empty_cart', array( __CLASS__, 'wp_travel_cart_empty_for_inventory' ) );
+	}
+
+	public static function get_extra_gallery() {
+		if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
+			$nonce_trip_extra  = $_POST['nonce'];
+			$gallery_id        = $_POST['id'];
+			$gallerys_data     = wp_get_attachment_image_src( (int) $gallery_id );
+			$gallery_thumnails = wp_json_encode(
+				array(
+					'id'  => $gallery_id,
+					'url' => $gallerys_data[0],
+
+				)
+			);
+		}
 	}
 
 	/**
@@ -226,10 +257,10 @@ class WP_Travel_Ajax_Trips {
 		/**
 		 * Return list of filtered trips according to conditions.
 		 */
-		$start_date       = ! empty( $_GET['start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['start_date'] ) ) : ''; // @phpcs:ignore
-		$end_date         = ! empty( $_GET['end_date'] ) ? sanitize_text_field( wp_unslash( $_GET['end_date'] ) ) : ''; // @phpcs:ignore
-		$min_price        = ! empty( $_GET['min_price'] ) ? sanitize_text_field( wp_unslash( $_GET['min_price'] ) ) : 0; // @phpcs:ignore
-		$max_price        = ! empty( $_GET['max_price'] ) ? sanitize_text_field( wp_unslash( $_GET['max_price'] ) ) : 0; // @phpcs:ignore
+		$start_date = ! empty( $_GET['start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['start_date'] ) ) : ''; // @phpcs:ignore
+		$end_date   = ! empty( $_GET['end_date'] ) ? sanitize_text_field( wp_unslash( $_GET['end_date'] ) ) : ''; // @phpcs:ignore
+		$min_price  = ! empty( $_GET['min_price'] ) ? sanitize_text_field( wp_unslash( $_GET['min_price'] ) ) : 0; // @phpcs:ignore
+		$max_price  = ! empty( $_GET['max_price'] ) ? sanitize_text_field( wp_unslash( $_GET['max_price'] ) ) : 0; // @phpcs:ignore
 
 		// Not used yet to get trip id.
 		$travel_locations = ! empty( $_GET['travel_locations'] ) ? sanitize_text_field( wp_unslash( $_GET['travel_locations'] ) ) : ''; // @phpcs:ignore
@@ -288,7 +319,68 @@ class WP_Travel_Ajax_Trips {
 
 		return WP_Travel_Helpers_REST_API::response( $response );
 	}
+	/**
+	 * @since 6.5.0 
+	 * wp travel inventory checking on checkout page
+	 */
+	public static function wp_travel_inventory_checking() {
 
+		header( 'Content-Type: application/json' );
+		$json_str = file_get_contents( 'php://input' );
+		$json_obj = json_decode(  $json_str );
+		if ( class_exists( 'WP_Travel_Util_Inventory' ) ) {
+			$inventory_enable = 'no';
+			foreach ( $json_obj->wp_travel_trip as $keys => $value ) {
+				if ( isset( $value->trip_id ) ) {
+					$trip_id = $value->trip_id;
+					$inv = get_post_meta( $trip_id, 'enable_trip_inventory' );
+					if ( isset( $inv[0] ) && $inv[0] == 'yes' ) {
+						$inventory_enable = $inv[0];
+						$pricing_id = isset( $value->pricing_id ) ? $value->pricing_id : '';
+						$select_date = isset( $value->trip_start_date ) ? $value->trip_start_date : '';
+						$trp_time = '';
+						$available_pax = '';
+						$inventory_size = '';
+						$select_pax = isset( $value->pax ) ? $value->pax : 0;
+						if ( class_exists( 'WP_Travel_Helpers_Inventory' ) ) {
+							$inventorys = WP_Travel_Helpers_Inventory::get_inventory( array(
+								'trip_id' => $trip_id,
+								'pricing_id'	=> $pricing_id,
+								'selected_date'	=> $select_date,
+								'times'			=> $trp_time
+							) );
+							if ( isset( $inventorys['inventory'] ) ) {
+								foreach ( $inventorys['inventory'] as $key => $val ) {
+									$available_pax = isset( $val['pax_available'] ) ? $val['pax_available'] : 0;
+									if ( $select_pax > $available_pax ) {
+										return WP_Travel_Helpers_REST_API::response( array(
+											'code' => 'WP_TRAVEL_INVENTORY_TESTING',
+											'inventory_available' => 'no_pax',
+										) );
+									}
+								}
+							}
+						}
+					} 
+				}
+			}
+		}
+		return WP_Travel_Helpers_REST_API::response( array(
+			'code' => 'WP_TRAVEL_INVENTORY_TESTING',
+			'inventory_available' => 'yes',
+		) );
+	}
+	public static function wp_travel_cart_empty_for_inventory() {
+		header( 'Content-Type: application/json' );
+		$json_str = file_get_contents( 'php://input' );
+		$json_obj = json_decode(  $json_str );
+		global $wt_cart;
+		$wt_cart->clear(); 
+		return WP_Travel_Helpers_REST_API::response( array(
+			'code' => 'WP_TRAVEL_INVENTORY_TESTING',
+			'inventory_available' => 'cart_empty',
+		) );
+	}
 	/**
 	 * Nonce.
 	 */

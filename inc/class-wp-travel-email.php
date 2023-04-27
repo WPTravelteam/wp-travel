@@ -10,7 +10,8 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 	 /**
 	  * WP Travel email templates class.
 	  */
-	 class WP_Travel_Email extends WP_Travel_Emails { // @phpcs:ignore
+	class WP_Travel_Email extends WP_Travel_Emails {
+ // @phpcs:ignore
 
 		/**
 		 * Settings.
@@ -29,9 +30,9 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 		/**
 		 * Website Name.
 		 *
-		 * @var $site_name Name of website.
+		 * @var $sitename Name of website.
 		 */
-		public $site_name;
+		public $sitename;
 
 		/**
 		 * Constructor.
@@ -54,7 +55,7 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 			 *
 			 * @since 5.0.0
 			 */
-			add_action( 'wptravel_action_send_booking_email', array( $this, 'send_booking_email' ), 10, 2 );
+			add_action( 'wptravel_action_send_booking_email', array( $this, 'send_booking_email' ), 10, 3 );
 
 		}
 
@@ -67,7 +68,6 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 		 * @deprecated 4.7.1
 		 */
 		public function send_booking_emails( $args ) {
-
 			$this->admin_email = apply_filters( 'wp_travel_booking_admin_emails', get_option( 'admin_email' ) ); // @phpcs:ignore
 
 			$customer_email = $args['customer_email'];
@@ -97,11 +97,10 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 				// Email Content.
 				$email_content = str_replace( array_keys( $email_tags ), $email_tags, $email_content );
 
-				if ( ! wp_mail( $this->admin_email, $email_subject, $email_content, $headers ) ) {
+				if ( ! wp_mail( $this->admin_email, $email_subject, $email_content, $headers, array( $attachment ) ) ) {
 					WPTravel()->notices->add( __( 'Your trip has been booked but the email could not be sent. Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
 				}
 			}
-
 			$send_mail = apply_filters( 'wptravel_send_booking_email_to_client', true );
 			if ( true === $send_mail ) {
 				// Send mail to client.
@@ -119,7 +118,7 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 				// Email Content.
 				$email_content = str_replace( array_keys( $email_tags ), $email_tags, $email_content );
 
-				if ( ! wp_mail( $customer_email, $email_subject, $email_content, $headers ) ) {
+				if ( ! wp_mail( $customer_email, $email_subject, $email_content, $headers, array( $attachment ) ) ) {
 					WPTravel()->notices->add( __( 'Your trip has been booked but the email could not be sent. Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
 				}
 			}
@@ -132,8 +131,7 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 		 * @param array $request_data POST request data.
 		 * @since 5.0.0
 		 */
-		public function send_booking_email( $booking_id, $request_data ) {
-
+		public function send_booking_email( $booking_id, $request_data, $new_trip_id ) {
 			$this->admin_email = apply_filters( 'wp_travel_booking_admin_emails', get_option( 'admin_email' ) ); // @phpcs:ignore
 
 			$customer_email_ids = isset( $request_data['wp_travel_email_traveller'] ) ? $request_data['wp_travel_email_traveller'] : array();
@@ -154,7 +152,40 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 
 			$email      = new WP_Travel_Emails();
 			$email_tags = $this->get_tags( $booking_id, $request_data ); // Supported email tags.
+			/**
+			 * @since 6.5.0
+			 * Send itinerary pdf in booking email.
+			 * @required Download_Core
+			 * 
+			 */
+			$attachments = apply_filters( 'wp_travel_email_itinerary_pdf_attachment', false );
+			$attachment = array();
+			$wt_settings_send_pdf = get_option( 'itinerary_pdf_send_booking_mail' );
+			if ( $wt_settings_send_pdf ||  $attachments ) {
+				foreach ( $new_trip_id as $indexs => $id ) {
+					if ( class_exists( 'WP_Travel_Downloads_Core' ) ) {
+						WP_Travel_Downloads_Core::email_attachment_generate_pdf( $id, false );
+						$dir                   = trailingslashit( WP_TRAVEL_ITINERARY_PATH );
+						$trips_name            = get_the_title( $id );
+						$downloadable_filename = $trips_name . '.pdf';
+						$attachment[]            = $dir . $downloadable_filename;
+					}
+				}
 
+			} else {
+				foreach ( $new_trip_id as $indexs => $id ) {
+					$wt_trip_email_itineray_pdf = get_post_meta( $id, 'send_booking_maile_attached_itinerary_pdf', true );
+					if ( $wt_trip_email_itineray_pdf ) {
+						if ( class_exists( 'WP_Travel_Downloads_Core' ) ) {
+							WP_Travel_Downloads_Core::email_attachment_generate_pdf( $id, false );
+							$dir                   = trailingslashit( WP_TRAVEL_ITINERARY_PATH );
+							$trips_name            = get_the_title( $id );
+							$downloadable_filename = $trips_name . '.pdf';
+							$attachment[]            = $dir . $downloadable_filename;
+						}
+					}
+				}
+			}
 			$send_email_to_admin = $this->settings['send_booking_email_to_admin']; // 'yes' By default.
 			if ( 'yes' === $send_email_to_admin ) { // Send mail to admin if booking email is set to yes.
 				$email_template = $email->wptravel_get_email_template( 'bookings', 'admin' );
@@ -169,10 +200,12 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 				// Email Subject.
 				$email_subject = str_replace( array_keys( $email_tags ), $email_tags, $email_template['subject'] ); // Added email tag support from ver 4.1.5.
 				// Email Content.
-				$email_content = str_replace( array_keys( $email_tags ), $email_tags, $email_content );
-
-				if ( ! wp_mail( $this->admin_email, $email_subject, $email_content, $headers ) ) {
-					WPTravel()->notices->add( __( 'Your trip has been booked but the email could not be sent. Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
+				$email_content      = str_replace( array_keys( $email_tags ), $email_tags, $email_content );
+				$amdin_send_booking = apply_filters( 'wp_travel_booking_mail_sent_to_admin', true );
+				if ( $amdin_send_booking == true ) {
+					if ( ! wp_mail( $this->admin_email, $email_subject, $email_content, $headers, $attachment ) ) {
+						WPTravel()->notices->add( __( 'Your trip has been booked but the email could not be sent. Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
+					}
 				}
 			}
 
@@ -198,7 +231,7 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 				// Email Content.
 				$email_content = str_replace( array_keys( $email_tags ), $email_tags, $email_content );
 
-				if ( ! wp_mail( $customer_email, $email_subject, $email_content, $headers ) ) {
+				if ( ! wp_mail( $customer_email, $email_subject, $email_content, $headers, $attachment ) ) {
 					WPTravel()->notices->add( __( 'Your trip has been booked but the email could not be sent. Possible reason: your host may have disabled the mail() function.', 'wp-travel' ), 'error' );
 				}
 			}
@@ -256,6 +289,7 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 
 			$email_tags = array(
 				'{sitename}'               => $this->sitename,
+				'{trip_id}'                => $trip_id,
 				'{itinerary_link}'         => get_permalink( $trip_id ),
 				'{itinerary_title}'        => wptravel_get_trip_pricing_name( $trip_id, $price_key ),
 				'{booking_id}'             => $booking_id,
@@ -356,10 +390,11 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 			if ( isset( $request_data['wp_travel_payment_gateway'] ) && 'bank_deposit' === $request_data['wp_travel_payment_gateway'] ) {
 				$bank_deposit_table = wptravel_get_bank_deposit_account_table( false );
 			}
-
-			$email_tags = array(
+			$itineraries = get_post_meta( $trip_id, 'wp_travel_trip_itinerary_data', true );
+			$email_tags  = array(
 				'{sitename}'               => $this->sitename,
-
+				'{trip_id}'                => $trip_id,
+				// '{itineraries}'            => $this->$itineraries,
 				'{itinerary_link}'         => get_permalink( $trip_id ), // @deprecated.
 				'{itinerary_title}'        => wptravel_get_trip_pricing_name( $trip_id, $price_key ), // @deprecated.
 				'{booking_arrival_date}'   => $arrival_date, // @deprecated.
@@ -387,5 +422,6 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 			return $email_tags;
 		}
 	}
+
 }
 new WP_Travel_Email();

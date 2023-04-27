@@ -85,7 +85,19 @@ class WpTravel_Helpers_Localize {
 			if ( wptravel_can_load_payment_scripts() ) {
 
 				global $wt_cart;
-
+				if ( WP_Travel::is_page( 'checkout' ) ) {
+					$trip_item = $wt_cart->getitems();
+					$invent = 'no';
+					foreach ( $trip_item as $key => $val ) {
+						$id_trip = $val['trip_id'];
+						$inventorys  = get_post_meta( $id_trip, 'enable_trip_inventory' );
+						if ( $inventorys[0] == 'yes' ) {
+							$invent = 'yes';
+						}
+					}
+					$wp_travel['items'] = $trip_item;
+					$wp_travel['inventory'] = $invent;
+				}
 				$cart_amounts   = $wt_cart->get_total();
 				$trip_price     = isset( $cart_amounts['total'] ) ? $cart_amounts['total'] : '';
 				$payment_amount = isset( $cart_amounts['total_partial'] ) ? $cart_amounts['total_partial'] : '';

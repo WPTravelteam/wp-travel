@@ -1,8 +1,125 @@
 const changeLog = [
 	{
+		version: "6.6.0",
+		log: <p>
+				Release Date: 27th April 2023
+				<br/><br/>
+				Fixes: 
+				<br/>
+				* Fixed N/A in payment mode while the partial payment is disabled.
+				<br/><br/>
+				Enhancement:
+				<br/>
+				* Sending an email to the client when Payment Info is changed to Paid by the admin manually.
+				<br/>
+				* Added option to add hourly Trips in case of Trip duration.
+				<br/>
+				* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-6-0-release-note/ ).
+				<br/>
+			</p>
+	},
+	{
+		version: "6.5.0",
+		log: <p>
+				Release Date: 12th April 2023
+				<br/><br/>
+				Fixes: 
+				<br/>
+				* Fixed when changing Payment Status to paid, Payment Mode status will also be changed to full.
+				<br/>
+				* Fixed calendar layout issue in backend trip edit dashboard.
+				<br/><br/>
+				Enhancement:
+				<br/>
+				* Added hook `[wp_travel_email_itinerary_pdf_attachment]` to attach itinerary PDF in the booking email.
+				<br/>
+				* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-5-0-release-note/ ).
+				<br/>
+			</p>
+	},
+	{
+		version: "6.4.1",
+		log: <p>
+				Release Date: 3rd April 2023
+				<br/><br/>
+				Fixes: 
+				<br/>
+				* Fixed js issue in the gallery backend.
+				<br/>
+				* Fixed thank you page not set while activate WPML plugin.
+				<br/>
+				* Fixed custom filter label not translate while translating using WPML.
+				<br/><br/>
+				others:
+				<br/>
+				* Sets the WordPress tested up to version to 6.2.
+				<br/>
+			</p>
+	},
+	{
+		version: "6.4.0",
+		log: <p>
+				Release Date: 30th March 2023
+				<br/><br/>
+				Enhancement: 
+				<br/>
+				* Implemented new design and interface of the Settings page.
+				<br/>
+				* Added compatibility with WPML plugin for translations.
+				<br/>
+				* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-4-0-release-note/ ).
+				<br/>
+			</p>
+	},
+	{
+		version: "6.3.0",
+		log: <p>
+				Release Date: 1st March 2023
+				<br/><br/>
+				Tweaks:
+				<br/>
+				* Added hook 'wp_travel_strings'.
+				<br/><br/>
+				Fixes:
+				<br/>
+				* For additional compatible bug fixes with WP Travel Pro please see this [changelog]( https://wptravel.io/changelog-wp-travel-pro/ ).
+				<br/>
+			</p>
+	},
+	{
+		version: "6.2.0",
+		log: <p>
+				Release Date: 13th February 2023
+				<br/><br/>
+				Fixes:
+				<br/>
+				* Fixed Trip placeholder image being cropped.
+				<br/>
+				* Fixed filter by option not being clickable in small screen size.
+				<br />
+				* Fixed shortcode `[WP_TRAVEL_ITINERARIES limit=50 type='itinerary_types' slug="term-slug" ]` not working.
+				<br/><br/>
+				Enhancement:
+				<br/>
+				* Added option to disable rating star option for admin.
+			</p>
+	},
+	{
+		version: "6.1.1",
+		log: <p>
+				Release Date:  24th January 2023
+				<br/><br/>
+				Fixes: 
+				<br/>
+				* Fixed slow performance in admin Dashboard with latest version of WP Travel.
+				<br/>
+				* Fixed media upload issue.
+			</p>
+	},
+	{
 		version: "6.1.0",
 		log: <p>
-				Release Date:  5th January 2023
+				Release Date:  19th January 2023
 				<br/><br/>
 				Tweaks:
 				<br/>
@@ -30,7 +147,7 @@ const changeLog = [
 				<br/><br/>
 				Enhancement:
 				<br/>
-				* Provides compatibility for the Tour Guide feature in WP Travel Pro.<br/>
+				* Provides compatibility for the Travel Guide feature in WP Travel Pro.<br/>
                 * Provides compatibility for showing high prices on trips.improving in TTFB speed.
 				<br/><br/>
 				Fixes:

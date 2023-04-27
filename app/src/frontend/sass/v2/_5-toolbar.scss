@@ -85,6 +85,26 @@
 					display: block !important;
 				}
 			}
+			.btn.btn-wptravel-filter-by-shortcodes-itinerary {
+				display: none !important;
+
+				.fa-chevron-down {
+					//(toolbar issue fix)
+					content: "\f078";
+					margin-left: 16px;
+					transition: 0.2s ease-in;
+				}
+				&.active {
+					.fa-chevron-down {
+						transition: 0.2s ease-in;
+						transform: rotate(180deg);
+					}
+				}
+				@media (max-width: 767px) {
+					//(toolbar issue fix)
+					display: block !important;
+				}
+			}
 			@media (max-width: 1354px) {
 				//(toolbar issue fix)
 				width: 100%;

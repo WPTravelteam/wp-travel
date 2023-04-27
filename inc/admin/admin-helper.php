@@ -333,45 +333,91 @@ function wptravel_marketplace_page() {
 	);
 
 	$info_btn_text     = __( 'View Demo', 'wp-travel' );
+	$install_btn_text     = __( 'Install', 'wp-travel' );
 	$download_btn_text = __( 'View Detail', 'wp-travel' );
 
 	?>
 	<div class="wrap">
+		
 		<div id="poststuff">
 			<h1 class="wp-heading-inline"><?php esc_html_e( 'Marketplace', 'wp-travel' ); ?></h1>
 			<div id="post-body">
-				<div class="wp-travel-marketplace-tab-wrap">
-					<div id="tabs-2" class="tab-pannel">
-						<div class="marketplace-module clearfix">
-							<?php foreach ( $themes_data as $theme ) : ?>
-								<div class="single-module">
-									<div class="single-module-image">
-										<a href="<?php echo esc_url( $theme['demo_url'] ); ?>" target="_blank">
-										<img width="423" height="237" src="<?php echo esc_url( $theme['img_url'] ); ?>" class="" alt="" >
-										</a>
+				<div id="wptravel-theme-install-loader">
+					<svg style="margin: auto; background: rgb(255, 255, 255); display: block; shape-rendering: auto;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+						<circle cx="50" cy="50" fill="none" stroke="#079812" stroke-width="16" r="41" stroke-dasharray="193.20794819577225 66.40264939859075">
+						  <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="2s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+						</circle>
+					</svg>
+					<div style="text-align: center; margin-top: 10px;">
+						<?php echo __( 'Installing Theme...' ) ?>
+					</div>
+				</div>
+				<div id="wptravel-market-content">
+					<div class="wp-travel-marketplace-tab-wrap">
+						<div id="tabs-2" class="tab-pannel">
+							<div class="marketplace-module clearfix">
+								<?php foreach ( $themes_data as $key => $theme ) : ?>
+									<div class="single-module">
+										<div class="single-module-image">
+											<a href="<?php echo esc_url( $theme['demo_url'] ); ?>" target="_blank">
+											<img width="423" height="237" src="<?php echo esc_url( $theme['img_url'] ); ?>" class="" alt="" >
+											</a>
+										</div>
+										<div class="single-module-content clearfix">
+											<h4 class="text-title"><a href="<?php echo esc_url( $theme['detail_url'] ); ?>" target="_blank">
+											<span class="dashicons-wp-travel">
+											</span><?php echo esc_html( $theme['name'] ); ?></a></h4>
+											<a class="btn-default pull-left" href="<?php echo esc_url( $theme['demo_url'] ); ?>" target="_blank"><?php echo esc_html( $info_btn_text ); ?></a>
+											<?php if ( $theme['type'] == 'free' && !in_array( $key, array_keys( wp_get_themes() ) ) ): ?>
+												<a class="btn-default pull-left" href="#" onclick="wptravel_install_theme('<?php echo str_replace( '-', '_', $key ) ?>')" ><?php echo esc_html( $install_btn_text ); ?></a>
+											<?php endif ?>										
+											<a class="btn-default pull-right" href="<?php echo esc_url( $theme['detail_url'] ); ?>" target="_blank"><?php echo esc_html( $download_btn_text ); ?></a>
+										</div>
 									</div>
-									<div class="single-module-content clearfix">
-										<h4 class="text-title"><a href="<?php echo esc_url( $theme['detail_url'] ); ?>" target="_blank">
-										<span class="dashicons-wp-travel">
-										</span><?php echo esc_html( $theme['name'] ); ?></a></h4>
-										<a class="btn-default pull-left" href="<?php echo esc_url( $theme['demo_url'] ); ?>" target="_blank"><?php echo esc_html( $info_btn_text ); ?></a>
-										<a class="btn-default pull-right" href="<?php echo esc_url( $theme['detail_url'] ); ?>" target="_blank"><?php echo esc_html( $download_btn_text ); ?></a>
-									</div>
-								</div>
-							<?php endforeach; ?>
+								<?php endforeach; ?>
+							</div>
 						</div>
+
 					</div>
 
+					<script type="text/javascript">
+						var site_url = '<?php get_site_url() ?>';
+
+						function wptravel_install_theme( slug ){
+	
+							document.getElementById("wptravel-theme-install-loader").style.display = 'block';
+							document.getElementById("wptravel-market-content").style.display = 'none';
+
+							fetch( site_url + '/wp-json/wp-travel/v1/theme-install/' + slug )
+							.then(response => {
+								document.getElementById("wptravel-theme-install-loader").style.display = 'none';
+								document.getElementById("wptravel-market-content").style.display = 'block';
+							});
+
+						}
+
+					</script>
+
+					<div id="aside-wrap-container">
+						<div id="aside-wrap" class="single-module-side">
+							<div class="aside-wrap-buttons-container">
+								<h2 class="wp-travel-aside-wrap-block-title">
+									<span><?php esc_html_e( 'Need Help?', 'wp-travel' ); ?></span>
+								</h2>
+								<div class="wp-travel-aside-help-block">
+									<?php
+									wptravel_meta_box_support();
+									wptravel_meta_box_documentation();
+									?>
+								</div>
+							</div>
+							<?php
+								wptravel_meta_box_review();
+							?>
+						</div>
+					</div>
 				</div>
 
-
-				<div id="aside-wrap" class="single-module-side">
-					<?php
-					wptravel_meta_box_support();
-					wptravel_meta_box_documentation();
-					wptravel_meta_box_review();
-					?>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -386,23 +432,13 @@ function wptravel_marketplace_page() {
  */
 function wptravel_meta_box_support() {
 	?>
-	<div id="wp_travel_support_block_id" class="postbox ">
-		<button type="button" class="handlediv" aria-expanded="true">
-			<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Support', 'wp-travel' ); ?></span>
-			<span class="toggle-indicator-acc" aria-hidden="true"></span>
-		</button>
-		<h2 class="hndle ui-sortable-handle">
-			<span><?php esc_html_e( 'Support', 'wp-travel' ); ?></span>
-		</h2>
-		<div class="inside">
-
-			<div class="thumbnail">
-				<img src="<?php echo esc_url( plugins_url( '/wp-travel/assets/images/support-image.png' ) ); ?>">
-					<p class="text-justify"><?php esc_html_e( 'Click Below for support.', 'wp-travel' ); ?> </p>
-					<p class="text-center"><a href="http://wptravel.io/support/" target="_blank" class="button button-primary"><?php esc_html_e( 'Get Support Here', 'wp-travel' ); ?></a></p>
-			</div>
-
-		</div>
+	<div id="wp_travel_support_block_id">
+		<p class="text-center">
+			<a class="wp-travel-aside-block-button" href="http://wptravel.io/support/" target="_blank">
+				<i class="fa fa-question-circle"></i>
+				<?php esc_html_e( 'Support', 'wp-travel' ); ?>
+			</a>
+		</p>
 	</div>
 	<?php
 }
@@ -416,23 +452,13 @@ function wptravel_meta_box_support() {
 function wptravel_meta_box_documentation() {
 
 	?>
-	<div id="wp_travel_doc_block_id" class="postbox ">
-		<button type="button" class="handlediv" aria-expanded="true">
-			<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Documentation', 'wp-travel' ); ?></span>
-			<span class="toggle-indicator" aria-hidden="true"></span>
-		</button>
-		<h2 class="hndle ui-sortable-handle">
-			<span><?php esc_html_e( 'Documentation', 'wp-travel' ); ?></span>
-		</h2>
-		<div class="inside">
-
-			<div class="thumbnail">
-				<img src="<?php echo esc_url( plugins_url( '/wp-travel/assets/images/docico.png' ) ); ?>">
-					<p class="text-justify"><?php esc_html_e( 'Click Below for our full Documentation about logo slider.', 'wp-travel' ); ?> </p>
-					<p class="text-center"><a href="http://wptravel.io/documentations/" target="_blank" class="button button-primary"><?php esc_html_e( 'Get Documentation Here', 'wp-travel' ); ?></a></p>
-			</div>
-
-		</div>
+	<div id="wp_travel_doc_block_id">
+		<p class="text-center">
+			<a class="wp-travel-aside-block-button" href="http://wptravel.io/documentations/" target="_blank">
+				<i class="fa fa-book"></i>
+				<?php esc_html_e( 'Documentation', 'wp-travel' ); ?>
+			</a>
+		</p>
 	</div>
 	<?php
 
@@ -459,12 +485,12 @@ function wptravel_meta_box_review() {
 		),
 	);
 	?>
-	<div id="wp_travel_review_block_id" class="postbox ">
+	<div id="wp_travel_review_block_id">
 		<button type="button" class="handlediv" aria-expanded="true">
 			<span class="screen-reader-text"><?php esc_html_e( 'Toggle panel: Reviews', 'wp-travel' ); ?></span>
 			<span class="toggle-indicator" aria-hidden="true"></span>
 		</button>
-		<h2 class="hndle ui-sortable-handle">
+		<h2 class="wp-travel-aside-wrap-block-title">
 			<span><?php esc_html_e( 'Reviews', 'wp-travel' ); ?></span>
 		</h2>
 		<div class="inside">
@@ -481,14 +507,16 @@ function wptravel_meta_box_review() {
 						</p>
 						<h4><?php echo esc_html( $wp_travel_review['title'] ); ?></h4>
 						<h5><?php echo esc_html( $wp_travel_review['description'] ); ?></h5>
-						<span class="by"><strong> <a href="https://profiles.wordpress.org/<?php echo esc_attr( $wp_travel_review['profile'] ); ?>" target="_blank"><?php echo esc_html( $wp_travel_review['profile'] ); ?></a></strong></span>
+						<span class="by"><strong> <a class="wp-travel-anchor" href="https://profiles.wordpress.org/<?php echo esc_attr( $wp_travel_review['profile'] ); ?>" target="_blank"><?php echo esc_html( $wp_travel_review['profile'] ); ?></a></strong></span>
 					</div>
 					<?php
 			}
 			?>
 			<div class="thumbnail last">
-				<h5><?php esc_html_e( '"Please fill free to leave us a review, if you found this plugin helpful."', 'wp-travel' ); ?></h5>
-				<p class="text-center"><a href="https://wordpress.org/plugins/wp-travel/#reviews" target="_blank" class="button button-primary"><?php esc_html_e( 'Leave a Review', 'wp-travel' ); ?></a></p>
+				<h5><?php esc_html_e( 'Enjoying WP-Travel? Feel free to leave us a review.', 'wp-travel' ); ?></h5>
+					<a class="wp-travel-aside-block-button fit" href="https://wordpress.org/plugins/wp-travel/#reviews" target="_blank">
+						<?php esc_html_e( 'Leave a Review', 'wp-travel' ); ?>
+					</a>
 			</div>
 		</div>
 	</div>
@@ -497,31 +525,31 @@ function wptravel_meta_box_review() {
 }
 
 /**
- * Upsell Message Callback for Tour Guide submenu. WP Travel > Tour Guide.
+ * Upsell Message Callback for Travel Guide submenu. WP Travel > Travel Guide.
  */
-function wptravel_get_tour_guide_upsell(){
+function wptravel_get_travel_guide_upsell(){
 	?>
-	<h2><?php echo esc_html( 'Tour Guide' ); ?></h2>
+	<h2><?php echo esc_html( 'Travel Guide' ); ?></h2>
 	<?php
-	if ( ! class_exists( 'WP_Travel_Tour_Guide_Core' ) ) :
+	if ( ! class_exists( 'WP_Travel_Travel_Guide_Core' ) ) :
 		$args = array(
-			'title'      => __( 'Need to add your tour guide ?', 'wp-travel' ),
-			'content'    => __( 'By upgrading to Pro, you can add your tour guide in all of your trips !', 'wp-travel' ),
+			'title'      => __( 'Need to add your Travel Guide ?', 'wp-travel' ),
+			'content'    => __( 'By upgrading to Pro, you can add your Travel Guide in all of your trips !', 'wp-travel' ),
 			'link'       => 'https://wptravel.io/wp-travel-pro/',
 			'link_label' => __( 'Get WP Travel Pro', 'wp-travel' ),
 		);
 		wptravel_upsell_message( $args );
 		if ( class_exists( 'WP_Travel_Pro' ) ) {
-			$settings = wptravel_get_settings();
-			$modules  = $settings['modules'];
-			if ( isset( $modules['show_wp_travel_tour_guide'] ) ) {
-				$active = 'yes' === $modules['show_wp_travel_tour_guide'];
-				if ( ! $active ) {
-					?>
-					<p>Tour Guide is currently disabled please go to Modules Settings to enable it and reload the page.</p>
-					<?php
-				}
-			}
+		?>	
+		<div class="components-notice is-warning">
+			<div class="components-notice__content">
+				<p>Travel Guides is currently disabled please go to Modules Settings to enable it and reload the page. </p>
+				<div class="components-notice__actions">
+
+				</div>
+			</div>
+		</div>
+		<?php
 		}
 	endif;
 }

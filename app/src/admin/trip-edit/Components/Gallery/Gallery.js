@@ -106,16 +106,17 @@ const Gallery = ( props ) => {
             || <Notice isDismissible={false} status="info">{__i18n.messages.no_gallery}</Notice>}
     </ErrorBoundary>
 }
+// remove @since 6.4.0
 export default withSelect( (select ) => {
-    const { getMedia } = select( 'core' );
-    const { getEditedPostAttribute } = select( 'core/editor' );
-    const featuredImageId = getEditedPostAttribute( 'featured_media' );
-
-    return {
-        media: featuredImageId ? getMedia( featuredImageId ) : null,
-        featuredImageId,
-        setFeaturedImage: function(attachmentId) {
-			dispatch('core/editor').editPost({ featured_media: attachmentId });
-		}
-    };
+    // const { getMedia } = typeof select( 'core' ) != 'undefined' && select( 'core' ) != null ? select( 'core' ) : null;
+    // const { getEditedPostAttribute } = select( 'core/editor' );
+    // const featuredImageId = getEditedPostAttribute( 'featured_media' );
+    
+    // return {
+    //     media: featuredImageId && typeof getMedia != 'undefined' && getMedia != null ? getMedia( featuredImageId ) : null,
+    //     featuredImageId,
+    //     setFeaturedImage: function(attachmentId) {
+	// 		dispatch('core/editor').editPost({ featured_media: attachmentId });
+	// 	}
+    // };
   })( Gallery )

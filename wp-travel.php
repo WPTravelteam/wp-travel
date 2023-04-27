@@ -3,12 +3,12 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 6.1.0
+ * Version: 6.6.0
  * Author: WP Travel
  * Author URI: http://wptravel.io/
- * Requires at least: 5.4.1
- * Requires PHP: 5.6
- * Tested up to: 6.1.1
+ * Requires at least: 6.0.0
+ * Requires PHP: 7.4
+ * Tested up to: 6.2
  *
  * Text Domain: wp-travel
  * Domain Path: /i18n/languages/
@@ -38,7 +38,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '6.1.0';
+		public $version = '6.6.0';
 
 		/**
 		 * WP Travel API version.
@@ -164,6 +164,10 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			 */
 			add_filter( 'option_wp_travel_settings', array( $this, 'filter_wp_travel_settings' ), 11, 2 );
 			self::reject_cache_in_checkout();
+			$settings = wptravel_get_settings();
+			if ( isset( $settings['wpml_migrations'] ) && $settings['wpml_migrations'] ) {
+				add_action( 'init', array( 'WpTravel_Helpers_Trips', 'wp_travel_trip_date_price' ) );
+			}
 		}
 
 		/**
@@ -267,7 +271,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/core/helpers/layout.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/core/helpers/localize.php', WP_TRAVEL_ABSPATH );
 
-			include sprintf( '%s/inc/setup-page/setup-page.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-assets.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-default-form-fields.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-wp-travel-emails.php', WP_TRAVEL_ABSPATH );
@@ -353,10 +356,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				include sprintf( '%s/inc/admin/tablenav.php', WP_TRAVEL_ABSPATH );
 				include sprintf( '%s/inc/admin/class-admin-booking.php', WP_TRAVEL_ABSPATH );
 			}
-
-			if ( $this->is_request( 'frontend' ) ) {
-
-			}
 			include sprintf( '%s/inc/class-wp-travel-extras-frontend.php', WP_TRAVEL_ABSPATH );
 
 			// Additional.
@@ -420,14 +419,16 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			// Front End.
 			require WP_TRAVEL_ABSPATH . '/app/inc/frontend/class-wptravel-single-itinerary-hooks.php';
 			require WP_TRAVEL_ABSPATH . '/app/inc/frontend/class-wptravel-frontend-assets.php';
-
+			// include sprintf( '%s/core/api/include.php', WP_TRAVEL_ABSPATH ); // for api include file.
 			include sprintf( '%s/inc/deprecated-class/trait/class-wp-travel-deprecated-trait.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/deprecated-class/trait/deprecated-includes.php', WP_TRAVEL_ABSPATH );
 
 			if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 				require WP_TRAVEL_ABSPATH . '/core/helpers/network.php';
 			}
-
+			if ( ! is_multisite() ) {
+				include sprintf( '%s/inc/setup-page/setup-page.php', WP_TRAVEL_ABSPATH );
+			}
 		}
 
 		/**
@@ -590,8 +591,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 						return 'tour-extras' === $screen->id || 'edit-tour-extras' === $screen->id;
 					case 'downloads':
 						return 'itinerary-booking_page_download_upsell_page' === $screen->id || 'wp_travel_downloads' === $screen->id || 'edit-wp_travel_downloads' === $screen->id;
-					case 'tour_guide':
-						return 'itinerary-booking_page_wp-travel-tour-guide' === $screen->id;
+					case 'travel_guide':
+						return 'itinerary-booking_page_wp-travel-travel-guide' === $screen->id;
 					case 'reports':
 						return 'itinerary-booking_page_booking_chart' === $screen->id;
 					case 'custom_filters':
@@ -619,7 +620,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				global $post;
 				$page_id  = (int) get_the_ID();
 				$settings = wptravel_get_settings();
-
 				switch ( $slug ) {
 					case 'cart':
 						$cart_page_id = isset( $settings['cart_page_id'] ) ? (int) $settings['cart_page_id'] : 0;
@@ -665,7 +665,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 					'enquiry',
 					'extras',
 					'downloads',
-					'tour_guide',
+					'travel_guide',
 					'reports',
 					'custom_filters',
 					'marketplace',

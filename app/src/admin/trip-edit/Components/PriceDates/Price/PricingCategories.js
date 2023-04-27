@@ -179,6 +179,7 @@ const WPTravelTripPricingCategories = ({priceIndex}) => {
                             updateTripPricing(priceData, priceIndex)
                         } } />
                 </PanelRow>
+                {applyFilters('wp_travel_after_pricings_category_ege',[], price, priceIndex, catIndex )}
                 {applyFilters('wp_travel_after_pricings_category_fields',[], priceIndex, catIndex )}
                 <hr/>
                 <PanelRow className="wp-travel-action-section">

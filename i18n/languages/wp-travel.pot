@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Travel package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Travel 6.0.1\n"
+"Project-Id-Version: WP Travel 6.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-16 05:24:58+00:00\n"
+"POT-Creation-Date: 2023-02-17 10:00:30+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -84,7 +84,7 @@ msgid "Booking Details"
 msgstr ""
 
 #: core/helpers/booking.php:45 core/helpers/strings.php:152
-#: core/helpers/strings.php:248 inc/admin/class-admin-metaboxes.php:49
+#: core/helpers/strings.php:249 inc/admin/class-admin-metaboxes.php:49
 #: inc/email-template-functions.php:122 inc/email-template-functions.php:395
 #: inc/email-template-functions.php:704 inc/email-template-functions.php:1004
 #: inc/email-template-functions.php:1216
@@ -1719,11 +1719,11 @@ msgid "Leave a Review"
 msgstr ""
 
 #: inc/admin/admin-helper.php:508
-msgid "Need to add your tour guide ?"
+msgid "Need to add your Travel Guide ?"
 msgstr ""
 
 #: inc/admin/admin-helper.php:509
-msgid "By upgrading to Pro, you can add your tour guide in all of your trips !"
+msgid "By upgrading to Pro, you can add your Travel Guide in all of your trips !"
 msgstr ""
 
 #: inc/admin/admin-helper.php:538
@@ -2549,7 +2549,7 @@ msgstr ""
 msgid "Trip Extras:"
 msgstr ""
 
-#: inc/cart/cart-mini.php:349 inc/cart/cart-mini.php:614
+#: inc/cart/cart-mini.php:349 inc/cart/cart-mini.php:634
 msgid "Subtotal"
 msgstr ""
 
@@ -2916,31 +2916,31 @@ msgid "Add New"
 msgstr ""
 
 #: inc/class-post-types.php:377
-msgid "Add New Tour Guide"
+msgid "Add New Travel Guide"
 msgstr ""
 
 #: inc/class-post-types.php:378
-msgid "New Tour Tour Guide"
+msgid "New Tour Travel Guide"
 msgstr ""
 
 #: inc/class-post-types.php:379
-msgid "Edit Tour Guide"
+msgid "Edit Travel Guide"
 msgstr ""
 
 #: inc/class-post-types.php:380
-msgid "View Tour Guide"
+msgid "View Travel Guide"
 msgstr ""
 
 #: inc/class-post-types.php:381
-msgid "All Tour Guide"
+msgid "All Travel Guide"
 msgstr ""
 
 #: inc/class-post-types.php:382
-msgid "Search Tour Guide"
+msgid "Search Travel Guide"
 msgstr ""
 
 #: inc/class-post-types.php:383
-msgid "Parent Tour Guide:"
+msgid "Parent Travel Guide:"
 msgstr ""
 
 #: inc/class-post-types.php:384
@@ -8492,7 +8492,7 @@ msgid "Settings"
 msgstr ""
 
 #: inc/helpers.php:3240 inc/helpers.php:3241
-msgid "Tour Guide"
+msgid "Travel Guide"
 msgstr ""
 
 #: inc/helpers.php:3475 inc/helpers.php:4231
@@ -9509,22 +9509,22 @@ msgstr ""
 
 #: inc/class-post-types.php:372
 msgctxt "Post type general name"
-msgid "Tour Guide"
+msgid "Travel Guide"
 msgstr ""
 
 #: inc/class-post-types.php:373
 msgctxt "Post type singular name"
-msgid "Tour Guide"
+msgid "Travel Guide"
 msgstr ""
 
 #: inc/class-post-types.php:374
 msgctxt "Admin Menu text"
-msgid "Tour Guide"
+msgid "Travel Guide"
 msgstr ""
 
 #: inc/class-post-types.php:375
 msgctxt "Add New on Toolbar"
-msgid "Tour Guide"
+msgid "Travel Guide"
 msgstr ""
 
 #: inc/class-taxonomies.php:53

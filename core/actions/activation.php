@@ -8,7 +8,8 @@
 /**
  * Activation class.
  */
-class WP_Travel_Actions_Activation { // @phpcs:ignore
+class WP_Travel_Actions_Activation {
+ // @phpcs:ignore
 
 	/**
 	 * Minimum required PHP version.
@@ -51,8 +52,6 @@ class WP_Travel_Actions_Activation { // @phpcs:ignore
 
 	/**
 	 * Check for multile plugin activation.
-	 *
-	 *
 	 */
 	public static function wp_travel_check_for_plugin_activation() {
 		// Don't do redirects when multiple plugins are bulk activated
@@ -62,7 +61,7 @@ class WP_Travel_Actions_Activation { // @phpcs:ignore
 			return;
 		}
 		add_option( 'wp_travel_setup_page_redirect', wp_get_current_user()->ID );
-		
+
 	}
 
 	/**

@@ -324,6 +324,8 @@ function wptravel_booking_data( $booking_id ) {
 		$due_amount = 0;
 	}
 
+	
+
 	$payment_status = get_post_meta( $payment_id, 'wp_travel_payment_status', true );
 	$payment_status = ( ! empty( $payment_status ) ) ? $payment_status : 'N/A';
 
@@ -332,7 +334,56 @@ function wptravel_booking_data( $booking_id ) {
 
 	$booking_option = get_post_meta( $payment_id, 'wp_travel_booking_option', true );
 	$booking_option = ( ! empty( $booking_option ) ) ? $booking_option : 'booking_with_payment'; // if booking option empty while paying from dashboard then default assign to booking_with_payment.
+	
 
+	$partial_mode = get_post_meta( $booking_id, 'wp_travel_is_partial_payment', true );
+
+	/**
+	* Change payment mode N/A to full while payment full.
+	* @since 6.6.0
+	*/
+	$booking_paid = get_post_meta( $booking_id, 'wp_travel_payment_status', true );
+	if ( $booking_paid == 'paid' && $payment_status == 'paid' && $partial_mode == 'no' &&  $total > 0 ) {
+
+		if ( $label_key == 'full' && $due_amount > 0 ) {
+			update_post_meta( $payment_id, 'wp_travel_payment_amount', $total );
+		}
+		$pay_amount = get_post_meta( $payment_id, 'wp_travel_payment_amount', true );
+		if ( $label_key == '' && $pay_amount == 0 ) {
+			update_post_meta( $payment_id, 'wp_travel_payment_amount', $total );
+			update_post_meta( $payment_id, 'wp_travel_payment_mode', 'full' );
+		}
+	}
+
+	if ( $payment_status == 'paid' ) {
+		if ( $partial_mode == 'yes' ) {
+			if ( $due_amount != 0.00 ) {
+				update_post_meta( $payment_id, 'wp_travel_partial_payment_amount_change_status', $total_paid_amount );
+				update_post_meta( $payment_id, 'wp_travel_payment_amount', $total );
+				update_post_meta( $payment_id, 'wp_travel_payment_mode', 'full' );
+				$due_amount = 0.00;
+				$total_paid_amount = $total;
+				$payment_mode = 'full';
+			}
+		}
+	} else {  
+		if ( $payment_status == 'partially_paid' ) {
+			if ( $partial_mode == 'yes' ) {
+				$change_status = get_post_meta( $payment_id, 'wp_travel_partial_payment_amount_change_status', true );
+				if ( isset( $change_status ) && ! empty( $change_status ) && $change_status > 0 && $change_status != $total ) {
+					$due_amount_after_change_status = $total - $change_status;
+					if ( $due_amount_after_change_status < 0 ) {
+						$due_amount_after_change_status = 0;
+					}
+					update_post_meta( $payment_id, 'wp_travel_payment_mode', 'partial' );
+					update_post_meta( $payment_id, 'wp_travel_payment_amount', $change_status );
+					$due_amount = $due_amount_after_change_status;
+					$payment_mode = 'partial';
+					$total_paid_amount = $change_status;
+				}
+			}
+		}
+	}
 	$amounts = array(
 		'booking_status' => $booking_status,
 		'booking_option' => $booking_option,
@@ -347,7 +398,6 @@ function wptravel_booking_data( $booking_id ) {
 		'paid_amount'    => sprintf( '%0.2f', $total_paid_amount ),
 		'due_amount'     => sprintf( '%0.2f', $due_amount ),
 	);
-
 	// Partical calculation.
 	if ( wptravel_is_partial_payment_enabled() ) {
 		$payout_percent = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );

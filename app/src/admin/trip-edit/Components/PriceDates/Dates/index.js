@@ -11,6 +11,8 @@ import TripDatesTimes from './dates-times';
 
 
 import ErrorBoundary from '../../../../../ErrorBoundry/ErrorBoundry';
+import DateDurationSelect from './DateDurationSelect';
+import DateDuration from './DateDuration';
 
 const __i18n = {
 	..._wp_travel_admin.strings
@@ -94,7 +96,7 @@ const Dates = ( {allData} ) => {
             [storeKey]:[...data]
         })
     }
-    
+    const durationValidation = document.getElementById( 'wp-travel-trip-duration-validation' );
 
     return <ErrorBoundary key="1">
     <div className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-top-border">
@@ -115,38 +117,11 @@ const Dates = ( {allData} ) => {
         {is_fixed_departure ?
             <TripDatesTimes dates={dates} storeKey="dates" onUpdate={updateDateTimes} pricings={pricings} /> :
             <>
-                <PanelRow>
-                    <label>{ __i18n.trip_duration }</label>
-                    <div className="wp-travel-trip-duration">
-                        <TextControl
-                            value={trip_duration.days}
-                            help={__i18n.days}
-                            onChange={(e) =>{
-                                let _trip_duration = allData.trip_duration;
-                                _trip_duration.days = e;
-
-                                updateTripData({
-                                    ...allData,
-                                    trip_duration:{..._trip_duration}
-                                })
-                            } }
-                        />
-                        <TextControl
-                            value={trip_duration.nights}
-                            help={__i18n.nights}
-                            onChange={(e) =>{
-                                let _trip_duration = allData.trip_duration;
-                                _trip_duration.nights = e;
-                                updateTripData({
-                                    ...allData,
-                                    trip_duration:{..._trip_duration}
-                                })
-                            } }
-                    />
-                    </div>
-                </PanelRow>
+                {applyFilters( 'wp_travel_trip_duration_condition', [], allData ) }
+                <DateDurationSelect allData={allData} />
+                <DateDuration allData={allData} format={'day'} /> 
                 {/* <Notice status="warning" isDismissible={false}>{__( 'Inventory option will only work in fixed departure date.', 'wp-travel')}</Notice> */}
-
+                { applyFilters( 'wp_travel_trip_duration_validation', [], allData ) }
             </>
         }
         {applyFilters('wp_travel_after_dates_options', [], allData)}

@@ -29,6 +29,7 @@ import InventoryNotice, { Notice } from '../_InventoryNotice';
 const initialState = DEFAULT_BOOKING_STATE();
 
 const CalendarView = ( props ) => {
+	console.log('dfjsdkljf', props)
 	// Component Props.
 	const { calendarInline, showTooltip, tooltipText, tripData, bookingData, updateBookingData } = props;
 
@@ -39,6 +40,9 @@ const CalendarView = ( props ) => {
         pricings,
         trip_duration:tripDuration
     } = tripData;
+	console.log( 'trip data', tripDuration );
+	const { trip_duration } = typeof tripData != 'undefined' && tripData || {};
+	// const { start_date, end_date } = typeof trip_duration != 'undefined' && trip_duration || '';
     const allPricings        = pricings && _.keyBy( pricings, p => p.id ) // Need object structure because pricing id may not be in sequencial order.
     const _dates             = 'undefined' !== typeof dates && dates.length > 0 ? dates : [];
     const datesById          = _.keyBy(_dates, d => d.id)
@@ -459,7 +463,7 @@ const CalendarView = ( props ) => {
 		( moment( md.start_date ).isBefore( moment(new Date() ) ) && md.is_recurring ) || // @todo need to filter end date condition as well in recurring.
 		moment( md.start_date ).isSame( moment(new Date() ) ) 
 	);
-
+		console.log( 'hekdfsdf',isFixedDeparture );
 	let minDate = _mindate && moment(_mindate.start_date).toDate() || new Date();
 	let maxDate = new Date( new Date().setFullYear(new Date().getFullYear() + 10 ));
     let params = {
@@ -477,7 +481,15 @@ const CalendarView = ( props ) => {
 	}
     if ( ! isFixedDeparture ) {
 		delete params.filterDate;
-		params.minDate   = new Date();
+		let dateformat = /^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/;
+		let oldDates  = typeof trip_duration.start_date != 'undefined' && trip_duration.start_date != '' && new Date(trip_duration.start_date) || new Date();
+		// let validateChecking = oldDates.match(dateformat ) ? oldDates : new Date();
+		let validateChecking = moment( oldDates, 'MM/DD/YYYY',true).isValid() ? oldDates : new Date();
+		let durations_dates = typeof trip_duration != 'undefined' && typeof trip_duration.start_date != 'undefined' && trip_duration.start_date != '' && new Date( trip_duration.start_date ) || new Date();
+		let duration_end_dates = typeof trip_duration != 'undefined' && typeof trip_duration.end_date != 'undefined' && trip_duration.end_date != '' && new Date( trip_duration.end_date ) || '';
+		const finalDates = validateChecking < new Date() ? new Date() : oldDates;
+		params.minDate   = finalDates;
+		params.maxDate	 = duration_end_dates;
 		params.startDate = selectedDate;
 		params.endDate   = moment( selectedDate ).add( duration - 1, 'days' ).toDate();
 	}

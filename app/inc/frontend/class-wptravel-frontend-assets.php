@@ -271,7 +271,6 @@ class WpTravel_Frontend_Assets {
 			}
 		}
 
-
 		$styles = array(
 			'wp-travel-slick'           => array(
 				'src'   => self::$app_path . '/assets/css/lib/slick/slick.min.css',
@@ -380,7 +379,7 @@ class WpTravel_Frontend_Assets {
 		if ( self::is_request( 'frontend' ) ) {
 			$scripts['wp-travel-script'] = array(
 				'src'       => self::$app_path . '/assets/js/wp-travel-front-end.js',
-				'deps'      => array( 'jquery', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng', 'jquery-ui-accordion', 'wp-travel-slick' ),
+				'deps'      => array( 'easy-responsive-tabs', 'jquery', 'jquery-datepicker-lib', 'jquery-datepicker-lib-eng', 'jquery-ui-accordion', 'wp-travel-slick' ),
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,
 			);
@@ -415,7 +414,7 @@ class WpTravel_Frontend_Assets {
 				'jquery-ui-accordion',
 				'jquery-datepicker-lib-eng',
 				'jquery-ui-slider',
-				'easy-responsive-tabs',
+				'easy-responsive-tabs', // prashant
 			);
 
 			if ( '' !== $api_key && true === $show_google_map ) {
@@ -458,7 +457,7 @@ class WpTravel_Frontend_Assets {
 		if ( self::is_request( 'admin' ) ) {
 			if ( function_exists( 'get_current_screen' ) ) {
 				$screen = get_current_screen();
-	
+
 				if ( isset( $screen->is_block_editor ) && ! $screen->is_block_editor ) {
 					// Main Styles for all admin pages.
 					$styles['wp-travel-back-end'] = array(
@@ -526,7 +525,6 @@ class WpTravel_Frontend_Assets {
 			if ( '' !== $api_key && true === $show_google_map ) {
 				$admin_depencency[] = 'jquery-gmaps';
 			}
-
 
 			$admin_script_handler = array( 'jquery', 'jquery-ui-sortable', 'jquery-ui-accordion' );
 			if ( get_current_screen()->base == 'dashboard_page_wp-travel-setup-page' ) {
