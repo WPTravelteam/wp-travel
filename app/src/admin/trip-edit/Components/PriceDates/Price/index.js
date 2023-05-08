@@ -92,7 +92,7 @@ const Pricings = ( {allData} ) => {
         <div className="wp-travel-trip-pricings">
             {applyFilters('wp_travel_before_pricings_options', [], allData)}
             {'multiple-price' === pricing_type && <>
-                {tripPrices.length > 0 ? <>
+                { typeof tripPrices != 'undefined' && tripPrices.length > 0 ? <>
                 
                     <Notice status="warning" isDismissible={false}>{__i18n.messages.pricing_message}</Notice>
                     <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addTripPrice()}>{__i18n.add_price }</Button></PanelRow>
@@ -249,7 +249,7 @@ const Pricings = ( {allData} ) => {
                     })}
                     </ReactSortable>
                     </ div>
-                {tripPrices.length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addTripPrice()}>{__i18n.add_price }</Button></PanelRow>}</>:<>
+                { typeof tripPrices != 'undefined' && tripPrices.length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addTripPrice()}>{__i18n.add_price }</Button></PanelRow>}</>:<>
                 <Notice isDismissible={false} actions={[{
                     'label': __i18n.add_price,
                     onClick:()=>{

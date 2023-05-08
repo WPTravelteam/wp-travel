@@ -41,11 +41,20 @@ class WP_Travel_Ajax_Settings {
 		 */
 
 		WP_Travel::verify_nonce();
-
-		$post_data = json_decode( file_get_contents( 'php://input' ), true ); // Added 2nd Parameter to resolve issue with objects.
-		$post_data = wptravel_sanitize_array( $post_data, true );  // wp kses for some editor content in email settings.
-		$response  = WP_Travel_Helpers_Settings::update_settings( $post_data );
+		/**
+		 * solve ajax request in server
+		 */
+		$post_data = file_get_contents( 'php://input' ); // Added 2nd Parameter to resolve issue with objects.
+		// $post_data = wptravel_sanitize_array( $post_data, true );  // wp kses for some editor content in email settings.
+		$post_data     = is_string( $post_data ) ? json_decode( $post_data, true ) : $post_data; // check ajax string data
+		$new_post_data = is_string( $post_data ) ? json_decode( $post_data, true ) : $post_data; // check after ajax data is converted in to array of not
+		$new_post_data = wptravel_sanitize_array( $new_post_data, true );
+		$response      = WP_Travel_Helpers_Settings::update_settings( $new_post_data );
 		WP_Travel_Helpers_REST_API::response( $response );
+		// $post_data = json_decode( file_get_contents( 'php://input' ), true ); // Added 2nd Parameter to resolve issue with objects.
+		// $post_data = wptravel_sanitize_array( $post_data, true );  // wp kses for some editor content in email settings.
+		// $response  = WP_Travel_Helpers_Settings::update_settings( $post_data );
+		// WP_Travel_Helpers_REST_API::response( $response );
 	}
 
 	public static function force_migrate_to_v4() {
@@ -66,8 +75,8 @@ class WP_Travel_Ajax_Settings {
 	}
 	/**
 	 * @since 6.4.0
-	 * when click migrate button in in setting of debug page button 
-	 * migrate all price and date in to post meta 
+	 * when click migrate button in in setting of debug page button
+	 * migrate all price and date in to post meta
 	 */
 	public static function force_migrate_wpml() {
 		/**
@@ -83,7 +92,7 @@ class WP_Travel_Ajax_Settings {
 		$date_table      = $db_prefix . 'wt_dates';
 		$price_table     = $db_prefix . 'wt_pricings';
 		$price_cat_table = $db_prefix . 'wt_price_category_relation';
-		$settings  = WP_Travel_Helpers_Settings::get_settings();
+		$settings        = WP_Travel_Helpers_Settings::get_settings();
 		if ( isset( $settings['settings'] ) && isset( $settings['settings']['wpml_migrations'] ) ) {
 			if ( $settings['settings']['wpml_migrations'] == true ) {
 				$posts = new WP_Query(
@@ -113,27 +122,27 @@ class WP_Travel_Ajax_Settings {
 				}
 				/**
 				 * @since 6.4.1
-                 * migrate custom filter
-                 */
-                $custom_filter = get_option( 'wp_travel_custom_filters_option' );
-                if ( ! empty( $custom_filter ) && count( $custom_filter ) > 0 ) {
-                    $new_term_options = $custom_filter;
-                    foreach ( $custom_filter as $slug => $val ) {
-                        $term_id = isset( $val['term_id'] ) ? $val['term_id'] : 0;
-                        $term_name = isset( $val['label'] ) ? $val['label'] : '';
-                        if ( empty( $term_id ) && $term_id == 0 ) {
-                            $term_array = array(
-                                'slug'          => $slug,
-                                'description'   => '',
-                            );
-                            $term_res = wp_insert_term( $term_name, 'wp_travel_custom_filters', $term_array );
-                            if ( ! is_wp_error( $term_res ) && ! empty( $term_res ) ) { 
-                                $new_term_options[$slug]['term_id'] = isset( $term_res['term_id'] ) ? $term_res['term_id'] : 0;
-                            }
-                        }
-                    }
-                    update_option('wp_travel_custom_filters_option', $new_term_options );
-                }
+				 * migrate custom filter
+				 */
+				$custom_filter = get_option( 'wp_travel_custom_filters_option' );
+				if ( ! empty( $custom_filter ) && count( $custom_filter ) > 0 ) {
+					$new_term_options = $custom_filter;
+					foreach ( $custom_filter as $slug => $val ) {
+						$term_id   = isset( $val['term_id'] ) ? $val['term_id'] : 0;
+						$term_name = isset( $val['label'] ) ? $val['label'] : '';
+						if ( empty( $term_id ) && $term_id == 0 ) {
+							$term_array = array(
+								'slug'        => $slug,
+								'description' => '',
+							);
+							$term_res   = wp_insert_term( $term_name, 'wp_travel_custom_filters', $term_array );
+							if ( ! is_wp_error( $term_res ) && ! empty( $term_res ) ) {
+								$new_term_options[ $slug ]['term_id'] = isset( $term_res['term_id'] ) ? $term_res['term_id'] : 0;
+							}
+						}
+					}
+					update_option( 'wp_travel_custom_filters_option', $new_term_options );
+				}
 			}
 		}
 		return wp_send_json_success( 'success' );
