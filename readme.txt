@@ -247,10 +247,11 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
 
-= 6.6.0. =
+= 6.7.0. =
 Release Date: 27th April 2023
 
 Fixes:
+* Fixed serching by using wpml plugins.
 * Fixed serching by using wpml plugins.
 
 = 6.6.0. =
