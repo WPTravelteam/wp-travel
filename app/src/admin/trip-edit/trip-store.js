@@ -1,6 +1,6 @@
 import { registerStore } from '@wordpress/data';
 import apiFetch from '@wordpress/api-fetch';
-
+// console.log( '_wp_travel.wp_settings', _wp_travel.wp_settings.settings );
 const DEFAULT_STATE = () => {
     let initState = {
         // tripCode: `WT-CODE ${wpTravelLocalize.postID}`,
@@ -23,7 +23,8 @@ const DEFAULT_STATE = () => {
 
         // Additional states
         has_state_changes:false,
-        is_sending_request:true
+        is_sending_request:true,
+        settings : _wp_travel.wp_settings.settings
     };
 
     return initState;

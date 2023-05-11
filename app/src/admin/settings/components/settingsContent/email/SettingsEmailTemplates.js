@@ -56,7 +56,8 @@ const BookingEmailTemplates = () => {
     // }
     return <ErrorBoundary>
         <PanelBody title={__('Booking Email Templates', 'wp-travel')} initialOpen={true} >
-            <h4>{__('Admin Email Template Options', 'wp-travel')}</h4>
+            {applyFilters( 'wp_travel_email_template_content_after_send_email', [], allData ) }
+            <h3>{__('Admin Email Template Options', 'wp-travel')}</h3>
             <PanelRow>
                 <label>{__('Send Email', 'wp-travel')}</label>
                 <div className="wp-travel-field-value">
@@ -73,8 +74,6 @@ const BookingEmailTemplates = () => {
                     <p className="description">{__('Enable or disable Email notification to admin.', 'wp-travel')}</p>
                 </div>
             </PanelRow> 
-            {applyFilters( 'wp_travel_email_template_content_after_send_email', [], allData ) }
-
             {applyFilters('wp_travel_utils_booking_notif', [], allData)}
 
             <PanelRow>
@@ -127,7 +126,7 @@ const BookingEmailTemplates = () => {
 
 
 
-            <h4>{__('Client Email Template Options', 'wp-travel')}</h4>
+            <h3>{__('Client Email Template Options', 'wp-travel')}</h3>
             <PanelRow>
                 <label>{__('Booking Email Subject', 'wp-travel')}</label>
                 <div className="wp-travel-field-value">
@@ -193,7 +192,7 @@ const PaymentEmailTemplates = () => {
 
     return <>
         <PanelBody title={__('Payment Email Templates', 'wp-travel')} initialOpen={false} >
-            <h4>{__('Admin Email Template Options', 'wp-travel')}</h4>
+            <h3>{__('Admin Email Template Options', 'wp-travel')}</h3>
 
             {applyFilters('wp_travel_utils_payment_notif', [], allData)}
 
@@ -242,7 +241,7 @@ const PaymentEmailTemplates = () => {
 
 
 
-            <h4>{__('Client Email Template Options', 'wp-travel')}</h4>
+            <h3>{__('Client Email Template Options', 'wp-travel')}</h3>
             <PanelRow>
                 <label>{__('Payment Email Subject', 'wp-travel')}</label>
                 <div className="wp-travel-field-value">
@@ -306,7 +305,7 @@ const EnquiryEmailTemplates = () => {
 
     return <>
         <PanelBody title={__('Enquiry Email Templates', 'wp-travel')} initialOpen={false} >
-            <h4>{__('Admin Email Template Options', 'wp-travel')}</h4>
+            <h3>{__('Admin Email Template Options', 'wp-travel')}</h3>
 
             {applyFilters('wp_travel_utils_enquiry_notif', [], allData)}
 

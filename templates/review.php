@@ -34,23 +34,27 @@ $rating = intval( get_comment_meta( $comment->comment_ID, '_wp_travel_rating', t
 
 		<div class="comment-text">
 			<!-- since 6.2 -->
-			<?php if ( $settings['disable_admin_review'] == 'yes' ):
+			<?php
+			if ( $settings['disable_admin_review'] == 'yes' ) :
 
-				if ( get_user_by('login', $comment->comment_author) ) {
-					if ( in_array( get_user_by('login', $comment->comment_author)->roles[0], array( 'administrator', 'editor', 'author' )) ) { ?>
+				if ( get_user_by( 'login', $comment->comment_author ) ) {
+					if ( in_array( get_user_by( 'login', $comment->comment_author )->roles[0], array( 'administrator', 'editor', 'author' ) ) ) {
+						?>
 						<div class="wp-travel-admin-review">
 							<?php _e( 'Admin', 'wp-travel' ); ?>
 						</div>
-					<?php }else{
-					?>
+						<?php
+					} else {
+						?>
 						<div class="wp-travel-average-review" title="<?php echo sprintf( __( 'Rated %d out of 5', 'wp-travel' ), $rating ); ?>">
 							<a>
 							 <span style="width:<?php echo esc_attr( ( $rating / 5 ) * 100 ); ?>%"><strong><?php echo $rating; ?></strong> <?php _e( 'out of 5', 'wp-travel' ); ?></span>
 							</a>
 						</div>
-					<?php
+						<?php
 					}
-				}else{ ?>
+				} else {
+					?>
 					<div class="wp-travel-average-review" title="<?php echo sprintf( __( 'Rated %d out of 5', 'wp-travel' ), $rating ); ?>">
 						<a>
 						 <span style="width:<?php echo esc_attr( ( $rating / 5 ) * 100 ); ?>%"><strong><?php echo $rating; ?></strong> <?php _e( 'out of 5', 'wp-travel' ); ?></span>
@@ -58,7 +62,7 @@ $rating = intval( get_comment_meta( $comment->comment_ID, '_wp_travel_rating', t
 					</div>
 				<?php	} ?>
 				
-				<?php else: ?>
+				<?php else : ?>
 					<div class="wp-travel-average-review" title="<?php echo sprintf( __( 'Rated %d out of 5', 'wp-travel' ), $rating ); ?>">
 						<a>
 						 <span style="width:<?php echo esc_attr( ( $rating / 5 ) * 100 ); ?>%"><strong><?php echo $rating; ?></strong> <?php _e( 'out of 5', 'wp-travel' ); ?></span>
@@ -70,21 +74,22 @@ $rating = intval( get_comment_meta( $comment->comment_ID, '_wp_travel_rating', t
 
 			<?php if ( $comment->comment_approved == '0' ) : ?>
 
-				<p class="meta"><em><?php esc_html_e( 'Your comment is awaiting approval', 'wp-travel' ); ?></em></p>
+				<p class="meta"><em><?php esc_html_e( apply_filters( 'wp_travel_single_archive_comment_approve_message', 'Your comment is awaiting approval' ), 'wp-travel' ); ?></em></p>
 
 			<?php else : ?>
 
 				<p class="meta">
-					<strong><?php comment_author(); ?></strong>&ndash; <time datetime="<?php echo get_comment_date( 'c' ); ?>"><?php echo get_comment_date( get_option( 'date_format' ) ); ?></time>:
+					<strong><?php apply_Filters( 'wp_travel_single_archive_comment_author', comment_author() ); ?></strong>&ndash; <time datetime="<?php echo apply_filters( 'wp_travel_single_archive_comment_date', get_comment_date( 'c' ) ); ?>"><?php echo apply_filters( 'wp_travel_single_archive_comment_date_format', get_comment_date( get_option( 'date_format' ) ) ); ?></time>:
 				</p>
 
 			<?php endif; ?>
 
 			<?php do_action( 'wp_travel_review_before_comment_text', $comment ); ?>
 
-			<div class="description"><?php comment_text(); ?></div>
+			<div class="description"><?php apply_filters( 'wp_travel_single_archive_comment', comment_text() ); ?></div>
 			<div class="reply">
 			<?php
+			do_action( 'wp_travel_single_archive_after_comment_text', $comment, $rating );
 			// Reply Link.
 			$post_id = get_the_ID();
 			if ( ! comments_open( get_the_ID() ) ) {
@@ -99,7 +104,7 @@ $rating = intval( get_comment_meta( $comment->comment_ID, '_wp_travel_rating', t
 
 				$link = "<a class='comment-reply-link' href='" . esc_url( add_query_arg( 'replytocom', $comment->comment_ID ) ) . '#respond' . "' onclick='return addComment.moveForm(\"comment-$comment->comment_ID\", \"$comment->comment_ID\", \"respond\", \"$post_id\")'>" . esc_html( 'Reply', 'wp-travel' ) . '</a>';
 			}
-			echo $link;
+			echo apply_filters( 'wp_travel_comment_reply_link', $link );
 			?>
 			</div>
 			<?php do_action( 'wp_travel_review_after_comment_text', $comment ); ?>
