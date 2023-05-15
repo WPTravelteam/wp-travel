@@ -33,6 +33,7 @@ function wptravel_book_now() {
 	if ( ! count( $items ) ) {
 		return;
 	}
+	$discount_coupon_data = $wt_cart->get_discounts();
 	
 	// return 'not pax available';
 	if ( class_exists( 'WP_Travel_Util_Inventory' ) ) {
@@ -200,7 +201,11 @@ function wptravel_book_now() {
 		$booking_count     = ( isset( $booking_count ) && '' !== $booking_count ) ? $booking_count : 0;
 		$new_booking_count = $booking_count + 1;
 		update_post_meta( $trip_id, 'wp_travel_booking_count', sanitize_text_field( $new_booking_count ) );
-
+		/**
+		 * Coupon code and value store in booking
+		 * @since 6.7.0
+		 */
+		update_post_meta( $booking_id, 'wp_travel_applied_coupon_data', $discount_coupon_data );
 		/**
 		 * Add Support for invertory addon options.
 		 */

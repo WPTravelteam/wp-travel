@@ -1,5 +1,28 @@
 const changeLog = [
 	{
+		version: "6.7.0",
+		log: <p>
+				Release Date: 15th May 2023
+				<br/><br/>
+				Fixes: 
+				<br/>
+				* Fixed Type Error on the Price & Dates backend section.
+				<br/>
+				* Fixed Translation issue of gender with the Chinese language.
+				<br/>
+				* Fixed searching not working in multilingual sites while using WPML plugins.
+				<br/>
+				* Fixed translation issue under the booking tab (Select Date and Pricing Options for this trip in the Trip Options setting).
+				<br/><br/>
+				Enhancement:
+				<br/>
+				* WP Travel compatibility with Yoast ( For Internal link verification and Featured image).
+				<br/>
+				* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-7-0-release-note/ ).
+				<br/>
+			</p>
+	},
+	{
 		version: "6.6.0",
 		log: <p>
 				Release Date: 27th April 2023

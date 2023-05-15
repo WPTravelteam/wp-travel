@@ -55,9 +55,9 @@ const Pricings = ( {allData} ) => {
     const settings = useSelect((select) => {
         return select('WPTravel/TripEdit').getSettings()
     }, []);
-
+    // console.log( 'settings data', settings );
     const { pricing_type, pricings, has_extras, minimum_partial_payout_use_global, minimum_partial_payout_percent, highest_price } = allData;
-    const { options } = settings;
+    const { options } = typeof settings != 'undefined' && settings;
     const { updateTripPricing, addTripPricing, updateTripPrices, updateTripData } = dispatch('WPTravel/TripEdit');
 
     let tripPrices = 'undefined' != typeof pricings ? pricings : [];
@@ -92,7 +92,7 @@ const Pricings = ( {allData} ) => {
         <div className="wp-travel-trip-pricings">
             {applyFilters('wp_travel_before_pricings_options', [], allData)}
             {'multiple-price' === pricing_type && <>
-                {tripPrices.length > 0 ? <>
+                { typeof tripPrices != 'undefined' && tripPrices.length > 0 ? <>
                 
                     <Notice status="warning" isDismissible={false}>{__i18n.messages.pricing_message}</Notice>
                     <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addTripPrice()}>{__i18n.add_price }</Button></PanelRow>
@@ -249,7 +249,7 @@ const Pricings = ( {allData} ) => {
                     })}
                     </ReactSortable>
                     </ div>
-                {tripPrices.length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addTripPrice()}>{__i18n.add_price }</Button></PanelRow>}</>:<>
+                { typeof tripPrices != 'undefined' && tripPrices.length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addTripPrice()}>{__i18n.add_price }</Button></PanelRow>}</>:<>
                 <Notice isDismissible={false} actions={[{
                     'label': __i18n.add_price,
                     onClick:()=>{

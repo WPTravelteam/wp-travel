@@ -5,4 +5,36 @@
     background: whitesmoke;
     color: #aa0001;
     border-top: 1px solid #ddd;
+}
+.post-type-wp-travel-coupons {
+  .wp-travel-ui.wp-travel-ui-card.coupon-general {
+    .components-datetime {
+      .components-datetime__time-field {
+        .components-base-control.components-input-control.components-number-control{
+          &.components-datetime__time-field-hours-input,
+          &.components-datetime__time-field-minutes-input{
+          width: unset;
+          }
+        }
+      }
+    }
+    .wp-travel-field-value {
+      .components-base-control {
+        &.css-qy3gpb {
+          &.ej5x27r4 {
+            width: unset;
+          }
+        }
+      }
+      .components-dropdown {
+        .components-base-control {
+          &.css-qy3gpb {
+            &.ej5x27r4 {
+              width: 250px;
+            }
+          }
+        }
+      }
+    }
   }
+}

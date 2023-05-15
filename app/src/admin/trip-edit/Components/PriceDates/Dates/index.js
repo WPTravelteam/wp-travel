@@ -22,7 +22,7 @@ const Dates = ( {allData} ) => {
 
     const {is_fixed_departure, has_state_changes, is_multiple_dates, dates, trip_time, pricings, trip_duration } = allData;
 
-    let firstDate = dates.length>0?dates[0]:{
+    let firstDate = typeof dates != 'undefined' && dates.length > 0 ? dates[0] : {
         start_date:format('Y-m-d', new Date() ),
         end_date:''
     };

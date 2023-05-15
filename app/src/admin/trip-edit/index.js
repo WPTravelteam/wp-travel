@@ -5,6 +5,8 @@ import { applyFilters, addFilter } from "@wordpress/hooks";
 import { _n, __ } from "@wordpress/i18n";
 import domReady from "@wordpress/dom-ready";
 import ErrorBoundary from "../../ErrorBoundry/ErrorBoundry";
+import WpTravelSEOAnalysisEditorText from './yoast-seo-compatible/YoastSeo';
+
 
 import "./trip-store";
 
@@ -91,6 +93,29 @@ const WPTravelTripOptions = () => {
 
 		let tripCats = getTripPricingCategories();
 	}, []);
+	/**
+	 * Uses for analysis editor data using yoast seo plugin
+	 * create instance only on time by using useEffect
+	 * @version 6.7.0
+	 */
+	useEffect( () => {
+		if ( typeof YoastSEO !== "undefined" && typeof YoastSEO.app !== "undefined" ) {
+			new WpTravelSEOAnalysisEditorText( );
+		} else {
+			jQuery( window ).on(
+			"YoastSEO:ready",
+				function() {
+					new WpTravelSEOAnalysisEditorText( );
+				}
+			);
+		}
+	},[] );
+	/**
+	 * transfer real data in yoast seo analysis
+	 * @version 6.7
+	 */
+	WpTravelSEOAnalysisEditorText.changeAnalysisTextData( allData )
+
 	let wrapperClasses = "wp-travel-trip-pricings";
 	wrapperClasses = allData.is_sending_request
 		? wrapperClasses + " wp-travel-sending-request"

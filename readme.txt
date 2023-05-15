@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 6.0.0
 Tested up to: 6.2
 Requires PHP: 7.4
-Stable tag: 6.6.0
+Stable tag: 6.7.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -246,6 +246,19 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 6.7.0. =
+Release Date: 15th May 2023
+ 
+Fixes:
+* Fixed Type Error on the Price & Dates backend section.
+* Fixed Translation issue of gender with the Chinese language.
+* Fixed searching not working in multilingual sites while using WPML plugins.
+* Fixed translation issue under the booking tab (Select Date and Pricing Options for this trip in the Trip Options setting).
+  
+Enhancement:
+* WP Travel compatibility with Yoast ( For Internal link verification and Featured image).
+* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-7-0-release-note/ ). 
 
 = 6.6.0. =
 Release Date: 27th April 2023
