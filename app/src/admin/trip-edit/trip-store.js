@@ -1,8 +1,17 @@
 import { registerStore } from '@wordpress/data';
 import apiFetch from '@wordpress/api-fetch';
 // console.log( '_wp_travel.wp_settings', _wp_travel.wp_settings.settings );
+if ( typeof _wp_travel != 'undefined' && _wp_travel != null ) {
+    console.log( 'hfjsdhf' );
+} else {
+    console.log( 'not define ');
+}
 const DEFAULT_STATE = () => {
-    let initState = {
+    /**
+     * fixed _wp_travel undefine variable 
+     * also fixed price and date not show after refreshing or realoa
+     */
+    var initState = {
         // tripCode: `WT-CODE ${wpTravelLocalize.postID}`,
         content: '',
         excerpt: '',
@@ -24,8 +33,11 @@ const DEFAULT_STATE = () => {
         // Additional states
         has_state_changes:false,
         is_sending_request:true,
-        settings : _wp_travel.wp_settings.settings
+        // settings : _wp_travel.wp_settings.settings
     };
+    if ( typeof _wp_travel != 'undefined' && _wp_travel != null ) {
+        initState = {...initState, settings : _wp_travel.wp_settings.settings }
+    }
 
     return initState;
 }

@@ -248,11 +248,16 @@ Before updating plugin please check ["our latest release notes"](#developers).
 == Changelog ==
 
 = 6.7.0. =
-Release Date: 27th April 2023
-
+Release Date: 15th May 2023
+ 
 Fixes:
-* Fixed serching by using wpml plugins.
-* Fixed serching by using wpml plugins.
+* Fixed Type Error on Price & Dates backend section.
+* Fixed Translation issue of gender with the Chinese language.
+* Fixed searching not working in multilingual sites while using WPML plugins.
+ 
+Enhancement:
+* WP Travel should be compatible with Yoast ( Internal link verification, Featured image)
+* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-7-0-release-note/ ).
 
 = 6.6.0. =
 Release Date: 27th April 2023
