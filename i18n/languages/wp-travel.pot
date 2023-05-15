@@ -1172,6 +1172,10 @@ msgstr ""
 msgid "Select a Date to view available pricings and other options."
 msgstr ""
 
+#: core/helpers/strings.php:31
+msgid "Select Date and Pricing Options for this trip in the Trip Options setting."
+msgstr ""
+
 #: core/helpers/strings.php:220
 msgid "Clear All"
 msgstr ""

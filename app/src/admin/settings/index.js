@@ -317,7 +317,7 @@ const WPTravelSettings = () => {
                             <div ref={settingsRef} className="wp-travel-settings-section">
                                 {/* Render tab contents from the tabs object */}
                                 {tabs.map((tab) => (
-                                    <ErrorBoundary>
+                                    <ErrorBoundary key={`err-boundary-${tab.name}`}>
                                         {activeTab == tab.name &&
                                             tab.content &&
                                             isValidElement(<tab.content />) &&
@@ -337,6 +337,59 @@ const WPTravelSettings = () => {
             </div>
         </>
     );
+};
+
+/**
+ * remove network error
+ * @since 6.7.0
+ */
+const WPTravelNetworkSettings = () => {
+    const settingsData = useSelect((select) => {
+        return select('WPTravel/Admin').getSettings()
+    }, []);
+    
+    const allData = useSelect((select) => {
+        return select('WPTravel/Admin').getAllStore()
+    }, []);
+    
+    const {options}= allData
+   
+    let wrapperClasses = "wp-travel-block-tabs-wrapper wp-travel-trip-settings";
+    wrapperClasses = allData.is_sending_request ? wrapperClasses + ' wp-travel-sending-request' : wrapperClasses;
+
+    // Add filter to tabs.
+    let tabs = applyFilters('wp_travel_network_settings_tabs', [
+        {
+            name: 'license',
+            title: __('License', 'wp-travel'),
+            className: 'tab-license',
+            content: SettingsLicense
+        }
+        
+    ], allData );
+    return <div className={wrapperClasses}>
+        {allData.is_sending_request && <Spinner />}
+        <SaveSettings position="top" />
+        <TabPanel className="wp-travel-block-tabs"
+            activeClass="active-tab"
+            onSelect={() => false}
+            tabs={tabs}>
+            {
+                (tab) =><ErrorBoundary>
+                    { tab.content && isValidElement( <tab.content /> ) ? <tab.content /> : ''} {/* Need to remove this latter. add all content with filter instead */}
+                    {applyFilters(
+                        `wptravel_settings_tab_content_${tab.name.replaceAll(
+                            "-",
+                            "_"
+                        )}`,
+                        [],
+                        allData
+                    )}
+                </ErrorBoundary>
+            }
+        </TabPanel>
+        <SaveSettings position="bottom" />
+    </div>
 };
 
 const SettingsDownloadsTemp = () => {
@@ -600,5 +653,14 @@ domReady(function () {
             <WPTravelSettings />,
             document.getElementById("wp-travel-settings-block")
         );
+    }
+});
+/**
+ * Rendering network 
+ * @since 6.7.0
+ */
+domReady(function () {
+    if ('undefined' !== typeof document.getElementById('wp-travel-network-settings-block') && null !== document.getElementById('wp-travel-network-settings-block')) {
+        render(<WPTravelNetworkSettings />, document.getElementById('wp-travel-network-settings-block'));
     }
 });

@@ -190,6 +190,7 @@ class WpTravel_Localize_Admin {
 			'wpml_label'				=> __( 'WPML Migrations', 'wp-travel' ),
 			'wpml_btn_label'			=> __( 'Migrate', 'wp-travel' ),
 			'diable_wpml_text'			=> __( 'Please save setting before migrate.', 'wp-travel' ),
+			'wp_settings'			 => WP_Travel_Helpers_Settings::get_settings(),
 		);
 
 		// trip edit page.

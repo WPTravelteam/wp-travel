@@ -60,6 +60,7 @@ export default memo((props) => {
                                                 tab.className == "tab-general" && (
                                                     <div
                                                         id={`wp-travel-tab-${tab.name}`}
+                                                        key={`wp-travel-tab-${tab.name}`}
                                                         className={`wp-travel-secondary-tab ${activeTab == tab.name ? "is-active" : ""
                                                             }`}
                                                         onClick={() => handleTabClick(tab.name)}
@@ -96,6 +97,7 @@ export default memo((props) => {
                                             (tab) =>
                                                 tab.className == "tab-trip" && (
                                                     <div
+                                                        key={`wp-travel-tab-${tab.name}`}
                                                         className={`wp-travel-secondary-tab ${activeTab == tab.name ? "is-active" : ""
                                                             }`}
                                                         onClick={() => handleTabClick(tab.name)}
@@ -132,6 +134,7 @@ export default memo((props) => {
                                             (tab) =>
                                                 tab.className == "tab-email" && (
                                                     <div
+                                                        key={`wp-travel-tab-${tab.name}`}
                                                         className={`wp-travel-secondary-tab ${activeTab == tab.name ? "is-active" : ""
                                                             }`}
                                                         onClick={() => handleTabClick(tab.name)}
@@ -168,6 +171,7 @@ export default memo((props) => {
                                             (tab) =>
                                                 tab.className == "tab-account" && (
                                                     <div
+                                                        key={`wp-travel-tab-${tab.name}`}
                                                         className={`wp-travel-secondary-tab ${activeTab == tab.name ? "is-active" : ""
                                                             }`}
                                                         onClick={() => handleTabClick(tab.name)}
@@ -204,6 +208,7 @@ export default memo((props) => {
                                             (tab) =>
                                                 tab.className == "tab-checkout" && (
                                                     <div
+                                                        key={`wp-travel-tab-${tab.name}`}
                                                         className={`wp-travel-secondary-tab ${activeTab == tab.name ? "is-active" : ""
                                                             }`}
                                                         onClick={() => handleTabClick(tab.name)}
@@ -240,6 +245,7 @@ export default memo((props) => {
                                             (tab) =>
                                                 tab.className == "tab-payment" && (
                                                     <div
+                                                        key={`wp-travel-tab-${tab.name}`}
                                                         className={`wp-travel-secondary-tab ${activeTab == tab.name ? "is-active" : ""
                                                             }`}
                                                         onClick={() => handleTabClick(tab.name)}
@@ -276,6 +282,7 @@ export default memo((props) => {
                                             (tab) =>
                                                 tab.className == "tab-invoice" && (
                                                     <div
+                                                        key={`wp-travel-tab-${tab.name}`}
                                                         className={`wp-travel-secondary-tab ${activeTab == tab.name ? "is-active" : ""
                                                             }`}
                                                         onClick={() => handleTabClick(tab.name)}
@@ -312,6 +319,7 @@ export default memo((props) => {
                                             (tab) =>
                                                 tab.className == "tab-misc" && (
                                                     <div
+                                                        key={`wp-travel-tab-${tab.name}`}
                                                         className={`wp-travel-secondary-tab ${activeTab == tab.name ? "is-active" : ""
                                                             }`}
                                                         onClick={() => handleTabClick(tab.name)}
@@ -348,6 +356,7 @@ export default memo((props) => {
                                             (tab) => (
                                                 tab.className == "tab-advanced" && (
                                                     <div
+                                                        key={`wp-travel-tab-${tab.name}`}
                                                         className={`wp-travel-secondary-tab ${activeTab == tab.name ? "is-active" : ""
                                                             }`}
                                                         onClick={() => handleTabClick(tab.name)}

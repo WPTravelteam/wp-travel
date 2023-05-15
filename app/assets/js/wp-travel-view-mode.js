@@ -9,7 +9,7 @@ jQuery(document).ready(function($) {
         if ( window.location.search ) {
             query_string = window.location.search;
         }
-        var full_url       = new URL( pathname + query_string );
+        var full_url       = new URL( pathname );
         var search_params  = full_url.searchParams;
 
         $('.wp_travel_input_filters').each(function() {

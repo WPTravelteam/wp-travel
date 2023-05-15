@@ -91,10 +91,17 @@ class WP_Travel_Ajax_Trips {
 			$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_PERMISSION' );
 			WP_Travel_Helpers_REST_API::response( $error );
 		}
-
-		$post_data = json_decode( file_get_contents( 'php://input' ), true ); // Added 2nd Parameter to resolve issue with objects.
-		$post_data = wptravel_sanitize_array( $post_data, true );
-		$response  = WP_Travel_Helpers_Trips::update_trip( $trip_id, $post_data );
+		
+		/**
+		 * solve json get error
+		 */
+		$post_data = file_get_contents( 'php://input' ); // Added 2nd Parameter to resolve issue with objects.
+		$post_data = is_string( $post_data ) ? json_decode( $post_data, true ) : $post_data;
+		$new_post_data = is_string( $post_data  ) ? json_decode( $post_data, true ) : $post_data;
+		$new_post_data = wptravel_sanitize_array( $new_post_data, true );
+		$response  = WP_Travel_Helpers_Trips::update_trip( $trip_id, $new_post_data );
+		// $post_data = wptravel_sanitize_array( $post_data, true );
+		// $response  = WP_Travel_Helpers_Trips::update_trip( $trip_id, $post_data );
 		WP_Travel_Helpers_REST_API::response( $response );
 	}
 

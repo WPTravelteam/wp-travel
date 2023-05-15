@@ -54,7 +54,7 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
     }
 
     return <ErrorBoundary>
-        {dates.length > 0 && <>
+        { typeof dates != 'undefined' && dates.length > 0 && <>
             <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addTripDate()}>{__i18n.add_date}</Button></PanelRow>
             {dates.map((_date, _dateIndex) => {
 
@@ -72,7 +72,7 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
                 })
 
                 let pricingSuggestions = []
-                if (pricings.length > 0) {
+                if ( typeof pricings != 'undefined' && pricings.length > 0) {
                     pricingSuggestions = pricings.map(pricing => {
                         return { id: pricing.id, title: pricing.title }
                     })
@@ -284,9 +284,9 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
 
                 </PanelBody>
             })}
-            {dates.length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addTripDate()}>{__i18n.add_date}</Button></PanelRow>}
+            {typeof dates != 'undefined' && dates.length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addTripDate()}>{__i18n.add_date}</Button></PanelRow>}
         </>}
-        {dates.length < 1 && 
+        { typeof dates != 'undefined' && dates.length < 1 && 
             <Notice isDismissible={false} actions={[{
                 'label': __i18n.add_date,
                 onClick: () => {

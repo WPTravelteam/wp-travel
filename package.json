@@ -1,6 +1,6 @@
 {
   "name": "wp-travel",
-  "version": "6.6.0",
+  "version": "6.7.0",
   "description": "Travel plugin for WordPress",
   "main": "index.js",
   "scripts": {
@@ -65,7 +65,8 @@
     "sass-loader": "^12.1.0",
     "state-pool": "^0.9.0",
     "style-loader": "^3.2.1",
-    "url-loader": "^4.1.1"
+    "url-loader": "^4.1.1",
+    "yoastseo": "^1.91.2"
   },
   "dependencies": {
     "@wordpress/block-editor": "^7.0.2",
