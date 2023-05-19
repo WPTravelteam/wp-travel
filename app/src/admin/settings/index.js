@@ -28,6 +28,7 @@ import SettingsGeneralEmail from "./components/settingsContent/email/SettingsGen
 import SettingsAccount from "./components/settingsContent/account/SettingsAccount";
 import SettingsCheckout from "./components/settingsContent/checkout/SettingsCheckout";
 import SettingsPayment from "./components/settingsContent/payment/SettingsPayment";
+import SettingsConditionalPayment from "./components/settingsContent/payment/SettingsConditionalPayment";
 import SettingsInvoice from "./components/settingsContent/invoice/SettingsInvoice";
 import SettingsMisc from "./components/settingsContent/misc/SettingsMisc";
 import SettingsAdvancedGallery from "./components/settingsContent/misc/SettingsAdvancedGallery";
@@ -189,6 +190,12 @@ const WPTravelSettings = () => {
                 title: __("Payment", "wp-travel"),
                 className: "tab-payment",
                 content: SettingsPayment,
+            },
+            {
+                name: "conditional-payment",
+                title: __("Conditional Payment", "wp-travel"),
+                className: "tab-payment",
+                content: SettingsConditionalPayment,
             },
             {
                 name: "invoice",

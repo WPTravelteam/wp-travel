@@ -163,10 +163,12 @@ function wptravel_settings_default_fields() {
 
 		// @since 6.2.0 - PWA
 		'enable_pwa'                    		=> 'no',
+		'enableasdasd_pwa'                    		=> 'no',
 		'pwa_app_name'                    		=> __( 'WP Travel', 'wp-travel' ),
 		'pwa_app_short_name'                    => __( 'WPTVL', 'wp-travel' ),
 		'pwa_app_start_url'                    	=> home_url(),
-		'pwa_app_logo'                    		=>  plugin_dir_url( __FILE__ ) . 'assets/images/logo1.png',
+		'pwa_app_logo'                    		=>  plugin_dir_url( __FILE__ ) . 'assets/images/logo1.png',		
+		
 	);
 
 	$user_since = get_option( 'wp_travel_user_since' );
@@ -4449,3 +4451,4 @@ function wptravel_nocache_headers() {
 	WP_Travel_Helpers_Cache::set_nocache_constants();
 	nocache_headers();
 }
+

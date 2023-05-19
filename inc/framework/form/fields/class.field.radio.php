@@ -13,7 +13,7 @@ class WP_Travel_FW_Field_Radio {
 		return $this;
 	}
 
-	function render( $display = true ) {
+	function render( $display = true, $trip_id ) {
 		$validations = '';
 		if ( isset( $this->field['validations'] ) ) {
 			foreach ( $this->field['validations'] as $key => $attr ) {
@@ -35,7 +35,53 @@ class WP_Travel_FW_Field_Radio {
 					$this->field['options'] = $mapped_options;
 				}
 			}
-			foreach ( $this->field['options'] as $key => $value ) {
+
+			$payment_gateways = $this->field['options'];
+			$payment = $payment_gateways;
+			$by_billing_address = '';
+			if ( class_exists('WP_Travel_Pro') && wptravel_get_settings()['enable_conditional_payment'] == 'yes' ){
+
+				if ( wptravel_get_settings()['enable_CP_by_billing_address'] == 'yes' ){
+					return;
+				}
+				// die;
+				
+				$trip_location = wp_get_post_terms( $trip_id[array_key_first($trip_id)]['trip_id'], 'travel_locations', array( 'fields' => 'all' ) )[0]->slug;
+				
+				add_action('wp_enqueue_scripts', function(){
+					wp_localize_script( 'wp-travel-script', '_wp_travel_conditional_payment_list', wptravel_get_settings()['conditional_payment_list'] );
+					wp_localize_script( 'wp-travel-script', '_wp_travel_trip_location', $trip_location );
+				});
+
+				$conditional_payment = array();
+				foreach( wptravel_get_settings()['conditional_payment_list'] as $value ){
+
+					if( array_key_exists( $trip_location, $conditional_payment ) ){
+						array_push( $conditional_payment[$trip_location], $value['payment_gateway'] );
+					}else{
+						$conditional_payment[$value['trip_location']] = array( $value['payment_gateway'] );
+					}					
+					$by_billing_address = $value['enable_CP_by_billing_address'];
+				}
+
+				if( array_key_exists( $trip_location, $conditional_payment )  ){
+					$payment_list = array();
+	
+					$conditional_payment = $conditional_payment[ $trip_location ];
+	
+					foreach( $conditional_payment as $value ){
+						$payment_list[$value] = isset( $payment_gateways[$value] ) ? $payment_gateways[$value] : '';
+					}
+	
+					$payment = $payment_list;
+	
+				}else{
+					$payment = $payment_gateways;
+				}
+			}
+
+			
+			foreach ( $payment as $key => $value ) {
 
 				// Option Attributes.
 				$option_attributes = '';
@@ -62,6 +108,7 @@ class WP_Travel_FW_Field_Radio {
 		}
 		// $output .= sprintf( '</select>' );
 
+		
 		if ( ! $display ) {
 			return $output;
 		}

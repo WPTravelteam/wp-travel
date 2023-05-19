@@ -120,13 +120,13 @@ class WP_Travel_FW_Field {
 		return $field_classes;
 	}
 
-	private function process() {
+	private function process( $trip_id ) {
 		$output = '';
 		if ( ! empty( $this->fields ) ) {
 			foreach ( $this->fields as $field ) {
 				$field = $this->verify_arguments( $field );
 				if ( $field ) {
-					$content = $this->process_single( $field );
+					$content = $this->process_single( $field, $trip_id  );
 					$output .= ( in_array( $field['type'], array( 'hidden', 'heading' ), true ) ) ? $content : $this->template( $field, $content );
 				}
 			}
@@ -154,22 +154,22 @@ class WP_Travel_FW_Field {
 		return $content;
 	}
 
-	function render() {
-		echo $this->process();
+	function render( $trip_id ) {
+		echo $this->process( $trip_id );
 	}
 
 	function render_input( $field ) {
 		if ( ! $field ) {
 			return;
 		}
-		echo $this->process_single( $field );
+		echo $this->process_single( $field, $trip_id );
 	}
 
-	private function process_single( $field ) {
+	private function process_single( $field, $trip_id  ) {
 		$field = $this->verify_arguments( $field );
 		if ( $field ) {
 			$field_init = new $this->field_types[ $field['type'] ]();
-			return $field_init->init( $field )->render( false );
+			return $field_init->init( $field )->render( false, $trip_id );
 		}
 		return;
 	}

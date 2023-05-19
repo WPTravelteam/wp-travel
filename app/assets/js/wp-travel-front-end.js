@@ -1,98 +1,85 @@
-/**
- * =========================
- * detecting sticky
- * =========================
- */
-//  jQuery(document).ready(function($) {
-    /** Original code is this but due to minification problem of es6 code .. this is converted to es5 code.  starts here */
-        // const el = document.querySelector(".wti__nav-tabs")
-        // const observer = new IntersectionObserver( 
-        // ([e]) => e.target.classList.toggle("sticky-mode", e.intersectionRatio < 1),
-        // { threshold: [1] }
-        // );
-        // observer.observe(el);
-    /** End here */
-//     function wpTravelInteractionObserver() {
-//         function _slicedToArray(arr, i) {
-//             return (
-//                 _arrayWithHoles(arr) ||
-//                 _iterableToArrayLimit(arr, i) ||
-//                 _unsupportedIterableToArray(arr, i) ||
-//                 _nonIterableRest()
-//             );
-//         }
-//         function _nonIterableRest() {
-//             throw new TypeError(
-//                 "Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."
-//             );
-//         }
-//         function _unsupportedIterableToArray(o, minLen) {
-//             if (!o) return;
-//             if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-//             var n = Object.prototype.toString.call(o).slice(8, -1);
-//             if (n === "Object" && o.constructor) n = o.constructor.name;
-//             if (n === "Map" || n === "Set") return Array.from(o);
-//             if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
-//                 return _arrayLikeToArray(o, minLen);
-//         }
-//         function _arrayLikeToArray(arr, len) {
-//             if (len == null || len > arr.length) len = arr.length;
-//             for (var i = 0, arr2 = new Array(len); i < len; i++) {
-//                 arr2[i] = arr[i];
-//             }
-//             return arr2;
-//         }
-//         function _iterableToArrayLimit(arr, i) {
-//             if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr)))
-//                 return;
-//             var _arr = [];
-//             var _n = true;
-//             var _d = false;
-//             var _e = undefined;
-//             try {
-//                 for (
-//                     var _i = arr[Symbol.iterator](), _s;
-//                     !(_n = (_s = _i.next()).done);
-//                     _n = true
-//                 ) {
-//                     _arr.push(_s.value);
-//                     if (i && _arr.length === i) break;
-//                 }
-//             } catch (err) {
-//                 _d = true;
-//                 _e = err;
-//             } finally {
-//                 try {
-//                     if (!_n && _i["return"] != null) _i["return"]();
-//                 } finally {
-//                     if (_d) throw _e;
-//                 }
-//             }
-//             return _arr;
-//         }
-//         function _arrayWithHoles(arr) {
-//             if (Array.isArray(arr)) return arr;
-//         }
-//         var el = document.querySelector(".wti__nav-tabs");
-//         var observer = new IntersectionObserver(
-//             function (_ref) {
-//                 var _ref2 = _slicedToArray(_ref, 1),
-//                     e = _ref2[0];
-//                 return e.target.classList.toggle("sticky-mode", e.intersectionRatio < 1);
-//             },
-//             {
-//                 threshold: [1]
-//             }
-//         );
-//         observer.observe(el);
-//     }
-//     wpTravelInteractionObserver();
-// });
-/**
- * =========================
- * detecting sticky end
- * =========================
- */
+if( ( _wp_travel_check_for_pro == true ) && ( _wp_travel_check_cp_by_billing == 'yes' ) ){
+    jQuery(function ($) {
+        $( '#wp-travel-country' ).change( function(){
+            for (const key in _wp_travel_conditional_payment_list) {
+                if( _wp_travel_conditional_payment_list[key].billing_address == this.value ){
+                    if( _wp_travel_conditional_payment_list[key].payment_gateway == 'paypal' ){
+                        $( '.wp-travel-radio-group.wp-travel-payment-field .wp-travel-radio' ).remove();
+                        $(".wp-travel-radio-group.wp-travel-payment-field").append("<div class='wp-travel-radio'><input type='radio' id='wp-travel-payment-paypal' name='wp_travel_payment_gateway' value='paypal' data-parsley-required='1' required='1' data-parsley-errors-container='#error_container-wp-travel-payment-gateway' data-parsley-multiple='wp_travel_payment_gateway' checked><label for='wp-travel-payment-paypal' class='radio-checkbox-label'>Standard Paypal</label></div>");
+                    }
+    
+                    if( _wp_travel_conditional_payment_list[key].payment_gateway == 'instamojo_checkout' ){
+                        $( '.wp-travel-radio-group.wp-travel-payment-field .wp-travel-radio' ).remove();
+                        $(".wp-travel-radio-group.wp-travel-payment-field").append("<div class='wp-travel-radio'><input type='radio' id='wp-travel-payment-instamojo_checkout' name='wp_travel_payment_gateway' value='instamojo_checkout' data-parsley-required='1' required='1' data-parsley-errors-container='#error_container-wp-travel-payment-gateway' data-parsley-multiple='wp_travel_payment_gateway' checked><label for='wp-travel-payment-instamojo_checkout' class='radio-checkbox-label'>Instamojo</label></div>");
+                    }
+    
+                    if( _wp_travel_conditional_payment_list[key].payment_gateway == 'bank_deposit' ){
+                        $( '.wp-travel-radio-group.wp-travel-payment-field .wp-travel-radio' ).remove();
+                        $(".wp-travel-radio-group.wp-travel-payment-field").append("<div class='wp-travel-radio'><input type='radio' id='wp-travel-payment-bank_deposit' name='wp_travel_payment_gateway' value='bank_deposit' data-parsley-required='1' required='1' data-parsley-errors-container='#error_container-wp-travel-payment-gateway' data-parsley-multiple='wp_travel_payment_gateway' checked><label for='wp-travel-payment-bank_deposit' class='radio-checkbox-label'>Bank Deposite</label></div>");
+                    }
+    
+                    if( _wp_travel_conditional_payment_list[key].payment_gateway == 'khalti' ){
+                        $( '.wp-travel-radio-group.wp-travel-payment-field .wp-travel-radio' ).remove();
+                        $(".wp-travel-radio-group.wp-travel-payment-field").append("<div class='wp-travel-radio'><input type='radio' id='wp-travel-payment-khalti' name='wp_travel_payment_gateway' value='khalti' data-parsley-required='1' required='1' data-parsley-errors-container='#error_container-wp-travel-payment-gateway' data-parsley-multiple='wp_travel_payment_gateway' checked><label for='wp-travel-payment-khalti' class='radio-checkbox-label'>Khalti</label></div>");
+                    }
+    
+                    if( _wp_travel_conditional_payment_list[key].payment_gateway == 'payu' ){
+                        $( '.wp-travel-radio-group.wp-travel-payment-field .wp-travel-radio' ).remove();
+                        $(".wp-travel-radio-group.wp-travel-payment-field").append("<div class='wp-travel-radio'><input type='radio' id='wp-travel-payment-payu' name='wp_travel_payment_gateway' value='payu' data-parsley-required='1' required='1' data-parsley-errors-container='#error_container-wp-travel-payment-gateway' data-parsley-multiple='wp_travel_payment_gateway' checked><label for='wp-travel-payment-payu' class='radio-checkbox-label'>Payu</label></div>");
+                    }
+    
+                    if( _wp_travel_conditional_payment_list[key].payment_gateway == 'payu_latam' ){
+                        $( '.wp-travel-radio-group.wp-travel-payment-field .wp-travel-radio' ).remove();
+                        $(".wp-travel-radio-group.wp-travel-payment-field").append("<div class='wp-travel-radio'><input type='radio' id='wp-travel-payment-payu_latam' name='wp_travel_payment_gateway' value='payu_latam' data-parsley-required='1' required='1' data-parsley-errors-container='#error_container-wp-travel-payment-gateway' data-parsley-multiple='wp_travel_payment_gateway' checked><label for='wp-travel-payment-payu_latam' class='radio-checkbox-label'>Payu Latam</label></div>");
+                    }
+    
+                    if( _wp_travel_conditional_payment_list[key].payment_gateway == 'payfast' ){
+                        $( '.wp-travel-radio-group.wp-travel-payment-field .wp-travel-radio' ).remove();
+                        $(".wp-travel-radio-group.wp-travel-payment-field").append("<div class='wp-travel-radio'><input type='radio' id='wp-travel-payment-payfast' name='wp_travel_payment_gateway' value='payfast' data-parsley-required='1' required='1' data-parsley-errors-container='#error_container-wp-travel-payment-gateway' data-parsley-multiple='wp_travel_payment_gateway' checked><label for='wp-travel-payment-payfast' class='radio-checkbox-label'>Payfast</label></div>");
+                    }
+    
+                    if( _wp_travel_conditional_payment_list[key].payment_gateway == 'payhere' ){
+                        $( '.wp-travel-radio-group.wp-travel-payment-field .wp-travel-radio' ).remove();
+                        $(".wp-travel-radio-group.wp-travel-payment-field").append("<div class='wp-travel-radio'><input type='radio' id='wp-travel-payment-payhere' name='wp_travel_payment_gateway' value='payhere' data-parsley-required='1' required='1' data-parsley-errors-container='#error_container-wp-travel-payment-gateway' data-parsley-multiple='wp_travel_payment_gateway' checked><label for='wp-travel-payment-payhere' class='radio-checkbox-label'>Payhere</label></div>");
+                    }
+    
+                    if( _wp_travel_conditional_payment_list[key].payment_gateway == 'express_checkout' ){
+                        $( '.wp-travel-radio-group.wp-travel-payment-field .wp-travel-radio' ).remove();
+                        $(".wp-travel-radio-group.wp-travel-payment-field").append("<div class='wp-travel-radio'><input type='radio' id='wp-travel-payment-express_checkout' name='wp_travel_payment_gateway' value='express_checkout' data-parsley-required='1' required='1' data-parsley-errors-container='#error_container-wp-travel-payment-gateway' data-parsley-multiple='wp_travel_payment_gateway' checked><label for='wp-travel-payment-express_checkout' class='radio-checkbox-label'>Paypal Express Checkout</label></div>");
+                    }
+    
+                    if( _wp_travel_conditional_payment_list[key].payment_gateway == 'paystack' ){
+                        $( '.wp-travel-radio-group.wp-travel-payment-field .wp-travel-radio' ).remove();
+                        $(".wp-travel-radio-group.wp-travel-payment-field").append("<div class='wp-travel-radio'><input type='radio' id='wp-travel-payment-paystack' name='wp_travel_payment_gateway' value='paystack' data-parsley-required='1' required='1' data-parsley-errors-container='#error_container-wp-travel-payment-gateway' data-parsley-multiple='wp_travel_payment_gateway' checked><label for='wp-travel-payment-paystack' class='radio-checkbox-label'>Paystack</label></div>");
+                    }
+    
+                    if( _wp_travel_conditional_payment_list[key].payment_gateway == 'razorpay_checkout' ){
+                        $( '.wp-travel-radio-group.wp-travel-payment-field .wp-travel-radio' ).remove();
+                        $(".wp-travel-radio-group.wp-travel-payment-field").append("<div class='wp-travel-radio'><input type='radio' id='wp-travel-payment-razorpay_checkout' name='wp_travel_payment_gateway' value='razorpay_checkout' data-parsley-required='1' required='1' data-parsley-errors-container='#error_container-wp-travel-payment-gateway' data-parsley-multiple='wp_travel_payment_gateway' checked><label for='wp-travel-payment-razorpay_checkout' class='radio-checkbox-label'>Razorpay</label></div>");
+                    }
+    
+                    if( _wp_travel_conditional_payment_list[key].payment_gateway == 'squareup_checkout' ){
+                        $( '.wp-travel-radio-group.wp-travel-payment-field .wp-travel-radio' ).remove();
+                        $(".wp-travel-radio-group.wp-travel-payment-field").append("<div class='wp-travel-radio'><input type='radio' id='wp-travel-payment-squareup_checkout' name='wp_travel_payment_gateway' value='squareup_checkout' data-parsley-required='1' required='1' data-parsley-errors-container='#error_container-wp-travel-payment-gateway' data-parsley-multiple='wp_travel_payment_gateway' checked><label for='wp-travel-payment-squareup_checkout' class='radio-checkbox-label'>Squareup</label></div>");
+                    }
+    
+                    if( _wp_travel_conditional_payment_list[key].payment_gateway == 'stripe' ){
+                        $( '.wp-travel-radio-group.wp-travel-payment-field .wp-travel-radio' ).remove();
+                        $(".wp-travel-radio-group.wp-travel-payment-field").append("<div class='wp-travel-radio'><input type='radio' id='wp-travel-payment-stripe' name='wp_travel_payment_gateway' value='stripe' data-parsley-required='1' required='1' data-parsley-errors-container='#error_container-wp-travel-payment-gateway' data-parsley-multiple='wp_travel_payment_gateway' checked><label for='wp-travel-payment-stripe' class='radio-checkbox-label'>Stripe</label></div>");
+                    }
+    
+                    if( _wp_travel_conditional_payment_list[key].payment_gateway == 'stripe_ideal' ){
+                        $( '.wp-travel-radio-group.wp-travel-payment-field .wp-travel-radio' ).remove();
+                        $(".wp-travel-radio-group.wp-travel-payment-field").append("<div class='wp-travel-radio'><input type='radio' id='wp-travel-payment-stripe_ideal' name='wp_travel_payment_gateway' value='stripe_ideal' data-parsley-required='1' required='1' data-parsley-errors-container='#error_container-wp-travel-payment-gateway' data-parsley-multiple='wp_travel_payment_gateway' checked><label for='wp-travel-payment-stripe_ideal' class='radio-checkbox-label'>Stripe Ideal</label></div>");
+                    }
+    
+                }
+            }
+        });
+    });
+}
+
+
 jQuery(function ($) {
 
     if ($('.wp-travel-error').length > 0) {
