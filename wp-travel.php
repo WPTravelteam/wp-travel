@@ -843,4 +843,3 @@ function wptravel() {
 // Start WP Travel.
 wptravel();
 
-
