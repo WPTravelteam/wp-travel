@@ -157,7 +157,7 @@ $wptravel_form_fw->init_validation( 'wp-travel-booking' );
 															}
 														}
 
-														$wptravel_form_field->init( array( $wptravel_field ) )->render();
+														$wptravel_form_field->init( array( $wptravel_field ) )->render( $wptravel_trip_id );
 													}
 												endforeach;
 											}

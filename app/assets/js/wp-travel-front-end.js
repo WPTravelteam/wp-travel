@@ -1,3 +1,4 @@
+
 if( ( _wp_travel_check_for_pro == true ) && ( _wp_travel_check_cp_by_billing == 'yes' ) ){
     jQuery(function ($) {
         $( '#wp-travel-country' ).change( function(){

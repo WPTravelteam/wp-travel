@@ -349,7 +349,7 @@ function wptravel_marketplace_page() {
 						</circle>
 					</svg>
 					<div style="text-align: center; margin-top: 10px;">
-						<?php echo __( 'Installing Theme...' ) ?>
+						<?php echo __( 'Installing Theme...', 'wp-travel' ) ?>
 					</div>
 				</div>
 				<div id="wptravel-market-content">
