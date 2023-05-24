@@ -1,5 +1,4 @@
-
-if( ( _wp_travel_check_for_pro == true ) && ( _wp_travel_check_cp_by_billing == 'yes' ) ){
+if( ( typeof _wp_travel_check_for_pro  != 'undefined' && _wp_travel_check_for_pro.is_enable == '1' ) && ( typeof _wp_travel_check_cp_by_billing != 'undefined' && _wp_travel_check_cp_by_billing.is_enable == 'yes' ) ){ 
     jQuery(function ($) {
         $( '#wp-travel-country' ).change( function(){
             for (const key in _wp_travel_conditional_payment_list) {
@@ -18,7 +17,6 @@ if( ( _wp_travel_check_for_pro == true ) && ( _wp_travel_check_cp_by_billing == 
                         $( '.wp-travel-radio-group.wp-travel-payment-field .wp-travel-radio' ).remove();
                         $(".wp-travel-radio-group.wp-travel-payment-field").append("<div class='wp-travel-radio'><input type='radio' id='wp-travel-payment-bank_deposit' name='wp_travel_payment_gateway' value='bank_deposit' data-parsley-required='1' required='1' data-parsley-errors-container='#error_container-wp-travel-payment-gateway' data-parsley-multiple='wp_travel_payment_gateway' checked><label for='wp-travel-payment-bank_deposit' class='radio-checkbox-label'>Bank Deposite</label></div>");
                     }
-    
                     if( _wp_travel_conditional_payment_list[key].payment_gateway == 'khalti' ){
                         $( '.wp-travel-radio-group.wp-travel-payment-field .wp-travel-radio' ).remove();
                         $(".wp-travel-radio-group.wp-travel-payment-field").append("<div class='wp-travel-radio'><input type='radio' id='wp-travel-payment-khalti' name='wp_travel_payment_gateway' value='khalti' data-parsley-required='1' required='1' data-parsley-errors-container='#error_container-wp-travel-payment-gateway' data-parsley-multiple='wp_travel_payment_gateway' checked><label for='wp-travel-payment-khalti' class='radio-checkbox-label'>Khalti</label></div>");

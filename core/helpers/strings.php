@@ -190,6 +190,9 @@ class WpTravel_Helpers_Strings {
 			'enter_your_email'          => __( 'Enter your email', 'wp-travel' ),
 			'enquiry_message'           => __( 'Enquiry Message', 'wp-travel' ),
 			'enter_your_enquiry'        => __( 'Enter your enquiry...', 'wp-travel' ),
+			'arrival_departure'			=> apply_filters( 'wp_travel_trip_duration_arrival_time', true ),
+			'arrival_time'				=> __( apply_filters( 'wp_travel_arrival_time', 'Arrival Time' ), 'wp-travel' ),
+			'departure_time'			=> __( apply_filters( 'wp_travel_departure_time', 'Departure Time' ), 'wp-travel' ),
 		);
 
 		$localized_strings['price_per_labels'] = array(

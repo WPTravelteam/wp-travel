@@ -13,7 +13,7 @@ class WP_Travel_FW_Field_Radio {
 		return $this;
 	}
 
-	function render( $display = true, $trip_id ) {
+	function render( $display = true, $trip_id= "" ) {
 		$validations = '';
 		if ( isset( $this->field['validations'] ) ) {
 			foreach ( $this->field['validations'] as $key => $attr ) {
@@ -39,18 +39,16 @@ class WP_Travel_FW_Field_Radio {
 			$payment_gateways = $this->field['options'];
 			$payment = $payment_gateways;
 			$by_billing_address = '';
-			if ( class_exists('WP_Travel_Pro') && wptravel_get_settings()['enable_conditional_payment'] == 'yes' ){
+			if ( class_exists('WP_Travel_Pro') && isset( wptravel_get_settings()['enable_conditional_payment'] ) && wptravel_get_settings()['enable_conditional_payment'] == 'yes' ){
 
-				if ( wptravel_get_settings()['enable_CP_by_billing_address'] == 'yes' ){
+				if ( isset( wptravel_get_settings()['enable_CP_by_billing_address'] ) && wptravel_get_settings()['enable_CP_by_billing_address'] == 'yes' ){
 					return;
 				}
-				// die;
 				
 				$trip_location = wp_get_post_terms( $trip_id[array_key_first($trip_id)]['trip_id'], 'travel_locations', array( 'fields' => 'all' ) )[0]->slug;
 				
 				add_action('wp_enqueue_scripts', function(){
 					wp_localize_script( 'wp-travel-script', '_wp_travel_conditional_payment_list', wptravel_get_settings()['conditional_payment_list'] );
-					wp_localize_script( 'wp-travel-script', '_wp_travel_trip_location', $trip_location );
 				});
 
 				$conditional_payment = array();
@@ -61,7 +59,7 @@ class WP_Travel_FW_Field_Radio {
 					}else{
 						$conditional_payment[$value['trip_location']] = array( $value['payment_gateway'] );
 					}					
-					$by_billing_address = $value['enable_CP_by_billing_address'];
+					$by_billing_address = isset( $value['enable_CP_by_billing_address'] ) ?$value['enable_CP_by_billing_address'] : '';
 				}
 
 				if( array_key_exists( $trip_location, $conditional_payment )  ){

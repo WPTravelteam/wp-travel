@@ -844,30 +844,3 @@ function wptravel() {
 wptravel();
 
 
-$args = array(
-	'post_type'         =>  'itineraries',
-);
-
-
-	// $args['tax_query'] = array(
-	// 	'relations' =>  'AND'
-	// );
-
-
-		// $args['tax_query'][] = array(
-		// 	'taxonomy' => 'itinerary_types',
-		// 	'field' => 'slug',
-		// 	'terms' => ''
-		// );
-
-		// $args['tax_query'][] = array(
-		// 	'taxonomy' => 'travel_locations',
-		// 	'field' => 'slug',
-		// 	'terms' => 'americs'
-		// );
-	
-
-
-$trip_data = new WP_Query( $args );
-var_dump( $trip_data );
-die;

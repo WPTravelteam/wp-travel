@@ -158,7 +158,7 @@ class WP_Travel_FW_Field {
 		echo $this->process( $trip_id );
 	}
 
-	function render_input( $field ) {
+	function render_input( $field, $trip_id ) {
 		if ( ! $field ) {
 			return;
 		}
