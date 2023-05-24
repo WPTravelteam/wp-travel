@@ -144,9 +144,9 @@ class WpTravel_Frontend_Assets {
 		wp_enqueue_script( 'jquery-datepicker-lib' );
 		wp_enqueue_script( 'jquery-datepicker-lib-eng' );
 
-		wp_localize_script( 'wp-travel-script', '_wp_travel_check_for_pro', class_exists('WP_Travel_Pro') );
-		wp_localize_script( 'wp-travel-script', '_wp_travel_check_cp_by_billing', wptravel_get_settings()['enable_CP_by_billing_address'] );
-		wp_localize_script( 'wp-travel-script', '_wp_travel_conditional_payment_list', wptravel_get_settings()['conditional_payment_list'] );
+		// wp_localize_script( 'wp-travel-script', '_wp_travel_check_for_pro', class_exists('WP_Travel_Pro') );
+		// wp_localize_script( 'wp-travel-script', '_wp_travel_check_cp_by_billing', wptravel_get_settings()['enable_CP_by_billing_address'] );
+		wp_localize_script( 'wp-travel-script', '_wp_travel_conditional_payment_list', isset( wptravel_get_settings()['conditional_payment_list'] ) ? wptravel_get_settings()['conditional_payment_list'] : array() );
 	}
 
 	/**

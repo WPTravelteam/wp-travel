@@ -13,7 +13,7 @@ class WP_Travel_FW_Field_Radio {
 		return $this;
 	}
 
-	function render( $display = true, $trip_id ) {
+	function render( $display = true, $trip_id= "" ) {
 		$validations = '';
 		if ( isset( $this->field['validations'] ) ) {
 			foreach ( $this->field['validations'] as $key => $attr ) {
@@ -39,7 +39,7 @@ class WP_Travel_FW_Field_Radio {
 			$payment_gateways = $this->field['options'];
 			$payment = $payment_gateways;
 			$by_billing_address = '';
-			if ( class_exists('WP_Travel_Pro') && wptravel_get_settings()['enable_conditional_payment'] == 'yes' ){
+			if ( class_exists('WP_Travel_Pro') && isset( wptravel_get_settings()['enable_conditional_payment'] ) && wptravel_get_settings()['enable_conditional_payment'] == 'yes' ){
 
 				if ( wptravel_get_settings()['enable_CP_by_billing_address'] == 'yes' ){
 					return;

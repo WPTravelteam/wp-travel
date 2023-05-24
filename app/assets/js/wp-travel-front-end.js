@@ -1,4 +1,4 @@
-if( ( _wp_travel_check_for_pro == true ) && ( _wp_travel_check_cp_by_billing == 'yes' ) ){
+if( ( typeof _wp_travel_check_for_pro  != 'undefined' && _wp_travel_check_for_pro == true ) && ( typeof _wp_travel_check_cp_by_billing != 'undefined' && _wp_travel_check_cp_by_billing == 'yes' ) ){
     jQuery(function ($) {
         $( '#wp-travel-country' ).change( function(){
             for (const key in _wp_travel_conditional_payment_list) {
