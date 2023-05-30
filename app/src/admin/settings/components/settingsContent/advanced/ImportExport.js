@@ -5,7 +5,7 @@ import apiFetch from '@wordpress/api-fetch';
 export default () => {
 
     const WP_Travel_Export = () => {
-        fetch('http://import.test/wp-json/wp-travel/v1/export-settings-data', {
+        fetch( _wp_travel.site_url + '/wp-json/wp-travel/v1/export-settings-data', {
               method: "GET"
             }).then((res) => res.json())
               .then((data) => location.reload() )
@@ -25,7 +25,7 @@ export default () => {
 
             var formdata = new FormData();
             formdata.append("settings_data", rawLog);
-            fetch('http://import.test/wp-json/wp-travel/v1/import-settings-data', {
+            fetch( _wp_travel.site_url + '/wp-json/wp-travel/v1/import-settings-data', {
               method: "POST", 
               body: formdata
             }).then((res) => res.json())
