@@ -173,6 +173,7 @@ class WpTravel_Localize_Admin {
 		$translation_array = array(
 			'_nonce'             => wp_create_nonce( 'wp_travel_nonce' ),
 			'admin_url'          => admin_url(),
+			'site_url'          => site_url(),
 			'plugin_url'         => plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ),
 			'is_pro_enable'      => class_exists( 'WP_Travel_Pro' ) ? 'yes' : 'no',
 			'is_conditional_payment_enable'      => class_exists( 'WP_Travel_Conditional_Payment_Core' ) ? 'yes' : 'no',
