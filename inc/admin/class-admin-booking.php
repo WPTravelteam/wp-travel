@@ -497,11 +497,11 @@ class WP_Travel_Admin_Booking {
 		// Updating booking status.
 		$booking_status = isset( $_POST['wp_travel_booking_status'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_booking_status'] ) ) : 'pending';
 		$mail_sending_payment_status = apply_filters( 'wp_travel_change_payment_status_mail_sending', true );
+		$payment_status = isset( $_POST['wp_travel_payment_status'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_payment_status'] ) ) : 'N/A';
+		$payment_status_change = sanitize_text_field( $payment_status );
+		$old_payment_status = get_post_meta( $booking_id, 'wp_travel_payment_status' );
+		$pmt_status = isset( $old_payment_status[0] ) ? $old_payment_status[0] : 'N/A';
 		if ( $mail_sending_payment_status ) {
-			$payment_status = isset( $_POST['wp_travel_payment_status'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_payment_status'] ) ) : 'N/A';
-			$payment_status_change = sanitize_text_field( $payment_status );
-			$old_payment_status = get_post_meta( $booking_id, 'wp_travel_payment_status' );
-			$pmt_status = isset( $old_payment_status[0] ) ? $old_payment_status[0] : 'N/A';
 			if ( $payment_status_change != $pmt_status ) {
 				$traveler_email = get_post_meta( $booking_id, 'wp_travel_email_traveller', true );
 				$traveler_name = get_post_meta( $booking_id, 'wp_travel_fname_traveller', true );
@@ -517,7 +517,6 @@ class WP_Travel_Admin_Booking {
 			}
 		}
 		update_post_meta( $booking_id, 'wp_travel_booking_status', sanitize_text_field( $booking_status ) );
-
 		$checkout_fields = wptravel_get_checkout_form_fields();
 		foreach ( $checkout_fields as $field_type => $fields ) {
 			$priority = array();
@@ -571,7 +570,30 @@ class WP_Travel_Admin_Booking {
 			}
 			update_post_meta( $booking_id, 'order_items_data', $order_items_data ); // use this instead of order_data meta.
 		}
+		$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
+		$payment_data = wptravel_booking_data( $booking_id );
+		$partial_mode = get_post_meta( $booking_id, 'wp_travel_is_partial_payment', true );
+		$due_amount = isset( $payment_data['due_amount'] ) ? $payment_data['due_amount'] : 0;
+		$paid_amount = isset( $payment_data['paid_amount'] ) ? $payment_data['paid_amount'] : 0;
+		$total = isset( $payment_data['total'] ) ? $payment_data['total'] : 0;
+		
+		if ( $booking_status == 'booked' &&  $payment_status_change == 'paid' ) {
+			if ( $due_amount > 0 && $partial_mode != 'yes' && $due_amount == $total ) {
+				update_post_meta( $payment_id, 'wp_travel_real_payment_amount_change_status', $total );
+				update_post_meta( $payment_id, 'wp_travel_payment_amount', $due_amount );
+				update_post_meta( $payment_id, 'wp_travel_payment_mode', 'full' );
+			}
+		} else {
+			$old_payment_data = get_post_meta( $payment_id, 'wp_travel_real_payment_amount_change_status', true );
+			if ( ! empty( $old_payment_data ) && $old_payment_data > 0 ) {
+				update_post_meta( $payment_id, 'wp_travel_real_payment_amount_change_status', 0 );
+				update_post_meta( $payment_id, 'wp_travel_payment_amount', 0 );
+				update_post_meta( $payment_id, 'wp_travel_payment_mode', 'N/A' );
+			}
+		}
 		do_action( 'wp_travel_after_booking_data_save', $booking_id ); // update payment status.
+		$affiliate_status = apply_filters( 'wp_travel_booking_status_trigger_from', $booking_id, $booking_status );
+
 	}
 }
 new WP_Travel_Admin_Booking();
