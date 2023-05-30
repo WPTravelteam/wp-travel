@@ -37,6 +37,7 @@ import SettingsThirdParty from "./components/settingsContent/misc/SettingsThirdP
 import SettingsModules from "./components/settingsContent/advanced/SettingsModules";
 import SettingsPWA from "./components/settingsContent/advanced/SettingsPWA";
 import SettingsDebug from "./components/settingsContent/advanced/SettingsDebug";
+import ImportExport from "./components/settingsContent/advanced/ImportExport";
 
 // Settings from Redux Store
 import "./store/settings-store";
@@ -244,6 +245,12 @@ const WPTravelSettings = () => {
                 title: __("Debug", "wp-travel"),
                 className: "tab-advanced",
                 content: SettingsDebug,
+            },
+            {
+                name: "import-export",
+                title: __("Import Export", "wp-travel"),
+                className: "tab-advanced",
+                content: ImportExport,
             },
             blockTab,
             downloadsTab

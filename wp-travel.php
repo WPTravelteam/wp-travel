@@ -429,6 +429,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			if ( ! is_multisite() ) {
 				include sprintf( '%s/inc/setup-page/setup-page.php', WP_TRAVEL_ABSPATH );
 			}
+
+			include sprintf( '%s/inc/import-export/import-export.php', WP_TRAVEL_ABSPATH );
 		}
 
 		/**

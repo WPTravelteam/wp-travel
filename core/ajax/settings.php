@@ -49,12 +49,13 @@ class WP_Travel_Ajax_Settings {
 		$post_data     = is_string( $post_data ) ? json_decode( $post_data, true ) : $post_data; // check ajax string data
 		$new_post_data = is_string( $post_data ) ? json_decode( $post_data, true ) : $post_data; // check after ajax data is converted in to array of not
 		$new_post_data = wptravel_sanitize_array( $new_post_data, true );
-		$response      = WP_Travel_Helpers_Settings::update_settings( $new_post_data );
-		WP_Travel_Helpers_REST_API::response( $response );
-		// $post_data = json_decode( file_get_contents( 'php://input' ), true ); // Added 2nd Parameter to resolve issue with objects.
-		// $post_data = wptravel_sanitize_array( $post_data, true );  // wp kses for some editor content in email settings.
-		// $response  = WP_Travel_Helpers_Settings::update_settings( $post_data );
+		var_dump('asdasdasd');
+		// $response      = WP_Travel_Helpers_Settings::update_settings( $new_post_data );
 		// WP_Travel_Helpers_REST_API::response( $response );
+		// // $post_data = json_decode( file_get_contents( 'php://input' ), true ); // Added 2nd Parameter to resolve issue with objects.
+		// // $post_data = wptravel_sanitize_array( $post_data, true );  // wp kses for some editor content in email settings.
+		// // $response  = WP_Travel_Helpers_Settings::update_settings( $post_data );
+		// // WP_Travel_Helpers_REST_API::response( $response );
 	}
 
 	public static function force_migrate_to_v4() {
