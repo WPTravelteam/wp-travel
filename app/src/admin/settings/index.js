@@ -6,7 +6,7 @@ import {
     isValidElement,
     createPortal,
 } from "@wordpress/element"; // [ useeffect : used on onload, component update ]
-import { Spinner, Notice } from "@wordpress/components";
+import { Spinner, Notice, TabPanel } from "@wordpress/components";
 import { useSelect, select, dispatch } from "@wordpress/data"; // redux [and also for hook / filter] | dispatch : send data to store
 import { applyFilters, addFilter } from "@wordpress/hooks";
 import { _n, __ } from "@wordpress/i18n";
@@ -381,29 +381,34 @@ const WPTravelNetworkSettings = () => {
         }
         
     ], allData );
-    return <div className={wrapperClasses}>
-        {allData.is_sending_request && <Spinner />}
-        <SaveSettings position="top" />
-        <TabPanel className="wp-travel-block-tabs"
-            activeClass="active-tab"
-            onSelect={() => false}
-            tabs={tabs}>
-            {
-                (tab) =><ErrorBoundary>
-                    { tab.content && isValidElement( <tab.content /> ) ? <tab.content /> : ''} {/* Need to remove this latter. add all content with filter instead */}
-                    {applyFilters(
-                        `wptravel_settings_tab_content_${tab.name.replaceAll(
-                            "-",
-                            "_"
-                        )}`,
-                        [],
-                        allData
-                    )}
-                </ErrorBoundary>
-            }
-        </TabPanel>
-        <SaveSettings position="bottom" />
-    </div>
+    return (
+        <>
+            { allData.is_sending_request && <div className="wp-travel-spinner-overlay"><Spinner /></div> }
+            <div className="wp-travel-block-tabs-wrapper wp-travel-trip-settings">
+                <TabPanel className="wp-travel-block-tabs"
+                    activeClass="active-tab"
+                    onSelect={() => false}
+                    tabs={tabs}>
+                    {
+                        (tab) =><ErrorBoundary>
+                            { tab.content && isValidElement( <tab.content /> ) ? <tab.content /> : ''} {/* Need to remove this latter. add all content with filter instead */}
+                            {applyFilters(
+                                `wptravel_settings_tab_content_${tab.name.replaceAll(
+                                    "-",
+                                    "_"
+                                )}`,
+                                [],
+                                allData
+                            )}
+                        </ErrorBoundary>
+                    }
+                </TabPanel>
+                <div id="wp-travel-save-changes-container">
+                    <SaveSettings position="bottom" />
+                </div>
+            </div>
+        </>
+    )
 };
 
 const SettingsDownloadsTemp = () => {
