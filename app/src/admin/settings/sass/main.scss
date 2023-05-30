@@ -18,7 +18,7 @@ $wp-travel-success: rgb(7, 152, 18);
 $wp-travel-shadow: rgba(0, 0, 0, 0.1);
 $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 
-.wp-admin.itinerary-booking_page_settings {
+.wp-admin.itinerary-booking_page_settings, .wp-admin.toplevel_page_wp_travel_network_settings {
 	@import "../../sass/block-tabs";
 	#wpwrap {
 		#wp-travel-search-modal-wrapper {
@@ -565,7 +565,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 	}
 }
 
-.wp-admin.itinerary-booking_page_settings {
+.wp-admin.itinerary-booking_page_settings, .wp-admin.toplevel_page_wp_travel_network_settings {
 	#wpwrap {
 		#wp-travel-settings-menu.wp-travel-active {
 			display: flex;
@@ -1553,7 +1553,28 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 				}
 			}
 
-			#wp-travel-settings-block {
+			#wp-travel-network-settings-block {
+				margin-left: 1rem;
+				.wp-travel-block-tabs-wrapper {
+					.wp-travel-block-tabs {
+						.components-tab-panel__tabs {
+							button {
+								&.active-tab {
+									box-shadow: inset -3px 0px $wp-travel-green;
+									&:hover {
+										color: $wp-travel-green;
+									}
+								}
+							}
+						}
+						.components-tab-panel__tab-content {
+							padding: 2rem;
+						}
+					}
+				}
+			}
+
+			#wp-travel-settings-block, #wp-travel-network-settings-block {
 				position: relative;
 
 				.wp-travel-spinner-overlay {
@@ -1620,7 +1641,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 }
 
 @media screen and (min-width: 576px) {
-	.wp-admin.itinerary-booking_page_settings {
+	.wp-admin.itinerary-booking_page_settings, .wp-admin.toplevel_page_wp_travel_network_settings {
 		#wpwrap {
 			#wpbody-content {
 				#wp-travel-settings-block-wrapper {
@@ -1665,7 +1686,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 }
 
 @media screen and (min-width: 640px) {
-	.wp-admin.itinerary-booking_page_settings {
+	.wp-admin.itinerary-booking_page_settings, .wp-admin.toplevel_page_wp_travel_network_settings {
 		#wpwrap {
 			#wpbody-content {
 				#wp-travel-settings-block-wrapper {
@@ -1766,7 +1787,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 }
 
 @media screen and (min-width: 768px) {
-	.wp-admin.itinerary-booking_page_settings {
+	.wp-admin.itinerary-booking_page_settings, .wp-admin.toplevel_page_wp_travel_network_settings {
 		#wpwrap {
 			#wpbody-content {
 				padding-right: 1rem;
@@ -1886,7 +1907,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 }
 
 @media screen and (min-width: 1024px) {
-	.wp-admin.itinerary-booking_page_settings {
+	.wp-admin.itinerary-booking_page_settings, .wp-admin.toplevel_page_wp_travel_network_settings {
 		#wpwrap {
 			#wpbody-content {
 				.wp-travel-field-value {
@@ -1951,7 +1972,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 }
 
 @media screen and (min-width: 1366px) {
-	.wp-admin.itinerary-booking_page_settings {
+	.wp-admin.itinerary-booking_page_settings, .wp-admin.toplevel_page_wp_travel_network_settings {
 		#wpwrap {
 			#wpbody-content {
 				#wp-travel-search-modal-wrapper {
@@ -2006,7 +2027,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 }
 
 @media (min-width: 1582px) {
-	.wp-admin.itinerary-booking_page_settings {
+	.wp-admin.itinerary-booking_page_settings, .wp-admin.toplevel_page_wp_travel_network_settings {
 		#wpwrap {
 			#wpbody-content {
 				.wptravel-ui-content.wptravel-modules {
@@ -2023,7 +2044,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 }
 
 @media (min-width: 1832px) {
-	.wp-admin.itinerary-booking_page_settings {
+	.wp-admin.itinerary-booking_page_settings, .wp-admin.toplevel_page_wp_travel_network_settings {
 		#wpwrap {
 			#wpbody-content {
 				.wptravel-ui-content.wptravel-modules {

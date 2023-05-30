@@ -54,6 +54,10 @@ class WpTravel_Admin_Assets {
 			}
 		}
 
+		if ( is_network_admin() ) {
+			wp_enqueue_style( 'wp-travel-back-end' );
+		}
+
 		if ( get_current_screen()->base == 'dashboard_page_wp-travel-setup-page' ) {
 			wp_enqueue_style( 'wp-travel-setup-page' );
 		}
