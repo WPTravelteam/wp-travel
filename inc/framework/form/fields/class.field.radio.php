@@ -13,7 +13,7 @@ class WP_Travel_FW_Field_Radio {
 		return $this;
 	}
 
-	function render( $display = true, $trip_id ) {
+	function render( $display = true ) {
 		$validations = '';
 		if ( isset( $this->field['validations'] ) ) {
 			foreach ( $this->field['validations'] as $key => $attr ) {
@@ -37,51 +37,13 @@ class WP_Travel_FW_Field_Radio {
 			}
 
 			$payment_gateways = $this->field['options'];
-			$payment = $payment_gateways;
-			$by_billing_address = '';
-			if ( class_exists('WP_Travel_Pro') && wptravel_get_settings()['enable_conditional_payment'] == 'yes' ){
 
-				if ( isset(wptravel_get_settings()['enable_CP_by_billing_address']) && wptravel_get_settings()['enable_CP_by_billing_address'] == 'yes' ){
-					return;
-				}
-				
-				$trip_location = '';
-				
-				if( isset( wp_get_post_terms( $trip_id[array_key_first($trip_id)]['trip_id'], 'travel_locations', array( 'fields' => 'all' ) )[0] ) ){
-					$trip_location = wp_get_post_terms( $trip_id[array_key_first($trip_id)]['trip_id'], 'travel_locations', array( 'fields' => 'all' ) )[0]->slug;
-				}
-				
-				
-
-				$conditional_payment = array();
-				foreach( wptravel_get_settings()['conditional_payment_list'] as $value ){
-
-					if( array_key_exists( $trip_location, $conditional_payment ) ){
-						array_push( $conditional_payment[$trip_location], $value['payment_gateway'] );
-					}else{
-						$conditional_payment[$value['trip_location']] = array( $value['payment_gateway'] );
-					}					
-					// $by_billing_address = $value['enable_CP_by_billing_address'];
-				}
-
-				if( array_key_exists( $trip_location, $conditional_payment )  ){
-					$payment_list = array();
-	
-					$conditional_payment = $conditional_payment[ $trip_location ];
-	
-					foreach( $conditional_payment as $value ){
-						$payment_list[$value] = isset( $payment_gateways[$value] ) ? $payment_gateways[$value] : '';
-					}
-	
-					$payment = $payment_list;
-	
-				}else{
-					$payment = $payment_gateways;
-				}
+			if ( class_exists('WP_Travel_Pro') && isset(wptravel_get_settings()['enable_CP_by_billing_address']) && wptravel_get_settings()['enable_CP_by_billing_address'] == 'yes' ){
+				return;
 			}
 
 			
-			foreach ( $payment as $key => $value ) {
+			foreach ( $payment_gateways as $key => $value ) {
 
 				// Option Attributes.
 				$option_attributes = '';
