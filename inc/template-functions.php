@@ -203,6 +203,15 @@ function wptravel_posts_clauses_filter( $post_clauses, $object ) {
  * @return Mixed
  */
 function wptravel_get_template( $template_name ) {
+
+	if ( count( get_block_templates() ) > 0  ) {
+		foreach ( get_block_templates() as $value ) {
+			if ( $value->slug == 'single-itineraries' ) {
+				return;
+			}
+		}
+	}
+
 	$template_path = apply_filters( 'wp_travel_template_path', 'wp-travel/' ); // @phpcs:ignore
 	$template_path = apply_filters( 'wptravel_template_path', $template_path );
 	$default_path  = sprintf( '%s/templates/', plugin_dir_path( dirname( __FILE__ ) ) );
