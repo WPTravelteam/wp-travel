@@ -196,7 +196,6 @@ function wptravel_get_checkout_form_fields() {
 				}else{
 					$conditional_payment[$value['trip_location']] = array( $value['payment_gateway'] );
 				}					
-				// $by_billing_address = $value['enable_CP_by_billing_address'];
 			}
 
 
@@ -207,61 +206,73 @@ function wptravel_get_checkout_form_fields() {
 				$conditional_payment = $conditional_payment[ $trip_location ];
 
 				foreach( $conditional_payment as $value ){
-					if ( $value == 'paypal' ) {
-						$payment_list[$value] = 'Standard Paypal';
+					if ( array_key_exists( $value, $gateway_list['active'] ) ) {
+						if ( $value == 'paypal' ) {
+							$payment_list[$value] = 'Standard Paypal';
+						}
+						if ( $value == 'bank_deposit' ) {
+							$payment_list[$value] = 'Bank Deposit';
+						}
+						if ( $value == 'instamojo_checkout' ) {
+							$payment_list[$value] = 'Instamojo checkout';
+						}
+						if ( $value == 'khalti' ) {
+							$payment_list[$value] = 'Khalti';
+						}
+						if ( $value == 'payu' ) {
+							$payment_list[$value] = 'PayU Checkout';
+						}
+						if ( $value == 'payu_latam' ) {
+							$payment_list[$value] = 'PayU Latam Checkout';
+						}
+						if ( $value == 'payfast' ) {
+							$payment_list[$value] = 'PayFast Checkout';
+						}
+						if ( $value == 'payhere' ) {
+							$payment_list[$value] = 'PayHere Checkout';
+						}
+						if ( $value == 'express_checkout' ) {
+							$payment_list[$value] = 'Paypal Express Checkout';
+						}
+						if ( $value == 'paystack' ) {
+							$payment_list[$value] = 'Paystack Checkout';
+						}
+						if ( $value == 'razorpay_checkout' ) {
+							$payment_list[$value] = 'Razorpay checkout';
+						}
+						if ( $value == 'squareup_checkout' ) {
+							$payment_list[$value] = 'Squareup Checkout';
+						}
+						if ( $value == 'stripe' ) {
+							$payment_list[$value] = 'Stripe Checkout';
+						}
+						if ( $value == 'stripe_ideal' ) {
+							$payment_list[$value] = 'Stripe iDEAL Checkout';
+						}
+						if ( $value == 'authorizenet' ) {
+							$payment_list[$value] = 'Authorize.Net';
+						}		
 					}
-					if ( $value == 'bank_deposit' ) {
-						$payment_list[$value] = 'Bank Deposit';
-					}
-					if ( $value == 'instamojo_checkout' ) {
-						$payment_list[$value] = 'Instamojo checkout';
-					}
-					if ( $value == 'khalti' ) {
-						$payment_list[$value] = 'Khalti';
-					}
-					if ( $value == 'payu' ) {
-						$payment_list[$value] = 'PayU Checkout';
-					}
-					if ( $value == 'payu_latam' ) {
-						$payment_list[$value] = 'PayU Latam Checkout';
-					}
-					if ( $value == 'payfast' ) {
-						$payment_list[$value] = 'PayFast Checkout';
-					}
-					if ( $value == 'payhere' ) {
-						$payment_list[$value] = 'PayHere Checkout';
-					}
-					if ( $value == 'express_checkout' ) {
-						$payment_list[$value] = 'Paypal Express Checkout';
-					}
-					if ( $value == 'paystack' ) {
-						$payment_list[$value] = 'Paystack Checkout';
-					}
-					if ( $value == 'razorpay_checkout' ) {
-						$payment_list[$value] = 'Razorpay checkout';
-					}
-					if ( $value == 'squareup_checkout' ) {
-						$payment_list[$value] = 'Squareup Checkout';
-					}
-					if ( $value == 'stripe' ) {
-						$payment_list[$value] = 'Stripe Checkout';
-					}
-					if ( $value == 'stripe_ideal' ) {
-						$payment_list[$value] = 'Stripe iDEAL Checkout';
-					}
-					if ( $value == 'authorizenet' ) {
-						$payment_list[$value] = 'Authorize.Net';
-					}					
+								
 				}
 				$payment = $payment_list;
 
 			}
-			$active_gateway_list = $payment_list;
+			if ( $payment_list == null ) {
+				$active_gateway_list = $active_gateway_list;
+			}else{
+				$active_gateway_list = $payment_list;
+			}
+			
 		}
 
 
 		if ( is_array( $active_gateway_list ) && count( $active_gateway_list ) > 0 ) {
 			$selected_gateway = apply_filters( 'wp_travel_checkout_default_gateway', $selected_gateway );
+
+			if ( class_exists('WP_Travel_Pro') && isset(wptravel_get_settings()['enable_CP_by_billing_address']) && wptravel_get_settings()['enable_CP_by_billing_address'] == 'yes' ){
+				$active_gateway_list        = array();
+			}
 
 			$payment_fields['payment_gateway'] = array(
 				'type'          => 'radio',
