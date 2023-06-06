@@ -126,8 +126,13 @@ class WpTravel_Helpers_Schema {
 			'sku'         => wptravel_get_trip_code( $trip_id ),
 			'description' => wp_strip_all_tags( $trip['trip_overview'] ),
 			'image'       => wptravel_get_post_thumbnail_url( $trip_id ),
+			"brand"		  => [
+				"@type"	  => "Brand",
+				"name"	  => get_bloginfo(),
+			],
 		);
-
+		// print_r( get_bloginfo() );
+		// die;
 		// Rating Data.
 		$schema['aggregateRating'] = array(
 			'@type'       => 'AggregateRating', // Fixed.
@@ -135,6 +140,7 @@ class WpTravel_Helpers_Schema {
 			'ratingValue' => wptravel_get_average_rating( $trip_id ) * 20,
 			'reviewCount' => wptravel_get_rating_count(),
 		);
+		// $schema[]
 
 		/**
 		 * Trip Review schema structure.

@@ -182,7 +182,7 @@ function wptravel_get_checkout_form_fields() {
 			$trip_location = wp_get_post_terms( $trip_ids, 'travel_locations', array( 'fields' => 'all' ) )[0]->slug;
 		}		
 
-		if ( ( $trip_location !== '' ) && class_exists('WP_Travel_Pro') && wptravel_get_settings()['enable_conditional_payment'] == 'yes' ){
+		if ( ( $trip_location !== '' ) && class_exists('WP_Travel_Pro') && class_exists('WP_Travel_Conditional_Payment') && wptravel_get_settings()['enable_conditional_payment'] == 'yes' ){
 			
 			add_action('wp_enqueue_scripts', function(){
 				wp_localize_script( 'wp-travel-script', '_wp_travel_conditional_payment_list', wptravel_get_settings()['conditional_payment_list'] );
@@ -251,26 +251,28 @@ function wptravel_get_checkout_form_fields() {
 						}
 						if ( $value == 'authorizenet' ) {
 							$payment_list[$value] = 'Authorize.Net';
-						}		
+						}
+						$selected_gateway = $value;		
 					}
 								
 				}
 				$payment = $payment_list;
-
-			}
-			if ( $payment_list == null ) {
-				$active_gateway_list = $active_gateway_list;
-			}else{
-				$active_gateway_list = $payment_list;
-			}
+				if ( $payment_list == null ) {
+					$active_gateway_list = $active_gateway_list;
+				}else{
+					$active_gateway_list = $payment_list;
+				}
+			}		
 			
+		}else{
+			$active_gateway_list = $active_gateway_list;
 		}
 
 
 		if ( is_array( $active_gateway_list ) && count( $active_gateway_list ) > 0 ) {
 			$selected_gateway = apply_filters( 'wp_travel_checkout_default_gateway', $selected_gateway );
 
-			if ( class_exists('WP_Travel_Pro') && isset(wptravel_get_settings()['enable_CP_by_billing_address']) && wptravel_get_settings()['enable_CP_by_billing_address'] == 'yes' ){
+			if ( class_exists('WP_Travel_Pro') && class_exists('WP_Travel_Conditional_Payment') && isset(wptravel_get_settings()['enable_CP_by_billing_address']) && wptravel_get_settings()['enable_CP_by_billing_address'] == 'yes' ){
 				$active_gateway_list        = array();
 			}
 

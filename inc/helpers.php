@@ -898,7 +898,7 @@ function wp_travel_get_trip_durations( $trip_id ) {
 		$old_day = $trip_duration_days > 0  ? $trip_duration_days . ' ' .  $days : '';
 		$trip_duration = ! empty( $old_night ) || ! empty( $old_day ) ? $old_day . ' ' . $old_night : $duration_na;
 	}
-	return $trip_duration;
+	return apply_filters( 'wp_travel_trip_duration_formated_text', $trip_duration, $duration_format, $get_Duration, $trip_duration_nights, $trip_duration_days, $trip_id );
 }
 /**
  * Get Payment Status List.
