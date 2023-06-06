@@ -66,7 +66,7 @@ class WP_Travel_Post_Types { // @phpcs:ignore
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => null,
-			'supports'           => array( 'editor', 'title', 'comments', 'excerpt', 'revisions' ),
+			'supports'           => array( 'title', 'comments', 'excerpt', 'revisions' ),
 			'menu_icon'          => 'dashicons-location',
 			'menu_position'      => 30,
 			'show_in_rest'       => true,
