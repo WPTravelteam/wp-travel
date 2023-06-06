@@ -339,7 +339,6 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 			$arrival_dates    = array(); // date along with time.
 			$departure_dates  = array();
 			$trip_times       = array();
-
 			$total_pax = 0;
 			if ( is_array( $items ) && 0 < count( $items ) ) {
 				foreach ( $items as $key => $item ) {
@@ -347,7 +346,7 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 					$price_key      = isset( $item['price_key'] ) ? $item['price_key'] : '';
 					$arrival_date   = isset( $item['arrival_date'] ) ? $item['arrival_date'] : '';  // date along with time.
 					$departure_date = isset( $item['departure_date'] ) ? $item['departure_date'] : '';
-					$time           = isset( $item['time'] ) ? $item['time'] : '';
+					$time           = isset( $item['trip_time'] ) ? $item['trip_time'] : '';
 
 					$trip_ids[]   = $trip_id;
 					$price_keys[] = $price_key;
@@ -390,6 +389,12 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 			if ( isset( $request_data['wp_travel_payment_gateway'] ) && 'bank_deposit' === $request_data['wp_travel_payment_gateway'] ) {
 				$bank_deposit_table = wptravel_get_bank_deposit_account_table( false );
 			}
+			$trip_time_get = '';
+			if ( is_array( $trip_times ) && count( $trip_times ) > 0 ) {
+				foreach ( $trip_times as $keys => $time_values ) {
+					$trip_time_get .= ' ' . $time_values;
+				} 
+			} 
 			$itineraries = get_post_meta( $trip_id, 'wp_travel_trip_itinerary_data', true );
 			$email_tags  = array(
 				'{sitename}'               => $this->sitename,
@@ -399,7 +404,7 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 				'{itinerary_title}'        => wptravel_get_trip_pricing_name( $trip_id, $price_key ), // @deprecated.
 				'{booking_arrival_date}'   => $arrival_date, // @deprecated.
 				'{booking_departure_date}' => $departure_date,  // @deprecated.
-				'{booking_selected_time}'  => $time,  // @deprecated.
+				'{booking_selected_time}'  => apply_filters( 'wp_travel_booking_email_trip_time', $trip_time_get, $items, $trip_times ),  // @deprecated.
 				'{booking_scheduled_date}' => esc_html__( 'N/A', 'wp-travel' ), // @deprecated.
 				'{customer_name}'          => $customer_name,
 				'{customer_country}'       => $customer_country,
