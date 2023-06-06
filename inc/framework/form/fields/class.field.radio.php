@@ -37,11 +37,6 @@ class WP_Travel_FW_Field_Radio {
 			}
 
 			$radio_option = $this->field['options'];
-
-			if ( class_exists('WP_Travel_Pro') && isset(wptravel_get_settings()['enable_CP_by_billing_address']) && wptravel_get_settings()['enable_CP_by_billing_address'] == 'yes' ){
-				return;
-			}
-
 			
 			foreach ( $radio_option as $key => $value ) {
 
