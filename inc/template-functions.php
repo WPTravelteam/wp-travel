@@ -203,6 +203,13 @@ function wptravel_posts_clauses_filter( $post_clauses, $object ) {
  * @return Mixed
  */
 function wptravel_get_template( $template_name ) {
+	if ( count( get_block_templates() ) > 0 ) {
+		foreach ( get_block_templates() as $value ) {
+			if ( $value->slug == 'single-itineraries' ) {
+				return;
+			}
+		}
+	}
 	$template_path = apply_filters( 'wp_travel_template_path', 'wp-travel/' ); // @phpcs:ignore
 	$template_path = apply_filters( 'wptravel_template_path', $template_path );
 	$default_path  = sprintf( '%s/templates/', plugin_dir_path( dirname( __FILE__ ) ) );
@@ -947,7 +954,7 @@ function wptravel_single_location( $trip_id ) {
 		?>
 
 	<?php else : ?>
-		<?php $new_trip_duration  = wp_travel_get_trip_durations( $trip_id ); ?>
+		<?php $new_trip_duration = wp_travel_get_trip_durations( $trip_id ); ?>
 		<?php if ( ! empty( $new_trip_duration ) ) : ?>
 			<li class="wp-travel-trip-duration">
 				<div class="travel-info">
@@ -956,7 +963,7 @@ function wptravel_single_location( $trip_id ) {
 				<div class="travel-info">
 					<span class="value">
 						<?php
-							printf( '%1$s', esc_html( $new_trip_duration) ); // @phpcs:ignore
+							printf( '%1$s', esc_html( $new_trip_duration ) ); // @phpcs:ignore
 						?>
 					</span>
 				</div>
@@ -1416,26 +1423,22 @@ function wptravel_get_average_rating( $trip_id = null ) {
 	$count = (int) get_comments_number( $trip_id );
 
 	// @since 6.2.0
-	$settings   = wptravel_get_settings();
-
+	$settings = wptravel_get_settings();
 
 	if ( $settings['disable_admin_review'] == 'yes' ) {
-		$get_reviews  = get_comments( array( 'post_id' => $trip_id ) );
+		$get_reviews = get_comments( array( 'post_id' => $trip_id ) );
 
 		$admin_count = 0;
 		foreach ( $get_reviews as $review ) {
 
-			if ( get_user_by('login', $review->comment_author) ) {
-				if ( in_array( get_user_by('login', $review->comment_author)->roles[0], array( 'administrator', 'editor', 'author' )) ) {
+			if ( get_user_by( 'login', $review->comment_author ) ) {
+				if ( in_array( get_user_by( 'login', $review->comment_author )->roles[0], array( 'administrator', 'editor', 'author' ) ) ) {
 					$admin_count = $admin_count + 1;
 				}
-				
 			}
-			
 		}
 		$count = $count - $admin_count;
-	}	
-
+	}
 
 	$average_rating_query = "SELECT SUM(meta_value) FROM $wpdb->commentmeta
 	LEFT JOIN $wpdb->comments ON $wpdb->commentmeta.comment_id = $wpdb->comments.comment_ID
@@ -1444,33 +1447,32 @@ function wptravel_get_average_rating( $trip_id = null ) {
 	AND comment_approved = '1'
 	AND meta_value > 0";
 
-
 	// // No meta data? Do the calculation.
 	// if ( ! metadata_exists( 'post', $trip_id, '_wpt_average_rating' ) ) {
-		if ( $count ) {
-			$ratings = $wpdb->get_var(
-				$wpdb->prepare( $average_rating_query, $trip_id ) // @phpcs:ignore
-			);
-			$average = number_format( $ratings / $count, 2, '.', '' );
-		} else {
-			$average = 0;
-		}
+	if ( $count ) {
+		$ratings = $wpdb->get_var(
+			$wpdb->prepare( $average_rating_query, $trip_id ) // @phpcs:ignore
+		);
+		$average = number_format( $ratings / $count, 2, '.', '' );
+	} else {
+		$average = 0;
+	}
 		update_post_meta( $trip_id, '_wpt_average_rating', $average );
 	// } else {
 
-	// 	$average = get_post_meta( $trip_id, '_wpt_average_rating', true );
+	// $average = get_post_meta( $trip_id, '_wpt_average_rating', true );
 
-	// 	if ( ! $average && $count > 0 ) { // re update average meta if there is number of reviews but no average ratings value.
-	// 		if ( $count ) {
-	// 			$ratings = $wpdb->get_var(
-	// 				$wpdb->prepare( $average_rating_query, $trip_id ) // @phpcs:ignore
-	// 			);
-	// 			$average = number_format( $ratings / $count, 2, '.', '' );
-	// 		} else {
-	// 			$average = 0;
-	// 		}
-	// 		update_post_meta( $trip_id, '_wpt_average_rating', $average );
-	// 	}
+	// if ( ! $average && $count > 0 ) { // re update average meta if there is number of reviews but no average ratings value.
+	// if ( $count ) {
+	// $ratings = $wpdb->get_var(
+	// $wpdb->prepare( $average_rating_query, $trip_id ) // @phpcs:ignore
+	// );
+	// $average = number_format( $ratings / $count, 2, '.', '' );
+	// } else {
+	// $average = 0;
+	// }
+	// update_post_meta( $trip_id, '_wpt_average_rating', $average );
+	// }
 
 	// }
 	return (string) floatval( $average );
@@ -1734,7 +1736,7 @@ function wptravel_booking_message() {
 			history.replaceState({},null,window.location.pathname);
 		</script>
 		<?php if ( 'booking_only' == $booking_option ) { ?>
-			<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo esc_html( apply_filters( 'wp_travel_booked_message', __( "Thank you for booking! We'll reach out to you soon.", 'wp-travel' ) ) ); ?><span><?php echo esc_html( apply_filters( 'wp_travel_booked_message_after_text', ' (Booking Option : Booking Only ).') ); ?></span></p>  
+			<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo esc_html( apply_filters( 'wp_travel_booked_message', __( "Thank you for booking! We'll reach out to you soon.", 'wp-travel' ) ) ); ?><span><?php echo esc_html( apply_filters( 'wp_travel_booked_message_after_text', ' (Booking Option : Booking Only ).' ) ); ?></span></p>  
 			<?php
 		} elseif ( 'booking_with_payment' == $booking_option ) {
 			$payment_gatway = get_post_meta( $booking_id, 'wp_travel_payment_gateway', true );
@@ -1754,11 +1756,11 @@ function wptravel_booking_message() {
 				$payment_status = get_post_meta( $booking_id, 'wp_travel_payment_status', true );
 				if ( 'paid' == $payment_status ) {
 					?>
-						<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo esc_html( apply_filters( 'wp_travel_booked_message', __( "Thank you for booking! We'll reach out to you soon.", 'wp-travel' ) ) ); ?><span><?php echo esc_html( apply_filters( 'wp_travel_booked_message_after_text', ' (Booking Option : Booking with Payment, Payment Methode : PayPal, and Payment Status : Paid.)' ) ) ?></span></p>
+						<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo esc_html( apply_filters( 'wp_travel_booked_message', __( "Thank you for booking! We'll reach out to you soon.", 'wp-travel' ) ) ); ?><span><?php echo esc_html( apply_filters( 'wp_travel_booked_message_after_text', ' (Booking Option : Booking with Payment, Payment Methode : PayPal, and Payment Status : Paid.)' ) ); ?></span></p>
 					<?php
 				} else {
 					?>
-						<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo esc_html( apply_filters( 'wp_travel_booked_message', __( "Thank you for booking! We'll reach out to you soon.", 'wp-travel' ) ) ); ?><span><?php echo esc_html( apply_filters( 'wp_travel_booked_message_after_text', ' (Booking Option : Booking with Payment, Payment Methode : PayPal.)' ) ) ?></span></p>
+						<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo esc_html( apply_filters( 'wp_travel_booked_message', __( "Thank you for booking! We'll reach out to you soon.", 'wp-travel' ) ) ); ?><span><?php echo esc_html( apply_filters( 'wp_travel_booked_message_after_text', ' (Booking Option : Booking with Payment, Payment Methode : PayPal.)' ) ); ?></span></p>
 					<?php
 				}
 			}
