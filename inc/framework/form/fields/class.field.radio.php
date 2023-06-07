@@ -35,7 +35,10 @@ class WP_Travel_FW_Field_Radio {
 					$this->field['options'] = $mapped_options;
 				}
 			}
-			foreach ( $this->field['options'] as $key => $value ) {
+
+			$radio_option = $this->field['options'];
+			
+			foreach ( $radio_option as $key => $value ) {
 
 				// Option Attributes.
 				$option_attributes = '';
@@ -62,6 +65,7 @@ class WP_Travel_FW_Field_Radio {
 		}
 		// $output .= sprintf( '</select>' );
 
+		
 		if ( ! $display ) {
 			return $output;
 		}

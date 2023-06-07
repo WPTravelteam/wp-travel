@@ -98,7 +98,7 @@ class WP_Travel_FW_Form {
 					<?php do_action( $this->form_options['hook_prefix'] . '_before_form_field' ); ?>
 					<?php
 					$fields = new WP_Travel_FW_Field();
-					$fields->init( $this->fields )->render();
+					$fields->init( $this->fields )->render( );
 					?>
 					<div class="wp-travel-form-field button-field">
 						<?php do_action( $this->form_options['hook_prefix'] . '_before_submit_button' ); ?>

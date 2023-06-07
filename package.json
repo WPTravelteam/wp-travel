@@ -1,6 +1,6 @@
 {
   "name": "wp-travel",
-  "version": "6.7.0",
+  "version": "6.8.0",
   "description": "Travel plugin for WordPress",
   "main": "index.js",
   "scripts": {
@@ -61,6 +61,7 @@
     "node-sass": "^6.0.1",
     "postcss-loader": "^6.1.1",
     "react-step-progress-bar": "^1.0.3",
+    "react-time-picker": "^6.2.0",
     "sass": "^1.39.2",
     "sass-loader": "^12.1.0",
     "state-pool": "^0.9.0",

@@ -48,6 +48,12 @@ const actions = {
             newData
         };
     },
+    addNewCPFact(newData) {
+        return {
+            type: 'ADD_NEW_CP',
+            newData
+        };
+    },
     getSettingsFromAPI(url) {
         return {
             type: 'FETCH_FROM_API',
@@ -95,6 +101,13 @@ registerStore('WPTravel/Admin', {
                 return {
                     ...state,
                     wp_travel_trip_facts_settings: addNewData,
+                    has_state_changes: true
+                };
+            case 'ADD_NEW_CP':
+                let addNewCPData = [...state.conditional_payment_list, action.newData];
+                return {
+                    ...state,
+                    conditional_payment_list: addNewCPData,
                     has_state_changes: true
                 };
         }

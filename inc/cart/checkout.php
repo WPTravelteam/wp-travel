@@ -127,7 +127,7 @@ $wptravel_form_fw->init_validation( 'wp-travel-booking' );
 														}
 													}
 
-													$wptravel_form_field->init( array( $wptravel_field ) )->render();
+													$wptravel_form_field->init( array( $wptravel_field ) )->render( $wptravel_trips );
 												endforeach;
 											} else {
 												foreach ( $wptravel_traveller_fields as $wptravel_field_group => $wptravel_field ) :
@@ -157,7 +157,7 @@ $wptravel_form_fw->init_validation( 'wp-travel-booking' );
 															}
 														}
 
-														$wptravel_form_field->init( array( $wptravel_field ) )->render();
+														$wptravel_form_field->init( array( $wptravel_field ) )->render( $wptravel_trip_id );
 													}
 												endforeach;
 											}
@@ -184,7 +184,7 @@ $wptravel_form_fw->init_validation( 'wp-travel-booking' );
 			<!-- <div id="number-accordion3" class="panel-collapse collapse in"> -->
 				<div class="panel-body">
 					<div class="payment-content">
-						<?php $wptravel_form_field->init( $wptravel_billing_fields )->render(); ?>
+						<?php $wptravel_form_field->init( $wptravel_billing_fields )->render( $wptravel_trips ); ?>
 					</div>
 				</div>
 			<!-- </div> -->
@@ -196,7 +196,7 @@ $wptravel_form_fw->init_validation( 'wp-travel-booking' );
 		<!-- <div id="number-accordion4" class="panel-collapse collapse in"> -->
 			<div class="panel-body">
 				<div class="payment-content">
-					<?php $wptravel_form_field->init( $wptravel_payment_fields )->render(); ?>
+					<?php $wptravel_form_field->init( $wptravel_payment_fields )->render( $wptravel_trips ); ?>
 					<?php
 					/**
 					 * Before Booknow button on checkout page.

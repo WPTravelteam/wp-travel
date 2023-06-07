@@ -6,7 +6,7 @@ import {
     isValidElement,
     createPortal,
 } from "@wordpress/element"; // [ useeffect : used on onload, component update ]
-import { Spinner, Notice } from "@wordpress/components";
+import { Spinner, Notice, TabPanel } from "@wordpress/components";
 import { useSelect, select, dispatch } from "@wordpress/data"; // redux [and also for hook / filter] | dispatch : send data to store
 import { applyFilters, addFilter } from "@wordpress/hooks";
 import { _n, __ } from "@wordpress/i18n";
@@ -28,6 +28,7 @@ import SettingsGeneralEmail from "./components/settingsContent/email/SettingsGen
 import SettingsAccount from "./components/settingsContent/account/SettingsAccount";
 import SettingsCheckout from "./components/settingsContent/checkout/SettingsCheckout";
 import SettingsPayment from "./components/settingsContent/payment/SettingsPayment";
+import SettingsConditionalPayment from "./components/settingsContent/payment/SettingsConditionalPayment";
 import SettingsInvoice from "./components/settingsContent/invoice/SettingsInvoice";
 import SettingsMisc from "./components/settingsContent/misc/SettingsMisc";
 import SettingsAdvancedGallery from "./components/settingsContent/misc/SettingsAdvancedGallery";
@@ -36,6 +37,7 @@ import SettingsThirdParty from "./components/settingsContent/misc/SettingsThirdP
 import SettingsModules from "./components/settingsContent/advanced/SettingsModules";
 import SettingsPWA from "./components/settingsContent/advanced/SettingsPWA";
 import SettingsDebug from "./components/settingsContent/advanced/SettingsDebug";
+import ImportExport from "./components/settingsContent/advanced/ImportExport";
 
 // Settings from Redux Store
 import "./store/settings-store";
@@ -191,6 +193,12 @@ const WPTravelSettings = () => {
                 content: SettingsPayment,
             },
             {
+                name: "conditional-payment",
+                title: __("Conditional Payment", "wp-travel"),
+                className: "tab-payment",
+                content: SettingsConditionalPayment,
+            },
+            {
                 name: "invoice",
                 title: __("Invoice", "wp-travel"),
                 className: "tab-invoice",
@@ -237,6 +245,12 @@ const WPTravelSettings = () => {
                 title: __("Debug", "wp-travel"),
                 className: "tab-advanced",
                 content: SettingsDebug,
+            },
+            {
+                name: "import-export",
+                title: __("Import Export", "wp-travel"),
+                className: "tab-advanced",
+                content: ImportExport,
             },
             blockTab,
             downloadsTab
@@ -367,29 +381,34 @@ const WPTravelNetworkSettings = () => {
         }
         
     ], allData );
-    return <div className={wrapperClasses}>
-        {allData.is_sending_request && <Spinner />}
-        <SaveSettings position="top" />
-        <TabPanel className="wp-travel-block-tabs"
-            activeClass="active-tab"
-            onSelect={() => false}
-            tabs={tabs}>
-            {
-                (tab) =><ErrorBoundary>
-                    { tab.content && isValidElement( <tab.content /> ) ? <tab.content /> : ''} {/* Need to remove this latter. add all content with filter instead */}
-                    {applyFilters(
-                        `wptravel_settings_tab_content_${tab.name.replaceAll(
-                            "-",
-                            "_"
-                        )}`,
-                        [],
-                        allData
-                    )}
-                </ErrorBoundary>
-            }
-        </TabPanel>
-        <SaveSettings position="bottom" />
-    </div>
+    return (
+        <>
+            { allData.is_sending_request && <div className="wp-travel-spinner-overlay"><Spinner /></div> }
+            <div className="wp-travel-block-tabs-wrapper wp-travel-trip-settings">
+                <TabPanel className="wp-travel-block-tabs"
+                    activeClass="active-tab"
+                    onSelect={() => false}
+                    tabs={tabs}>
+                    {
+                        (tab) =><ErrorBoundary>
+                            { tab.content && isValidElement( <tab.content /> ) ? <tab.content /> : ''} {/* Need to remove this latter. add all content with filter instead */}
+                            {applyFilters(
+                                `wptravel_settings_tab_content_${tab.name.replaceAll(
+                                    "-",
+                                    "_"
+                                )}`,
+                                [],
+                                allData
+                            )}
+                        </ErrorBoundary>
+                    }
+                </TabPanel>
+                <div id="wp-travel-save-changes-container">
+                    <SaveSettings position="bottom" />
+                </div>
+            </div>
+        </>
+    )
 };
 
 const SettingsDownloadsTemp = () => {

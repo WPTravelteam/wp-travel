@@ -15,14 +15,19 @@
  */
 
 get_header( 'itinerary' ); ?>
-<?php do_action( 'wp_travel_before_main_content' ); ?>
+<?php 
+do_action( 'wp_travel_before_main_content' ); 
+?>
 <?php
 while ( have_posts() ) :
 	the_post();
 	do_action( 'wptravel_single_itinerary_main_content' );
+	// the_content();
 
 endwhile; // end of the loop.
 ?>
-<?php do_action( 'wp_travel_after_main_content' ); ?>
+<?php 
+do_action( 'wp_travel_after_main_content' ); 
+?>
 <?php
 get_footer( 'itinerary' );
