@@ -1,5 +1,24 @@
 const changeLog = [
 	{
+		version: "6.8.0",
+		log: <p>
+				Release Date: 7th June 2023
+				<br/><br/>
+				Fixes: 
+				<br/>
+				* Fixed gender translation issue in the Chinese language.
+				<br/>
+				* Fixed rating schema.
+				<br/><br/>
+				Enhancement:
+				<br/>
+				* Added option to Import/Export WP Travel settings options.
+				<br/>
+				* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-8-0-release-note/ ).
+				<br/>
+			</p>
+	},
+	{
 		version: "6.7.0",
 		log: <p>
 				Release Date: 15th May 2023

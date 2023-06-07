@@ -58,7 +58,7 @@ class WP_Travel_FW_Field_Radio {
 				$checked                 = ( $key == $this->field['default'] ) ? 'checked' : '';
 				$error_coontainer_id     = sprintf( 'error_container-%s', $this->field['id'] );
 				$parsley_error_container = ( 0 === $index ) ? sprintf( 'data-parsley-errors-container="#%s"', $error_coontainer_id ) : '';
-				$output                 .= sprintf( '<div class="wp-travel-radio"><input type="radio" id="wp-travel-payment-%s" name="%s" %s value="%s" %s %s %s/><label for="wp-travel-payment-%s" class="radio-checkbox-label">%s</label></div>', $key, $this->field['name'], $option_attributes, $value, $checked, $validations, $parsley_error_container, $key, $value );
+				$output                 .= sprintf( '<div class="wp-travel-radio"><input type="radio" id="wp-travel-payment-%s" name="%s" %s value="%s" %s %s %s/><label for="wp-travel-payment-%s" class="radio-checkbox-label">%s</label></div>', $key, $this->field['name'], $option_attributes, $key, $checked, $validations, $parsley_error_container, $key, $value );
 				$index++;
 			}
 			$output .= sprintf( '<div id="%s"></div>', $error_coontainer_id );
