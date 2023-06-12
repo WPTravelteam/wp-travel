@@ -248,7 +248,7 @@ Before updating plugin please check ["our latest release notes"](#developers).
 == Changelog ==
 
 = 6.8.0. =
-Release Date: 7th June 2023
+Release Date: 12th June 2023
  
 Fixes:
 * Fixed gender translation issue in the Chinese language.
