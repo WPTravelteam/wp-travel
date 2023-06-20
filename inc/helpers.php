@@ -168,6 +168,8 @@ function wptravel_settings_default_fields() {
 		'pwa_app_short_name'                    => __( 'WPTVL', 'wp-travel' ),
 		'pwa_app_start_url'                    	=> home_url(),
 		'pwa_app_logo'                    		=>  plugin_dir_url( __FILE__ ) . 'assets/images/logo1.png',		
+
+		'enable_session'                    	=> 'no',
 		
 	);
 

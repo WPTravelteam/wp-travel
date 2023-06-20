@@ -59,7 +59,7 @@ class WP_Travel_Import_Export{
 new WP_Travel_Import_Export();
 
 if ( isset( $_SESSION['download_settings'] ) && $_SESSION['download_settings'] == true ) {
-	session_unset();
+	session_destroy();
 	$settings  = json_encode( wptravel_get_settings() );
 
 	$file = "wp-travel-settings.json";

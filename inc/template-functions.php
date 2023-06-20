@@ -196,6 +196,60 @@ function wptravel_posts_clauses_filter( $post_clauses, $object ) {
 	return $post_clauses;
 }
 
+function wptravel_get_for_block_template($template_name){
+
+	$template_path = apply_filters( 'wp_travel_template_path', 'wp-travel/' ); // @phpcs:ignore
+	$template_path = apply_filters( 'wptravel_template_path', $template_path );
+	$default_path  = sprintf( '%s/templates/', plugin_dir_path( dirname( __FILE__ ) ) );
+
+	// Look templates in theme first.
+	$template       = locate_template(
+		array(
+			trailingslashit( $template_path ) . $template_name,
+			$template_name,
+		)
+	);
+	$layout_version = wptravel_layout_version();
+	preg_match( '!\d+!', $layout_version, $version_number );
+	// Legacy Templates for themes.
+	if ( ! $template ) {
+		if ( isset( $version_number[0] ) && 1 !== (int) $version_number[0] ) {
+			$version = (int) $version_number[0];
+			for ( $i = $version; $i >= 1; $i-- ) {
+				$template_ver         = 'v' . $i . '/';
+				$replace_with         = 2 >= $i ? '' : 'v' . ( $i - 1 ) . '/';
+				$legacy_template_name = str_replace( $template_ver, $replace_with, $template_name );
+				$legacy_template      = locate_template(
+					array(
+						trailingslashit( $template_path ) . $legacy_template_name,
+						$legacy_template_name,
+					)
+				);
+				if ( $legacy_template ) {
+					add_filter(
+						'wptravel_layout_version',
+						function( $v ) {
+							return 'v1';
+							return $v;
+						}
+					);
+					return $legacy_template;
+				}
+			}
+		}
+	}
+	// End of Legacy Templates for themes.
+
+	if ( ! $template ) { // Load From Plugin if file not found in theme.
+		$template = $default_path . $template_name;
+	}
+	if ( file_exists( $template ) ) {
+		return $template;
+	}
+	return false;
+
+}
+
 /**
  * Return template.
  *
@@ -278,6 +332,17 @@ function wptravel_get_template_html( $template_name, $args = array() ) {
 	}
 	include wptravel_get_template( $template_name );
 	return ob_get_clean();
+}
+
+function wptravel_get_block_template_part( $slug, $name = '' ){
+	$template  = '';
+	$file_name = ( $name ) ? "{$slug}-{$name}.php" : "{$slug}.php";
+	if ( $name ) {
+		$template = wptravel_get_template( $file_name );
+	}
+	if ( $template ) {
+		load_template( $template, false );
+	}
 }
 
 /**

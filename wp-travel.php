@@ -430,7 +430,10 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				include sprintf( '%s/inc/setup-page/setup-page.php', WP_TRAVEL_ABSPATH );
 			}
 
-			include sprintf( '%s/inc/import-export/import-export.php', WP_TRAVEL_ABSPATH );
+			if ( wptravel_get_settings()['enable_session'] == 'yes' ) {
+				include sprintf( '%s/inc/import-export/import-export.php', WP_TRAVEL_ABSPATH );
+			}
+			
 		}
 
 		/**
