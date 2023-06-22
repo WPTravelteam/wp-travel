@@ -847,8 +847,5 @@ function wptravel() {
 
 // Start WP Travel.
 wptravel();
-// echo "<pre>";
-// var_dump( get_block_templates() );
-// die;
 
 
