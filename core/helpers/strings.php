@@ -194,6 +194,7 @@ class WpTravel_Helpers_Strings {
 			'arrival_time'				=> __( apply_filters( 'wp_travel_arrival_time', 'Arrival Time' ), 'wp-travel' ),
 			'departure_time'			=> __( apply_filters( 'wp_travel_departure_time', 'Departure Time' ), 'wp-travel' ),
 			'conditional_payment_text'	=> __( 'Using the Conditional payment module, you can apply for conditional payment on the checkout page according to the billing address or the trip locations.', 'wp-travel' ),
+			'single_archive'			=> self::wp_travel_single_archive_strings(),
 		);
 
 		$localized_strings['price_per_labels'] = array(
@@ -384,5 +385,19 @@ class WpTravel_Helpers_Strings {
 				'description' => __( 'By upgrading to Pro, you can get trip specific custom tabs addition options with customized content and sorting !', 'wp-travel' ),
 			),
 		);
+	}
+	/**
+	 * Wp trave trip single archive page strings
+	 * @since 6.9
+	 */
+	public static function wp_travel_single_archive_strings() {
+		$strings = [
+			'offer'		=> __( 'Offer', 'wp-travel' ),
+			'view_gallery'					=> __( 'View Gallery', 'wp-travel' ),
+			'keywords'						=> __( 'Keywords', 'wp-travel' ),
+
+		];
+
+		return $strings;
 	}
 }
