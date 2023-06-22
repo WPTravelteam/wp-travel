@@ -252,6 +252,13 @@ class WpTravel_Helpers_Strings {
 			'booking_option'                => __( 'Booking Options', 'wp-travel' ),
 			'booking_with_payment'          => __( 'Booking with payment', 'wp-travel' ),
 			'booking_only'                  => __( 'Booking only', 'wp-travel' ),
+			'payment_price_detail'			=> [
+				'payment_detail'		=> __( 'Payment Details', 'wp-travel' ),
+				'date'					=> __( 'Date', 'wp-travel' ),
+				'payment_id'			=> __( 'Payment ID / Txn ID', 'wp-travel' ),
+				'payment_methode'		=> __( 'Payment Method', 'wp-travel' ),
+				'payment_amount'		=> __( 'Payment Amount', 'wp-travel' ),
+			]
 		);
 	}
 
