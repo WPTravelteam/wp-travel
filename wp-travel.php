@@ -1043,8 +1043,3 @@ function wptravel() {
 
 // Start WP Travel.
 wptravel();
-<<<<<<< HEAD
-=======
-
-
->>>>>>> e6715808d128431a70dbf27b68988d3d7f287110
