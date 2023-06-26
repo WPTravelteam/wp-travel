@@ -1,0 +1,88 @@
+/*!**************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/trip-faqs/editor.scss ***!
+  \**************************************************************************************************************************************************************************************************************************************************/
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+#faq .wp-collapse-open {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: right;
+}
+
+#faq .panel-body {
+  display: none;
+}
+
+#collapse1 .panel-body {
+  display: block;
+}
+
+#faq .wp-collapse-open a {
+  padding: 5px 10px;
+  border: 1px solid #8b8b8b;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+#faq .panel-default {
+  margin-bottom: 0.5em;
+  background-color: #fff;
+}
+
+#faq .panel-heading {
+  position: relative;
+}
+#faq .panel-heading h4 {
+  margin-bottom: 0;
+  margin-top: 10px;
+}
+#faq .panel-heading h4 a {
+  border: 1px solid #ddd;
+  padding: 10px 40px 10px 15px;
+  margin: 0;
+  position: relative;
+  font-weight: normal;
+  display: block;
+  text-decoration: none;
+}
+#faq .panel-heading h4 a .collapse-icon {
+  position: absolute;
+  right: 15px;
+  width: 20px;
+  height: 20px;
+  float: right;
+  text-align: center;
+  top: 5px;
+  border-radius: 50%;
+}
+
+#faq .panel-heading [data-toggle=collapse] span.collapse-icon::after {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 15px;
+  content: "\f077";
+  position: absolute;
+  top: 7px;
+}
+
+#faq .collapse.in {
+  display: block;
+}
+
+#faq .panel-collapse {
+  padding: 0;
+  border: 1px solid #ddd;
+  border-top: none;
+}
+#faq .panel-collapse .panel-body {
+  padding: 10px 15px;
+}
+#faq .panel-collapse .panel-body p {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+/*# sourceMappingURL=index.css.map*/

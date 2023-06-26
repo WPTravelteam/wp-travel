@@ -1,0 +1,45 @@
+/*!*********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/trip-review-list/editor.scss ***!
+  \*********************************************************************************************************************************************************************************************************************************************************/
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+.wptravel-block-trip-rating .wp-travel-average-review {
+  font-family: "Font Awesome 5 Free";
+  font-size: 1em;
+  height: 1em;
+  line-height: 1;
+  overflow: hidden;
+  position: relative;
+  width: 5.5em;
+  display: inline-block;
+  word-break: normal;
+}
+.wptravel-block-trip-rating .wp-travel-average-review span {
+  float: left;
+  left: 0;
+  overflow: hidden;
+  padding-top: 1.5em;
+  position: absolute;
+  top: 0;
+  color: #f9a032;
+  font-weight: 900;
+}
+.wptravel-block-trip-rating .wp-travel-average-review span::before {
+  content: "\f005\f005\f005\f005\f005";
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+.wptravel-block-trip-rating .wp-travel-average-review:before {
+  color: #f9a032;
+  content: "\f005\f005\f005\f005\f005";
+  float: left;
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+/*# sourceMappingURL=index.css.map*/

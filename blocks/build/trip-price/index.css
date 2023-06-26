@@ -1,0 +1,20 @@
+/*!***************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/trip-price/editor.scss ***!
+  \***************************************************************************************************************************************************************************************************************************************************/
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+.wptravel-block-trip-price .trip-price {
+  font-weight: 600;
+  font-size: 22px;
+}
+.wptravel-block-trip-price .trip-price .person-count {
+  text-transform: capitalize;
+}
+.wptravel-block-trip-price .trip-price ins {
+  text-decoration: none;
+}
+
+/*# sourceMappingURL=index.css.map*/

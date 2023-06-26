@@ -1,0 +1,67 @@
+/*!****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/trip-gallery/style.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************/
+@charset "UTF-8";
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+.wp-travel-advanced-gallery-items-list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0 !important;
+}
+
+.wptravel-block-trip-gallery img {
+  height: 200px;
+}
+
+.wptravel-block-trip-gallery .slick-slider .wptag__thumbnail img {
+  height: auto !important;
+  width: 100%;
+}
+
+.alignfull .wp-block-wptravelblock-trip-gallery,
+.alignfull #wptravel-block-trip-gallery {
+  max-width: 100% !important;
+}
+
+.wptravel-block-trip-gallery .slick-dots {
+  bottom: 0px;
+}
+.wptravel-block-trip-gallery .slick-next {
+  right: 30px;
+}
+.wptravel-block-trip-gallery .slick-prev {
+  left: 30px;
+  z-index: 10;
+}
+
+.wptravel-block-trip-gallery.slick-next:before, .wptravel-block-trip-gallery.slick-prev:before {
+  font-size: 30px;
+}
+
+.wptravel-block-trip-gallery .slick-dots li button:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "•";
+  width: 20px;
+  height: 20px;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  color: #000;
+  opacity: 0.25;
+}
+
+@media only screen and (min-width: 993px) {
+  .wptravel-block-trip-gallery .wp-travel-advanced-gallery-items-list.slick-slider .wptag__thumbnail img {
+    max-height: 400px;
+  }
+}
+
+/*# sourceMappingURL=style-index.css.map*/

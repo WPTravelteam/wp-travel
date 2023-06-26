@@ -1,0 +1,50 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "wptravelblock/trip-enquiry",
+  "version": "0.1.0",
+  "title": "Trip Enquiry",
+  "category": "wp-travel-single-trip-blocks",
+  "icon": "smiley",
+  "description": "Example block scaffolded with Create Block tool.",
+  "attributes": {
+    "extraClass": {
+      "type": "string",
+      "default": ""
+    },
+    "textColor": {
+      "type": "string",
+      "default": ""
+    },
+    "inputBackgroundColor": {
+      "type": "string",
+      "default": ""
+    },
+    "inputBorderColor": {
+      "type": "string",
+      "default": ""
+    },
+    "btnBorderColor": {
+      "type": "string",
+      "default": ""
+    },
+    "btnBackgroundColor": {
+      "type": "string",
+      "default": ""
+    },
+    "btnTextColor": {
+      "type": "string",
+      "default": ""
+    },
+    "btnBorderRadius": {
+      "type": "number"
+    }
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "trip-enquiry",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

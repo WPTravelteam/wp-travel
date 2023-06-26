@@ -259,7 +259,10 @@ function wptravel_get_for_block_template($template_name){
 function wptravel_get_template( $template_name ) {
 	if ( count( get_block_templates() ) > 0 ) {
 		foreach ( get_block_templates() as $value ) {
-			if ( $value->slug == 'single-itineraries' ) {
+			if ( is_single() && $value->slug == 'single-itineraries' ) {
+				return;
+			}
+			if( is_archive() && $value->slug == 'archive-itineraries' ){
 				return;
 			}
 		}
