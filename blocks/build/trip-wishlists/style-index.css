@@ -1,0 +1,19 @@
+/*!******************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/trip-wishlists/style.scss ***!
+  \******************************************************************************************************************************************************************************************************************************************************/
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+#wptravel-wishlists-block .wp-travel-add-to-wishlists {
+  position: inherit;
+}
+
+#wptravel-wishlists-block .wp-travel-add-to-wishlists .fa-bookmark:before {
+  content: "\f02e";
+  font-family: "Font Awesome 5 Free";
+}
+
+/*# sourceMappingURL=style-index.css.map*/

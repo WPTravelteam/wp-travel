@@ -170,7 +170,9 @@ function wptravel_settings_default_fields() {
 		'pwa_app_logo'                    		=>  plugin_dir_url( __FILE__ ) . 'assets/images/logo1.png',		
 
 		'enable_session'                    	=> 'no',
-		
+
+		'enable_block'                    	=> 'no',
+	
 	);
 
 	$user_since = get_option( 'wp_travel_user_since' );

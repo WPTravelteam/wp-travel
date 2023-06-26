@@ -1,0 +1,38 @@
+/*!*****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/trip-enquiry/editor.scss ***!
+  \*****************************************************************************************************************************************************************************************************************************************************/
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+#wp-travel-enquiries {
+  max-width: 550px;
+  top: 0;
+  background: #fff;
+  padding: 0px;
+  width: 100%;
+  position: relative;
+  display: block;
+  border-radius: 5px;
+}
+#wp-travel-enquiries .wp-travel-form-field {
+  margin: 10px 0;
+  width: 100%;
+  display: inline-block;
+}
+#wp-travel-enquiries .wp-travel-form-field label {
+  width: 100%;
+  display: block;
+}
+#wp-travel-enquiries .wp-travel-form-field input {
+  width: 100%;
+}
+#wp-travel-enquiries .wp-travel-form-field input[type=checkbox] {
+  width: auto;
+}
+#wp-travel-enquiries .wp-travel-form-field textarea {
+  width: inherit;
+}
+
+/*# sourceMappingURL=index.css.map*/

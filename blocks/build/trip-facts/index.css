@@ -1,0 +1,49 @@
+/*!***************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/trip-facts/editor.scss ***!
+  \***************************************************************************************************************************************************************************************************************************************************/
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+.tour-info {
+  margin: 0 0 30px;
+  margin-block: 20px;
+}
+
+.wptravel-block-trip-fact .tour-info .tour-info-box {
+  border: none;
+  background: #abb8c3;
+  padding: 20px;
+}
+
+.tour-info .tour-info-column {
+  width: 100%;
+  float: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 1em;
+}
+
+.wptravel-block-trip-fact .tour-info .tour-info-column {
+  float: none;
+}
+
+.tour-info .tour-info-column .tour-info-item {
+  display: inline-flex;
+  font-style: normal;
+  color: #595959;
+  width: 100%;
+  float: none;
+  margin: 2px 0;
+  padding: 0;
+  align-items: center;
+}
+
+.tour-info .tour-info-column .tour-info-item i {
+  font-size: 16px;
+  width: 30px;
+  line-height: 25px;
+}
+
+/*# sourceMappingURL=index.css.map*/
