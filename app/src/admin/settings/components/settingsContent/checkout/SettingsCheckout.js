@@ -31,7 +31,7 @@ export default () => {
                     {applyFilters('wp_travel_settings_tab_cart_checkout_fields', [], allData)}
 
                     <PanelRow>
-                        <label>{__('Enable multiple travelers', 'wp-travel')} dsfsdf</label>
+                        <label>{__('Enable multiple travelers', 'wp-travel')}</label>
                         <div id="wp-travel-checkout-enable-multiple-travelers" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={enable_multiple_travellers == 'yes'}

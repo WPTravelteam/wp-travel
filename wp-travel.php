@@ -38,7 +38,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '6.8.0';
+		public $version = '6.9.0';
 
 		/**
 		 * WP Travel API version.
@@ -190,7 +190,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				return $categories;
 			} );
 
-			if ( wptravel_get_settings()['enable_block'] == 'yes' ) {
+			if ( wptravel_get_settings()['enable_block'] == 'yes-test-remove' ) {
 				add_action( 'init', function(){
 					if ( !class_exists( 'WP_Travel_Block_Pro' ) ) {
 						register_block_type( __DIR__ . '/blocks/build/trip-search', array(
@@ -575,13 +575,13 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				include sprintf( '%s/inc/setup-page/setup-page.php', WP_TRAVEL_ABSPATH );
 			}
 
-			if ( wptravel_get_settings()['enable_session'] == 'yes' ) {
+			if ( isset( wptravel_get_settings()['enable_session'] ) && wptravel_get_settings()['enable_session'] == 'yes' ) {
 				include sprintf( '%s/inc/import-export/import-export.php', WP_TRAVEL_ABSPATH );
 			}
 
-			include sprintf( '%s/blocks/breadcrumb-class.php', dirname( __FILE__ ) );
+			// include sprintf( '%s/blocks/breadcrumb-class.php', dirname( __FILE__ ) );
 
-			if ( wptravel_get_settings()['enable_block'] == 'yes' ) { 
+			if ( isset( wptravel_get_settings()['enable_block'] ) &&  wptravel_get_settings()['enable_block'] == 'yes-test-best' ) { 
 				add_action( 'init', function(){  
 					if ( !class_exists( 'WP_Travel_Block_Pro' ) ) {
 						include sprintf( '%s/blocks/block-render/trip-search.php', dirname( __FILE__ ) );

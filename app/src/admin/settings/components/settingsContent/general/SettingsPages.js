@@ -102,7 +102,7 @@ export default () => {
                         </div>
                     </div>
                 </PanelRow>
-                <PanelRow>
+                {/* <PanelRow>
                     <label>
                         {__('Enable Gutenberg Support', 'wp-travel')}
                         <Tooltip text={__('Enbale this option for block supports.', 'wp-travel')}>
@@ -122,7 +122,7 @@ export default () => {
                         <p className="description">
                         </p>
                     </div>
-                </PanelRow>
+                </PanelRow> */}
                 {applyFilters('wp_travel_settings_after_general_fields', [])}
             </div>
         </>
