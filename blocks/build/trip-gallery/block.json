@@ -1,0 +1,39 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "wptravelblock/trip-gallery",
+  "version": "0.1.0",
+  "title": "Trip Gallery",
+  "category": "wp-travel-single-trip-blocks",
+  "icon": "smiley",
+  "description": "Example block scaffolded with Create Block tool.",
+  "attributes": {
+    "galleryDesign": {
+      "type": "string",
+      "default": "gridStyle"
+    },
+    "sliderHeight": {
+      "type": "number",
+      "default": 400
+    },
+    "sliderAutoplay": {
+      "type": "boolean",
+      "default": false
+    },
+    "sliderArrow": {
+      "type": "boolean",
+      "default": false
+    },
+    "sliderDots": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "trip-gallery",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

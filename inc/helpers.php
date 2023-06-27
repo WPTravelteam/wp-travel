@@ -168,7 +168,11 @@ function wptravel_settings_default_fields() {
 		'pwa_app_short_name'                    => __( 'WPTVL', 'wp-travel' ),
 		'pwa_app_start_url'                    	=> home_url(),
 		'pwa_app_logo'                    		=>  plugin_dir_url( __FILE__ ) . 'assets/images/logo1.png',		
-		
+
+		'enable_session'                    	=> 'no',
+
+		'enable_block'                    	=> 'no',
+	
 	);
 
 	$user_since = get_option( 'wp_travel_user_since' );
@@ -2992,6 +2996,13 @@ function wptravel_view_payment_details_table( $booking_id ) {
 	if ( ! $booking_id ) {
 		return;
 	}
+	$strings = WpTravel_Helpers_Strings::get();	
+	$payment_price_detail = isset( $payment_price_detail['payment_price_detail'] ) ? $payment_price_detail['payment_price_detail'] : [];
+	$date_txt 			= isset( $payment_price_detail['date'] ) ? $payment_price_detail['date'] : apply_filters( 'wp_invc_date', 'Date' );
+	$payment_id_txt 	= isset( $payment_price_detail['payment_id'] ) ? $payment_price_detail['payment_id'] : apply_filters( 'wp_invc_payment_id', 'Payment ID / Txn ID' );
+	$payment_method_txt = isset( $payment_price_detail['payment_method'] ) ? $payment_price_detail['payment_method'] : apply_filters( 'wp_invc_payment_method', 'Payment Method' );
+	$payment_amount_txt = isset( $payment_price_detail['payment_amount'] ) ? $payment_price_detail['payment_amount'] : apply_filters( 'wp_invc_payment_amount', 'Payment Amount' );
+	$payment_detail_txt 	= isset( $payment_price_detail['payment_detail'] ) ? $payment_price_detail['payment_detail'] : apply_filters( 'wp_invc_payment_details', 'Payment Details' );
 
 	$payment_data = wptravel_payment_data( $booking_id );
 	$status_list  = wptravel_get_payment_status();
@@ -3009,13 +3020,13 @@ function wptravel_view_payment_details_table( $booking_id ) {
 			<?php
 		}
 		?>
-		<h3><?php esc_html_e( 'Payment Details', 'wp-travel' ); ?></h3>
+		<h3><?php esc_html_e( $payment_detail_txt, 'wp-travel' ); ?></h3>
 		<table class="my-order-payment-details">
 			<tr>
-				<th><?php esc_html_e( 'Date', 'wp-travel' ); ?></th>
-				<th><?php esc_html_e( 'Payment ID / Txn ID', 'wp-travel' ); ?></th>
-				<th><?php esc_html_e( 'Payment Method', 'wp-travel' ); ?></th>
-				<th><?php esc_html_e( 'Payment Amount', 'wp-travel' ); ?></th>
+				<th><?php esc_html_e( $date_txt, 'wp-travel' ); ?></th>
+				<th><?php esc_html_e( $payment_id_txt, 'wp-travel' ); ?></th>
+				<th><?php esc_html_e( $payment_method_txt, 'wp-travel' ); ?></th>
+				<th><?php esc_html_e( $payment_amount_txt, 'wp-travel' ); ?></th>
 			</tr>
 			<?php
 			foreach ( $payment_data as $payment_args ) {

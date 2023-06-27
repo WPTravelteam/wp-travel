@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 6.0.0
 Tested up to: 6.2
 Requires PHP: 7.4
-Stable tag: 6.8.0
+Stable tag: 6.9.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -246,6 +246,23 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 6.9.0. =
+Release Date: 27th June 2023
+
+Fixes:
+* Fixed backend setting page string translation.
+
+Enhancement:
+* Added hook `[wp_travel_single_archive_trip_types]` to modify and remove trip types on single trip page.
+* Added hook `[wp_travel_single_archive_activities]` to modify and remove activities on single trip page.
+* Added hook `[wp_travel_single_archive_group_size]` to modify and remove group size on single trip page.
+* Added hook `[wp_travel_single_archive_review]` to modify and remove review on single trip page.
+* Added hook `[wp_travel_single_archive_page_trip_location]` to modify and remove trip location on single trip page.
+* Added hook `[wp_travel_single_archive_page_trip_duration]` to modify and remove trip duration on single trip page.
+* Added hook `[wp_travel_single_archive_trip_code]` to modify and remove trip code on single trip page.
+* Added hook `[wp_travel_single_archive_trip_keyword]` to modify and remove trip keyword on single trip page.
+* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-9-0-release-note/ ).
 
 = 6.8.0. =
 Release Date: 12th June 2023

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "wptravelblock/trip-calendar",
+  "version": "0.1.0",
+  "title": "Trip Book",
+  "category": "wp-travel-single-trip-blocks",
+  "icon": "smiley",
+  "description": "Example block scaffolded with Create Block tool.",
+  "attributes": {
+    "showTooltip": {
+      "type": "boolean",
+      "default": true
+    },
+    "textAlign": {
+      "type": "string",
+      "default": "left"
+    },
+    "tooltipText": {
+      "type": "string",
+      "default": "Select a Date to view available pricings and other options."
+    },
+    "tooltipColor": {
+      "type": "string",
+      "default": ""
+    },
+    "tooltipBgColor": {
+      "type": "string",
+      "default": ""
+    },
+    "tooltipBorderColor": {
+      "type": "string",
+      "default": ""
+    },
+    "btnBackgroundColor": {
+      "type": "string",
+      "default": ""
+    },
+    "btnIconBackgroundColor": {
+      "type": "string",
+      "default": ""
+    },
+    "iconColor": {
+      "type": "string",
+      "default": ""
+    },
+    "btnTextColor": {
+      "type": "string",
+      "default": ""
+    },
+    "btnBorderRadius": {
+      "type": "number",
+      "default": 3
+    },
+    "btnBordercolor": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "trip-calendar",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

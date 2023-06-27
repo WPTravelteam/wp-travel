@@ -131,7 +131,7 @@ class WpTravel_Localize_Admin {
 					'theme_page' => 'https://themepalace.com/downloads/travel-insight/',
 				),
 			);
-
+			
 			$theme_datas = array();
 			if ( property_exists( themes_api( 'theme_information', array( 'slug' => 'travel-joy' ) ), 'errors' ) == false ) {
 				foreach ( $theme_lists as $data ) {
@@ -218,6 +218,7 @@ class WpTravel_Localize_Admin {
 		if ( get_current_screen()->base == 'dashboard_page_wp-travel-setup-page' ) {
 			wp_localize_script( 'wp-travel-setup-page-js', '_wp_travel', $translation_array );  // temp fixes to use
 		}
+		
 	}
 }
 

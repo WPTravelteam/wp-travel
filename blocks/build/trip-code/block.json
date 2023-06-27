@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "wptravelblock/trip-code",
+  "version": "0.1.0",
+  "title": "Trip Code",
+  "category": "wp-travel-single-trip-blocks",
+  "icon": "smiley",
+  "description": "Example block scaffolded with Create Block tool.",
+  "usesContext": [
+    "postId",
+    "postType",
+    "queryId"
+  ],
+  "attributes": {
+    "textAlign": {
+      "type": "string",
+      "default": "left"
+    },
+    "extraClass": {
+      "type": "string",
+      "default": ""
+    },
+    "textColor": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "trip-code",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

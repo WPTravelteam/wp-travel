@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "wptravelblock/trip-rating",
+  "version": "0.1.0",
+  "title": "Trip Rating",
+  "category": "wp-travel-single-trip-blocks",
+  "icon": "smiley",
+  "description": "Example block scaffolded with Create Block tool.",
+  "attributes": {
+    "textAlign": {
+      "type": "string",
+      "default": "left"
+    },
+    "reviewColor": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "trip-rating",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

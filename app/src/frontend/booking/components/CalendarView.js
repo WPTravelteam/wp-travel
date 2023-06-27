@@ -39,7 +39,7 @@ const CalendarView = ( props ) => {
         pricings,
         trip_duration:tripDuration
     } = tripData;
-	console.log( 'trip data', tripDuration );
+	// console.log( 'trip data', tripDuration );
 	const { trip_duration } = typeof tripData != 'undefined' && tripData || {};
 	// const { start_date, end_date } = typeof trip_duration != 'undefined' && trip_duration || '';
     const allPricings        = pricings && _.keyBy( pricings, p => p.id ) // Need object structure because pricing id may not be in sequencial order.
@@ -462,7 +462,7 @@ const CalendarView = ( props ) => {
 		( moment( md.start_date ).isBefore( moment(new Date() ) ) && md.is_recurring ) || // @todo need to filter end date condition as well in recurring.
 		moment( md.start_date ).isSame( moment(new Date() ) ) 
 	);
-		console.log( 'hekdfsdf',isFixedDeparture );
+		// console.log( 'hekdfsdf',isFixedDeparture );
 	let minDate = _mindate && moment(_mindate.start_date).toDate() || new Date();
 	let maxDate = new Date( new Date().setFullYear(new Date().getFullYear() + 10 ));
     let params = {

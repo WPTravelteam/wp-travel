@@ -2,7 +2,7 @@ import React from 'react'
 import { applyFilters, addFilter } from '@wordpress/hooks';
 import { useSelect, dispatch } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
-import { PanelRow } from '@wordpress/components';
+import { PanelRow, ToggleControl } from '@wordpress/components';
 import Tooltip from '../../UI/Tooltip';
 
 import Select from '../../UI/Select'
@@ -15,6 +15,7 @@ export default () => {
         // cart_page_id,
         checkout_page_id,
         dashboard_page_id,
+        enable_block,
         options } = allData;
 
     const { updateSettings } = dispatch('WPTravel/Admin');
@@ -101,6 +102,27 @@ export default () => {
                         </div>
                     </div>
                 </PanelRow>
+                {/* <PanelRow>
+                    <label>
+                        {__('Enable Gutenberg Support', 'wp-travel')}
+                        <Tooltip text={__('Enbale this option for block supports.', 'wp-travel')}>
+                            <span><i className='fa fa-info-circle'></i></span>
+                        </Tooltip>
+                    </label>
+                    <div id="wp-travel-use-currency-name" className="wp-travel-field-value">
+                        <ToggleControl
+                            checked={enable_block == 'yes'}
+                            onChange={() => {
+                                updateSettings({
+                                    ...allData,
+                                    enable_block: 'yes' == enable_block ? 'no' : 'yes'
+                                })
+                            }}
+                        />
+                        <p className="description">
+                        </p>
+                    </div>
+                </PanelRow> */}
                 {applyFilters('wp_travel_settings_after_general_fields', [])}
             </div>
         </>

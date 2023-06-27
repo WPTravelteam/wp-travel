@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "wptravelblock/trip-sale",
+  "version": "0.1.0",
+  "title": "Trip Sale",
+  "category": "wp-travel-single-trip-blocks",
+  "icon": "smiley",
+  "description": "Example block scaffolded with Create Block tool.",
+  "attributes": {
+    "textAlign": {
+      "type": "string",
+      "default": "left"
+    },
+    "fontSize": {
+      "type": "number",
+      "default": 22
+    }
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "trip-sale",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

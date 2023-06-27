@@ -1,0 +1,166 @@
+.wp-travel-gutenberg-blocks-library {
+    width: 90%;
+    overflow: hidden;
+}
+
+.wp-travel-gutenberg-blocks-library .components-modal__header{
+    padding: 0px 15px;
+    height: 50px;
+}
+
+.wp-travel-gutenberg-blocks-library .components-modal__content.hide-header {
+    margin-top: 98px;
+    padding-top: 0px;
+}
+
+.wp-travel-gutenberg-blocks-library  .components-modal__header{
+    background: #159F84;
+}
+.wp-travel-gutenberg-blocks-library .components-tab-panel__tabs{
+    position: fixed;
+    top: 50px;
+    z-index: 1212;
+    background: #159f847a;
+    width: 100%;
+    left: 0px;
+}
+.wp-travel-gutenberg-blocks-modal {
+    min-width: 1200px;
+    max-width: 800px;
+  }
+  .wp-travel-gutenberg-blocks-modal .components-modal__header:first-child {
+    display: flex;
+  }
+  .wp-travel-gutenberg-blocks-modal .components-modal__header {
+    position: initial;
+    padding: 0 0px;
+  }
+.wp-travel-gutenberg-blocks-modal-loading-spinner {
+    text-align: center;
+  }
+  
+  .wp-travel-gutenberg-blocks-categories-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+  }
+  
+  .wp-travel-gutenberg-blocks-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin-top: 0px;
+    list-style: none;
+  }
+  .wp-travel-gutenberg-blocks-list > li {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 32.33%;
+    flex: 0 0 32.33%;
+    width: 32.33%;
+    border: 2px solid;
+  }
+  .wp-travel-gutenberg-blocks-list > li > button {
+    display: block;
+    width: 100%;
+    padding: 0;
+    cursor: pointer;
+    background: none;
+    background-color: #fff;
+    border: none;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 0 0 1px #edeff0;
+    box-shadow: 0 0 0 1px #edeff0;
+    -webkit-transition: 0.2s border-color, 0.2s box-shadow;
+    -o-transition: 0.2s border-color, 0.2s box-shadow;
+    transition: 0.2s border-color, 0.2s box-shadow;
+  }
+  .wp-travel-gutenberg-blocks-list > li > button:hover {
+    box-shadow: 0 0 0 2px #007cba;
+  }
+  .wp-travel-gutenberg-blocks-list > li > button > .wp-travel-gutenberg-blocks-list-item-image {
+    position: relative;
+    display: block;
+  }
+  .wp-travel-gutenberg-blocks-list > li > button > .wp-travel-gutenberg-blocks-list-item-image .wp-travel-gutenberg-blocks-list-item-image-sizer {
+    width: 100%;
+  }
+  .wp-travel-gutenberg-blocks-list > li > button > .wp-travel-gutenberg-blocks-list-item-image .lazyload-wrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    display: block;
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+  }
+  .wp-travel-gutenberg-blocks-list > li > button .wp-travel-gutenberg-blocks-list-item-title {
+    padding: 10px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-top: 1px solid #f8f9f9;
+  }
+
+  .wp-travel-gutenberg-blocks-list-item img{
+    max-height: 500px;
+    object-fit: cover;
+    object-position: top;
+  }
+  
+
+  .wp-travel-gutenberg-blocks-list-item img:hover{
+    object-position: bottom;
+    -webkit-transition: all 11s;
+    -moz-transition: all 11s;
+    -ms-transition: all 11s;
+    -o-transition: all 11s;
+    transition: all 11s;
+  }
+
+.wp-travel-gutenberg-blocks-list-item-title .template-name{
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.wp-travel-gutenberg-blocks-list-item-title{
+  display: flex;
+  padding: 10px 10px;
+  justify-content: space-between;
+}
+
+.wp-travel-gutenberg-blocks-list-item-title .import-icon button{
+  width: 28px;
+}
+
+button[aria-label="WP Travel Templates"]{
+  padding: 0px !important;
+}
+
+button[aria-label="WP Travel Templates"]:before {
+  content: " Add Template";
+  background: #159F84;
+  color:#fff;
+  padding: 10px 15px;
+}
+
+button[aria-label="WP Travel Templates"] svg{
+  display: none;
+}
+
+.wp-travel-gutenberg-blocks-list .wp-travel-gutenberg-blocks-list-item{
+  position: unset !important;
+}
+
+.wp-travel-gutenberg-blocks-list{
+  gap: 1.5%;
+}
+
+.wp-travel-gutenberg-blocks-list-item-title .import-icon{
+  background: #f16464;
+  color: #fff;
+  padding: 5px 10px;
+}

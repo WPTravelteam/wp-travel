@@ -71,9 +71,10 @@ class WP_Travel_Post_Types { // @phpcs:ignore
 			'menu_position'      => 30,
 			'show_in_rest'       => true,
 		);
-		if ( is_plugin_active( 'elementor/elementor.php' ) ) {
+		if ( is_plugin_active( 'elementor/elementor.php' ) || wptravel_get_settings()['enable_block'] == 'yes' ) {
 			$args['supports'][] = 'editor';
 		}
+
 		/**
 		 * Register a itineraries post type.
 		 *

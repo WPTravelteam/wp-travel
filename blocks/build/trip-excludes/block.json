@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "wptravelblock/trip-excludes",
+  "version": "0.1.0",
+  "title": "Trip Excludes",
+  "category": "wp-travel-single-trip-blocks",
+  "icon": "smiley",
+  "description": "Example block scaffolded with Create Block tool.",
+  "attributes": {
+    "textAlign": {
+      "type": "string",
+      "default": "left"
+    }
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "trip-excludes",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

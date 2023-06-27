@@ -3,7 +3,7 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 6.8.0
+ * Version: 6.9.0
  * Author: WP Travel
  * Author URI: http://wptravel.io/
  * Requires at least: 6.0.0
@@ -38,7 +38,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '6.8.0';
+		public $version = '6.9.0';
 
 		/**
 		 * WP Travel API version.
@@ -100,6 +100,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			self::define( 'WP_TRAVEL_API_VERSION', $api_version );
 			self::define( 'WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT', array( 10 ) ); // In percent.
 			self::define( 'WP_TRAVEL_SLIP_UPLOAD_DIR', 'wp-travel-slip' ); // In percent.
+			// since 6.9
+			self::define( 'WPTRAVEL_BLOCK_VERSION', '1.0.0' );
 		}
 
 		/**
@@ -168,6 +170,149 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			if ( isset( $settings['wpml_migrations'] ) && $settings['wpml_migrations'] ) {
 				add_action( 'init', array( 'WpTravel_Helpers_Trips', 'wp_travel_trip_date_price' ) );
 			}
+			/**
+			 * Admin Notice for install wp travel slicewp affiliate addon
+ 			 */
+			  add_action( 'admin_notices', array( $this, 'wp_travel_slicewp_affiliate_install_notice' ) );
+			  
+			add_action( 'enqueue_block_editor_assets', array( $this, 'blocks_editor_scripts' ) );
+
+			add_filter( 'block_categories_all' , function( $categories ) {
+				// Adding a new category.
+				$categories[] = array(
+					'slug'  => 'wp-travel-blocks',
+					'title' => esc_html__( 'WP Travel Blocks', 'wp-travel' )
+				);	
+				$categories[] = array(
+					'slug'  => 'wp-travel-single-trip-blocks',
+					'title' => esc_html__( 'WP Travel Single Trip Blocks', 'wp-travel' )
+				);		
+				return $categories;
+			} );
+
+			if ( wptravel_get_settings()['enable_block'] == 'yes-test-remove' ) {
+				add_action( 'init', function(){
+					if ( !class_exists( 'WP_Travel_Block_Pro' ) ) {
+						register_block_type( __DIR__ . '/blocks/build/trip-search', array(
+							'render_callback' => 'wptravel_block_trip_search_render'
+						) );
+
+						register_block_type( __DIR__ . '/blocks/build/trip-list', array(
+							'render_callback' => 'wptravel_block_trip_list_render'
+						) );
+
+						register_block_type( __DIR__ . '/blocks/build/trip-calendar', array(
+							'render_callback' => 'wptravel_block_trip_calendar_render'
+						) );
+
+						register_block_type( __DIR__ . '/blocks/build/trip-category', array(
+							'render_callback' => 'wptravel_block_trip_category_render'
+						) );
+
+						register_block_type( __DIR__ . '/blocks/build/trip-code', array(
+							'render_callback' => 'wptravel_block_trip_code_render',
+						) );
+
+						register_block_type( __DIR__ . '/blocks/build/trip-duration', array(
+							'render_callback' => 'wptravel_block_trip_duration_render'
+						) );
+
+						register_block_type( __DIR__ . '/blocks/build/trip-enquiry', array(
+							'render_callback' => 'wptravel_block_trip_enquiry_render'
+						) );
+
+						register_block_type( __DIR__ . '/blocks/build/trip-excludes', array(
+							'render_callback' => 'wptravel_block_trip_excludes_render'
+						) );
+
+						register_block_type( __DIR__ . '/blocks/build/trip-facts', array(
+							'render_callback' => 'wptravel_block_trip_facts_render'
+						) );
+
+						register_block_type( __DIR__ . '/blocks/build/trip-faqs', array(
+							'render_callback' => 'wptravel_block_trip_faqs_render'
+						) );
+
+						register_block_type( __DIR__ . '/blocks/build/trip-filters', array(
+							'render_callback' => 'wptravel_block_trip_filters_render'
+						) );
+
+						register_block_type( __DIR__ . '/blocks/build/trip-gallery', array(
+							'render_callback' => 'wptravel_block_trip_gallery_render'
+						) );
+
+						register_block_type( __DIR__ . '/blocks/build/trip-group-size', array(
+							'render_callback' => 'wptravel_block_trip_group_size_render'
+						) );
+
+						register_block_type( __DIR__ . '/blocks/build/trip-includes', array(
+							'render_callback' => 'wptravel_block_trip_includes_render'
+						) );
+
+						register_block_type( __DIR__ . '/blocks/build/trip-map', array(
+							'render_callback' => 'wptravel_block_trip_map_render'
+						) );
+
+						register_block_type( __DIR__ . '/blocks/build/trip-outline', array(
+							'render_callback' => 'wptravel_block_trip_outline_render'
+						) );
+
+						register_block_type( __DIR__ . '/blocks/build/trip-overview', array(
+							'render_callback' => 'wptravel_block_trip_overview_render'
+						) );
+
+						register_block_type( __DIR__ . '/blocks/build/trip-price', array(
+							'render_callback' => 'wptravel_block_trip_price_render'
+						) );
+
+						register_block_type( __DIR__ . '/blocks/build/trip-rating', array(
+							'render_callback' => 'wptravel_block_trip_rating_render'
+						) );
+
+						register_block_type( __DIR__ . '/blocks/build/trip-review', array(
+							'render_callback' => 'wptravel_block_trip_review_render'
+						) );
+
+						register_block_type( __DIR__ . '/blocks/build/trip-review-list', array(
+							'render_callback' => 'wptravel_block_trip_review_list_render'
+						) );
+
+						register_block_type( __DIR__ . '/blocks/build/trip-tabs', array(
+							'render_callback' => 'wptravel_block_trip_tabs_render'
+						) );
+
+						register_block_type( __DIR__ . '/blocks/build/trip-wishlists', array(
+							'render_callback' => 'wptravel_block_trip_wishlists_render'
+						) );
+
+						register_block_type( __DIR__ . '/blocks/build/trip-sale', array(
+							'render_callback' => 'wptravel_block_trip_sale_render'
+						) );
+
+						register_block_type( __DIR__ . '/blocks/build/trip-departure', array(
+							'render_callback' => 'wptravel_block_trip_departure_render'
+						) );
+
+						register_block_type( __DIR__ . '/blocks/build/trip-downloads', array(
+							'render_callback' => 'wptravel_block_trip_downloads_render'
+						) );
+
+						register_block_type( __DIR__ . '/blocks/build/breadcrumb', array(
+							'render_callback' => 'wptravel_block_breadcrumb_render'
+						) );
+					}
+				});
+			}			
+			
+		}
+
+
+
+		public function blocks_editor_scripts(){
+			wp_enqueue_style( 
+				'wp-travel-block-editor-style', 
+				plugin_dir_url( __FILE__ ) . '/blocks/assets/css/editor-style.css', 
+			);
 		}
 
 		/**
@@ -430,7 +575,53 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				include sprintf( '%s/inc/setup-page/setup-page.php', WP_TRAVEL_ABSPATH );
 			}
 
-			include sprintf( '%s/inc/import-export/import-export.php', WP_TRAVEL_ABSPATH );
+			if ( isset( wptravel_get_settings()['enable_session'] ) && wptravel_get_settings()['enable_session'] == 'yes' ) {
+				include sprintf( '%s/inc/import-export/import-export.php', WP_TRAVEL_ABSPATH );
+			}
+
+			// include sprintf( '%s/blocks/breadcrumb-class.php', dirname( __FILE__ ) );
+
+			if ( isset( wptravel_get_settings()['enable_block'] ) &&  wptravel_get_settings()['enable_block'] == 'yes-test-best' ) { 
+				add_action( 'init', function(){  
+					if ( !class_exists( 'WP_Travel_Block_Pro' ) ) {
+						include sprintf( '%s/blocks/block-render/trip-search.php', dirname( __FILE__ ) );
+						include sprintf( '%s/blocks/block-render/trip-list.php', dirname( __FILE__ ) );
+						include sprintf( '%s/blocks/block-render/trip-calendar.php', dirname( __FILE__ ) );
+						include sprintf( '%s/blocks/block-render/trip-category.php', dirname( __FILE__ ) );
+						include sprintf( '%s/blocks/block-render/trip-code.php', dirname( __FILE__ ) );
+						include sprintf( '%s/blocks/block-render/trip-duration.php', dirname( __FILE__ ) );
+						include sprintf( '%s/blocks/block-render/trip-enquiry.php', dirname( __FILE__ ) );
+						include sprintf( '%s/blocks/block-render/trip-excludes.php', dirname( __FILE__ ) );
+						include sprintf( '%s/blocks/block-render/trip-facts.php', dirname( __FILE__ ) );
+						include sprintf( '%s/blocks/block-render/trip-faqs.php', dirname( __FILE__ ) );
+						include sprintf( '%s/blocks/block-render/trip-filters.php', dirname( __FILE__ ) );
+						include sprintf( '%s/blocks/block-render/trip-gallery.php', dirname( __FILE__ ) );
+						include sprintf( '%s/blocks/block-render/trip-group-size.php', dirname( __FILE__ ) );
+						include sprintf( '%s/blocks/block-render/trip-includes.php', dirname( __FILE__ ) );
+						include sprintf( '%s/blocks/block-render/trip-map.php', dirname( __FILE__ ) );
+						include sprintf( '%s/blocks/block-render/trip-outline.php', dirname( __FILE__ ) );
+						include sprintf( '%s/blocks/block-render/trip-overview.php', dirname( __FILE__ ) );
+						include sprintf( '%s/blocks/block-render/trip-price.php', dirname( __FILE__ ) );
+						include sprintf( '%s/blocks/block-render/trip-rating.php', dirname( __FILE__ ) );
+						include sprintf( '%s/blocks/block-render/trip-review.php', dirname( __FILE__ ) );
+						include sprintf( '%s/blocks/block-render/trip-review-list.php', dirname( __FILE__ ) );
+						include sprintf( '%s/blocks/block-render/trip-tabs.php', dirname( __FILE__ ) );
+						include sprintf( '%s/blocks/block-render/trip-wishlists.php', dirname( __FILE__ ) );
+						include sprintf( '%s/blocks/block-render/trip-sale.php', dirname( __FILE__ ) );
+						include sprintf( '%s/blocks/block-render/trip-departure.php', dirname( __FILE__ ) );
+						include sprintf( '%s/blocks/block-render/trip-downloads.php', dirname( __FILE__ ) );
+						include sprintf( '%s/blocks/block-render/breadcrumb.php', dirname( __FILE__ ) );
+					}
+				} );
+
+				include sprintf( '%s/blocks/class-rest.php', dirname( __FILE__ ) );
+				include sprintf( '%s/blocks/class-templates.php', dirname( __FILE__ ) );
+				
+			}
+			
+
+			
+			
 		}
 
 		/**
@@ -827,6 +1018,14 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			do_action( 'wp_travel_reject_checkout_cache_plugin_action', $support_plugins ); // phpcs:ignore
 			do_action( 'wptravel_reject_checkout_cache_plugin_action', $support_plugins );
 		}
+		/**
+		 * Admin notice for request installation of wp-travel-slicewp-affiliate plugin
+		 */
+		public function wp_travel_slicewp_affiliate_install_notice() {
+			if ( is_plugin_active( 'slicewp/index.php' ) && ! is_plugin_active( 'wp-travel-slicewp-affiliate-addon/wp-travel-slicewp-affiliate-addon.php' ) ) {
+				echo '<div class="notice notice-warning is-dismissible"><h4>Check our <a href="https://wptravel.io/wp-travel-slicewp-affiliate-plugin/" style="text-decoration:none; color:red;" target="_blank" >WP Travel SliceWP Affiliate</a> plugin to know about new affiliate program feature and increase your booking.</h4></div>';
+			}
+		}
 	}
 endif;
 
@@ -844,8 +1043,3 @@ function wptravel() {
 
 // Start WP Travel.
 wptravel();
-// echo "<pre>";
-// var_dump( get_block_templates() );
-// die;
-
-

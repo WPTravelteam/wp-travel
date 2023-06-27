@@ -1,0 +1,68 @@
+/*!*****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/trip-outline/editor.scss ***!
+  \*****************************************************************************************************************************************************************************************************************************************************/
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+.wptravel-block-trip-outline .col {
+  display: flex;
+  flex-wrap: wrap;
+}
+.wptravel-block-trip-outline .col .tc-heading {
+  position: relative;
+  width: calc(50% - 1px);
+  padding: 0px 50px 15px 50px;
+  text-align: right;
+}
+.wptravel-block-trip-outline .col .tc-heading h4 {
+  font-size: 22px;
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 0px;
+}
+.wptravel-block-trip-outline .col .tc-heading h3:last-of-type {
+  font-style: italic;
+  font-weight: 100;
+}
+.wptravel-block-trip-outline .col h3 {
+  margin-top: 0;
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 3px;
+  flex-basis: 100%;
+}
+.wptravel-block-trip-outline .timeline-contents .col:last-of-type .tc-content {
+  padding-bottom: 0;
+}
+.wptravel-block-trip-outline .tc-content.right {
+  border-left: 2px solid;
+}
+.wptravel-block-trip-outline .tc-content {
+  position: relative;
+  width: calc(50% - 1px);
+  padding: 0 50px 15px 50px;
+}
+.wptravel-block-trip-outline .itenary .timeline-contents .tc-content img {
+  transform: translateY(8px);
+}
+.wptravel-block-trip-outline .timeline-contents .col:last-of-type .tc-content p {
+  margin-bottom: 0;
+}
+.wptravel-block-trip-outline .itenary .image {
+  height: 25px;
+  width: 25px;
+  left: -13px;
+  background: #8b8b8b;
+  top: 0;
+  border-radius: 50%;
+  border: 2px solid;
+  position: absolute;
+}
+
+.timeline-contents h2 {
+  text-align: center;
+}
+
+/*# sourceMappingURL=index.css.map*/
