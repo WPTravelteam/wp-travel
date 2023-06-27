@@ -262,6 +262,7 @@ Enhancement:
 * Added hook `[wp_travel_single_archive_page_trip_duration]` to modify and remove trip duration on single trip page.
 * Added hook `[wp_travel_single_archive_trip_code]` to modify and remove trip code on single trip page.
 * Added hook `[wp_travel_single_archive_trip_keyword]` to modify and remove trip keyword on single trip page.
+* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-9-0-release-note/ ).
 
 = 6.8.0. =
 Release Date: 12th June 2023
