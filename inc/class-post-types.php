@@ -8,7 +8,8 @@
 /**
  * WP Travel Post Type class
  */
-class WP_Travel_Post_Types { // @phpcs:ignore
+class WP_Travel_Post_Types {
+ // @phpcs:ignore
 
 	/**
 	 * Init.
@@ -20,7 +21,7 @@ class WP_Travel_Post_Types { // @phpcs:ignore
 		self::register_trip();
 		self::register_payment();
 		self::register_travel_guide();
-		
+
 		WP_Travel_Post_Status::init();
 	}
 	/**
@@ -32,8 +33,8 @@ class WP_Travel_Post_Types { // @phpcs:ignore
 		if ( ! function_exists( 'is_plugin_active' ) ) {
 			require_once ABSPATH . '/wp-admin/includes/plugin.php';
 		}
-		$permalink       = wptravel_get_permalink_structure();
-		$labels          = array(
+		$permalink = wptravel_get_permalink_structure();
+		$labels    = array(
 			'name'               => _x( 'Trips', 'post type general name', 'wp-travel' ),
 			'singular_name'      => _x( 'Trip', 'post type singular name', 'wp-travel' ),
 			'menu_name'          => _x( 'Trips', 'admin menu', 'wp-travel' ),
@@ -71,9 +72,6 @@ class WP_Travel_Post_Types { // @phpcs:ignore
 			'menu_position'      => 30,
 			'show_in_rest'       => true,
 		);
-		if ( is_plugin_active( 'elementor/elementor.php' ) || wptravel_get_settings()['enable_block'] == 'yes' ) {
-			$args['supports'][] = 'editor';
-		}
 
 		/**
 		 * Register a itineraries post type.
@@ -84,7 +82,7 @@ class WP_Travel_Post_Types { // @phpcs:ignore
 
 		$post_types = array( 'itineraries' );
 		$fields     = array(
-			'wp_travel_lat' => array(
+			'wp_travel_lat'                  => array(
 				'show_in_rest'  => true,
 				'single'        => true,
 				'type'          => 'string',
@@ -92,7 +90,7 @@ class WP_Travel_Post_Types { // @phpcs:ignore
 					return current_user_can( 'edit_posts' );
 				},
 			),
-			'wp_travel_lng' => array(
+			'wp_travel_lng'                  => array(
 				'show_in_rest'  => true,
 				'single'        => true,
 				'type'          => 'string',
@@ -108,7 +106,7 @@ class WP_Travel_Post_Types { // @phpcs:ignore
 					return current_user_can( 'edit_posts' );
 				},
 			),
-			'wp_travel_location' => array(
+			'wp_travel_location'             => array(
 				'show_in_rest'  => true,
 				'single'        => true,
 				'type'          => 'string',
@@ -117,14 +115,14 @@ class WP_Travel_Post_Types { // @phpcs:ignore
 				},
 			),
 			// 'wp_travel_tabs' => array(
-			// 	'show_in_rest'  => true,
-			// 	'single'        => true,
-			// 	'type'          => 'string',
-			// 	'auth_callback' => function () {
-			// 		return current_user_can( 'edit_posts' );
-			// 	},
+			// 'show_in_rest'  => true,
+			// 'single'        => true,
+			// 'type'          => 'string',
+			// 'auth_callback' => function () {
+			// return current_user_can( 'edit_posts' );
+			// },
 			// ),
-			'wp_travel_overview' => array(
+			'wp_travel_overview'             => array(
 				'show_in_rest'  => true,
 				'single'        => true,
 				'type'          => 'string',
@@ -132,7 +130,7 @@ class WP_Travel_Post_Types { // @phpcs:ignore
 					return current_user_can( 'edit_posts' );
 				},
 			),
-			'wp_travel_outline' => array(
+			'wp_travel_outline'              => array(
 				'show_in_rest'  => true,
 				'single'        => true,
 				'type'          => 'string',
@@ -140,7 +138,7 @@ class WP_Travel_Post_Types { // @phpcs:ignore
 					return current_user_can( 'edit_posts' );
 				},
 			),
-			'wp_travel_trip_include' => array(
+			'wp_travel_trip_include'         => array(
 				'show_in_rest'  => true,
 				'single'        => true,
 				'type'          => 'string',
@@ -148,7 +146,7 @@ class WP_Travel_Post_Types { // @phpcs:ignore
 					return current_user_can( 'edit_posts' );
 				},
 			),
-			'wp_travel_trip_exclude' => array(
+			'wp_travel_trip_exclude'         => array(
 				'show_in_rest'  => true,
 				'single'        => true,
 				'type'          => 'string',
@@ -157,12 +155,12 @@ class WP_Travel_Post_Types { // @phpcs:ignore
 				},
 			),
 			// 'wp_travel_itinerary_gallery_ids' => array(
-			// 	'show_in_rest'  => true,
-			// 	'single'        => true,
-			// 	'type'          => 'string',
-			// 	'auth_callback' => function () {
-			// 		return current_user_can( 'edit_posts' );
-			// 	},
+			// 'show_in_rest'  => true,
+			// 'single'        => true,
+			// 'type'          => 'string',
+			// 'auth_callback' => function () {
+			// return current_user_can( 'edit_posts' );
+			// },
 			// ),
 		);
 		/**
@@ -370,38 +368,38 @@ class WP_Travel_Post_Types { // @phpcs:ignore
 
 	public static function register_travel_guide() {
 		$guide_labels = array(
-            'name'                  => _x( 'Travel Guide', 'Post type general name', 'wp-travel' ),
-            'singular_name'         => _x( 'Travel Guide', 'Post type singular name', 'wp-travel' ),
-            'menu_name'             => _x( 'Travel Guide', 'Admin Menu text', 'wp-travel' ),
-            'name_admin_bar'        => _x( 'Travel Guide', 'Add New on Toolbar', 'wp-travel' ),
-            'add_new'               => __( 'Add New', 'wp-travel' ),
-            'add_new_item'          => __( 'Add New Travel Guide', 'wp-travel' ),
-            'new_item'              => __( 'New Tour Travel Guide', 'wp-travel' ),
-            'edit_item'             => __( 'Edit Travel Guide', 'wp-travel' ),
-            'view_item'             => __( 'View Travel Guide', 'wp-travel' ),
-            'all_items'             => __( 'All Travel Guide', 'wp-travel' ),
-            'search_items'          => __( 'Search Travel Guide', 'wp-travel' ),
-            'parent_item_colon'     => __( 'Parent Travel Guide:', 'wp-travel' ),
-            'not_found'             => __( 'No guides found.', 'wp-travel' ),
-            'not_found_in_trash'    => __( 'No guides found in Trash.', 'wp-travel' ),
-        );
+			'name'               => _x( 'Travel Guide', 'Post type general name', 'wp-travel' ),
+			'singular_name'      => _x( 'Travel Guide', 'Post type singular name', 'wp-travel' ),
+			'menu_name'          => _x( 'Travel Guide', 'Admin Menu text', 'wp-travel' ),
+			'name_admin_bar'     => _x( 'Travel Guide', 'Add New on Toolbar', 'wp-travel' ),
+			'add_new'            => __( 'Add New', 'wp-travel' ),
+			'add_new_item'       => __( 'Add New Travel Guide', 'wp-travel' ),
+			'new_item'           => __( 'New Tour Travel Guide', 'wp-travel' ),
+			'edit_item'          => __( 'Edit Travel Guide', 'wp-travel' ),
+			'view_item'          => __( 'View Travel Guide', 'wp-travel' ),
+			'all_items'          => __( 'All Travel Guide', 'wp-travel' ),
+			'search_items'       => __( 'Search Travel Guide', 'wp-travel' ),
+			'parent_item_colon'  => __( 'Parent Travel Guide:', 'wp-travel' ),
+			'not_found'          => __( 'No guides found.', 'wp-travel' ),
+			'not_found_in_trash' => __( 'No guides found in Trash.', 'wp-travel' ),
+		);
 
-        $guide_args = array(
-            'labels'             => $guide_labels,
-            'public'             => true,
-            'publicly_queryable' => true,
-            'show_ui'            => true,
-            'show_in_menu'       => false,
-            'query_var'          => true,
-            'rewrite'            => array( 'slug' => 'travel-guide' ),
-            'capability_type'    => 'post',
-            'has_archive'        => true,
-            'hierarchical'       => false,
-            'menu_position'      => null,
-            'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
-        );
+		$guide_args = array(
+			'labels'             => $guide_labels,
+			'public'             => true,
+			'publicly_queryable' => true,
+			'show_ui'            => true,
+			'show_in_menu'       => false,
+			'query_var'          => true,
+			'rewrite'            => array( 'slug' => 'travel-guide' ),
+			'capability_type'    => 'post',
+			'has_archive'        => true,
+			'hierarchical'       => false,
+			'menu_position'      => null,
+			'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
+		);
 
-        register_post_type( 'travel-guide', $guide_args );
+		register_post_type( 'travel-guide', $guide_args );
 	}
 
 	/**
