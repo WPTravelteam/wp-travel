@@ -64,6 +64,7 @@
     "node-native-zip": "^1.1.0",
     "node-sass": "^6.0.1",
     "postcss-loader": "^6.1.1",
+    "react-modal": "^3.16.1",
     "react-step-progress-bar": "^1.0.3",
     "react-time-picker": "^6.2.0",
     "sass": "^1.39.2",

@@ -1,4 +1,6 @@
-import { Button, Modal } from '@wordpress/components'
+import { Button } from '@wordpress/components'
+import Modal from 'react-modal';
+
 import { useState, useEffect } from '@wordpress/element';
 import OpenBookign from './OpenBookign';
 import { useSelect, dispatch } from '@wordpress/data';
@@ -30,13 +32,16 @@ export default () => {
     const { bookingTabEnable, travelerInfo, tripBillingEnable, treipPaymentEnable } = bookingData;
     console.log( 'selected data', bookingData );
     const tooltipText = __i18n.bookings.date_select_to_view_options;
-    
+    const hell = () => {
+        console.log( 'heehre')
+    }
     return <>
         <Button onClick={openModal}>Book Now</Button>
         <div className="wp-travel-checkout-one-page">
-            { isOpen && (
-                <Modal 
-                title={ typeof bookingTabEnable != 'undefined' && bookingTabEnable ? 'Select Your Pax' : ( typeof travelerInfo != 'undefined' && travelerInfo ? 'Enter traveler Detail' : ( typeof tripBillingEnable != 'undefined' && tripBillingEnable ? 'Billing Details' : 'Payment Field' ) ) } 
+             <Modal 
+                isOpen={isOpen}
+                onRequestClose={closeModal}
+                contentLabel={ typeof bookingTabEnable != 'undefined' && bookingTabEnable ? 'Select Your Pax' : ( typeof travelerInfo != 'undefined' && travelerInfo ? 'Enter traveler Detail' : ( typeof tripBillingEnable != 'undefined' && tripBillingEnable ? 'Billing Details' : 'Payment Field' ) ) } 
                 >
                     { typeof bookingTabEnable != 'undefined' && bookingTabEnable && 
                         <OpenBookign forceCalendarDisplay={false} calendarInline={false} showTooltip={true} tooltipText={tooltipText} />
@@ -49,7 +54,6 @@ export default () => {
                     {/* <BookingFormWithPayment /> */}
                     {/* <TravelerInfo /> */}
                 </Modal>
-            ) }
         </div>
     </>
 }
