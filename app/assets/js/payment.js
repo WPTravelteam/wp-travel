@@ -136,3 +136,5 @@ function get_payable_price(payment_mode, no_of_pax) {
     amount['trip_price'] = trip_price;
     return amount;
 }
+// console.log( 'helllcall', document.getElementById( 'wp-travel-option' ) )
+// document.getElementById( 'wp-travel-option' )

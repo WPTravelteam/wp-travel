@@ -42,10 +42,10 @@ class WpTravel_Helpers_Booking {
 		<table class="wp-travel-table-content" cellpadding="0" cellspacing="0" height="100%" width="100%" style="text-align: left;">
 			<thead>
 				<tr>
-					<th><?php esc_html_e( 'Itinerary', 'wp-travel' ); ?></th>
-					<th><?php esc_html_e( ! empty( $strings ) ? strtoupper( $strings['bookings']['pax'] ) : 'PAX', 'wp-travel' ); ?></th>
-					<th><?php esc_html_e( 'Arrival Date', 'wp-travel' ); ?></th>
-					<th><?php esc_html_e( 'Departure Date', 'wp-travel' ); ?></th>
+					<th><?php apply_filters( 'wp_travel_booking_mail_pax', esc_html_e( 'Itinerary', 'wp-travel' ), $booking_id ); ?></th>
+					<th><?php apply_filters( 'wp_travel_booking_mail_pax', esc_html_e( ! empty( $strings ) ? strtoupper( $strings['bookings']['pax'] ) : 'PAX', 'wp-travel' ), $booking_id ); ?></th>
+					<th><?php apply_filters( 'wp_travel_booking_mail_arrival', esc_html_e( 'Arrival Date', 'wp-travel' ), $booking_id ); ?></th>
+					<th><?php apply_filters( 'wp_travel_booking_mail_departure', esc_html_e( 'Departure Date', 'wp-travel' ), $booking_id ); ?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -121,9 +121,9 @@ class WpTravel_Helpers_Booking {
 								endif;
 							?>
 						</td>
-						<td><?php echo esc_html( $pax ); ?></td>
-						<td><?php echo esc_html( $arrival_date ); ?></td>
-						<td><?php echo esc_html( $departure_date ); ?></td>
+						<td><?php echo apply_filters( 'wp_travel_booking_mail_pax_val', esc_html( $pax ), $booking_id ); ?></td>
+						<td><?php echo apply_filters( 'wp_travel_booking_mail_arrival_val', esc_html( $arrival_date ), $booking_id ); ?></td>
+						<td><?php echo apply_filters( 'wp_travel_booking_mail_departure_val', esc_html( $departure_date ), $booking_id ); ?></td>
 					</tr>
 
 					<?php

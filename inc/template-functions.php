@@ -876,6 +876,7 @@ function wptravel_single_excerpt( $trip_id ) {
 				<?php
 			elseif ( wptravel_tab_show_in_menu( 'booking' ) ) :
 				?>
+				<div id='wp-travel-one-page-checkout-enables'>here</div>
 				<button class="wptravel-book-your-trip wp-travel-booknow-btn"><?php echo esc_html( apply_filters( 'wp_travel_template_book_now_text', $book_now_text ) ); // @phpcs:ignore ?></button>
 			<?php endif; ?>
 			<?php if ( 'yes' === $enable_enquiry ) : ?>

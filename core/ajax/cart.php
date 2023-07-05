@@ -30,6 +30,9 @@ class WP_Travel_Ajax_Cart {
 		add_action( 'wp_ajax_wp_travel_update_cart_item', array( __CLASS__, 'update_cart_item' ) );
 		add_action( 'wp_ajax_nopriv_wp_travel_update_cart_item', array( __CLASS__, 'update_cart_item' ) );
 
+		add_action( 'wp_ajax_wptravel_get_payment_field', array( __CLASS__, 'wp_get_payment_fied' ) );
+		add_action( 'wp_ajax_nopriv_wptravel_get_payment_field', array( __CLASS__, 'wp_get_payment_fied' ) );
+
 	}
 
 	/**
@@ -79,6 +82,21 @@ class WP_Travel_Ajax_Cart {
 
 		$response = WP_Travel_Helpers_Cart::update_cart_item( $cart_id, $post_data );
 		WP_Travel_Helpers_REST_API::response( $response );
+	}
+	/**
+	 * get all payment field for one page booking
+	 * @since 7.0
+	 */
+	public static function wp_get_payment_fied() {
+		global $wt_cart;
+		$trip_items = $wt_cart->getItems();
+		$all_form_field = wptravel_get_checkout_form_fields();
+		$payment_field = [
+			'payment' => isset( $all_form_field['payment_fields'] ) ? $all_form_field['payment_fields'] : '',
+			'form_key' => ! empty( $trip_items ) ?  array_key_first( $trip_items ) : 'one',
+
+		];
+		WP_Travel_Helpers_REST_API::response( $payment_field);
 	}
 }
 

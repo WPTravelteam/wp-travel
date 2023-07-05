@@ -17,7 +17,7 @@ const Pricings =  ( props ) => {
 	// console.log( 'nomineePricingIds', nomineePricingIds );
 	return <>
 		{ isLoading && <Loader /> }
-		{
+		{	
 			nomineePricingIds.length > 1 ?
 				<>
 				<h4>{__i18n.bookings.pricings_list_label}</h4>

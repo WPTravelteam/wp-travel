@@ -23,6 +23,7 @@ import ResetBooking from './components/ResetBooking'; // Note: this will also im
 import CalendarView from './components/CalendarView';
 import DateListing from './components/DateListing';
 import WpTravelBookNow from './components/WpTravelBookNow';
+import OpenCheckout from './checkout/OpenCheckout';
 
 const WPTravelBooking = ( props ) => {
 	// Component Props.
@@ -88,6 +89,12 @@ if (document.getElementById(blockId)) {
 	const tooltip = undefined != typeof props.tooltip && props.tooltip;
 	const tooltipText = undefined != typeof props.tooltip_text && props.tooltip_text;
 	render(<WPTravelBooking forceCalendarDisplay={true} calendarInline={inline} showTooltip={tooltip} tooltipText={tooltipText} />, elem );
+}
+
+let checkoutId = 'wp-travel-one-page-checkout-enables';
+checkoutId      = applyFilters( 'wptravel_booking_checkout_id', checkoutId  );
+if (document.getElementById(checkoutId )) {
+    render( <OpenCheckout />, document.getElementById(checkoutId ));
 }
 // @todo calendar button. in trip duration
 // @trip extras implementation.
