@@ -4,7 +4,7 @@ import { Button, Modal, PanelBody, PanelRow, TextControl } from '@wordpress/comp
 import { useState } from '@wordpress/element'
 import DatePicker from "react-datepicker";
 
-export default ( { travelerData, trvOne = 'travelerOne' } ) => {
+export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     const { updateStore } = dispatch( bookingStoreName );
     const { label, type, name, id, attributes } = travelerData
@@ -12,8 +12,8 @@ export default ( { travelerData, trvOne = 'travelerOne' } ) => {
     const keyDate = typeof attributes != 'undefined' && Object.keys( attributes ) || [];
     const { checkoutDetails } = bookingData
     const travelerDataList = typeof checkoutDetails != 'undefined' && typeof checkoutDetails[trvOne] != 'undefined' && checkoutDetails[trvOne] || {};
-    const travelerValue = typeof travelerDataList[name] != 'undefined' && travelerDataList[name] || '';
-    const selectedDate =  typeof travelerValue != 'undefined' && travelerValue != '' ? new Date( travelerValue ) : new Date();
+    const travelerValue = typeof travelerDataList[name] != 'undefined' && travelerDataList[name] || {};
+    const selectedDate =  typeof travelerValue != 'undefined' && typeof travelerValue[pxKey] != 'undefined' && travelerValue[pxKey] != '' ? new Date( travelerValue[pxKey] ) : new Date();
     // console.log( 'dhfjdf oldd', new Date( travelerValue ) )
     const datePickerParams =  {
         showMonthDropdown: true,
@@ -30,7 +30,7 @@ export default ( { travelerData, trvOne = 'travelerOne' } ) => {
             // dateFormat="yyyy-MM-dd"
             selected={selectedDate }
             { ...datePickerParams }
-            value={ travelerValue }
+            value={ typeof travelerValue[pxKey] != 'undefined' && travelerValue[pxKey] || '' }
             onChange={ ( value ) => {
                 const createNewDate =  value;
                 const month = createNewDate.getMonth() + 1 
@@ -38,12 +38,13 @@ export default ( { travelerData, trvOne = 'travelerOne' } ) => {
                 const days = createNewDate.getDate() ;
                 const finaldate = years + '-' + month + '-' + days;
                 // console.log( 'dhfjdf', value)
-                const newData = {...travelerDataList, [name] : finaldate };
+                const newTraveler = {...travelerValue, [pxKey] : finaldate}
+                const newData = {...travelerDataList, [name] : newTraveler };
                 const checkoutNewData = {...checkoutDetails, [trvOne] : newData }
                 // console.log( 'ths date', checkoutNewData )
                 updateStore({...bookingData, checkoutDetails : checkoutNewData } )
             }}
         />
-        <input type='hidden' value={ travelerValue } id={id} name={name} />
+        <input type='hidden' value={ typeof travelerValue[pxKey] != 'undefined' && travelerValue[pxKey] || '' } id={id} name={name} />
     </PanelBody>
 }

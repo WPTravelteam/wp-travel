@@ -98,3 +98,4 @@ if (document.getElementById(checkoutId )) {
 }
 // @todo calendar button. in trip duration
 // @trip extras implementation.
+
