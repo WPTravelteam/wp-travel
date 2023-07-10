@@ -32,9 +32,6 @@ export default () => {
     const { bookingTabEnable, travelerInfo, tripBillingEnable, treipPaymentEnable } = bookingData;
     console.log( 'selected data', bookingData );
     const tooltipText = __i18n.bookings.date_select_to_view_options;
-    const hell = () => {
-        console.log( 'heehre')
-    }
     return <>
         <Button onClick={openModal}>Book Now</Button>
         <div className="wp-travel-checkout-one-page">
@@ -53,7 +50,7 @@ export default () => {
                     { typeof treipPaymentEnable != 'undefined' && treipPaymentEnable && <BookingFormWithPayment /> }
                     {/* <BookingFormWithPayment /> */}
                     {/* <TravelerInfo /> */}
-                </Modal>
+            </Modal>
         </div>
     </>
 }

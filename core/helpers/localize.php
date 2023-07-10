@@ -25,7 +25,9 @@ class WpTravel_Helpers_Localize {
 		global $post;
 		$localized_data = array();
 		$settings       = wptravel_get_settings();
-
+		// echo '<pre>';
+		// print_r( $settings );
+		// die;
 		// Getting Locale to fetch Localized calender js.
 		$lang_code            = explode( '-', get_bloginfo( 'language' ) );
 		$locale               = $lang_code[0];
@@ -44,10 +46,9 @@ class WpTravel_Helpers_Localize {
 		$rdp_locale = str_replace( '_', '', $rdp_locale ); // React date picker locale.
 		// user form transfer in react
 		global $wt_cart;
-		$trip_items = $wt_cart->getItems();
+		$trip_items     = $wt_cart->getItems();
 		$checkoutPage   = get_option( 'wp_travel_wp-travel-checkout_page_id' );
 		$checkoutDetail = get_post( $checkoutPage );
-		
 		if ( self::is_request( 'frontend' ) ) {
 			$_wp_travel                       = array();
 			$_wp_travel['_nonce']             = wp_create_nonce( 'wp_travel_nonce' );
@@ -68,6 +69,7 @@ class WpTravel_Helpers_Localize {
 			$_wp_travel['strings']            = WpTravel_Helpers_Strings::get();
 			$_wp_travel['itinerary_v2']       = wptravel_use_itinerary_v2_layout();
 			$_wp_travel['checkout_url']       = $checkoutDetail->guid;
+			$_wp_travel['partial_enable']     = isset( $settings['partial_payment'] ) ? $settings['partial_payment'] : 'no';
 			$_wp_travel['checkout_field']     = array(
 				'form'                       => wptravel_get_checkout_form_fields(),
 				'enable_multiple_travellers' => isset( $settings['enable_multiple_travellers'] ) ? $settings['enable_multiple_travellers'] : 'no',

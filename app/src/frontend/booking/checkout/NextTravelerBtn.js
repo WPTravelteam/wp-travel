@@ -169,7 +169,7 @@ const WpTravelBookNow = ( props ) => {
 			
 							if ( settingData.success === true && settingData.data != '' ) {
 								console.log( 'data', settingData.data )
-								updateStore( {...bookingData, payment_form : settingData.data.payment, form_key : settingData.data.form_key, bookingTabEnable: false, travelerInfo : true } )
+								updateStore( {...bookingData, payment_form : settingData.data.payment, form_key : settingData.data.form_key, price_list : settingData.data.price_list , bookingTabEnable: false, travelerInfo : true } )
 							}
 			
 						} else {

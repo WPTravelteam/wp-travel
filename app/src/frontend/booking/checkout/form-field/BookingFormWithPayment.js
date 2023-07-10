@@ -5,7 +5,7 @@ import PaymentPrice from "./booking/PaymentPrice"
 import TotalPrice from "./booking/TotalPrice"
 import { useSelect, dispatch } from '@wordpress/data';
 const bookingStoreName = 'WPTravelFrontend/BookingData';
-import { applyFilters } from '@wordpress/hooks';
+import { applyFilters, doAction } from '@wordpress/hooks';
 import HiddenText from "./form/HiddenText"
 import BillingHiddenField from "./form/BillingHiddenField"
 // import { useEffect } from '@wordpress/element'
@@ -17,22 +17,30 @@ export default () => {
     const { updateStore } = dispatch( bookingStoreName );
     const { checkoutDetails, payment_form, form_key  } = bookingData;
     const { booking_selected, payment_select  } = checkoutDetails;
+    const { wp_travel_payment_gateway } = typeof payment_select != 'undefined' && payment_select || 'no';
+    const selected_payment = typeof wp_travel_payment_gateway != 'undefined' && wp_travel_payment_gateway || 'no'
     const travelerData = typeof checkoutDetails != undefined && checkoutDetails[form_key] || '';
     const billingData = typeof checkoutDetails != undefined && typeof checkoutDetails.billing != 'undefined' && checkoutDetails.billing || '';
     const travelerKey = travelerData != '' && Object.keys( travelerData ) || [];
     const billingKey = billingData != '' && Object.keys( billingData ) || [];
     const { wp_travel_booking_option } = typeof booking_selected != 'undefined' && booking_selected || "booking_with_payment"
     const { payment_gateway } = payment_form;
+    const partial_enable = _wp_travel.partial_enable;
     const { wp_travel_payment_mode } = typeof booking_selected != 'undefined' && booking_selected || "partial"
+    // console.log( 'partial', partial_enable, _wp_travel.partial_enable );
+
+    const handlingForm = ( e ) => {
+        e.preventDefault();
+    }
     return  typeof payment_gateway != 'undefined' && <>
-    <form method="POST" action={_wp_travel.checkout_url} className="wp-travel-booking" id="wp-travel-booking" onSubmit={ (e ) => e.preventDefault() }>
+    <form method="POST" action={_wp_travel.checkout_url} className="wp-travel-booking" id="wp-travel-booking" >
         <BookingType />
         { wp_travel_booking_option == "booking_with_payment" && <>
         <PaymentFormField />
-        <PartialPyamet />
+        { partial_enable == 'yes' && <PartialPyamet /> }
         </> }
         <TotalPrice />
-        { wp_travel_booking_option == "booking_with_payment" && wp_travel_payment_mode == 'partial' && <>
+        { wp_travel_booking_option == "booking_with_payment" && wp_travel_payment_mode == 'partial' &&  partial_enable == 'yes' && <>
         <PaymentPrice />
         </> }
         { travelerKey.length > 0 && travelerKey.map( ( keyList, indexs ) => {
@@ -47,9 +55,15 @@ export default () => {
         } ) }
         { wp_travel_booking_option == 'booking_with_payment' && typeof payment_select != 'undefined' && typeof payment_select.wp_travel_payment_gateway != 'undefined' && payment_select.wp_travel_payment_gateway == 'stripe' && <><label> {wp_travel.strip_card }</label><div id="card-element"></div> </>}
         {/* <p>{stCardError.card }</p>  */}
+        {/* 'wp_travel_is_partial_payment' */}
+        
+        { <input type="hidden" id="wp-travel-partial-payment" value={partial_enable} name="wp_travel_is_partial_payment" /> }
         <div className="wp-travel-form-field button-field" >
+            {doAction( 'wptravel_booking_button_payment', bookingData )}
             <input type="hidden" value={_wp_travel._nonce} name="_nonce" />
-            { applyFilters( 'wptravel_booking_button_payment', [<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Booke Now" /> ], bookingData ) }
+            { selected_payment == 'stripe' && applyFilters( 'wptravel_booking_button_payment_strp', [<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Booke Now" /> ], bookingData )
+            || selected_payment == 'authorizenet' && applyFilters( 'wptravel_booking_button_payment_auth', [<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Booke Now" /> ], bookingData )
+            ||    <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Booke Now no" onClick={ e => handlingForm(e) }/> }
         </div>
     </form>
     </>

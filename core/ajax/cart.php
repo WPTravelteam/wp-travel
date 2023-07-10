@@ -85,18 +85,27 @@ class WP_Travel_Ajax_Cart {
 	}
 	/**
 	 * get all payment field for one page booking
+	 *
 	 * @since 7.0
 	 */
 	public static function wp_get_payment_fied() {
 		global $wt_cart;
-		$trip_items = $wt_cart->getItems();
+		$trip_items     = $wt_cart->getItems();
 		$all_form_field = wptravel_get_checkout_form_fields();
-		$payment_field = [
-			'payment' => isset( $all_form_field['payment_fields'] ) ? $all_form_field['payment_fields'] : '',
-			'form_key' => ! empty( $trip_items ) ?  array_key_first( $trip_items ) : 'one',
+		$price_listing = [];
+		if ( ! empty( $trip_items ) ) {
+			foreach ( $trip_items as $key => $value ) {
+				$price_listing['partial_amount']	= isset( $value['trip_price_partial'] ) ? $value['trip_price_partial'] : '';
+				$price_listing['trip_price']		= isset( $value['trip_price'] ) ? $value['trip_price'] : '';
+			} 
+		}
+		$payment_field = array(
+			'payment'  => isset( $all_form_field['payment_fields'] ) ? $all_form_field['payment_fields'] : '',
+			'form_key' => ! empty( $trip_items ) ? array_key_first( $trip_items ) : 'one',
+			'price_list' => $price_listing,
 
-		];
-		WP_Travel_Helpers_REST_API::response( $payment_field);
+		);
+		WP_Travel_Helpers_REST_API::response( $payment_field );
 	}
 }
 

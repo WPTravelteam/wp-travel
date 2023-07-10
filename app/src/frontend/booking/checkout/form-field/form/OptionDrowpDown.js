@@ -28,7 +28,7 @@ export default ( { travelerData, trvOne = 'travelerOne' } ) => {
             }}> 
                 {
                     optionKey.length > 0 && optionKey.map( ( list, index ) => {
-                        return <option value={list} key={index} >{options[list]}</option>
+                        return <option value={list} key={index} defaultChecked={ travelerValue == list ? true : false} >{options[list]}</option>
                     })
                 }
             </select>
