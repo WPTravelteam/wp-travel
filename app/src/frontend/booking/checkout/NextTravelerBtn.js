@@ -199,7 +199,8 @@ const WpTravelBookNow = ( props ) => {
             <Suspense>
                 
                 { selectedPricingId &&
-                    <div className="wp-travel-booking__panel-bottom">
+                    <div className='new-bottom-booking-container'>
+						<div className="wp-travel-booking__panel-bottom-new">
                         
                         <div className="left-info" >
                             {selectedPricingId && <p><strong>{__i18n.bookings.combined_pricing}</strong>: {allPricings[selectedPricingId].title}</p>}
@@ -216,6 +217,7 @@ const WpTravelBookNow = ( props ) => {
                             <button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">Next to traveler info</button>
                         </div>
                     </div>
+					</div>
                 }
             </Suspense>
                 

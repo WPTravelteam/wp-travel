@@ -26,6 +26,7 @@ export default ( { travelerData, trvOne = 'travelerOne' } ) => {
     return <PanelBody>
         <label >{typeof label != 'undefined' && label || '' }</label>
         <DatePicker
+        className= "wptravel-booking-datepicker"
             // dateFormat="yyyy-MM-dd"
             selected={selectedDate }
             { ...datePickerParams }
