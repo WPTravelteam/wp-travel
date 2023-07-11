@@ -11,10 +11,12 @@ import { useSelect, dispatch } from '@wordpress/data';
 const bookingStoreName = 'WPTravelFrontend/BookingData';
 import { Button, PanelBody, PanelRow } from '@wordpress/components'
 import TextArea from './form/TextArea';
-import { useEffect } from '@wordpress/element'
+import { useEffect, useState } from '@wordpress/element'
 // import apiFetch from '@wordpress/api-fetch';
 export default ( ) => {
     // Booking Data/state.
+    const [loaders, setLoaders] = useState(false)
+    const [errorFound, setErrorFound] = useState('')
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     const { updateStore } = dispatch( bookingStoreName );
     const { billing_form, error_list, checkoutDetails } = bookingData;
@@ -42,6 +44,7 @@ export default ( ) => {
         }
     }, [])
     const validateTravelerData = () => {
+        setLoaders(true);
         const errorss = {};
         if ( fieldKey.length > 0 ) {
             fieldKey.map( ( trvk, index ) => {
@@ -68,9 +71,12 @@ export default ( ) => {
             })
         }
         if ( Object.keys( errorss ).length < 1 ) {
+            setLoaders(false);
             updateStore({...bookingData, error_list : {}, treipPaymentEnable : true , tripBillingEnable : false })
         } else {
+            setErrorFound('Required field is empty' );
             updateStore({...bookingData, error_list : errorss })
+            setLoaders(false);
         }
     }
     return <>
@@ -91,9 +97,12 @@ export default ( ) => {
                 <Button onClick={ () => { 
                     updateStore({...bookingData, travelerInfo : true , tripBillingEnable : false })
                 }} >Go Back</Button>
-                <Button onClick={ validateTravelerData } >Next</Button>
+                <div><Button onClick={ validateTravelerData } >Next{loaders && <img src={_wp_travel.loader_url } /> }</Button>
+                    <p>{errorFound}</p>
+                </div>
             </PanelRow>
         </PanelBody>
+        
         
     </>
 }

@@ -12,7 +12,7 @@ const bookingStoreName = 'WPTravelFrontend/BookingData';
 import { Button } from '@wordpress/components'
 import TextArea from './form/traveler/TextArea';
 import 'react-accessible-accordion/dist/fancy-example.css';
-import { useEffect } from '@wordpress/element'
+import { useEffect, useState } from '@wordpress/element'
 import {
     Accordion,
     AccordionItem,
@@ -22,6 +22,8 @@ import {
 } from 'react-accessible-accordion';
 
 export default ( ) => {
+    const [loaders, setLoaders] = useState(false)
+    const [errorFound, setErrorFound] = useState('')
     // Booking Data/state.
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     const { updateStore } = dispatch( bookingStoreName );
@@ -31,6 +33,11 @@ export default ( ) => {
     const paxKey = Object.keys( paxCounts )
     // console.log( 'multipleTraveler', multipleTraveler )
     const travelerEnter = typeof checkoutDetails[form_key] != 'undefined' && checkoutDetails[form_key] || {};
+    const validateEmail = ( input ) => {
+        var validRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if ( input.match( validRegex ) ) return true;
+        else return false;
+    }
     useEffect( () => {
         const requiredField = {};
         if ( fieldKey.length > 0 ) {
@@ -40,11 +47,31 @@ export default ( ) => {
                 const { validations, name, label } = fieldCollect;
                 // console.log( 'validations', validations );
                 const requireds = typeof validations != 'undefined' && typeof validations.required != 'undefined' && validations.required || '0';
-                
+                const requiredAll = typeof validations != 'undefined' && typeof validations.required_for_all != 'undefined' && validations.required_for_all || '0';
+                const intRequiredAll = parseInt( requiredAll );
                 const intRequiresd = parseInt( requireds );
                 // console.log( 'cick me id', intRequiresd );
                 if ( intRequiresd == 1 ) {
-                    requiredField[name] = true;
+                    const newKeyRequired = { 1 : true }
+                    requiredField[name] = newKeyRequired;
+                }
+
+                if ( multipleTraveler == 'yes' && intRequiredAll == 1 ) {
+                    var paxTotal = 0
+                    paxKey.length > 0 && paxKey.map( ( pKeys, index) => {
+                        // const newdata = [];
+                        const paxC = paxCounts[pKeys];
+                        paxTotal = paxTotal + paxC;
+                    })
+                    var pxReq = {}
+                    if ( paxTotal > 1 ) {
+                        for( i = 0 ; i < paxTotal ; i++ ) {
+                            pxReq[i + 1 ] = true
+                        }
+                        if ( Object.keys( pxReq ).length > 0 ) {
+                            requiredField[name] = pxReq;
+                        }
+                    }
                 }
             })
         }
@@ -53,48 +80,95 @@ export default ( ) => {
         }
     },[])
     const validateTravelerData = () => {
+        setLoaders(true)
         const errorss = {};
+        const emailValidate = {}
         if ( fieldKey.length > 0 ) {
             fieldKey.map( ( trvk, index ) => {
                 // console.log( 'trv key', trvk )
                 const fieldCollect = typeof traveler_form[trvk] != 'undefined' && traveler_form[trvk] || {};
-                const { validations, name, label } = fieldCollect;
+                const { validations, name, label, type } = fieldCollect;
                 // console.log( 'validations', validations );
-                const requireds = typeof validations != 'undefined' && typeof validations.required != 'undefined' && validations.required || '123';
-                
+                const requireds = typeof validations != 'undefined' && typeof validations.required != 'undefined' && validations.required || '0';
+                const requiredAll = typeof validations != 'undefined' && typeof validations.required_for_all != 'undefined' && validations.required_for_all || '0';
+                const intRequiredAll = parseInt( requiredAll );
                 const intRequiresd = parseInt( requireds );
                 // console.log( 'cick me id', intRequiresd );
+                const travelData = typeof travelerEnter[name] != 'undefined' && travelerEnter[name] || {};
+                var requiredListed = {}
+                if ( type == 'email' ) {
+                    const emailData = typeof travelData[1] != 'undefined' && travelData[1] || '';
+                    if ( emailData != '' && ! validateEmail( emailData ) ) {
+                        const newEmailError = {1 : 'Email is not valide'}
+                        emailValidate[name] = newEmailError;
+                    }
+
+                }
                 if ( intRequiresd == 1 ) {
                     if ( Object.keys( travelerEnter ).length < 1 ) {
                         // console.log( 'error data', error_list );
-                        errorss[name] = label + ' is required';
+                        const newCreateError = { 1 : label + ' is required' }
+                        requiredListed[1] = label + ' is required';
+                        errorss[name] = newCreateError;
                     } else {
-                        const travelData = typeof travelerEnter[name] != 'undefined' && travelerEnter[name] || {};
                         const finalData = typeof travelData[1] != 'undefined' && travelData[1] || '';
                         // console.log( 'skdfjsdjfdlsfj', finalData );
                         if ( finalData == '' ) {
-                            errorss[name] = label + ' is required';
+                            const newCreateError = { 1 : label + ' is required' }
+                            requiredListed[1] = label + ' is required';
+                            errorss[name] = newCreateError;
+                        }
+                    }
+                } 
+                if ( multipleTraveler == 'yes' ) {
+                    var paxTotal = 0
+                    paxKey.length > 0 && paxKey.map( ( pKeys, index) => {
+                        // const newdata = [];
+                        const paxC = paxCounts[pKeys];
+                        paxTotal = paxTotal + paxC;
+                    })
+                    var pxReq = {}
+                    var emailErrors = {}
+                    if ( paxTotal > 1 ) {
+                        for( i = 0 ; i < paxTotal ; i++ ) {
+                            const finalDatas = typeof travelData[i+1] != 'undefined' && travelData[i+1] || '';
+                            if ( type == 'email' && finalDatas != '' && ! validateEmail( finalDatas ) ) {
+                                emailErrors[i+1] = 'Email is not valide';
+                            }
+                            if ( finalDatas == '' ) {
+                                pxReq[i + 1 ] = label + ' is required';
+                            }
+                        }
+                        if ( intRequiredAll == 1 && Object.keys( pxReq ).length > 0 ) {
+                            errorss[name] = {...requiredListed, ...pxReq };
+                        }
+                        if ( Object.keys( emailErrors).length > 0 ) {
+                            emailValidate[name] = emailErrors;
                         }
                     }
                 }
             })
         }
-        if ( Object.keys( errorss ).length < 1 ) {
+        if ( Object.keys( errorss ).length < 1 && Object.keys( emailValidate ).length < 1 ) {
+            setLoaders( false );
             updateStore({...bookingData, error_list : {}, tripBillingEnable : true , travelerInfo : false })
         } else {
-            updateStore({...bookingData, error_list : errorss })
+            const newRequiredError = {...errorss, email_validation : emailValidate }
+            setErrorFound('Required field is empty' );
+            updateStore({...bookingData, error_list : newRequiredError })
+            setLoaders(false);
         }
     }
     return <>
-        { multipleTraveler == 'yes' && <> { paxKey.length > 0 && paxKey.map( ( pKeys, index) => {
+        { multipleTraveler == 'yes' && <> { paxKey.length > 0 && paxKey.map( ( pKeys, ind) => {
             const newdata = [];
             const paxC = paxCounts[pKeys];
             for ( i= 1; i <= paxC; i++ ) {
                 newdata.push( i );
             }
-        return newdata.length > 0 && newdata.map( ( finalPax, index ) => {
+        return <div key={ind * 9 } >{ newdata.length > 0 && newdata.map( ( finalPax, index ) => {
             // console.log( 'finalPax', finalPax )
-             return <Accordion allowZeroExpanded={true} key={ index }>
+             return <Accordion allowZeroExpanded={true} key={ index + 10 }>
                 <AccordionItem>
                     <AccordionItemHeading>
                         <AccordionItemButton>
@@ -106,14 +180,22 @@ export default ( ) => {
                         {   
                             fieldKey.length > 0 && fieldKey.map( ( trvKey, index ) => {
                                 const travelerData = typeof traveler_form[trvKey] != 'undefined' && traveler_form[trvKey] || undefined;
+                                const validated = typeof travelerData != 'undefined' && typeof travelerData.remove_field != 'undefined' && travelerData.remove_field || '';
                                 const fieldTypes = typeof travelerData != 'undefined' && typeof travelerData.type != 'undefined' && travelerData.type || 'text';
                                 const fieldName = typeof travelerData != 'undefined' && typeof travelerData.name != 'undefined' && travelerData.name || '';
-                                return <div key={ index }>{ ( fieldTypes == 'text' || fieldTypes == 'number' ) && <Texts travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'email' && <Emails travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'radio' && <div className='wp-travel-new-gender-field'><RadioButton travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /></div> || fieldTypes == 'checkbox' && <CheckBoxs travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'date' && <Dates travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'country_dropdown' && <DropDowns travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'textarea' && <TextArea travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> }</div>
+                                if ( finalPax == 1 ) {
+                                    return <div key={ index }>{ ( fieldTypes == 'text' || fieldTypes == 'number' ) && <Texts travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'email' && <Emails travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'radio' && <div className='wp-travel-new-gender-field'><RadioButton travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /></div> || fieldTypes == 'checkbox' && <CheckBoxs travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'date' && <Dates travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'country_dropdown' && <DropDowns travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'textarea' && <TextArea travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> }</div>
+                                } else {
+                                    if ( validated == '' ) {
+                                        return <div key={ index }>{ ( fieldTypes == 'text' || fieldTypes == 'number' ) && <Texts travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'email' && <Emails travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'radio' && <div className='wp-travel-new-gender-field'><RadioButton travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /></div> || fieldTypes == 'checkbox' && <CheckBoxs travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'date' && <Dates travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'country_dropdown' && <DropDowns travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'textarea' && <TextArea travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> }</div>
+
+                                    }
+                                }
                             })
                         } </div>
                     </AccordionItemPanel>
                 </AccordionItem>
-        </Accordion> }) }) }</>|| <div className='wptravel-traveller-info-container'>
+        </Accordion> }) } </div> }) }</>|| <div className='wptravel-traveller-info-container'>
         {   
             fieldKey.length > 0 && fieldKey.map( ( trvKey, index ) => {
                 const travelerData = typeof traveler_form[trvKey] != 'undefined' && traveler_form[trvKey] || undefined;
@@ -122,6 +204,7 @@ export default ( ) => {
                 return <div key={ index }>{ ( fieldTypes == 'text' || fieldTypes == 'number' ) && <Texts travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'email' && <Emails travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'radio' && <div className='wp-travel-new-gender-field'><RadioButton travelerData={travelerData} trvOne={form_key} /></div> || fieldTypes == 'checkbox' && <CheckBoxs travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'date' && <Dates travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'country_dropdown' && <DropDowns travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'textarea' && <TextArea travelerData={travelerData} trvOne={form_key} /> }</div>
             })
         } </div> }
-        <Button onClick={validateTravelerData} >Next</Button>
+        <Button onClick={validateTravelerData} >Next{loaders && <img src={_wp_travel.loader_url } /> }</Button>
+        <p>{errorFound}</p>
     </>
 }

@@ -70,6 +70,7 @@ class WpTravel_Helpers_Localize {
 			$_wp_travel['itinerary_v2']       = wptravel_use_itinerary_v2_layout();
 			$_wp_travel['checkout_url']       = $checkoutDetail->guid;
 			$_wp_travel['partial_enable']     = isset( $settings['partial_payment'] ) ? $settings['partial_payment'] : 'no';
+			$_wp_travel['loader_url']         = plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/images/loader.gif';
 			$_wp_travel['checkout_field']     = array(
 				'form'                       => wptravel_get_checkout_form_fields(),
 				'enable_multiple_travellers' => isset( $settings['enable_multiple_travellers'] ) ? $settings['enable_multiple_travellers'] : 'no',

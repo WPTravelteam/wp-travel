@@ -7,11 +7,12 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
     const { updateStore } = dispatch( bookingStoreName );
     const { label, type, name, id, wrapper_class, options } = travelerData
     const { checkoutDetails, error_list, requiredField } = bookingData
-    const thisRequired = typeof requiredField[name] != 'undefined' && requiredField[name] || false;
+    const thisRequired = typeof requiredField[name] != 'undefined' && typeof requiredField[name][pxKey] != 'undefined' && requiredField[name][pxKey] || false;
+    const errorData = typeof error_list[name] != 'undefined' && typeof error_list[name][pxKey] != 'undefined' &&  error_list[name][pxKey] || '';
     const travelerDataList = typeof checkoutDetails != 'undefined' && typeof checkoutDetails[trvOne] != 'undefined' && checkoutDetails[trvOne] || {};
     const travelerValue = typeof travelerDataList[name] != 'undefined' && travelerDataList[name] || {};
     const finalTravelerData = typeof travelerValue[pxKey] != 'undefined' && travelerValue[pxKey] || [];
-    const errorData = typeof error_list[name] != 'undefined' && error_list[name]  || '';
+    
     return <><PanelBody>
         <PanelRow>
             <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>

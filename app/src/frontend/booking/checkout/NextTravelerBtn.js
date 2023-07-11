@@ -1,4 +1,4 @@
-import { Suspense } from '@wordpress/element';
+import { Suspense, useState } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 import { applyFilters } from '@wordpress/hooks';
 import { useSelect, dispatch } from '@wordpress/data';
@@ -16,7 +16,7 @@ const bookingStoreName = 'WPTravelFrontend/BookingData';
 import { objectSum, wpTravelFormat, wpTravelTimeout, GetConvertedPrice } from '../_wptravelFunctions';
 
 const WpTravelBookNow = ( props ) => {
-
+	const [loaders, setLoaders] = useState(false)
     // Booking Data/state.
     const bookingAllData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     // // console.log( bookingData );
@@ -123,6 +123,7 @@ const WpTravelBookNow = ( props ) => {
 	}
 
 	const addToCart = () => {
+		setLoaders(true)
 		let data = {
 			trip_id: tripData.id,
 			arrival_date: moment(selectedDate).format('YYYY-MM-DD'),
@@ -168,7 +169,8 @@ const WpTravelBookNow = ( props ) => {
 						if ( typeof settingData != 'undefined' && typeof settingData.success != 'undefined' && typeof settingData.data != 'undefined' ) {
 			
 							if ( settingData.success === true && settingData.data != '' ) {
-								console.log( 'data', settingData.data )
+								// console.log( 'data', settingData.data )
+								setLoaders(false)
 								updateStore( {...bookingData, payment_form : settingData.data.payment, form_key : settingData.data.form_key, price_list : settingData.data.price_list , bookingTabEnable: false, travelerInfo : true } )
 							}
 			
@@ -214,7 +216,7 @@ const WpTravelBookNow = ( props ) => {
                         
                         <div className="right-info" >
                             <p>{__i18n.bookings.booking_tab_cart_total}<strong dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCartTotal(true)) }}></strong></p>
-                            <button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">Next</button>
+                            <button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">Next{loaders && <img src={_wp_travel.loader_url } /> }</button>
                         </div>
                     </div>
 					</div>

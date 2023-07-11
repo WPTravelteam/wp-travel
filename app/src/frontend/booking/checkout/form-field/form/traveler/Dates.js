@@ -11,12 +11,13 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
     const backed = typeof attributes != 'undefined' && attributes['data-max-today'] || '';
     const keyDate = typeof attributes != 'undefined' && Object.keys( attributes ) || [];
     const { checkoutDetails, error_list, requiredField } = bookingData
-    const thisRequired = typeof requiredField[name] != 'undefined' && requiredField[name] || false;
+    const thisRequired = typeof requiredField[name] != 'undefined' && typeof requiredField[name][pxKey] != 'undefined' && requiredField[name][pxKey] || false;
+    const errorData = typeof error_list[name] != 'undefined' && typeof error_list[name][pxKey] != 'undefined' &&  error_list[name][pxKey] || '';
     const travelerDataList = typeof checkoutDetails != 'undefined' && typeof checkoutDetails[trvOne] != 'undefined' && checkoutDetails[trvOne] || {};
     const travelerValue = typeof travelerDataList[name] != 'undefined' && travelerDataList[name] || {};
     const selectedDate =  typeof travelerValue != 'undefined' && typeof travelerValue[pxKey] != 'undefined' && travelerValue[pxKey] != '' ? new Date( travelerValue[pxKey] ) : new Date();
     // console.log( 'dhfjdf oldd', new Date( travelerValue ) )
-    const errorData = typeof error_list[name] != 'undefined' && error_list[name]  || '';
+    
     const datePickerParams =  {
         showMonthDropdown: true,
         showYearDropdown: "select",

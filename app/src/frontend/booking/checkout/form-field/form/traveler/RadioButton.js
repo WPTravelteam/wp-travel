@@ -9,10 +9,10 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
     const { label, type, name, id, wrapper_class, options } = travelerData
     const defaults = typeof travelerData != 'undefined' && typeof travelerData.default != 'undefined' && travelerData.default || ''
     const { checkoutDetails, error_list, requiredField } = bookingData
-    const thisRequired = typeof requiredField[name] != 'undefined' && requiredField[name] || false;
+    const thisRequired = typeof requiredField[name] != 'undefined' && typeof requiredField[name][pxKey] != 'undefined' && requiredField[name][pxKey] || false;
+    const errorData = typeof error_list[name] != 'undefined' && typeof error_list[name][pxKey] != 'undefined' &&  error_list[name][pxKey] || '';
     const travelerDataList = typeof checkoutDetails != 'undefined' && typeof checkoutDetails[trvOne] != 'undefined' && checkoutDetails[trvOne] || {};
     const travelerValue = typeof travelerDataList[name] != 'undefined' && travelerDataList[name] || {} ;
-    const errorData = typeof error_list[name] != 'undefined' && error_list[name]  || '';
     // console.log( )
     const optionKey = typeof options != 'undefined' && Object.keys( options ) || [];
     return optionKey.length > 0 && <> <PanelBody>
