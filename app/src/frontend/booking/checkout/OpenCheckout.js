@@ -10,17 +10,34 @@ import TravelerInfo from './TravelerInfo';
 import BillingFormField from './form-field/BillingFormField';
 // import PaymentFormField from './form-field/PaymentFormField';
 import BookingFormWithPayment from './form-field/BookingFormWithPayment';
-
-// $(document).ready(function() {
-//     $(document).on('click', '#wp-travel-one-page-checkout-enables', function() {
-//         setTimeout(function() {
-//             // Your code to execute after a delay
-//             $('.booknow-btn-modal').addClass('show');
-//           }, 1000);
-
-     
-//     });
-//   });
+    // $(document).ready(function() {
+    //     const counter = $('.counter');
+    //     const increaseBtn = $('.increase');
+    //     const decreaseBtn = $('.decrease');
+    
+    //     increaseBtn.on('click', function() {
+    //         console.log("this is working");
+    //       let value = parseInt(counter.val());
+    //       value += 1;
+    //       counter.val(value);
+    //       counter.addClass('animate');
+    //       setTimeout(function() {
+    //         counter.removeClass('animate');
+    //       }, 300);
+    //     });
+    
+    //     decreaseBtn.on('click', function() {
+    //       let value = parseInt(counter.val());
+    //       if (value > 0) {
+    //         value -= 1;
+    //         counter.val(value);
+    //         counter.addClass('animate');
+    //         setTimeout(function() {
+    //           counter.removeClass('animate');
+    //         }, 300);
+    //       }
+    //     });
+    //   });
   
   
   
@@ -63,7 +80,8 @@ export default () => {
                 }
                 { typeof tripBillingEnable != 'undefined' && tripBillingEnable && <BillingFormField /> }
                 { typeof treipPaymentEnable != 'undefined' && treipPaymentEnable && <BookingFormWithPayment /> }
- 
+                    
+                   
                 {/* <BookingFormWithPayment /> */}
                 {/* <TravelerInfo /> */}
                 {/* <div className='wptravel-traveller-info-container'><TravelerInfo /></div> */}

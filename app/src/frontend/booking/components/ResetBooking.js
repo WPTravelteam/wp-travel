@@ -16,7 +16,7 @@ const ResetBooking = ( props ) => {
         is_fixed_departure:isFixedDeparture,
     } = tripData;
     return <ErrorBoundary>
-            <button onClick={ () => {
+            <button className='wp-travel-reset-btn' onClick={ () => {
                 updateBookingData( initialState );
                 }}>
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x={0} y={0} viewBox="0 0 36.9 41.7">
