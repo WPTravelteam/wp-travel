@@ -54,7 +54,7 @@ export default () => {
                 isOpen={isOpen}
                 onRequestClose={closeModal}
             >
-                <h2>{typeof bookingTabEnable != 'undefined' && bookingTabEnable ? 'Select Your Pax' : (typeof travelerInfo != 'undefined' && travelerInfo ? 'Enter traveler Detail' : (typeof tripBillingEnable != 'undefined' && tripBillingEnable ? 'Billing Details' : 'Payment Field'))} </h2>
+                <h2>{typeof bookingTabEnable != 'undefined' && bookingTabEnable ? 'Select Your Pax' : (typeof travelerInfo != 'undefined' && travelerInfo ? 'Traveler Details' : (typeof tripBillingEnable != 'undefined' && tripBillingEnable ? 'Billing Details' : 'Payment Details'))} </h2>
                 { typeof bookingTabEnable != 'undefined' && bookingTabEnable && 
                     <OpenBookign forceCalendarDisplay={false} calendarInline={false} showTooltip={true} tooltipText={tooltipText} />
                 }

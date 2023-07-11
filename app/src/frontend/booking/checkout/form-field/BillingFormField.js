@@ -9,7 +9,7 @@ import RadioButton from './form/RadioButton';
 import Texts from './form/Texts'
 import { useSelect, dispatch } from '@wordpress/data';
 const bookingStoreName = 'WPTravelFrontend/BookingData';
-import { Button } from '@wordpress/components'
+import { Button, PanelBody, PanelRow } from '@wordpress/components'
 import TextArea from './form/TextArea';
 // import { useEffect } from '@wordpress/element'
 // import apiFetch from '@wordpress/api-fetch';
@@ -52,11 +52,16 @@ export default ( ) => {
             })
         }
         </div>
-        <Button onClick={ () => { 
-            updateStore({...bookingData, treipPaymentEnable : true , tripBillingEnable : false })
-        }} >Next</Button>
-        <Button onClick={ () => { 
-            updateStore({...bookingData, travelerInfo : true , tripBillingEnable : false })
-        }} >Go Back</Button>
+        <PanelBody>
+            <PanelRow>
+                <Button onClick={ () => { 
+                    updateStore({...bookingData, travelerInfo : true , tripBillingEnable : false })
+                }} >Go Back</Button>
+                <Button onClick={ () => { 
+                    updateStore({...bookingData, treipPaymentEnable : true , tripBillingEnable : false })
+                }} >Next</Button>
+            </PanelRow>
+        </PanelBody>
+        
     </>
 }
