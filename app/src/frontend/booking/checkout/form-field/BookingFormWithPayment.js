@@ -63,13 +63,13 @@ export default () => {
                 <input type="hidden" value={_wp_travel._nonce} name="_nonce" />
                 { selected_payment == 'stripe' && applyFilters( 'wptravel_booking_button_payment_strp', [<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Booke Now" /> ], bookingData )
                 || selected_payment == 'authorizenet' && applyFilters( 'wptravel_booking_button_payment_auth', [<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Booke Now" /> ], bookingData )
-                ||    <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Booke Now no" onClick={ e => handlingForm(e) }/> }
+                ||    <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Booke Now" onClick={ e => handlingForm(e) }/> }
             </div>
         </form>
-    </div></> || <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Booke Now no" onClick={ e => handlingForm(e) }/> }
+    </div></> || <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Booke Now" onClick={ e => handlingForm(e) }/> }
     <Button onClick={ () => { 
             updateStore({...bookingData, tripBillingEnable : true, treipPaymentEnable : false })
-    }} >Go Previus</Button>
+    }} >Go Back</Button>
 
     </>
 }

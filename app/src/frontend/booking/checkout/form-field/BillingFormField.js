@@ -54,9 +54,9 @@ export default ( ) => {
         </div>
         <Button onClick={ () => { 
             updateStore({...bookingData, treipPaymentEnable : true , tripBillingEnable : false })
-        }} >Go Payment </Button>
+        }} >Next</Button>
         <Button onClick={ () => { 
             updateStore({...bookingData, travelerInfo : true , tripBillingEnable : false })
-        }} >Go Previus</Button>
+        }} >Go Back</Button>
     </>
 }

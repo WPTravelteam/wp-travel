@@ -69,6 +69,6 @@ export default ( ) => {
         } </div> }
         <Button onClick={ () => { 
            updateStore({...bookingData, tripBillingEnable : true , travelerInfo : false }) 
-        }} >Go Billing </Button>
+        }} >Next</Button>
     </>
 }
