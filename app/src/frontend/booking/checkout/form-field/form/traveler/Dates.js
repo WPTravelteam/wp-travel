@@ -10,11 +10,13 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
     const { label, type, name, id, attributes } = travelerData
     const backed = typeof attributes != 'undefined' && attributes['data-max-today'] || '';
     const keyDate = typeof attributes != 'undefined' && Object.keys( attributes ) || [];
-    const { checkoutDetails } = bookingData
+    const { checkoutDetails, error_list, requiredField } = bookingData
+    const thisRequired = typeof requiredField[name] != 'undefined' && requiredField[name] || false;
     const travelerDataList = typeof checkoutDetails != 'undefined' && typeof checkoutDetails[trvOne] != 'undefined' && checkoutDetails[trvOne] || {};
     const travelerValue = typeof travelerDataList[name] != 'undefined' && travelerDataList[name] || {};
     const selectedDate =  typeof travelerValue != 'undefined' && typeof travelerValue[pxKey] != 'undefined' && travelerValue[pxKey] != '' ? new Date( travelerValue[pxKey] ) : new Date();
     // console.log( 'dhfjdf oldd', new Date( travelerValue ) )
+    const errorData = typeof error_list[name] != 'undefined' && error_list[name]  || '';
     const datePickerParams =  {
         showMonthDropdown: true,
         showYearDropdown: "select",
@@ -23,8 +25,8 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
         minDate: backed != 1 && keyDate.length > 0 && keyDate.includes( 'data-max-today' ) ? new Date() : null,
         maxDate: backed == 1 ?  new Date() : null,
     }
-    return <PanelBody>
-        <label >{typeof label != 'undefined' && label || '' }</label>
+    return <> <PanelBody>
+        <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>
         <DatePicker
         className= "wptravel-booking-datepicker"
             // dateFormat="yyyy-MM-dd"
@@ -46,5 +48,5 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
             }}
         />
         <input type='hidden' value={ typeof travelerValue[pxKey] != 'undefined' && travelerValue[pxKey] || '' } id={id} name={name} />
-    </PanelBody>
+    </PanelBody> <p className='wp-travel-in-page-error'>{errorData}</p></>
 }

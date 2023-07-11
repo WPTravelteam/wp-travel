@@ -65,9 +65,9 @@ export default () => {
                         updateStore({...bookingData, tripBillingEnable : true, treipPaymentEnable : false })
                     }} >Go Back</Button>
                     <div className="wp-travel-form-field button-field" >
-                        { selected_payment == 'stripe' && applyFilters( 'wptravel_booking_button_payment_strp', [<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Booke Now" /> ], bookingData )
-                        || selected_payment == 'authorizenet' && applyFilters( 'wptravel_booking_button_payment_auth', [<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Booke Now" /> ], bookingData )
-                        ||    <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Booke Now" onClick={ e => handlingForm(e) }/> }
+                        { selected_payment == 'stripe' && applyFilters( 'wptravel_booking_button_payment_strp', [<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book Now" /> ], bookingData )
+                        || selected_payment == 'authorizenet' && applyFilters( 'wptravel_booking_button_payment_auth', [<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book Now" /> ], bookingData )
+                        ||    <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book Now" onClick={ e => handlingForm(e) }/> }
                     </div> 
                 </PanelRow>
             </PanelBody></div></> || 
@@ -76,7 +76,7 @@ export default () => {
                     <Button onClick={ () => { 
                         updateStore({...bookingData, tripBillingEnable : true, treipPaymentEnable : false })
                     }} >Go Back</Button>
-                    <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Booke Now" onClick={ e => handlingForm(e) }/>
+                    <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book Now" onClick={ e => handlingForm(e) }/>
                 </PanelRow>
             </PanelBody> }
     </form>

@@ -29,7 +29,8 @@ export const DEFAULT_BOOKING_STATE = () => {
         payment_form : typeof _wp_travel != 'undefined' && typeof _wp_travel.checkout_field != 'undefined' && typeof _wp_travel.checkout_field.form != 'undefined' && typeof _wp_travel.checkout_field.form.payment_fields && _wp_travel.checkout_field.form.payment_fields || undefined,
         form_key : typeof _wp_travel != 'undefined' && typeof _wp_travel.checkout_field != 'undefined' && typeof _wp_travel.checkout_field.form_key && _wp_travel.checkout_field.form_key || 'travelerOne',
         checkoutDetails : {},
-        error_list : {}
+        error_list : {},
+        requiredField : {}
     };
     return initState;
 }

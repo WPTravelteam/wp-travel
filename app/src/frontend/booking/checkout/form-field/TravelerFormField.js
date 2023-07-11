@@ -12,7 +12,7 @@ const bookingStoreName = 'WPTravelFrontend/BookingData';
 import { Button } from '@wordpress/components'
 import TextArea from './form/traveler/TextArea';
 import 'react-accessible-accordion/dist/fancy-example.css';
-
+import { useEffect } from '@wordpress/element'
 import {
     Accordion,
     AccordionItem,
@@ -26,10 +26,65 @@ export default ( ) => {
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     const { updateStore } = dispatch( bookingStoreName );
     const multipleTraveler = typeof _wp_travel != 'undefined' && typeof _wp_travel.checkout_field != 'undefined' && typeof _wp_travel.checkout_field.enable_multiple_travellers != 'undefined' &&  _wp_travel.checkout_field.enable_multiple_travellers || 'no';
-    const { traveler_form, form_key, paxCounts } = bookingData;
+    const { traveler_form, form_key, paxCounts, checkoutDetails, error_list } = bookingData;
     const fieldKey  = typeof traveler_form != 'undefined' && Object.keys( traveler_form ) || [];
     const paxKey = Object.keys( paxCounts )
-    console.log( 'multipleTraveler', multipleTraveler )
+    // console.log( 'multipleTraveler', multipleTraveler )
+    const travelerEnter = typeof checkoutDetails[form_key] != 'undefined' && checkoutDetails[form_key] || {};
+    useEffect( () => {
+        const requiredField = {};
+        if ( fieldKey.length > 0 ) {
+            fieldKey.map( ( trvk, index ) => {
+                // console.log( 'trv key', trvk )
+                const fieldCollect = typeof traveler_form[trvk] != 'undefined' && traveler_form[trvk] || {};
+                const { validations, name, label } = fieldCollect;
+                // console.log( 'validations', validations );
+                const requireds = typeof validations != 'undefined' && typeof validations.required != 'undefined' && validations.required || '0';
+                
+                const intRequiresd = parseInt( requireds );
+                // console.log( 'cick me id', intRequiresd );
+                if ( intRequiresd == 1 ) {
+                    requiredField[name] = true;
+                }
+            })
+        }
+        if ( Object.keys( requiredField ).length > 0 ) {
+            updateStore({...bookingData, requiredField : requiredField })
+        }
+    },[])
+    const validateTravelerData = () => {
+        const errorss = {};
+        if ( fieldKey.length > 0 ) {
+            fieldKey.map( ( trvk, index ) => {
+                // console.log( 'trv key', trvk )
+                const fieldCollect = typeof traveler_form[trvk] != 'undefined' && traveler_form[trvk] || {};
+                const { validations, name, label } = fieldCollect;
+                // console.log( 'validations', validations );
+                const requireds = typeof validations != 'undefined' && typeof validations.required != 'undefined' && validations.required || '123';
+                
+                const intRequiresd = parseInt( requireds );
+                // console.log( 'cick me id', intRequiresd );
+                if ( intRequiresd == 1 ) {
+                    if ( Object.keys( travelerEnter ).length < 1 ) {
+                        // console.log( 'error data', error_list );
+                        errorss[name] = label + ' is required';
+                    } else {
+                        const travelData = typeof travelerEnter[name] != 'undefined' && travelerEnter[name] || {};
+                        const finalData = typeof travelData[1] != 'undefined' && travelData[1] || '';
+                        // console.log( 'skdfjsdjfdlsfj', finalData );
+                        if ( finalData == '' ) {
+                            errorss[name] = label + ' is required';
+                        }
+                    }
+                }
+            })
+        }
+        if ( Object.keys( errorss ).length < 1 ) {
+            updateStore({...bookingData, error_list : {}, tripBillingEnable : true , travelerInfo : false })
+        } else {
+            updateStore({...bookingData, error_list : errorss })
+        }
+    }
     return <>
         { multipleTraveler == 'yes' && <> { paxKey.length > 0 && paxKey.map( ( pKeys, index) => {
             const newdata = [];
@@ -38,7 +93,7 @@ export default ( ) => {
                 newdata.push( i );
             }
         return newdata.length > 0 && newdata.map( ( finalPax, index ) => {
-            console.log( 'finalPax', finalPax )
+            // console.log( 'finalPax', finalPax )
              return <Accordion allowZeroExpanded={true} key={ index }>
                 <AccordionItem>
                     <AccordionItemHeading>
@@ -67,8 +122,6 @@ export default ( ) => {
                 return <div key={ index }>{ ( fieldTypes == 'text' || fieldTypes == 'number' ) && <Texts travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'email' && <Emails travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'radio' && <div className='wp-travel-new-gender-field'><RadioButton travelerData={travelerData} trvOne={form_key} /></div> || fieldTypes == 'checkbox' && <CheckBoxs travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'date' && <Dates travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'country_dropdown' && <DropDowns travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'textarea' && <TextArea travelerData={travelerData} trvOne={form_key} /> }</div>
             })
         } </div> }
-        <Button onClick={ () => { 
-           updateStore({...bookingData, tripBillingEnable : true , travelerInfo : false }) 
-        }} >Next</Button>
+        <Button onClick={validateTravelerData} >Next</Button>
     </>
 }

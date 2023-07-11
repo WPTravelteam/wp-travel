@@ -11,34 +11,68 @@ import { useSelect, dispatch } from '@wordpress/data';
 const bookingStoreName = 'WPTravelFrontend/BookingData';
 import { Button, PanelBody, PanelRow } from '@wordpress/components'
 import TextArea from './form/TextArea';
-// import { useEffect } from '@wordpress/element'
+import { useEffect } from '@wordpress/element'
 // import apiFetch from '@wordpress/api-fetch';
 export default ( ) => {
     // Booking Data/state.
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     const { updateStore } = dispatch( bookingStoreName );
-    const { billing_form } = bookingData;
+    const { billing_form, error_list, checkoutDetails } = bookingData;
+    const { billing } = checkoutDetails;
+    const billingData = typeof billing != 'undefined' && billing || {};
     const fieldKey  = typeof billing_form != 'undefined' && Object.keys( billing_form ) || [];
-    // useEffect( () => {
-    //     apiFetch( {
-    //         url: `${wp_travel.ajaxUrl}?action=wptravel_get_payment_field&_nonce=${_wp_travel._nonce}`,
-    //         method: 'GET',
-    //     }).then( settingData => {
-    //         console.log( 'sdf', typeof settingData, settingData )
-    //         if ( typeof settingData != 'undefined' && typeof settingData.success != 'undefined' && typeof settingData.data != 'undefined' ) {
-
-    //             if ( settingData.success === true && settingData.data != '' ) {
-    //                 console.log( 'data', settingData.data )
-    //                 updateStore( {...bookingData, payment_form : settingData.data.payment, form_key : settingData.data.form_key } )
-    //             }
-
-    //         } else {
-    //             console.log( 'setting not get!' )
-    //         }
-    //     }).catch(error => {
-    //         console.log( 'You can not use one page checkout because setting not loaded!' );
-    //     })
-    // },[])
+    useEffect( () => {
+        const requiredField = {};
+        if ( fieldKey.length > 0 ) {
+            fieldKey.map( ( trvk, index ) => {
+                console.log( 'trv key', trvk )
+                const fieldCollect = typeof billing_form[trvk] != 'undefined' && billing_form[trvk] || {};
+                const { validations, name, label } = fieldCollect;
+                console.log( 'validations', validations );
+                const requireds = typeof validations != 'undefined' && typeof validations.required != 'undefined' && validations.required || '0';
+                const intRequiresd = parseInt( requireds );
+                console.log( 'cick me id', intRequiresd );
+                if ( intRequiresd == 1 ) {
+                    requiredField[name] = true;
+                }
+            })
+        }
+        if ( Object.keys( requiredField ).length > 0 ) {
+            updateStore({...bookingData, requiredField : requiredField })
+        }
+    }, [])
+    const validateTravelerData = () => {
+        const errorss = {};
+        if ( fieldKey.length > 0 ) {
+            fieldKey.map( ( trvk, index ) => {
+                console.log( 'trv key', trvk )
+                const fieldCollect = typeof billing_form[trvk] != 'undefined' && billing_form[trvk] || {};
+                const { validations, name, label } = fieldCollect;
+                console.log( 'validations', validations );
+                const requireds = typeof validations != 'undefined' && typeof validations.required != 'undefined' && validations.required || '0';
+                
+                const intRequiresd = parseInt( requireds );
+                console.log( 'cick me id', intRequiresd );
+                if ( intRequiresd == 1 ) {
+                    if ( Object.keys( billingData ).length < 1 ) {
+                        console.log( 'error data', error_list );
+                        errorss[name] = label + ' is required';
+                    } else {
+                        const travelData = typeof billingData[name] != 'undefined' && billingData[name] || '';
+                        console.log( 'skdfjsdjfdlsfj', travelData );
+                        if ( travelData == '' ) {
+                            errorss[name] = label + ' is required';
+                        }
+                    }
+                }
+            })
+        }
+        if ( Object.keys( errorss ).length < 1 ) {
+            updateStore({...bookingData, error_list : {}, treipPaymentEnable : true , tripBillingEnable : false })
+        } else {
+            updateStore({...bookingData, error_list : errorss })
+        }
+    }
     return <>
     <div className="wptravel-billing-formfield">
         {
@@ -57,9 +91,7 @@ export default ( ) => {
                 <Button onClick={ () => { 
                     updateStore({...bookingData, travelerInfo : true , tripBillingEnable : false })
                 }} >Go Back</Button>
-                <Button onClick={ () => { 
-                    updateStore({...bookingData, treipPaymentEnable : true , tripBillingEnable : false })
-                }} >Next</Button>
+                <Button onClick={ validateTravelerData } >Next</Button>
             </PanelRow>
         </PanelBody>
         

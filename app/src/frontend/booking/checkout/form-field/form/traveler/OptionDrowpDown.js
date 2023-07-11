@@ -7,18 +7,20 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
     const { updateStore } = dispatch( bookingStoreName );
     const { label, type, name, id, options } = travelerData
     const defaults = typeof travelerData != 'undefined' && typeof travelerData.default != undefined && travelerData.default || '';
-    const { checkoutDetails } = bookingData
+    const { checkoutDetails, error_list, requiredField } = bookingData
+    const thisRequired = typeof requiredField[name] != 'undefined' && requiredField[name] || false;
     const travelerDataList = typeof checkoutDetails != 'undefined' && typeof checkoutDetails[trvOne] != 'undefined' && checkoutDetails[trvOne] || {};
     const travelerValue = typeof travelerDataList[name] != 'undefined' && travelerDataList[name] || {};
     const optionKey = typeof options != undefined && Object.keys( options ) || []
+    const errorData = typeof error_list[name] != 'undefined' && error_list[name]  || '';
     // if ( typeof travelerDataList[name] == undefined ) {
     //     const newData = {...travelerDataList, [name] : "booking_only" };
     //     const checkoutNewData = {...checkoutDetails, [trvOne] : newData }
     //     updateStore({...bookingData, checkoutDetails : checkoutNewData } )  
     // }
-    return <PanelBody>
+    return <><PanelBody>
         <PanelRow>
-            <label >{typeof label != 'undefined' && label || '' }</label>
+            <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>
             <select id={id} name={name} defaultValue={ typeof travelerValue[pxKey] != 'undefined' && travelerValue[pxKey] || defaults } 
                 onClick={ (val ) => { 
                     const selectedValue = val.target.value;
@@ -34,5 +36,5 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
                 }
             </select>
         </PanelRow>
-    </PanelBody>
+    </PanelBody> <p className='wp-travel-in-page-error'>{errorData}</p></>
 }

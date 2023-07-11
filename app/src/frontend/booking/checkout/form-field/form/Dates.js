@@ -10,7 +10,8 @@ export default ( { travelerData, trvOne = 'travelerOne' } ) => {
     const { label, type, name, id, attributes } = travelerData
     const backed = typeof attributes != 'undefined' && attributes['data-max-today'] || '';
     const keyDate = typeof attributes != 'undefined' && Object.keys( attributes ) || [];
-    const { checkoutDetails } = bookingData
+    const { checkoutDetails, error_list, requiredField } = bookingData
+    const thisRequired = typeof requiredField[name] != 'undefined' && requiredField[name] || false;
     const travelerDataList = typeof checkoutDetails != 'undefined' && typeof checkoutDetails[trvOne] != 'undefined' && checkoutDetails[trvOne] || {};
     const travelerValue = typeof travelerDataList[name] != 'undefined' && travelerDataList[name] || '';
     const selectedDate =  typeof travelerValue != 'undefined' && travelerValue != '' ? new Date( travelerValue ) : new Date();
@@ -23,8 +24,9 @@ export default ( { travelerData, trvOne = 'travelerOne' } ) => {
         minDate: backed != 1 && keyDate.length > 0 && keyDate.includes( 'data-max-today' ) ? new Date() : null,
         maxDate: backed == 1 ?  new Date() : null,
     }
-    return <PanelBody>
-        <label >{typeof label != 'undefined' && label || '' }</label>
+    const errorData = typeof error_list[name] != 'undefined' && error_list[name]  || '';
+    return <><PanelBody>
+        <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>
         <DatePicker
         className= "wptravel-booking-datepicker"
             // dateFormat="yyyy-MM-dd"
@@ -45,5 +47,5 @@ export default ( { travelerData, trvOne = 'travelerOne' } ) => {
             }}
         />
         <input type='hidden' value={ travelerValue } id={id} name={name} />
-    </PanelBody>
+    </PanelBody><p className='wp-travel-in-page-error'>{errorData}</p></>
 }
