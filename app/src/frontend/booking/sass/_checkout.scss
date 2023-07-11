@@ -67,7 +67,10 @@
 				/*************** Person section **************/
 				td[data-label="Person"] {
 					text-align: center;
-
+					/**Opacity of selecting pax**/
+					.css-u2jump.components-disabled {
+						opacity: 0.3;
+					}
 					.wp-travel-booking__pax-selector-wrapper {
 						margin-bottom: 20px;
 
