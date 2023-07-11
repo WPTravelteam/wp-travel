@@ -63,8 +63,7 @@ export default () => {
                 }
                 { typeof tripBillingEnable != 'undefined' && tripBillingEnable && <BillingFormField /> }
                 { typeof treipPaymentEnable != 'undefined' && treipPaymentEnable && <BookingFormWithPayment /> }
-                    
-                   
+ 
                 {/* <BookingFormWithPayment /> */}
                 {/* <TravelerInfo /> */}
                 {/* <div className='wptravel-traveller-info-container'><TravelerInfo /></div> */}
