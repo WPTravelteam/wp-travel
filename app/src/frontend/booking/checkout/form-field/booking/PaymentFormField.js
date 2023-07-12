@@ -21,6 +21,6 @@ export default ( ) => {
     // console.log( 'payment select', payment_gateway)
     // const fieldKey  = typeof payment_gateway != 'undefined' && Object.keys( payment_gateway ) || [];
     return <>
-        { typeof payment_gateway != undefined && <RadioButton travelerData={payment_gateway} trvOne='payment_select' /> }
+        { typeof payment_gateway != undefined && <RadioButton travelerData={payment_gateway} trvOne='payment_select' pmtFld='yes' /> }
     </>
 }

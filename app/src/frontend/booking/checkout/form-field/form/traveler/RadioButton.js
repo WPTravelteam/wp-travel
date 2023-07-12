@@ -21,7 +21,7 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
             <div>
                 { optionKey.map( ( val, index ) => {
                     return  <> <input 
-                        name={name} 
+                        name={name + pxKey.toString()} 
                         type='radio' 
                         id={id} 
                         key={index}

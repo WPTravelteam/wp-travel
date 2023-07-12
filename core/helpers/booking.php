@@ -42,7 +42,7 @@ class WpTravel_Helpers_Booking {
 		<table class="wp-travel-table-content" cellpadding="0" cellspacing="0" height="100%" width="100%" style="text-align: left;">
 			<thead>
 				<tr>
-					<th><?php apply_filters( 'wp_travel_booking_mail_pax', esc_html_e( 'Itinerary', 'wp-travel' ), $booking_id ); ?></th>
+					<th><?php apply_filters( 'wp_travel_booking_mail_itinerary', esc_html_e( 'Itinerary', 'wp-travel' ), $booking_id ); ?></th>
 					<th><?php apply_filters( 'wp_travel_booking_mail_pax', esc_html_e( ! empty( $strings ) ? strtoupper( $strings['bookings']['pax'] ) : 'PAX', 'wp-travel' ), $booking_id ); ?></th>
 					<th><?php apply_filters( 'wp_travel_booking_mail_arrival', esc_html_e( 'Arrival Date', 'wp-travel' ), $booking_id ); ?></th>
 					<th><?php apply_filters( 'wp_travel_booking_mail_departure', esc_html_e( 'Departure Date', 'wp-travel' ), $booking_id ); ?></th>
@@ -202,12 +202,12 @@ class WpTravel_Helpers_Booking {
 							</tr>
 							<?php $indexs++; } } if ( count( $traveler_first_names ) < 2 ) { ?>
 							<tr>
-								<th><?php esc_html_e( 'Traveler Name', 'wp-travel' ); ?></th>
-								<th><?php esc_html_e( 'Country', 'wp-travel' ); ?></th>
-								<th><?php esc_html_e( 'Phone No.', 'wp-travel' ); ?></th>
-								<th><?php esc_html_e( 'Email', 'wp-travel' ); ?></th>
-								<th><?php esc_html_e( 'DOB', 'wp-travel' ); ?></th>
-								<th><?php esc_html_e( 'Gender', 'wp-travel' ); ?></th>
+								<th><?php apply_filters( 'wp_travel_booking_mail_trv_name', esc_html_e( 'Traveler Name', 'wp-travel' ) ); ?></th>
+								<th><?php apply_filters( 'wp_travel_booking_mail_trv_country', esc_html_e( 'Country', 'wp-travel' ) ); ?></th>
+								<th><?php apply_filters( 'wp_travel_booking_mail_trv_phone', esc_html_e( 'Phone No.', 'wp-travel' ) ); ?></th>
+								<th><?php apply_filters( 'wp_travel_booking_mail_trv_email', esc_html_e( 'Email', 'wp-travel' ) ); ?></th>
+								<th><?php apply_filters( 'wp_travel_booking_mail_trv_dob', esc_html_e( 'DOB', 'wp-travel' ) ); ?></th>
+								<th><?php apply_filters( 'wp_travel_booking_mail_trv_gender', esc_html_e( 'Gender', 'wp-travel' ) ); ?></th>
 							</tr>
 						</thead><?php } ?>
 						<tbody>
