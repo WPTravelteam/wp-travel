@@ -69,7 +69,7 @@ export default () => {
                                     ...allData,
                                     enable_session: 'yes' == enable_session ? 'no' : 'yes'
                                 })
-                                location.reload()
+                                // location.reload()
                             }}
                         />
                         <p className="description">{__('Enable to export settings data.', 'wp-travel')}</p>

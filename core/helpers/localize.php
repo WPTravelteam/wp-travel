@@ -77,6 +77,7 @@ class WpTravel_Helpers_Localize {
 				'country'                    => wptravel_get_countries(),
 				'form_key'                   => ! empty( $trip_items ) ? array_key_first( $trip_items ) : 'travelerOne',
 				'my_data'                    => do_action( 'wp_travel_action_before_book_now' ),
+				'bank_detail_form'			 => wptravel_get_bank_deposit_account_details(),
 
 			);
 

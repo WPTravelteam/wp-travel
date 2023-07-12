@@ -9,6 +9,7 @@ import { applyFilters, doAction } from '@wordpress/hooks';
 import HiddenText from "./form/HiddenText"
 import BillingHiddenField from "./form/BillingHiddenField"
 import { Button, PanelBody, PanelRow } from "@wordpress/components"
+import BankDetail from "./form/BankDetail"
 // import { useEffect } from '@wordpress/element'
 // import apiFetch from '@wordpress/api-fetch';
 // import { hari } from './booking/data'
@@ -16,19 +17,25 @@ import { Button, PanelBody, PanelRow } from "@wordpress/components"
 export default () => {
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     const { updateStore } = dispatch( bookingStoreName );
-    const { checkoutDetails, payment_form, form_key  } = bookingData;
+    const { checkoutDetails, payment_form, form_key, traveler_form  } = bookingData;
     const { booking_selected, payment_select  } = checkoutDetails;
     const { wp_travel_payment_gateway } = typeof payment_select != 'undefined' && payment_select || 'no';
     const selected_payment = typeof wp_travel_payment_gateway != 'undefined' && wp_travel_payment_gateway || 'no'
     const travelerData = typeof checkoutDetails != undefined && checkoutDetails[form_key] || '';
     const billingData = typeof checkoutDetails != undefined && typeof checkoutDetails.billing != 'undefined' && checkoutDetails.billing || '';
-    const travelerKey = travelerData != '' && Object.keys(travelerData) || [];
+    const travelerKey = [];
+    Object.keys( traveler_form ).length > 0 && Object.keys(traveler_form).map( ( fstKey, index ) => {
+        const finalFstKey = typeof traveler_form[fstKey] != 'undefined' && traveler_form[fstKey] || {};
+        const trvName = typeof finalFstKey.name != 'undefined' && finalFstKey.name || ''
+        if ( trvName != '' ){
+            travelerKey.push( trvName );
+        }
+    } )
     const billingKey = billingData != '' && Object.keys(billingData) || [];
     const { wp_travel_booking_option } = typeof booking_selected != 'undefined' && booking_selected || "booking_with_payment"
     const { payment_gateway } = payment_form;
     const partial_enable = _wp_travel.partial_enable;
     const { wp_travel_payment_mode } = typeof booking_selected != 'undefined' && booking_selected || "partial"
-    // console.log( 'partial', partial_enable, _wp_travel.partial_enable );
 
     const handlingForm = ( e ) => {
         // e.preventDefault();
@@ -45,15 +52,16 @@ export default () => {
             <PaymentPrice />
             </> }
             { travelerKey.length > 0 && travelerKey.map( ( keyList, indexs ) => {
-                const trvValue = travelerData[keyList]
+                const trvValue = typeof travelerData[keyList] != 'undefined' && travelerData[keyList] || { 1 : ''}
                 const newTravelerKey = typeof trvValue != 'undefined' && Object.keys( trvValue ) || [];
-            return newTravelerKey.length > 0 && newTravelerKey.map( ( finalKeys, index) => { return <div key={indexs} ><HiddenText names={keyList} values={trvValue[finalKeys]} index={index} keys={form_key} /></div> })
+                return newTravelerKey.length > 0 && newTravelerKey.map( ( finalKeys, index) => { return <div key={indexs + index } ><HiddenText names={keyList} values={trvValue[finalKeys]} index={index} keys={form_key} /></div> })
             })}
             {billingKey.length > 0 && billingKey.map((keyList, indexs) => {
                 const billValue = billingData[keyList];
                 return <div key={indexs} >{billValue != '' && <BillingHiddenField names={keyList} values={billingData[keyList]} />}</div>
 
             })}
+            { wp_travel_booking_option == "booking_with_payment"&& selected_payment == 'bank_deposit' && <BankDetail />}
             { wp_travel_booking_option == 'booking_with_payment' && typeof payment_select != 'undefined' && typeof payment_select.wp_travel_payment_gateway != 'undefined' && payment_select.wp_travel_payment_gateway == 'stripe' && <><label> {wp_travel.strip_card }</label><div id="card-element"></div> </>}
             
             { <input type="hidden" id="wp-travel-partial-payment" value={partial_enable} name="wp_travel_is_partial_payment" /> }

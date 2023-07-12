@@ -17,14 +17,14 @@
 		border: 1px solid rgb(204, 204, 204);
 		overflow: auto;
 		outline: none;
-		top: 0 !important;
+		top: 50% !important;
 		left: 0% !important;
 		margin: 0 auto;
 		background-color: #ffffffe6;
 		padding: 20px;
 		border-radius: 5px;
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-		// transform: translate(0, -50%);
+		transform: translate(0, -50%);
 		// select your pax h2 title
 		h2 {
 			font-size: 20px;

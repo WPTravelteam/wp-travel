@@ -413,6 +413,11 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			require WP_TRAVEL_ABSPATH . '/core/ajax/view-mode.php';
 			require WP_TRAVEL_ABSPATH . '/core/ajax/payments.php';
 
+			//include import and export setting file
+			if( isset( wptravel_get_settings()['enable_session'] ) && wptravel_get_settings()['enable_session'] == 'yes' ){
+                require WP_TRAVEL_ABSPATH . '/inc/import-export/import-export.php';
+            }
+
 			/**
 			 * App Part.
 			 */
