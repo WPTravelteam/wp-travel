@@ -83,7 +83,7 @@ export default () => {
             <div className="wptravel-onepage-navigation-btn">
                 <Button onClick={ () => { 
                     updateStore({...bookingData, tripBillingEnable : true, treipPaymentEnable : false })
-                }} >Go Back</Button>
+                }} >Go Back {loaders && <img src={_wp_travel.loader_url } /> }</Button>
                 <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book Now" onClick={ e => handlingForm(e) }/>
             </div> }
     </form>

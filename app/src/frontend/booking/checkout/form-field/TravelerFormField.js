@@ -203,7 +203,10 @@ export default ( ) => {
                 return <div key={ index }>{ ( fieldTypes == 'text' || fieldTypes == 'number' ) && <Texts travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'email' && <Emails travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'radio' && <div className='wp-travel-new-gender-field'><RadioButton travelerData={travelerData} trvOne={form_key} /></div> || fieldTypes == 'checkbox' && <CheckBoxs travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'date' && <Dates travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'country_dropdown' && <DropDowns travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'textarea' && <TextArea travelerData={travelerData} trvOne={form_key} /> }</div>
             })
         } </div> }
+        <p className='wp-travel-in-page-error'>{errorFound}</p>
+        <div className='wptrave-singlepage-initial-nextbtn'>
         <Button onClick={validateTravelerData} >Next{loaders && <img src={_wp_travel.loader_url } /> }</Button>
-        <p>{errorFound}</p>
+        </div>
+        
     </>
 }
