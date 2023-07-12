@@ -92,16 +92,19 @@ export default ( ) => {
             })
         }
         </div>
-        <PanelBody>
-            <PanelRow>
-                <Button onClick={ () => { 
-                    updateStore({...bookingData, travelerInfo : true , tripBillingEnable : false })
-                }} >Go Back</Button>
-                <div><Button onClick={ validateTravelerData } >Next{loaders && <img src={_wp_travel.loader_url } /> }</Button>
-                    <p>{errorFound}</p>
-                </div>
-            </PanelRow>
-        </PanelBody>
+        {/* <PanelBody>
+            <PanelRow> */}
+        <div className='wptravel-onepage-navigation-btn'>
+        
+            <Button onClick={ () => { 
+                updateStore({...bookingData, travelerInfo : true , tripBillingEnable : false })
+            }} >Go Back</Button>
+            <div><p className='wptravel-onepage-navigation-error'>{errorFound}</p><Button onClick={ validateTravelerData } >Next{loaders && <img src={_wp_travel.loader_url } /> }</Button>
+                
+            </div>
+        </div>
+            {/* </PanelRow>
+        </PanelBody> */}
         
         
     </>

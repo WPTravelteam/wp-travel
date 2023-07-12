@@ -44,13 +44,14 @@ export default () => {
         <div className="wptravel-booking-payment-page">
             <BookingType />
             { wp_travel_booking_option == "booking_with_payment" && <>
-            <PaymentFormField />
+            <div className="wptravel-onepage-payment-gateway"><PaymentFormField /> </div>
             { partial_enable == 'yes' && <PartialPyamet /> }
             </> }
-            <TotalPrice />
-            { wp_travel_booking_option == "booking_with_payment" && wp_travel_payment_mode == 'partial' &&  partial_enable == 'yes' && <>
+            <div className="wptravel-onepage-payment-total-trip-price"><TotalPrice /></div>
+            
+            { wp_travel_booking_option == "booking_with_payment" && wp_travel_payment_mode == 'partial' &&  partial_enable == 'yes' && <div className="wptravel-one-page-payment-amount">
             <PaymentPrice />
-            </> }
+            </div> }
             { travelerKey.length > 0 && travelerKey.map( ( keyList, indexs ) => {
                 const trvValue = typeof travelerData[keyList] != 'undefined' && travelerData[keyList] || { 1 : ''}
                 const newTravelerKey = typeof trvValue != 'undefined' && Object.keys( trvValue ) || [];
@@ -67,26 +68,22 @@ export default () => {
             { <input type="hidden" id="wp-travel-partial-payment" value={partial_enable} name="wp_travel_is_partial_payment" /> }
             <input type="hidden" value={_wp_travel._nonce} name="_nonce" />
             {doAction( 'wptravel_booking_button_payment', bookingData )}
-            <PanelBody>
-                <PanelRow>
-                    <Button onClick={ () => { 
-                        updateStore({...bookingData, tripBillingEnable : true, treipPaymentEnable : false })
-                    }} >Go Back</Button>
-                    <div className="wp-travel-form-field button-field" >
-                        { selected_payment == 'stripe' && applyFilters( 'wptravel_booking_button_payment_strp', [<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book Now" /> ], bookingData )
-                        || selected_payment == 'authorizenet' && applyFilters( 'wptravel_booking_button_payment_auth', [<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book Now" /> ], bookingData )
-                        ||    <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book Now" onClick={ e => handlingForm(e) }/> }
-                    </div> 
-                </PanelRow>
-            </PanelBody></div></> || 
-            <PanelBody>
-                <PanelRow>
-                    <Button onClick={ () => { 
-                        updateStore({...bookingData, tripBillingEnable : true, treipPaymentEnable : false })
-                    }} >Go Back</Button>
-                    <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book Now" onClick={ e => handlingForm(e) }/>
-                </PanelRow>
-            </PanelBody> }
+            <div className="wptravel-onepage-navigation-btn">
+                <Button onClick={ () => { 
+                    updateStore({...bookingData, tripBillingEnable : true, treipPaymentEnable : false })
+                }} >Go Back</Button>
+                <div className="wp-travel-form-field button-field" >
+                    { selected_payment == 'stripe' && applyFilters( 'wptravel_booking_button_payment_strp', [<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book Now" /> ], bookingData )
+                    || selected_payment == 'authorizenet' && applyFilters( 'wptravel_booking_button_payment_auth', [<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book Now" /> ], bookingData )
+                    ||    <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book Now" onClick={ e => handlingForm(e) }/> }
+                </div> 
+            </div></div></> || 
+            <div className="wptravel-onepage-navigation-btn">
+                <Button onClick={ () => { 
+                    updateStore({...bookingData, tripBillingEnable : true, treipPaymentEnable : false })
+                }} >Go Back</Button>
+                <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book Now" onClick={ e => handlingForm(e) }/>
+            </div> }
     </form>
     </>
 }
