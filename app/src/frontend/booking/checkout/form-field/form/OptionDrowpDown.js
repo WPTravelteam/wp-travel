@@ -18,8 +18,8 @@ export default ( { travelerData, trvOne = 'travelerOne' } ) => {
         updateStore({...bookingData, checkoutDetails : checkoutNewData } )  
     }
     const errorData = typeof error_list[name] != 'undefined' && error_list[name]  || '';
-    return <><PanelBody>
-        <PanelRow>
+    return <><PanelBody >
+        <PanelRow className='wptravel-singlepage-booking-options'>
             <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>
             <select id={id} name={name} defaultValue={ typeof travelerValue != 'undefined' && travelerValue != '' && travelerValue || defaults } 
                 onClick={ (val ) => { 

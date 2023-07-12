@@ -338,6 +338,7 @@
 		background-color: #fff;
 		border-top: 1px solid #ccc;
 		width: 100%;
+		padding-bottom: 0;
 
 		// left-info i.e pricine and trip-date
 		.left-info {
@@ -394,6 +395,7 @@
 		text-align: right;
 		margin-right: 10px;
 		color: red;
+		margin: 10px 0;
 	}
 	span.wp-travel-in-page-required-field {
 		color: #ff0000;
@@ -417,8 +419,10 @@
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 		gap: 10px;
+		grid-column-gap: 40px;
 		padding: 0 40px;
-		margin: 30px 0;
+		margin: 40px 0;
+		align-items: center;
 		// inner formfields
 		div {
 			margin-bottom: 5px;
@@ -483,6 +487,7 @@
 					border: 1px solid rgb(204, 204, 204);
 					padding: 0.5rem;
 					border-radius: 0.5rem;
+					width: 100%;
 				}
 			}
 		}
@@ -543,7 +548,7 @@
 				justify-content: center;
 				align-items: center;
 			}
-			input#wp-travel-book-now:hover{
+			input#wp-travel-book-now:hover {
 				transform: scale(1.1);
 				transition: width 2s;
 			}
@@ -557,41 +562,70 @@
 		margin-bottom: 20px;
 	}
 
-	// booking with payment
+	/************* booking with payment *************/
 	form#wp-travel-booking {
-		width: 600px;
-		margin: 0 auto;
+		// width: 600px;
+		// margin: 0 auto;
 		//
 		.wptravel-booking-payment-page {
 			background: rgb(255 255 255);
 			box-shadow: 0 0 3px;
 			border-radius: 5px;
-
-			// trip totla price section
-			.wptravel-onepage-payment-total-trip-price,
-			.wptravel-one-page-payment-amount{
+			margin:30px;
+			//booking options such as partial payment, full payment
+			.wptravel-singlepage-booking-options{
+				width: 70%;
+				margin: 0 auto;
+				justify-content: space-between;
 				label{
-					font-weight:bold;
+					font-weight: bold;
+				}
+				select#wp-travel-payment-mode{
+					flex: 0.9;
+				}
+			}
+
+			// trip total price section
+			.wptravel-onepage-payment-total-trip-price,
+			.wptravel-one-page-payment-amount {
+				label {
+					font-weight: bold;
 				}
 			}
 			.wptravel-onepage-payment-gateway {
+				width: 70%;
+				margin: 0 auto;
 				.components-panel__body.is-opened {
-					overflow-y: scroll;
+					padding: 10px 40px 10px 40px;
+					// overflow-y: scroll;
 					.components-panel__row {
 						background: #f7f7f7;
 						padding: 20px;
 						border-radius: 5px;
+						overflow-y: scroll;
+						height: 180px;
+
+						// payment's label font-sizes
+						> 	label{
+							font-weight: bold;
+							margin-right: 30px;
+							
+						}
+						label{
+							font-size: 16px;
+
+						}
 					}
 				}
 			}
 			.components-panel__body.is-opened {
 				padding: 40px 40px 10px 40px;
-				max-height: 150px;
+				// max-height: 150px;
 				// overflow-y: scroll;
 				.components-panel__row {
 					display: flex;
 					#wp-travel-option {
-						flex: 1;
+						flex: 0.3;
 						margin-left: 10px;
 						// padding: 5px 0;
 						min-height: 40px;
@@ -703,12 +737,20 @@
 			box-shadow: 0 0 0 0 rgba(0, 128, 0, 0);
 		}
 	}
+	// initial book-now button to align right side
+	.wptrave-singlepage-initial-nextbtn {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+	}
 
 	/*********************billing form fields section***********************/
 	.wptravel-billing-formfield {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 		gap: 10px;
+		grid-column-gap: 40px;
+
 		padding: 0 40px;
 		// select,input,radio fielss
 		.components-panel__body.is-opened {
@@ -741,15 +783,19 @@
 }
 
 @media only screen and (max-width: 980px) {
-	.booknow-btn-modal .wptravel-traveller-info-container {
-		grid-template-columns: repeat(1, 1fr);
+	.booknow-btn-modal {
 	}
 }
-@media only screen and (max-width: 530px) {
+@media only screen and (max-width: 668px) {
 	#wp-travel-country {
 		width: 80px;
 	}
-	.wptravel-layout-v2.ReactModal__Body--open .ReactModal__Content {
+	.wptravel-layout-v2.ReactModal__Body--open .booknow-btn-modal {
 		padding: 20px;
+		//traveller info field
+		.wptravel-traveller-info-container,
+		.wptravel-billing-formfield {
+			grid-template-columns: repeat(1, 1fr);
+		}
 	}
 }
