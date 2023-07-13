@@ -27,14 +27,14 @@ export default ( ) => {
         const requiredField = {};
         if ( fieldKey.length > 0 ) {
             fieldKey.map( ( trvk, index ) => {
-                console.log( 'trv key', trvk )
+                // console.log( 'trv key', trvk )
                 const fieldCollect = typeof billing_form[trvk] != 'undefined' && billing_form[trvk] || {};
                 const { validations, name, label } = fieldCollect;
-                console.log( 'validations', validations );
+                // console.log( 'validations', validations );
                 const requireds = typeof validations != 'undefined' && typeof validations.required != 'undefined' && validations.required || '0';
-                const intRequiresd = parseInt( requireds );
-                console.log( 'cick me id', intRequiresd );
-                if ( intRequiresd == 1 ) {
+                const intRequiresd = requireds;
+                // console.log( 'cick me id', intRequiresd );
+                if ( intRequiresd == 1 || intRequiresd == true ) {
                     requiredField[name] = true;
                 }
             })
@@ -48,21 +48,21 @@ export default ( ) => {
         const errorss = {};
         if ( fieldKey.length > 0 ) {
             fieldKey.map( ( trvk, index ) => {
-                console.log( 'trv key', trvk )
+                // console.log( 'trv key', trvk )
                 const fieldCollect = typeof billing_form[trvk] != 'undefined' && billing_form[trvk] || {};
                 const { validations, name, label } = fieldCollect;
-                console.log( 'validations', validations );
+                // console.log( 'validations', validations );
                 const requireds = typeof validations != 'undefined' && typeof validations.required != 'undefined' && validations.required || '0';
                 
-                const intRequiresd = parseInt( requireds );
-                console.log( 'cick me id', intRequiresd );
-                if ( intRequiresd == 1 ) {
+                const intRequiresd = requireds;
+                // console.log( 'cick me id', intRequiresd );
+                if ( intRequiresd == 1 || intRequiresd == true ) {
                     if ( Object.keys( billingData ).length < 1 ) {
-                        console.log( 'error data', error_list );
+                        // console.log( 'error data', error_list );
                         errorss[name] = label + ' is required';
                     } else {
                         const travelData = typeof billingData[name] != 'undefined' && billingData[name] || '';
-                        console.log( 'skdfjsdjfdlsfj', travelData );
+                        // console.log( 'skdfjsdjfdlsfj', travelData );
                         if ( travelData == '' ) {
                             errorss[name] = label + ' is required';
                         }

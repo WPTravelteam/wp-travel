@@ -32,7 +32,7 @@ function wptravel_listen_paypal_ipn() {
 	if ( ! WP_Travel::verify_nonce( true ) ) {
 		return;
 	}
-
+	// print_r( $_GET ); die;
 	if ( isset( $_GET['wp_travel_listener'] )
 		&& $_GET['wp_travel_listener'] == 'IPN'
 		|| isset( $_GET['test'] )
@@ -108,7 +108,7 @@ function wptravel_paypal_ipn_process() {
 		 *
 		 * Create a new payment, send customer an email and empty the cart
 		 */
-
+		 
 		if ( ! empty( $_POST['payment_status'] ) && $_POST['payment_status'] == 'Pending' ) { // @phpcs:ignore
 				// Update booking status and Payment args.
 				update_post_meta( $booking_id, 'wp_travel_booking_status', 'booked' );

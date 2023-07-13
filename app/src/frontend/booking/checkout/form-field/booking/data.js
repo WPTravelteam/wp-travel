@@ -5,14 +5,12 @@ var gateway_change = function() {
     const func = $('[name=wp_travel_payment_gateway]:checked').val();
     const executor = payments[func];
     executor && executor();
-
     bank_deposit_field();
    
 };
 var bank_deposit_field = function() {
-
     $( '.f-bank-deposit' ).hide();
-    func = $('[name=wp_travel_payment_gateway]:checked').val();
+    const func = $('[name=wp_travel_payment_gateway]:checked').val();
     if ( func === 'bank_deposit' ) {
         // For Frontend submission.
         $( '.f-bank-deposit' ).show();

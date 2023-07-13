@@ -48,15 +48,15 @@ export default ( ) => {
                 // console.log( 'validations', validations );
                 const requireds = typeof validations != 'undefined' && typeof validations.required != 'undefined' && validations.required || '0';
                 const requiredAll = typeof validations != 'undefined' && typeof validations.required_for_all != 'undefined' && validations.required_for_all || '0';
-                const intRequiredAll = parseInt( requiredAll );
-                const intRequiresd = parseInt( requireds );
+                const intRequiredAll =  requiredAll;
+                const intRequiresd = requireds;
                 // console.log( 'cick me id', intRequiresd );
-                if ( intRequiresd == 1 ) {
+                if ( intRequiresd == 1 || intRequiredAll == true ) {
                     const newKeyRequired = { 1 : true }
                     requiredField[name] = newKeyRequired;
                 }
 
-                if ( multipleTraveler == 'yes' && intRequiredAll == 1 ) {
+                if ( multipleTraveler == 'yes' && ( intRequiredAll == 1 || intRequiredAll == true ) ) {
                     var paxTotal = 0
                     paxKey.length > 0 && paxKey.map( ( pKeys, index) => {
                         // const newdata = [];
@@ -91,8 +91,8 @@ export default ( ) => {
                 // console.log( 'validations', validations );
                 const requireds = typeof validations != 'undefined' && typeof validations.required != 'undefined' && validations.required || '0';
                 const requiredAll = typeof validations != 'undefined' && typeof validations.required_for_all != 'undefined' && validations.required_for_all || '0';
-                const intRequiredAll = parseInt( requiredAll );
-                const intRequiresd = parseInt( requireds );
+                const intRequiredAll = requiredAll;
+                const intRequiresd = requireds;
                 // console.log( 'cick me id', intRequiresd );
                 const travelData = typeof travelerEnter[name] != 'undefined' && travelerEnter[name] || {};
                 var requiredListed = {}
@@ -104,7 +104,7 @@ export default ( ) => {
                     }
 
                 }
-                if ( intRequiresd == 1 ) {
+                if ( intRequiresd == 1 || intRequiresd == true ) {
                     if ( Object.keys( travelerEnter ).length < 1 ) {
                         // console.log( 'error data', error_list );
                         const newCreateError = { 1 : label + ' is required' }
@@ -139,7 +139,7 @@ export default ( ) => {
                                 pxReq[i + 1 ] = label + ' is required';
                             }
                         }
-                        if ( intRequiredAll == 1 && Object.keys( pxReq ).length > 0 ) {
+                        if ( ( intRequiredAll == true || intRequiredAll == 1 ) && Object.keys( pxReq ).length > 0 ) {
                             errorss[name] = {...requiredListed, ...pxReq };
                         }
                         if ( Object.keys( emailErrors).length > 0 ) {

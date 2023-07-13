@@ -42,7 +42,7 @@ export default ( { travelerData, trvOne = 'travelerOne', pmtFld = 'no' } ) => {
                 }) || optionKey.map( ( val, index ) => {
                     // travelerValue == val && setOption( 'checked' );
                     // const vall = optionList[val];
-                    if ( val == 'stripe' || val == 'authorizenet' || val == 'bank_deposit'  ) {
+                    if ( val == 'stripe' || val == 'authorizenet' || val == 'bank_deposit' || val == 'paypal'  ) {
                         return  <> <input 
                             name={name} 
                             type='radio' 
