@@ -13,6 +13,7 @@ import BankDetail from "./form/BankDetail"
 // import { useEffect } from '@wordpress/element'
 // import apiFetch from '@wordpress/api-fetch';
 // import { hari } from './booking/data'
+import ProgressBary from "../ProgressBary"
 
 export default () => {
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
@@ -40,7 +41,10 @@ export default () => {
     const handlingForm = ( e ) => {
         // e.preventDefault();
     }
-    return <> <form method="POST" action={_wp_travel.checkout_url} className="wp-travel-booking" id="wp-travel-booking" > { typeof payment_gateway != 'undefined' && <>
+    return <> 
+         {/* <ProgressBary statusText={`Progress: Fill Up payment Details`} value={90} max={100} /> */}
+    
+    <form method="POST" action={_wp_travel.checkout_url} className="wp-travel-booking" id="wp-travel-booking" > { typeof payment_gateway != 'undefined' && <>
         <div className="wptravel-booking-payment-page">
             <BookingType />
             { wp_travel_booking_option == "booking_with_payment" && <>
@@ -63,7 +67,7 @@ export default () => {
 
             })}
             { wp_travel_booking_option == "booking_with_payment"&& selected_payment == 'bank_deposit' && <BankDetail />}
-            { wp_travel_booking_option == 'booking_with_payment' && typeof payment_select != 'undefined' && typeof payment_select.wp_travel_payment_gateway != 'undefined' && payment_select.wp_travel_payment_gateway == 'stripe' && <><label> {wp_travel.strip_card }</label><div id="card-element"></div> </>}
+            { wp_travel_booking_option == 'booking_with_payment' && typeof payment_select != 'undefined' && typeof payment_select.wp_travel_payment_gateway != 'undefined' && payment_select.wp_travel_payment_gateway == 'stripe' && <div className="wptravel-single-page-stripcheckout"><label> {wp_travel.strip_card }</label><div id="card-element"></div> </div>}
             
             { <input type="hidden" id="wp-travel-partial-payment" value={partial_enable} name="wp_travel_is_partial_payment" /> }
             <input type="hidden" value={_wp_travel._nonce} name="_nonce" />

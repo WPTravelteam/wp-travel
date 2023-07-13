@@ -13,6 +13,7 @@ import { Button, PanelBody, PanelRow } from '@wordpress/components'
 import TextArea from './form/TextArea';
 import { useEffect, useState } from '@wordpress/element'
 // import apiFetch from '@wordpress/api-fetch';
+import ProgressBary from '../ProgressBary';
 export default ( ) => {
     // Booking Data/state.
     const [loaders, setLoaders] = useState(false)
@@ -80,6 +81,8 @@ export default ( ) => {
         }
     }
     return <>
+       {/* <ProgressBary statusText={`Progress: Fill Up billing Details`} value={60} max={100} /> */}
+
     <div className="wptravel-billing-formfield">
         {
             fieldKey.length > 0 && fieldKey.map( ( trvKey, index ) => {
