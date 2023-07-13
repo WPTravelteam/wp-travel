@@ -208,7 +208,7 @@ export default ( ) => {
         <p className='wp-travel-in-page-error'>{errorFound}</p>
         <div className='wptrave-singlepage-initial-nextbtn'>
     
-        <Button onClick={validateTravelerData} >Next{loaders && <img src={_wp_travel.loader_url } /> }</Button>
+        <Button onClick={validateTravelerData} >Next{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</Button>
         </div>
         
     </>

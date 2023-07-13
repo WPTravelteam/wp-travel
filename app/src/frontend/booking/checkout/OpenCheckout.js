@@ -34,7 +34,7 @@ export default () => {
     const tooltipText = __i18n.bookings.date_select_to_view_options;
     // Modal.setAppElement('#OpenCeckout');
     return <>
-        <Button className="booknow-btn-booking" onClick={openModal}>Book Now</Button>
+        <Button className="booknow-btn-booking wptravel-book-your-trip wp-travel-booknow-btn" onClick={openModal}>Book Now</Button>
         <div className="wp-travel-checkout-one-page">
             <Modal
                 className="booknow-btn-modal"

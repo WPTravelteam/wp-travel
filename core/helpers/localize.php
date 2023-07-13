@@ -46,6 +46,7 @@ class WpTravel_Helpers_Localize {
 		$rdp_locale = str_replace( '_', '', $rdp_locale ); // React date picker locale.
 		// user form transfer in react
 		global $wt_cart;
+		// echo '<pre>'; print_r( wptravel_get_checkout_form_fields() ); die;
 		$trip_items     = $wt_cart->getItems();
 		$checkoutPage   = get_option( 'wp_travel_wp-travel-checkout_page_id' );
 		$checkoutDetail = get_post( $checkoutPage );

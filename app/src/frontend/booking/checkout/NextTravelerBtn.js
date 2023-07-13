@@ -16,7 +16,7 @@ const bookingStoreName = 'WPTravelFrontend/BookingData';
 import { objectSum, wpTravelFormat, wpTravelTimeout, GetConvertedPrice } from '../_wptravelFunctions';
 
 const WpTravelBookNow = ( props ) => {
-	const [loaders, setLoaders] = useState(false)
+	const [loaders, setLoaders] = useState(false);
     // Booking Data/state.
     const bookingAllData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     // // console.log( bookingData );
@@ -216,7 +216,7 @@ const WpTravelBookNow = ( props ) => {
                         
                         <div className="right-info" >
                             <p>{__i18n.bookings.booking_tab_cart_total}<strong dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCartTotal(true)) }}></strong></p>
-                            <button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">Next{loaders && <img src={_wp_travel.loader_url } /> }</button>
+                            <button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">Next{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</button>
                         </div>
                     </div>
 					</div>

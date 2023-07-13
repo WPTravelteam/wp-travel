@@ -11,12 +11,13 @@ import BillingHiddenField from "./form/BillingHiddenField"
 import { Button, PanelBody, PanelRow } from "@wordpress/components"
 import BankDetail from "./form/BankDetail"
 
-import { useEffect } from '@wordpress/element'
+import { useEffect, useState } from '@wordpress/element'
 // import apiFetch from '@wordpress/api-fetch';
 // import { hari } from './booking/data'
 import ProgressBary from "../ProgressBary"
 
 export default () => {
+    const [loaders, setLoaders] = useState(false)
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     const { updateStore } = dispatch( bookingStoreName );
     const { checkoutDetails, payment_form, form_key, traveler_form  } = bookingData;
@@ -84,7 +85,7 @@ export default () => {
             <div className="wptravel-onepage-navigation-btn">
                 <Button onClick={ () => { 
                     updateStore({...bookingData, tripBillingEnable : true, treipPaymentEnable : false })
-                }} >Go Back {loaders && <img src={_wp_travel.loader_url } /> }</Button>
+                }} >Go Back {loaders && <img className="wptravel-single-page-loader-btn" src={_wp_travel.loader_url } /> }</Button>
                 <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book Now" onClick={ e => handlingForm(e) }/>
             </div> }
     </form>
