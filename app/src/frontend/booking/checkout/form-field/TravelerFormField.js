@@ -20,6 +20,7 @@ import {
     AccordionItemButton,
     AccordionItemPanel,
 } from 'react-accessible-accordion';
+import ProgressBary from '../ProgressBary';
 
 export default ( ) => {
     const [loaders, setLoaders] = useState(false)
@@ -160,6 +161,7 @@ export default ( ) => {
         }
     }
     return <>
+        {/* <ProgressBary statusText={`Progress: Fill Up Traveller Details`} value={30} max={100} /> */}
         { multipleTraveler == 'yes' && <> { paxKey.length > 0 && paxKey.map( ( pKeys, ind) => {
             const newdata = [];
             const paxC = paxCounts[pKeys];
@@ -205,6 +207,7 @@ export default ( ) => {
         } </div> }
         <p className='wp-travel-in-page-error'>{errorFound}</p>
         <div className='wptrave-singlepage-initial-nextbtn'>
+    
         <Button onClick={validateTravelerData} >Next{loaders && <img src={_wp_travel.loader_url } /> }</Button>
         </div>
         

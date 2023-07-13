@@ -11,6 +11,7 @@ import DateListing from "../components/DateListing";
 import CalendarView from "../components/CalendarView";
 // import WpTravelBookNow from '../components/WpTravelBookNow';
 import NextTravelerBtn from './NextTravelerBtn'
+import ProgressBary from './ProgressBary';
 export default ( props ) => {
 	// Component Props.
 	const { forceCalendarDisplay } = props;
@@ -39,6 +40,10 @@ export default ( props ) => {
                 tripData && 'custom-booking' === pricingType && <CustomBooking {...tripData} /> ||
 				<ErrorBoundary>
 					<Suspense>
+
+                        {/* progress bar */}
+                        {/* <ProgressBary statusText={`Progress: this is the starting`} value={5} max={100} /> */}
+
                         { ( ! forceCalendarDisplay || selectedDate ) &&
                             <div className="wp-travel-booking__header">
                                 {<h3>{__i18n.booking_tab_content_label}</h3> }
@@ -53,6 +58,7 @@ export default ( props ) => {
                             <CalendarView { ...{ ...props, bookingData, updateBookingData, tripData } } />
                         }
                         {/* Book Now Button at bottom */}
+                        
                         <NextTravelerBtn { ...{ ...props, bookingData, updateBookingData, tripData } } />
 					</Suspense>
                 </ErrorBoundary>
