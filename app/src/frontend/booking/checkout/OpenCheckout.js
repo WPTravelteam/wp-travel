@@ -10,37 +10,7 @@ import TravelerInfo from './TravelerInfo';
 import BillingFormField from './form-field/BillingFormField';
 // import PaymentFormField from './form-field/PaymentFormField';
 import BookingFormWithPayment from './form-field/BookingFormWithPayment';
-    // $(document).ready(function() {
-    //     const counter = $('.counter');
-    //     const increaseBtn = $('.increase');
-    //     const decreaseBtn = $('.decrease');
-    
-    //     increaseBtn.on('click', function() {
-    //         console.log("this is working");
-    //       let value = parseInt(counter.val());
-    //       value += 1;
-    //       counter.val(value);
-    //       counter.addClass('animate');
-    //       setTimeout(function() {
-    //         counter.removeClass('animate');
-    //       }, 300);
-    //     });
-    
-    //     decreaseBtn.on('click', function() {
-    //       let value = parseInt(counter.val());
-    //       if (value > 0) {
-    //         value -= 1;
-    //         counter.val(value);
-    //         counter.addClass('animate');
-    //         setTimeout(function() {
-    //           counter.removeClass('animate');
-    //         }, 300);
-    //       }
-    //     });
-    //   });
-  
-  
-  
+ 
 const __i18n = {
     ..._wp_travel.strings
 }
@@ -74,7 +44,10 @@ export default () => {
                 <h2>{typeof bookingTabEnable != 'undefined' && bookingTabEnable ? 'Select Your Pax' : (typeof travelerInfo != 'undefined' && travelerInfo ? 'Traveler Details' : (typeof tripBillingEnable != 'undefined' && tripBillingEnable ? 'Billing Details' : 'Payment Details'))} </h2>
 
                 { typeof bookingTabEnable != 'undefined' && bookingTabEnable && 
-                    <OpenBookign forceCalendarDisplay={false} calendarInline={false} showTooltip={true} tooltipText={tooltipText} />
+                    <div className='wptravel-single-page-calender-booking wp-travel-calendar-view'>
+                        <OpenBookign forceCalendarDisplay={false} calendarInline={false} showTooltip={true} tooltipText={tooltipText} />
+                    </div>
+                    
                 }
                 {
                     typeof travelerInfo != 'undefined' && travelerInfo && <TravelerInfo />
@@ -88,7 +61,7 @@ export default () => {
 
                    {/* <BillingFormField /> */}
                 {/* <TravelerInfo /> */}
-
+                
                 {/* <BookingFormWithPayment /> */}
                 {/* <div className='wptravel-traveller-info-container'><TravelerInfo /></div> */}
             </Modal>

@@ -14,6 +14,7 @@ import BankDetail from "./form/BankDetail"
 import { useEffect, useState } from '@wordpress/element'
 // import apiFetch from '@wordpress/api-fetch';
 // import { hari } from './booking/data'
+import ProgressBary from "../ProgressBary"
 
 export default () => {
     const [loaders, setLoaders] = useState(false)
@@ -65,8 +66,8 @@ export default () => {
                 return <div key={indexs} >{billValue != '' && <BillingHiddenField names={keyList} values={billingData[keyList]} />}</div>
 
             })}
-            { wp_travel_booking_option == "booking_with_payment" && selected_payment == 'bank_deposit' && <BankDetail />}
-            { wp_travel_booking_option == 'booking_with_payment' && typeof payment_select != 'undefined' && typeof payment_select.wp_travel_payment_gateway != 'undefined' && payment_select.wp_travel_payment_gateway == 'stripe' && <><label> {wp_travel.strip_card }</label><div id="card-element"></div> </>}
+            { wp_travel_booking_option == "booking_with_payment"&& selected_payment == 'bank_deposit' && <BankDetail />}
+            { wp_travel_booking_option == 'booking_with_payment' && typeof payment_select != 'undefined' && typeof payment_select.wp_travel_payment_gateway != 'undefined' && payment_select.wp_travel_payment_gateway == 'stripe' && <div className="wptravel-single-page-stripcheckout"><label> {wp_travel.strip_card }</label><div id="card-element"></div> </div>}
             
             { <input type="hidden" id="wp-travel-partial-payment" value={partial_enable} name="wp_travel_is_partial_payment" /> }
             <input type="hidden" value={_wp_travel._nonce} name="_nonce" />
