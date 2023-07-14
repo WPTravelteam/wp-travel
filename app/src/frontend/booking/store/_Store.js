@@ -31,7 +31,8 @@ export const DEFAULT_BOOKING_STATE = () => {
         banck_detail : typeof _wp_travel != 'undefined' && typeof _wp_travel.checkout_field != 'undefined' && typeof _wp_travel.checkout_field.bank_detail_form != 'undefined' && _wp_travel.checkout_field.bank_detail_form || [],
         checkoutDetails : {},
         error_list : {},
-        requiredField : {}
+        requiredField : {},
+        couponCode: ''
     };
     return initState;
 }
