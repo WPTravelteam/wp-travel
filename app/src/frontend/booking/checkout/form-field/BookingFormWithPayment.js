@@ -43,6 +43,7 @@ export default () => {
     const handlingForm = ( e ) => {
         // e.preventDefault();
     }
+    paypalPayment();
     // hari();
     return <> <form method="POST" action={_wp_travel.checkout_url} className="wp-travel-booking" id="wp-travel-booking" > { typeof payment_gateway != 'undefined' && <>
         <div className="wptravel-booking-payment-page">
@@ -85,7 +86,7 @@ export default () => {
             <div className="wptravel-onepage-navigation-btn">
                 <Button onClick={ () => { 
                     updateStore({...bookingData, tripBillingEnable : true, treipPaymentEnable : false })
-                }} >Go Back {loaders && <img src={_wp_travel.loader_url } /> }</Button>
+                }} >Go Back {loaders && <img className="wptravel-single-page-loader-btn" src={_wp_travel.loader_url } /> }</Button>
                 <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book Now" onClick={ e => handlingForm(e) }/>
             </div> }
     </form>

@@ -790,7 +790,6 @@ function wptravel_single_excerpt( $trip_id ) {
 	$booking_type    = get_post_meta( $trip_id, 'wp_travel_custom_booking_type', true );
 	$custom_link     = get_post_meta( $trip_id, 'wp_travel_custom_booking_link', true );
 	$open_in_new_tab = get_post_meta( $trip_id, 'wp_travel_custom_booking_link_open_in_new_tab', true );
-	// print_r( $settings['enable_one_page_booking'] ); die;
 	if ( class_exists( 'WP_Travel_Utilities_Core' ) ) {
 		$pricing_type = get_post_meta( $trip_id, 'wp_travel_pricing_option_type', true );
 	}

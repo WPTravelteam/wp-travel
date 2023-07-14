@@ -1,7 +1,6 @@
 import $ from 'jquery';
 import 'jquery-ui-bundle';
 var gateway_change = function() {
-    console.log( 'best travgg')
     const func = $('[name=wp_travel_payment_gateway]:checked').val();
     const executor = payments[func];
     executor && executor();
@@ -72,7 +71,7 @@ const display_payment_mode_option = {
 }
 
 // $(document).ready(function($) {
-export const hari = () => {
+export const paypalPayment = () => {
     // Functions
     var booking_option_change = function() {
         const trigger = $('[name=wp_travel_booking_option]').val();
@@ -138,5 +137,5 @@ export const hari = () => {
         return amount;
     }
 }
-console.log( 'helllcall', document.getElementById( 'wp-travel-option' ) )
+// console.log( 'helllcall', document.getElementById( 'wp-travel-option' ) )
 // document.getElementById( 'wp-travel-option' )
