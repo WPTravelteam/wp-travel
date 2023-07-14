@@ -89,7 +89,7 @@ function wptravel_marketplace_page() {
 			'name'       => __( 'Travel Ocean', 'wp-travel' ),
 			'type'       => 'free',
 			'img_url'    => 'https://i0.wp.com/themes.svn.wordpress.org/travel-ocean/1.0.5/screenshot.png?w=572&strip=all',
-			'demo_url'   => 'https://wpdemo.wensolutions.com/travel-joy-pro/',
+			'demo_url'   => 'https://wpdemo.wensolutions.com/travel-ocean/',
 			'detail_url' => 'https://wensolutions.com/themes/travel-ocean/',
 		),
 		'travel-escape-pro'         => array(

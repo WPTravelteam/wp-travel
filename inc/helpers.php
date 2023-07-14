@@ -1040,6 +1040,7 @@ function wptravel_get_frontend_tabs( $show_in_menu_query = false, $frontend_hide
 	$trip_id = $post->ID;
 
 	$settings                  = wptravel_get_settings();
+	$enable_one_page_booking = isset( $settings['enable_one_page_booking'] ) ? $settings['enable_one_page_booking'] : false;
 	$wp_travel_use_global_tabs = get_post_meta( $trip_id, 'wp_travel_use_global_tabs', true );
 	if ( 'yes' === $wp_travel_use_global_tabs ) {
 		$custom_tab_enabled = apply_filters( 'wp_travel_is_custom_tabs_support_enabled', false );
@@ -1048,7 +1049,7 @@ function wptravel_get_frontend_tabs( $show_in_menu_query = false, $frontend_hide
 		$enable_custom_itinerary_tabs = apply_filters( 'wp_travel_custom_itinerary_tabs', false );
 		$wp_travel_tabs               = wptravel_get_admin_trip_tabs( $trip_id, $enable_custom_itinerary_tabs, $frontend_hide_content );
 	}
-
+	$hook_for_double_enable = apply_filters( 'wp_travel_enable_double_booking_button', true );
 	// Adding Content to the tabs.
 	$return_tabs = array();
 
@@ -1071,6 +1072,10 @@ function wptravel_get_frontend_tabs( $show_in_menu_query = false, $frontend_hide
 				if ( 'custom-booking' === $pricing_type && 'custom-link' === $booking_type && $custom_link ) {
 					$show_in_menu = 'no';
 				}
+				if ( ( $enable_one_page_booking == true || $enable_one_page_booking == 1 ) && $hook_for_double_enable == true ) {
+					$show_in_menu = 'no';
+				}
+
 			}
 
 			if ( ! $frontend_hide_content ) {  // this var is passed to check value whether current tab show in frontend or not. so content is not required
@@ -1099,6 +1104,7 @@ function wptravel_get_frontend_tabs( $show_in_menu_query = false, $frontend_hide
 		}
 		$return_tabs = $new_tabs;
 	}
+	// echo '<pre>'; print_r( $return_tabs ); die;
 	return $return_tabs = apply_filters( 'wp_travel_itinerary_tabs', $return_tabs );
 }
 

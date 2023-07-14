@@ -168,12 +168,12 @@ export default ( ) => {
             for ( i= 1; i <= paxC; i++ ) {
                 newdata.push( i );
             }
-        return <div key={ind * 9 } ><Accordion allowZeroExpanded={true} >{ newdata.length > 0 && newdata.map( ( finalPax, index ) => {
+        return <div key={ind * 9 } ><Accordion allowZeroExpanded={true} preExpanded={[1]}  >{ newdata.length > 0 && newdata.map( ( finalPax, index ) => {
             // console.log( 'finalPax', finalPax )
-             return <AccordionItem key={ index + 10 } >
+             return <AccordionItem key={ index + 10 } uuid={finalPax + ind } >
                     <AccordionItemHeading>
                         <AccordionItemButton>
-                            <span>Traveler { finalPax }</span>
+                            <span>{ finalPax == 1 ? "Lead Traveler" : 'Traveler ' } { finalPax > 1 && finalPax } </span>
                         </AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>

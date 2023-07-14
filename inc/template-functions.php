@@ -755,7 +755,8 @@ function wptravel_single_excerpt( $trip_id ) {
 	$strings = WpTravel_Helpers_Strings::get();
 	// Get Settings.
 	$settings = wptravel_get_settings();
-
+	$enable_one_page = isset( $settings['enable_one_page_booking'] ) &&  ( $settings['enable_one_page_booking'] == true || $settings['enable_one_page_booking'] == 1 ) ? true : false;
+	$hook_for_double_enable = apply_filters( 'wp_travel_enable_double_booking_button', true );
 	$enquery_global_setting = isset( $settings['enable_trip_enquiry_option'] ) ? $settings['enable_trip_enquiry_option'] : 'yes';
 
 	$global_enquiry_option = get_post_meta( $trip_id, 'wp_travel_use_global_trip_enquiry_option', true );
@@ -789,7 +790,7 @@ function wptravel_single_excerpt( $trip_id ) {
 	$booking_type    = get_post_meta( $trip_id, 'wp_travel_custom_booking_type', true );
 	$custom_link     = get_post_meta( $trip_id, 'wp_travel_custom_booking_link', true );
 	$open_in_new_tab = get_post_meta( $trip_id, 'wp_travel_custom_booking_link_open_in_new_tab', true );
-
+	// print_r( $settings['enable_one_page_booking'] ); die;
 	if ( class_exists( 'WP_Travel_Utilities_Core' ) ) {
 		$pricing_type = get_post_meta( $trip_id, 'wp_travel_pricing_option_type', true );
 	}
@@ -873,12 +874,15 @@ function wptravel_single_excerpt( $trip_id ) {
 			if ( 'custom-booking' === $pricing_type && 'custom-link' === $booking_type && $custom_link ) :
 				?>
 				<a href="<?php echo esc_url( $custom_link ); ?>" target="<?php echo $open_in_new_tab ? esc_attr( 'new' ) : ''; ?>" class="wptravel-book-your-trip"><?php echo esc_html( apply_filters( 'wp_travel_template_book_now_text', $book_now_text ) ); // @phpcs:ignore ?></a>
+				
 				<?php
-			elseif ( wptravel_tab_show_in_menu( 'booking' ) ) :
+			elseif ( wptravel_tab_show_in_menu( 'booking' ) || $enable_one_page ) :
+				if ( $enable_one_page == true && $hook_for_double_enable == true ) {
 				?>
-				<div id='wp-travel-one-page-checkout-enables'>here</div>
+				<div id='wp-travel-one-page-checkout-enables'>Book Now</div>
+				<?php } else { ?>
 				<button class="wptravel-book-your-trip wp-travel-booknow-btn"><?php echo esc_html( apply_filters( 'wp_travel_template_book_now_text', $book_now_text ) ); // @phpcs:ignore ?></button>
-			<?php endif; ?>
+			<?php } endif; ?>
 			<?php if ( 'yes' === $enable_enquiry ) : ?>
 				<a id="wp-travel-send-enquiries" class="wp-travel-send-enquiries" data-effect="mfp-move-from-top" href="#wp-travel-enquiries">
 					<span class="wp-travel-booking-enquiry">

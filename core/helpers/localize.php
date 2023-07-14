@@ -25,9 +25,6 @@ class WpTravel_Helpers_Localize {
 		global $post;
 		$localized_data = array();
 		$settings       = wptravel_get_settings();
-		// echo '<pre>';
-		// print_r( $settings );
-		// die;
 		// Getting Locale to fetch Localized calender js.
 		$lang_code            = explode( '-', get_bloginfo( 'language' ) );
 		$locale               = $lang_code[0];
@@ -69,7 +66,9 @@ class WpTravel_Helpers_Localize {
 			$_wp_travel['strings']            = WpTravel_Helpers_Strings::get();
 			$_wp_travel['itinerary_v2']       = wptravel_use_itinerary_v2_layout();
 			$_wp_travel['checkout_url']       = $checkoutDetail->guid;
+			$_wp_travel['select_you_pax']	  = apply_filters( 'wp_travel_select_you_pax', __( 'Select Your Pax', 'wp-travel' )); 
 			$_wp_travel['partial_enable']     = isset( $settings['partial_payment'] ) ? $settings['partial_payment'] : 'no';
+			$_wp_travel['enable_one_page_booking'] = isset( $settings['enable_one_page_booking'] ) ? $settings['enable_one_page_booking'] : false;
 			$_wp_travel['loader_url']         = plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/images/loader.gif';
 			$_wp_travel['checkout_field']     = array(
 				'form'                       => wptravel_get_checkout_form_fields(),
@@ -156,8 +155,8 @@ class WpTravel_Helpers_Localize {
 			}
 
 			$wp_travel                    = apply_filters( 'wptravel_frontend_data', $wp_travel, $settings );
-			$localized_data['wp_travel']  = $wp_travel;
-			$localized_data['_wp_travel'] = $_wp_travel;
+			$localized_data['wp_travel']  = apply_filters( 'wp_travel_localize_data_wp_travel', $wp_travel );
+			$localized_data['_wp_travel'] = apply_filters( 'wp_travel_localize_data_travel', $_wp_travel );
 		}
 
 		if ( self::is_request( 'admin' ) ) {
