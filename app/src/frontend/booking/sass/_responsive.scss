@@ -1,0 +1,29 @@
+// close button
+.booknow-btn-modal {
+	position: relative;
+	padding: 20px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+}
+
+.wptravel-single-page-close-btn {
+	position: absolute;
+	top: 30px;
+	right: 40px;
+	background-color: transparent;
+	border: none;
+	font-size: 25px;
+	cursor: pointer;
+	color: rgb(255, 0, 0);
+}
+
+.wptravel-single-page-close-btn:hover {
+	text-decoration: none;
+    // transition: 2s;
+	color: green;
+	transform: scale(1.2);
+	transition: width 2s;
+	transition: height 2s;
+
+    
+}

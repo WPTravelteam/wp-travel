@@ -10,7 +10,7 @@ import TravelerInfo from './TravelerInfo';
 import BillingFormField from './form-field/BillingFormField';
 // import PaymentFormField from './form-field/PaymentFormField';
 import BookingFormWithPayment from './form-field/BookingFormWithPayment';
- 
+
 const __i18n = {
     ..._wp_travel.strings
 }
@@ -41,27 +41,30 @@ export default () => {
                 isOpen={isOpen}
                 onRequestClose={closeModal}
             >
+                
+                <button onClick={ closeModal} className="wptravel-single-page-close-btn">x</button>
+               
                 <h2>{typeof bookingTabEnable != 'undefined' && bookingTabEnable ? 'Select Your Pax' : (typeof travelerInfo != 'undefined' && travelerInfo ? 'Traveler Details' : (typeof tripBillingEnable != 'undefined' && tripBillingEnable ? 'Billing Details' : 'Payment Details'))} </h2>
 
-                { typeof bookingTabEnable != 'undefined' && bookingTabEnable && 
+                {typeof bookingTabEnable != 'undefined' && bookingTabEnable &&
                     <div className='wptravel-single-page-calender-booking wp-travel-calendar-view'>
                         <OpenBookign forceCalendarDisplay={false} calendarInline={false} showTooltip={true} tooltipText={tooltipText} />
                     </div>
-                    
+
                 }
                 {
                     typeof travelerInfo != 'undefined' && travelerInfo && <TravelerInfo />
                 }
-                { typeof tripBillingEnable != 'undefined' && tripBillingEnable && <BillingFormField /> }
-                { typeof treipPaymentEnable != 'undefined' && treipPaymentEnable && <BookingFormWithPayment /> }
-                    
+                {typeof tripBillingEnable != 'undefined' && tripBillingEnable && <BillingFormField />}
+                {typeof treipPaymentEnable != 'undefined' && treipPaymentEnable && <BookingFormWithPayment />}
 
 
 
 
-                   {/* <BillingFormField /> */}
+
+                {/* <BillingFormField /> */}
                 {/* <TravelerInfo /> */}
-                
+
                 {/* <BookingFormWithPayment /> */}
                 {/* <div className='wptravel-traveller-info-container'><TravelerInfo /></div> */}
             </Modal>

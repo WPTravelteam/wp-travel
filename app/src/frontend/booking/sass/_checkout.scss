@@ -1,3 +1,4 @@
+@import './responsive.scss';
 .wp-travel-checkout-one-page {
 	width: 90%;
 }
@@ -150,6 +151,22 @@
 				button:hover {
 					transform: scale(1.06);
 					transition: width 2s;
+				}
+			}
+		}
+	}
+
+	// in case of recurring dates
+	.wptravel-recurring-dates {
+		table {
+			td {
+				button.prev {
+					float: left;
+				}
+				button.show-more,
+				button.next {
+					float: right;
+					margin-right: 10px;
 				}
 			}
 		}
@@ -875,6 +892,23 @@
 					border: 1px solid rgb(204, 204, 204);
 					padding: 0.5rem;
 					border-radius: 0.5rem;
+				}
+			}
+
+			// Large tablets and desktops
+			// responsive
+			
+			@media (max-width: 576px) {
+				.wptravel-singlepage-booking-options {
+					flex-wrap: wrap;
+					label{
+						width: 100%;
+						display: block;
+					}
+					select#wp-travel-option{
+						width: 100%;
+						display: block;
+					}
 				}
 			}
 
