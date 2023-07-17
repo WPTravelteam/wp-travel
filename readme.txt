@@ -42,6 +42,7 @@ View [Demo of Best Travel & Tour Plugin ](https://wpdemo.wensolutions.com/travel
 * [WP Travel Stripe iDEAL Checkout](https://wptravel.io/downloads/wp-travel-stripe-ideal-checkout/) (For payment from customers in the Netherlands)
 
 = WP TRAVEL PREMIUM MODULES =
+
 * [WP Travel Group Discount](https://wptravel.io/downloads/wp-travel-group-discount/)
 * [WP Travel Utilities](https://wptravel.io/downloads/wp-travel-utilities/)
 * [WP Travel Tour Extras](https://wptravel.io/downloads/wp-travel-tour-extras/)
@@ -68,15 +69,16 @@ View [Demo of Best Travel & Tour Plugin ](https://wpdemo.wensolutions.com/travel
 * [WP Travel Mapquest](https://wptravel.io/downloads/wp-travel-mapquest/)
 
 [View all WP Travel modules](https://wptravel.io/downloads/)
+
 = FREE TRAVEL THEMES COMPATIBLE WITH WP TRAVEL PLUGIN =
 
 * [Photo Journal](https://catchthemes.com/themes/photo-journal/) by Catch Themes
 * [Travelore](https://catchthemes.com/themes/travelore/) by Catch Themes
 * [Mega Tour](https://themepalace.com/downloads/mega-tour/) by Theme Palace
-* [Travelstore](https://wensolutions.com/travelstore) by WEN Solutions
-* [Travel Joy](https://wensolutions.com/travel-joy-pro/) by WEN Solutions
+* [Travelstore](https://wensolutions.com/themes/travelstore/) by WEN Solutions
+* [Travel Joy](https://wensolutions.com/themes/travel-joy-pro/) by WEN Solutions
 * [Travel Gem](https://wenthemes.com/item/wordpress-themes/travel-gem/) by WEN Themes
-* [Travel Log](https://wensolutions.com/travel-log-pro) by WEN Solutions
+* [Travel Log](https://wensolutions.com/themes/travel-log-pro/) by WEN Solutions
 * [Travel Base](https://themepalace.com/downloads/travel-base/) by Theme Palace
 * [Tourable](https://themepalace.com/downloads/tourable/) by Theme Palace
 * [Pleased](https://themepalace.com/downloads/pleased/) by Theme Palace
@@ -89,7 +91,7 @@ View [Demo of Best Travel & Tour Plugin ](https://wpdemo.wensolutions.com/travel
 * [Photo Journal Pro](https://catchthemes.com/themes/photo-journal-pro/) by Catch Themes
 * [Travelore Pro](https://catchthemes.com/themes/travelore-pro/) by Catch Themes.
 * [Mega Tour Pro](https://themepalace.com/downloads/mega-tour-pro/) by Theme Palace.
-* [Travel Joy Pro](https://wensolutions.com/travel-joy-pro/) by WEN Solutions
+* [Travel Joy Pro](https://wensolutions.com/themes/travel-joy-pro/) by WEN Solutions
 * [Travel Gem Pro](https://themepalace.com/downloads/travel-gem-pro/) by WEN Themes
 * [Travel Ultimate Pro](https://themepalace.com/downloads/travel-ultimate-pro/) by Theme Palace.
 * [Travel Base Pro](https://themepalace.com/downloads/travel-base-pro/) by Theme Palace.
@@ -251,6 +253,16 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 7.0.0. =
+Release Date: 17th July 2023
+
+Enhancement:
+* Added hook `[wp_travel_related_trip_filter_single_archive_page]` to show the related trip according to your taxonomy choice.
+* Made the pax selector editable so that you can enter a number.
+* Added On-Page booing option. 
+* Compatibility for Standard PayPal and  Bank deposit for On-page booking.
+* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version7-0-0-july-2023-update-release-notes/ ).
 
 = 6.9.1. =
 Release Date: 29th June 2023

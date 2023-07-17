@@ -10,8 +10,9 @@ import ResetBooking from "../components/ResetBooking";
 import DateListing from "../components/DateListing";
 import CalendarView from "../components/CalendarView";
 // import WpTravelBookNow from '../components/WpTravelBookNow';
+import CustomBooking from '../components/CustomBooking';
 import NextTravelerBtn from './NextTravelerBtn'
-import ProgressBary from './ProgressBary';
+// import ProgressBary from './ProgressBary';
 export default ( props ) => {
 	// Component Props.
 	const { forceCalendarDisplay } = props;

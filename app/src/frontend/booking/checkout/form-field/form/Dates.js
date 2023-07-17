@@ -1,7 +1,7 @@
 import { useSelect, dispatch } from '@wordpress/data';
 const bookingStoreName = 'WPTravelFrontend/BookingData';
-import { Button, Modal, PanelBody, PanelRow, TextControl } from '@wordpress/components'
-import { useState } from '@wordpress/element'
+import { PanelBody } from '@wordpress/components'
+// import { useState } from '@wordpress/element'
 import DatePicker from "react-datepicker";
 
 export default ( { travelerData, trvOne = 'travelerOne' } ) => {
@@ -15,7 +15,6 @@ export default ( { travelerData, trvOne = 'travelerOne' } ) => {
     const travelerDataList = typeof checkoutDetails != 'undefined' && typeof checkoutDetails[trvOne] != 'undefined' && checkoutDetails[trvOne] || {};
     const travelerValue = typeof travelerDataList[name] != 'undefined' && travelerDataList[name] || '';
     const selectedDate =  typeof travelerValue != 'undefined' && travelerValue != '' ? new Date( travelerValue ) : new Date();
-    // console.log( 'dhfjdf oldd', new Date( travelerValue ) )
     const datePickerParams =  {
         showMonthDropdown: true,
         showYearDropdown: "select",
@@ -39,10 +38,8 @@ export default ( { travelerData, trvOne = 'travelerOne' } ) => {
                 const years = createNewDate.getFullYear();
                 const days = createNewDate.getDate() ;
                 const finaldate = years + '-' + month + '-' + days;
-                // console.log( 'dhfjdf', value)
                 const newData = {...travelerDataList, [name] : finaldate };
                 const checkoutNewData = {...checkoutDetails, [trvOne] : newData }
-                // console.log( 'ths date', checkoutNewData )
                 updateStore({...bookingData, checkoutDetails : checkoutNewData } )
             }}
         />

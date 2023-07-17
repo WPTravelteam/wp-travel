@@ -1,5 +1,5 @@
-import { useSelect, dispatch } from '@wordpress/data';
-const bookingStoreName = 'WPTravelFrontend/BookingData';
+// import { useSelect, dispatch } from '@wordpress/data';
+// const bookingStoreName = 'WPTravelFrontend/BookingData';
 
 export default ( { names, values }  ) => {;
     return <input 

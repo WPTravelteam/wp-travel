@@ -20,7 +20,7 @@ import {
     AccordionItemButton,
     AccordionItemPanel,
 } from 'react-accessible-accordion';
-import ProgressBary from '../ProgressBary';
+// import ProgressBary from '../ProgressBary';
 
 export default ( ) => {
     const [loaders, setLoaders] = useState(false)
@@ -32,26 +32,26 @@ export default ( ) => {
     const { traveler_form, form_key, paxCounts, checkoutDetails, error_list } = bookingData;
     const fieldKey  = typeof traveler_form != 'undefined' && Object.keys( traveler_form ) || [];
     const paxKey = Object.keys( paxCounts )
-    // console.log( 'multipleTraveler', multipleTraveler )
     const travelerEnter = typeof checkoutDetails[form_key] != 'undefined' && checkoutDetails[form_key] || {};
     const validateEmail = ( input ) => {
         var validRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if ( input.match( validRegex ) ) return true;
         else return false;
     }
+    /** 
+     * When load this component, this function set validation of required field 
+     * 
+     */
     useEffect( () => {
         const requiredField = {};
         if ( fieldKey.length > 0 ) {
             fieldKey.map( ( trvk, index ) => {
-                // console.log( 'trv key', trvk )
                 const fieldCollect = typeof traveler_form[trvk] != 'undefined' && traveler_form[trvk] || {};
                 const { validations, name, label } = fieldCollect;
-                // console.log( 'validations', validations );
                 const requireds = typeof validations != 'undefined' && typeof validations.required != 'undefined' && validations.required || '0';
                 const requiredAll = typeof validations != 'undefined' && typeof validations.required_for_all != 'undefined' && validations.required_for_all || '0';
                 const intRequiredAll =  requiredAll;
                 const intRequiresd = requireds;
-                // console.log( 'cick me id', intRequiresd );
                 if ( intRequiresd == 1 || intRequiredAll == true ) {
                     const newKeyRequired = { 1 : true }
                     requiredField[name] = newKeyRequired;
@@ -60,7 +60,6 @@ export default ( ) => {
                 if ( multipleTraveler == 'yes' && ( intRequiredAll == 1 || intRequiredAll == true ) ) {
                     var paxTotal = 0
                     paxKey.length > 0 && paxKey.map( ( pKeys, index) => {
-                        // const newdata = [];
                         const paxC = paxCounts[pKeys];
                         paxTotal = paxTotal + paxC;
                     })
@@ -80,21 +79,22 @@ export default ( ) => {
             updateStore({...bookingData, requiredField : requiredField })
         }
     },[])
+    /** 
+     * When use click next button this function check required field validation 
+     * 
+     */
     const validateTravelerData = () => {
         setLoaders(true)
         const errorss = {};
         const emailValidate = {}
         if ( fieldKey.length > 0 ) {
             fieldKey.map( ( trvk, index ) => {
-                // console.log( 'trv key', trvk )
                 const fieldCollect = typeof traveler_form[trvk] != 'undefined' && traveler_form[trvk] || {};
                 const { validations, name, label, type } = fieldCollect;
-                // console.log( 'validations', validations );
                 const requireds = typeof validations != 'undefined' && typeof validations.required != 'undefined' && validations.required || '0';
                 const requiredAll = typeof validations != 'undefined' && typeof validations.required_for_all != 'undefined' && validations.required_for_all || '0';
                 const intRequiredAll = requiredAll;
                 const intRequiresd = requireds;
-                // console.log( 'cick me id', intRequiresd );
                 const travelData = typeof travelerEnter[name] != 'undefined' && travelerEnter[name] || {};
                 var requiredListed = {}
                 if ( type == 'email' ) {
@@ -107,13 +107,11 @@ export default ( ) => {
                 }
                 if ( intRequiresd == 1 || intRequiresd == true ) {
                     if ( Object.keys( travelerEnter ).length < 1 ) {
-                        // console.log( 'error data', error_list );
                         const newCreateError = { 1 : label + ' is required' }
                         requiredListed[1] = label + ' is required';
                         errorss[name] = newCreateError;
                     } else {
                         const finalData = typeof travelData[1] != 'undefined' && travelData[1] || '';
-                        // console.log( 'skdfjsdjfdlsfj', finalData );
                         if ( finalData == '' ) {
                             const newCreateError = { 1 : label + ' is required' }
                             requiredListed[1] = label + ' is required';
@@ -124,7 +122,6 @@ export default ( ) => {
                 if ( multipleTraveler == 'yes' ) {
                     var paxTotal = 0
                     paxKey.length > 0 && paxKey.map( ( pKeys, index) => {
-                        // const newdata = [];
                         const paxC = paxCounts[pKeys];
                         paxTotal = paxTotal + paxC;
                     })
@@ -168,8 +165,9 @@ export default ( ) => {
             for ( i= 1; i <= paxC; i++ ) {
                 newdata.push( i );
             }
-        return <div key={ind * 9 } ><Accordion allowZeroExpanded={true} preExpanded={[1]}  >{ newdata.length > 0 && newdata.map( ( finalPax, index ) => {
-            // console.log( 'finalPax', finalPax )
+        return <div key={ind * 9 } >
+            {/* When Multiple traveler enable this accordion show */}
+            <Accordion allowZeroExpanded={true} preExpanded={[1]}  >{ newdata.length > 0 && newdata.map( ( finalPax, index ) => {
              return <AccordionItem key={ index + 10 } uuid={finalPax + ind } >
                     <AccordionItemHeading>
                         <AccordionItemButton>
@@ -197,6 +195,7 @@ export default ( ) => {
                     </AccordionItemPanel>
                 </AccordionItem>
          }) } </Accordion> </div> }) }</>|| <div className='wptravel-traveller-info-container'>
+            {/* When disable multiple traveler, Execute this code and show traveler detail without accordion */}
         {   
             fieldKey.length > 0 && fieldKey.map( ( trvKey, index ) => {
                 const travelerData = typeof traveler_form[trvKey] != 'undefined' && traveler_form[trvKey] || undefined;
@@ -207,7 +206,7 @@ export default ( ) => {
         } </div> }
         <p className='wp-travel-in-page-error'>{errorFound}</p>
         <div className='wptrave-singlepage-initial-nextbtn'>
-    
+        
         <Button onClick={validateTravelerData} >Next{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</Button>
         </div>
         

@@ -1,6 +1,6 @@
-import { useSelect, dispatch } from '@wordpress/data';
-import he from 'he'
-import parse from 'html-react-parser';
+import { useSelect } from '@wordpress/data';
+// import he from 'he'
+// import parse from 'html-react-parser';
 const bookingStoreName = 'WPTravelFrontend/BookingData';
 import { _n, __} from '@wordpress/i18n';
 // import { Button, Modal, PanelBody, PanelRow, TextControl } from '@wordpress/components'

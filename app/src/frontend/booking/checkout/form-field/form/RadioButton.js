@@ -1,7 +1,7 @@
 import { useSelect, dispatch } from '@wordpress/data';
 const bookingStoreName = 'WPTravelFrontend/BookingData';
-import { Button, Modal, PanelBody, PanelRow, TextControl, RadioControl } from '@wordpress/components'
-import { useState, useEffect } from '@wordpress/element'
+import { PanelBody, PanelRow } from '@wordpress/components'
+// import { useState, useEffect } from '@wordpress/element'
 export default ( { travelerData, trvOne = 'travelerOne', pmtFld = 'no' } ) => {
     // const [ optionList, setOption ] = useState({})
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
@@ -13,15 +13,12 @@ export default ( { travelerData, trvOne = 'travelerOne', pmtFld = 'no' } ) => {
     const travelerDataList = typeof checkoutDetails != 'undefined' && typeof checkoutDetails[trvOne] != 'undefined' && checkoutDetails[trvOne] || {};
     const travelerValue = typeof travelerDataList[name] != 'undefined' && travelerDataList[name] ||  defaults ;
     const errorData = typeof error_list[name] != 'undefined' && error_list[name]  || '';
-    // console.log( )
     const optionKey = typeof options != 'undefined' && Object.keys( options ) || [];
     return optionKey.length > 0 && <><PanelBody>
         <PanelRow>
             <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>
             <div>
                 { pmtFld == 'no' && optionKey.map( ( val, index ) => {
-                    // travelerValue == val && setOption( 'checked' );
-                    // const vall = optionList[val];
                     return  <> <input 
                         name={name} 
                         type='radio' 
@@ -40,8 +37,6 @@ export default ( { travelerData, trvOne = 'travelerOne', pmtFld = 'no' } ) => {
                         <label htmlFor={val}>{ options[val] }</label> <br/>
                     </>
                 }) || optionKey.map( ( val, index ) => {
-                    // travelerValue == val && setOption( 'checked' );
-                    // const vall = optionList[val];
                     if ( val == 'stripe' || val == 'authorizenet' || val == 'bank_deposit' || val == 'paypal'  ) {
                         return  <> <input 
                             name={name} 

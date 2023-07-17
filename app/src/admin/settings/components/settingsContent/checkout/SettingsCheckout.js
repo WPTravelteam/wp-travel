@@ -46,16 +46,18 @@ export default () => {
                     </PanelRow>
                     <PanelRow>
                         <label>{__( 'Enable On-Page Booking', 'wp-travel' ) }</label>
-                        <ToggleControl 
-                            help={__( 'To book a trip without redirecting to the checkout page.', 'wp-travel' )}
-                            checked={ typeof enable_one_page_booking != 'undefined' && enable_one_page_booking || false }
-                            onChange={ (value ) => {
-                                updateSettings({
-                                    ...allData,
-                                    enable_one_page_booking : value
-                                })
-                            }}
-                        />
+                        <div id="wp-travel-checkout-enable-multiple-travelers" className="wp-travel-field-value">
+                            <ToggleControl 
+                                checked={ typeof enable_one_page_booking != 'undefined' && enable_one_page_booking || false }
+                                onChange={ (value ) => {
+                                    updateSettings({
+                                        ...allData,
+                                        enable_one_page_booking : value
+                                    })
+                                }}
+                            />
+                            <p className="description">{__('To book a trip without redirecting to the checkout page.', 'wp-travel')}</p>
+                        </div>
                     </PanelRow>
                 </ErrorBoundary>
             </div>

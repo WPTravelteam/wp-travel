@@ -56,13 +56,15 @@ export default () => {
 				data : {
                     couponCode: couponCode
                 }
+            }).then( resp => {
+
             })
         } else {
             setCouponError('Please enter your coupon code');
         }
     }
     return <> 
-        <div className="wptravel-on-page-coupon-apply">
+        {/* <div className="wptravel-on-page-coupon-apply">
             <div className="wptravel-on-page-coupon-data">
                 <input type='text' value={typeof couponCode != 'undefined' && couponCode || '' } placeholder="Enter you coupon code" className="wp-travel-coupon-code" onChange={ ( e ) => {
                 const values =  e.target.value;
@@ -71,7 +73,7 @@ export default () => {
                 { couponError != '' && <p className="wptravel-on-page-coupon-error">{couponError}</p> }
             </div>
             <button className="wptravel-on-page-coupon-code-btn" onClick={applyCouponCode}>{__( 'Apply Coupon')}</button>
-        </div>
+        </div> */}
         <form method="POST" action={_wp_travel.checkout_url} className="wp-travel-booking" id="wp-travel-booking" > { typeof payment_gateway != 'undefined' && <>
             
             <div className="wptravel-booking-payment-page">

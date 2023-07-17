@@ -1,6 +1,6 @@
 import { useSelect, dispatch } from '@wordpress/data';
 const bookingStoreName = 'WPTravelFrontend/BookingData';
-import { Button, Modal, PanelBody, PanelRow, TextControl } from '@wordpress/components'
+import { PanelBody } from '@wordpress/components'
 
 export default ( { travelerData, trvOne = 'travelerOne' } ) => {
     const countries = typeof _wp_travel != 'undefined' && typeof _wp_travel.checkout_field != 'undefined' && typeof _wp_travel.checkout_field.country != 'undefined' &&  _wp_travel.checkout_field.country || undefined;

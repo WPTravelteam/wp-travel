@@ -2,7 +2,7 @@ import { useSelect, dispatch } from '@wordpress/data';
 import he from 'he'
 import parse from 'html-react-parser';
 const bookingStoreName = 'WPTravelFrontend/BookingData';
-import { Button, Modal, PanelBody, PanelRow, TextControl } from '@wordpress/components'
+import { PanelBody, PanelRow } from '@wordpress/components'
 
 export default ( { travelerData, trvOne = 'travelerOne' } ) => {
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
@@ -12,10 +12,11 @@ export default ( { travelerData, trvOne = 'travelerOne' } ) => {
     const defaults = typeof travelerData != 'undefined' && typeof travelerData.default != undefined && travelerData.default || '';
     // const travelerDataList = typeof checkoutDetails != 'undefined' && typeof checkoutDetails[trvOne] != 'undefined' && checkoutDetails[trvOne] || {};
     // const travelerValue = typeof travelerDataList[name] != 'undefined' && travelerDataList[name] || '';
+    // console.log( 'fosdf', defaults, travelerData )
     return <PanelBody>
         <PanelRow>
             <label >{typeof label != 'undefined' && label || '' }</label>
-            <div id={id} className={wrapper_class} >{ parse( he.decode( defaults ) ) }</div>
+            <div id={id} className={'wptravel-one-page-booking'} >{ parse( he.decode( defaults ) ) }</div>
         </PanelRow>
         
     </PanelBody>

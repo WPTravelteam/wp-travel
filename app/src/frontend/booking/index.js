@@ -93,7 +93,7 @@ if (document.getElementById(blockId)) {
 
 let checkoutId = 'wp-travel-one-page-checkout-enables';
 checkoutId      = applyFilters( 'wptravel_booking_checkout_id', checkoutId  );
-if (document.getElementById(checkoutId )) {
+if ( typeof document.getElementById(checkoutId ) != 'undefined' && document.getElementById(checkoutId ) ) {
     render( <OpenCheckout />, document.getElementById(checkoutId ));
 }
 // @todo calendar button. in trip duration

@@ -9,7 +9,7 @@ import RadioButton from './form/RadioButton';
 import Texts from './form/Texts'
 import { useSelect, dispatch } from '@wordpress/data';
 const bookingStoreName = 'WPTravelFrontend/BookingData';
-import { Button, PanelBody, PanelRow } from '@wordpress/components'
+import { Button } from '@wordpress/components'
 import TextArea from './form/TextArea';
 import { useEffect, useState } from '@wordpress/element'
 // import apiFetch from '@wordpress/api-fetch';
@@ -28,13 +28,10 @@ export default ( ) => {
         const requiredField = {};
         if ( fieldKey.length > 0 ) {
             fieldKey.map( ( trvk, index ) => {
-                // console.log( 'trv key', trvk )
                 const fieldCollect = typeof billing_form[trvk] != 'undefined' && billing_form[trvk] || {};
                 const { validations, name, label } = fieldCollect;
-                // console.log( 'validations', validations );
                 const requireds = typeof validations != 'undefined' && typeof validations.required != 'undefined' && validations.required || '0';
                 const intRequiresd = requireds;
-                // console.log( 'cick me id', intRequiresd );
                 if ( intRequiresd == 1 || intRequiresd == true ) {
                     requiredField[name] = true;
                 }
@@ -49,21 +46,16 @@ export default ( ) => {
         const errorss = {};
         if ( fieldKey.length > 0 ) {
             fieldKey.map( ( trvk, index ) => {
-                // console.log( 'trv key', trvk )
                 const fieldCollect = typeof billing_form[trvk] != 'undefined' && billing_form[trvk] || {};
                 const { validations, name, label } = fieldCollect;
-                // console.log( 'validations', validations );
                 const requireds = typeof validations != 'undefined' && typeof validations.required != 'undefined' && validations.required || '0';
                 
                 const intRequiresd = requireds;
-                // console.log( 'cick me id', intRequiresd );
                 if ( intRequiresd == 1 || intRequiresd == true ) {
                     if ( Object.keys( billingData ).length < 1 ) {
-                        // console.log( 'error data', error_list );
                         errorss[name] = label + ' is required';
                     } else {
                         const travelData = typeof billingData[name] != 'undefined' && billingData[name] || '';
-                        // console.log( 'skdfjsdjfdlsfj', travelData );
                         if ( travelData == '' ) {
                             errorss[name] = label + ' is required';
                         }
@@ -81,8 +73,6 @@ export default ( ) => {
         }
     }
     return <>
-       {/* <ProgressBary statusText={`Progress: Fill Up billing Details`} value={60} max={100} /> */}
-
     <div className="wptravel-billing-formfield">
         {
             fieldKey.length > 0 && fieldKey.map( ( trvKey, index ) => {

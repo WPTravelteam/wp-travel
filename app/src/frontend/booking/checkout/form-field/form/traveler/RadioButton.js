@@ -1,7 +1,7 @@
 import { useSelect, dispatch } from '@wordpress/data';
 const bookingStoreName = 'WPTravelFrontend/BookingData';
 import { Button, Modal, PanelBody, PanelRow, TextControl, RadioControl } from '@wordpress/components'
-import { useState, useEffect } from '@wordpress/element'
+// import { useState, useEffect } from '@wordpress/element'
 export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
     // const [ optionList, setOption ] = useState({})
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);

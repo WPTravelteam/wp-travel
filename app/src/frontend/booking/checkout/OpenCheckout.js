@@ -1,7 +1,7 @@
 import { Button } from '@wordpress/components'
 import Modal from 'react-modal';
 import $ from 'jquery';
-import { useState, useEffect } from '@wordpress/element';
+import { useState } from '@wordpress/element';
 import OpenBookign from './OpenBookign';
 import { useSelect, dispatch } from '@wordpress/data';
 import TravelerInfo from './TravelerInfo';
@@ -17,8 +17,7 @@ const __i18n = {
 const bookingStoreName = 'WPTravelFrontend/BookingData';
 
 export default () => {
-    console.log('detailsdfdf', _wp_travel);
-    // console.log('def', wp_travel);
+    // console.log('detailsdfdf', _wp_travel);
     const [isOpen, setOpen] = useState(false);
 
     const openModal = () => setOpen(true);
@@ -30,9 +29,7 @@ export default () => {
     const { updateStore } = dispatch(bookingStoreName);
 
     const { bookingTabEnable, travelerInfo, tripBillingEnable, treipPaymentEnable } = bookingData;
-    console.log('selected data', bookingData);
     const tooltipText = __i18n.bookings.date_select_to_view_options;
-    // Modal.setAppElement('#OpenCeckout');
     return <>
         <Button className="booknow-btn-booking wptravel-book-your-trip wp-travel-booknow-btn" onClick={openModal}>{__( 'Book Now', 'wp-travel' ) }</Button>
         <div className="wp-travel-checkout-one-page">
@@ -41,7 +38,6 @@ export default () => {
                 isOpen={isOpen}
                 onRequestClose={closeModal}
             >
-                
                 <button onClick={ closeModal} className="wptravel-single-page-close-btn">x</button>
                
                 <h2>{typeof bookingTabEnable != 'undefined' && bookingTabEnable ? _wp_travel.select_you_pax : (typeof travelerInfo != 'undefined' && travelerInfo ? __('Traveler Details', 'wp-travel' ) : (typeof tripBillingEnable != 'undefined' && tripBillingEnable ? __('Billing Details', 'wp-travel' ) : __( 'Payment Details', 'wp-travel' ) ) ) } </h2>
@@ -58,15 +54,6 @@ export default () => {
                 {typeof tripBillingEnable != 'undefined' && tripBillingEnable && <BillingFormField />}
                 {typeof treipPaymentEnable != 'undefined' && treipPaymentEnable && <BookingFormWithPayment />}
 
-
-
-
-
-                {/* <BillingFormField /> */}
-                {/* <TravelerInfo /> */}
-
-                {/* <BookingFormWithPayment /> */}
-                {/* <div className='wptravel-traveller-info-container'><TravelerInfo /></div> */}
             </Modal>
         </div>
     </>

@@ -1,7 +1,7 @@
 import { useSelect, dispatch } from '@wordpress/data';
 const bookingStoreName = 'WPTravelFrontend/BookingData';
-import { Button, Modal, PanelBody, PanelRow, CheckboxControl} from '@wordpress/components'
-import { useState, useEffect } from '@wordpress/element'
+import {  PanelBody, PanelRow, CheckboxControl} from '@wordpress/components'
+// import { useState, useEffect } from '@wordpress/element'
 export default ( { travelerData, trvOne = 'travelerOne' } ) => {
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     const { updateStore } = dispatch( bookingStoreName );
