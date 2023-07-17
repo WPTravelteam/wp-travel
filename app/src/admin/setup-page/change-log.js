@@ -10,7 +10,7 @@ const changeLog = [
 				<br/>
 				* Made the pax selector editable so that you can enter a number.
 				<br/>
-				* Added On-Page booing option.
+				* Added On-Page booking option.
 				<br/>
 				* Compatibility for Standard PayPal and  Bank deposit for On-page booking.
 				<br/>

@@ -25,13 +25,15 @@ import {
 export default ( ) => {
     const [loaders, setLoaders] = useState(false)
     const [errorFound, setErrorFound] = useState('')
+    // const [ paxSize, setPaxSize ] = useState(0);
     // Booking Data/state.
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     const { updateStore } = dispatch( bookingStoreName );
     const multipleTraveler = typeof _wp_travel != 'undefined' && typeof _wp_travel.checkout_field != 'undefined' && typeof _wp_travel.checkout_field.enable_multiple_travellers != 'undefined' &&  _wp_travel.checkout_field.enable_multiple_travellers || 'no';
-    const { traveler_form, form_key, paxCounts, checkoutDetails, error_list } = bookingData;
+    const { traveler_form, form_key, paxCounts, checkoutDetails, error_list, paxSize } = bookingData;
     const fieldKey  = typeof traveler_form != 'undefined' && Object.keys( traveler_form ) || [];
-    const paxKey = Object.keys( paxCounts )
+    // const paxValue = Object.values( paxCounts )
+
     const travelerEnter = typeof checkoutDetails[form_key] != 'undefined' && checkoutDetails[form_key] || {};
     const validateEmail = ( input ) => {
         var validRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -58,14 +60,14 @@ export default ( ) => {
                 }
 
                 if ( multipleTraveler == 'yes' && ( intRequiredAll == 1 || intRequiredAll == true ) ) {
-                    var paxTotal = 0
-                    paxKey.length > 0 && paxKey.map( ( pKeys, index) => {
-                        const paxC = paxCounts[pKeys];
-                        paxTotal = paxTotal + paxC;
-                    })
+                    // var paxTotal = 0
+                    // paxKey.length > 0 && paxKey.map( ( pKeys, index) => {
+                    //     const paxC = paxCounts[pKeys];
+                    //     paxTotal = paxTotal + paxC;
+                    // })
                     var pxReq = {}
-                    if ( paxTotal > 1 ) {
-                        for( i = 0 ; i < paxTotal ; i++ ) {
+                    if ( paxSize > 1 ) {
+                        for( i = 0 ; i < paxSize ; i++ ) {
                             pxReq[i + 1 ] = true
                         }
                         if ( Object.keys( pxReq ).length > 0 ) {
@@ -120,15 +122,15 @@ export default ( ) => {
                     }
                 } 
                 if ( multipleTraveler == 'yes' ) {
-                    var paxTotal = 0
-                    paxKey.length > 0 && paxKey.map( ( pKeys, index) => {
-                        const paxC = paxCounts[pKeys];
-                        paxTotal = paxTotal + paxC;
-                    })
+                    // var paxTotal = 0
+                    // paxKey.length > 0 && paxKey.map( ( pKeys, index) => {
+                    //     const paxC = paxCounts[pKeys];
+                    //     paxTotal = paxTotal + paxC;
+                    // })
                     var pxReq = {}
                     var emailErrors = {}
-                    if ( paxTotal > 1 ) {
-                        for( i = 0 ; i < paxTotal ; i++ ) {
+                    if ( paxSize > 1 ) {
+                        for( i = 0 ; i < paxSize ; i++ ) {
                             const finalDatas = typeof travelData[i+1] != 'undefined' && travelData[i+1] || '';
                             if ( type == 'email' && finalDatas != '' && ! validateEmail( finalDatas ) ) {
                                 emailErrors[i+1] = 'Email is not valide';
@@ -157,12 +159,13 @@ export default ( ) => {
             setLoaders(false);
         }
     }
+    const paxKey = [paxSize];
     return <>
         {/* <ProgressBary statusText={`Progress: Fill Up Traveller Details`} value={30} max={100} /> */}
         { multipleTraveler == 'yes' && <> { paxKey.length > 0 && paxKey.map( ( pKeys, ind) => {
             const newdata = [];
-            const paxC = paxCounts[pKeys];
-            for ( i= 1; i <= paxC; i++ ) {
+            // const paxC = pKeys;
+            for ( i= 1; i <= pKeys; i++ ) {
                 newdata.push( i );
             }
         return <div key={ind * 9 } >
@@ -183,10 +186,10 @@ export default ( ) => {
                                 const fieldTypes = typeof travelerData != 'undefined' && typeof travelerData.type != 'undefined' && travelerData.type || 'text';
                                 const fieldName = typeof travelerData != 'undefined' && typeof travelerData.name != 'undefined' && travelerData.name || '';
                                 if ( finalPax == 1 ) {
-                                    return <div key={ index }>{ ( fieldTypes == 'text' || fieldTypes == 'number' ) && <Texts travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'email' && <Emails travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'radio' && <div className='wp-travel-new-gender-field'><RadioButton travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /></div> || fieldTypes == 'checkbox' && <CheckBoxs travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'date' && <Dates travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'country_dropdown' && <DropDowns travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'textarea' && <TextArea travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> }</div>
+                                    return <div key={ trvKey }>{ ( fieldTypes == 'text' || fieldTypes == 'number' ) && <Texts travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'email' && <Emails travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'radio' && <div className='wp-travel-new-gender-field'><RadioButton travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /></div> || fieldTypes == 'checkbox' && <CheckBoxs travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'date' && <Dates travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'country_dropdown' && <DropDowns travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'textarea' && <TextArea travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> }</div>
                                 } else {
                                     if ( validated == '' ) {
-                                        return <div key={ index }>{ ( fieldTypes == 'text' || fieldTypes == 'number' ) && <Texts travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'email' && <Emails travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'radio' && <div className='wp-travel-new-gender-field'><RadioButton travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /></div> || fieldTypes == 'checkbox' && <CheckBoxs travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'date' && <Dates travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'country_dropdown' && <DropDowns travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'textarea' && <TextArea travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> }</div>
+                                        return <div key={ trvKey }>{ ( fieldTypes == 'text' || fieldTypes == 'number' ) && <Texts travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'email' && <Emails travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'radio' && <div className='wp-travel-new-gender-field'><RadioButton travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /></div> || fieldTypes == 'checkbox' && <CheckBoxs travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'date' && <Dates travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'country_dropdown' && <DropDowns travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> || fieldTypes == 'textarea' && <TextArea travelerData={travelerData} trvOne={form_key} pxKey={finalPax} /> }</div>
 
                                     }
                                 }

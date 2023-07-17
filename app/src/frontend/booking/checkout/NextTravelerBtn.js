@@ -132,7 +132,14 @@ const WpTravelBookNow = ( props ) => {
 			category_pax: paxCounts,
 			trip_price: getCartTotal(), // just trip price without extras.
 		}
-
+		// console.log( 'final pax', paxCounts ) 
+		let paxVal =  Object.values( paxCounts ); // get all pax value form price category
+		let size = 0;
+		if ( paxVal.length > 0 ) {
+			paxVal.map( ( paxSize, ind ) => {
+				size = size + paxSize; // pax count for multiple traveler
+			} )
+		}
 		if (selectedTime)
 			data.trip_time = moment(selectedDate).format('HH:mm')
 
@@ -165,13 +172,11 @@ const WpTravelBookNow = ( props ) => {
 						url: `${wp_travel.ajaxUrl}?action=wptravel_get_payment_field&_nonce=${_wp_travel._nonce}`,
 						method: 'GET',
 					}).then( settingData => {
-						console.log( 'sdf', typeof settingData, settingData )
 						if ( typeof settingData != 'undefined' && typeof settingData.success != 'undefined' && typeof settingData.data != 'undefined' ) {
 			
 							if ( settingData.success === true && settingData.data != '' ) {
-								// console.log( 'data', settingData.data )
 								setLoaders(false)
-								updateStore( {...bookingData, payment_form : settingData.data.payment, form_key : settingData.data.form_key, price_list : settingData.data.price_list , bookingTabEnable: false, travelerInfo : true } )
+								updateStore( {...bookingData, paxSize : size, payment_form : settingData.data.payment, form_key : settingData.data.form_key, price_list : settingData.data.price_list , bookingTabEnable: false, travelerInfo : true } )
 							}
 			
 						} else {

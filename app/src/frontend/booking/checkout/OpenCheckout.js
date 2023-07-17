@@ -30,6 +30,7 @@ export default () => {
 
     const { bookingTabEnable, travelerInfo, tripBillingEnable, treipPaymentEnable } = bookingData;
     const tooltipText = __i18n.bookings.date_select_to_view_options;
+    // console.log( 'booking data', bookingData )
     return <>
         <Button className="booknow-btn-booking wptravel-book-your-trip wp-travel-booknow-btn" onClick={openModal}>{__( 'Book Now', 'wp-travel' ) }</Button>
         <div className="wp-travel-checkout-one-page">

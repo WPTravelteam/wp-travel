@@ -260,7 +260,7 @@ Release Date: 17th July 2023
 Enhancement:
 * Added hook `[wp_travel_related_trip_filter_single_archive_page]` to show the related trip according to your taxonomy choice.
 * Made the pax selector editable so that you can enter a number.
-* Added On-Page booing option. 
+* Added On-Page booking option. 
 * Compatibility for Standard PayPal and  Bank deposit for On-page booking.
 * For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version7-0-0-july-2023-update-release-notes/ ).
 
