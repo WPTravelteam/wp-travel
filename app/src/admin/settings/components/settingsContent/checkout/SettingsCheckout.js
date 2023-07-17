@@ -47,7 +47,7 @@ export default () => {
                     <PanelRow>
                         <label>{__( 'Enable On-Page Booking', 'wp-travel' ) }</label>
                         <ToggleControl 
-                            help={__( 'Enable "On-Page Booking" to book a trip without redirecting to the checkout page.', 'wp-travel' )}
+                            help={__( 'To book a trip without redirecting to the checkout page.', 'wp-travel' )}
                             checked={ typeof enable_one_page_booking != 'undefined' && enable_one_page_booking || false }
                             onChange={ (value ) => {
                                 updateSettings({
