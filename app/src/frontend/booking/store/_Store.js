@@ -17,7 +17,22 @@ export const DEFAULT_BOOKING_STATE = () => {
         nomineeTripExtras: [],
         tripExtras: {}, // object structure for selected extras like paxCounts
         isLoading: false,
-        dateListingChangeType:null // To prevent multiple ajax request on pricing select. [only used in date listing]
+        dateListingChangeType:null, // To prevent multiple ajax request on pricing select. [only used in date listing]
+
+        // for modal field
+        travelerInfo : false,
+        bookingTabEnable : true,
+        tripBillingEnable: false,
+        treipPaymentEnable : false,
+        traveler_form : typeof _wp_travel != 'undefined' && typeof _wp_travel.checkout_field != 'undefined' && typeof _wp_travel.checkout_field.form != 'undefined' && typeof _wp_travel.checkout_field.form.traveller_fields && _wp_travel.checkout_field.form.traveller_fields || undefined,
+        billing_form : typeof _wp_travel != 'undefined' && typeof _wp_travel.checkout_field != 'undefined' && typeof _wp_travel.checkout_field.form != 'undefined' && typeof _wp_travel.checkout_field.form.billing_fields && _wp_travel.checkout_field.form.billing_fields || undefined,
+        payment_form : typeof _wp_travel != 'undefined' && typeof _wp_travel.checkout_field != 'undefined' && typeof _wp_travel.checkout_field.form != 'undefined' && typeof _wp_travel.checkout_field.form.payment_fields && _wp_travel.checkout_field.form.payment_fields || undefined,
+        form_key : typeof _wp_travel != 'undefined' && typeof _wp_travel.checkout_field != 'undefined' && typeof _wp_travel.checkout_field.form_key && _wp_travel.checkout_field.form_key || 'travelerOne',
+        banck_detail : typeof _wp_travel != 'undefined' && typeof _wp_travel.checkout_field != 'undefined' && typeof _wp_travel.checkout_field.bank_detail_form != 'undefined' && _wp_travel.checkout_field.bank_detail_form || [],
+        checkoutDetails : {},
+        error_list : {},
+        requiredField : {},
+        couponCode: ''
     };
     return initState;
 }

@@ -45,21 +45,30 @@ if ( $locations && is_array( $locations ) ) {
 	$location_name  = $first_location->name;
 	$location_link  = get_term_link( $first_location->term_id, 'travel_locations' );
 }
+$trp_cd = apply_filters( 'wp_travel_trip_code_enable_disable', true );
+$trp_thmbail = apply_filters( 'wp_travel_trip_thumbnail_enable_disable', true );
+$trp_title = apply_filters( 'wp_travel_trip_title_enable_disable', true );
+
 ?>
 	<!-- Contents Here -->
 	<div class="view-box">
 		<div class="view-image">
+			<?php if ( $trp_thmbail == true ) { ?>
 			<a href="<?php the_permalink(); ?>" class="image-thumb">
 				<div class="image-overlay"></div>
 				<?php echo apply_filters( 'wp_travel_archive_page_trip_image', wptravel_get_post_thumbnail( $trip_id ), $trip_id ); ?>
 			</a>
+			<?php }
+			 if ( $trp_cd == true ) { ?>
 			<div class="offer">
-				<span>#<?php echo esc_html( apply_filters( 'wp_travel_archive_page_trip_code', $wp_travel_itinerary->get_trip_code(), $wp_travel_itinerary, $trip_id ) ); ?></span>
+				<span><?php echo esc_html( apply_filters( 'wp_travel_archive_page_trip_code', '#' . $wp_travel_itinerary->get_trip_code(), $wp_travel_itinerary, $trip_id ) ); ?></span>
 			</div>
+			<?php } ?>
 		</div>
 
 		<div class="view-content">
 			<div class="left-content">
+				<?php if ( $trp_title == true ) { ?>
 				<header>
 					<?php do_action( 'wp_travel_before_archive_content_title', $trip_id ); ?>
 					<h2 class="entry-title">
@@ -69,6 +78,7 @@ if ( $locations && is_array( $locations ) ) {
 					</h2>
 					<?php do_action( 'wp_travel_after_archive_title', $trip_id ); ?>
 				</header>
+				<?php } ?>
 				<div class="trip-icons">
 					<?php wptravel_get_trip_duration( $trip_id ); ?>
 					<div class="trip-location">

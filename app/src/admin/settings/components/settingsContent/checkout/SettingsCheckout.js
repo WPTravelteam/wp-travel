@@ -14,7 +14,7 @@ export default () => {
         return select('WPTravel/Admin').getAllStore()
     }, []);
     const { updateSettings } = dispatch('WPTravel/Admin');
-    const { enable_multiple_travellers } = allData;
+    const { enable_multiple_travellers, enable_one_page_booking } = allData;
 
     return (
         <>
@@ -29,7 +29,6 @@ export default () => {
             <div className='wp-travel-section-content'>
                 <ErrorBoundary>
                     {applyFilters('wp_travel_settings_tab_cart_checkout_fields', [], allData)}
-
                     <PanelRow>
                         <label>{__('Enable multiple travelers', 'wp-travel')}</label>
                         <div id="wp-travel-checkout-enable-multiple-travelers" className="wp-travel-field-value">
@@ -43,6 +42,21 @@ export default () => {
                                 }}
                             />
                             <p className="description">{__('Collect multiple travelers information from checkout page.', 'wp-travel')}</p>
+                        </div>
+                    </PanelRow>
+                    <PanelRow>
+                        <label>{__( 'Enable On-Page Booking', 'wp-travel' ) }</label>
+                        <div id="wp-travel-checkout-enable-multiple-travelers" className="wp-travel-field-value">
+                            <ToggleControl 
+                                checked={ typeof enable_one_page_booking != 'undefined' && enable_one_page_booking || false }
+                                onChange={ (value ) => {
+                                    updateSettings({
+                                        ...allData,
+                                        enable_one_page_booking : value
+                                    })
+                                }}
+                            />
+                            <p className="description">{__('To book a trip without redirecting to the checkout page.', 'wp-travel')}</p>
                         </div>
                     </PanelRow>
                 </ErrorBoundary>
