@@ -47,11 +47,8 @@ export default () => {
                     <div className='wptravel-single-page-calender-booking wp-travel-calendar-view'>
                         <OpenBookign forceCalendarDisplay={false} calendarInline={false} showTooltip={true} tooltipText={tooltipText} />
                     </div>
-
                 }
-                {
-                    typeof travelerInfo != 'undefined' && travelerInfo && <TravelerInfo />
-                }
+                { typeof travelerInfo != 'undefined' && travelerInfo && <TravelerInfo /> }
                 {typeof tripBillingEnable != 'undefined' && tripBillingEnable && <BillingFormField />}
                 {typeof treipPaymentEnable != 'undefined' && treipPaymentEnable && <BookingFormWithPayment />}
 

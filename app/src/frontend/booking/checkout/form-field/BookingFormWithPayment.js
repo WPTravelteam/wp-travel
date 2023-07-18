@@ -14,6 +14,7 @@ import {_n, __} from '@wordpress/i18n'
 import { useEffect, useState } from '@wordpress/element'
 import apiFetch from '@wordpress/api-fetch';
 import { paypalPayment } from './booking/data'
+import CouponApplyAmount from "./booking/CouponApplyAmount"
 // import { ProgressBary } from "../ProgressBary"
 
 export default () => {
@@ -21,8 +22,9 @@ export default () => {
     const [couponError, setCouponError] = useState('')
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     const { updateStore } = dispatch( bookingStoreName );
-    const { checkoutDetails, payment_form, form_key, traveler_form, couponCode  } = bookingData;
+    const { checkoutDetails, payment_form, form_key, traveler_form, couponCode, apply_coupon, cart_amount, currency_symbol } = bookingData;
     const { booking_selected, payment_select  } = checkoutDetails;
+
     const { wp_travel_payment_gateway } = typeof payment_select != 'undefined' && payment_select || 'no';
     const selected_payment = typeof wp_travel_payment_gateway != 'undefined' && wp_travel_payment_gateway || 'no'
     const travelerData = typeof checkoutDetails != undefined && checkoutDetails[form_key] || '';
@@ -57,14 +59,23 @@ export default () => {
                     couponCode: couponCode
                 }
             }).then( resp => {
+                if ( resp.success == true && typeof resp.data.code != 'undefined' && resp.data.code == "WP_TRAVEL_COUPON_APPLIED" ) {
+                    const cart_detail = typeof resp.data.cart != 'undefined' && resp.data.cart || {};
+                    const { cart_total, cart_total_regular, total } = cart_detail;
+                    const { discount }     = typeof total != 'undefined' && total || {};
+                    const total_partial = typeof total != 'undefined' && typeof total.total_partial != 'undefined' && total.total_partial || '0';
+                    const price_data = { partial_amount : total_partial, trip_price : cart_total  }
+                    updateStore( { ...bookingData, cart_amount : total, price_list : price_data, apply_coupon : true } )
 
+                } 
             })
         } else {
             setCouponError('Please enter your coupon code');
         }
     }
     return <> 
-        {/* <div className="wptravel-on-page-coupon-apply">
+        {/* This section containce add your coupon code and get discount */}
+        <div className="wptravel-on-page-coupon-apply">
             <div className="wptravel-on-page-coupon-data">
                 <input type='text' value={typeof couponCode != 'undefined' && couponCode || '' } placeholder="Enter you coupon code" className="wp-travel-coupon-code" onChange={ ( e ) => {
                 const values =  e.target.value;
@@ -72,8 +83,9 @@ export default () => {
                 }} />
                 { couponError != '' && <p className="wptravel-on-page-coupon-error">{couponError}</p> }
             </div>
-            <button className="wptravel-on-page-coupon-code-btn" onClick={applyCouponCode}>{__( 'Apply Coupon')}</button>
-        </div> */}
+            <button className="wptravel-on-page-coupon-code-btn components-button" onClick={applyCouponCode}>{__( 'Apply Coupon')}</button>
+        </div>
+        {/* This section contain your hole booking process booking and booking with payment */}
         <form method="POST" action={_wp_travel.checkout_url} className="wp-travel-booking" id="wp-travel-booking" > { typeof payment_gateway != 'undefined' && <>
             
             <div className="wptravel-booking-payment-page">
@@ -82,11 +94,12 @@ export default () => {
                 <div className="wptravel-onepage-payment-gateway"><PaymentFormField /> </div>
                 { partial_enable == 'yes' && <PartialPyamet /> }
                 </> }
-                <div className="wptravel-onepage-payment-total-trip-price"><TotalPrice /></div>
+                <CouponApplyAmount coupon_data={cart_amount} currency_symbol={ currency_symbol } booking_option={wp_travel_booking_option} payment_mode={wp_travel_payment_mode} partial_enable={ partial_enable }  /> 
+                {/* { apply_coupon == true && <CouponApplyAmount coupon_data={cart_amount} currency_symbol={ currency_symbol} /> || <div className="wptravel-onepage-payment-total-trip-price"><TotalPrice /></div> } */}
                 
-                { wp_travel_booking_option == "booking_with_payment" && wp_travel_payment_mode == 'partial' &&  partial_enable == 'yes' && <div className="wptravel-one-page-payment-amount">
-                <PaymentPrice />
-                </div> }
+                {/* { wp_travel_booking_option == "booking_with_payment" && wp_travel_payment_mode == 'partial' &&  partial_enable == 'yes' && <div className="wptravel-one-page-payment-amount">
+                 <PaymentPrice />
+                </div> } */}
                 { travelerKey.length > 0 && travelerKey.map( ( keyList, indexs ) => {
                     const trvValue = typeof travelerData[keyList] != 'undefined' && travelerData[keyList] || { 1 : ''}
                     const newTravelerKey = typeof trvValue != 'undefined' && Object.keys( trvValue ) || [];

@@ -32,7 +32,10 @@ export const DEFAULT_BOOKING_STATE = () => {
         checkoutDetails : {},
         error_list : {},
         requiredField : {},
-        couponCode: ''
+        couponCode: '',
+        apply_coupon : false,
+        cart_amount : {},
+        currency_symbol : typeof _wp_travel != 'undefined' && typeof _wp_travel.currency_symbol != 'undefined' && _wp_travel.currency_symbol || '$',
     };
     return initState;
 }

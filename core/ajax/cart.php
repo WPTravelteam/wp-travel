@@ -92,18 +92,17 @@ class WP_Travel_Ajax_Cart {
 		global $wt_cart;
 		$trip_items     = $wt_cart->getItems();
 		$all_form_field = wptravel_get_checkout_form_fields();
-		$price_listing = [];
-		if ( ! empty( $trip_items ) ) {
-			foreach ( $trip_items as $key => $value ) {
-				$price_listing['partial_amount']	= isset( $value['trip_price_partial'] ) ? $value['trip_price_partial'] : '';
-				$price_listing['trip_price']		= isset( $value['trip_price'] ) ? $value['trip_price'] : '';
-			} 
-		}
+		$get_cart  = WP_Travel_Helpers_Cart::get_cart();
+		$total_cart = isset( $get_cart['cart'] ) && isset( $get_cart['cart']['total'] ) ? $get_cart['cart']['total'] : array( 'total' => '0' );
+		$price_listing = [
+			'partial_amount'	=> isset( $total_cart['total_partial'] ) ? $total_cart['total_partial'] : '0',
+			'trip_price'		=> isset( $total_cart['total'] ) ? $total_cart['total'] : $total_cart['total'],
+		];
 		$payment_field = array(
 			'payment'  => isset( $all_form_field['payment_fields'] ) ? $all_form_field['payment_fields'] : '',
 			'form_key' => ! empty( $trip_items ) ? array_key_first( $trip_items ) : 'one',
 			'price_list' => $price_listing,
-
+			'cart_price' => $total_cart,
 		);
 		WP_Travel_Helpers_REST_API::response( $payment_field );
 	}
