@@ -20,6 +20,7 @@ import {
     AccordionItemButton,
     AccordionItemPanel,
 } from 'react-accessible-accordion';
+import UpdateCart from './booking/UpdateCart';
 // import ProgressBary from '../ProgressBary';
 
 export default ( ) => {
@@ -80,7 +81,7 @@ export default ( ) => {
         if ( Object.keys( requiredField ).length > 0 ) {
             updateStore({...bookingData, requiredField : requiredField })
         }
-    },[])
+    },[paxSize])
     /** 
      * When use click next button this function check required field validation 
      * 
@@ -161,6 +162,7 @@ export default ( ) => {
     }
     const paxKey = [paxSize];
     return <>
+        <UpdateCart />
         {/* <ProgressBary statusText={`Progress: Fill Up Traveller Details`} value={30} max={100} /> */}
         { multipleTraveler == 'yes' && <> { paxKey.length > 0 && paxKey.map( ( pKeys, ind) => {
             const newdata = [];
@@ -209,7 +211,7 @@ export default ( ) => {
         } </div> }
         <p className='wp-travel-in-page-error'>{errorFound}</p>
         <div className='wptrave-singlepage-initial-nextbtn'>
-        
+        {/* <Button onClick={backToReturn} >Next{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</Button> */}
         <Button onClick={validateTravelerData} >Next{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</Button>
         </div>
         

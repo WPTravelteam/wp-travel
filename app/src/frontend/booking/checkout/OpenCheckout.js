@@ -17,7 +17,7 @@ const __i18n = {
 const bookingStoreName = 'WPTravelFrontend/BookingData';
 
 export default () => {
-    // console.log('detailsdfdf', _wp_travel);
+    console.log('detailsdfdf', _wp_travel);
     const [isOpen, setOpen] = useState(false);
 
     const openModal = () => setOpen(true);
@@ -30,7 +30,7 @@ export default () => {
 
     const { bookingTabEnable, travelerInfo, tripBillingEnable, treipPaymentEnable } = bookingData;
     const tooltipText = __i18n.bookings.date_select_to_view_options;
-    // console.log( 'booking data', bookingData )
+    console.log( 'booking data', bookingData )
     return <>
         <Button className="booknow-btn-booking wptravel-book-your-trip wp-travel-booknow-btn" onClick={openModal}>{__( 'Book Now', 'wp-travel' ) }</Button>
         <div className="wp-travel-checkout-one-page">
@@ -43,7 +43,7 @@ export default () => {
                
                 <h2>{typeof bookingTabEnable != 'undefined' && bookingTabEnable ? _wp_travel.select_you_pax : (typeof travelerInfo != 'undefined' && travelerInfo ? __('Traveler Details', 'wp-travel' ) : (typeof tripBillingEnable != 'undefined' && tripBillingEnable ? __('Billing Details', 'wp-travel' ) : __( 'Payment Details', 'wp-travel' ) ) ) } </h2>
 
-                {typeof bookingTabEnable != 'undefined' && bookingTabEnable &&
+                { typeof bookingTabEnable != 'undefined' && bookingTabEnable &&
                     <div className='wptravel-single-page-calender-booking wp-travel-calendar-view'>
                         <OpenBookign forceCalendarDisplay={false} calendarInline={false} showTooltip={true} tooltipText={tooltipText} />
                     </div>

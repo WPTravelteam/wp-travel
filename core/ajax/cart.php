@@ -79,7 +79,9 @@ class WP_Travel_Ajax_Cart {
 		$post_data = json_decode( file_get_contents( 'php://input' ) );
 		$post_data = is_object( $post_data ) ? (array) $post_data : array();
 		$post_data = wptravel_sanitize_array( $post_data );
-
+		// print_r( $request );
+		// print_r( $post_data );
+		// die;
 		$response = WP_Travel_Helpers_Cart::update_cart_item( $cart_id, $post_data );
 		WP_Travel_Helpers_REST_API::response( $response );
 	}
@@ -92,15 +94,15 @@ class WP_Travel_Ajax_Cart {
 		global $wt_cart;
 		$trip_items     = $wt_cart->getItems();
 		$all_form_field = wptravel_get_checkout_form_fields();
-		$get_cart  = WP_Travel_Helpers_Cart::get_cart();
-		$total_cart = isset( $get_cart['cart'] ) && isset( $get_cart['cart']['total'] ) ? $get_cart['cart']['total'] : array( 'total' => '0' );
-		$price_listing = [
-			'partial_amount'	=> isset( $total_cart['total_partial'] ) ? $total_cart['total_partial'] : '0',
-			'trip_price'		=> isset( $total_cart['total'] ) ? $total_cart['total'] : $total_cart['total'],
-		];
-		$payment_field = array(
-			'payment'  => isset( $all_form_field['payment_fields'] ) ? $all_form_field['payment_fields'] : '',
-			'form_key' => ! empty( $trip_items ) ? array_key_first( $trip_items ) : 'one',
+		$get_cart       = WP_Travel_Helpers_Cart::get_cart();
+		$total_cart     = isset( $get_cart['cart'] ) && isset( $get_cart['cart']['total'] ) ? $get_cart['cart']['total'] : array( 'total' => '0' );
+		$price_listing  = array(
+			'partial_amount' => isset( $total_cart['total_partial'] ) ? $total_cart['total_partial'] : '0',
+			'trip_price'     => isset( $total_cart['total'] ) ? $total_cart['total'] : $total_cart['total'],
+		);
+		$payment_field  = array(
+			'payment'    => isset( $all_form_field['payment_fields'] ) ? $all_form_field['payment_fields'] : '',
+			'form_key'   => ! empty( $trip_items ) ? array_key_first( $trip_items ) : 'one',
 			'price_list' => $price_listing,
 			'cart_price' => $total_cart,
 		);
