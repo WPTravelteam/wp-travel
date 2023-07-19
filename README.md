@@ -37,7 +37,7 @@ cd wp-travel
 git checkout sn
 
 # Install all required packages.
-yarn setup
+yarn install
 ```
 
 ### ⁉️ Issue with ```PHPCS``` in ```VS Code```.
@@ -55,7 +55,7 @@ Incase ```phpcs``` is not showing error in editor then:
 ### Start development
 This will start development mode to edit script to make changes in JS and CSS. 
 ```sh
-yarn dev
+yarn start
 ```
 
 ### Start production
