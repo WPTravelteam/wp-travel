@@ -18,7 +18,7 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
     return optionKey.length > 0 && <> <PanelBody>
         <PanelRow>
             <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>
-            <div>
+            <div className='wptravel-onpage-radiobtn-handle' >
                 { optionKey.map( ( val, index ) => {
                     return  <div className='wptravel-single-page-gender-radio-btn'> <input 
                         name={name + pxKey.toString()} 

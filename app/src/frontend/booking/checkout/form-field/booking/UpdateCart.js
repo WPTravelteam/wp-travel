@@ -102,6 +102,8 @@ export default () => {
     }
     // console.log( 'pricecate', cartDetail );
     return <>
+            <div className='wptravel-udate-cart-wrapper'>
+            <button className='components-button' onClick={cartUpdateOpen} >Edit Cart</button>
         { cartOpen == true && <> 
             <div className="wptravel-on-page-booking-update-cart-section">
                 { typeof priceCategoryList != 'undefined' && priceCategoryList.length > 0  && priceCategoryList.map( ( listed, index ) => {
@@ -111,9 +113,11 @@ export default () => {
                         <div className="wptrave-on-page-booking-cart-update-field">
                             <label>{title}</label>
                             <div className="wp-travel-on-page-cart-update-button">
-                                <button className='components-button wptravel-page-cart-update-btn-increase' onClick={ () => paxIncreament( catId )}>+</button>
+                                
+                                <button className='wptravel-page-cart-update-btn-increase' onClick={ () => paxDecreament( catId )}>-</button>
                                 <p>{paxCounts[catId]}</p>
-                                <button className='components-button wptravel-page-cart-update-btn-increase' onClick={ () => paxDecreament( catId )}>-</button>
+                                <button className='wptravel-page-cart-update-btn-increase' onClick={ () => paxIncreament( catId )}>+</button>
+                                
                             </div>
                         </div>
                     </>
@@ -124,6 +128,7 @@ export default () => {
             </div>
         
         </>}
-        <button onClick={cartUpdateOpen} >Open Update Cart</button>
+            </div>
+        
     </>;
 }

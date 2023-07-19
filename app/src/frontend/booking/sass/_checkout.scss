@@ -625,7 +625,8 @@
 		z-index: 10;
 		margin-bottom: 10px;
 	}
-	.wptravel-traveller-info-container {
+	.wptravel-traveller-info-container,
+	.wptravel-billing-formfield {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 		gap: 10px;
@@ -634,18 +635,24 @@
 		margin: 40px 0;
 		align-items: center;
 		// inner formfields
-		div {
+		> div {
 			margin-bottom: 5px;
 			// gender radio type layout
 			.wp-travel-new-gender-field {
 				.components-panel__body.is-opened {
 					.components-panel__row {
 						display: flex;
+						width: 100%;
 						label {
 							display: block;
 							width: 100%;
 						}
-						div {
+						div.wptravel-onpage-radiobtn-handle {
+							display: flex;
+							flex-wrap: wrap;
+							align-items: center;
+						}
+						div.wptravel-single-page-gender-radio-btn {
 							display: inline-flex;
 							align-items: center;
 							label {
@@ -675,6 +682,22 @@
 				align-items: center;
 				margin-bottom: 10px;
 
+				// billing details input icon and button
+				.wptravel-onpage-radiobtn-handle {
+					display: flex;
+					flex-wrap: wrap;
+					align-items: center;
+					// icon height
+					input{
+						min-height: auto;
+					}
+					.wptravel-single-page-gender-radio-btn{
+						display: flex;
+						align-items: center;
+						gap: 5px;
+					}
+				}
+
 				// date-picker select element width issue
 				.react-datepicker__input-container {
 					display: flex;
@@ -683,6 +706,27 @@
 					}
 				}
 				// label
+				.wptravel-onpage-checkbox-wrapper {
+					display: flex;
+					flex-wrap: wrap;
+					align-items: center;
+					//
+					.wtravel-onpage-boking-checkbox {
+						display: flex;
+						align-items: center;
+						//
+						.components-base-control__field {
+							display: flex;
+							align-items: center;
+							gap: 5px;
+							margin-bottom: 0;
+
+							span.components-checkbox-control__input-container{
+								line-height: 1;
+							}
+						}
+					}
+				}
 				label {
 					flex: 0 0 140px;
 					font-weight: bold;
@@ -699,6 +743,10 @@
 					padding: 0.5rem;
 					border-radius: 0.5rem;
 					width: 100%;
+				}
+				input[type="checkbox"] {
+					width: auto;
+					min-width: 0;
 				}
 				select:focus-visible {
 					border-color: green;
@@ -896,15 +944,15 @@
 
 			// Large tablets and desktops
 			// responsive
-			
+
 			@media (max-width: 576px) {
 				.wptravel-singlepage-booking-options {
 					flex-wrap: wrap;
-					label{
+					label {
 						width: 100%;
 						display: block;
 					}
-					select#wp-travel-option{
+					select#wp-travel-option {
 						width: 100%;
 						display: block;
 					}
@@ -1010,7 +1058,7 @@
 			rgba(129, 5, 240, 1) 100%
 		);
 		border: none;
-		width: 130px;
+		width: auto;
 		height: 40px;
 		color: #000;
 		border-radius: 5px;
@@ -1130,7 +1178,7 @@
 			}
 			// label
 			label {
-				flex: 0 0 100px;
+				flex: 0 0 140px;
 				font-weight: bold;
 			}
 
@@ -1163,4 +1211,4 @@
 		}
 	}
 }
-@import './responsive.scss';
+@import "./responsive.scss";

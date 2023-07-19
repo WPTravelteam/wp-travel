@@ -15,11 +15,11 @@ export default ( { travelerData, trvOne = 'travelerOne', pmtFld = 'no' } ) => {
     const errorData = typeof error_list[name] != 'undefined' && error_list[name]  || '';
     const optionKey = typeof options != 'undefined' && Object.keys( options ) || [];
     return optionKey.length > 0 && <><PanelBody>
-        <PanelRow>
+        {/* <PanelRow> */}
             <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>
-            <div>
+            <div className='wptravel-onpage-radiobtn-handle'>
                 { pmtFld == 'no' && optionKey.map( ( val, index ) => {
-                    return  <> <input 
+                    return  <div className='wptravel-single-page-gender-radio-btn'> <input 
                         name={name} 
                         type='radio' 
                         id={id} 
@@ -35,7 +35,7 @@ export default ( { travelerData, trvOne = 'travelerOne', pmtFld = 'no' } ) => {
                         }}
                     /> 
                         <label htmlFor={val}>{ options[val] }</label> <br/>
-                    </>
+                    </div>
                 }) || optionKey.map( ( val, index ) => {
                     if ( val == 'stripe' || val == 'authorizenet' || val == 'bank_deposit' || val == 'paypal'  ) {
                         return  <> <input 
@@ -58,6 +58,6 @@ export default ( { travelerData, trvOne = 'travelerOne', pmtFld = 'no' } ) => {
                     }
                 })  }
             </div>
-        </PanelRow>
+        {/* </PanelRow> */}
     </PanelBody><p className='wp-travel-in-page-error'>{errorData}</p></>
 }
