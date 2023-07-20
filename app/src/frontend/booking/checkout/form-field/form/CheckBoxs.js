@@ -11,12 +11,13 @@ export default ( { travelerData, trvOne = 'travelerOne' } ) => {
     const travelerDataList = typeof checkoutDetails != 'undefined' && typeof checkoutDetails[trvOne] != 'undefined' && checkoutDetails[trvOne] || {};
     const travelerValue = typeof travelerDataList[name] != 'undefined' && travelerDataList[name] || [];
     const errorData = typeof error_list[name] != 'undefined' && error_list[name]  || '';
-    return <><PanelBody>
-        <PanelRow>
+    return <div className='wptravel-onpage-checkbox-container'><PanelBody>
+        {/* <PanelRow> */}
             <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>
+            <div className="wptravel-onpage-checkbox-wrapper">
             {
                typeof options != 'undefined' && options.length > 0 && options.map( ( value, index ) => {
-                return <div key={index}><CheckboxControl
+                return <div className='wtravel-onpage-boking-checkbox' key={index}><CheckboxControl
                     key={index}
                     label={value}
                     name={name}
@@ -39,7 +40,8 @@ export default ( { travelerData, trvOne = 'travelerOne' } ) => {
                 </div>
                } )
             }
-        </PanelRow>
-    </PanelBody><p className='wp-travel-in-page-error'>{errorData}</p></>
+            </div>
+        {/* </PanelRow> */}
+    </PanelBody><p className='wp-travel-in-page-error'>{errorData}</p></div>
 }
 

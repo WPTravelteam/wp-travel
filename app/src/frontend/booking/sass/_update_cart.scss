@@ -1,0 +1,96 @@
+.wptravel-on-page-booking-update-cart-section {
+	.wp-travel-on-page-cart-update-button {
+		display: flex;
+		// gap: 10px;
+	}
+
+	.wptrave-on-page-booking-cart-update-field {
+		display: flex;
+		// gap: 40px;
+		margin: 20px 0;
+		label {
+			width: 100px;
+		}
+	}
+	button {
+		height: 30px;
+		width: 30px;
+		border: 0;
+		border-radius: 5px;
+		transition: all 0.2s ease-in;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 0 10px;
+		text-decoration: none;
+	}
+}
+
+// Update cart button
+.wptravel-on-page-booking-cart-update-btn {
+	margin: 10px 0;
+}
+// edit cart
+.wptravel-udate-cart-wrapper button.components-button {
+	margin: 10px 0;
+}
+.wptravel-udate-cart-wrapper
+	button.wptravel-page-cart-update-btn-increase:hover {
+	transform: scale(1.06);
+	transition: width 2s;
+}
+
+.wptravel-onpage-checkbox-container {
+	.components-panel__body.is-opened {
+		align-items: baseline;
+	}
+}
+
+// testing
+// .wptravel-billing-formfield {
+// 	// inner formfields
+// 	> div {
+// 		margin-bottom: 5px;
+// 		// container
+// 		.components-panel__body.is-opened {
+// 			.components-panel__row {
+//                 display: flex;
+//                 flex-wrap: wrap;
+//                 align-items: center;
+// 				label {
+// 					flex: 0 0 140px;
+// 					font-weight: bold;
+// 				}
+
+// 				// input
+// 				input,
+// 				select {
+// 					flex: 1;
+// 					margin-left: 10px;
+// 					padding: 5px 0;
+// 					min-height: 40px;
+// 					border: 1px solid rgb(204, 204, 204);
+// 					padding: 0.5rem;
+// 					border-radius: 0.5rem;
+// 					width: 100%;
+// 				}
+// 				input[type="checkbox"] {
+// 					width: auto;
+// 					min-width: 0;
+// 				}
+// 				select:focus-visible {
+// 					border-color: green;
+// 					outline-color: green;
+// 				}
+// 				.components-base-control__field {
+// 					display: flex;
+// 					align-items: center;
+// 					gap: 5px;
+// 				}
+// 			}
+// 			display: flex;
+// 			align-items: center;
+// 			margin-bottom: 10px;
+// 		}
+// 	}
+// }
