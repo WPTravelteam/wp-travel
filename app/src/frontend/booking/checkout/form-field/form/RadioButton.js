@@ -37,7 +37,7 @@ export default ( { travelerData, trvOne = 'travelerOne', pmtFld = 'no' } ) => {
                         <label htmlFor={val}>{ options[val] }</label> <br/>
                     </>
                 }) || optionKey.map( ( val, index ) => {
-                    if ( val == 'stripe' || val == 'authorizenet' || val == 'bank_deposit' || val == 'paypal'  ) {
+                    if ( val == 'stripe' || val == 'authorizenet' || val == 'bank_deposit' || val == 'paypal' || val == 'express_checkout' ) {
                         return  <> <input 
                             name={name} 
                             type='radio' 

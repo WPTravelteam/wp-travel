@@ -35,6 +35,7 @@ export const DEFAULT_BOOKING_STATE = () => {
         couponCode: '',
         apply_coupon : false,
         cart_amount : {},
+        currency_code : typeof _wp_travel.currency != 'undefined' && _wp_travel.currency || 'USD',
         currency_symbol : typeof _wp_travel != 'undefined' && typeof _wp_travel.currency_symbol != 'undefined' && _wp_travel.currency_symbol || '$',
     };
     return initState;

@@ -198,7 +198,7 @@ const PaxSelector = ( props ) => {
 						<div className="text-left">
 							<strong>
 								{`${c.term_info.title}`} &nbsp;
-								{<span className="wp_travel_pax_info">({`${minPax}`}/{maxPax})</span>}
+								{<span className="wp_travel_pax_info">{ _wp_travel.pax_show_remove == '' ? `(${minPax}/${maxPax})` : _wp_travel.pax_show_remove }</span>}
 							</strong>
 							{( 
 								( 
