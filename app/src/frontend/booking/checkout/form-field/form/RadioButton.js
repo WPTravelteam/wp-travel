@@ -15,10 +15,11 @@ export default ( { travelerData, trvOne = 'travelerOne', pmtFld = 'no' } ) => {
     const errorData = typeof error_list[name] != 'undefined' && error_list[name]  || '';
     const optionKey = typeof options != 'undefined' && Object.keys( options ) || [];
     return optionKey.length > 0 && <><PanelBody>
-        {/* <PanelRow> */}
-            <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>
-            <div className='wptravel-onpage-radiobtn-handle'>
-                { pmtFld == 'no' && optionKey.map( ( val, index ) => {
+            {/* <div className='wptravel-onpage-radiobtn-handle'> */}
+                { pmtFld == 'no' &&<>
+                <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>  
+                <div className='wptravel-onpage-radiobtn-handle'>
+                 {optionKey.map( ( val, index ) => {
                     return  <div className='wptravel-single-page-gender-radio-btn'> <input 
                         name={name} 
                         type='radio' 
@@ -36,7 +37,11 @@ export default ( { travelerData, trvOne = 'travelerOne', pmtFld = 'no' } ) => {
                     /> 
                         <label htmlFor={val}>{ options[val] }</label> <br/>
                     </div>
-                }) || optionKey.map( ( val, index ) => {
+                }) } </div> </> || <>
+                <PanelRow>
+                  <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>  
+                  <div className='wptravel-onpage-radiobtn-handle'>
+                 {optionKey.map( ( val, index ) => {
                     if ( val == 'stripe' || val == 'authorizenet' || val == 'bank_deposit' || val == 'paypal' || val == 'express_checkout' ) {
                         return  <> <input 
                             name={name} 
@@ -56,8 +61,7 @@ export default ( { travelerData, trvOne = 'travelerOne', pmtFld = 'no' } ) => {
                             <label htmlFor={val}>{ options[val] }</label> <br/>
                         </>
                     }
-                })  }
-            </div>
-        {/* </PanelRow> */}
+                })} </div> </PanelRow> </>  }
+            {/* </div> */}
     </PanelBody><p className='wp-travel-in-page-error'>{errorData}</p></>
 }

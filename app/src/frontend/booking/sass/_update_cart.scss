@@ -46,51 +46,11 @@
 	}
 }
 
-// testing
-// .wptravel-billing-formfield {
-// 	// inner formfields
-// 	> div {
-// 		margin-bottom: 5px;
-// 		// container
-// 		.components-panel__body.is-opened {
-// 			.components-panel__row {
-//                 display: flex;
-//                 flex-wrap: wrap;
-//                 align-items: center;
-// 				label {
-// 					flex: 0 0 140px;
-// 					font-weight: bold;
-// 				}
-
-// 				// input
-// 				input,
-// 				select {
-// 					flex: 1;
-// 					margin-left: 10px;
-// 					padding: 5px 0;
-// 					min-height: 40px;
-// 					border: 1px solid rgb(204, 204, 204);
-// 					padding: 0.5rem;
-// 					border-radius: 0.5rem;
-// 					width: 100%;
-// 				}
-// 				input[type="checkbox"] {
-// 					width: auto;
-// 					min-width: 0;
-// 				}
-// 				select:focus-visible {
-// 					border-color: green;
-// 					outline-color: green;
-// 				}
-// 				.components-base-control__field {
-// 					display: flex;
-// 					align-items: center;
-// 					gap: 5px;
-// 				}
-// 			}
-// 			display: flex;
-// 			align-items: center;
-// 			margin-bottom: 10px;
-// 		}
-// 	}
-// }
+// Coupon code apply
+.booknow-btn-modal {
+	.wptravel-on-page-coupon-apply {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+}
