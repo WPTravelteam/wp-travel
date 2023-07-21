@@ -20,6 +20,8 @@ import CouponApplyAmount from "./booking/CouponApplyAmount"
 export default () => {
     const [loaders, setLoaders] = useState(false)
     const [couponError, setCouponError] = useState('')
+    const [ couponDisable, setDisable ]  = useState(false)
+    const [ couponLoaders, setCouponLoaders ] = useState(false)
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     const { updateStore } = dispatch( bookingStoreName );
     const { checkoutDetails, payment_form, price_list, form_key, traveler_form, couponCode, apply_coupon, cart_amount, currency_symbol } = bookingData;
@@ -53,6 +55,7 @@ export default () => {
     // hari();
     const applyCouponCode = () => {
         if ( typeof couponCode != 'undefined' && couponCode != '' ) {
+            setCouponLoaders(true)
             apiFetch( {
                 url: `${wp_travel.ajaxUrl}?action=wp_travel_apply_coupon&_nonce=${_wp_travel._nonce}`,
 				method: 'POST',
@@ -68,13 +71,25 @@ export default () => {
                     const total_partial = typeof total != 'undefined' && typeof total.total_partial != 'undefined' && total.total_partial || '0';
                     const price_data = { partial_amount : total_partial, trip_price : cart_total_price  }
                     updateStore( { ...bookingData, cart_amount : total, price_list : price_data, apply_coupon : true } )
-
-                } 
+                    setCouponError( __( 'Coupon is applied.', 'wp-travel' ) );
+                    setCouponLoaders(false)
+                    setDisable(true)
+                } else {
+                    setCouponError( __( 'Coupon code is invalid. Please re-enter your coupon code', 'wp-travel' ) );
+                    setCouponLoaders(false)
+                }
             })
+            
         } else {
-            setCouponError('Please enter your coupon code');
+            setCouponError( __( 'Please enter your coupon code', 'wp-travel' ) );
         }
     }
+    const createCouponError = () => {
+        setCouponLoaders(true)
+        setCouponError('You are coupon already applied.')
+        setCouponLoaders(false)
+    }
+    console.log( 'selecteed', selected_payment );
     return <> 
         {/* This section containce add your coupon code and get discount */}
         <div className="wptravel-on-page-coupon-apply">
@@ -83,10 +98,10 @@ export default () => {
                 const values =  e.target.value;
                 updateStore({...bookingData, couponCode : values } );
                 }} />
-                { couponError != '' && <p className="wptravel-on-page-coupon-error">{couponError}</p> }
             </div>
-            <button className="wptravel-on-page-coupon-code-btn components-button" onClick={applyCouponCode}>{__( 'Apply Coupon')}</button>
+            <button {...couponDisable} className="wptravel-on-page-coupon-code-btn components-button" onClick={ couponDisable == true ? createCouponError : applyCouponCode}>{__( 'Apply Coupon')}{couponLoaders && <img className="wptravel-single-page-loader-btn" src={_wp_travel.loader_url } /> }</button>
         </div>
+        { couponError != '' && <p className="wptravel-on-page-coupon-error">{couponError}</p> }
         {/* This section contain your hole booking process booking and booking with payment */}
         <form method="POST" action={_wp_travel.checkout_url} className="wp-travel-booking" id="wp-travel-booking" > { typeof payment_gateway != 'undefined' && <>
             
@@ -96,12 +111,8 @@ export default () => {
                 <div className="wptravel-onepage-payment-gateway"><PaymentFormField /> </div>
                 { partial_enable == 'yes' && <PartialPyamet /> }
                 </> }
+                {/* Show all price data  */}
                 <CouponApplyAmount coupon_data={cart_amount} currency_symbol={ currency_symbol } booking_option={wp_travel_booking_option} payment_mode={wp_travel_payment_mode} partial_enable={ partial_enable }  /> 
-                {/* { apply_coupon == true && <CouponApplyAmount coupon_data={cart_amount} currency_symbol={ currency_symbol} /> || <div className="wptravel-onepage-payment-total-trip-price"><TotalPrice /></div> } */}
-                
-                {/* { wp_travel_booking_option == "booking_with_payment" && wp_travel_payment_mode == 'partial' &&  partial_enable == 'yes' && <div className="wptravel-one-page-payment-amount">
-                 <PaymentPrice />
-                </div> } */}
                 { travelerKey.length > 0 && travelerKey.map( ( keyList, indexs ) => {
                     const trvValue = typeof travelerData[keyList] != 'undefined' && travelerData[keyList] || { 1 : ''}
                     const newTravelerKey = typeof trvValue != 'undefined' && Object.keys( trvValue ) || [];
@@ -126,9 +137,9 @@ export default () => {
                     <div className="wp-travel-form-field button-field" >
                     {  wp_travel_booking_option == "booking_with_payment" && selected_payment == 'stripe' && applyFilters( 'wptravel_booking_button_payment_strp', [<div><input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book Now" disabled /></div> ], bookingData )
                         ||  wp_travel_booking_option == "booking_with_payment" && selected_payment == 'authorizenet' && applyFilters( 'wptravel_booking_button_payment_auth', [<div><input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book Now" disabled /></div>], bookingData )
-                        ||  wp_travel_booking_option == "booking_with_payment" && ( selected_payment == 'bank_deposit' && selected_payment == 'paypal' ) && <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book Now" />
                         ||  wp_travel_booking_option == "booking_with_payment" && selected_payment == 'express_checkout' && applyFilters( 'wptravel_booking_button_payment_express_checkout', [<div><input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book Now pa" disabled /></div>], bookingData )  
-                        ||  wp_travel_booking_option == "booking_with_payment" && <div><input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book Now" onClick={ e => handlingForm(e) } /></div> 
+                        ||  wp_travel_booking_option == "booking_with_payment" && ( selected_payment == 'bank_deposit' || selected_payment == 'paypal' ) && <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book Now" />
+                        ||  wp_travel_booking_option == "booking_with_payment" && ( typeof selected_payment == 'undefined' || selected_payment == '' ) && <div><input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book Now" onClick={ e => handlingForm(e) } /></div> 
                         || <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="Book Now" onClick={ e => handlingForm(e) } /> }
                     </div> 
                 </div></div></> || 

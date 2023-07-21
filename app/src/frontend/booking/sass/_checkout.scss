@@ -1211,4 +1211,12 @@
 		}
 	}
 }
+div.wptravel-onpage-priceshow {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+span.onpage-travel-price-display-label {
+	margin-right:  15px;
+}
 @import "./responsive.scss";

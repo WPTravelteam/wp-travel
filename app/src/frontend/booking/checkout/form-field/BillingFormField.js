@@ -20,10 +20,11 @@ export default ( ) => {
     const [errorFound, setErrorFound] = useState('')
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     const { updateStore } = dispatch( bookingStoreName );
-    const { billing_form, error_list, checkoutDetails } = bookingData;
+    const { billing_form, error_list, checkoutDetails, price_list, currency_symbol } = bookingData;
     const { billing } = checkoutDetails;
     const billingData = typeof billing != 'undefined' && billing || {};
     const fieldKey  = typeof billing_form != 'undefined' && Object.keys( billing_form ) || [];
+    const { trip_price }  = typeof price_list != 'undefined' && price_list || ''
     useEffect( () => {
         const requiredField = {};
         if ( fieldKey.length > 0 ) {
@@ -92,7 +93,14 @@ export default ( ) => {
             <Button onClick={ () => { 
                 updateStore({...bookingData, travelerInfo : true , tripBillingEnable : false })
             }} >Go Back</Button>
-            <div><p className='wptravel-onepage-navigation-error'>{errorFound}</p><Button onClick={ validateTravelerData } >Next{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</Button>
+            <div>
+                <p className='wptravel-onepage-navigation-error'>{errorFound}</p>
+                <div className="wptravel-onpage-priceshow">
+                    { trip_price != '' && <div className="onpage-traveler-field-price-show">
+                        <p><span className='onpage-travel-price-display-label'>Trip Price</span>{currency_symbol}{trip_price}</p>
+                    </div>}
+                    <Button onClick={ validateTravelerData } >Next{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</Button>
+                </div>
                 
             </div>
         </div>

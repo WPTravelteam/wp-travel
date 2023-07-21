@@ -6,7 +6,7 @@ export default ( { coupon_data, currency_symbol, booking_option, payment_mode, p
     const cart_payable  = typeof cart_total != 'undefined' && cart_total || '0';
     return <>
         <div className="wptravel-onepage-payment-total-trip-price">
-            <div className="components-panel__body is-opened wptrave-on-page-booking-price-with-coupon">
+            <div className="components-panel__body is-opened wptrave-on-page-booking-price-with-coupon wptrave-onpage-price-calculation">
                 { parseInt( cart_payable ) > 0 && ( parseInt( tax ) > 0 || parseInt( discount_get ) > 0 ) &&  <div className="components-panel__row">
                     <label>{ __( 'Trip Price', 'wp-travel' ) }</label>
                     <div id="wp-travel-trip-price_info" className="wptravel-one-page-booking">			
@@ -14,13 +14,6 @@ export default ( { coupon_data, currency_symbol, booking_option, payment_mode, p
                         <span className="wp-travel-trip-price-figure">{cart_payable}</span>
                     </div>
                 </div> }
-                { parseInt( tax ) > 0 && <div className="components-panel__row">
-                    <label>{ __( 'Tax', 'wp-travel' ) }</label>
-                    <div id="wp-travel-trip-price_info" className="wptravel-one-page-booking">			
-                        <span className="wp-travel-trip-currency"><span className="wptravel-on-page-tax-increament-icon">+</span> {currency_symbol}</span> 
-                        <span className="wp-travel-trip-price-figure">{tax}</span>
-                    </div>
-                </div>}
                 { parseInt( discount_get ) > 0 && <div className="components-panel__row">
                     <label>{ __( 'Discount', 'wp-travel' ) }</label>
                     <div id="wp-travel-trip-price_info" className="wptravel-one-page-booking">			
@@ -28,6 +21,14 @@ export default ( { coupon_data, currency_symbol, booking_option, payment_mode, p
                         <span className="wp-travel-trip-price-figure">{discount_get}</span>
                     </div>
                 </div>}
+                { parseInt( tax ) > 0 && <div className="components-panel__row">
+                    <label>{ __( 'Tax', 'wp-travel' ) }</label>
+                    <div id="wp-travel-trip-price_info" className="wptravel-one-page-booking">			
+                        <span className="wp-travel-trip-currency"><span className="wptravel-on-page-tax-increament-icon">+</span> {currency_symbol}</span> 
+                        <span className="wp-travel-trip-price-figure">{tax}</span>
+                    </div>
+                </div>}
+                
                 { parseInt( payable_price ) > 0 && <div className="components-panel__row">
                     <label>{ __( 'Total Trip Price', 'wp-travel' ) }</label>
                     <div id="wp-travel-trip-price_info" className="wptravel-one-page-booking">			

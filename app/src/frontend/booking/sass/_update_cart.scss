@@ -54,3 +54,20 @@
 		gap: 10px;
 	}
 }
+.wptrave-onpage-price-calculation {
+	display: flex;
+	flex-direction: column;
+	.components-panel__row {
+		justify-content: left;
+		label {
+			flex-basis: 220px;
+		}
+	}
+} 
+.wptravel-on-page-coupon-error {
+	font-size: 12px;
+	text-align: left;
+	// margin-right: 10px;
+	color: red;
+	margin: 10px 0;
+}

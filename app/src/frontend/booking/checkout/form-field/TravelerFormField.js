@@ -31,10 +31,10 @@ export default ( ) => {
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     const { updateStore } = dispatch( bookingStoreName );
     const multipleTraveler = typeof _wp_travel != 'undefined' && typeof _wp_travel.checkout_field != 'undefined' && typeof _wp_travel.checkout_field.enable_multiple_travellers != 'undefined' &&  _wp_travel.checkout_field.enable_multiple_travellers || 'no';
-    const { traveler_form, form_key, paxCounts, checkoutDetails, error_list, paxSize } = bookingData;
+    const { traveler_form, form_key, paxCounts, checkoutDetails, error_list, paxSize, price_list, currency_symbol } = bookingData;
     const fieldKey  = typeof traveler_form != 'undefined' && Object.keys( traveler_form ) || [];
     // const paxValue = Object.values( paxCounts )
-
+    const { trip_price }  = typeof price_list != 'undefined' && price_list || ''
     const travelerEnter = typeof checkoutDetails[form_key] != 'undefined' && checkoutDetails[form_key] || {};
     const validateEmail = ( input ) => {
         var validRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -212,7 +212,10 @@ export default ( ) => {
         <p className='wp-travel-in-page-error'>{errorFound}</p>
         <div className='wptrave-singlepage-initial-nextbtn'>
         {/* <Button onClick={backToReturn} >Next{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</Button> */}
-        <Button onClick={validateTravelerData} >Next{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</Button>
+            { trip_price != '' && <div className="onpage-traveler-field-price-show">
+                <p><span className='onpage-travel-price-display-label'>Trip Price</span>{currency_symbol}{trip_price}</p>
+            </div>}
+            <Button onClick={validateTravelerData} >Next{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</Button>
         </div>
         
     </>
