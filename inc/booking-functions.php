@@ -570,3 +570,11 @@ function wptravel_get_booking_chart() {
 	</div>
 	<?php
 }
+
+/**
+ * Add to cart system
+ * @since 7.1.0
+ */
+function wp_travel_add_to_cart_system() {
+	return apply_filters( 'wp_travel_add_to_cart_system', false );
+}

@@ -65,6 +65,7 @@ class WpTravel_Helpers_Localize {
 			$_wp_travel['trip_date_listing']  = $settings['trip_date_listing'];
 			$_wp_travel['strings']            = WpTravel_Helpers_Strings::get();
 			$_wp_travel['itinerary_v2']       = wptravel_use_itinerary_v2_layout();
+			$_wp_travel['add_to_cart_system'] = wp_travel_add_to_cart_system();
 			$_wp_travel['checkout_url']       = $checkoutDetail->guid;
 			$_wp_travel['pax_show_remove'] 	  = apply_filters( 'wp_travel_booking_pax_editable', '' );
 			$_wp_travel['select_you_pax']	  = apply_filters( 'wp_travel_select_you_pax', __( 'Select Your Pax', 'wp-travel' )); 

@@ -42,7 +42,7 @@ export default ( { travelerData, trvOne = 'travelerOne', pmtFld = 'no' } ) => {
                   <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>  
                   <div className='wptravel-onpage-radiobtn-handle'>
                  {optionKey.map( ( val, index ) => {
-                    if ( val == 'stripe' || val == 'authorizenet' || val == 'bank_deposit' || val == 'paypal' || val == 'express_checkout' ) {
+                    if ( val == 'stripe' || val == 'authorizenet' || val == 'bank_deposit' || val == 'paypal' || val == 'express_checkout' || val == 'stripe_ideal' ) {
                         return  <> <input 
                             name={name} 
                             type='radio' 
