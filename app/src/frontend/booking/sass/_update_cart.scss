@@ -95,15 +95,33 @@
 		}
 	}
 }
-		// 	// ideal bank select background
+// 	// ideal bank select background
 
-		.SelectFieldButton.SelectField-control {
-			border: 1px solid rgb(204, 204, 204);
-			padding: 0.5rem;
-			border-radius: 0.5rem;
-		}
-		.SelectField.SelectField--ltr{
-			border: 1px solid rgb(204, 204, 204);
-			padding: 0.5rem;
-			border-radius: 0.5rem;
-		}
+.SelectFieldButton.SelectField-control {
+	border: 1px solid rgb(204, 204, 204);
+	padding: 0.5rem;
+	border-radius: 0.5rem;
+}
+.SelectField.SelectField--ltr {
+	border: 1px solid rgb(204, 204, 204);
+	padding: 0.5rem;
+	border-radius: 0.5rem;
+}
+
+.wp-travel-add-to-cart-item-anchor-tag {
+	background-color: #f0f0f0;
+	border: solid 1px #f3e6e6;
+	color: black;
+	padding: 10px 30px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.wp-travel-add-to-cart-item-anchor-tag:hover {
+	background-color: #000;
+	color: #fff;
+}

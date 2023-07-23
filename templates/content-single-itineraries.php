@@ -67,7 +67,7 @@ do_action( 'wp_travel_before_content_start' );
 						<header class="entry-header">
 							<?php 
 								if ( wp_travel_add_to_cart_system() == true && ! empty( $trip_items ) && count( $trip_items ) ) {
-							?><a href="<?php echo wptravel_get_checkout_url(); ?>" target="_blank" rel="noopener noreferrer">Cart <span class="wp-travel-add-to-cart-cart_item_show" ><?php echo count( $trip_items ); ?></span> </a> <?php } ?>
+							?><a class="wp-travel-add-to-cart-item-anchor-tag" href="<?php echo wptravel_get_checkout_url(); ?>" target="_blank" rel="noopener noreferrer">Cart <span class="wp-travel-add-to-cart-cart_item_show" ><?php echo count( $trip_items ); ?></span> </a> <?php } ?>
 							<?php do_action( 'wp_travel_before_single_title', get_the_ID() ); ?>
 							<?php wptravel_do_deprecated_action( 'wp_tarvel_before_single_title', array( get_the_ID() ), '2.0.4', 'wp_travel_before_single_title' ); ?>
 							<?php apply_filters( 'wp_travel_single_archive_trip_tilte', the_title( '<h1 class="entry-title">', '</h1>' ),  $trip_id ); ?>
