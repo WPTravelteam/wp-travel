@@ -88,7 +88,7 @@ export default () => {
                                     })
                                 }}
                             />
-                            <p className="description">{__('This will create WP Travel Customer while booking made', 'wp-travel')}</p>
+                            <p className="description">{__('This will create WP Travel Customer once the booking has been done.', 'wp-travel')}</p>
                         </div>
                     </PanelRow>
                     {('yes' == enableMyAccountCustomerRegistration || 'yes' == createUserWhileBooking) &&

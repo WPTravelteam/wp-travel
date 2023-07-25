@@ -196,6 +196,60 @@ function wptravel_posts_clauses_filter( $post_clauses, $object ) {
 	return $post_clauses;
 }
 
+function wptravel_get_for_block_template($template_name){
+
+	$template_path = apply_filters( 'wp_travel_template_path', 'wp-travel/' ); // @phpcs:ignore
+	$template_path = apply_filters( 'wptravel_template_path', $template_path );
+	$default_path  = sprintf( '%s/templates/', plugin_dir_path( dirname( __FILE__ ) ) );
+
+	// Look templates in theme first.
+	$template       = locate_template(
+		array(
+			trailingslashit( $template_path ) . $template_name,
+			$template_name,
+		)
+	);
+	$layout_version = wptravel_layout_version();
+	preg_match( '!\d+!', $layout_version, $version_number );
+	// Legacy Templates for themes.
+	if ( ! $template ) {
+		if ( isset( $version_number[0] ) && 1 !== (int) $version_number[0] ) {
+			$version = (int) $version_number[0];
+			for ( $i = $version; $i >= 1; $i-- ) {
+				$template_ver         = 'v' . $i . '/';
+				$replace_with         = 2 >= $i ? '' : 'v' . ( $i - 1 ) . '/';
+				$legacy_template_name = str_replace( $template_ver, $replace_with, $template_name );
+				$legacy_template      = locate_template(
+					array(
+						trailingslashit( $template_path ) . $legacy_template_name,
+						$legacy_template_name,
+					)
+				);
+				if ( $legacy_template ) {
+					add_filter(
+						'wptravel_layout_version',
+						function( $v ) {
+							return 'v1';
+							return $v;
+						}
+					);
+					return $legacy_template;
+				}
+			}
+		}
+	}
+	// End of Legacy Templates for themes.
+
+	if ( ! $template ) { // Load From Plugin if file not found in theme.
+		$template = $default_path . $template_name;
+	}
+	if ( file_exists( $template ) ) {
+		return $template;
+	}
+	return false;
+
+}
+
 /**
  * Return template.
  *
@@ -203,6 +257,16 @@ function wptravel_posts_clauses_filter( $post_clauses, $object ) {
  * @return Mixed
  */
 function wptravel_get_template( $template_name ) {
+	if ( count( get_block_templates() ) > 0 ) {
+		foreach ( get_block_templates() as $value ) {
+			if ( is_single() && $value->slug == 'single-itineraries' ) {
+				return;
+			}
+			if( is_archive() && $value->slug == 'archive-itineraries' ){
+				return;
+			}
+		}
+	}
 	$template_path = apply_filters( 'wp_travel_template_path', 'wp-travel/' ); // @phpcs:ignore
 	$template_path = apply_filters( 'wptravel_template_path', $template_path );
 	$default_path  = sprintf( '%s/templates/', plugin_dir_path( dirname( __FILE__ ) ) );
@@ -271,6 +335,17 @@ function wptravel_get_template_html( $template_name, $args = array() ) {
 	}
 	include wptravel_get_template( $template_name );
 	return ob_get_clean();
+}
+
+function wptravel_get_block_template_part( $slug, $name = '' ){
+	$template  = '';
+	$file_name = ( $name ) ? "{$slug}-{$name}.php" : "{$slug}.php";
+	if ( $name ) {
+		$template = wptravel_get_template( $file_name );
+	}
+	if ( $template ) {
+		load_template( $template, false );
+	}
 }
 
 /**
@@ -680,7 +755,8 @@ function wptravel_single_excerpt( $trip_id ) {
 	$strings = WpTravel_Helpers_Strings::get();
 	// Get Settings.
 	$settings = wptravel_get_settings();
-
+	$enable_one_page = isset( $settings['enable_one_page_booking'] ) &&  ( $settings['enable_one_page_booking'] == true || $settings['enable_one_page_booking'] == 1 ) ? true : false;
+	$hook_for_double_enable = apply_filters( 'wp_travel_enable_double_booking_button', true );
 	$enquery_global_setting = isset( $settings['enable_trip_enquiry_option'] ) ? $settings['enable_trip_enquiry_option'] : 'yes';
 
 	$global_enquiry_option = get_post_meta( $trip_id, 'wp_travel_use_global_trip_enquiry_option', true );
@@ -714,7 +790,6 @@ function wptravel_single_excerpt( $trip_id ) {
 	$booking_type    = get_post_meta( $trip_id, 'wp_travel_custom_booking_type', true );
 	$custom_link     = get_post_meta( $trip_id, 'wp_travel_custom_booking_link', true );
 	$open_in_new_tab = get_post_meta( $trip_id, 'wp_travel_custom_booking_link_open_in_new_tab', true );
-
 	if ( class_exists( 'WP_Travel_Utilities_Core' ) ) {
 		$pricing_type = get_post_meta( $trip_id, 'wp_travel_pricing_option_type', true );
 	}
@@ -739,7 +814,7 @@ function wptravel_single_excerpt( $trip_id ) {
 				 * Hooks parameter array varible declear
 				 */
 				$wptravel_after_excerpt_single_trip_page = array(
-					'trip_type'  => '<li>
+					'trip_type'  => apply_filters( 'wp_travel_single_archive_trip_types', '<li>
 										<div class="travel-info">
 											<strong class="title">' . esc_html( $trip_type_text ) . '</strong>
 										</div>
@@ -747,8 +822,8 @@ function wptravel_single_excerpt( $trip_id ) {
 											<span class="value">' . ( ( $trip_types_list ) ? wp_kses( $trip_types_list, wptravel_allowed_html( array( 'a' ) ) ) : ( esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_trip_type_text ) ) ) ) .
 											'</span>
 										</div>
-									</li>',
-					'activity'   => '<li>
+									</li>', $trip_id ),
+					'activity'   => apply_filters( 'wp_travel_single_archive_activities', '<li>
 										<div class="travel-info">
 											<strong class="title">' . esc_html( $activities_text ) . '</strong>
 										</div>
@@ -756,9 +831,9 @@ function wptravel_single_excerpt( $trip_id ) {
 											<span class="value">' . ( ( $activity_list ) ? wp_kses( $activity_list, wptravel_allowed_html( array( 'a' ) ) ) : ( esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_activities_text ) ) ) ) .
 											'</span>
 										</div>
-									</li>',
+									</li>', $trip_id ),
 					'group_size' => ( ( $wptravel_enable_group_size_text ) ? (
-									'<li>
+									apply_filters( 'wp_travel_single_archive_group_size', '<li>
 										<div class="travel-info">
 											<strong class="title">' . esc_html( $group_size_text ) . '</strong>
 										</div>
@@ -766,8 +841,8 @@ function wptravel_single_excerpt( $trip_id ) {
 											<span class="value">' . ( ( (int) $group_size && $group_size < 999 ) ? ( sprintf( apply_filters( 'wp_travel_template_group_size_text', __( '%1$d %2$s', 'wp-travel' ) ), esc_html( $group_size ), esc_html( ( $pax_text ) ) ) ) : ( esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_group_size_text ) ) ) ) .
 											'</span>
 										</div>
-									</li>' ) : '' ),
-					'reviews'    => '<li>
+									</li>', $trip_id ) ) : '' ),
+					'reviews'    => apply_filters( 'wp_travel_single_archive_review', '<li>
 									<div class="travel-info">
 										<strong class="title">' . esc_html( $reviews_text ) . '</strong>
 									</div>
@@ -775,10 +850,10 @@ function wptravel_single_excerpt( $trip_id ) {
 										<span class="value"> <a href="javascript:void(0)" class="wp-travel-count-info">' . ( sprintf( _n( '%s Review', '%s Reviews', $count, 'wp-travel' ), esc_html( $count ) ) ) .
 										'</a></span>
 									</div>
-								</li>',
+								</li>', $trip_id ),
 				);
 
-				$wptravel_after_excerpt_single_trip_page = apply_filters( 'wptravel_after_excerpt_single_trip_page', $wptravel_after_excerpt_single_trip_page );
+				$wptravel_after_excerpt_single_trip_page = apply_filters( 'wptravel_after_excerpt_single_trip_page', $wptravel_after_excerpt_single_trip_page, $trip_id );
 
 				foreach ( $wptravel_after_excerpt_single_trip_page as $key => $value ) {
 					echo $value;
@@ -795,14 +870,21 @@ function wptravel_single_excerpt( $trip_id ) {
 			<?php
 			$trip_enquiry_text = isset( $strings['trip_enquiry'] ) ? $strings['trip_enquiry'] : __( 'Trip Enquiry', 'wp-travel' );
 			$book_now_text     = isset( $strings['featured_book_now'] ) ? $strings['featured_book_now'] : __( 'Book Now', 'wp-travel' );
+			if ( wp_travel_add_to_cart_system() ) {
+				$book_now_text = apply_filters( 'wp_travel_add_to_cart_text', 'Add to Cart' );
+			}
 			if ( 'custom-booking' === $pricing_type && 'custom-link' === $booking_type && $custom_link ) :
 				?>
 				<a href="<?php echo esc_url( $custom_link ); ?>" target="<?php echo $open_in_new_tab ? esc_attr( 'new' ) : ''; ?>" class="wptravel-book-your-trip"><?php echo esc_html( apply_filters( 'wp_travel_template_book_now_text', $book_now_text ) ); // @phpcs:ignore ?></a>
+				
 				<?php
-			elseif ( wptravel_tab_show_in_menu( 'booking' ) ) :
+			elseif ( wptravel_tab_show_in_menu( 'booking' ) || $enable_one_page ) :
+				if ( $enable_one_page == true && $hook_for_double_enable == true ) {
 				?>
+				<div id='wp-travel-one-page-checkout-enables'>Book Now</div>
+				<?php } else { ?>
 				<button class="wptravel-book-your-trip wp-travel-booknow-btn"><?php echo esc_html( apply_filters( 'wp_travel_template_book_now_text', $book_now_text ) ); // @phpcs:ignore ?></button>
-			<?php endif; ?>
+			<?php } endif; ?>
 			<?php if ( 'yes' === $enable_enquiry ) : ?>
 				<a id="wp-travel-send-enquiries" class="wp-travel-send-enquiries" data-effect="mfp-move-from-top" href="#wp-travel-enquiries">
 					<span class="wp-travel-booking-enquiry">
@@ -842,11 +924,15 @@ function wptravel_single_keywords( $trip_id ) {
 	if ( ! $trip_id ) {
 		return;
 	}
+	$strings         = WpTravel_Helpers_Strings::get();
+	$keywords = isset( $strings['single_archive'] ) && isset( $strings['single_archive']['keywords'] ) ? $strings['single_archive']['keywords'] : __( 'Keywordss', 'wp-travel' );
+	$trip_code_enable = apply_filters( 'wp_travel_single_archive_trip_code', true, $trip_id );
+	$trip_keyword_enable = apply_filters( 'wp_travel_single_archive_trip_keyword', true, $trip_id );
 	$terms = get_the_terms( $trip_id, 'travel_keywords' );
-	if ( is_array( $terms ) && count( $terms ) > 0 ) :
+	if ( is_array( $terms ) && count( $terms ) > 0 && $trip_keyword_enable == true ) :
 		?>
 		<div class="wp-travel-keywords">
-			<span class="label"><?php esc_html_e( 'Keywords : ', 'wp-travel' ); ?></span>
+			<span class="label"><?php echo esc_html( $keywords ); ?></span>
 			<?php
 			$i = 0;
 			foreach ( $terms as $term ) :
@@ -865,9 +951,8 @@ function wptravel_single_keywords( $trip_id ) {
 		<?php
 	endif;
 	global $wp_travel_itinerary;
-	if ( is_singular( WP_TRAVEL_POST_TYPE ) ) :
-		$strings         = WpTravel_Helpers_Strings::get();
-		$trip_code_label = $strings['trip_code'];
+	if ( is_singular( WP_TRAVEL_POST_TYPE ) && $trip_code_enable == true ) :
+		$trip_code_label = isset( $strings['trip_code'] ) ? $strings['trip_code'] : __( 'Trip codes', 'wp-travel' );
 		?>
 		<div class="wp-travel-trip-code"><span><?php echo esc_html( $trip_code_label ); ?> </span><code><?php echo esc_html( $wp_travel_itinerary->get_trip_code() ); ?></code></div>
 		<?php
@@ -901,8 +986,10 @@ function wptravel_single_location( $trip_id ) {
 	$trip_duration_text   = isset( $strings['trip_duration'] ) ? $strings['trip_duration'] : __( 'Trip duration', 'wp-travel' );
 	$days_text            = isset( $strings['days'] ) ? $strings['days'] : __( 'Day(s)', 'wp-travel' );
 	$nights_text          = isset( $strings['nights'] ) ? $strings['nights'] : __( 'Night(s)', 'wp-travel' );
+	$trip_locations_enable = apply_filters( 'wp_travel_single_archive_page_trip_location', true, $trip_id );
+	$trip_duration_enable = apply_filters( 'wp_travel_single_archive_page_trip_duration', true, $trip_id );
 
-	if ( is_array( $terms ) && count( $terms ) > 0 ) :
+	if ( is_array( $terms ) && count( $terms ) > 0 && $trip_locations_enable == true ) :
 		?>
 		<li class="no-border">
 			<div class="travel-info">
@@ -919,7 +1006,7 @@ function wptravel_single_location( $trip_id ) {
 							<?php
 						endif;
 						?>
-						<span class="wp-travel-locations"><a href="<?php echo esc_url( get_term_link( $term->term_id ) ); ?>"><?php echo esc_html( $term->name ); ?></a></span>
+						<span class="wp-travel-locations"><a href="<?php echo esc_url( get_term_link( $term->term_id ) ); ?>"><?php echo esc_html( $term->name ); ?></a><?php do_action( 'wp_travel_single_after_location_data' ); ?></span>
 						<?php
 						$i++;
 					endforeach;
@@ -928,7 +1015,7 @@ function wptravel_single_location( $trip_id ) {
 			</div>
 		</li>
 	<?php endif; ?>
-	<?php
+	<?php if ( $trip_duration_enable == true ) {
 	if ( $fixed_departure ) :
 		$dates = wptravel_get_fixed_departure_date( $trip_id );
 		if ( $dates ) {
@@ -947,7 +1034,7 @@ function wptravel_single_location( $trip_id ) {
 		?>
 
 	<?php else : ?>
-		<?php $new_trip_duration  = wp_travel_get_trip_durations( $trip_id ); ?>
+		<?php $new_trip_duration = wp_travel_get_trip_durations( $trip_id ); ?>
 		<?php if ( ! empty( $new_trip_duration ) ) : ?>
 			<li class="wp-travel-trip-duration">
 				<div class="travel-info">
@@ -956,7 +1043,7 @@ function wptravel_single_location( $trip_id ) {
 				<div class="travel-info">
 					<span class="value">
 						<?php
-							printf( '%1$s', esc_html( $new_trip_duration) ); // @phpcs:ignore
+							printf( '%1$s', esc_html( $new_trip_duration ) ); // @phpcs:ignore
 						?>
 					</span>
 				</div>
@@ -964,6 +1051,7 @@ function wptravel_single_location( $trip_id ) {
 		<?php endif; ?>
 		<?php
 	endif;
+	}
 }
 
 /**
@@ -1416,26 +1504,22 @@ function wptravel_get_average_rating( $trip_id = null ) {
 	$count = (int) get_comments_number( $trip_id );
 
 	// @since 6.2.0
-	$settings   = wptravel_get_settings();
-
+	$settings = wptravel_get_settings();
 
 	if ( $settings['disable_admin_review'] == 'yes' ) {
-		$get_reviews  = get_comments( array( 'post_id' => $trip_id ) );
+		$get_reviews = get_comments( array( 'post_id' => $trip_id ) );
 
 		$admin_count = 0;
 		foreach ( $get_reviews as $review ) {
 
-			if ( get_user_by('login', $review->comment_author) ) {
-				if ( in_array( get_user_by('login', $review->comment_author)->roles[0], array( 'administrator', 'editor', 'author' )) ) {
+			if ( get_user_by( 'login', $review->comment_author ) ) {
+				if ( in_array( get_user_by( 'login', $review->comment_author )->roles[0], array( 'administrator', 'editor', 'author' ) ) ) {
 					$admin_count = $admin_count + 1;
 				}
-				
 			}
-			
 		}
 		$count = $count - $admin_count;
-	}	
-
+	}
 
 	$average_rating_query = "SELECT SUM(meta_value) FROM $wpdb->commentmeta
 	LEFT JOIN $wpdb->comments ON $wpdb->commentmeta.comment_id = $wpdb->comments.comment_ID
@@ -1444,33 +1528,32 @@ function wptravel_get_average_rating( $trip_id = null ) {
 	AND comment_approved = '1'
 	AND meta_value > 0";
 
-
 	// // No meta data? Do the calculation.
 	// if ( ! metadata_exists( 'post', $trip_id, '_wpt_average_rating' ) ) {
-		if ( $count ) {
-			$ratings = $wpdb->get_var(
-				$wpdb->prepare( $average_rating_query, $trip_id ) // @phpcs:ignore
-			);
-			$average = number_format( $ratings / $count, 2, '.', '' );
-		} else {
-			$average = 0;
-		}
+	if ( $count ) {
+		$ratings = $wpdb->get_var(
+			$wpdb->prepare( $average_rating_query, $trip_id ) // @phpcs:ignore
+		);
+		$average = number_format( $ratings / $count, 2, '.', '' );
+	} else {
+		$average = 0;
+	}
 		update_post_meta( $trip_id, '_wpt_average_rating', $average );
 	// } else {
 
-	// 	$average = get_post_meta( $trip_id, '_wpt_average_rating', true );
+	// $average = get_post_meta( $trip_id, '_wpt_average_rating', true );
 
-	// 	if ( ! $average && $count > 0 ) { // re update average meta if there is number of reviews but no average ratings value.
-	// 		if ( $count ) {
-	// 			$ratings = $wpdb->get_var(
-	// 				$wpdb->prepare( $average_rating_query, $trip_id ) // @phpcs:ignore
-	// 			);
-	// 			$average = number_format( $ratings / $count, 2, '.', '' );
-	// 		} else {
-	// 			$average = 0;
-	// 		}
-	// 		update_post_meta( $trip_id, '_wpt_average_rating', $average );
-	// 	}
+	// if ( ! $average && $count > 0 ) { // re update average meta if there is number of reviews but no average ratings value.
+	// if ( $count ) {
+	// $ratings = $wpdb->get_var(
+	// $wpdb->prepare( $average_rating_query, $trip_id ) // @phpcs:ignore
+	// );
+	// $average = number_format( $ratings / $count, 2, '.', '' );
+	// } else {
+	// $average = 0;
+	// }
+	// update_post_meta( $trip_id, '_wpt_average_rating', $average );
+	// }
 
 	// }
 	return (string) floatval( $average );
@@ -1734,7 +1817,7 @@ function wptravel_booking_message() {
 			history.replaceState({},null,window.location.pathname);
 		</script>
 		<?php if ( 'booking_only' == $booking_option ) { ?>
-			<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo esc_html( apply_filters( 'wp_travel_booked_message', __( "Thank you for booking! We'll reach out to you soon.", 'wp-travel' ) ) ); ?><span><?php echo esc_html( apply_filters( 'wp_travel_booked_message_after_text', ' (Booking Option : Booking Only ).') ); ?></span></p>  
+			<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo esc_html( apply_filters( 'wp_travel_booked_message', __( "Thank you for booking! We'll reach out to you soon.", 'wp-travel' ) ) ); ?><span><?php echo esc_html( apply_filters( 'wp_travel_booked_message_after_text', ' (Booking Option : Booking Only ).' ) ); ?></span></p>  
 			<?php
 		} elseif ( 'booking_with_payment' == $booking_option ) {
 			$payment_gatway = get_post_meta( $booking_id, 'wp_travel_payment_gateway', true );
@@ -1754,11 +1837,11 @@ function wptravel_booking_message() {
 				$payment_status = get_post_meta( $booking_id, 'wp_travel_payment_status', true );
 				if ( 'paid' == $payment_status ) {
 					?>
-						<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo esc_html( apply_filters( 'wp_travel_booked_message', __( "Thank you for booking! We'll reach out to you soon.", 'wp-travel' ) ) ); ?><span><?php echo esc_html( apply_filters( 'wp_travel_booked_message_after_text', ' (Booking Option : Booking with Payment, Payment Methode : PayPal, and Payment Status : Paid.)' ) ) ?></span></p>
+						<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo esc_html( apply_filters( 'wp_travel_booked_message', __( "Thank you for booking! We'll reach out to you soon.", 'wp-travel' ) ) ); ?><span><?php echo esc_html( apply_filters( 'wp_travel_booked_message_after_text', ' (Booking Option : Booking with Payment, Payment Methode : PayPal, and Payment Status : Paid.)' ) ); ?></span></p>
 					<?php
 				} else {
 					?>
-						<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo esc_html( apply_filters( 'wp_travel_booked_message', __( "Thank you for booking! We'll reach out to you soon.", 'wp-travel' ) ) ); ?><span><?php echo esc_html( apply_filters( 'wp_travel_booked_message_after_text', ' (Booking Option : Booking with Payment, Payment Methode : PayPal.)' ) ) ?></span></p>
+						<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo esc_html( apply_filters( 'wp_travel_booked_message', __( "Thank you for booking! We'll reach out to you soon.", 'wp-travel' ) ) ); ?><span><?php echo esc_html( apply_filters( 'wp_travel_booked_message_after_text', ' (Booking Option : Booking with Payment, Payment Methode : PayPal.)' ) ); ?></span></p>
 					<?php
 				}
 			}

@@ -25,7 +25,6 @@ class WpTravel_Helpers_Localize {
 		global $post;
 		$localized_data = array();
 		$settings       = wptravel_get_settings();
-
 		// Getting Locale to fetch Localized calender js.
 		$lang_code            = explode( '-', get_bloginfo( 'language' ) );
 		$locale               = $lang_code[0];
@@ -42,7 +41,11 @@ class WpTravel_Helpers_Localize {
 			$rdp_locale = $rdp_locale_array[0];
 		}
 		$rdp_locale = str_replace( '_', '', $rdp_locale ); // React date picker locale.
-		// Frontend Localized Strings for React block.
+		// user form transfer in react
+		global $wt_cart;
+		$trip_items     = $wt_cart->getItems();
+		$checkoutPage   = get_option( 'wp_travel_wp-travel-checkout_page_id' );
+		$checkoutDetail = get_post( $checkoutPage );
 		if ( self::is_request( 'frontend' ) ) {
 			$_wp_travel                       = array();
 			$_wp_travel['_nonce']             = wp_create_nonce( 'wp_travel_nonce' );
@@ -62,6 +65,22 @@ class WpTravel_Helpers_Localize {
 			$_wp_travel['trip_date_listing']  = $settings['trip_date_listing'];
 			$_wp_travel['strings']            = WpTravel_Helpers_Strings::get();
 			$_wp_travel['itinerary_v2']       = wptravel_use_itinerary_v2_layout();
+			$_wp_travel['add_to_cart_system'] = wp_travel_add_to_cart_system();
+			$_wp_travel['checkout_url']       = $checkoutDetail->guid;
+			$_wp_travel['pax_show_remove'] 	  = apply_filters( 'wp_travel_booking_pax_editable', '' );
+			$_wp_travel['select_you_pax']	  = apply_filters( 'wp_travel_select_you_pax', __( 'Select Your Pax', 'wp-travel' )); 
+			$_wp_travel['partial_enable']     = isset( $settings['partial_payment'] ) ? $settings['partial_payment'] : 'no';
+			$_wp_travel['enable_one_page_booking'] = isset( $settings['enable_one_page_booking'] ) ? $settings['enable_one_page_booking'] : false;
+			$_wp_travel['loader_url']         = plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/images/loader.gif';
+			$_wp_travel['checkout_field']     = array(
+				'form'                       => wptravel_get_checkout_form_fields(),
+				'enable_multiple_travellers' => isset( $settings['enable_multiple_travellers'] ) ? $settings['enable_multiple_travellers'] : 'no',
+				'country'                    => wptravel_get_countries(),
+				'form_key'                   => ! empty( $trip_items ) ? array_key_first( $trip_items ) : 'travelerOne',
+				'my_data'                    => do_action( 'wp_travel_action_before_book_now' ),
+				'bank_detail_form'			 => wptravel_get_bank_deposit_account_details(),
+
+			);
 
 			// Localized varialble for old trips less than WP Travel 4.0. // Need to migrate in _wp_travel.
 			$wp_travel = array(
@@ -87,15 +106,15 @@ class WpTravel_Helpers_Localize {
 				global $wt_cart;
 				if ( WP_Travel::is_page( 'checkout' ) ) {
 					$trip_item = $wt_cart->getitems();
-					$invent = 'no';
+					$invent    = 'no';
 					foreach ( $trip_item as $key => $val ) {
-						$id_trip = $val['trip_id'];
-						$inventorys  = get_post_meta( $id_trip, 'enable_trip_inventory' );
-						if ( $inventorys[0] == 'yes' ) {
+						$id_trip    = $val['trip_id'];
+						$inventorys = get_post_meta( $id_trip, 'enable_trip_inventory' );
+						if ( isset( $inventorys[0] ) && $inventorys[0] == 'yes' ) {
 							$invent = 'yes';
 						}
 					}
-					$wp_travel['items'] = $trip_item;
+					$wp_travel['items']     = $trip_item;
 					$wp_travel['inventory'] = $invent;
 				}
 				$cart_amounts   = $wt_cart->get_total();
@@ -110,22 +129,22 @@ class WpTravel_Helpers_Localize {
 
 			// Add Post specific data for wp_travel and _wp_travel var.
 			if ( $post && WP_Travel::is_page( 'single' ) ) { // There will be no $post for 404, search and other pages.
-				$trip_id    = $post->ID;
-				$map_data   = wptravel_get_map_data( $trip_id ); // Only Google map data.
-				$maps       = array(
+				$trip_id  = $post->ID;
+				$map_data = wptravel_get_map_data( $trip_id ); // Only Google map data.
+				$maps     = array(
 					'google_map' => array(
 						'lat' => $map_data['lat'],
 						'lng' => $map_data['lng'],
 						'loc' => $map_data['loc'],
 					),
 				);
-				$maps       = apply_filters( 'wptravel_maps_data', $maps, $settings ); // @since 4.6.5
-				$trip       = WP_Travel_Helpers_Trips::get_trip( $trip_id );
+				$maps     = apply_filters( 'wptravel_maps_data', $maps, $settings ); // @since 4.6.5
+				$trip     = WP_Travel_Helpers_Trips::get_trip( $trip_id );
 
 				if ( ! is_wp_error( $trip ) && 'WP_TRAVEL_TRIP_INFO' === $trip['code'] ) {
 					// _wp_travel vars.
-					$_wp_travel['maps']               = $maps;
-					$_wp_travel['trip_data']          = $trip['trip'];
+					$_wp_travel['maps']      = $maps;
+					$_wp_travel['trip_data'] = $trip['trip'];
 
 					// wp_travel vars.
 					// Need map data enhancement.
@@ -133,13 +152,13 @@ class WpTravel_Helpers_Localize {
 					$wp_travel['lng'] = ! empty( $map_data['lng'] ) ? ( $map_data['lng'] ) : '';
 					$wp_travel['loc'] = ! empty( $map_data['loc'] ) ? ( $map_data['loc'] ) : '';
 
-					$wp_travel['payment']['price_per']       = wptravel_get_price_per_text( $trip_id, '', true );
+					$wp_travel['payment']['price_per'] = wptravel_get_price_per_text( $trip_id, '', true );
 				}
 			}
 
 			$wp_travel                    = apply_filters( 'wptravel_frontend_data', $wp_travel, $settings );
-			$localized_data['wp_travel']  = $wp_travel;
-			$localized_data['_wp_travel'] = $_wp_travel;
+			$localized_data['wp_travel']  = apply_filters( 'wp_travel_localize_data_wp_travel', $wp_travel );
+			$localized_data['_wp_travel'] = apply_filters( 'wp_travel_localize_data_travel', $_wp_travel );
 		}
 
 		if ( self::is_request( 'admin' ) ) {

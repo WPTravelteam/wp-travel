@@ -1,0 +1,1219 @@
+.wp-travel-checkout-one-page {
+	width: 90%;
+}
+
+#wp-travel-one-page-checkout-enables .components-button {
+	// padding: 5px 50px;
+	box-shadow: none;
+	margin-right: 15px;
+}
+// experimental
+// calender view/ fixed departure off
+.wptravel-single-page-calender-booking {
+	//butttons
+	ul.wp-travel-booking__trip-option-list {
+		button {
+			border: none;
+			width: auto;
+			height: 40px;
+			color: #000;
+			border-radius: 5px;
+			padding: 10px 25px;
+			font-family: "Lato", sans-serif;
+			font-weight: 500;
+			cursor: pointer;
+			transition: all 0.1s ease;
+			position: relative;
+			background: #f7f7f7;
+			outline: none;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		button:hover {
+			text-decoration: none;
+			transform: scale(1.06);
+			transition: width 2s;
+		}
+	}
+
+	// date picker button with calender icon
+	.wp-travel-booking__datepicker-wrapper {
+		//
+		//margin-right to the datepicker
+		.react-datepicker__tab-loop {
+			margin-right: 20px;
+		}
+		//
+		.react-datepicker-popper {
+			// translate and transform datepeaker befor/after icon
+			.react-datepicker__triangle {
+				transform: translate(-5px, 180px) rotate(270deg) !important;
+			}
+		}
+		button.wp-travel-date-picker-btn {
+			height: 40px;
+			color: #000;
+			border-radius: 5px;
+			cursor: pointer;
+			background: #f7f7f7;
+			outline: none;
+			border: 1px solid gray;
+			// calender icon
+		}
+	}
+
+	// listing prices
+	.wp-travel-booking__pricing-wrapper {
+		.wp-travel-booking__pricing-name {
+			// box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
+			// 	0 2px 6px rgba(0, 0, 0, 0.24);
+			transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+			padding: 30px;
+			// background-image: linear-gradient(to bottom, #8585850d, #ffffff);
+			border-radius: 5px;
+			border: none;
+			margin-bottom: 0;
+
+			h4 {
+				font-size: 16px;
+				font-weight: bold;
+				margin-bottom: 14px;
+
+				margin-bottom: 1em;
+			}
+			button {
+				border: 1px solid #999;
+				background-color: #fff;
+				color: #444;
+				display: block;
+				text-align: left;
+				width: 100%;
+				margin-bottom: 1em;
+				font-weight: bold;
+				padding: 0.75em 1em;
+				cursor: pointer;
+				font-size: 14px;
+				border-radius: 5px;
+				outline: 0;
+				border-color: green;
+			}
+			button:hover {
+				border-color: green;
+				outline-color: green;
+			}
+		}
+	}
+
+	// pax selector/ price,person section of calender date view
+	.wp-travel-booking__pricing-wrapper.wptravel-pax-selector {
+		// box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.24);
+		transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+		padding: 0px;
+		border-radius: 5px;
+		border: none;
+		margin-bottom: 0;
+		//
+		.wp-travel-booking__pax-selector-wrapper {
+			margin-top: 30px;
+			padding: 30px;
+			//pax selector h4
+			h4 {
+				font-size: 16px;
+				font-weight: bold;
+				margin-bottom: 14px;
+			}
+
+			//pax selector's pricing categories section
+			.pricing-area {
+				input.wp-trave-pax-selected-frontend-second {
+					border: none;
+				}
+			}
+		}
+
+		// trip extras section of calender date view
+		.wp-travel-booking__trip-extras-wrapper {
+			padding: 30px;
+			h4 {
+				font-size: 16px;
+				font-weight: bold;
+				margin-bottom: 14px;
+			}
+			//trip extras input, button fields
+			.pricing-area {
+				span {
+					border: none;
+				}
+				button {
+				}
+				button:hover {
+					transform: scale(1.06);
+					transition: width 2s;
+				}
+			}
+		}
+	}
+
+	// in case of recurring dates
+	.wptravel-recurring-dates {
+		table {
+			td {
+				button.prev {
+					float: left;
+				}
+				button.show-more,
+				button.next {
+					float: right;
+					margin-right: 10px;
+				}
+			}
+		}
+	}
+}
+//END :  calender view/fixed departure off
+
+.ReactModalPortal {
+	.ReactModal__Overlay {
+		z-index: 9999;
+	}
+}
+
+.ReactModal__Body--open {
+	.ReactModalPortal {
+		position: fixed;
+		top: 0px;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(0, 0, 0, 0.5);
+		z-index: 999;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}
+
+.wptravel-layout-v2.ReactModal__Body--open {
+	// disable fixed departure will casue issue with date picker.
+	.react-datepicker-popper:not(.wptravel-traveller-info-container
+			.react-datepicker-popper) {
+		position: relative !important;
+		transform: unset !important;
+	}
+	// End : disable fixed departure will casue issue with date picker.
+
+	// modal container
+	.ReactModal__Content {
+		position: relative !important;
+		max-width: 1145px;
+		max-height: 85vh;
+		inset: 40px;
+		border: 1px solid rgb(204, 204, 204);
+		overflow: auto;
+		outline: none;
+		top: 50% !important;
+		left: 0% !important;
+		margin: 0 auto;
+		background-color: #ffffff;
+		padding: 20px;
+		// border-radius: 5px;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+		transform: translate(0, -50%);
+		// select your pax h2 title
+		h2 {
+			font-size: 20px;
+			font-weight: bold;
+		}
+		/*************Select Your Pax Section ************/
+		.wptravel-recurring-table {
+			display: table;
+			width: 100%;
+			border-spacing: 0px;
+			// control how the borders of adjacent table cells interact with each other. It specifies whether the borders should be collapsed into a single border or if they should be displayed individually.
+			border-collapse: collapse;
+
+			/*************** Table Head section **************/
+			.thead-table {
+				// all table heading padding
+				th {
+					padding: 10px 20px;
+					border-bottom: solid 1px #0000000d;
+					box-shadow: 0px 0px 1px #b1aaaa;
+				}
+				tr {
+					// box shadow to the heading titles
+					box-shadow: 0px 0px 5px #d1d1d1;
+
+					//individual titles
+					th[data-label="Pricings"] {
+						text-align: left;
+					}
+
+					th[data-label="Person"] {
+						text-align: left;
+					}
+
+					th[data-label="Date"] {
+						text-align: center;
+					}
+				}
+			}
+
+			/*************** Table body section **************/
+			.tbody-table {
+				border-bottom: solid 1px #0000000d;
+				box-shadow: 0px 0px 2px #b1aaaa;
+				span.end-date {
+					display: block;
+				}
+				td {
+					padding: 10px 20px;
+					border-right: 2px solid #00000014;
+				}
+
+				/*************** pricing section **************/
+				td[data-label="Pricings"] {
+					text-align: left;
+					width: 200px;
+					//this is price checkbox container
+					span.components-checkbox-control__input-container {
+						margin-right: 0.5rem;
+
+						svg {
+							display: none;
+						}
+						// adding hover effect on price checkboxes
+						input[type="checkbox"].components-checkbox-control__input {
+							transition: all 0.2s ease-in;
+						}
+						input[type="checkbox"].components-checkbox-control__input:hover {
+							transform: scale(1.06);
+							transition: width 2s;
+						}
+					}
+					label.components-checkbox-control__label {
+						font-size: 18px;
+						font-weight: 600;
+					}
+				}
+
+				/*************** Person section **************/
+				td[data-label="Person"] {
+					text-align: center;
+					/**Opacity of selecting pax**/
+					.css-u2jump.components-disabled {
+						opacity: 0.3;
+					}
+
+					// person category section
+					.wp-travel-booking__pax-selector-wrapper {
+						// margin-bottom: 20px;
+
+						// pax selector heading
+						h4 {
+							display: none;
+						}
+
+						// counter section to increase/decrease person
+						.text-right {
+							.item-price {
+								margin-right: 20px;
+							}
+							.wp-travel-pax-selected-frontend-flex {
+								display: flex;
+								flex-wrap: wrap;
+								align-items: center;
+
+								// '+' and '-' button
+								button {
+									height: 30px;
+									width: 30px;
+									border: 0;
+									border-radius: 5px;
+									transition: all 0.2s ease-in;
+									display: flex;
+									justify-content: center;
+									align-items: center;
+									margin: 0 10px;
+									text-decoration: none;
+								}
+								button:hover {
+									transform: scale(1.06);
+									transition: width 2s;
+								}
+								input.wp-trave-pax-selected-frontend {
+									width: 30px;
+									font-size: 16px;
+									height: 30px;
+									border: 0;
+									background: #fffdfd;
+									border-radius: 5px;
+								}
+							}
+						}
+					}
+
+					// trip extras section
+					.wp-travel-booking__trip-extras-wrapper {
+						text-align: left;
+						border-radius: 5px;
+						box-shadow: 0px 1px 4px 1px rgba(194, 194, 194, 0.6);
+						-webkit-box-shadow: 0px 1px 4px 1px
+							rgba(194, 194, 194, 0.6);
+
+						// right section
+						.text-right {
+							span.item-price {
+								margin-right: 10px;
+							}
+							.pricing-area {
+								// '+' and '-' button
+								.qty-spinner button:nth-child(1) {
+									height: 30px;
+									width: 30px;
+									border: 0;
+									border-radius: 5px;
+									transition: all 0.2s ease-in;
+									margin-right: 10px;
+									display: flex;
+									justify-content: center;
+									align-items: center;
+									text-decoration: none;
+								}
+								button:hover {
+									transform: scale(1.06);
+									transition: width 2s;
+								}
+								.qty-spinner button:nth-child(3) {
+									height: 30px;
+									width: 30px;
+									border: 0;
+									border-radius: 5px;
+									transition: all 0.2s ease-in;
+									margin-left: 10px;
+									display: flex;
+									justify-content: center;
+									align-items: center;
+									text-decoration: none;
+								}
+								span {
+									width: 30px;
+									font-size: 16px;
+									height: 30px;
+									border: 0;
+									background: #fffdfd;
+									border-radius: 5px;
+								}
+
+								// trip extras - + button
+								.qty-spinner {
+									display: flex;
+									justify-content: center;
+									align-items: center;
+									span {
+										display: flex;
+										justify-content: center;
+										align-items: center;
+									}
+								}
+							}
+						}
+
+						// trip extras title
+						h4 {
+							font-size: 16px;
+							padding: 10px;
+							background: #ededed;
+							border-bottom: 1px solid #d5d5d5;
+							font-weight: 600;
+						}
+					}
+
+					ul.wp-travel-booking__trip-option-list {
+						padding: 10px;
+					}
+
+					.wp-travel-booking__trip-option-list li {
+						list-style: none;
+						display: flex;
+						flex-wrap: wrap;
+						justify-content: space-between;
+						align-items: flex-start;
+						margin-bottom: 10px;
+
+						.text-left {
+							flex: 1;
+							margin-right: 0.5em;
+							display: flex;
+							align-items: center;
+							text-decoration: none;
+
+							.info-container {
+								margin-left: 5px;
+							}
+
+							// info icon
+							a.info {
+								display: flex;
+								flex-wrap: wrap;
+
+								// svg height
+								svg {
+									height: 15px;
+									width: 15px;
+								}
+
+								// infobox
+								.infoBox {
+									display: none;
+								}
+							}
+						}
+
+						.text-right {
+							display: flex;
+							flex-wrap: wrap;
+							align-items: center;
+						}
+					}
+				}
+
+				/*************** Date section **************/
+				td[data-label="Date"] {
+					text-align: center;
+					width: 250px;
+					// start and end date bold text
+					.start-date span,
+					.end-date span {
+						font-weight: 600;
+					}
+				}
+			}
+		}
+
+		// button layout
+		.wp-travel-booking__header {
+			// reset button
+			button.wp-travel-reset-btn {
+				background: rgb(96, 9, 240);
+				background: linear-gradient(
+					0deg,
+					rgba(96, 9, 240, 1) 0%,
+					rgba(129, 5, 240, 1) 100%
+				);
+				border: none;
+				width: 130px;
+				height: 40px;
+				color: #000;
+				border-radius: 5px;
+				padding: 10px 25px;
+				font-family: "Lato", sans-serif;
+				font-weight: 500;
+				background: transparent;
+				cursor: pointer;
+				transition: all 0.1s ease;
+				position: relative;
+				// display: inline-block;
+				background: #f7f7f7;
+				outline: none;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.wp-travel-reset-btn:hover {
+				transform: scale(1.06);
+				transition: width 2s;
+			}
+		}
+	}
+}
+
+/*********************new booking bottom section***********************/
+.new-bottom-booking-container {
+	.wp-travel-booking__panel-bottom-new {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: center;
+		padding: 15px;
+		background-color: #fff;
+		border-top: 1px solid #ccc;
+		width: 100%;
+		padding-bottom: 0;
+
+		// left-info i.e pricine and trip-date
+		.left-info {
+			display: inline-flex;
+			align-items: center;
+		}
+		// first paragraph
+		p:first-child {
+			margin-right: 15px;
+		}
+
+		// right-info i.e pricine and trip-date
+		.right-info {
+			display: inline-flex;
+			align-items: baseline;
+			// next button
+			button.wp-travel-book {
+				text-decoration: none;
+				padding: 5px;
+				background: rgb(96, 9, 240);
+				background: linear-gradient(
+					0deg,
+					rgba(96, 9, 240, 1) 0%,
+					rgba(129, 5, 240, 1) 100%
+				);
+				border: none;
+				width: 130px;
+				height: 40px;
+				color: #000;
+				border-radius: 5px;
+				padding: 10px 25px;
+				font-family: "Lato", sans-serif;
+				font-weight: 500;
+				background: transparent;
+				cursor: pointer;
+				transition: all 0.1s ease;
+				position: relative;
+				// display: inline-block;
+				background: #f7f7f7;
+				outline: none;
+				//loader image
+				img.wptravel-single-page-loader-btn {
+					height: 20px;
+					width: 20px;
+					margin-left: 10px;
+				}
+			}
+			button.wp-travel-book:hover {
+				text-decoration: none;
+				transform: scale(1.06);
+				transition: width 2s;
+			}
+		}
+	}
+}
+
+/*********************Traveller, Billing information section***********************/
+.booknow-btn-modal {
+	// required field text
+	p.wp-travel-in-page-error {
+		font-size: 12px;
+		text-align: right;
+		margin-right: 10px;
+		color: red;
+		margin: 10px 0;
+	}
+	span.wp-travel-in-page-required-field {
+		color: #ff0000;
+		padding-left: 5px;
+	}
+	// end required field text
+	h2 {
+		align-items: center;
+		border-bottom: 1px solid #d3c4c466;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: row;
+		height: 76px;
+		justify-content: space-between;
+		// padding: 0 32px;
+		width: 100%;
+		z-index: 10;
+		margin-bottom: 10px;
+	}
+	.wptravel-traveller-info-container,
+	.wptravel-billing-formfield {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 10px;
+		grid-column-gap: 40px;
+		padding: 0;
+		margin: 40px 0;
+		align-items: center;
+		// inner formfields
+		> div {
+			margin-bottom: 5px;
+			// gender radio type layout
+			.wp-travel-new-gender-field {
+				.components-panel__body.is-opened {
+					.components-panel__row {
+						display: flex;
+						width: 100%;
+						label {
+							display: block;
+							width: 100%;
+						}
+						div.wptravel-onpage-radiobtn-handle {
+							display: flex;
+							flex-wrap: wrap;
+							align-items: center;
+						}
+						div.wptravel-single-page-gender-radio-btn {
+							display: inline-flex;
+							align-items: center;
+							label {
+								margin-left: 10px;
+							}
+						}
+						// remove outline of radio when active
+						#wp-travel-gender {
+							outline: none;
+							border: none;
+						}
+						#wp-travel-gender:focus {
+							outline: none;
+							border: none;
+							animation: burnBorder 0s;
+						}
+
+						#wp-travel-gender:active {
+							outline: none;
+						}
+					}
+				}
+			}
+			// container
+			.components-panel__body.is-opened {
+				display: flex;
+				align-items: center;
+				margin-bottom: 10px;
+
+				// billing details input icon and button
+				.wptravel-onpage-radiobtn-handle {
+					display: flex;
+					flex-wrap: wrap;
+					align-items: center;
+					// icon height
+					input{
+						min-height: auto;
+					}
+					.wptravel-single-page-gender-radio-btn{
+						display: flex;
+						align-items: center;
+						gap: 5px;
+					}
+				}
+
+				// date-picker select element width issue
+				.react-datepicker__input-container {
+					display: flex;
+					.wptravel-booking-datepicker {
+						width: 100%;
+					}
+				}
+				// label
+				.wptravel-onpage-checkbox-wrapper {
+					display: flex;
+					flex-wrap: wrap;
+					align-items: center;
+					//
+					.wtravel-onpage-boking-checkbox {
+						display: flex;
+						align-items: center;
+						//
+						.components-base-control__field {
+							display: flex;
+							align-items: center;
+							gap: 5px;
+							margin-bottom: 0;
+
+							span.components-checkbox-control__input-container{
+								line-height: 1;
+							}
+						}
+					}
+				}
+				label {
+					flex: 0 0 140px;
+					font-weight: bold;
+				}
+
+				// input
+				input,
+				select {
+					flex: 1;
+					margin-left: 10px;
+					padding: 5px 0;
+					min-height: 40px;
+					border: 1px solid rgb(204, 204, 204);
+					padding: 0.5rem;
+					border-radius: 0.5rem;
+					width: 100%;
+				}
+				input[type="checkbox"] {
+					width: auto;
+					min-width: 0;
+				}
+				select:focus-visible {
+					border-color: green;
+					outline-color: green;
+				}
+			}
+		}
+	}
+	.wptravel-billing-formfield {
+		label {
+			flex: 0 0 140px;
+			font-weight: bold;
+		}
+
+		// input
+		input,
+		select,
+		textarea {
+			flex: 1;
+			margin-left: 10px;
+			padding: 5px 0;
+			min-height: 40px;
+			border: 1px solid rgb(204, 204, 204);
+			padding: 0.5rem;
+			border-radius: 0.5rem;
+		}
+	}
+
+	.wptravel-onepage-navigation-btn {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: 30px;
+		padding: 0 40px;
+		padding-bottom: 20px;
+		// position: sticky;
+		// bottom: 0;
+		// strip brand logo issue
+		.wp-travel-one-page-booking-buttons {
+			align-items: center;
+			display: flex;
+			flex-direction: row-reverse;
+			justify-content: center;
+			img {
+				height: auto;
+				margin-right: 40px;
+				width: 100px;
+			}
+		}
+		// last button to add to cart -'book now ' button
+		.wp-travel-form-field.button-field {
+			input#wp-travel-book-now {
+				text-decoration: none;
+				padding: 5px;
+				background: rgb(96, 9, 240);
+				background: linear-gradient(
+					0deg,
+					rgb(96, 9, 240) 0%,
+					rgb(129, 5, 240) 100%
+				);
+				border: none;
+				width: 130px;
+				height: 40px;
+				color: #000;
+				border-radius: 5px;
+				padding: 10px 25px;
+				font-family: "Lato", sans-serif;
+				font-weight: 500;
+				background: transparent;
+				cursor: pointer;
+				transition: all 0.1s ease;
+				position: relative;
+				display: inline-block;
+				background: #f7f7f7;
+				outline: none;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			input#wp-travel-book-now:hover {
+				text-decoration: none;
+				transform: scale(1.06);
+				transition: width 2s;
+			}
+			button {
+				border: none;
+				width: auto;
+				height: 40px;
+				color: #000;
+				border-radius: 5px;
+				padding: 10px 25px;
+				font-family: "Lato", sans-serif;
+				font-weight: 500;
+				cursor: pointer;
+				transition: all 0.1s ease;
+				position: relative;
+				background: #f7f7f7;
+				outline: none;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+		}
+	}
+	p.wptravel-onepage-navigation-error {
+		font-size: 12px;
+		text-align: right;
+		margin-right: 10px;
+		color: red;
+		margin-bottom: 20px;
+	}
+
+	/************* booking with payment *************/
+	form#wp-travel-booking {
+		.wptravel-booking-payment-page {
+			background: rgb(255 255 255);
+			box-shadow: 0 0 3px;
+			border-radius: 5px;
+			margin: 30px;
+			//stripe checkout
+			.wptravel-single-page-stripcheckout {
+				padding: 40px 40px 10px 40px;
+				display: flex;
+				justify-content: center;
+				align-items: flex-start;
+				//card label
+				label {
+					font-weight: bold;
+					width: 33%;
+					float: left;
+					min-height: 1px;
+					position: relative;
+					padding: 0 15px 0 0;
+					font-size: 16px;
+				}
+				div#card-element {
+					width: 66%;
+					margin-left: 10px;
+					min-height: 40px;
+					border: 1px solid rgb(204, 204, 204);
+					padding: 0.5rem;
+					border-radius: 0.5rem;
+				}
+			}
+			// bank details tab
+			.wp-travel-one-page-bank-detail {
+				padding: 40px 40px 10px 40px;
+				h4 {
+					font-size: 16px;
+					font-weight: 600;
+					margin-bottom: 10px;
+				}
+				table {
+					width: 100%;
+				}
+				th {
+					background-color: #ddd;
+					border: 1px solid #ddd;
+					padding: 10px;
+					text-align: left;
+					font-weight: bold;
+				}
+
+				td {
+					border: 1px solid #ddd;
+					padding: 10px;
+					/* background-color: #f2f2f2; */
+				}
+
+				tbody tr:nth-child(even) {
+					background-color: #f2f2f2;
+				}
+			}
+			//booking options such as partial payment, full payment
+			.wptravel-singlepage-booking-options {
+				width: 100%;
+				label {
+					font-weight: bold;
+					width: 33%;
+					float: left;
+					min-height: 1px;
+					position: relative;
+					padding: 0 15px 0 0;
+					font-size: 16px;
+				}
+				select#wp-travel-payment-mode {
+					width: 66%;
+					margin-left: 10px;
+					min-height: 40px;
+					border: 1px solid rgb(204, 204, 204);
+					padding: 0.5rem;
+					border-radius: 0.5rem;
+				}
+			}
+
+			// Large tablets and desktops
+			// responsive
+
+			@media (max-width: 576px) {
+				.wptravel-singlepage-booking-options {
+					flex-wrap: wrap;
+					label {
+						width: 100%;
+						display: block;
+					}
+					select#wp-travel-option {
+						width: 100%;
+						display: block;
+					}
+				}
+			}
+
+			// trip total price section
+			.wptravel-one-page-payment-amount {
+				label {
+					font-weight: bold;
+				}
+				.components-panel__row {
+					display: inline-flex;
+					gap: 10px;
+				}
+			}
+			.wptravel-onepage-payment-total-trip-price {
+				label {
+					font-weight: bold;
+				}
+				//
+				.components-panel__row {
+					display: inline-flex;
+					gap: 10px;
+				}
+			}
+			.wptravel-onepage-payment-gateway {
+				.components-panel__body.is-opened {
+					padding: 10px 40px 10px 40px;
+					.components-panel__row {
+						display: flex;
+						justify-content: center;
+						align-items: flex-start;
+						width: 100%;
+						border-radius: 5px;
+
+						div {
+							input[type="radio"]#wp-travel-payment-gateway {
+								margin-right: 10px;
+							}
+						}
+
+						// payment's label font-sizes
+						> label {
+							font-weight: bold;
+							width: 33%;
+							float: left;
+							min-height: 1px;
+							position: relative;
+							padding: 0 15px 0 0;
+							font-size: 16px;
+						}
+						div {
+							width: 66%;
+							margin-left: 10px;
+							min-height: 40px;
+							border: 1px solid rgb(204, 204, 204);
+							padding: 0.5rem;
+							border-radius: 0.5rem;
+							overflow-y: scroll;
+						}
+					}
+				}
+			}
+			.components-panel__body.is-opened {
+				padding: 40px 40px 10px 40px;
+				// max-height: 150px;
+				// overflow-y: scroll;
+				.components-panel__row.wptravel-singlepage-booking-options {
+					// left side aligning the slect
+					display: flex;
+					justify-content: flex-start;
+					align-items: center;
+					label {
+						font-weight: bold;
+						width: 33%;
+						float: left;
+						min-height: 1px;
+						position: relative;
+						padding: 0 15px 0 0;
+						font-size: 16px;
+					}
+					select#wp-travel-option {
+						width: 66%;
+						margin-left: 10px;
+						min-height: 40px;
+						border: 1px solid rgb(204, 204, 204);
+						padding: 0.5rem;
+						border-radius: 0.5rem;
+					}
+				}
+			}
+		}
+	}
+
+	// billing button
+	button.components-button {
+		padding: 5px;
+		background: rgb(96, 9, 240);
+		background: linear-gradient(
+			0deg,
+			rgba(96, 9, 240, 1) 0%,
+			rgba(129, 5, 240, 1) 100%
+		);
+		border: none;
+		width: auto;
+		height: 40px;
+		color: #000;
+		border-radius: 5px;
+		padding: 10px 25px;
+		font-family: "Lato", sans-serif;
+		font-weight: 500;
+		background: transparent;
+		cursor: pointer;
+		transition: all 0.1s ease;
+		position: relative;
+		display: inline-block;
+		background: #f7f7f7;
+		outline: none;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	button.components-button:hover {
+		transform: scale(1.06);
+		transition: width 2s;
+	}
+
+	// global button
+	button.wp-travel-book {
+		text-decoration: none;
+		padding: 5px;
+		background: rgb(96, 9, 240);
+		background: linear-gradient(
+			0deg,
+			rgba(96, 9, 240, 1) 0%,
+			rgba(129, 5, 240, 1) 100%
+		);
+		border: none;
+		width: 130px;
+		height: 40px;
+		color: #000;
+		border-radius: 5px;
+		padding: 10px 25px;
+		font-family: "Lato", sans-serif;
+		font-weight: 500;
+		background: transparent;
+		cursor: pointer;
+		transition: all 0.1s ease;
+		position: relative;
+		display: inline-block;
+		background: #f7f7f7;
+		outline: none;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	button.wp-travel-book:hover {
+		text-decoration: none;
+		transform: scale(1.06);
+		transition: width 2s;
+	}
+
+	button.wp-travel-book:disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+		transition: width 0s;
+		transform: scale(1);
+	}
+	// global input fields
+
+	input:hover,
+	textarea:hover {
+		border-color: green;
+	}
+
+	input:focus,
+	textarea:focus {
+		outline: 1px solid green;
+		border: 1px solid green;
+		animation: burnBorder 0.5s;
+	}
+
+	input:active,
+	textarea:focus {
+		outline: 1px solid green;
+	}
+
+	@keyframes burnBorder {
+		0% {
+			box-shadow: 0 0 0px 1px rgba(0, 128, 0, 7);
+		}
+		100% {
+			box-shadow: 0 0 0 0 rgba(0, 128, 0, 0);
+		}
+	}
+	// initial book-now button to align right side
+	.wptrave-singlepage-initial-nextbtn {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+	}
+
+	/*********************billing form fields section***********************/
+	.wptravel-billing-formfield {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 10px;
+		grid-column-gap: 40px;
+
+		padding: 0 40px;
+		// select,input,radio fielss
+		.components-panel__body.is-opened {
+			display: flex;
+			align-items: center;
+			margin-bottom: 10px;
+			// date-picker select element width issue
+			.react-datepicker__input-container {
+				display: flex;
+				.wptravel-booking-datepicker {
+					width: 100%;
+				}
+			}
+			// label
+			label {
+				flex: 0 0 140px;
+				font-weight: bold;
+			}
+
+			// input
+			input,
+			select {
+				flex: 1;
+				margin-left: 10px;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 980px) {
+// 
+}
+@media only screen and (max-width: 767px) {
+	#wp-travel-country {
+		width: 80px;
+	}
+	.wptravel-layout-v2.ReactModal__Body--open .booknow-btn-modal {
+		padding: 20px;
+		//traveller info field
+		.wptravel-traveller-info-container,
+		.wptravel-billing-formfield {
+			grid-template-columns: repeat(1, 1fr);
+		}
+	}
+}
+div.wptravel-onpage-priceshow {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+span.onpage-travel-price-display-label {
+	margin-right:  15px;
+}
+@import "./responsive.scss";

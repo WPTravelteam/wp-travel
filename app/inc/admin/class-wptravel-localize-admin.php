@@ -3,7 +3,6 @@
  * Admin Localize file.
  *
  * @package WP_Travel
- *
  */
 
 /**
@@ -40,15 +39,15 @@ class WpTravel_Localize_Admin {
 			$theme_lists = array(
 				array(
 					'slug'       => 'travel-log',
-					'theme_page' => 'https://wensolutions.com/themes/travel-log/',
+					'theme_page' => 'https://wensolutions.com/themes/travel-log-pro/',
 				),
 				array(
 					'slug'       => 'travel-buzz',
-					'theme_page' => 'https://wensolutions.com/themes/travel-buzz/',
+					'theme_page' => 'https://wensolutions.com/themes/travel-buzz-pro/',
 				),
 				array(
 					'slug'       => 'travel-joy',
-					'theme_page' => 'https://wensolutions.com/themes/travel-joy/',
+					'theme_page' => 'https://wensolutions.com/themes/travel-joy-pro/ ',
 				),
 				array(
 					'slug'       => 'travel-one',
@@ -64,7 +63,7 @@ class WpTravel_Localize_Admin {
 				),
 				array(
 					'slug'       => 'travel-escape',
-					'theme_page' => 'https://wensolutions.com/themes/travel-escape/',
+					'theme_page' => 'https://wensolutions.com/themes/travel-escape-pro/',
 				),
 				array(
 					'slug'       => 'bloguide',
@@ -154,7 +153,7 @@ class WpTravel_Localize_Admin {
 					$theme_data['download_link']  = $get_theme_data->download_link;
 					$theme_data['is_installed']   = $is_installed;
 					$theme_data['is_active']      = $is_active;
-					
+
 					array_push( $theme_datas, $theme_data );
 				}
 			} else {
@@ -165,32 +164,36 @@ class WpTravel_Localize_Admin {
 		function get_pro_version() {
 			$all_plugins = get_plugins();
 			$pro_version = $all_plugins['wp-travel-pro/wp-travel-pro.php']['Version'];
-			return (float)$pro_version;
+			return (float) $pro_version;
 		}
-		
-		require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
+		require_once ABSPATH . 'wp-admin/includes/plugin.php';
+
 		$translation_array = array(
-			'_nonce'             => wp_create_nonce( 'wp_travel_nonce' ),
-			'admin_url'          => admin_url(),
-			'plugin_url'         => plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ),
-			'is_pro_enable'      => class_exists( 'WP_Travel_Pro' ) ? 'yes' : 'no',
-			'pro_version'		 => class_exists( 'WP_Travel_Pro') ? get_pro_version() : null,
-			'plugin_name'        => 'WP Travel',
-			'is_blocks_enable'	 => class_exists( 'WPTravel_Blocks' ) ? true : false,
-			'dev_mode'           => wptravel_dev_mode(),
-			'theme_datas'        => $theme_datas,
-			'currency'           => $settings['currency'],
-			'currency_position'  => $settings['currency_position'],
-			'currency_symbol'    => wptravel_get_currency_symbol(),
-			'number_of_decimals' => $settings['number_of_decimals'] ? $settings['number_of_decimals'] : 0,
-			'decimal_separator'  => $settings['decimal_separator'] ? $settings['decimal_separator'] : '.',
-			'thousand_separator' => $settings['thousand_separator'] ? $settings['thousand_separator'] : ',',
-			'activated_plugins'			=> get_option( 'active_plugins' ),
-			'wpml_migratio_dicription'	=> __( 'Use to migrate WP Travel compatible with WPML. After enable please save setting and then click migration button.', 'wp-travel' ),
-			'wpml_label'				=> __( 'WPML Migrations', 'wp-travel' ),
-			'wpml_btn_label'			=> __( 'Migrate', 'wp-travel' ),
-			'diable_wpml_text'			=> __( 'Please save setting before migrate.', 'wp-travel' ),
-			'wp_settings'			 => WP_Travel_Helpers_Settings::get_settings(),
+			'_nonce'                        => wp_create_nonce( 'wp_travel_nonce' ),
+			'admin_url'                     => admin_url(),
+			'site_url'                      => site_url(),
+			'plugin_url'                    => plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ),
+			'is_pro_enable'                 => class_exists( 'WP_Travel_Pro' ) ? 'yes' : 'no',
+			'is_conditional_payment_enable' => class_exists( 'WP_Travel_Conditional_Payment_Core' ) ? 'yes' : 'no',
+			'is_conditional_payment_active' => is_plugin_active( 'wp-travel-conditional-payment/wp-travel-conditional-payment.php' ) ? 'yes' : 'no',
+			'pro_version'                   => class_exists( 'WP_Travel_Pro' ) ? get_pro_version() : null,
+			'plugin_name'                   => 'WP Travel',
+			'is_blocks_enable'              => class_exists( 'WPTravel_Blocks' ) ? true : false,
+			'dev_mode'                      => wptravel_dev_mode(),
+			'theme_datas'                   => $theme_datas,
+			'currency'                      => $settings['currency'],
+			'currency_position'             => $settings['currency_position'],
+			'currency_symbol'               => wptravel_get_currency_symbol(),
+			'number_of_decimals'            => $settings['number_of_decimals'] ? $settings['number_of_decimals'] : 0,
+			'decimal_separator'             => $settings['decimal_separator'] ? $settings['decimal_separator'] : '.',
+			'thousand_separator'            => $settings['thousand_separator'] ? $settings['thousand_separator'] : ',',
+			'activated_plugins'             => get_option( 'active_plugins' ),
+			'wpml_migratio_dicription'      => __( 'Use to migrate WP Travel compatible with WPML. After enable please save setting and then click migration button.', 'wp-travel' ),
+			'wpml_label'                    => __( 'WPML Migrations', 'wp-travel' ),
+			'wpml_btn_label'                => __( 'Migrate', 'wp-travel' ),
+			'diable_wpml_text'              => __( 'Please save setting before migrate.', 'wp-travel' ),
+			'wp_settings'                   => WP_Travel_Helpers_Settings::get_settings(),
 		);
 
 		// trip edit page.
@@ -214,6 +217,7 @@ class WpTravel_Localize_Admin {
 		if ( get_current_screen()->base == 'dashboard_page_wp-travel-setup-page' ) {
 			wp_localize_script( 'wp-travel-setup-page-js', '_wp_travel', $translation_array );  // temp fixes to use
 		}
+
 	}
 }
 

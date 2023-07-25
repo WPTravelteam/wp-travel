@@ -1,5 +1,85 @@
 const changeLog = [
 	{
+		version: "7.0.0",
+		log: <p>
+				Release Date: 17th July 2023
+				<br/><br/>
+				Enhancement:
+				<br/>
+				* Added hook `[wp_travel_related_trip_filter_single_archive_page]` to show the related trip according to your taxonomy choice.
+				<br/>
+				* Made the pax selector editable so that you can enter a number.
+				<br/>
+				* Added On-Page booking option.
+				<br/>
+				* Compatibility for Standard PayPal and  Bank deposit for On-page booking.
+				<br/>
+				* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version7-0-0-july-2023-update-release-notes/ ).
+				<br/>
+			</p>
+	},
+	{
+		version: "6.9.1",
+		log: <p>
+				Release Date: 29th June 2023
+				<br/><br/>
+				Enhancement:
+				<br/>
+				* Some information and broken links fixed in the description section of plugin page in wordpress.org
+				<br/>
+			</p>
+	},
+	{
+		version: "6.9.0",
+		log: <p>
+				Release Date: 27th June 2023
+				<br/><br/>
+				Fixes: 
+				<br/>
+				* Fixed backend setting page string translation.
+				<br/><br/>
+				Enhancement:
+				<br/>
+				* Added hook `[wp_travel_single_archive_trip_types]` to modify and remove trip types on single trip page.
+				<br/>
+				* Added hook `[wp_travel_single_archive_activities]` to modify and remove activities on single trip page.
+				<br/>
+				* Added hook `[wp_travel_single_archive_group_size]` to modify and remove group size on single trip page.
+				<br/>
+				* Added hook `[wp_travel_single_archive_review]` to modify and remove review on single trip page.
+				<br/>
+				* Added hook `[wp_travel_single_archive_page_trip_location]` to modify and remove trip location on single trip page.
+				<br/>
+				* Added hook `[wp_travel_single_archive_page_trip_duration]` to modify and remove trip duration on single trip page.
+				<br/>
+				* Added hook `[wp_travel_single_archive_trip_code]` to modify and remove trip code on single trip page.
+				<br/>
+				* Added hook `[wp_travel_single_archive_trip_keyword]` to modify and remove trip keyword on single trip page.
+				<br/>
+				* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-9-0-release-note/ ).
+				<br/>
+			</p>
+	},
+	{
+		version: "6.8.0",
+		log: <p>
+				Release Date: 12th June 2023
+				<br/><br/>
+				Fixes: 
+				<br/>
+				* Fixed gender translation issue in the Chinese language.
+				<br/>
+				* Fixed rating schema.
+				<br/><br/>
+				Enhancement:
+				<br/>
+				* Added option to Import/Export WP Travel settings options.
+				<br/>
+				* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-8-0-release-note/ ).
+				<br/>
+			</p>
+	},
+	{
 		version: "6.7.0",
 		log: <p>
 				Release Date: 15th May 2023

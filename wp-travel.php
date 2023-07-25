@@ -3,12 +3,12 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 6.7.0
+ * Version: 7.0.1
  * Author: WP Travel
  * Author URI: http://wptravel.io/
  * Requires at least: 6.0.0
  * Requires PHP: 7.4
- * Tested up to: 6.2
+ * Tested up to: 6.2.2
  *
  * Text Domain: wp-travel
  * Domain Path: /i18n/languages/
@@ -38,7 +38,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '6.7.0';
+		public $version = '7.0.0';
 
 		/**
 		 * WP Travel API version.
@@ -100,6 +100,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			self::define( 'WP_TRAVEL_API_VERSION', $api_version );
 			self::define( 'WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT', array( 10 ) ); // In percent.
 			self::define( 'WP_TRAVEL_SLIP_UPLOAD_DIR', 'wp-travel-slip' ); // In percent.
+			
 		}
 
 		/**
@@ -168,6 +169,11 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			if ( isset( $settings['wpml_migrations'] ) && $settings['wpml_migrations'] ) {
 				add_action( 'init', array( 'WpTravel_Helpers_Trips', 'wp_travel_trip_date_price' ) );
 			}
+			/**
+			 * Admin Notice for install wp travel slicewp affiliate addon
+ 			 */
+			  add_action( 'admin_notices', array( $this, 'wp_travel_slicewp_affiliate_install_notice' ) );			
+			
 		}
 
 		/**
@@ -406,6 +412,11 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			require WP_TRAVEL_ABSPATH . '/core/ajax/trips.php';
 			require WP_TRAVEL_ABSPATH . '/core/ajax/view-mode.php';
 			require WP_TRAVEL_ABSPATH . '/core/ajax/payments.php';
+
+			//include import and export setting file
+			if( isset( wptravel_get_settings()['enable_session'] ) && wptravel_get_settings()['enable_session'] == 'yes' ){
+                require WP_TRAVEL_ABSPATH . '/inc/import-export/import-export.php';
+            }
 
 			/**
 			 * App Part.
@@ -824,6 +835,14 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			// @since 4.4.4
 			do_action( 'wp_travel_reject_checkout_cache_plugin_action', $support_plugins ); // phpcs:ignore
 			do_action( 'wptravel_reject_checkout_cache_plugin_action', $support_plugins );
+		}
+		/**
+		 * Admin notice for request installation of wp-travel-slicewp-affiliate plugin
+		 */
+		public function wp_travel_slicewp_affiliate_install_notice() {
+			if ( is_plugin_active( 'slicewp/index.php' ) && ! is_plugin_active( 'wp-travel-slicewp-affiliate-addon/wp-travel-slicewp-affiliate-addon.php' ) ) {
+				echo '<div class="notice notice-warning is-dismissible"><h4>Check our <a href="https://wptravel.io/wp-travel-slicewp-affiliate-plugin/" style="text-decoration:none; color:red;" target="_blank" >WP Travel SliceWP Affiliate</a> plugin to know about new affiliate program feature and increase your booking.</h4></div>';
+			}
 		}
 	}
 endif;

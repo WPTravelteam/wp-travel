@@ -1,0 +1,51 @@
+
+// close button
+.wptravel-single-page-close-btn {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    background-color: transparent;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+    color: rgb(255, 0, 0);
+}
+
+.wptravel-single-page-close-btn:hover {
+    text-decoration: none;
+    // transition: 2s;
+    color: green;
+    transform: scale(1.2);
+    transition: width 2s;
+    transition: height 2s;
+}
+@media only screen and (max-width: 767px) {
+
+    .booknow-btn-modal form#wp-travel-booking .wptravel-booking-payment-page .wp-travel-one-page-bank-detail table{
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+@media only screen and (max-width: 576px) {
+    .booknow-btn-modal form#wp-travel-booking .wptravel-booking-payment-page .components-panel__body.is-opened .components-panel__row.wptravel-singlepage-booking-options label{
+        width: 100%;
+    }
+    .booknow-btn-modal form#wp-travel-booking .wptravel-booking-payment-page .components-panel__body.is-opened .components-panel__row.wptravel-singlepage-booking-options select#wp-travel-option{
+        margin-left: 0;
+        margin-top: 10px;
+    }
+    .wptravel-single-page-calender-booking .wp-travel-booking__pricing-wrapper .wp-travel-booking__pricing-name{
+        padding: 30px 10px;
+    }
+    .booknow-btn-modal form#wp-travel-booking .wptravel-booking-payment-page .components-panel__body.is-opened{
+        padding: 10px 10px 0px 10px;
+    }
+    .wptravel-single-page-calender-booking{
+        .wp-travel-booking__header{
+            flex-direction: column-reverse;
+            align-items: end;
+            gap: 10px;
+        }
+    }
+}

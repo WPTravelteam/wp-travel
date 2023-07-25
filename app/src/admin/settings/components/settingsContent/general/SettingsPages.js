@@ -15,6 +15,7 @@ export default () => {
         // cart_page_id,
         checkout_page_id,
         dashboard_page_id,
+        enable_block,
         options } = allData;
 
     const { updateSettings } = dispatch('WPTravel/Admin');

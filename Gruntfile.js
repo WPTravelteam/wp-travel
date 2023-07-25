@@ -37,7 +37,8 @@ module.exports = function (grunt) {
 		'!app/build/*.map',
 		'app/inc/**',
 		'app/assets/**',
-		'core/**'
+		'core/**',
+		'blocks/**'
 	];
 
 	/**
@@ -440,7 +441,7 @@ module.exports = function (grunt) {
 		'checktextdomain'
 	]);
 
-	grunt.registerTask('textdomain', [
+	grunt.registerTask('textdomains', [
 		'addtextdomain',
 		'makepot'
 	]);

@@ -20,10 +20,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 global $wp_travel_itinerary;
+global $wt_cart;
+$trip_items     = $wt_cart->getItems();
+// echo '<pre>';
+print_r( count( $trip_items ) );
 ?>
 
 <?php
 do_action( 'wp_travel_before_single_itinerary', get_the_ID() );
+$trip_id = get_the_ID();
+$strings = WpTravel_Helpers_Strings::get();
+$string = isset( $strings['single_archive'] ) ? $strings['single_archive'] : [];
+$offers = isset( $string['offer'] ) ? $string['offer'] : apply_filters( 'wp_travel_singel_page_offer', 'Offer' );
+$view_gallerys = isset( $string['view_gallery'] ) ? $string['view_gallery'] : apply_filters( 'wp_travel_singel_page_view_gallery', 'View Gallery' );
 if ( post_password_required() ) {
 	echo get_the_password_form();
 	return;
@@ -36,18 +45,18 @@ do_action( 'wp_travel_before_content_start' );
 	<div class="content entry-content">
 		<div class="wp-travel trip-headline-wrapper clearfix <?php echo esc_attr( $wrapper_class ); ?>">
 			<div class="wp-travel-feature-slide-content featured-side-image left-plot">
-				<div class="banner-image-wrapper" style="background-image: url(<?php echo esc_url( wptravel_get_post_thumbnail_url( get_the_ID(), 'large' ) ); ?>)">
-						<?php echo wp_kses( wptravel_get_post_thumbnail( get_the_ID() ), wptravel_allowed_html( array( 'img' ) ) ); ?>
+				<div class="banner-image-wrapper" style="background-image: url(<?php echo apply_filters( 'wp_travel_trip_single_page_thumbnail_background', esc_url( wptravel_get_post_thumbnail_url( get_the_ID(), 'large' ) ), get_the_ID() ); ?>)">
+						<?php echo apply_filters( 'wp_travel_trip_single_page_thumbnail', wp_kses( wptravel_get_post_thumbnail( get_the_ID() ), wptravel_allowed_html( array( 'img' ) ) ), get_the_ID() ); ?>
 				</div>
 				<?php if ( WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => get_the_ID() ) ) ) : ?>
 
 					<div class="wp-travel-offer">
-						<span><?php esc_html_e( 'Offer', 'wp-travel' ); ?></span>
+						<span><?php esc_html_e( $offers, 'wp-travel' ); ?></span>
 					</div>
 					<?php endif; ?>
 						<?php if ( $wp_travel_itinerary->has_multiple_images() ) : ?>
 					<div class="wp-travel-view-gallery">
-						<a class="top-view-gallery" href=""><?php esc_html_e( 'View Gallery', 'wp-travel' ); ?></a>
+						<a class="top-view-gallery" href=""><?php esc_html_e( $view_gallerys, 'wp-travel' ); ?></a>
 					</div>
 				<?php endif; ?>
 			</div>
@@ -56,9 +65,12 @@ do_action( 'wp_travel_before_content_start' );
 					<?php $show_title = apply_filters( 'wp_travel_show_single_page_title', true ); ?>
 					<?php if ( $show_title ) : ?>
 						<header class="entry-header">
+							<?php 
+								if ( wp_travel_add_to_cart_system() == true && ! empty( $trip_items ) && count( $trip_items ) ) {
+							?><a class="wp-travel-add-to-cart-item-anchor-tag" href="<?php echo wptravel_get_checkout_url(); ?>" target="_blank" rel="noopener noreferrer">Cart <span class="wp-travel-add-to-cart-cart_item_show" ><?php echo count( $trip_items ); ?></span> </a> <?php } ?>
 							<?php do_action( 'wp_travel_before_single_title', get_the_ID() ); ?>
 							<?php wptravel_do_deprecated_action( 'wp_tarvel_before_single_title', array( get_the_ID() ), '2.0.4', 'wp_travel_before_single_title' ); ?>
-							<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+							<?php apply_filters( 'wp_travel_single_archive_trip_tilte', the_title( '<h1 class="entry-title">', '</h1>' ),  $trip_id ); ?>
 						</header>
 					<?php endif; ?>					
 					<?php wptravel_do_deprecated_action( 'wp_travel_after_single_title', array( get_the_ID() ), '2.0.4', 'wp_travel_single_trip_after_title' );  // @since 1.0.4 and deprecated in 2.0.4 ?>

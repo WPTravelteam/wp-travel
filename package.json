@@ -1,6 +1,6 @@
 {
   "name": "wp-travel",
-  "version": "6.7.0",
+  "version": "7.0.1",
   "description": "Travel plugin for WordPress",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "build:pre_release": "npx wp-scripts build && npx wp-scripts build --mode development && npx grunt pre_release",
     "lint:php": "wp-scripts env lint-php",
     "postinstall": "husky install",
-    "makepot": "wp i18n make-pot . i18n/languages/wp-travel-test.pot --exclude=node_modules,vendor,src,wordpress,build --skip-js",
+    "makepots": "wp i18n make-pot . i18n/languages/wp-travel-test.pot --exclude=node_modules,vendor,src,wordpress,build,bundle --skip-js",
     "bundle": "wp-scripts build && npx grunt build_svn"
   },
   "repository": {
@@ -54,13 +54,20 @@
     "grunt-wp-i18n": "0.5.4",
     "grunt-writefile": "^0.1.4",
     "grunt-zip": "^0.18.1",
+    "he": "^1.2.0",
+    "html-react-parser": "^4.0.0",
     "husky": "^7.0.2",
+    "jquery": "^3.7.0",
+    "jquery-ui-bundle": "^1.12.1-migrate",
     "lint-staged": "^11.1.2",
     "mini-css-extract-plugin": "^2.3.0",
     "node-native-zip": "^1.1.0",
     "node-sass": "^6.0.1",
     "postcss-loader": "^6.1.1",
+    "react-accessible-accordion": "^5.0.0",
+    "react-modal": "^3.16.1",
     "react-step-progress-bar": "^1.0.3",
+    "react-time-picker": "^6.2.0",
     "sass": "^1.39.2",
     "sass-loader": "^12.1.0",
     "state-pool": "^0.9.0",

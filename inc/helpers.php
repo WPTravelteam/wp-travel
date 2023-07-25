@@ -163,10 +163,14 @@ function wptravel_settings_default_fields() {
 
 		// @since 6.2.0 - PWA
 		'enable_pwa'                    		=> 'no',
+		'enableasdasd_pwa'                    		=> 'no',
 		'pwa_app_name'                    		=> __( 'WP Travel', 'wp-travel' ),
 		'pwa_app_short_name'                    => __( 'WPTVL', 'wp-travel' ),
 		'pwa_app_start_url'                    	=> home_url(),
-		'pwa_app_logo'                    		=>  plugin_dir_url( __FILE__ ) . 'assets/images/logo1.png',
+		'pwa_app_logo'                    		=>  plugin_dir_url( __FILE__ ) . 'assets/images/logo1.png',		
+
+		'enable_session'                    	=> 'no',
+	
 	);
 
 	$user_since = get_option( 'wp_travel_user_since' );
@@ -896,7 +900,7 @@ function wp_travel_get_trip_durations( $trip_id ) {
 		$old_day = $trip_duration_days > 0  ? $trip_duration_days . ' ' .  $days : '';
 		$trip_duration = ! empty( $old_night ) || ! empty( $old_day ) ? $old_day . ' ' . $old_night : $duration_na;
 	}
-	return $trip_duration;
+	return apply_filters( 'wp_travel_trip_duration_formated_text', $trip_duration, $get_Duration, $trip_duration_nights, $trip_duration_days, $trip_id );
 }
 /**
  * Get Payment Status List.
@@ -1036,6 +1040,7 @@ function wptravel_get_frontend_tabs( $show_in_menu_query = false, $frontend_hide
 	$trip_id = $post->ID;
 
 	$settings                  = wptravel_get_settings();
+	$enable_one_page_booking = isset( $settings['enable_one_page_booking'] ) ? $settings['enable_one_page_booking'] : false;
 	$wp_travel_use_global_tabs = get_post_meta( $trip_id, 'wp_travel_use_global_tabs', true );
 	if ( 'yes' === $wp_travel_use_global_tabs ) {
 		$custom_tab_enabled = apply_filters( 'wp_travel_is_custom_tabs_support_enabled', false );
@@ -1044,7 +1049,7 @@ function wptravel_get_frontend_tabs( $show_in_menu_query = false, $frontend_hide
 		$enable_custom_itinerary_tabs = apply_filters( 'wp_travel_custom_itinerary_tabs', false );
 		$wp_travel_tabs               = wptravel_get_admin_trip_tabs( $trip_id, $enable_custom_itinerary_tabs, $frontend_hide_content );
 	}
-
+	$hook_for_double_enable = apply_filters( 'wp_travel_enable_double_booking_button', true );
 	// Adding Content to the tabs.
 	$return_tabs = array();
 
@@ -1067,6 +1072,10 @@ function wptravel_get_frontend_tabs( $show_in_menu_query = false, $frontend_hide
 				if ( 'custom-booking' === $pricing_type && 'custom-link' === $booking_type && $custom_link ) {
 					$show_in_menu = 'no';
 				}
+				if ( ( $enable_one_page_booking == true || $enable_one_page_booking == 1 ) && $hook_for_double_enable == true ) {
+					$show_in_menu = 'no';
+				}
+
 			}
 
 			if ( ! $frontend_hide_content ) {  // this var is passed to check value whether current tab show in frontend or not. so content is not required
@@ -1095,6 +1104,7 @@ function wptravel_get_frontend_tabs( $show_in_menu_query = false, $frontend_hide
 		}
 		$return_tabs = $new_tabs;
 	}
+	// echo '<pre>'; print_r( $return_tabs ); die;
 	return $return_tabs = apply_filters( 'wp_travel_itinerary_tabs', $return_tabs );
 }
 
@@ -2990,6 +3000,13 @@ function wptravel_view_payment_details_table( $booking_id ) {
 	if ( ! $booking_id ) {
 		return;
 	}
+	$strings = WpTravel_Helpers_Strings::get();	
+	$payment_price_detail = isset( $payment_price_detail['payment_price_detail'] ) ? $payment_price_detail['payment_price_detail'] : [];
+	$date_txt 			= isset( $payment_price_detail['date'] ) ? $payment_price_detail['date'] : apply_filters( 'wp_invc_date', 'Date' );
+	$payment_id_txt 	= isset( $payment_price_detail['payment_id'] ) ? $payment_price_detail['payment_id'] : apply_filters( 'wp_invc_payment_id', 'Payment ID / Txn ID' );
+	$payment_method_txt = isset( $payment_price_detail['payment_method'] ) ? $payment_price_detail['payment_method'] : apply_filters( 'wp_invc_payment_method', 'Payment Method' );
+	$payment_amount_txt = isset( $payment_price_detail['payment_amount'] ) ? $payment_price_detail['payment_amount'] : apply_filters( 'wp_invc_payment_amount', 'Payment Amount' );
+	$payment_detail_txt 	= isset( $payment_price_detail['payment_detail'] ) ? $payment_price_detail['payment_detail'] : apply_filters( 'wp_invc_payment_details', 'Payment Details' );
 
 	$payment_data = wptravel_payment_data( $booking_id );
 	$status_list  = wptravel_get_payment_status();
@@ -3007,13 +3024,13 @@ function wptravel_view_payment_details_table( $booking_id ) {
 			<?php
 		}
 		?>
-		<h3><?php esc_html_e( 'Payment Details', 'wp-travel' ); ?></h3>
+		<h3><?php esc_html_e( $payment_detail_txt, 'wp-travel' ); ?></h3>
 		<table class="my-order-payment-details">
 			<tr>
-				<th><?php esc_html_e( 'Date', 'wp-travel' ); ?></th>
-				<th><?php esc_html_e( 'Payment ID / Txn ID', 'wp-travel' ); ?></th>
-				<th><?php esc_html_e( 'Payment Method', 'wp-travel' ); ?></th>
-				<th><?php esc_html_e( 'Payment Amount', 'wp-travel' ); ?></th>
+				<th><?php esc_html_e( $date_txt, 'wp-travel' ); ?></th>
+				<th><?php esc_html_e( $payment_id_txt, 'wp-travel' ); ?></th>
+				<th><?php esc_html_e( $payment_method_txt, 'wp-travel' ); ?></th>
+				<th><?php esc_html_e( $payment_amount_txt, 'wp-travel' ); ?></th>
 			</tr>
 			<?php
 			foreach ( $payment_data as $payment_args ) {
@@ -4449,3 +4466,4 @@ function wptravel_nocache_headers() {
 	WP_Travel_Helpers_Cache::set_nocache_constants();
 	nocache_headers();
 }
+

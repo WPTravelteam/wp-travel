@@ -154,11 +154,7 @@
 .wp-travel-trip-settings .wp-travel-block-tabs .components-tab-panel__tab-content {
   flex: 1;
   background-color: #fff;
-<<<<<<< HEAD
-  border-radius: 15px;
-=======
   border: 1px solid #e0e0e0;
->>>>>>> wensanchay
 }
 .wp-travel-trip-settings .wp-travel-block-tabs .components-tab-panel__tab-content .components-panel__body {
   border: 1px solid #e2e4e7;
@@ -288,10 +284,7 @@ td .components-base-control {
 
 .wp-travel-ui.wp-travel-ui-card {
   border: 1px solid #e0e0e0;
-<<<<<<< HEAD
-=======
   padding: 16px;
->>>>>>> wensanchay
   margin-bottom: 15px;
   padding-top: 7px;
   padding-bottom: 0 !important;

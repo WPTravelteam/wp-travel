@@ -117,6 +117,31 @@ const PaxSelector = ( props ) => {
 		updateBookingData({ paxCounts: { ...paxCounts, [id]: count } })
 	}
 
+	const handlePaxChangeInput = (id, datas ) => {
+		const values = datas.target.value;
+		let  count =  values != '' && parseInt( values ) < 0 ? 0 : values;
+		let _inventory = inventory.find(i => i.date === moment(selectedDate).format('YYYY-MM-DD[T]HH:mm')); // selectedDate : date along with time.
+		let maxPax = _inventory && _inventory.pax_available;
+		if ( ! maxPax ) {
+			maxPax = pricing && pricing.max_pax ? pricing.max_pax : 1;
+		}
+
+		if ( ! maxPax ) {
+			maxPax = pricing && pricing.max_pax ? pricing.max_pax : 1;
+		}
+
+		if (maxPax >= 1) {
+			// let _totalPax = _.size(paxCounts) > 0 && Object.values(paxCounts).reduce((acc, curr) => acc + curr) || 0
+			if ( values > parseInt(maxPax)) {
+				updateBookingData({ paxCounts: { ...paxCounts, [id]: 0 } })
+				return;
+			} else {
+				datas.target.parentElement.querySelector('.error') && datas.target.parentElement.querySelector('.error').remove()
+			}
+		}
+		updateBookingData({ paxCounts: { ...paxCounts, [id]: count != 0 && count >= 1 ? parseInt( count ) : count } })
+	} 
+
 	return <div className="wp-travel-booking__pax-selector-wrapper">
 		<h4>{__i18n.bookings.booking_tab_pax_selector}</h4>
 		<ul className="wp-travel-booking__trip-option-list">
@@ -137,7 +162,7 @@ const PaxSelector = ( props ) => {
 						<div className="text-left">
 							<strong>
 								{`${c.term_info.title}`} &nbsp;
-								{<span className="wp_travel_pax_info">({`${minPax}`}/{maxPax})</span>}
+								{<span className="wp_travel_pax_info">{ _wp_travel.pax_show_remove == '' ? `(${minPax}/${maxPax})` : _wp_travel.pax_show_remove }</span>}
 							</strong>
 							{( ( c.has_group_price && c.group_prices.length > 0 ) || pricing && 'undefined' != typeof pricing.has_group_price && pricing.has_group_price && pricing.group_prices.length > 0 ) && <span className="tooltip group-discount-button">
 								<span>{__i18n.bookings.group_discount_tooltip}</span>
@@ -175,7 +200,12 @@ const PaxSelector = ( props ) => {
 							<div className="pricing-area">
 								<div className="qty-spinner">
 									<button onClick={handlePaxChange(c.id, -1)}>-</button>
-									<span>{typeof paxCounts[c.id] == 'undefined' ? parseInt(c.default_pax) : paxCounts[c.id]}</span>
+									{/* <span>{typeof paxCounts[c.id] == 'undefined' ? parseInt(c.default_pax) : paxCounts[c.id]}</span> */}
+									<input  className='wp-trave-pax-selected-frontend-second' 
+										value={typeof paxCounts[c.id] == 'undefined' ? parseInt(c.default_pax) : paxCounts[c.id]} 
+										onChange={ ( essdfdsf ) => {
+											handlePaxChangeInput( c.id, essdfdsf )
+									}} />
 									<button onClick={handlePaxChange(c.id, 1)}>+</button>
 								</div>
 							</div>

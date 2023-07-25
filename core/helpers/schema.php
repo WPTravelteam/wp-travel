@@ -119,6 +119,7 @@ class WpTravel_Helpers_Schema {
 		if ( ! $review_count ) {
 			return;
 		}
+		$brand_name = apply_filters( 'wp_travel_schema_brand', get_bloginfo(), $trip_id );
 		$schema = array(
 			'@context'    => 'https://schema.org',
 			'@type'       => 'Product', // Fixed.
@@ -126,15 +127,53 @@ class WpTravel_Helpers_Schema {
 			'sku'         => wptravel_get_trip_code( $trip_id ),
 			'description' => wp_strip_all_tags( $trip['trip_overview'] ),
 			'image'       => wptravel_get_post_thumbnail_url( $trip_id ),
+			'brand'       => array(
+				'@type' => 'Brand',
+				'name'  => $brand_name,
+			),
 		);
-
+		$get_rating = wptravel_get_average_rating( $trip_id );
+		$get_rating = apply_filters( 'wp_travel_schema_ratting_value', $get_rating, $trip_id );
+		$calculate_rating = $get_rating * 20;
+		$calculate_rating = apply_filters( 'wp_travel_calculated_rating', $calculate_rating, $trip_id );
+		$rount_rating = apply_filters( 'wp_travel_round_rating', round( $calculate_rating ), $trip_id );
+		$final_rating = apply_filters( 'wp_travel_schema_final_rating', $rount_rating < 20 ? 20 : $rount_rating, $trip_id );
 		// Rating Data.
-		$schema['aggregateRating'] = array(
+		$schema['aggregateRating']        = array(
 			'@type'       => 'AggregateRating', // Fixed.
 			'bestRating'  => 100,
-			'ratingValue' => wptravel_get_average_rating( $trip_id ) * 20,
-			'reviewCount' => wptravel_get_rating_count(),
+			'ratingValue' => $final_rating,
+			'reviewCount' => $review_count,
 		);
+		/**
+		 * added affers in schema
+		 * @since 6.8.0
+		 */
+		$args                             = array( 'trip_id' => $trip_id );
+		$args_regular                     = $args;
+		$args_regular['is_regular_price'] = true;
+		$trip_price                       = WP_Travel_Helpers_Pricings::get_price( $args );
+		$regular_price                    = WP_Travel_Helpers_Pricings::get_price( $args_regular );
+		$enable_sale                      = WP_Travel_Helpers_Trips::is_sale_enabled(
+			array(
+				'trip_id'                => $trip_id,
+				'from_price_sale_enable' => true,
+			)
+		);
+		$settings = wptravel_get_settings();
+		$currency = isset( $settings['currency'] ) ? $settings['currency'] : 'USD';
+		$schema['offers'] = array(
+			'@type'         => 'Offer',
+			'price'         => $enable_sale ? $trip_price : $regular_price,
+			'priceCurrency' => $currency,
+			'availability'  => 'https://schema.org/InStock',
+		);
+
+		$schema['identifier']	= [
+			"@type"		=> "PropertyValue",
+			"name"		=> $brand_name,
+			"value"		=> $trip_id,
+		];
 
 		/**
 		 * Trip Review schema structure.

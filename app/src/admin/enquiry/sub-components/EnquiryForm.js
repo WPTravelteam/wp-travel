@@ -5,7 +5,7 @@ import { dispatch } from '@wordpress/data';
 const EnquiryForm = ( { allData } ) => {
  const { wp_travel_form_field, wp_travel_form_field_data } = allData;
  const { updateEnquiry } = dispatch('WPTravel/Enquiry');
- console.log(allData)
+//  console.log(allData)
  return (
    <div>
      {wp_travel_form_field.map( (res , index ) => {

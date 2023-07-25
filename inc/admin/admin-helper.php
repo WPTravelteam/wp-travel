@@ -33,78 +33,78 @@ function wptravel_marketplace_page() {
 			'name'       => __( 'Travel Log Pro', 'wp-travel' ),
 			'type'       => 'premium',
 			'img_url'    => 'https://i0.wp.com/themes.svn.wordpress.org/travel-log/1.4.3/screenshot.png?w=572&strip=all',
-			'demo_url'   => 'http://demo.wensolutions.com/travel-log-pro/',
-			'detail_url' => 'https://wensolutions.com/travel-log-pro/',
+			'demo_url'   => 'https://wpdemo.wensolutions.com/travel-log-pro/',
+			'detail_url' => 'https://wensolutions.com/themes/travel-log-pro/',
 		),
 		'travel-log'         => array(
 			'name'       => __( 'Travel Log', 'wp-travel' ),
 			'type'       => 'free',
 			'img_url'    => 'https://i0.wp.com/themes.svn.wordpress.org/travel-log/1.4.3/screenshot.png?w=572&strip=all',
-			'demo_url'   => 'http://demo.wensolutions.com/travel-log-pro/',
-			'detail_url' => 'https://wensolutions.com/travel-log/',
+			'demo_url'   => 'https://wpdemo.wensolutions.com/travel-log-pro/',
+			'detail_url' => 'https://wensolutions.com/themes/travel-log-pro/',
 		),
 		'travel-buzz-pro'     => array(
 			'name'       => __( 'Travel Buzz Pro', 'wp-travel' ),
 			'type'       => 'premium',
 			'img_url'    => 'https://i0.wp.com/themes.svn.wordpress.org/travel-buzz/2.0/screenshot.png?w=572&strip=all',
-			'demo_url'   => 'http://demo.wensolutions.com/travel-buzz/',
+			'demo_url'   => 'https://wpdemo.wensolutions.com/travel-buzz-pro/',
 			'detail_url' => 'https://wensolutions.com/themes/travel-buzz-pro/',
 		),
 		'travel-buzz'         => array(
 			'name'       => __( 'Travel Buzz', 'wp-travel' ),
 			'type'       => 'free',
 			'img_url'    => 'https://i0.wp.com/themes.svn.wordpress.org/travel-buzz/2.0/screenshot.png?w=572&strip=all',
-			'demo_url'   => 'https://demo.wensolutions.com/travel-buzz/',
-			'detail_url' => 'https://wensolutions.com/travel-buzz/',
+			'demo_url'   => 'https://wpdemo.wensolutions.com/travel-buzz-pro/',
+			'detail_url' => 'https://wensolutions.com/themes/travel-buzz-pro/',
 		),
 		'travel-joy-pro'     => array(
 			'name'       => __( 'Travel Joy Pro', 'wp-travel' ),
 			'type'       => 'premium',
 			'img_url'    => 'https://i0.wp.com/themes.svn.wordpress.org/travel-joy/1.1.2/screenshot.png?w=572&strip=all',
-			'demo_url'   => 'http://demo.wensolutions.com/travel-joy-pro/',
-			'detail_url' => 'https://wensolutions.com/travel-joy-pro/',
+			'demo_url'   => 'https://wpdemo.wensolutions.com/travel-joy-pro/',
+			'detail_url' => 'https://wensolutions.com/themes/travel-joy-pro/',
 		),
 		'travel-joy'         => array(
 			'name'       => __( 'Travel Joy', 'wp-travel' ),
 			'type'       => 'free',
 			'img_url'    => 'https://i0.wp.com/themes.svn.wordpress.org/travel-joy/1.1.2/screenshot.png?w=572&strip=all',
-			'demo_url'   => 'https://demo.wensolutions.com/travel-joy-pro/',
-			'detail_url' => 'https://wensolutions.com/travel-joy/',
+			'demo_url'   => 'https://wpdemo.wensolutions.com/travel-joy-pro/',
+			'detail_url' => 'https://wensolutions.com/themes/travel-joy-pro/',
 		),
 		'travel-one'         => array(
 			'name'       => __( 'Travel One', 'wp-travel' ),
 			'type'       => 'free',
 			'img_url'    => 'https://i0.wp.com/themes.svn.wordpress.org/travel-one/1.0.5/screenshot.png?w=572&strip=all',
-			'demo_url'   => 'https://demo.wensolutions.com/travel-one/',
-			'detail_url' => 'https://wensolutions.com/travel-one/',
+			'demo_url'   => 'https://wpdemo.wensolutions.com/travel-one/',
+			'detail_url' => 'https://wensolutions.com/themes/travel-one/',
 		),
 		'travelstore'         => array(
 			'name'       => __( 'Travelstore', 'wp-travel' ),
 			'type'       => 'free',
 			'img_url'    => 'https://i0.wp.com/themes.svn.wordpress.org/travelstore/1.0.5/screenshot.png?w=572&strip=all',
-			'demo_url'   => 'https://demo.wensolutions.com/travelstore/',
-			'detail_url' => 'https://wensolutions.com/travelstore/',
+			'demo_url'   => 'https://wpdemo.wensolutions.com/travelstore/',
+			'detail_url' => 'https://wensolutions.com/themes/travelstore/',
 		),
 		'travel-ocean'         => array(
 			'name'       => __( 'Travel Ocean', 'wp-travel' ),
 			'type'       => 'free',
 			'img_url'    => 'https://i0.wp.com/themes.svn.wordpress.org/travel-ocean/1.0.5/screenshot.png?w=572&strip=all',
-			'demo_url'   => 'https://demo.wensolutions.com/travel-ocean/',
-			'detail_url' => 'https://wensolutions.com/travel-ocean/',
+			'demo_url'   => 'https://wpdemo.wensolutions.com/travel-ocean/',
+			'detail_url' => 'https://wensolutions.com/themes/travel-ocean/',
 		),
 		'travel-escape-pro'         => array(
 			'name'       => __( 'Travel Escape Pro', 'wp-travel' ),
 			'type'       => 'premium',
 			'img_url'    => 'https://i0.wp.com/themes.svn.wordpress.org/travel-escape/1.0.6/screenshot.png?w=572&strip=all',
-			'demo_url'   => 'https://demo.wensolutions.com/travel-escape-pro/',
-			'detail_url' => 'https://wensolutions.com/travel-escape-pro/',
+			'demo_url'   => 'https://wpdemo.wensolutions.com/travel-escape-pro/',
+			'detail_url' => ' https://wensolutions.com/themes/travel-escape-pro/',
 		),
 		'travel-escape'         => array(
 			'name'       => __( 'Travel Escape', 'wp-travel' ),
 			'type'       => 'free',
 			'img_url'    => 'https://i0.wp.com/themes.svn.wordpress.org/travel-escape/1.0.6/screenshot.png?w=572&strip=all',
-			'demo_url'   => 'https://demo.wensolutions.com/travel-escape-pro/',
-			'detail_url' => 'https://wensolutions.com/travel-escape/',
+			'demo_url'   => 'https://wpdemo.wensolutions.com/travel-escape-pro/',
+			'detail_url' => 'https://wensolutions.com/themes/travel-escape-pro/',
 		),
 		'bloguide-pro'         => array(
 			'name'       => __( 'Bloguide Pro', 'wp-travel' ),
@@ -349,7 +349,7 @@ function wptravel_marketplace_page() {
 						</circle>
 					</svg>
 					<div style="text-align: center; margin-top: 10px;">
-						<?php echo __( 'Installing Theme...' ) ?>
+						<?php echo __( 'Installing Theme...', 'wp-travel' ) ?>
 					</div>
 				</div>
 				<div id="wptravel-market-content">

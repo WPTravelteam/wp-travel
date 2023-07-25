@@ -170,7 +170,7 @@ class WP_Travel_Helpers_Settings {
 		$settings_options['is_multisite']     = is_multisite();
 		$settings_options['default_settings'] = wptravel_settings_default_fields(); // default settings values. [this will help to display only available values rather than saved values.]
 		$settings_options['saved_settings']   = get_option( 'wp_travel_settings', array() ); // default settings values.
-
+		$settings['enable_one_page_booking'] = isset( $settings['enable_one_page_booking'] ) ? $settings['enable_one_page_booking'] : false;
 		$settings         = apply_filters( 'wp_travel_settings_values', $settings ); // main settings value filter.
 		$settings_options = apply_filters( 'wp_travel_settings_options', $settings_options, $settings ); // additional values like dropdown options etc.
 		// Asign Additional option values.
@@ -370,6 +370,7 @@ class WP_Travel_Helpers_Settings {
 		if ( isset( $settings_data['wpml_migrations'] ) ) {
 			$settings['wpml_migrations'] = $settings_data['wpml_migrations'];
 		}
+		$settings['enable_one_page_booking'] = isset( $settings_data['enable_one_page_booking'] ) ? $settings_data['enable_one_page_booking'] : false;
 		// unset( $settings['modules'] );
 		update_option( 'wp_travel_settings', $settings );
 		/**

@@ -4,7 +4,7 @@ function wptravel_get_countries() {
 
 	$countries = array(
 		'AF' => __( 'Afghanistan', 'wp-travel' ),
-		'AX' => __( '&#197;land Islands', 'wp-travel' ),
+		'AX' => __( 'land Islands', 'wp-travel' ),
 		'AL' => __( 'Albania', 'wp-travel' ),
 		'DZ' => __( 'Algeria', 'wp-travel' ),
 		'AS' => __( 'American Samoa', 'wp-travel' ),

@@ -109,7 +109,8 @@ const PaxSelector = ( props ) => {
 		} else {
 			pricing = allPricings[selectedPricingId];
 		}
-		let count = paxCounts[id] + value < 0 ? 0 : paxCounts[id] + value
+		let count = parseInt ( paxCounts[id] ) + value <= 0 ? 0 : parseInt ( paxCounts[id] ) + value
+
 		let _inventory = inventory.find(i => i.date === moment(selectedDate).format('YYYY-MM-DD[T]HH:mm')); // selectedDate : date along with time.
 		let maxPax = _inventory && _inventory.pax_available;
 		if ( ! maxPax ) {
@@ -119,6 +120,7 @@ const PaxSelector = ( props ) => {
 		if (maxPax >= 1) {
 
 			let _totalPax = _.size(paxCounts) > 0 && Object.values(paxCounts).reduce((acc, curr) => acc + curr) || 0
+
 			if (_totalPax + value > parseInt(maxPax)) {
 				if (e.target.parentElement.querySelector('.error'))
 					return
@@ -134,8 +136,35 @@ const PaxSelector = ( props ) => {
 				e.target.parentElement.querySelector('.error') && e.target.parentElement.querySelector('.error').remove()
 			}
 		}
-
 		updateBookingData({ paxCounts: { ...paxCounts, [id]: count } })
+	}
+
+	const handlePaxChangeInput = (id, datas ) => {
+		const values = datas.target.value;
+		let pricing    = [];
+		// // Pricing Not Selected or ( not recurring date && for not selected rows ) or ( recurring date but not selected rows )
+		if ( ( pricings.length > 0  && ! selectedPricingId ) || ( ! recurrindDate && ! selectedDateIds.includes( date.id ) ) || ( recurrindDate && sd !== rd ) ) {
+			pricing = allPricings[firstIndex];
+		} else {
+			pricing = allPricings[selectedPricingId];
+		}
+		let  count =  values != '' && parseInt( values ) < 0 ? 0 : values;
+		let _inventory = inventory.find(i => i.date === moment(selectedDate).format('YYYY-MM-DD[T]HH:mm')); // selectedDate : date along with time.
+		let maxPax = _inventory && _inventory.pax_available;
+		if ( ! maxPax ) {
+			maxPax = pricing && pricing.max_pax ? pricing.max_pax : 1;
+		}
+
+		if (maxPax >= 1) {
+			// let _totalPax = _.size(paxCounts) > 0 && Object.values(paxCounts).reduce((acc, curr) => acc + curr) || 0
+			if ( values > parseInt(maxPax)) {
+				updateBookingData({ paxCounts: { ...paxCounts, [id]: 0 } })
+				return;
+			} else {
+				datas.target.parentElement.querySelector('.error') && datas.target.parentElement.querySelector('.error').remove()
+			}
+		}
+		updateBookingData({ paxCounts: { ...paxCounts, [id]: count != 0 && count >= 1 ? parseInt( count ) : count } })
 	}
 
 	return <div className="wp-travel-booking__pax-selector-wrapper">
@@ -169,7 +198,7 @@ const PaxSelector = ( props ) => {
 						<div className="text-left">
 							<strong>
 								{`${c.term_info.title}`} &nbsp;
-								{<span className="wp_travel_pax_info">({`${minPax}`}/{maxPax})</span>}
+								{<span className="wp_travel_pax_info">{ _wp_travel.pax_show_remove == '' ? `(${minPax}/${maxPax})` : _wp_travel.pax_show_remove }</span>}
 							</strong>
 							{( 
 								( 
@@ -212,10 +241,13 @@ const PaxSelector = ( props ) => {
 						<div className="text-right">
 							<span className="item-price">{c.is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat( GetConvertedPrice( c.regular_price ) ) }}></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat( price ) }}></span>/{price_per_label}</span>
 							<div className="pricing-area">
-								<div className="qty-spinner">
+								<div className="qty-spinner wp-travel-pax-selected-frontend-flex">
 									<button onClick={handlePaxChange(c.id, -1)}>-</button>
-									<span>{selectedPax}</span>
-									<button onClick={handlePaxChange(c.id, 1)}>+</button>
+									<input  className='wp-trave-pax-selected-frontend' value={selectedPax} onChange={ ( essdfdsf ) => {
+										handlePaxChangeInput( c.id, essdfdsf )
+										console.log( 'thsidf', essdfdsf )
+									}} />
+									<button className='wp-booking-pax-selected-wp' onClick={handlePaxChange(c.id, 1)}>+</button>
 								</div>
 							</div>
 						</div>
