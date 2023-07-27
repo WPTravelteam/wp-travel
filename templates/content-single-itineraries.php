@@ -23,7 +23,7 @@ global $wp_travel_itinerary;
 global $wt_cart;
 $trip_items     = $wt_cart->getItems();
 // echo '<pre>';
-print_r( count( $trip_items ) );
+// print_r( count( $trip_items ) );
 ?>
 
 <?php
