@@ -17,7 +17,10 @@
 get_header( 'itinerary' ); ?>
 <?php 
 do_action( 'wp_travel_before_main_content' ); 
+
+
 ?>
+
 <?php
 while ( have_posts() ) :
 	the_post();
