@@ -46,6 +46,7 @@ class WpTravel_Helpers_Localize {
 		$trip_items     = $wt_cart->getItems();
 		$checkoutPage   = get_option( 'wp_travel_wp-travel-checkout_page_id' );
 		$checkoutDetail = get_post( $checkoutPage );
+		// echo '<pre>'; print_r( $settings );die;
 		if ( self::is_request( 'frontend' ) ) {
 			$_wp_travel                       = array();
 			$_wp_travel['_nonce']             = wp_create_nonce( 'wp_travel_nonce' );

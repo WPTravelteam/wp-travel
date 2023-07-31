@@ -1,6 +1,6 @@
 import { _n, __} from '@wordpress/i18n'
 export default ( { coupon_data, currency_symbol, booking_option, payment_mode, partial_enable } ) => {
-    const { cart_total, discount, total, tax, total_partial } = coupon_data;
+    const { cart_total, discount, total, tax, total_partial } = coupon_amount;
     const payable_price = typeof total != 'undefined' && total || '0';
     const discount_get  = typeof discount != 'undefined' && discount || '0';
     const cart_payable  = typeof cart_total != 'undefined' && cart_total || '0';

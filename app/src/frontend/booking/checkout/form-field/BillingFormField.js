@@ -20,11 +20,12 @@ export default ( ) => {
     const [errorFound, setErrorFound] = useState('')
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     const { updateStore } = dispatch( bookingStoreName );
-    const { billing_form, error_list, checkoutDetails, price_list, currency_symbol } = bookingData;
+    const { billing_form, error_list, checkoutDetails, price_list, currency_symbol, cart_amount } = bookingData;
     const { billing } = checkoutDetails;
     const billingData = typeof billing != 'undefined' && billing || {};
     const fieldKey  = typeof billing_form != 'undefined' && Object.keys( billing_form ) || [];
-    const { trip_price }  = typeof price_list != 'undefined' && price_list || ''
+    // const { trip_price }  = typeof price_list != 'undefined' && price_list || ''
+    const trip_price = typeof cart_amount != 'undefined' && typeof cart_amount.cart_total != 'undefined' && cart_amount.cart_total || 0
     useEffect( () => {
         const requiredField = {};
         if ( fieldKey.length > 0 ) {
