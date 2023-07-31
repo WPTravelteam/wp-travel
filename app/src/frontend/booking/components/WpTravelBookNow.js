@@ -185,7 +185,7 @@ const WpTravelBookNow = ( props ) => {
                         
                         <div className="right-info" >
                             <p>{__i18n.bookings.booking_tab_cart_total}<strong dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCartTotal(true)) }}></strong></p>
-                            <button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">{typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? 'Add to Cart' : __i18n.bookings.booking_tab_booking_btn_label}</button>
+                            <button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">{typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? 'Added Cart' : __i18n.bookings.booking_tab_booking_btn_label}</button>
                         </div>
                     </div>
                 }

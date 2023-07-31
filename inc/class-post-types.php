@@ -73,10 +73,6 @@ class WP_Travel_Post_Types {
 			'show_in_rest'       => true,
 		);
 
-		if( class_exists( 'WP_Travel_Blocks' ) || class_exists( 'WpTravelElementorExtended\Main' ) ){
-			$args['supports'][] = 'editor';
-		}
-
 		/**
 		 * Register a itineraries post type.
 		 *

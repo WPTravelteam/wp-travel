@@ -341,7 +341,7 @@ function wptravel_get_block_template_part( $slug, $name = '' ){
 	$template  = '';
 	$file_name = ( $name ) ? "{$slug}-{$name}.php" : "{$slug}.php";
 	if ( $name ) {
-		$template = wptravel_get_for_block_template( $file_name );
+		$template = wptravel_get_template( $file_name );
 	}
 	if ( $template ) {
 		load_template( $template, false );

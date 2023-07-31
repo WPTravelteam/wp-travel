@@ -20,7 +20,7 @@ export default ( ) => {
     const [errorFound, setErrorFound] = useState('')
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     const { updateStore } = dispatch( bookingStoreName );
-    const { billing_form, error_list, checkoutDetails, price_list, currency_symbol, cart_amount } = bookingData;
+    const { billing_form, error_list, checkoutDetails, price_list, currency_symbol,  cart_amount  } = bookingData;
     const { billing } = checkoutDetails;
     const billingData = typeof billing != 'undefined' && billing || {};
     const fieldKey  = typeof billing_form != 'undefined' && Object.keys( billing_form ) || [];

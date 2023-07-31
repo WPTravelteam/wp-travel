@@ -108,53 +108,21 @@
 	border-radius: 0.5rem;
 }
 
-.wp-travel-single-trip-add-to-cart {
-	display: flex;
-	justify-content: flex-end;
-	margin-bottom: 25px;
-    padding: 0 25px;
+.wp-travel-add-to-cart-item-anchor-tag {
+	background-color: #f0f0f0;
+	border: solid 1px #f3e6e6;
+	color: black;
+	padding: 10px 30px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 5px;
+	cursor: pointer;
+	display: block;
+}
 
-	.wp-travel-add-to-cart-item-anchor {
-		.wp-travel-single-trip-cart-button {
-			background: #b5b3b3;
-			border: none;
-			padding: 10px;
-			border-radius: 50%;
-			color: white;
-
-			.wp-travel-add-to-cart-cart_item_show {
-				position: relative;
-
-				i.fa.fa-shopping-cart {
-					font-size: 18px;
-					vertical-align: middle;
-				}
-	
-				.wp-travel-cart-items-number {
-					position: absolute;
-					top: -15px;
-					right: -15px;
-					background: #656565;
-					width: 20px;
-					height: 20px;
-					display: inline-flex;
-					line-height: 1;
-					color: white;
-					border-radius: 50%;
-					justify-content: center;
-					align-items: center;
-					font-weight: 600;
-					font-size: 12px;
-					letter-spacing: normal;
-				}
-			}
-		}
-	}
-
-	.wp-travel-add-to-cart-item-anchor-tag {
-		padding: 10px 30px;
-		display: inline-block;
-		border-radius: 5px;
-		cursor: pointer;
-	}
+.wp-travel-add-to-cart-item-anchor-tag:hover {
+	// background-color: #000;
+	// color: #fff;
 }
