@@ -15,9 +15,10 @@ import { objectSum, wpTravelFormat, wpTravelTimeout, GetConvertedPrice } from '.
 const WpTravelBookNow = ( props ) => {
     // Component Props.
 	const { tripData, bookingData, updateBookingData } = props;
-
+	// console.log( 'sdtripData', tripData )
     // Trip Data.
     const {
+		title,
         dates,
         pricings,
     } = tripData;
@@ -150,6 +151,7 @@ const WpTravelBookNow = ( props ) => {
 			}).then(res => {
 
 				if ( applyFilters( 'wptravel_redirect_to_checkout', true ) && true === res.success && 'WP_TRAVEL_ADDED_TO_CART' === res.data.code) {
+					typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true && alert( title + ' has been added to cart' )
 					location.href = typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? window.location.href :  wp_travel.checkoutUrl; // [only checkout page url]
 					// location.href = window.location.href;
 				}
