@@ -45,6 +45,8 @@ class WP_Travel_Setup_Page {
 			)
 		);
 
+
+
 		register_rest_route(
 			'wp-travel/v1',
 			'/trip-import',
