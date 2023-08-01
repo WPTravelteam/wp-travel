@@ -2,7 +2,7 @@ import { useSelect, dispatch } from '@wordpress/data';
 const bookingStoreName = 'WPTravelFrontend/BookingData';
 import { PanelBody, PanelRow } from '@wordpress/components'
 
-export default ( { travelerData, trvOne = 'travelerOne' } ) => {
+export default ( { travelerData, trvOne = 'travelerOne', partials = 'no' } ) => {
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     const { updateStore } = dispatch( bookingStoreName );
     const { label, type, name, id, options } = travelerData
@@ -10,8 +10,9 @@ export default ( { travelerData, trvOne = 'travelerOne' } ) => {
     const { checkoutDetails, error_list, requiredField } = bookingData
     const thisRequired = typeof requiredField[name] != 'undefined' && requiredField[name] || false;
     const travelerDataList = typeof checkoutDetails != 'undefined' && typeof checkoutDetails[trvOne] != 'undefined' && checkoutDetails[trvOne] || {};
-    const travelerValue = typeof travelerDataList[name] != 'undefined' && travelerDataList[name] || "booking_only";
+    const travelerValue = typeof travelerDataList[name] != 'undefined' && travelerDataList[name] || ( partials == 'yes' && "full" || "booking_only" );
     const optionKey = typeof options != undefined && Object.keys( options ) || []
+
     if ( typeof travelerDataList[name] == undefined ) {
         const newData = {...travelerDataList, [name] : "booking_only" };
         const checkoutNewData = {...checkoutDetails, [trvOne] : newData }

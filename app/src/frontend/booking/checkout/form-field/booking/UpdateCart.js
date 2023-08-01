@@ -5,6 +5,7 @@ import apiFetch from '@wordpress/api-fetch';
 
 export default () => {
     const [ cartOpen, setCartOpen ]     = useState( false );
+    const [loaders, setLoaders ]  = useState( false )
     const [ cartError, setCartError ]  = useState('')
     const [ updatePriceData, setUpdatePriceData ]  = useState({})
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
@@ -76,6 +77,7 @@ export default () => {
     }
 
     const updateYouCart = () => {
+        setLoaders( true );
         const _nonce = typeof _wp_travel._nonce != 'undefined' && _wp_travel._nonce || '';
         const extraDatas  = Object.keys( tripExtras );
         const extraValues = Object.values( tripExtras );
@@ -111,13 +113,22 @@ export default () => {
                         } )
                     }
                     updateStore( {...bookingData, price_list : priceList, paxSize : size, cart_amount : total })
+                    alert( "Cart updated successfully.")
+                    setLoaders( false )
+                    setCartOpen( false )
                 } else {
                     setCartError( "Your cart isn't update due to server error." )
+                    setLoaders( false )
                 }
             } else {
                 setCartError( "Your cart isn't update due to server responce error." )
+                setLoaders( false )
             }
-         }).catch( err => alert( 'Your cart is not update due to some server error.' ) )
+         }).catch( err => {alert( 'Your cart is not update due to some server error.' ) 
+        
+            setLoaders( false )
+        } )
+        //  setLoaders( false );
     }
     return <>
             <div className='wptravel-udate-cart-wrapper'>
@@ -147,7 +158,7 @@ export default () => {
                     </>
                 } )}
                 <div className="wptravel-on-page-booking-cart-update-btn">
-                    <button className='components-button' onClick={updateYouCart}>Update Cart</button>
+                    <button className='components-button' onClick={updateYouCart}>Update Cart{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</button>
                 </div>
             </div>
         

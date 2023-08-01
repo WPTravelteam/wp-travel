@@ -28,7 +28,8 @@ export default () => {
     const bookingData = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     const { updateStore } = dispatch(bookingStoreName);
 
-    const { bookingTabEnable, travelerInfo, tripBillingEnable, treipPaymentEnable } = bookingData;
+    const { bookingTabEnable, travelerInfo, tripBillingEnable, treipPaymentEnable, payment_form } = bookingData;
+    const paymentEnable = typeof payment_form != 'undefined' && typeof payment_form.payment_gateway != 'undefined' && true || false
     const tooltipText = __i18n.bookings.date_select_to_view_options;
     console.log( 'booking data', bookingData )
     return <>
@@ -41,7 +42,7 @@ export default () => {
             >
                 <button onClick={ closeModal} className="wptravel-single-page-close-btn">x</button>
                
-                <h2>{typeof bookingTabEnable != 'undefined' && bookingTabEnable ? _wp_travel.select_you_pax : (typeof travelerInfo != 'undefined' && travelerInfo ? __('Traveler Details', 'wp-travel' ) : (typeof tripBillingEnable != 'undefined' && tripBillingEnable ? __('Billing Details', 'wp-travel' ) : __( 'Payment Details', 'wp-travel' ) ) ) } </h2>
+                <h2>{typeof bookingTabEnable != 'undefined' && bookingTabEnable ? _wp_travel.select_you_pax : (typeof travelerInfo != 'undefined' && travelerInfo ? __('Traveler Details', 'wp-travel' ) : (typeof tripBillingEnable != 'undefined' && tripBillingEnable ? __('Billing Details', 'wp-travel' ) : ( paymentEnable &&  __( 'Booking / Payments', 'wp-travel' ) || __( 'Booking', 'wp-travel' ) ) ) ) } </h2>
 
                 { typeof bookingTabEnable != 'undefined' && bookingTabEnable &&
                     <div className='wptravel-single-page-calender-booking wp-travel-calendar-view'>
