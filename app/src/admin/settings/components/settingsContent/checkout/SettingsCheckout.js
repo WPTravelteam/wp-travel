@@ -57,7 +57,6 @@ export default () => {
                                 }}
                             />
                             <p className="description">{__('To book a trip without redirecting to the checkout page.', 'wp-travel')}</p>
-                            <p className="description warning">{__('To enable On-Page booking, make sure you have disabled multiple checkout (Add to cart) option.', 'wp-travel')}</p>
                         </div>
                     </PanelRow>
                 </ErrorBoundary>
