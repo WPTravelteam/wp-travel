@@ -216,7 +216,7 @@ export default ( ) => {
             { trip_price != '' && <div className="onpage-traveler-field-price-show">
                 <p><span className='onpage-travel-price-display-label'>Trip Price</span>{currency_symbol}{trip_price}</p>
             </div>}
-            <Button onClick={validateTravelerData} >Next{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</Button>
+            <Button onClick={validateTravelerData} className="wp-travel-booking__panel-bottom">Next{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</Button>
         </div>
         
     </>

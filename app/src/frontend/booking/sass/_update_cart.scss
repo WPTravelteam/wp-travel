@@ -1,13 +1,15 @@
 .wptravel-on-page-booking-update-cart-section {
 	.wp-travel-on-page-cart-update-button {
 		display: flex;
-		// gap: 10px;
+		align-items: center;
+		gap: 20px;
 	}
 
 	.wptrave-on-page-booking-cart-update-field {
 		display: flex;
-		// gap: 40px;
 		margin: 20px 0;
+		align-items: center;
+		gap: 10px;
 		label {
 			width: 100px;
 		}
@@ -29,10 +31,16 @@
 // Update cart button
 .wptravel-on-page-booking-cart-update-btn {
 	margin: 10px 0;
+	button{
+		width: auto;
+		font-size: 20px;
+	}
 }
 // edit cart
-.wptravel-udate-cart-wrapper button.components-button {
+.wptravel-udate-cart-wrapper button {
 	margin: 10px 0;
+	width: auto;
+	font-size: 20px;
 }
 .wptravel-udate-cart-wrapper
 	button.wptravel-page-cart-update-btn-increase:hover {
@@ -52,6 +60,11 @@
 		display: flex;
 		align-items: center;
 		gap: 10px;
+
+		// apply cupon button
+		.wptravel-on-page-coupon-code-btn {
+			width: auto;
+		}
 	}
 }
 .wptrave-onpage-price-calculation {
