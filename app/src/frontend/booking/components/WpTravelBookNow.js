@@ -1,6 +1,7 @@
 import { Suspense } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 import { applyFilters } from '@wordpress/hooks';
+import { DEFAULT_BOOKING_STATE } from '../store/_Store'; 
 
 const __i18n = {
 	..._wp_travel.strings
@@ -13,9 +14,10 @@ import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
 import { objectSum, wpTravelFormat, wpTravelTimeout, GetConvertedPrice } from '../_wptravelFunctions';
 
 const WpTravelBookNow = ( props ) => {
+	const initialState = DEFAULT_BOOKING_STATE();
     // Component Props.
 	const { tripData, bookingData, updateBookingData } = props;
-	// console.log( 'sdtripData', tripData )
+	// console.log( 'TRIP DATA :: ', tripData )
     // Trip Data.
     const {
 		title,
@@ -149,14 +151,29 @@ const WpTravelBookNow = ( props ) => {
 				method: 'POST',
 				data
 			}).then(res => {
+				var cartCount = Object.keys(res.data.cart.cart_items).length;
 
 				if ( applyFilters( 'wptravel_redirect_to_checkout', true ) && true === res.success && 'WP_TRAVEL_ADDED_TO_CART' === res.data.code) {
-					typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true && alert( title + ' has been added to cart' )
-					location.href = typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? window.location.href :  wp_travel.checkoutUrl; // [only checkout page url]
-					// location.href = window.location.href;
+					typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true
+					jQuery( '#wp-travel__add-to-cart_notice' ).addClass( 'success' ).append( '<span><i class="fa fa-check-circle"></i><strong>' + title + '</strong> has been added to cart.</span>' );
+			
+					setTimeout( () => {
+						jQuery( '#wp-travel__add-to-cart_notice' ).removeClass( 'success' )
+						jQuery( '#wp-travel__add-to-cart_notice span' ).css( 'display', 'none' );
+					}, 8000 );
+
+					updateBookingData( initialState );
+					window.scrollTo({
+						top: 0,
+						behavior: 'smooth',
+					})
 				}
 
 				jQuery( document.body ).trigger( 'wptravel_added_to_cart', [ data ] );
+				if( cartCount > 0 ) {
+					jQuery( '.wp-travel-cart-items-number' ).css('display', 'inline-flex')
+					jQuery( '.wp-travel-cart-items-number' ).html( cartCount );
+				}
 
 			}), 1000 ).catch(error => {
 				alert( '[X] Request Timeout!' );
