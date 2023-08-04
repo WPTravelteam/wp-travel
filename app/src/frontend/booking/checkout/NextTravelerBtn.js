@@ -16,7 +16,7 @@ const bookingStoreName = 'WPTravelFrontend/BookingData';
 import { objectSum, wpTravelFormat, wpTravelTimeout, GetConvertedPrice } from '../_wptravelFunctions';
 
 const WpTravelBookNow = ( props ) => {
-	const [loaders, setLoaders] = useState(false);
+	const [loaders, setLoaders] = useState(true);
     // Booking Data/state.
     const bookingAllData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     // // console.log( bookingData );
@@ -207,7 +207,7 @@ const WpTravelBookNow = ( props ) => {
                 
                 { selectedPricingId &&
                     <div className='new-bottom-booking-container'>
-						<div className="wp-travel-booking__panel-bottom-new">
+						<div className="wp-travel-booking__panel-bottom-new wp-travel-booking__panel-bottom">
                         
                         <div className="left-info" >
                             {selectedPricingId && <p><strong>{__i18n.bookings.combined_pricing}</strong>: {allPricings[selectedPricingId].title}</p>}

@@ -33,7 +33,7 @@ export default () => {
     const tooltipText = __i18n.bookings.date_select_to_view_options;
     console.log( 'booking data', bookingData )
     return <>
-        <Button className=" wptravel-book-your-trip " onClick={openModal}>{__( 'Book Now', 'wp-travel' ) }</Button>
+        <Button className=" wptravel-book-your-trip  wp-travel-booknow-btn" onClick={openModal}>{__( 'Book Now', 'wp-travel' ) }</Button>
         <div className="wp-travel-checkout-one-page">
             <Modal
                 className="booknow-btn-modal"
