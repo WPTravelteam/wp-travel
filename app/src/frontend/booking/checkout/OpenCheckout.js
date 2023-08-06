@@ -40,7 +40,7 @@ export default () => {
                 isOpen={isOpen}
                 onRequestClose={closeModal}
             >
-                <button onClick={ closeModal} className="wptravel-single-page-close-btn">x</button>
+                <button onClick={ closeModal} className="wptravel-single-page-close-btn"><i className='fa fa-times'></i></button>
                
                 <h2>{typeof bookingTabEnable != 'undefined' && bookingTabEnable ? _wp_travel.select_you_pax : (typeof travelerInfo != 'undefined' && travelerInfo ? __('Traveler Details', 'wp-travel' ) : (typeof tripBillingEnable != 'undefined' && tripBillingEnable ? __('Billing Details', 'wp-travel' ) : ( paymentEnable &&  __( 'Booking / Payments', 'wp-travel' ) || __( 'Booking', 'wp-travel' ) ) ) ) } </h2>
 
