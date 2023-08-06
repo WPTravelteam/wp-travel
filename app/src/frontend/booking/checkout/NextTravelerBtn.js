@@ -16,7 +16,7 @@ const bookingStoreName = 'WPTravelFrontend/BookingData';
 import { objectSum, wpTravelFormat, wpTravelTimeout, GetConvertedPrice } from '../_wptravelFunctions';
 
 const WpTravelBookNow = ( props ) => {
-	const [loaders, setLoaders] = useState(true);
+	const [loaders, setLoaders] = useState(false);
     // Booking Data/state.
     const bookingAllData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     // // console.log( bookingData );
