@@ -1,11 +1,13 @@
 
 // close button
 button.wptravel-single-page-close-btn {
-    float: right;
-    width: 50px;
-    color: white;
-    background: #ff0000;
+    position: absolute;
+    right: 20px;
+    width: 40px;
+    color: red;
+    background: transparent;
     height: 40px;
+    padding: 0 !important;
 }
 
 .wptravel-single-page-close-btn:hover {

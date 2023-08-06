@@ -51,15 +51,28 @@
 			.react-datepicker__triangle {
 				transform: translate(-5px, 180px) rotate(270deg) !important;
 			}
+
+			@media screen and (max-width: 575px) {
+				.react-datepicker__triangle {
+					transform: translate(82px, 0px) !important;
+				}
+			}
+			
+			.react-datepicker {
+				.react-datepicker__navigation {
+					width: 20px;
+					height: 20px;
+				}
+
+				button {
+					border: none;
+				}
+			}
 		}
 		button {
 			height: 40px;
-			color: #000;
-			border-radius: 5px;
 			cursor: pointer;
-			background: #f7f7f7;
 			outline: none;
-			border: 1px solid gray;
 			// calender icon
 		}
 	}
@@ -80,26 +93,6 @@
 
 				margin-bottom: 1em;
 			}
-			button {
-				border: 1px solid #999;
-				background-color: #fff;
-				color: #444;
-				display: block;
-				text-align: left;
-				width: 100%;
-				margin-bottom: 1em;
-				font-weight: bold;
-				padding: 0.75em 1em;
-				cursor: pointer;
-				font-size: 14px;
-				border-radius: 5px;
-				outline: 0;
-				border-color: green;
-			}
-			button:hover {
-				border-color: green;
-				outline-color: green;
-			}
 		}
 	}
 
@@ -113,8 +106,6 @@
 		margin-bottom: 0;
 		//
 		.wp-travel-booking__pax-selector-wrapper {
-			margin-top: 30px;
-			padding: 30px;
 			//pax selector h4
 			h4 {
 				font-size: 16px;
@@ -194,8 +185,8 @@
 	// disable fixed departure will casue issue with date picker.
 	.react-datepicker-popper:not(.wptravel-traveller-info-container
 			.react-datepicker-popper) {
-		position: relative !important;
-		transform: unset !important;
+				position: relative !important;
+				transform: unset !important;
 	}
 	// End : disable fixed departure will casue issue with date picker.
 
@@ -206,16 +197,17 @@
 		max-height: 85vh;
 		inset: 40px;
 		border: 1px solid rgb(204, 204, 204);
-		overflow: auto;
+		border-radius: 5px;
 		outline: none;
 		top: 50% !important;
 		left: 0% !important;
 		margin: 0 auto;
 		background-color: #ffffff;
 		padding: 20px;
-		// border-radius: 5px;
-		box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 		transform: translate(0, -50%);
+		overflow-x: hidden;
+		overflow-y: auto;
+
 		// select your pax h2 title
 		h2 {
 			font-size: 20px;
@@ -479,27 +471,15 @@
 		.wp-travel-booking__header {
 			// reset button
 			button.wp-travel-reset-btn {
-				
-				border: none;
-				// width: 130px;
-				// height: 40px;
-				color: #000;
-				border-radius: 5px;
 				padding: 10px 25px;
-				font-family: "Lato", sans-serif;
 				font-weight: 500;
 				cursor: pointer;
-				transition: all 0.1s ease;
+				transition: all 0.2s ease;
 				position: relative;
-				background-color: #f7f7f7;
 				outline: none;
 				display: flex;
 				justify-content: center;
 				align-items: center;
-			}
-			.wp-travel-reset-btn:hover {
-				transform: scale(1.06);
-				transition: width 2s;
 			}
 		}
 	}
@@ -524,42 +504,41 @@
 		.left-info {
 			display: inline-flex;
 			align-items: center;
+			gap: 20px;
 		}
 		// first paragraph
 		p:first-child {
-			margin-right: 15px;
+			margin-right: 0;
+			margin-bottom: 0;
 		}
 
 		// right-info i.e pricine and trip-date
 		.right-info {
 			display: inline-flex;
 			align-items: baseline;
+			gap: 20px;
+
 			// next button
-			button {
+			button.wp-travel-book {
+				padding: 10px 30px;
 				text-decoration: none;
-				padding: 5px;
-				border: none;
-				// width: 130px;
-				// height: 40px;
-				border-radius: 5px;
-				padding: 10px 25px;
+				display: inline-flex;
 				font-weight: 500;
 				cursor: pointer;
-				transition: all 0.1s ease;
+				transition: all 0.2s ease;
 				position: relative;
-				background: #f7f7f7;
 				outline: none;
+
 				//loader image
 				img.wptravel-single-page-loader-btn {
 					height: 20px;
 					width: 20px;
 					margin-left: 10px;
+					filter: brightness(100);
 				}
 			}
 			button:hover {
 				text-decoration: none;
-				transform: scale(1.06);
-				transition: width 2s;
 			}
 		}
 	}
@@ -567,6 +546,27 @@
 
 /*********************Traveller, Billing information section***********************/
 .booknow-btn-modal {
+	.wptravel-single-page-calender-booking {
+		.wp-travel-booking__header {
+			button.wp-travel-reset-btn {
+				margin-right: 0;
+			}
+		}
+
+		@media screen and (max-width: 680px) {
+			.wp-travel-booking__panel-bottom-new {
+				align-items: flex-start;
+				flex-direction: column;
+				flex-wrap: nowrap;
+				gap: 20px;
+
+				.right-info {
+					width: 100%;
+    				justify-content: space-between;
+				}
+			}
+		}
+	}
 	// required field text
 	p.wp-travel-in-page-error {
 		font-size: 12px;
@@ -681,6 +681,7 @@
 					display: flex;
 					flex-wrap: wrap;
 					align-items: center;
+					gap: 10px;
 					//
 					.wtravel-onpage-boking-checkbox {
 						display: flex;
@@ -712,16 +713,12 @@
 					min-height: 40px;
 					border: 1px solid rgb(204, 204, 204);
 					padding: 0.5rem;
-					border-radius: 0.5rem;
+					border-radius: inherit;
 					width: 100%;
 				}
 				input[type="checkbox"] {
 					width: auto;
 					min-width: 0;
-				}
-				select:focus-visible {
-					border-color: green;
-					outline-color: green;
 				}
 			}
 		}
@@ -742,7 +739,7 @@
 			min-height: 40px;
 			border: 1px solid rgb(204, 204, 204);
 			padding: 0.5rem;
-			border-radius: 0.5rem;
+			max-width: 450px;
 		}
 	}
 
@@ -751,11 +748,7 @@
 		justify-content: space-between;
 		align-items: center;
 		margin-top: 30px;
-		padding: 0 40px;
-		padding-bottom: 20px;
-		// position: sticky;
-		// bottom: 0;
-		// strip brand logo issue
+
 		.wp-travel-one-page-booking-buttons {
 			align-items: center;
 			display: flex;
@@ -773,19 +766,11 @@
 				text-decoration: none;
 				padding: 5px;
 				border: none;
-				// width: 130px;
-				// height: 40px;
-				color: #000;
-				border-radius: 5px;
 				padding: 10px 25px;
-				font-family: "Lato", sans-serif;
 				font-weight: 500;
-				background: transparent;
 				cursor: pointer;
 				transition: all 0.1s ease;
 				position: relative;
-				display: inline-block;
-				background-color: #f7f7f7;
 				outline: none;
 				display: flex;
 				justify-content: center;
@@ -797,17 +782,12 @@
 				// transition: width 2s;
 			}
 			button {
-				border: none;
 				width: auto;
-				height: 40px;
-				color: #000;
-				border-radius: 5px;
 				padding: 10px 25px;
 				font-weight: 500;
 				cursor: pointer;
 				transition: all 0.1s ease;
 				position: relative;
-				// background: #f7f7f7;
 				outline: none;
 				display: flex;
 				justify-content: center;
@@ -826,16 +806,20 @@
 	/************* booking with payment *************/
 	form#wp-travel-booking {
 		.wptravel-booking-payment-page {
-			background: rgb(255 255 255);
-			box-shadow: 0 0 3px;
-			border-radius: 5px;
-			margin: 30px;
+			margin-top: 30px;
+
 			//stripe checkout
 			.wptravel-single-page-stripcheckout {
 				padding: 40px 40px 10px 40px;
 				display: flex;
 				justify-content: center;
 				align-items: flex-start;
+
+				@media screen and (max-width: 576px) {
+					padding: 40px 10px 10px 10px;
+					flex-direction: column;
+				}
+
 				//card label
 				label {
 					font-weight: bold;
@@ -852,7 +836,12 @@
 					min-height: 40px;
 					border: 1px solid rgb(204, 204, 204);
 					padding: 0.5rem;
-					border-radius: 0.5rem;
+
+					@media screen and (max-width: 576px) {
+						width: 100%;
+						margin-left: 0;
+						margin-top: 10px;
+					}
 				}
 			}
 			// bank details tab
@@ -902,7 +891,12 @@
 					min-height: 40px;
 					border: 1px solid rgb(204, 204, 204);
 					padding: 0.5rem;
-					border-radius: 0.5rem;
+
+					@media screen and ( max-width: 576px ) {
+						width: 100%;
+						margin-left: 0;
+						margin-top: 10px;
+					}
 				}
 			}
 
@@ -945,7 +939,6 @@
 			}
 			.wptravel-onepage-payment-gateway {
 				.components-panel__body.is-opened {
-					padding: 10px 40px 10px 40px;
 					.components-panel__row {
 						display: flex;
 						justify-content: center;
@@ -953,9 +946,33 @@
 						width: 100%;
 						border-radius: 5px;
 
+						@media screen and ( max-width: 576px ) {
+							flex-direction: column;
+						}
+
 						div {
 							input[type="radio"]#wp-travel-payment-gateway {
 								margin-right: 10px;
+							}
+						}
+
+						.wptravel-onpage-radiobtn-handle {
+							width: 66%;
+							margin-left: 10px;
+							min-height: 40px;
+							border: 1px solid rgb(204, 204, 204);
+							padding: 0.5rem;
+							overflow-y: auto;
+							max-height: 300px;
+
+							@media screen and ( max-width: 576px ) {
+								width: 100%;
+								margin-left: 0;
+								margin-top: 10px;
+							}
+
+							input {
+								width: auto;
 							}
 						}
 
@@ -968,15 +985,10 @@
 							position: relative;
 							padding: 0 15px 0 0;
 							font-size: 16px;
-						}
-						div {
-							width: 66%;
-							margin-left: 10px;
-							min-height: 40px;
-							border: 1px solid rgb(204, 204, 204);
-							padding: 0.5rem;
-							border-radius: 0.5rem;
-							overflow-y: scroll;
+
+							@media screen and ( max-width: 576px ) {
+								width: 100%;
+							}
 						}
 					}
 				}
@@ -1003,9 +1015,11 @@
 						width: 66%;
 						margin-left: 10px;
 						min-height: 40px;
-						border: 1px solid rgb(204, 204, 204);
 						padding: 0.5rem;
-						border-radius: 0.5rem;
+
+						@media screen and (max-width: 576px) {
+							width: 100%;
+						}
 					}
 				}
 			}
@@ -1013,54 +1027,52 @@
 	}
 
 	// billing button
-	button {
-		padding: 5px;
-		border: none;
-		width: auto;
-		height: 40px;
-		color: #000;
-		border-radius: 5px;
-		padding: 10px 25px;
-		font-weight: 500;
-		cursor: pointer;
-		transition: all 0.1s ease;
-		position: relative;
-		display: inline-block;
-		outline: none;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-	button:hover {
-		transform: scale(1.06);
-		transition: width 2s;
-	}
+	// button {
+	// 	padding: 5px;
+	// 	border: none;
+	// 	width: auto;
+	// 	height: 40px;
+	// 	color: #000;
+	// 	border-radius: 5px;
+	// 	padding: 10px 25px;
+	// 	font-weight: 500;
+	// 	cursor: pointer;
+	// 	transition: all 0.1s ease;
+	// 	display: inline-block;
+	// 	outline: none;
+	// 	display: flex;
+	// 	justify-content: center;
+	// 	align-items: center;
+	// }
+	// button:hover {
+	// 	transform: scale(1.06);
+	// 	transition: width 2s;
+	// }
 
 	// global button
-	button {
-		text-decoration: none;
-		border: none;
-		// width: 130px;
-		// height: 40px;
-		color: #000;
-		border-radius: 5px;
-		padding: 10px 25px;
-		font-weight: 500;
-		cursor: pointer;
-		transition: all 0.1s ease;
-		position: relative;
-		display: inline-block;
-		background-color: #f7f7f7;
-		outline: none;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-	button:hover {
-		// text-decoration: none;
-		// transform: scale(1.06);
-		// transition: width 2s;
-	}
+	// button {
+	// 	text-decoration: none;
+	// 	border: none;
+	// 	// width: 130px;
+	// 	// height: 40px;
+	// 	color: #000;
+	// 	border-radius: 5px;
+	// 	padding: 10px 25px;
+	// 	font-weight: 500;
+	// 	cursor: pointer;
+	// 	transition: all 0.1s ease;
+	// 	display: inline-block;
+	// 	background-color: #f7f7f7;
+	// 	outline: none;
+	// 	display: flex;
+	// 	justify-content: center;
+	// 	align-items: center;
+	// }
+	// button:hover {
+	// 	// text-decoration: none;
+	// 	// transform: scale(1.06);
+	// 	// transition: width 2s;
+	// }
 
 	button:disabled {
 		opacity: 0.5;
@@ -1070,37 +1082,48 @@
 	}
 	// global input fields
 
-	input:hover,
-	textarea:hover {
-		border-color: green;
-	}
+	// input:hover,
+	// textarea:hover {
+	// 	border-color: green;
+	// }
 
-	input:focus,
-	textarea:focus {
-		outline: 1px solid green;
-		border: 1px solid green;
-		animation: burnBorder 0.5s;
-	}
+	// input:focus,
+	// textarea:focus {
+	// 	outline: 1px solid green;
+	// 	border: 1px solid green;
+	// 	animation: burnBorder 0.5s;
+	// }
 
-	input:active,
-	textarea:focus {
-		outline: 1px solid green;
-	}
+	// input:active,
+	// textarea:focus {
+	// 	outline: 1px solid green;
+	// }
 
-	@keyframes burnBorder {
-		0% {
-			box-shadow: 0 0 0px 1px rgba(0, 128, 0, 7);
-		}
-		100% {
-			box-shadow: 0 0 0 0 rgba(0, 128, 0, 0);
-		}
-	}
+	// @keyframes burnBorder {
+	// 	0% {
+	// 		box-shadow: 0 0 0px 1px rgba(0, 128, 0, 7);
+	// 	}
+	// 	100% {
+	// 		box-shadow: 0 0 0 0 rgba(0, 128, 0, 0);
+	// 	}
+	// }
+
 	// initial book-now button to align right side
 	.wptrave-singlepage-initial-nextbtn {
 		display: flex;
 		justify-content: flex-end;
 		align-items: center;
-		gap: 10px;
+		gap: 50px;
+
+		.onpage-traveler-field-price-show {
+			p {
+				display: flex;
+    			align-items: center;
+				margin: 0;
+				font-size: 20px;
+    			font-weight: bold;
+			}
+		}
 	}
 
 	/*********************billing form fields section***********************/
@@ -1109,8 +1132,6 @@
 		grid-template-columns: repeat(2, 1fr);
 		gap: 10px;
 		grid-column-gap: 40px;
-
-		padding: 0 40px;
 		// select,input,radio fielss
 		.components-panel__body.is-opened {
 			display: flex;
@@ -1141,12 +1162,7 @@
 
 	// Coupon code entering section
 	.wptravel-on-page-coupon-apply input{
-		margin-left: 30px;
 		min-height: 40px;
-		border: 1px solid rgb(204, 204, 204);
-		padding: 0.5rem;
-		border-radius: 0.5rem;
-	
 	}
 }
 
@@ -1170,6 +1186,19 @@ div.wptravel-onpage-priceshow {
 	display: flex;
 	align-items: center;
 	gap: 10px;
+
+	.onpage-traveler-field-price-show {
+		p {
+			margin: 0;
+			font-weight: 600;
+			font-size: 20px;
+
+			.onpage-travel-price-display-label {
+				font-size: 16px;
+				font-weight: 400;
+			}
+		}
+	}
 }
 span.onpage-travel-price-display-label {
 	margin-right:  15px;

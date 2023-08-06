@@ -1,28 +1,45 @@
 .wptravel-on-page-booking-update-cart-section {
-	.wp-travel-on-page-cart-update-button {
-		display: flex;
-		align-items: center;
-		gap: 20px;
-	}
-
 	.wptrave-on-page-booking-cart-update-field {
 		display: flex;
 		margin: 20px 0;
 		align-items: center;
 		gap: 10px;
+
 		label {
 			width: 100px;
 		}
+
+		.wp-travel-on-page-cart-update-button {
+			display: flex;
+			align-items: center;
+			gap: 20px;
+	
+			button {
+				height: 30px;
+				width: 30px;
+				transition: all 0.2s ease-in;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				text-decoration: none;
+				padding: 0 !important;
+			}
+	
+			p {
+				margin: 0;
+			}
+		}
+
+		.wptravel-onpage-booking-cart-price {
+			p {
+				margin: 0;
+				margin-left: 50px;
+				font-size: 20px;
+				font-weight: 600;
+			}
+		}
 	}
 	button {
-		height: 30px;
-		width: 30px;
-		border: 0;
-		border-radius: 5px;
-		transition: all 0.2s ease-in;
-		display: flex;
-		justify-content: center;
-		align-items: center;
 		margin: 0 10px;
 		text-decoration: none;
 	}
@@ -33,14 +50,21 @@
 	margin: 10px 0;
 	button{
 		width: auto;
-		font-size: 20px;
+		display: flex;
+		gap: 10px;
+		align-items: center;
+
+		img {
+			width: 20px;
+			height: 20px;
+			filter: brightness(100);
+		}
 	}
 }
 // edit cart
 .wptravel-udate-cart-wrapper button {
 	margin: 10px 0;
 	width: auto;
-	font-size: 20px;
 }
 .wptravel-udate-cart-wrapper
 	button.wptravel-page-cart-update-btn-increase:hover {
@@ -51,6 +75,28 @@
 .wptravel-onpage-checkbox-container {
 	.components-panel__body.is-opened {
 		align-items: baseline;
+
+		.wtravel-onpage-boking-checkbox {
+			label {
+				font-weight: 400;
+			}
+
+			.components-checkbox-control__input-container {
+				input.components-checkbox-control__input{
+					width: 15px;
+					height: 15px;
+					min-height: fit-content;
+
+					&:focus, &:active {
+						outline: none;
+					}
+				}
+				
+				svg {
+					display: none;
+				}
+			}
+		}
 	}
 }
 
@@ -64,19 +110,46 @@
 		// apply cupon button
 		.wptravel-on-page-coupon-code-btn {
 			width: auto;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+
+			img {
+				width: 20px;
+				height: 20px;
+				filter: brightness(100);
+			}
 		}
 	}
 }
-.wptrave-onpage-price-calculation {
-	display: flex;
-	flex-direction: column;
-	.components-panel__row {
-		justify-content: left;
-		label {
-			flex-basis: 220px;
+.wptravel-onepage-payment-total-trip-price {
+	width: 100%;
+
+	.wptrave-onpage-price-calculation {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	
+		.components-panel__row {
+			justify-content: left;
+
+			label {
+				width: 33%;
+				font-size: initial;
+
+				@media screen and ( max-width: 576px ) {
+					width: 100%;
+				}
+			}
+
+			#wp-travel-trip-price_info {
+				font-weight: 600;
+				font-size: initial;
+			}
 		}
 	}
 }
+
 .wptravel-on-page-coupon-error {
 	font-size: 12px;
 	text-align: left;
@@ -90,8 +163,22 @@
 	display: flex;
 	justify-content: start;
 	align-items: center;
-	.wptravel-onepage-payment-total-trip-price {
-		flex: 0 0 45%;
+
+	.wptrave-on-page-booking-price-with-coupon.wptravel-onepage-payment-total-trip-price {
+		width: 100%;
+
+		.wptrave-onepage-price-calculation {
+			.components-panel__row {
+				label {
+					font-size: initial;
+				}
+
+				#wp-travel-trip-price_info {
+					font-size: 20px;
+					font-weight: 600;
+				}
+			}
+		}
 	}
 	.wptravel-on-page-stripe-ideal-checkout-field {
 		flex: 0 0 15%;
