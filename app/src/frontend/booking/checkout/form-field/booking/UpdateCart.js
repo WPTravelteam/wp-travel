@@ -16,7 +16,7 @@ export default () => {
     const prcMin = typeof priceCart != 'undefined' && typeof priceCart.min_pax != 'undefined' && priceCart.min_pax || 0;
     let tripData = 'undefined' !== typeof _wp_travel.trip_data ? _wp_travel.trip_data : {};
     const { pricings }  = tripData;
-    // Open update cart field which is use to update cart pax 
+    // Open update cart field which is use to update cart pax
     const cartUpdateOpen = () => {
         typeof priceCart == 'undefined' && typeof pricings != 'undefined' && pricings.length > 0 && pricings.forEach( ( priceList, index ) => {
             const { id, categories, max_pax, min_pax }    = priceList;
@@ -45,12 +45,12 @@ export default () => {
                     if ( Object.values( prcCategory ).length > 0 ) {
                         const finalPrice = { max_pax : max_pax, min_pax : min_pax, priceCategoryList : Object.values( prcCategory ) }
                         updateStore( {...bookingData, priceCart :  finalPrice } )
-                    } 
+                    }
                 }
             }
         } )
         setCartOpen( true )
-        
+
     }
     const cartUpdateClose = () => {
         setCartOpen(false)
@@ -80,19 +80,26 @@ export default () => {
         setLoaders( true );
         const _nonce = typeof _wp_travel._nonce != 'undefined' && _wp_travel._nonce || '';
         const extraDatas  = Object.keys( tripExtras );
-        const extraValues = Object.values( tripExtras );
+		var newExtreaKey = [];
+		var newExtraVal = [];
+		extraDatas.map( (val, indexs) => {
+			if ( typeof tripExtras[val] != 'undefined' && tripExtras[val] > 0 ) {
+				newExtreaKey = [...newExtreaKey, val ]
+				newExtraVal = [...newExtraVal, tripExtras[val] ];
+			}
+		})
         const cartDatas = {
             pax : paxCounts,
             wp_travel_trip_extras : {
-                id : extraDatas,
-                qty : extraValues
+                id : newExtreaKey,
+                qty : newExtraVal
             }
         };
         apiFetch({
             url: `${wp_travel.ajaxUrl}?action=wp_travel_update_cart_item&_nonce=${_nonce}&cart_id=${form_key}`,
             method: 'POST',
             data : cartDatas
-        }).then(res => { 
+        }).then(res => {
             console.log( 'respoces', res );
             if ( typeof res.success != 'undefined' && res.success == true && typeof res.data != 'undefined' ) {
                 const responceData = res.data;
@@ -124,8 +131,8 @@ export default () => {
                 setCartError( "Your cart isn't update due to server responce error." )
                 setLoaders( false )
             }
-         }).catch( err => {alert( 'Your cart is not update due to some server error.' ) 
-        
+         }).catch( err => {alert( 'Your cart is not update due to some server error.' )
+
             setLoaders( false )
         } )
         //  setLoaders( false );
@@ -133,7 +140,7 @@ export default () => {
     return <>
             <div className='wptravel-udate-cart-wrapper'>
             <button className='components-button' onClick={cartOpen == true ? cartUpdateClose : cartUpdateOpen} >{ cartOpen == true ? 'Close Cart' : 'View Cart' }</button>
-        { cartOpen == true && <> 
+        { cartOpen == true && <>
             <div className="wptravel-on-page-booking-update-cart-section">
                 { typeof priceCategoryList != 'undefined' && priceCategoryList.length > 0  && priceCategoryList.map( ( listed, index ) => {
                     const { title, catId, is_sale, regular_price, sale_price }  = listed;
@@ -142,11 +149,11 @@ export default () => {
                         <div className="wptrave-on-page-booking-cart-update-field">
                             <label>{title}</label>
                             <div className="wp-travel-on-page-cart-update-button">
-                                
+
                                 <button className='wptravel-page-cart-update-btn-increase' onClick={ () => paxDecreament( catId, is_sale, regular_price, sale_price )}>-</button>
                                 <p>{paxCounts[catId]}</p>
                                 <button className='wptravel-page-cart-update-btn-increase' onClick={ () => paxIncreament( catId, is_sale, regular_price, sale_price )}>+</button>
-                                
+
                             </div>
                             <div className="wptravel-onpage-booking-cart-price">
                                 <p>{currency_symbol}{updatePriceData[catId]}</p>
@@ -161,9 +168,9 @@ export default () => {
                     <button className='components-button' onClick={updateYouCart}>Update Cart{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</button>
                 </div>
             </div>
-        
+
         </>}
             </div>
-        
+
     </>;
 }
