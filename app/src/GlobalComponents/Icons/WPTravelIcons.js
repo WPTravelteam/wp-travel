@@ -56,7 +56,7 @@ const WPTravelIcons = (props) => {
                 const [ selectedImgDataObj ] = selectedImgData;
     
                 const { url, id, sizes } = selectedImgDataObj;
-                updateFact( 'icon_img', sizes.thumbnail.url, index );
+                updateFact( 'icon_img', url, index );
                 updateFact( 'icon_img_id', id, index );
                 updateFact( 'selected_icon_type', 'custom-upload', index );
                 props.modalHandleClick(false);
