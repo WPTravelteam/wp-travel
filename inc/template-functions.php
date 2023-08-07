@@ -705,7 +705,7 @@ function wptravel_group_size( $attr ) {
 										<strong class="title">' . esc_html( $group_size_text ) . '</strong>
 									</div>
 									<div class="travel-info">
-										<span class="value">' . apply_filters( 'wp_travel_fonrtend_group_sized_show_min_max_in', ( ( (int) $group_size && $group_size < 999 ) ? ( sprintf( apply_filters( 'wp_travel_template_group_size_text', __( '%1$d %2$s', 'wp-travel' ) ), esc_html( $group_size ), esc_html( ( $pax_text ) ) ) ) : ( esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_group_size_text ) ) ) ), $trip_id ) .
+										<span class="value">' . apply_filters( 'wp_travel_frontend_group_sized_show_min_max_in', ( ( (int) $group_size && $group_size < 999 ) ? ( sprintf( apply_filters( 'wp_travel_template_group_size_text', __( '%1$d %2$s', 'wp-travel' ) ), esc_html( $group_size ), esc_html( ( $pax_text ) ) ) ) : ( esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_group_size_text ) ) ) ), $trip_id ) .
 										'</span>
 									</div>' ) : '<div style=" display:none; " ></div>' );
 	return $group_size_data;
@@ -838,7 +838,7 @@ function wptravel_single_excerpt( $trip_id ) {
 											<strong class="title">' . esc_html( $group_size_text ) . '</strong>
 										</div>
 										<div class="travel-info">
-											<span class="value">' . apply_filters( 'wp_travel_fonrtend_group_sized_show_min_max', ( ( (int) $group_size && $group_size < 999 ) ? ( sprintf( apply_filters( 'wp_travel_template_group_size_text', __( '%1$d %2$s', 'wp-travel' ) ), esc_html( $group_size ), esc_html( ( $pax_text ) ) ) ) : ( esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_group_size_text ) ) ) ), $trip_id ) .
+											<span class="value">' . apply_filters( 'wp_travel_frontend_group_sized_show_min_max', ( ( (int) $group_size && $group_size < 999 ) ? ( sprintf( apply_filters( 'wp_travel_template_group_size_text', __( '%1$d %2$s', 'wp-travel' ) ), esc_html( $group_size ), esc_html( ( $pax_text ) ) ) ) : ( esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_group_size_text ) ) ) ), $trip_id ) .
 											'</span>
 										</div>
 									</li>', $trip_id ) ) : '' ),

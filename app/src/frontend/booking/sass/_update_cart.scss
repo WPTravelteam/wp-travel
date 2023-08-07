@@ -216,26 +216,29 @@
 
 	.wp-travel-add-to-cart-item-anchor {
 		.wp-travel-single-trip-cart-button {
-			background: #b5b3b3;
 			border: none;
 			padding: 10px;
 			border-radius: 50%;
-			color: white;
 			cursor: pointer;
+			width: 40px;
+			height: 40px;
+			display: flex;
 
 			.wp-travel-add-to-cart-cart_item_show {
 				position: relative;
+				display: flex;
 
 				i.fa.fa-shopping-cart {
 					font-size: 18px;
 					vertical-align: middle;
+					margin-top: 1px;
 				}
 	
 				.wp-travel-cart-items-number {
 					position: absolute;
 					top: -15px;
 					right: -15px;
-					background: #656565;
+					background: #333333;
 					width: 20px;
 					height: 20px;
 					display: inline-flex;
