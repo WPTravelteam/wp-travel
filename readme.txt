@@ -31,7 +31,7 @@ Streamline your travel agency's operations and boost your online presence with W
 > **WP Travel PRO**
 > With WP Travel Pro you can get all premium features of WP Travel in a single package. [View Detail](https://wptravel.io/wp-travel-pro/)
 
-= 🌟CORE FEATURES =
+= 🌟 CORE FEATURES =
 
 * **[Unlimited Tour packages](https://wptravel.io/how-to-create-a-trip):** Create unlimited number of tour packages (that your server can store). Every detail you need for a trip like description, itinerary builder, price, sales price, duration, gallery, package included and excluded, map and many more can be entered very easily. This feature enables us to create the best travel agency website!
 
@@ -63,7 +63,7 @@ Streamline your travel agency's operations and boost your online presence with W
 
 * **[Coupon](https://wptravel.io/create-wordpress-coupon-code/):** With WP Travel coupon, percentage or fixed amount of coupons are applied to the trips.
 
-= 🚀EXCITING NEW FEATURES =
+= 🚀 EXCITING NEW FEATURES =
 
 * **[Currency Exchange](https://wptravel.io/docs/currency-exchange/):** Free module that enables you to display an exchange rate table on your website. It offers the flexibility to add the table as a widget or shortcode.
 
@@ -85,7 +85,7 @@ Streamline your travel agency's operations and boost your online presence with W
 
 * **[Customer Dashboard](https://wptravel.io/docs/wp-travel-customer-dashboard/)** You will have a feature to setup a customer dashboard.
 
-= 🔥ADDITIONAL FEATURES =
+= 🔥 ADDITIONAL FEATURES =
 * Trip Search / Filter Shortcode
 * Trip Search / Filter Widget
 * Sale widget added
@@ -127,13 +127,13 @@ Streamline your travel agency's operations and boost your online presence with W
 * Multiple Travelers info
 [And much more ...](https://wptravel.io/features/)
 
-= ⏰CUSTOMIZATION AND FLEXIBILITY =
+= ⏰ CUSTOMIZATION AND FLEXIBILITY =
 WP Travel plugin is very flexible and highly customizable. There are a number of hooks and filters which makes the plugin really flexible from the developer’s point of view. There are a bulk of options which add further flexibility in the plugin.
 
 These themes are specially designed for WP Travel plugin. So, it is 100% compatible with our plugin. It can be used with other themes as well with some styling changes. We are always here to support you with any issues using the theme.
 
 
-= ▶️STEP-BY-STEP VIDEO TUTORIALS TO USE WP TRAVEL PLUGIN =
+= ▶️ STEP-BY-STEP VIDEO TUTORIALS TO USE WP TRAVEL PLUGIN =
 
 **How to add extra services to your Trips?**
 [youtube https://www.youtube.com/watch?v=1G67H0Z64sQ]
@@ -156,19 +156,19 @@ These themes are specially designed for WP Travel plugin. So, it is 100% compati
 **How To Book A Trip Using WP Travel?**
 [youtube https://www.youtube.com/watch?v=B0mwT-HIZSQ]
 
-**[👆CLICK HERE FOR MORE!](https://wptravel.io/docs/youtube-video-tutorials/)**
+**[👆 CLICK HERE FOR MORE!](https://wptravel.io/docs/youtube-video-tutorials/)**
 
-= 💁‍♂️GET SUPPORT =
+= 💁‍♂️ GET SUPPORT =
 
 We have comprehensive tutorials available for using WP Travel, both in video and text formats. These tutorials cover various topics and provide step-by-step guidance. You can access the tutorials through the following resources:
 
-* [▶️YouTube Video Tutorials](https://wptravel.io/docs/youtube-video-tutorials/): We have a collection of instructional videos on how to use WP Travel plugin. These videos demonstrate the features and functionalities in a visual format, making it easier to follow along.
+* [▶️ YouTube Video Tutorials](https://wptravel.io/docs/youtube-video-tutorials/): We have a collection of instructional videos on how to use WP Travel plugin. These videos demonstrate the features and functionalities in a visual format, making it easier to follow along.
 
-* [🗄️Text Documentation](https://wptravel.io/wp-travel-documentations/): We provide detailed written documentation that outlines the usage of WP Travel Engine. This documentation includes explanations, instructions, and examples to assist you in understanding and utilizing the plugin effectively.
+* [🗄️ Text Documentation](https://wptravel.io/wp-travel-documentations/): We provide detailed written documentation that outlines the usage of WP Travel. This documentation includes explanations, instructions, and examples to assist you in understanding and utilizing the plugin effectively.
 
-* [💁‍♂️Support Forum](https://wptravel.io/contact/): If you have any specific questions that are not addressed in the tutorials, we recommend reaching out to our support team. We have an entire team of happiness engineers ready to help you.
+* [💁‍♂️ Support Forum](https://wptravel.io/contact/): If you have any specific questions that are not addressed in the tutorials, we recommend reaching out to our support team. We have an entire team of happiness engineers ready to help you.
 
-* [🗣️Active Facebook Community](https://www.facebook.com/groups/2529491873966327): We have a Facebook community for WP Travel Plugin users. This community serves as a platform for discussions related to travel website development and marketing. We encourage you to join this community to connect with fellow users and engage in relevant conversations.
+* [🗣️ Active Facebook Community](https://www.facebook.com/groups/2529491873966327): We have a Facebook community for WP Travel Plugin users. This community serves as a platform for discussions related to travel website development and marketing. We encourage you to join this community to connect with fellow users and engage in relevant conversations.
 
 = 🔗INTEGRATIONS =
 
@@ -181,7 +181,7 @@ We have comprehensive tutorials available for using WP Travel, both in video and
 * **[SliceWP](https://wptravel.io/docs/what-is-wp-travel-slicewp-affiliate-addon/):** With this you can initiate your affiliate program and experience rapid growth in your
 business.
 
-= 📄Documentation =
+= 📄 Documentation =
 
 Access our documentation to gain in-depth knowledge and make the most out of WP Travel's features and capabilities. Our comprehensive documentation covers all the essential information you need, including the following sections:
 
@@ -201,7 +201,7 @@ Access our documentation to gain in-depth knowledge and make the most out of WP 
 
 * [FAQ](https://wptravel.io/docs-category/faq/): Get answers to commonly asked questions for quick problem-solving.
 
-= 💳PAYMENT MODULES =
+= 💳 PAYMENT MODULES =
 
 Our range of exclusive WordPress payment plugins is specifically designed to seamlessly integrate with WP Travel, catering to the needs of travel and tour websites built on the WordPress platform. These plugins support a wide selection of widely used payment gateways worldwide. Explore some of our popular payment plugins tailored for the travel industry on WordPress.
 
@@ -231,7 +231,7 @@ Our range of exclusive WordPress payment plugins is specifically designed to sea
 
 * **[WP Travel Stripe iDEAL Checkout](https://wptravel.io/downloads/wp-travel-stripe-ideal-checkout/)** (For payment from customers in the Netherlands)
 
-= 💫PRO MODULES =
+= 💫 PRO MODULES =
 
 * [WP Travel Currency Exchange Rate](https://wptravel.io/downloads/wp-travel-currency-exchange-rate/)
 
@@ -275,7 +275,7 @@ Our range of exclusive WordPress payment plugins is specifically designed to sea
 
 * [WP Travel Travel Guide](https://wptravel.io/downloads/travel-guide/)
 
-= 🗺️MAP MODULES =
+= 🗺️ MAP MODULES =
 
 * [WP Travel Here Map](https://wptravel.io/downloads/wp-travel-here-map/)
 
@@ -289,7 +289,7 @@ Our range of exclusive WordPress payment plugins is specifically designed to sea
 
 [View all WP Travel modules](https://wptravel.io/downloads/)
 
-= 🆓FREE TRAVEL THEMES COMPATIBLE WITH WP TRAVEL PLUGIN =
+= 🆓 FREE TRAVEL THEMES COMPATIBLE WITH WP TRAVEL PLUGIN =
 
 * [Photo Journal](https://catchthemes.com/themes/photo-journal/) by Catch Themes
 * [Travelore](https://catchthemes.com/themes/travelore/) by Catch Themes
@@ -305,7 +305,7 @@ Our range of exclusive WordPress payment plugins is specifically designed to sea
 * [Tale Travel](https://themepalace.com/downloads/tale-travel/) by Theme Palace
 * [View all FREE WordPress Travel & Tour Themes](https://wptravel.io/travel-agency-wordpress-themes/)
 
-= 🎨PREMIUM TRAVEL THEMES COMPATIBLE WP TRAVEL PLUGIN =
+= 🎨 PREMIUM TRAVEL THEMES COMPATIBLE WP TRAVEL PLUGIN =
 
 * [Photo Journal Pro](https://catchthemes.com/themes/photo-journal-pro/) by Catch Themes
 * [Travelore Pro](https://catchthemes.com/themes/travelore-pro/) by Catch Themes.
@@ -320,7 +320,7 @@ Our range of exclusive WordPress payment plugins is specifically designed to sea
 * [Travel Master Pro](https://themepalace.com/downloads/travel-master-pro/) by Theme Palace.
 * [View all Premium WordPress Travel & Tour Themes](https://wptravel.io/travel-agency-wordpress-themes/)
 
-= 📱MOBILE APP =
+= 📱 MOBILE APP =
 * **[Android App](https://wptravel.io/apps/)**: Keep track of all the bookings and inquiries without logging into the site.
 
 * **[PWA Mobile App](https://wptravel.io/wp-travel-pwa-mobile-app/)**: With the growing trend of mobile website access, WP Travel has successfully integrated all the functionalities of their desktop WordPress Plugin into a sleek and impressive mobile app.
@@ -332,7 +332,7 @@ Spanish translation partner - [Blarlo](https://www.blarlo.com/)
 
 Also you can checkout WP Travel [documentation](https://wptravel.io/wp-travel-documentations/).
 
-= 📝Release Notes: =
+= 📝 Release Notes: =
 Dear Sir/Mam, Before updating the plugin it is advised to check ["our latest release notes"](#developers).
 
 Love WP Travel?
