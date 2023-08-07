@@ -20,6 +20,7 @@ import {
     AccordionItemButton,
     AccordionItemPanel,
 } from 'react-accessible-accordion';
+import UpdateCart from './booking/UpdateCart';
 // import ProgressBary from '../ProgressBary';
 
 export default ( ) => {
@@ -30,10 +31,11 @@ export default ( ) => {
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     const { updateStore } = dispatch( bookingStoreName );
     const multipleTraveler = typeof _wp_travel != 'undefined' && typeof _wp_travel.checkout_field != 'undefined' && typeof _wp_travel.checkout_field.enable_multiple_travellers != 'undefined' &&  _wp_travel.checkout_field.enable_multiple_travellers || 'no';
-    const { traveler_form, form_key, paxCounts, checkoutDetails, error_list, paxSize } = bookingData;
+    const { traveler_form, form_key, paxCounts, checkoutDetails, error_list, paxSize, price_list, currency_symbol, cart_amount } = bookingData;
     const fieldKey  = typeof traveler_form != 'undefined' && Object.keys( traveler_form ) || [];
     // const paxValue = Object.values( paxCounts )
-
+    // const { trip_price }  = typeof price_list != 'undefined' && price_list || ''
+    const trip_price = typeof cart_amount != 'undefined' && typeof cart_amount.cart_total != 'undefined' && cart_amount.cart_total || 0
     const travelerEnter = typeof checkoutDetails[form_key] != 'undefined' && checkoutDetails[form_key] || {};
     const validateEmail = ( input ) => {
         var validRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -80,7 +82,7 @@ export default ( ) => {
         if ( Object.keys( requiredField ).length > 0 ) {
             updateStore({...bookingData, requiredField : requiredField })
         }
-    },[])
+    },[paxSize])
     /** 
      * When use click next button this function check required field validation 
      * 
@@ -102,7 +104,7 @@ export default ( ) => {
                 if ( type == 'email' ) {
                     const emailData = typeof travelData[1] != 'undefined' && travelData[1] || '';
                     if ( emailData != '' && ! validateEmail( emailData ) ) {
-                        const newEmailError = {1 : 'Email is not valide'}
+                        const newEmailError = {1 : 'Invalid Email'}
                         emailValidate[name] = newEmailError;
                     }
 
@@ -133,7 +135,7 @@ export default ( ) => {
                         for( i = 0 ; i < paxSize ; i++ ) {
                             const finalDatas = typeof travelData[i+1] != 'undefined' && travelData[i+1] || '';
                             if ( type == 'email' && finalDatas != '' && ! validateEmail( finalDatas ) ) {
-                                emailErrors[i+1] = 'Email is not valide';
+                                emailErrors[i+1] = 'Invalid Email';
                             }
                             if ( finalDatas == '' ) {
                                 pxReq[i + 1 ] = label + ' is required';
@@ -161,6 +163,7 @@ export default ( ) => {
     }
     const paxKey = [paxSize];
     return <>
+        <UpdateCart />
         {/* <ProgressBary statusText={`Progress: Fill Up Traveller Details`} value={30} max={100} /> */}
         { multipleTraveler == 'yes' && <> { paxKey.length > 0 && paxKey.map( ( pKeys, ind) => {
             const newdata = [];
@@ -209,8 +212,11 @@ export default ( ) => {
         } </div> }
         <p className='wp-travel-in-page-error'>{errorFound}</p>
         <div className='wptrave-singlepage-initial-nextbtn'>
-        
-        <Button onClick={validateTravelerData} >Next{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</Button>
+        {/* <Button onClick={backToReturn} >Next{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</Button> */}
+            { trip_price != '' && <div className="onpage-traveler-field-price-show">
+                <p><span className='onpage-travel-price-display-label'>Trip Price</span>{currency_symbol}{trip_price}</p>
+            </div>}
+            <Button onClick={validateTravelerData}>Next{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</Button>
         </div>
         
     </>

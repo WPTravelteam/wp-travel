@@ -13,20 +13,23 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
     const travelerValue = typeof travelerDataList[name] != 'undefined' && travelerDataList[name] || {};
     const finalTravelerData = typeof travelerValue[pxKey] != 'undefined' && travelerValue[pxKey] || [];
     
-    return <><PanelBody>
-        <PanelRow>
-            <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>
+    return <div className='wptravel-onpage-checkbox-container'>
+    <PanelBody>
+        {/* <PanelRow> */}
+        <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>
+        <div className="wptravel-onpage-checkbox-wrapper">
             {
                typeof options != 'undefined' && options.length > 0 && options.map( ( value, index ) => {
-                return <div key={index}><CheckboxControl
+                return <div className='wtravel-onpage-boking-checkbox' key={index}><CheckboxControl
                     key={index}
                     label={value}
                     name={name}
                     checked={ typeof finalTravelerData != 'undefined' && finalTravelerData.length > 0 && finalTravelerData.includes( value ) || false }
                     onChange={ ( values ) => {
+                        console.log( 'my value is', values )
                         if ( values == true ) {
                             // const newVal = [...]
-                            const newTrData = [...finalTravelerData, values ]
+                            const newTrData = [...finalTravelerData, value ]
                             const newDataSelect = {...travelerValue, [pxKey] : newTrData }
                             const newData = {...travelerDataList, [name] : newDataSelect };
                             const checkoutNewData = {...checkoutDetails, [trvOne] : newData }
@@ -44,7 +47,9 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
                 </div>
                } )
             }
-        </PanelRow>
-    </PanelBody> <p className='wp-travel-in-page-error'>{errorData}</p></>
+        </div>
+        {/* </PanelRow> */}
+    </PanelBody>
+     <p className='wp-travel-in-page-error'>{errorData}</p></div>
 }
 

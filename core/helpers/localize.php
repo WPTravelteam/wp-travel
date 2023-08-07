@@ -43,7 +43,6 @@ class WpTravel_Helpers_Localize {
 		$rdp_locale = str_replace( '_', '', $rdp_locale ); // React date picker locale.
 		// user form transfer in react
 		global $wt_cart;
-		// echo '<pre>'; print_r( wptravel_get_checkout_form_fields() ); die;
 		$trip_items     = $wt_cart->getItems();
 		$checkoutPage   = get_option( 'wp_travel_wp-travel-checkout_page_id' );
 		$checkoutDetail = get_post( $checkoutPage );
@@ -66,7 +65,9 @@ class WpTravel_Helpers_Localize {
 			$_wp_travel['trip_date_listing']  = $settings['trip_date_listing'];
 			$_wp_travel['strings']            = WpTravel_Helpers_Strings::get();
 			$_wp_travel['itinerary_v2']       = wptravel_use_itinerary_v2_layout();
+			$_wp_travel['add_to_cart_system'] = wp_travel_add_to_cart_system();
 			$_wp_travel['checkout_url']       = $checkoutDetail->guid;
+			$_wp_travel['pax_show_remove'] 	  = apply_filters( 'wp_travel_booking_pax_editable', '' );
 			$_wp_travel['select_you_pax']	  = apply_filters( 'wp_travel_select_you_pax', __( 'Select Your Pax', 'wp-travel' )); 
 			$_wp_travel['partial_enable']     = isset( $settings['partial_payment'] ) ? $settings['partial_payment'] : 'no';
 			$_wp_travel['enable_one_page_booking'] = isset( $settings['enable_one_page_booking'] ) ? $settings['enable_one_page_booking'] : false;

@@ -1,5 +1,6 @@
 @import "./node_modules/react-datepicker/src/stylesheets/datepicker.scss";
 @import './checkout';
+@import './update_cart';
 
 // map
 .wp-travel-map {
@@ -56,8 +57,7 @@ input.wp-trave-pax-selected-frontend {
 }
 
 input.wp-trave-pax-selected-frontend-second { 
-	width: 30px;
+	width: 30px !important;
     height: 30px;
-    line-height: 30px;
     text-align: center;
 }

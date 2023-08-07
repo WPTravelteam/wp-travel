@@ -15,9 +15,10 @@ import { objectSum, wpTravelFormat, wpTravelTimeout, GetConvertedPrice } from '.
 const WpTravelBookNow = ( props ) => {
     // Component Props.
 	const { tripData, bookingData, updateBookingData } = props;
-
+	// console.log( 'sdtripData', tripData )
     // Trip Data.
     const {
+		title,
         dates,
         pricings,
     } = tripData;
@@ -150,7 +151,9 @@ const WpTravelBookNow = ( props ) => {
 			}).then(res => {
 
 				if ( applyFilters( 'wptravel_redirect_to_checkout', true ) && true === res.success && 'WP_TRAVEL_ADDED_TO_CART' === res.data.code) {
-					location.href = wp_travel.checkoutUrl; // [only checkout page url]
+					typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true && alert( title + ' has been added to cart' )
+					location.href = typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? window.location.href :  wp_travel.checkoutUrl; // [only checkout page url]
+					// location.href = window.location.href;
 				}
 
 				jQuery( document.body ).trigger( 'wptravel_added_to_cart', [ data ] );
@@ -184,7 +187,7 @@ const WpTravelBookNow = ( props ) => {
                         
                         <div className="right-info" >
                             <p>{__i18n.bookings.booking_tab_cart_total}<strong dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCartTotal(true)) }}></strong></p>
-                            <button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">{__i18n.bookings.booking_tab_booking_btn_label}</button>
+                            <button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">{typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? 'Add to Cart' : __i18n.bookings.booking_tab_booking_btn_label}</button>
                         </div>
                     </div>
                 }

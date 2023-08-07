@@ -20,6 +20,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 global $wp_travel_itinerary;
+global $wt_cart;
+$trip_items     = $wt_cart->getItems();
+// echo '<pre>';
+// print_r( count( $trip_items ) );
 ?>
 
 <?php
@@ -40,6 +44,19 @@ do_action( 'wp_travel_before_content_start' );
 <div id="itinerary-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<div class="content entry-content">
 		<div class="wp-travel trip-headline-wrapper clearfix <?php echo esc_attr( $wrapper_class ); ?>">
+			<?php if ( wp_travel_add_to_cart_system() == true && ! empty( $trip_items ) && count( $trip_items ) ) {?>
+				<div class="wp-travel-single-trip-add-to-cart">
+					<a class="wp-travel-add-to-cart-item-anchor" href="<?php echo wptravel_get_checkout_url(); ?>" target="_blank" rel="noopener noreferrer">
+						<button class="wp-travel-single-trip-cart-button">
+							<span class="wp-travel-add-to-cart-cart_item_show">
+								<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+								<span class="wp-travel-cart-items-number"><?php echo count( $trip_items ); ?></span>
+							</span>
+						</button>
+					</a>
+				</div>
+			<?php } ?>
+
 			<div class="wp-travel-feature-slide-content featured-side-image left-plot">
 				<div class="banner-image-wrapper" style="background-image: url(<?php echo apply_filters( 'wp_travel_trip_single_page_thumbnail_background', esc_url( wptravel_get_post_thumbnail_url( get_the_ID(), 'large' ) ), get_the_ID() ); ?>)">
 						<?php echo apply_filters( 'wp_travel_trip_single_page_thumbnail', wp_kses( wptravel_get_post_thumbnail( get_the_ID() ), wptravel_allowed_html( array( 'img' ) ) ), get_the_ID() ); ?>

@@ -176,7 +176,7 @@ const WpTravelBookNow = ( props ) => {
 			
 							if ( settingData.success === true && settingData.data != '' ) {
 								setLoaders(false)
-								updateStore( {...bookingData, paxSize : size, payment_form : settingData.data.payment, form_key : settingData.data.form_key, price_list : settingData.data.price_list , bookingTabEnable: false, travelerInfo : true } )
+								updateStore( {...bookingData, paxSize : size, payment_form : settingData.data.payment, form_key : settingData.data.form_key, price_list : settingData.data.price_list, cart_amount : settingData.data.cart_price , bookingTabEnable: false, travelerInfo : true } )
 							}
 			
 						} else {
@@ -207,7 +207,7 @@ const WpTravelBookNow = ( props ) => {
                 
                 { selectedPricingId &&
                     <div className='new-bottom-booking-container'>
-						<div className="wp-travel-booking__panel-bottom-new">
+						<div className="wp-travel-booking__panel-bottom-new wp-travel-booking__panel-bottom">
                         
                         <div className="left-info" >
                             {selectedPricingId && <p><strong>{__i18n.bookings.combined_pricing}</strong>: {allPricings[selectedPricingId].title}</p>}
