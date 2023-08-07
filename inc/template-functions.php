@@ -705,7 +705,7 @@ function wptravel_group_size( $attr ) {
 										<strong class="title">' . esc_html( $group_size_text ) . '</strong>
 									</div>
 									<div class="travel-info">
-										<span class="value">' . ( ( (int) $group_size && $group_size < 999 ) ? ( sprintf( apply_filters( 'wp_travel_template_group_size_text', __( '%1$d %2$s', 'wp-travel' ) ), esc_html( $group_size ), esc_html( ( $pax_text ) ) ) ) : ( esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_group_size_text ) ) ) ) .
+										<span class="value">' . apply_filters( 'wp_travel_fonrtend_group_sized_show_min_max_in', ( ( (int) $group_size && $group_size < 999 ) ? ( sprintf( apply_filters( 'wp_travel_template_group_size_text', __( '%1$d %2$s', 'wp-travel' ) ), esc_html( $group_size ), esc_html( ( $pax_text ) ) ) ) : ( esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_group_size_text ) ) ) ), $trip_id ) .
 										'</span>
 									</div>' ) : '<div style=" display:none; " ></div>' );
 	return $group_size_data;
@@ -838,7 +838,7 @@ function wptravel_single_excerpt( $trip_id ) {
 											<strong class="title">' . esc_html( $group_size_text ) . '</strong>
 										</div>
 										<div class="travel-info">
-											<span class="value">' . ( ( (int) $group_size && $group_size < 999 ) ? ( sprintf( apply_filters( 'wp_travel_template_group_size_text', __( '%1$d %2$s', 'wp-travel' ) ), esc_html( $group_size ), esc_html( ( $pax_text ) ) ) ) : ( esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_group_size_text ) ) ) ) .
+											<span class="value">' . apply_filters( 'wp_travel_fonrtend_group_sized_show_min_max', ( ( (int) $group_size && $group_size < 999 ) ? ( sprintf( apply_filters( 'wp_travel_template_group_size_text', __( '%1$d %2$s', 'wp-travel' ) ), esc_html( $group_size ), esc_html( ( $pax_text ) ) ) ) : ( esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_group_size_text ) ) ) ), $trip_id ) .
 											'</span>
 										</div>
 									</li>', $trip_id ) ) : '' ),
@@ -876,7 +876,7 @@ function wptravel_single_excerpt( $trip_id ) {
 			if ( 'custom-booking' === $pricing_type && 'custom-link' === $booking_type && $custom_link ) :
 				?>
 				<a href="<?php echo esc_url( $custom_link ); ?>" target="<?php echo $open_in_new_tab ? esc_attr( 'new' ) : ''; ?>" class="wptravel-book-your-trip"><?php echo esc_html( apply_filters( 'wp_travel_template_book_now_text', $book_now_text ) ); // @phpcs:ignore ?></a>
-				
+
 				<?php
 			elseif ( wptravel_tab_show_in_menu( 'booking' ) || $enable_one_page ) :
 				if ( $enable_one_page == true && $hook_for_double_enable == true ) {
@@ -1027,7 +1027,7 @@ function wptravel_single_location( $trip_id ) {
 				<div class="travel-info fixed-date-options">
 					<?php echo $dates; // @phpcs:ignore ?>
 				</div>
-				
+
 			</li>
 			<?php
 		}
@@ -1817,7 +1817,7 @@ function wptravel_booking_message() {
 			history.replaceState({},null,window.location.pathname);
 		</script>
 		<?php if ( 'booking_only' == $booking_option ) { ?>
-			<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo esc_html( apply_filters( 'wp_travel_booked_message', __( "Thank you for booking! We'll reach out to you soon.", 'wp-travel' ) ) ); ?><span><?php echo esc_html( apply_filters( 'wp_travel_booked_message_after_text', ' (Booking Option : Booking Only ).' ) ); ?></span></p>  
+			<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo esc_html( apply_filters( 'wp_travel_booked_message', __( "Thank you for booking! We'll reach out to you soon.", 'wp-travel' ) ) ); ?><span><?php echo esc_html( apply_filters( 'wp_travel_booked_message_after_text', ' (Booking Option : Booking Only ).' ) ); ?></span></p>
 			<?php
 		} elseif ( 'booking_with_payment' == $booking_option ) {
 			$payment_gatway = get_post_meta( $booking_id, 'wp_travel_payment_gateway', true );
