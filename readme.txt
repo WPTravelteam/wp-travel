@@ -423,8 +423,8 @@ Release Date: 7th August 2023
 
 Enhancements:
 * Added edit cart option in case of On-Page booking.
-* Added apply coupon field in payment details section in case of On-page booking.
-* Added tax calculation in On-page booking in Payment Details.
+* Added apply coupon field in payment details section in case of On-Page booking.
+* Added tax calculation in On-Page booking in Payment Details.
 
 Fixes:
 * Fixed issue while uploading custom image in trip facts.
@@ -443,7 +443,7 @@ Enhancement:
 * Added hook `[wp_travel_related_trip_filter_single_archive_page]` to show the related trip according to your taxonomy choice.
 * Made the pax selector editable so that you can enter a number.
 * Added On-Page booking option. 
-* Compatibility for Standard PayPal and  Bank deposit for On-page booking.
+* Compatibility for Standard PayPal and  Bank deposit for On-Page booking.
 * For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version7-0-0-july-2023-update-release-notes/ ).
 
 = 6.9.1. =
