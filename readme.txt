@@ -424,6 +424,9 @@ Release Date: 9th August 2023
 Fixes:
 * Fixed booking issue.
 
+others: 
+* Sets the WordPress tested up to version to 6.3.
+
 = 7.1.0 =
 Release Date: 7th August 2023
 
