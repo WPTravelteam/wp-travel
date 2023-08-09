@@ -1,7 +1,8 @@
 import { __ } from '@wordpress/i18n'
 import { wpTravelFormat, GetConvertedPrice } from '../../_wptravelFunctions'
 
-const _ = lodash
+// const _ = lodash
+import _ from 'lodash';
 const __i18n = {
 	..._wp_travel.strings
 }

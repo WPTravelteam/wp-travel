@@ -6,7 +6,8 @@ const __i18n = {
 	..._wp_travel.strings
 }
 // Additional lib @todo need to implement path lib.
-const _ = lodash;
+// const _ = lodash;
+import _ from 'lodash';
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
 
 // WP Travel Functions.

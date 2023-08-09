@@ -4,7 +4,8 @@ import apiFetch from '@wordpress/api-fetch';
 
 // Additional lib
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
-const _ = lodash;
+// const _ = lodash;
+import _ from 'lodash';
 import moment from 'moment';
 
 // WP Travel Components.

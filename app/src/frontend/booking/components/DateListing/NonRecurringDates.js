@@ -23,7 +23,8 @@ import { RRule, RRuleSet } from "rrule";
 import { objectSum } from '../../_wptravelFunctions';
 
 // Additional lib
-const _ = lodash;
+// const _ = lodash;
+import _ from 'lodash';
 
 // WP Travel Components.
 import Pricings from './SubComponents/Pricings';

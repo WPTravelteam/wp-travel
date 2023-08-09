@@ -1,5 +1,6 @@
 // Additional lib
-const _ = lodash;
+import _ from 'lodash';
+// const _ = lodash;
 import { RRule } from "rrule";
 
 /**]

@@ -3,9 +3,9 @@ Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 6.0.0
-Tested up to: 6.2.2
+Tested up to: 6.3
 Requires PHP: 7.4
-Stable tag: 7.1.0
+Stable tag: 7.1.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -69,11 +69,11 @@ Streamline your travel agency's operations and boost your online presence with W
 
 * **[Itinerary pdf send along booking email](https://wptravel.io/download-itinerary-in-pdf-format/):** share trips details on booking email.
 
-* **[Download Itinerary](https://wptravel.io/download-itinerary-in-pdf-format/):** lets users download trip related media files.
+* **[Download Itinerary](https://wptravel.io/download-itinerary-in-pdf-format/):** Lets users download trip related media files.
 
 * **[Cutt-off time for booking trip](https://wptravel.io/cut-off-time-feature-for-booking-of-trip/):** feature to setup a trip within an only specific period of time.
 
-* [Recurring Dates](https://wptravel.io/recurring-dates-feature-for-your-trip/):** You can now set different recurring dates (years, months, days) for the same trip, allowing you to display the trip as available for different seasonal dates.
+* **[Recurring Dates](https://wptravel.io/recurring-dates-feature-for-your-trip/):** You can now set different recurring dates (years, months, days) for the same trip, allowing you to display the trip as available for different seasonal dates.
 
 * **[Trip Duration](https://wptravel.io/docs/how-to-configure-trips-setting-available-in-wp-travel-plugin/#h-trip-duration):** Trip Duration feature where you can add duration for the trip.
 
@@ -417,6 +417,15 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 7.1.1 =
+Release Date: 9th August 2023
+
+Fixes:
+* Fixed booking issue.
+
+others: 
+* Sets the WordPress tested up to version to 6.3.
 
 = 7.1.0 =
 Release Date: 7th August 2023
