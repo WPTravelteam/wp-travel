@@ -12,7 +12,8 @@ import Loader from '../../../../GlobalComponents/Loader';
 
 
 // Additional lib
-const _ = lodash;
+// const _ = lodash;
+import _ from 'lodash';
 import { RRule, RRuleSet } from "rrule";
 
 

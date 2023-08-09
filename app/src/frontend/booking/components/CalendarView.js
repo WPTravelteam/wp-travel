@@ -9,7 +9,8 @@ const __i18n = {
 
 // Additional lib
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
-const _ = lodash;
+// const _ = lodash;
+import _ from 'lodash';
 import moment from 'moment';
 import RDP_Locale from '../_Locale'
 import DatePicker, {registerLocale} from "react-datepicker";

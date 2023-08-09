@@ -5,7 +5,8 @@ const __i18n = {
 }
 
 // Additional lib
-const _ = lodash;
+// const _ = lodash;
+import _ from 'lodash';
 import moment from 'moment';
 
 // WP Travel Functions.

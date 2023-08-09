@@ -5,7 +5,7 @@ import { useSelect, dispatch } from '@wordpress/data';
 import apiFetch from '@wordpress/api-fetch';
 import { _n, __} from '@wordpress/i18n';
 import {alignJustify } from '@wordpress/icons';
-
+import _ from 'lodash';
 import { ReactSortable } from 'react-sortablejs';
 import Select from 'react-select'
 
@@ -16,7 +16,7 @@ import ErrorBoundary from '../../../../../ErrorBoundry/ErrorBoundry';
 const __i18n = {
 	..._wp_travel_admin.strings
 }
-const _ = lodash;
+// const _ = lodash;
 
 const Pricings = ( {allData} ) => {
     const [{tripExtrasData}, setState] = useState({
