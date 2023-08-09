@@ -69,11 +69,11 @@ Streamline your travel agency's operations and boost your online presence with W
 
 * **[Itinerary pdf send along booking email](https://wptravel.io/download-itinerary-in-pdf-format/):** share trips details on booking email.
 
-* **[Download Itinerary](https://wptravel.io/download-itinerary-in-pdf-format/):** lets users download trip related media files.
+* **[Download Itinerary](https://wptravel.io/download-itinerary-in-pdf-format/):** Lets users download trip related media files.
 
 * **[Cutt-off time for booking trip](https://wptravel.io/cut-off-time-feature-for-booking-of-trip/):** feature to setup a trip within an only specific period of time.
 
-* [Recurring Dates](https://wptravel.io/recurring-dates-feature-for-your-trip/):** You can now set different recurring dates (years, months, days) for the same trip, allowing you to display the trip as available for different seasonal dates.
+* **[Recurring Dates](https://wptravel.io/recurring-dates-feature-for-your-trip/):** You can now set different recurring dates (years, months, days) for the same trip, allowing you to display the trip as available for different seasonal dates.
 
 * **[Trip Duration](https://wptravel.io/docs/how-to-configure-trips-setting-available-in-wp-travel-plugin/#h-trip-duration):** Trip Duration feature where you can add duration for the trip.
 
@@ -417,6 +417,12 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 7.1.1 =
+Release Date: 9th August 2023
+
+Fixes:
+* Fixed booking issue.
 
 = 7.1.0 =
 Release Date: 7th August 2023
