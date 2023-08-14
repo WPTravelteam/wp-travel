@@ -162,8 +162,9 @@ export default ( ) => {
         }
     }
     const paxKey = [paxSize];
+    console.log( 'coupons', _wp_travel.coupon_available )
     return <>
-        <UpdateCart />
+        { typeof _wp_travel.coupon_available != 'undefined' && _wp_travel.coupon_available == true && <UpdateCart /> }
         {/* <ProgressBary statusText={`Progress: Fill Up Traveller Details`} value={30} max={100} /> */}
         { multipleTraveler == 'yes' && <> { paxKey.length > 0 && paxKey.map( ( pKeys, ind) => {
             const newdata = [];

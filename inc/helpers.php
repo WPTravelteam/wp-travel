@@ -856,19 +856,19 @@ function wp_travel_get_trip_durations( $trip_id ) {
 	$trip_duration_nights = get_post_meta( $trip_id, 'wp_travel_trip_duration_night', true );
 	$trip_duration_nights = ( $trip_duration_nights ) ? $trip_duration_nights : 0;
 
-	$old_duration_select = isset( $trip_duration_formating['duration_format'] ) ? $trip_duration_formating['duration_format'] : '';
-	if ( ! empty( $old_duration_select ) && $old_duration_select == 'hour' ) {
-		$duration_selected_date = $old_duration_select;
-	} else {
-		$duration_selected_date = 'day_night';
-	}
-	$new_duration_date = array(
-		'days'				=> isset( $trip_duration_formating['days'] ) ? $trip_duration_formating['days'] : '',
-		'nights'			=> isset( $trip_duration_formating['nights'] ) ? $trip_duration_formating['nights'] : '',
-		'hours'				=> isset( $trip_duration_formating['hours'] ) ? $trip_duration_formating['hours'] : '',
-		'duration_format'	=> $duration_selected_date,
-	);
-	$get_Duration = apply_filters( 'wp_travel_trip_duration_formating_selects', $new_duration_date, $trip_duration_formating );
+	// $old_duration_select = isset( $trip_duration_formating['duration_format'] ) ? $trip_duration_formating['duration_format'] : '';
+	// if ( ! empty( $old_duration_select ) ) {
+	// 	$duration_selected_date = $old_duration_select;
+	// } else {
+	// 	$duration_selected_date = 'day_night';
+	// }
+	// $new_duration_date = array(
+	// 	'days'				=> isset( $trip_duration_formating['days'] ) ? $trip_duration_formating['days'] : '',
+	// 	'nights'			=> isset( $trip_duration_formating['nights'] ) ? $trip_duration_formating['nights'] : '',
+	// 	'hours'				=> isset( $trip_duration_formating['hours'] ) ? $trip_duration_formating['hours'] : '',
+	// 	'duration_format'	=> $duration_selected_date,
+	// );
+	$get_Duration = apply_filters( 'wp_travel_trip_duration_formating_selecteds', $trip_duration_formating );
 
 	if ( ! empty( $trip_duration_formating ) ) {
 		$duration_format = isset( $get_Duration['duration_format'] ) ? $get_Duration['duration_format'] : '';
@@ -882,7 +882,7 @@ function wp_travel_get_trip_durations( $trip_id ) {
 			$trip_day = $date_day > 0 ? $date_day . ' ' . $days : '';
 			$trip_hour = $hour > 0 ? $hour . ' ' . $hours : '';
 			$trip_duration = $trip_day . ' ' . $trip_hour;
-		} elseif ( $duration_format == 'hour_minute' ) {
+		} elseif ( $duration_format == 'hour_minute' ) { 
 			$trip_hour 		= $hour > 0 ? $hour . ' ' . $hours : '';
 			$trip_minute	= $date_minute > 0 ? $date_minute . ' ' . $minutes : '';
 			$trip_duration = $trip_hour . ' ' . $trip_minute;
@@ -900,7 +900,7 @@ function wp_travel_get_trip_durations( $trip_id ) {
 		$old_day = $trip_duration_days > 0  ? $trip_duration_days . ' ' .  $days : '';
 		$trip_duration = ! empty( $old_night ) || ! empty( $old_day ) ? $old_day . ' ' . $old_night : $duration_na;
 	}
-	return apply_filters( 'wp_travel_trip_duration_formated_text', $trip_duration, $get_Duration, $trip_duration_nights, $trip_duration_days, $trip_id );
+	return apply_filters( 'wp_travel_trip_duration_formated_texted', $trip_duration, $get_Duration, $trip_duration_nights, $trip_duration_days, $trip_id );
 }
 /**
  * Get Payment Status List.

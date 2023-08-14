@@ -40,6 +40,7 @@ class WpTravel_Helpers_Localize {
 		if ( is_array( $rdp_locale_array ) && count( $rdp_locale_array ) > 1 && strtoupper( $rdp_locale_array[0] ) === strtoupper( $rdp_locale_array[1] ) ) {
 			$rdp_locale = $rdp_locale_array[0];
 		}
+		
 		$rdp_locale = str_replace( '_', '', $rdp_locale ); // React date picker locale.
 		// user form transfer in react
 		global $wt_cart;
@@ -81,6 +82,22 @@ class WpTravel_Helpers_Localize {
 				'bank_detail_form'			 => wptravel_get_bank_deposit_account_details(),
 
 			);
+			$coupon_args  = array(
+				'post_type'   => 'wp-travel-coupons',
+				'post_status' => 'published',
+			);
+			$coupon_query = new WP_Query( $coupon_args );
+			$coupons      = false;
+			while ( $coupon_query->have_posts() ) {
+				$coupon_query->the_post();
+				$coupon_data = get_post_status();
+				if ( $coupon_data == 'publish' ) {
+					$coupons = true;
+					break;
+				}
+			}
+			$_wp_travel['coupon_available']	= $coupons;
+			wp_reset_query();
 
 			// Localized varialble for old trips less than WP Travel 4.0. // Need to migrate in _wp_travel.
 			$wp_travel = array(
