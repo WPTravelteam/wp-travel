@@ -154,6 +154,7 @@ module.exports = function (grunt) {
 					domainPath: 'i18n/languages',
 					exclude: ['deploy/.*', 'node_modules/.*', 'bundle/.*', 'wordpress/.*', 'vendor/.*'],
 					updateTimestamp: false,
+					potFilename: '<%= pkg.name %>.pot',
 					potHeaders: {
 						'report-msgid-bugs-to': '',
 						'x-poedit-keywordslist': true,

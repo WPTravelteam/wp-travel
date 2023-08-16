@@ -3,6 +3,9 @@ import { useSelect } from '@wordpress/data';
 // import parse from 'html-react-parser';
 const bookingStoreName = 'WPTravelFrontend/BookingData';
 import { _n, __} from '@wordpress/i18n';
+const _i18n = {
+    ..._wp-travel.strings
+} 
 // import { Button, Modal, PanelBody, PanelRow, TextControl } from '@wordpress/components'
 
 export default ( { travelerData, trvOne = 'travelerOne' } ) => {
@@ -10,17 +13,17 @@ export default ( { travelerData, trvOne = 'travelerOne' } ) => {
     const { banck_detail } = bookingData
     return banck_detail.length > 0 && <>
         <div className='wp-travel-one-page-bank-detail'>
-            <h4>{__( 'Bank Details', 'wp-travel')}</h4>
+            <h4>{_i18n.set_bank_detail}</h4>
             <table>
                 <thead>
                     <tr>
-                        <th>{__( 'Account Name', 'wp-travel')}</th>
-                        <th>{__( 'Account Number', 'wp-travel')}</th>
-                        <th>{__( 'Bank Name', 'wp-travel')}</th>
-                        <th>{__( 'Sort Code', 'wp-travel')}</th>
-                        <th>{__( 'IBAN', 'wp-travel')}</th>
-                        <th>{__( 'Swift', 'wp-travel')}</th>
-                        <th>{__( 'Routing Number', 'wp-travel')}</th>
+                        <th>{_i18n.set_account_name}</th>
+                        <th>{_i18n.set_account_number}</th>
+                        <th>{_i18n.set_bank_name}</th>
+                        <th>{_i18n.set_sort_code}</th>
+                        <th>{_i18n.set_ibam}</th>
+                        <th>{_i18n.set_swift}</th>
+                        <th>{_i18n.set_routing_number}</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -1,4 +1,4 @@
-const __i18n = {
+const i18n = {
 	..._wp_travel.strings
 }
 import CheckBoxs from './form/traveler/CheckBoxs';
@@ -13,6 +13,7 @@ import { Button } from '@wordpress/components'
 import TextArea from './form/traveler/TextArea';
 import 'react-accessible-accordion/dist/fancy-example.css';
 import { useEffect, useState } from '@wordpress/element'
+import { __ } from '@wordpress/i18n';
 import {
     Accordion,
     AccordionItem,
@@ -104,21 +105,21 @@ export default ( ) => {
                 if ( type == 'email' ) {
                     const emailData = typeof travelData[1] != 'undefined' && travelData[1] || '';
                     if ( emailData != '' && ! validateEmail( emailData ) ) {
-                        const newEmailError = {1 : 'Invalid Email'}
+                        const newEmailError = {1 : i18n.set_invalid_email}
                         emailValidate[name] = newEmailError;
                     }
 
                 }
                 if ( intRequiresd == 1 || intRequiresd == true ) {
                     if ( Object.keys( travelerEnter ).length < 1 ) {
-                        const newCreateError = { 1 : label + ' is required' }
-                        requiredListed[1] = label + ' is required';
+                        const newCreateError = { 1 : label + i18n.set_require_message }
+                        requiredListed[1] = label + i18n.set_require_message;
                         errorss[name] = newCreateError;
                     } else {
                         const finalData = typeof travelData[1] != 'undefined' && travelData[1] || '';
                         if ( finalData == '' ) {
-                            const newCreateError = { 1 : label + ' is required' }
-                            requiredListed[1] = label + ' is required';
+                            const newCreateError = { 1 : label + i18n.set_require_message }
+                            requiredListed[1] = label + i18n.set_require_message;
                             errorss[name] = newCreateError;
                         }
                     }
@@ -135,10 +136,10 @@ export default ( ) => {
                         for( i = 0 ; i < paxSize ; i++ ) {
                             const finalDatas = typeof travelData[i+1] != 'undefined' && travelData[i+1] || '';
                             if ( type == 'email' && finalDatas != '' && ! validateEmail( finalDatas ) ) {
-                                emailErrors[i+1] = 'Invalid Email';
+                                emailErrors[i+1] = i18n.set_invalid_email;
                             }
                             if ( finalDatas == '' ) {
-                                pxReq[i + 1 ] = label + ' is required';
+                                pxReq[i + 1 ] = label + i18n.set_require_message;
                             }
                         }
                         if ( ( intRequiredAll == true || intRequiredAll == 1 ) && Object.keys( pxReq ).length > 0 ) {
@@ -156,15 +157,14 @@ export default ( ) => {
             updateStore({...bookingData, error_list : {}, tripBillingEnable : true , travelerInfo : false })
         } else {
             const newRequiredError = {...errorss, email_validation : emailValidate }
-            setErrorFound('Required field is empty' );
+            setErrorFound(i18n.set_require_empty );
             updateStore({...bookingData, error_list : newRequiredError })
             setLoaders(false);
         }
     }
     const paxKey = [paxSize];
-    console.log( 'coupons', _wp_travel.coupon_available )
     return <>
-        { typeof _wp_travel.coupon_available != 'undefined' && _wp_travel.coupon_available == true && <UpdateCart /> }
+         <UpdateCart />
         {/* <ProgressBary statusText={`Progress: Fill Up Traveller Details`} value={30} max={100} /> */}
         { multipleTraveler == 'yes' && <> { paxKey.length > 0 && paxKey.map( ( pKeys, ind) => {
             const newdata = [];
@@ -178,7 +178,7 @@ export default ( ) => {
              return <AccordionItem key={ index + 10 } uuid={finalPax + ind } >
                     <AccordionItemHeading>
                         <AccordionItemButton>
-                            <span>{ finalPax == 1 ? "Lead Traveler" : 'Traveler ' } { finalPax > 1 && finalPax } </span>
+                            <span>{ finalPax == 1 ? i18n.set_load_traveler : i18n.set_traveler } { finalPax > 1 && finalPax } </span>
                         </AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>
@@ -215,9 +215,9 @@ export default ( ) => {
         <div className='wptrave-singlepage-initial-nextbtn'>
         {/* <Button onClick={backToReturn} >Next{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</Button> */}
             { trip_price != '' && <div className="onpage-traveler-field-price-show">
-                <p><span className='onpage-travel-price-display-label'>Trip Price</span>{currency_symbol}{trip_price}</p>
+                <p><span className='onpage-travel-price-display-label'>{i18n.set_cart_total_price }</span>{currency_symbol}{trip_price}</p>
             </div>}
-            <Button onClick={validateTravelerData}>Next{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</Button>
+            <Button onClick={validateTravelerData}>{i18n.set_next_btn}{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</Button>
         </div>
         
     </>

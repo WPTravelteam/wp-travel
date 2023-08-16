@@ -10,6 +10,8 @@ const __i18n = {
 import _ from 'lodash';
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
 
+import { __ } from '@wordpress/i18n';
+
 // WP Travel Functions.
 import { objectSum, wpTravelFormat, wpTravelTimeout, GetConvertedPrice } from '../_wptravelFunctions';
 
@@ -152,7 +154,7 @@ const WpTravelBookNow = ( props ) => {
 			}).then(res => {
 
 				if ( applyFilters( 'wptravel_redirect_to_checkout', true ) && true === res.success && 'WP_TRAVEL_ADDED_TO_CART' === res.data.code) {
-					typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true && alert( title + ' has been added to cart' )
+					typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true && alert( title + __( ' has been added to cart', 'wp-travel' ) )
 					location.href = typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? window.location.href :  wp_travel.checkoutUrl; // [only checkout page url]
 					// location.href = window.location.href;
 				}
@@ -160,7 +162,7 @@ const WpTravelBookNow = ( props ) => {
 				jQuery( document.body ).trigger( 'wptravel_added_to_cart', [ data ] );
 
 			}), 1000 ).catch(error => {
-				alert( '[X] Request Timeout!' );
+				alert( __( '[X] Request Timeout!', 'wp-travel' ) );
 		})
 	}
 	let enable_time = '';
@@ -188,7 +190,7 @@ const WpTravelBookNow = ( props ) => {
                         
                         <div className="right-info" >
                             <p>{__i18n.bookings.booking_tab_cart_total}<strong dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCartTotal(true)) }}></strong></p>
-                            <button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">{typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? 'Add to Cart' : __i18n.bookings.booking_tab_booking_btn_label}</button>
+                            <button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">{typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? __i18n.set_add_to_cart : __i18n.bookings.booking_tab_booking_btn_label}</button>
                         </div>
                     </div>
                 }

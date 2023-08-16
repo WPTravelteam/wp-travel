@@ -2,6 +2,8 @@ import { useSelect, dispatch } from '@wordpress/data';
 const bookingStoreName = 'WPTravelFrontend/BookingData';
 import { useState, useEffect } from '@wordpress/element'
 import apiFetch from '@wordpress/api-fetch';
+import { __ } from '@wordpress/i18n';
+const i18n = _wp_travel.strings;
 
 export default () => {
     const [ cartOpen, setCartOpen ]     = useState( false );
@@ -50,6 +52,7 @@ export default () => {
 
     }
     const cartUpdateClose = () => {
+
         setCartOpen(false)
     }
     // Increament pax throught + icon
@@ -73,7 +76,10 @@ export default () => {
         updateStore( {...bookingData, paxCounts : newPax } );
     }
 
-    const disableCart = () => setCartOpen( false )
+    const disableCart = () => { 
+        setUpdateMessage('')
+        setCartOpen( false )
+    }
 
     const updateYouCart = () => {
         setLoaders( true );
@@ -119,18 +125,18 @@ export default () => {
                     }
                     updateStore( {...bookingData, price_list : priceList, paxSize : size, cart_amount : total })
                     // alert( "Cart updated successfully.")
-                    setUpdateMessage( "Cart updated successfully." )
+                    setUpdateMessage( i18n.set_cart_updated )
                     setLoaders( false )
                    setTimeout( disableCart, 3000 )
                 } else {
-                    setCartError( "Your cart isn't update due to server error." )
+                    setCartError( i18n.set_cart_updated_error )
                     setLoaders( false )
                 }
             } else {
-                setCartError( "Your cart isn't update due to server responce error." )
+                setCartError( i18n.set_cart_updated_server_responce )
                 setLoaders( false )
             }
-         }).catch( err => {alert( 'Your cart is not update due to some server error.' )
+         }).catch( err => {alert( i18n.set_cart_server_error )
 
             setLoaders( false )
         } )
@@ -138,7 +144,7 @@ export default () => {
     }
     return <>
             <div className='wptravel-udate-cart-wrapper'>
-            <button className='components-button' onClick={cartOpen == true ? cartUpdateClose : cartUpdateOpen} >{ cartOpen == true ? 'Close Cart' : 'View Cart' }</button>
+            <button className='components-button' onClick={cartOpen == true ? cartUpdateClose : cartUpdateOpen} >{ cartOpen == true ? i18n.set_close_cart : i18n.set_view_cart }</button>
         { cartOpen == true && <>
             <div className="wptravel-on-page-booking-update-cart-section">
                 { typeof priceCategoryList != 'undefined' && priceCategoryList.length > 0  && priceCategoryList.map( ( listed, index ) => {
@@ -164,7 +170,7 @@ export default () => {
                     </>
                 } )}
                 <div className="wptravel-on-page-booking-cart-update-btn">
-                    <button className='components-button' onClick={updateYouCart}>Update Cart{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</button>
+                    <button className='components-button' onClick={updateYouCart}>{i18n.set_updated_cart_btn}{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</button>
                     <p className='wptravel-onpage-cart-updated-message' >{cartUpdateMessage}</p>
                 </div>
             </div>
