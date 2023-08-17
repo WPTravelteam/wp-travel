@@ -150,7 +150,6 @@ const WpTravelBookNow = ( props ) => {
 				method: 'POST',
 				data
 			}).then(res => {
-
 				if ( applyFilters( 'wptravel_redirect_to_checkout', true ) && true === res.success && 'WP_TRAVEL_ADDED_TO_CART' === res.data.code) {
 					typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true && alert( title + ' has been added to cart' )
 					location.href = typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? window.location.href :  wp_travel.checkoutUrl; // [only checkout page url]
