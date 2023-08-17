@@ -743,7 +743,7 @@ class WpTravel_Helpers_Trips {
 		if ( empty( $trips ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIPS' );
 		}
-
+	
 		return WP_Travel_Helpers_Response_Codes::get_success_response(
 			'WP_TRAVEL_FILTER_RESULTS',
 			array(
