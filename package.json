@@ -10,7 +10,8 @@
     "lint:php": "wp-scripts env lint-php",
     "postinstall": "husky install",
     "makepots": "wp i18n make-pot . i18n/languages/wp-travel-test.pot --exclude=node_modules,vendor,src,wordpress,build,bundle --skip-js",
-    "bundle": "wp-scripts build && npx grunt build_svn"
+    "bundle": "wp-scripts build && npx grunt build_svn",
+    "pots" : "npx grunt textdomains"
   },
   "repository": {
     "type": "git",
@@ -51,7 +52,7 @@
     "grunt-push-svn": "^0.2.2",
     "grunt-rtlcss": "^2.0.1",
     "grunt-svn-export": "^0.1.7",
-    "grunt-wp-i18n": "0.5.4",
+    "grunt-wp-i18n": "1.0.3",
     "grunt-writefile": "^0.1.4",
     "grunt-zip": "^0.18.1",
     "he": "^1.2.0",

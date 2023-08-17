@@ -1,4 +1,4 @@
-const __i18n = {
+const i18n = {
 	..._wp_travel.strings
 }
 import CheckBoxs from './form/CheckBoxs';
@@ -12,8 +12,10 @@ const bookingStoreName = 'WPTravelFrontend/BookingData';
 import { Button } from '@wordpress/components'
 import TextArea from './form/TextArea';
 import { useEffect, useState } from '@wordpress/element'
+import { __ } from '@wordpress/i18n';
 // import apiFetch from '@wordpress/api-fetch';
 import ProgressBary from '../ProgressBary';
+// import i18n from '@wordpress/i18n/build-types/default-i18n';
 export default ( ) => {
     // Booking Data/state.
     const [loaders, setLoaders] = useState(false)
@@ -55,11 +57,11 @@ export default ( ) => {
                 const intRequiresd = requireds;
                 if ( intRequiresd == 1 || intRequiresd == true ) {
                     if ( Object.keys( billingData ).length < 1 ) {
-                        errorss[name] = label + ' is required';
+                        errorss[name] = label + i18n.set_require_message
                     } else {
                         const travelData = typeof billingData[name] != 'undefined' && billingData[name] || '';
                         if ( travelData == '' ) {
-                            errorss[name] = label + ' is required';
+                            errorss[name] = label + i18n.set_require_message
                         }
                     }
                 }
@@ -69,7 +71,7 @@ export default ( ) => {
             setLoaders(false);
             updateStore({...bookingData, error_list : {}, treipPaymentEnable : true , tripBillingEnable : false })
         } else {
-            setErrorFound('Required field is empty' );
+            setErrorFound(i18n.set_require_empty );
             updateStore({...bookingData, error_list : errorss })
             setLoaders(false);
         }
@@ -93,14 +95,14 @@ export default ( ) => {
         
             <Button onClick={ () => { 
                 updateStore({...bookingData, travelerInfo : true , tripBillingEnable : false })
-            }} >Go Back</Button>
+            }} >{i18n.set_go_back}</Button>
             <div>
                 <p className='wptravel-onepage-navigation-error'>{errorFound}</p>
                 <div className="wptravel-onpage-priceshow">
                     { trip_price != '' && <div className="onpage-traveler-field-price-show">
-                        <p><span className='onpage-travel-price-display-label'>Trip Price</span>{currency_symbol}{trip_price}</p>
+                        <p><span className='onpage-travel-price-display-label'>{__( 'Trip Price', 'wp-travel' ) }</span>{currency_symbol}{trip_price}</p>
                     </div>}
-                    <Button onClick={ validateTravelerData } >Next{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</Button>
+                    <Button onClick={ validateTravelerData } >{i18n.set_next_btn }{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</Button>
                 </div>
                 
             </div>

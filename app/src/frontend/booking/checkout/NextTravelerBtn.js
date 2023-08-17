@@ -193,7 +193,7 @@ const WpTravelBookNow = ( props ) => {
 				jQuery( document.body ).trigger( 'wptravel_added_to_cart', [ data ] );
 
 			}), 1000 ).catch(error => {
-				alert( '[X] Request Timeout!' );
+				alert( __i18n.set_time_out );
 		})
 	}
 	let enable_time = '';
