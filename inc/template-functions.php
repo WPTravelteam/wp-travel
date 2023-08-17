@@ -881,7 +881,7 @@ function wptravel_single_excerpt( $trip_id ) {
 			elseif ( wptravel_tab_show_in_menu( 'booking' ) || $enable_one_page ) :
 				if ( $enable_one_page == true && $hook_for_double_enable == true ) {
 				?>
-				<div id='wp-travel-one-page-checkout-enables'>Book Now</div>
+				<div id='wp-travel-one-page-checkout-enables'><?php __('Book Now', 'wp-travel' ); ?></div>
 				<?php } else { ?>
 				<button class="wptravel-book-your-trip wp-travel-booknow-btn"><?php echo esc_html( apply_filters( 'wp_travel_template_book_now_text', $book_now_text ) ); // @phpcs:ignore ?></button>
 			<?php } endif; ?>

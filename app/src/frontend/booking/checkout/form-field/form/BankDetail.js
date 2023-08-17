@@ -4,7 +4,7 @@ import { useSelect } from '@wordpress/data';
 const bookingStoreName = 'WPTravelFrontend/BookingData';
 import { _n, __} from '@wordpress/i18n';
 const _i18n = {
-    ..._wp-travel.strings
+    ..._wp_travel.strings
 } 
 // import { Button, Modal, PanelBody, PanelRow, TextControl } from '@wordpress/components'
 

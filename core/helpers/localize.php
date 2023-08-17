@@ -25,6 +25,7 @@ class WpTravel_Helpers_Localize {
 		global $post;
 		$localized_data = array();
 		$settings       = wptravel_get_settings();
+		
 		// Getting Locale to fetch Localized calender js.
 		$lang_code            = explode( '-', get_bloginfo( 'language' ) );
 		$locale               = $lang_code[0];
@@ -86,6 +87,8 @@ class WpTravel_Helpers_Localize {
 				'post_type'   => 'wp-travel-coupons',
 				'post_status' => 'published',
 			);
+			$_wp_travel['trip_tax_enable']	= isset( $settings['trip_tax_enable'] ) ? $settings['trip_tax_enable'] : 'no';
+			$_wp_travel['trip_tax_percentage'] = isset( $settings['trip_tax_percentage'] ) ? $settings['trip_tax_percentage'] : 0;
 			$coupon_query = new WP_Query( $coupon_args );
 			$coupons      = false;
 			while ( $coupon_query->have_posts() ) {

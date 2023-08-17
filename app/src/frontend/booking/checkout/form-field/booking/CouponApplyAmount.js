@@ -23,7 +23,9 @@ export default ( { coupon_data, currency_symbol, booking_option, payment_mode, p
                     </div>
                 </div>}
                 { parseInt( tax ) > 0 && <div className="components-panel__row">
-                    <label>{ i18n.set_cart_tax }</label>
+                    <label>{ i18n.set_cart_tax }
+                        <span className='wptravel-onpage-trip-tax-prcnt' > ( {_wp_travel.trip_tax_enable == 'yes' &&  _wp_travel.trip_tax_percentage || 13}% )</span>
+                    </label>
                     <div id="wp-travel-trip-price_info" className="wptravel-one-page-booking">			
                         <span className="wp-travel-trip-currency"><span className="wptravel-on-page-tax-increament-icon">+</span> {currency_symbol}</span> 
                         <span className="wp-travel-trip-price-figure">{tax}</span>
