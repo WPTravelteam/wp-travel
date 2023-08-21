@@ -1,6 +1,6 @@
 {
   "name": "wp-travel",
-  "version": "7.1.0",
+  "version": "7.2.0",
   "description": "Travel plugin for WordPress",
   "main": "index.js",
   "scripts": {
@@ -24,7 +24,7 @@
     "booking"
   ],
   "author": "WP Travel",
-  "license": "GPL-2.0",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://gitlab.com/ws-plugins/wp-travel/issues"
   },
