@@ -17,7 +17,6 @@ const __i18n = {
 const bookingStoreName = 'WPTravelFrontend/BookingData';
 
 export default () => {
-    console.log('detailsdfdf', _wp_travel);
     const [isOpen, setOpen] = useState(false);
 
     const openModal = () => setOpen(true);
@@ -31,7 +30,7 @@ export default () => {
     const { bookingTabEnable, travelerInfo, tripBillingEnable, treipPaymentEnable, payment_form } = bookingData;
     const paymentEnable = typeof payment_form != 'undefined' && typeof payment_form.payment_gateway != 'undefined' && true || false
     const tooltipText = __i18n.bookings.date_select_to_view_options;
-    console.log( 'booking data', bookingData )
+    
     return <>
         <Button className=" wptravel-book-your-trip  wp-travel-booknow-btn" onClick={openModal}>{__i18n.set_book_now }</Button>
         <div className="wp-travel-checkout-one-page">

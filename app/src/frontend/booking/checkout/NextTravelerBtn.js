@@ -2,6 +2,7 @@ import { Suspense, useState } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 import { applyFilters } from '@wordpress/hooks';
 import { useSelect, dispatch } from '@wordpress/data';
+import { __ } from '@wordpress/i18n';
 const __i18n = {
 	..._wp_travel.strings
 }
@@ -222,7 +223,7 @@ const WpTravelBookNow = ( props ) => {
                         
                         <div className="right-info" >
                             <p>{__i18n.bookings.booking_tab_cart_total}<strong dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCartTotal(true)) }}></strong></p>
-                            <button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">Next{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</button>
+                            <button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">{ __( 'Next', 'wp-travel' ) }{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</button>
                         </div>
                     </div>
 					</div>
