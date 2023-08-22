@@ -38,6 +38,18 @@ class WpTravel_Localize_Admin {
 		if ( get_current_screen()->base == 'dashboard_page_wp-travel-setup-page' ) {
 			$theme_lists = array(
 				array(
+					'slug'       => 'travelvania',
+					'theme_page' => 'https://wensolutions.com/themes/travelvania/',
+				),
+				array(
+					'slug'       => 'wp-travel-fse',
+					'theme_page' => 'https://wensolutions.com/themes/wp-travel-fse/',
+				),
+				array(
+					'slug'       => 'travel-init',
+					'theme_page' => 'https://wensolutions.com/themes/travel-init/',
+				),
+				array(
 					'slug'       => 'travel-log',
 					'theme_page' => 'https://wensolutions.com/themes/travel-log-pro/',
 				),
