@@ -1284,6 +1284,10 @@ msgid "Go Back"
 msgstr ""
 
 #: core/helpers/strings.php:222
+msgid "has been added to cart."
+msgstr ""
+
+#: core/helpers/strings.php:222
 msgid "Plese select you payment gateway"
 msgstr ""
 
