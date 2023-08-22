@@ -403,15 +403,15 @@ If you have any queries regarding the plugin and extensions then you can ask for
 
 == Screenshots ==
 1. Backend: Settings
-2. Backend: New trip, Description
-3. Backend: New trip, Prices
-4. Backend: New trip, Dates
-5. Backend: New trip, Locations
-6. Backend: New trip, Tabs
-7. Frontend: Trip detail
-8. Frontend: WP Travel Cart
-9. Frontend: WP Travel Checkout
-10. Frontend: Trip listing
+2. Backend: Add New Trip
+3. Backend: Trip Options - Prices
+4. Backend: Trip Options - Dates
+5. Backend: Trip Options - Locations
+6. Backend: Trip Options - Tabs
+7. Frontend: Trip Details
+8. Frontend: On-Page Trip Booking
+9. Frontend: Checkout
+10. Frontend: Trip Listings
 
 == Upgrade Notice ==
 Before updating plugin please check ["our latest release notes"](#developers).
@@ -423,12 +423,13 @@ Release Date: 22nd August 2023
 
 Fixes:
 * Fixed translation issue for On-Page booking.
-* Fixed Payment detail message while selecting 'Booking Only' in case of On-Page booking.
 
 Enhancements:
 * Added Hour and Minute option in case of Trip duration.
 * Added Tax percentage in case of On-Page booking.
 * Removed 'Apply Coupon' field, if coupon is not added in case of On-Page booking.
+
+**For more details, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-7-2-0-update-release-note/).**
 
 = 7.1.1 =
 Release Date: 9th August 2023
