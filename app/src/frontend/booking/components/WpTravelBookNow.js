@@ -173,7 +173,7 @@ const WpTravelBookNow = ( props ) => {
 						location.href = typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? window.location.href :  wp_travel.checkoutUrl; // [only checkout page url]
 					} else {
 						var cartCount = Object.keys(res.data.cart.cart_items).length;
-						jQuery( '#wp-travel__add-to-cart_notice' ).addClass( 'success' ).append( '<span><i class="fa fa-check-circle"></i><strong>' + title + '</strong> ' + __( 'has been added to cart.', 'wp-travel' ) + '</span>' );
+						jQuery( '#wp-travel__add-to-cart_notice' ).addClass( 'success' ).append( '<span><i class="fa fa-check-circle"></i><strong>' + title + '</strong> ' + __i18n.set_added_cart + '</span>' );
 			
 						setTimeout( () => {
 							jQuery( '#wp-travel__add-to-cart_notice' ).removeClass( 'success' )

@@ -219,6 +219,7 @@ class WpTravel_Helpers_Strings {
 			'set_require_empty'			=> __( 'Required field is empty', 'wp-travel' ),
 			'set_go_back'				=> __( 'Go Back', 'wp-travel' ) ,
 			'set_next_btn'				=> __( 'Next', 'wp-travel' ),
+			'set_added_cart'			=> __( 'has been added to cart.', 'wp-travel' ),
 			'set_gateway_select'		=> __( 'Plese select you payment gateway', 'wp-travel' ),
 			'set_book_now'				=> __( "Book Now", 'wp-travel' ),
 			'set_invalid_email'			=> __( 'Invalid Email', 'wp-travel' ),
