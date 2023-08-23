@@ -419,7 +419,7 @@ Before updating plugin please check ["our latest release notes"](#developers).
 == Changelog ==
 
 = 7.2.0 =
-Release Date: 22nd August 2023
+Release Date: 23nd August 2023
 
 Fixes:
 * Fixed translation issue for On-Page booking.
