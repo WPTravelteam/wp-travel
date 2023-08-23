@@ -43,13 +43,14 @@
 .wp-travel-average-review {
 	font-family: "Font Awesome 5 Free";
 	font-size: 1em;
-	height: 1em;
-	line-height: 1;
+	height: 1.2em;
+	line-height: 1.2;
 	overflow: hidden;
 	position: relative;
-	width: 5.5em;
+	width: 5.9em;
 	display: inline-block;
 	word-break: normal;
+	letter-spacing: 1px;
 
 	&:before {
 		color: #f9a032;
