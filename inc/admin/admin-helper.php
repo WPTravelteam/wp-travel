@@ -29,6 +29,27 @@ function wptravel_marketplace_page() {
 
 	// Hardcoded themes data.
 	$themes_data = array(
+		'travelvania'     => array(
+			'name'       => __( 'Travelvania', 'wp-travel' ),
+			'type'       => 'free',
+			'img_url'    => 'https://i0.wp.com/themes.svn.wordpress.org/travelvania/1.0.3/screenshot.png?w=572&strip=all',
+			'demo_url'   => 'https://wpdemo.wensolutions.com/travelvania/',
+			'detail_url' => 'https://wensolutions.com/themes/travelvania/',
+		),
+		'wp-travel-fse'     => array(
+			'name'       => __( 'WP Travel FSE', 'wp-travel' ),
+			'type'       => 'free',
+			'img_url'    => 'https://i0.wp.com/themes.svn.wordpress.org/wp-travel-fse/1.0.6/screenshot.png?w=572&strip=all',
+			'demo_url'   => 'https://wpdemo.wensolutions.com/wp-travel-fse/',
+			'detail_url' => 'https://wensolutions.com/themes/wp-travel-fse/',
+		),
+		'travel-init'     => array(
+			'name'       => __( 'Travel Init', 'wp-travel' ),
+			'type'       => 'free',
+			'img_url'    => 'https://i0.wp.com/themes.svn.wordpress.org/travel-init/1.1/screenshot.png?w=572&strip=all',
+			'demo_url'   => 'https://wpdemo.wensolutions.com/travel-init/',
+			'detail_url' => 'https://wensolutions.com/themes/travel-init/',
+		),
 		'travel-log-pro'     => array(
 			'name'       => __( 'Travel Log Pro', 'wp-travel' ),
 			'type'       => 'premium',

@@ -178,12 +178,13 @@ function wptravel_get_checkout_form_fields() {
 		$trip_location = '';
 		$payment       = '';
 
+
 		if ( count( wp_get_post_terms( $trip_ids, 'travel_locations', array( 'fields' => 'all' ) ) ) > 0 ) {
 			$trip_location = wp_get_post_terms( $trip_ids, 'travel_locations', array( 'fields' => 'all' ) )[0]->slug;
+
 		}
 
-		if ( ( $trip_location !== '' ) && class_exists( 'WP_Travel_Pro' ) && class_exists( 'WP_Travel_Conditional_Payment' ) && wptravel_get_settings()['enable_conditional_payment'] == 'yes' ) {
-
+		if ( ( $trip_location !== '' ) && class_exists( 'WP_Travel_Pro' ) && class_exists( 'WP_Travel_Conditional_Payment_Core' ) && wptravel_get_settings()['enable_conditional_payment'] == 'yes' ) {
 			add_action(
 				'wp_enqueue_scripts',
 				function() {

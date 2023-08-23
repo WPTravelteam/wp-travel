@@ -224,7 +224,8 @@ class WP_Travel_Admin_Booking {
 			$payment_id                  = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
 			$booking_option              = get_post_meta( $payment_id, 'wp_travel_booking_option', true );
 			$multiple_trips_booking_data = get_post_meta( $booking_id, 'order_items_data', true );
-			?>
+			?> 
+			kjfjdshkfd
 			<div class="wp-travel-booking-form-wrapper" >
 				<?php
 				do_action( 'wp_travel_booking_before_form_field' );
@@ -240,7 +241,7 @@ class WP_Travel_Admin_Booking {
 					'default'       => $wp_travel_post_id,
 				);
 				$form_field->init( $trip_field_args, array( 'single' => true ) )->render();
-
+				
 				$args       = array( 'trip_id' => $booking_id ); // why booking id ??
 				$trip_price = WP_Travel_Helpers_Pricings::get_price( $args );
 
@@ -251,7 +252,6 @@ class WP_Travel_Admin_Booking {
 				if ( 'booking_only' === $booking_option ) {
 					unset( $payment_fields['is_partial_payment'], $payment_fields['payment_gateway'], $payment_fields['payment_mode'], $payment_fields['payment_amount'], $payment_fields['payment_amount_info'] );
 				}
-
 				// Sort fields.
 				$traveller_fields = wptravel_sort_form_fields( $traveller_fields );
 				$billing_fields   = wptravel_sort_form_fields( $billing_fields );
@@ -267,6 +267,7 @@ class WP_Travel_Admin_Booking {
 					$input_val  = get_post_meta( $booking_id, $field_name, true );
 				}
 
+				?><div id="wpcrm-added-code" ></div> <?php
 				if ( $input_val && is_array( $input_val ) ) { // Multiple Travelers Section.
 					foreach ( $input_val as $cart_id => $field_fname_values ) {
 						$trip_id   = isset( $multiple_trips_booking_data[ $cart_id ]['trip_id'] ) ? $multiple_trips_booking_data[ $cart_id ]['trip_id'] : 0;
@@ -274,6 +275,7 @@ class WP_Travel_Admin_Booking {
 						echo '<h3>' . wptravel_get_trip_pricing_name( $trip_id, $price_key ) . '</h3>'; //phpcs:ignore
 						foreach ( $field_fname_values as $i => $field_fname_value ) {
 							?>
+							
 							<div class="wp-travel-form-field-wrapper">
 								<?php
 								if ( 0 === $i ) {

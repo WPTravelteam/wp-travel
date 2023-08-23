@@ -2,9 +2,12 @@ import { useSelect, dispatch } from '@wordpress/data';
 const bookingStoreName = 'WPTravelFrontend/BookingData';
 import { useState, useEffect } from '@wordpress/element'
 import apiFetch from '@wordpress/api-fetch';
+import { __ } from '@wordpress/i18n';
+const i18n = _wp_travel.strings;
 
 export default () => {
     const [ cartOpen, setCartOpen ]     = useState( false );
+    const [ cartUpdateMessage, setUpdateMessage ] = useState('')
     const [loaders, setLoaders ]  = useState( false )
     const [ cartError, setCartError ]  = useState('')
     const [ updatePriceData, setUpdatePriceData ]  = useState({})
@@ -20,18 +23,15 @@ export default () => {
     const cartUpdateOpen = () => {
         typeof priceCart == 'undefined' && typeof pricings != 'undefined' && pricings.length > 0 && pricings.forEach( ( priceList, index ) => {
             const { id, categories, max_pax, min_pax }    = priceList;
-            console.log( 'bestign', nomineePricingIds.includes( id.toString() ), id, categories )
             if ( nomineePricingIds[0] == id ) {
                 var prcCategory = {}
                 var priceFirst = {};
                 if ( typeof categories != 'undefined' && categories.length > 0 ) {
-                    console.log( 'in the file ' )
                     categories.forEach( ( priceCatList, ind ) => {
                         const { term_info, regular_price, is_sale, sale_price } = priceCatList;
                         const catName = typeof term_info != 'undefined' && typeof term_info.title != 'undefined' && term_info.title || '';
                         const catId = typeof priceCatList.id != 'undefined' && priceCatList.id || 0;
                         const optionCat = { title : catName, catId : catId, is_sale : is_sale, regular_price : regular_price, sale_price : sale_price }
-                        console.log( 'catde', optionCat );
                         prcCategory[catId]  = optionCat;
                         if ( is_sale == true ) {
                             var firstPrice = paxCounts[catId] * sale_price;
@@ -41,7 +41,6 @@ export default () => {
                         priceFirst[catId] = firstPrice;
                     })
                     setUpdatePriceData( priceFirst )
-                    console.log( 'prcCategory', prcCategory );
                     if ( Object.values( prcCategory ).length > 0 ) {
                         const finalPrice = { max_pax : max_pax, min_pax : min_pax, priceCategoryList : Object.values( prcCategory ) }
                         updateStore( {...bookingData, priceCart :  finalPrice } )
@@ -53,6 +52,7 @@ export default () => {
 
     }
     const cartUpdateClose = () => {
+
         setCartOpen(false)
     }
     // Increament pax throught + icon
@@ -74,6 +74,11 @@ export default () => {
         const newPriceList = { ...updatePriceData, [categoryId] : priceCalulate }
         setUpdatePriceData( newPriceList );
         updateStore( {...bookingData, paxCounts : newPax } );
+    }
+
+    const disableCart = () => { 
+        setUpdateMessage('')
+        setCartOpen( false )
     }
 
     const updateYouCart = () => {
@@ -100,7 +105,6 @@ export default () => {
             method: 'POST',
             data : cartDatas
         }).then(res => {
-            console.log( 'respoces', res );
             if ( typeof res.success != 'undefined' && res.success == true && typeof res.data != 'undefined' ) {
                 const responceData = res.data;
                 if ( typeof responceData.code != 'undefined' && responceData.code == 'WP_TRAVEL_CART_ITEM_UPDATED' && typeof responceData.cart != 'undefined' ) {
@@ -120,18 +124,19 @@ export default () => {
                         } )
                     }
                     updateStore( {...bookingData, price_list : priceList, paxSize : size, cart_amount : total })
-                    alert( "Cart updated successfully.")
+                    // alert( "Cart updated successfully.")
+                    setUpdateMessage( i18n.set_cart_updated )
                     setLoaders( false )
-                    setCartOpen( false )
+                   setTimeout( disableCart, 3000 )
                 } else {
-                    setCartError( "Your cart isn't update due to server error." )
+                    setCartError( i18n.set_cart_updated_error )
                     setLoaders( false )
                 }
             } else {
-                setCartError( "Your cart isn't update due to server responce error." )
+                setCartError( i18n.set_cart_updated_server_responce )
                 setLoaders( false )
             }
-         }).catch( err => {alert( 'Your cart is not update due to some server error.' )
+         }).catch( err => {alert( i18n.set_cart_server_error )
 
             setLoaders( false )
         } )
@@ -139,7 +144,7 @@ export default () => {
     }
     return <>
             <div className='wptravel-udate-cart-wrapper'>
-            <button className='components-button' onClick={cartOpen == true ? cartUpdateClose : cartUpdateOpen} >{ cartOpen == true ? 'Close Cart' : 'View Cart' }</button>
+            <button className='components-button' onClick={cartOpen == true ? cartUpdateClose : cartUpdateOpen} >{ cartOpen == true ? i18n.set_close_cart : i18n.set_view_cart }</button>
         { cartOpen == true && <>
             <div className="wptravel-on-page-booking-update-cart-section">
                 { typeof priceCategoryList != 'undefined' && priceCategoryList.length > 0  && priceCategoryList.map( ( listed, index ) => {
@@ -165,7 +170,8 @@ export default () => {
                     </>
                 } )}
                 <div className="wptravel-on-page-booking-cart-update-btn">
-                    <button className='components-button' onClick={updateYouCart}>Update Cart{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</button>
+                    <button className='components-button' onClick={updateYouCart}>{i18n.set_updated_cart_btn}{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</button>
+                    { cartUpdateMessage !== '' && <span className="wptravel-onpage-cart-updated-message"><i class="fa fa-check-circle"></i>{ cartUpdateMessage }</span> }
                 </div>
             </div>
 

@@ -246,7 +246,6 @@ const PaxSelector = ( props ) => {
 									<button onClick={handlePaxChange(c.id, -1)}>-</button>
 									<input  className='wp-trave-pax-selected-frontend' value={selectedPax} onChange={ ( essdfdsf ) => {
 										handlePaxChangeInput( c.id, essdfdsf )
-										console.log( 'thsidf', essdfdsf )
 									}} />
 									<button className='wp-booking-pax-selected-wp' onClick={handlePaxChange(c.id, 1)}>+</button>
 								</div>
