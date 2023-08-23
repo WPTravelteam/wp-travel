@@ -88,7 +88,7 @@ $trp_title = apply_filters( 'wp_travel_trip_title_enable_disable', true );
 								<a href="<?php echo esc_url( $location_link ); ?>" ><?php echo apply_filters( 'wp_travel_archives_page_trip_location', esc_html( $location_name ), $trip_id ); ?></a>
 								<?php
 							else :
-								esc_html_e( apply_filters( 'wp_travel_archives_page_trip_location', 'wp-travel', $trip_id), 'wp-travel' );
+								esc_html_e( apply_filters( 'wp_travel_archives_page_trip_location', 'N/A', $trip_id), 'wp-travel' );
 							endif;
 							?>
 						</span>
