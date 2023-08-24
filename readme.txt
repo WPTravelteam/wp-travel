@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 6.0.0
 Tested up to: 6.3
 Requires PHP: 7.4
-Stable tag: 7.2.0
+Stable tag: 7.2.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -422,7 +422,7 @@ Before updating plugin please check ["our latest release notes"](#developers).
 Release Date: 24th August 2023
 
 Fixes:
-* Fix and remove random string generated on custom booking page.
+* Code cleanup
 
 = 7.2.0 =
 Release Date: 23rd August 2023
