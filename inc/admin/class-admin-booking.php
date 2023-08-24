@@ -225,7 +225,6 @@ class WP_Travel_Admin_Booking {
 			$booking_option              = get_post_meta( $payment_id, 'wp_travel_booking_option', true );
 			$multiple_trips_booking_data = get_post_meta( $booking_id, 'order_items_data', true );
 			?> 
-			kjfjdshkfd
 			<div class="wp-travel-booking-form-wrapper" >
 				<?php
 				do_action( 'wp_travel_booking_before_form_field' );
