@@ -418,6 +418,12 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
 
+= 7.2.1 =
+Release Date: 24th August 2023
+
+Fixes:
+* Fix and remove random string generated on custom booking page.
+
 = 7.2.0 =
 Release Date: 23rd August 2023
 
