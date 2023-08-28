@@ -194,6 +194,7 @@ export default () => {
                     }
 
                     {applyFilters('wp_travel_below_debug_tab_fields', [])}
+                    {applyFilters('wptravelwpcrmmigration', [], allData )}
                 </ErrorBoundary>
             </div>
         </>
