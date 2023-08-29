@@ -136,7 +136,7 @@ function wptravel_book_now() {
 	wp_update_post( $update_data_array );
 
 	$sanitized_data = wptravel_sanitize_array( $_POST ); // @phpcs:ignore
-
+	do_action( 'wpcrm_post_booking_user', $sanitized_data );
 	// Updating Booking Metas.
 	update_post_meta( $booking_id, 'order_data', $sanitized_data );
 	update_post_meta( $booking_id, 'order_items_data', $items ); // @since 1.8.3
