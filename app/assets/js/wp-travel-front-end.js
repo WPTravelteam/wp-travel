@@ -1,6 +1,7 @@
 if( ( typeof _wp_travel_check_for_pro  != 'undefined' && _wp_travel_check_for_pro.is_enable == '1' ) && ( typeof _wp_travel_check_cp_by_billing != 'undefined' && _wp_travel_check_cp_by_billing.is_enable == 'yes' ) ){ 
     
     jQuery(function ($) {
+
         $( '#wp-travel-country' ).change( function(){
             $(".wp-travel-radio-group.wp-travel-payment-field .wp-travel-radio").remove();
 
@@ -101,6 +102,12 @@ if( ( typeof _wp_travel_check_for_pro  != 'undefined' && _wp_travel_check_for_pr
 
 
 jQuery(function ($) {
+
+    $('.trip-video').magnificPopup({
+        type: 'iframe',
+        mainClass: 'mfp-fade',
+        preloader: true,
+    });
 
     if ($('.wp-travel-error').length > 0) {
 

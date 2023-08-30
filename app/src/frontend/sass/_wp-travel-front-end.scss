@@ -2552,3 +2552,29 @@ li {
 $primaryColor: #3399ff;
 
 // Cart
+
+.wptravel-layout-v2 #wptravel-archive-wrapper  .trip-location .wp-travel-caret{
+	display:none;
+	position: absolute;
+	background: #eee;
+    padding: 5px 20px;
+}
+
+.wptravel-layout-v2 #wptravel-archive-wrapper  .trip-location .post-category i:hover + .wp-travel-caret{
+	display: block;
+} 
+
+.featured-side-image .banner-image-wrapper i{
+	font-size: 60px;
+	left: 50%;
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	color: aliceblue;
+}
+
+
+
+
+
