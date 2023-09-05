@@ -22,6 +22,18 @@ class WpTravel_Helpers_Strings {
 	 * @return array
 	 */
 	public static function get() {
+
+		$price_per = array(
+			array(
+				'label' => __( 'Person', 'wp-travel' ),
+				'value' => 'person',
+			),
+			array(
+				'label' => __( 'Group', 'wp-travel' ),
+				'value' => 'group',
+			)
+		);
+
 		$localized_strings = array(
 			'activities'                => __( 'Activities', 'wp-travel' ),
 			'add_date'                  => __( 'Please add date.', 'wp-travel' ),
@@ -238,7 +250,8 @@ class WpTravel_Helpers_Strings {
 			'set_ibam'					=> __( 'IBAN', 'wp-travel'),
 			'set_swift'					=> __( 'Swift', 'wp-travel'),
 			'set_routing_number'		=> __( 'Routing Number', 'wp-travel'),
-			'set_add_to_cart'			=> __('Add to Cart', 'wp-travel')
+			'set_add_to_cart'			=> __('Add to Cart', 'wp-travel'),
+			'trip_price_per'			=> apply_filters( 'wp_travel_trip_price_per', $price_per )
 		);
 
 		$localized_strings['price_per_labels'] = array(

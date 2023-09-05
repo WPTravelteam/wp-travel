@@ -21,7 +21,7 @@ const __i18n = {
 
 // Single Components for hook callbacks.
 const TripOverview = ({ allData }) => {
-	const { trip_overview } = allData;
+	const { trip_overview, trip_video_code } = allData;
 	const { updateTripData } = dispatch("WPTravel/TripEdit");
 	return (
 		<>
@@ -42,7 +42,19 @@ const TripOverview = ({ allData }) => {
 						name="trip_overview"
 					/>
 				)}
+				
 			</PanelRow>
+			<p>Youtube Video Code</p>
+			<TextControl
+				value={trip_video_code}
+				onChange={(trip_video_code) => {
+					updateTripData({
+						...allData,
+						trip_video_code: trip_video_code,
+					});
+				}}
+			/>
+			<p>Example :- https://www.youtube.com/watch?v=eaLcanzEB6w&t=16s, in given url "eaLcanzEB6w" is a video code</p>
 		</>
 	);
 };

@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 6.0.0
 Tested up to: 6.3
 Requires PHP: 7.4
-Stable tag: 7.2.1
+Stable tag: 7.3.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -417,6 +417,20 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 7.3.0 =
+Release Date: 
+
+Fixes:
+* Code cleanup 
+* Fixed booking date label in case of one day trip
+* Added departure date in thankyou page and booking email template
+
+Enhancements:
+* Inherit theme color on add to cart
+* Extend time interval of cornjobs ( once in a two day )
+* Added hook for cart icon - wptravel_get_cart_icon()
+* Added wp_travel_trip_price_per hook ( this hook helps to and extra label for book per ( ie. person, group ) )
 
 = 7.2.1 =
 Release Date: 24th August 2023

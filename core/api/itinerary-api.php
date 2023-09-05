@@ -83,6 +83,8 @@ Class WP_Travel_API_Itinerary {
 		  'meta_input'    => array(
 		  	'wp_travel_overview' => !empty( $get_data['trip_overview'] ) ? $get_data['trip_overview'] : '',
 
+			'wp_travel_video_url' => !empty( $get_data['trip_video_url'] ) ? $get_data['trip_video_url'] : '',
+
 		  	'wp_travel_outline'		=> !empty( $get_data['trip_outline'] ) ? $get_data['trip_outline'] : '',
 
 		  	'wp_travel_fixed_departure'	=> $get_data['trip_enable_fixed_departure'],
@@ -361,6 +363,10 @@ Class WP_Travel_API_Itinerary {
 
 		if( !empty( $get_data['trip_overview'] ) ){ 
 			$my_post['meta_input']['wp_travel_overview'] = $get_data['trip_overview'];
+		}
+
+		if( !empty( $get_data['trip_video_url'] ) ){ 
+			$my_post['meta_input']['wp_travel_video_url'] = $get_data['trip_video_url'];
 		}
 
 		if( !empty( $get_data['trip_outline'] ) ){ 

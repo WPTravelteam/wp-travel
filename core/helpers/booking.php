@@ -44,8 +44,8 @@ class WpTravel_Helpers_Booking {
 				<tr>
 					<th><?php apply_filters( 'wp_travel_booking_mail_itinerary', esc_html_e( 'Itinerary', 'wp-travel' ), $booking_id ); ?></th>
 					<th><?php apply_filters( 'wp_travel_booking_mail_pax', esc_html_e( ! empty( $strings ) ? strtoupper( $strings['bookings']['pax'] ) : 'PAX', 'wp-travel' ), $booking_id ); ?></th>
-					<th><?php apply_filters( 'wp_travel_booking_mail_arrival', esc_html_e( 'Arrival Date', 'wp-travel' ), $booking_id ); ?></th>
 					<th><?php apply_filters( 'wp_travel_booking_mail_departure', esc_html_e( 'Departure Date', 'wp-travel' ), $booking_id ); ?></th>
+					<th><?php apply_filters( 'wp_travel_booking_mail_arrival', esc_html_e( 'Arrival Date', 'wp-travel' ), $booking_id ); ?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -53,13 +53,15 @@ class WpTravel_Helpers_Booking {
 				// Order Details.
 				foreach ( $items as $item_key => $trip ) {
 					$trip_id = $trip['trip_id'];
-
+					$trip_data = WpTravel_Helpers_Trips::get_trip($trip_id)['trip'];
 					// Values
 					$title          = get_the_title( $trip_id );
 					$pax            = isset( $trip['pax'] ) ? $trip['pax'] : '';
-					$arrival_date   = isset( $trip['arrival_date'] ) && ! empty( $trip['arrival_date'] ) ? wptravel_format_date( $trip['arrival_date'] ) : '';
-					$departure_date = isset( $trip['departure_date'] ) && ! empty( $trip['departure_date'] ) ? wptravel_format_date( $trip['departure_date'] ) : '';
 
+					$arrival_date   = isset( $trip['arrival_date'] ) && ! empty( $trip['arrival_date'] ) ? wptravel_format_date( $trip['arrival_date'] ) : '';
+					$departure_date = date_create( $arrival_date );
+					date_add( $departure_date,date_interval_create_from_date_string( ( (int) $trip_data['trip_duration']['days'] - 1 )." days" ) );
+					$departure_date = date_format($departure_date,"F j, Y");
 					$pricing_id   = $trip['pricing_id'];
 					$pricing_data = WP_Travel_Helpers_Pricings::get_pricings( $trip_id, $pricing_id );
 
@@ -122,8 +124,18 @@ class WpTravel_Helpers_Booking {
 							?>
 						</td>
 						<td><?php echo apply_filters( 'wp_travel_booking_mail_pax_val', esc_html( $pax ), $booking_id ); ?></td>
-						<td><?php echo apply_filters( 'wp_travel_booking_mail_arrival_val', esc_html( $arrival_date ), $booking_id ); ?></td>
-						<td><?php echo apply_filters( 'wp_travel_booking_mail_departure_val', esc_html( $departure_date ), $booking_id ); ?></td>
+						<?php if( !$trip_data['is_fixed_departure'] ): ?>
+							<?php if( $trip_data['trip_duration']["duration_format"] == 'day_night' ): ?>
+								<td><?php echo esc_html( $arrival_date ); ?></td>
+								<td><?php echo esc_html( $departure_date ); ?></td>
+								<?php else: ?>
+								<td><?php echo esc_html( $arrival_date ); ?></td>
+								<td><?php echo esc_html( $arrival_date ); ?></td>
+							<?php endif; ?>
+							<?php else: ?>
+								<td><?php echo esc_html( $arrival_date ); ?></td>
+								<td></td>
+						<?php endif; ?>
 					</tr>
 
 					<?php

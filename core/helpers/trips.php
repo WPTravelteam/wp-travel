@@ -62,6 +62,7 @@ class WpTravel_Helpers_Trips {
 		$has_extras        = is_array( $extras ) && isset( $extras['code'] ) && 'WP_TRAVEL_TRIP_EXTRAS' == $extras['code'] && isset( $extras['trip_extras'] ) && count( $extras['trip_extras'] ) > 0 ? true : false;
 		$highest_price     = get_post_meta( $trip_id, 'wp_travel_show_highest_price', true );
 		$trip_default_data = array(
+			'trip_video_code'					=> get_post_meta( $trip_id, 'wp_travel_video_code', true ),
 			'pricing_type'                        => 'multiple-price',
 			'custom_booking_type'                 => 'custom-link',
 			'custom_booking_form'                 => '',
@@ -161,6 +162,7 @@ class WpTravel_Helpers_Trips {
 		$enable_trip_enquiry_option = get_post_meta( $trip_id, 'wp_travel_enable_trip_enquiry_option', true );
 
 		$trip_overview = get_post_meta( $trip_id, 'wp_travel_overview', true );
+		$trip_video_url = get_post_meta( $trip_id, 'wp_travel_video_url', true );
 		$trip_include  = get_post_meta( $trip_id, 'wp_travel_trip_include', true );
 		$trip_exclude  = get_post_meta( $trip_id, 'wp_travel_trip_exclude', true );
 		$trip_outline  = get_post_meta( $trip_id, 'wp_travel_outline', true );
@@ -443,6 +445,15 @@ class WpTravel_Helpers_Trips {
 			 * @todo Need escaping in wp_travel_overview
 			 */
 			update_post_meta( $trip_id, 'wp_travel_overview', wp_kses_post( $trip_data->trip_overview ) );
+		}
+
+		if ( ! empty( $trip_data->trip_video_code ) || empty( $trip_data->trip_video_code ) ) {
+			/**
+			 * Save trip outline.
+			 *
+			 * @todo Need escaping in wp_travel_overview
+			 */
+			update_post_meta( $trip_id, 'wp_travel_video_code', sanitize_text_field( $trip_data->trip_video_code ) );
 		}
 
 		if ( ! empty( $trip_data->trip_outline ) || empty( $trip_data->trip_outline ) ) {
