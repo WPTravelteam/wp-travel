@@ -1971,6 +1971,20 @@ if ( ! function_exists( 'wptravel_format_date' ) ) :
 
 endif;
 
+function getBetweenDates($startDate, $endDate) {
+    $rangArray = [];
+ 
+    $startDate = strtotime($startDate);
+    $endDate = strtotime($endDate);
+ 
+    for ($currentDate = $startDate; $currentDate <= $endDate; $currentDate += (86400)) {
+        $date = date('Y-m-d', $currentDate);
+        $rangArray[] = $date;
+    }
+ 
+    return $rangArray;
+}
+
 if ( ! function_exists( 'wptravel_get_trip_available_dates' ) ) {
 
 	/**
@@ -1996,9 +2010,29 @@ if ( ! function_exists( 'wptravel_get_trip_available_dates' ) ) {
 			if ( is_array( $data ) && 'WP_TRAVEL_TRIP_DATES' === $data['code'] ) {
 				$dates = $data['dates'];
 				foreach ( $dates as $date ) {
-					$available_dates[] = $date['start_date'];
+					if ( $date['is_recurring']) {
+						foreach ( getBetweenDates( $date['start_date'], $date['end_date'] ) as $keys => $val ) {
+							if ( ! empty( $date['days'] ) ) {
+								$dateDays = date( 'D', strtotime( $val ) );
+								if ( str_contains( strtolower( $date['days'] ), substr( strtolower( $dateDays ), 0, 2 ) ) ) {
+									$available_dates[] = $val;
+								}
+
+							} elseif ( ! empty( $date['date_days'] ) ) {
+								$datesDays = date( 'j', strtotime( $val ) );
+								if ( in_array( $datesDays, explode( ',', $date['date_days'] ) ) ) {
+									$available_dates[] = $val;
+								}
+							} else {
+								$available_dates[] = $val;
+							}
+						}
+					} else {
+						$available_dates[] = $date['start_date'];
+					}
 				}
 			}
+			// die;
 			return $available_dates;
 		}
 
