@@ -18,12 +18,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
-
 global $wp_travel_itinerary;
-global $wt_cart;
-$trip_items     = $wt_cart->getItems();
-// echo '<pre>';
-// print_r( count( $trip_items ) );
 ?>
 
 <?php
@@ -46,18 +41,9 @@ do_action( 'wp_travel_before_content_start' );
 		<div class="wp-travel trip-headline-wrapper clearfix <?php echo esc_attr( $wrapper_class ); ?>">
 			<div class="wp-travel__trip-headline">
 				<div id="wp-travel__add-to-cart_notice"></div>
-				<?php if ( wp_travel_add_to_cart_system() == true ) {?>
-					<div class="wp-travel-single-trip-add-to-cart">
-						<a class="wp-travel-add-to-cart-item-anchor" href="<?php echo wptravel_get_checkout_url(); ?>" target="_blank" rel="noopener noreferrer">
-							<button class="wp-travel-single-trip-cart-button">
-								<span id="wp-travel-add-to-cart-cart_item_show">
-									<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-									<span class="wp-travel-cart-items-number <?php echo ( !empty( $trip_items ) && count( $trip_items ) > 0 ) ? 'active' : '' ?>"><?php echo count( $trip_items ); ?></span>
-								</span>
-							</button>
-						</a>
-					</div>
-				<?php } ?>
+				<div class="wp-travel-single-trip-add-to-cart">
+					<?php wptravel_get_cart_icon(); ?>
+				</div>
 			</div>
 				
 			<div class="wp-travel-feature-slide-content featured-side-image left-plot">

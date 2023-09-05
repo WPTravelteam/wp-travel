@@ -45,7 +45,6 @@ if ( $locations && is_array( $locations ) ) {
 	$location_name  = $first_location->name;
 	$location_link  = get_term_link( $first_location->term_id, 'travel_locations' );
 }
-
 $trp_cd = apply_filters( 'wp_travel_trip_code_enable_disable', true );
 $trp_thmbail = apply_filters( 'wp_travel_trip_thumbnail_enable_disable', true );
 $trp_title = apply_filters( 'wp_travel_trip_title_enable_disable', true );
@@ -84,24 +83,15 @@ $trp_title = apply_filters( 'wp_travel_trip_title_enable_disable', true );
 					<?php wptravel_get_trip_duration( $trip_id ); ?>
 					<div class="trip-location">
 						<?php echo apply_filters( 'wp_travel_archive_page_location_icon', '<i class="fas fa-map-marker-alt"></i>' ); ?>
-						<?php if( is_array( $locations ) && count( $locations ) > 0 ): ?>
-						<span class="post-category">
-							<a href="<?php echo esc_url( get_term_link( $locations[0]->term_id, 'travel_locations' ) ); ?>" rel="tag">
-								<?php echo esc_html( $locations[0]->name ); ?>								
-							</a>
-							<i class="wt-icon wt-icon-caret-down"></i>
-
-
-							<div class="wp-travel-caret">
-
-								<div class="sub-category-menu">
-									<a href="https://themepalacedemo.com/hodophile-pro/trip-type/trekking/">
-										Trekking
-									</a>
-								</div>
-							</div>									
+						<span>
+							<?php if ( $location_name ) : ?>
+								<a href="<?php echo esc_url( $location_link ); ?>" ><?php echo apply_filters( 'wp_travel_archives_page_trip_location', esc_html( $location_name ), $trip_id ); ?></a>
+								<?php
+							else :
+								esc_html_e( apply_filters( 'wp_travel_archives_page_trip_location', 'N/A', $trip_id), 'wp-travel' );
+							endif;
+							?>
 						</span>
-						<?php endif; ?>
 					</div>
 					<div class="group-size">
 						<?php echo apply_filters( 'wp_travel_archive_page_group_size_icon', '<i class="fas fa-users"></i>' ); ?>

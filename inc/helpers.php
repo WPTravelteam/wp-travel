@@ -4467,3 +4467,26 @@ function wptravel_nocache_headers() {
 	nocache_headers();
 }
 
+
+/**
+ * Cart icon.
+ *
+ * @return HTML
+ */
+function wptravel_get_cart_icon(){
+	global $wp_travel_itinerary;
+	global $wt_cart;
+	$trip_items     = $wt_cart->getItems();
+	if ( wp_travel_add_to_cart_system() == true ) {?>
+		
+			<a class="wp-travel-add-to-cart-item-anchor" href="<?php echo wptravel_get_checkout_url(); ?>" target="_blank" rel="noopener noreferrer">
+				<button class="wp-travel-single-trip-cart-button">
+					<span id="wp-travel-add-to-cart-cart_item_show">
+						<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+						<span class="wp-travel-cart-items-number <?php echo ( !empty( $trip_items ) && count( $trip_items ) > 0 ) ? 'active' : '' ?>"><?php echo count( $trip_items ); ?></span>
+					</span>
+				</button>
+			</a>
+		
+	<?php }
+}

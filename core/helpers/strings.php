@@ -22,6 +22,18 @@ class WpTravel_Helpers_Strings {
 	 * @return array
 	 */
 	public static function get() {
+
+		$price_per = array(
+			array(
+				'label' => __( 'Person', 'wp-travel' ),
+				'value' => 'person',
+			),
+			array(
+				'label' => __( 'Group', 'wp-travel' ),
+				'value' => 'group',
+			)
+		);
+
 		$localized_strings = array(
 			'activities'                => __( 'Activities', 'wp-travel' ),
 			'add_date'                  => __( 'Please add date.', 'wp-travel' ),
@@ -191,8 +203,8 @@ class WpTravel_Helpers_Strings {
 			'enquiry_message'           => __( 'Enquiry Message', 'wp-travel' ),
 			'enter_your_enquiry'        => __( 'Enter your enquiry...', 'wp-travel' ),
 			'arrival_departure'			=> apply_filters( 'wp_travel_trip_duration_arrival_time', false ),
-			'arrival_time'				=> __( apply_filters( 'wp_travel_arrival_time', 'wp-travel' ), 'wp-travel' ),
-			'departure_time'			=> __( apply_filters( 'wp_travel_departure_time', 'wp-travel' ), 'wp-travel' ),
+			'arrival_time'				=> __( apply_filters( 'wp_travel_arrival_time', 'Arrival Time' ), 'wp-travel' ),
+			'departure_time'			=> __( apply_filters( 'wp_travel_departure_time', 'Departure Time' ), 'wp-travel' ),
 			'conditional_payment_text'	=> __( 'Using the Conditional payment module, you can apply for conditional payment on the checkout page according to the billing address or the trip locations.', 'wp-travel' ),
 			'single_archive'			=> self::wp_travel_single_archive_strings(),
 			'set_cart_error'			=> __( 'You are coupon already applied.', 'wp-travel' ),
@@ -238,7 +250,8 @@ class WpTravel_Helpers_Strings {
 			'set_ibam'					=> __( 'IBAN', 'wp-travel'),
 			'set_swift'					=> __( 'Swift', 'wp-travel'),
 			'set_routing_number'		=> __( 'Routing Number', 'wp-travel'),
-			'set_add_to_cart'			=> __('Add to Cart', 'wp-travel')
+			'set_add_to_cart'			=> __('Add to Cart', 'wp-travel'),
+			'trip_price_per'			=> apply_filters( 'wp_travel_trip_price_per', $price_per )
 		);
 
 		$localized_strings['price_per_labels'] = array(
