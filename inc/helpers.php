@@ -2015,16 +2015,25 @@ if ( ! function_exists( 'wptravel_get_trip_available_dates' ) ) {
 							if ( ! empty( $date['days'] ) ) {
 								$dateDays = date( 'D', strtotime( $val ) );
 								if ( str_contains( strtolower( $date['days'] ), substr( strtolower( $dateDays ), 0, 2 ) ) ) {
-									$available_dates[] = $val;
+									if ( strtotime( $val ) > strtotime( date('Y-m-d') ) ) {
+										$available_dates[] = $val;
+										break;
+									}
 								}
 
 							} elseif ( ! empty( $date['date_days'] ) ) {
 								$datesDays = date( 'j', strtotime( $val ) );
 								if ( in_array( $datesDays, explode( ',', $date['date_days'] ) ) ) {
-									$available_dates[] = $val;
+									if ( strtotime( $val ) > strtotime( date('Y-m-d') ) ) {
+										$available_dates[] = $val;
+										break;
+									}
 								}
 							} else {
-								$available_dates[] = $val;
+								if ( strtotime( $val ) > strtotime( date('Y-m-d') ) ) {
+									$available_dates[] = $val;
+									break;
+								}
 							}
 						}
 					} else {
