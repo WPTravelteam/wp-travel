@@ -234,15 +234,12 @@
 					box-shadow: 0px 0px 5px #d1d1d1;
 
 					//individual titles
-					th[data-label="Pricings"] {
+					.tablehead-booking-pricings,
+					.tablehead-booking-person {
 						text-align: left;
 					}
 
-					th[data-label="Person"] {
-						text-align: left;
-					}
-
-					th[data-label="Date"] {
+					.tablehead-booking-dates {
 						text-align: center;
 					}
 				}
@@ -261,7 +258,7 @@
 				}
 
 				/*************** pricing section **************/
-				td[data-label="Pricings"] {
+				.tablebody-booking-pricings {
 					text-align: left;
 					width: 200px;
 					//this is price checkbox container
@@ -287,7 +284,7 @@
 				}
 
 				/*************** Person section **************/
-				td[data-label="Person"] {
+				.tablebody-booking-person {
 					text-align: center;
 					/**Opacity of selecting pax**/
 					.css-u2jump.components-disabled {
@@ -455,7 +452,7 @@
 				}
 
 				/*************** Date section **************/
-				td[data-label="Date"] {
+				.tablebody-booking-dates {
 					text-align: center;
 					width: 250px;
 					// start and end date bold text
