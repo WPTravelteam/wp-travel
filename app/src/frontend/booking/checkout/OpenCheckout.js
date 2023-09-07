@@ -17,7 +17,7 @@ const __i18n = {
 const bookingStoreName = 'WPTravelFrontend/BookingData';
 
 export default () => {
-    const [isOpen, setOpen] = useState(false);
+    const [isOpen, setOpen] = useState(true);
 
     const openModal = () => setOpen(true);
     const closeModal = () => setOpen(false);

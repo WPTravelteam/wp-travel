@@ -3,12 +3,10 @@ const __i18n = {
 }
 
 const DateListingTableHead = ( props ) => {
-    return <thead className="thead-table">
-		<tr>
-			<th data-label={__i18n.bookings.pricings_list_label}>{__i18n.bookings.pricings_list_label}</th>
-			<th data-label={__i18n.bookings.person}>{__i18n.bookings.person}</th>
-			<th data-label={__i18n.bookings.date}>{__i18n.bookings.date}</th>
-		</tr>
-	</thead>;
+    return <section className="thead-table parash-head">
+			{/* <span data-label={__i18n.bookings.pricings_list_label}>{__i18n.bookings.pricings_list_label}</span>
+			<span data-label={__i18n.bookings.person}>{__i18n.bookings.person}</span>
+			<span data-label={__i18n.bookings.date}>{__i18n.bookings.date}</span> */}
+	</section>;
 }
 export default DateListingTableHead;

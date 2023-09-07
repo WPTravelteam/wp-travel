@@ -2,7 +2,7 @@ import { CheckboxControl, Disabled } from '@wordpress/components';
 import { Fragment, useState, useEffect } from '@wordpress/element';
 
 const __i18n = {
-	..._wp_travel.strings
+    ..._wp_travel.strings
 }
 
 /**
@@ -40,7 +40,7 @@ import InventoryNotice, { Notice } from '../../_InventoryNotice';
  * @returns price list
  * @since 5.3.9
  */
-const NonRecorringRepeater = ( props ) => {
+const NonRecorringRepeater = (props) => {
     const { date, _nomineePricings } = props;
     // console.log('ppp');
     // console.log(date);
@@ -48,12 +48,12 @@ const NonRecorringRepeater = ( props ) => {
     const [activeRecurringDates, setActiveRecurringDates] = useState([]); // curren page dates.
     const [rruleArgs, setRRuleArgs] = useState(null)
 
-    useEffect( () => {
-        if ( ! rruleArgs ) {
+    useEffect(() => {
+        if (!rruleArgs) {
             let aaa = generateRRUleArgs(date);
             if (Object.keys(aaa).length > 0) {
                 setRRuleArgs(aaa)
-			}
+            }
         }
     }, [date]);
 
@@ -64,8 +64,8 @@ const NonRecorringRepeater = ( props ) => {
             setActiveRecurringDates(_dates)
         }
     }, [rruleArgs]);
-    
-    
+
+
 
     const generateRRule = rruleArgs => {
         const rruleSet = new RRuleSet();
@@ -75,16 +75,16 @@ const NonRecorringRepeater = ( props ) => {
         return rruleSet.all();
     }
 
-	/**
-	 * 
-	 * @param {*} date 
-	 * @param {*} showAll 
-	 * @returns Wed Dec 21 2022 05:45:00 GMT+0545 (Nepal Time) 
-	 * @since 5.3.9
-	 */
-    const generateRRUleArgs = ( date, showAll ) => {
-        let startDate = date.start_date && new Date( date.start_date + ' 00:00:00' ) || new Date();
-        let nowDate   = new Date();
+    /**
+     * 
+     * @param {*} date 
+     * @param {*} showAll 
+     * @returns Wed Dec 21 2022 05:45:00 GMT+0545 (Nepal Time) 
+     * @since 5.3.9
+     */
+    const generateRRUleArgs = (date, showAll) => {
+        let startDate = date.start_date && new Date(date.start_date + ' 00:00:00') || new Date();
+        let nowDate = new Date();
         nowDate.setHours(0, 0, 0, 0);
 
         let rruleStartDate = nowDate < startDate ? startDate : nowDate;
@@ -92,43 +92,43 @@ const NonRecorringRepeater = ( props ) => {
         let curretYear = rruleStartDate.getFullYear();
         let currentDate = rruleStartDate.getDate();
         let currentMonth = rruleStartDate.getMonth();
-    
+
         // UTC Offset Fixes.
         let totalOffsetMin = new Date(rruleStartDate).getTimezoneOffset();
-        let offsetHour = parseInt(totalOffsetMin/60);
-        let offsetMin = parseInt(totalOffsetMin%60);
-    
+        let offsetHour = parseInt(totalOffsetMin / 60);
+        let offsetMin = parseInt(totalOffsetMin % 60);
+
         let currentHours = 0;
         let currentMin = 0;
-        if ( offsetHour > 0 ) {
+        if (offsetHour > 0) {
             currentHours = offsetHour;
             currentMin = offsetMin;
         }
-        rruleStartDate = moment( new Date( Date.UTC(curretYear, currentMonth, currentDate, currentHours, currentMin, 0 ) ) ).utc();
-        
+        rruleStartDate = moment(new Date(Date.UTC(curretYear, currentMonth, currentDate, currentHours, currentMin, 0))).utc();
+
         let ruleArgs = {
             freq: RRule.DAILY,
             count: datePerPage,
             dtstart: new Date(rruleStartDate),
         };
-		if ( showAll ) { // This args is only For Pagination.
-			// delete ruleArgs.count;
-            ruleArgs.count = ( 50 * datePerPage ); // Support Max 50 pages i.e. 500 records.
-		}
-        if ( date.end_date && '0000-00-00' != date.end_date ) { // if has end date.
+        if (showAll) { // This args is only For Pagination.
+            // delete ruleArgs.count;
+            ruleArgs.count = (50 * datePerPage); // Support Max 50 pages i.e. 500 records.
+        }
+        if (date.end_date && '0000-00-00' != date.end_date) { // if has end date.
             let endDate = new Date(date.end_date)
             ruleArgs.until = endDate
         }
-        rruleStartDate    = moment( rruleStartDate );
+        rruleStartDate = moment(rruleStartDate);
         let selectedYears = date.years ? date.years.split(",").filter(year => year != 'every_year').map(year => parseInt(year)) : [];
         if (selectedYears.length > 0 && !selectedYears.includes(rruleStartDate.year())) {
             return []
         }
-    
+
         let selectedMonths = date.months ? date.months.split(",").filter(month => month != 'every_month') : [];
-        let selectedDates  = date.date_days ? date.date_days.split(",").filter(date => date !== 'every_weekdays' && date !== '') : [];
-        let selectedDays   = date.days ? date.days.split(",").filter(day => day !== 'every_date_days' && day !== '') : [];
-    
+        let selectedDates = date.date_days ? date.date_days.split(",").filter(date => date !== 'every_weekdays' && date !== '') : [];
+        let selectedDays = date.days ? date.days.split(",").filter(day => day !== 'every_date_days' && day !== '') : [];
+
         if (selectedMonths.length > 0) {
             ruleArgs.bymonth = selectedMonths.map(m => parseInt(m));
         }
@@ -141,95 +141,102 @@ const NonRecorringRepeater = ( props ) => {
         return ruleArgs
     }
     return <>
-            { activeRecurringDates.map( esx => {
+        {activeRecurringDates.map(esx => {
             // { console.log('mmmm') }
             // { console.log(props) } 
-            	return  <div key={12} > {IsTourDates(props)(esx) && <Pricings { ...props } /> || <Disabled><Pricings { ...props } /></Disabled>} </div>; 
-                       
-            })}
+            return <div key={12} > {IsTourDates(props)(esx) && <Pricings {...props} /> || <Disabled><Pricings {...props} /></Disabled>} </div>;
+
+        })}
 
     </>
 }
 
-const NonRecurringDates = ( props ) => {
+const NonRecurringDates = (props) => {
     // Component Props.
-	const { tripData, bookingData } = props;
+    const { tripData, bookingData } = props;
 
     // Trip Data.
     const {
         dates,
         pricings,
     } = tripData;
-    const allPricings        = pricings && _.keyBy( pricings, p => p.id ) // Need object structure because pricing id may not be in sequencial order.
-    const _dates             = 'undefined' !== typeof dates && dates.length > 0 ? dates : [];
+    const allPricings = pricings && _.keyBy(pricings, p => p.id) // Need object structure because pricing id may not be in sequencial order.
+    const _dates = 'undefined' !== typeof dates && dates.length > 0 ? dates : [];
 
-    let nonRecurringDates = _dates.filter( d => { return !d.is_recurring && d.start_date && '0000-00-00' !== d.start_date && new Date( d.start_date )  > new Date() } )
-	nonRecurringDates     = _.chain( nonRecurringDates ).sortBy( d => moment( d.start_date).unix() ).value() || []; // Sort by date.
+    let nonRecurringDates = _dates.filter(d => { return !d.is_recurring && d.start_date && '0000-00-00' !== d.start_date && new Date(d.start_date) > new Date() })
+    nonRecurringDates = _.chain(nonRecurringDates).sortBy(d => moment(d.start_date).unix()).value() || []; // Sort by date.
 
     // Booking Data.
     const { isLoading, selectedDate, selectedDateIds, nomineePricingIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
-	let enable_time = '';
-	_dates.map( ( dateData ) => {
-		if( selectedDateIds[0] == dateData.id ) {
-			enable_time = dateData.enable_time;
-		}
-	})
+    let enable_time = '';
+    _dates.map((dateData) => {
+        if (selectedDateIds[0] == dateData.id) {
+            enable_time = dateData.enable_time;
+        }
+    })
     return <>
-    {
-		nonRecurringDates.length > 0 && <tbody className="tbody-table">
-		{ nonRecurringDates.map( ( date, index ) => {
-			let loadingClass = isLoading && selectedDateIds.includes( date.id ) ? 'wptravel-loading' : '';
-			let _nomineePricings = date.pricing_ids.split(',').map( id => id.trim() );
-			_nomineePricings = _.chain( _nomineePricings ).flatten().uniq().value().filter( p => p != '' && typeof allPricings[p] !== 'undefined' );
-			if ( ! _nomineePricings.length ) {
-				return <Fragment key={index}></Fragment>
-			}
-			return <tr key={index} className={loadingClass}>
-				<td data-label={__i18n.bookings.pricings_list_label}>
-					{/* _nomineePricings not updated in store/state because there are multiple _nomineePricings as per date so just a variable. */}
-					{/* <Pricings { ...{ ...props, _nomineePricings, date } }  /> */}
-					{/**
-					 * @param props, date , and price id
-					 * @return price name
-					 * @since 5.3.9
-					 */}
-					 <NonRecorringRepeater { ...{ ...props, _nomineePricings, date } } />
-				</td>
-				<td data-label={__i18n.bookings.person}>
-					<div className ="person-box">
-						
-						{ ! isLoading && pricingUnavailable && tripData.inventory && 'yes' === tripData.inventory.enable_trip_inventory && selectedDateIds.includes( date.id ) ? 
-							<Notice><InventoryNotice inventory={tripData.inventory} /></Notice> 
-							:
-							<>
-								{ ( ! selectedPricingId || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) || ! selectedDateIds.includes( date.id ) || isLoading ) && <Disabled><PaxSelector { ...{ ...props, _nomineePricings, date } } /></Disabled> || <PaxSelector { ...{ ...props, _nomineePricings, date } } /> }
-								{ 
-									selectedPricingId && 
-									selectedDateIds.includes( date.id ) && 
-									_.size( allPricings[ selectedPricingId ].trip_extras ) > 0 && 
-									objectSum( paxCounts ) > 0 && 
-									( ! nomineeTimes.length || ( nomineeTimes.length > 0 && selectedTime ) ) &&
-									<> <TripExtras { ...{ ...props, _nomineePricings, date } } /> </> 
-								}
-							</>
-						}
-					</div>
-				</td>
-				<td data-label={__i18n.bookings.date}>
-					<div className = "date-box">
-						<div className="date-time-wrapper">
-							<span className="start-date"><span>{__i18n.bookings.start_date}: </span>{moment(date.start_date).format(_wp_travel.date_format_moment)}</span>
-							{date.end_date && '0000-00-00' != date.end_date && <span className="end-date"><span>{__i18n.bookings.end_date}: </span>{moment(date.end_date).format(_wp_travel.date_format_moment)}</span> }
-						</div>
-						{selectedDateIds.includes( date.id ) && ! isLoading &&
-							<TripTimes { ...{ ...props, _nomineePricings, date } }  />
-						}
-					</div>
-				</td>
-			</tr>
-        } ) }
-		</tbody>
-    }
+        {
+            nonRecurringDates.length > 0 && <section className="tbody-table parash-tbody">
+                {nonRecurringDates.map((date, index) => {
+                    let loadingClass = isLoading && selectedDateIds.includes(date.id) ? 'wptravel-loading' : 'parash-wptravel-booking-content-wrapper';
+                    let _nomineePricings = date.pricing_ids.split(',').map(id => id.trim());
+                    _nomineePricings = _.chain(_nomineePricings).flatten().uniq().value().filter(p => p != '' && typeof allPricings[p] !== 'undefined');
+                    if (!_nomineePricings.length) {
+                        return <Fragment key={index}></Fragment>
+                    }
+                    return <div key={index} className={loadingClass}>
+                        <div className="parash-pricing-date-combined">
+                            <div data-label={__i18n.bookings.pricings_list_label} className='parash-pricing-category'>
+                                {/* _nomineePricings not updated in store/state because there are multiple _nomineePricings as per date so just a variable. */}
+                                {/* <Pricings { ...{ ...props, _nomineePricings, date } }  /> */}
+                                {/**
+                             * @param props, date , and price id
+                             * @return price name
+                             * @since 5.3.9
+                             */}
+
+                                {/* pricing selection section */}
+                                <span data-label={__i18n.bookings.pricings_list_label}>{__i18n.bookings.pricings_list_label}</span>
+                                <NonRecorringRepeater {...{ ...props, _nomineePricings, date }} />
+                            </div>
+                            <div data-label={__i18n.bookings.date} className='parash-pricing-dates'>
+                                <span data-label={__i18n.bookings.date}>{__i18n.bookings.date}</span>
+                                <div className="date-box">
+                                    <div className="date-time-wrapper">
+                                        <span className="start-date"><span>{__i18n.bookings.start_date}: </span>{moment(date.start_date).format(_wp_travel.date_format_moment)}</span>
+                                        {date.end_date && '0000-00-00' != date.end_date && <span className="end-date"><span>{__i18n.bookings.end_date}: </span>{moment(date.end_date).format(_wp_travel.date_format_moment)}</span>}
+                                    </div>
+                                    {selectedDateIds.includes(date.id) && !isLoading &&
+                                        <TripTimes {...{ ...props, _nomineePricings, date }} />
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        {/* person pax selector */}
+                        <div data-label={__i18n.bookings.person} className='parash-person-category'>
+                            <span data-label={__i18n.bookings.person}>{__i18n.bookings.person}</span>
+                            <div className="person-box">
+                                {!isLoading && pricingUnavailable && tripData.inventory && 'yes' === tripData.inventory.enable_trip_inventory && selectedDateIds.includes(date.id) ?
+                                    <Notice><InventoryNotice inventory={tripData.inventory} /></Notice>
+                                    :
+                                    <>
+                                        {(!selectedPricingId || (enable_time && nomineeTimes.length > 0 && !selectedTime) || !selectedDateIds.includes(date.id) || isLoading) && <Disabled><PaxSelector {...{ ...props, _nomineePricings, date }} /></Disabled> || <PaxSelector {...{ ...props, _nomineePricings, date }} />}
+                                        {
+                                            selectedPricingId &&
+                                            selectedDateIds.includes(date.id) &&
+                                            _.size(allPricings[selectedPricingId].trip_extras) > 0 &&
+                                            objectSum(paxCounts) > 0 &&
+                                            (!nomineeTimes.length || (nomineeTimes.length > 0 && selectedTime)) &&
+                                            <> <TripExtras {...{ ...props, _nomineePricings, date }} /> </>
+                                        }
+                                    </>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                })}
+            </section>
+        }
     </>
 }
 export default NonRecurringDates;

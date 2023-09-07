@@ -1,5 +1,5 @@
 import { CheckboxControl } from '@wordpress/components';
-
+import React, { useState } from 'react';
 const __i18n = {
 	..._wp_travel.strings
 }
@@ -13,6 +13,8 @@ import moment from 'moment';
 import Loader from '../../../../../GlobalComponents/Loader';
 
 const Pricings = ( props ) => {
+	const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
+	console.log(isCheckboxChecked);
     // Component Props.
 	const { tripData, bookingData, updateBookingData, _nomineePricings, date, recurrindDate } = props; // where date is row and recurrindDate is the date to select in recurring
     // Trip Data.
@@ -41,6 +43,7 @@ const Pricings = ( props ) => {
 						checked={ selectedPricingId == pricingId && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) }
 						onChange={ ( value ) => {
 							if ( value ) {
+								setIsCheckboxChecked(value);
 								let newSelectedDate = new Date( date.start_date + ' 00:00:00' ); // Non Recurring.
 								if ( 'undefined' !== typeof recurrindDate ) {
 									newSelectedDate = recurrindDate; // Recurring
@@ -93,4 +96,5 @@ const Pricings = ( props ) => {
 			
 	</>
 }
+
 export default Pricings;

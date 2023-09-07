@@ -340,10 +340,10 @@ const DateListing = ( props ) => {
                 <div className="wptravel-recurring-dates">
                     { nonRecurringDates.length > 0 &&
                         <div className="wptravel-recurring-table-wrapper">
-                            <table className="wptravel-recurring-table">
-                                <DateListingTableHead />
+                            <div className="wptravel-recurring-table parash-div">
+                                {/* <DateListingTableHead /> */}
                                 <NonRecurringDates { ...props } />
-                            </table>
+                            </div>
                         </div>
                     }
 
@@ -351,7 +351,7 @@ const DateListing = ( props ) => {
 						{ recurringDates.map((date, index) => {
 							return <div className="wptravel-recurring-table-wrapper" key={index}>
 								<table className="wptravel-recurring-table">
-									<DateListingTableHead />
+									{/* <DateListingTableHead /> */}
 									<RecurringDates { ...{ ...props, date, index } } />
 								</table>
 							</div>
