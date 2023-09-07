@@ -419,12 +419,13 @@ Before updating plugin please check ["our latest release notes"](#developers).
 == Changelog ==
 
 = 7.3.0 =
-Release Date: 
+Release Date: 7th September 2023
 
 Fixes:
 * Code cleanup 
 * Fixed booking date label in case of one day trip
 * Added departure date in thankyou page and booking email template
+* Fixed image width on WP Travel User login page
 
 Enhancements:
 * Inherit theme color on add to cart
