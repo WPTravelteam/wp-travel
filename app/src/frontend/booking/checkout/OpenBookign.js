@@ -16,7 +16,7 @@ import NextTravelerBtn from './NextTravelerBtn'
 export default ( props ) => {
 	// Component Props.
 	const { forceCalendarDisplay } = props;
-
+    console.log( 'sdfdf', _wp_travel)
 	// All Trip Related Data(Not State)
     const tripListingType = 'undefined' !== typeof _wp_travel.trip_date_listing ? _wp_travel.trip_date_listing : 'calendar'; // dates | calendar
     let tripData = 'undefined' !== typeof _wp_travel.trip_data ? _wp_travel.trip_data : {};
@@ -28,7 +28,7 @@ export default ( props ) => {
 
 	// Booking Data/state.
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
-    // console.log( bookingData );
+    console.log( 'tttt', bookingData );
     const { selectedDate } = bookingData;
     const { updateStore } = dispatch( bookingStoreName );
     const updateBookingData = ( data ) => {
