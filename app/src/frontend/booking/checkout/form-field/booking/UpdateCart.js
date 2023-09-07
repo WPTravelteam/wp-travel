@@ -44,6 +44,19 @@ export default () => {
                     })
                     setUpdatePriceData( priceFirst )
                     if ( Object.values( prcCategory ).length > 0 ) {
+                        var extPrinces = {}
+                        if( nomineeTripExtras.length > 0 ) {
+                            nomineeTripExtras.map( ( ext, ind) => {
+                                const { id, is_sale, sale_price, tour_extras_metas } = ext;
+                                const { extras_item_price } = typeof tour_extras_metas != 'undefined' && tour_extras_metas || 0;
+                                if ( is_sale ) {
+                                    extPrinces[id] = typeof tripExtras[id] != 'undefined' && typeof sale_price != 'undefined' && tripExtras[id] * sale_price || 0;
+                                } else {
+                                    extPrinces[id] = typeof tripExtras[id] != 'undefined' && typeof extras_item_price != 'undefined' && tripExtras[id] * extras_item_price || 0;
+                                }
+                            })
+                        }
+                        setUpdateExtraPrice(extPrinces)
                         const finalPrice = { max_pax : max_pax, min_pax : min_pax, priceCategoryList : Object.values( prcCategory ), extras : trip_extras }
                         updateStore( {...bookingData, priceCart :  finalPrice } )
                     }
@@ -207,7 +220,7 @@ export default () => {
 
                             </div>
                             <div className="wptravel-onpage-booking-cart-price">
-                                <p>{currency_symbol}{updateExtraPrice[extraIds]}</p>
+                                { updateExtraPrice[extraIds] > 0 && <p>{currency_symbol}{updateExtraPrice[extraIds]}</p> }
                             </div>
                             {/* <div className="wptravel-onpage-booking-cart-price">
                                 <p>{currency_symbol}{updatePriceData[catId]}</p>
