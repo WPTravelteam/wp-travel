@@ -41,11 +41,11 @@ const RecurringRepeator = ( props ) =>  {
     let loadingClass = isLoading && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) ? 'wptravel-loading' : '';
     const { enable_time } = date;
     return <tr key={index} className={loadingClass}>
-        <td data-label={__i18n.bookings.pricings_list_label}>
+        <td class="tablebody-booking-pricings"  data-label={__i18n.bookings.pricings_list_label}>
             {/* _nomineePricings not updated in store/state because there are multiple _nomineePricings as per date so just a variable. */}
             {IsRecuringTourDates(props)(recurrindDate) && <Pricings { ...props } /> || <Disabled><Pricings { ...props } /></Disabled> }
         </td>
-        <td data-label={__i18n.bookings.person}>
+        <td class="tablebody-booking-person"  data-label={__i18n.bookings.person}>
             <div className ="person-box">
                 
                 { ! isLoading && pricingUnavailable && tripData.inventory && 'yes' === tripData.inventory.enable_trip_inventory && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) && ( ! nomineeTimes.length || ( nomineeTimes.length && selectedTime ) )  ) ?
@@ -69,7 +69,7 @@ const RecurringRepeator = ( props ) =>  {
                 }		
             </div>
         </td>
-        <td data-label={__i18n.bookings.date}>
+        <td class="tablebody-booking-dates" data-label={__i18n.bookings.date}>
             <div className = "date-box">
                 <div className="date-time-wrapper">
                     <span className="start-date"><span>{__i18n.bookings.start_date}: </span>{moment(recurrindDate).format(_wp_travel.date_format_moment)}</span>
