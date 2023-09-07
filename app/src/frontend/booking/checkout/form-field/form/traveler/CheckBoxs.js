@@ -26,7 +26,6 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
                     name={name}
                     checked={ typeof finalTravelerData != 'undefined' && finalTravelerData.length > 0 && finalTravelerData.includes( value ) || false }
                     onChange={ ( values ) => {
-                        console.log( 'my value is', values )
                         if ( values == true ) {
                             // const newVal = [...]
                             const newTrData = [...finalTravelerData, value ]

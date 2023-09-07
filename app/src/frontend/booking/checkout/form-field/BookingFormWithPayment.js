@@ -90,7 +90,7 @@ export default () => {
         setCouponError(i18n.set_cart_error )
         setCouponLoaders(false)
     }
-    console.log( 'selecteed', selected_payment );
+
     return <> 
         {/* This section containce add your coupon code and get discount */}
         { typeof _wp_travel.coupon_available != 'undefined' && _wp_travel.coupon_available == true &&  <div className="wptravel-on-page-coupon-apply">
