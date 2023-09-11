@@ -137,7 +137,7 @@ class WpTravel_Helpers_Booking {
 						<?php if( !$trip_data['is_fixed_departure'] ): ?>
 							<?php if( $trip_data['trip_duration']["duration_format"] == 'day_night' ): ?>
 								<td><?php echo esc_html( $arrival_date ); ?></td>
-								<td><?php echo esc_html( $departure_date ); ?></td>
+								<td><?php echo esc_html( wptravel_format_date( $departure_date ) ); ?></td>
 								<?php else: ?>
 								<td><?php echo esc_html( $arrival_date ); ?></td>
 								<td><?php echo esc_html( $arrival_date ); ?></td>
