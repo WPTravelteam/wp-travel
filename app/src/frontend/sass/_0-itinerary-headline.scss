@@ -245,25 +245,22 @@
 //Close button for Trip Enquiry Form popup
 .mfp-wrap button.mfp-close {
 	margin: 0;
-	right: -29px;
-	box-shadow: none;
-	top: 7px;
-	display: inline-block;
-	// background: #fff;
-	background: transparent;
-	width: 30px;
-	min-width: 30px;
-	opacity: 1;
-	line-height: 30px;
-	height: 30px;
-	text-align: center;
-	padding: 0;
-	border-radius: 50%;
-	cursor: pointer;
-	color: #252525;
-	// box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18),
-	// 	0 4px 15px 0 rgba(0, 0, 0, 0.15);
-	box-shadow: none;
+    right: -40px;
+    box-shadow: none;
+    top: -40px;
+    display: inline-block;
+    background: transparent;
+    width: 30px;
+    min-width: 30px;
+    opacity: 1;
+    line-height: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #ffffff;
+    box-shadow: none;
 }
 label.radio-checkbox-label {
 	input[type="checkbox"] {

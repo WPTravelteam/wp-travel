@@ -1971,6 +1971,20 @@ if ( ! function_exists( 'wptravel_format_date' ) ) :
 
 endif;
 
+function getBetweenDates($startDate, $endDate) {
+    $rangArray = [];
+ 
+    $startDate = strtotime($startDate);
+    $endDate = strtotime($endDate);
+ 
+    for ($currentDate = $startDate; $currentDate <= $endDate; $currentDate += (86400)) {
+        $date = date('Y-m-d', $currentDate);
+        $rangArray[] = $date;
+    }
+ 
+    return $rangArray;
+}
+
 if ( ! function_exists( 'wptravel_get_trip_available_dates' ) ) {
 
 	/**
@@ -1996,9 +2010,38 @@ if ( ! function_exists( 'wptravel_get_trip_available_dates' ) ) {
 			if ( is_array( $data ) && 'WP_TRAVEL_TRIP_DATES' === $data['code'] ) {
 				$dates = $data['dates'];
 				foreach ( $dates as $date ) {
-					$available_dates[] = $date['start_date'];
+					if ( $date['is_recurring']) {
+						foreach ( getBetweenDates( $date['start_date'], $date['end_date'] ) as $keys => $val ) {
+							if ( ! empty( $date['days'] ) ) {
+								$dateDays = date( 'D', strtotime( $val ) );
+								if ( str_contains( strtolower( $date['days'] ), substr( strtolower( $dateDays ), 0, 2 ) ) ) {
+									if ( strtotime( $val ) > strtotime( date('Y-m-d') ) ) {
+										$available_dates[] = $val;
+										break;
+									}
+								}
+
+							} elseif ( ! empty( $date['date_days'] ) ) {
+								$datesDays = date( 'j', strtotime( $val ) );
+								if ( in_array( $datesDays, explode( ',', $date['date_days'] ) ) ) {
+									if ( strtotime( $val ) > strtotime( date('Y-m-d') ) ) {
+										$available_dates[] = $val;
+										break;
+									}
+								}
+							} else {
+								if ( strtotime( $val ) > strtotime( date('Y-m-d') ) ) {
+									$available_dates[] = $val;
+									break;
+								}
+							}
+						}
+					} else {
+						$available_dates[] = $date['start_date'];
+					}
 				}
 			}
+			// die;
 			return $available_dates;
 		}
 
@@ -4439,6 +4482,16 @@ function wptravel_php_to_moment_format( $format ) {
 	if ( 'D \DD\zz MMMM \DD\zz YYYY' === $moment_format ) {
 		$moment_format = 'MMMM D YYYY';
 	}
+	
+	/**
+	 * Quick fix for Português.
+	 * 
+	 * @example date format : j \d\e F, Y
+	 */
+	if( "D \DD\zz MMMM, YYYY" === $moment_format ) {
+		$moment_format = 'D \d\e MMMM, YYYY';
+	}
+
 	return $moment_format;
 }
 
@@ -4467,3 +4520,26 @@ function wptravel_nocache_headers() {
 	nocache_headers();
 }
 
+
+/**
+ * Cart icon.
+ *
+ * @return HTML
+ */
+function wptravel_get_cart_icon(){
+	global $wp_travel_itinerary;
+	global $wt_cart;
+	$trip_items     = $wt_cart->getItems();
+	if ( wp_travel_add_to_cart_system() == true ) {?>
+		
+			<a class="wp-travel-add-to-cart-item-anchor" href="<?php echo wptravel_get_checkout_url(); ?>" target="_blank" rel="noopener noreferrer">
+				<button class="wp-travel-single-trip-cart-button">
+					<span id="wp-travel-add-to-cart-cart_item_show">
+						<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+						<span class="wp-travel-cart-items-number <?php echo ( !empty( $trip_items ) && count( $trip_items ) > 0 ) ? 'active' : '' ?>"><?php echo count( $trip_items ); ?></span>
+					</span>
+				</button>
+			</a>
+		
+	<?php }
+}

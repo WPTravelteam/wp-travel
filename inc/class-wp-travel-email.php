@@ -328,6 +328,7 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 			$coupon_code = ! empty( $discounts['coupon_code'] ) ? ( $discounts['coupon_code'] ) : '';
 
 			$items = $wt_cart->getItems();
+
 			// Cart Datas.
 			$trip_ids   = array();
 			$price_keys = array();
@@ -369,6 +370,20 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 			$customer_country = isset( $request_data['wp_travel_country_traveller'] ) ? $request_data['wp_travel_country_traveller'] : array();
 			$customer_phone   = isset( $request_data['wp_travel_phone_traveller'] ) ? $request_data['wp_travel_phone_traveller'] : array();
 			$customer_email   = isset( $request_data['wp_travel_email_traveller'] ) ? $request_data['wp_travel_email_traveller'] : array();
+			$customer_gender   = get_post_meta( $booking_id, 'order_data', true )['wp_travel_gender_traveller'][array_key_first( get_post_meta( $booking_id, 'order_data', true )['wp_travel_gender_traveller'])][0];
+
+			if( apply_filters( 'wptravel_traveller_salutation', true ) ==  true ){
+				if( $customer_gender == 'male' ){
+					$salutation = __( 'Mr ', 'wp-travel' );
+				}elseif( $customer_gender == 'female' ){
+					$salutation = __( 'Miss ', 'wp-travel' );
+				}else{
+					$salutation = '';
+				}
+			}else{
+				$salutation = '';
+			}
+			
 
 			reset( $first_name );
 			$first_key = key( $first_name );
@@ -376,7 +391,7 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 			$first_name = isset( $first_name[ $first_key ] ) && isset( $first_name[ $first_key ][0] ) ? $first_name[ $first_key ][0] : '';
 			$last_name  = isset( $last_name[ $first_key ] ) && isset( $last_name[ $first_key ][0] ) ? $last_name[ $first_key ][0] : '';
 
-			$customer_name    = $first_name . ' ' . $last_name;
+			$customer_name    = $salutation . $first_name . ' ' . $last_name;
 			$customer_country = isset( $customer_country[ $first_key ] ) && isset( $customer_country[ $first_key ][0] ) ? $customer_country[ $first_key ][0] : '';
 			$customer_phone   = isset( $customer_phone[ $first_key ] ) && isset( $customer_phone[ $first_key ][0] ) ? $customer_phone[ $first_key ][0] : '';
 			$customer_email   = isset( $customer_email[ $first_key ] ) && isset( $customer_email[ $first_key ][0] ) ? $customer_email[ $first_key ][0] : '';

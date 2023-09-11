@@ -360,7 +360,7 @@ const CalendarView = ( props ) => {
     // Just custom botton. There is no custom onclick event here.
     const DatePickerBtn = forwardRef( ( { value, onClick }, ref ) => (
 		<button className="wp-travel-date-picker-btn" onClick={ onClick } >
-			{ selectedDate ? ! isFixedDeparture && `${moment(selectedDate).format('MMM D, YYYY')} - ${moment(selectedDate).add(duration - 1, 'days').format('MMM D, YYYY')}` || moment(selectedDate).format('MMM D, YYYY') : __i18n.bookings.date_select}
+			{ selectedDate ? ! isFixedDeparture && `${moment(selectedDate).format('MMM D, YYYY')}` || moment(selectedDate).format('MMM D, YYYY') : __i18n.bookings.date_select}
 			<span><i className="far fa-calendar-alt"></i></span>
 		</button>
 	));

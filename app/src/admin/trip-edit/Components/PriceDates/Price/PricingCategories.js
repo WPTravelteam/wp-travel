@@ -79,15 +79,7 @@ const WPTravelTripPricingCategories = ({priceIndex}) => {
                     <label>{ __i18n.price_per }</label>
                     <SelectControl
                         value={ category.price_per }
-                        options={ [
-                            {
-                                label: __i18n.person,
-                                value:'person'
-                            }, {
-                                label: __i18n.group,
-                                value:'group'
-                            }
-                        ] }
+                        options={ __i18n.trip_price_per }
                         onChange={ ( price_per ) => {
                             let priceData = price;
                             priceData.categories[catIndex].price_per = price_per;

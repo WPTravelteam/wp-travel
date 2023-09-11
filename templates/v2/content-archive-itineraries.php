@@ -86,6 +86,14 @@ $trp_title = apply_filters( 'wp_travel_trip_title_enable_disable', true );
 						<span>
 							<?php if ( $location_name ) : ?>
 								<a href="<?php echo esc_url( $location_link ); ?>" ><?php echo apply_filters( 'wp_travel_archives_page_trip_location', esc_html( $location_name ), $trip_id ); ?></a>
+									<?php if( count( $locations ) > 0 ): ?>
+										<i class="fas fa-angle-down"></i>
+										<ul>
+											<?php foreach( $locations as $location ): ?>
+												<li><a href="<?php echo esc_url( get_term_link( $location->term_id, 'travel_locations' ) ); ?>" ><?php echo esc_html( $location->name ); ?></a></li>
+											<?php endforeach; ?>
+										</ul>
+									<?php endif; ?>
 								<?php
 							else :
 								esc_html_e( apply_filters( 'wp_travel_archives_page_trip_location', 'N/A', $trip_id), 'wp-travel' );
