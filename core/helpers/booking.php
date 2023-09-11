@@ -137,7 +137,7 @@ class WpTravel_Helpers_Booking {
 						<?php if( !$trip_data['is_fixed_departure'] ): ?>
 							<?php if( $trip_data['trip_duration']["duration_format"] == 'day_night' ): ?>
 								<td><?php echo esc_html( $arrival_date ); ?></td>
-								<td><?php echo esc_html( wptravel_format_date( $departure_date ) ); ?></td>
+								<td><?php echo esc_html( $departure_date ); ?></td>
 								<?php else: ?>
 								<td><?php echo esc_html( $arrival_date ); ?></td>
 								<td><?php echo esc_html( $arrival_date ); ?></td>
@@ -252,6 +252,17 @@ class WpTravel_Helpers_Booking {
 										$pricing       = $pricing_datas['pricings'];
 										$pricing_titles = isset( $pricing['title'] ) ? $pricing['title'] : $pricing[0]['title'];
 									}
+									if( apply_filters( 'wptravel_traveller_salutation', true ) ==  true ){
+										if( $gender == 'male' ){
+											$salutation = __( 'Mr ', 'wp-travel' );
+										}elseif( $gender == 'female' ){
+											$salutation = __( 'Miss ', 'wp-travel' );
+										}else{
+											$salutation = '';
+										}
+									}else{
+										$salutation = '';
+									}
 									?>
 										<thead>
 											<tr>
@@ -277,7 +288,7 @@ class WpTravel_Helpers_Booking {
 										$traveler_dob  = isset( $dob[$indx] ) ? $dob[$indx] : '';
 									?>
 									<tr>
-										<td><?php echo esc_html( $dats ); ?> <?php echo esc_html( $traveler_l_name ); ?></td>
+										<td><?php echo $salutation . esc_html( $dats ); ?> <?php echo esc_html( $traveler_l_name ); ?></td>
 										<td><?php echo esc_html( $traveler_country ); ?></td>
 										<td><?php echo esc_html( $traveler_phone ); ?></td>
 										<td><?php echo esc_html( $traveler_email ); ?></td>
@@ -353,9 +364,21 @@ class WpTravel_Helpers_Booking {
 								$email     = isset( $emails[ $key ] ) ? $emails[ $key ] : '';
 								$dob       = isset( $dobs[ $key ] ) ? $dobs[ $key ] : '';
 								$gender    = isset( $genders[ $key ] ) ? $genders[ $key ] : '';
+
+								if( apply_filters( 'wptravel_traveller_salutation', true ) ==  true ){
+									if( $gender == 'male' ){
+										$salutation = __( 'Mr ', 'wp-travel' );
+									}elseif( $gender == 'female' ){
+										$salutation = __( 'Miss ', 'wp-travel' );
+									}else{
+										$salutation = '';
+									}
+								}else{
+									$salutation = '';
+								}
 								?>
 								<tr>
-									<td><?php echo esc_html( $first_name ); ?> <?php echo esc_html( $last_name ); ?></td>
+									<td><?php echo $salutation . esc_html( $first_name ); ?> <?php echo esc_html( $last_name ); ?></td>
 									<td><?php echo esc_html( $country ); ?></td>
 									<td><?php echo esc_html( $phone ); ?></td>
 									<td><?php echo esc_html( $email ); ?></td>
