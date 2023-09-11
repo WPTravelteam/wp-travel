@@ -1,10 +1,10 @@
 .wp-travel-checkout-one-page {
 	width: 90%;
 }
-#wp-travel-one-page-checkout-enables{
+#wp-travel-one-page-checkout-enables {
 	display: inline-block;
 }
-// making parent div inline so that 'book now' and 
+// making parent div inline so that 'book now' and
 #wp-travel-one-page-checkout-enables .components-button {
 	// padding: 5px 50px;
 	box-shadow: none;
@@ -20,7 +20,7 @@
 			width: auto;
 			height: 40px;
 			border-radius: 5px;
-			padding: .5em 1em;
+			padding: 0.5em 1em;
 			font-weight: 500;
 			cursor: pointer;
 			transition: all 0.1s ease;
@@ -57,7 +57,7 @@
 					transform: translate(82px, 0px) !important;
 				}
 			}
-			
+
 			.react-datepicker {
 				.react-datepicker__navigation {
 					width: 20px;
@@ -185,8 +185,8 @@
 	// disable fixed departure will casue issue with date picker.
 	.react-datepicker-popper:not(.wptravel-traveller-info-container
 			.react-datepicker-popper) {
-				position: relative !important;
-				transform: unset !important;
+		position: relative !important;
+		transform: unset !important;
 	}
 	// End : disable fixed departure will casue issue with date picker.
 
@@ -300,6 +300,85 @@
 							display: none;
 						}
 
+						.text-left {
+							.tooltip.group-discount-button {
+								cursor: pointer;
+								font-size: 12px;
+								display: inline-flex;
+								align-items: center;
+								text-decoration: underline;
+
+								svg {
+									height: 20px;
+									width: 20px;
+									fill: red;
+									color: red;
+									margin-right: 0.25em;
+								}
+								.discount-table {
+									display: none;
+									position: absolute;
+									top: 100%;
+									left: 0;
+									z-index: 50;
+									background-color: #fff;
+									border-radius: 4px;
+									padding: 0.5em;
+									width: 250px;
+									margin-top: 10px;
+									box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+									border: 1px solid #ccc;
+
+									table {
+										width: 100%;
+										border-collapse: collapse;
+										text-align: center;
+										display: table;
+										margin: 0;
+										//
+										thead tr:first-child th:last-child {
+											border-left: 1px solid #eee;
+											border-bottom: 1px solid #eee;
+											padding: 0.25em 0.5em;
+											font-size: 14px;
+											text-align: center;
+											//
+											th {
+												border-bottom: 1px solid #eee;
+												padding: 0.25em 0.5em;
+												font-size: 14px;
+												text-align: center;
+											}
+										}
+									}
+									::before {
+										border-bottom-color: #999;
+										top: -0.7px;
+										content: "";
+										border-bottom: 10px solid #fff;
+										border-left: 10px solid transparent;
+										border-right: 10px solid transparent;
+										position: absolute;
+										left: 10px;
+										transform: translateY(-100%);
+									}
+									::after {
+										content: "";
+										border-bottom: 10px solid #c3c3c3;
+										border-left: 10px solid transparent;
+										border-right: 10px solid transparent;
+										position: absolute;
+										top: 0;
+										left: 10px;
+										transform: translateY(-100%);
+									}
+								}
+								&:hover .discount-table {
+									display: block ;
+								}
+							}
+						}
+
 						// counter section to increase/decrease person
 						.text-right {
 							.item-price {
@@ -411,7 +490,8 @@
 						display: flex;
 						flex-wrap: wrap;
 						justify-content: space-between;
-						align-items: flex-start;
+						// align-items: flex-start;
+						align-items: center;
 						margin-bottom: 10px;
 
 						.text-left {
@@ -495,7 +575,6 @@
 		width: 100%;
 		padding-bottom: 0;
 		position: unset;
-		
 
 		// left-info i.e pricine and trip-date
 		.left-info {
@@ -559,7 +638,7 @@
 
 				.right-info {
 					width: 100%;
-    				justify-content: space-between;
+					justify-content: space-between;
 				}
 			}
 		}
@@ -656,10 +735,10 @@
 					flex-wrap: wrap;
 					align-items: center;
 					// icon height
-					input{
+					input {
 						min-height: auto;
 					}
-					.wptravel-single-page-gender-radio-btn{
+					.wptravel-single-page-gender-radio-btn {
 						display: flex;
 						align-items: center;
 						gap: 5px;
@@ -690,7 +769,7 @@
 							gap: 5px;
 							margin-bottom: 0;
 
-							span.components-checkbox-control__input-container{
+							span.components-checkbox-control__input-container {
 								line-height: 1;
 							}
 						}
@@ -889,7 +968,7 @@
 					border: 1px solid rgb(204, 204, 204);
 					padding: 0.5rem;
 
-					@media screen and ( max-width: 576px ) {
+					@media screen and (max-width: 576px) {
 						width: 100%;
 						margin-left: 0;
 						margin-top: 10px;
@@ -943,7 +1022,7 @@
 						width: 100%;
 						border-radius: 5px;
 
-						@media screen and ( max-width: 576px ) {
+						@media screen and (max-width: 576px) {
 							flex-direction: column;
 						}
 
@@ -962,7 +1041,7 @@
 							overflow-y: auto;
 							max-height: 300px;
 
-							@media screen and ( max-width: 576px ) {
+							@media screen and (max-width: 576px) {
 								width: 100%;
 								margin-left: 0;
 								margin-top: 10px;
@@ -983,7 +1062,7 @@
 							padding: 0 15px 0 0;
 							font-size: 16px;
 
-							@media screen and ( max-width: 576px ) {
+							@media screen and (max-width: 576px) {
 								width: 100%;
 							}
 						}
@@ -1115,10 +1194,10 @@
 		.onpage-traveler-field-price-show {
 			p {
 				display: flex;
-    			align-items: center;
+				align-items: center;
 				margin: 0;
 				font-size: 20px;
-    			font-weight: bold;
+				font-weight: bold;
 			}
 		}
 	}
@@ -1156,15 +1235,14 @@
 		}
 	}
 
-
 	// Coupon code entering section
-	.wptravel-on-page-coupon-apply input{
+	.wptravel-on-page-coupon-apply input {
 		min-height: 40px;
 	}
 }
 
 @media only screen and (max-width: 980px) {
-// 
+	//
 }
 @media only screen and (max-width: 767px) {
 	#wp-travel-country {
@@ -1198,6 +1276,6 @@ div.wptravel-onpage-priceshow {
 	}
 }
 span.onpage-travel-price-display-label {
-	margin-right:  15px;
+	margin-right: 15px;
 }
 @import "./responsive.scss";
