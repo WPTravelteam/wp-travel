@@ -419,18 +419,23 @@ Before updating plugin please check ["our latest release notes"](#developers).
 == Changelog ==
 
 = 7.3.0 =
-Release Date: 
+Release Date: 11th September 2023
 
 Fixes:
 * Code cleanup 
 * Fixed booking date label in case of one day trip
 * Added departure date in thankyou page and booking email template
+* Fixed image width on WP Travel User login page
+* Fixed CSS of group price on onpage booking 
 
 Enhancements:
 * Inherit theme color on add to cart
-* Extend time interval of cornjobs ( once in a two day )
-* Added hook for cart icon - wptravel_get_cart_icon()
-* Added wp_travel_trip_price_per hook ( this hook helps to and extra label for book per ( ie. person, group ) )
+* Extend time interval of cornjobs ( once in two days )
+* Added function for cart icon - `[wptravel_get_cart_icon()]`
+* Added `[wp_travel_trip_price_per]` hook ( this hook helps to and extra label for book per ( ie. person, group ) )
+* Added `[wptravel_traveller_salutation]` hook - this hook helps to add or remove salutation on booking email
+
+**For more details, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-v7-3-0-update-release-note/).**
 
 = 7.2.1 =
 Release Date: 24th August 2023

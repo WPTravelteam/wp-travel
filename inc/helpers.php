@@ -4482,6 +4482,16 @@ function wptravel_php_to_moment_format( $format ) {
 	if ( 'D \DD\zz MMMM \DD\zz YYYY' === $moment_format ) {
 		$moment_format = 'MMMM D YYYY';
 	}
+	
+	/**
+	 * Quick fix for Português.
+	 * 
+	 * @example date format : j \d\e F, Y
+	 */
+	if( "D \DD\zz MMMM, YYYY" === $moment_format ) {
+		$moment_format = 'D \d\e MMMM, YYYY';
+	}
+
 	return $moment_format;
 }
 
