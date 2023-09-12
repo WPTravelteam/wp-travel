@@ -14,7 +14,7 @@ export default () => {
     const [ updateExtraPrice, setUpdateExtraPrice ]  = useState({})
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     const { updateStore } = dispatch( bookingStoreName );
-    const { nomineePricingIds, priceCart, paxCounts, form_key, currency_symbol, tripExtras, nomineeTripExtras } = bookingData;
+    const { nomineePricingIds, priceCart, paxCounts, form_key, currency_symbol, tripExtras, nomineeTripExtras, selectedPricingId } = bookingData;
     const priceCategoryList = typeof priceCart != 'undefined' && typeof priceCart.priceCategoryList != 'undefined' && priceCart.priceCategoryList || [];
     const prcMax = typeof priceCart != 'undefined' && typeof priceCart.max_pax != 'undefined' && priceCart.max_pax || 0;
     const prcMin = typeof priceCart != 'undefined' && typeof priceCart.min_pax != 'undefined' && priceCart.min_pax || 0;
@@ -25,7 +25,7 @@ export default () => {
     const cartUpdateOpen = () => {
         typeof priceCart == 'undefined' && typeof pricings != 'undefined' && pricings.length > 0 && pricings.forEach( ( priceList, index ) => {
             const { id, categories, max_pax, min_pax, trip_extras }    = priceList;
-            if ( nomineePricingIds[0] == id ) {
+            if ( typeof selectedPricingId != 'undefined' && selectedPricingId == id ) {
                 var prcCategory = {}
                 var priceFirst = {};
                 if ( typeof categories != 'undefined' && categories.length > 0 ) {
@@ -174,7 +174,7 @@ export default () => {
         } )
         //  setLoaders( false );
     }
-    console.log( 'wrd,', bookingData)
+    // console.log( 'wrd,', bookingData)
     return <>
             <div className='wptravel-udate-cart-wrapper'>
             <button className='components-button' onClick={cartOpen == true ? cartUpdateClose : cartUpdateOpen} >{ cartOpen == true ? i18n.set_close_cart : i18n.set_view_cart }</button>
@@ -207,8 +207,8 @@ export default () => {
                             // let extraIds = typeof trpExtra.id != 'undefined' &&  trpExtra.id || 0;
                             const { is_sale, sale_price, tour_extras_metas } = trpExtra;
                             const extras_item_price = typeof tour_extras_metas != 'undefined' && typeof tour_extras_metas.extras_item_price != 'undefined' && tour_extras_metas.extras_item_price || 0;
-                            console.log( 'extraIds', extraIds )
-                            console.log( 'extras', trpsExtras )
+                            // console.log( 'extraIds', extraIds )
+                            // console.log( 'extras', trpsExtras )
                             return typeof trpsExtras != 'undefined' && trpsExtras.length > 0 && trpsExtras.includes( extraIds.toString() ) && <>
                              <div className="wptrave-on-page-booking-cart-update-field" key={extraIndex *20 }>
                             <label>{extraTitles}</label>
