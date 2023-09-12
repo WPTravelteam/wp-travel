@@ -14,6 +14,11 @@ export default ( { travelerData, trvOne = 'travelerOne', pmtFld = 'no' } ) => {
     const travelerValue = typeof travelerDataList[name] != 'undefined' && travelerDataList[name] ||  defaults ;
     const errorData = typeof error_list[name] != 'undefined' && error_list[name]  || '';
     const optionKey = typeof options != 'undefined' && Object.keys( options ) || [];
+    if ( pmtFld == 'yes' && typeof travelerDataList[name] == 'undefined' ) {
+        const newData = {...travelerDataList, [name] : defaults };
+        const checkoutNewData = {...checkoutDetails, [trvOne] : newData }
+        updateStore({...bookingData, checkoutDetails : checkoutNewData } ) 
+    }
     return optionKey.length > 0 && <><PanelBody>
             {/* <div className='wptravel-onpage-radiobtn-handle'> */}
                 { pmtFld == 'no' &&<>

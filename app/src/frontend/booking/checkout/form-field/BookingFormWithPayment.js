@@ -24,6 +24,7 @@ export default () => {
     const [ couponDisable, setDisable ]  = useState(false)
     const [ couponLoaders, setCouponLoaders ] = useState(false)
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
+    console.log( 'sdfdsf', bookingData );
     const { updateStore } = dispatch( bookingStoreName );
     const { checkoutDetails, payment_form, price_list, form_key, traveler_form, couponCode, apply_coupon, cart_amount, currency_symbol } = bookingData;
     const { booking_selected, payment_select  } = checkoutDetails;
@@ -166,11 +167,13 @@ export default () => {
 
                 })}
                 <input type="hidden" value={_wp_travel._nonce} name="_nonce" />
-                <div className="wptravel-onepage-navigation-btn">
+                <div style={{display:"flex", justifyContent:"space-between"}}>
                     <button className="wptravel-onpage-booking-back-buttons" onClick={ () => { 
-                        updateStore({...bookingData, tripBillingEnable : true, treipPaymentEnable : false })
-                    }} >{i18n.set_go_back}</button>
-                    <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value={i18n.set_book_now} />
+                            updateStore({...bookingData, tripBillingEnable : true, treipPaymentEnable : false })
+                        }} >{i18n.set_go_back}</button>
+                    <div className="wptravel-onepage-navigation-btn"> 
+                        <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value={i18n.set_book_now} />
+                    </div>
                 </div>
                 </>
                  }

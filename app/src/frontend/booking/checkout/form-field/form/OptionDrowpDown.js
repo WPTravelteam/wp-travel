@@ -10,11 +10,11 @@ export default ( { travelerData, trvOne = 'travelerOne', partials = 'no' } ) => 
     const { checkoutDetails, error_list, requiredField } = bookingData
     const thisRequired = typeof requiredField[name] != 'undefined' && requiredField[name] || false;
     const travelerDataList = typeof checkoutDetails != 'undefined' && typeof checkoutDetails[trvOne] != 'undefined' && checkoutDetails[trvOne] || {};
-    const travelerValue = typeof travelerDataList[name] != 'undefined' && travelerDataList[name] || ( partials == 'yes' && "full" || "booking_only" );
+    const travelerValue = typeof travelerDataList[name] != 'undefined' && travelerDataList[name] || '';
     const optionKey = typeof options != undefined && Object.keys( options ) || []
 
-    if ( typeof travelerDataList[name] == undefined ) {
-        const newData = {...travelerDataList, [name] : "booking_only" };
+    if ( typeof travelerDataList[name] == 'undefined' ) {
+        const newData = {...travelerDataList, [name] : defaults };
         const checkoutNewData = {...checkoutDetails, [trvOne] : newData }
         updateStore({...bookingData, checkoutDetails : checkoutNewData } )  
     }
