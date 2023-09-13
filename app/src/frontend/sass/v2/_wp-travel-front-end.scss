@@ -1165,19 +1165,20 @@ ul.availabily-list {
 		}
 	}
 }
-#wptravel-archive-wrapper .view-box .trip-location ul{
+#wptravel-archive-wrapper .view-box .trip-location ul {
 	display: none;
 	padding: 5px 20px;
-    border: none;
-    position: absolute;
-    background: aliceblue;
-}
-
-#wptravel-archive-wrapper .view-box  .trip-location ul li{
 	border: none;
-	background: aliceblue;
+	position: absolute;
+	background: #fff;
+	box-shadow: 0px 0px 1px #cdcdcd;
 }
 
-#wptravel-archive-wrapper  .view-box .trip-location:hover ul{
+#wptravel-archive-wrapper .view-box .trip-location ul li {
+	border: none;
+	background: #fff;
+}
+
+#wptravel-archive-wrapper .view-box .trip-location:hover ul {
 	display: block;
 }
