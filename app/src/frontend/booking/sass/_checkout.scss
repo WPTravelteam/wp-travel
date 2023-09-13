@@ -374,7 +374,7 @@
 									}
 								}
 								&:hover .discount-table {
-									display: block ;
+									display: block;
 								}
 							}
 						}
@@ -1236,8 +1236,11 @@
 	}
 
 	// Coupon code entering section
-	.wptravel-on-page-coupon-apply input {
-		min-height: 40px;
+	.wptravel-on-page-coupon-apply {
+		padding: 40px 40px 10px 40px;
+		input.wp-travel-coupon-code {
+			min-height: 40px;
+		}
 	}
 }
 
