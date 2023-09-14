@@ -112,11 +112,12 @@ export default () => {
                 { partial_enable == 'yes' && <PartialPyamet /> }
                 </> }
                 {/* Show all price data  */}
+                { selected_payment == 'stripe_ideal' && <div className="wptravel-on-page-stripe-ideal-checkout-field">
+                    <label>iDEAL Bank</label><div id="stripeIdealElement"></div>
+                </div> }
                 <div className="wptravel-on-page-price-with-payment-field-show">
                     <CouponApplyAmount coupon_data={cart_amount} currency_symbol={ currency_symbol } booking_option={wp_travel_booking_option} payment_mode={wp_travel_payment_mode} partial_enable={ partial_enable }  /> 
-                    { selected_payment == 'stripe_ideal' && <div className="wptravel-on-page-stripe-ideal-checkout-field">
-                        <label>iDEAL Bank</label><div id="stripeIdealElement"></div>
-                    </div> }
+                    
                 </div>
                 { travelerKey.length > 0 && travelerKey.map( ( keyList, indexs ) => {
                     const trvValue = typeof travelerData[keyList] != 'undefined' && travelerData[keyList] || { 1 : ''}
