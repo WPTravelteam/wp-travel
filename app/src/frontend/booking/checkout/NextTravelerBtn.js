@@ -21,8 +21,7 @@ const WpTravelBookNow = ( props ) => {
 	const [loaders, setLoaders] = useState(false);
     // Booking Data/state.
     const bookingAllData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
-    // // console.log( bookingData );
-    // const { selectedDate } = bookingData;
+
     const { updateStore } = dispatch( bookingStoreName );
     // Component Props.
 	const { tripData, bookingData, updateBookingData } = props;
@@ -134,7 +133,7 @@ const WpTravelBookNow = ( props ) => {
 			category_pax: paxCounts,
 			trip_price: getCartTotal(), // just trip price without extras.
 		}
-		// console.log( 'final pax', paxCounts ) 
+
 		let paxVal =  Object.values( paxCounts ); // get all pax value form price category
 		let size = 0;
 		if ( paxVal.length > 0 ) {

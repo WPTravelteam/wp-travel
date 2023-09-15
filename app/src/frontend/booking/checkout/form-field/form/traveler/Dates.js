@@ -16,7 +16,7 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
     const travelerDataList = typeof checkoutDetails != 'undefined' && typeof checkoutDetails[trvOne] != 'undefined' && checkoutDetails[trvOne] || {};
     const travelerValue = typeof travelerDataList[name] != 'undefined' && travelerDataList[name] || {};
     const selectedDate =  typeof travelerValue != 'undefined' && typeof travelerValue[pxKey] != 'undefined' && travelerValue[pxKey] != '' ? new Date( travelerValue[pxKey] ) : new Date();
-    // console.log( 'dhfjdf oldd', new Date( travelerValue ) )
+
     
     const datePickerParams =  {
         showMonthDropdown: true,
@@ -40,11 +40,11 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
                 const years = createNewDate.getFullYear();
                 const days = createNewDate.getDate() ;
                 const finaldate = years + '-' + month + '-' + days;
-                // console.log( 'dhfjdf', value)
+ 
                 const newTraveler = {...travelerValue, [pxKey] : finaldate}
                 const newData = {...travelerDataList, [name] : newTraveler };
                 const checkoutNewData = {...checkoutDetails, [trvOne] : newData }
-                // console.log( 'ths date', checkoutNewData )
+           
                 updateStore({...bookingData, checkoutDetails : checkoutNewData } )
             }}
         />

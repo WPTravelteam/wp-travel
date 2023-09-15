@@ -13,7 +13,7 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
     const errorData = typeof error_list[name] != 'undefined' && typeof error_list[name][pxKey] != 'undefined' &&  error_list[name][pxKey] || '';
     const travelerDataList = typeof checkoutDetails != 'undefined' && typeof checkoutDetails[trvOne] != 'undefined' && checkoutDetails[trvOne] || {};
     const travelerValue = typeof travelerDataList[name] != 'undefined' && travelerDataList[name] || {} ;
-    // console.log( )
+
     const optionKey = typeof options != 'undefined' && Object.keys( options ) || [];
     return optionKey.length > 0 && <> <PanelBody>
         <PanelRow>

@@ -34,7 +34,6 @@ jQuery(document).ready(function ($) {
 		}
 	});
 	$( "input[name=wp_travel_payment_gateway]").click(function () {
-		// console.log('clik mes', wp_travel );
 		inventory_testing();
 	})
 

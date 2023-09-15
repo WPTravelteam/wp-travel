@@ -137,5 +137,3 @@ export const paypalPayment = () => {
         return amount;
     }
 }
-// console.log( 'helllcall', document.getElementById( 'wp-travel-option' ) )
-// document.getElementById( 'wp-travel-option' )

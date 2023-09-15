@@ -6,8 +6,7 @@ import { DEFAULT_BOOKING_STATE } from '../store/_Store';
 const __i18n = {
 	..._wp_travel.strings
 }
-// Additional lib @todo need to implement path lib.
-// const _ = lodash;
+
 import _ from 'lodash';
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
 
@@ -20,7 +19,7 @@ const WpTravelBookNow = ( props ) => {
 	const initialState = DEFAULT_BOOKING_STATE();
     // Component Props.
 	const { tripData, bookingData, updateBookingData } = props;
-	// console.log( 'sdtripData', tripData )
+
     // Trip Data.
     const {
 		title,

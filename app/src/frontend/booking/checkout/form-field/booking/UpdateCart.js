@@ -174,7 +174,7 @@ export default () => {
         } )
         //  setLoaders( false );
     }
-    // console.log( 'wrd,', bookingData)
+ 
     return <>
             <div className='wptravel-udate-cart-wrapper'>
             <button className='components-button' onClick={cartOpen == true ? cartUpdateClose : cartUpdateOpen} >{ cartOpen == true ? i18n.set_close_cart : i18n.set_view_cart }</button>
@@ -207,8 +207,7 @@ export default () => {
                             // let extraIds = typeof trpExtra.id != 'undefined' &&  trpExtra.id || 0;
                             const { is_sale, sale_price, tour_extras_metas } = trpExtra;
                             const extras_item_price = typeof tour_extras_metas != 'undefined' && typeof tour_extras_metas.extras_item_price != 'undefined' && tour_extras_metas.extras_item_price || 0;
-                            // console.log( 'extraIds', extraIds )
-                            // console.log( 'extras', trpsExtras )
+            
                             return typeof trpsExtras != 'undefined' && trpsExtras.length > 0 && trpsExtras.includes( extraIds.toString() ) && <>
                              <div className="wptrave-on-page-booking-cart-update-field" key={extraIndex *20 }>
                             <label>{extraTitles}</label>

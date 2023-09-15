@@ -41,7 +41,7 @@ const WPTravelBooking = ( props ) => {
 
 	// Booking Data/state.
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
-    // console.log( bookingData );
+
     const { selectedDate } = bookingData;
     const { updateStore } = dispatch( bookingStoreName );
     const updateBookingData = ( data ) => {

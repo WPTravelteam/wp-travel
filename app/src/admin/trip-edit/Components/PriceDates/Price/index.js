@@ -55,7 +55,7 @@ const Pricings = ( {allData} ) => {
     const settings = useSelect((select) => {
         return select('WPTravel/TripEdit').getSettings()
     }, []);
-    // console.log( 'settings data', settings );
+
     const { pricing_type, pricings, has_extras, minimum_partial_payout_use_global, minimum_partial_payout_percent, highest_price } = allData;
     const { options } = typeof settings != 'undefined' && settings;
     const { updateTripPricing, addTripPricing, updateTripPrices, updateTripData } = dispatch('WPTravel/TripEdit');

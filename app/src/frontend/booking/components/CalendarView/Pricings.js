@@ -15,7 +15,7 @@ const Pricings =  ( props ) => {
 	let allPricings = tripData && tripData.pricings && _.keyBy( tripData.pricings, p => p.id ); // Need object structure because pricing id may not be in sequencial order.
 
 	const { isLoading, selectedDate, nomineePricingIds, selectedPricingId } = bookingData;
-	// console.log( 'nomineePricingIds', nomineePricingIds );
+
 	return <>
 		{ isLoading && <Loader /> }
 		{	
