@@ -15,7 +15,7 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
     
     return <div className='wptravel-onpage-checkbox-container'>
     <PanelBody>
-        {/* <PanelRow> */}
+
         <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>
         <div className="wptravel-onpage-checkbox-wrapper">
             {
@@ -27,7 +27,7 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
                     checked={ typeof finalTravelerData != 'undefined' && finalTravelerData.length > 0 && finalTravelerData.includes( value ) || false }
                     onChange={ ( values ) => {
                         if ( values == true ) {
-                            // const newVal = [...]
+    
                             const newTrData = [...finalTravelerData, value ]
                             const newDataSelect = {...travelerValue, [pxKey] : newTrData }
                             const newData = {...travelerDataList, [name] : newDataSelect };
@@ -47,7 +47,7 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
                } )
             }
         </div>
-        {/* </PanelRow> */}
+
     </PanelBody>
      <p className='wp-travel-in-page-error'>{errorData}</p></div>
 }

@@ -1,7 +1,6 @@
 import { __ } from '@wordpress/i18n'
 import DiscountTable from './_GroupDiscountTable';
 
-// const _ = lodash
 import _ from 'lodash';
 const __i18n = {
 	..._wp_travel.strings
@@ -51,14 +50,14 @@ const PaxSelector = ( props ) => {
 					price = parseFloat(group_price.price);
 					return  GetConvertedPrice( price ); // Add Multiple currency support to get converted price.
 				}
-				// price = 'group' === category.price_per ? (totalPax > 0 ? parseFloat(group_price.price) : 0) : parseFloat(group_price.price) * totalPax
+
 				price =  parseFloat(group_price.price) * totalPax
 			} else {
 				if (single) {
 					price = parseFloat(price);
 					return GetConvertedPrice( price ); // Add Multiple currency support to get converted price.
 				}
-				// price = 'group' === category.price_per ? (totalPax > 0 ? parseFloat(price) : 0) : parseFloat(price) * totalPax
+		
 				price = parseFloat(price) * totalPax
 			}
 		} else if (category.has_group_price && category.group_prices.length > 0) { // If has group price/discount.
@@ -132,7 +131,7 @@ const PaxSelector = ( props ) => {
 		}
 
 		if (maxPax >= 1) {
-			// let _totalPax = _.size(paxCounts) > 0 && Object.values(paxCounts).reduce((acc, curr) => acc + curr) || 0
+
 			if ( values > parseInt(maxPax)) {
 				updateBookingData({ paxCounts: { ...paxCounts, [id]: 0 } })
 				return;
@@ -201,7 +200,7 @@ const PaxSelector = ( props ) => {
 							<div className="pricing-area">
 								<div className="qty-spinner">
 									<button onClick={handlePaxChange(c.id, -1)}>-</button>
-									{/* <span>{typeof paxCounts[c.id] == 'undefined' ? parseInt(c.default_pax) : paxCounts[c.id]}</span> */}
+			
 									<input  className='wp-trave-pax-selected-frontend-second' 
 										value={typeof paxCounts[c.id] == 'undefined' ? parseInt(c.default_pax) : paxCounts[c.id]} 
 										onChange={ ( essdfdsf ) => {

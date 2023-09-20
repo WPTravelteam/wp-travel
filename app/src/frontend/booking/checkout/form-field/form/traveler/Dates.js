@@ -21,7 +21,6 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
     const datePickerParams =  {
         showMonthDropdown: true,
         showYearDropdown: "select",
-        // seleted : new Date( travelerValue ),
         dropdownMode: "select",
         minDate: backed != 1 && keyDate.length > 0 && keyDate.includes( 'data-max-today' ) ? new Date() : null,
         maxDate: backed == 1 ?  new Date() : null,
@@ -30,7 +29,6 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
         <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>
         <DatePicker
         className= "wptravel-booking-datepicker"
-            // dateFormat="yyyy-MM-dd"
             selected={selectedDate }
             { ...datePickerParams }
             value={ typeof travelerValue[pxKey] != 'undefined' && travelerValue[pxKey] || '' }

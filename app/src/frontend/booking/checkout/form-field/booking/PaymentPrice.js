@@ -20,7 +20,7 @@ export default ( ) => {
     const { updateStore } = dispatch( bookingStoreName );
     const { payment_form } = bookingData;
     const { payment_amount_info } = payment_form;
-    // const fieldKey  = typeof booking_option != 'undefined' && Object.keys( booking_option ) || [];
+
     return <>
         { typeof payment_amount_info != 'undefined' && <TextData travelerData={ payment_amount_info } trvOne='price_print' /> }
     </>

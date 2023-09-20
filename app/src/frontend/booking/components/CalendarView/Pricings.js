@@ -6,11 +6,11 @@ const __i18n = {
 }
 
 // Additional lib
-// const _ = lodash;
+
 import _ from 'lodash';
 import Loader from '../../../../GlobalComponents/Loader';
 const Pricings =  ( props ) => {
-	// Component Props.
+
 	const { tripData, bookingData, updateBookingData } = props;
 	let allPricings = tripData && tripData.pricings && _.keyBy( tripData.pricings, p => p.id ); // Need object structure because pricing id may not be in sequencial order.
 

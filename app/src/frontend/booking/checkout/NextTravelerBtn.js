@@ -186,7 +186,6 @@ const WpTravelBookNow = ( props ) => {
 					}).catch(error => {
 						console.log( 'You can not use one page checkout because setting not loaded!' );
 					})
-                    // updateStore( {...bookingAllData, bookingTabEnable: false, travelerInfo : true } );
 
 				}
 

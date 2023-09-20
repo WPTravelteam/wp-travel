@@ -172,7 +172,7 @@ export default () => {
 
             setLoaders( false )
         } )
-        //  setLoaders( false );
+
     }
  
     return <>
@@ -195,9 +195,7 @@ export default () => {
                             <div className="wptravel-onpage-booking-cart-price">
                                 <p>{currency_symbol}{updatePriceData[catId]}</p>
                             </div>
-                            {/* <div className="wptravel-onpage-booking-cart-price">
-                                <p>{currency_symbol}{updatePriceData[catId]}</p>
-                            </div> */}
+
                         </div>
                     </>
                 } )}
@@ -221,9 +219,7 @@ export default () => {
                             <div className="wptravel-onpage-booking-cart-price">
                                 { updateExtraPrice[extraIds] > 0 && <p>{currency_symbol}{updateExtraPrice[extraIds]}</p> }
                             </div>
-                            {/* <div className="wptravel-onpage-booking-cart-price">
-                                <p>{currency_symbol}{updatePriceData[catId]}</p>
-                            </div> */}
+
                         </div> </>} )}
                 <div className="wptravel-on-page-booking-cart-update-btn">
                     <button className='components-button' onClick={updateYouCart}>{i18n.set_updated_cart_btn}{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</button>

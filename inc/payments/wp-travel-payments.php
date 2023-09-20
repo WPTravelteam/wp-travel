@@ -450,7 +450,22 @@ function wptravel_send_email_payment( $booking_id ) {
 		$arrival_date_email_tag = $wp_travel_arrival_date_email_tag; // email date tag along with time.
 	}
 
-	$customer_name    = $first_name . ' ' . $last_name;
+	$customer_gender   = isset( get_post_meta( $booking_id, 'order_data', true )['wp_travel_gender_traveller'] ) ? get_post_meta( $booking_id, 'order_data', true )['wp_travel_gender_traveller'][array_key_first( get_post_meta( $booking_id, 'order_data', true )['wp_travel_gender_traveller'])][0] : '';
+
+	if( apply_filters( 'wptravel_traveller_salutation', true ) ==  true ){
+		if( $customer_gender == 'male' ){
+			$salutation = __( 'Mr ', 'wp-travel' );
+		}elseif( $customer_gender == 'female' ){
+			$salutation = __( 'Miss ', 'wp-travel' );
+		}else{
+			$salutation = '';
+		}
+	}else{
+		$salutation = '';
+	}
+
+	$customer_name    = $salutation.$first_name . ' ' . $last_name;
+
 	$customer_country = $country;
 	$customer_address = get_post_meta( $booking_id, 'wp_travel_address', true );
 	$customer_phone   = $phone;

@@ -1,7 +1,6 @@
 import { __ } from '@wordpress/i18n'
 import DiscountTable from '../../CalendarView/_GroupDiscountTable';
 
-// const _ = lodash
 import _ from 'lodash';
 const __i18n = {
 	..._wp_travel.strings
@@ -87,19 +86,7 @@ const PaxSelector = ( props ) => {
 		pricing = allPricings[selectedPricingId];
 	}
 	// Fetch Default First Pricing and Category 
-	// let firstPricing    = {};
-	// let firstCagegories = [];
-	// let firstCagegory   = [];
-	// let firstPrice      = 0;
-	// let firstCagegoryId = null;
-	// // If Pricing is not selected then Need to display Pax selector as per First Pricing from pricings list.
-	// if ( pricings.length > 0 ) {
-		// firstPricing    = allPricings[firstIndex];
-	// 	firstCagegories = 'undefined' != typeof firstPricing && firstPricing.categories;
-	// 	firstCagegory   = firstCagegories.length > 0 ? firstCagegories[0] : [];
-	// 	firstCagegoryId = firstCagegory && firstCagegory.id ? firstCagegory.id : null;
-	// 	firstPrice      = firstCagegoryId ? getCategoryPrice(  firstCagegoryId, true ) : 0;
-	// }
+
 	let categories = pricing && pricing.categories || []
 
 	const handlePaxChange = (id, value) => e => {

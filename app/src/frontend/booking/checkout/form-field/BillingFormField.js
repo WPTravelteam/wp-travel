@@ -13,9 +13,9 @@ import { Button } from '@wordpress/components'
 import TextArea from './form/TextArea';
 import { useEffect, useState } from '@wordpress/element'
 import { __ } from '@wordpress/i18n';
-// import apiFetch from '@wordpress/api-fetch';
+
 import ProgressBary from '../ProgressBary';
-// import i18n from '@wordpress/i18n/build-types/default-i18n';
+
 export default ( ) => {
     // Booking Data/state.
     const [loaders, setLoaders] = useState(false)
@@ -26,7 +26,7 @@ export default ( ) => {
     const { billing } = checkoutDetails;
     const billingData = typeof billing != 'undefined' && billing || {};
     const fieldKey  = typeof billing_form != 'undefined' && Object.keys( billing_form ) || [];
-    // const { trip_price }  = typeof price_list != 'undefined' && price_list || ''
+
     const trip_price = typeof cart_amount != 'undefined' && typeof cart_amount.cart_total != 'undefined' && cart_amount.cart_total || 0
     useEffect( () => {
         const requiredField = {};
@@ -89,8 +89,7 @@ export default ( ) => {
             })
         }
         </div>
-        {/* <PanelBody>
-            <PanelRow> */}
+
         <div className='wptravel-onepage-navigation-btn'>
         
             <Button onClick={ () => { 
@@ -107,8 +106,6 @@ export default ( ) => {
                 
             </div>
         </div>
-            {/* </PanelRow>
-        </PanelBody> */}
         
         
     </>

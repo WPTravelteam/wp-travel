@@ -135,7 +135,7 @@ class WpTravel_Helpers_Booking {
 						</td>
 						<td><?php echo apply_filters( 'wp_travel_booking_mail_pax_val', esc_html( $pax ), $booking_id ); ?></td>
 						<?php if( !$trip_data['is_fixed_departure'] ): ?>
-							<?php if( $trip_data['trip_duration']["duration_format"] == 'day_night' ): ?>
+							<?php if( isset( $trip_data['trip_duration']["duration_format"] ) && $trip_data['trip_duration']["duration_format"] == 'day_night' ): ?>
 								<td><?php echo esc_html( $arrival_date ); ?></td>
 								<td><?php echo esc_html( wptravel_format_date( $departure_date ) ); ?></td>
 								<?php else: ?>

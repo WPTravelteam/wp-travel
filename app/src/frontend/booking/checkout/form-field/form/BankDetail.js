@@ -1,12 +1,11 @@
 import { useSelect } from '@wordpress/data';
-// import he from 'he'
-// import parse from 'html-react-parser';
+
 const bookingStoreName = 'WPTravelFrontend/BookingData';
 import { _n, __} from '@wordpress/i18n';
 const _i18n = {
     ..._wp_travel.strings
 } 
-// import { Button, Modal, PanelBody, PanelRow, TextControl } from '@wordpress/components'
+
 
 export default ( { travelerData, trvOne = 'travelerOne' } ) => {
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);

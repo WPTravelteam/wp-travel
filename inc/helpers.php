@@ -789,7 +789,7 @@ function wptravel_search_form( $args = array() ) {
 			<?php endif; ?>
 			<?php WP_Travel::create_nonce_field(); ?>
 
-			<p class="wp-travel-search"><input type="submit" name="wp-travel_search" id="wp-travel-search" class="button wp-block-button__link button-primary" value="<?php echo esc_attr( $search_button_string ); ?>"  /></p>
+			<p class="wp-travel-search"><input type="submit" name="" id="wp-travel-search" class="button wp-block-button__link button-primary" value="<?php echo esc_attr( $search_button_string ); ?>"  /></p>
 		</form>
 	</div>
 	<?php
@@ -2007,6 +2007,7 @@ if ( ! function_exists( 'wptravel_get_trip_available_dates' ) ) {
 
 		if ( wptravel_is_react_version_enabled() && 'yes' === $fixed_departure ) {
 			$data = WP_Travel_Helpers_Trip_Dates::get_dates( $trip_id );
+
 			if ( is_array( $data ) && 'WP_TRAVEL_TRIP_DATES' === $data['code'] ) {
 				$dates = $data['dates'];
 				foreach ( $dates as $date ) {
@@ -2029,7 +2030,13 @@ if ( ! function_exists( 'wptravel_get_trip_available_dates' ) ) {
 										break;
 									}
 								}
-							} else {
+							} elseif ( ! empty( $date['months'] ) ) {
+
+								foreach ( explode( ',', $date['months'] ) as $value) {
+									$total_days = cal_days_in_month( CAL_GREGORIAN,$value, explode( '-', $val )[0] );
+									// var_dump($total_days);
+								}
+							}else {
 								if ( strtotime( $val ) > strtotime( date('Y-m-d') ) ) {
 									$available_dates[] = $val;
 									break;
@@ -3487,8 +3494,10 @@ function wptravel_get_fixed_departure_date( $trip_id ) {
 			$trip_pricing_options = wptravel_get_trip_pricings_with_dates( $trip_id );
 		}
 		if ( is_array( $trip_pricing_options ) && count( $trip_pricing_options ) > 0 ) {
+
 			if ( $react_version_enabled ) { // @since 4.0.3
 				$dates = wptravel_get_trip_available_dates( $trip_id );
+				// var_dump($dates);
 			} else {
 				foreach ( $trip_pricing_options as $price_key => $pricing ) :
 					// Set Vars.
@@ -3501,7 +3510,7 @@ function wptravel_get_fixed_departure_date( $trip_id ) {
 					}
 				endforeach;
 			}
-			$dates = array_unique( $dates );
+			$dates = array_unique( wptravel_get_trip_available_dates( $trip_id ) );
 			usort( $dates, 'wptravel_date_sort' );
 			$show_multiple = apply_filters( 'wp_travel_show_multiple_fixed_departure_dates', true );
 
@@ -3512,6 +3521,7 @@ function wptravel_get_fixed_departure_date( $trip_id ) {
 					$available_dates[] = $date;
 				}
 			}
+
 			if ( $show_multiple && count( $available_dates ) > 1 ) {
 				?>
 				<div class="fixed-date-dropdown">

@@ -42,7 +42,6 @@ const CalendarView = ( props ) => {
     } = tripData;
 
 	const { trip_duration } = typeof tripData != 'undefined' && tripData || {};
-	// const { start_date, end_date } = typeof trip_duration != 'undefined' && trip_duration || '';
     const allPricings        = pricings && _.keyBy( pricings, p => p.id ) // Need object structure because pricing id may not be in sequencial order.
     const _dates             = 'undefined' !== typeof dates && dates.length > 0 ? dates : [];
     const datesById          = _.keyBy(_dates, d => d.id)
@@ -67,9 +66,7 @@ const CalendarView = ( props ) => {
 			nomineeTimes: [],
 			selectedTime: null,
 		};
-		// if ( ! isInventoryEnabled ) {
-		// 	_bookingData.isLoading = false; // maybe not reqd.
-		// }
+
 		// after selecting pricing. need to check available time for selected pricing as well. Single pricing id case is already checked in date changes lifecycle below.
 		bookingWidgetUseEffects( _bookingData, 'pricingChange' );
 	}, [ selectedPricingId ]); 

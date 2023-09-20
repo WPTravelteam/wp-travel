@@ -115,6 +115,7 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
       extrasTotal = 0;
     var tripTotal = 0;
     var item = wp_travel_cart.cart && wp_travel_cart.cart.cart_items && wp_travel_cart.cart.cart_items[id];
+    // console.log( 'item', item.trip_data.pricings );
     var itemNode = shoppingCart.querySelector("[data-cart-id=\"".concat(id, "\"]"));
     var pricing = item.trip_data.pricings.find(function (p) {
       return p.id == parseInt(item.pricing_id);

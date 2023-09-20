@@ -1,9 +1,9 @@
 import { useSelect, dispatch } from '@wordpress/data';
 const bookingStoreName = 'WPTravelFrontend/BookingData';
 import { PanelBody, PanelRow } from '@wordpress/components'
-// import { useState, useEffect } from '@wordpress/element'
+
 export default ( { travelerData, trvOne = 'travelerOne', pmtFld = 'no' } ) => {
-    // const [ optionList, setOption ] = useState({})
+
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     const { updateStore } = dispatch( bookingStoreName );
     const { label, type, name, id, wrapper_class, options } = travelerData
@@ -20,7 +20,6 @@ export default ( { travelerData, trvOne = 'travelerOne', pmtFld = 'no' } ) => {
         updateStore({...bookingData, checkoutDetails : checkoutNewData } ) 
     }
     return optionKey.length > 0 && <><PanelBody>
-            {/* <div className='wptravel-onpage-radiobtn-handle'> */}
                 { pmtFld == 'no' &&<>
                 <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>  
                 <div className='wptravel-onpage-radiobtn-handle'>
@@ -67,6 +66,5 @@ export default ( { travelerData, trvOne = 'travelerOne', pmtFld = 'no' } ) => {
                         </>
                     }
                 })} </div> </PanelRow> </>  }
-            {/* </div> */}
     </PanelBody><p className='wp-travel-in-page-error'>{errorData}</p></>
 }

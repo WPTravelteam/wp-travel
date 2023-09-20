@@ -273,7 +273,22 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 			$first_name = isset( $first_name[ $first_key ] ) && isset( $first_name[ $first_key ][0] ) ? $first_name[ $first_key ][0] : '';
 			$last_name  = isset( $last_name[ $first_key ] ) && isset( $last_name[ $first_key ][0] ) ? $last_name[ $first_key ][0] : '';
 
-			$customer_name    = $first_name . ' ' . $last_name;
+			$customer_gender   = isset( get_post_meta( $booking_id, 'order_data', true )['wp_travel_gender_traveller'] ) ? get_post_meta( $booking_id, 'order_data', true )['wp_travel_gender_traveller'][array_key_first( get_post_meta( $booking_id, 'order_data', true )['wp_travel_gender_traveller'])][0] : '';
+
+			if( apply_filters( 'wptravel_traveller_salutation', true ) ==  true ){
+				if( $customer_gender == 'male' ){
+					$salutation = __( 'Mr ', 'wp-travel' );
+				}elseif( $customer_gender == 'female' ){
+					$salutation = __( 'Miss ', 'wp-travel' );
+				}else{
+					$salutation = '';
+				}
+			}else{
+				$salutation = '';
+			}
+			
+
+			$customer_name    = $salutation.$first_name . ' ' . $last_name;
 			$customer_country = isset( $customer_country[ $first_key ] ) && isset( $customer_country[ $first_key ][0] ) ? $customer_country[ $first_key ][0] : '';
 			$customer_phone   = isset( $customer_phone[ $first_key ] ) && isset( $customer_phone[ $first_key ][0] ) ? $customer_phone[ $first_key ][0] : '';
 			$customer_email   = isset( $customer_email[ $first_key ] ) && isset( $customer_email[ $first_key ][0] ) ? $customer_email[ $first_key ][0] : '';
@@ -370,7 +385,7 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 			$customer_country = isset( $request_data['wp_travel_country_traveller'] ) ? $request_data['wp_travel_country_traveller'] : array();
 			$customer_phone   = isset( $request_data['wp_travel_phone_traveller'] ) ? $request_data['wp_travel_phone_traveller'] : array();
 			$customer_email   = isset( $request_data['wp_travel_email_traveller'] ) ? $request_data['wp_travel_email_traveller'] : array();
-			$customer_gender   = get_post_meta( $booking_id, 'order_data', true )['wp_travel_gender_traveller'][array_key_first( get_post_meta( $booking_id, 'order_data', true )['wp_travel_gender_traveller'])][0];
+			$customer_gender   = isset( get_post_meta( $booking_id, 'order_data', true )['wp_travel_gender_traveller'] ) ? get_post_meta( $booking_id, 'order_data', true )['wp_travel_gender_traveller'][array_key_first( get_post_meta( $booking_id, 'order_data', true )['wp_travel_gender_traveller'])][0] : '';
 
 			if( apply_filters( 'wptravel_traveller_salutation', true ) ==  true ){
 				if( $customer_gender == 'male' ){
@@ -438,7 +453,17 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 				'{payment_details}'        => WpTravel_Helpers_Payment::render_payment_details( $booking_id ),
 
 			);
+
+			$email          = new WP_Travel_Emails();
 			$email_tags = apply_filters( 'wp_travel_admin_booking_email_tags', $email_tags, $booking_id ); // @phpcs:ignore
+			$headers = $email->email_headers( $reply_to_email, $reply_to_email );
+			$email_data = array(
+				'from' => $reply_to_email,
+				'to'   => $customer_email,
+			);
+
+			do_action( 'wp_travel_after_payment_email_sent', $booking_id, $email_data, $email_tags ); // @since 3.0.6 for invoice.
+
 			return $email_tags;
 		}
 	}
