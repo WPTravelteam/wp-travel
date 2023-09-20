@@ -540,6 +540,19 @@
 					.end-date span {
 						font-weight: 600;
 					}
+
+					// When trip has TIME enabled
+					.wp-travel-booking__selected-time{
+						h4{
+							font-size: 18px;
+							text-decoration: none;
+							font-weight: 600;
+							margin: 5px 0px;
+						}
+						button{
+							margin: 5px;
+						}
+					}
 				}
 			}
 		}
