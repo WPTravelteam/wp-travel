@@ -158,35 +158,34 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 			 * @required Download_Core
 			 * 
 			 */
-			// $attachments = apply_filters( 'wp_travel_email_itinerary_pdf_attachment', false );
-			// $attachment = array();
-			// $wt_settings_send_pdf = get_option( 'itinerary_pdf_send_booking_mail' );
-			// if ( $wt_settings_send_pdf ||  $attachments ) {
-			// 	foreach ( $new_trip_id as $indexs => $id ) {
-			// 		if ( class_exists( 'WP_Travel_Downloads_Core' ) ) {
-			// 			WP_Travel_Downloads_Core::email_attachment_generate_pdf( $id, false );
-			// 			$dir                   = trailingslashit( WP_TRAVEL_ITINERARY_PATH );
-			// 			$trips_name            = get_the_title( $id );
-			// 			$downloadable_filename = $trips_name . '.pdf';
-			// 			$attachment[]            = $dir . $downloadable_filename;
-			// 		}
-			// 	}
+			$attachments = apply_filters( 'wp_travel_email_itinerary_pdf_attachment', false );
+			$attachment = array();
+			$wt_settings_send_pdf = get_option( 'itinerary_pdf_send_booking_mail' );
+			if ( $wt_settings_send_pdf ||  $attachments ) {
+				foreach ( $new_trip_id as $indexs => $id ) {
+					if ( class_exists( 'WP_Travel_Downloads_Core' ) ) {
+						WP_Travel_Downloads_Core::email_attachment_generate_pdf( $id, false );
+						$dir                   = trailingslashit( WP_TRAVEL_ITINERARY_PATH );
+						$trips_name            = get_the_title( $id );
+						$downloadable_filename = $trips_name . '.pdf';
+						$attachment[]            = $dir . $downloadable_filename;
+					}
+				}
 
-			// } 
-			// else {
-			// 	foreach ( $new_trip_id as $indexs => $id ) {
-			// 		$wt_trip_email_itineray_pdf = get_post_meta( $id, 'send_booking_maile_attached_itinerary_pdf', true );
-			// 		if ( $wt_trip_email_itineray_pdf ) {
-			// 			if ( class_exists( 'WP_Travel_Downloads_Core' ) ) {
-			// 				WP_Travel_Downloads_Core::email_attachment_generate_pdf( $id, false );
-			// 				$dir                   = trailingslashit( WP_TRAVEL_ITINERARY_PATH );
-			// 				$trips_name            = get_the_title( $id );
-			// 				$downloadable_filename = $trips_name . '.pdf';
-			// 				$attachment[]            = $dir . $downloadable_filename;
-			// 			}
-			// 		}
-			// 	}
-			// }
+			} else {
+				foreach ( $new_trip_id as $indexs => $id ) {
+					$wt_trip_email_itineray_pdf = get_post_meta( $id, 'send_booking_maile_attached_itinerary_pdf', true );
+					if ( $wt_trip_email_itineray_pdf ) {
+						if ( class_exists( 'WP_Travel_Downloads_Core' ) ) {
+							WP_Travel_Downloads_Core::email_attachment_generate_pdf( $id, false );
+							$dir                   = trailingslashit( WP_TRAVEL_ITINERARY_PATH );
+							$trips_name            = get_the_title( $id );
+							$downloadable_filename = $trips_name . '.pdf';
+							$attachment[]            = $dir . $downloadable_filename;
+						}
+					}
+				}
+			}
 			$send_email_to_admin = $this->settings['send_booking_email_to_admin']; // 'yes' By default.
 			if ( 'yes' === $send_email_to_admin ) { // Send mail to admin if booking email is set to yes.
 				$email_template = $email->wptravel_get_email_template( 'bookings', 'admin' );
@@ -455,14 +454,17 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 
 			);
 
-			$email          = new WP_Travel_Emails();
 			$email_tags = apply_filters( 'wp_travel_admin_booking_email_tags', $email_tags, $booking_id ); // @phpcs:ignore
-			$headers = $email->email_headers( $reply_to_email, $reply_to_email );
-			$email_data = array(
-				'from' => $reply_to_email,
-				'to'   => $customer_email,
-			);
-
+			
+			if( $request_data['wp_travel_booking_option'] == 'booking_only' ){
+				$email          = new WP_Travel_Emails();
+				$headers = $email->email_headers( $reply_to_email, $reply_to_email );
+				$email_data = array(
+					'from' => $reply_to_email,
+					'to'   => $customer_email,
+				);
+			}
+			
 			do_action( 'wp_travel_after_payment_email_sent', $booking_id, $email_data, $email_tags ); // @since 3.0.6 for invoice.
 
 			return $email_tags;
