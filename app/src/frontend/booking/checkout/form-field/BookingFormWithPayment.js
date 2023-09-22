@@ -113,7 +113,7 @@ export default () => {
                 { partial_enable == 'yes' && <PartialPyamet /> }
                 </> }
                 {/* Show all price data  */}
-                { selected_payment == 'stripe_ideal' && <div className="wptravel-on-page-stripe-ideal-checkout-field">
+                { ( wp_travel_booking_option == "booking_with_payment" && selected_payment == 'stripe_ideal' ) && <div className="wptravel-on-page-stripe-ideal-checkout-field">
                         <label>{i18n.set_ideal_bank}</label><div id="stripeIdealElement"></div>
                     </div> }
                 <div className="wptravel-on-page-price-with-payment-field-show">

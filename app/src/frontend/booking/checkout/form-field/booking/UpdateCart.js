@@ -5,6 +5,7 @@ import apiFetch from '@wordpress/api-fetch';
 import { __ } from '@wordpress/i18n';
 const i18n = _wp_travel.strings;
 
+import { wpTravelFormat, objectSum, GetConvertedPrice } from '../../../_wptravelFunctions';
 export default () => {
     const [ cartOpen, setCartOpen ]     = useState( false );
     const [ cartUpdateMessage, setUpdateMessage ] = useState('')
@@ -70,22 +71,39 @@ export default () => {
 
         setCartOpen(false)
     }
+
+    console.log( nomineeTripExtras );
+    console.log( tripData.pricings[0].categories );
+
+    const[ totalPax, setTotalPax ] = useState( 0 );
+    let _totalPax = _.size(paxCounts) > 0 && Object.values(paxCounts).reduce((acc, curr) => acc + curr) || 0;
     // Increament pax throught + icon
     const paxIncreament = ( categoryId, sale_enable, price_regular, price_sale ) => {
+
         const cat  = typeof paxCounts[categoryId] != 'undefined' && paxCounts[categoryId] || 0;
         const paxCalculate = cat >= prcMax ? prcMax : cat + 1;
         const priceCalulate = sale_enable == true ? price_sale * paxCalculate : price_regular * paxCalculate;
         const newPax = {...paxCounts, [categoryId] : cat >= prcMax ? prcMax : cat + 1 }
-        const newPriceList = { ...updatePriceData, [categoryId] : priceCalulate }
-        setUpdatePriceData( newPriceList );
-        updateStore( {...bookingData, paxCounts : newPax } );
+
+        if( tripData.enable_pax_all_pricing == "1" ){ 
+            const newPriceList = { ...updatePriceData, [categoryId] : priceCalulate }
+            setUpdatePriceData( newPriceList );
+            updateStore( {...bookingData, paxCounts : newPax } );
+        }else{
+            if( _totalPax < prcMax ){
+                const newPriceList = { ...updatePriceData, [categoryId] : priceCalulate }
+                setUpdatePriceData( newPriceList );
+                updateStore( {...bookingData, paxCounts : newPax } );
+            }
+        }
+        
     }
     // Decreament pax throught - icon
     const paxDecreament = ( categoryId, sale_enable, price_regular, price_sale ) => {
         const cat  = typeof paxCounts[categoryId] != 'undefined' && paxCounts[categoryId] || 0;
-        const paxCalculate = cat > prcMin ? cat - 1 : prcMin;
+        const paxCalculate = cat > 0 ? cat - 1 : 0;
         const priceCalulate = sale_enable == true ? price_sale * paxCalculate : price_regular * paxCalculate;
-        const newPax = {...paxCounts, [categoryId] : cat > prcMin ? cat - 1 : prcMin }
+        const newPax = {...paxCounts, [categoryId] : cat > 0 ? cat - 1 : 0 }
         const newPriceList = { ...updatePriceData, [categoryId] : priceCalulate }
         setUpdatePriceData( newPriceList );
         updateStore( {...bookingData, paxCounts : newPax } );
@@ -99,14 +117,25 @@ export default () => {
         setUpdateExtraPrice( newPriceList );
         updateStore( {...bookingData, tripExtras : newExtra } );
     }
-    const extraIncreament = ( extId, extPrince, extSale, extSalePrince ) => {
+    const extraIncreament = ( extId, extPrince, extSale, extSalePrince, quantity ) => {
         const cat  = typeof tripExtras[extId] != 'undefined' && tripExtras[extId] || 0;
         const extraCalculate = cat + 1;
-        const priceCalulate = extSale == true ? extSalePrince * extraCalculate : extPrince * extraCalculate;
-        const newExtra = {...tripExtras, [extId] : extraCalculate }
-        const newPriceList = { ...updateExtraPrice, [extId] : priceCalulate }
-        setUpdateExtraPrice( newPriceList );
-        updateStore( {...bookingData, tripExtras : newExtra } );
+
+        if( quantity > 0 ){
+            if( extraCalculate <= quantity ){
+                const priceCalulate = extSale == true ? extSalePrince * extraCalculate : extPrince * extraCalculate;
+                const newExtra = {...tripExtras, [extId] : extraCalculate }
+                const newPriceList = { ...updateExtraPrice, [extId] : priceCalulate }
+                setUpdateExtraPrice( newPriceList );
+                updateStore( {...bookingData, tripExtras : newExtra } );
+            }
+        }else{
+            const priceCalulate = extSale == true ? extSalePrince * extraCalculate : extPrince * extraCalculate;
+            const newExtra = {...tripExtras, [extId] : extraCalculate }
+            const newPriceList = { ...updateExtraPrice, [extId] : priceCalulate }
+            setUpdateExtraPrice( newPriceList );
+            updateStore( {...bookingData, tripExtras : newExtra } );
+        }
     }
     const disableCart = () => { 
         setUpdateMessage('')
@@ -174,46 +203,56 @@ export default () => {
         } )
 
     }
- 
+
+    console.log( priceCategoryList );
     return <>
             <div className='wptravel-udate-cart-wrapper'>
             <button className='components-button' onClick={cartOpen == true ? cartUpdateClose : cartUpdateOpen} >{ cartOpen == true ? i18n.set_close_cart : i18n.set_view_cart }</button>
         { cartOpen == true && <>
             <div className="wptravel-on-page-booking-update-cart-section">
-                { typeof priceCategoryList != 'undefined' && priceCategoryList.length > 0  && priceCategoryList.map( ( listed, index ) => {
-                    const { title, catId, is_sale, regular_price, sale_price }  = listed;
+                <span className='pax-selector-label'> { __( 'Pax Selector', 'wp-travel' ) } </span>
+                { tripData.pricings[0].categories.map( ( listed, index ) => {
+                    const { term_info, id, is_sale, regular_price, sale_price, price_per }  = listed;
                     return <>
                         <div className="wptrave-on-page-booking-cart-update-field">
-                            <label>{title}</label>
+                            <label>{term_info.title} ( {paxCounts[id]} / {prcMax} )</label>
+                            <span className="item-price">{is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat( GetConvertedPrice( regular_price ) ) }}></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat( sale_price ) }}></span>/{price_per}</span>
                             <div className="wp-travel-on-page-cart-update-button">
 
-                                <button className='wptravel-page-cart-update-btn-increase' onClick={ () => paxDecreament( catId, is_sale, regular_price, sale_price )}>-</button>
-                                <p>{paxCounts[catId]}</p>
-                                <button className='wptravel-page-cart-update-btn-increase' onClick={ () => paxIncreament( catId, is_sale, regular_price, sale_price )}>+</button>
+                                <button className='wptravel-page-cart-update-btn-increase' onClick={ () => paxDecreament( id, is_sale, regular_price, sale_price )}>-</button>
+                                <p>{paxCounts[id]}</p>
+                                <button className='wptravel-page-cart-update-btn-increase' onClick={ () => paxIncreament( id, is_sale, regular_price, sale_price )}>+</button>
 
                             </div>
                             <div className="wptravel-onpage-booking-cart-price">
-                                <p>{currency_symbol}{updatePriceData[catId]}</p>
+                                <p>{currency_symbol}{updatePriceData[id]}</p>
                             </div>
 
                         </div>
                     </>
                 } )}
+
+                { typeof nomineeTripExtras != 'undefined' && nomineeTripExtras.length > 0 && <> 
+                <span className='trip-extra-label'> { __( 'Trip Extras', 'wp-travel' ) } </span>
+                </> }
+                
                 { typeof nomineeTripExtras != 'undefined' && nomineeTripExtras.length > 0 && nomineeTripExtras.map( ( trpExtra, extraIndex ) => {
                             let extraIds = typeof trpExtra.id != 'undefined' &&  trpExtra.id || 0;
                             let extraTitles = typeof trpExtra.title != 'undefined' &&  trpExtra.title || 0;
                             // let extraIds = typeof trpExtra.id != 'undefined' &&  trpExtra.id || 0;
-                            const { is_sale, sale_price, tour_extras_metas } = trpExtra;
+                            const { is_sale, sale_price, unit, tour_extras_metas } = trpExtra;
                             const extras_item_price = typeof tour_extras_metas != 'undefined' && typeof tour_extras_metas.extras_item_price != 'undefined' && tour_extras_metas.extras_item_price || 0;
-            
+                        
                             return typeof trpsExtras != 'undefined' && trpsExtras.length > 0 && trpsExtras.includes( extraIds.toString() ) && <>
                              <div className="wptrave-on-page-booking-cart-update-field" key={extraIndex *20 }>
-                            <label>{extraTitles}</label>
+                            <label>{extraTitles} { tour_extras_metas.extras_item_quantity > 0 && <>( {tripExtras[extraIds]} / {tour_extras_metas.extras_item_quantity} )</>} </label>
+                            <span className="item-price"><span dangerouslySetInnerHTML={{ __html: wpTravelFormat( extras_item_price ) }}></span>/{unit}</span>
+                            
                             <div className="wp-travel-on-page-cart-update-button">
 
                                 <button className='wptravel-page-cart-update-btn-increase' onClick={ () => extraDecreament( extraIds, extras_item_price, is_sale, sale_price )}>-</button>
                                 <p>{tripExtras[extraIds]}</p>
-                                <button className='wptravel-page-cart-update-btn-increase' onClick={ () => extraIncreament( extraIds, extras_item_price, is_sale, sale_price )}>+</button>
+                                <button className='wptravel-page-cart-update-btn-increase' onClick={ () => extraIncreament( extraIds, extras_item_price, is_sale, sale_price, tour_extras_metas.extras_item_quantity )}>+</button>
 
                             </div>
                             <div className="wptravel-onpage-booking-cart-price">

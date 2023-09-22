@@ -14,6 +14,7 @@ const DEFAULT_STATE = () => {
         galleryIds: [],
         group_size:'',
         highest_price : '',
+        
         pricing_type: 'multiple-price',
         pricings:[],
         _thumbnail_id: 0,

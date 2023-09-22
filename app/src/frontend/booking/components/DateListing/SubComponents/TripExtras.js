@@ -37,43 +37,6 @@ const TripExtras = ( props ) => {
 		updateBookingData({ tripExtras: { ...tripExtras, [id]: parseInt(_xcount) } });
 	}
 
-	const handlePaxChange = (id, value) => e => {
-		let pricing    = [];
-		// Pricing Not Selected or ( not recurring date && for not selected rows ) or ( recurring date but not selected rows )
-		if ( ( pricings.length > 0  && ! selectedPricingId ) || ( ! recurrindDate && ! selectedDateIds.includes( date.id ) ) || ( recurrindDate && sd !== rd ) ) {
-			pricing = allPricings[firstIndex];
-		} else {
-			pricing = allPricings[selectedPricingId];
-		}
-		let count = parseInt ( paxCounts[id] ) + value <= 0 ? 0 : parseInt ( paxCounts[id] ) + value
-
-		let _inventory = inventory.find(i => i.date === moment(selectedDate).format('YYYY-MM-DD[T]HH:mm')); // selectedDate : date along with time.
-		let maxPax = _inventory && _inventory.pax_available;
-		if ( ! maxPax ) {
-			maxPax = pricing && pricing.max_pax ? pricing.max_pax : 1;
-		}
-
-		if (maxPax >= 1) {
-
-			let _totalPax = _.size(paxCounts) > 0 && Object.values(paxCounts).reduce((acc, curr) => acc + curr) || 0
-
-			if (_totalPax + value > parseInt(maxPax)) {
-				if (e.target.parentElement.querySelector('.error'))
-					return
-				let em = document.createElement('em')
-				em.classList.add('error')
-				em.textContent = __i18n.bookings.max_pax_exceeded
-				e.target.parentElement.appendChild(em)
-				setTimeout(() => {
-					em.remove()
-				}, 1000)
-				return
-			} else {
-				e.target.parentElement.querySelector('.error') && e.target.parentElement.querySelector('.error').remove()
-			}
-		}
-		updateBookingData({ paxCounts: { ...paxCounts, [id]: count } })
-	}
 
 	return <div className="wp-travel-booking__trip-extras-wrapper">
 		{	

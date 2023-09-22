@@ -2031,10 +2031,14 @@ if ( ! function_exists( 'wptravel_get_trip_available_dates' ) ) {
 									}
 								}
 							} elseif ( ! empty( $date['months'] ) ) {
-
 								foreach ( explode( ',', $date['months'] ) as $value) {
 									$total_days = cal_days_in_month( CAL_GREGORIAN,$value, explode( '-', $val )[0] );
-									// var_dump($total_days);
+									foreach ( getBetweenDates( explode( '-', $val )[0].'-'.$value.'-01', explode( '-', $val )[0].'-'.$value.'-'.$total_days ) as $keys => $val ){
+										if ( strtotime( $val ) > strtotime( date('Y-m-d') ) ) {
+											$available_dates[] = $val;
+										
+										}
+									}
 								}
 							}else {
 								if ( strtotime( $val ) > strtotime( date('Y-m-d') ) ) {
@@ -3534,19 +3538,11 @@ function wptravel_get_fixed_departure_date( $trip_id ) {
 							<?php
 							if ( 0 === $index ) {
 								?>
-									<div class="dropbtn"><?php echo esc_html( date_i18n( $date_format, strtotime( $date ) ) ); ?></div> <!--selected -->
-									<!-- loop wrapper -->
-									<div class="dropdown-content"> 
+									<div class="dropbtns"><?php echo esc_html( date_i18n( $date_format, strtotime( $date ) ) ); ?></div> <!--selected -->
+									
 									<?php
 							}
-							?>
-								<span class="dropdown-list"> <?php echo esc_html( date_i18n( $date_format, strtotime( $date ) ) ); ?></span>
-								<?php
-								if ( count( $available_dates ) === ( $index + 1 ) ) {
-									?>
-									</div> <!-- /loop wrapper -->
-									<?php
-								}
+				
 						}
 					}
 					?>

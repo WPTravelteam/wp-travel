@@ -6,7 +6,7 @@
 		gap: 10px;
 
 		label {
-			width: 100px;
+			width: 250px;
 		}
 
 		.wp-travel-on-page-cart-update-button {
@@ -312,4 +312,9 @@
 			cursor: pointer;
 		}
 	}
+}
+
+.trip-extra-label,
+.pax-selector-label{
+	font-weight: bold;
 }
