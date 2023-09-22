@@ -1,15 +1,348 @@
+.wptravel-single-page-calender-booking.wp-travel-calendar-view {
+	.wp-travel-booking__content-wrapper {
+		.wptravel-recurring-table.parash-div {
+			.tbody-table.parash-tbody {
+				.thead-table.parash-head {
+					display: flex;
+					flex-wrap: nowrap;
+					span {
+						font-weight: 600;
+						background: #f2f3f4;
+						padding: 10px;
+						border-right: 3px solid #fff;
+						border-bottom: 3px solid #fff;
+					}
+					span[data-label="Pricings"] {
+						flex-basis: 20%;
+					}
+					span[data-label="Person"] {
+						flex-basis: 60%;
+					}
+					span[data-label="Date"] {
+						flex-basis: 20%;
+						text-align: right;
+					}
+					@media screen and (max-width: 768px) {
+						display: none;
+					}
+				}
+				.parash-wptravel-booking-content-wrapper {
+					display: flex;
+					padding: 10px;
+					flex-wrap: nowrap;
+					&:nth-child(even) {
+						background-color: #faf8f8;
+					}
+					&:nth-child(odd) {
+						background-color: rgba(229, 229, 230, 0.5411764706);
+					}
+					@media screen and (max-width: 992px) {
+						flex-wrap: wrap;
+					}
+					// inside this div there are 3 more divs for pricings, pax selector with trip extras and trip date
+					.parash-pricing {
+						flex-basis: 20%;
+						padding: 15px 10px;
+						.components-checkbox-control__input-container input {
+							margin-right: 5px;
+							vertical-align: middle;
+							width: 20px;
+							height: 20px;
+							transition: 0.3s;
+							cursor: pointer;
+						}
+						.components-checkbox-control__label {
+							font-size: 15px;
+							font-weight: bold;
+							color: #444;
+							margin-left: 0.5em;
+							text-align: left;
+						}
+						// remove extra tick icon
+						svg.components-checkbox-control__checked {
+							display: none;
+						}
+						
+					}
+					.parash-person-category {
+						flex-basis: 60%;
+						padding: 15px 10px;
+						.wp-travel-booking__pax-selector-wrapper {
+							margin-bottom: 15px;
+							h4 {
+								display: none;
+							}
+							li {
+								display: flex;
+								.text-left {
+									flex: 1;
+									margin-right: 0.5em;
+									display: flex;
+									align-items: center;
+									strong {
+										font-size: 15px;
+										margin-right: 1em;
+									}
+									span.tooltip.group-discount-button {
+										cursor: pointer;
+										font-size: 12px;
+										display: inline-flex;
+										align-items: center;
+										text-decoration: underline;
+										position: relative;
+										transition: all 0.4s ease-in-out;
+										&:hover .discount-table {
+											opacity: 1;
+											visibility: visible;
+										}
+										svg {
+											width: 15px;
+											height: 15px;
+											margin-right: 0.25em;
+											path {
+												fill: red;
+											}
+										}
+										.discount-table {
+											position: absolute;
+											top: 70%;
+											left: 0;
+											z-index: 50;
+											background-color: #fff;
+											border-radius: 4px;
+											padding: 0.5em;
+											width: 250px;
+											margin-top: 10px;
+											box-shadow: 0 20px 30px
+												rgba(0, 0, 0, 0.1);
+											border: 1px solid #ccc;
+											opacity: 0;
+											visibility: hidden;
+											animation: arrowAnimate1 1s ease
+												infinite;
 
-.wptravel-single-page-calender-booking.wp-travel-calendar-view{
-    .parash-head{
-        display: flex;
-        justify-content: space-between;
-    }
-    .parash-pricing-date-combined{
-        display: flex;
-        justify-content: space-between;
-    }
-    button.wp-travel-reset-btn 
-    .parash-person-category{
-        display: none;
-    }
+											table {
+												width: 100%;
+												border-collapse: collapse;
+												text-align: center;
+												display: table;
+												margin: 0;
+											}
+											&::before {
+												content: "";
+												border-bottom: 10px solid #fff;
+												border-left: 10px solid
+													transparent;
+												border-right: 10px solid
+													transparent;
+												position: absolute;
+												left: 10px;
+												transform: translateY(-100%);
+												border-bottom-color: rgba(
+													0,
+													0,
+													0,
+													0.3607843137
+												);
+												top: -0.7px;
+											}
+											&::after {
+												content: "";
+												border-bottom: 10px solid #fff;
+												border-left: 10px solid
+													transparent;
+												border-right: 10px solid
+													transparent;
+												position: absolute;
+												top: 0;
+												left: 10px;
+												transform: translateY(-100%);
+											}
+										}
+									}
+								}
+								.text-right {
+									display: flex;
+									flex-wrap: nowrap;
+									.item-price {
+										margin: 0.3em;
+										margin-right: 1em;
+										font-weight: 500;
+										display: inline-block;
+										font-size: 14px;
+										del {
+											opacity: 0.5;
+											margin-right: 1em;
+											font-size: 12px;
+										}
+										span {
+											font-size: 16px;
+											font-weight: bold;
+											color: #444;
+										}
+									}
+									.pricing-area {
+										margin-left: 5px;
+										.qty-spinner {
+											display: flex;
+											flex-wrap: nowrap;
+											align-items: center;
+											position: relative;
+											border-top-left-radius: 4px;
+											border-bottom-left-radius: 4px;
+											// button{
+											button {
+												border-top-left-radius: 4px;
+												border-bottom-left-radius: 4px;
+												background: #b3b3b3;
+											}
+											// input field
+											.wp-trave-pax-selected-frontend {
+												height: 40px;
+												border-radius: 5px;
+												font-weight: 500;
+												cursor: pointer;
+												outline: none;
+											}
+										}
+									}
+								}
+							}
+						}
+						// trip extras section
+						.wp-travel-booking__trip-extras-wrapper {
+							h4 {
+								text-align: left;
+								font-size: 14px;
+								background: #f2f3f4;
+								padding: 5px 10px;
+								margin-block-start: 1.33em;
+								margin-block-end: 1.33em;
+							}
+							.wp-travel-booking__trip-option-list {
+								margin: 0;
+								padding: 0;
+								list-style: none;
+								li {
+									padding: 0.3em 0.5em;
+									font-size: 15px;
+									border-radius: 4px;
+									display: flex;
+									flex-wrap: wrap;
+									justify-content: space-between;
+									align-items: center;
+									position: relative;
+									span.checkbox {
+										display: none;
+									}
+									.text-left {
+										flex: 1;
+										margin-right: 0.5em;
+										display: flex;
+										align-items: center;
+										.info-container {
+											flex: 1;
+											margin-right: 0.5em;
+											display: flex;
+											align-items: center;
+											position: relative;
+											a.info {
+												display: block;
+												.info-icon {
+													margin-left: 0.5em;
+													width: 15px;
+													height: 15px;
+													cursor: pointer;
+												}
+												&:hover {
+													.infoBox {
+														opacity: 1;
+														visibility: visible;
+													}
+												}
+												.infoBox {
+													position: absolute;
+													top: 30px;
+													right: -118px;
+													border: 1px solid #b3b3b3;
+													background: #fff;
+													padding: 5px;
+													border-radius: 5px;
+													z-index: 1;
+													width: 250px;
+													opacity: 0;
+													visibility: hidden;
+													animation: arrowAnimate1 1s
+														ease infinite;
+												}
+											}
+										}
+									}
+									.text-right {
+										display: flex;
+										flex-wrap: wrap;
+										align-items: center;
+										text-align: right;
+										.item-price {
+											margin: 0.3em;
+											margin-right: 1em;
+											font-weight: 500;
+											display: inline-block;
+											font-size: 12px;
+											span {
+												font-size: 16px;
+												color: #444;
+												font-weight: bold;
+											}
+										}
+										.pricing-area {
+											display: flex;
+											align-items: center;
+											text-align: right;
+											font-size: 15px;
+											color: #404040;
+											.qty-spinner {
+												position: relative;
+												display: flex;
+												align-items: center;
+												text-align: right;
+												font-size: 15px;
+												color: #404040;
+												input.wp-trave-pax-selected-frontend {
+													width: 30px;
+													height: 20px;
+													line-height: 20px;
+													text-align: center;
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+					.parash-pricing-dates {
+						flex-basis: 20%;
+						padding: 15px 10px;
+					}
+                    @media screen and (max-width: 768px) {
+                        .parash-pricing {
+                            flex-basis: 100%;
+                            background: #444;
+                            color: white;
+                            // border-top-right-radius: 25px;
+                            // border-top-left-radius: 25px;
+                        }
+                        .parash-person-category{
+                            flex-basis: 100%;
+                        }
+                        .parash-pricing-dates{
+                            flex-basis: 100%;
+                        }
+                        
+                    }
+				}
+			}
+		}
+	}
 }

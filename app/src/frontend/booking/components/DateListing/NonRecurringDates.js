@@ -1,6 +1,6 @@
 import { CheckboxControl, Disabled } from '@wordpress/components';
 import { Fragment, useState, useEffect } from '@wordpress/element';
-
+import DateListingTableHead from './DateListingTableHead';
 const __i18n = {
     ..._wp_travel.strings
 }
@@ -177,15 +177,16 @@ const NonRecurringDates = (props) => {
     return <>
         {
             nonRecurringDates.length > 0 && <section className="tbody-table parash-tbody">
+                <DateListingTableHead />
                 {nonRecurringDates.map((date, index) => {
-                    let loadingClass = isLoading && selectedDateIds.includes(date.id) ? 'wptravel-loading' : 'parash-wptravel-booking-content-wrapper';
+                    let loadingClass = isLoading && selectedDateIds.includes(date.id) ? 'parash-wptravel-booking-content-wrapper wptravel-loading' : 'parash-wptravel-booking-content-wrapper';
                     let _nomineePricings = date.pricing_ids.split(',').map(id => id.trim());
                     _nomineePricings = _.chain(_nomineePricings).flatten().uniq().value().filter(p => p != '' && typeof allPricings[p] !== 'undefined');
                     if (!_nomineePricings.length) {
                         return <Fragment key={index}></Fragment>
                     }
                     return <div key={index} className={loadingClass}>
-                        <div className="parash-pricing-date-combined">
+                        <div className="parash-pricing">
                             <div data-label={__i18n.bookings.pricings_list_label} className='parash-pricing-category'>
                                 {/* _nomineePricings not updated in store/state because there are multiple _nomineePricings as per date so just a variable. */}
                                 {/* <Pricings { ...{ ...props, _nomineePricings, date } }  /> */}
@@ -199,18 +200,7 @@ const NonRecurringDates = (props) => {
                                 <span data-label={__i18n.bookings.pricings_list_label}>{__i18n.bookings.pricings_list_label}</span>
                                 <NonRecorringRepeater {...{ ...props, _nomineePricings, date }} />
                             </div>
-                            <div data-label={__i18n.bookings.date} className='parash-pricing-dates'>
-                                <span data-label={__i18n.bookings.date}>{__i18n.bookings.date}</span>
-                                <div className="date-box">
-                                    <div className="date-time-wrapper">
-                                        <span className="start-date"><span>{__i18n.bookings.start_date}: </span>{moment(date.start_date).format(_wp_travel.date_format_moment)}</span>
-                                        {date.end_date && '0000-00-00' != date.end_date && <span className="end-date"><span>{__i18n.bookings.end_date}: </span>{moment(date.end_date).format(_wp_travel.date_format_moment)}</span>}
-                                    </div>
-                                    {selectedDateIds.includes(date.id) && !isLoading &&
-                                        <TripTimes {...{ ...props, _nomineePricings, date }} />
-                                    }
-                                </div>
-                            </div>
+
                         </div>
                         {/* person pax selector */}
                         <div data-label={__i18n.bookings.person} className='parash-person-category'>
@@ -233,7 +223,21 @@ const NonRecurringDates = (props) => {
                                 }
                             </div>
                         </div>
+
+                        <div data-label={__i18n.bookings.date} className='parash-pricing-dates'>
+                            <span data-label={__i18n.bookings.date}>{__i18n.bookings.date}</span>
+                            <div className="date-box">
+                                <div className="date-time-wrapper">
+                                    <span className="start-date"><span>{__i18n.bookings.start_date}: </span>{moment(date.start_date).format(_wp_travel.date_format_moment)}</span>
+                                    {date.end_date && '0000-00-00' != date.end_date && <span className="end-date"><span>{__i18n.bookings.end_date}: </span>{moment(date.end_date).format(_wp_travel.date_format_moment)}</span>}
+                                </div>
+                                {selectedDateIds.includes(date.id) && !isLoading &&
+                                    <TripTimes {...{ ...props, _nomineePricings, date }} />
+                                }
+                            </div>
+                        </div>
                     </div>
+
                 })}
             </section>
         }
