@@ -191,7 +191,7 @@ export default ( ) => {
                         } </div>
                     </AccordionItemPanel>
                 </AccordionItem>
-         }) } </Accordion> </div> }) }</>|| <div className='wptravel-traveller-info-container'>
+         }) } </Accordion> </div> }) }</>|| <div className='wptravel-traveller-info-container animated-wp-travel fadeIn-wp-travel'>
 
         {   
             fieldKey.length > 0 && fieldKey.map( ( trvKey, index ) => {

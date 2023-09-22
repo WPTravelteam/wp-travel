@@ -19,7 +19,6 @@
 	}
 	.wptrave-on-page-booking-cart-update-field {
 		display: flex;
-		margin: 20px 0;
 		align-items: center;
 		gap: 10px;
 		padding: 10px;
@@ -31,7 +30,7 @@
 			font-weight: bold;
 		}
 		span.item-price {
-			flex-basis: 40%;
+			flex-basis: 30%;
 			text-align: right;
 			margin-right: 10px;
 			del {
@@ -42,7 +41,8 @@
 		.wp-travel-on-page-cart-update-button {
 			display: flex;
 			align-items: center;
-			// gap: 20px;
+			flex: 5%;
+			justify-content: flex-end;
 			button {
 				height: 30px;
 				width: 30px;
@@ -64,6 +64,8 @@
 		}
 
 		.wptravel-onpage-booking-cart-price {
+			flex: 5%;
+			text-align: right;
 			p {
 				margin: 0;
 				margin-left: 50px;
