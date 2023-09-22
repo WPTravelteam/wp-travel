@@ -1,19 +1,48 @@
 .wptravel-on-page-booking-update-cart-section {
+	.wptravel-on-page-booking-update-cart-section-wrapper {
+		border: 1px solid rgb(204, 204, 204);
+		padding: 20px;
+		margin-bottom: 20px;
+		border-radius: 4px;
+		span.pax-selector-label {
+			font-size: 20px;
+		}
+	}
+	.wptravel-on-page-booking-update-trip-extras-wrapper {
+		border: 1px solid rgb(204, 204, 204);
+		padding: 20px;
+		margin-bottom: 20px;
+		border-radius: 4px;
+		span.item-price {
+			opacity: 0.7;
+		}
+	}
 	.wptrave-on-page-booking-cart-update-field {
 		display: flex;
 		margin: 20px 0;
 		align-items: center;
 		gap: 10px;
-
+		padding: 10px;
+		margin: 0;
+		justify-content: space-between;
 		label {
-			width: 250px;
+			// width: 250px;
+			flex-basis: 40%;
+			font-weight: bold;
+		}
+		span.item-price {
+			flex-basis: 40%;
+			text-align: right;
+			margin-right: 10px;
+			del {
+				opacity: 0.5;
+			}
 		}
 
 		.wp-travel-on-page-cart-update-button {
 			display: flex;
 			align-items: center;
-			gap: 20px;
-	
+			// gap: 20px;
 			button {
 				height: 30px;
 				width: 30px;
@@ -24,9 +53,13 @@
 				text-decoration: none;
 				padding: 0 !important;
 			}
-	
+
 			p {
 				margin: 0;
+				height: 30px;
+				width: 30px;
+				border: 1px solid rgb(204, 204, 204);
+				text-align: center;
 			}
 		}
 
@@ -48,7 +81,7 @@
 // Update cart button
 .wptravel-on-page-booking-cart-update-btn {
 	margin: 10px 0;
-	button{
+	button {
 		width: auto;
 		display: flex;
 		gap: 10px;
@@ -79,6 +112,7 @@
 .wptravel-udate-cart-wrapper button {
 	margin: 10px 0;
 	width: auto;
+	padding: 10px 10px;
 }
 .wptravel-udate-cart-wrapper
 	button.wptravel-page-cart-update-btn-increase:hover {
@@ -96,16 +130,17 @@
 			}
 
 			.components-checkbox-control__input-container {
-				input.components-checkbox-control__input{
+				input.components-checkbox-control__input {
 					width: 15px;
 					height: 15px;
 					min-height: fit-content;
 
-					&:focus, &:active {
+					&:focus,
+					&:active {
 						outline: none;
 					}
 				}
-				
+
 				svg {
 					display: none;
 				}
@@ -116,6 +151,17 @@
 
 // Coupon code apply
 .booknow-btn-modal {
+	.wptravel-single-page-close-btn {
+		position: sticky;
+		width: 40px;
+		color: red;
+		background: transparent;
+		height: 40px;
+		padding: 0 !important;
+		top: -5px;
+		z-index: 999;
+		left: 100%;
+	}
 	.wptravel-on-page-coupon-apply {
 		display: flex;
 		align-items: center;
@@ -144,7 +190,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
-	
+
 		.components-panel__row {
 			justify-content: left;
 
@@ -152,7 +198,7 @@
 				width: 33%;
 				font-size: initial;
 
-				@media screen and ( max-width: 576px ) {
+				@media screen and (max-width: 576px) {
 					width: 100%;
 				}
 			}
@@ -227,7 +273,7 @@
 	display: flex;
 	justify-content: space-between;
 	max-height: 75px;
-	
+
 	#wp-travel__add-to-cart_notice {
 		border-radius: 5px;
 		margin: 10px 0 25px 0;
@@ -243,7 +289,7 @@
 			padding: 10px 20px;
 			background-color: #f3d7d7;
 			color: #d12323;
-    		border: 1px solid #d12323;
+			border: 1px solid #d12323;
 		}
 
 		i {
@@ -257,7 +303,7 @@
 		justify-content: space-between;
 		padding: 0 25px;
 		margin: 10px 0 25px 0;
-	
+
 		.wp-travel-add-to-cart-item-anchor {
 			.wp-travel-single-trip-cart-button {
 				width: 40px;
@@ -266,10 +312,10 @@
 				padding: 10px;
 				border-radius: 50%;
 				cursor: pointer;
-	
+
 				#wp-travel-add-to-cart-cart_item_show {
 					position: relative;
-	
+
 					i.fa.fa-shopping-cart {
 						font-size: 18px;
 						vertical-align: middle;
@@ -279,7 +325,7 @@
 						top: -9px;
 						left: -10px;
 					}
-		
+
 					.wp-travel-cart-items-number {
 						display: none;
 						position: absolute;
@@ -304,7 +350,7 @@
 				}
 			}
 		}
-	
+
 		.wp-travel-add-to-cart-item-anchor-tag {
 			padding: 10px 30px;
 			display: inline-block;
@@ -315,6 +361,37 @@
 }
 
 .trip-extra-label,
-.pax-selector-label{
+.pax-selector-label {
 	font-weight: bold;
+	font-size: 20px;
+}
+.animated-wp-travel {
+	opacity: 0; /* Set the default opacity to 0 */
+	-webkit-animation-duration: 0.6s;
+	animation-duration: 0.6s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.fadeIn-wp-travel {
+	-webkit-animation-name: fadeIn;
+	animation-name: fadeIn;
 }
