@@ -172,7 +172,7 @@ export default ( ) => {
                         </AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>
-                        <div className='wptravel-traveller-info-container'>
+                        <div className='wptravel-traveller-info-container animated-wp-travel fadeIn-wp-travel'>
                         {   
                             fieldKey.length > 0 && fieldKey.map( ( trvKey, index ) => {
                                 const travelerData = typeof traveler_form[trvKey] != 'undefined' && traveler_form[trvKey] || undefined;

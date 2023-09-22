@@ -104,7 +104,7 @@ export default () => {
         </div> }
         { couponError != '' && <p className="wptravel-on-page-coupon-error">{couponError}</p> }
         {/* This section contain your hole booking process booking and booking with payment */}
-        <form method="POST" action={_wp_travel.checkout_url} className="wp-travel-booking" id="wp-travel-booking" > { typeof payment_gateway != 'undefined' && <>
+        <form method="POST" action={_wp_travel.checkout_url} className="wp-travel-booking animated-wp-travel fadeIn-wp-travel" id="wp-travel-booking" > { typeof payment_gateway != 'undefined' && <>
             
             <div className="wptravel-booking-payment-page">
                 <BookingType />

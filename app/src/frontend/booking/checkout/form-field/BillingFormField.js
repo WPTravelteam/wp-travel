@@ -77,7 +77,7 @@ export default ( ) => {
         }
     }
     return <>
-    <div className="wptravel-billing-formfield">
+    <div className="wptravel-billing-formfield animated-wp-travel  fadeIn-wp-travel">
         {
             fieldKey.length > 0 && fieldKey.map( ( trvKey, index ) => {
                 const travelerData = typeof billing_form[trvKey] != 'undefined' && billing_form[trvKey] || undefined;
