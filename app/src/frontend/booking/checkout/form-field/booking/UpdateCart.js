@@ -209,7 +209,8 @@ export default () => {
             <div className='wptravel-udate-cart-wrapper'>
             <button className='components-button' onClick={cartOpen == true ? cartUpdateClose : cartUpdateOpen} >{ cartOpen == true ? i18n.set_close_cart : i18n.set_view_cart }</button>
         { cartOpen == true && <>
-            <div className="wptravel-on-page-booking-update-cart-section">
+            <div className="wptravel-on-page-booking-update-cart-section animated-wp-travel fadeIn-wp-travel">
+                <div className="wptravel-on-page-booking-update-cart-section-wrapper">
                 <span className='pax-selector-label'> { __( 'Pax Selector', 'wp-travel' ) } </span>
                 { tripData.pricings[0].categories.map( ( listed, index ) => {
                     const { term_info, id, is_sale, regular_price, sale_price, price_per }  = listed;
@@ -231,7 +232,8 @@ export default () => {
                         </div>
                     </>
                 } )}
-
+                </div>
+                <div className="wptravel-on-page-booking-update-trip-extras-wrapper">
                 { typeof nomineeTripExtras != 'undefined' && nomineeTripExtras.length > 0 && <> 
                 <span className='trip-extra-label'> { __( 'Trip Extras', 'wp-travel' ) } </span>
                 </> }
@@ -260,6 +262,8 @@ export default () => {
                             </div>
 
                         </div> </>} )}
+                </div>
+
                 <div className="wptravel-on-page-booking-cart-update-btn">
                     <button className='components-button' onClick={updateYouCart}>{i18n.set_updated_cart_btn}{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</button>
                     { cartUpdateMessage !== '' && <span className="wptravel-onpage-cart-updated-message"><i class="fa fa-check-circle"></i>{ cartUpdateMessage }</span> }
