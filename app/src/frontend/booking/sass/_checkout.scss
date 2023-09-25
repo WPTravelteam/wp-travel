@@ -220,14 +220,9 @@
 		h2 {
 			font-size: 20px;
 			font-weight: bold;
-			display: block;
-			position: sticky;
-			top: -20px;
 			height: 80px;
-			background: #fff;
 			margin: 0;
 			padding: 20px;
-			margin-bottom: 30px;
 		}
 		/*************Select Your Pax Section ************/
 		.wptravel-recurring-table {
@@ -651,6 +646,26 @@
 
 /*********************Traveller, Billing information section***********************/
 .booknow-btn-modal {
+	// modal header
+	.wptravel-onpage-header{
+		display: flex;
+		position: sticky;
+		top: -20px;
+		z-index: 999;
+		background-color: white;
+		margin-top: 0;
+		align-items: center;
+
+		
+		border-bottom: 1px solid rgba(211, 196, 196, 0.4);
+		box-sizing: border-box;
+		flex-direction: row;
+		height: 76px;
+		justify-content: space-between;
+		width: 100%;
+		z-index: 10;
+		margin-bottom: 10px;
+	}
 	.wptravel-single-page-calender-booking {
 		.wp-travel-booking__header {
 			button.wp-travel-reset-btn {
@@ -686,17 +701,17 @@
 	}
 	// end required field text
 	h2 {
-		align-items: center;
-		border-bottom: 1px solid #d3c4c466;
-		box-sizing: border-box;
-		display: flex;
-		flex-direction: row;
-		height: 76px;
-		justify-content: space-between;
-		// padding: 0 32px;
-		width: 100%;
-		z-index: 10;
-		margin-bottom: 10px;
+		// align-items: center;
+		// border-bottom: 1px solid #d3c4c466;
+		// box-sizing: border-box;
+		// display: flex;
+		// flex-direction: row;
+		// height: 76px;
+		// justify-content: space-between;
+		// // padding: 0 32px;
+		// width: 100%;
+		// z-index: 10;
+		// margin-bottom: 10px;
 	}
 	.wptravel-traveller-info-container,
 	.wptravel-billing-formfield {
@@ -858,6 +873,9 @@
 		border-top: 1px solid #ccc;
 		width: 100%;
 		padding-bottom: 20px;
+		button{
+			padding: 10px 30px;
+		}
 
 		.wp-travel-one-page-booking-buttons {
 			align-items: center;
@@ -1229,6 +1247,10 @@
 		border-top: 1px solid #ccc;
 		width: 100%;
 		padding-bottom: 20px;
+		// next button
+		button{
+			padding: 10px 30px;
+		}
 
 		.onpage-traveler-field-price-show {
 			p {
