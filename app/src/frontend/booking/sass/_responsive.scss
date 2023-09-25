@@ -26,6 +26,9 @@ button.wptravel-single-page-close-btn {
     }
 }
 @media only screen and (max-width: 576px) {
+    .wptravel-udate-cart-wrapper{
+        flex-wrap: wrap;
+    }
     .booknow-btn-modal form#wp-travel-booking .wptravel-booking-payment-page .components-panel__body.is-opened .components-panel__row.wptravel-singlepage-booking-options label{
         width: 100%;
     }

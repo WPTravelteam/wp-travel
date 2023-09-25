@@ -29,12 +29,22 @@
 			flex-basis: 40%;
 			font-weight: bold;
 		}
+		@media screen and (max-width: 768px) {
+			label{
+				flex-basis: 30%;
+			}
+		}
 		span.item-price {
 			flex-basis: 30%;
 			text-align: right;
 			margin-right: 10px;
 			del {
 				opacity: 0.5;
+			}
+		}
+		@media screen and (max-width: 768px) {
+			span.item-price{
+				flex-basis: 20%;
 			}
 		}
 
@@ -369,8 +379,8 @@
 }
 .animated-wp-travel {
 	opacity: 0; /* Set the default opacity to 0 */
-	-webkit-animation-duration: 0.6s;
-	animation-duration: 0.6s;
+	-webkit-animation-duration: 3s;
+	animation-duration: 3s;
 	-webkit-animation-fill-mode: both;
 	animation-fill-mode: both;
 }
