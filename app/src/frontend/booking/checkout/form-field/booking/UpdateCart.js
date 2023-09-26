@@ -3,6 +3,7 @@ const bookingStoreName = 'WPTravelFrontend/BookingData';
 import { useState, useEffect } from '@wordpress/element'
 import apiFetch from '@wordpress/api-fetch';
 import { __ } from '@wordpress/i18n';
+import _ from 'lodash';
 const i18n = _wp_travel.strings;
 
 import { wpTravelFormat, objectSum, GetConvertedPrice } from '../../../_wptravelFunctions';
@@ -72,8 +73,6 @@ export default () => {
         setCartOpen(false)
     }
 
-    console.log( nomineeTripExtras );
-    console.log( tripData.pricings[0].categories );
 
     const[ totalPax, setTotalPax ] = useState( 0 );
     let _totalPax = _.size(paxCounts) > 0 && Object.values(paxCounts).reduce((acc, curr) => acc + curr) || 0;
@@ -204,7 +203,64 @@ export default () => {
 
     }
 
-    console.log( priceCategoryList );
+    const allPricings        = pricings && _.keyBy( pricings, p => p.id ) 
+    const pricing = allPricings[selectedPricingId];
+
+
+    const getCategoryPrice = (categoryId, single) => { // This function handles group discounts as well
+		let category = pricing.categories.find(c => c.id == categoryId)
+		if (!category) {
+			return
+		}
+		let count = paxCounts[categoryId] || 0
+		let price = category && category.is_sale ? category.sale_price : category.regular_price
+
+		if ( 'undefined' != typeof pricing.has_group_price && pricing.has_group_price && pricing.group_prices && pricing.group_prices.length > 0  ) {
+			let totalPax = objectSum(paxCounts);
+			let groupPrices = _.orderBy(pricing.group_prices, gp => parseInt(gp.max_pax))
+			let group_price = groupPrices.find(gp => parseInt(gp.min_pax) <= totalPax && parseInt(gp.max_pax) >= totalPax)
+			if (group_price && group_price.price) {
+				if (single) {
+					price = parseFloat(group_price.price);
+					return  GetConvertedPrice( price ); // Add Multiple currency support to get converted price.
+				}
+
+				price =  parseFloat(group_price.price) * totalPax
+			} else {
+				if (single) {
+					price = parseFloat(price);
+					return GetConvertedPrice( price ); // Add Multiple currency support to get converted price.
+				}
+		
+				price = parseFloat(price) * totalPax
+			}
+		} else if (category.has_group_price && category.group_prices.length > 0) { // If has group price/discount.
+			let groupPrices = _.orderBy(category.group_prices, gp => parseInt(gp.max_pax))
+			let group_price = groupPrices.find(gp => parseInt(gp.min_pax) <= count && parseInt(gp.max_pax) >= count)
+			if (group_price && group_price.price) {
+				if (single) {
+					price = parseFloat(group_price.price)
+					return GetConvertedPrice( price ); // Add Multiple currency support to get converted price.
+				}
+				price = 'group' === category.price_per ? (count > 0 ? parseFloat(group_price.price) : 0) : parseFloat(group_price.price) * count
+			} else {
+				if (single) {
+					price = parseFloat(price)
+					return GetConvertedPrice( price ); // Add Multiple currency support to get converted price.
+				}
+				price = 'group' === category.price_per ? (count > 0 ? parseFloat(price) : 0) : parseFloat(price) * count
+			}
+		} else {
+			if (single) {
+				price = parseFloat(price)
+				return GetConvertedPrice( price ); // Add Multiple currency support to get converted price. 
+			}
+			price = 'group' === category.price_per ? (count > 0 ? parseFloat(price) : 0) : parseFloat(price) * count
+		}
+		price = price || 0;
+		return GetConvertedPrice( price ); // Add Multiple currency support to get converted price.
+	}
+
     return <>
             <div className='wptravel-udate-cart-wrapper'>
             <button className='components-button' onClick={cartOpen == true ? cartUpdateClose : cartUpdateOpen} >{ cartOpen == true ? i18n.set_close_cart : i18n.set_view_cart }</button>
@@ -217,7 +273,7 @@ export default () => {
                     return <>
                         <div className="wptrave-on-page-booking-cart-update-field">
                             <label>{term_info.title} ( {paxCounts[id]} / {prcMax} )</label>
-                            <span className="item-price">{is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat( GetConvertedPrice( regular_price ) ) }}></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat( sale_price ) }}></span>/{price_per}</span>
+                            <span className="item-price">{ is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat( GetConvertedPrice( regular_price ) ) } }></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat( getCategoryPrice(  id, true ) ) }}></span>/{price_per}</span>
                             <div className="wp-travel-on-page-cart-update-button">
 
                                 <button className='wptravel-page-cart-update-btn-increase' onClick={ () => paxDecreament( id, is_sale, regular_price, sale_price )}>-</button>
@@ -233,11 +289,10 @@ export default () => {
                     </>
                 } )}
                 </div>
-                <div className="wptravel-on-page-booking-update-trip-extras-wrapper">
-                { typeof nomineeTripExtras != 'undefined' && nomineeTripExtras.length > 0 && <> 
-                <span className='trip-extra-label'> { __( 'Trip Extras', 'wp-travel' ) } </span>
-                </> }
                 
+                { typeof nomineeTripExtras != 'undefined' && nomineeTripExtras.length > 0 && <> 
+                <div className="wptravel-on-page-booking-update-trip-extras-wrapper">
+                <span className='trip-extra-label'> { __( 'Trip Extras', 'wp-travel' ) } </span>
                 { typeof nomineeTripExtras != 'undefined' && nomineeTripExtras.length > 0 && nomineeTripExtras.map( ( trpExtra, extraIndex ) => {
                             let extraIds = typeof trpExtra.id != 'undefined' &&  trpExtra.id || 0;
                             let extraTitles = typeof trpExtra.title != 'undefined' &&  trpExtra.title || 0;
@@ -258,11 +313,14 @@ export default () => {
 
                             </div>
                             <div className="wptravel-onpage-booking-cart-price">
-                                { updateExtraPrice[extraIds] > 0 && <p>{currency_symbol}{updateExtraPrice[extraIds]}</p> }
+                                { updateExtraPrice[extraIds] > 0 && <p>{currency_symbol}{updateExtraPrice[extraIds]}</p> || <p>{currency_symbol}0</p> }
                             </div>
 
-                        </div> </>} )}
-                </div>
+                        </div> </>} )} </div>
+                </> }
+                
+                
+               
 
                 <div className="wptravel-on-page-booking-cart-update-btn">
                     <button className='components-button' onClick={updateYouCart}>{i18n.set_updated_cart_btn}{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</button>

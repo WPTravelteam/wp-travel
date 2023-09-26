@@ -334,6 +334,7 @@ class WpTravel_Helpers_Trips {
 	 * @param int $trip_data Other data related to that particular trip.
 	 */
 	public static function update_trip( $trip_id, $trip_data ) {
+
 		if ( empty( $trip_id ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
 		}
@@ -353,8 +354,8 @@ class WpTravel_Helpers_Trips {
 
 		$is_fixed_departure = ! empty( $trip_data->is_fixed_departure ) ? 'yes' : 'no';
 		update_post_meta( $trip_id, 'wp_travel_fixed_departure', $is_fixed_departure );
-
-		update_post_meta( $trip_id, 'wp_travel_enable_pax_all_pricing', $trip_data->individual_enable_pax );
+		
+		update_post_meta( $trip_id, 'wp_travel_enable_pax_all_pricing', $trip_data->enable_pax_all_pricing );
 
 		$dates = ( 'no' === $is_fixed_departure ) ? array() : $trip_data->dates;
 		if ( ! empty( $dates ) ) {

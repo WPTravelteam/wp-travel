@@ -1,6 +1,7 @@
 import { useSelect, dispatch } from '@wordpress/data';
 const bookingStoreName = 'WPTravelFrontend/BookingData';
 import { PanelBody, PanelRow } from '@wordpress/components'
+import $ from 'jquery';
 
 export default ( { travelerData, trvOne = 'travelerOne', partials = 'no' } ) => {
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
@@ -19,6 +20,7 @@ export default ( { travelerData, trvOne = 'travelerOne', partials = 'no' } ) => 
         updateStore({...bookingData, checkoutDetails : checkoutNewData } )  
     }
     const errorData = typeof error_list[name] != 'undefined' && error_list[name]  || '';
+    
     return <><PanelBody >
         <PanelRow className='wptravel-singlepage-booking-options'>
             <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>
