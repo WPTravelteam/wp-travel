@@ -79,9 +79,10 @@
 
 	// listing prices
 	.wp-travel-booking__pricing-wrapper {
+
 		.wp-travel-booking__pricing-name {
 			transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-			padding: 30px;
+			padding: 0px;
 			border-radius: 5px;
 			border: none;
 			margin-bottom: 0;
@@ -100,7 +101,7 @@
 	.wp-travel-booking__pricing-wrapper.wptravel-pax-selector {
 		// box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.24);
 		transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-		padding: 0px;
+		padding: 10px;
 		border-radius: 5px;
 		border: none;
 		margin-bottom: 0;
@@ -1330,9 +1331,9 @@
 	.wptravel-billing-formfield{
 		display: block;
 	}
-	#wp-travel-country {
-		width: 80px;
-	}
+	// #wp-travel-country {
+	// 	width: 80px;
+	// }
 	.wptravel-layout-v2.ReactModal__Body--open .booknow-btn-modal {
 		padding: 20px 20px 0 20px;
 		//traveller info field
