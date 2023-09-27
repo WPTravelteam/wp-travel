@@ -274,7 +274,7 @@ export default () => {
                     return <>
                         <div className="wptrave-on-page-booking-cart-update-field">
                         <label>{title} ( {paxCounts[catId]} / {prcMax} )</label>
-                            <span className="item-price">{ is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat( GetConvertedPrice( regular_price ) ) } }></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat( getCategoryPrice(  catId, true ) ) }}></span>/{pricings.find(item => item.id === selectedPricingId ).categories.find(item => item.id === catId ).price_per}</span>
+                            <span className="item-price">{ is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat( GetConvertedPrice( regular_price ) ) } }></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat( getCategoryPrice(  catId, true ) ) }}></span>/{pricings.find(item => item.id == selectedPricingId ).categories.find(item => item.id === catId ).price_per}</span>
                             
                             <div className="wp-travel-on-page-cart-update-button">
                                 <button className='wptravel-page-cart-update-btn-increase' onClick={ () => paxDecreament( catId, is_sale, regular_price, sale_price )}>-</button>
