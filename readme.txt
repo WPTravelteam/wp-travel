@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 6.0.0
 Tested up to: 6.3
 Requires PHP: 7.4
-Stable tag: 7.3.0
+Stable tag: 7.4.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -417,6 +417,27 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 7.4.0 =
+Release Date: 27th September 2023
+
+Fixes:
+* Fixed issues in the accordions with third-party plugins(like the UserWP plugin and Geodirectory plugin).
+* Removed all unwanted consoles.
+* Removed all unwanted comment codes.
+* Added translation for missing strings.
+* Fixed booking button scroll issue for mobile devices.
+* Fixed the pax issue in the mail, when updating the cart on the checkout page.
+
+
+Enhancements:
+* "Thank You" message has been added to the On-Page booking feature when WP Travel (free) is activated.
+* When payment is enabled for On-Page bookings by default booking with payment will be displayed.
+
+Layout Issue:
+* Fixed the layout issue under the Related Trip section.
+
+**For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v7-4-0-update-release-note).**
 
 = 7.3.0 =
 Release Date: 11th September 2023

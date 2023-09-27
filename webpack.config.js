@@ -49,10 +49,7 @@ module.exports = (env, options) => {
     entries['admin-enquiry' + fileSuffix ] = [
       './app/src/admin/enquiry/index.js',
       ];
-    // console.log('entries', entries);
-    // entries['legacy-widgets' + fileSuffix ] = [
-    //   './app/src/LegacyWidgets/BlockWidgets.js',
-    // ];
+
   entries['wptravel-admin-widgets' + fileSuffix ] = [
     './app/src/admin/widgets/index.js',
     './app/src/admin/widgets/sass/main.scss',

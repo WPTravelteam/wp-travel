@@ -79,9 +79,10 @@
 
 	// listing prices
 	.wp-travel-booking__pricing-wrapper {
+
 		.wp-travel-booking__pricing-name {
 			transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-			padding: 30px;
+			padding: 0px;
 			border-radius: 5px;
 			border: none;
 			margin-bottom: 0;
@@ -100,7 +101,7 @@
 	.wp-travel-booking__pricing-wrapper.wptravel-pax-selector {
 		// box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.24);
 		transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-		padding: 0px;
+		padding: 10px;
 		border-radius: 5px;
 		border: none;
 		margin-bottom: 0;
@@ -189,12 +190,20 @@
 		transform: unset !important;
 	}
 	// End : disable fixed departure will casue issue with date picker.
-
+	.new-bottom-booking-container,
+	.wptrave-singlepage-initial-nextbtn,
+	.wptravel-onepage-navigation-btn,
+	.wptravel-onepage-navigation-btn {
+		position: sticky;
+		bottom: 0px;
+	}
 	// modal container
 	.ReactModal__Content {
-		position: relative !important;
-		max-width: 1145px;
 		max-height: 85vh;
+		max-width: 1150px;
+		position: relative !important;
+		// max-width: 1145px;
+		// max-height: 85vh;
 		inset: 40px;
 		border: 1px solid rgb(204, 204, 204);
 		border-radius: 5px;
@@ -203,7 +212,7 @@
 		left: 0% !important;
 		margin: 0 auto;
 		background-color: #ffffff;
-		padding: 20px;
+		padding: 20px 20px 0px 20px;
 		transform: translate(0, -50%);
 		overflow-x: hidden;
 		overflow-y: auto;
@@ -212,6 +221,11 @@
 		h2 {
 			font-size: 20px;
 			font-weight: bold;
+			// height: 80px;
+			margin: 0;
+			padding: 20px 0px;
+			display: flex;
+			align-items: center;
 		}
 		/*************Select Your Pax Section ************/
 		.wptravel-recurring-table {
@@ -374,7 +388,7 @@
 									}
 								}
 								&:hover .discount-table {
-									display: block ;
+									display: block;
 								}
 							}
 						}
@@ -540,6 +554,19 @@
 					.end-date span {
 						font-weight: 600;
 					}
+
+					// When trip has TIME enabled
+					.wp-travel-booking__selected-time {
+						h4 {
+							font-size: 18px;
+							text-decoration: none;
+							font-weight: 600;
+							margin: 5px 0px;
+						}
+						button {
+							margin: 5px;
+						}
+					}
 				}
 			}
 		}
@@ -573,7 +600,7 @@
 		background-color: #fff;
 		border-top: 1px solid #ccc;
 		width: 100%;
-		padding-bottom: 0;
+		padding-bottom: 20px;
 		position: unset;
 
 		// left-info i.e pricine and trip-date
@@ -622,6 +649,26 @@
 
 /*********************Traveller, Billing information section***********************/
 .booknow-btn-modal {
+	// modal header
+	.wptravel-onpage-header{
+		display: flex;
+		position: sticky;
+		top: -20px;
+		z-index: 999;
+		background-color: white;
+		margin-top: 0;
+		align-items: center;
+
+		
+		border-bottom: 1px solid rgba(211, 196, 196, 0.4);
+		box-sizing: border-box;
+		flex-direction: row;
+		height: 76px;
+		justify-content: space-between;
+		width: 100%;
+		z-index: 10;
+		margin-bottom: 10px;
+	}
 	.wptravel-single-page-calender-booking {
 		.wp-travel-booking__header {
 			button.wp-travel-reset-btn {
@@ -657,17 +704,17 @@
 	}
 	// end required field text
 	h2 {
-		align-items: center;
-		border-bottom: 1px solid #d3c4c466;
-		box-sizing: border-box;
-		display: flex;
-		flex-direction: row;
-		height: 76px;
-		justify-content: space-between;
-		// padding: 0 32px;
-		width: 100%;
-		z-index: 10;
-		margin-bottom: 10px;
+		// align-items: center;
+		// border-bottom: 1px solid #d3c4c466;
+		// box-sizing: border-box;
+		// display: flex;
+		// flex-direction: row;
+		// height: 76px;
+		// justify-content: space-between;
+		// // padding: 0 32px;
+		// width: 100%;
+		// z-index: 10;
+		// margin-bottom: 10px;
 	}
 	.wptravel-traveller-info-container,
 	.wptravel-billing-formfield {
@@ -821,15 +868,28 @@
 
 	.wptravel-onepage-navigation-btn {
 		display: flex;
+		flex-wrap: wrap;
 		justify-content: space-between;
 		align-items: center;
-		margin-top: 30px;
+		padding: 15px;
+		background-color: #fff;
+		border-top: 1px solid #ccc;
+		width: 100%;
+		padding-bottom: 20px;
+		button{
+			padding: 10px 30px;
+		}
 
 		.wp-travel-one-page-booking-buttons {
 			align-items: center;
 			display: flex;
 			flex-direction: row-reverse;
 			justify-content: center;
+			// reference stripe checkout 
+			.wp-travel-one-page-booking-buttons{
+				width: auto;
+				float: right;
+			}
 			img {
 				height: auto;
 				margin-right: 40px;
@@ -869,6 +929,12 @@
 				justify-content: center;
 				align-items: center;
 			}
+		}
+
+		// for paypal express checkout
+		.paypal-button{
+			width: auto !important;
+			float: right;
 		}
 	}
 	p.wptravel-onepage-navigation-error {
@@ -1187,9 +1253,18 @@
 	// initial book-now button to align right side
 	.wptrave-singlepage-initial-nextbtn {
 		display: flex;
-		justify-content: flex-end;
+		flex-wrap: wrap;
+		justify-content: space-between;
 		align-items: center;
-		gap: 50px;
+		padding: 15px;
+		background-color: #fff;
+		border-top: 1px solid #ccc;
+		width: 100%;
+		padding-bottom: 20px;
+		// next button
+		button{
+			padding: 10px 30px;
+		}
 
 		.onpage-traveler-field-price-show {
 			p {
@@ -1236,8 +1311,16 @@
 	}
 
 	// Coupon code entering section
-	.wptravel-on-page-coupon-apply input {
-		min-height: 40px;
+	.wptravel-on-page-coupon-apply {
+		padding: 40px 40px 10px 40px;
+		input.wp-travel-coupon-code {
+			min-height: 40px;
+		}
+	}
+	@media screen and (max-width: 576px) {
+		.wptravel-on-page-coupon-apply {
+			padding: 10px;
+		}
 	}
 }
 
@@ -1245,11 +1328,14 @@
 	//
 }
 @media only screen and (max-width: 767px) {
-	#wp-travel-country {
-		width: 80px;
+	.wptravel-billing-formfield{
+		display: block;
 	}
+	// #wp-travel-country {
+	// 	width: 80px;
+	// }
 	.wptravel-layout-v2.ReactModal__Body--open .booknow-btn-modal {
-		padding: 20px;
+		padding: 20px 20px 0 20px;
 		//traveller info field
 		.wptravel-traveller-info-container,
 		.wptravel-billing-formfield {
@@ -1277,5 +1363,9 @@ div.wptravel-onpage-priceshow {
 }
 span.onpage-travel-price-display-label {
 	margin-right: 15px;
+}
+
+form .wptravel-onepage-navigation-btn {
+	justify-content: flex-end !important;
 }
 @import "./responsive.scss";

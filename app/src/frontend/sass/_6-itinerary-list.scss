@@ -52,7 +52,7 @@
 #wp-travel_rate a {
 	color: #ffa700;
 	padding: 0 1px;
-    text-decoration: none;
+	text-decoration: none;
 }
 
 .wp-travel-trip-meta-info {
@@ -528,20 +528,32 @@
 
 // Related Posts
 .wp-travel-related-posts {
+	.trip-location {
+		ul {
+			display: none;
+			padding: 5px 20px;
+			border: none;
+			position: absolute;
+			background: #fff;
+			box-shadow: 0px 0px 1px #cdcdcd;
+			li {
+				background: #fff;
+				border: 0;
+				margin-bottom: 10px;
+			}
+		}
+
+		&:hover ul {
+			display: block;
+		}
+	}
 	.wp-travel-itinerary-items {
 		.wp-travel-itinerary-list {
 			display: grid !important;
 			grid-template-columns: repeat(
 				auto-fill,
 				minmax(295px, 1fr)
-			); // 275px, 295px previous
-			// grid-template-columns: repeat(3, 1fr);
-			// @media (max-width: 991px) {
-			// 	grid-template-columns: repeat(2, 1fr);
-			// }
-			// @media (max-width: 650px) {
-			// 	grid-template-columns: repeat(1, 1fr);
-			// }
+			); 
 		}
 	}
 }
@@ -1264,7 +1276,7 @@
 						left: 15px;
 						// bottom: -10px;
 						bottom: -15px;
-						
+
 						&::before {
 							content: none;
 						}
@@ -1313,7 +1325,7 @@
 						.trip-icons {
 							display: grid;
 							grid-template-columns: repeat(2, 1fr);
-							column-gap: 3em;
+							column-gap: 1em;
 							position: relative;
 							border: 1px solid #e9e9e9;
 							border-left: 0;
@@ -1660,7 +1672,6 @@
 	}
 }
 
-
 .wptravel-layout-v2 {
 	.wp-travel-itinerary-items .wp-travel-post-item-wrapper .favourite {
 		position: absolute;
@@ -1673,7 +1684,7 @@
 // 	top: 10px !important;
 // 	left: auto !important;
 // }
-.wp-travel-itinerary-items{
+.wp-travel-itinerary-items {
 	&.grid-view {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(295px, 1fr));
@@ -1793,11 +1804,15 @@
 		margin-bottom: 30px;
 		padding-bottom: 25px;
 		cursor: default;
-		box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+		box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08),
+			0 2px 4px 0 rgba(0, 0, 0, 0.12);
 		.taxonomy-thumb {
 			position: relative;
 			overflow: hidden;
-			a{display: block; color:#fff}
+			a {
+				display: block;
+				color: #fff;
+			}
 			img {
 				// position: absolute;
 				top: 0;
@@ -1823,7 +1838,7 @@
 			bottom: 0;
 			left: 0;
 			text-align: left;
-			
+
 			h4 {
 				bottom: 20px;
 				margin-bottom: 0px;
@@ -1837,24 +1852,23 @@
 				-ms-transition: all 0.4s ease-in;
 				-o-transition: all 0.4s ease-in;
 				transition: all 0.4s ease-in;
-				a{
+				a {
 					display: block;
 					text-transform: uppercase;
 					text-decoration: none;
 					margin-bottom: 10px;
 				}
-				
 			}
-			.taxonomy-meta{
+			.taxonomy-meta {
 				position: absolute;
 				bottom: 15px;
-				width:calc( 100% - 30px );
-				span{
+				width: calc(100% - 30px);
+				span {
 					float: left;
 					font-size: 14px;
 					display: block;
 					color: #666;
-					i{
+					i {
 						padding-right: 5px;
 					}
 				}
@@ -1862,17 +1876,17 @@
 					float: right;
 					// position: absolute;
 					bottom: 20px;
-					right:20px;
+					right: 20px;
 					font-size: 12px;
 					font-weight: bold;
 					letter-spacing: 1px;
 					&:after {
-						content: '\f105';
+						content: "\f105";
 						font-family: "wt-icon-solid";
 						padding-left: 8px;
 					}
 				}
-				
+
 				.taxonomy-read-more-link:hover {
 					color: #b0b0b0;
 				}
@@ -1886,6 +1900,5 @@
 				transition: all 0.4s ease-in;
 			}
 		}
-		
 	}
 }

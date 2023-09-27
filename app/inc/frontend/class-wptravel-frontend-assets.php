@@ -146,6 +146,7 @@ class WpTravel_Frontend_Assets {
 
 		wp_localize_script( 'wp-travel-script', '_wp_travel_check_for_pro', array( 'is_enable' => class_exists('WP_Travel_Pro') ) );
 		wp_localize_script( 'wp-travel-script', '_wp_travel_check_cp_by_billing', array( 'is_enable' => isset( wptravel_get_settings()['enable_CP_by_billing_address'] ) ? wptravel_get_settings()['enable_CP_by_billing_address']: '' ) );
+		wp_localize_script( 'wp-travel-script', '_wp_travel_check_cp_enable', array( 'is_enable' => isset( wptravel_get_settings()['enable_conditional_payment'] ) ? wptravel_get_settings()['enable_conditional_payment']: '' ) );
 		wp_localize_script( 'wp-travel-script', '_wp_travel_conditional_payment_list', isset( wptravel_get_settings()['conditional_payment_list'] ) ? wptravel_get_settings()['conditional_payment_list'] : array() );
 		wp_localize_script( 'wp-travel-script', '_wp_travel_active_payment', wptravel_get_active_gateways()['active'] );
 	}

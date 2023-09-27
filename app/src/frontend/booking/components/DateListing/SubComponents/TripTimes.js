@@ -4,7 +4,7 @@ const __i18n = {
 }
 
 // Additional lib
-// const _ = lodash
+
 import _ from 'lodash';
 const TripTimes =  ( props ) => {
 	// Component Props.

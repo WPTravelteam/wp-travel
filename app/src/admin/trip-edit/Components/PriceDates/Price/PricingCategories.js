@@ -98,47 +98,7 @@ const WPTravelTripPricingCategories = ({priceIndex}) => {
                         } }
                     />
                 </PanelRow>
-                {/* <PanelRow>
-                    <label>{ __( 'Set as default price', 'wp-travel' ) }</label>
-                    <div className="wp-travel-field-value">
-                        <ToggleControl
-                            checked={ price.id == defaultPricingId && category.id == defaultCategoryId }
-                            onChange={ () => {
-                                // console.log(' price.id ', price.id )
-                                // console.log(' category.id ', category.id )
-                                
-                            } }
-                        />
-
-                        <CheckboxControl
-                            label={ __( 'Set as default price', 'wp-travel' ) }
-                            checked={ price.id == defaultPricingId && category.id == defaultCategoryId }
-                            onChange={ (v) => {
-                                if ( v ) {
-
-                                    updateTripData({
-                                        ...allData,
-                                        default_pricing_id: price.id
-                                    })
-                                    updateTripData({
-                                        ...allData,
-                                        default_category_id: category.id
-                                    })
-                                } else {
-                                    updateTripData({
-                                        ...allData,
-                                        default_pricing_id: null
-                                    })
-                                    updateTripData({
-                                        ...allData,
-                                        default_category_id: null
-                                    })
-                                }
-                            } }
-                        />
-                        <p className="components-form-token-field__help">{__( 'Display as Starting from price', 'wp-travel' )}</p>
-                    </div>
-                </PanelRow> */}
+ 
                 <PanelRow>
                     <label>{ __i18n.enable_sale }</label>
                     <ToggleControl

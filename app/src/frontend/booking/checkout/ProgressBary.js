@@ -17,7 +17,7 @@ function ProgressBary(props) {
       setWidth(Math.min(newWidth, 100));
       if (progress < 1) {
         requestAnimationFrame(updateWidth);
-      }
+      }       
     }
 
     requestAnimationFrame(updateWidth);

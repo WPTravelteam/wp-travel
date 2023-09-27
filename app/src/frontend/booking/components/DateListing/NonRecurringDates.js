@@ -23,7 +23,7 @@ import { RRule, RRuleSet } from "rrule";
 import { objectSum } from '../../_wptravelFunctions';
 
 // Additional lib
-// const _ = lodash;
+
 import _ from 'lodash';
 
 // WP Travel Components.
@@ -42,8 +42,7 @@ import InventoryNotice, { Notice } from '../../_InventoryNotice';
  */
 const NonRecorringRepeater = ( props ) => {
     const { date, _nomineePricings } = props;
-    // console.log('ppp');
-    // console.log(date);
+
     const [dates, setRecurringDates] = useState([]); // New dates will push here when clicking load more.
     const [activeRecurringDates, setActiveRecurringDates] = useState([]); // curren page dates.
     const [rruleArgs, setRRuleArgs] = useState(null)
@@ -142,8 +141,7 @@ const NonRecorringRepeater = ( props ) => {
     }
     return <>
             { activeRecurringDates.map( esx => {
-            // { console.log('mmmm') }
-            // { console.log(props) } 
+
             	return  <div key={12} > {IsTourDates(props)(esx) && <Pricings { ...props } /> || <Disabled><Pricings { ...props } /></Disabled>} </div>; 
                        
             })}

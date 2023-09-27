@@ -1,7 +1,6 @@
 import { __ } from '@wordpress/i18n'
 import DiscountTable from '../../CalendarView/_GroupDiscountTable';
 
-// const _ = lodash
 import _ from 'lodash';
 const __i18n = {
 	..._wp_travel.strings
@@ -87,22 +86,11 @@ const PaxSelector = ( props ) => {
 		pricing = allPricings[selectedPricingId];
 	}
 	// Fetch Default First Pricing and Category 
-	// let firstPricing    = {};
-	// let firstCagegories = [];
-	// let firstCagegory   = [];
-	// let firstPrice      = 0;
-	// let firstCagegoryId = null;
-	// // If Pricing is not selected then Need to display Pax selector as per First Pricing from pricings list.
-	// if ( pricings.length > 0 ) {
-		// firstPricing    = allPricings[firstIndex];
-	// 	firstCagegories = 'undefined' != typeof firstPricing && firstPricing.categories;
-	// 	firstCagegory   = firstCagegories.length > 0 ? firstCagegories[0] : [];
-	// 	firstCagegoryId = firstCagegory && firstCagegory.id ? firstCagegory.id : null;
-	// 	firstPrice      = firstCagegoryId ? getCategoryPrice(  firstCagegoryId, true ) : 0;
-	// }
+
 	let categories = pricing && pricing.categories || []
 
-	const handlePaxChange = (id, value) => e => {
+	const handlePaxChange = (id, value, tripPax) => e => {
+
 		let pricing    = [];
 		// Pricing Not Selected or ( not recurring date && for not selected rows ) or ( recurring date but not selected rows )
 		if ( ( pricings.length > 0  && ! selectedPricingId ) || ( ! recurrindDate && ! selectedDateIds.includes( date.id ) ) || ( recurrindDate && sd !== rd ) ) {
@@ -112,17 +100,11 @@ const PaxSelector = ( props ) => {
 		}
 		let count = parseInt ( paxCounts[id] ) + value <= 0 ? 0 : parseInt ( paxCounts[id] ) + value
 
-		let _inventory = inventory.find(i => i.date === moment(selectedDate).format('YYYY-MM-DD[T]HH:mm')); // selectedDate : date along with time.
-		let maxPax = _inventory && _inventory.pax_available;
-		if ( ! maxPax ) {
-			maxPax = pricing && pricing.max_pax ? pricing.max_pax : 1;
-		}
-
-		if (maxPax >= 1) {
-
-			let _totalPax = _.size(paxCounts) > 0 && Object.values(paxCounts).reduce((acc, curr) => acc + curr) || 0
-
-			if (_totalPax + value > parseInt(maxPax)) {
+		// @since v7.4.0
+		if( tripData.enable_pax_all_pricing == "1" ){
+			console.log( '.............' )
+			if( count > tripPax ){
+				count = tripPax
 				if (e.target.parentElement.querySelector('.error'))
 					return
 				let em = document.createElement('em')
@@ -133,10 +115,37 @@ const PaxSelector = ( props ) => {
 					em.remove()
 				}, 1000)
 				return
-			} else {
-				e.target.parentElement.querySelector('.error') && e.target.parentElement.querySelector('.error').remove()
+			}
+			
+		}else{
+			// let count = parseInt ( paxCounts[id] ) + value <= 0 ? 0 : parseInt ( paxCounts[id] ) + value
+			let _inventory = inventory.find(i => i.date === moment(selectedDate).format('YYYY-MM-DD[T]HH:mm')); // selectedDate : date along with time.
+			let maxPax = _inventory && _inventory.pax_available;
+			if ( ! maxPax ) {
+				maxPax = pricing && pricing.max_pax ? pricing.max_pax : 1;
+			}
+
+			if (maxPax >= 1) {
+
+				let _totalPax = _.size(paxCounts) > 0 && Object.values(paxCounts).reduce((acc, curr) => acc + curr) || 0
+
+				if (_totalPax + value > parseInt(maxPax)) {
+					if (e.target.parentElement.querySelector('.error'))
+						return
+					let em = document.createElement('em')
+					em.classList.add('error')
+					em.textContent = __i18n.bookings.max_pax_exceeded
+					e.target.parentElement.appendChild(em)
+					setTimeout(() => {
+						em.remove()
+					}, 1000)
+					return
+				} else {
+					e.target.parentElement.querySelector('.error') && e.target.parentElement.querySelector('.error').remove()
+				}
 			}
 		}
+		
 		updateBookingData({ paxCounts: { ...paxCounts, [id]: count } })
 	}
 
@@ -243,11 +252,11 @@ const PaxSelector = ( props ) => {
 							<span className="item-price">{c.is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat( GetConvertedPrice( c.regular_price ) ) }}></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat( price ) }}></span>/{price_per_label}</span>
 							<div className="pricing-area">
 								<div className="qty-spinner wp-travel-pax-selected-frontend-flex">
-									<button onClick={handlePaxChange(c.id, -1)}>-</button>
+									<button onClick={handlePaxChange(c.id, -1, maxPax )}>-</button>
 									<input  className='wp-trave-pax-selected-frontend' value={selectedPax} onChange={ ( essdfdsf ) => {
 										handlePaxChangeInput( c.id, essdfdsf )
 									}} />
-									<button className='wp-booking-pax-selected-wp' onClick={handlePaxChange(c.id, 1)}>+</button>
+									<button className='wp-booking-pax-selected-wp' onClick={handlePaxChange(c.id, 1, maxPax )}>+</button>
 								</div>
 							</div>
 						</div>

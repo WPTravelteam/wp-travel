@@ -28,6 +28,7 @@ class WpTravel_Helpers_Booking {
 		global $wt_cart;
 		$items = $wt_cart->getItems();
 
+		
 		if ( ! $items ) {
 			$items = get_post_meta( $booking_id, 'order_items_data', true );
 		}
@@ -35,6 +36,7 @@ class WpTravel_Helpers_Booking {
 		if ( ! $items ) {
 			return;
 		}
+		
 		ob_start();
 		?>
 		<h2 class="wp-travel-order-heading"><?php esc_html_e( 'Booking Details', 'wp-travel' ); ?></h2>
@@ -56,7 +58,7 @@ class WpTravel_Helpers_Booking {
 					$trip_data = WpTravel_Helpers_Trips::get_trip($trip_id)['trip'];
 					// Values
 					$title          = get_the_title( $trip_id );
-					$pax            = isset( $trip['pax'] ) ? $trip['pax'] : '';
+					$pax            = 0;
 
 					$arrival_date   = isset( $trip['arrival_date'] ) && ! empty( $trip['arrival_date'] ) ? wptravel_format_date( $trip['arrival_date'] ) : '';
 
@@ -94,8 +96,9 @@ class WpTravel_Helpers_Booking {
 										if ( $t['pax'] < 1 ) {
 											continue;
 										}
-										?>
-										<span class="my-order-price-detail">(<?php echo esc_html( $t['pax'] ) . ' ' . $t['custom_label'] . ' x ' . wptravel_get_formated_price_currency( $t['price'], false, '', $booking_id ); ?>) </span>
+										$pax = $pax + $t['pax'];
+									?>
+										<span class="my-order-price-detail">(<?php echo esc_html( $t['pax'] ) . ' ' . $t['custom_label'] . ' x ' . wptravel_get_formated_price_currency( $t['price'], false, '', $booking_id ); ?>) <?php echo $t['pax'] * $t['price'] ;?> </span>
 									<?php endforeach; ?>
 								<?php endif; ?>
 							</span>
@@ -135,7 +138,7 @@ class WpTravel_Helpers_Booking {
 						</td>
 						<td><?php echo apply_filters( 'wp_travel_booking_mail_pax_val', esc_html( $pax ), $booking_id ); ?></td>
 						<?php if( !$trip_data['is_fixed_departure'] ): ?>
-							<?php if( $trip_data['trip_duration']["duration_format"] == 'day_night' ): ?>
+							<?php if( isset( $trip_data['trip_duration']["duration_format"] ) && $trip_data['trip_duration']["duration_format"] == 'day_night' ): ?>
 								<td><?php echo esc_html( $arrival_date ); ?></td>
 								<td><?php echo esc_html( wptravel_format_date( $departure_date ) ); ?></td>
 								<?php else: ?>

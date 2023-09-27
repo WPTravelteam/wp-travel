@@ -6,8 +6,7 @@ import { DEFAULT_BOOKING_STATE } from '../store/_Store';
 const __i18n = {
 	..._wp_travel.strings
 }
-// Additional lib @todo need to implement path lib.
-// const _ = lodash;
+
 import _ from 'lodash';
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
 
@@ -20,7 +19,7 @@ const WpTravelBookNow = ( props ) => {
 	const initialState = DEFAULT_BOOKING_STATE();
     // Component Props.
 	const { tripData, bookingData, updateBookingData } = props;
-	// console.log( 'sdtripData', tripData )
+
     // Trip Data.
     const {
 		title,
@@ -154,17 +153,6 @@ const WpTravelBookNow = ( props ) => {
 				method: 'POST',
 				data
 			}).then(res => {
-				// if ( applyFilters( 'wptravel_redirect_to_checkout', true ) && true === res.success && 'WP_TRAVEL_ADDED_TO_CART' === res.data.code) {
-				// 	typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true && alert( title + __( ' has been added to cart', 'wp-travel' ) )
-				// 	location.href = typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? window.location.href :  wp_travel.checkoutUrl; // [only checkout page url]
-				// 	// location.href = window.location.href;
-				// }
-
-				// if ( applyFilters( 'wptravel_redirect_to_checkout', true ) && true === res.success && 'WP_TRAVEL_ADDED_TO_CART' === res.data.code) {
-				// 	typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true && alert( title + ' has been added to cart' )
-					
-				// 	// location.href = window.location.href;
-				// }
 
 				
 				if ( applyFilters( 'wptravel_redirect_to_checkout', true ) && true === res.success && 'WP_TRAVEL_ADDED_TO_CART' === res.data.code) {
@@ -224,7 +212,13 @@ const WpTravelBookNow = ( props ) => {
                         
                         <div className="right-info" >
                             <p>{__i18n.bookings.booking_tab_cart_total}<strong dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCartTotal(true)) }}></strong></p>
-                            <button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">{typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? __i18n.set_add_to_cart : __i18n.bookings.booking_tab_booking_btn_label}</button>
+							{
+								tripData.enable_pax_all_pricing == "1" &&
+								<button onClick={addToCart} className="wp-travel-book">{typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? __i18n.set_add_to_cart : __i18n.bookings.booking_tab_booking_btn_label}</button>
+								||
+								<button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">{typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? __i18n.set_add_to_cart : __i18n.bookings.booking_tab_booking_btn_label}</button>
+							}
+							
                         </div>
                     </div>
                 }

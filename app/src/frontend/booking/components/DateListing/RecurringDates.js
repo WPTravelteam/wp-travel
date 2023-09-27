@@ -12,7 +12,6 @@ import Loader from '../../../../GlobalComponents/Loader';
 
 
 // Additional lib
-// const _ = lodash;
 import _ from 'lodash';
 import { RRule, RRuleSet } from "rrule";
 
@@ -22,7 +21,6 @@ import Pricings from './SubComponents/Pricings';
 import PaxSelector from './SubComponents/PaxSelector';
 import TripExtras from './SubComponents/TripExtras';
 import TripTimes from './SubComponents/TripTimes';
-// import generateRRule from "../../_GenerateRRule";
 import InventoryNotice, { Notice } from '../../_InventoryNotice';
 
 

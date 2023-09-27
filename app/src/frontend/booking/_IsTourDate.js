@@ -25,9 +25,7 @@ const IsTourDate = ( props ) => date => {
 
     if (moment(date).isBefore(moment(new Date())))
         return false
-    // if ( moment( date ).isSame(moment( selectedDate ) ) ) {
-    // 	return;
-    // }
+
     if ( ! isFixedDeparture )
         return true
     let curretYear = date.getFullYear();
@@ -116,9 +114,7 @@ const IsTourDates = ( props ) => date => {
 
     if (moment(date).isBefore(moment(new Date())))
         return false
-    // if ( moment( date ).isSame(moment( selectedDate ) ) ) {
-    // 	return;
-    // }
+
     if ( ! isFixedDeparture )
         return true
     let curretYear = date.getFullYear();
@@ -206,9 +202,7 @@ const IsRecuringTourDates = ( props ) => date => {
 
     if (moment(date).isBefore(moment(new Date())))
         return false
-    // if ( moment( date ).isSame(moment( selectedDate ) ) ) {
-    // 	return;
-    // }
+
     if ( ! isFixedDeparture )
         return true
     let curretYear = date.getFullYear();

@@ -272,7 +272,7 @@ const DateListing = ( props ) => {
 			_bookingData = {..._bookingData, ..._inventory_state }
 		}
 		updateBookingData( _bookingData );
-		// console.log(effectType, bookingData, _bookingData );
+
 	}
 
 	// functions.

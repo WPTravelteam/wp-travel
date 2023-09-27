@@ -2553,18 +2553,23 @@ $primaryColor: #3399ff;
 
 // Cart
 
-.wptravel-layout-v2 #wptravel-archive-wrapper  .trip-location .wp-travel-caret{
-	display:none;
+.wptravel-layout-v2 #wptravel-archive-wrapper .trip-location .wp-travel-caret {
+	display: none;
 	position: absolute;
 	background: #eee;
-    padding: 5px 20px;
+	padding: 5px 20px;
 }
 
-.wptravel-layout-v2 #wptravel-archive-wrapper  .trip-location .post-category i:hover + .wp-travel-caret{
+.wptravel-layout-v2
+	#wptravel-archive-wrapper
+	.trip-location
+	.post-category
+	i:hover
+	+ .wp-travel-caret {
 	display: block;
-} 
+}
 
-.featured-side-image .banner-image-wrapper i{
+.featured-side-image .banner-image-wrapper i {
 	font-size: 60px;
 	left: 50%;
 	position: absolute;
@@ -2574,21 +2579,45 @@ $primaryColor: #3399ff;
 	color: aliceblue;
 }
 
-#wptravel-archive-wrapper .view-box .trip-location ul{
+#wptravel-archive-wrapper .view-box .trip-location ul {
 	display: none;
 	padding: 5px 20px;
-    border: none;
-    position: absolute;
-    background: aliceblue;
-}
-
-#wptravel-archive-wrapper .view-box .trip-location ul li{
 	border: none;
-	background: aliceblue;
+	position: absolute;
+	background: #fff;
+	box-shadow: 0px 0px 1px #cdcdcd;
 }
 
-#wptravel-archive-wrapper .view-box .trip-location:hover ul{
+#wptravel-archive-wrapper .view-box .trip-location ul li {
+	border: none;
+	background: #fff;
+}
+
+#wptravel-archive-wrapper .view-box .trip-location:hover ul {
 	display: block;
 }
 
+.wptravel-on-page-stripe-ideal-checkout-field{
+	padding: 40px 40px 10px 40px;
+}
 
+.wptravel-on-page-stripe-ideal-checkout-field label{
+	display: inline-block;
+    width: 33.33%;
+	vertical-align: middle;
+}
+
+.wptravel-on-page-stripe-ideal-checkout-field #stripeIdealElement{
+	display: inline-block;
+    width: 66.66%;
+	vertical-align: middle;
+    border: 1px solid;
+}
+
+.trip-extra-quantity{
+	font-weight: bold;
+    margin-left: 10px;
+}
+#faq .collapse.show{
+	display: block;
+}

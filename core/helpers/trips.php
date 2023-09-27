@@ -70,6 +70,7 @@ class WpTravel_Helpers_Trips {
 			'custom_booking_link_text'            => '',
 			'custom_booking_link_open_in_new_tab' => '',
 			'highest_price'                       => ! empty( $highest_price ) ? $highest_price : '',
+			'enable_pax_all_pricing'              => get_post_meta( $trip_id, 'wp_travel_enable_pax_all_pricing', true ),
 			'pricings'                            => array(),
 			'trip_price'                          => 0,
 			'regular_price'                       => 0,
@@ -333,6 +334,7 @@ class WpTravel_Helpers_Trips {
 	 * @param int $trip_data Other data related to that particular trip.
 	 */
 	public static function update_trip( $trip_id, $trip_data ) {
+
 		if ( empty( $trip_id ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
 		}
@@ -352,6 +354,8 @@ class WpTravel_Helpers_Trips {
 
 		$is_fixed_departure = ! empty( $trip_data->is_fixed_departure ) ? 'yes' : 'no';
 		update_post_meta( $trip_id, 'wp_travel_fixed_departure', $is_fixed_departure );
+		
+		update_post_meta( $trip_id, 'wp_travel_enable_pax_all_pricing', $trip_data->enable_pax_all_pricing );
 
 		$dates = ( 'no' === $is_fixed_departure ) ? array() : $trip_data->dates;
 		if ( ! empty( $dates ) ) {

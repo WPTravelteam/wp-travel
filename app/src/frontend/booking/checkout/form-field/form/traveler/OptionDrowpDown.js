@@ -14,11 +14,7 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
     const travelerValue = typeof travelerDataList[name] != 'undefined' && travelerDataList[name] || {};
     const optionKey = typeof options != undefined && Object.keys( options ) || []
     
-    // if ( typeof travelerDataList[name] == undefined ) {
-    //     const newData = {...travelerDataList, [name] : "booking_only" };
-    //     const checkoutNewData = {...checkoutDetails, [trvOne] : newData }
-    //     updateStore({...bookingData, checkoutDetails : checkoutNewData } )  
-    // }
+
     return <><PanelBody>
         <PanelRow>
             <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>

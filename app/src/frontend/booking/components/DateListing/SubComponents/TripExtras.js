@@ -8,22 +8,44 @@ const TripExtras = ( props ) => {
 	const { bookingData, updateBookingData } = props;
 	const { nomineeTripExtras, tripExtras } = bookingData;
 
-	const handleClick = ( index, inc ) => () => {
+	const handleClick = ( index, inc, quantity ) => e => {
+		
 		let id = nomineeTripExtras[index].id
 		let _xcount = tripExtras[id] + inc < 0 ? 0 : tripExtras[id] + inc;
+
+		if( quantity != -1 ){
+			if( _xcount > quantity ){
+				_xcount = quantity
+				if (e.target.parentElement.querySelector('.error'))
+					return
+				let em = document.createElement('em')
+				em.classList.add('error')
+				em.textContent = __i18n.bookings.max_pax_exceeded
+				e.target.parentElement.appendChild(em)
+				setTimeout(() => {
+					em.remove()
+				}, 1000)
+				return
+			}
+		}	
+		
 		// Trip extras required validation.
 		if ( nomineeTripExtras[index].is_required && _xcount <= 0 ) {
 			_xcount = 1;
 		}
+
 		updateBookingData({ tripExtras: { ...tripExtras, [id]: parseInt(_xcount) } });
 	}
 
+
 	return <div className="wp-travel-booking__trip-extras-wrapper">
-		{
+		{	
+		
 			nomineeTripExtras.length > 0 && <>
 				<h4>{__i18n.bookings.trip_extras_list_label}</h4>
 				<ul className="wp-travel-booking__trip-option-list">
-					{
+					{	
+					
 						nomineeTripExtras.map((tx, i) => {
 							if (typeof tx.tour_extras_metas == 'undefined') {
 								return <li key={i}>
@@ -76,14 +98,21 @@ const TripExtras = ( props ) => {
 											}
 										</a>
 									</div>
+									{
+										tx.tour_extras_metas.extras_item_quantity != -1 &&
+										<>
+											<span className='trip-extra-quantity'>( {_count} / { tx.tour_extras_metas.extras_item_quantity } )</span>
+										</>
+									}									
 								</div>
 								<div className="text-right">
-									<span className="item-price">{tx.is_sale && <del dangerouslySetInnerHTML={{__html: wpTravelFormat( GetConvertedPrice( tx.tour_extras_metas.extras_item_price ) ) }}></del>} <span dangerouslySetInnerHTML={ { __html: wpTravelFormat( GetConvertedPrice( price ) ) }}></span> /{__i18n.unit}</span>
+									<span className="item-price">{tx.is_sale && <del dangerouslySetInnerHTML={{__html: wpTravelFormat( GetConvertedPrice( tx.tour_extras_metas.extras_item_price ) ) }}></del>} <span dangerouslySetInnerHTML={ { __html: wpTravelFormat( GetConvertedPrice( price ) ) }}></span> /{tx.unit}</span>
+									
 									<div className="pricing-area">
 										<div className="qty-spinner">
-											<button onClick={ handleClick( i, -1 ) }>-</button>
+											<button onClick={ handleClick( i, -1, tx.tour_extras_metas.extras_item_quantity ) }>-</button>
 											<span>{_count}</span>
-											<button onClick={ handleClick( i, 1 ) }>+</button>
+											<button onClick={ handleClick( i, 1, tx.tour_extras_metas.extras_item_quantity ) }>+</button>
 										</div>
 									</div>
 								</div>

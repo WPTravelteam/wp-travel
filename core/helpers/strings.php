@@ -87,6 +87,8 @@ class WpTravel_Helpers_Strings {
 			'pricing_name'              => __( 'Pricing Name', 'wp-travel' ),
 			'highest_price'             => __( 'Show Highest Price', 'wp-travel' ),
 			'highest_price_description' => __( 'This option will display the highest price.', 'wp-travel' ),
+			'enable_pax_individual'     => __( 'Enable Pax Individually', 'wp-travel' ),
+			'enable_pax_individual_description' => __( 'This option will enable pax limit for individual pricing.', 'wp-travel' ),
 			'reviews'                   => __( 'Reviews', 'wp-travel' ),
 			'sale_price'                => __( 'Sale Price', 'wp-travel' ),
 			'search'                    => __( 'Search', 'wp-travel' ),

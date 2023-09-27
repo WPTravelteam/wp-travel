@@ -21,8 +21,7 @@ const WpTravelBookNow = ( props ) => {
 	const [loaders, setLoaders] = useState(false);
     // Booking Data/state.
     const bookingAllData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
-    // // console.log( bookingData );
-    // const { selectedDate } = bookingData;
+
     const { updateStore } = dispatch( bookingStoreName );
     // Component Props.
 	const { tripData, bookingData, updateBookingData } = props;
@@ -134,7 +133,7 @@ const WpTravelBookNow = ( props ) => {
 			category_pax: paxCounts,
 			trip_price: getCartTotal(), // just trip price without extras.
 		}
-		// console.log( 'final pax', paxCounts ) 
+
 		let paxVal =  Object.values( paxCounts ); // get all pax value form price category
 		let size = 0;
 		if ( paxVal.length > 0 ) {
@@ -187,7 +186,6 @@ const WpTravelBookNow = ( props ) => {
 					}).catch(error => {
 						console.log( 'You can not use one page checkout because setting not loaded!' );
 					})
-                    // updateStore( {...bookingAllData, bookingTabEnable: false, travelerInfo : true } );
 
 				}
 
@@ -223,8 +221,13 @@ const WpTravelBookNow = ( props ) => {
                         
                         <div className="right-info" >
                             <p>{__i18n.bookings.booking_tab_cart_total}<strong dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCartTotal(true)) }}></strong></p>
-                            <button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">{ __i18n.set_next_btn }{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</button>
-                        </div>
+							{
+								tripData.enable_pax_all_pricing == "1" &&
+								<button onClick={addToCart} className="wp-travel-book">{typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? __i18n.set_add_to_cart : __i18n.bookings.booking_tab_booking_btn_label}</button>
+								||
+								<button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">{typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? __i18n.set_add_to_cart : __i18n.bookings.booking_tab_booking_btn_label}</button>
+							}
+						</div>
                     </div>
 					</div>
                 }

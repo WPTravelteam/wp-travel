@@ -21,8 +21,7 @@ registerBlockType( 'wptravel/searchfilter', {
 				type: 'block',
 				blocks: [ 'core/legacy-widget' ],
 				isMatch: ( { idBase, instance } ) => {
-					// console.log('idBase', idBase)
-					// console.log('instance', instance)
+
 					if ( ! instance?.raw ) {
 						// Can't transform if raw instance is not shown in REST API.
 						return false;
