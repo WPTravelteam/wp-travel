@@ -3501,7 +3501,6 @@ function wptravel_get_fixed_departure_date( $trip_id ) {
 
 			if ( $react_version_enabled ) { // @since 4.0.3
 				$dates = wptravel_get_trip_available_dates( $trip_id );
-				// var_dump($dates);
 			} else {
 				foreach ( $trip_pricing_options as $price_key => $pricing ) :
 					// Set Vars.
