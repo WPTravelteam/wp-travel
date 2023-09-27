@@ -23,6 +23,9 @@ export default () => {
     const trpsExtras = typeof priceCart != 'undefined' && typeof priceCart.extras != 'undefined' && priceCart.extras || [];
     let tripData = 'undefined' !== typeof _wp_travel.trip_data ? _wp_travel.trip_data : {};
     const { pricings }  = tripData;
+
+    console.log(pricings);
+    console.log( pricings.find(item => item.id === selectedPricingId ).categories.find(item => item.id === 11 ) );
     // Open update cart field which is use to update cart pax
     const cartUpdateOpen = () => {
         typeof priceCart == 'undefined' && typeof pricings != 'undefined' && pricings.length > 0 && pricings.forEach( ( priceList, index ) => {
@@ -268,25 +271,28 @@ export default () => {
             <div className="wptravel-on-page-booking-update-cart-section animated-wp-travel fadeIn-wp-travel">
                 <div className="wptravel-on-page-booking-update-cart-section-wrapper">
                 <span className='pax-selector-label'> { __( 'Pax Selector', 'wp-travel' ) } </span>
-                { tripData.pricings[0].categories.map( ( listed, index ) => {
-                    const { term_info, id, is_sale, regular_price, sale_price, price_per }  = listed;
+                { typeof priceCategoryList != 'undefined' && priceCategoryList.length > 0  && priceCategoryList.map( ( listed, index ) => {
+                    const { title, catId, is_sale, regular_price, sale_price }  = listed;
                     return <>
                         <div className="wptrave-on-page-booking-cart-update-field">
-                            <label>{term_info.title} ( {paxCounts[id]} / {prcMax} )</label>
-                            <span className="item-price">{ is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat( GetConvertedPrice( regular_price ) ) } }></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat( getCategoryPrice(  id, true ) ) }}></span>/{price_per}</span>
+                        <label>{title} ( {paxCounts[catId]} / {prcMax} )</label>
+                            {console.log(tripData.pricings + ' and' + catId )}
+                            <span className="item-price">{ is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat( GetConvertedPrice( regular_price ) ) } }></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat( getCategoryPrice(  catId, true ) ) }}></span>/{pricings.find(item => item.id === selectedPricingId ).categories.find(item => item.id === catId ).price_per}</span>
+                            
                             <div className="wp-travel-on-page-cart-update-button">
-
-                                <button className='wptravel-page-cart-update-btn-increase' onClick={ () => paxDecreament( id, is_sale, regular_price, sale_price )}>-</button>
-                                <p>{paxCounts[id]}</p>
-                                <button className='wptravel-page-cart-update-btn-increase' onClick={ () => paxIncreament( id, is_sale, regular_price, sale_price )}>+</button>
-
+                                <button className='wptravel-page-cart-update-btn-increase' onClick={ () => paxDecreament( catId, is_sale, regular_price, sale_price )}>-</button>
+                                <p>{paxCounts[catId]}</p>
+                                <button className='wptravel-page-cart-update-btn-increase' onClick={ () => paxIncreament( catId, is_sale, regular_price, sale_price )}>+</button>
                             </div>
                             <div className="wptravel-onpage-booking-cart-price">
-                                <p>{currency_symbol}{updatePriceData[id]}</p>
+                                <p>{currency_symbol}{updatePriceData[catId]}</p>
                             </div>
-
+                            {/* <div className="wptravel-onpage-booking-cart-price">
+                                <p>{currency_symbol}{updatePriceData[catId]}</p>
+                            </div> */}
                         </div>
                     </>
+
                 } )}
                 </div>
                 

@@ -385,9 +385,12 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 			$customer_country = isset( $request_data['wp_travel_country_traveller'] ) ? $request_data['wp_travel_country_traveller'] : array();
 			$customer_phone   = isset( $request_data['wp_travel_phone_traveller'] ) ? $request_data['wp_travel_phone_traveller'] : array();
 			$customer_email   = isset( $request_data['wp_travel_email_traveller'] ) ? $request_data['wp_travel_email_traveller'] : array();
-			$customer_gender   = isset( get_post_meta( $booking_id, 'order_data', true )['wp_travel_gender_traveller'] ) ? get_post_meta( $booking_id, 'order_data', true )['wp_travel_gender_traveller'][array_key_first( get_post_meta( $booking_id, 'order_data', true )['wp_travel_gender_traveller'])][0] : '';
-
+			
+			var_dump( get_post_meta( $booking_id, 'order_data', true )['wp_travel_gender_traveller'][array_key_first( get_post_meta( $booking_id, 'order_data', true )['wp_travel_gender_traveller'])] );
+			die;
 			if( apply_filters( 'wptravel_traveller_salutation', true ) ==  true ){
+				$customer_gender   = isset( get_post_meta( $booking_id, 'order_data', true )['wp_travel_gender_traveller'] ) ? get_post_meta( $booking_id, 'order_data', true )['wp_travel_gender_traveller'][array_key_first( get_post_meta( $booking_id, 'order_data', true )['wp_travel_gender_traveller'])][0] : '';
+				
 				if( $customer_gender == 'male' ){
 					$salutation = __( 'Mr ', 'wp-travel' );
 				}elseif( $customer_gender == 'female' ){
@@ -397,6 +400,10 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 				}
 			}else{
 				$salutation = '';
+			}
+
+			if( apply_filters( 'wptravel_traveller_salutation', true ) ==  'custom-salutation' ){ 
+
 			}
 			
 

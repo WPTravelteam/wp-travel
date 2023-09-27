@@ -50,9 +50,11 @@ export default () => {
                 isOpen={isOpen}
                 onRequestClose={closeModal}
             >
-                <button onClick={ closeModal} className="wptravel-single-page-close-btn"><i className='fa fa-times'></i></button>
-               
-                <h2>{typeof bookingTabEnable != 'undefined' && bookingTabEnable ? _wp_travel.select_you_pax : (typeof travelerInfo != 'undefined' && travelerInfo ? __i18n.set_traveler_details : (typeof tripBillingEnable != 'undefined' && tripBillingEnable ? __i18n.set_booking_details : ( paymentEnable &&  __i18n.set_booking_with || __i18n.set_booking_only ) ) ) } </h2>
+                <div className="wptravel-onpage-header">
+                    <h2>{typeof bookingTabEnable != 'undefined' && bookingTabEnable ? _wp_travel.select_you_pax : (typeof travelerInfo != 'undefined' && travelerInfo ? __i18n.set_traveler_details : (typeof tripBillingEnable != 'undefined' && tripBillingEnable ? __i18n.set_booking_details : (paymentEnable && __i18n.set_booking_with || __i18n.set_booking_only)))} </h2>
+
+                    <button onClick={closeModal} className="wptravel-single-page-close-btn"><i className='fa fa-times'></i></button>
+                </div>
 
                 {typeof bookingTabEnable != 'undefined' && bookingTabEnable &&
                     <div className='wptravel-single-page-calender-booking wp-travel-calendar-view'>
