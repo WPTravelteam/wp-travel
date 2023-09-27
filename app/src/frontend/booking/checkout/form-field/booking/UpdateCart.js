@@ -24,8 +24,6 @@ export default () => {
     let tripData = 'undefined' !== typeof _wp_travel.trip_data ? _wp_travel.trip_data : {};
     const { pricings }  = tripData;
 
-    console.log(pricings);
-    console.log( pricings.find(item => item.id === selectedPricingId ).categories.find(item => item.id === 11 ) );
     // Open update cart field which is use to update cart pax
     const cartUpdateOpen = () => {
         typeof priceCart == 'undefined' && typeof pricings != 'undefined' && pricings.length > 0 && pricings.forEach( ( priceList, index ) => {
@@ -276,7 +274,6 @@ export default () => {
                     return <>
                         <div className="wptrave-on-page-booking-cart-update-field">
                         <label>{title} ( {paxCounts[catId]} / {prcMax} )</label>
-                            {console.log(tripData.pricings + ' and' + catId )}
                             <span className="item-price">{ is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat( GetConvertedPrice( regular_price ) ) } }></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat( getCategoryPrice(  catId, true ) ) }}></span>/{pricings.find(item => item.id === selectedPricingId ).categories.find(item => item.id === catId ).price_per}</span>
                             
                             <div className="wp-travel-on-page-cart-update-button">
