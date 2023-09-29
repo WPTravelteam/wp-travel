@@ -348,7 +348,8 @@ const DateListing = ( props ) => {
                     }
 
                     { recurringDates.length > 0 && <>
-						{ recurringDates.map((date, index) => {
+						{  
+						recurringDates.map((date, index) => {
 							return <div className="wptravel-recurring-table-wrapper" key={index}>
 								<table className="wptravel-recurring-table">
 									<DateListingTableHead />

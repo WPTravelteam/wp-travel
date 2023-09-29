@@ -716,17 +716,33 @@ function wptravel_search_form( $args = array() ) {
 	$label_string = apply_filters(
 		'wp_travel_search_filter_label_strings',
 		array(
-			'search'        => __( 'Search:', 'wp-travel' ),
-			'trip_type'     => __( 'Trip Type:', 'wp-travel' ),
-			'location'      => __( 'Location:', 'wp-travel' ),
-			'search_button' => __( 'Search', 'wp-travel' ),
+			'search'        	=> __( 'Search:', 'wp-travel' ),
+			'trip_type'     	=> __( 'Trip Type:', 'wp-travel' ),
+			'location'      	=> __( 'Location:', 'wp-travel' ),
+			'activity'      	=> __( 'Activity:', 'wp-travel' ),
+			'travel_keywords'   => __( 'Keywords:', 'wp-travel' ),
+			'search_button' 	=> __( 'Search', 'wp-travel' ),
 		)
 	);
 
-	$search_string        = ! empty( $label_string['search'] ) ? $label_string['search'] : '';
-	$trip_type_string     = ! empty( $label_string['trip_type'] ) ? $label_string['trip_type'] : '';
-	$location_string      = ! empty( $label_string['location'] ) ? $label_string['location'] : '';
-	$search_button_string = ! empty( $label_string['search_button'] ) ? $label_string['search_button'] : '';
+	// @since 7.5.0
+	$input_field = apply_filters(
+		'wp_travel_search_filter_input_fields',
+		array(
+			'search'        	=> true,
+			'trip_type'     	=> true,
+			'location'      	=> true,
+			'activity'      	=> true,
+			'travel_keywords'   => true,
+		)
+	);
+
+	$search_string        		= ! empty( $label_string['search'] ) ? $label_string['search'] : '';
+	$trip_type_string     		= ! empty( $label_string['trip_type'] ) ? $label_string['trip_type'] : '';
+	$location_string      		= ! empty( $label_string['location'] ) ? $label_string['location'] : '';
+	$activity_string      		= ! empty( $label_string['activity'] ) ? $label_string['activity'] : '';
+	$travel_keywords_string     = ! empty( $label_string['travel_keywords'] ) ? $label_string['travel_keywords'] : '';
+	$search_button_string 		= ! empty( $label_string['search_button'] ) ? $label_string['search_button'] : '';
 
 	// Show Hide Options.
 	$show_input     = isset( $args['show_input'] ) ? $args['show_input'] : true;
@@ -737,55 +753,91 @@ function wptravel_search_form( $args = array() ) {
 		<form method="get" name="wp-travel_search" action="<?php echo esc_url( home_url( '/' ) ); ?>" >
 			<input type="hidden" name="post_type" value="<?php echo esc_attr( WP_TRAVEL_POST_TYPE ); ?>" />
 			<?php if ( $show_input ) : ?>
-			<p>
-				<label><?php echo esc_html( $search_string ); ?></label>
-				<?php $placeholder = __( 'Ex: Trekking', 'wp-travel' ); ?>
-				<input type="text" name="s" id="s" value="<?php the_search_query(); ?>" placeholder="<?php echo esc_attr( apply_filters( 'wp_travel_search_placeholder', $placeholder ) ); ?>">
-			</p>
+				<?php if ( $input_field['search'] ) : ?>
+					<p>
+						<label><?php echo esc_html( $search_string ); ?></label>
+						<?php $placeholder = __( 'Ex: Trekking', 'wp-travel' ); ?>
+						<input type="text" name="s" id="s" value="<?php the_search_query(); ?>" placeholder="<?php echo esc_attr( apply_filters( 'wp_travel_search_placeholder', $placeholder ) ); ?>">
+					</p>
+				<?php endif; ?>
 			<?php endif; ?>
 			<?php if ( $show_trip_type ) : ?>
-			<p>
-				<label><?php echo esc_html( $trip_type_string ); ?></label>
-				<?php
-				$taxonomy = 'itinerary_types';
-				$args     = array(
-					'show_option_all' => __( 'All', 'wp-travel' ),
-					'hide_empty'      => 0,
-					'selected'        => 1,
-					'hierarchical'    => 1,
-					'name'            => $taxonomy,
-					'class'           => 'wp-travel-taxonomy',
-					'taxonomy'        => $taxonomy,
-					'selected'        => ( isset( $submission_get[ $taxonomy ] ) ) ? esc_textarea( $submission_get[ $taxonomy ] ) : 0,
-					'value_field'     => 'slug',
-					'order'           => 'asc',
-					'orderby'         => 'title',
-				);
+				<?php if ( $input_field['trip_type'] ) : ?>
+					<p>
+						<label><?php echo esc_html( $trip_type_string ); ?></label>
+						<?php
+						$taxonomy = 'itinerary_types';
+						$args     = array(
+							'show_option_all' => __( 'All', 'wp-travel' ),
+							'hide_empty'      => 0,
+							'selected'        => 1,
+							'hierarchical'    => 1,
+							'name'            => $taxonomy,
+							'class'           => 'wp-travel-taxonomy',
+							'taxonomy'        => $taxonomy,
+							'selected'        => ( isset( $submission_get[ $taxonomy ] ) ) ? esc_textarea( $submission_get[ $taxonomy ] ) : 0,
+							'value_field'     => 'slug',
+							'order'           => 'asc',
+							'orderby'         => 'title',
+						);
 
-				wp_dropdown_categories( $args, $taxonomy );
-				?>
-			</p>
+						wp_dropdown_categories( $args, $taxonomy );
+						?>
+					</p>
+				<?php endif; ?>
 			<?php endif; ?>
 			<?php if ( $show_location ) : ?>
-			<p>
-				<label><?php echo esc_html( $location_string ); ?></label>
-				<?php
-				$taxonomy = 'travel_locations';
-				$args     = array(
-					'show_option_all' => __( 'All', 'wp-travel' ),
-					'hide_empty'      => 0,
-					'selected'        => 1,
-					'hierarchical'    => 1,
-					'name'            => $taxonomy,
-					'class'           => 'wp-travel-taxonomy',
-					'taxonomy'        => $taxonomy,
-					'selected'        => ( isset( $submission_get[ $taxonomy ] ) ) ? esc_textarea( $submission_get[ $taxonomy ] ) : 0,
-					'value_field'     => 'slug',
-				);
+				<?php if ( $input_field['location'] ) : ?>
+					<p>
+						<label><?php echo esc_html( $location_string ); ?></label>
+						<?php
+						$taxonomy = 'travel_locations';
+						$args     = array(
+							'show_option_all' => __( 'All', 'wp-travel' ),
+							'hide_empty'      => 0,
+							'selected'        => 1,
+							'hierarchical'    => 1,
+							'name'            => $taxonomy,
+							'class'           => 'wp-travel-taxonomy',
+							'taxonomy'        => $taxonomy,
+							'selected'        => ( isset( $submission_get[ $taxonomy ] ) ) ? esc_textarea( $submission_get[ $taxonomy ] ) : 0,
+							'value_field'     => 'slug',
+						);
 
-				wp_dropdown_categories( $args, $taxonomy );
-				?>
-			</p>
+						wp_dropdown_categories( $args, $taxonomy );
+						?>
+					</p>
+				<?php endif; ?>
+			<?php endif; ?>
+			<?php if ( $input_field['activity'] ) : ?>
+				<p>
+					<label><?php echo esc_html( $activity_string ); ?></label>
+					<?php
+					$taxonomy = 'activity';
+					$args     = array(
+						'show_option_all' => __( 'All', 'wp-travel' ),
+						'hide_empty'      => 0,
+						'selected'        => 1,
+						'hierarchical'    => 1,
+						'name'            => $taxonomy,
+						'class'           => 'wp-travel-taxonomy',
+						'taxonomy'        => $taxonomy,
+						'selected'        => ( isset( $submission_get[ $taxonomy ] ) ) ? esc_textarea( $submission_get[ $taxonomy ] ) : 0,
+						'value_field'     => 'slug',
+						'order'           => 'asc',
+						'orderby'         => 'title',
+					);
+
+					wp_dropdown_categories( $args, $taxonomy );
+					?>
+				</p>
+			<?php endif; ?>
+			<?php if ( $input_field['travel_keywords'] ) : ?>
+				<p>
+					<label><?php echo esc_html( $travel_keywords_string ); ?></label>
+					<?php $placeholder = __( 'Ex: Trekking', 'wp-travel' ); ?>
+					<input type="text" name="travel_keywords" id="travel_keywords" value="<?php the_search_query(); ?>" placeholder="<?php echo esc_attr( apply_filters( 'wp_travel_keywords_placeholder', $placeholder ) ); ?>">
+				</p>
 			<?php endif; ?>
 			<?php WP_Travel::create_nonce_field(); ?>
 
@@ -2028,16 +2080,6 @@ if ( ! function_exists( 'wptravel_get_trip_available_dates' ) ) {
 									if ( strtotime( $val ) > strtotime( date('Y-m-d') ) ) {
 										$available_dates[] = $val;
 										break;
-									}
-								}
-							} elseif ( ! empty( $date['months'] ) ) {
-								foreach ( explode( ',', $date['months'] ) as $value) {
-									$total_days = cal_days_in_month( CAL_GREGORIAN,$value, explode( '-', $val )[0] );
-									foreach ( getBetweenDates( explode( '-', $val )[0].'-'.$value.'-01', explode( '-', $val )[0].'-'.$value.'-'.$total_days ) as $keys => $val ){
-										if ( strtotime( $val ) > strtotime( date('Y-m-d') ) ) {
-											$available_dates[] = $val;
-										
-										}
 									}
 								}
 							}else {
@@ -4548,3 +4590,56 @@ function wptravel_get_cart_icon(){
 		
 	<?php }
 }
+
+// @since v7.5.0
+
+/**
+ * Extend WordPress search to include custom fields
+ * Join posts and postmeta tables
+ *
+ * http://codex.wordpress.org/Plugin_API/Filter_Reference/posts_join
+ */
+function wp_travel_search_join( $join ) {
+    global $wpdb;
+
+    if ( is_search() ) {    
+        $join .=' LEFT JOIN '.$wpdb->postmeta. ' ON '. $wpdb->posts . '.ID = ' . $wpdb->postmeta . '.post_id ';
+    }
+
+    return $join;
+}
+add_filter('posts_join', 'wp_travel_search_join' );
+
+/**
+ * Modify the search query with posts_where
+ *
+ * http://codex.wordpress.org/Plugin_API/Filter_Reference/posts_where
+ */
+function wp_travel_search_where( $where ) {
+    global $pagenow, $wpdb;
+
+    if ( is_search() ) {
+        $where = preg_replace(
+            "/\(\s*".$wpdb->posts.".post_title\s+LIKE\s*(\'[^\']+\')\s*\)/",
+            "(".$wpdb->posts.".post_title LIKE $1) OR (".$wpdb->postmeta.".meta_value LIKE $1)", $where );
+    }
+
+    return $where;
+}
+add_filter( 'posts_where', 'wp_travel_search_where' );
+
+/**
+ * Prevent duplicates
+ *
+ * http://codex.wordpress.org/Plugin_API/Filter_Reference/posts_distinct
+ */
+function wp_travel_search_distinct( $where ) {
+    global $wpdb;
+
+    if ( is_search() ) {
+        return "DISTINCT";
+    }
+
+    return $where;
+}
+add_filter( 'posts_distinct', 'wp_travel_search_distinct' );

@@ -23,7 +23,7 @@ import { DEFAULT_BOOKING_STATE } from '../store/_Store';
 const initialState = DEFAULT_BOOKING_STATE();
 
 export default () => {
-    const [isOpen, setOpen] = useState(false);
+    const [isOpen, setOpen] = useState(true);
 
 
     // Booking Data/state.
@@ -49,6 +49,7 @@ export default () => {
                 className="booknow-btn-modal"
                 isOpen={isOpen}
                 onRequestClose={closeModal}
+                shouldCloseOnOverlayClick={false}
             >
                 <div className="wptravel-onpage-header">
                     <h2>{typeof bookingTabEnable != 'undefined' && bookingTabEnable ? _wp_travel.select_you_pax : (typeof travelerInfo != 'undefined' && travelerInfo ? __i18n.set_traveler_details : (typeof tripBillingEnable != 'undefined' && tripBillingEnable ? __i18n.set_booking_details : (paymentEnable && __i18n.set_booking_with || __i18n.set_booking_only)))} </h2>
