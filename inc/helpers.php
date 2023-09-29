@@ -732,8 +732,8 @@ function wptravel_search_form( $args = array() ) {
 			'search'        	=> true,
 			'trip_type'     	=> true,
 			'location'      	=> true,
-			'activity'      	=> true,
-			'travel_keywords'   => true,
+			'activity'      	=> false,
+			'travel_keywords'   => false,
 		)
 	);
 

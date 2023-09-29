@@ -21,8 +21,14 @@ do_action( 'wp_travel_before_main_content' );
 <?php
 while ( have_posts() ) :
 	the_post();
-	do_action( 'wptravel_single_itinerary_main_content' );
-	// the_content();
+
+	if( !apply_filters( 'wp_travel_enable_trip_content', false ) ){
+		do_action( 'wptravel_single_itinerary_main_content' );
+	}
+	
+	if( apply_filters( 'wp_travel_enable_trip_content', false ) ){
+		the_content();
+	}
 
 endwhile; // end of the loop.
 ?>
