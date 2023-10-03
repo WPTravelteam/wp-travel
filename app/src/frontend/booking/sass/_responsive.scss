@@ -23,6 +23,9 @@ button.wptravel-single-page-close-btn {
         overflow-x: auto;
         white-space: nowrap;
     }
+    .wptravel-layout-v2.ReactModal__Body--open .ReactModal__Content .wptravel-recurring-table .tbody-table .tablebody-booking-person .wp-travel-booking__trip-option-list li .text-left{
+        flex-wrap: wrap;
+    }
 }
 @media only screen and (max-width: 576px) {
     .wptravel-udate-cart-wrapper{
@@ -48,4 +51,11 @@ button.wptravel-single-page-close-btn {
             gap: 10px;
         }
     }
+    .wptravel-on-page-stripe-ideal-checkout-field{
+        padding: 40px 10px 10px 10px;
+    }
+    .wptravel-layout-v2.ReactModal__Body--open .ReactModal__Content .wptravel-recurring-table .tbody-table .tablebody-booking-pricings span.components-checkbox-control__input-container{
+        margin-right: 0;
+    }
+    
 }
