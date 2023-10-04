@@ -36,10 +36,11 @@ export default () => {
     const paymentEnable = typeof payment_form != 'undefined' && typeof payment_form.payment_gateway != 'undefined' && true || false
     const tooltipText = __i18n.bookings.date_select_to_view_options;
     
-    const openModal = () => setOpen(true);
+    const openModal = () => {
+        $( '.ReactModalPortal' ).css( 'display', 'block' );
+    };
     const closeModal = () => {
-        updateBookingData( initialState );
-        setOpen(false);
+        $( '.ReactModalPortal' ).css( 'display', 'none' );
     } 
 
     return <>
