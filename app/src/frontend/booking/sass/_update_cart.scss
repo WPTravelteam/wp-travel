@@ -274,31 +274,77 @@
 
 .wp-travel__trip-headline {
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-end;
 	max-height: 75px;
 
+	// #wp-travel__add-to-cart_notice {
+	// 	border-radius: 5px;
+	// 	margin: 10px 0 25px 0;
+
+	// 	&.success {
+	// 		padding: 10px 20px;
+	// 		background-color: #d7f3d7;
+	// 		color: #329b32;
+	// 		border: 1px solid #329b32;
+	// 	}
+
+	// 	&.error {
+	// 		padding: 10px 20px;
+	// 		background-color: #f3d7d7;
+	// 		color: #d12323;
+	// 		border: 1px solid #d12323;
+	// 	}
+
+	// 	i {
+	// 		margin-right: 7px;
+	// 	}
+	// }
+
+	/**
+	* Added toast styles
+	*
+	* @since 7.5.0
+	*/
 	#wp-travel__add-to-cart_notice {
-		border-radius: 5px;
-		margin: 10px 0 25px 0;
+        display: none;
+        position: fixed;
+        right: 20px;
+        top: 45px;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        max-width: 450px;
+        box-shadow: 0 0 10px 3px rgba(0,0,0,0.05);
+        overflow: hidden;
+        gap: 50px;
+        align-items: center;
+		z-index: 999;
 
-		&.success {
-			padding: 10px 20px;
-			background-color: #d7f3d7;
-			color: #329b32;
-			border: 1px solid #329b32;
-		}
+        &.success {
+            display: flex;
+            
+            #wp-travel__notice_time-bar {
+                height: 5px;
+                background-color: green;
+                width: 100%;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                animation: slide-out 8s forwards linear;
+            }
+        }
 
-		&.error {
-			padding: 10px 20px;
-			background-color: #f3d7d7;
-			color: #d12323;
-			border: 1px solid #d12323;
-		}
+        #toast-close {
+            cursor: pointer;
+        }
 
-		i {
-			margin-right: 7px;
-		}
-	}
+        span {
+            i {
+                margin-right: 5px;
+                color: rgb(22, 153, 22);
+            }
+        }
+    }
 
 	.wp-travel-single-trip-add-to-cart {
 		display: flex;
@@ -374,6 +420,31 @@
 	animation-duration: 0.6s;
 	-webkit-animation-fill-mode: both;
 	animation-fill-mode: both;
+}
+
+/**
+* Added animation for toast time-bar
+*
+* @since 7.5.0
+*/
+@-webkit-keyframes slide-out {
+    0% {
+        left: 0;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+@keyframes slide-out {
+    0% {
+        left: 0;
+    }
+
+    100% {
+        left: 100%;
+    }
 }
 
 @-webkit-keyframes fadeIn {
