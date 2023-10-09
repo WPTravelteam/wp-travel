@@ -118,7 +118,13 @@ const WpTravelBookNow = ( props ) => {
 		return price || 0
 	}
 
-	const addToCart = () => {
+	const addToCart = event => {
+		/**
+		 * Added button disable after clicking once on Book Now button
+		 * 
+		 * @since 7.5.0
+		 */
+		event.currentTarget.disabled = true;
 		let data = {
 			trip_id: tripData.id,
 			arrival_date: moment(selectedDate).format('YYYY-MM-DD'),
@@ -161,11 +167,44 @@ const WpTravelBookNow = ( props ) => {
 						location.href = typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? window.location.href :  wp_travel.checkoutUrl; // [only checkout page url]
 					} else {
 						var cartCount = Object.keys(res.data.cart.cart_items).length;
-						jQuery( '#wp-travel__add-to-cart_notice' ).addClass( 'success' ).append( '<span><i class="fa fa-check-circle"></i><strong>' + title + '</strong> ' + __i18n.set_added_cart + '</span>' );
-			
+						/**
+						 * Added toast to display successful booking 
+						 * 
+						 * @since 7.5.0
+						 */
+						jQuery( '#wp-travel__add-to-cart_notice' ).addClass( 'success' ).append( `
+								<span><i class="fa fa-check-circle"></i><strong>` + title + `</strong> ` + __i18n.set_added_cart + `</span>
+								<span id="toast-close"><i class="fa fa-times"></i></span>
+								<div id="wp-travel__notice_time-bar"></div>
+							` );
+						
+						/**
+						 * Added close [X] button on toast to remove it
+						 * 
+						 * @since 7.5.0
+						 */
+						jQuery( '#toast-close' ).on('click', function() {
+							jQuery( '#wp-travel__add-to-cart_notice' ).removeClass( 'success' )
+							/**
+							 * Remove style [ display: none ], as the notice was just hidden in DOM and not removed
+							 * Fixed: Remove toast from DOM after the toast duration expires [ 8sec ]
+							 * 
+							 * @since 7.5.0
+							 */
+							jQuery( '#wp-travel__add-to-cart_notice span' ).remove();
+							jQuery( '#wp-travel__notice_time-bar' ).remove();
+						});
+
 						setTimeout( () => {
 							jQuery( '#wp-travel__add-to-cart_notice' ).removeClass( 'success' )
-							jQuery( '#wp-travel__add-to-cart_notice span' ).css( 'display', 'none' );
+							/**
+							 * Remove style [ display: none ], as the notice was just hidden in DOM and not removed
+							 * Fixed: Remove toast from DOM after the toast duration expires [ 8sec ]
+							 * 
+							 * @since 7.5.0
+							 */
+							jQuery( '#wp-travel__add-to-cart_notice span' ).remove();
+							jQuery( '#wp-travel__notice_time-bar' ).remove();
 						}, 8000 );
 	
 						updateBookingData( initialState );
