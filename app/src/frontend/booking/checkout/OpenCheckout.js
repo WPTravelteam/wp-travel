@@ -40,6 +40,7 @@ export default () => {
         $( '.ReactModalPortal' ).css( 'display', 'block' );
     };
     const closeModal = () => {
+        updateBookingData( initialState );
         $( '.ReactModalPortal' ).css( 'display', 'none' );
     } 
 

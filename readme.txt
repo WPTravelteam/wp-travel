@@ -424,7 +424,7 @@ Release Date: 12th October  2023
 Fixes:
 * Fixed currency symbol missing in different emails.
 * Fixed update cart issue in the case of Minicart.
-* Fixed arival and departure date issue on thakyou page and booking email template 
+* Fixed arrival and departure date issue on thakyou page and booking email template 
 
 Enhancements:
 * Added more taxonomy options in the search filter( By default, Search, Trip Type, and Location will be displayed.)        

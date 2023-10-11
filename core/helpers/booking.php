@@ -155,6 +155,14 @@ class WpTravel_Helpers_Booking {
 								<td><?php echo esc_html( $start_date ); ?></td>
 								<?php if( isset( $trip_data['dates'] ) && $trip_data['dates'][0]['is_recurring'] == false ): ?>
 									<td><?php echo esc_html( $end_date ); ?></td>
+									<?php else: ?>
+									<td>
+										<?php if( $trip_data['trip_duration']['days'] ): ?>
+											<?php echo esc_html( $departure_date ); ?>
+											<?php else: ?>
+												<?php echo __( 'N\A', 'wp-travel' ); ?>
+										<?php endif; ?>
+									</td>
 								<?php endif; ?>
 						<?php endif; ?>
 					</tr>
