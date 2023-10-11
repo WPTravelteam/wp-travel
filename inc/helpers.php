@@ -3262,6 +3262,18 @@ function wptravel_privacy_link() {
 	return $link;
 }
 
+function wptravel_privacy_link_url() {
+	$settings = wptravel_get_settings();
+	$link     = '';
+
+	$privacy_policy_url = false;
+	if ( function_exists( 'get_privacy_policy_url' ) ) {
+		$privacy_policy_url = get_privacy_policy_url();
+	}
+
+	return $privacy_policy_url;
+}
+
 /**
  * Return Pax alert message.
  *

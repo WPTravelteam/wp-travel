@@ -255,6 +255,7 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
                                 </button>
                         </div>
                     </PanelRow>
+                    {/* {applyFilters('wp_travel_after_end_date', '', dates, _dateIndex, _date, onUpdate, storeKey)} */}
                     {applyFilters('wp_travel_after_end_date', '', dates, _dateIndex, _date, onUpdate, storeKey)}
 
                     <hr />

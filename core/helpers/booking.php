@@ -98,7 +98,7 @@ class WpTravel_Helpers_Booking {
 										}
 										$pax = $pax + $t['pax'];
 									?>
-										<span class="my-order-price-detail">(<?php echo esc_html( $t['pax'] ) . ' ' . $t['custom_label'] . ' x ' . wptravel_get_formated_price_currency( $t['price'], false, '', $booking_id ); ?>) <?php echo '$'.$t['pax'] * $t['price'] ;?> </span>
+										<span class="my-order-price-detail">(<?php echo esc_html( $t['pax'] ) . ' ' . $t['custom_label'] . ' x ' . wptravel_get_formated_price_currency( $t['price'], false, '', $booking_id ); ?>) <?php echo wptravel_get_formated_price_currency( $t['pax'] * $t['price'], false, '', $booking_id ); //@phpcs:ignore ?></span>
 									<?php endforeach; ?>
 								<?php endif; ?>
 							</span>

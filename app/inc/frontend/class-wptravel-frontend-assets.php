@@ -42,6 +42,7 @@ class WpTravel_Frontend_Assets {
 	public static function assets() {
 		self::register_scripts();
 		$all_localized = WpTravel_Helpers_Localize::get();
+
 		$wp_travel     = isset( $all_localized['wp_travel'] ) ? $all_localized['wp_travel'] : array(); // localized data for WP Travel below V 4.0.
 
 		$settings     = wptravel_get_settings();

@@ -83,6 +83,13 @@ class WpTravel_Helpers_Localize {
 				'bank_detail_form'			 => wptravel_get_bank_deposit_account_details(),
 
 			);
+			if( class_exists( 'WP_Travel_Trip_Extras_Inventory' ) ){
+				$_wp_travel['WP_Travel_Trip_Extras_Inventory'] = 'yes';
+			}
+
+			$_wp_travel['gdpr_msg'] = ! empty( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ) : __( 'By contacting us, you agree to our ', 'wp-travel' );
+			$_wp_travel['policy_link'] = wptravel_privacy_link_url();
+
 			$coupon_args  = array(
 				'post_type'   => 'wp-travel-coupons',
 				'post_status' => 'published',
