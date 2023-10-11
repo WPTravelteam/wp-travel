@@ -313,7 +313,7 @@ export default () => {
                                 ||
                                 <label>{extraTitles}</label>
                             }	
-                            <span className="item-price"><span dangerouslySetInnerHTML={{ __html: wpTravelFormat( extras_item_price ) }}></span>/{unit}</span>
+                            <span className="item-price">{ is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat( extras_item_price ) } }></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat( sale_price ) }}></span>/{unit}</span>
                             
                             <div className="wp-travel-on-page-cart-update-button">
 

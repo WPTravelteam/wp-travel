@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 6.0.0
 Tested up to: 6.3
 Requires PHP: 7.4
-Stable tag: 7.4.0
+Stable tag: 7.5.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -417,6 +417,21 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 7.5.0 =
+Release Date: 12th October  2023
+
+Fixes:
+* Fixed currency symbol missing in different emails.
+* Fixed update cart issue in the case of Minicart.
+* Fixed arival and departure date issue on thakyou page and booking email template 
+
+Enhancements:
+* Added more taxonomy options in the search filter( By default, Search, Trip Type, and Location will be displayed.)        
+* Added hook for the empty cart message [wp_travel_cart_empty_message] 
+* Added check box for Privacy Policy on On-page booking
+* Fixed arival and departure date issue on thakyou page and booking email template 
+
 
 = 7.4.0 =
 Release Date: 27th September 2023
