@@ -918,9 +918,11 @@
 		.components-panel__body.is-opened{
 			.react-datepicker-popper{
 				div.react-datepicker{
-					bottom: -186px;
+					// bottom: -186px;
+					position: relative;
+					top: 0;
 					.react-datepicker__triangle{
-						transform: translate3d(-4px, -156px, 0px) rotate(90deg) !important;
+						// transform: translate3d(-4px, -156px, 0px) rotate(90deg) !important;
 					}
 				}
 			}
