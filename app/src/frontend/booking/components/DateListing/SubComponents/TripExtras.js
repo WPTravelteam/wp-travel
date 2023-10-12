@@ -13,21 +13,24 @@ const TripExtras = ( props ) => {
 		let id = nomineeTripExtras[index].id
 		let _xcount = tripExtras[id] + inc < 0 ? 0 : tripExtras[id] + inc;
 
-		if( quantity != -1 ){
-			if( _xcount > quantity ){
-				_xcount = quantity
-				if (e.target.parentElement.querySelector('.error'))
+		if( typeof _wp_travel.WP_Travel_Trip_Extras_Inventory !== 'undefined' ){
+			if( quantity != -1 ){
+				if( _xcount > quantity ){
+					_xcount = quantity
+					if (e.target.parentElement.querySelector('.error'))
+						return
+					let em = document.createElement('em')
+					em.classList.add('error')
+					em.textContent = __i18n.bookings.max_pax_exceeded
+					e.target.parentElement.appendChild(em)
+					setTimeout(() => {
+						em.remove()
+					}, 1000)
 					return
-				let em = document.createElement('em')
-				em.classList.add('error')
-				em.textContent = __i18n.bookings.max_pax_exceeded
-				e.target.parentElement.appendChild(em)
-				setTimeout(() => {
-					em.remove()
-				}, 1000)
-				return
+				}
 			}
-		}	
+		}
+			
 		
 		// Trip extras required validation.
 		if ( nomineeTripExtras[index].is_required && _xcount <= 0 ) {
@@ -98,10 +101,10 @@ const TripExtras = ( props ) => {
 											}
 										</a>
 									</div>
-									{
-										tx.tour_extras_metas.extras_item_quantity != -1 &&
+									{	
+										( typeof _wp_travel.WP_Travel_Trip_Extras_Inventory !== 'undefined' && tx.tour_extras_metas.extras_item_quantity != -1 ) &&
 										<>
-											<span className='trip-extra-quantity'>( {_count} / { tx.tour_extras_metas.extras_item_quantity } )</span>
+											<span className='trip-extra-quantity'>( {_count} / { tx.tour_extras_metas.extras_item_quantity - tx.tour_extras_metas.extras_item_quantity_in_used } )</span>
 										</>
 									}									
 								</div>
@@ -110,9 +113,9 @@ const TripExtras = ( props ) => {
 									
 									<div className="pricing-area">
 										<div className="qty-spinner">
-											<button onClick={ handleClick( i, -1, tx.tour_extras_metas.extras_item_quantity ) }>-</button>
+											<button onClick={ handleClick( i, -1, ( tx.tour_extras_metas.extras_item_quantity - tx.tour_extras_metas.extras_item_quantity_in_used ) ) }>-</button>
 											<span>{_count}</span>
-											<button onClick={ handleClick( i, 1, tx.tour_extras_metas.extras_item_quantity ) }>+</button>
+											<button onClick={ handleClick( i, 1, ( tx.tour_extras_metas.extras_item_quantity - tx.tour_extras_metas.extras_item_quantity_in_used ) ) }>+</button>
 										</div>
 									</div>
 								</div>

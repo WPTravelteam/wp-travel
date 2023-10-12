@@ -1,5 +1,6 @@
 import { forwardRef, useEffect, useState, Fragment } from '@wordpress/element';
 import { CheckboxControl, Disabled } from '@wordpress/components';
+import $ from 'jquery';
 
 const __i18n = {
 	..._wp_travel.strings
@@ -23,10 +24,24 @@ import TripExtras from './SubComponents/TripExtras';
 import TripTimes from './SubComponents/TripTimes';
 import InventoryNotice, { Notice } from '../../_InventoryNotice';
 
-
+var recurringCount = 1;
 const RecurringRepeator = ( props ) =>  {
     const { innerIndex:index, _nomineePricings, date, recurrindDate, tripData, bookingData } = props;
 
+   
+
+    if( recurringCount == 1 ){
+        // @since 7.5.0
+        // this will render the nearest date of the trip
+        $( '.wp-travel-fixed-departure .fixed-date-options' ).html( moment(recurrindDate).format(_wp_travel.date_format_moment ) )
+    }
+
+
+    $( '.wptravel-book-your-trip.wp-travel-booknow-btn' ).click( function(){
+        // This will open booking modal 
+        $( '.ReactModalPortal' ).css( 'display', 'block' );
+    } );
+    
     // Trip Data.
     const { pricings } = tripData;
     const allPricings  = pricings && _.keyBy( pricings, p => p.id ) // Need object structure because pricing id may not be in sequencial order.
@@ -38,6 +53,7 @@ const RecurringRepeator = ( props ) =>  {
 
     let loadingClass = isLoading && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) ? 'wptravel-loading' : '';
     const { enable_time } = date;
+    recurringCount++;
     return <tr key={index} className={loadingClass}>
         <td class="tablebody-booking-pricings"  data-label={__i18n.bookings.pricings_list_label}>
             {/* _nomineePricings not updated in store/state because there are multiple _nomineePricings as per date so just a variable. */}

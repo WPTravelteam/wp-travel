@@ -143,6 +143,23 @@ function wptravel_book_now() {
 	update_post_meta( $booking_id, 'order_totals', $wt_cart->get_total() );
 	update_post_meta( $booking_id, 'wp_travel_pax', $total_pax );
 	update_post_meta( $booking_id, 'wp_travel_booking_status', 'pending' );
+
+	// update trip extras inventory
+	// if( isset( $items[array_key_first($items)]['trip_extras'] ) ){
+	// 	foreach( $items[array_key_first($items)]['trip_extras']['id'] as $key => $value ){
+	// 		$trip_extras =  array(
+	// 				'extras_item_description' => get_post_meta( intval( $value ), 'wp_travel_tour_extras_metas' )[0]['extras_item_description'],
+	// 				'extras_item_price' => get_post_meta( intval( $value ), 'wp_travel_tour_extras_metas' )[0]['extras_item_price'],
+	// 				'extras_item_sale_price' => get_post_meta( intval( $value ), 'wp_travel_tour_extras_metas' )[0]['extras_item_sale_price'],
+	// 				'extras_item_unit' => get_post_meta( intval( $value ), 'wp_travel_tour_extras_metas' )[0]['extras_item_unit'],
+	// 				'extras_item_quantity' => get_post_meta( intval( $value ), 'wp_travel_tour_extras_metas' )[0]['extras_item_quantity'],
+	// 				'extras_item_quantity_in_used' => strval( get_post_meta( intval( $value ), 'wp_travel_tour_extras_metas' )[0]['extras_item_quantity_in_used'] + $items[array_key_first($items)]['trip_extras']['qty'][$key] )
+	// 			); 
+
+	// 		update_post_meta( intval( $value ), 'wp_travel_tour_extras_metas', $trip_extras );
+	// 	}
+	// }
+
 	/**
 	 * Update Arrival and Departure dates metas.
 	 */

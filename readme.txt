@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 6.0.0
 Tested up to: 6.3
 Requires PHP: 7.4
-Stable tag: 7.4.0
+Stable tag: 7.5.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -43,7 +43,7 @@ Streamline your travel agency's operations and boost your online presence with W
 
 * **[Full Data Reporting](https://wptravel.io/docs/manage-booking/):** Data is very important for all businesses. WP Travel has an in-build booking stat that helps you to generate the report from different date ranges, types and locations.
 
-* **[Payment System](https://wptravel.io/downloads/category/payment/):** Currently we have Standard PayPal and Bank Deposit within the WP Travel free plugin and have thirteen additional payment gateway in WP Travel Pro plugins.
+* **[Payment System](https://wptravel.io/downloads):** Currently we have Standard PayPal and Bank Deposit within the WP Travel free plugin and have thirteen additional payment gateway in WP Travel Pro plugins.
 
 * **[Multiple pricing and Multiple dates](https://wptravel.io/add-multiple-fixed-departure-dates-with-different-prices/):** This feature allows you to add multiple pricing and multiple dates for a single trip.
 
@@ -283,9 +283,6 @@ Our range of exclusive WordPress payment plugins is specifically designed to sea
 
 * [View all WP Travel modules](https://wptravel.io/downloads/?utm_source=addons&utm_medium=viewall&utm_campaign=WP%20Plugin)
 
-= WP TRAVEL MAP MODULES =
-* [WP Travel Here Map](https://wptravel.io/downloads/wp-travel-here-map/)
-* [WP Travel Mapquest](https://wptravel.io/downloads/wp-travel-mapquest/)
 
 [View all WP Travel modules](https://wptravel.io/downloads/)
 
@@ -417,6 +414,22 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 7.5.0 =
+Release Date: 12th October  2023
+
+Fixes:
+* Fixed currency symbol missing in different emails.
+* Fixed update cart issue in the case of Minicart.
+* Fixed arrival and departure date issue on thakyou page and booking email template 
+
+Enhancements:
+* Added more taxonomy options in the search filter( By default, Search, Trip Type, and Location will be displayed.)        
+* Added hook for the empty cart message [wp_travel_cart_empty_message] 
+* Added check box for Privacy Policy on On-page booking
+* Fixed arival and departure date issue on thakyou page and booking email template 
+
+**For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v7-5-0-update-release-note).**
 
 = 7.4.0 =
 Release Date: 27th September 2023

@@ -121,7 +121,7 @@ export default () => {
         const cat  = typeof tripExtras[extId] != 'undefined' && tripExtras[extId] || 0;
         const extraCalculate = cat + 1;
 
-        if( quantity > 0 ){
+        if( typeof _wp_travel.WP_Travel_Trip_Extras_Inventory !== 'undefined' && quantity > 0 ){
             if( extraCalculate <= quantity ){
                 const priceCalulate = extSale == true ? extSalePrince * extraCalculate : extPrince * extraCalculate;
                 const newExtra = {...tripExtras, [extId] : extraCalculate }
@@ -305,8 +305,15 @@ export default () => {
                         
                             return typeof trpsExtras != 'undefined' && trpsExtras.length > 0 && trpsExtras.includes( extraIds.toString() ) && <>
                              <div className="wptrave-on-page-booking-cart-update-field" key={extraIndex *20 }>
-                            <label>{extraTitles} { tour_extras_metas.extras_item_quantity > 0 && <>( {tripExtras[extraIds]} / {tour_extras_metas.extras_item_quantity} )</>} </label>
-                            <span className="item-price"><span dangerouslySetInnerHTML={{ __html: wpTravelFormat( extras_item_price ) }}></span>/{unit}</span>
+                             {	
+                                ( typeof _wp_travel.WP_Travel_Trip_Extras_Inventory !== 'undefined' && tour_extras_metas.extras_item_quantity != -1 ) &&
+                                <>
+                                    <label>{extraTitles} { tour_extras_metas.extras_item_quantity > 0 && <>( {tripExtras[extraIds]} / {tour_extras_metas.extras_item_quantity} )</>} </label>
+                                </>
+                                ||
+                                <label>{extraTitles}</label>
+                            }	
+                            <span className="item-price">{ is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat( extras_item_price ) } }></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat( sale_price ) }}></span>/{unit}</span>
                             
                             <div className="wp-travel-on-page-cart-update-button">
 

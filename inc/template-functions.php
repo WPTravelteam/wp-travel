@@ -1148,7 +1148,6 @@ function wptravel_frontend_trip_facts( $trip_id ) {
 							?>
 							<span class="tour-info-item tour-info-type">
 								<?php WpTravel_Helpers_Icon::get( $icon_args ); ?>
-								<!-- <i class="<?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i> -->
 								<strong><?php echo esc_html( $label ); ?></strong>:
 								<?php
 								if ( 'multiple' === $trip_fact['type'] ) {

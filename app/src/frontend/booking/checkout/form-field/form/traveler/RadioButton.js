@@ -26,7 +26,7 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
                         id={id} 
                         key={index}
                         defaultChecked={typeof travelerValue[pxKey] != 'undefined' && travelerValue[pxKey] == val ? true : false} 
-                        value={val}
+                        value={options[val]}
                         className={ typeof wrapper_class != undefined && wrapper_class || ''}
                         onChange={ ( e ) => {
                             const value = e.target.value

@@ -2618,6 +2618,37 @@ $primaryColor: #3399ff;
 	font-weight: bold;
     margin-left: 10px;
 }
+
 #faq .collapse.show{
 	display: block;
+}
+
+
+.wp-travel-advanced-gallery-items-list .slick-next:before, 
+.wp-travel-advanced-gallery-items-list .slick-prev:before {
+  font-size: 30px;
+  line-height: 1;
+  color: #000;
+  opacity: .75;
+}
+
+.wp-travel-advanced-gallery-items-list .slick-prev {
+  left: 0px;
+  z-index: 1;
+}
+
+.wp-travel-advanced-gallery-items-list .slick-next {
+  right: 8px;
+  z-index: 1;
+}
+
+.wp-travel-advanced-gallery-items-list .slick-dots li button:before {
+    content: "•";
+    width: 30px;
+    height: 30px;
+    font-size: 10px;
+}
+
+.wp-travel-advanced-gallery-items-list .slick-dots {
+    bottom: -10px;
 }

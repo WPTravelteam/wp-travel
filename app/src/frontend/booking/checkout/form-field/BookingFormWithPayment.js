@@ -18,6 +18,8 @@ import CouponApplyAmount from "./booking/CouponApplyAmount"
 
 const i18n = _wp_travel.strings;
 
+console.log( _wp_travel );
+
 export default () => {
     const [loaders, setLoaders] = useState(false)
     const [couponError, setCouponError] = useState('')
@@ -131,7 +133,25 @@ export default () => {
                 })}
                 { wp_travel_booking_option == "booking_with_payment"&& selected_payment == 'bank_deposit' && <BankDetail />}
                 { wp_travel_booking_option == 'booking_with_payment' && typeof payment_select != 'undefined' && typeof payment_select.wp_travel_payment_gateway != 'undefined' && payment_select.wp_travel_payment_gateway == 'stripe' && <div className="wptravel-single-page-stripcheckout"><label> {wp_travel.strip_card }</label><div id="card-element"></div> </div>}
-                
+                {
+                    <div id="onpage-privacy-policy" className="wptravel-onepage-payment-total-trip-price">
+                        <div className="components-panel__body is-opened wptrave-on-page-booking-price-with-coupon wptrave-onpage-price-calculation">
+                            <div className="components-panel__row">
+                                <label for="wp-travel-enquiry-gdpr-msg">
+                                    { __( 'Privacy Policy', 'wp-travel' ) }											
+                                    <span className="required-label">*</span>
+                                </label>
+                                <div className="radio-checkbox-label">
+                                    <input type="checkbox" name="wp_travel_checkout_gdpr_msg[]" required="1" value="By contacting us, you agree to our  Privacy Policy" data-parsley-required="1" data-parsley-errors-container="#error_container-wp-travel-enquiry-gdpr-msg" data-parsley-multiple="wp_travel_checkout_gdpr_msg" />
+                                        <span>{ __( 'By contacting us, you agree to our', 'wp-travel' ) }</span>  
+                                        <a href="http://main.test/privacy-policy/"><span>{ __( 'Privacy Policy', 'wp-travel' ) }</span></a>
+                                </div>		
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                }
                 { <input type="hidden" id="wp-travel-partial-payment" value={partial_enable} name="wp_travel_is_partial_payment" /> }
                 <input type="hidden" value={_wp_travel._nonce} name="_nonce" />
                 <input type="hidden" value={ partial_enable == 'yes' && wp_travel_payment_mode == 'partial' ? partial_amount : trip_price } name="onpage-trip_price" id="onpage-trip_price" />
@@ -145,6 +165,7 @@ export default () => {
                         ||  wp_travel_booking_option == "booking_with_payment" && selected_payment == 'authorizenet' && applyFilters( 'wptravel_booking_button_payment_auth', [<div><input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value={i18n.set_book_now} disabled /></div>], bookingData )
                         ||  wp_travel_booking_option == "booking_with_payment" && selected_payment == 'express_checkout' && applyFilters( 'wptravel_booking_button_payment_express_checkout', [<div><input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value={i18n.set_book_now} disabled /></div>], bookingData )  
                         ||  wp_travel_booking_option == "booking_with_payment" && selected_payment == 'stripe_ideal' && applyFilters( 'wptravel_booking_button_payment_ideal_checkout', [<div><input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value={i18n.set_book_now} disabled /></div>], bookingData )  
+                        ||  wp_travel_booking_option == "booking_with_payment" && selected_payment == 'payu' && <div><input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value={ __( 'Pay with PayU', 'wp-travel' ) }/></div>  
                         ||  wp_travel_booking_option == "booking_with_payment" && ( selected_payment == 'bank_deposit' || selected_payment == 'paypal' ) && <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value={i18n.book_n_pay} />
                         ||  wp_travel_booking_option == "booking_with_payment" && ( typeof selected_payment == 'undefined' || selected_payment == '' ) && <div><input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value={i18n.set_book_now} onClick={ e => handlingForm(e) } /></div> 
                         || wp_travel_booking_option == "booking_only" && <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value={i18n.set_book_now} />
@@ -165,6 +186,7 @@ export default () => {
                     return <div key={indexs} >{billValue != '' && <BillingHiddenField names={keyList} values={billingData[keyList]} />}</div>
 
                 })}
+                
                 <input type="hidden" value={_wp_travel._nonce} name="_nonce" />
                 <div style={{display:"flex", justifyContent:"space-between"}}>
                     <button className="wptravel-onpage-booking-back-buttons" onClick={ () => { 

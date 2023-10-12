@@ -36,6 +36,9 @@ class WpTravel_Helpers_Booking {
 		if ( ! $items ) {
 			return;
 		}
+
+		// var_dump( $items  );
+		// die;
 		
 		ob_start();
 		?>
@@ -60,8 +63,10 @@ class WpTravel_Helpers_Booking {
 					$title          = get_the_title( $trip_id );
 					$pax            = 0;
 
-					$arrival_date   = isset( $trip['arrival_date'] ) && ! empty( $trip['arrival_date'] ) ? wptravel_format_date( $trip['arrival_date'] ) : '';
-
+					$arrival_date   = isset( $trip['departure_date'] ) && ! empty( $trip['departure_date'] ) ? wptravel_format_date( $trip['departure_date'] ) : '';
+					
+					$start_date   = isset( $trip['arrival_date'] ) && ! empty( $trip['arrival_date'] ) ? wptravel_format_date( $trip['arrival_date'] ) : '';
+					$end_date   = isset( $trip['departure_date'] ) && ! empty( $trip['departure_date'] ) ? wptravel_format_date( $trip['departure_date'] ) : '';
 					/**
 					 * Fix for active date format that skips character.
 					 * Coverts original date instead of date from active date format to DateTime object.
@@ -98,7 +103,7 @@ class WpTravel_Helpers_Booking {
 										}
 										$pax = $pax + $t['pax'];
 									?>
-										<span class="my-order-price-detail">(<?php echo esc_html( $t['pax'] ) . ' ' . $t['custom_label'] . ' x ' . wptravel_get_formated_price_currency( $t['price'], false, '', $booking_id ); ?>) <?php echo $t['pax'] * $t['price'] ;?> </span>
+										<span class="my-order-price-detail">(<?php echo esc_html( $t['pax'] ) . ' ' . $t['custom_label'] . ' x ' . wptravel_get_formated_price_currency( $t['price'], false, '', $booking_id ); ?>) <?php echo wptravel_get_formated_price_currency( $t['pax'] * $t['price'], false, '', $booking_id ); //@phpcs:ignore ?></span>
 									<?php endforeach; ?>
 								<?php endif; ?>
 							</span>
@@ -137,17 +142,28 @@ class WpTravel_Helpers_Booking {
 							?>
 						</td>
 						<td><?php echo apply_filters( 'wp_travel_booking_mail_pax_val', esc_html( $pax ), $booking_id ); ?></td>
+					
 						<?php if( !$trip_data['is_fixed_departure'] ): ?>
-							<?php if( isset( $trip_data['trip_duration']["duration_format"] ) && $trip_data['trip_duration']["duration_format"] == 'day_night' ): ?>
-								<td><?php echo esc_html( $arrival_date ); ?></td>
-								<td><?php echo esc_html( wptravel_format_date( $departure_date ) ); ?></td>
+							<?php if( isset( $trip_data['trip_duration']["duration_format"] ) && $trip_data['trip_duration']["duration_format"] == 'hour_minute' ): ?>
+								<td><?php echo esc_html( $start_date ); ?></td>
+								<td><?php echo esc_html( $start_date ); ?></td>
 								<?php else: ?>
-								<td><?php echo esc_html( $arrival_date ); ?></td>
-								<td><?php echo esc_html( $arrival_date ); ?></td>
+								<td><?php echo esc_html( $start_date ); ?></td>
+								<td><?php echo esc_html( wptravel_format_date( $departure_date ) ); ?></td>
 							<?php endif; ?>
 							<?php else: ?>
-								<td><?php echo esc_html( $arrival_date ); ?></td>
-								<td></td>
+								<td><?php echo esc_html( $start_date ); ?></td>
+								<?php if( isset( $trip_data['dates'] ) && $trip_data['dates'][0]['is_recurring'] == false ): ?>
+									<td><?php echo esc_html( $end_date ); ?></td>
+									<?php else: ?>
+									<td>
+										<?php if( $trip_data['trip_duration']['days'] ): ?>
+											<?php echo esc_html( $departure_date ); ?>
+											<?php else: ?>
+												<?php echo __( 'N\A', 'wp-travel' ); ?>
+										<?php endif; ?>
+									</td>
+								<?php endif; ?>
 						<?php endif; ?>
 					</tr>
 

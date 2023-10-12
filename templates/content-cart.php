@@ -306,3 +306,5 @@ wptravel_print_notices();
 	</form>
 </div>
 <?php
+
+
