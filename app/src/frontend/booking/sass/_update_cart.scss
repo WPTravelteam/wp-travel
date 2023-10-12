@@ -300,52 +300,6 @@
 	// 	}
 	// }
 
-	/**
-	* Added toast styles
-	*
-	* @since 7.5.0
-	*/
-	#wp-travel__add-to-cart_notice {
-        display: none;
-        position: fixed;
-        right: 20px;
-        top: 45px;
-        background: white;
-        padding: 30px;
-        border-radius: 10px;
-        max-width: 450px;
-        box-shadow: 0 0 10px 3px rgba(0,0,0,0.05);
-        overflow: hidden;
-        gap: 50px;
-        align-items: center;
-		z-index: 999;
-
-        &.success {
-            display: flex;
-            
-            #wp-travel__notice_time-bar {
-                height: 5px;
-                background-color: green;
-                width: 100%;
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                animation: slide-out 8s forwards linear;
-            }
-        }
-
-        #toast-close {
-            cursor: pointer;
-        }
-
-        span {
-            i {
-                margin-right: 5px;
-                color: rgb(22, 153, 22);
-            }
-        }
-    }
-
 	.wp-travel-single-trip-add-to-cart {
 		display: flex;
 		flex-direction: row-reverse;
@@ -405,6 +359,52 @@
 			display: inline-block;
 			border-radius: 5px;
 			cursor: pointer;
+		}
+	}
+}
+
+/**
+* Added toast styles
+*
+* @since 7.5.0
+*/
+#wp-travel__add-to-cart_notice {
+	display: none;
+	position: fixed;
+	right: 20px;
+	top: 45px;
+	background: white;
+	padding: 30px;
+	border-radius: 10px;
+	max-width: 450px;
+	box-shadow: 0 0 10px 3px rgba(0,0,0,0.05);
+	overflow: hidden;
+	gap: 50px;
+	align-items: center;
+	z-index: 999;
+
+	&.success {
+		display: flex;
+		
+		#wp-travel__notice_time-bar {
+			height: 5px;
+			background-color: green;
+			width: 100%;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			animation: slide-out 8s forwards linear;
+		}
+	}
+
+	#toast-close {
+		cursor: pointer;
+	}
+
+	span {
+		i {
+			margin-right: 5px;
+			color: rgb(22, 153, 22);
 		}
 	}
 }
