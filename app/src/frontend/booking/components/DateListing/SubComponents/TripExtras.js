@@ -116,6 +116,7 @@ const TripExtras = ( props ) => {
 											}
 										</a>
 									</div>
+									{ console.log( tripExtrasStock ) }
 									{ console.log( tripExtrasStock[tx.id] ) }
 									{ console.log( tx.tour_extras_metas.extras_item_quantity ) }
 									{	
