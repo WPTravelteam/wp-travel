@@ -116,6 +116,7 @@ const TripExtras = ( props ) => {
 											}
 										</a>
 									</div>
+									{ console.log( tripExtrasStock[tx.id] ) }
 									{	
 										( typeof _wp_travel.WP_Travel_Trip_Extras_Inventory !== 'undefined' && tx.tour_extras_metas.extras_item_quantity != -1 ) &&
 										<>
