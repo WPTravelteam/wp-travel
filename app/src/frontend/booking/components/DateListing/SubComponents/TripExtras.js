@@ -121,7 +121,7 @@ const TripExtras = ( props ) => {
 									{	
 										( typeof _wp_travel.WP_Travel_Trip_Extras_Inventory !== 'undefined' && tx.tour_extras_metas.extras_item_quantity != -1 ) &&
 										<>
-											<span className='trip-extra-quantity'>( {_count} / { tx.tour_extras_metas.extras_item_quantity - tripExtrasStock[tx.id] } )</span>
+											<span className='trip-extra-quantity'>( {_count} / { tx.tour_extras_metas.extras_item_quantity - ( typeof tripExtrasStock[tx.id] !== 'undefined' ? tripExtrasStock[tx.id] : 0 ) } )</span>
 										</>
 									}									
 								</div>
@@ -130,9 +130,9 @@ const TripExtras = ( props ) => {
 									
 									<div className="pricing-area">
 										<div className="qty-spinner">
-											<button onClick={ handleClick( i, -1, ( tx.tour_extras_metas.extras_item_quantity - tripExtrasStock[tx.id] ) ) }>-</button>
+											<button onClick={ handleClick( i, -1, ( tx.tour_extras_metas.extras_item_quantity - ( typeof tripExtrasStock[tx.id] !== 'undefined' ? tripExtrasStock[tx.id] : 0 ) ) ) }>-</button>
 											<span>{_count}</span>
-											<button onClick={ handleClick( i, 1, ( tx.tour_extras_metas.extras_item_quantity - tripExtrasStock[tx.id] ) ) }>+</button>
+											<button onClick={ handleClick( i, 1, ( tx.tour_extras_metas.extras_item_quantity - ( typeof tripExtrasStock[tx.id] !== 'undefined' ? tripExtrasStock[tx.id] : 0 ) ) ) }>+</button>
 										</div>
 									</div>
 								</div>
