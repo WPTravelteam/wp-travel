@@ -117,7 +117,7 @@ const TripExtras = ( props ) => {
 										</a>
 									</div>
 									{	
-										( typeof _wp_travel.WP_Travel_Trip_Extras_Inventory !== 'undefined' && tx.tour_extras_metas.extras_item_quantity != -1 && typeof tripExtrasStock[tx.id] !== 'undefined' ) &&
+										( typeof _wp_travel.WP_Travel_Trip_Extras_Inventory !== 'undefined' && tx.tour_extras_metas.extras_item_quantity != -1 ) &&
 										<>
 											<span className='trip-extra-quantity'>( {_count} / { tx.tour_extras_metas.extras_item_quantity - tripExtrasStock[tx.id] } )</span>
 										</>
