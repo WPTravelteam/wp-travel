@@ -220,8 +220,8 @@ const PaxSelector = ( props ) => {
 			
 									<input  className='wp-trave-pax-selected-frontend-second' 
 										value={typeof paxCounts[c.id] == 'undefined' ? parseInt(c.default_pax) : paxCounts[c.id]} 
-										onChange={ ( essdfdsf ) => {
-											handlePaxChangeInput( c.id, essdfdsf )
+										onChange={ ( data ) => {
+											handlePaxChangeInput( c.id, data )
 									}} />
 									<button onClick={handlePaxChange(c.id, 1, maxPax )}>+</button>
 								</div>

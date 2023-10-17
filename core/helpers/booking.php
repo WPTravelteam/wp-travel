@@ -27,6 +27,7 @@ class WpTravel_Helpers_Booking {
 		}
 		global $wt_cart;
 		$items = $wt_cart->getItems();
+		$coupon_applied = false;
 
 		
 		if ( ! $items ) {
@@ -37,9 +38,6 @@ class WpTravel_Helpers_Booking {
 			return;
 		}
 
-		// var_dump( $items  );
-		// die;
-		
 		ob_start();
 		?>
 		<h2 class="wp-travel-order-heading"><?php esc_html_e( 'Booking Details', 'wp-travel' ); ?></h2>
@@ -166,13 +164,32 @@ class WpTravel_Helpers_Booking {
 								<?php endif; ?>
 						<?php endif; ?>
 					</tr>
-
+					
 					<?php
+				}
+				if( isset( $trip['discount_type'] ) ){
+					$coupon_applied = true;
+					$coupon_type = $trip['discount_type'];
+					$coupon_code = $trip['coupon_code'];
+					$coupon_value = $trip['discount'];
 				}
 				?>
 			</tbody>
 		</table>
+		
 		<?php
+		if( $coupon_applied ){
+		?>
+			<h4><?php esc_html_e( 'Coupon Applied', 'wp-travel-pro' ); ?></h4>
+			<p><b><?php esc_html_e( 'Coupon Code:', 'wp-travel-pro' ); ?></b> <?php echo esc_html($coupon_code); ?></p>
+			<?php if( $coupon_type == 'percentage' ): ?>
+				<p><b><?php esc_html_e( 'Discount:', 'wp-travel-pro' ); ?></b> <?php echo esc_html($coupon_value); ?> <?php esc_html_e( 'Percentage', 'wp-travel-pro' ); ?></b></p>
+				<?php else: ?>
+				<p><b><?php esc_html_e( 'Discount:', 'wp-travel-pro' ); ?></b> <?php echo wptravel_get_formated_price_currency( $coupon_value, false, '', $booking_id ); //@phpcs:ignore ?></p>
+			<?php endif; ?>
+			</br>
+		<?php }
+
 		$content = ob_get_contents();
 
 		ob_end_clean();

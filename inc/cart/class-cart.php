@@ -537,6 +537,13 @@ class WP_Travel_Cart {
 				} elseif ( 'percentage' === $discount_type ) {
 					$discount_amount = ( $item_total * $discount_value ) / 100;
 				}
+				$this->items[ $cart_item_id ]['coupon_code'] = $coupon_code; 
+				$this->items[ $cart_item_id ]['discount_type'] = $discount_type;
+				if ( 'fixed' === $discount_type ) {
+					$this->items[ $cart_item_id ]['discount_price'] = WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $discount_value );
+				} elseif ( 'percentage' === $discount_type ) {
+					$this->items[ $cart_item_id ]['discount_percentage'] = $discount_value;
+				}
 				$this->items[ $cart_item_id ]['discount'] = $discount_amount;  // Discount amount applied to individual trip total.
 			}
 		}
