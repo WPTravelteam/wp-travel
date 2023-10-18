@@ -1,5 +1,7 @@
 import { __ } from '@wordpress/i18n'
 import DiscountTable from '../../CalendarView/_GroupDiscountTable';
+import { useState, useEffect } from "@wordpress/element";
+import apiFetch from '@wordpress/api-fetch';
 
 import _ from 'lodash';
 const __i18n = {
@@ -22,6 +24,21 @@ const PaxSelector = ( props ) => {
 
     // Booking Data.
     const { selectedDate, selectedDateIds, selectedPricingId, excludedDateTimes, pricingUnavailable, inventory, paxCounts } = bookingData;
+
+
+	var tripID = tripData.id;
+	var tripDepartureDate = moment(moment(bookingData.selectedDate).format('YYYY-MM-DD'))._i.replace( '-', '_' ).replace( '-', '_' );
+
+	const[ tripPaxStock, setTripPaxStock ] = useState( [] );
+
+	if( typeof _wp_travel.WP_Travel_Trip_Extras_Inventory !== 'undefined' ){
+		useEffect( () => {			
+			apiFetch( { path: '/wptravelgettripindividual_pricing_category_paxstock/v1/tripindividual_pricing_category_paxStock/'+tripDepartureDate+'seperate'+tripID+'?key='+Math.random().toString(36).substring(2,7), method: 'GET' } ).then( ( response ) => {
+				setTripPaxStock( response )
+			} )
+		}, [] );
+	}
+
 
 	/**]
 	 * @param categoryId This is to return price as per category id
@@ -102,7 +119,6 @@ const PaxSelector = ( props ) => {
 
 		// @since v7.4.0
 		if( tripData.enable_pax_all_pricing == "1" ){
-			console.log( '.............' )
 			if( count > tripPax ){
 				count = tripPax
 				if (e.target.parentElement.querySelector('.error'))
@@ -180,7 +196,7 @@ const PaxSelector = ( props ) => {
 	return <div className="wp-travel-booking__pax-selector-wrapper">
 		<h4>{__i18n.bookings.booking_tab_pax_selector}</h4>
 		<ul className="wp-travel-booking__trip-option-list">
-			{
+			{	
 				categories.map((c, i) => {
 					let price = getCategoryPrice(c.id, true );
 					if ( 'undefined' == typeof c.term_info ) { // Fixes : index title of undefined.
@@ -203,7 +219,11 @@ const PaxSelector = ( props ) => {
 					    _inventory = inventory.find(i => i.date === moment(recurrindDate).format('YYYY-MM-DD[T]HH:mm')); // selectedDate : date along with time.
 						maxPax = isInventoryEnabled && _inventory && _inventory.pax_available && selectedDateIds.includes( date.id ) ? _inventory.pax_available : pricing.max_pax; // Temp fixes for inventory disabled case.
 					}
-
+					
+					if( typeof _wp_travel.WP_Travel_Trip_Extras_Inventory !== 'undefined' ){ 
+						maxPax = pricing.max_pax - ( typeof tripPaxStock[c.term_info.title] !== 'undefined' ? tripPaxStock[c.term_info.title] : 0 )
+					}
+					
 					return <li key={i}>
 						<div className="text-left">
 							<strong>

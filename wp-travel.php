@@ -862,3 +862,23 @@ function wptravel() {
 
 // Start WP Travel.
 wptravel();
+
+$args = array(
+	'post_type'  => 'itinerary-booking',
+	'meta_query' => array(
+		'relation' => 'AND',
+		array(
+			'key'   => 'wp_travel_arrival_date',
+			'value' => '2023-10-21',
+		),
+		array(
+			'key'   => 'wp_travel_post_id',
+			'value' => '490',
+		)
+	)
+);
+$bookingList = get_posts( $args );
+
+// echo "<pre>";
+// var_dump( get_post_meta( 581, 'order_items_data' )[0][array_key_first( get_post_meta( 581, 'order_items_data' )[0])]['trip'] );
+// die;
