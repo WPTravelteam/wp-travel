@@ -86,6 +86,8 @@ class WpTravel_Helpers_Booking {
 						$pricing_title = isset( $pricing['title'] ) ? $pricing['title'] : $pricing[0]['title'];
 					}
 
+					$pax_price_total = 0;
+					$extras_price_total = 0;
 					?>
 					<tr>
 						<td>
@@ -100,6 +102,7 @@ class WpTravel_Helpers_Booking {
 											continue;
 										}
 										$pax = $pax + $t['pax'];
+										$pax_price_total = $pax_price_total + ( $t['pax'] * $t['price'] );
 									?>
 										<span class="my-order-price-detail">(<?php echo esc_html( $t['pax'] ) . ' ' . $t['custom_label'] . ' x ' . wptravel_get_formated_price_currency( $t['price'], false, '', $booking_id ); ?>) <?php echo wptravel_get_formated_price_currency( $t['pax'] * $t['price'], false, '', $booking_id ); //@phpcs:ignore ?></span>
 									<?php endforeach; ?>
@@ -126,6 +129,8 @@ class WpTravel_Helpers_Booking {
 											$qty   = isset( $extras['qty'][ $k ] ) && $extras['qty'][ $k ] ? $extras['qty'][ $k ] : 1;
 
 											$total = $price * $qty;
+
+											$extras_price_total = $extras_price_total + ( $price * $qty );
 											?>
 											<div class="my-order-price-breakdown-additional-service-item clearfix">
 												<span class="my-order-head"><?php echo esc_html( get_the_title( $extra_id ) ); ?> (<?php echo esc_attr( $qty ) . ' x ' . wptravel_get_formated_price_currency( $price, false, '', $booking_id ); ?>)</span>
@@ -174,20 +179,27 @@ class WpTravel_Helpers_Booking {
 					$coupon_value = $trip['discount'];
 				}
 				?>
-			</tbody>
-		</table>
+			
 		
 		<?php
 		if( $coupon_applied ){
-		?>
-			<h4><?php esc_html_e( 'Coupon Applied', 'wp-travel-pro' ); ?></h4>
-			<p><b><?php esc_html_e( 'Coupon Code:', 'wp-travel-pro' ); ?></b> <?php echo esc_html($coupon_code); ?></p>
-			<?php if( $coupon_type == 'percentage' ): ?>
-				<p><b><?php esc_html_e( 'Discount:', 'wp-travel-pro' ); ?></b> <?php echo esc_html($coupon_value); ?> <?php esc_html_e( 'Percentage', 'wp-travel-pro' ); ?></b></p>
-				<?php else: ?>
+		?>	
+			<tr>
+				<th colspan="4"><h4><?php esc_html_e( 'Coupon Applied', 'wp-travel-pro' ); ?></h4></th>
+			</tr>
+
+			<tr>
+				<td colspan="2"><p><b><?php esc_html_e( 'Coupon Code:', 'wp-travel-pro' ); ?></b> <?php echo esc_html($coupon_code); ?></p></td>
+				<td>
 				<p><b><?php esc_html_e( 'Discount:', 'wp-travel-pro' ); ?></b> <?php echo wptravel_get_formated_price_currency( $coupon_value, false, '', $booking_id ); //@phpcs:ignore ?></p>
-			<?php endif; ?>
-			</br>
+				</td>
+				<td>
+					<p><b><?php esc_html_e( 'Net Total:', 'wp-travel-pro' ); ?></b><?php echo wptravel_get_formated_price_currency( ( $extras_price_total + $pax_price_total) - $coupon_value, false, '', $booking_id ); //@phpcs:ignore ?></b></p>										
+				</td>
+			</tr>
+			
+			</tbody>
+		</table>
 		<?php }
 
 		$content = ob_get_contents();

@@ -501,7 +501,7 @@ class WP_Travel_Admin_Booking {
 		// Updating booking status.
 		$booking_status = isset( $_POST['wp_travel_booking_status'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_booking_status'] ) ) : 'pending';
 		$mail_sending_payment_status = apply_filters( 'wp_travel_change_payment_status_mail_sending', true );
-		$mail_sending_booking_status = apply_filters( 'wp_travel_change_booking_status_mail_sending', true );
+		$mail_sending_booking_status = apply_filters( 'wp_travel_change_booking_status_mail_sending', false );
 		$payment_status = isset( $_POST['wp_travel_payment_status'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_payment_status'] ) ) : 'N/A';
 		$payment_status_change = sanitize_text_field( $payment_status );
 		$old_payment_status = get_post_meta( $booking_id, 'wp_travel_payment_status' );

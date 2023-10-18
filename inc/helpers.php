@@ -3591,19 +3591,11 @@ function wptravel_get_fixed_departure_date( $trip_id ) {
 							<?php
 							if ( 0 === $index ) {
 								?>
-									<div class="dropbtn"><?php echo esc_html( date_i18n( $date_format, strtotime( $date ) ) ); ?></div> <!--selected -->
-									<!-- loop wrapper -->
-									<div class="dropdown-content"> 
+									<div class="dropbtns"><?php echo esc_html( date_i18n( $date_format, strtotime( $date ) ) ); ?></div> <!--selected -->
+									
 									<?php
 							}
-							?>
-								<span class="dropdown-list"> <?php echo esc_html( date_i18n( $date_format, strtotime( $date ) ) ); ?></span>
-								<?php
-								if ( count( $available_dates ) === ( $index + 1 ) ) {
-									?>
-									</div> <!-- /loop wrapper -->
-									<?php
-								}
+				
 						}
 					}
 					?>
