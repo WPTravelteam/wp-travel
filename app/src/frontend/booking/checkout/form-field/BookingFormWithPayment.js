@@ -18,7 +18,7 @@ import CouponApplyAmount from "./booking/CouponApplyAmount"
 
 const i18n = _wp_travel.strings;
 
-console.log( _wp_travel );
+
 
 export default () => {
     const [loaders, setLoaders] = useState(false)
