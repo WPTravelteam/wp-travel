@@ -108,6 +108,7 @@ const SaveSettings = (props) => {
                 </div>
             </PanelRow>
         }
+
         {'bottom' == props.position &&
             <>
                 { _wp_travel.is_pro_enable == "no" &&
