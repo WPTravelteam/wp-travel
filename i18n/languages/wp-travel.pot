@@ -1359,9 +1359,10 @@ msgstr ""
 msgid "Routing Number"
 msgstr ""
 
-#: core/helpers/strings.php:240 inc/template-functions.php:874
+#: core/helpers/strings.php:262
 msgid "Add to Cart"
 msgstr ""
+
 
 #: core/helpers/strings.php:262
 msgid "Start"
@@ -1383,6 +1384,14 @@ msgstr ""
 
 #: core/helpers/strings.php:266
 msgid "Group (Min-Max)"
+msgstr ""
+
+#: core/helpers/strings.php:43
+msgid "Select Date and Pricing Options for this trip in the Trip Options setting."
+msgstr ""
+
+#: core/helpers/strings.php:255
+msgid "Add to Cart"
 msgstr ""
 
 #: core/helpers/strings.php:267
