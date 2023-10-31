@@ -871,7 +871,7 @@ function wptravel_single_excerpt( $trip_id ) {
 			$trip_enquiry_text = isset( $strings['trip_enquiry'] ) ? $strings['trip_enquiry'] : __( 'Trip Enquiry', 'wp-travel' );
 			$book_now_text     = isset( $strings['featured_book_now'] ) ? $strings['featured_book_now'] : __( 'Book Now', 'wp-travel' );
 			if ( wp_travel_add_to_cart_system() ) {
-				$book_now_text = apply_filters( 'wp_travel_add_to_cart_text', __('Add to Cart', 'wp-travel' ) );
+				$book_now_text = isset( $strings['set_add_to_cart'] ) ? $strings['set_add_to_cart'] : __( 'Add to Cart', 'wp-travel' );
 			}
 			if ( 'custom-booking' === $pricing_type && 'custom-link' === $booking_type && $custom_link ) :
 				?>
