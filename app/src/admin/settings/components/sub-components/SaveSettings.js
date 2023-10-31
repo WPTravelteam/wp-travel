@@ -109,9 +109,91 @@ const SaveSettings = (props) => {
             </PanelRow>
         }
         {'bottom' == props.position &&
-            <div className="wp-travel-setting-system-info">
-                <a href={sysInfoUrl} title={__i18n.view_system_information} ><span className="dashicons dashicons-info"></span>{__i18n.system_information}</a>
-            </div>
+            <>
+                { _wp_travel.is_pro_enable == "no" &&
+                    <div id="wptravel-pro-interface">
+                        <div class="wptravel-pro-interace-container">
+                            <div class="wptravel-pro-upsell-head">
+                                <h2 class="wptravel-pro-head-title">Upgrade to WP Travel Pro</h2>
+                            </div>
+                            <div class="wptravel-pro-upsell-body">
+                                <div class="wptravel-pro-body-legend">
+                                    <span>Premium Offerings</span>
+                                </div>
+                                <div class="wptravel-pro-upsell-content">
+                                    <div class="wptravel-pro-features-highlight">
+                                        <ul>
+                                            <li>
+                                                <i class="fa fa-check"></i>
+                                                <span>
+                                                    <strong>WP Travel Downloads: </strong>Allows users to download files
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-check"></i>
+                                                <span><strong>Multiple Currency: </strong>Set currency of your choice</span>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-check"></i>
+                                                <span><strong>Download Itinerary: </strong>Get trips(itineraries) in PDF</span>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-check"></i>
+                                                <span><strong>Multiple Cart</strong></span>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-check"></i>
+                                                <span><strong>Tour Extras: </strong>Extra services in fair packages</span>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-check"></i>
+                                                <span><strong>Group Discount: </strong>Discount tailored to group size</span>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-check"></i>
+                                                <span><strong>Travel Guide: </strong>Display Travel representatives</span>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-check"></i>
+                                                <span><strong>Google Calendar integration</strong></span>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-check"></i>
+                                                <span><strong>Get E-mail Support</strong></span>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-check"></i>
+                                                <span><strong>Send Invoice containing PDF</strong></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="wptravel-pro-pricing-box-wrap">
+                                        <div class="wptravel-pro-pricing-box">
+                                            <div class="wptravel-pro-label-wrapper">
+                                                <p class="wptravel-pro-starting-label">Starting From</p>
+                                                <div class="wptravel-pro-price">
+                                                    <span class="currency">$</span>
+                                                    <span class="number">99.99</span>
+                                                    <abbr title="United States Dollar">USD</abbr>
+                                                </div>
+                                            </div>
+                                            <a href="https://wptravel.io/wp-travel-pro" target="_blank">
+                                                <button class="wptravel-pro-btn-goto-pricing">
+                                                    <span>Get WP Travel Pro</span>
+                                                    <i class="fas fa-arrow-right"></i>
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div className="wp-travel-setting-system-info">
+                    <a href={sysInfoUrl} title={__i18n.view_system_information} ><span className="dashicons dashicons-info"></span>{__i18n.system_information}</a>
+                </div>
+            </>
         }
     </>
 }
