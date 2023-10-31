@@ -3552,7 +3552,6 @@ function wptravel_get_fixed_departure_date( $trip_id ) {
 			$trip_pricing_options = wptravel_get_trip_pricings_with_dates( $trip_id );
 		}
 		if ( is_array( $trip_pricing_options ) && count( $trip_pricing_options ) > 0 ) {
-
 			if ( $react_version_enabled ) { // @since 4.0.3
 				$dates = wptravel_get_trip_available_dates( $trip_id );
 			} else {
@@ -3567,7 +3566,7 @@ function wptravel_get_fixed_departure_date( $trip_id ) {
 					}
 				endforeach;
 			}
-			$dates = array_unique( wptravel_get_trip_available_dates( $trip_id ) );
+			$dates = array_unique( $dates );
 			usort( $dates, 'wptravel_date_sort' );
 			$show_multiple = apply_filters( 'wp_travel_show_multiple_fixed_departure_dates', true );
 
@@ -3578,7 +3577,6 @@ function wptravel_get_fixed_departure_date( $trip_id ) {
 					$available_dates[] = $date;
 				}
 			}
-
 			if ( $show_multiple && count( $available_dates ) > 1 ) {
 				?>
 				<div class="fixed-date-dropdown">
@@ -3591,11 +3589,19 @@ function wptravel_get_fixed_departure_date( $trip_id ) {
 							<?php
 							if ( 0 === $index ) {
 								?>
-									<div class="dropbtns"><?php echo esc_html( date_i18n( $date_format, strtotime( $date ) ) ); ?></div> <!--selected -->
-									
+									<div class="dropbtn"><?php echo esc_html( date_i18n( $date_format, strtotime( $date ) ) ); ?></div> <!--selected -->
+									<!-- loop wrapper -->
+									<div class="dropdown-content"> 
 									<?php
 							}
-				
+							?>
+								<span class="dropdown-list"> <?php echo esc_html( date_i18n( $date_format, strtotime( $date ) ) ); ?></span>
+								<?php
+								if ( count( $available_dates ) === ( $index + 1 ) ) {
+									?>
+									</div> <!-- /loop wrapper -->
+									<?php
+								}
 						}
 					}
 					?>

@@ -1360,11 +1360,6 @@ msgid "Routing Number"
 msgstr ""
 
 #: core/helpers/strings.php:262
-msgid "Add to Cart"
-msgstr ""
-
-
-#: core/helpers/strings.php:262
 msgid "Start"
 msgstr ""
 
