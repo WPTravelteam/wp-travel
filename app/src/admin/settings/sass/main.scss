@@ -2084,3 +2084,187 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 		background-color: rgb(162 223 167) !important;
 	}
 }
+
+#wptravel-pro-interface {
+	margin: 20px 0 0 0;
+	border-radius: 10px;
+	border: 1px solid #DDD;
+	background: url('../../../../../assets/images/wp-travel-banner-background.png');
+	background-position: 75%;
+	overflow: hidden;
+
+	.wptravel-pro-interace-container {
+		padding: 25px;
+		backdrop-filter: blur(2px);
+
+		.wptravel-pro-head-title {
+			display: inline-block;
+			font-size: 22px;
+			color: rgb(7, 152, 18);
+			font-weight: 500;
+			margin: 0 0 10px 0;
+		}
+		
+		.wptravel-pro-body-legend {
+			text-transform: uppercase;
+			font-size: 12px;
+			font-weight: 500;
+			color: orange;
+			display: flex;
+			align-items: center;
+			gap: 5px;
+
+			span {
+				min-width: 150px;
+			}
+
+			.divider {
+				display: inline-block;
+				width: 100%;
+				height: 2px;
+				background: #eee;
+				border: none;
+			}
+		}
+		
+		ul {
+			display: flex;
+			flex-wrap: wrap;
+			list-style-type: none;
+			gap: 5px;
+			margin: 20px 0;
+			justify-content: space-between;
+
+			li {
+				display: flex;
+				min-width: 340px;
+
+				i {
+					margin-right: 10px;
+					color: rgb(47, 153, 47);
+					line-height: 1.3rem;
+				}
+			}
+		}
+		
+		.wptravel-pro-upsell-body {
+			/* display: flex; */
+			gap: 20px;
+		}
+		
+		.wptravel-pro-pricing-box {
+			border-radius: 10px;
+			background-color: rgb(7, 152, 18);
+			color: white;
+			padding: 20px;
+			width: 100%;
+		}
+		
+		.wptravel-pro-starting-label {
+			font-size: 18px;
+			margin: 0;
+		}
+		
+		.wptravel-pro-upsell-content {
+			display: flex;
+			justify-content: space-between;
+
+			.wptravel-pro-pricing-box-wrap {
+				display: flex;
+				align-items: flex-end;
+
+				.wptravel-pro-pricing-box {
+					min-width: 250px;
+
+					.wptravel-pro-price {
+						font-size: 42px;
+						margin: 0 0 20px 0;
+
+						.currency {
+							opacity: 0.7;
+							font-size: 26px;
+							margin: -20px 5px 0 0;
+							vertical-align: text-top;
+							line-height: 1.8;
+						}
+
+						abbr {
+							font-size: 26px;
+							opacity: 0.7;
+							margin-left: 10px;
+						}
+
+						.number {
+							font-size: 42px;
+						}
+					}
+
+					.wptravel-pro-btn-goto-pricing {
+						padding: 10px;
+						width: 100%;
+						border: none;
+						border-radius: 5px;
+						font-size: 16px;
+						background-color: white;
+						font-weight: 500;
+						color: rgb(7, 152, 18);
+						cursor: pointer;
+
+						&:hover {
+							i {
+								opacity: 1;
+								margin-left: 10px;
+							}
+						}
+
+						i {
+							opacity: 0;
+							margin-left: -15px;
+							transition: 0.25s ease-in-out all;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@media (min-width: 2534px) {
+    #wptravel-pro-interface .wptravel-pro-interace-container ul {
+        justify-content: unset;
+    }
+}
+
+@media (max-width: 1530px) {
+    #wptravel-pro-interface {
+		.wptravel-pro-interace-container {
+			.wptravel-pro-upsell-content {
+				.wptravel-pro-pricing-box-wrap {
+					.wptravel-pro-pricing-box {
+						min-width: 240px;
+						margin-top: 20px;
+					}
+				}
+			}
+
+			ul {
+				display: block;
+
+				li {
+					width: unset;
+					min-width: 250px;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 1100px) {
+    #wptravel-pro-interface .wptravel-pro-interace-container .wptravel-pro-upsell-content {
+        flex-direction: column;
+
+		.wptravel-pro-pricing-box-wrap .wptravel-pro-pricing-box {
+			margin-top: 0px;
+		}
+    }
+}
