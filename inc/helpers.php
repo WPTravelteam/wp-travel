@@ -163,7 +163,6 @@ function wptravel_settings_default_fields() {
 
 		// @since 6.2.0 - PWA
 		'enable_pwa'                    		=> 'no',
-		'enableasdasd_pwa'                    		=> 'no',
 		'pwa_app_name'                    		=> __( 'WP Travel', 'wp-travel' ),
 		'pwa_app_short_name'                    => __( 'WPTVL', 'wp-travel' ),
 		'pwa_app_start_url'                    	=> home_url(),
