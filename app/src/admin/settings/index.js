@@ -40,7 +40,7 @@ import SettingsDebug from "./components/settingsContent/advanced/SettingsDebug";
 import ImportExport from "./components/settingsContent/advanced/ImportExport";
 
 // Settings from Redux Store
-import "./store/settings-store";
+// import "./store/settings-store";
 
 // Menu Component
 import Menu from './components/menu'
