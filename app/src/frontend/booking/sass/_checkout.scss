@@ -206,7 +206,7 @@
 		position: relative !important;
 		transform: unset !important;
 	}
-
+                
 
 	// End : disable fixed departure will casue issue with date picker.
 	.new-bottom-booking-container,
@@ -932,8 +932,12 @@
 
 		// date picker
 		.react-datepicker-popper{
-			position: relative !important;
-			transform: unset !important;
+			// position: relative !important;
+			// transform: unset !important;
+			// width: max-content;
+			.react-datepicker{
+				width: max-content;
+			}
 			.react-datepicker__triangle{
 				display: none;
 			}
