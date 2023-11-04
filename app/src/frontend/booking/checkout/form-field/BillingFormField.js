@@ -15,6 +15,7 @@ import { useEffect, useState } from '@wordpress/element'
 import { __ } from '@wordpress/i18n';
 
 import ProgressBary from '../ProgressBary';
+import SelectOption from './form/SelectOption';
 
 export default ( ) => {
     // Booking Data/state.
@@ -84,7 +85,7 @@ export default ( ) => {
                 const fieldTypes = typeof travelerData != 'undefined' && typeof travelerData.type != 'undefined' && travelerData.type || 'text';
                 const fieldName = typeof travelerData != 'undefined' && typeof travelerData.name != 'undefined' && travelerData.name || '';
                 if ( fieldTypes != 'heading' ) {
-                return <div  key={ index }>{ ( fieldTypes == 'text' || fieldTypes == 'number' ) && <Texts travelerData={travelerData} trvOne={'billing'} /> || fieldTypes == 'email' && <Emails travelerData={travelerData} trvOne={'billing'} /> || fieldTypes == 'radio' && <RadioButton travelerData={travelerData} trvOne={'billing'} /> || fieldTypes == 'checkbox' && <CheckBoxs travelerData={travelerData} trvOne={'billing'} /> || fieldTypes == 'date' && <Dates travelerData={travelerData} trvOne={'billing'} /> || fieldTypes == 'country_dropdown' && <DropDowns travelerData={travelerData} trvOne={'billing'} /> || fieldTypes == 'textarea' && <TextArea travelerData={travelerData} trvOne={'billing'} /> } </div>
+                return <div  key={ index }>{ ( fieldTypes == 'text' || fieldTypes == 'number' ) && <Texts travelerData={travelerData} trvOne={'billing'} /> || fieldTypes == 'email' && <Emails travelerData={travelerData} trvOne={'billing'} /> || fieldTypes == 'radio' && <RadioButton travelerData={travelerData} trvOne={'billing'} /> || fieldTypes == 'checkbox' && <CheckBoxs travelerData={travelerData} trvOne={'billing'} /> || fieldTypes == 'date' && <Dates travelerData={travelerData} trvOne={'billing'} /> || fieldTypes == 'country_dropdown' && <DropDowns travelerData={travelerData} trvOne={'billing'} /> || fieldTypes == 'select' && <SelectOption travelerData={travelerData} trvOne={'billing'} /> || fieldTypes == 'textarea' && <TextArea travelerData={travelerData} trvOne={'billing'} /> } </div>
                 }
             })
         }
