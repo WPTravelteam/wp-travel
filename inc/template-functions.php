@@ -1816,7 +1816,7 @@ function wptravel_booking_message() {
 			history.replaceState({},null,window.location.pathname);
 		</script>
 		<?php if ( 'booking_only' == $booking_option ) { ?>
-			<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo esc_html( apply_filters( 'wp_travel_booked_message', __( "Thank you for booking! We'll reach out to you soon.", 'wp-travel' ) ) ); ?><span><?php echo esc_html( apply_filters( 'wp_travel_booked_message_after_text', ' (Booking Option : Booking Only ).' ) ); ?></span></p>
+			<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo esc_html( apply_filters( 'wp_travel_booked_message', __( "Thank you for booking! We'll reach out to you soon.", 'wp-travel' ) ) ); ?><span><?php echo esc_html( apply_filters( 'wp_travel_booked_message_after_text', ' (' . __( 'Booking Option : Booking Only', 'wp-travel' ) . ').' ) ); ?></span></p>
 			<?php
 		} elseif ( 'booking_with_payment' == $booking_option ) {
 			$payment_gatway = get_post_meta( $booking_id, 'wp_travel_payment_gateway', true );
@@ -1825,22 +1825,22 @@ function wptravel_booking_message() {
 				// print_r($payment_status);
 				if ( 'waiting_voucher' == $payment_status ) {
 					?>
-						<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo esc_html( apply_filters( 'wp_travel_booked_message', __( "Thank you for booking! We'll reach out to you soon.", 'wp-travel' ) ) ); ?><span><?php echo apply_filters( 'wp_travel_booked_message_after_text', '  (Payment Method: Bank Deposit, and Payment Status: Waiting for Voucher. Please <a href="https://wptravel.io/docs/wp-travel-user-documentation/settings/payment/#h-bank-deposit" target="_blank" >submit</a> your voucher.)' ); ?></span> </p>
+						<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo esc_html( apply_filters( 'wp_travel_booked_message', __( "Thank you for booking! We'll reach out to you soon.", 'wp-travel' ) ) ); ?><span><?php echo apply_filters( 'wp_travel_booked_message_after_text', '  (' . __( 'Payment Method: Bank Deposit, and Payment Status: Waiting for Voucher. Please', 'wp-travel' ) . '<a href="https://wptravel.io/docs/wp-travel-user-documentation/settings/payment/#h-bank-deposit" target="_blank" >' . __( 'submit', 'wp-travel' ) . '</a>' . __( 'your voucher', 'wp-travel' ) . '.)' ); ?></span> </p>
 					<?php
 				} else {
 					?>
-						<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo esc_html( apply_filters( 'wp_travel_booked_message', __( "Thank you for booking! We'll reach out to you soon.", 'wp-travel' ) ) ); ?><span><?php echo apply_filters( 'wp_travel_booked_message_after_text', '  (Payment Method: Bank Deposit, and Payment Status: Waiting for Voucher. Please <a href="https://wptravel.io/docs/wp-travel-user-documentation/settings/payment/#h-bank-deposit" target="_blank" >submit</a> your voucher.)' ); ?></span> </p>
+						<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo esc_html( apply_filters( 'wp_travel_booked_message', __( "Thank you for booking! We'll reach out to you soon.", 'wp-travel' ) ) ); ?><span><?php echo apply_filters( 'wp_travel_booked_message_after_text', '  (' . __( 'Payment Method: Bank Deposit, and Payment Status: Waiting for Voucher. Please', 'wp-travel' ) . '<a href="https://wptravel.io/docs/wp-travel-user-documentation/settings/payment/#h-bank-deposit" target="_blank" >' . __( 'submit', 'wp-travel' ) . '</a>' . __( 'your voucher', 'wp-travel' ) . '.)' ); ?></span> </p>
 					<?php
 				}
 			} elseif ( 'paypal' == $payment_gatway ) {
 				$payment_status = get_post_meta( $booking_id, 'wp_travel_payment_status', true );
 				if ( 'paid' == $payment_status ) {
 					?>
-						<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo esc_html( apply_filters( 'wp_travel_booked_message', __( "Thank you for booking! We'll reach out to you soon.", 'wp-travel' ) ) ); ?><span><?php echo esc_html( apply_filters( 'wp_travel_booked_message_after_text', ' (Booking Option : Booking with Payment, Payment Methode : PayPal, and Payment Status : Paid.)' ) ); ?></span></p>
+						<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo esc_html( apply_filters( 'wp_travel_booked_message', __( "Thank you for booking! We'll reach out to you soon.", 'wp-travel' ) ) ); ?><span><?php echo esc_html( apply_filters( 'wp_travel_booked_message_after_text', ' (' . __( 'Booking Option : Booking with Payment, Payment Methode : PayPal, and Payment Status : Paid', 'wp-travel' ) . '.)' ) ); ?></span></p>
 					<?php
 				} else {
 					?>
-						<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo esc_html( apply_filters( 'wp_travel_booked_message', __( "Thank you for booking! We'll reach out to you soon.", 'wp-travel' ) ) ); ?><span><?php echo esc_html( apply_filters( 'wp_travel_booked_message_after_text', ' (Booking Option : Booking with Payment, Payment Methode : PayPal.)' ) ); ?></span></p>
+						<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo esc_html( apply_filters( 'wp_travel_booked_message', __( "Thank you for booking! We'll reach out to you soon.", 'wp-travel' ) ) ); ?><span><?php echo esc_html( apply_filters( 'wp_travel_booked_message_after_text', ' (' . __( 'Booking Option : Booking with Payment, Payment Methode : PayPal', 'wp-travel' ) . '.)' ) ); ?></span></p>
 					<?php
 				}
 			}
