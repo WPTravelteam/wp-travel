@@ -122,7 +122,7 @@ const WpTravelBookNow = ( props ) => {
 		/**
 		 * Added button disable after clicking once on Book Now button
 		 * 
-		 * @since 7.5.0
+		 * @since 7.6.0
 		 */
 		event.currentTarget.disabled = true;
 		let data = {
@@ -171,7 +171,7 @@ const WpTravelBookNow = ( props ) => {
 						/**
 						 * Added toast to display successful booking 
 						 * 
-						 * @since 7.5.0
+						 * @since 7.6.0
 						 */
 						jQuery( '#wp-travel__add-to-cart_notice' ).addClass( 'success' ).append( `
 								<span><i class="fa fa-check-circle"></i><strong>` + title + `</strong> ` + __i18n.set_added_cart + `</span>
@@ -182,7 +182,7 @@ const WpTravelBookNow = ( props ) => {
 						/**
 						 * Added close [X] button on toast to remove it
 						 * 
-						 * @since 7.5.0
+						 * @since 7.6.0
 						 */
 						jQuery( '#toast-close' ).on('click', function() {
 							jQuery( '#wp-travel__add-to-cart_notice' ).removeClass( 'success' )
@@ -190,7 +190,7 @@ const WpTravelBookNow = ( props ) => {
 							 * Remove style [ display: none ], as the notice was just hidden in DOM and not removed
 							 * Fixed: Remove toast from DOM after the toast duration expires [ 8sec ]
 							 * 
-							 * @since 7.5.0
+							 * @since 7.6.0
 							 */
 							jQuery( '#wp-travel__add-to-cart_notice span' ).remove();
 							jQuery( '#wp-travel__notice_time-bar' ).remove();
@@ -202,7 +202,7 @@ const WpTravelBookNow = ( props ) => {
 							 * Remove style [ display: none ], as the notice was just hidden in DOM and not removed
 							 * Fixed: Remove toast from DOM after the toast duration expires [ 8sec ]
 							 * 
-							 * @since 7.5.0
+							 * @since 7.6.0
 							 */
 							jQuery( '#wp-travel__add-to-cart_notice span' ).remove();
 							jQuery( '#wp-travel__notice_time-bar' ).remove();
