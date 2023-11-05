@@ -31,7 +31,7 @@ const RecurringRepeator = ( props ) =>  {
    
 
     if( recurringCount == 1 ){
-        // @since 7.5.0
+        // @since 7.6.0
         // this will render the nearest date of the trip
         $( '.wp-travel-fixed-departure .fixed-date-options' ).html( moment(recurrindDate).format(_wp_travel.date_format_moment ) )
     }

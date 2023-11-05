@@ -142,6 +142,7 @@ class WP_Travel_Helpers_Cart {
 				$cart[ $cart_id ]['trip']               = $item['trip'];
 				$cart[ $cart_id ]['trip_data']          = $trip_data['trip'];
 				$cart[ $cart_id ]['arrival_date']       = wptravel_format_date( $item['arrival_date'] );
+				$cart[ $cart_id ]['date_id']       		= $item['date_id'];
 				if ( isset( $item['trip_time'] ) ) {
 					$cart[ $cart_id ]['trip_time'] = $item['trip_time'];
 				}

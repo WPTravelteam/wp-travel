@@ -724,7 +724,7 @@ function wptravel_search_form( $args = array() ) {
 		)
 	);
 
-	// @since 7.5.0
+	// @since 7.6.0
 	$input_field = apply_filters(
 		'wp_travel_search_filter_input_fields',
 		array(
@@ -4598,7 +4598,7 @@ function wptravel_get_cart_icon(){
 		/**
 		* Added toast notice
 		* 
-		* @since 7.5.0
+		* @since 7.6.0
 		*/
 		?>
 		<div id="wp-travel__add-to-cart_notice"></div>
@@ -4614,7 +4614,7 @@ function wptravel_get_cart_icon(){
 	<?php }
 }
 
-// @since v7.5.0
+// @since v7.6.0
 
 /**
  * Extend WordPress search to include custom fields

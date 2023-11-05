@@ -46,8 +46,9 @@ if ( wptravel_is_react_version_enabled() ) {
 		$coupon_code = $cart['cart']['coupon']['coupon_code'];
 		$coupon_type = $cart['cart']['coupon']['type'];
 	}
-	?>
 
+	?>
+	
 	<div class="order-wrapper">
 		<div class="wp-travel-cart-sidebar">
 			<div id="shopping-cart">

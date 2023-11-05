@@ -356,6 +356,7 @@ class WP_Travel_Ajax {
 
 		$attrs['pricing_id']     = $pricing_id;
 		$attrs['arrival_date']   = $arrival_date;
+		$attrs['date_id']   	= (int)$post_data['date_id'][0];
 		$attrs['departure_date'] = $departure_date;
 		$attrs['trip_extras']    = $trip_extras;
 

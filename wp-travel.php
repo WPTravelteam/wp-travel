@@ -3,7 +3,7 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 7.5.0
+ * Version: 7.6.0
  * Author: WP Travel
  * Author URI: http://wptravel.io/
  * Requires at least: 6.0.0
@@ -39,7 +39,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '7.5.0';
+		public $version = '7.6.0';
 
 		/**
 		 * WP Travel API version.
@@ -415,9 +415,9 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			require WP_TRAVEL_ABSPATH . '/core/ajax/payments.php';
 
 			//include import and export setting file
-			if( isset( wptravel_get_settings()['enable_session'] ) && wptravel_get_settings()['enable_session'] == 'yes' ){
-                require WP_TRAVEL_ABSPATH . '/inc/import-export/import-export.php';
-            }
+			// if( isset( wptravel_get_settings()['enable_session'] ) && wptravel_get_settings()['enable_session'] == 'yes' ){
+                // require WP_TRAVEL_ABSPATH . '/inc/import-export/import-export.php';
+            // }
 
 			/**
 			 * App Part.
@@ -586,6 +586,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				if ( ! $screen ) {
 					return;
 				}
+				
 				switch ( $slug ) {
 					// WP Travel Menu.
 					case 'settings':
@@ -650,7 +651,14 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 					case 'search':
 						return is_search() && isset( $request['post_type'] ) && 'itineraries' === $request['post_type'];
 					case 'archive':
-						return ( is_post_type_archive( WP_TRAVEL_POST_TYPE ) || is_tax( array( 'itinerary_types', 'travel_locations', 'travel_keywords', 'activity' ) ) ) && ! is_search();
+						$wptravel_tax_list = array( 'itinerary_types', 'travel_locations', 'travel_keywords', 'activity' );
+						if( class_exists( 'WP_Travel_Pro' ) ){
+							foreach( array_keys( get_option( 'wp_travel_custom_filters_option', array() ) ) as $data ){
+								array_push( $wptravel_tax_list, $data );
+							}
+						}
+						
+						return ( is_post_type_archive( WP_TRAVEL_POST_TYPE ) || is_tax( $wptravel_tax_list ) ) && ! is_search();
 				}
 			}
 			return false;
