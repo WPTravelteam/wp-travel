@@ -54,6 +54,7 @@ class WpTravel_Helpers_Booking {
 			<tbody>
 				<?php
 				// Order Details.
+				global $wpdb;
 				foreach ( $items as $item_key => $trip ) {
 					$trip_id = $trip['trip_id'];
 					$trip_data = WpTravel_Helpers_Trips::get_trip($trip_id)['trip'];
@@ -64,7 +65,8 @@ class WpTravel_Helpers_Booking {
 					$arrival_date   = isset( $trip['departure_date'] ) && ! empty( $trip['departure_date'] ) ? wptravel_format_date( $trip['departure_date'] ) : '';
 					
 					$start_date   = isset( $trip['arrival_date'] ) && ! empty( $trip['arrival_date'] ) ? wptravel_format_date( $trip['arrival_date'] ) : '';
-					$end_date   = isset( $trip['departure_date'] ) && ! empty( $trip['departure_date'] ) ? wptravel_format_date( $trip['departure_date'] ) : '';
+					$end_date = isset( $trip['departure_date'] ) && ! empty( $trip['departure_date'] ) ? wptravel_format_date( $wpdb->get_row( $wpdb->prepare("SELECT * FROM wp_wt_dates WHERE id=%s;", $trip['date_id'] ) )->end_date ) : '';
+					
 					/**
 					 * Fix for active date format that skips character.
 					 * Coverts original date instead of date from active date format to DateTime object.
@@ -190,11 +192,8 @@ class WpTravel_Helpers_Booking {
 
 			<tr>
 				<td colspan="2"><p><b><?php esc_html_e( 'Coupon Code:', 'wp-travel-pro' ); ?></b> <?php echo esc_html($coupon_code); ?></p></td>
-				<td>
+				<td colspan="2">
 				<p><b><?php esc_html_e( 'Discount:', 'wp-travel-pro' ); ?></b> <?php echo wptravel_get_formated_price_currency( $coupon_value, false, '', $booking_id ); //@phpcs:ignore ?></p>
-				</td>
-				<td>
-					<p><b><?php esc_html_e( 'Net Total:', 'wp-travel-pro' ); ?></b><?php echo wptravel_get_formated_price_currency( ( $extras_price_total + $pax_price_total) - $coupon_value, false, '', $booking_id ); //@phpcs:ignore ?></b></p>										
 				</td>
 			</tr>
 			

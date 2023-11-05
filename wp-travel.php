@@ -586,6 +586,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				if ( ! $screen ) {
 					return;
 				}
+				
 				switch ( $slug ) {
 					// WP Travel Menu.
 					case 'settings':
@@ -650,7 +651,14 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 					case 'search':
 						return is_search() && isset( $request['post_type'] ) && 'itineraries' === $request['post_type'];
 					case 'archive':
-						return ( is_post_type_archive( WP_TRAVEL_POST_TYPE ) || is_tax( array( 'itinerary_types', 'travel_locations', 'travel_keywords', 'activity' ) ) ) && ! is_search();
+						$wptravel_tax_list = array( 'itinerary_types', 'travel_locations', 'travel_keywords', 'activity' );
+						if( class_exists( 'WP_Travel_Pro' ) ){
+							foreach( array_keys( get_option( 'wp_travel_custom_filters_option', array() ) ) as $data ){
+								array_push( $wptravel_tax_list, $data );
+							}
+						}
+						
+						return ( is_post_type_archive( WP_TRAVEL_POST_TYPE ) || is_tax( $wptravel_tax_list ) ) && ! is_search();
 				}
 			}
 			return false;
@@ -862,3 +870,4 @@ function wptravel() {
 
 // Start WP Travel.
 wptravel();
+
