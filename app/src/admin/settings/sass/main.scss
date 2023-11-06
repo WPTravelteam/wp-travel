@@ -2230,14 +2230,28 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
     }
 }
 
+@media (max-width: 1680px) {
+    #wptravel-pro-interface {
+		.wptravel-pro-interace-container {
+			ul {
+				li {
+					width: unset;
+					min-width: 250px;
+				}
+			}
+		}
+	}
+}
+
 @media (max-width: 1530px) {
     #wptravel-pro-interface {
 		.wptravel-pro-interace-container {
 			.wptravel-pro-upsell-content {
 				.wptravel-pro-pricing-box-wrap {
 					.wptravel-pro-pricing-box {
-						min-width: 240px;
+						min-width: 185px;
 						margin-top: 20px;
+						margin-left: 20px;
 					}
 				}
 			}
@@ -2247,7 +2261,31 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 
 				li {
 					width: unset;
-					min-width: 250px;
+					min-width: 180px;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 1366px) {
+	#wptravel-pro-interface {
+		.wptravel-pro-interace-container {
+			.wptravel-pro-upsell-content {
+				.wptravel-pro-pricing-box-wrap {
+					.wptravel-pro-pricing-box {
+						min-width: 240px;
+						margin-left: 20px;
+					}
+				}
+			}
+
+			ul {
+				display: block;
+
+				li {
+					width: unset;
+					min-width: 200px;
 				}
 			}
 		}
