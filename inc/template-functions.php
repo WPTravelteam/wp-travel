@@ -1627,7 +1627,13 @@ function wptravel_comments_template_loader( $template ) {
 function wptravel_template_loader( $template ) {
 	$layout_version = wptravel_layout_version();
 	// Load template for post archive / taxonomy archive.
-	if ( is_post_type_archive( WP_TRAVEL_POST_TYPE ) || is_tax( array( 'itinerary_types', 'travel_locations', 'travel_keywords', 'activity', 'hello' ) ) ) {
+	$wptravel_tax_list = array( 'itinerary_types', 'travel_locations', 'travel_keywords', 'activity' );
+	if( class_exists( 'WP_Travel_Pro' ) ){
+		foreach( array_keys( get_option( 'wp_travel_custom_filters_option', array() ) ) as $data ){
+			array_push( $wptravel_tax_list, $data );
+		}
+	}
+	if ( is_post_type_archive( WP_TRAVEL_POST_TYPE ) || is_tax( $wptravel_tax_list ) ) {
 		$archive_template = wptravel_get_template( $layout_version . '/archive-itineraries.php' ); // Load version specific template if version greater than v1.
 		if ( 'v1' === $layout_version ) { // Legacy Template.
 			$archive_template = wptravel_get_template( 'archive-itineraries.php' );
