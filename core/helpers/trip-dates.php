@@ -58,6 +58,7 @@ class WpTravel_Helpers_Trip_Dates {
 			 * @since 6.1.0
 			 */
 			$dates[ $index ] ['enable_time']            = ! empty( absint( $result->id ) ) && class_exists( 'WP_Travel_Utilities_Core' ) ? get_post_meta( absint( $result->id ), 'wp_travel_trip_time_enable', true ) : false;
+			$dates[ $index ] ['twentyfour_time_format']            = ! empty( absint( $result->id ) ) && class_exists( 'WP_Travel_Utilities_Core' ) ? get_post_meta( absint( $result->id ), 'wp_travel_trip_twentyfour_time_format', true ) : false;
 			$dates[ $index ]['trip_time']               = ! empty( $result->trip_time ) && class_exists( 'WP_Travel_Utilities_Core' ) ? $result->trip_time : ''; // Time is utilities features.
 			$dates[ $index ]['pricing_ids']             = ! empty( $result->pricing_ids ) ? $result->pricing_ids : '';
 			$dates[ $index ]['recurring_weekdays_type'] = '';
@@ -184,6 +185,7 @@ class WpTravel_Helpers_Trip_Dates {
 			 * @since 6.1.0
 			 */
 			update_post_meta( $date_id, 'wp_travel_trip_time_enable', ! empty( $date['enable_time'] ) ? $date['enable_time'] : false );
+			update_post_meta( $date_id, 'wp_travel_trip_twentyfour_time_format', ! empty( $date['twentyfour_time_format'] ) ? $date['twentyfour_time_format'] : false );
 		} else {
 			$wpdb->insert(
 				$table,
@@ -212,6 +214,7 @@ class WpTravel_Helpers_Trip_Dates {
 			 */
 			$date['ids'] = $inserted_id ? $inserted_id : 0;
 			update_post_meta( $inserted_id, 'wp_travel_trip_time_enable', ! empty( $date['enable_time'] ) ? $date['enable_time'] : false );
+			update_post_meta( $inserted_id, 'wp_travel_trip_twentyfour_time_format', ! empty( $date['twentyfour_time_format'] ) ? $date['twentyfour_time_format'] : false );
 		}
 
 		return WP_Travel_Helpers_Response_Codes::get_success_response(
@@ -241,6 +244,7 @@ class WpTravel_Helpers_Trip_Dates {
 		if ( ! empty( $results ) ) {
 			foreach ( $results as $date_result ) {
 				delete_post_meta( $date_result->id, 'wp_travel_trip_time_enable' );
+				delete_post_meta( $date_result->id, 'wp_travel_trip_twentyfour_time_format' );
 			}
 		}
 
@@ -269,6 +273,7 @@ class WpTravel_Helpers_Trip_Dates {
 		 * @since 6.1.0
 		 */
 		delete_post_meta( $date_id, 'wp_travel_trip_time_enable' );
+		delete_post_meta( $date_id, 'wp_travel_trip_twentyfour_time_format' );
 		$result = $wpdb->delete( $table, array( 'id' => $date_id ), array( '%d' ) );
 
 		if ( false === $result ) {

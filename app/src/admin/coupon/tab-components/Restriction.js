@@ -99,7 +99,7 @@ export default () => {
                 <div className="wp-travel-field-value">
                     <SelectControl
                         value={coupon_user_id}
-                        options={userTravel}
+                        options={allUsers}
                         onChange={ ( value ) => {
                             updateCoupon({
                                 ...allData,

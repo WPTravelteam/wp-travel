@@ -18,7 +18,7 @@ import CouponApplyAmount from "./booking/CouponApplyAmount"
 
 const i18n = _wp_travel.strings;
 
-console.log( _wp_travel );
+
 
 export default () => {
     const [loaders, setLoaders] = useState(false)
@@ -166,6 +166,8 @@ export default () => {
                         ||  wp_travel_booking_option == "booking_with_payment" && selected_payment == 'express_checkout' && applyFilters( 'wptravel_booking_button_payment_express_checkout', [<div><input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value={i18n.set_book_now} disabled /></div>], bookingData )  
                         ||  wp_travel_booking_option == "booking_with_payment" && selected_payment == 'stripe_ideal' && applyFilters( 'wptravel_booking_button_payment_ideal_checkout', [<div><input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value={i18n.set_book_now} disabled /></div>], bookingData )  
                         ||  wp_travel_booking_option == "booking_with_payment" && selected_payment == 'payu' && <div><input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value={ __( 'Pay with PayU', 'wp-travel' ) }/></div>  
+                        ||  wp_travel_booking_option == "booking_with_payment" && selected_payment == 'payu_latam' && <div><input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value={ __( 'Pay with PayU Latam', 'wp-travel' ) }/></div>  
+                        ||  wp_travel_booking_option == "booking_with_payment" && selected_payment == 'razorpay_checkout' && <div><input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value={ __( 'Pay with Razorpay', 'wp-travel' ) }/></div>  
                         ||  wp_travel_booking_option == "booking_with_payment" && ( selected_payment == 'bank_deposit' || selected_payment == 'paypal' ) && <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value={i18n.book_n_pay} />
                         ||  wp_travel_booking_option == "booking_with_payment" && ( typeof selected_payment == 'undefined' || selected_payment == '' ) && <div><input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value={i18n.set_book_now} onClick={ e => handlingForm(e) } /></div> 
                         || wp_travel_booking_option == "booking_only" && <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value={i18n.set_book_now} />

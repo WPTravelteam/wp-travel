@@ -1,12 +1,27 @@
 import { __ } from '@wordpress/i18n';
 import { wpTravelFormat, GetConvertedPrice } from '../../../_wptravelFunctions';
+import apiFetch from '@wordpress/api-fetch';
+import { useState, useEffect } from "@wordpress/element";
 const __i18n = {
 	..._wp_travel.strings
 }
 const TripExtras = ( props ) => {
 	// Component Props.
-	const { bookingData, updateBookingData } = props;
-	const { nomineeTripExtras, tripExtras } = bookingData;
+	const { tripData, bookingData, updateBookingData } = props;
+	const { isLoading, nomineeTripExtras, tripExtras } = bookingData;
+	const[ tripExtrasStock, setTripExtrasStock ] = useState( [] );
+	
+	var tripID = tripData.id;
+	var tripDepartureDate = moment(moment(bookingData.selectedDate).format('YYYY-MM-DD'))._i.replace( '-', '_' ).replace( '-', '_' );
+
+	if( typeof _wp_travel.WP_Travel_Trip_Extras_Inventory !== 'undefined' ){
+		useEffect( () => {			
+			apiFetch( { path: '/wptravelgettripextrasstock/v1/tripextrasStock/'+tripDepartureDate+'seperate'+tripID+'?key='+Math.random().toString(36).substring(2,7), method: 'GET' } ).then( ( response ) => {
+				setTripExtrasStock( response )
+			} )
+			
+		}, [] );
+	}
 
 	const handleClick = ( index, inc, quantity ) => e => {
 		
@@ -101,10 +116,11 @@ const TripExtras = ( props ) => {
 											}
 										</a>
 									</div>
+	
 									{	
 										( typeof _wp_travel.WP_Travel_Trip_Extras_Inventory !== 'undefined' && tx.tour_extras_metas.extras_item_quantity != -1 ) &&
 										<>
-											<span className='trip-extra-quantity'>( {_count} / { tx.tour_extras_metas.extras_item_quantity - tx.tour_extras_metas.extras_item_quantity_in_used } )</span>
+											<span className='trip-extra-quantity'>( {_count} / { tx.tour_extras_metas.extras_item_quantity - ( typeof tripExtrasStock[tx.id] !== 'undefined' ? tripExtrasStock[tx.id] : 0 ) } )</span>
 										</>
 									}									
 								</div>
@@ -113,9 +129,9 @@ const TripExtras = ( props ) => {
 									
 									<div className="pricing-area">
 										<div className="qty-spinner">
-											<button onClick={ handleClick( i, -1, ( tx.tour_extras_metas.extras_item_quantity - tx.tour_extras_metas.extras_item_quantity_in_used ) ) }>-</button>
+											<button onClick={ handleClick( i, -1, ( tx.tour_extras_metas.extras_item_quantity - ( typeof tripExtrasStock[tx.id] !== 'undefined' ? tripExtrasStock[tx.id] : 0 ) ) ) }>-</button>
 											<span>{_count}</span>
-											<button onClick={ handleClick( i, 1, ( tx.tour_extras_metas.extras_item_quantity - tx.tour_extras_metas.extras_item_quantity_in_used ) ) }>+</button>
+											<button onClick={ handleClick( i, 1, ( tx.tour_extras_metas.extras_item_quantity - ( typeof tripExtrasStock[tx.id] !== 'undefined' ? tripExtrasStock[tx.id] : 0 ) ) ) }>+</button>
 										</div>
 									</div>
 								</div>

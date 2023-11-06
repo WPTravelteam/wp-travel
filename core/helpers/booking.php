@@ -27,6 +27,7 @@ class WpTravel_Helpers_Booking {
 		}
 		global $wt_cart;
 		$items = $wt_cart->getItems();
+		$coupon_applied = false;
 
 		
 		if ( ! $items ) {
@@ -37,9 +38,6 @@ class WpTravel_Helpers_Booking {
 			return;
 		}
 
-		// var_dump( $items  );
-		// die;
-		
 		ob_start();
 		?>
 		<h2 class="wp-travel-order-heading"><?php esc_html_e( 'Booking Details', 'wp-travel' ); ?></h2>
@@ -56,6 +54,7 @@ class WpTravel_Helpers_Booking {
 			<tbody>
 				<?php
 				// Order Details.
+				global $wpdb;
 				foreach ( $items as $item_key => $trip ) {
 					$trip_id = $trip['trip_id'];
 					$trip_data = WpTravel_Helpers_Trips::get_trip($trip_id)['trip'];
@@ -66,7 +65,8 @@ class WpTravel_Helpers_Booking {
 					$arrival_date   = isset( $trip['departure_date'] ) && ! empty( $trip['departure_date'] ) ? wptravel_format_date( $trip['departure_date'] ) : '';
 					
 					$start_date   = isset( $trip['arrival_date'] ) && ! empty( $trip['arrival_date'] ) ? wptravel_format_date( $trip['arrival_date'] ) : '';
-					$end_date   = isset( $trip['departure_date'] ) && ! empty( $trip['departure_date'] ) ? wptravel_format_date( $trip['departure_date'] ) : '';
+					$end_date = isset( $trip['departure_date'] ) && ! empty( $trip['departure_date'] ) ? wptravel_format_date( $wpdb->get_row( $wpdb->prepare("SELECT * FROM wp_wt_dates WHERE id=%s;", $trip['date_id'] ) )->end_date ) : '';
+					
 					/**
 					 * Fix for active date format that skips character.
 					 * Coverts original date instead of date from active date format to DateTime object.
@@ -88,6 +88,8 @@ class WpTravel_Helpers_Booking {
 						$pricing_title = isset( $pricing['title'] ) ? $pricing['title'] : $pricing[0]['title'];
 					}
 
+					$pax_price_total = 0;
+					$extras_price_total = 0;
 					?>
 					<tr>
 						<td>
@@ -102,6 +104,7 @@ class WpTravel_Helpers_Booking {
 											continue;
 										}
 										$pax = $pax + $t['pax'];
+										$pax_price_total = $pax_price_total + ( $t['pax'] * $t['price'] );
 									?>
 										<span class="my-order-price-detail">(<?php echo esc_html( $t['pax'] ) . ' ' . $t['custom_label'] . ' x ' . wptravel_get_formated_price_currency( $t['price'], false, '', $booking_id ); ?>) <?php echo wptravel_get_formated_price_currency( $t['pax'] * $t['price'], false, '', $booking_id ); //@phpcs:ignore ?></span>
 									<?php endforeach; ?>
@@ -128,6 +131,8 @@ class WpTravel_Helpers_Booking {
 											$qty   = isset( $extras['qty'][ $k ] ) && $extras['qty'][ $k ] ? $extras['qty'][ $k ] : 1;
 
 											$total = $price * $qty;
+
+											$extras_price_total = $extras_price_total + ( $price * $qty );
 											?>
 											<div class="my-order-price-breakdown-additional-service-item clearfix">
 												<span class="my-order-head"><?php echo esc_html( get_the_title( $extra_id ) ); ?> (<?php echo esc_attr( $qty ) . ' x ' . wptravel_get_formated_price_currency( $price, false, '', $booking_id ); ?>)</span>
@@ -166,13 +171,36 @@ class WpTravel_Helpers_Booking {
 								<?php endif; ?>
 						<?php endif; ?>
 					</tr>
-
+					
 					<?php
 				}
+				if( isset( $trip['discount_type'] ) ){
+					$coupon_applied = true;
+					$coupon_type = $trip['discount_type'];
+					$coupon_code = $trip['coupon_code'];
+					$coupon_value = $trip['discount'];
+				}
 				?>
+			
+		
+		<?php
+		if( $coupon_applied ){
+		?>	
+			<tr>
+				<th colspan="4"><h4><?php esc_html_e( 'Coupon Applied', 'wp-travel-pro' ); ?></h4></th>
+			</tr>
+
+			<tr>
+				<td colspan="2"><p><b><?php esc_html_e( 'Coupon Code:', 'wp-travel-pro' ); ?></b> <?php echo esc_html($coupon_code); ?></p></td>
+				<td colspan="2">
+				<p><b><?php esc_html_e( 'Discount:', 'wp-travel-pro' ); ?></b> <?php echo wptravel_get_formated_price_currency( $coupon_value, false, '', $booking_id ); //@phpcs:ignore ?></p>
+				</td>
+			</tr>
+			
 			</tbody>
 		</table>
-		<?php
+		<?php }
+
 		$content = ob_get_contents();
 
 		ob_end_clean();

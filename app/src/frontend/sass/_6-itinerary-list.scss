@@ -1610,7 +1610,7 @@
 		box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 		z-index: 3;
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 		transition: all 0.5s ease-in-out;
 		.dropdown-list {
 			color: #555;
@@ -1635,7 +1635,6 @@
 			}
 			&:hover {
 				background: #ddd;
-				padding-left: 20px;
 				color: #282828;
 				transition: all 0.3s ease;
 			}

@@ -501,6 +501,7 @@ class WP_Travel_Admin_Booking {
 		// Updating booking status.
 		$booking_status = isset( $_POST['wp_travel_booking_status'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_booking_status'] ) ) : 'pending';
 		$mail_sending_payment_status = apply_filters( 'wp_travel_change_payment_status_mail_sending', true );
+		$mail_sending_booking_status = apply_filters( 'wp_travel_change_booking_status_mail_sending', false );
 		$payment_status = isset( $_POST['wp_travel_payment_status'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_payment_status'] ) ) : 'N/A';
 		$payment_status_change = sanitize_text_field( $payment_status );
 		$old_payment_status = get_post_meta( $booking_id, 'wp_travel_payment_status' );
@@ -520,7 +521,32 @@ class WP_Travel_Admin_Booking {
 				}
 			}
 		}
-		update_post_meta( $booking_id, 'wp_travel_booking_status', sanitize_text_field( $booking_status ) );
+
+		$booking_status = isset( $_POST['wp_travel_booking_status'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_booking_status'] ) ) : 'N/A';
+		$booking_status_change = sanitize_text_field( $booking_status );
+		$old_booking_status = get_post_meta( $booking_id, 'wp_travel_booking_status' );
+		$booking_status = isset( $old_booking_status[0] ) ? $old_booking_status[0] : 'N/A';
+		if ( $mail_sending_booking_status ) {
+			if ( $booking_status_change != $booking_status ) {
+				$traveler_email = get_post_meta( $booking_id, 'wp_travel_email_traveller', true );
+				$traveler_name = get_post_meta( $booking_id, 'wp_travel_fname_traveller', true );
+				$subject = 'Booking status update';
+				$email_headers = "Content-Type: text/html; charset=UTF-8\r\n";
+				foreach ( $traveler_email as $trip_key => $email_detail ) {
+					$fname_traveller = isset( $traveler_name[$trip_key] ) && isset( $traveler_name[$trip_key][0] ) ? $traveler_name[$trip_key][0] : '';
+					if( $booking_status_change == 'booked' ){
+						$message = "<h2>Dear " . $fname_traveller . ",</h2><p>Congratulations, we are reaching out to inform you about some recent changes to your booking with us. Your booking status has been updated from <b>" . $booking_status . "</b> to <b>" . $booking_status_change ."</b>.</p><br><h3>Thank you.</h3>";
+					}else{
+						$message = "<h2>Dear " . $fname_traveller . ",</h2><p>We are reaching out to inform you about some recent changes to your booking with us. Unfortunately, your booking status has been updated from <b>" . $booking_status . "</b> to <b>" . $booking_status_change ."</b>.</p><br><h3>Thank you.</h3>";
+					}
+					if ( ! wp_mail( $email_detail[0], $subject, $message, $email_headers ) ) {
+
+					}
+				}
+			}
+		}
+
+		update_post_meta( $booking_id, 'wp_travel_booking_status', sanitize_text_field( $booking_status_change ) );
 		$checkout_fields = wptravel_get_checkout_form_fields();
 		foreach ( $checkout_fields as $field_type => $fields ) {
 			$priority = array();

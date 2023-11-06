@@ -10,7 +10,7 @@ const TripTimes =  ( props ) => {
 	// Component Props.
 	const { bookingData, updateBookingData, date  } = props;
 
-	const { enable_time } = date;
+	const { twentyfour_time_format, enable_time } = date;
 	const { selectedDate, nomineeTimes } = bookingData;
 	return enable_time  && <div className="wp-travel-booking__selected-time">
 		{nomineeTimes.length > 0 && <>
@@ -24,7 +24,13 @@ const TripTimes =  ( props ) => {
 								} );
 							}
 						} >
-							{timeObject.format('h:mm A')}
+	
+						{
+							twentyfour_time_format &&
+							timeObject.format('HH:mm')
+							||
+							timeObject.format('h:mm A')
+						}
 						</button>
 					
 				})

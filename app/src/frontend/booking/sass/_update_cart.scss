@@ -366,7 +366,7 @@
 /**
 * Added toast styles
 *
-* @since 7.5.0
+* @since 7.6.0
 */
 #wp-travel__add-to-cart_notice {
 	display: none;
@@ -374,6 +374,7 @@
 	right: 20px;
 	top: 45px;
 	background: white;
+	color: #000;
 	padding: 30px;
 	border-radius: 10px;
 	max-width: 450px;
@@ -414,18 +415,18 @@
 	font-weight: bold;
 	font-size: 20px;
 }
-.animated-wp-travel {
-	opacity: 0; /* Set the default opacity to 0 */
-	-webkit-animation-duration: 0.6s;
-	animation-duration: 0.6s;
-	-webkit-animation-fill-mode: both;
-	animation-fill-mode: both;
-}
+// .animated-wp-travel {
+//     opacity: 0; 
+//     -webkit-animation-duration: 0.6s;
+//     animation-duration: 0.6s;
+//     -webkit-animation-fill-mode: both;
+//     animation-fill-mode: both;
+// }
 
 /**
 * Added animation for toast time-bar
 *
-* @since 7.5.0
+* @since 7.6.0
 */
 @-webkit-keyframes slide-out {
     0% {
@@ -447,25 +448,25 @@
     }
 }
 
-@-webkit-keyframes fadeIn {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
-}
+// @-webkit-keyframes fadeIn {
+// 	0% {
+// 		opacity: 0;
+// 	}
+// 	100% {
+// 		opacity: 1;
+// 	}
+// }
 
-@keyframes fadeIn {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
-}
+// @keyframes fadeIn {
+// 	0% {
+// 		opacity: 0;
+// 	}
+// 	100% {
+// 		opacity: 1;
+// 	}
+// }
 
-.fadeIn-wp-travel {
-	-webkit-animation-name: fadeIn;
-	animation-name: fadeIn;
-}
+// .fadeIn-wp-travel {
+// 	-webkit-animation-name: fadeIn;
+// 	animation-name: fadeIn;
+// }

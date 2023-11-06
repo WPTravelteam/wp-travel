@@ -16,14 +16,21 @@ export default () => {
     const [ updateExtraPrice, setUpdateExtraPrice ]  = useState({})
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     const { updateStore } = dispatch( bookingStoreName );
-    const { nomineePricingIds, priceCart, paxCounts, form_key, currency_symbol, tripExtras, nomineeTripExtras, selectedPricingId } = bookingData;
+    const { nomineePricingIds, priceCart, paxCounts, form_key, currency_symbol, tripExtras, nomineeTripExtras, inventory, selectedDate, selectedPricingId } = bookingData;
     const priceCategoryList = typeof priceCart != 'undefined' && typeof priceCart.priceCategoryList != 'undefined' && priceCart.priceCategoryList || [];
-    const prcMax = typeof priceCart != 'undefined' && typeof priceCart.max_pax != 'undefined' && priceCart.max_pax || 0;
+    var prcMax = typeof priceCart != 'undefined' && typeof priceCart.max_pax != 'undefined' && priceCart.max_pax || 0;
     const prcMin = typeof priceCart != 'undefined' && typeof priceCart.min_pax != 'undefined' && priceCart.min_pax || 0;
     const trpsExtras = typeof priceCart != 'undefined' && typeof priceCart.extras != 'undefined' && priceCart.extras || [];
     let tripData = 'undefined' !== typeof _wp_travel.trip_data ? _wp_travel.trip_data : {};
     const { pricings }  = tripData;
 
+    const isInventoryEnabled = tripData.inventory && tripData.inventory.enable_trip_inventory === 'yes';
+
+    if( isInventoryEnabled ){
+        let _inventory = inventory.find(i => i.date === moment(selectedDate).format('YYYY-MM-DD[T]HH:mm'));
+        prcMax = _inventory && _inventory.pax_available;
+    }
+   
     // Open update cart field which is use to update cart pax
     const cartUpdateOpen = () => {
         typeof priceCart == 'undefined' && typeof pricings != 'undefined' && pricings.length > 0 && pricings.forEach( ( priceList, index ) => {
@@ -262,6 +269,7 @@ export default () => {
 		return GetConvertedPrice( price ); // Add Multiple currency support to get converted price.
 	}
 
+
     return <>
             <div className='wptravel-udate-cart-wrapper'>
             <button className='components-button' onClick={cartOpen == true ? cartUpdateClose : cartUpdateOpen} >{ cartOpen == true ? i18n.set_close_cart : i18n.set_view_cart }</button>
@@ -271,6 +279,7 @@ export default () => {
                 <span className='pax-selector-label'> { __( 'Pax Selector', 'wp-travel' ) } </span>
                 { typeof priceCategoryList != 'undefined' && priceCategoryList.length > 0  && priceCategoryList.map( ( listed, index ) => {
                     const { title, catId, is_sale, regular_price, sale_price }  = listed;
+                    
                     return <>
                         <div className="wptrave-on-page-booking-cart-update-field">
                         <label>{title} ( {paxCounts[catId]} / {prcMax} )</label>

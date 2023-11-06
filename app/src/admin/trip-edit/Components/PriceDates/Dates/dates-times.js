@@ -1,6 +1,7 @@
 import { useState, useEffect } from '@wordpress/element';
 import { TextControl, PanelBody, PanelRow, ToggleControl, Button, FormTokenField, SelectControl, Dropdown, RangeControl, DateTimePicker, Notice, CheckboxControl } from '@wordpress/components';
 import { sprintf, _n, __ } from '@wordpress/i18n';
+import DatePicker from 'react-datepicker';
 import { useSelect, dispatch } from '@wordpress/data';
 import { applyFilters, addFilter } from '@wordpress/hooks';
 import apiFetch from '@wordpress/api-fetch';
@@ -52,6 +53,14 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
             recurring_weekdays_type: '',
         })
     }
+
+    const startParams =  {
+		showMonthDropdown: true,
+		showYearDropdown: 'select',
+		dropdownMode: "select",
+		minDate: new Date(),
+		maxDate: typeof newEndDate != 'undefined' && newEndDate || '',
+	}
 
     return <ErrorBoundary>
         { typeof dates != 'undefined' && dates.length > 0 && <>
@@ -107,6 +116,12 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
 
                 let selectedTimes = 'undefined' !== typeof _date.trip_time && '' !== _date.trip_time ? _date.trip_time.split(',') : [];
                 
+                let _start_date = moment(_date.start_date)
+                _start_date = _start_date.isValid() ? _start_date.toDate() : new Date();
+
+                let _end_date = moment(_date.end_date)
+                _end_date = _end_date.isValid() ? _end_date.toDate() : '';
+
                 return <PanelBody title={_date.title || `${__i18n.fixed_departure} ${_dateIndex + 1}`} className="wp-travel-panelbody-add-top-gap wp-travel-callendar-leyout-fixed-6-4-0" key={`${storeKey}-date-times-${_dateIndex}`}>
                     <PanelRow>
                         <label>{__i18n.date_label}</label>
@@ -156,103 +171,42 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
                     </PanelRow>
                     <PanelRow>
                         <label>{__i18n.start_date}</label>
-                        <Dropdown
-                            className="my-container-class-name"
-                            contentClassName="my-popover-content-classname"
-                            position="bottom right"
-                            renderToggle={({ isOpen, onToggle }) => {
-                                var startDate = moment(_date.start_date);
-                                return <TextControl value={startDate.isValid() ? _date.start_date : ''} onFocus={onToggle} aria-expanded={isOpen} onChange={() => false} autoComplete="off" />
-                            }}
-                            renderContent={() => {
-                                {
-                                    let _start_date = moment(_date.start_date)
-                                    _start_date = _start_date.isValid() ? _start_date.toDate() : new Date();
-
-                                    return (
-                                        <div className="wp-travel-dropdown-content-wrap wp-travel-datetimepicker wp-travel-datetimepicker-hide-time">
-                                            <DateTimePicker
-                                                currentDate={_start_date}
-                                                minDate={new Date()}
-                                                isInvalidDate={ (date) =>{
-                                                    if (moment(date).isSame(_start_date)) {
-                                                        return true;
-                                                    }
-                                                    if (!moment(date).isAfter(new Date())) {
-                                                        return true;
-                                                    }
-                                                    return false;
-                                                } }
-                                                onChange={(date) => {
-                                                    // if (moment(date).isSame(_start_date)) {
-                                                    //     return false;
-                                                    // }
-                                                    // if (!moment(date).isAfter(new Date())) {
-                                                    //     return false;
-                                                    // }
-                                                    updateDatesTimes({ start_date: moment(date).format('YYYY-MM-DD', date) }, _dateIndex);
-
-                                                }}
-                                            />
-                                        </div>
-                                    )
-                                }
-                            }}
-                        />
+                        <div className='wp-travel-trip-duration-date-validation-date-picker'>
+                            <DatePicker
+                                selected={ _start_date }
+                                { ...startParams }
+                                onChange={ ( date ) =>{
+                                    if (moment(date).isSame(_start_date)) {
+                                        return false;
+                                    }
+                                    if (!moment(date).isAfter(new Date())) {
+                                        return false;
+                                    }
+                                    updateDatesTimes({ start_date: moment(date).format('YYYY-MM-DD', date) }, _dateIndex);
+                                }}
+                            />
+                        </div>
+                        
                     </PanelRow>
 
                     <PanelRow>
                         <label>{__i18n.end_date}</label>
-                        <div className="wp-travel-form-input-with-clear">
-                            <Dropdown
-                                className="my-container-class-name"
-                                contentClassName="my-popover-content-classname"
-                                position="bottom right"
-                                renderToggle={({ isOpen, onToggle }) => {
-                                    var endDate = moment(_date.end_date);
-                                    return <TextControl value={endDate.isValid() ? _date.end_date : ''} onFocus={onToggle} aria-expanded={isOpen} onChange={() => false} autoComplete="off" />
-                                }}
-                                renderContent={() => {
-                                    let _end_date = moment(_date.end_date)
-                                    _end_date = _end_date.isValid() ? _end_date.toDate() : '';
-
-                                    return (
-                                        <div className="wp-travel-dropdown-content-wrap wp-travel-datetimepicker wp-travel-datetimepicker-hide-time">
-                                            <DateTimePicker
-                                                currentDate={_end_date}
-                                                isInvalidDate={ (date) =>{
-                                                    if (!moment(date).isAfter(new Date())) {
-                                                        return true;
-                                                    }
-                                                    if (!moment(date).isAfter(new Date( _date.start_date ))) {
-                                                        return true;
-                                                    }
-                                                    return false;
-                                                } }
-                                                onChange={(date) => {
-
-                                                    // if (!moment(date).isAfter(new Date())) {
-                                                    //     return false;
-                                                    // }
-                                                    // if (!moment(date).isAfter(new Date( _date.start_date ))) {
-                                                    //     return false;
-                                                    // }
-
-                                                    updateDatesTimes({ end_date: moment(date).format('YYYY-MM-DD', date) }, _dateIndex);
-
-                                                }}
-                                            />
-                                        </div>
-                                    )
+                        <div className="wp-travel-trip-duration-date-validation-date-picker">
+                            <DatePicker
+                                selected={ _end_date }
+                                { ...startParams }
+                                onChange={ ( date ) =>{
+                                    updateDatesTimes({ end_date: moment(date).format('YYYY-MM-DD', date) }, _dateIndex);
                                 }}
                             />
-                            <button className="wp-travel-form-input-clear-btn" type="button" onClick={() => {
+                     
+                            {/* <button className="wp-travel-form-input-clear-btn" type="button" onClick={() => {
                                 let _allDates = dates;
                                 _allDates[_dateIndex] = { ..._allDates[_dateIndex], end_date: '' }
                                 onUpdate(storeKey, _allDates);
                             }}>
                                 <i className="fas fa-times-circle"></i>
-                                </button>
+                                </button> */}
                         </div>
                     </PanelRow>
                     {/* {applyFilters('wp_travel_after_end_date', '', dates, _dateIndex, _date, onUpdate, storeKey)} */}

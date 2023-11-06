@@ -246,12 +246,12 @@ const WPTravelSettings = () => {
                 className: "tab-advanced",
                 content: SettingsDebug,
             },
-            {
-                name: "import-export",
-                title: __("Import Export", "wp-travel"),
-                className: "tab-advanced",
-                content: ImportExport,
-            },
+            // {
+            //     name: "import-export",
+            //     title: __("Import Export", "wp-travel"),
+            //     className: "tab-advanced",
+            //     content: ImportExport,
+            // },
             blockTab,
             downloadsTab
         ],

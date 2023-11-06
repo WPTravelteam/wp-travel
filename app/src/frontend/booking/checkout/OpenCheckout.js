@@ -38,14 +38,16 @@ export default () => {
     
     const openModal = () => {
         $( '.ReactModalPortal' ).css( 'display', 'block' );
+        $('.single-itineraries').addClass('wp-travel-one-page-open-for-booking')
     };
     const closeModal = () => {
         updateBookingData( initialState );
         $( '.ReactModalPortal' ).css( 'display', 'none' );
+        $('.single-itineraries').removeClass('wp-travel-one-page-open-for-booking')
     } 
 
     return <>
-        <Button className=" wptravel-book-your-trip  wp-travel-booknow-btn" onClick={openModal}>{__i18n.set_book_now}</Button>
+        <Button className=" wptravel-book-your-trips  wp-travel-booknow-btns" onClick={openModal}>{__i18n.set_book_now}</Button>
         <div className="wp-travel-checkout-one-page">
             <Modal
                 className="booknow-btn-modal"

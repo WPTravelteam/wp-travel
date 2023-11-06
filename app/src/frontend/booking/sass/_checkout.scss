@@ -201,10 +201,12 @@
 .wptravel-layout-v2.ReactModal__Body--open {
 
 	// disable fixed departure will casue issue with date picker.
+	// .react-datepicker-popper:not(.wptravel-traveller-info-container.react-datepicker-popper) {
 	.react-datepicker-popper:not(.wptravel-traveller-info-container .react-datepicker-popper) {
 		position: relative !important;
 		transform: unset !important;
 	}
+                
 
 	// End : disable fixed departure will casue issue with date picker.
 	.new-bottom-booking-container,
@@ -925,6 +927,19 @@
 						// transform: translate3d(-4px, -156px, 0px) rotate(90deg) !important;
 					}
 				}
+			}
+		}
+
+		// date picker
+		.react-datepicker-popper{
+			// position: relative !important;
+			// transform: unset !important;
+			// width: max-content;
+			.react-datepicker{
+				width: max-content;
+			}
+			.react-datepicker__triangle{
+				display: none;
 			}
 		}
 	}

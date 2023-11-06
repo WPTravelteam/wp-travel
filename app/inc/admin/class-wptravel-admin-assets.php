@@ -77,7 +77,31 @@ class WpTravel_Admin_Assets {
 			wp_enqueue_script( 'wptravel-uploader' );
 
 			wp_enqueue_script( 'jquery-parsley' );
-
+			wp_localize_script( 'jquery-parsley', 'error_string', [
+				'defaultMessage' => __( "This value seems to be invalid.", 'wp-travel' ),
+				'type' => [
+				'email' => __( "This value should be a valid email.", 'wp-travel' ),
+				'url' => __( "This value should be a valid url.", 'wp-travel' ),
+				'number' => __( "This value should be a valid number.", 'wp-travel' ),
+				'integer' => __( "This value should be a valid integer.", 'wp-travel' ),
+				'digits' => __( "This value should be digits.", 'wp-travel' ),
+				'alphanum' => __( "This value should be alphanumeric.", 'wp-travel' )
+				],
+				'notblank' => __( "This value should not be blank.", 'wp-travel' ),
+				'required' => __( "This value is required.", 'wp-travel' ),
+				'pattern' => __( "This value seems to be invalid.", 'wp-travel' ),
+				'min' => __( "This value should be greater than or equal to %s.", 'wp-travel' ),
+				'max' => __( "This value should be lower than or equal to %s.", 'wp-travel' ),
+				'range' => __( "This value should be between %s and %s.", 'wp-travel' ),
+				'minlength' => __( "This value is too short. It should have %s characters or more.", 'wp-travel' ),
+				'maxlength' => __( "This value is too long. It should have %s characters or fewer.", 'wp-travel' ),
+				'length' => __( "This value length is invalid. It should be between %s and %s characters long.", 'wp-travel' ),
+				'mincheck' => __( "You must select at least %s choices.", 'wp-travel' ),
+				'maxcheck' => __( "You must select %s choices or fewer.", 'wp-travel' ),
+				'check' => __( "You must select between %s and %s choices.", 'wp-travel' ),
+				'equalto' => __( "This value should be the same.", 'wp-travel' ),
+				'euvatin' => __( "It's not a valid VAT Identification Number.", 'wp-travel' )
+			] );
 			wp_localize_script( 'wp-travel-media-upload', 'wp_travel_drag_drop_uploader', $wp_travel_drag_drop_uploader );
 			wp_enqueue_script( 'wp-travel-media-upload' );
 		}

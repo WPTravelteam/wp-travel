@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 6.0.0
 Tested up to: 6.3
 Requires PHP: 7.4
-Stable tag: 7.5.0
+Stable tag: 7.6.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -415,21 +415,38 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
 
+= 7.6.0 =
+Release Date: 6th November 2023
+
+Fixes:
+* Fixed multiple fixed departure dates not showing on the single trip page.
+* Fixed the pax selector issue while updating the cart.
+* Fixed the translation issue regarding validation.
+
+Enhancements:
+* Added function for sending email while changing booking status.
+* Added discount coupon code and discount amount on booking emails.
+* Enhanced the backend date selector calendar.
+* Added a translation for "Select Date and Pricing Options for this trip in the Trip Options setting."
+
+**For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v7-6-0-update-release-note).**
+
 = 7.5.0 =
 Release Date: 12th October  2023
 
 Fixes:
-* Fixed currency symbol missing in different emails.
-* Fixed update cart issue in the case of Minicart.
-* Fixed arrival and departure date issue on thakyou page and booking email template 
+* Fixed multiple fixed departure dates not showing on the single trip page.
+* Fixed the pax selector issue while updating the cart.
+* Fixed the translation issue regarding validation.
+* Fixed the translation issue for the Thankyou message.
 
 Enhancements:
-* Added more taxonomy options in the search filter( By default, Search, Trip Type, and Location will be displayed.)        
-* Added hook for the empty cart message [wp_travel_cart_empty_message] 
-* Added check box for Privacy Policy on On-page booking
-* Fixed arival and departure date issue on thakyou page and booking email template 
+* Added function for sending email while changing booking status.
+* Added discount coupon code and discount amount on booking emails.
+* Enhanced the backend date selector calendar.
+* Added a translation for "Select Date and Pricing Options for this trip in the Trip Options setting."
 
-**For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v7-5-0-update-release-note).**
+**For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v7.6.0-update-release-note).**
 
 = 7.4.0 =
 Release Date: 27th September 2023
@@ -452,7 +469,7 @@ Layout Issue:
 
 **For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v7-4-0-update-release-note).**
 
-= 7.3.0 =
+= 7.6.0 =
 Release Date: 11th September 2023
 
 Fixes:
