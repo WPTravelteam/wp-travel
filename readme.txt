@@ -431,7 +431,7 @@ Enhancements:
 
 **For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v7-6-0-update-release-note).**
 
-= 7.6.0 =
+= 7.5.0 =
 Release Date: 12th October  2023
 
 Fixes:

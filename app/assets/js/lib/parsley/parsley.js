@@ -2382,29 +2382,29 @@
 
   // This is included with the Parsley library itself,
   Parsley.addMessages('en', {
-    defaultMessage: error_string.defaultMessage,
+    defaultMessage: "This value seems to be invalid.",
     type: {
-      email: error_string.type.email,
-      url: error_string.type.url,
-      number: error_string.type.number,
-      integer: error_string.type.integer,
-      digits: error_string.type.digits,
-      alphanum: error_string.type.alphanum
+      email: "This value should be a valid email.",
+      url: "This value should be a valid url.",
+      number: "This value should be a valid number.",
+      integer: "This value should be a valid integer.",
+      digits: "This value should be digits.",
+      alphanum: "This value should be alphanumeric."
     },
-    notblank: error_string.notblank,
-    required: error_string.required,
-    pattern: error_string.pattern,
-    min: error_string.min,
-    max: error_string.max,
-    range: error_string.range,
-    minlength: error_string.minlength,
-    maxlength: error_string.maxlength,
-    length: error_string.length,
-    mincheck: error_string.mincheck,
-    maxcheck: error_string.maxcheck,
-    check: error_string.check,
-    equalto: error_string.equalto,
-    euvatin: error_string.euvatin
+    notblank: "This value should not be blank.",
+    required: "This value is required.",
+    pattern: "This value seems to be invalid.",
+    min: "This value should be greater than or equal to %s.",
+    max: "This value should be lower than or equal to %s.",
+    range: "This value should be between %s and %s.",
+    minlength: "This value is too short. It should have %s characters or more.",
+    maxlength: "This value is too long. It should have %s characters or fewer.",
+    length: "This value length is invalid. It should be between %s and %s characters long.",
+    mincheck: "You must select at least %s choices.",
+    maxcheck: "You must select %s choices or fewer.",
+    check: "You must select between %s and %s choices.",
+    equalto: "This value should be the same.",
+    euvatin: "It's not a valid VAT Identification Number."
   });
   Parsley.setLocale('en');
 

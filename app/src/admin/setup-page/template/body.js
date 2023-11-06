@@ -45,7 +45,7 @@ const Body = () => {
       	break;
 
     	case 2:
-	     	stepCountValue = 42.9;
+	     	stepCountValue = 46.9;
 	     	document.getElementById("currency-tab-item").classList.remove( 'active' );
 	     	document.getElementById("email-tab-item").classList.remove( 'active' );
 	      	document.getElementById("page-tab-item").classList.add( 'active' );
@@ -53,7 +53,7 @@ const Body = () => {
       	break;
 
     	case 3:
-	      	stepCountValue = 57.2;
+	      	stepCountValue = 61.2;
 	      	document.getElementById("page-tab-item").classList.remove( 'active' );
 	      	document.getElementById("payment-tab-item").classList.remove( 'active' );
 	      	document.getElementById("email-tab-item").classList.add( 'active' );
@@ -61,24 +61,24 @@ const Body = () => {
 	      break;
 
     	case 4:
-      		stepCountValue = 71.5;
+      		stepCountValue = 76.5;
       		document.getElementById("email-tab-item").classList.remove( 'active' );
-      		document.getElementById("theme-tab-item").classList.remove( 'active' );
+      		document.getElementById("finished-tab-item").classList.remove( 'active' );
 	      	document.getElementById("payment-tab-item").classList.add( 'active' );
 
       	break;
 
-    	case 5:
-      		stepCountValue = 85.8;
-      		document.getElementById("payment-tab-item").classList.remove( 'active' );
-      		document.getElementById("finished-tab-item").classList.remove( 'active' );
-	      	document.getElementById("theme-tab-item").classList.add( 'active' );
+    	// case 5:
+      	// 	stepCountValue = 85.8;
+      	// 	document.getElementById("payment-tab-item").classList.remove( 'active' );
+      	// 	document.getElementById("finished-tab-item").classList.remove( 'active' );
+	    //   	document.getElementById("theme-tab-item").classList.add( 'active' );
 
-	    break;
+	    // break;
 
-	   	case 6:
+	   	case 5:
       		stepCountValue = 100;
-      		document.getElementById("theme-tab-item").classList.remove( 'active' );
+      		document.getElementById("payment-tab-item").classList.remove( 'active' );
 	      	document.getElementById("finished-tab-item").classList.add( 'active' );
 
       	break;
@@ -342,7 +342,7 @@ const Body = () => {
 					<li id="page-tab-item" className="tab-item">{ __('Page', 'wp-travel') }</li>
 					<li id="email-tab-item"  className="tab-item">{ __('Email', 'wp-travel') }</li>
 					<li id="payment-tab-item" className="tab-item">{ __('Payment', 'wp-travel') }</li>
-					<li id="theme-tab-item" className="tab-item">{ __('Compatible Themes', 'wp-travel') }</li>
+					{/* <li id="theme-tab-item" className="tab-item">{ __('Compatible Themes', 'wp-travel') }</li> */}
 					<li id="finished-tab-item" className="tab-item">{ __('Finished Setup', 'wp-travel') }</li>
 				</ul>
 				<div id="wp-travel-setup-page-tab">
@@ -853,7 +853,7 @@ const Body = () => {
 							</div>	
 						</div>
 					}
-					{ stepCount == 5 &&
+					{/* { stepCount == 5 &&
 						<div id="theme-tab" className="tab">
 							<div id="setting-save-notice"></div>  
 							<img id="setup-page-loader" src={ _wp_travel.plugin_url + 'assets/images/loader.gif' } />					            
@@ -918,8 +918,8 @@ const Body = () => {
 								<button id="next-step" onClick={nextStep} >{__( 'Skip this step', 'wp-travel' )}</button>
 							</div>	
 						</div>
-					}
-					{ stepCount == 6 && 
+					} */}
+					{ stepCount == 5 && 
 						<div id="finished-tab" className="tab">
 							<div id="trip-import-loader">
 								<p>{ __('Importing demo trips ...', 'wp-travel') }</p>
@@ -981,7 +981,7 @@ const Body = () => {
 					<li id="page-tab-item" className="tab-item">{ __('Page', 'wp-travel') }</li>
 					<li id="email-tab-item"  className="tab-item">{ __('Email', 'wp-travel') }</li>
 					<li id="payment-tab-item" className="tab-item">{ __('Payment', 'wp-travel') }</li>
-					<li id="theme-tab-item" className="tab-item">{ __('Compatible Themes', 'wp-travel') }</li>
+					{/* <li id="theme-tab-item" className="tab-item">{ __('Compatible Themes', 'wp-travel') }</li> */}
 					<li id="finished-tab-item" className="tab-item">{ __('Finished Setup', 'wp-travel') }</li>
 				</ul>
 				<div id="wp-travel-setup-page-tab">
