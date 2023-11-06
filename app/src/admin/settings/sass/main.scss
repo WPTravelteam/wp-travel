@@ -2015,6 +2015,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 				.wp-travel-trip-settings {
 					.wp-travel-save-changes.is-active.is-sticky {
 						margin-right: 341px;
+						min-width: 594px;
 					}
 				}
 
@@ -2268,7 +2269,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 	}
 }
 
-@media (max-width: 1366px) {
+@media (max-width: 1365px) {
 	#wptravel-pro-interface {
 		.wptravel-pro-interace-container {
 			.wptravel-pro-upsell-content {
