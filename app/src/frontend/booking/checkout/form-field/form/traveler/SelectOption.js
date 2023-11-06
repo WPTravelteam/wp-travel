@@ -16,7 +16,7 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
     
 
     return <><PanelBody>
-        <PanelRow>
+        {/* <PanelRow> */}
             <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>
             <select id={id} name={name} defaultValue={ typeof travelerValue[pxKey] != 'undefined' && travelerValue[pxKey] || defaults } 
                 onClick={ (val ) => { 
@@ -32,6 +32,7 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
                     })
                 }
             </select>
-        </PanelRow>
-    </PanelBody> <p className='wp-travel-in-page-error'>{errorData}</p></>
+        {/* </PanelRow> */}
+    </PanelBody> 
+    <p className='wp-travel-in-page-error'>{errorData}</p></>
 }
