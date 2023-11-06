@@ -22,7 +22,7 @@ export default ( { travelerData, trvOne = 'travelerOne', partials = 'no' } ) => 
     const errorData = typeof error_list[name] != 'undefined' && error_list[name]  || '';
     
     return <><PanelBody >
-        <PanelRow className='wptravel-singlepage-booking-options'>
+        {/* <PanelRow className='wptravel-singlepage-booking-options'> */}
             <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>
             <select id={id} name={name} defaultValue={ typeof travelerValue != 'undefined' && travelerValue != '' && travelerValue || defaults } 
                 onClick={ (val ) => { 
@@ -37,6 +37,6 @@ export default ( { travelerData, trvOne = 'travelerOne', partials = 'no' } ) => 
                     })
                 }
             </select>
-        </PanelRow>
+        {/* </PanelRow> */}
     </PanelBody><p className='wp-travel-in-page-error'>{errorData}</p></>
 }
