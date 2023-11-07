@@ -469,7 +469,7 @@ Layout Issue:
 
 **For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v7-4-0-update-release-note).**
 
-= 7.6.0 =
+= 7.3.0 =
 Release Date: 11th September 2023
 
 Fixes:

@@ -1370,7 +1370,7 @@ function wptravel_frontend_google_map( $trip_id, $data ) {
 		<div class="wp-travel-map <?php echo esc_attr( $wrapper_class ); ?>">
 			<div class="<?php echo esc_attr( $map_id ); ?>" id="<?php echo esc_attr( $map_id ); ?>" style="width:100%;height:300px"></div>
 		</div>
-		<script>
+		<!-- <script>
 			jQuery(document).ready(function($) {
 				// var options = {
 				// 	lat : '27.693171845837',
@@ -1378,7 +1378,7 @@ function wptravel_frontend_google_map( $trip_id, $data ) {
 				// }
 				$( '#<?php echo esc_attr( $map_id ); ?>' ).wptravelGoogleMap();
 			});
-		</script>
+		</script> -->
 		<?php
 	} else {
 		$use_lat_lng = get_post_meta( $trip_id, 'wp_travel_trip_map_use_lat_lng', true );
