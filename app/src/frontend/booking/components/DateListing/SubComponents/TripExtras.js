@@ -15,7 +15,10 @@ const TripExtras = ( props ) => {
 	var tripDepartureDate = moment(moment(bookingData.selectedDate).format('YYYY-MM-DD'))._i.replace( '-', '_' ).replace( '-', '_' );
 
 	if( typeof _wp_travel.WP_Travel_Trip_Extras_Inventory !== 'undefined' ){
-		useEffect( () => {			
+		useEffect( () => {	
+			
+			apiFetch.use( apiFetch.createNonceMiddleware( window.myvars.nonce ) );
+			
 			apiFetch( { path: '/wptravelgettripextrasstock/v1/tripextrasStock/'+tripDepartureDate+'seperate'+tripID+'?key='+Math.random().toString(36).substring(2,7), method: 'GET' } ).then( ( response ) => {
 				setTripExtrasStock( response )
 			} )

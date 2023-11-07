@@ -32,7 +32,10 @@ const PaxSelector = ( props ) => {
 	const[ tripPaxStock, setTripPaxStock ] = useState( [] );
 
 	if( typeof _wp_travel.WP_Travel_Trip_Extras_Inventory !== 'undefined' ){
-		useEffect( () => {			
+		useEffect( () => {	
+			
+			apiFetch.use( apiFetch.createNonceMiddleware( window.myvars.nonce ) );
+
 			apiFetch( { path: '/wptravelgettripindividual_pricing_category_paxstock/v1/tripindividual_pricing_category_paxStock/'+tripDepartureDate+'seperate'+tripID+'?key='+Math.random().toString(36).substring(2,7), method: 'GET' } ).then( ( response ) => {
 				setTripPaxStock( response )
 			} )
