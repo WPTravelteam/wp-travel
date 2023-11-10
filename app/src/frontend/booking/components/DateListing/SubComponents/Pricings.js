@@ -28,8 +28,11 @@ const Pricings = ( props ) => {
 
     // Booking Data.
     const { isLoading, dateListingChangeType, selectedDate, selectedDateIds, nomineePricingIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
-	let sd = moment(moment(selectedDate).format('YYYY-MM-DD')).unix();
-	let rd = moment(moment(recurrindDate).format('YYYY-MM-DD')).unix();
+	if( selectedDate !== null ){ 
+		let sd = moment(moment(selectedDate).format('YYYY-MM-DD')).unix();
+		let rd = moment(moment(recurrindDate).format('YYYY-MM-DD')).unix();
+	}
+	
 	return <>
 		{ isLoading && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) && <Loader /> }
 		{ 'undefined' != typeof _nomineePricings && _nomineePricings.length > 0 && <>

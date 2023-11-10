@@ -29,6 +29,27 @@ function wptravel_marketplace_page() {
 
 	// Hardcoded themes data.
 	$themes_data = array(
+		'travelaero'     => array(
+			'name'       => __( 'Travelaero', 'wp-travel' ),
+			'type'       => 'free',
+			'img_url'    => 'https://wensolutions.com/wp-content/uploads/2023/09/description-banner.png',
+			'demo_url'   => 'https://wpdemo.wensolutions.com/travelaero/',
+			'detail_url' => 'https://wensolutions.com/themes/travelaero/',
+		),
+		'wp-yatra'     => array(
+			'name'       => __( 'Wp Yatra', 'wp-travel' ),
+			'type'       => 'free',
+			'img_url'    => 'https://wensolutions.com/wp-content/uploads/elementor/thumbs/hero-qbkhhc4a7nv7rej5i8ckxpsgrxhtscltq568froge8.png',
+			'demo_url'   => 'https://wpdemo.wensolutions.com/wp-yatra/',
+			'detail_url' => 'https://wensolutions.com/themes/wp-yatra/',
+		),
+		'travelin'     => array(
+			'name'       => __( 'Travelin', 'wp-travel' ),
+			'type'       => 'free',
+			'img_url'    => 'https://wensolutions.com/wp-content/uploads/2023/08/TravelinHero-768x843.png',
+			'demo_url'   => 'https://wpdemo.wensolutions.com/travelin/',
+			'detail_url' => 'https://wensolutions.com/themes/travelin/',
+		),
 		'travelvania'     => array(
 			'name'       => __( 'Travelvania', 'wp-travel' ),
 			'type'       => 'free',
@@ -126,6 +147,34 @@ function wptravel_marketplace_page() {
 			'img_url'    => 'https://i0.wp.com/themes.svn.wordpress.org/travel-escape/1.0.6/screenshot.png?w=572&strip=all',
 			'demo_url'   => 'https://wpdemo.wensolutions.com/travel-escape-pro/',
 			'detail_url' => 'https://wensolutions.com/themes/travel-escape-pro/',
+		),
+		'gotrip'         => array(
+			'name'       => __( 'Gotrip', 'wp-travel' ),
+			'type'       => 'free',
+			'img_url'    => 'https://www.eaglevisionit.com/wp-content/uploads/2023/09/screenshot-41-1024x768.png',
+			'demo_url'   => 'https://demos.eaglevisionit.com/gotrip/',
+			'detail_url' => 'https://www.eaglevisionit.com/downloads/gotrip/',
+		),
+		'travel-store'         => array(
+			'name'       => __( 'Travel Store', 'wp-travel' ),
+			'type'       => 'free',
+			'img_url'    => 'https://www.eaglevisionit.com/wp-content/uploads/2023/08/screenshot-26-1024x768.png',
+			'demo_url'   => 'https://demos.eaglevisionit.com/travel-store/',
+			'detail_url' => 'https://www.eaglevisionit.com/downloads/travel-store/',
+		),
+		'travel-fse'         => array(
+			'name'       => __( 'Travel FSE', 'wp-travel' ),
+			'type'       => 'free',
+			'img_url'    => 'https://www.eaglevisionit.com/wp-content/uploads/2023/06/screenshot-1-1-1024x768.png',
+			'demo_url'   => 'https://demos.eaglevisionit.com/travel-fse/',
+			'detail_url' => 'https://www.eaglevisionit.com/downloads/travel-fse/',
+		),
+		'travel-ride'         => array(
+			'name'       => __( 'Travel Ride', 'wp-travel' ),
+			'type'       => 'free',
+			'img_url'    => 'https://www.eaglevisionit.com/wp-content/uploads/2023/09/travel-ride-1024x768.png',
+			'demo_url'   => 'https://demos.eaglevisionit.com/travel-ride/',
+			'detail_url' => 'https://www.eaglevisionit.com/downloads/travel-ride/',
 		),
 		'bloguide-pro'         => array(
 			'name'       => __( 'Bloguide Pro', 'wp-travel' ),
@@ -388,10 +437,7 @@ function wptravel_marketplace_page() {
 											<h4 class="text-title"><a href="<?php echo esc_url( $theme['detail_url'] ); ?>" target="_blank">
 											<span class="dashicons-wp-travel">
 											</span><?php echo esc_html( $theme['name'] ); ?></a></h4>
-											<a class="btn-default pull-left" href="<?php echo esc_url( $theme['demo_url'] ); ?>" target="_blank"><?php echo esc_html( $info_btn_text ); ?></a>
-											<?php if ( $theme['type'] == 'free' && !in_array( $key, array_keys( wp_get_themes() ) ) ): ?>
-												<a class="btn-default pull-left" href="#" onclick="wptravel_install_theme('<?php echo str_replace( '-', '_', $key ) ?>')" ><?php echo esc_html( $install_btn_text ); ?></a>
-											<?php endif ?>										
+											<a class="btn-default pull-left" href="<?php echo esc_url( $theme['demo_url'] ); ?>" target="_blank"><?php echo esc_html( $info_btn_text ); ?></a>									
 											<a class="btn-default pull-right" href="<?php echo esc_url( $theme['detail_url'] ); ?>" target="_blank"><?php echo esc_html( $download_btn_text ); ?></a>
 										</div>
 									</div>
@@ -401,23 +447,7 @@ function wptravel_marketplace_page() {
 
 					</div>
 
-					<script type="text/javascript">
-						var site_url = '<?php get_site_url() ?>';
-
-						function wptravel_install_theme( slug ){
-	
-							document.getElementById("wptravel-theme-install-loader").style.display = 'block';
-							document.getElementById("wptravel-market-content").style.display = 'none';
-
-							fetch( site_url + '/wp-json/wp-travel/v1/theme-install/' + slug )
-							.then(response => {
-								document.getElementById("wptravel-theme-install-loader").style.display = 'none';
-								document.getElementById("wptravel-market-content").style.display = 'block';
-							});
-
-						}
-
-					</script>
+					
 
 					<div id="aside-wrap-container">
 						<div id="aside-wrap" class="single-module-side">
@@ -455,7 +485,7 @@ function wptravel_meta_box_support() {
 	?>
 	<div id="wp_travel_support_block_id">
 		<p class="text-center">
-			<a class="wp-travel-aside-block-button" href="http://wptravel.io/support/" target="_blank">
+			<a class="wp-travel-aside-block-button" href="https://wptravel.io/contact/" target="_blank">
 				<i class="fa fa-question-circle"></i>
 				<?php esc_html_e( 'Support', 'wp-travel' ); ?>
 			</a>
@@ -475,7 +505,7 @@ function wptravel_meta_box_documentation() {
 	?>
 	<div id="wp_travel_doc_block_id">
 		<p class="text-center">
-			<a class="wp-travel-aside-block-button" href="http://wptravel.io/documentations/" target="_blank">
+			<a class="wp-travel-aside-block-button" href="https://wptravel.io/wp-travel-documentations/" target="_blank">
 				<i class="fa fa-book"></i>
 				<?php esc_html_e( 'Documentation', 'wp-travel' ); ?>
 			</a>

@@ -13,8 +13,8 @@ import Select from 'react-select'
 import "react-step-progress-bar/styles.css";
 import { createStore } from 'state-pool';
 
-const store = createStore();  // Create store for storing our global state
-store.setState("stepCount", 0);  // Create "count" global state and add it to the store
+// const store = createStore();  // Create store for storing our global state
+// store.setState("stepCount", 0);  // Create "count" global state and add it to the store
 
 
 
@@ -22,7 +22,7 @@ let stepCountValue = 0;
 
 const Body = () => {
 
-	var [stepCount, setStepCount] = store.useState("stepCount");
+	var [stepCount, setStepCount] = useState(0);
 
 	// var [wptravelsetuppage, setwptravelsetuppage] = useState(0);
 
@@ -45,7 +45,7 @@ const Body = () => {
       	break;
 
     	case 2:
-	     	stepCountValue = 46.9;
+	     	stepCountValue = 42.9;
 	     	document.getElementById("currency-tab-item").classList.remove( 'active' );
 	     	document.getElementById("email-tab-item").classList.remove( 'active' );
 	      	document.getElementById("page-tab-item").classList.add( 'active' );
@@ -53,7 +53,7 @@ const Body = () => {
       	break;
 
     	case 3:
-	      	stepCountValue = 61.2;
+	      	stepCountValue = 57.2;
 	      	document.getElementById("page-tab-item").classList.remove( 'active' );
 	      	document.getElementById("payment-tab-item").classList.remove( 'active' );
 	      	document.getElementById("email-tab-item").classList.add( 'active' );
@@ -61,24 +61,24 @@ const Body = () => {
 	      break;
 
     	case 4:
-      		stepCountValue = 76.5;
+      		stepCountValue = 71.5;
       		document.getElementById("email-tab-item").classList.remove( 'active' );
-      		document.getElementById("finished-tab-item").classList.remove( 'active' );
+      		document.getElementById("theme-tab-item").classList.remove( 'active' );
 	      	document.getElementById("payment-tab-item").classList.add( 'active' );
 
       	break;
 
-    	// case 5:
-      	// 	stepCountValue = 85.8;
-      	// 	document.getElementById("payment-tab-item").classList.remove( 'active' );
-      	// 	document.getElementById("finished-tab-item").classList.remove( 'active' );
-	    //   	document.getElementById("theme-tab-item").classList.add( 'active' );
-
-	    // break;
-
-	   	case 5:
-      		stepCountValue = 100;
+    	case 5:
+      		stepCountValue = 85.8;
       		document.getElementById("payment-tab-item").classList.remove( 'active' );
+      		document.getElementById("finished-tab-item").classList.remove( 'active' );
+	      	document.getElementById("theme-tab-item").classList.add( 'active' );
+
+	    break;
+
+	   	case 6:
+      		stepCountValue = 100;
+      		document.getElementById("theme-tab-item").classList.remove( 'active' );
 	      	document.getElementById("finished-tab-item").classList.add( 'active' );
 
       	break;
@@ -342,7 +342,7 @@ const Body = () => {
 					<li id="page-tab-item" className="tab-item">{ __('Page', 'wp-travel') }</li>
 					<li id="email-tab-item"  className="tab-item">{ __('Email', 'wp-travel') }</li>
 					<li id="payment-tab-item" className="tab-item">{ __('Payment', 'wp-travel') }</li>
-					{/* <li id="theme-tab-item" className="tab-item">{ __('Compatible Themes', 'wp-travel') }</li> */}
+					<li id="theme-tab-item" className="tab-item">{ __('Compatible Themes', 'wp-travel') }</li>
 					<li id="finished-tab-item" className="tab-item">{ __('Finished Setup', 'wp-travel') }</li>
 				</ul>
 				<div id="wp-travel-setup-page-tab">
@@ -603,7 +603,7 @@ const Body = () => {
 							<div id="setting-save-notice">{ __( 'Saving payment setting ...', 'wp-travel' ) }</div>  
 							<img id="setup-page-loader" src={ _wp_travel.plugin_url + 'assets/images/loader.gif' } />
 							<form onSubmit={handleSubmit} id="setup-page-form">
-								<h1>{ __( 'Payment', 'wp-travel' ) }</h1>
+								{/* <h1>{ __( 'Payment', 'wp-travel' ) }</h1>
 								<PanelRow>
 					                <label>{ __( 'Partial Payment', 'wp-travel' ) }</label>
 					                <div className="wp-travel-field-value">
@@ -714,7 +714,7 @@ const Body = () => {
 					                    }
 					                </>
 					                : '' }
-					            {applyFilters( 'wp_travel_after_minimum_partial_payout', [], allData )} 
+					            {applyFilters( 'wp_travel_after_minimum_partial_payout', [], allData )}  */}
 					            <h3>
 					                {__( 'Payment Gateways', 'wp-travel' )}
 					                <label>
@@ -853,7 +853,7 @@ const Body = () => {
 							</div>	
 						</div>
 					}
-					{/* { stepCount == 5 &&
+					{ stepCount == 5 &&
 						<div id="theme-tab" className="tab">
 							<div id="setting-save-notice"></div>  
 							<img id="setup-page-loader" src={ _wp_travel.plugin_url + 'assets/images/loader.gif' } />					            
@@ -880,31 +880,8 @@ const Body = () => {
 									                    return <div className="wp-travel-theme-item">
 									                                <img id="theme-image" src={screenshot_url} />
 									                                <div className="wp-travel-theme-item-wrapper">
-									                                	<h3>{title}</h3>
-									                                	<div className="btns">
-									                                		{										                           				
-									                                			is_active == 'yes' &&
-									                                			<p>{ __('Curently Active', 'wp-travel') }</p>
-									                                			||
-									                                			is_installed == 'yes' &&
-									                                			<button onClick={ () =>{
-										                                			switchTheme( slug, title )
-										                                			}
-										                                		} >
-										                                			{ __('Active', 'wp-travel') }
-										                                		</button>
-										                                		||
-										                                		<button onClick={ () =>{
-										                                			installTheme( slug, title )
-										                                			}
-										                                		} >
-										                                			{ __('Install & Active', 'wp-travel') }
-										                                		</button>
-									                                		}
-									                                		<a className="dashboard-btn" href={ theme_page } target="_blank">
-									                                			{ __('Theme Page', 'wp-travel') }
-									                                		</a>
-									                                	</div>
+									                                	<h3><a href={ theme_page } target="_blank">{title}</a></h3>
+									                                	
 									                                </div>
 									                            </div>
 								                    
@@ -918,8 +895,8 @@ const Body = () => {
 								<button id="next-step" onClick={nextStep} >{__( 'Skip this step', 'wp-travel' )}</button>
 							</div>	
 						</div>
-					} */}
-					{ stepCount == 5 && 
+					}
+					{ stepCount == 6 && 
 						<div id="finished-tab" className="tab">
 							<div id="trip-import-loader">
 								<p>{ __('Importing demo trips ...', 'wp-travel') }</p>
@@ -981,7 +958,7 @@ const Body = () => {
 					<li id="page-tab-item" className="tab-item">{ __('Page', 'wp-travel') }</li>
 					<li id="email-tab-item"  className="tab-item">{ __('Email', 'wp-travel') }</li>
 					<li id="payment-tab-item" className="tab-item">{ __('Payment', 'wp-travel') }</li>
-					{/* <li id="theme-tab-item" className="tab-item">{ __('Compatible Themes', 'wp-travel') }</li> */}
+					<li id="theme-tab-item" className="tab-item">{ __('Compatible Themes', 'wp-travel') }</li>
 					<li id="finished-tab-item" className="tab-item">{ __('Finished Setup', 'wp-travel') }</li>
 				</ul>
 				<div id="wp-travel-setup-page-tab">
@@ -998,9 +975,7 @@ const Body = () => {
 			</div>
    		);
    	}
-
-
-	
+		
 }
 
 export default Body

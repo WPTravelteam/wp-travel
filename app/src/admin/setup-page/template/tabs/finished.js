@@ -8,33 +8,33 @@ const FinishedTab = () => {
 
 		if ( tabName == 'plugin-features' ) {
 			document.getElementById("plugin-features-tab").classList.add( 'active' );
-			document.getElementById("change-log-tab").classList.remove( 'active' );
+			// document.getElementById("change-log-tab").classList.remove( 'active' );
 			document.getElementById("Comparision-tab").classList.remove( 'active' );
 
 			document.getElementById("plugin-features").classList.add( 'active' );
-			document.getElementById("change-log").classList.remove( 'active' );
+			// document.getElementById("change-log").classList.remove( 'active' );
 			document.getElementById("Comparision").classList.remove( 'active' );
 		}
 
 		if ( tabName == 'Comparision' ) {
 			document.getElementById("plugin-features-tab").classList.remove( 'active' );
-			document.getElementById("change-log-tab").classList.remove( 'active' );
+			// document.getElementById("change-log-tab").classList.remove( 'active' );
 			document.getElementById("Comparision-tab").classList.add( 'active' );
 
 			document.getElementById("plugin-features").classList.remove( 'active' );
-			document.getElementById("change-log").classList.remove( 'active' );
+			// document.getElementById("change-log").classList.remove( 'active' );
 			document.getElementById("Comparision").classList.add( 'active' );
 		}
 
-		if ( tabName == 'change-log' ) {
-			document.getElementById("plugin-features-tab").classList.remove( 'active' );
-			document.getElementById("change-log-tab").classList.add( 'active' );
-			document.getElementById("Comparision-tab").classList.remove( 'active' );
+		// if ( tabName == 'change-log' ) {
+		// 	document.getElementById("plugin-features-tab").classList.remove( 'active' );
+		// 	document.getElementById("change-log-tab").classList.add( 'active' );
+		// 	document.getElementById("Comparision-tab").classList.remove( 'active' );
 
-			document.getElementById("plugin-features").classList.remove( 'active' );
-			document.getElementById("change-log").classList.add( 'active' );
-			document.getElementById("Comparision").classList.remove( 'active' );
-		}
+		// 	document.getElementById("plugin-features").classList.remove( 'active' );
+		// 	document.getElementById("change-log").classList.add( 'active' );
+		// 	document.getElementById("Comparision").classList.remove( 'active' );
+		// }
 	   
 	}
 
@@ -59,7 +59,7 @@ const FinishedTab = () => {
 			        <div className="wptravel-tab">
 			            <button id="plugin-features-tab" className="tablinks active" onClick={ () => { openCity( 'plugin-features')} } >{__('Plugin Features', 'wp-travel')}</button>
 			            <button id="Comparision-tab" className="tablinks" onClick={ () => { openCity( 'Comparision') } }>{__('Compare Free & Pro', 'wp-travel')}</button>
-			            <button id="change-log-tab" className="tablinks" onClick={ () => { openCity( 'change-log')} }>{__('Change Log', 'wp-travel')}</button>
+			            {/* <button id="change-log-tab" className="tablinks" onClick={ () => { openCity( 'change-log')} }>{__('Change Log', 'wp-travel')}</button> */}
 			        </div>
 
 			        <div id="plugin-features" className="tabcontent active">
@@ -1470,7 +1470,7 @@ const FinishedTab = () => {
 			                </div>
 			            </section>
 			        </div>
-			        <div id="change-log" className="tabcontent">
+			        {/* <div id="change-log" className="tabcontent">
 			            <div className="wptravel-wrapper">
 			                <div className="wptravel-section-title">
 			                    <h2 id="wptravel-h2-title"><strong>{__('General Info', 'wp-travel')}</strong></h2>
@@ -1500,7 +1500,7 @@ const FinishedTab = () => {
 			                    </div>
 			                </div>
 			            </div>
-			        </div>
+			        </div> */}
 			    </div>
 			</section>
 		</div>						

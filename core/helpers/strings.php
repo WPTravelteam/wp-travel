@@ -344,6 +344,7 @@ class WpTravel_Helpers_Strings {
 			'misc'              => __( 'Misc', 'wp-travel' ),
 			'tabs'              => __( 'Tabs', 'wp-travel' ),
 			'guides'            => __( 'Guides', 'wp-travel' ),
+			'checkout_field_editor'            => __( 'Checkout Field Editor', 'wp-travel' ),
 		);
 	}
 

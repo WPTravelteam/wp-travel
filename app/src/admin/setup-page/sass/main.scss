@@ -393,19 +393,29 @@ body.dashboard_page_wp-travel-setup-page {
 #setup-page-payment-form .wp-travel-block-section table td:not(:last-child) {
   margin-bottom: 5px;
 }
-#wp-travel-theme-lists{
-  
+
+.wp-travel-theme-lists h3{
+    margin-top: 10px;
+    margin-bottom: 0px;
 }
+
+.wp-travel-theme-lists h3 a{
+    text-decoration: none;
+}
+
 .wp-travel-theme-lists {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    gap:20px;
+    gap: 20px;
     text-align: center;
 }
 
 .wp-travel-theme-item #theme-image{
-  width: 510px;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    object-position: top;
 }
 
 .wp-travel-theme-item{

@@ -17,7 +17,8 @@ const TripExtras = ( props ) => {
 	if( typeof _wp_travel.WP_Travel_Trip_Extras_Inventory !== 'undefined' ){
 		useEffect( () => {	
 			
-			apiFetch.use( apiFetch.createNonceMiddleware( window.myvars.nonce ) );
+			let nonce = Math.random().toString(36).substring(2,7);
+			apiFetch.use( apiFetch.createNonceMiddleware( nonce ) );
 			
 			apiFetch( { path: '/wptravelgettripextrasstock/v1/tripextrasStock/'+tripDepartureDate+'seperate'+tripID+'?key='+Math.random().toString(36).substring(2,7), method: 'GET' } ).then( ( response ) => {
 				setTripExtrasStock( response )
