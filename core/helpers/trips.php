@@ -457,7 +457,7 @@ class WpTravel_Helpers_Trips {
 			 *
 			 * @todo Need escaping in wp_travel_overview
 			 */
-			update_post_meta( $trip_id, 'wp_travel_video_code', sanitize_text_field( $trip_data->trip_video_code ) );
+			update_post_meta( $trip_id, 'wp_travel_video_code', sanitize_url( $trip_data->trip_video_code ) );
 		}
 
 		if ( ! empty( $trip_data->trip_outline ) || empty( $trip_data->trip_outline ) ) {

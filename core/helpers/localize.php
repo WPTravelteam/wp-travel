@@ -296,7 +296,7 @@ class WpTravel_Helpers_Localize {
 				$_wp_travel_admin['overview'] = $wp_travel_itinerary->get_content();
 			}
 
-			$_wp_travel_admin['price_per'] = 'asssssssssss';
+			$_wp_travel_admin['price_per'] = 'unit';
 
 			$localized_data['_wp_travel_admin'] = $_wp_travel_admin;
 
