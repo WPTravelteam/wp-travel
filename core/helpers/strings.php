@@ -57,9 +57,11 @@ class WpTravel_Helpers_Strings {
 			'fact'                      => __( 'Fact', 'wp-travel' ),
 			'featured_book_now'         => __( 'Book Now', 'wp-travel' ), // Book Now at the featured section.
 			'featured_trip_enquiry'     => __( 'Trip Enquiry', 'wp-travel' ), // Trip Enquiry at the featured section.
+			'featured_trip_video'		=> __( 'Featured Video', 'wp-travel' ),	// Featured Video Heading at Trip Options
 			'filter_by'                 => __( 'Filter By', 'wp-travel' ),
 			'fixed_departure'           => __( 'Fixed Departure', 'wp-travel' ),
 			'from'                      => __( 'From', 'wp-travel' ),
+			'gallery_images'     		=> __( 'Images', 'wp-travel' ),	// Images Heading at Trip Options
 			'global_partial_payout'     => __( 'Global Partial Payout', 'wp-travel' ),
 			'global_trip_enquiry'       => __( 'Global Trip Enquiry Option', 'wp-travel' ),
 			'global_trip_title'         => __( 'Global Trip Title', 'wp-travel' ),
@@ -102,6 +104,7 @@ class WpTravel_Helpers_Strings {
 			'view_system_information'   => __( 'View system information', 'wp-travel' ),
 			'general_setting'           => __( 'General Settings', 'wp-travel' ),
 			'to'                        => __( 'To', 'wp-travel' ),
+			'video_url'                 => __( 'Video URL', 'wp-travel' ),
 			'trip_code'                 => __( 'Trip code', 'wp-travel' ),
 			'trip_date'                 => __( 'Trip date', 'wp-travel' ),
 			'trip_duration'             => __( 'Trip Duration', 'wp-travel' ),
@@ -428,6 +431,9 @@ class WpTravel_Helpers_Strings {
 			'global_faq_option'  => array(
 				'title'       => __( 'Tired of updating repitative FAQs ?', 'wp-travel' ),
 				'description' => __( 'By upgrading to Pro, you can create and use Global FAQs in all of your trips !', 'wp-travel' ),
+			),
+			'featured_trip_video_option'   => array(
+				'description' => __( 'Insert the video link to embed.', 'wp-travel' ),
 			),
 			'trip_code_option'   => array(
 				'description' => __( 'Need Custom Trip Code? Check', 'wp-travel' ),
