@@ -14,6 +14,7 @@ function wptravel_get_currency_list() {
 	$currency = array(
 		'ALL' => 'Albania Lek',
 		'AFN' => 'Afghanistan Afghani',
+		'AMD' => 'Armenian Dram',
 		'ARS' => 'Argentina Peso',
 		'AWG' => 'Aruba Guilder',
 		'AUD' => 'Australia Dollar',
