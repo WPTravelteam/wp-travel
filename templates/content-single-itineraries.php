@@ -50,7 +50,7 @@ do_action( 'wp_travel_before_content_start' );
 				<div class="banner-image-wrapper" style="background-image: url(<?php echo apply_filters( 'wp_travel_trip_single_page_thumbnail_background', esc_url( wptravel_get_post_thumbnail_url( get_the_ID(), 'large' ) ), get_the_ID() ); ?>)">
 						<?php echo apply_filters( 'wp_travel_trip_single_page_thumbnail', wp_kses( wptravel_get_post_thumbnail( get_the_ID() ), wptravel_allowed_html( array( 'img' ) ) ), get_the_ID() ); ?>
 						<?php if( WP_Travel_Helpers_Trips::get_trip(get_the_ID())['trip']['trip_video_code'] ): ?>
-						<a class="trip-video" href="https://www.youtube.com/watch?v=<?php echo esc_attr(WP_Travel_Helpers_Trips::get_trip(get_the_ID())['trip']['trip_video_code']); ?>"><i class="fas fa-play-circle"></i></a>
+						<a class="trip-video" href="<?php echo esc_url(WP_Travel_Helpers_Trips::get_trip(get_the_ID())['trip']['trip_video_code']); ?>"><i class="fas fa-play-circle"></i></a>
 						<?php endif; ?>
 				</div>
 				<?php if ( WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => get_the_ID() ) ) ) : ?>
