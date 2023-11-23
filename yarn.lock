@@ -1924,6 +1924,8 @@
   version "0.22.34"
   resolved "https://registry.yarnpkg.com/@types/cheerio/-/cheerio-0.22.34.tgz#a2becca3fff0b33697a0e8db20b77d0f8b65894f"
   integrity sha512-uoi5gQGpH5vdNrGOexnNm+19YZLdIRMF/IW8V6w1kIeoXaO1m2mVUMV4dl76tvRRKoIp9d/Z97ZYeIE4lacEsA==
+  dependencies:
+    "@types/node" "*"
 
 "@types/eslint-scope@^3.7.3":
   version "3.7.7"
@@ -4981,12 +4983,17 @@ data-urls@^2.0.0:
     whatwg-mimetype "^2.3.0"
     whatwg-url "^8.0.0"
 
-date-fns@^2.22.1, date-fns@^2.30.0:
+date-fns@^2.30.0:
   version "2.30.0"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.30.0.tgz#f367e644839ff57894ec6ac480de40cae4b0f4d0"
   integrity sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==
   dependencies:
     "@babel/runtime" "^7.21.0"
+
+date-fns@^3.0.0-alpha.1:
+  version "3.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-3.0.0-alpha.1.tgz#11c47acd3ab3b083381afd9f087b4144591ad488"
+  integrity sha512-vnXwZJRuIUykjVFiKOTzpTQEFhm0SBPU47kRcztmhKZ0tcvWkS9lisnNzRRJC/HfSodCkhPuTFQdjyHxXtrInA==
 
 date-now@^0.1.4:
   version "0.1.4"

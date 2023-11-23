@@ -46,14 +46,14 @@ function wptravel_marketplace_page() {
 		'travelin'     => array(
 			'name'       => __( 'Travelin', 'wp-travel' ),
 			'type'       => 'free',
-			'img_url'    => 'https://wensolutions.com/wp-content/uploads/2023/08/TravelinHero-768x843.png',
+			'img_url'    => 'http://wpdemo.wensolutions.com/travelin/wp-content/uploads/sites/17/2023/11/screenshot-1-min-1.png',
 			'demo_url'   => 'https://wpdemo.wensolutions.com/travelin/',
 			'detail_url' => 'https://wensolutions.com/themes/travelin/',
 		),
 		'travelvania'     => array(
 			'name'       => __( 'Travelvania', 'wp-travel' ),
 			'type'       => 'free',
-			'img_url'    => 'https://i0.wp.com/themes.svn.wordpress.org/travelvania/1.0.3/screenshot.png?w=572&strip=all',
+			'img_url'    => 'http://wpdemo.wensolutions.com/travelvania/wp-content/uploads/sites/16/2023/11/Travelvania-1-1024x736-min.png',
 			'demo_url'   => 'https://wpdemo.wensolutions.com/travelvania/',
 			'detail_url' => 'https://wensolutions.com/themes/travelvania/',
 		),
@@ -401,6 +401,8 @@ function wptravel_marketplace_page() {
 			'detail_url' => 'https://themepalace.com/downloads/travel-insight/',
 		),
 	);
+
+	
 
 	$info_btn_text     = __( 'View Demo', 'wp-travel' );
 	$install_btn_text     = __( 'Install', 'wp-travel' );

@@ -99,10 +99,13 @@ const PaxSelector = ( props ) => {
 		return GetConvertedPrice( price ); // Add Multiple currency support to get converted price.
 	}
 
+	var sd = '';
 	if( selectedDate !== null ){ 
-		let sd     = moment(moment(selectedDate).format('YYYY-MM-DD')).unix();
-		let rd     = moment(moment(recurrindDate).format('YYYY-MM-DD')).unix();
+		
+		sd     = moment(moment(selectedDate).format('YYYY-MM-DD')).unix();
 	}
+	let rd = moment(moment(recurrindDate).format('YYYY-MM-DD')).unix();
+
 
 	let firstIndex = _nomineePricings[0];
 	let pricing    = [];

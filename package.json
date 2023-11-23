@@ -11,7 +11,7 @@
     "postinstall": "husky install",
     "makepots": "wp i18n make-pot . i18n/languages/wp-travel-test.pot --exclude=node_modules,vendor,src,wordpress,build,bundle --skip-js",
     "bundle": "wp-scripts build && npx grunt build_svn",
-    "pots" : "npx grunt textdomains"
+    "pots": "npx grunt textdomains"
   },
   "repository": {
     "type": "git",
@@ -81,7 +81,7 @@
     "@wordpress/env": "^4.1.1",
     "@wordpress/i18n": "^4.2.2",
     "@wordpress/icons": "^5.0.2",
-    "date-fns": "^2.22.1",
+    "date-fns": "^3.0.0-alpha.1",
     "lodash": "^4.17.21",
     "querystring-es3": "^0.2.1",
     "react-datepicker": "^4.2.1",

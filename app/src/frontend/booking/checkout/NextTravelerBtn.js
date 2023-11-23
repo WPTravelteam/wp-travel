@@ -129,6 +129,7 @@ const WpTravelBookNow = ( props ) => {
 			trip_id: tripData.id,
 			arrival_date: moment(selectedDate).format('YYYY-MM-DD'),
 			pricing_id: selectedPricingId,
+			date_id: selectedDateIds,
 			pax: paxCounts,
 			category_pax: paxCounts,
 			trip_price: getCartTotal(), // just trip price without extras.

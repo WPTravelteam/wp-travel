@@ -38,7 +38,7 @@ const SaveCoupons = (props) => {
                     if( res.success && "WP_TRAVEL_UPDATED_COUPON" === res.data.code){
                         updateStateChange(false)
                         displaySavedMessage(true)
-                        disable_save(true)
+                        // disable_save(true)
                     }
                 } );
             }}

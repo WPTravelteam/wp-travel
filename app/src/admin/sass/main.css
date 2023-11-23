@@ -9706,7 +9706,7 @@ a.wp-travel-tablenav span {
 }
 .my-order-details .table-wrp .my-order-single-field .my-order-tail {
   display: block;
-  overflow: hidden;
+  overflow: inherit;
 }
 .my-order-details .table-wrp .my-order-single-field a {
   color: #31708f;

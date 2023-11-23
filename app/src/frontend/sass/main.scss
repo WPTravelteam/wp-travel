@@ -35,6 +35,11 @@
 @import "./14-trip-itinerary";
 @import "./15-wptravel-addons";
 
+
+
+.wptravel-recurring-table-wrapper .person-box h4{
+    display: none;
+}
 .single-itineraries.wptravel-layout-v2 .wptravel-recurring-table-wrapper tr{
 	color: black;
 }

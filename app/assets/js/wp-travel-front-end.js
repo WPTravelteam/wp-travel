@@ -39,7 +39,7 @@ if( ( typeof _wp_travel_check_for_pro  != 'undefined' && _wp_travel_check_for_pr
 
             if( item == 'bank_deposit' ){
                 
-                $(".wp-travel-radio-group.wp-travel-payment-field").append("<div class='wp-travel-radio'><input type='radio' id='wp-travel-payment-bank_deposit' name='wp_travel_payment_gateway' value='bank_deposit' data-parsley-required='1' required='1' data-parsley-errors-container='#error_container-wp-travel-payment-gateway' data-parsley-multiple='wp_travel_payment_gateway' checked><label for='wp-travel-payment-bank_deposit' class='radio-checkbox-label'>Bank Deposite</label></div>");
+                $(".wp-travel-radio-group.wp-travel-payment-field").append("<div class='wp-travel-radio'><input type='radio' id='wp-travel-payment-bank_deposit' name='wp_travel_payment_gateway' value='bank_deposit' data-parsley-required='1' required='1' data-parsley-errors-container='#error_container-wp-travel-payment-gateway' data-parsley-multiple='wp_travel_payment_gateway' checked><label for='wp-travel-payment-bank_deposit' class='radio-checkbox-label'>Bank Deposit</label></div>");
             }
             if( item == 'khalti' ){
                 
