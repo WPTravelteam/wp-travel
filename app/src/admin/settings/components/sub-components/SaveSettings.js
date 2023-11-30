@@ -73,7 +73,7 @@ const SaveSettings = (props) => {
                     </div>
                 </div>
                 <Button
-                    isPrimary
+                    variant="secondary"
                     onClick={() => {
                         updateRequestSending(true);
                         apiFetch({ url: `${ajaxurl}?action=wp_travel_update_settings&_nonce=${_wp_travel._nonce}`, data: JSON.stringify( allData ), method: 'post' }).then(res => {

@@ -29,7 +29,7 @@ const SaveCoupons = (props) => {
                     <p className="text-success"><strong>{__('Coupon Saved !', 'wp-travel')}</strong></p>
                 </div> }
             </div>
-            <Button isPrimary onClick={()=>{
+            <Button variant="primary" onClick={()=>{
                  
                 updateRequestSending(true);
                 apiFetch( { url: `${ajaxurl}?action=wptravel_update_coupon&_nonce=${_wp_travel._nonce}&coupon_id=${_wp_travel.postID}`, data:allData, method:'post' } ).then( res => {

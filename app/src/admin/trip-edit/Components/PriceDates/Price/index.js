@@ -95,7 +95,7 @@ const Pricings = ( {allData} ) => {
                 { typeof tripPrices != 'undefined' && tripPrices.length > 0 ? <>
                 
                     <Notice status="warning" isDismissible={false}>{__i18n.messages.pricing_message}</Notice>
-                    <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addTripPrice()}>{__i18n.add_price }</Button></PanelRow>
+                    <PanelRow className="wp-travel-action-section"><span></span><Button variant="secondary" onClick={() => addTripPrice()}>{__i18n.add_price }</Button></PanelRow>
                     {applyFilters( 'show_heighest_price_after_add_price', [], allData )}
                     <div className="wp-travel-sortable-component">
                     <ReactSortable
@@ -224,7 +224,7 @@ const Pricings = ( {allData} ) => {
                             {applyFilters('wp_travel_after_pricings_fields', [], priceIndex, allData)}
                             <hr />
                             <PanelRow className="wp-travel-action-section has-right-padding">
-                                <span></span><Button isDefault onClick={() => {
+                                <span></span><Button variant="secondary" onClick={() => {
                                     if (!confirm(__i18n.alert.remove_price )) {
                                         return false;
                                     }
@@ -249,7 +249,7 @@ const Pricings = ( {allData} ) => {
                     })}
                     </ReactSortable>
                     </ div>
-                { typeof tripPrices != 'undefined' && tripPrices.length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addTripPrice()}>{__i18n.add_price }</Button></PanelRow>}</>:<>
+                { typeof tripPrices != 'undefined' && tripPrices.length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button variant="secondary" onClick={() => addTripPrice()}>{__i18n.add_price }</Button></PanelRow>}</>:<>
                 <Notice isDismissible={false} actions={[{
                     'label': __i18n.add_price,
                     onClick:()=>{

@@ -90,6 +90,12 @@ class WpTravel_Helpers_Localize {
 			$_wp_travel['gdpr_msg'] = ! empty( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ) : __( 'By contacting us, you agree to our ', 'wp-travel' );
 			$_wp_travel['policy_link'] = wptravel_privacy_link_url();
 
+			if( class_exists( 'WP_Travel_Multiple_Currency_Core' ) ){
+				$_wp_travel['conversion_rate'] = wtmc_get_conversion_rate();
+				$_wp_travel['conversion_rate']  = wtmc_get_conversion_rate();
+			}
+			
+
 			$coupon_args  = array(
 				'post_type'   => 'wp-travel-coupons',
 				'post_status' => 'published',

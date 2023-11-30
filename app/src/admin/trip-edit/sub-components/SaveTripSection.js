@@ -28,7 +28,7 @@ const SaveTripSection = () => {
                 <p className="text-success"><strong>{__i18n.messages.trip_saved}</strong></p>
             </div> }
         </div>
-        <Button isPrimary onClick={()=>{
+        <Button variant="primary" onClick={()=>{
             updateRequestSending(true);
 
             if ( allData.is_fixed_departure ) {
