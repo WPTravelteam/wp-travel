@@ -43,6 +43,9 @@ button.wptravel-single-page-close-btn {
     }
     .booknow-btn-modal form#wp-travel-booking .wptravel-booking-payment-page .components-panel__body.is-opened{
         padding: 10px 10px 0px 10px;
+        @media screen and (max-width: 576px) {
+            padding: 20px 0;
+        }
     }
     .wptravel-single-page-calender-booking{
         .wp-travel-booking__header{

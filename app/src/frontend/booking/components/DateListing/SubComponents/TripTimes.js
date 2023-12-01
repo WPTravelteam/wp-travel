@@ -14,7 +14,7 @@ const TripTimes =  ( props ) => {
 	const { selectedDate, nomineeTimes } = bookingData;
 	return enable_time  && <div className="wp-travel-booking__selected-time">
 		{nomineeTimes.length > 0 && <>
-			<h4>{`${__i18n.bookings.available_trip_times}`}</h4>
+			<h4 className='wptravel-available-booking-time__label'>{`${__i18n.bookings.available_trip_times}`}</h4>
 			{
 				nomineeTimes.map((timeObject, i) => {
 					return <button key={i} disabled={timeObject.isSame( selectedDate ) } onClick={ () => {
