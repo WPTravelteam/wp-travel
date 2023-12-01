@@ -290,6 +290,13 @@ $defaultColor: #3399ff;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	@media screen and (max-width: 600px) {
+		flex-direction: column;
+		text-align: center;
+		p {
+			margin: 5px 0;
+		}
+	}
 	.left-info {
 		p:last-child {
 			margin-bottom: 0;
@@ -297,6 +304,9 @@ $defaultColor: #3399ff;
 	}
 	.right-info {
 		text-align: right;
+		@media screen and (max-width: 600px) {
+			text-align: center;
+		}
 		p {
 			font-size: 20px;
 			strong {
@@ -311,6 +321,7 @@ $defaultColor: #3399ff;
 			align-items: center;
 			p {
 				margin-bottom: 0;
+				margin-top: 0;
 			}
 		}
 		.left-info {
@@ -1065,7 +1076,7 @@ $defaultColor: #3399ff;
 						td:not(:nth-child(2)) {
 							vertical-align: top;
 							text-align: right;
-							width: 250px;
+							// width: 250px;
 						}
 						td:nth-child(1) {
 							div {
@@ -1076,19 +1087,19 @@ $defaultColor: #3399ff;
 								}
 							}
 						}
-						@media (min-width: 992px) {
-							td:nth-child(3) {
-								width: 170px;
-							}
-							td:nth-child(2) {
-								width: 460px;
-							}
-						}
-						@media (min-width: 1200px) {
-							td:nth-child(3) {
-								width: 200px;
-							}
-						}
+						// @media (min-width: 992px) {
+						// 	td:nth-child(3) {
+						// 		width: 170px;
+						// 	}
+						// 	td:nth-child(2) {
+						// 		width: 460px;
+						// 	}
+						// }
+						// @media (min-width: 1200px) {
+						// 	td:nth-child(3) {
+						// 		width: 200px;
+						// 	}
+						// }
 					}
 					tr.selected {
 						background: #f9f9f9;

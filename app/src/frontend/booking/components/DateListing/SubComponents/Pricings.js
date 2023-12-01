@@ -43,6 +43,7 @@ const Pricings = ( props ) => {
 			{ 
 				_nomineePricings.map( (pricingId, pricingIndex) => {
 					return <CheckboxControl
+						className="wptravel-opb-trip-pricings-label"
 						key={pricingIndex}
 						label={allPricings[pricingId].title}
 						checked={ selectedPricingId == pricingId && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) }
