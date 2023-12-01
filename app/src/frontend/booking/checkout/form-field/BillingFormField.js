@@ -89,6 +89,7 @@ export default ( ) => {
             })
         }
         </div>
+        <p className='wptravel-onepage-navigation-error'>{errorFound}</p>
 
         <div className='wptravel-onepage-navigation-btn'>
         
@@ -96,7 +97,6 @@ export default ( ) => {
                 updateStore({...bookingData, travelerInfo : true , tripBillingEnable : false })
             }} >{i18n.set_go_back}</Button>
             <div>
-                <p className='wptravel-onepage-navigation-error'>{errorFound}</p>
                 <div className="wptravel-onpage-priceshow">
                     { trip_price != '' && <div className="onpage-traveler-field-price-show">
                         <p><span className='onpage-travel-price-display-label'>{__( 'Trip Price', 'wp-travel' ) }</span>{currency_symbol}{trip_price}</p>
