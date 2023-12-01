@@ -58,8 +58,8 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
 		showMonthDropdown: true,
 		showYearDropdown: 'select',
 		dropdownMode: "select",
-		minDate: new Date(),
-		maxDate: typeof newEndDate != 'undefined' && newEndDate || '',
+		// minDate: new Date(),
+		// maxDate: typeof newEndDate != 'undefined' && newEndDate || '',
 	}
 
     return <ErrorBoundary>
@@ -170,7 +170,7 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
 
                     </PanelRow>
                     <PanelRow>
-                        <label>{__i18n.start_date}</label>http://main.test/wp-admin/edit.php?post_type=itineraries
+                        <label>{__i18n.start_date}</label>
                         <div className='wp-travel-trip-duration-date-validation-date-picker'>
                             <DatePicker
                                 selected={ _start_date }
