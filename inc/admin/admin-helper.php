@@ -37,7 +37,7 @@ function wptravel_marketplace_page() {
 			'detail_url' => 'https://wensolutions.com/themes/travelaero/',
 		),
 		'wp-yatra'     => array(
-			'name'       => __( 'Wp Yatra', 'wp-travel' ),
+			'name'       => __( 'WP Yatra', 'wp-travel' ),
 			'type'       => 'free',
 			'img_url'    => 'https://wensolutions.com/wp-content/uploads/elementor/thumbs/hero-qbkhhc4a7nv7rej5i8ckxpsgrxhtscltq568froge8.png',
 			'demo_url'   => 'https://wpdemo.wensolutions.com/wp-yatra/',
