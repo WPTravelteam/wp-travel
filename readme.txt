@@ -415,6 +415,25 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
 
+= 7.7.0 =
+Release Date: 4th December 2023
+
+Fixes:
+* Fixed ajax-loader console issue.
+* Fixed Google Map API issue.
+* Fixed booking edit page content width issue.
+* Added the latest theme to the marketplace page and setup page.
+* Update setup page design. 
+* Optimized scripts.
+* Fixed Broken Access Control Vulnerability issue. 
+* Fixed moment js issue. 
+* Replaced invalid contact page documentation url in setting page. 
+* Update demo trips CSV file. 
+* Fixed react date picker console error.  
+* Fixed Onpage layout issue.  
+
+**For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v7-7-0-update-release-note).**
+
 = 7.6.0 =
 Release Date: 6th November 2023
 
