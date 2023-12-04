@@ -321,8 +321,14 @@ class WpTravel_Helpers_Booking {
 												<th><?php esc_html_e( 'Country', 'wp-travel' ); ?></th>
 												<th><?php esc_html_e( 'Phone No.', 'wp-travel' ); ?></th>
 												<th><?php esc_html_e( 'Email', 'wp-travel' ); ?></th>
-												<th><?php esc_html_e( 'DOB', 'wp-travel' ); ?></th>
-												<th><?php esc_html_e( 'Gender', 'wp-travel' ); ?></th>
+												<?php if( apply_filters( 'wp_travel_enable_traveller_dob_booking_email', true ) ): ?>
+													<th><?php esc_html_e( 'DOB', 'wp-travel' ); ?></th>
+												<?php endif; ?>
+												<?php if( apply_filters( 'wp_travel_enable_traveller_gender_booking_email', true ) ): ?>
+													<th><?php esc_html_e( 'Gender', 'wp-travel' ); ?></th>
+												<?php endif; ?>
+												
+												
 											</tr>
 										</thead>
 									<?php 
@@ -339,8 +345,14 @@ class WpTravel_Helpers_Booking {
 										<td><?php echo esc_html( $traveler_country ); ?></td>
 										<td><?php echo esc_html( $traveler_phone ); ?></td>
 										<td><?php echo esc_html( $traveler_email ); ?></td>
-										<td><?php echo esc_html( $traveler_dob ); ?></td>
-										<td><?php echo esc_html( $traveler_gander ); ?></td>
+										<?php if( apply_filters( 'wp_travel_enable_traveller_dob_booking_email', true ) ): ?>
+											<td><?php echo esc_html( $traveler_dob ); ?></td>
+										<?php endif; ?>
+										<?php if( apply_filters( 'wp_travel_enable_traveller_gender_booking_email', true ) ): ?>
+											<td><?php echo esc_html( $traveler_gander ); ?></td>
+										<?php endif; ?>
+										
+										
 									</tr>
 									<?php }
 								}
@@ -358,6 +370,10 @@ class WpTravel_Helpers_Booking {
 										<td><?php echo esc_html( $country ); ?></td>
 										<td><?php echo esc_html( $phone ); ?></td>
 										<td><?php echo esc_html( $email ); ?></td>
+										<?php if( apply_filters( 'wp_travel_enable_traveller_dob_booking_email', true ) ): ?>
+										<?php endif; ?>
+										<?php if( apply_filters( 'wp_travel_enable_traveller_dob_booking_email', true ) ): ?>
+										<?php endif; ?>
 										<td><?php echo esc_html( $dob ); ?></td>
 										<td><?php echo esc_html( $gender ); ?></td>
 									</tr>
@@ -398,8 +414,13 @@ class WpTravel_Helpers_Booking {
 								<th><?php esc_html_e( 'Country', 'wp-travel' ); ?></th>
 								<th><?php esc_html_e( 'Phone No.', 'wp-travel' ); ?></th>
 								<th><?php esc_html_e( 'Email', 'wp-travel' ); ?></th>
-								<th><?php esc_html_e( 'DOB', 'wp-travel' ); ?></th>
-								<th><?php esc_html_e( 'Gender', 'wp-travel' ); ?></th>
+								<?php if( apply_filters( 'wp_travel_enable_traveller_dob_booking_email', true ) ): ?>
+									<th><?php esc_html_e( 'DOB', 'wp-travel' ); ?></th>
+								<?php endif; ?>
+								
+								<?php if( apply_filters( 'wp_travel_enable_traveller_gender_booking_email', true ) ): ?>
+									<th><?php esc_html_e( 'Gender', 'wp-travel' ); ?></th>
+								<?php endif; ?>
 							</tr>
 						</thead>
 						<tbody>
@@ -429,8 +450,14 @@ class WpTravel_Helpers_Booking {
 									<td><?php echo esc_html( $country ); ?></td>
 									<td><?php echo esc_html( $phone ); ?></td>
 									<td><?php echo esc_html( $email ); ?></td>
-									<td><?php echo esc_html( $dob ); ?></td>
-									<td><?php echo esc_html( $gender ); ?></td>
+									<?php if( apply_filters( 'wp_travel_enable_traveller_dob_booking_email', true ) ): ?>
+										<td><?php echo esc_html( $dob ); ?></td>
+									<?php endif; ?>
+									
+									<?php if( apply_filters( 'wp_travel_enable_traveller_gender_booking_email', true ) ): ?>
+										<td><?php echo esc_html( $gender ); ?></td>
+									<?php endif; ?>
+									
 								</tr>
 								<?php
 							}
