@@ -1358,7 +1358,7 @@ const FinishedTab = () => {
 			                                            <i class="fa fa-check" aria-hidden="true"></i>
 			                                        </td>
 			                                        <td>
-			                                            {__('PauY Checkout', 'wp-travel')}
+			                                            {__('PayU Checkout', 'wp-travel')}
 			                                        </td>
 			                                        <td>
 			                                            <i class="fa fa-times" aria-hidden="true"></i>

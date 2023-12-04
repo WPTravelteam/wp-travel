@@ -38,6 +38,12 @@ class WpTravel_Localize_Admin {
 		if ( get_current_screen()->base == 'dashboard_page_wp-travel-setup-page' ) {
 			$theme_lists = array(
                 array(
+                    'name'       => 'Travel Knock',
+                    'slug'       => 'travel-knock',
+                    'theme_page' => 'https://wensolutions.com/themes/travel-knock/',
+                    'screenshot' => 'http://wpdemo.wensolutions.com/wp-content/uploads/2023/12/Travel-Knock-2-min.png',
+                ),
+                array(
                     'name'       => 'Travelaero',
                     'slug'       => 'travelaero',
                     'theme_page' => 'https://wensolutions.com/themes/travelaero/',

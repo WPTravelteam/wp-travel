@@ -2652,3 +2652,23 @@ $primaryColor: #3399ff;
 .wp-travel-advanced-gallery-items-list .slick-dots {
     bottom: -10px;
 }
+
+.wp-travel-itinerary-items .trip-location span:hover ul {
+    display: block;
+}
+
+.wp-travel-itinerary-items .view-box .trip-location ul {
+    display: none;
+    padding: 5px 20px;
+    border: none;
+    position: absolute;
+    top: 35px;
+    background: #fff;
+    box-shadow: 0px 0px 1px #cdcdcd;
+    margin: 10px;
+}
+
+.wp-travel-itinerary-items .view-box .trip-location li {
+    border: none;
+    padding: 3px;
+}

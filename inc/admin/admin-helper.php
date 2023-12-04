@@ -29,12 +29,12 @@ function wptravel_marketplace_page() {
 
 	// Hardcoded themes data.
 	$themes_data = array(
-		'travelaero'     => array(
-			'name'       => __( 'Travelaero', 'wp-travel' ),
+		'travel-knock'     => array(
+			'name'       => __( 'Travel Knock', 'wp-travel' ),
 			'type'       => 'free',
-			'img_url'    => 'https://wensolutions.com/wp-content/uploads/2023/09/description-banner.png',
-			'demo_url'   => 'https://wpdemo.wensolutions.com/travelaero/',
-			'detail_url' => 'https://wensolutions.com/themes/travelaero/',
+			'img_url'    => 'http://wpdemo.wensolutions.com/wp-content/uploads/2023/12/Travel-Knock-2-min.png',
+			'demo_url'   => 'https://wpdemo.wensolutions.com/travel-knock/',
+			'detail_url' => 'https://wensolutions.com/themes/travel-knock/',
 		),
 		'wp-yatra'     => array(
 			'name'       => __( 'WP Yatra', 'wp-travel' ),
