@@ -138,6 +138,7 @@ class WP_Travel_Itinerary {
 	 */
 	function get_group_size() {
 		$group_size = isset( $this->post_meta['wp_travel_group_size'] ) ? $this->post_meta['wp_travel_group_size'][0] : '';
+
 		if ( $group_size ) {
 			return apply_filters( 'wp_travel_min_max_show_frontend', $group_size, $this->post->ID ); // If group size saved in meta. return it from meta.
 		}

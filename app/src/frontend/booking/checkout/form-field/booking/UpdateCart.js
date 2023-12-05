@@ -268,7 +268,7 @@ export default () => {
 		price = price || 0;
 		return GetConvertedPrice( price ); // Add Multiple currency support to get converted price.
 	}
-
+    
 
     return <>
             <div className='wptravel-udate-cart-wrapper'>
@@ -276,7 +276,7 @@ export default () => {
         { cartOpen == true && <>
             <div className="wptravel-on-page-booking-update-cart-section animated-wp-travel fadeIn-wp-travel">
                 <div className="wptravel-on-page-booking-update-cart-section-wrapper">
-                <span className='pax-selector-label'> { __( 'Pax Selector', 'wp-travel' ) } </span>
+                <span className='pax-selector-label'> {i18n.bookings.booking_tab_pax_selector} </span>
                 { typeof priceCategoryList != 'undefined' && priceCategoryList.length > 0  && priceCategoryList.map( ( listed, index ) => {
                     const { title, catId, is_sale, regular_price, sale_price }  = listed;
                     
@@ -304,7 +304,7 @@ export default () => {
                 
                 { typeof nomineeTripExtras != 'undefined' && nomineeTripExtras.length > 0 && <> 
                 <div className="wptravel-on-page-booking-update-trip-extras-wrapper">
-                <span className='trip-extra-label'> { __( 'Trip Extras', 'wp-travel' ) } </span>
+                <span className='trip-extra-label'> {i18n.bookings.trip_extras_list_label} </span>
                 { typeof nomineeTripExtras != 'undefined' && nomineeTripExtras.length > 0 && nomineeTripExtras.map( ( trpExtra, extraIndex ) => {
                             let extraIds = typeof trpExtra.id != 'undefined' &&  trpExtra.id || 0;
                             let extraTitles = typeof trpExtra.title != 'undefined' &&  trpExtra.title || 0;

@@ -1893,6 +1893,7 @@ function wptravel_get_group_size( $trip_id = null ) {
 
 	$group_size = $wp_travel_itinerary->get_group_size();
 
+
 	if ( $group_size ) {
 		return sprintf( apply_filters( 'wp_travel_template_group_size_text', __( '%d ' . ( $strings['bookings']['pax'] ? $strings['bookings']['pax'] : 'Pax' ), 'wp-travel' ) ), $group_size );
 	}
