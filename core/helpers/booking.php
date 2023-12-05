@@ -87,7 +87,7 @@ class WpTravel_Helpers_Booking {
 						$pricing       = $pricing_data['pricings'];
 						$pricing_title = isset( $pricing['title'] ) ? $pricing['title'] : $pricing[0]['title'];
 					}
-
+					
 					$pax_price_total = 0;
 					$extras_price_total = 0;
 					?>
@@ -154,7 +154,9 @@ class WpTravel_Helpers_Booking {
 								<td><?php echo esc_html( $start_date ); ?></td>
 								<?php else: ?>
 								<td><?php echo esc_html( $start_date ); ?></td>
-								<td><?php echo esc_html( wptravel_format_date( $departure_date ) ); ?></td>
+								<?php if( (int) $trip_data['trip_duration']['days'] !== 0 ): ?>
+									<td><?php echo esc_html( wptravel_format_date( $departure_date ) ); ?></td>
+								<?php endif; ?>
 							<?php endif; ?>
 							<?php else: ?>
 								<td><?php echo esc_html( $start_date ); ?></td>

@@ -416,7 +416,7 @@ Before updating plugin please check ["our latest release notes"](#developers).
 == Changelog ==
 
 = 7.7.0 =
-Release Date: 4th December 2023
+Release Date: 5th December 2023
 
 Fixes:
 * Fixed ajax-loader console issue.
