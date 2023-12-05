@@ -7538,7 +7538,9 @@ a.wp-travel-tablenav span {
 }
 .marketplace-module .single-module-image img {
   width: 100%;
-  height: auto;
+  height: 220px;
+  object-fit: cover;
+  object-position: top;
   border-bottom: 1px solid #ddd;
 }
 .marketplace-module .single-module-content {
@@ -9704,7 +9706,7 @@ a.wp-travel-tablenav span {
 }
 .my-order-details .table-wrp .my-order-single-field .my-order-tail {
   display: block;
-  overflow: hidden;
+  overflow: inherit;
 }
 .my-order-details .table-wrp .my-order-single-field a {
   color: #31708f;

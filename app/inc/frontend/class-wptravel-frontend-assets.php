@@ -79,31 +79,31 @@ class WpTravel_Frontend_Assets {
 				if ( ! wp_script_is( 'jquery-parsley', 'enqueued' ) ) {
 					// Parsley For Frontend Single Trips.
 					wp_enqueue_script( 'jquery-parsley' ); // Maybe already enqueued from form fields.
-					wp_localize_script( 'jquery-parsley', 'error_string', [
-						'defaultMessage' => __( "This value seems to be invalid.", 'wp-travel' ),
-						'type' => [
-						'email' => __( "This value should be a valid email.", 'wp-travel' ),
-						'url' => __( "This value should be a valid url.", 'wp-travel' ),
-						'number' => __( "This value should be a valid number.", 'wp-travel' ),
-						'integer' => __( "This value should be a valid integer.", 'wp-travel' ),
-						'digits' => __( "This value should be digits.", 'wp-travel' ),
-						'alphanum' => __( "This value should be alphanumeric.", 'wp-travel' )
-						],
-						'notblank' => __( "This value should not be blank.", 'wp-travel' ),
-						'required' => __( "This value is required.", 'wp-travel' ),
-						'pattern' => __( "This value seems to be invalid.", 'wp-travel' ),
-						'min' => __( "This value should be greater than or equal to %s.", 'wp-travel' ),
-						'max' => __( "This value should be lower than or equal to %s.", 'wp-travel' ),
-						'range' => __( "This value should be between %s and %s.", 'wp-travel' ),
-						'minlength' => __( "This value is too short. It should have %s characters or more.", 'wp-travel' ),
-						'maxlength' => __( "This value is too long. It should have %s characters or fewer.", 'wp-travel' ),
-						'length' => __( "This value length is invalid. It should be between %s and %s characters long.", 'wp-travel' ),
-						'mincheck' => __( "You must select at least %s choices.", 'wp-travel' ),
-						'maxcheck' => __( "You must select %s choices or fewer.", 'wp-travel' ),
-						'check' => __( "You must select between %s and %s choices.", 'wp-travel' ),
-						'equalto' => __( "This value should be the same.", 'wp-travel' ),
-						'euvatin' => __( "It's not a valid VAT Identification Number.", 'wp-travel' )
-					] );
+					// wp_localize_script( 'jquery-parsley', 'error_string', [
+					// 	'defaultMessage' => __( "This value seems to be invalid.", 'wp-travel' ),
+					// 	'type' => [
+					// 	'email' => __( "This value should be a valid email.", 'wp-travel' ),
+					// 	'url' => __( "This value should be a valid url.", 'wp-travel' ),
+					// 	'number' => __( "This value should be a valid number.", 'wp-travel' ),
+					// 	'integer' => __( "This value should be a valid integer.", 'wp-travel' ),
+					// 	'digits' => __( "This value should be digits.", 'wp-travel' ),
+					// 	'alphanum' => __( "This value should be alphanumeric.", 'wp-travel' )
+					// 	],
+					// 	'notblank' => __( "This value should not be blank.", 'wp-travel' ),
+					// 	'required' => __( "This value is required.", 'wp-travel' ),
+					// 	'pattern' => __( "This value seems to be invalid.", 'wp-travel' ),
+					// 	'min' => __( "This value should be greater than or equal to %s.", 'wp-travel' ),
+					// 	'max' => __( "This value should be lower than or equal to %s.", 'wp-travel' ),
+					// 	'range' => __( "This value should be between %s and %s.", 'wp-travel' ),
+					// 	'minlength' => __( "This value is too short. It should have %s characters or more.", 'wp-travel' ),
+					// 	'maxlength' => __( "This value is too long. It should have %s characters or fewer.", 'wp-travel' ),
+					// 	'length' => __( "This value length is invalid. It should be between %s and %s characters long.", 'wp-travel' ),
+					// 	'mincheck' => __( "You must select at least %s choices.", 'wp-travel' ),
+					// 	'maxcheck' => __( "You must select %s choices or fewer.", 'wp-travel' ),
+					// 	'check' => __( "You must select between %s and %s choices.", 'wp-travel' ),
+					// 	'equalto' => __( "This value should be the same.", 'wp-travel' ),
+					// 	'euvatin' => __( "It's not a valid VAT Identification Number.", 'wp-travel' )
+					// ] );
 				}
 
 				// for GMAP.
@@ -149,15 +149,14 @@ class WpTravel_Frontend_Assets {
 			wp_enqueue_script( 'wp-travel-payment-frontend-script' );
 		}
 
-		if ( WP_Travel::is_page( 'single' ) || WP_Travel::is_page( 'checkout' ) ) {
-			// Localize the script with new data.
-			if ( $switch_to_v4 ) {
-				$_wp_travel = isset( $all_localized['_wp_travel'] ) ? $all_localized['_wp_travel'] : array();
-				wp_localize_script( 'wp-travel-frontend-booking-widget', '_wp_travel', $_wp_travel );
-				wp_enqueue_script( 'wp-travel-frontend-booking-widget' );
-				wp_enqueue_style( 'wp-travel-frontend-booking-widget-style' );
-			}
+		// Localize the script with new data.
+		if ( $switch_to_v4 ) {
+			$_wp_travel = isset( $all_localized['_wp_travel'] ) ? $all_localized['_wp_travel'] : array();
+			wp_localize_script( 'wp-travel-frontend-booking-widget', '_wp_travel', $_wp_travel );
+			wp_enqueue_script( 'wp-travel-frontend-booking-widget' );
+			wp_enqueue_style( 'wp-travel-frontend-booking-widget-style' );
 		}
+	
 
 		// Styles for all Pages.
 		wp_enqueue_style( 'dashicons' );
@@ -394,7 +393,7 @@ class WpTravel_Frontend_Assets {
 
 		if ( '' !== $api_key && true === $show_google_map ) {
 			$scripts['google-map-api'] = array(
-				'src'       => 'https://maps.googleapis.com/maps/api/js?libraries=places&key=' . $api_key,
+				'src'       => 'https://maps.googleapis.com/maps/api/js?libraries=places&key=' . $api_key . '&callback=Function.prototype',
 				'deps'      => array(),
 				'ver'       => WP_TRAVEL_VERSION,
 				'in_footer' => true,

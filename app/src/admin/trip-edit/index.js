@@ -6,11 +6,12 @@ import { _n, __ } from "@wordpress/i18n";
 import domReady from "@wordpress/dom-ready";
 import ErrorBoundary from "../../ErrorBoundry/ErrorBoundry";
 import WpTravelSEOAnalysisEditorText from './yoast-seo-compatible/YoastSeo';
-
+import Select from 'react-select'
 
 import "./trip-store";
 
-import "../settings/store/settings-store"; // @since 4.5.1
+
+// import "../settings/store/settings-store"; // @since 4.5.1
 
 import SaveTripSection from "./sub-components/SaveTripSection";
 
@@ -79,6 +80,8 @@ const WPTravelTripOptions = () => {
 	const allData = useSelect((select) => {
 		return select("WPTravel/TripEdit").getAllStore();
 	}, []);
+
+
 	toggleDisablePostUpdate(allData.has_state_changes);
 
 	const settingsData = useSelect((select) => {

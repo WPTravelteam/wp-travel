@@ -24,7 +24,6 @@ export default ( { travelerData, trvOne = 'travelerOne' } ) => {
                 updateStore({...bookingData, checkoutDetails : checkoutNewData } )
             } }
             rows="4"
-             cols="50"
         />
     </PanelBody><p className='wp-travel-in-page-error'>{errorData}</p></>
 }

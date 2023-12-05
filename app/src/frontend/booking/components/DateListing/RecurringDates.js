@@ -1,6 +1,5 @@
 import { forwardRef, useEffect, useState, Fragment } from '@wordpress/element';
 import { CheckboxControl, Disabled } from '@wordpress/components';
-import $ from 'jquery';
 
 const __i18n = {
 	..._wp_travel.strings
@@ -13,6 +12,7 @@ import Loader from '../../../../GlobalComponents/Loader';
 
 
 // Additional lib
+// const _ = lodash;
 import _ from 'lodash';
 import { RRule, RRuleSet } from "rrule";
 
@@ -22,44 +22,36 @@ import Pricings from './SubComponents/Pricings';
 import PaxSelector from './SubComponents/PaxSelector';
 import TripExtras from './SubComponents/TripExtras';
 import TripTimes from './SubComponents/TripTimes';
+// import generateRRule from "../../_GenerateRRule";
 import InventoryNotice, { Notice } from '../../_InventoryNotice';
 
-var recurringCount = 1;
+
 const RecurringRepeator = ( props ) =>  {
     const { innerIndex:index, _nomineePricings, date, recurrindDate, tripData, bookingData } = props;
 
-   
-
-    if( recurringCount == 1 ){
-        // @since 7.6.0
-        // this will render the nearest date of the trip
-        $( '.wp-travel-fixed-departure .fixed-date-options' ).html( moment(recurrindDate).format(_wp_travel.date_format_moment ) )
-    }
-
-
-    $( '.wptravel-book-your-trip.wp-travel-booknow-btn' ).click( function(){
-        // This will open booking modal 
-        $( '.ReactModalPortal' ).css( 'display', 'block' );
-    } );
-    
     // Trip Data.
     const { pricings } = tripData;
     const allPricings  = pricings && _.keyBy( pricings, p => p.id ) // Need object structure because pricing id may not be in sequencial order.
 
     // Booking Data.
     const { isLoading, selectedDate, selectedDateIds, selectedPricingId, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
-    let sd = moment(moment(selectedDate).format('YYYY-MM-DD')).unix();
-    let rd = moment(moment(recurrindDate).format('YYYY-MM-DD')).unix();
+
+    var sd = '';
+	if( selectedDate !== null ){ 
+		
+		sd     = moment(moment(selectedDate).format('YYYY-MM-DD')).unix();
+	}
+	let rd = moment(moment(recurrindDate).format('YYYY-MM-DD')).unix();
+
 
     let loadingClass = isLoading && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) ? 'wptravel-loading' : '';
     const { enable_time } = date;
-    recurringCount++;
     return <tr key={index} className={loadingClass}>
-        <td class="tablebody-booking-pricings"  data-label={__i18n.bookings.pricings_list_label}>
+        <td data-label={__i18n.bookings.pricings_list_label}>
             {/* _nomineePricings not updated in store/state because there are multiple _nomineePricings as per date so just a variable. */}
             {IsRecuringTourDates(props)(recurrindDate) && <Pricings { ...props } /> || <Disabled><Pricings { ...props } /></Disabled> }
         </td>
-        <td class="tablebody-booking-person"  data-label={__i18n.bookings.person}>
+        <td data-label={__i18n.bookings.person}>
             <div className ="person-box">
                 
                 { ! isLoading && pricingUnavailable && tripData.inventory && 'yes' === tripData.inventory.enable_trip_inventory && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) && ( ! nomineeTimes.length || ( nomineeTimes.length && selectedTime ) )  ) ?
@@ -83,7 +75,7 @@ const RecurringRepeator = ( props ) =>  {
                 }		
             </div>
         </td>
-        <td class="tablebody-booking-dates" data-label={__i18n.bookings.date}>
+        <td data-label={__i18n.bookings.date}>
             <div className = "date-box">
                 <div className="date-time-wrapper">
                     <span className="start-date"><span>{__i18n.bookings.start_date}: </span>{moment(recurrindDate).format(_wp_travel.date_format_moment)}</span>

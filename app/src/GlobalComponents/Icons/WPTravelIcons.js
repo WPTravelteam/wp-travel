@@ -163,7 +163,7 @@ const WPTravelIcons = (props) => {
                         </Notice>
                     }
                         <Button
-                        isSecondary
+                        variant="secondary"
                         onClick={() => updateTabSettings(props.factIndex)}
                         >
                             {__( 'Insert', 'wp-travel' )}

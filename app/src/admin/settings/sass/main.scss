@@ -749,73 +749,86 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 		#wpbody-content {
 			.wp-travel-field-value {
 				.components-range-control {
-					.css-l9lx82 {
-						display: block;
-						flex: 1 1 0%;
-						position: relative;
-						width: 100%;
-						color: $wp-travel-green;
-						height: 30px;
-						min-height: 30px;
-					}
+					.components-base-control.components-input-control.components-number-control {
+                        width: fit-content;
+                    }
+                    .components-range-control__track {
+                        background-color: $wp-travel-green;
+                    }
+                    .components-range-control__thumb-wrapper {
+                        background-color: $wp-travel-green;
+                        span {
+                            background-color: $wp-travel-green;
+                        }
+                    }
 
-					.css-10282dw {
-						border-radius: 4px;
-						height: 4px;
-						pointer-events: none;
-						display: block;
-						position: absolute;
-						margin-top: 13px;
-						top: 0px;
-						background: $wp-travel-green;
-					}
+					// .css-l9lx82 {
+					// 	display: block;
+					// 	flex: 1 1 0%;
+					// 	position: relative;
+					// 	width: 100%;
+					// 	color: $wp-travel-green;
+					// 	height: 30px;
+					// 	min-height: 30px;
+					// }
 
-					.css-1nzgp6g {
-						-webkit-box-align: center;
-						align-items: center;
-						border-radius: 50%;
-						height: 100%;
-						outline: 0px;
-						position: absolute;
-						-webkit-user-select: none;
-						user-select: none;
-						width: 100%;
-						background-color: $wp-travel-green;
-					}
+					// .css-10282dw {
+					// 	border-radius: 4px;
+					// 	height: 4px;
+					// 	pointer-events: none;
+					// 	display: block;
+					// 	position: absolute;
+					// 	margin-top: 13px;
+					// 	top: 0px;
+					// 	background: $wp-travel-green;
+					// }
 
-					.css-19h143v {
-						-webkit-box-align: center;
-						align-items: center;
-						border-radius: 50%;
-						height: 100%;
-						outline: 0px;
-						position: absolute;
-						-webkit-user-select: none;
-						user-select: none;
-						width: 100%;
-						background-color: $wp-travel-green;
-					}
+					// .css-1nzgp6g {
+					// 	-webkit-box-align: center;
+					// 	align-items: center;
+					// 	border-radius: 50%;
+					// 	height: 100%;
+					// 	outline: 0px;
+					// 	position: absolute;
+					// 	-webkit-user-select: none;
+					// 	user-select: none;
+					// 	width: 100%;
+					// 	background-color: $wp-travel-green;
+					// }
 
-					.css-azwfbw {
-						-webkit-box-align: center;
-						align-items: center;
-						display: flex;
-						height: 12px;
-						-webkit-box-pack: center;
-						justify-content: center;
-						margin-top: 9px;
-						outline: 0px;
-						pointer-events: none;
-						position: absolute;
-						top: 0px;
-						-webkit-user-select: none;
-						user-select: none;
-						width: 12px;
-						border-radius: 50%;
-						background-color: $wp-travel-green;
-						margin-left: -10px;
-						transform: translateX(4.5px);
-					}
+					// .css-19h143v {
+					// 	-webkit-box-align: center;
+					// 	align-items: center;
+					// 	border-radius: 50%;
+					// 	height: 100%;
+					// 	outline: 0px;
+					// 	position: absolute;
+					// 	-webkit-user-select: none;
+					// 	user-select: none;
+					// 	width: 100%;
+					// 	background-color: $wp-travel-green;
+					// }
+
+					// .css-azwfbw {
+					// 	-webkit-box-align: center;
+					// 	align-items: center;
+					// 	display: flex;
+					// 	height: 12px;
+					// 	-webkit-box-pack: center;
+					// 	justify-content: center;
+					// 	margin-top: 9px;
+					// 	outline: 0px;
+					// 	pointer-events: none;
+					// 	position: absolute;
+					// 	top: 0px;
+					// 	-webkit-user-select: none;
+					// 	user-select: none;
+					// 	width: 12px;
+					// 	border-radius: 50%;
+					// 	background-color: $wp-travel-green;
+					// 	margin-left: -10px;
+					// 	transform: translateX(4.5px);
+					// }
 				}
 				.components-base-control {
 					display: flex;
@@ -999,6 +1012,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 						border-radius: 0.5rem;
 						align-items: center;
 						justify-content: center;
+						color: #fff;
 
 						&:hover {
 							background-color: $wp-travel-green-hover;

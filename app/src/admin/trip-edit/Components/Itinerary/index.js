@@ -123,7 +123,7 @@ const Itinerary = ({allData}) => {
     return <>
             <div className="wp-travel-itinerary-title">
                 <h3 className="wp-travel-tab-content-title">{__i18n.itinerary}</h3>
-                {typeof itineraries != 'undefined' && itineraries && Object.keys(itineraries).length > 0 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addItinerary()}>{__i18n.add_itinerary}</Button></PanelRow> }
+                {typeof itineraries != 'undefined' && itineraries && Object.keys(itineraries).length > 0 && <PanelRow className="wp-travel-action-section"><span></span><Button variant="secondary" onClick={() => addItinerary()}>{__i18n.add_itinerary}</Button></PanelRow> }
             </div>
             {typeof itineraries != 'undefined' && itineraries && Object.keys(itineraries).length > 0 ?
                 <div className="wp-travel-sortable-component itinerary-sortable">
@@ -289,7 +289,7 @@ const Itinerary = ({allData}) => {
                                     </PanelRow>
                                     <hr />
                                     <PanelRow className="wp-travel-action-section has-right-padding">
-                                        <span></span><Button isDefault onClick={() => {
+                                        <span></span><Button variant="secondary" onClick={() => {
                                             if (!confirm(__i18n.alert.remove_itinerary )) {
                                                 return false;
                                             }
@@ -306,7 +306,7 @@ const Itinerary = ({allData}) => {
                             })
                         }
                     </ReactSortable>
-                    {typeof itineraries != 'undefined' && Object.keys(itineraries).length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addItinerary()}>{__i18n.add_itinerary}</Button></PanelRow> }
+                    {typeof itineraries != 'undefined' && Object.keys(itineraries).length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button variant="secondary" onClick={() => addItinerary()}>{__i18n.add_itinerary}</Button></PanelRow> }
 
                 </div>
                 : <><Notice isDismissible={false} actions={[{

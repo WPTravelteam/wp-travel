@@ -135,7 +135,7 @@ export default () => {
                 { wp_travel_booking_option == 'booking_with_payment' && typeof payment_select != 'undefined' && typeof payment_select.wp_travel_payment_gateway != 'undefined' && payment_select.wp_travel_payment_gateway == 'stripe' && <div className="wptravel-single-page-stripcheckout"><label> {wp_travel.strip_card }</label><div id="card-element"></div> </div>}
                 {
                     <div id="onpage-privacy-policy" className="wptravel-onepage-payment-total-trip-price">
-                        <div className="components-panel__body is-opened wptrave-on-page-booking-price-with-coupon wptrave-onpage-price-calculation">
+                        <div className="components-panel__body is-opened wptrave-on-page-booking-price-with-coupon wptrave-onpage-price-calculation wptravel-opb-privacy-policy-check">
                             <div className="components-panel__row">
                                 <label for="wp-travel-enquiry-gdpr-msg">
                                     { __( 'Privacy Policy', 'wp-travel' ) }											
@@ -191,10 +191,10 @@ export default () => {
                 
                 <input type="hidden" value={_wp_travel._nonce} name="_nonce" />
                 <div style={{display:"flex", justifyContent:"space-between"}}>
-                    <button className="wptravel-onpage-booking-back-buttons" onClick={ () => { 
+                    <div className="wptravel-onepage-navigation-btn" style={{display:"flex", justifyContent:"space-between"}}>
+                        {/* <button className="wptravel-onpage-booking-back-buttons" onClick={ () => { 
                             updateStore({...bookingData, tripBillingEnable : true, treipPaymentEnable : false })
-                        }} >{i18n.set_go_back}</button>
-                    <div className="wptravel-onepage-navigation-btn"> 
+                        }} >{i18n.set_go_back}</button> */}
                         <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value={i18n.set_book_now} />
                     </div>
                 </div>

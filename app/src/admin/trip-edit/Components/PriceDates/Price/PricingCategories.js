@@ -136,7 +136,7 @@ const WPTravelTripPricingCategories = ({priceIndex}) => {
                 <hr/>
                 <PanelRow className="wp-travel-action-section">
                     <span></span>
-                    <Button isDefault onClick={() => removePricingCategory(category.id,priceIndex)} className="wp-traval-button-danger" >{ __i18n.remove_category }</Button>
+                    <Button variant="secondary" onClick={() => removePricingCategory(category.id,priceIndex)} className="wp-traval-button-danger" >{ __i18n.remove_category }</Button>
                 </PanelRow>
             </PanelBody>})}
             {applyFilters('wp_travel_pricing_option_content_after_category', '', price, priceIndex )}

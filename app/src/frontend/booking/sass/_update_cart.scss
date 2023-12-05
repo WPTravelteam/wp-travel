@@ -24,6 +24,11 @@
 		padding: 10px;
 		margin: 0;
 		justify-content: space-between;
+		@media screen and (max-width: 768px) {
+			padding: 0;
+			flex-direction: column;
+			align-items: flex-start;
+		}
 		label {
 			// width: 250px;
 			flex-basis: 40%;
@@ -80,6 +85,9 @@
 			p {
 				margin: 0;
 				margin-left: 50px;
+				@media screen and (max-width: 768px) {
+					margin-left: 0;
+				}
 				font-size: 20px;
 				font-weight: 600;
 			}
@@ -188,6 +196,7 @@
 }
 .wptravel-onepage-payment-total-trip-price {
 	width: 100%;
+	margin-bottom: 20px;
 
 	.wptrave-onpage-price-calculation {
 		display: flex;

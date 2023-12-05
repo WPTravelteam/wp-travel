@@ -614,7 +614,7 @@ addFilter('wp_travel_payment_gateway_fields_bank_deposit', 'wp_travel', (content
                                     </tr>
                                     </table>
                                         <PanelRow className="wp-travel-action-section">
-                                            <Button isDefault onClick={() => {
+                                            <Button variant="secondary" onClick={() => {
                                                 if (!confirm(__('Are you sure to delete Bank Detail?', 'wp-travel'))) {
                                                     return false;
                                                 }
@@ -630,7 +630,7 @@ addFilter('wp_travel_payment_gateway_fields_bank_deposit', 'wp_travel', (content
                             </ReactSortable>
                         </>
                     }
-                    <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addNewAccount()}>{__('+ Add New', 'wp-travel')}</Button></PanelRow>
+                    <PanelRow className="wp-travel-action-section"><span></span><Button variant="secondary" onClick={() => addNewAccount()}>{__('+ Add New', 'wp-travel')}</Button></PanelRow>
 
                 </>
             }

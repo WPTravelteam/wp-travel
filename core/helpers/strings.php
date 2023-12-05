@@ -57,9 +57,11 @@ class WpTravel_Helpers_Strings {
 			'fact'                      => __( 'Fact', 'wp-travel' ),
 			'featured_book_now'         => __( 'Book Now', 'wp-travel' ), // Book Now at the featured section.
 			'featured_trip_enquiry'     => __( 'Trip Enquiry', 'wp-travel' ), // Trip Enquiry at the featured section.
+			'featured_trip_video'		=> __( 'Featured Video', 'wp-travel' ),	// Featured Video Heading at Trip Options
 			'filter_by'                 => __( 'Filter By', 'wp-travel' ),
 			'fixed_departure'           => __( 'Fixed Departure', 'wp-travel' ),
 			'from'                      => __( 'From', 'wp-travel' ),
+			'gallery_images'     		=> __( 'Images', 'wp-travel' ),	// Images Heading at Trip Options
 			'global_partial_payout'     => __( 'Global Partial Payout', 'wp-travel' ),
 			'global_trip_enquiry'       => __( 'Global Trip Enquiry Option', 'wp-travel' ),
 			'global_trip_title'         => __( 'Global Trip Title', 'wp-travel' ),
@@ -102,6 +104,7 @@ class WpTravel_Helpers_Strings {
 			'view_system_information'   => __( 'View system information', 'wp-travel' ),
 			'general_setting'           => __( 'General Settings', 'wp-travel' ),
 			'to'                        => __( 'To', 'wp-travel' ),
+			'video_url'                 => __( 'Video URL', 'wp-travel' ),
 			'trip_code'                 => __( 'Trip code', 'wp-travel' ),
 			'trip_date'                 => __( 'Trip date', 'wp-travel' ),
 			'trip_duration'             => __( 'Trip Duration', 'wp-travel' ),
@@ -209,18 +212,18 @@ class WpTravel_Helpers_Strings {
 			'departure_time'			=> __( apply_filters( 'wp_travel_departure_time', 'Departure Time' ), 'wp-travel' ),
 			'conditional_payment_text'	=> __( 'Using the Conditional payment module, you can apply for conditional payment on the checkout page according to the billing address or the trip locations.', 'wp-travel' ),
 			'single_archive'			=> self::wp_travel_single_archive_strings(),
-			'set_cart_error'			=> __( 'You are coupon already applied.', 'wp-travel' ),
+			'set_cart_error'			=> __( 'You have already applied a coupon.', 'wp-travel' ),
 			'set_coupon_empty'			=> __( 'Please enter your coupon code', 'wp-travel' ),
-			'set_invalid_coupon_error'	=> __( 'Coupon code is invalid. Please re-enter your coupon code', 'wp-travel' ),
-			'set_coupon_apply'			=> __( 'Coupon is applied.', 'wp-travel' ),
+			'set_invalid_coupon_error'	=> __( 'Invalid Coupon code. Please re-enter your coupon code', 'wp-travel' ),
+			'set_coupon_apply'			=> __( 'Coupon applied.', 'wp-travel' ),
 			'set_enter_coupon_message'	=> __( 'Enter you coupon code', 'wp-travel' ),
 			'set_coupon_btn'			=> __( 'Apply Coupon', 'wp-travel' ),
 			'set_ideal_bank'			=> __( 'iDEAL Bank', 'wp-travel' ),
 			'set_book_now_btn'			=> __( 'Book Now', 'wp-travel' ),
 			'set_cart_updated'			=> __( 'Cart updated successfully.', 'wp-travel' ),
-			'set_cart_updated_error'	=> __( "Your cart isn't update due to server error.", "wp-travel" ),
-			'set_cart_updated_server_responce' => __( "Your cart isn't update due to server responce error.", "wp-travel" ),
-			'set_cart_server_error'		=> __( 'Your cart is not update due to some server error.', 'wp-travel' ),
+			'set_cart_updated_error'	=> __( "Cart failed to update due to server error.", "wp-travel" ),
+			'set_cart_updated_server_responce' => __( "Cart failed to update due to server response error.", "wp-travel" ),
+			'set_cart_server_error'		=> __( 'Cart failed to update due to some server error.', 'wp-travel' ),
 			'set_close_cart'			=> __( 'Close Cart', 'wp-travel' ),
 			'set_view_cart'				=> __( 'View Cart', 'wp-travel' ),
 			'set_updated_cart_btn'		=> __( 'Update Cart', 'wp-travel' ),
@@ -344,6 +347,7 @@ class WpTravel_Helpers_Strings {
 			'misc'              => __( 'Misc', 'wp-travel' ),
 			'tabs'              => __( 'Tabs', 'wp-travel' ),
 			'guides'            => __( 'Guides', 'wp-travel' ),
+			'checkout_field_editor'            => __( 'Checkout Field Editor', 'wp-travel' ),
 		);
 	}
 
@@ -428,6 +432,9 @@ class WpTravel_Helpers_Strings {
 			'global_faq_option'  => array(
 				'title'       => __( 'Tired of updating repitative FAQs ?', 'wp-travel' ),
 				'description' => __( 'By upgrading to Pro, you can create and use Global FAQs in all of your trips !', 'wp-travel' ),
+			),
+			'featured_trip_video_option'   => array(
+				'description' => __( 'Insert the video link to embed.', 'wp-travel' ),
 			),
 			'trip_code_option'   => array(
 				'description' => __( 'Need Custom Trip Code? Check', 'wp-travel' ),

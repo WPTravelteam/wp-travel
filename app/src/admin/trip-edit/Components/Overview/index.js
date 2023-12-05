@@ -1,16 +1,5 @@
-import { useState } from "@wordpress/element";
-import {
-	TextControl,
-	PanelRow,
-	PanelBody,
-	Button,
-	Notice,
-	TextareaControl,
-	Dropdown,
-	DateTimePicker,
-	RangeControl,
-} from "@wordpress/components";
-import { applyFilters, addFilter } from "@wordpress/hooks";
+import { PanelRow } from "@wordpress/components";
+import { addFilter } from "@wordpress/hooks";
 import { dispatch } from "@wordpress/data";
 import { _n, __ } from "@wordpress/i18n";
 
@@ -21,7 +10,7 @@ const __i18n = {
 
 // Single Components for hook callbacks.
 const TripOverview = ({ allData }) => {
-	const { trip_overview, trip_video_code } = allData;
+	const { trip_overview } = allData;
 	const { updateTripData } = dispatch("WPTravel/TripEdit");
 	return (
 		<>
@@ -44,17 +33,6 @@ const TripOverview = ({ allData }) => {
 				)}
 				
 			</PanelRow>
-			<p>Youtube Video Code</p>
-			<TextControl
-				value={trip_video_code}
-				onChange={(trip_video_code) => {
-					updateTripData({
-						...allData,
-						trip_video_code: trip_video_code,
-					});
-				}}
-			/>
-			<p>Example :- https://www.youtube.com/watch?v=eaLcanzEB6w&t=16s, in given url "eaLcanzEB6w" is a video code</p>
 		</>
 	);
 };

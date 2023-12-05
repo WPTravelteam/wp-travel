@@ -123,7 +123,7 @@ export default () => {
                     <Dropdown
                         className="my-container-class-name"
                         contentClassName="my-popover-content-classname"
-                        position="bottom right"
+                        popoverProps={ { placement: 'bottom-right' } }
                         renderToggle={({ isOpen, onToggle }) => {
                             var couponExpiryDate = moment(coupon_expiry_date);
                             return <TextControl value={couponExpiryDate.isValid() ? coupon_expiry_date : ''} onFocus={onToggle} aria-expanded={isOpen} onChange={() => false} autoComplete="off" />

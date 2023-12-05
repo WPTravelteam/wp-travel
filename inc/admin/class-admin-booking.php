@@ -408,8 +408,10 @@ class WP_Travel_Admin_Booking {
 					// Billing Fields HTML.
 					unset( $billing_fields['price-unavailable'] );
 					foreach ( $billing_fields as $field_group => $field ) {
-						$field['default'] = get_post_meta( $booking_id, $field['name'], true );
-						$form_field->init( $field, array( 'single' => true ) )->render();
+						if( isset($field['name']) ){
+							$field['default'] = get_post_meta( $booking_id, $field['name'], true );
+							$form_field->init( $field, array( 'single' => true ) )->render();
+						}
 					}
 					?>
 				</div>

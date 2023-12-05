@@ -58,13 +58,13 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
 		showMonthDropdown: true,
 		showYearDropdown: 'select',
 		dropdownMode: "select",
-		minDate: new Date(),
-		maxDate: typeof newEndDate != 'undefined' && newEndDate || '',
+		// minDate: new Date(),
+		// maxDate: typeof newEndDate != 'undefined' && newEndDate || '',
 	}
 
     return <ErrorBoundary>
         { typeof dates != 'undefined' && dates.length > 0 && <>
-            <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addTripDate()}>{__i18n.add_date}</Button></PanelRow>
+            <PanelRow className="wp-travel-action-section"><span></span><Button variant="secondary" onClick={() => addTripDate()}>{__i18n.add_date}</Button></PanelRow>
             {dates.map((_date, _dateIndex) => {
 
                 let selectedYears = 'undefined' !== typeof _date.years ? _date.years.split(',') : [];
@@ -214,7 +214,7 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
 
                     <hr />
                     <PanelRow className="wp-travel-action-section has-right-padding">
-                        <span></span><Button isDefault onClick={() => {
+                        <span></span><Button variant="secondary" onClick={() => {
                             if (!confirm(__i18n.alert.remove_date)) {
                                 return false;
                             }
@@ -239,7 +239,7 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
 
                 </PanelBody>
             })}
-            {typeof dates != 'undefined' && dates.length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addTripDate()}>{__i18n.add_date}</Button></PanelRow>}
+            {typeof dates != 'undefined' && dates.length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button variant="secondary" onClick={() => addTripDate()}>{__i18n.add_date}</Button></PanelRow>}
         </>}
         { typeof dates != 'undefined' && dates.length < 1 && 
             <Notice isDismissible={false} actions={[{

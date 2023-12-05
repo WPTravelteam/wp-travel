@@ -23,12 +23,12 @@ export default ({ onImagesDrop, onMediaLib }) => {
                     </span>
                     <div className="uploader-buttons">
                         <Button
-                            isDefault={true}
+                            variant="secondary"
                             onClick={(e) => e.target.nextElementSibling.click()}
                         >{__i18n.upload}</Button>
                         <input type="file" multiple id="trip-gallery-upload" onChange={(e) => onImagesDrop(e.target.files)} style={{ display: 'none' }} accept="image/*" />
                         <Button
-                            isDefault={true}
+                            variant="secondary"
                             onClick={() => onMediaLib()}>{__i18n.media_library}</Button>
                     </div>
                 </>}

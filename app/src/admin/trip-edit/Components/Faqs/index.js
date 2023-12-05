@@ -206,7 +206,7 @@ const Faqs = ({allData}) => {
             {typeof faqs != 'undefined' &&  Object.keys(faqs).length > 0 ?
             <>
                 {}
-                <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addFaq()}>{__i18n.add_faq}</Button></PanelRow>
+                <PanelRow className="wp-travel-action-section"><span></span><Button variant="secondary" onClick={() => addFaq()}>{__i18n.add_faq}</Button></PanelRow>
                 <div className="wp-travel-sortable-component">
                     <ReactSortable
                         list={faqs}
@@ -336,7 +336,7 @@ const Faqs = ({allData}) => {
                                         />
                                     </PanelRow>
                                     <PanelRow className="wp-travel-action-section has-right-padding">
-                                        <span></span><Button isDefault onClick={() => {
+                                        <span></span><Button variant="secondary" onClick={() => {
                                             if (!confirm( __i18n.alert.remove_faq)) {
                                                 return false;
                                             }
@@ -355,7 +355,7 @@ const Faqs = ({allData}) => {
                     </ReactSortable>
 
                 </div>
-                { Object.keys(faqs).length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addFaq()}>{__i18n.add_faq}</Button></PanelRow> }
+                { Object.keys(faqs).length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button variant="secondary" onClick={() => addFaq()}>{__i18n.add_faq}</Button></PanelRow> }
             </> :
             <>
                 <Notice isDismissible={false} actions={[{

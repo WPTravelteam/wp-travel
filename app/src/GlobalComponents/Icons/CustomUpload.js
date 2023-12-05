@@ -73,7 +73,7 @@ const CustomUploadContent = (props) => {
                     {isFetchingImage && <Spinner />}
                     {imageUrl && <img src={imageUrl} height="100" width="20%" />}
                     <div className="wti_custom_uploader_btn_wrapper">
-                        <Button isPrimary onClick={onMediaUploaderBtnClicked}>{ imageUrl ? __('Change image', 'wp-travel' ) : __( 'Select image', 'wp-travel' )}</Button>
+                        <Button variant="primary" onClick={onMediaUploaderBtnClicked}>{ imageUrl ? __('Change image', 'wp-travel' ) : __( 'Select image', 'wp-travel' )}</Button>
                         {
                             imageUrl &&
                             <Button className="wti_custom_remove_btn" isDestructive onClick={onMediaRemoveBtnClicked}>{ __('Remove image', 'wp-travel' ) }</Button>

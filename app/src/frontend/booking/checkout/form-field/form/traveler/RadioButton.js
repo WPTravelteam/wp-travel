@@ -16,7 +16,7 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
 
     const optionKey = typeof options != 'undefined' && Object.keys( options ) || [];
     return optionKey.length > 0 && <> <PanelBody>
-        <PanelRow>
+        {/* <PanelRow> */}
             <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>
             <div className='wptravel-onpage-radiobtn-handle' >
                 { optionKey.map( ( val, index ) => {
@@ -40,6 +40,6 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
                     </div>
                 })  }
             </div>
-        </PanelRow>
+        {/* </PanelRow> */}
     </PanelBody> <p className='wp-travel-in-page-error'>{errorData}</p></>
 }

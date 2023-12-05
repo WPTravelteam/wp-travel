@@ -161,7 +161,7 @@ export default () => {
 
                 {'undefined' != typeof wp_travel_trip_facts_enable && 'yes' == wp_travel_trip_facts_enable &&
                     <>
-                        <PanelRow className="wp-travel-action-section"><span></span><Button isSecondary onClick={() => addNewFactData()}>{__('+ Add New', 'wp-travel')}</Button></PanelRow>
+                        <PanelRow className="wp-travel-action-section"><span></span><Button variant="secondary" onClick={() => addNewFactData()}>{__('+ Add New', 'wp-travel')}</Button></PanelRow>
 
                         {'undefined' != typeof wp_travel_trip_facts_settings &&
                             <>
@@ -218,7 +218,7 @@ export default () => {
                                                         'icon-class' == fact.selected_icon_type && '' != fact.icon &&
                                                         <p>{__('Icon Class: ', 'wp-travel')}<strong>[ {fact.icon} ]</strong></p>
                                                     }
-                                                    <Button isSecondary onClick={openModal}>{__('Choose Icon', 'wp-travel')}</Button>
+                                                    <Button variant="secondary" onClick={openModal}>{__('Choose Icon', 'wp-travel')}</Button>
                                                 </div>
                                                 {
                                                     isOpenModal &&
@@ -228,7 +228,7 @@ export default () => {
 
                                             <PanelRow className="wp-travel-action-section">
                                                 <span></span>
-                                                <Button isSecondary onClick={() => {
+                                                <Button variant="secondary" onClick={() => {
                                                     if (!confirm(__('Are you sure to delete Fact?', 'wp-travel'))) {
                                                         return false;
                                                     }
@@ -243,7 +243,7 @@ export default () => {
                                     )
                                 })}
 
-                                {wp_travel_trip_facts_settings.length > 2 && <PanelRow className="wp-travel-action-section"><span></span><Button isSecondary onClick={() => addNewFactData()}>{__('+ Add New', 'wp-travel')}</Button></PanelRow>}
+                                {wp_travel_trip_facts_settings.length > 2 && <PanelRow className="wp-travel-action-section"><span></span><Button variant="secondary" onClick={() => addNewFactData()}>{__('+ Add New', 'wp-travel')}</Button></PanelRow>}
                             </>
                         }
                     </>

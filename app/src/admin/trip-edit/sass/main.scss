@@ -31,3 +31,12 @@
 .recurring-every-year{
 	display: none !important;
 }
+
+/**
+ * since 7.7.0
+ * Fix for popover time selection
+ *
+ */
+.components-popover__fallback-container .components-popover.components-dropdown__content .wp-travel-dropdown-content-wrap {
+	width: 232px;
+}

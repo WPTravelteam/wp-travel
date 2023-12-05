@@ -249,9 +249,9 @@ const IsRecuringTourDates = ( props ) => date => {
     const _date = _dates.find(data => {
         if ( data.is_recurring ) {
             let selectedYears = data.years ? data.years.split(",").filter(year => year != 'every_year').map(year => parseInt(year)) : [];
-            if (data.end_date && moment(date).toDate().toString().toLowerCase() != 'invalid date' && moment(date).isAfter(moment(data.end_date + 1 ) ) ) {
-                return false
-            }
+            // if (data.end_date && moment(date).toDate().toString().toLowerCase() != 'invalid date' && moment(date).isAfter(moment(data.end_date + 1 ) ) ) {
+            //     return false
+            // }
             if (data.start_date && moment(date).toDate().toString().toLowerCase() != 'invalid date' && moment(date).isBefore(moment(data.start_date))) {
                 return false
             }
