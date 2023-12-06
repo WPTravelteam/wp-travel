@@ -119,7 +119,7 @@ $trp_title = apply_filters( 'wp_travel_trip_title_enable_disable', true );
 								<?php echo apply_filters('wp_travel_archives_page_trip_price', wptravel_get_formated_price_currency( $trip_price ), $trip_id ); //phpcs:ignore ?>
 							</span>
 						<?php endif; ?>
-						<?php if ( $enable_sale ) : ?>
+						<?php if ( $enable_sale && $trip_price < $regular_price ) : ?>
 							<del><?php echo apply_filters('wp_travel_archives_page_trip_price_sale', wptravel_get_formated_price_currency( $regular_price, true ), $trip_id ); //phpcs:ignore ?></del>
 						<?php endif; ?>
 
