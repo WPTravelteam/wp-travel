@@ -3,7 +3,7 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 7.7.0
+ * Version: 7.8.0
  * Author: WP Travel
  * Author URI: http://wptravel.io/
  * Requires at least: 6.0.0
@@ -39,7 +39,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '7.7.0';
+		public $version = '7.8.0';
 
 		/**
 		 * WP Travel API version.
@@ -81,8 +81,54 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			$this->init_hooks();
 			$this->init_shortcodes();
 			$this->init_sidebars();
+
+			/**
+			 * Add to extra column - booking table 
+			 * @since 7.8.0
+			 */
+			add_filter( 'manage_edit-itinerary-booking_columns', array( $this, 'wp_travel_booking_column_name' ) );
+			add_action( 'manage_itinerary-booking_posts_custom_column', array( $this, 'wp_travel_booking_columns_content' ), 10, 2 );
+		}
+		
+		public function wp_travel_booking_column_name( $columns ) {
+			$columns['contact_number'] = __( 'Contact Number' );
+			$columns['contact_email'] = __( 'Contact Email' );
+			$columns['country_code'] = __( 'Country Code' );
+			$columns['tour_date'] = __( 'Tour date' );
+			return $columns;
 		}
 
+		public function wp_travel_booking_columns_content( $column_name, $id ) {
+			$traveller_data = get_post_meta( $id, 'order_data', true );
+
+			switch ( $column_name ) {
+				case 'contact_number':
+					?>
+					<span><?php echo get_post_meta( $id, 'order_data', true )['wp_travel_phone_traveller'][ array_key_first( get_post_meta( $id, 'order_data', true )['wp_travel_phone_traveller'] ) ][0]; ?></span>
+					<?php
+					break;
+
+				case 'contact_email':
+					?>
+					<span><?php echo get_post_meta( $id, 'order_data', true )['wp_travel_email_traveller'][ array_key_first( get_post_meta( $id, 'order_data', true )['wp_travel_email_traveller'] ) ][0]; ?></span>
+					<?php
+					break;
+				case 'country_code':
+					?>
+					<span><?php echo get_post_meta( $id, 'order_data', true )['wp_travel_country_traveller'][ array_key_first( get_post_meta( $id, 'order_data', true )['wp_travel_country_traveller'] ) ][0]; ?></span>
+					<?php
+					break;
+				case 'tour_date':
+					?>
+					<span><?php echo wptravel_format_date( get_post_meta( $id, 'wp_travel_arrival_date', true ) ); ?></span>
+					<?php
+					break;
+				default:
+					break;
+			}
+		}
+
+		
 		/**
 		 * Define WP Travel Constants.
 		 */
@@ -431,7 +477,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			// Front End.
 			require WP_TRAVEL_ABSPATH . '/app/inc/frontend/class-wptravel-single-itinerary-hooks.php';
 			require WP_TRAVEL_ABSPATH . '/app/inc/frontend/class-wptravel-frontend-assets.php';
-			include sprintf( '%s/core/api/include.php', WP_TRAVEL_ABSPATH ); // for api include file.
+			// include sprintf( '%s/core/api/include.php', WP_TRAVEL_ABSPATH ); // for api include file.
 			include sprintf( '%s/inc/deprecated-class/trait/class-wp-travel-deprecated-trait.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/deprecated-class/trait/deprecated-includes.php', WP_TRAVEL_ABSPATH );
 
@@ -870,4 +916,3 @@ function wptravel() {
 
 // Start WP Travel.
 wptravel();
-

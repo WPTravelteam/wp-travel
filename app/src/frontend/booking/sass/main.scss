@@ -74,10 +74,27 @@ input.wp-trave-pax-selected-frontend-second {
 .wptravel-layout-v2 #wp-travel__add-to-cart_notice{
 	color: #000 ;
 }
-.wp-travel-one-page-open-for-booking {
-	position: fixed !important;
-}
+
 
 .wptravel-billing-formfield .heading{
 	display: none;
+}
+
+.booknow-btn-modal #onpage-trip_price + .wptravel-onepage-navigation-btn {
+	justify-content: flex-end !important;
+}
+
+.wp-travel-booking__trip-option-list .group-discount-button svg{
+	width: 15px;
+}
+
+.wp-travel-booking__trip-option-list .group-discount-button .discount-table{
+	display: none;
+}
+
+.wp-travel-booking__trip-option-list .group-discount-button:hover .discount-table{
+	display: block;
+	position: absolute;
+	background: #fff;
+    z-index: 1;
 }

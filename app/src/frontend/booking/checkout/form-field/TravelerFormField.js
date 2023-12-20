@@ -107,20 +107,43 @@ export default ( ) => {
                     }
 
                 }
-                if ( intRequiresd == 1 || intRequiresd == true ) {
-                    if ( Object.keys( travelerEnter ).length < 1 ) {
-                        const newCreateError = { 1 : label + i18n.set_require_message }
-                        requiredListed[1] = label + i18n.set_require_message;
-                        errorss[name] = newCreateError;
-                    } else {
-                        const finalData = typeof travelData[1] != 'undefined' && travelData[1] || '';
-                        if ( finalData == '' ) {
+                const travelerData = typeof traveler_form[trvk] != 'undefined' && traveler_form[trvk] || 'undefined';
+                var get_trip_ids = typeof travelerData.trip_ids != 'undefined' && travelerData.trip_ids.split(',') || [];
+                var current_trip_id = _wp_travel.trip_data.id.toString();
+                if( typeof travelerData.validations != 'undefined' && typeof travelerData.validations.specific_trip != 'undefined' && travelerData.validations.specific_trip == '1' ){
+                    if( get_trip_ids.includes( current_trip_id ) ){
+                        if ( intRequiresd == 1 || intRequiresd == true ) {
+                            if ( Object.keys( travelerEnter ).length < 1 ) {
+                                const newCreateError = { 1 : label + i18n.set_require_message }
+                                requiredListed[1] = label + i18n.set_require_message;
+                                errorss[name] = newCreateError;
+                            } else {
+                                const finalData = typeof travelData[1] != 'undefined' && travelData[1] || '';
+                                if ( finalData == '' ) {
+                                    const newCreateError = { 1 : label + i18n.set_require_message }
+                                    requiredListed[1] = label + i18n.set_require_message;
+                                    errorss[name] = newCreateError;
+                                }
+                            }
+                        } 
+                    }
+                }else{
+                    if ( intRequiresd == 1 || intRequiresd == true ) {
+                        if ( Object.keys( travelerEnter ).length < 1 ) {
                             const newCreateError = { 1 : label + i18n.set_require_message }
                             requiredListed[1] = label + i18n.set_require_message;
                             errorss[name] = newCreateError;
+                        } else {
+                            const finalData = typeof travelData[1] != 'undefined' && travelData[1] || '';
+                            if ( finalData == '' ) {
+                                const newCreateError = { 1 : label + i18n.set_require_message }
+                                requiredListed[1] = label + i18n.set_require_message;
+                                errorss[name] = newCreateError;
+                            }
                         }
-                    }
-                } 
+                    } 
+                }
+               
                 if ( multipleTraveler == 'yes' ) {
    
                     var pxReq = {}
@@ -194,13 +217,26 @@ export default ( ) => {
                     </AccordionItemPanel>
                 </AccordionItem>
          }) } </Accordion> </div> }) }</>|| <div className='wptravel-traveller-info-container animated-wp-travel fadeIn-wp-travel'>
-
+        
         {   
             fieldKey.length > 0 && fieldKey.map( ( trvKey, index ) => {
-                const travelerData = typeof traveler_form[trvKey] != 'undefined' && traveler_form[trvKey] || undefined;
+                
+
+                const travelerData = typeof traveler_form[trvKey] != 'undefined' && traveler_form[trvKey] || 'undefined';
+                var get_trip_ids = typeof travelerData.trip_ids != 'undefined' && travelerData.trip_ids.split(',') || [];
+                var current_trip_id = _wp_travel.trip_data.id.toString();
+                
                 const fieldTypes = typeof travelerData != 'undefined' && typeof travelerData.type != 'undefined' && travelerData.type || 'text';
                 const fieldName = typeof travelerData != 'undefined' && typeof travelerData.name != 'undefined' && travelerData.name || '';
-                return <div key={ index }>{ ( fieldTypes == 'text' || fieldTypes == 'number' ) && <Texts travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'email' && <Emails travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'radio' && <div className='wp-travel-new-gender-field'><RadioButton travelerData={travelerData} trvOne={form_key} /></div> || fieldTypes == 'checkbox' && <CheckBoxs travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'date' && <Dates travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'country_dropdown' && <DropDowns travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'select' && <SelectOption travelerData={travelerData} trvOne={form_key} />|| fieldTypes == 'heading' && <Heading travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'textarea' && <TextArea travelerData={travelerData} trvOne={form_key} /> }</div>
+                if( typeof travelerData.validations != 'undefined' && typeof travelerData.validations.specific_trip != 'undefined' && travelerData.validations.specific_trip == '1' ){
+                    if( get_trip_ids.includes( current_trip_id ) ){
+                        return <div key={ index }>{ ( fieldTypes == 'text' || fieldTypes == 'number' ) && <Texts travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'email' && <Emails travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'radio' && <div className='wp-travel-new-gender-field'><RadioButton travelerData={travelerData} trvOne={form_key} /></div> || fieldTypes == 'checkbox' && <CheckBoxs travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'date' && <Dates travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'country_dropdown' && <DropDowns travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'select' && <SelectOption travelerData={travelerData} trvOne={form_key} />|| fieldTypes == 'heading' && <Heading travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'textarea' && <TextArea travelerData={travelerData} trvOne={form_key} /> }</div>
+                    }
+                }else{
+                    return <div key={ index }>{ ( fieldTypes == 'text' || fieldTypes == 'number' ) && <Texts travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'email' && <Emails travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'radio' && <div className='wp-travel-new-gender-field'><RadioButton travelerData={travelerData} trvOne={form_key} /></div> || fieldTypes == 'checkbox' && <CheckBoxs travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'date' && <Dates travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'country_dropdown' && <DropDowns travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'select' && <SelectOption travelerData={travelerData} trvOne={form_key} />|| fieldTypes == 'heading' && <Heading travelerData={travelerData} trvOne={form_key} /> || fieldTypes == 'textarea' && <TextArea travelerData={travelerData} trvOne={form_key} /> }</div>
+                
+                }         
+               
             })
         } </div> }
         <p className='wp-travel-in-page-error'>{errorFound}</p>

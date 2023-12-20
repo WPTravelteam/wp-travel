@@ -5,9 +5,13 @@
  * @package WP_Travel
  */
 
+
+
 require sprintf( '%s/inc/helpers/helpers-price.php', WP_TRAVEL_ABSPATH );
 require sprintf( '%s/inc/helpers/helpers-stat.php', WP_TRAVEL_ABSPATH );
 require sprintf( '%s/inc/helpers/helpers-fontawesome.php', WP_TRAVEL_ABSPATH );
+
+
 /**
  * Return all Gallery ID of specific post.
  *

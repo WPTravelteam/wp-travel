@@ -36,16 +36,25 @@ const PaxSelector = ( props ) => {
 	const[ tripPaxStock, setTripPaxStock ] = useState( [] );
 
 	if( typeof _wp_travel.WP_Travel_Trip_Extras_Inventory !== 'undefined' ){
-		
-		useEffect( () => {	
-			
-			let nonce = Math.random().toString(36).substring(2,7);
-			apiFetch.use( apiFetch.createNonceMiddleware( nonce ) );
 
-			apiFetch( { path: '/wptravelgettripindividual_pricing_category_paxstock/v1/tripindividual_pricing_category_paxStock/'+tripDepartureDate+'seperate'+tripID+'?key='+Math.random().toString(36).substring(2,7), method: 'GET' } ).then( ( response ) => {
-				setTripPaxStock( response )
-			} )
+		useEffect( () => {	
+			apiFetch( { url: `${_wp_travel.ajax_url}?action=wptravel_get_trip_pax_inventory&_nonce=${_wp_travel._nonce}&tripID=${tripID}&tripDepartureDate=${tripDepartureDate}`, data:'', method:'post' } ).then( res => {
+				
+				if( res.success){
+					setTripPaxStock( res.data )
+				}
+			} );
 		}, [] );
+		
+		// useEffect( () => {	
+			
+		// 	let nonce = Math.random().toString(36).substring(2,7);
+		// 	apiFetch.use( apiFetch.createNonceMiddleware( nonce ) );
+
+		// 	apiFetch( { path: '/wptravelgettripindividual_pricing_category_paxstock/v1/tripindividual_pricing_category_paxStock/'+tripDepartureDate+'seperate'+tripID+'?key='+Math.random().toString(36).substring(2,7), method: 'GET' } ).then( ( response ) => {
+		// 		setTripPaxStock( response )
+		// 	} )
+		// }, [] );
 	}
 
 

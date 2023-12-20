@@ -455,7 +455,7 @@ function wptravel_save_user_enquiry() {
 	// If we reach here, Send Success message !!
 	$trip_name = get_the_title( $post_id );
 	$success   = array(
-		'message' => __( $strings . ' sent succesfully !!', 'wp-travel' ),
+		'message' => __( $strings . ' sent successfully !!', 'wp-travel' ),
 	);
 
 	// Send Success Message.

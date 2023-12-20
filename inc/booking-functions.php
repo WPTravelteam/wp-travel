@@ -595,3 +595,5 @@ function wptravel_get_booking_chart() {
 function wp_travel_add_to_cart_system() { 
 	return apply_filters( 'wp_travel_add_to_cart_system', false );
 }
+
+
