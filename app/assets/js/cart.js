@@ -164,6 +164,7 @@ var wptravelcheckout = function wptravelcheckout(shoppingCart) {
           _price = _groupPrice.price;
           _price = GetConvertedPrice(_price); // Multiple currency support on edit cart.
         }
+
         if (dataCategoryPrice) dataCategoryPrice.innerHTML = wp_travel_cart.format(_price);
       }
       var categoryTotal = _category.price_per == 'group' ? _count > 0 && _price || 0 : _price * _count;
