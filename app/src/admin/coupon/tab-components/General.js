@@ -6,8 +6,8 @@ import { _n, __ } from '@wordpress/i18n';
 import { PanelRow, ToggleControl, TextControl, SelectControl, Dropdown, DateTimePicker, Notice } from '@wordpress/components';
 import Select from 'react-select'
 import {VersionCompare} from '../../fields/VersionCompare'
-// import DatePicker, {registerLocale} from "react-datepicker";
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
+import DatePicker from 'react-datepicker';
 
 export default () => {
     const allData = useSelect((select) => {
@@ -32,6 +32,16 @@ export default () => {
 		setState(state => ({ ...state, ...data }))
 	}
 
+    const startParams =  {
+		showMonthDropdown: true,
+		showYearDropdown: 'select',
+		dropdownMode: "select",
+		// minDate: new Date(),
+		// maxDate: typeof newEndDate != 'undefined' && newEndDate || '',
+	}
+    
+    let _coupon_expiry_date = moment(coupon_expiry_date)
+    _coupon_expiry_date = _coupon_expiry_date.isValid() ? _coupon_expiry_date.toDate() : new Date();
     return <div className="wp-travel-ui wp-travel-ui-card coupon-general">
         <h3>{ __( 'General Settings', 'wp-travel' ) }</h3>
         <ErrorBoundary>
@@ -118,43 +128,16 @@ export default () => {
                 </div>
             </PanelRow>
             <PanelRow>
-                <label>Coupon Expiry Date</label>
+                <label>{ __( 'Coupon Expiry Date', 'wp-travel' ) }</label>
                 <div className="wp-travel-field-value">
-                    <Dropdown
-                        className="my-container-class-name"
-                        contentClassName="my-popover-content-classname"
-                        popoverProps={ { placement: 'bottom-right' } }
-                        renderToggle={({ isOpen, onToggle }) => {
-                            var couponExpiryDate = moment(coupon_expiry_date);
-                            return <TextControl value={couponExpiryDate.isValid() ? coupon_expiry_date : ''} onFocus={onToggle} aria-expanded={isOpen} onChange={() => false} autoComplete="off" />
-                        }}
-                        renderContent={() => {
-                            {
-                                let _coupon_expiry_date = moment(coupon_expiry_date)
-                                _coupon_expiry_date = _coupon_expiry_date.isValid() ? _coupon_expiry_date.toDate() : new Date();
-
-                                return (
-                                    <div className="wp-travel-dropdown-content-wrap wp-travel-datetimepicker wp-travel-datetimepicker-hide-time">
-                                        <DateTimePicker
-                                            currentDate={_coupon_expiry_date}
-                                            minDate={new Date()}
-                                            isInvalidDate={ (date) =>{
-                                                if (!moment(date).isAfter(new Date())) {
-                                                    return true;
-                                                }
-                                                return false;
-                                            } }
-                                            onChange={(date) => {
-                                                updateCoupon({
-                                                    ...allData,
-                                                    general: {...general, coupon_expiry_date: moment(date).format('YYYY-MM-DD', date) }
-                                                })
-
-                                            }}
-                                        />
-                                    </div>
-                                )
-                            }
+                    <DatePicker
+                        selected={ _coupon_expiry_date }
+                        { ...startParams }
+                        onChange={ ( date ) =>{
+                            updateCoupon({
+                                ...allData,
+                                general: {...general, coupon_expiry_date: moment(date).format('YYYY-MM-DD', date) }
+                            })
                         }}
                     />
                 </div>

@@ -40,3 +40,16 @@
 .components-popover__fallback-container .components-popover.components-dropdown__content .wp-travel-dropdown-content-wrap {
 	width: 232px;
 }
+
+.react-datepicker-wrapper{
+	text-align: right !important;
+}
+
+.react-datepicker-wrapper input{
+	width: 250px !important;
+}
+
+.exclude-date-time-panel .react-datepicker-popper{
+	left: auto !important;
+    right: 10% !important;
+}

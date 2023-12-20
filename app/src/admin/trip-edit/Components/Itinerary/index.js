@@ -6,7 +6,7 @@ import { _n, __ } from '@wordpress/i18n';
 
 import { ReactSortable } from 'react-sortablejs';
 import {alignJustify } from '@wordpress/icons';
-
+import DatePicker from 'react-datepicker';
 import WPEditor from '../../../fields/WPEditor';
 const __i18n = {
 	..._wp_travel_admin.strings
@@ -120,6 +120,16 @@ const Itinerary = ({allData}) => {
             itineraries: sortedItineraries
         })
     }
+
+    const startParams =  {
+		showMonthDropdown: true,
+		showYearDropdown: 'select',
+		dropdownMode: "select",
+		// minDate: new Date(),
+		// maxDate: typeof newEndDate != 'undefined' && newEndDate || '',
+	}
+
+    
     return <>
             <div className="wp-travel-itinerary-title">
                 <h3 className="wp-travel-tab-content-title">{__i18n.itinerary}</h3>
@@ -135,6 +145,9 @@ const Itinerary = ({allData}) => {
                         {
                             Object.keys(itineraries).map(function (itineraryId) {
 								let index     = parseInt(itineraryId);
+                                let _itineraryDate = moment(itineraries[itineraryId].date ? itineraries[itineraryId].date : null);
+                                _itineraryDate = _itineraryDate.isValid() ? _itineraryDate.toDate() : new Date();
+
                                 return <div style={{position:'relative'}}  data-index={index} key={index} >
 										<div className={`wptravel-swap-list`}>
 										<Button
@@ -183,37 +196,20 @@ const Itinerary = ({allData}) => {
                                     </PanelRow>
                                     <PanelRow>
                                         <label>{__i18n.itinerary_date}</label>
-                                        <Dropdown
-                                            className="wp-travel-dropdown-container"
-                                            contentClassName="wp-travel-dropdown-popup-content"
-                                            position="bottom right"
-                                            renderToggle={({ isOpen, onToggle }) => {
-                                                var itineraryDate = moment(itineraries[itineraryId].date ? itineraries[itineraryId].date : null);
-                                                return <TextControl value={itineraryDate.isValid() ? itineraries[itineraryId].date : ''} onFocus={onToggle} aria-expanded={isOpen} onChange={() => false} autoComplete="off" />
-                                            }}
-                                            renderContent={() => {
-                                                {
-                                                    let _itineraryDate = moment(itineraries[itineraryId].date ? itineraries[itineraryId].date : null);
-                                                    _itineraryDate = _itineraryDate.isValid() ? _itineraryDate.toDate() : new Date();
-
-                                                    return (
-                                                        <div className="wp-travel-dropdown-content-wrap wp-travel-datetimepicker wp-travel-datetimepicker-hide-time">
-                                                            <DateTimePicker
-                                                                currentDate={_itineraryDate}
-                                                                onChange={(date) => {
-                                                                    if (moment(date).isSame(_itineraryDate)) {
-                                                                        return false;
-                                                                    }
-                                                                    updateTripItinerary('date', moment(date).format('YYYY-MM-DD', date), itineraryId)
-                                                                    // updateDatesTimes( {start_date: moment(date).format( 'YYYY-MM-DD', date)}, _dateIndex );
-
-                                                                }}
-                                                            />
-                                                        </div>
-                                                    )
+                                        
+                                        <DatePicker
+                                            selected={ _itineraryDate }
+                                            { ...startParams }
+                                            onChange={ ( date ) =>{
+                                                if (moment(date).isSame(_itineraryDate)) {
+                                                    return false;
                                                 }
+                                                updateTripItinerary('date', moment(date).format('YYYY-MM-DD', date), itineraryId)
+                                                // updateDatesTimes( {start_date: moment(date).format( 'YYYY-MM-DD', date)}, _dateIndex );
+
                                             }}
                                         />
+                                       
                                     </PanelRow>
                                     <PanelRow>
                                         <label>{__i18n.itinerary_time}</label>

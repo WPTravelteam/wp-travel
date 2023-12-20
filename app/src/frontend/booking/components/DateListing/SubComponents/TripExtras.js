@@ -15,16 +15,26 @@ const TripExtras = ( props ) => {
 	var tripDepartureDate = moment(moment(bookingData.selectedDate).format('YYYY-MM-DD'))._i.replace( '-', '_' ).replace( '-', '_' );
 
 	if( typeof _wp_travel.WP_Travel_Trip_Extras_Inventory !== 'undefined' ){
+
 		useEffect( () => {	
+		apiFetch( { url: `${_wp_travel.ajax_url}?action=wptravel_get_trip_extras_inventory&_nonce=${_wp_travel._nonce}&tripID=${tripID}&tripDepartureDate=${tripDepartureDate}`, data:'', method:'post' } ).then( res => {
 			
-			let nonce = Math.random().toString(36).substring(2,7);
-			apiFetch.use( apiFetch.createNonceMiddleware( nonce ) );
-			
-			apiFetch( { path: '/wptravelgettripextrasstock/v1/tripextrasStock/'+tripDepartureDate+'seperate'+tripID+'?key='+Math.random().toString(36).substring(2,7), method: 'GET' } ).then( ( response ) => {
-				setTripExtrasStock( response )
-			} )
-			
+			if( res.success){
+				setTripExtrasStock( res.data )
+			}
+		} );
 		}, [] );
+		
+		// useEffect( () => {	
+			
+		// 	let nonce = Math.random().toString(36).substring(2,7);
+		// 	apiFetch.use( apiFetch.createNonceMiddleware( nonce ) );
+			
+		// 	apiFetch( { path: '/wptravelgettripextrasstock/v1/tripextrasStock/'+tripDepartureDate+'seperate'+tripID+'?key='+Math.random().toString(36).substring(2,7), method: 'GET' } ).then( ( response ) => {
+		// 		setTripExtrasStock( response )
+		// 	} )
+			
+		// }, [] );
 	}
 
 	const handleClick = ( index, inc, quantity ) => e => {
@@ -148,3 +158,5 @@ const TripExtras = ( props ) => {
 	</div >
 }
 export default TripExtras
+
+

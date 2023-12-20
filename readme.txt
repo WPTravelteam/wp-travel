@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 6.0.0
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 7.7.0
+Stable tag: 7.8.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -414,6 +414,25 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 7.8.0 =
+Release Date: 20th December 2023
+
+Fixes:
+* Fixed departure date and arrival date format in booking emails.
+* Fixed trip location design issue in trip lists.
+* Fixed sale issue for multiple pricing on the trip archive page.
+* Fixed the book button alignment issue in case of On-page booking.
+
+Enhancements:
+* Added text translations for “Select Pax”, “Trip Price” and “Trip Extras”.
+* Added Contact Number, Contact Email, Country Code, and Tour Date column in the bookings table.
+* Added filter 'wp_travel_enable_traveller_dob_booking_email'.
+* Added filter 'wp_travel_enable_traveller_gender_booking_email'.
+* Added filter 'wp_travel_enable_traveller_country_booking_email'.
+* Added filter 'wp_travel_trip_enquiry_label'.
+
+**For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v7-8-0-update-release-note).**
 
 = 7.7.0 =
 Release Date: 5th December 2023

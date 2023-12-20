@@ -320,7 +320,9 @@ class WpTravel_Helpers_Booking {
 											<?php $indexs++;  ?>
 											<tr>
 												<th><?php esc_html_e( 'Traveler Name', 'wp-travel' ); ?></th>
-												<th><?php esc_html_e( 'Country', 'wp-travel' ); ?></th>
+												<?php if( apply_filters( 'wp_travel_enable_traveller_country_booking_email', true ) ): ?>
+													<th><?php esc_html_e( 'Country', 'wp-travel' ); ?></th>
+												<?php endif; ?>
 												<th><?php esc_html_e( 'Phone No.', 'wp-travel' ); ?></th>
 												<th><?php esc_html_e( 'Email', 'wp-travel' ); ?></th>
 												<?php if( apply_filters( 'wp_travel_enable_traveller_dob_booking_email', true ) ): ?>

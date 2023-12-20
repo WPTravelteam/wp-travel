@@ -587,7 +587,7 @@ function wptravel_update_payment_status( $booking_id, $amount, $status, $args, $
 		$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
 		// need to get last payment id here. remaining.
 	}
-
+	
 	update_post_meta( $booking_id, 'wp_travel_booking_status', 'booked' );
 	update_post_meta( $payment_id, 'wp_travel_payment_amount', $amount );
 	update_post_meta( $payment_id, $key, $args );

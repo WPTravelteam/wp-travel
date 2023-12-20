@@ -37,6 +37,7 @@
                 function jtab_options() {
                     if (jtype == vtabs) {
                         $respTabs.addClass('resp-vtabs');
+                        $respTabs.css({ display: 'flex' });
                     }
                     if (jfit == true) {
                         $respTabs.css({ width: '100%', margin: '0px' });
