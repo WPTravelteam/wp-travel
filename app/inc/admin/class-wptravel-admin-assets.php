@@ -103,7 +103,7 @@ class WpTravel_Admin_Assets {
 		}
 
 		// Block Settings.
-		if ( WP_Travel::is_page( 'settings', true ) ) {
+		if ( WP_Travel::is_page( 'settings', true ) ||  get_current_screen()->base == 'dashboard_page_wp-travel-setup-page'  ) {
 			wp_enqueue_style( 'wp-travel-admin-settings-style' );
 		}
 		

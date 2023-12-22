@@ -52,6 +52,11 @@ class WP_Travel_Ajax_Trips {
 	}
 
 	public static function get_extra_gallery() {
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return wp_send_json( array( 'result' => 'Authentication error' ) );
+		}
+
 		if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 			$nonce_trip_extra  = $_POST['nonce'];
 			$gallery_id        = $_POST['id'];
@@ -74,6 +79,10 @@ class WP_Travel_Ajax_Trips {
 		 * Permission Check
 		 */
 
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return wp_send_json( array( 'result' => 'Authentication error' ) );
+		}
+		
 		$permission = self::get_trip_permission_check();
 
 		if ( is_wp_error( $permission ) ) {
@@ -145,6 +154,10 @@ class WP_Travel_Ajax_Trips {
 	 * Get Trip data.
 	 */
 	public static function get_trip() {
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return wp_send_json( array( 'result' => 'Authentication error' ) );
+		}
 
 		$permission = self::get_trip_permission_check();
 
@@ -296,6 +309,11 @@ class WP_Travel_Ajax_Trips {
 		/**
 		 * Permission Check
 		 */
+
+		 if ( ! current_user_can( 'manage_options' ) ) {
+			return wp_send_json( array( 'result' => 'Authentication error' ) );
+		}
+		
 		$permission = self::get_trips_permissions_check();
 
 		if ( is_wp_error( $permission ) ) {
@@ -331,6 +349,12 @@ class WP_Travel_Ajax_Trips {
 	 * wp travel inventory checking on checkout page
 	 */
 	public static function wp_travel_inventory_checking() {
+
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
 
 		header( 'Content-Type: application/json' );
 		$json_str = file_get_contents( 'php://input' );
@@ -378,6 +402,13 @@ class WP_Travel_Ajax_Trips {
 		) );
 	}
 	public static function wp_travel_cart_empty_for_inventory() {
+
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
+
 		header( 'Content-Type: application/json' );
 		$json_str = file_get_contents( 'php://input' );
 		$json_obj = json_decode(  $json_str );

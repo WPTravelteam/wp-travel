@@ -3,7 +3,7 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 7.8.0
+ * Version: 7.8.1
  * Author: WP Travel
  * Author URI: http://wptravel.io/
  * Requires at least: 6.0.0
@@ -39,7 +39,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '7.8.0';
+		public $version = '7.8.1';
 
 		/**
 		 * WP Travel API version.
@@ -103,25 +103,33 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 
 			switch ( $column_name ) {
 				case 'contact_number':
+					if( is_array( get_post_meta( $id, 'order_data', true )['wp_travel_phone_traveller'] ) ){
 					?>
 					<span><?php echo get_post_meta( $id, 'order_data', true )['wp_travel_phone_traveller'][ array_key_first( get_post_meta( $id, 'order_data', true )['wp_travel_phone_traveller'] ) ][0]; ?></span>
 					<?php
+					}
 					break;
 
 				case 'contact_email':
+					if( is_array( get_post_meta( $id, 'order_data', true )['wp_travel_email_traveller'] ) ){
 					?>
 					<span><?php echo get_post_meta( $id, 'order_data', true )['wp_travel_email_traveller'][ array_key_first( get_post_meta( $id, 'order_data', true )['wp_travel_email_traveller'] ) ][0]; ?></span>
 					<?php
+					}
 					break;
 				case 'country_code':
+					if( is_array( get_post_meta( $id, 'order_data', true )['wp_travel_country_traveller'] ) ){
 					?>
 					<span><?php echo get_post_meta( $id, 'order_data', true )['wp_travel_country_traveller'][ array_key_first( get_post_meta( $id, 'order_data', true )['wp_travel_country_traveller'] ) ][0]; ?></span>
 					<?php
+					}
 					break;
 				case 'tour_date':
+					if( !empty(get_post_meta( $id, 'wp_travel_arrival_date', true )) ){
 					?>
 					<span><?php echo wptravel_format_date( get_post_meta( $id, 'wp_travel_arrival_date', true ) ); ?></span>
 					<?php
+					}
 					break;
 				default:
 					break;

@@ -22,6 +22,11 @@ class WP_Travel_Ajax_Enquiry { // @phpcs:ignore
 	 * @since 5.0.0
 	 */
 	public static function get_enquiry_details() {
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return wp_send_json( array( 'result' => 'Authentication error' ) );
+		}
+
 		$permission = WP_Travel::verify_nonce();
 
 		if ( ! $permission || is_wp_error( $permission ) ) {
@@ -42,6 +47,11 @@ class WP_Travel_Ajax_Enquiry { // @phpcs:ignore
 	 * @since 5.0.0
 	 */
 	public static function update_enquiry_details() {
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return wp_send_json( array( 'result' => 'Authentication error' ) );
+		}
+		
 		$permission = WP_Travel::verify_nonce();
 
 		if ( ! $permission || is_wp_error( $permission ) ) {

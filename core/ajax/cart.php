@@ -39,7 +39,11 @@ class WP_Travel_Ajax_Cart {
 	 * Get cart ajax request.
 	 */
 	public static function get_cart() {
-		WP_Travel::verify_nonce();
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
 		/**
 		 * We are checking nonce using WP_Travel::verify_nonce(); method.
 		 */
@@ -51,6 +55,13 @@ class WP_Travel_Ajax_Cart {
 	 * Add to cart ajax request.
 	 */
 	public static function add_to_cart() {
+
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
+
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		$post_data = json_decode( file_get_contents( 'php://input' ) );
 		$post_data = is_object( $post_data ) ? (array) $post_data : array();
@@ -63,6 +74,13 @@ class WP_Travel_Ajax_Cart {
 	 * Remove from cart ajax request.
 	 */
 	public static function remove_cart_item() {
+
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
+
 		$request = WP_Travel::get_sanitize_request();
 
 		$cart_id  = ! empty( $request['cart_id'] ) ? $request['cart_id'] : 0;
@@ -74,6 +92,13 @@ class WP_Travel_Ajax_Cart {
 	 * Update cart ajax request.
 	 */
 	public static function update_cart_item() {
+
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
+
 		$request   = WP_Travel::get_sanitize_request();
 		$cart_id   = ! empty( $request['cart_id'] ) ? $request['cart_id'] : 0;
 		$post_data = json_decode( file_get_contents( 'php://input' ) );
@@ -91,6 +116,13 @@ class WP_Travel_Ajax_Cart {
 	 * @since 7.0
 	 */
 	public static function wp_get_payment_fied() {
+
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
+
 		global $wt_cart;
 		$trip_items     = $wt_cart->getItems();
 		$all_form_field = wptravel_get_checkout_form_fields();
