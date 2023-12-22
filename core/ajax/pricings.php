@@ -10,7 +10,16 @@ class WP_Travel_Ajax_Pricings {
 	}
 
 	public static function get_pricings() {
-		WP_Travel::verify_nonce();
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return wp_send_json( array( 'result' => 'Authentication error' ) );
+		}
+
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
 
 		/**
 		 * We are checking nonce using WP_Travel::verify_nonce(); method.
@@ -22,7 +31,15 @@ class WP_Travel_Ajax_Pricings {
 
 	public static function remove_trip_pricing() {
 
-		WP_Travel::verify_nonce();
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return wp_send_json( array( 'result' => 'Authentication error' ) );
+		}
+
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
 
 		/**
 		 * We are checking nonce using WP_Travel::verify_nonce(); method.

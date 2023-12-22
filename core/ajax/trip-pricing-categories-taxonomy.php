@@ -10,12 +10,33 @@ class WP_Travel_Ajax_Trip_Pricing_Categories_Taxonomy {
 	}
 
 	public static function get_trip_pricing_categories_terms() {
-		WP_Travel::verify_nonce();
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return wp_send_json( array( 'result' => 'Authentication error' ) );
+		}
+		
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
+
 		$response = WP_Travel_Helpers_Trip_Pricing_Categories_Taxonomy::get_trip_pricing_categories_terms();
 		WP_Travel_Helpers_REST_API::response( $response );
 	}
 
 	public static function get_trip_pricing_categories_term() {
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return wp_send_json( array( 'result' => 'Authentication error' ) );
+		}
+		
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
+
 		WP_Travel::verify_nonce();
 		$category_id = ! empty( $_GET['pricing_category_id'] ) ? absint( $_GET['pricing_category_id'] ) : 0;
 		$response    = WP_Travel_Helpers_Trip_Pricing_Categories_Taxonomy::get_trip_pricing_categories_term( $category_id );

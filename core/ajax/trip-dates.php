@@ -14,7 +14,15 @@ class WP_Travel_Ajax_Trip_Dates {
 
 	public static function get_trip_dates() {
 
-		WP_Travel::verify_nonce();
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return wp_send_json( array( 'result' => 'Authentication error' ) );
+		}
+
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
 
 		/**
 		 * We are checking nonce using WP_Travel::verify_nonce(); method.
@@ -26,7 +34,15 @@ class WP_Travel_Ajax_Trip_Dates {
 
 	public static function update_trip_dates() {
 
-		WP_Travel::verify_nonce();
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return wp_send_json( array( 'result' => 'Authentication error' ) );
+		}
+
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
 
 		if ( ! current_user_can( 'manage_options' ) ) {
 			$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_PERMISSION' );
@@ -45,7 +61,15 @@ class WP_Travel_Ajax_Trip_Dates {
 
 	public static function remove_trip_date() {
 
-		WP_Travel::verify_nonce();
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return wp_send_json( array( 'result' => 'Authentication error' ) );
+		}
+
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
 
 		/**
 		 * We are checking nonce using WP_Travel::verify_nonce(); method.

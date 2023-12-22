@@ -30,6 +30,7 @@ class WpTravel_Ajax_Clone {
 	 * @since 5.0.1
 	 */
 	public static function clone_trip() {
+		
 		$permission = WP_Travel::verify_nonce();
 
 		if ( ! $permission || is_wp_error( $permission ) ) {

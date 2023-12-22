@@ -27,7 +27,15 @@ class WP_Travel_Ajax_Settings {
 		 * Permission Check
 		 */
 
-		WP_Travel::verify_nonce();
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return wp_send_json( array( 'result' => 'Authentication error' ) );
+		}
+
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
 
 		$response = WP_Travel_Helpers_Settings::get_settings();
 
@@ -39,8 +47,16 @@ class WP_Travel_Ajax_Settings {
 		/**
 		 * Permission Check
 		 */
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return wp_send_json( array( 'result' => 'Authentication error' ) );
+		}
 
-		WP_Travel::verify_nonce();
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
+
 		/**
 		 * solve ajax request in server
 		 */
@@ -61,7 +77,15 @@ class WP_Travel_Ajax_Settings {
 		/**
 		 * Permission Check
 		 */
-		WP_Travel::verify_nonce();
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return wp_send_json( array( 'result' => 'Authentication error' ) );
+		}
+
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
 
 		$post_data = json_decode( file_get_contents( 'php://input' ), true ); // Added 2nd Parameter to resolve issue with objects.
 		$post_data = wptravel_sanitize_array( $post_data, true );  // wp kses for some editor content in email settings.
@@ -83,7 +107,15 @@ class WP_Travel_Ajax_Settings {
 		 * Permission Check
 		 */
 
-		 WP_Travel::verify_nonce();
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return wp_send_json( array( 'result' => 'Authentication error' ) );
+		}
+
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
 
 		$post_data = json_decode( file_get_contents( 'php://input' ), true ); // Added 2nd Parameter to resolve issue with objects.
 		$post_data = wptravel_sanitize_array( $post_data, true );
