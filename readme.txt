@@ -419,7 +419,7 @@ Before updating plugin please check ["our latest release notes"](#developers).
 Release Date: 22th December 2023
 
 Fixes:
-* Added nonce to all ajax request.
+* Security patch update. Added nonce to all AJAX requests.
 
 = 7.8.0 =
 Release Date: 20th December 2023
