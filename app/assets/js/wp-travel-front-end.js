@@ -666,7 +666,6 @@ jQuery(function ($) {
         infinite: false,
         speed: 300,
         slidesToShow: 6,
-        centerMode: false,
         arrows: true,
         variableWidth: true,
         rows:0, // Tab issue fix
@@ -678,6 +677,22 @@ jQuery(function ($) {
         slick_options.rtl = true;
     }
     jQuery('#wp-travel-tab-wrapper .resp-tabs-list').slick(slick_options);
+
+    jQuery('.book-trip-date').click(function (e) { 
+
+
+        jQuery('#wp-travel-tab-wrapper .tab-list-content').css( 'display', 'none' );
+        
+        jQuery('.resp-tab-content').removeClass( 'resp-tab-content-active' );
+        jQuery('.resp-tab-item').removeClass( 'resp-tab-active' );
+
+        jQuery('.wp-travel-booking-form').addClass( 'resp-tab-active' );
+        jQuery('#booking').parent().css( 'display', 'block' );
+
+        $('html, body').animate({
+            scrollTop: $( "#booking" ).offset().top
+        }, 1000);
+    });
 });
 
 // New Archive page list/grid view switch

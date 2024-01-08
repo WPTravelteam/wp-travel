@@ -18,8 +18,6 @@ import CouponApplyAmount from "./booking/CouponApplyAmount"
 
 const i18n = _wp_travel.strings;
 
-
-
 export default () => {
     const [loaders, setLoaders] = useState(false)
     const [couponError, setCouponError] = useState('')
@@ -133,7 +131,7 @@ export default () => {
                 })}
                 { wp_travel_booking_option == "booking_with_payment"&& selected_payment == 'bank_deposit' && <BankDetail />}
                 { wp_travel_booking_option == 'booking_with_payment' && typeof payment_select != 'undefined' && typeof payment_select.wp_travel_payment_gateway != 'undefined' && payment_select.wp_travel_payment_gateway == 'stripe' && <div className="wptravel-single-page-stripcheckout"><label> {wp_travel.strip_card }</label><div id="card-element"></div> </div>}
-                {
+                {  _wp_travel.policy_link !== "" &&
                     <div id="onpage-privacy-policy" className="wptravel-onepage-payment-total-trip-price">
                         <div className="components-panel__body is-opened wptrave-on-page-booking-price-with-coupon wptrave-onpage-price-calculation wptravel-opb-privacy-policy-check">
                             <div className="components-panel__row">
@@ -142,16 +140,21 @@ export default () => {
                                     <span className="required-label">*</span>
                                 </label>
                                 <div className="radio-checkbox-label">
-                                    <input type="checkbox" name="wp_travel_checkout_gdpr_msg[]" required="1" value="By contacting us, you agree to our  Privacy Policy" data-parsley-required="1" data-parsley-errors-container="#error_container-wp-travel-enquiry-gdpr-msg" data-parsley-multiple="wp_travel_checkout_gdpr_msg" />
-                                        <span>{ __( 'By contacting us, you agree to our', 'wp-travel' ) }</span>  
-                                        <a href="http://main.test/privacy-policy/"><span>{ __( 'Privacy Policy', 'wp-travel' ) }</span></a>
+                                    <input type="checkbox" name="wp_travel_checkout_gdpr_msg[]" required="1" value={_wp_travel.gdpr_msg} data-parsley-required="1" data-parsley-errors-container="#error_container-wp-travel-enquiry-gdpr-msg" data-parsley-multiple="wp_travel_checkout_gdpr_msg" />
+                                        <span>{_wp_travel.gdpr_msg}</span>  
+                                        <a href={_wp_travel.policy_link}><span>{ _wp_travel.policy_page_title }</span></a>
                                 </div>		
                             </div>
                         </div>
-                        
-                        
                     </div>
                 }
+                {  ( _wp_travel.is_pro_enable == 'yes' && typeof _wp_travel.enable_subscription != 'undefined' ) &&
+                    <div class="on-page wp-travel-form-field wp-travel-enquiry-subscribe-section">
+                        <label for="wp-travel-subscribe">{_wp_travel.subscription_data.subscribe_label}</label>
+                        <label class="radio-checkbox-label"><input type="checkbox" name="wp_travel_subscribe[]" value={_wp_travel.subscription_data.subscribe_desc} data-parsley-errors-container="#error_container-wp-travel-subscribe" data-parsley-multiple="wp_travel_subscribe" />{_wp_travel.subscription_data.subscribe_desc}</label>
+                        <div id="error_container-wp-travel-subscribe"></div>
+                    </div>
+                }       
                 { <input type="hidden" id="wp-travel-partial-payment" value={partial_enable} name="wp_travel_is_partial_payment" /> }
                 <input type="hidden" value={_wp_travel._nonce} name="_nonce" />
                 <input type="hidden" value={ partial_enable == 'yes' && wp_travel_payment_mode == 'partial' ? partial_amount : trip_price } name="onpage-trip_price" id="onpage-trip_price" />

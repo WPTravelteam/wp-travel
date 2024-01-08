@@ -134,8 +134,14 @@ function wptravel_book_now() {
 		'post_title' => 'Booking - # ' . $booking_id,
 	);
 	wp_update_post( $update_data_array );
-
+	$settings       = wptravel_get_settings();
+	
+	
 	$sanitized_data = wptravel_sanitize_array( $_POST ); // @phpcs:ignore
+
+	if( count( $settings['selected_booking_option'] ) == 1 && $settings['selected_booking_option'][0] = 'booking-with-payment' ){
+		$sanitized_data['wp_travel_booking_option'] = 'booking_with_payment';
+	}
 	do_action( 'wpcrm_post_booking_user', $sanitized_data );
 	// Updating Booking Metas.
 	update_post_meta( $booking_id, 'order_data', $sanitized_data );
@@ -201,7 +207,7 @@ function wptravel_book_now() {
 		}
 	}
 
-	$settings       = wptravel_get_settings();
+	
 	$customer_email = isset( $_POST['wp_travel_email_traveller'] ) ? wptravel_sanitize_array( wp_unslash( $_POST['wp_travel_email_traveller'] ) ) : array(); // @phpcs:ignore
 	reset( $customer_email );
 	$first_key      = key( $customer_email );

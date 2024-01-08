@@ -173,7 +173,8 @@ const NonRecurringDates = ( props ) => {
 		}
 	})
     return <>
-    {
+    {   
+        
 		nonRecurringDates.length > 0 && <tbody className="tbody-table">
 		{ nonRecurringDates.map( ( date, index ) => {
 			let loadingClass = isLoading && selectedDateIds.includes( date.id ) ? 'wptravel-loading' : '';
@@ -182,7 +183,7 @@ const NonRecurringDates = ( props ) => {
 			if ( ! _nomineePricings.length ) {
 				return <Fragment key={index}></Fragment>
 			}
-			return <tr key={index} className={loadingClass}>
+			return <tr key={index} id={'date-'+date.id} className={loadingClass}>
 				<td class="tablebody-booking-pricings" data-label={__i18n.bookings.pricings_list_label}>
 					{/* _nomineePricings not updated in store/state because there are multiple _nomineePricings as per date so just a variable. */}
 					{/* <Pricings { ...{ ...props, _nomineePricings, date } }  /> */}

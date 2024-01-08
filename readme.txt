@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 6.0.0
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 7.8.1
+Stable tag: 7.9.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -415,11 +415,27 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
 
+= 7.9.0 =
+Release Date: 08th January 2024
+
+Fixes:
+* Optimized code.
+* Fixed minor design issues on the initial setup page.
+* Fixed date picker issue ( current date showing even if date picker is empty ).
+* Fixed privacy policy links in case of On-Page booking.
+
+Enhancements:
+* Added quick setup options on the initial setup page.
+* Added function to scroll to booking tab while clicking on departure date.
+
+**For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v7-9-0-update-release-note).**
+
 = 7.8.1 =
 Release Date: 22th December 2023
 
 Fixes:
 * Security patch update. Added nonce to all AJAX requests.
+
 
 = 7.8.0 =
 Release Date: 20th December 2023
