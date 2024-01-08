@@ -116,18 +116,18 @@ const Body = () => {
     	// return stepCount;
     }
 
-    // const importTrip = () => {
-	// 	setIsModalOpen(false);
-	// 	document.getElementById("trip-import-loader").classList.add( 'active' );
-    // 	document.getElementById("finished-tab-content").classList.add( 'inactive' );
-    // 	document.getElementById("wptravel-site-ready").classList.add( 'inactive' );
+    const importTrip = () => {
+		setIsModalOpen(false);
+		document.getElementById("trip-import-loader").classList.add( 'active' );
+    	document.getElementById("finished-tab-content").classList.add( 'inactive' );
+    	document.getElementById("wptravel-site-ready").classList.add( 'inactive' );
 
 
-    // 	apiFetch( { path: '/wp-travel/v1/trip-import/', method: 'POST' } ).then( ( response ) => {
+    	apiFetch( { path: '/wp-travel/v1/trip-import/', method: 'POST' } ).then( ( response ) => {
     		
-	// 	    location.replace( _wp_travel.admin_url );
-	// 	} );
-    // }
+		    location.replace( _wp_travel.admin_url );
+		} );
+    }
 
     const allData = useSelect((select) => {
         return select('WPTravel/Admin').getAllStore()
@@ -929,7 +929,7 @@ const Body = () => {
 						        </div>
 								<div className='final-setup-action-btns'>
 									<a className="dashboard-btn" href="https://wptravel.io/wp-travel-documentations/" target="_blank">{ __('Documentation', 'wp-travel') }</a>
-						            {/* <button  className="dashboard-btn" id="next-step" onClick={ () => setIsModalOpen(true) }>{ __('Quick Setup', 'wp-travel') }</button> */}
+						            <button  className="dashboard-btn" id="next-step" onClick={ () => setIsModalOpen(true) }>{ __('Quick Setup', 'wp-travel') }</button>
 									<a className="secondary-btn" href={ _wp_travel.admin_url }>{ __('Go To Dashboard', 'wp-travel') }</a>
 								</div>
 						    </section>

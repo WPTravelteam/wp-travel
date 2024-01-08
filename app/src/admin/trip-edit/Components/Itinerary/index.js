@@ -146,7 +146,7 @@ const Itinerary = ({allData}) => {
                             Object.keys(itineraries).map(function (itineraryId) {
 								let index     = parseInt(itineraryId);
                                 let _itineraryDate = moment(itineraries[itineraryId].date ? itineraries[itineraryId].date : null);
-                                _itineraryDate = _itineraryDate.isValid() ? _itineraryDate.toDate() : new Date();
+                                _itineraryDate = _itineraryDate.isValid() ? _itineraryDate.toDate() : '';
 
                                 return <div style={{position:'relative'}}  data-index={index} key={index} >
 										<div className={`wptravel-swap-list`}>
@@ -220,7 +220,7 @@ const Itinerary = ({allData}) => {
                                             position="bottom right"
                                             renderToggle={({ isOpen, onToggle }) => {
                                                 var itineraryTime = moment(itineraries[itineraryId].time ? itineraries[itineraryId].time : null);
-                                                return <TextControl value={itineraryTime ? itineraries[itineraryId].time : ''} onFocus={onToggle} aria-expanded={isOpen} onChange={() => false} autoComplete="off" />
+                                                return <TextControl value={itineraryTime ? itineraries[itineraryId].time : ''} onFocus={onToggle} aria-expanded={isOpen} autoComplete="off" />
                                             }}
                                             renderContent={ ({ isOpen, onToggle } ) => (
                                                 <div className="wp-travel-dropdown-content-wrap">
@@ -256,8 +256,8 @@ const Itinerary = ({allData}) => {
                                                     <Button onClick={()=>{
                                                         let _minutes = stateMinutes < 10 ? '0'+stateMinutes:stateMinutes;
                                                         let _hours = stateHours < 10 ? '0'+stateHours:stateHours;
-                                                        let time = `${_hours}:${_minutes}`;
-
+                                                        let time = `${_hours}:${_minutes}` == '00:00' ? '' : `${_hours}:${_minutes}`;
+                                                        console.log( time );
                                                         // @todo: Need to format time.
                                                         updateTripItinerary('time', time, itineraryId)
                                                         // updateTripItinerary('time', moment.time(time).format('hh:mm a', time), itineraryId)

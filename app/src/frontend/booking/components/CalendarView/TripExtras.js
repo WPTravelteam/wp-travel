@@ -39,7 +39,7 @@ const TripExtras = ( props ) => {
 
 		updateBookingData({ tripExtras: { ...tripExtras, [id]: parseInt(_xcount) } });
 	}
-	{ console.log( nomineeTripExtras ) }
+
 	return <div className="wp-travel-booking__trip-extras-wrapper">
 		{
 			nomineeTripExtras.length > 0 && <>

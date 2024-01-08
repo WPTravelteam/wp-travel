@@ -1294,6 +1294,7 @@
 
 		// last button to add to cart -'book now ' button
 		.wp-travel-form-field.button-field {
+			input#wp-travel-authorizenet,
 			input#wp-travel-book-now {
 				text-decoration: none;
 				padding: 5px;
@@ -1307,12 +1308,6 @@
 				display: flex;
 				justify-content: center;
 				align-items: center;
-			}
-
-			input#wp-travel-book-now:hover {
-				// text-decoration: none;
-				// transform: scale(1.06);
-				// transition: width 2s;
 			}
 
 			button {
@@ -1696,7 +1691,6 @@
 
 		.onpage-traveler-field-price-show {
 			p {
-				display: flex;
 				align-items: center;
 				flex-direction: column;
 				margin: 0;
@@ -1745,7 +1739,6 @@
 
 	// Coupon code entering section
 	.wptravel-on-page-coupon-apply {
-		padding: 20px 0;
 
 		input.wp-travel-coupon-code {
 			min-height: 40px;

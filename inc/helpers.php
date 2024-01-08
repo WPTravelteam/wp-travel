@@ -3584,6 +3584,7 @@ function wptravel_get_fixed_departure_date( $trip_id ) {
 				?>
 				<div class="fixed-date-dropdown">
 					<?php
+					$i=1;
 					foreach ( $available_dates as $index => $date ) {
 						if ( date( 'Y-m-d ', strtotime( $date ) ) >= date( 'Y-m-d' ) ) {
 							$date_found = true;
@@ -3598,7 +3599,7 @@ function wptravel_get_fixed_departure_date( $trip_id ) {
 									<?php
 							}
 							?>
-								<span class="dropdown-list"> <?php echo esc_html( date_i18n( $date_format, strtotime( $date ) ) ); ?></span>
+								<span data-id="date-<?php echo $i; ?>" class="book-trip-date dropdown-list"> <?php echo esc_html( date_i18n( $date_format, strtotime( $date ) ) ); ?></span>
 								<?php
 								if ( count( $available_dates ) === ( $index + 1 ) ) {
 									?>
@@ -3606,6 +3607,7 @@ function wptravel_get_fixed_departure_date( $trip_id ) {
 									<?php
 								}
 						}
+						$i++;
 					}
 					?>
 				</div>
