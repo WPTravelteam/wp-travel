@@ -139,7 +139,7 @@ function wptravel_book_now() {
 	
 	$sanitized_data = wptravel_sanitize_array( $_POST ); // @phpcs:ignore
 
-	if( count( $settings['selected_booking_option'] ) == 1 && $settings['selected_booking_option'][0] = 'booking-with-payment' ){
+	if( class_exists( 'WP_Travel_Pro' ) && isset( $settings['selected_booking_option'] ) && count( $settings['selected_booking_option'] ) == 1 && $settings['selected_booking_option'][0] = 'booking-with-payment' ){
 		$sanitized_data['wp_travel_booking_option'] = 'booking_with_payment';
 	}
 	do_action( 'wpcrm_post_booking_user', $sanitized_data );
@@ -601,5 +601,3 @@ function wptravel_get_booking_chart() {
 function wp_travel_add_to_cart_system() { 
 	return apply_filters( 'wp_travel_add_to_cart_system', false );
 }
-
-

@@ -1818,6 +1818,7 @@ function wptravel_booking_message() {
 
 	if ( isset( $submission_get['booked'] ) && 1 == wptravel_sanitize_array( wp_unslash( $submission_get['booked'] ) ) ) :
 		?>
+		
 		<script>
 			history.replaceState({},null,window.location.pathname);
 		</script>

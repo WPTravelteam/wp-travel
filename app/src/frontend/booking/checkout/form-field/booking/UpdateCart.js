@@ -291,7 +291,8 @@ export default () => {
                                 <button className='wptravel-page-cart-update-btn-increase' onClick={ () => paxIncreament( catId, is_sale, regular_price, sale_price )}>+</button>
                             </div>
                             <div className="wptravel-onpage-booking-cart-price">
-                                <p>{currency_symbol}{updatePriceData[catId]}</p>
+                                {/* <p>{currency_symbol}{updatePriceData[catId]}</p> */}
+                                <span dangerouslySetInnerHTML={{ __html: wpTravelFormat( updatePriceData[catId] ) }}></span>
                             </div>
                             {/* <div className="wptravel-onpage-booking-cart-price">
                                 <p>{currency_symbol}{updatePriceData[catId]}</p>
@@ -322,7 +323,7 @@ export default () => {
                                 ||
                                 <label>{extraTitles}</label>
                             }	
-                            <span className="item-price">{ is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat( extras_item_price ) } }></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat( sale_price ) }}></span>/{unit}</span>
+                            <span className="item-price">{ is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat( extras_item_price ) } }></del>} { is_sale && <span dangerouslySetInnerHTML={{ __html: wpTravelFormat( sale_price ) }}></span> || <span dangerouslySetInnerHTML={{ __html: wpTravelFormat( extras_item_price ) }}></span> }/{unit}</span>
                             
                             <div className="wp-travel-on-page-cart-update-button">
 
@@ -332,7 +333,7 @@ export default () => {
 
                             </div>
                             <div className="wptravel-onpage-booking-cart-price">
-                                { updateExtraPrice[extraIds] > 0 && <p>{currency_symbol}{updateExtraPrice[extraIds]}</p> || <p>{currency_symbol}0</p> }
+                                { updateExtraPrice[extraIds] > 0 && <p><span dangerouslySetInnerHTML={{ __html: wpTravelFormat( updateExtraPrice[extraIds] ) }}></span></p> || <p>{currency_symbol}0</p> }
                             </div>
 
                         </div> </>} )} </div>

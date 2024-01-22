@@ -16,6 +16,8 @@ export default () => {
     const { updateSettings, updateRequestSending } = dispatch('WPTravel/Admin');
     const {
         partial_payment,
+        partial_payment_amount,
+        partial_amount,
         minimum_partial_payout,
         sorted_gateways,
         trip_tax_enable,
@@ -132,8 +134,45 @@ export default () => {
                         </div>
                     </PanelRow>
 
+                    {'yes' == partial_payment && _wp_travel.is_pro_enable == 'yes' &&
+                        <PanelRow>
+                            <label>{__('In Amount', 'wp-travel')}</label>
+                            <div id="wp-travel-payment-partial" className="wp-travel-field-value">
+                                <ToggleControl
+                                    checked={partial_payment_amount == 'yes'}
+                                    onChange={() => {
+                                        updateSettings({
+                                            ...allData,
+                                            partial_payment_amount: 'yes' == partial_payment_amount ? 'no' : 'yes'
+                                        })
+                                    }}
+                                />
+                            </div>
+                        </PanelRow>
+                    }  
+
+                    {'yes' == partial_payment && 'yes' == partial_payment_amount && _wp_travel.is_pro_enable == 'yes' &&
+                        <PanelRow>
+                        <label>Partial Amount</label>
+                        <div id="wp-travel-payment-partial-amount" className="wp-travel-field-value">
+                            <TextControl
+                                // help={__( 'Set default zoom level of map.', 'wp-travel' )}
+                                type="number"
+                                value={partial_amount}
+                                onChange={(value) => {
+                                    updateSettings({
+                                    ...allData,
+                                    partial_amount: value,
+                                    });
+                                }}
+                            />  
+                        </div>
+                        </PanelRow>
+                    } 
+
                     {applyFilters('wp_travel_before_minimum_partial_payout', [], allData)}
-                    {'yes' == partial_payment && partial_payouts.length > 0 ?
+                    
+                    {'yes' == partial_payment && partial_payment_amount == 'no' && partial_payouts.length > 0 ?
                         <>
 
                             {'undefined' != typeof options && 'undefined' != options.has_partial_payment && options.has_partial_payment ?

@@ -77,6 +77,7 @@ if ( ! function_exists( 'wptravel_payments_tab_content' ) ) {
 											$meta_name      = sprintf( '_%s_args', $payment_method );
 
 											$ajax_url = admin_url( 'admin-ajax.php' );
+											$ajax_url = add_query_arg( 'booking_id', $payment_id, $ajax_url );
 											$ajax_url = add_query_arg( 'payment_id', $payment_id, $ajax_url );
 											$ajax_url = add_query_arg( 'action', 'wptravel_get_payment_details_html', $ajax_url );
 											$ajax_url = add_query_arg( '_nonce', WP_Travel::create_nonce(), $ajax_url );
@@ -141,7 +142,7 @@ if ( ! function_exists( 'wptravel_payments_tab_content' ) ) {
 				jQuery('.wptravel-payment-popup').magnificPopup({
 					type: 'ajax',
 					preloader: false,
-					midClick: true,
+					midClick: false,
 				});
 			});
 		</script>

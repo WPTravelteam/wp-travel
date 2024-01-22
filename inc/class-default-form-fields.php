@@ -254,6 +254,7 @@ class WP_Travel_Default_Form_Fields { // @phpcs:ignore
 				'validations' => array(
 					'required' => true,
 				),
+				'default-country'     => 'nepal',
 				'default'     => '',
 				'priority'    => 30,
 			),

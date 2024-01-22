@@ -116,6 +116,7 @@ function wptravel_get_checkout_form_fields() {
 	global $wt_cart;
 
 	$cart_amounts = $wt_cart->get_total();
+
 	$cart_total   = isset( $cart_amounts['total'] ) ? $cart_amounts['total'] : 0;
 	if ( wptravel_is_payment_enabled() && $cart_total > 0 ) {
 		$payment_fields['wp_travel_billing_address_heading'] = array(
@@ -213,6 +214,9 @@ function wptravel_get_checkout_form_fields() {
 
 				foreach ( $conditional_payment as $value ) {
 					if ( array_key_exists( $value, $gateway_list['active'] ) ) {
+						if ( $value == 'authorizenet' ) {
+							$payment_list[ $value ] = 'Authorize.Net';
+						}
 						if ( $value == 'paypal' ) {
 							$payment_list[ $value ] = 'Standard Paypal';
 						}
@@ -255,9 +259,7 @@ function wptravel_get_checkout_form_fields() {
 						if ( $value == 'stripe_ideal' ) {
 							$payment_list[ $value ] = 'Stripe iDEAL Checkout';
 						}
-						if ( $value == 'authorizenet' ) {
-							$payment_list[ $value ] = 'Authorize.Net';
-						}
+						
 						$selected_gateway = $value;
 					}
 				}

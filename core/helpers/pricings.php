@@ -576,12 +576,12 @@ class WpTravel_Helpers_Pricings {
 
 		global $wt_cart;
 		$items = $wt_cart->getItems();
-
+ 
 		// Trip specific partial payment is only for one cart items. if multiple items then above global payout percent will be used as payout percent.
-		if ( ! $use_global && $trip_payout_percent && count( $items ) < 2 ) {
+		if ( $use_global == "" && $trip_payout_percent && count( $items ) < 2 ) {
 			$payout_percent = $trip_payout_percent;
 		}
-
+		
 		$payout_percent = apply_filters( 'wp_travel_payout_percent', $payout_percent, $trip_id ); // @phpcs:ignore
 		$payout_percent = apply_filters( 'wptravel_payout_percent', $payout_percent, $trip_id );
 		$payout_percent = wptravel_initial_partial_payout_unformated( $payout_percent );
