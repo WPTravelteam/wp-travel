@@ -703,7 +703,7 @@ class WP_Travel_Cart {
 		$total_trip_price_partial = $total_trip_price_partial_after_dis + $tax_amount_partial; // Need to deprecate this.
 
 		$payout_percent           = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
-		$total_trip_price_partial = ( $total_trip_price * $payout_percent ) / 100;
+		$total_trip_price_partial = ( class_exists( 'WP_Travel_Pro' ) && wptravel_get_settings()['partial_payment_amount'] == 'yes' ) ? wptravel_get_settings()['partial_amount'] : ( $total_trip_price * $payout_percent ) / 100;
 		$get_total                = array(
 			'cart_total'         => wptravel_get_formated_price( $cart_total ), // Effective for multiple cart items[cart_total].
 			'discount'           => wptravel_get_formated_price( $discount_amount ),

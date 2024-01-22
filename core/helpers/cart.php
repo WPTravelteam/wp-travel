@@ -284,7 +284,7 @@ class WP_Travel_Helpers_Cart {
 					WP_Travel_Helpers_REST_API::response( $error );
 				}
 			}
-
+			
 			global $wt_cart;
 			$wt_cart->add_discount_values( $coupon_id, $discount_type, $discount_value, $coupon_code );
 			$cart = self::get_cart(); // 2nd assignment after deducting discount.

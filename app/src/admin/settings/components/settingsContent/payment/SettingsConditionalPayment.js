@@ -31,25 +31,27 @@ export default () => {
 addFilter('wp_travel_settings_conditional_payment', 'WPTravel/Settings/ConditionalPayment/Notice', (content, allData) => {
     content = [
         <>
-            { ( _wp_travel.is_conditional_payment_active == 'yes' ) && ( _wp_travel.is_conditional_payment_enable == 'no' ) &&
+           
+            { ( _wp_travel.is_pro_enable == 'no' ) &&
                 
                 <Notice isDismissible={false} status="informational">
-                    <strong>{__('Need Additional Conditional Payment ?', 'wp-travel')}</strong>
+                   <strong>{__('Need Additional Conditional Payment ?', 'wp-travel')}</strong>
                     <br />
                     {__( 'Using the Conditional payment module, you can apply for conditional payment on the checkout page according to the billing address or the trip locations.' , 'wp-travel' ) }
                     <br />
                     <br />
                     <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Get WP Travel Pro', 'wp-travel')}</a>
                 </Notice>
-            }
-            { ( _wp_travel.is_conditional_payment_active == 'no' ) &&
+                ||
+                ( _wp_travel.is_conditional_payment_active == 'no' ) &&
                 
                 <Notice isDismissible={false} status="informational">
-                    <strong>{__('Conditional Payment is currently disable.', 'wp-travel')}</strong>
+                     <strong>{__('Conditional Payment is currently disable.', 'wp-travel')}</strong>
                     <br />
                     {__('Plesae enable conditional payment module to get access to conditional payment settings.', 'wp-travel')}
                     <br />
                 </Notice>
+            
             }
             <br />
             

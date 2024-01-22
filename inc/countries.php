@@ -3,6 +3,7 @@
 function wptravel_get_countries() {
 
 	$countries = array(
+		'SelCon' => __( 'Select Country', 'wp-travel' ),
 		'AF' => __( 'Afghanistan', 'wp-travel' ),
 		'AX' => __( 'land Islands', 'wp-travel' ),
 		'AL' => __( 'Albania', 'wp-travel' ),

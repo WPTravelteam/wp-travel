@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 6.0.0
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 7.9.0
+Stable tag: 8.0.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -414,6 +414,20 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 8.0.0 =
+Release Date: 22nd January 2024
+
+Fixes:
+* Fixed undefined array index issue
+* Fixed payments PHP warnings 
+* Fixed thousand separator issue in case of decimal separator is set to 0 
+
+Enhancements:
+* Added a close icon on the payment details popup module
+* Added Trip, Coupon, Trip Extras access to the editor role
+
+**For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v8-0-0-update-release-note).**
 
 = 7.9.0 =
 Release Date: 08th January 2024

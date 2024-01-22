@@ -72,6 +72,7 @@ class WpTravel_Helpers_Localize {
 			$_wp_travel['pax_show_remove'] 	  = apply_filters( 'wp_travel_booking_pax_editable', '' );
 			$_wp_travel['select_you_pax']	  = apply_filters( 'wp_travel_select_you_pax', __( 'Select Your Pax', 'wp-travel' )); 
 			$_wp_travel['partial_enable']     = isset( $settings['partial_payment'] ) ? $settings['partial_payment'] : 'no';
+			$_wp_travel['partial_payment_amount']     = isset( $settings['partial_payment_amount'] ) ? $settings['partial_payment_amount'] : 'no';
 			$_wp_travel['enable_one_page_booking'] = isset( $settings['enable_one_page_booking'] ) ? $settings['enable_one_page_booking'] : false;
 			$_wp_travel['loader_url']         = plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/images/loader.gif';
 			$_wp_travel['checkout_field']     = array(

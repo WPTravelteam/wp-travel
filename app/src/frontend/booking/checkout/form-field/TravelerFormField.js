@@ -24,7 +24,7 @@ import {
 } from 'react-accessible-accordion';
 import UpdateCart from './booking/UpdateCart';
 import Heading from './form/traveler/Heading';
-
+import { wpTravelFormat } from '../../_wptravelFunctions';
 
 export default ( ) => {
     const [loaders, setLoaders] = useState(false)
@@ -242,7 +242,7 @@ export default ( ) => {
         <p className='wp-travel-in-page-error'>{errorFound}</p>
         <div className='wptrave-singlepage-initial-nextbtn'>
             { trip_price != '' && <div className="onpage-traveler-field-price-show">
-                <p><span className='onpage-travel-price-display-label'>{i18n.set_cart_total_price }</span>{currency_symbol}{trip_price}</p>
+                <p><span className='onpage-travel-price-display-label'>{i18n.set_cart_total_price }</span><span dangerouslySetInnerHTML={{ __html: wpTravelFormat( trip_price ) }}></span></p>
             </div>}
             <Button onClick={validateTravelerData}>{i18n.set_next_btn}{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</Button>
         </div>

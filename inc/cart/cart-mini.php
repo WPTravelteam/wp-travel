@@ -397,7 +397,10 @@ if ( wptravel_is_react_version_enabled() ) {
 								<?php
 								$total_upfront_label = apply_filters( 'wptravel_checkout_total_upfront_label', esc_html__( 'Total upfront', 'wp-travel' ), $cart );
 								echo esc_html( $total_upfront_label );
-								echo '(' . esc_html( $payout_percent ) . '%)';
+								if ( wptravel_get_settings()['partial_payment_amount'] == 'no' ){
+									echo '(' . esc_html( $payout_percent ) . '%)';
+								}
+								
 								?>
 							</label>
 							<div class="price"><strong data-wpt-cart-net-total-partial="<?php echo esc_attr( $total_partial ); ?>"><?php echo wptravel_get_formated_price_currency( $total_partial ); ?></strong></div>

@@ -134,7 +134,7 @@ class WP_Travel_Coupon {
 	public function get_discount_value( $coupon_id ) {
 		// Meta.
 		$coupon_metas = get_post_meta( $coupon_id, 'wp_travel_coupon_metas', true );
-		return isset( $coupon_metas['general'] ) && $coupon_metas['general']['coupon_value'] ? $coupon_metas['general']['coupon_value'] : 0;
+		return isset( $coupon_metas['general'] ) && isset( $coupon_metas['general']['coupon_value'] ) && $coupon_metas['general']['coupon_value'] ? $coupon_metas['general']['coupon_value'] : 0;
 	}
 
 	/**
