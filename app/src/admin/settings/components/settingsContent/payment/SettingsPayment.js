@@ -110,7 +110,7 @@ export default () => {
         <>
             <div className="wp-travel-section-header">
                 <h2 className="wp-travel-section-header-title">
-                    {__("Payment", "wp-travel")}
+                    {_wp_travel.setting_strings.payment.payment}
                 </h2>
                 <p className="wp-travel-section-header-description">
                     {__("More payment settings according to your choice.", "wp-travel")}
@@ -119,7 +119,7 @@ export default () => {
             <div className='wp-travel-section-content' id='wp-travel-partial-payment-pays'>
                 <ErrorBoundary>
                     <PanelRow>
-                        <label>{__('Partial Payment', 'wp-travel')}</label>
+                        <label>{_wp_travel.setting_strings.payment.partial_payment}</label>
                         <div id="wp-travel-payment-partial" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={partial_payment == 'yes'}
@@ -130,13 +130,13 @@ export default () => {
                                     })
                                 }}
                             />
-                            <p className="description">{__('Enable Partial Payment while booking.', 'wp-travel')}</p>
+                            <p className="description">{_wp_travel.setting_strings.payment.partial_payment_note}</p>
                         </div>
                     </PanelRow>
 
                     {'yes' == partial_payment && _wp_travel.is_pro_enable == 'yes' &&
                         <PanelRow>
-                            <label>{__('In Amount', 'wp-travel')}</label>
+                            <label>{_wp_travel.setting_strings.payment.in_amount}</label>
                             <div id="wp-travel-payment-partial" className="wp-travel-field-value">
                                 <ToggleControl
                                     checked={partial_payment_amount == 'yes'}
@@ -153,7 +153,7 @@ export default () => {
 
                     {'yes' == partial_payment && 'yes' == partial_payment_amount && _wp_travel.is_pro_enable == 'yes' &&
                         <PanelRow>
-                        <label>Partial Amount</label>
+                        <label>{_wp_travel.setting_strings.payment.partial_amount}</label>
                         <div id="wp-travel-payment-partial-amount" className="wp-travel-field-value">
                             <TextControl
                                 // help={__( 'Set default zoom level of map.', 'wp-travel' )}
@@ -180,7 +180,7 @@ export default () => {
                                     {
                                         partial_payouts.length >= 1 && <>
                                             <PanelRow>
-                                                <label>Partial Payout 1 (%)</label>
+                                                <label>{_wp_travel.setting_strings.payment.partial_payout_one}</label>
                                                 <div id="wp-travel-payment-partial-payout" className="wp-travel-field-value">
                                                     <RangeControl
                                                         value={'undefined' != typeof partial_payouts[0] ? parseFloat(partial_payouts[0]) : 0}
@@ -191,13 +191,13 @@ export default () => {
                                                         max={100.0}
                                                         step={0.01}
                                                     />
-                                                    <p className="description">{__('Minimum percent of amount to pay while booking.', 'wp-travel')}</p>
+                                                    <p className="description">{_wp_travel.setting_strings.payment.partial_payout_note}</p>
                                                 </div>
                                             </PanelRow>
                                         </>}
                                     {partial_payouts.length >= 2 && <>
                                         <PanelRow>
-                                            <label>Partial Payout 2 (%)</label>
+                                            <label>{_wp_travel.setting_strings.payment.partial_payout_two}</label>
                                             <div className="wp-travel-field-value">
                                                 <RangeControl
                                                     value={'undefined' != typeof partial_payouts[1] ? parseFloat(partial_payouts[1]) : 0}
@@ -208,13 +208,13 @@ export default () => {
                                                     max={100.0}
                                                     step={0.01}
                                                 />
-                                                <p className="description">{__('Minimum percent of amount to pay while booking.', 'wp-travel')}</p>
+                                                <p className="description">{_wp_travel.setting_strings.payment.partial_payout_note}</p>
                                             </div>
                                         </PanelRow>
                                     </>}
                                     {partial_payouts.length >= 3 && <>
                                         <PanelRow>
-                                            <label>Partial Payout 3 (%)</label>
+                                            <label>{_wp_travel.setting_strings.payment.partial_payout_three}</label>
                                             <div className="wp-travel-field-value">
                                                 <RangeControl
                                                     value={'undefined' != typeof partial_payouts[2] ? parseFloat(partial_payouts[2]) : 0}
@@ -225,13 +225,13 @@ export default () => {
                                                     max={100.0}
                                                     step={0.01}
                                                 />
-                                                <p className="description">{__('Minimum percent of amount to pay while booking.', 'wp-travel')}</p>
+                                                <p className="description">{_wp_travel.setting_strings.payment.partial_payout_note}</p>
                                             </div>
                                         </PanelRow>
                                     </>}
                                     {partial_payouts.length >= 4 && <>
                                         <PanelRow>
-                                            <label>Partial Payout 4 (%)</label>
+                                            <label>{_wp_travel.setting_strings.payment.partial_payout_four}</label>
                                             <div className="wp-travel-field-value">
                                                 <RangeControl
                                                     value={'undefined' != typeof partial_payouts[3] ? parseFloat(partial_payouts[3]) : 0}
@@ -242,14 +242,14 @@ export default () => {
                                                     max={100.0}
                                                     step={0.01}
                                                 />
-                                                <p className="description">{__('Minimum percent of amount to pay while booking.', 'wp-travel')}</p>
+                                                <p className="description">{_wp_travel.setting_strings.payment.partial_payout_note}</p>
                                             </div>
                                         </PanelRow>
                                     </>}
                                 </>
                                 :
                                 <PanelRow>
-                                    <label>{__('Minimum Payout (%)', 'wp-travel')}</label>
+                                    <label>{_wp_travel.setting_strings.payment.minimum_payout}</label>
                                     <div key={1} className="wp-travel-field-value">
                                         <RangeControl
                                             value={'undefined' != typeof partial_payouts && 'undefined' != typeof partial_payouts[0] ? parseFloat(partial_payouts[0]) : 0}
@@ -260,7 +260,7 @@ export default () => {
                                             max={100.0}
                                             step={0.1}
                                         />
-                                        <p className="description">{__('Minimum percent of amount to pay while booking.', 'wp-travel')}</p>
+                                        <p className="description">{_wp_travel.setting_strings.payment.partial_payout_note}</p>
                                     </div>
                                 </PanelRow>
                             }
@@ -271,7 +271,7 @@ export default () => {
 
                     <PanelRow>
                         <h3>
-                            {__('Payment Gateways', 'wp-travel')}
+                            {_wp_travel.setting_strings.payment.payment_gateways}
                         </h3>
                         <label id="wp-travel-payment-gateways" className="wp-travel-section-header-label">
                             <ToggleControl
@@ -300,7 +300,7 @@ export default () => {
                                     });
                                 }}
                             />
-                            <p className="description">{__('Enable/Disable All', 'wp-travel')}</p>
+                            <p className="description">{_wp_travel.setting_strings.payment.enable_disable}</p>
                         </label>
                     </PanelRow>
 
@@ -353,9 +353,9 @@ export default () => {
                     }
                     {applyFilters('wp_travel_after_payment_fields', [], allData)}
 
-                    <h3>{__('Tax Options', 'wp-travel')}</h3>
+                    <h3>{_wp_travel.setting_strings.payment.tax_options}</h3>
                     <PanelRow>
-                        <label>{__('Enable Tax', 'wp-travel')}</label>
+                        <label>{_wp_travel.setting_strings.payment.tax_options_enable_tax}</label>
                         <div id="wp-travel-payment-tax-options" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={trip_tax_enable == 'yes'}
@@ -366,20 +366,20 @@ export default () => {
                                     })
                                 }}
                             />
-                            <p className="description">{__('Check to enable Tax options for trips.', 'wp-travel')}</p>
+                            <p className="description">{_wp_travel.setting_strings.payment.tax_options_enable_tax_note}</p>
                         </div>
                     </PanelRow>
 
                     {'undefined' != typeof trip_tax_enable && 'yes' == trip_tax_enable &&
                         <>
                             <PanelRow>
-                                <label>{__('Tax on Trip prices', 'wp-travel')}</label>
+                                <label>{_wp_travel.setting_strings.payment.tax_options_tax_on_trip_prices}</label>
                                 <div id="wp-travel-payment-tax-on-trip" className="wp-travel-field-value">
                                     <RadioControl
                                         selected={trip_tax_price_inclusive}
                                         options={[
-                                            { label: __('Yes, I will enter trip prices inclusive of tax', 'wp-travel'), value: 'yes' },
-                                            { label: __('No, I will enter trip prices exclusive of tax', 'wp-travel'), value: 'no' },
+                                            { label: _wp_travel.setting_strings.payment.tax_options_tax_on_trip_prices_option_1, value: 'yes' },
+                                            { label: _wp_travel.setting_strings.payment.tax_options_tax_on_trip_prices_option_2, value: 'no' },
                                         ]}
                                         onChange={(option) => {
                                             updateSettings({
@@ -388,13 +388,13 @@ export default () => {
                                             })
                                         }}
                                     />
-                                    <p className="description">{__('This option will affect how you enter trip prices.', 'wp-travel')}</p>
+                                    <p className="description">{_wp_travel.setting_strings.payment.tax_options_tax_on_trip_prices_note}</p>
                                 </div>
                             </PanelRow>
                             {'undefined' != typeof trip_tax_price_inclusive && 'no' == trip_tax_price_inclusive &&
                                 <>
                                     <PanelRow>
-                                        <label>{__('Tax Percentage', 'wp-travel')}</label>
+                                        <label>{_wp_travel.setting_strings.payment.tax_options_tax_percentage}</label>
                                         <div id="wp-travel-payment-tax-percentage" className="wp-travel-field-value">
 
                                             <TextControl
@@ -409,7 +409,7 @@ export default () => {
                                                     }
                                                 }
                                             />
-                                            <p className="description">{__('Trip Tax percentage added to trip price.', 'wp-travel')}</p>
+                                            <p className="description">{_wp_travel.setting_strings.payment.tax_options_tax_percentage_note}</p>
                                         </div>
                                     </PanelRow>
                                 </>
@@ -430,7 +430,7 @@ addFilter('wp_travel_payment_gateway_fields_paypal', 'wp_travel', (content, allD
         <>
 
             <PanelRow>
-                <label>{__('Enable Paypal', 'wp-travel')}</label>
+                <label>{_wp_travel.setting_strings.payment.enable_paypal}</label>
                 <div className="wp-travel-field-value">
                     <ToggleControl
                         checked={payment_option_paypal == 'yes'}
@@ -441,13 +441,13 @@ addFilter('wp_travel_payment_gateway_fields_paypal', 'wp_travel', (content, allD
                             })
                         }}
                     />
-                    <p className="description">{__('Check to enable Standard PayPal payment.', 'wp-travel')}</p>
+                    <p className="description">{_wp_travel.setting_strings.payment.enable_paypal_note}</p>
                 </div>
             </PanelRow>
             {payment_option_paypal === 'yes' &&
 
                 <PanelRow>
-                    <label>{__('Paypal Email', 'wp-travel')}</label>
+                    <label>{_wp_travel.setting_strings.payment.paypal_email}</label>
                     <div className="wp-travel-field-value">
                         <TextControl
                             value={paypal_email}
@@ -460,7 +460,7 @@ addFilter('wp_travel_payment_gateway_fields_paypal', 'wp_travel', (content, allD
                                 }
                             }
                         />
-                        <p className="description">{__('PayPal email address that receive payment.', 'wp-travel')}</p>
+                        <p className="description">{_wp_travel.setting_strings.payment.paypal_email_note}</p>
                     </div>
                 </PanelRow>
             }
@@ -524,7 +524,7 @@ addFilter('wp_travel_payment_gateway_fields_bank_deposit', 'wp_travel', (content
     content = [
         <>
             <PanelRow>
-                <label>{__('Enable', 'wp-travel')}</label>
+                <label>{_wp_travel.setting_strings.payment.bank_deposit_enable}</label>
                 <div className="wp-travel-field-value">
                     <ToggleControl
                         checked={payment_option_bank_deposit == 'yes'}
@@ -535,13 +535,13 @@ addFilter('wp_travel_payment_gateway_fields_bank_deposit', 'wp_travel', (content
                             })
                         }}
                     />
-                    <p className="description">{__('Check to enable Bank deposit.', 'wp-travel')}</p>
+                    <p className="description">{_wp_travel.setting_strings.payment.bank_deposit_enable_note}</p>
                 </div>
             </PanelRow>
             {payment_option_bank_deposit === 'yes' &&
                 <>
                     <PanelRow>
-                        <label>{__('Description', 'wp-travel')}</label>
+                        <label>{_wp_travel.setting_strings.payment.bank_deposit_enable_description}</label>
                         <div className="wp-travel-field-value">
                             <TextareaControl
                                 value={wp_travel_bank_deposit_description}
@@ -556,7 +556,7 @@ addFilter('wp_travel_payment_gateway_fields_bank_deposit', 'wp_travel', (content
                             />
                         </div>
                     </PanelRow>
-                    <h3>{__('Account Detail', 'wp-travel')}</h3>
+                    <h3>{_wp_travel.setting_strings.payment.account_detail}</h3>
                     {'undefined' != typeof wp_travel_bank_deposits && wp_travel_bank_deposits.length > 0 &&
                         <>
                             <ReactSortable
@@ -648,13 +648,13 @@ addFilter('wp_travel_payment_gateway_fields_bank_deposit', 'wp_travel', (content
                                                     (e) => updateBankDeposit('enable', bankDeposite.enable == 'yes' ? 'no' : 'yes', index)
                                                 }
                                             />
-                                            <p className="description">{__('Enable', 'wp-travel')}</p>
+                                            <p className="description">{_wp_travel.setting_strings.payment.bank_deposit_enable}</p>
                                         </td>
                                     </tr>
                                     </table>
                                         <PanelRow className="wp-travel-action-section">
                                             <Button variant="secondary" onClick={() => {
-                                                if (!confirm(__('Are you sure to delete Bank Detail?', 'wp-travel'))) {
+                                                if (!confirm(_wp_travel.setting_strings.payment.remove_bank_note)) {
                                                     return false;
                                                 }
                                                 let bankData = [];
@@ -662,14 +662,14 @@ addFilter('wp_travel_payment_gateway_fields_bank_deposit', 'wp_travel', (content
                                                     return newIndex != index;
                                                 });
                                                 removeBankDeposit(bankData);
-                                            }} className="wp-traval-button-danger">{__('- Remove bank', 'wp-travel')}</Button>
+                                            }} className="wp-traval-button-danger">{_wp_travel.setting_strings.payment.remove_bank}</Button>
                                         </PanelRow>
                                     </PanelRow>
                                 })}
                             </ReactSortable>
                         </>
                     }
-                    <PanelRow className="wp-travel-action-section"><span></span><Button variant="secondary" onClick={() => addNewAccount()}>{__('+ Add New', 'wp-travel')}</Button></PanelRow>
+                    <PanelRow className="wp-travel-action-section"><span></span><Button variant="secondary" onClick={() => addNewAccount()}>{_wp_travel.setting_strings.payment.add_new}</Button></PanelRow>
 
                 </>
             }

@@ -32,7 +32,7 @@ export default () => {
         <>
             <div className="wp-travel-section-header">
                 <h2 className="wp-travel-section-header-title">
-                    {__("Trips Settings", "wp-travel")}
+                    {_wp_travel.setting_strings.trip_settings.trips_settings}
                 </h2>
                 <p className="wp-travel-section-header-description">
                     {__("More trips settings according to your choice.", "wp-travel")}
@@ -42,7 +42,7 @@ export default () => {
                 <ErrorBoundary>
                     {applyFilters('wp_travel_tab_content_before_trips', [], allData)}
                     <PanelRow>
-                        <label>{__('Enable Trip Enquiry', 'wp-travel')}</label>
+                        <label>{_wp_travel.setting_strings.trip_settings.enable_trip_enquiry}</label>
                         <div id="wp-travel-misc-enable-trip-inquiry" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={enable_trip_enquiry_option == 'yes'}
@@ -57,7 +57,7 @@ export default () => {
                         </div>
                     </PanelRow>
                     <PanelRow>
-                        <label>{__('Hide related trips', 'wp-travel')}</label>
+                        <label>{_wp_travel.setting_strings.trip_settings.hide_related_trips}</label>
                         <div id="wp-travel-trips-settings-hide-related-trips" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={hide_related_itinerary == 'yes'}
@@ -68,7 +68,7 @@ export default () => {
                                     })
                                 }}
                             />
-                            <p className="description">{__('This will hide your related trips.', 'wp-travel')}</p>
+                            <p className="description">{_wp_travel.setting_strings.trip_settings.hide_related_trips_note}</p>
                         </div>
                     </PanelRow>
 
@@ -102,8 +102,8 @@ export default () => {
                     {/* {  _wp_travel.dev_mode && */}
                     <PanelRow>
                         <label>
-                            {__('Trip date listing', 'wp-travel')}
-                            <Tooltip text={__('List date while booking or display calendar with available dates. Note: Date option only works for fixed departure trips.', 'wp-travel')}>
+                            {_wp_travel.setting_strings.trip_settings.trip_date_listing}
+                            <Tooltip text="{_wp_travel.setting_strings.trip_settings.trip_date_listing_tooltip}">
                                 <span><i className='fa fa-info-circle'></i></span>
                             </Tooltip>
                         </label>
@@ -132,7 +132,7 @@ export default () => {
                     </PanelRow>
                     {/* } */}
                     <PanelRow>
-                        <label>{__('Enable Expired Trip Option', 'wp-travel')}</label>
+                        <label>{_wp_travel.setting_strings.trip_settings.enable_expired_trip_option}</label>
                         <div id="wp-travel-trips-settings-enable-expired-trip" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={enable_expired_trip_option == 'yes'}
@@ -143,12 +143,12 @@ export default () => {
                                     })
                                 }}
                             />
-                            <p className="description">{__('This will enable expired trip set as Expired or delete.', 'wp-travel')}</p>
+                            <p className="description">{_wp_travel.setting_strings.trip_settings.enable_expired_trip_option_note}</p>
                         </div>
                     </PanelRow>
                     {'undefined' !== typeof enable_expired_trip_option && 'yes' === enable_expired_trip_option &&
                         <PanelRow>
-                            <label>{__('If expired, trip set to expired/delete', 'wp-travel')}</label>
+                            <label>{_wp_travel.setting_strings.trip_settings.if_expired_trip_set_to_expired_delete}</label>
                             <div id="wp-travel-trips-settings-if-expired-trip" className="wp-travel-field-value">
                                 <SelectControl
                                     value={expired_trip_set_to}
@@ -172,7 +172,7 @@ export default () => {
                         </PanelRow>
                     }
                     <PanelRow>
-                        <label>{__('Disable Star Rating For Admin', 'wp-travel')}</label>
+                        <label>{_wp_travel.setting_strings.trip_settings.disable_star_rating_for_admin}</label>
                         <div id="wp-travel-trips-settings-disable-star-rating" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={disable_admin_review == 'yes'}
@@ -183,7 +183,7 @@ export default () => {
                                     })
                                 }}
                             />
-                            <p className="description">{__('Enable to not allow star rating to admin', 'wp-travel')}</p>
+                            <p className="description">{_wp_travel.setting_strings.trip_settings.disable_star_rating_for_admin_note}</p>
                         </div>
                     </PanelRow>
 

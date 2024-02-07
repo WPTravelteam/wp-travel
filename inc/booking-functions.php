@@ -36,43 +36,43 @@ function wptravel_book_now() {
 	$discount_coupon_data = $wt_cart->get_discounts();
 
 	// return 'not pax available';
-	if ( class_exists( 'WP_Travel_Util_Inventory' ) ) {
-		$inventory_enable = 'no';
-		foreach ( $items as $keys => $value ) {
-			if ( isset( $value['trip_id'] ) ) {
-				$inv = get_post_meta( $value['trip_id'], 'enable_trip_inventory' );
-				if ( isset( $inv[0] ) && $inv[0] == 'yes' ) {
-					$inventory_enable = $inv[0];
-					$price_ids        = isset( $value['pricing_id'] ) ? $value['pricing_id'] : '';
-					$trp_id           = $value['trip_id'];
-					$select_dates     = isset( $value['trip_start_date'] ) ? $value['trip_start_date'] : '';
-					$trp_time         = '';
-					$available_pax    = '';
-					$inventory_size   = '';
-					$select_pax       = isset( $value['pax'] ) ? $value['pax'] : 0;
-					if ( class_exists( 'WP_Travel_Helpers_Inventory' ) ) {
-						$inventorys = WP_Travel_Helpers_Inventory::get_inventory(
-							array(
-								'trip_id'       => $trp_id,
-								'pricing_id'    => $price_ids,
-								'selected_date' => $select_dates,
-								'times'         => $trp_time,
-							)
-						);
-						if ( isset( $inventorys['inventory'] ) ) {
-							foreach ( $inventorys['inventory'] as $key => $val ) {
-								$available_pax = isset( $val['pax_available'] ) ? $val['pax_available'] : 0;
-								if ( $select_pax > $available_pax ) {
-									$wt_cart->clear();
-									return;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+	// if ( class_exists( 'WP_Travel_Util_Inventory' ) ) {
+	// 	$inventory_enable = 'no';
+	// 	foreach ( $items as $keys => $value ) {
+	// 		if ( isset( $value['trip_id'] ) ) {
+	// 			$inv = get_post_meta( $value['trip_id'], 'enable_trip_inventory' );
+	// 			if ( isset( $inv[0] ) && $inv[0] == 'yes' ) {
+	// 				$inventory_enable = $inv[0];
+	// 				$price_ids        = isset( $value['pricing_id'] ) ? $value['pricing_id'] : '';
+	// 				$trp_id           = $value['trip_id'];
+	// 				$select_dates     = isset( $value['trip_start_date'] ) ? $value['trip_start_date'] : '';
+	// 				$trp_time         = '';
+	// 				$available_pax    = '';
+	// 				$inventory_size   = '';
+	// 				$select_pax       = isset( $value['pax'] ) ? $value['pax'] : 0;
+	// 				if ( class_exists( 'WP_Travel_Helpers_Inventory' ) ) {
+	// 					$inventorys = WP_Travel_Helpers_Inventory::get_inventory(
+	// 						array(
+	// 							'trip_id'       => $trp_id,
+	// 							'pricing_id'    => $price_ids,
+	// 							'selected_date' => $select_dates,
+	// 							'times'         => $trp_time,
+	// 						)
+	// 					);
+	// 					if ( isset( $inventorys['inventory'] ) ) {
+	// 						foreach ( $inventorys['inventory'] as $key => $val ) {
+	// 							$available_pax = isset( $val['pax_available'] ) ? $val['pax_available'] : 0;
+	// 							if ( $select_pax > $available_pax ) {
+	// 								$wt_cart->clear();
+	// 								return;
+	// 							}
+	// 						}
+	// 					}
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+	// }
 	$price_key            = false;
 	$pax                  = 1;
 	$total_pax            = 0; // Total booked pax. helps to display report.
@@ -90,7 +90,6 @@ function wptravel_book_now() {
 		// @since 3.1.3
 		$email_travel_date = apply_filters( 'wp_travel_email_travel_date', $item['arrival_date'], $item ); // phpcs:ignore
 		$email_travel_date = apply_filters( 'wptravel_email_travel_date', $email_travel_date, $item );
-
 		$trip_ids[]               = $item['trip_id'];
 		$pax_array[]              = $item['pax'];
 		$price_keys[]             = $item['price_key'];
@@ -148,6 +147,13 @@ function wptravel_book_now() {
 	update_post_meta( $booking_id, 'order_items_data', $items ); // @since 1.8.3
 	update_post_meta( $booking_id, 'order_totals', $wt_cart->get_total() );
 	update_post_meta( $booking_id, 'wp_travel_pax', $total_pax );
+
+	$checkout_default_country = apply_filters( 'checkout_default_country', '' ); //@since 8.1.0
+
+	if( !empty( $checkout_default_country ) ){
+		update_post_meta( $booking_id, 'wp_travel_country', $checkout_default_country );
+	}
+
 	update_post_meta( $booking_id, 'wp_travel_booking_status', 'pending' );
 
 	// update trip extras inventory

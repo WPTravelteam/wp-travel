@@ -45,12 +45,12 @@ export default forwardRef((props) => {
     return (
         <>
             <div className="wp-travel-section-header">
-                <h2 className="wp-travel-section-header-title">{__('Currency Settings', 'wp-travel')}</h2>
+                <h2 className="wp-travel-section-header-title">{_wp_travel.setting_strings.currency.currency_settings}</h2>
                 <p className="wp-travel-section-header-description">{__('More general settings according to your choice.', 'wp-travel')}</p>
             </div>
             <div className='wp-travel-section-content'>
                 <PanelRow>
-                    <label>{__('Currency', 'wp-travel')}</label>
+                    <label>{_wp_travel.setting_strings.currency.currency}</label>
                     <div id="wp-travel-currency" className="wp-travel-field-value">
                         <div className="wp-travel-select-wrapper">
                             <Select
@@ -67,13 +67,13 @@ export default forwardRef((props) => {
                                 }}
                             />
                         </div>
-                        <p className="description">{__('Choose currency you accept payments in.', 'wp-travel')}</p>
+                        <p className="description">{_wp_travel.setting_strings.currency.currency_note}</p>
                     </div>
                 </PanelRow>
                 <PanelRow>
                     <label>
-                        {__('Use Currency Name', 'wp-travel')}
-                        <Tooltip text={__('This option will display currency name instead of symbol in frontend. ( E.g USD instead of $. )', 'wp-travel')}>
+                        {_wp_travel.setting_strings.currency.use_currency_name}
+                        <Tooltip text={_wp_travel.setting_strings.currency.use_currency_name_tooltip}>
                             <span><i className='fa fa-info-circle'></i></span>
                         </Tooltip>
                     </label>
@@ -92,7 +92,7 @@ export default forwardRef((props) => {
                     </div>
                 </PanelRow>
                 <PanelRow>
-                    <label>{__('Currency Position', 'wp-travel')}</label>
+                    <label>{_wp_travel.setting_strings.currency.currency_position}</label>
                     <div id="wp-travel-currency-position" className="wp-travel-field-value">
                         <div className="wp-travel-select-wrapper">
                             <Select
@@ -108,11 +108,11 @@ export default forwardRef((props) => {
                                 }}
                             />
                         </div>
-                        <p className="description">{__('Choose currency position.', 'wp-travel')}</p>
+                        <p className="description">{_wp_travel.setting_strings.currency.currency_position_note}</p>
                     </div>
                 </PanelRow>
                 <PanelRow>
-                    <label>{__('Thousand separator', 'wp-travel')}</label>
+                    <label>{_wp_travel.setting_strings.currency.thousand_separator}</label>
                     <div id="wp-travel-thousand-separator" className="wp-travel-field-value">
                         <TextControl
                             // help={__( 'This sets the thousand separator of displayed prices.', 'wp-travel' )}
@@ -126,11 +126,11 @@ export default forwardRef((props) => {
                                 }
                             }
                         />
-                        <p className="description">{__('This sets the thousand separator of displayed prices.', 'wp-travel')}</p>
+                        <p className="description">{_wp_travel.setting_strings.currency.thousand_separator_note}</p>
                     </div>
                 </PanelRow>
                 <PanelRow>
-                    <label>{__('Decimal separator', 'wp-travel')}</label>
+                    <label>{_wp_travel.setting_strings.currency.decimal_separator}</label>
                     <div id="wp-travel-decimal-separator" className="wp-travel-field-value">
                         <TextControl
                             // help={__( 'This sets the decimal separator of displayed prices.', 'wp-travel' )}
@@ -144,11 +144,11 @@ export default forwardRef((props) => {
                                 }
                             }
                         />
-                        <p className="description">{__('This sets the decimal separator of displayed prices.', 'wp-travel')}</p>
+                        <p className="description">{_wp_travel.setting_strings.currency.decimal_separator_note}</p>
                     </div>
                 </PanelRow>
                 <PanelRow>
-                    <label>{__('Number of decimals', 'wp-travel')}</label>
+                    <label>{_wp_travel.setting_strings.currency.number_decimals}</label>
                     <div id="wp-travel-number-decimals" className="wp-travel-field-value">
                         <TextControl
                             // help={__( 'This sets the number of decimal of displayed prices.', 'wp-travel' )}
@@ -163,7 +163,7 @@ export default forwardRef((props) => {
                                 }
                             }
                         />
-                        <p className="description">{__('This sets the number of decimal of displayed prices.', 'wp-travel')}</p>
+                        <p className="description">{_wp_travel.setting_strings.currency.number_decimals_note}</p>
                     </div>
                 </PanelRow>
             </div>

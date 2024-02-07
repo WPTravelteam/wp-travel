@@ -434,6 +434,7 @@ class WP_Travel_Cart {
 					$trip_price = floatval( $_REQUEST['trip_price'] );
 				}
 
+				$this->items[ $cart_item_id ]['pax']        = array_sum( array_values( $pax )  );
 				$this->items[ $cart_item_id ]['trip_price']         = $trip_price;
 				$this->items[ $cart_item_id ]['trip_price_partial'] = $trip_price_partial;
 				if ( $trip_extras ) {

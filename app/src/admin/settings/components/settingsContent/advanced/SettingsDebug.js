@@ -58,7 +58,7 @@ export default () => {
         <>
             <div className="wp-travel-section-header">
                 <h2 className="wp-travel-section-header-title">
-                    {__("Debug", "wp-travel")}
+                    {_wp_travel.setting_strings.debug.debug}
                 </h2>
                 <p className="wp-travel-section-header-description">
                     {__("More debug settings according to your choice.", "wp-travel")}
@@ -66,9 +66,9 @@ export default () => {
             </div>
             <div className='wp-travel-section-content'>
                 <ErrorBoundary>
-                    <h3 className='wp-travel-option-header'>{__('Test Payment')}</h3>
+                    <h3 className='wp-travel-option-header'>{_wp_travel.setting_strings.debug.debug_test_payment}</h3>
                     <PanelRow>
-                        <label>{__('Test Mode', 'wp-travel')}</label>
+                        <label>{_wp_travel.setting_strings.debug.debug_test_mode}</label>
                         <div id="wp-travel-debug-test-mode" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={wt_test_mode == 'yes'}
@@ -79,11 +79,11 @@ export default () => {
                                     })
                                 }}
                             />
-                            <p className="description">{__('Enable test mode to make test payment.', 'wp-travel')}</p>
+                            <p className="description">{_wp_travel.setting_strings.debug.debug_test_mode_note}</p>
                         </div>
                     </PanelRow>
                     <PanelRow>
-                        <label>{__('Test Email', 'wp-travel')}</label>
+                        <label>{_wp_travel.setting_strings.debug.debug_test_email}</label>
                         <div id="wp-travel-debug-test-email" className="wp-travel-field-value">
                             <TextControl
                                 value={wt_test_email}
@@ -96,13 +96,13 @@ export default () => {
                                     }
                                 }
                             />
-                            <p className="description">{__('Test email address will get test mode payment emails.', 'wp-travel')}</p>
+                            <p className="description">{_wp_travel.setting_strings.debug.debug_test_email_note}</p>
                         </div>
                     </PanelRow>
 
-                    <h3 className='wp-travel-option-header'>{__('Optimized Scripts and Styles', 'wp-travel')}</h3>
+                    <h3 className='wp-travel-option-header'>{_wp_travel.setting_strings.debug.optimized_scripts_styles}</h3>
                     <PanelRow>
-                        <label>{__('Load Combined Scripts', 'wp-travel')}</label>
+                        <label>{_wp_travel.setting_strings.debug.load_combined_scripts}</label>
                         <div id="wp-travel-debug-load-combined-scripts" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={wt_load_optimized_script == 'yes'}
@@ -113,11 +113,11 @@ export default () => {
                                     })
                                 }}
                             />
-                            <p className="description">{__('Enabling this will load the bundled scripts files.', 'wp-travel')}</p>
+                            <p className="description">{_wp_travel.setting_strings.debug.load_combined_scripts_note}</p>
                         </div>
                     </PanelRow>
                     <PanelRow>
-                        <label>{__('Load Minified Scripts', 'wp-travel')}</label>
+                        <label>{_wp_travel.setting_strings.debug.load_minified_scripts}</label>
                         <div id="wp-travel-debug-load-minified-scripts" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={load_minified_scripts == 'yes'}
@@ -128,7 +128,7 @@ export default () => {
                                     })
                                 }}
                             />
-                            <p className="description">{__('Enabling this will load minified scripts.', 'wp-travel')}</p>
+                            <p className="description">{_wp_travel.setting_strings.debug.load_minified_scripts_note}</p>
                         </div>
                     </PanelRow>
                     { wpml_plugins && <PanelRow>
@@ -194,7 +194,7 @@ export default () => {
                     }
 
                     {applyFilters('wp_travel_below_debug_tab_fields', [])}
-                    {applyFilters('wptravelwpcrmmigration', [], allData )}
+                    {/* {applyFilters('wptravelwpcrmmigration', [], allData )} */}
                 </ErrorBoundary>
             </div>
         </>

@@ -98,7 +98,7 @@ const WPTravelSettings = () => {
     if (_wp_travel.pro_version == null || _wp_travel.pro_version < 5.4) {
         downloadsTab = {
             name: "downloads",
-            title: __("Downloads", "wp-travel"),
+            title: _wp_travel.setting_strings.downloads.downloads,
             className: "tab-trip",
             content: SettingsDownloadsTemp,
         }
@@ -110,139 +110,139 @@ const WPTravelSettings = () => {
         [
             {
                 name: "currency",
-                title: __("Currency", "wp-travel"),
+                title: _wp_travel.setting_strings.sub_tab_name.currency,
                 className: "tab-general",
                 content: SettingsCurrency,
             },
             {
                 name: "maps",
-                title: __("Maps", "wp-travel"),
+                title: _wp_travel.setting_strings.sub_tab_name.maps,
                 className: "tab-general",
                 content: SettingsMaps,
             },
             {
                 name: "pages",
-                title: __("Pages", "wp-travel"),
+                title: _wp_travel.setting_strings.sub_tab_name.pages,
                 className: "tab-general",
                 content: SettingsPages,
             },
             {
                 name: "archive-page-title",
-                title: __("Archive Page Title", "wp-travel"),
+                title: _wp_travel.setting_strings.sub_tab_name.archive_page_title,
                 className: "tab-general",
                 content: SettingsArchivePageTitle,
             },
             {
                 name: "facts",
-                title: __("Facts", "wp-travel"),
+                title: _wp_travel.setting_strings.sub_tab_name.facts,
                 className: "tab-trip",
                 content: SettingsFacts,
             },
             {
                 name: "faqs",
-                title: __("FAQs", "wp-travel"),
+                title: _wp_travel.setting_strings.sub_tab_name.faqs,
                 className: "tab-trip",
                 content: SettingsFAQs,
             },
             {
                 name: "trip-settings",
-                title: __("Trips Settings", "wp-travel"),
+                title: _wp_travel.setting_strings.sub_tab_name.trip_settings,
                 className: "tab-trip",
                 content: SettingsTrips,
             },
             {
                 name: "field-editor",
-                title: __("Field Editor", "wp-travel"),
+                title: _wp_travel.setting_strings.sub_tab_name.field_editor,
                 className: "tab-trip",
                 content: SettingsFieldEditor,
             },
             {
                 name: "tabs",
-                title: __("Tabs", "wp-travel"),
+                title: _wp_travel.setting_strings.sub_tab_name.tabs,
                 className: "tab-trip",
                 content: SettingsTabs,
             },
             {
                 name: "general-email-settings",
-                title: __("General Email Settings", "wp-travel"),
+                title: _wp_travel.setting_strings.sub_tab_name.general_email_settings,
                 className: "tab-email",
                 content: SettingsGeneralEmail,
             },
             {
                 name: "email-templates",
-                title: __("Email Templates", "wp-travel"),
+                title: _wp_travel.setting_strings.sub_tab_name.email_templates,
                 className: "tab-email",
                 content: SettingsEmailTemplates,
             },
             {
                 name: "account",
-                title: __("Account", "wp-travel"),
+                title: _wp_travel.setting_strings.sub_tab_name.account,
                 className: "tab-account",
                 content: SettingsAccount,
             },
             {
                 name: "checkout",
-                title: __("Checkout", "wp-travel"),
+                title: _wp_travel.setting_strings.sub_tab_name.checkout,
                 className: "tab-checkout",
                 content: SettingsCheckout,
             },
             {
                 name: "payment",
-                title: __("Payment", "wp-travel"),
+                title: _wp_travel.setting_strings.sub_tab_name.payment,
                 className: "tab-payment",
                 content: SettingsPayment,
             },
             {
                 name: "conditional-payment",
-                title: __("Conditional Payment", "wp-travel"),
+                title: _wp_travel.setting_strings.sub_tab_name.conditional_payment,
                 className: "tab-payment",
                 content: SettingsConditionalPayment,
             },
             {
                 name: "invoice",
-                title: __("Invoice", "wp-travel"),
+                title: _wp_travel.setting_strings.sub_tab_name.invoice,
                 className: "tab-invoice",
                 content: SettingsInvoice,
             },
             {
                 name: "misc-options",
-                title: __("Miscellaneous Options", "wp-travel"),
+                title: _wp_travel.setting_strings.sub_tab_name.misc_options,
                 className: "tab-misc",
                 content: SettingsMisc,
             },
             {
                 name: "advanced-gallery",
-                title: __("Advanced Gallery", "wp-travel"),
+                title: _wp_travel.setting_strings.sub_tab_name.advanced_gallery,
                 className: "tab-misc",
                 content: SettingsAdvancedGallery,
             },
             {
                 name: "recaptcha-v2",
-                title: __("reCaptcha V2", "wp-travel"),
+                title: _wp_travel.setting_strings.sub_tab_name.recaptcha_v2,
                 className: "tab-misc",
                 content: SettingsReCaptchaV2,
             },
             {
                 name: "third-party",
-                title: __("Third Party Integrations", "wp-travel"),
+                title: _wp_travel.setting_strings.sub_tab_name.third_party,
                 className: "tab-misc",
                 content: SettingsThirdParty,
             },
             {
                 name: "modules-settings",
-                title: __("Modules Settings", "wp-travel"),
+                title: _wp_travel.setting_strings.sub_tab_name.modules_settings,
                 className: "tab-advanced",
                 content: SettingsModules,
             },
             {
                 name: "pwa",
-                title: __("PWA", "wp-travel"),
+                title: _wp_travel.setting_strings.sub_tab_name.pwa,
                 className: "tab-advanced",
                 content: SettingsPWA,
             },
             {
                 name: "debug",
-                title: __("Debug", "wp-travel"),
+                title: _wp_travel.setting_strings.sub_tab_name.debug,
                 className: "tab-advanced",
                 content: SettingsDebug,
             },
@@ -417,7 +417,7 @@ const SettingsDownloadsTemp = () => {
         <>
             <div className="wp-travel-section-header">
                 <h2 className="wp-travel-section-header-title">
-                    {__("Downloads", "wp-travel")}
+                    {_wp_travel.setting_strings.downloads.downloads}
                 </h2>
                 <p className="wp-travel-section-header-description">
                     {__("More Downloads settings according to your choice.", "wp-travel")}
@@ -438,7 +438,7 @@ const SettingsDownloadsTemp = () => {
         <>
             <div className="wp-travel-section-header">
                 <h2 className="wp-travel-section-header-title">
-                    {__("Downloads", "wp-travel")}
+                    {_wp_travel.setting_strings.downloads.downloads}
                 </h2>
                 <p className="wp-travel-section-header-description">
                     {__("More Downloads settings according to your choice.", "wp-travel")}
@@ -534,7 +534,7 @@ addFilter('wp_travel_submodule_multiple_currency_reset_cache_tooltip', 'wp_trave
 addFilter('wp_travel_submodule_mailchimp_optin_tooltip', 'wp_travel', () => {
     return (
         <Tooltip
-            text={__('Enabling this option will enable the Mailchimp double opt-in option i.e sends contact an opt-in confirmation email when they subscribe.', 'wp-travel-mailchimp')}
+            text={_wp_travel.setting_strings.third_party_integrations.mailchimp_opt_in_tooltip}
         >
             <span>
                 <i className="fa fa-info-circle" aria-hidden="true"></i>

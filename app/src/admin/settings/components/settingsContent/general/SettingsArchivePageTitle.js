@@ -18,7 +18,7 @@ export default () => {
         <>
             <div className="wp-travel-section-header">
                 <h2 className="wp-travel-section-header-title">
-                    {__("Archive Page Title Settings", "wp-travel")}
+                    {_wp_travel.setting_strings.archive_page_title.archive_page_title_settings}
                 </h2>
                 <p className="wp-travel-section-header-description">
                     {__("More archive page title settings according to your choice.", "wp-travel")}
@@ -26,7 +26,7 @@ export default () => {
             </div>
             <div className='wp-travel-section-content'>
             <PanelRow>
-                <label>{__('Hide Plugin Archive Page Title', 'wp-travel')}</label>
+                <label>{_wp_travel.setting_strings.archive_page_title.hide_plugin_archive_page_title}</label>
                 <div id="wp-travel-hide-plugin-archive-page-title" className="wp-travel-field-value">
                     <ToggleControl
                         checked={hide_plugin_archive_page_title == 'yes'}
@@ -37,7 +37,7 @@ export default () => {
                             })
                         }}
                     />
-                    <p className="description">{__('This option will hide archive title displaying from plugin.', 'wp-travel')}</p>
+                    <p className="description">{_wp_travel.setting_strings.archive_page_title.hide_plugin_archive_page_title_note}</p>
                 </div>
             </PanelRow>
             </div>

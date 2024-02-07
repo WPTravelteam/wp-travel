@@ -14,7 +14,7 @@ export default () => {
         <>
             <div className="wp-travel-section-header">
                 <h2 className="wp-travel-section-header-title">
-                    {__("Global FAQs", "wp-travel")}
+                    {_wp_travel.setting_strings.faqs.global_faqs}
                 </h2>
                 <p className="wp-travel-section-header-description">
                     {__("More FAQs settings according to your choice.", "wp-travel")}
