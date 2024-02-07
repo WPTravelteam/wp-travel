@@ -68,7 +68,7 @@ const SaveSettings = (props) => {
                     <div className="wp-travel-save-notice">
                         <p className="wp-travel-text-danger">
                             <i className="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                            {__('Unsaved changes', 'wp-travel')}
+                            {_wp_travel.setting_strings.unsaved_changes}
                         </p>
                     </div>
                 </div>

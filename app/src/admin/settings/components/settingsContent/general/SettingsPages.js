@@ -36,7 +36,7 @@ export default () => {
         <>
             <div className="wp-travel-section-header">
                 <h2 className="wp-travel-section-header-title">
-                    {__("Pages Settings", "wp-travel")}
+                {_wp_travel.setting_strings.pages.pages_setting}
                 </h2>
                 <p className="wp-travel-section-header-description">
                     {__("More pages settings according to your choice.", "wp-travel")}
@@ -45,9 +45,9 @@ export default () => {
             <div className='wp-travel-section-content'>
                 <PanelRow>
                     <label>
-                        {__('Checkout Page', 'wp-travel')}
+                        {_wp_travel.setting_strings.pages.checkout_page}
                         <Tooltip
-                            text={__('Choose the page to use as checkout page for booking which contents checkout page shortcode [wp_travel_checkout].', 'wp-travel')}
+                            text={_wp_travel.setting_strings.pages.checkout_page_tooltip}
                         >
                             <span>
                                 <i className="fa fa-info-circle" aria-hidden="true"></i>
@@ -73,12 +73,9 @@ export default () => {
                 </PanelRow>
                 <PanelRow>
                     <label>
-                        {__('Dashboard Page', 'wp-travel')}
+                        {_wp_travel.setting_strings.pages.dashboard_page}
                         <Tooltip
-                            text={__(
-                                "Choose the page to use as dashboard page which contents dashboard page shortcode [wp_travel_user_account].",
-                                "wp-travel"
-                            )}
+                            text={_wp_travel.setting_strings.pages.dashboard_page_tooltip}
                         >
                             <span>
                                 <i className="fa fa-info-circle" aria-hidden="true"></i>
@@ -112,7 +109,7 @@ export default () => {
 addFilter('wp_travel_settings_after_pages_fields', 'wp_travel', () => {
     return (
         <Tooltip
-            text={__('Choose the page to use as thankyou page which contents thankyou page shortcode [wp_travel_thankyou].', 'wp-travel')}
+            text={  _wp_travel.setting_strings.pages.thankyou_page_tooltip }
         >
             <span>
                 <i className="fa fa-info-circle" aria-hidden="true"></i>

@@ -1105,6 +1105,21 @@
 						}
 					}
 				}
+
+				@media screen and (max-width:620px) {
+					.wptravel-onpage-radiobtn-handle{
+						width: 100%;
+						.wptravel-single-page-gender-radio-btn{
+							flex: 0 0 100%;
+							justify-content: flex-end !important;
+							flex-direction: row-reverse !important;
+							input{
+								flex: unset !important;
+								width: 16px !important;
+							}
+						}
+					}
+				}
 			}
 
 			// container

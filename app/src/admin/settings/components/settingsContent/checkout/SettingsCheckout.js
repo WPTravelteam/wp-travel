@@ -20,7 +20,7 @@ export default () => {
         <>
             <div className="wp-travel-section-header">
                 <h2 className="wp-travel-section-header-title">
-                    {__("Checkout", "wp-travel")}
+                    {_wp_travel.setting_strings.checkout.checkout}
                 </h2>
                 <p className="wp-travel-section-header-description">
                     {__("More checkout settings according to your choice.", "wp-travel")}
@@ -30,7 +30,7 @@ export default () => {
                 <ErrorBoundary>
                     {applyFilters('wp_travel_settings_tab_cart_checkout_fields', [], allData)}
                     <PanelRow>
-                        <label>{__('Enable multiple travelers', 'wp-travel')}</label>
+                        <label>{_wp_travel.setting_strings.checkout.enable_multiple_travelers}</label>
                         <div id="wp-travel-checkout-enable-multiple-travelers" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={enable_multiple_travellers == 'yes'}
@@ -41,11 +41,11 @@ export default () => {
                                     })
                                 }}
                             />
-                            <p className="description">{__('Collect multiple travelers information from checkout page.', 'wp-travel')}</p>
+                            <p className="description">{_wp_travel.setting_strings.checkout.enable_multiple_travelers_note}</p>
                         </div>
                     </PanelRow>
                     <PanelRow>
-                        <label>{__( 'Enable On-Page Booking', 'wp-travel' ) }</label>
+                        <label>{_wp_travel.setting_strings.checkout.enable_on_page_booking}</label>
                         <div id="wp-travel-checkout-enable-multiple-travelers" className="wp-travel-field-value">
                             <ToggleControl 
                                 checked={ typeof enable_one_page_booking != 'undefined' && enable_one_page_booking || false }
@@ -56,8 +56,8 @@ export default () => {
                                     })
                                 }}
                             />
-                            <p className="description">{__('To book a trip without redirecting to the checkout page.', 'wp-travel')}</p>
-                            <p className="description warning">{__('To enable On-Page booking, make sure you have disabled multiple checkout (Add to cart) option.', 'wp-travel')}</p>
+                            <p className="description">{_wp_travel.setting_strings.checkout.enable_on_page_booking_note}</p>
+                            <p className="description warning">{_wp_travel.setting_strings.checkout.enable_on_page_booking_tooltip}</p>
                         </div>
                     </PanelRow>
                 </ErrorBoundary>

@@ -15,7 +15,7 @@ const wpTravelFormat = (_num, style = 'currency') => {
     let _formattedNum = parseFloat(_num).toFixed( _toFixed == 0 ? 1 : _toFixed ).replace(/\./,decimalSeparator).replace(regEx, replaceWith)
     // _formattedNum = String(_formattedNum).replace(/\./, ',')
     if( _toFixed == 0 ){
-        _formattedNum =  _formattedNum.split('.')[0]
+        _formattedNum =  _formattedNum.split(decimalSeparator)[0]
     }
 
     if(style == 'decimal') {
@@ -39,7 +39,7 @@ const wpTravelFormatV2 = (_num, style = 'currency') => {
     // _formattedNum = String(_formattedNum).replace(/\./, ',')
 
     if( _toFixed == 0 ){
-        _formattedNum =  _formattedNum.split('.')[0]
+        _formattedNum =  _formattedNum.split(decimalSeparator)[0]
     }
     if(style == 'decimal') {
         return _formattedNum
@@ -72,11 +72,6 @@ const objectSum = (obj) => {
     return sum;
 }
 
-const wpTravelPHPtoMomentDateFormat = (dateFormat) => {
-    const formats = {
-        
-    }
-}
 
 const GetConvertedPrice = ( price ) => {
     return applyFilters( 'wptravelMultipleCurrency', price );

@@ -15,7 +15,7 @@ export default () => {
 		<>
 			<div className="wp-travel-section-header">
                 <h2 className="wp-travel-section-header-title">
-                    {__("Conditional Payment", "wp-travel")}
+                    {_wp_travel.setting_strings.conditional_payment.conditional_payment}
                 </h2>
             </div>
 			<div className='wp-travel-section-content'>
@@ -48,7 +48,7 @@ addFilter('wp_travel_settings_conditional_payment', 'WPTravel/Settings/Condition
                 <Notice isDismissible={false} status="informational">
                      <strong>{__('Conditional Payment is currently disable.', 'wp-travel')}</strong>
                     <br />
-                    {__('Plesae enable conditional payment module to get access to conditional payment settings.', 'wp-travel')}
+                    {__('Please enable conditional payment module to get access to conditional payment settings.', 'wp-travel')}
                     <br />
                 </Notice>
             

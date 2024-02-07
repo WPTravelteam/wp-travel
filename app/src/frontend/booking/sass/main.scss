@@ -142,17 +142,30 @@ input.wp-trave-pax-selected-frontend-second {
 }
 
 @media screen and (max-width: 622px) {
+	// apply coupon 
+	.wptravel-on-page-coupon-apply{
+		padding: 0px !important;
+		.wptravel-on-page-coupon-data{
+			width: 100%;
+		}
+	}
+	
 	.on-page.wp-travel-enquiry-subscribe-section {
-		padding:0px 40px 10px 40px;
 		display: block;
 	}
 	.on-page.wp-travel-enquiry-subscribe-section {
 		label[for="wp-travel-subscribe"]{
 			width: 100%;
-    display: block;
+    		display: block;
 		}
 		.radio-checkbox-label{
 			width: 100%;
+			margin-right: 10px;
 		}
+	}
+}
+@media screen and (max-width: 575px) {
+	.on-page.wp-travel-enquiry-subscribe-section {
+		padding: 0px !important;
 	}
 }
