@@ -219,11 +219,11 @@ function wptravel_enquiries_content_manage_columns( $column_name, $id ) {
 
 	switch ( $column_name ) {
 		case 'contact_name':
-			$name = isset( $column_data['wp_travel_enquiry_name'] ) ? $column_data['wp_travel_enquiry_name'] : '';
+			$name = get_post_meta( $id, 'wp_travel_enquiry_name', true );
 			echo esc_html( $name );
 			break;
 		case 'contact_email':
-			$email = isset( $column_data['wp_travel_enquiry_email'] ) ? $column_data['wp_travel_enquiry_email'] : '';
+			$email = get_post_meta( $id, 'wp_travel_enquiry_email', true );
 			?>
 				<a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a>
 			<?php

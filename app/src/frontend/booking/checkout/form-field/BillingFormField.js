@@ -18,6 +18,8 @@ import ProgressBary from '../ProgressBary';
 import SelectOption from './form/SelectOption';
 import Heading from './form/Heading';
 
+import { wpTravelFormat, objectSum, GetConvertedPrice } from '../../_wptravelFunctions';
+
 export default ( ) => {
     // Booking Data/state.
     const [loaders, setLoaders] = useState(false)
@@ -78,6 +80,7 @@ export default ( ) => {
             setLoaders(false);
         }
     }
+
     return <>
     <div className="wptravel-billing-formfield animated-wp-travel  fadeIn-wp-travel">
         {
@@ -99,7 +102,7 @@ export default ( ) => {
             <div>
                 <div className="wptravel-onpage-priceshow">
                     { trip_price != '' && <div className="onpage-traveler-field-price-show">
-                        <p><span className='onpage-travel-price-display-label'>{i18n.set_cart_total_price}</span>{currency_symbol}{trip_price}</p>
+                        <p><span className='onpage-travel-price-display-label'>{i18n.set_cart_total_price}</span><span dangerouslySetInnerHTML={{ __html: wpTravelFormat( trip_price ) }}></span></p>
                     </div>}
                     <Button onClick={ validateTravelerData } >{i18n.set_next_btn }{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</Button>
                 </div>

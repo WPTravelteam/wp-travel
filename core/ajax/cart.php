@@ -104,9 +104,7 @@ class WP_Travel_Ajax_Cart {
 		$post_data = json_decode( file_get_contents( 'php://input' ) );
 		$post_data = is_object( $post_data ) ? (array) $post_data : array();
 		$post_data = wptravel_sanitize_array( $post_data );
-		// print_r( $request );
-		// print_r( $post_data );
-		// die;
+
 		$response = WP_Travel_Helpers_Cart::update_cart_item( $cart_id, $post_data );
 		WP_Travel_Helpers_REST_API::response( $response );
 	}

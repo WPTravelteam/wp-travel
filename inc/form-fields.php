@@ -43,9 +43,6 @@ function wptravel_get_checkout_form_fields() {
 	$traveller_fields = WP_Travel_Default_Form_Fields::traveller();
 	$traveller_fields = apply_filters( 'wp_travel_checkout_traveller_fields', $traveller_fields );
 
-	// echo "<pre>";
-	// var_dump( $traveller_fields );
-	// Set default values.
 	$traveller_fields['first_name']['default']   = $user_fname;
 	$traveller_fields['last_name']['default']    = $user_lname;
 	$traveller_fields['country']['default']      = $billing_country;
@@ -74,6 +71,7 @@ function wptravel_get_checkout_form_fields() {
 	$gdpr_msg = ! empty( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ) : __( 'By contacting us, you agree to our ', 'wp-travel' );
 
 	$policy_link = wptravel_privacy_link();
+	
 
 	$strings                    = WpTravel_Helpers_Strings::get();
 	$label_booking_options      = $strings['bookings']['booking_option'];
@@ -115,6 +113,7 @@ function wptravel_get_checkout_form_fields() {
 	global $wt_cart;
 
 	$cart_amounts = $wt_cart->get_total();
+
 	$cart_total   = isset( $cart_amounts['total'] ) ? $cart_amounts['total'] : 0;
 	if ( wptravel_is_payment_enabled() && $cart_total > 0 ) {
 		$payment_fields['wp_travel_billing_address_heading'] = array(
@@ -212,6 +211,9 @@ function wptravel_get_checkout_form_fields() {
 
 				foreach ( $conditional_payment as $value ) {
 					if ( array_key_exists( $value, $gateway_list['active'] ) ) {
+						if ( $value == 'authorizenet' ) {
+							$payment_list[ $value ] = 'Authorize.Net';
+						}
 						if ( $value == 'paypal' ) {
 							$payment_list[ $value ] = 'Standard Paypal';
 						}
@@ -254,9 +256,7 @@ function wptravel_get_checkout_form_fields() {
 						if ( $value == 'stripe_ideal' ) {
 							$payment_list[ $value ] = 'Stripe iDEAL Checkout';
 						}
-						if ( $value == 'authorizenet' ) {
-							$payment_list[ $value ] = 'Authorize.Net';
-						}
+						
 						$selected_gateway = $value;
 					}
 				}
@@ -366,6 +366,7 @@ function wptravel_get_checkout_form_fields() {
 		'payment_fields'   => $payment_fields,
 	);
 	$checkout_fields = apply_filters( 'wp_travel_checkout_fields', $checkout_fields ); // sort field after this filter.
+
 
 	if ( isset( $checkout_fields['traveller_fields'] ) ) {
 		$checkout_fields['traveller_fields'] = wptravel_sort_form_fields( $checkout_fields['traveller_fields'] );

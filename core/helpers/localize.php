@@ -72,6 +72,7 @@ class WpTravel_Helpers_Localize {
 			$_wp_travel['pax_show_remove'] 	  = apply_filters( 'wp_travel_booking_pax_editable', '' );
 			$_wp_travel['select_you_pax']	  = apply_filters( 'wp_travel_select_you_pax', __( 'Select Your Pax', 'wp-travel' )); 
 			$_wp_travel['partial_enable']     = isset( $settings['partial_payment'] ) ? $settings['partial_payment'] : 'no';
+			$_wp_travel['partial_payment_amount']     = isset( $settings['partial_payment_amount'] ) ? $settings['partial_payment_amount'] : 'no';
 			$_wp_travel['enable_one_page_booking'] = isset( $settings['enable_one_page_booking'] ) ? $settings['enable_one_page_booking'] : false;
 			$_wp_travel['loader_url']         = plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/images/loader.gif';
 			$_wp_travel['checkout_field']     = array(
@@ -87,8 +88,25 @@ class WpTravel_Helpers_Localize {
 				$_wp_travel['WP_Travel_Trip_Extras_Inventory'] = 'yes';
 			}
 
+			$privacy_policy_url = false;
+			if ( function_exists( 'get_privacy_policy_url' ) ) {
+				$privacy_policy_url = get_privacy_policy_url();
+			}
+
+			if ( $privacy_policy_url ) {
+				$policy_page_id = (int) get_option( 'wp_page_for_privacy_policy' );
+				$page_title     = ( $policy_page_id ) ? get_the_title( $policy_page_id ) : '';
+				$_wp_travel['policy_page_title'] = $page_title;
+			}
+
 			$_wp_travel['gdpr_msg'] = ! empty( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ) : __( 'By contacting us, you agree to our ', 'wp-travel' );
 			$_wp_travel['policy_link'] = wptravel_privacy_link_url();
+
+			$_wp_travel['is_pro_enable']  = class_exists( 'WP_Travel_Pro' ) ? 'yes' : 'no';
+			if ( isset( $settings['mailchimp'] ) && isset( $settings['mailchimp']['enable_subscription'] ) && ( in_array( 'all', $settings['mailchimp']['enable_subscription'], true ) ) ) {
+				$_wp_travel['enable_subscription'] =  'yes';
+				$_wp_travel['subscription_data'] =  $settings['mailchimp'];
+			}
 
 			if( class_exists( 'WP_Travel_Multiple_Currency_Core' ) ){
 				$_wp_travel['conversion_rate'] = wtmc_get_conversion_rate();
@@ -331,3 +349,4 @@ class WpTravel_Helpers_Localize {
 		}
 	}
 }
+

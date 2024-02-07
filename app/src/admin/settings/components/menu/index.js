@@ -44,7 +44,7 @@ export default memo((props) => {
                                 <span className="wp-travel-primary-tab-info">
                                     <i className="fa fa-desktop wp-travel-tab-icon"></i>
                                     <p className="wp-travel-primary-tab-title">
-                                        {__("General", "wp-travel")}
+                                        {_wp_travel.setting_strings.tab_name.general}
                                     </p>
                                 </span>
                                 <i
@@ -82,7 +82,7 @@ export default memo((props) => {
                                 <span className="wp-travel-primary-tab-info">
                                     <i className="fa fa-plane wp-travel-tab-icon"></i>
                                     <p className="wp-travel-primary-tab-title">
-                                        {__("Trips", "wp-travel")}
+                                        {_wp_travel.setting_strings.tab_name.trips}
                                     </p>
                                 </span>
                                 <i
@@ -119,7 +119,7 @@ export default memo((props) => {
                                 <span className="wp-travel-primary-tab-info">
                                     <i className="fa fa-envelope wp-travel-tab-icon"></i>
                                     <p className="wp-travel-primary-tab-title">
-                                        {__("Email", "wp-travel")}
+                                        {_wp_travel.setting_strings.tab_name.email}
                                     </p>
                                 </span>
                                 <i
@@ -156,7 +156,7 @@ export default memo((props) => {
                                 <span className="wp-travel-primary-tab-info">
                                     <i className="fa fa-user wp-travel-tab-icon"></i>
                                     <p className="wp-travel-primary-tab-title">
-                                        {__("Account", "wp-travel")}
+                                        {_wp_travel.setting_strings.tab_name.account}
                                     </p>
                                 </span>
                                 <i
@@ -193,7 +193,7 @@ export default memo((props) => {
                                 <span className="wp-travel-primary-tab-info">
                                     <i className="fa fa-shopping-cart wp-travel-tab-icon"></i>
                                     <p className="wp-travel-primary-tab-title">
-                                        {__("Checkout", "wp-travel")}
+                                        {_wp_travel.setting_strings.tab_name.checkout}
                                     </p>
                                 </span>
                                 <i
@@ -230,7 +230,7 @@ export default memo((props) => {
                                 <span className="wp-travel-primary-tab-info">
                                     <i className="fa fa-credit-card wp-travel-tab-icon"></i>
                                     <p className="wp-travel-primary-tab-title">
-                                        {__("Payment", "wp-travel")}
+                                        {_wp_travel.setting_strings.tab_name.payment}
                                     </p>
                                 </span>
                                 <i
@@ -267,7 +267,7 @@ export default memo((props) => {
                                 <span className="wp-travel-primary-tab-info">
                                     <i className="fa fa-receipt wp-travel-tab-icon"></i>
                                     <p className="wp-travel-primary-tab-title">
-                                        {__("Invoice", "wp-travel")}
+                                        {_wp_travel.setting_strings.tab_name.invoice}
                                     </p>
                                 </span>
                                 <i
@@ -304,7 +304,7 @@ export default memo((props) => {
                                 <span className="wp-travel-primary-tab-info">
                                     <i className="fa fa-folder-open wp-travel-tab-icon"></i>
                                     <p className="wp-travel-primary-tab-title">
-                                        {__("Miscellaneous", "wp-travel")}
+                                        {_wp_travel.setting_strings.tab_name.miscellaneous}
                                     </p>
                                 </span>
                                 <i
@@ -341,7 +341,7 @@ export default memo((props) => {
                                 <span className="wp-travel-primary-tab-info">
                                     <i className="fa fa-wrench wp-travel-tab-icon"></i>
                                     <p className="wp-travel-primary-tab-title">
-                                        {__("Advanced", "wp-travel")}
+                                        {_wp_travel.setting_strings.tab_name.advanced}
                                     </p>
                                 </span>
                                 <i

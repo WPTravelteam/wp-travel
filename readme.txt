@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 6.0.0
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 7.8.1
+Stable tag: 8.1.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -17,33 +17,39 @@ WP Travel is a free WordPress travel & tour agency plugin & travel engine to cre
 
 Looking for a reliable travel plugin for your WordPress website? Look no further than [WP Travel](https://wptravel.io/) Plugin. A free powerful travel engine (available in PRO version with additional features) for making customized travel agency or tour operator websites on WordPress in minutes!
 
+View: [Demo of Best Travel & Tour Plugin ](https://wpdemo.wensolutions.com/travel-joy-pro/) | [Modules](https://wptravel.io/modules/) | [Best Travel & Tour Themes](https://wptravel.io/travel-agency-wordpress-themes/) | [Documentations](https://wptravel.io/wp-travel-documentations/) | [Video Tutorials](https://wptravel.io/docs/youtube-video-tutorials/)
+
 **How to download and install WP Travel plugin?**
 [youtube https://www.youtube.com/watch?v=E7O_ZMNBxEQ&t=37s]
 
 With this SEO-friendly & scalable WordPress travel engine, you can create customized itineraries & travel packages on the fly. Powered with advanced modules, this plugin helps you save hours of development. Compatible with some of the best travel agency WordPress themes, this is the ultimate travel engine for travel and tour management WordPress websites.
 
-View [Demo of Best Travel & Tour Plugin ](https://demo.wptravel.io/demo-base/) | [Travel Booking Plugin Modules](https://wptravel.io/downloads/) | [Best WP Travel & Tour Themes](https://wptravel.io/wp-travel-theme-showcase/) | [WP Travel Booking Plugin Tutorial](https://wptravel.io/wp-travel-documentations/)
-
 With WP Travel Plugin, you can customize every aspect of your travel agency's offerings. Seamlessly integrate the plugin with your website to provide a smooth booking experience, customized tour and trekking packages along with receiving payments, preparing itineraries, many more for your customers. It accepts payments securely through popular payment gateways, making transactions hassle-free. 
 
 Streamline your travel agency's operations and boost your online presence with WP Travel Plugin. It's the best travel booking plugin for WordPress, empowering you to provide exceptional travel experiences for your clients. Get started with WP Travel Plugin today and revolutionize your travel business. For further details, check the [WP Travel](https://wptravel.io/) Plugin website.
 
-> **WP Travel PRO**
+> **WP Travel Pro**
 > With WP Travel Pro you can get all premium features of WP Travel in a single package. [View Detail](https://wptravel.io/wp-travel-pro/)
 
 = 🌟 CORE FEATURES =
 
 * **[Unlimited Tour packages](https://wptravel.io/how-to-create-a-trip):** Create unlimited number of tour packages (that your server can store). Every detail you need for a trip like description, itinerary builder, price, sales price, duration, gallery, package included and excluded, map and many more can be entered very easily. This feature enables us to create the best travel agency website!
 
-* **[Tour filters](https://wptravel.io/downloads/wp-travel-custom-filters/):** User can find their required Itineraries by filtering or using easy search form.
+* **[On-Page Booking](https://wptravel.io/docs/how-to-setup-on-page-booking-in-wp-travel/):** With WP Travel On-Page Booking, exciting new feature for booking helps the user to book a trip without redirecting to the checkout page.
 
-* **[Tour Extras](https://wptravel.io/downloads/wp-travel-tour-extras/):** It allows you to add paid or free service for the individual trip.
+* **[Travel Guide](https://wptravel.io/pro-features/travel-guide/):** With WP Travel Travel Guide advanced module included in WP Travel Pro that allows users to assign a Travel Guide to the Trip as personalized experience, recommendations and many more
+
+* **[Partial Payment](https://wptravel.io/pro-features/wp-travel-partial-payment/):** With WP Travel Partial Payment an advanced module that allows your customer to pay for the trip package in installment and helps you keeping track of remaining amounts
+
+* **[Custom Flters](https://wptravel.io/pro-features/wp-travel-custom-filters/):** User can find their required Itineraries by filtering or using easy search form.
+
+* **[Trip Extras](https://wptravel.io/pro-features/wp-travel-tour-extras/):** It allows you to add paid or free service for the individual trip.
 
 * **[Painless Booking System](https://wptravel.io/wordpress-tour-booking-system/):** WP Travel includes a very easy and simple travel booking system which users can fill up very fast and get you more bookings.
 
 * **[Full Data Reporting](https://wptravel.io/docs/manage-booking/):** Data is very important for all businesses. WP Travel has an in-build booking stat that helps you to generate the report from different date ranges, types and locations.
 
-* **[Payment System](https://wptravel.io/downloads):** Currently we have Standard PayPal and Bank Deposit within the WP Travel free plugin and have thirteen additional payment gateway in WP Travel Pro plugins.
+* **[Payment System](https://wptravel.io/payment-channels/):** Currently we have Standard PayPal and Bank Deposit within the WP Travel free plugin and have thirteen additional payment gateway in WP Travel Pro plugins.
 
 * **[Multiple pricing and Multiple dates](https://wptravel.io/add-multiple-fixed-departure-dates-with-different-prices/):** This feature allows you to add multiple pricing and multiple dates for a single trip.
 
@@ -62,6 +68,7 @@ Streamline your travel agency's operations and boost your online presence with W
 * **[Map](https://wptravel.io/docs/how-to-integrate-map-with-wp-travel-plugin/):** For each trip on your travel booking site, you can show Google map. The front-end user can see the location of the trip.
 
 * **[Coupon](https://wptravel.io/create-wordpress-coupon-code/):** With WP Travel coupon, percentage or fixed amount of coupons are applied to the trips.
+
 
 = 🚀 EXCITING NEW FEATURES =
 
@@ -134,6 +141,9 @@ These themes are specially designed for WP Travel plugin. So, it is 100% compati
 
 
 = ▶️ STEP-BY-STEP VIDEO TUTORIALS TO USE WP TRAVEL PLUGIN =
+
+**How to install WP Travel Pro and Activate License?**
+[https://www.youtube.com/watch?v=LNSVSAQ75Ao]
 
 **How to add extra services to your Trips?**
 [youtube https://www.youtube.com/watch?v=1G67H0Z64sQ]
@@ -335,10 +345,10 @@ Dear Sir/Mam, Before updating the plugin it is advised to check ["our latest rel
 Love WP Travel?
 We are doing our best from our side to help and provide support as instant as we can.
 
-* [Join our facebook Community group](https://www.facebook.com/groups/2529491873966327/)
+* [Join our facebook Community group](https://www.facebook.com/groups/wptravelcommunity/)
 * [Like our Facebook Page](https://www.facebook.com/wptravel.io/)
-* [Follow us in Linkedin Page](https://www.linkedin.com/in/wp-travel/)
-* [Subscribe us on Youtube](https://www.youtube.com/channel/UCJx51UI1H73clCxBCTHuEjA)
+* [Follow us in Linkedin Page](https://www.linkedin.com/in/wptravel/)
+* [Subscribe us on Youtube](https://www.youtube.com/@wp.travel)
 * [Join our Reddit community](https://www.reddit.com/user/wptravel)
 * [Join Quora for Q/A](https://www.quora.com/profile/WP-Travel)
 * [Follow us on Instagram](https://www.instagram.com/wp.travel/)
@@ -415,11 +425,58 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
 
+= 8.1.0 =
+Release Date: 7th February 2024
+
+Fixes:
+* Optimized code
+* fixed currency separator issue when decimal separator is set to ',' and Number of decimals set to '0'
+* fixed Onpage booking date picker issue - ( issue with safari browser )
+* Prefixed the date table with global $wpdb in the booking query
+* Fixed inventory issue on updating cart
+
+Enhancements:
+* Added trip extras information on the checkout page 
+* Added hook to set checkout default billing country - checkout_default_country
+* Localized modules setting strings for translation support 
+
+**For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v8-1-0-update-release-note).**
+
+= 8.0.0 =
+Release Date: 22nd January 2024
+
+Fixes:
+* Fixed undefined array index issue
+* Fixed payments PHP warnings 
+* Fixed thousand separator issue in case of decimal separator is set to 0 
+
+Enhancements:
+* Added a close icon on the payment details popup module
+* Added Trip, Coupon, Trip Extras access to the editor role
+
+**For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v8-0-0-update-release-note).**
+
+= 7.9.0 =
+Release Date: 08th January 2024
+
+Fixes:
+* Optimized code.
+* Fixed minor design issues on the initial setup page.
+* Fixed date picker issue ( current date showing even if date picker is empty ).
+* Fixed privacy policy links in case of On-Page booking.
+
+Enhancements:
+* Added quick setup options on the initial setup page.
+* Added function to scroll to booking tab while clicking on departure date.
+
+**For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v7-9-0-update-release-note).**
+
 = 7.8.1 =
 Release Date: 22th December 2023
 
 Fixes:
 * Security patch update. Added nonce to all AJAX requests.
+
 
 = 7.8.0 =
 Release Date: 20th December 2023

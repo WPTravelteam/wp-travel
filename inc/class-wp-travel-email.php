@@ -461,14 +461,19 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 			);
 
 			$email_tags = apply_filters( 'wp_travel_admin_booking_email_tags', $email_tags, $booking_id ); // @phpcs:ignore
+
+			$email_data = array(
+				'from' => $reply_to_email,
+				'to'   => $customer_email,
+			);
 			
 			if( $request_data['wp_travel_booking_option'] == 'booking_only' ){
 				$email          = new WP_Travel_Emails();
 				$headers = $email->email_headers( $reply_to_email, $reply_to_email );
-				$email_data = array(
-					'from' => $reply_to_email,
-					'to'   => $customer_email,
-				);
+				// $email_data = array(
+				// 	'from' => $reply_to_email,
+				// 	'to'   => $customer_email,
+				// );
 			}
 			
 			do_action( 'wp_travel_after_payment_email_sent', $booking_id, $email_data, $email_tags ); // @since 3.0.6 for invoice.

@@ -15,7 +15,7 @@ export default () => {
         <>
             <div className="wp-travel-section-header">
                 <h2 className="wp-travel-section-header-title">
-                    {__("Invoice", "wp-travel")}
+                    {_wp_travel.setting_strings.invoice.invoice}
                 </h2>
                 <p className="wp-travel-section-header-description">
                     {__("More invoice settings according to your choice.", "wp-travel")}
@@ -52,7 +52,7 @@ addFilter('wp_travel_settings_tab_invoice_fields', 'WPTravel/Settings/Invoice/No
 addFilter('wp_travel_settings_tab_invoice_fields_tooltip', 'wp_travel', () => {
     return (
         <Tooltip
-            text={__('Use image path as var/www/html... instead of http to generate pdf invoice.', 'wp-travel-pro')}
+            text={_wp_travel.setting_strings.invoice.use_relative_path_note}
         >
             <span>
                 <i className="fa fa-info-circle" aria-hidden="true"></i>

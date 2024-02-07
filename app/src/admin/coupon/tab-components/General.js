@@ -41,7 +41,7 @@ export default () => {
 	}
     
     let _coupon_expiry_date = moment(coupon_expiry_date)
-    _coupon_expiry_date = _coupon_expiry_date.isValid() ? _coupon_expiry_date.toDate() : new Date();
+    _coupon_expiry_date = _coupon_expiry_date.isValid() ? _coupon_expiry_date.toDate() : '';
     return <div className="wp-travel-ui wp-travel-ui-card coupon-general">
         <h3>{ __( 'General Settings', 'wp-travel' ) }</h3>
         <ErrorBoundary>

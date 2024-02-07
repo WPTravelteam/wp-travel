@@ -246,15 +246,14 @@ class WP_Travel_Default_Form_Fields { // @phpcs:ignore
 				'default'     => '',
 				'priority'    => 20,
 			),
-			'country'      => array(
+			'country'                           => array(
 				'type'        => 'country_dropdown',
 				'label'       => __( 'Country', 'wp-travel' ),
-				'name'        => 'wp_travel_country_traveller',
+				'name'        => 'wp_travel_country',
 				'id'          => 'wp-travel-country',
 				'validations' => array(
 					'required' => true,
 				),
-				'default'     => '',
 				'priority'    => 30,
 			),
 			'phone_number' => array(

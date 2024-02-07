@@ -1,4 +1,3 @@
-
 function GetConvertedPrice( price ) {
     var conversionRate = 'undefined' !== typeof wp_travel && 'undefined' !== typeof wp_travel.conversion_rate ? wp_travel.conversion_rate : 1;
     var _toFixed       = 'undefined' !== typeof wp_travel && 'undefined' !== typeof wp_travel.number_of_decimals ? wp_travel.number_of_decimals : 2;
@@ -201,7 +200,13 @@ jQuery(function($) {
         }
     } );
 
+    $(document).on( 'click', '.edit-trip a', function(){
+        $('.checkout-trip-extras').css( 'display', 'none' );
+    } );
+
 });
+
+
 
 // PWA
 // if ("serviceWorker" in navigator) {

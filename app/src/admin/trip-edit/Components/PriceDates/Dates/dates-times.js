@@ -117,7 +117,7 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
                 let selectedTimes = 'undefined' !== typeof _date.trip_time && '' !== _date.trip_time ? _date.trip_time.split(',') : [];
                 
                 let _start_date = moment(_date.start_date)
-                _start_date = _start_date.isValid() ? _start_date.toDate() : new Date();
+                _start_date = _start_date.isValid() ? _start_date.toDate() : '';
 
                 let _end_date = moment(_date.end_date)
                 _end_date = _end_date.isValid() ? _end_date.toDate() : '';
@@ -176,12 +176,6 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
                                 selected={ _start_date }
                                 { ...startParams }
                                 onChange={ ( date ) =>{
-                                    if (moment(date).isSame(_start_date)) {
-                                        return false;
-                                    }
-                                    if (!moment(date).isAfter(new Date())) {
-                                        return false;
-                                    }
                                     updateDatesTimes({ start_date: moment(date).format('YYYY-MM-DD', date) }, _dateIndex);
                                 }}
                             />

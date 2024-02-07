@@ -124,6 +124,8 @@ function wptravel_settings_default_fields() {
 
 		// Payment Settings Fields.
 		'partial_payment'                         => 'no',
+		'partial_payment_amount'                  => 'no',
+		'partial_amount'                  			=> '10',
 		'minimum_partial_payout'                  => WP_TRAVEL_MINIMUM_PARTIAL_PAYOUT,
 		'payment_option_paypal'                   => 'no',
 		'paypal_email'                            => '',
@@ -2325,7 +2327,7 @@ function wptravel_payment_data( $booking_id ) {
 		foreach ( $payment_ids as $payment_id ) :
 			$payment_method = get_post_meta( $payment_id, 'wp_travel_payment_gateway', true );
 			$meta_name      = sprintf( '_%s_args', $payment_method );
-			if ( $meta_name ) :
+			if ( $meta_name && $payment_id ) :
 				$payment_args = get_post_meta( $payment_id, $meta_name, true );
 				if ( $payment_args && ( is_object( $payment_args ) || is_array( $payment_args ) ) ) :
 					$payment_data[ $i ]['data']           = $payment_args;
@@ -2334,7 +2336,7 @@ function wptravel_payment_data( $booking_id ) {
 					$payment_data[ $i ]['payment_date']   = get_the_date( '', $payment_id );
 					$i++;
 				endif;
-			endif;
+			endif;			
 		endforeach;
 	}
 	return $payment_data;
@@ -2693,7 +2695,7 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 							echo esc_html( $payment_status['text'] );
 							?>
 						</div>
-
+						
 						<?php do_action( 'wp_travel_dashboard_booking_after_detail', $booking_id, $details ); ?>
 					</div>
 				<?php endif; ?>
@@ -3584,6 +3586,7 @@ function wptravel_get_fixed_departure_date( $trip_id ) {
 				?>
 				<div class="fixed-date-dropdown">
 					<?php
+					$i=1;
 					foreach ( $available_dates as $index => $date ) {
 						if ( date( 'Y-m-d ', strtotime( $date ) ) >= date( 'Y-m-d' ) ) {
 							$date_found = true;
@@ -3598,7 +3601,7 @@ function wptravel_get_fixed_departure_date( $trip_id ) {
 									<?php
 							}
 							?>
-								<span class="dropdown-list"> <?php echo esc_html( date_i18n( $date_format, strtotime( $date ) ) ); ?></span>
+								<span data-id="date-<?php echo $i; ?>" class="book-trip-date dropdown-list"> <?php echo esc_html( date_i18n( $date_format, strtotime( $date ) ) ); ?></span>
 								<?php
 								if ( count( $available_dates ) === ( $index + 1 ) ) {
 									?>
@@ -3606,6 +3609,7 @@ function wptravel_get_fixed_departure_date( $trip_id ) {
 									<?php
 								}
 						}
+						$i++;
 					}
 					?>
 				</div>

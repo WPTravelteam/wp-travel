@@ -49,6 +49,28 @@
 	width: 250px !important;
 }
 
+.itinerary-sortable .react-datepicker-popper{
+	transform: none !important;
+	top: 35% !important;
+	left: 60% !important;
+}
+
+.react-datepicker-popper{
+	z-index: 999 !important;
+}
+
+.itinerary-sortable .react-datepicker__triangle{
+	transform: translate(130px, 0px) !important;
+}
+
+@media screen and (max-width: 1366px){
+	.itinerary-sortable .react-datepicker-popper{
+		transform: none !important;
+		top: 35% !important;
+		left: 55% !important;
+	}
+}
+
 .exclude-date-time-panel .react-datepicker-popper{
 	left: auto !important;
     right: 10% !important;
