@@ -14,7 +14,7 @@ export default () => {
         <>
             <div className="wp-travel-section-header">
                 <h2 className="wp-travel-section-header-title">
-                    {__("Email Templates Settings", "wp-travel")}
+                    {_wp_travel.setting_strings.email_tempaltes.email_templates_settings}
                 </h2>
                 <p className="wp-travel-section-header-description">
                     {__("More email templates according to your choice.", "wp-travel")}
@@ -49,17 +49,12 @@ const BookingEmailTemplates = () => {
         updateSettings({ ...allData, [storeName]: { ...allData[storeName], [storeKey]: value } })
     }
 
-    // const resetContent = (storeName, storeKey ) => {
-    //     if ( confirm( 'are you sure to reset?' ) ) {
-    //         updateSettings({ ...allData, [storeName]: { ...allData[storeName], [storeKey]: 'jagat2' } })
-    //     }
-    // }
     return <ErrorBoundary>
-        <PanelBody title={__('Booking Email Templates', 'wp-travel')} initialOpen={true} >
+        <PanelBody title={_wp_travel.setting_strings.email_tempaltes.booking_email_templates} initialOpen={true} >
             {applyFilters( 'wp_travel_email_template_content_after_send_email', [], allData ) }
-            <h3>{__('Admin Email Template Options', 'wp-travel')}</h3>
+            <h3>{_wp_travel.setting_strings.email_tempaltes.admin_email_template_options}</h3>
             <PanelRow>
-                <label>{__('Send Email', 'wp-travel')}</label>
+                <label>{_wp_travel.setting_strings.email_tempaltes.admin_email_template_options_send_email}</label>
                 <div className="wp-travel-field-value">
                     <ToggleControl
                         checked={sendBookingEmailToAdmin == 'yes'}
@@ -71,13 +66,13 @@ const BookingEmailTemplates = () => {
                         }
                         }
                     />
-                    <p className="description">{__('Enable or disable Email notification to admin.', 'wp-travel')}</p>
+                    <p className="description">{_wp_travel.setting_strings.email_tempaltes.admin_email_template_options_send_email_note}</p>
                 </div>
             </PanelRow> 
             {applyFilters('wp_travel_utils_booking_notif', [], allData)}
 
             <PanelRow>
-                <label>{__('Booking Email Subject', 'wp-travel')}</label>
+                <label>{_wp_travel.setting_strings.email_tempaltes.booking_email_subject}</label>
                 <div className="wp-travel-field-value">
                     <TextControl
                         value={booking_admin_template_settings.admin_subject}
@@ -88,7 +83,7 @@ const BookingEmailTemplates = () => {
                 </div>
             </PanelRow>
             <PanelRow>
-                <label>{__('Booking Email Title', 'wp-travel')}</label>
+                <label>{_wp_travel.setting_strings.email_tempaltes.booking_email_title}</label>
                 <div className="wp-travel-field-value">
                     <TextControl
                         value={booking_admin_template_settings.admin_title}
@@ -99,7 +94,7 @@ const BookingEmailTemplates = () => {
                 </div>
             </PanelRow>
             <PanelRow>
-                <label>{__('Booking Email Header Color', 'wp-travel')}</label>
+                <label>{_wp_travel.setting_strings.email_tempaltes.booking_email_header_color}</label>
                 <div className="wp-travel-field-value">
                     <ColorPicker
                         color={booking_admin_template_settings.admin_header_color}
@@ -110,7 +105,7 @@ const BookingEmailTemplates = () => {
             </PanelRow>
 
             <PanelRow>
-                <label>{__('Email Content', 'wp-travel')}</label>
+                <label>{_wp_travel.setting_strings.email_tempaltes.email_content}</label>
                 {/* <div className="wp-travel-field-value">
                     <Button isSecondary onClick={() => resetContent('booking_admin_template_settings', 'email_content')}>{ __( 'Reset Content', 'wp-travel' ) }</Button>
                 </div> */}
@@ -126,9 +121,9 @@ const BookingEmailTemplates = () => {
 
 
 
-            <h3>{__('Client Email Template Options', 'wp-travel')}</h3>
+            <h3>{_wp_travel.setting_strings.email_tempaltes.client_email_template_options}</h3>
             <PanelRow>
-                <label>{__('Booking Email Subject', 'wp-travel')}</label>
+                <label>{_wp_travel.setting_strings.email_tempaltes.booking_email_subject}</label>
                 <div className="wp-travel-field-value">
                     <TextControl
                         value={booking_client_template_settings.client_subject}
@@ -139,7 +134,7 @@ const BookingEmailTemplates = () => {
                 </div>
             </PanelRow>
             <PanelRow>
-                <label>{__('Booking Email Title', 'wp-travel')}</label>
+                <label>{_wp_travel.setting_strings.email_tempaltes.booking_email_title}</label>
                 <div className="wp-travel-field-value">
                     <TextControl
                         value={booking_client_template_settings.client_title}
@@ -150,7 +145,7 @@ const BookingEmailTemplates = () => {
                 </div>
             </PanelRow>
             <PanelRow>
-                <label>{__('Booking Email Header Color', 'wp-travel')}</label>
+                <label>{_wp_travel.setting_strings.email_tempaltes.booking_email_header_color}</label>
                 <div className="wp-travel-field-value">
                     <ColorPicker
                         color={booking_client_template_settings.client_header_color}
@@ -161,7 +156,7 @@ const BookingEmailTemplates = () => {
             </PanelRow>
 
             <PanelRow>
-                <label>{__('Email Content', 'wp-travel')}</label>
+                <label>{_wp_travel.setting_strings.email_tempaltes.email_content}</label>
             </PanelRow>
             <PanelRow className="wp-travel-editor">
                 <WPEditor id="booking_client_template_settings" value={'undefined' !== typeof booking_client_template_settings.email_content ? booking_client_template_settings.email_content : ''}
@@ -191,13 +186,13 @@ const PaymentEmailTemplates = () => {
     }
 
     return <>
-        <PanelBody title={__('Payment Email Templates', 'wp-travel')} initialOpen={false} >
-            <h3>{__('Admin Email Template Options', 'wp-travel')}</h3>
+        <PanelBody title={_wp_travel.setting_strings.email_tempaltes.payment_email_templates} initialOpen={false} >
+            <h3>{_wp_travel.setting_strings.email_tempaltes.admin_email_template_options}</h3>
 
             {applyFilters('wp_travel_utils_payment_notif', [], allData)}
 
             <PanelRow>
-                <label>{__('Payment Email Subject', 'wp-travel')}</label>
+                <label>{_wp_travel.setting_strings.email_tempaltes.payment_email_subject}</label>
                 <div className="wp-travel-field-value">
                     <TextControl
                         value={payment_admin_template_settings.admin_subject}
@@ -208,7 +203,7 @@ const PaymentEmailTemplates = () => {
                 </div>
             </PanelRow>
             <PanelRow>
-                <label>{__('Payment Email Title', 'wp-travel')}</label>
+                <label>{_wp_travel.setting_strings.email_tempaltes.payment_email_title}</label>
                 <div className="wp-travel-field-value">
                     <TextControl
                         value={payment_admin_template_settings.admin_title}
@@ -219,7 +214,7 @@ const PaymentEmailTemplates = () => {
                 </div>
             </PanelRow>
             <PanelRow>
-                <label>{__('Payment Email Header Color', 'wp-travel')}</label>
+                <label>{_wp_travel.setting_strings.email_tempaltes.payment_email_header_color}</label>
                 <div className="wp-travel-field-value">
                     <ColorPicker
                         color={payment_admin_template_settings.admin_header_color}
@@ -230,7 +225,7 @@ const PaymentEmailTemplates = () => {
             </PanelRow>
 
             <PanelRow>
-                <label>{__('Email Content', 'wp-travel')}</label>
+                <label>{_wp_travel.setting_strings.email_tempaltes.email_content}</label>
             </PanelRow>
             <PanelRow className="wp-travel-editor">
                 <WPEditor id="payment_admin_template_settings" value={'undefined' !== typeof payment_admin_template_settings.email_content ? payment_admin_template_settings.email_content : ''}
@@ -241,9 +236,9 @@ const PaymentEmailTemplates = () => {
 
 
 
-            <h3>{__('Client Email Template Options', 'wp-travel')}</h3>
+            <h3>{_wp_travel.setting_strings.email_tempaltes.client_email_template_options}</h3>
             <PanelRow>
-                <label>{__('Payment Email Subject', 'wp-travel')}</label>
+                <label>{_wp_travel.setting_strings.email_tempaltes.payment_email_subject}</label>
                 <div className="wp-travel-field-value">
                     <TextControl
                         value={payment_client_template_settings.client_subject}
@@ -254,7 +249,7 @@ const PaymentEmailTemplates = () => {
                 </div>
             </PanelRow>
             <PanelRow>
-                <label>{__('Payment Email Title', 'wp-travel')}</label>
+                <label>{_wp_travel.setting_strings.email_tempaltes.payment_email_title}</label>
                 <div className="wp-travel-field-value">
                     <TextControl
                         value={payment_client_template_settings.client_title}
@@ -265,7 +260,7 @@ const PaymentEmailTemplates = () => {
                 </div>
             </PanelRow>
             <PanelRow>
-                <label>{__('Payment Email Header Color', 'wp-travel')}</label>
+                <label>{_wp_travel.setting_strings.email_tempaltes.payment_email_header_color}</label>
                 <div className="wp-travel-field-value">
                     <ColorPicker
                         color={payment_client_template_settings.client_header_color}
@@ -276,7 +271,7 @@ const PaymentEmailTemplates = () => {
             </PanelRow>
 
             <PanelRow>
-                <label>{__('Email Content', 'wp-travel')}</label>
+                <label>{_wp_travel.setting_strings.email_tempaltes.email_content}</label>
             </PanelRow>
             <PanelRow className="wp-travel-editor">
                 <WPEditor id="payment_client_template_settings" value={'undefined' !== typeof payment_client_template_settings.email_content ? payment_client_template_settings.email_content : ''}
@@ -304,13 +299,13 @@ const EnquiryEmailTemplates = () => {
     }
 
     return <>
-        <PanelBody title={__('Enquiry Email Templates', 'wp-travel')} initialOpen={false} >
-            <h3>{__('Admin Email Template Options', 'wp-travel')}</h3>
+        <PanelBody title={_wp_travel.setting_strings.email_tempaltes.enquiry_email_templates} initialOpen={false} >
+            <h3>{_wp_travel.setting_strings.email_tempaltes.admin_email_template_options}</h3>
 
             {applyFilters('wp_travel_utils_enquiry_notif', [], allData)}
 
             <PanelRow>
-                <label>{__('Enquiry Email Subject', 'wp-travel')}</label>
+                <label>{_wp_travel.setting_strings.email_tempaltes.enquiry_email_subject}</label>
                 <div className="wp-travel-field-value">
                     <TextControl
                         value={enquiry_admin_template_settings.admin_subject}
@@ -321,7 +316,7 @@ const EnquiryEmailTemplates = () => {
                 </div>
             </PanelRow>
             <PanelRow>
-                <label>{__('Enquiry Email Title', 'wp-travel')}</label>
+                <label>{_wp_travel.setting_strings.email_tempaltes.enquiry_email_title}</label>
                 <div className="wp-travel-field-value">
                     <TextControl
                         value={enquiry_admin_template_settings.admin_title}
@@ -332,7 +327,7 @@ const EnquiryEmailTemplates = () => {
                 </div>
             </PanelRow>
             <PanelRow>
-                <label>{__('Enquiry Email Header Color', 'wp-travel')}</label>
+                <label>{_wp_travel.setting_strings.email_tempaltes.enquiry_email_header_color}</label>
                 <div className="wp-travel-field-value">
                     <ColorPicker
                         color={enquiry_admin_template_settings.admin_header_color}
@@ -343,7 +338,7 @@ const EnquiryEmailTemplates = () => {
             </PanelRow>
 
             <PanelRow>
-                <label>{__('Email Content', 'wp-travel')}</label>
+                <label>{_wp_travel.setting_strings.email_tempaltes.email_content}</label>
             </PanelRow>
             <PanelRow className="wp-travel-editor">
                 <WPEditor id="enquiry_admin_template_settings" value={'undefined' !== typeof enquiry_admin_template_settings.email_content ? enquiry_admin_template_settings.email_content : ''}

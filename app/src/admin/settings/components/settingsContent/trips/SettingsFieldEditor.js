@@ -18,7 +18,7 @@ export default () => {
         <>
             <div className="wp-travel-section-header">
                 <h2 className="wp-travel-section-header-title">
-                    {__("Field Editor", "wp-travel")}
+                    {_wp_travel.setting_strings.field_editor.field_editor}
                 </h2>
                 <p className="wp-travel-section-header-description">
                     {__("More field editor settings according to your choice.", "wp-travel")}
@@ -55,7 +55,7 @@ addFilter('wp_travel_settings_tab_field_editor_fields_tooltip', 'wp_travel', () 
     return (
         <Tooltip
             text={(__('Use traveler info fields pattern.<br />', 'wp-travel'),
-                __('Enable to use field pattern (Like required or not required) set in "Traveler info fields" and disable to make multiple traveler fields unrequired except first one.', 'wp-travel'))}
+            _wp_travel.setting_strings.field_editor.multiple_traveler_tooltip)}
         >
             <span>
                 <i className="fa fa-info-circle" aria-hidden="true"></i>

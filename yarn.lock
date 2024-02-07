@@ -2482,6 +2482,15 @@
   resolved "https://registry.yarnpkg.com/@wordpress/babel-plugin-import-jsx-pragma/-/babel-plugin-import-jsx-pragma-3.2.0.tgz#0d4dc9ca50ed0cf1c14966db602351b13625303a"
   integrity sha512-XK3Sdpi9MWoy5qPHnRroY/ypX0VtT5yI5809u5As1P/3k4vlXNw8USH4lJ+rkurAOVqqN5mFlf2XAL9AkpfXyg==
 
+"@wordpress/babel-plugin-makepot@^5.33.0":
+  version "5.33.0"
+  resolved "https://registry.yarnpkg.com/@wordpress/babel-plugin-makepot/-/babel-plugin-makepot-5.33.0.tgz#2222903c562442d664f691eb9a6ea98eae8faee8"
+  integrity sha512-VXFvGcfrsaO9eTCeJKTjPJ1a8tBAxM1UEJXpl75ry9N3zDgNQ2B2BXwJ+9eFKm40fDq+LLgoIuWl4GGgPVhM9w==
+  dependencies:
+    deepmerge "^4.3.0"
+    gettext-parser "^1.3.1"
+    is-plain-object "^5.0.0"
+
 "@wordpress/babel-preset-default@^6.3.3":
   version "6.17.0"
   resolved "https://registry.yarnpkg.com/@wordpress/babel-preset-default/-/babel-preset-default-6.17.0.tgz#16418f17bd76352d2ae34856fb885d888edf9a99"
@@ -2879,6 +2888,13 @@
   dependencies:
     "@babel/runtime" "^7.16.0"
 
+"@wordpress/hooks@^3.49.0":
+  version "3.49.0"
+  resolved "https://registry.yarnpkg.com/@wordpress/hooks/-/hooks-3.49.0.tgz#11a370ee823f49e835ee89c3d5a9b5a1068c5886"
+  integrity sha512-GH546Jg8u/rw9I3fsvAhidwt8rUFNmkdXGByIPGsN3R6y+QwWMXPzsnoYdFmFOmDK9gOGCRDe5bXHikoWnaiKA==
+  dependencies:
+    "@babel/runtime" "^7.16.0"
+
 "@wordpress/html-entities@^3.2.2", "@wordpress/html-entities@^3.22.0":
   version "3.48.0"
   resolved "https://registry.yarnpkg.com/@wordpress/html-entities/-/html-entities-3.48.0.tgz#6fd2b062458461eba7e52d5d2764f08226aa0f3b"
@@ -2886,13 +2902,25 @@
   dependencies:
     "@babel/runtime" "^7.16.0"
 
-"@wordpress/i18n@^4.15.0", "@wordpress/i18n@^4.2.2", "@wordpress/i18n@^4.2.3", "@wordpress/i18n@^4.2.4", "@wordpress/i18n@^4.22.0", "@wordpress/i18n@^4.48.0":
+"@wordpress/i18n@^4.15.0", "@wordpress/i18n@^4.2.3", "@wordpress/i18n@^4.2.4", "@wordpress/i18n@^4.22.0", "@wordpress/i18n@^4.48.0":
   version "4.48.0"
   resolved "https://registry.yarnpkg.com/@wordpress/i18n/-/i18n-4.48.0.tgz#a8535723003c183bce668ebcdeecd06b0347703a"
   integrity sha512-CEaBkh1o1lArLqSv9misdmu4hNhs15Fc1tu9t/CzVWPhm7JkkZUi/+mfdAsQmMuON4lJLZKfOjjcRIfTq9YHhA==
   dependencies:
     "@babel/runtime" "^7.16.0"
     "@wordpress/hooks" "^3.48.0"
+    gettext-parser "^1.3.1"
+    memize "^2.1.0"
+    sprintf-js "^1.1.1"
+    tannin "^1.2.0"
+
+"@wordpress/i18n@^4.9.0":
+  version "4.49.0"
+  resolved "https://registry.yarnpkg.com/@wordpress/i18n/-/i18n-4.49.0.tgz#a850c8ba7e275fb03c32cd4417f115a46f9737bd"
+  integrity sha512-8aZmmRfOHzS/3pMWg+4f6QlPci0wK5V+PDllAwtwFFrXgc0pmk8VXu7Quajh1tiVoIQDCZpK6h1sqa+qrCLpZg==
+  dependencies:
+    "@babel/runtime" "^7.16.0"
+    "@wordpress/hooks" "^3.49.0"
     gettext-parser "^1.3.1"
     memize "^2.1.0"
     sprintf-js "^1.1.1"

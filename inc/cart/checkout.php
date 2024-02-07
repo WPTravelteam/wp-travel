@@ -144,6 +144,7 @@ $wptravel_form_fw->init_validation( 'wp-travel-booking' );
 																$wptravel_field['validations']['required'] = $i > 0 ? false : $wptravel_field['validations']['required'];
 															}
 														}
+
 														$wptravel_form_field->init( array( $wptravel_field ) )->render( $wptravel_trips );
 													}
 													
@@ -177,7 +178,7 @@ $wptravel_form_fw->init_validation( 'wp-travel-booking' );
 																$wptravel_field['validations']['required'] = $i > 0 ? false : $wptravel_field['validations']['required'];
 															}
 														}
-
+														
 														$wptravel_form_field->init( array( $wptravel_field ) )->render( $wptravel_trip_id );
 													}
 												endforeach;

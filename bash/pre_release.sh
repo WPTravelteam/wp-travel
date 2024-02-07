@@ -8,6 +8,8 @@ PACKAGE_VERSION=$(cat package.json \
   | sed 's/[",]//g' \
   | tr -d '[[:space:]]')
 
+./vendor/bin/wp i18n make-pot . --skip-audit --exclude=".dev,.github,.svn_folder,.wordpress-org,build,bundle,docs,dist,node_modules,vendor,wordpress,theme.json" i18n/languages/$PACKAGE_NAME.pot
+
 
 echo "Checkout dev"
 git checkout main

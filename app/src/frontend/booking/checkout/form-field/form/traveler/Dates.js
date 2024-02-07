@@ -27,17 +27,18 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
     }
     return <> <PanelBody>
         <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>
+
         <DatePicker
         className= "wptravel-booking-datepicker"
             selected={selectedDate }
             { ...datePickerParams }
             value={ typeof travelerValue[pxKey] != 'undefined' && travelerValue[pxKey] || '' }
             onChange={ ( value ) => {
-                const createNewDate =  value;
-                const month = createNewDate.getMonth() + 1 
-                const years = createNewDate.getFullYear();
-                const days = createNewDate.getDate() ;
-                const finaldate = years + '-' + month + '-' + days;
+                // const createNewDate =  value;
+                // const month = createNewDate.getMonth() + 1 
+                // const years = createNewDate.getFullYear();
+                // const days = createNewDate.getDate() ;
+                const finaldate = moment(value).format('YYYY-MM-DD', value)
  
                 const newTraveler = {...travelerValue, [pxKey] : finaldate}
                 const newData = {...travelerDataList, [name] : newTraveler };

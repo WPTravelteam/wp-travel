@@ -15,7 +15,7 @@ export default () => {
         <>
             <div className="wp-travel-section-header">
                 <h2 className="wp-travel-section-header-title">
-                    {__("Third Party Integrations", "wp-travel")}
+                    {_wp_travel.setting_strings.third_party_integrations.third_party_integrations}
                 </h2>
                 <p className="wp-travel-section-header-description">
                     {__("More third party supports according to your choice.", "wp-travel")}

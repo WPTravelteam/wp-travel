@@ -209,6 +209,40 @@ if ( wptravel_is_react_version_enabled() ) {
 									</div>
 								</div>
 							</div>
+							<div class="checkout-trip-extras">
+								<?php 
+									if ( count( $trip_extras ) > 0 && count( $cart_extras ) > 0 ) {
+										echo '<h4>' . __( 'Trip Extras:', 'wp-travel' ) . '</h4>';
+										foreach ( $trip_extras as $tx ) {
+											$title    = isset( $tx['title'] ) ? $tx['title'] : '';
+											$tx_count = 0;
+											$tx_price = 0;
+											?>
+											<div class="wp-travel-form-group" data-wpt-tx="<?php echo esc_attr( $tx['id'] ); ?>">
+												<label for="tour-extras-<?php echo esc_attr( $tx['id'] ); ?>"><?php echo esc_html( $title ); ?></label>
+												<?php
+												if ( isset( $tx['tour_extras_metas'] ) ) :
+													$tx_count    = isset( $cart_extras[ $tx['id'] ] ) ? (int) $cart_extras[ $tx['id'] ] : 0;
+													$tx_price    = $tx['tour_extras_metas']['extras_item_price'];
+													$tx_total    = $tx_count * (int) $tx_price;
+													$tx_min_attr = isset( $tx['is_required'] ) && $tx['is_required'] ? 'min="1"' : '';
+													// $cart_total += $tx_total;
+													$required = isset( $tx['is_required'] ) && $tx['is_required'];
+												?>
+												<div class="input-group">
+													<span class="quantity"><?php echo esc_attr( $tx_count ); ?></span>
+													<span class="prices">
+														<?php echo ' x <span data-wpt-tx-price="' . $tx_price . '">' . wptravel_get_formated_price_currency( WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $tx_price ) ) . '</span> = ' . '<strong><span data-wpt-tx-total="' . $tx_total . '">' . wptravel_get_formated_price_currency( WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $tx_total ) ) . '</span>' . '</strong>'; ?>
+													</span>
+												</div>
+												<?php endif; ?>
+											</div>
+											<?php
+										}
+									}
+								?>
+							</div>
+							
 							<div class="cart-item-items">
 								<a href="javascript:void(0);" class="del-btn" data-l10n="<?php echo esc_attr( sprintf( __( 'Are you sure you want to remove \'%s\' from cart?', 'wp-travel' ), $trip_data['title'] ) ); ?>"><i class="wt-icon wt-icon-trash-alt" aria-hidden="true"></i> <?php _e( 'Remove', 'wp-travel' ); ?></a>
 
@@ -218,7 +252,7 @@ if ( wptravel_is_react_version_enabled() ) {
 									</div>
 								<?php endif; ?>
 							</div>
-							<div class="update-fields-collapse" style="display: none;">
+							<div class="update-fields-collapse" >
 								<form class="wp-travel__cart-item" action="">
 									<?php
 									foreach ( $cart_pax as $category_id => $detail ) {

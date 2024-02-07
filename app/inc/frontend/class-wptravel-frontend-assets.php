@@ -658,6 +658,7 @@ class WpTravel_Frontend_Assets {
 		// Registered Scripts.
 		foreach ( $registered_scripts as $handler => $script ) {
 			wp_register_script( $handler, $script['src'], $script['deps'], $script['ver'], $script['in_footer'] );
+			wp_set_script_translations( $handler, 'wp-travel', plugin_dir_path( __FILE__ ) . 'i18n/languages' );
 		}
 	}
 

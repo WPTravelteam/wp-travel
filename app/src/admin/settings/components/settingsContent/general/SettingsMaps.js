@@ -37,7 +37,7 @@ export default () => {
     <>
       <div className="wp-travel-section-header">
         <h2 className="wp-travel-section-header-title">
-          {__("Maps Settings", "wp-travel")}
+          {_wp_travel.setting_strings.maps.maps_settings}
         </h2>
         <p className="wp-travel-section-header-description">
           {__("More maps settings according to your choice.", "wp-travel")}
@@ -45,7 +45,7 @@ export default () => {
       </div>
       <div className='wp-travel-section-content'>
         <PanelRow>
-          <label>{__("Select Map", "wp-travel")}</label>
+          <label>{_wp_travel.setting_strings.maps.select_map}</label>
           <div id="wp-travel-select-map" className="wp-travel-field-value">
             <div id="select-map" className="wp-travel-select-wrapper">
               <Select
@@ -77,10 +77,7 @@ export default () => {
               />
             </div>
             <p className="description">
-              {__(
-                "Choose your map provider to display map in site.",
-                "wp-travel"
-              )}
+              {_wp_travel.setting_strings.maps.select_map_note}
             </p>
           </div>
         </PanelRow>
@@ -89,12 +86,9 @@ export default () => {
           <>
             <PanelRow>
               <label>
-                {__("API Key", "wp-travel")}
+                {_wp_travel.setting_strings.maps.api_key}
                 <Tooltip
-                  text={__(
-                    "If you don't have API Key, you can use Map by using Lat/Lng or Location from location tab under trip edit page.",
-                    "wp-travel"
-                  )}
+                  text={_wp_travel.setting_strings.maps.api_key_tooltip}
                 >
                   <span>
                     <i className="fa fa-info-circle" aria-hidden="true"></i>
@@ -114,18 +108,18 @@ export default () => {
                   }}
                 />
                 <p className="description">
-                  {__("To get your Google map V3 API keys ", "wp-travel")}{" "}
+                  {_wp_travel.setting_strings.maps.api_key_note}
                   <a
                     href="https://developers.google.com/maps/documentation/javascript/get-api-key"
                     target="_blank"
                   >
-                    {__("click here ", "wp-travel")}
+                    {_wp_travel.setting_strings.maps.api_key_link_label}
                   </a>
                 </p>
               </div>
             </PanelRow>
             <PanelRow>
-              <label>{__("Zoom Level", "wp-travel")}</label>
+              <label>{_wp_travel.setting_strings.maps.zoom_level}</label>
               <div id="wp-travel-zoom-level" className="wp-travel-field-value">
                 <TextControl
                   // help={__( 'Set default zoom level of map.', 'wp-travel' )}
@@ -139,7 +133,7 @@ export default () => {
                   }}
                 />
                 <p className="description">
-                  {__("Set default zoom level of map.", "wp-travel")}
+                  {_wp_travel.setting_strings.maps.zoom_level_note}
                 </p>
               </div>
             </PanelRow>

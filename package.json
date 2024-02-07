@@ -1,6 +1,6 @@
 {
   "name": "wp-travel",
-  "version": "8.0.0",
+  "version": "8.1.0",
   "description": "Travel plugin for WordPress",
   "main": "index.js",
   "scripts": {
@@ -77,9 +77,10 @@
     "yoastseo": "^1.91.2"
   },
   "dependencies": {
+    "@wordpress/babel-plugin-makepot": "^5.33.0",
     "@wordpress/block-editor": "^7.0.2",
     "@wordpress/env": "^4.1.1",
-    "@wordpress/i18n": "^4.2.2",
+    "@wordpress/i18n": "^4.9.0",
     "@wordpress/icons": "^5.0.2",
     "date-fns": "^3.0.0-alpha.1",
     "lodash": "^4.17.21",
