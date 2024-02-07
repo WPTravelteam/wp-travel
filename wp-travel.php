@@ -31,7 +31,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 	 * @since 1.0.0
 	 */
 	final class WP_Travel {
- // @phpcs:ignore
+
 
 		/**
 		 * WP Travel version.
