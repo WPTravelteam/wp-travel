@@ -55,7 +55,7 @@ class WP_Travel_Ajax_Cart {
 	 * Add to cart ajax request.
 	 */
 	public static function add_to_cart() {
-
+		$settings = wptravel_get_settings();
 		$permission = WP_Travel::verify_nonce();
 
 		if ( ! $permission || is_wp_error( $permission ) ) {
@@ -67,6 +67,29 @@ class WP_Travel_Ajax_Cart {
 		$post_data = is_object( $post_data ) ? (array) $post_data : array();
 		$post_data = wptravel_sanitize_array( $post_data );
 		$response  = WP_Travel_Helpers_Cart::add_to_cart( $post_data );
+
+		if( $settings['enable_woo_checkout'] == 'yes' ){
+			global $woocommerce;
+			$woocommerce->cart->empty_cart();
+
+			$product_id = $post_data['trip_id']; //your predeterminate product id
+			$found = false;
+			//check if product is not already in cart
+			if ( sizeof( WC()->cart->get_cart() ) > 0 ) {
+			foreach ( WC()->cart->get_cart() as $cart_item_key => $values ) {
+				$_product = $values['data'];
+				if ( $_product->get_id() == $product_id )
+				$found = true;
+			}
+			// if product not found, add it
+			if ( ! $found )
+				WC()->cart->add_to_cart( $product_id );
+			} else {
+			// if no products in cart, add it
+			WC()->cart->add_to_cart( $product_id );
+			}
+		}
+
 		WP_Travel_Helpers_REST_API::response( $response );
 	}
 

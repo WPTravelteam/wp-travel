@@ -4,6 +4,8 @@ function GetConvertedPrice( price ) {
     conversionRate     = parseFloat( conversionRate ).toFixed( 2 );
     return parseFloat( price * conversionRate ).toFixed( _toFixed );
 }
+
+alert('asdasdas');
 jQuery(function($) {
 
     function findGetParameter(parameterName) {
@@ -203,6 +205,8 @@ jQuery(function($) {
     $(document).on( 'click', '.edit-trip a', function(){
         $('.checkout-trip-extras').css( 'display', 'none' );
     } );
+
+    
 
 });
 

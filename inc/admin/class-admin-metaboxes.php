@@ -140,6 +140,13 @@ class WP_Travel_Admin_Metaboxes {
 	 * Register metabox.
 	 */
 	public function register_metaboxes() {
+
+		$settings = wptravel_get_settings();
+
+		if( $settings['enable_woo_checkout'] == 'yes' ){ 
+			return;
+		}
+
 		$switch_to_react = wptravel_is_react_version_enabled();
 		if ( ! $switch_to_react ) {
 			add_meta_box( 'wp-travel-' . WP_TRAVEL_POST_TYPE . '-detail', __( 'Trip Detail', 'wp-travel' ), array( $this, 'load_tab_template' ), WP_TRAVEL_POST_TYPE, 'normal', 'high' );

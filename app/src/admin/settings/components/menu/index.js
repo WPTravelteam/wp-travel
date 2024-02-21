@@ -1,10 +1,18 @@
 import {memo} from 'react'
 import { useState } from '@wordpress/element'
 import { _n, __ } from "@wordpress/i18n";
+import { useSelect, select } from '@wordpress/data';
 
 import Search from '../sub-components/Search/Search';
 
 export default memo((props) => {
+
+    const allData = useSelect((select) => {
+        return select('WPTravel/Admin').getAllStore()
+    }, []);
+
+    const {  enable_woo_checkout } = allData;
+
     const [showGeneralTab, setShowGeneralTab] = useState(true);
     const [showTripsTab, setShowTripsTab] = useState(false);
     const [showEmailTab, setShowEmailTab] = useState(false);
@@ -110,43 +118,51 @@ export default memo((props) => {
                                 )}
                             </div>
                         </div>
-                        {/* Email */}
-                        <div className="wp-travel-primary-tab-container">
-                            <button
-                                className="wp-travel-primary-tab"
-                                onClick={() => setShowEmailTab(!showEmailTab)}
-                            >
-                                <span className="wp-travel-primary-tab-info">
-                                    <i className="fa fa-envelope wp-travel-tab-icon"></i>
-                                    <p className="wp-travel-primary-tab-title">
-                                        {_wp_travel.setting_strings.tab_name.email}
-                                    </p>
-                                </span>
-                                <i
-                                    className={`fa fa-chevron-${showEmailTab ? "up" : "down"}`}
-                                ></i>
-                            </button>
-                            <div className="wp-travel-secondary-tabs-container">
-                                {/* Render tab conditionally with respect to the className in tabs object */}
-                                {showEmailTab && (
-                                    <div>
-                                        {tabs.map(
-                                            (tab) =>
-                                                tab.className == "tab-email" && (
-                                                    <div
-                                                        key={`wp-travel-tab-${tab.name}`}
-                                                        className={`wp-travel-secondary-tab ${activeTab == tab.name ? "is-active" : ""
-                                                            }`}
-                                                        onClick={() => handleTabClick(tab.name)}
-                                                    >
-                                                        {tab.title}
-                                                    </div>
-                                                )
+
+                        {
+                            enable_woo_checkout == 'no' && 
+                            <>
+                                <div className="wp-travel-primary-tab-container">
+                                    <button
+                                        className="wp-travel-primary-tab"
+                                        onClick={() => setShowEmailTab(!showEmailTab)}
+                                    >
+                                        <span className="wp-travel-primary-tab-info">
+                                            <i className="fa fa-envelope wp-travel-tab-icon"></i>
+                                            <p className="wp-travel-primary-tab-title">
+                                                {_wp_travel.setting_strings.tab_name.email}
+                                            </p>
+                                        </span>
+                                        <i
+                                            className={`fa fa-chevron-${showEmailTab ? "up" : "down"}`}
+                                        ></i>
+                                    </button>
+                                    <div className="wp-travel-secondary-tabs-container">
+                                        {/* Render tab conditionally with respect to the className in tabs object */}
+                                        {showEmailTab && (
+                                            <div>
+                                                {tabs.map(
+                                                    (tab) =>
+                                                        tab.className == "tab-email" && (
+                                                            <div
+                                                                key={`wp-travel-tab-${tab.name}`}
+                                                                className={`wp-travel-secondary-tab ${activeTab == tab.name ? "is-active" : ""
+                                                                    }`}
+                                                                onClick={() => handleTabClick(tab.name)}
+                                                            >
+                                                                {tab.title}
+                                                            </div>
+                                                        )
+                                                )}
+                                            </div>
                                         )}
                                     </div>
-                                )}
-                            </div>
-                        </div>
+                                </div>
+                            </>
+                        }
+
+                        {/* Email */}
+                        
                         {/* Account */}
                         <div className="wp-travel-primary-tab-container">
                             <button
@@ -221,43 +237,48 @@ export default memo((props) => {
                                 )}
                             </div>
                         </div>
-                        {/* Payment */}
-                        <div className="wp-travel-primary-tab-container">
-                            <button
-                                className="wp-travel-primary-tab"
-                                onClick={() => setShowPaymentTab(!showPaymentTab)}
-                            >
-                                <span className="wp-travel-primary-tab-info">
-                                    <i className="fa fa-credit-card wp-travel-tab-icon"></i>
-                                    <p className="wp-travel-primary-tab-title">
-                                        {_wp_travel.setting_strings.tab_name.payment}
-                                    </p>
-                                </span>
-                                <i
-                                    className={`fa fa-chevron-${showPaymentTab ? "up" : "down"}`}
-                                ></i>
-                            </button>
-                            <div className="wp-travel-secondary-tabs-container">
-                                {/* Render tab conditionally with respect to the className in tabs object */}
-                                {showPaymentTab && (
-                                    <div>
-                                        {tabs.map(
-                                            (tab) =>
-                                                tab.className == "tab-payment" && (
-                                                    <div
-                                                        key={`wp-travel-tab-${tab.name}`}
-                                                        className={`wp-travel-secondary-tab ${activeTab == tab.name ? "is-active" : ""
-                                                            }`}
-                                                        onClick={() => handleTabClick(tab.name)}
-                                                    >
-                                                        {tab.title}
-                                                    </div>
-                                                )
+                        {
+                            enable_woo_checkout == 'no' && 
+                            <>
+                                <div className="wp-travel-primary-tab-container">
+                                    <button
+                                        className="wp-travel-primary-tab"
+                                        onClick={() => setShowPaymentTab(!showPaymentTab)}
+                                    >
+                                        <span className="wp-travel-primary-tab-info">
+                                            <i className="fa fa-credit-card wp-travel-tab-icon"></i>
+                                            <p className="wp-travel-primary-tab-title">
+                                                {_wp_travel.setting_strings.tab_name.payment}
+                                            </p>
+                                        </span>
+                                        <i
+                                            className={`fa fa-chevron-${showPaymentTab ? "up" : "down"}`}
+                                        ></i>
+                                    </button>
+                                    <div className="wp-travel-secondary-tabs-container">
+                                        {/* Render tab conditionally with respect to the className in tabs object */}
+                                        {showPaymentTab && (
+                                            <div>
+                                                {tabs.map(
+                                                    (tab) =>
+                                                        tab.className == "tab-payment" && (
+                                                            <div
+                                                                key={`wp-travel-tab-${tab.name}`}
+                                                                className={`wp-travel-secondary-tab ${activeTab == tab.name ? "is-active" : ""
+                                                                    }`}
+                                                                onClick={() => handleTabClick(tab.name)}
+                                                            >
+                                                                {tab.title}
+                                                            </div>
+                                                        )
+                                                )}
+                                            </div>
                                         )}
                                     </div>
-                                )}
-                            </div>
-                        </div>
+                                </div>
+                            </>
+                        }
+                        
                         {/* Invoice */}
                         <div className="wp-travel-primary-tab-container">
                             <button

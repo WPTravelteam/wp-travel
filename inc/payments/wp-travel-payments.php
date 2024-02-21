@@ -464,6 +464,8 @@ function wptravel_send_email_payment( $booking_id ) {
 		$salutation = '';
 	}
 
+	
+
 	$customer_name    = $salutation.$first_name . ' ' . $last_name;
 
 	$customer_country = $country;

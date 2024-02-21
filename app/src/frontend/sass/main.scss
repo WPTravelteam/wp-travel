@@ -36,6 +36,10 @@
 @import "./15-wptravel-addons";
 
 
+.btn-disable{
+    opacity: 0.5;
+    pointer-events: none;
+}
 
 .wptravel-recurring-table-wrapper .person-box h4{
     display: none;
@@ -50,3 +54,6 @@
     background-color: #e5e5e68a;
 }
 
+.wc-block-components-checkout-return-to-cart-button{
+    display: none !important;
+}

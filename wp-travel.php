@@ -3,7 +3,7 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 8.1.0
+ * Version: 8.2.0
  * Author: WP Travel
  * Author URI: http://wptravel.io/
  * Requires at least: 6.0.0
@@ -38,7 +38,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '8.1.0';
+		public $version = '8.2.0';
 
 		/**
 		 * WP Travel API version.
@@ -326,6 +326,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @return void
 		 */
 		public function includes() {
+			
 			include sprintf( '%s/core/helpers/strings.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/core/helpers/dev.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/core/helpers/layout.php', WP_TRAVEL_ABSPATH );
@@ -349,8 +350,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/class-notices.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/template-functions.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/itinerary-v2-functions.php', WP_TRAVEL_ABSPATH ); // @since 5.0.0
-
-			include sprintf( '%s/inc/coupon/wp-travel-coupon.php', WP_TRAVEL_ABSPATH );
 
 			include_once sprintf( '%s/inc/gateways/standard-paypal/class-wp-travel-gateway-paypal-request.php', WP_TRAVEL_ABSPATH );
 			include_once sprintf( '%s/inc/gateways/standard-paypal/paypal-functions.php', WP_TRAVEL_ABSPATH );
@@ -399,6 +398,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/cart/class-cart.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/cart/class-checkout.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/cron/class-wp-travel-cron.php', WP_TRAVEL_ABSPATH );
+
+			
 
 			if ( $this->is_request( 'admin' ) ) {
 				include sprintf( '%s/inc/admin/admin-helper.php', WP_TRAVEL_ABSPATH );
@@ -493,6 +494,11 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			}
 			if ( ! is_multisite() ) {
 				include sprintf( '%s/inc/setup-page/setup-page.php', WP_TRAVEL_ABSPATH );
+			}
+			include sprintf( '%s/inc/coupon/wp-travel-coupon.php', WP_TRAVEL_ABSPATH );
+			$settings = wptravel_get_settings();
+			if( $settings['enable_woo_checkout'] == 'yes' ){ 
+				include sprintf( '%s/inc/woo-checkout.php', WP_TRAVEL_ABSPATH );
 			}
 		}
 

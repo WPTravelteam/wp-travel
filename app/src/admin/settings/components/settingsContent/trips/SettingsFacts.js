@@ -237,7 +237,7 @@ export default () => {
                                                         return newIndex != index;
                                                     });
                                                     removeFact(factData);
-                                                }} className="wp-traval-button-danger">{_wp_travel.setting_strings.unsaved_changes}</Button></PanelRow>
+                                                }} className="wp-traval-button-danger">{_wp_travel.setting_strings.facts.remove_fact}</Button></PanelRow>
 
                                         </PanelBody>
                                     )

@@ -100,6 +100,7 @@ function wptravel_settings_default_fields() {
 		'expired_trip_set_to'                     => 'expired',
 		'wp_travel_switch_to_react'               => 'yes',
 		'enable_multiple_travellers'              => 'no',
+		'enable_woo_checkout'              		  => 'no',
 		'enable_multiple_category_on_pricing'     => 'yes', // This settings isn't visible for new user. So, it is always on for new settings. it means only new category layout will show in the admin and frontend.
 		'trip_pricing_options_layout'             => 'by-pricing-option',
 
@@ -2655,7 +2656,7 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 	if ( ! $booking_id ) {
 		return;
 	}
-
+	$settings = wptravel_get_settings();
 	$details = wptravel_booking_data( $booking_id );
 
 	$strings = array();
@@ -2811,7 +2812,10 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 						$indexs = 0;
 						foreach ( $fname as $cart_id => $first_names ) :
 							if ( is_array( $first_names ) && count( $first_names ) > 0 ) :
-								$trip_id = $order_items_data[ $cart_id ]['trip_id'];
+								if( $settings['enable_woo_checkout'] == 'no' ){ 
+									$trip_id = $order_items_data[ $cart_id ]['trip_id'];
+								}
+								
 								?>
 								<div class="my-order-single-traveller-info">
 									<h3 class="my-order-single-title">
@@ -2832,21 +2836,26 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 													<?php
 													$traveller_fields = isset( $checkout_fields['traveller_fields'] ) ? $checkout_fields['traveller_fields'] : array();
 													$traveller_fields = wptravel_sort_form_fields( $traveller_fields );
+													
 													if ( ! empty( $traveller_fields ) ) {
 														if ( $indexs == 0 ) {
 															foreach ( $traveller_fields as $field ) {
+																// var_dump( $traveller_infos[ $field['name'] ] );
 																if ( 'heading' === $field['type'] ) {
 																	// Do nothing.
 																} elseif ( in_array( $field['type'], array( 'hidden' ) ) ) {
 																	// Do nothing.
-																} else {
+																} elseif ( !isset( $traveller_infos[ $field['name'] ] ) ) {
+																	// Do nothing.
+																}else {
 																	$value = isset( $traveller_infos[ $field['name'] ] ) && isset( $traveller_infos[ $field['name'] ][0] ) ? maybe_unserialize( $traveller_infos[ $field['name'] ][0] ) : '';
 																	// $value = is_array( $value ) ? array_values( $value ) : $value;
 																	// $value = is_array( $value ) ? array_shift( $value ) : $value;
 																	// $value = is_array( $value ) ? $value[ $key ] : $value;
 																	echo '<div class="my-order-single-field clearfix">';
-																	printf( '<span class="my-order-head">%s:</span>', $field['label'] ); // @phpcs:ignore
-																	printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? $value[ $cart_id ][ $key ] : '' ); // @phpcs:ignore
+																	printf( '<span class="my-order-head">%s:</span>', $field['label'] ); // @phpcs:ignore																	
+																	printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? $value[ $cart_id ][ $key ] : '' ); // @phpcs:ignore																	
+																	
 																	echo '</div>';
 																}
 															}
@@ -2859,6 +2868,8 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 																	if ( 'heading' === $field['type'] ) {
 																		// Do nothing.
 																	} elseif ( in_array( $field['type'], array( 'hidden' ) ) ) {
+																		// Do nothing.
+																	}elseif ( !isset( $traveller_infos[ $field['name'] ] ) ) {
 																		// Do nothing.
 																	} else {
 																		$value = isset( $traveller_infos[ $field['name'] ] ) && isset( $traveller_infos[ $field['name'] ][0] ) ? maybe_unserialize( $traveller_infos[ $field['name'] ][0] ) : '';
@@ -2880,7 +2891,9 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 																	// Do nothing.
 																} elseif ( in_array( $field['type'], array( 'hidden' ) ) ) {
 																	// Do nothing.
-																} else {
+																} elseif ( !isset( $traveller_infos[ $field['name'] ] ) ) {
+																	// Do nothing.
+																}else {
 																	$value = isset( $traveller_infos[ $field['name'] ] ) && isset( $traveller_infos[ $field['name'] ][0] ) ? maybe_unserialize( $traveller_infos[ $field['name'] ][0] ) : '';
 																	/**
 																	 * remove @since 6.2.0 

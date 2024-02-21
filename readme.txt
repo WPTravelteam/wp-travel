@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 6.0.0
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 8.1.0
+Stable tag: 8.2.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -424,6 +424,22 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 8.2.0 =
+Release Date: 22nd February 2024
+
+Fixes:
+* Fixed undefined array key access
+* Fixed deprecated return type of Recursive Array Access
+* Fixed the issue of trip inventory while updating the cart
+* Fixed minimum value of pax selector not working while updating cart
+
+Enhancements:
+* Added hook to change departure date label and arrival date label for booking emails
+* Added hook to change email content of booking and payment status
+* Added support to show full billing country name on booking email
+
+**For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v8-2-0-update-release-note).**
 
 = 8.1.0 =
 Release Date: 7th February 2024

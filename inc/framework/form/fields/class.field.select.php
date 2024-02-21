@@ -39,8 +39,8 @@ class WP_Travel_FW_Field_Select {
 			// Note : select option need to be key = value for field editor so need to map option except above options.
 			if ( ! in_array( $this->field['name'], $ignore_mapping_fields ) ) {
 				$mapped_options = array();
-				foreach( $this->field['options'] as $key => $value) {
-					$mapped_options[ $key ] = $value;
+				foreach( $this->field['options'] as $option) {
+					$mapped_options[ $option ] = $option;
 				}
 				$this->field['options'] = $mapped_options;
 			}
