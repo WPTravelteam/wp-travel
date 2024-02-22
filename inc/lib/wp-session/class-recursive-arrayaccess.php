@@ -81,6 +81,7 @@ class Recursive_ArrayAccess implements ArrayAccess, Iterator, Countable {
 	 *
 	 * @return boolean true on success or false on failure.
 	 */
+	#[\ReturnTypeWillChange]
 	public function offsetExists( $offset ) {
 		return isset( $this->container[ $offset ] );
 	}
@@ -94,6 +95,7 @@ class Recursive_ArrayAccess implements ArrayAccess, Iterator, Countable {
 	 *
 	 * @return mixed Can return all value types.
 	 */
+	#[\ReturnTypeWillChange]
 	public function offsetGet( $offset ) {
 		return isset( $this->container[ $offset ] ) ? $this->container[ $offset ] : null;
 	}
@@ -108,6 +110,7 @@ class Recursive_ArrayAccess implements ArrayAccess, Iterator, Countable {
 	 *
 	 * @return void
 	 */
+	#[\ReturnTypeWillChange]
 	public function offsetSet( $offset, $data ) {
 		if ( is_array( $data ) ) {
 			$data = new self( $data );
@@ -130,6 +133,7 @@ class Recursive_ArrayAccess implements ArrayAccess, Iterator, Countable {
 	 *
 	 * @return void
 	 */
+	#[\ReturnTypeWillChange]
 	public function offsetUnset( $offset ) {
 		unset( $this->container[ $offset ] );
 
@@ -148,6 +152,7 @@ class Recursive_ArrayAccess implements ArrayAccess, Iterator, Countable {
 	 *
 	 * @return mixed
 	 */
+	#[\ReturnTypeWillChange]
 	public function current() {
 		return current( $this->container );
 	}
@@ -159,6 +164,7 @@ class Recursive_ArrayAccess implements ArrayAccess, Iterator, Countable {
 	 *
 	 * @return mixed
 	 */
+	#[\ReturnTypeWillChange]
 	public function key() {
 		return key( $this->container );
 	}
@@ -170,6 +176,7 @@ class Recursive_ArrayAccess implements ArrayAccess, Iterator, Countable {
 	 *
 	 * @return void
 	 */
+	#[\ReturnTypeWillChange]
 	public function next() {
 		next( $this->container );
 	}
@@ -181,6 +188,7 @@ class Recursive_ArrayAccess implements ArrayAccess, Iterator, Countable {
 	 *
 	 * @return void
 	 */
+	#[\ReturnTypeWillChange]
 	public function rewind() {
 		reset( $this->container );
 	}
@@ -192,6 +200,7 @@ class Recursive_ArrayAccess implements ArrayAccess, Iterator, Countable {
 	 *
 	 * @return bool
 	 */
+	#[\ReturnTypeWillChange]
 	public function valid() {
 		return $this->offsetExists( $this->key() );
 	}
@@ -207,6 +216,7 @@ class Recursive_ArrayAccess implements ArrayAccess, Iterator, Countable {
 	 *
 	 * @return int
 	 */
+	#[\ReturnTypeWillChange]
 	public function count() {
 		return count( $this->container );
 	}

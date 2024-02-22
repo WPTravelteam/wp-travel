@@ -4,6 +4,7 @@ function GetConvertedPrice( price ) {
     conversionRate     = parseFloat( conversionRate ).toFixed( 2 );
     return parseFloat( price * conversionRate ).toFixed( _toFixed );
 }
+
 jQuery(function($) {
 
     function findGetParameter(parameterName) {
@@ -203,6 +204,62 @@ jQuery(function($) {
     $(document).on( 'click', '.edit-trip a', function(){
         $('.checkout-trip-extras').css( 'display', 'none' );
     } );
+
+
+    $(document).on( 'click', '.edit-pax-selector-qty', function(){
+        var cartInputValue = document.getElementsByClassName('edit-pax-'+$(this).attr( 'data-cart' ));
+
+       
+        var cartInputValueTrip = document.getElementsByClassName('wp-trave-pax-selected-frontend-second');
+
+        
+        if( $(this).attr( 'data-allpricing' ) == 1 ){
+            $flag = 1;
+
+            if( cartInputValue.length > 0 ){
+                for(var i=0;i<cartInputValue.length;i++){
+                    if(parseFloat(cartInputValue[i].value) < $(this).attr( 'data-minpax' ) ){
+                        $flag = 0;
+                    }
+                }
+
+                if( $flag == 0 ){
+                    $('.cart-edit-'+$(this).attr( 'data-cart' )).addClass( 'btn-disable' );
+                }else{
+                    $('.cart-edit-'+$(this).attr( 'data-cart' )).removeClass( 'btn-disable' );
+                }
+            }
+            
+            if( cartInputValueTrip.length > 0 ){
+                for(var i=0;i<cartInputValueTrip.length;i++){
+                    if(parseFloat(cartInputValueTrip[i].value) < $(this).attr( 'data-minpax' ) ){
+                        $flag = 0;
+                    }
+                }
+                if( $flag == 0 ){
+                    $('.wp-travel-book').addClass( 'btn-disable' );
+                }else{
+                    $('.wp-travel-book').removeClass( 'btn-disable' );
+                }
+            }
+           
+        }else{
+            var totalpax=0;
+            for(var i=0;i<cartInputValue.length;i++){
+                if(parseFloat(cartInputValue[i].value))
+                totalpax += parseFloat(cartInputValue[i].value);
+            }
+    
+            if( totalpax < $(this).attr( 'data-minpax' ) ){
+                $('.cart-edit-'+$(this).attr( 'data-cart' )).addClass( 'btn-disable' );
+            }else{
+                $('.cart-edit-'+$(this).attr( 'data-cart' )).removeClass( 'btn-disable' );
+            }
+        }
+       
+    } );
+
+    
 
 });
 

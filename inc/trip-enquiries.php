@@ -156,6 +156,10 @@ add_action( 'add_meta_boxes', 'wptravel_add_enquiries_data_metaboxes', 10, 2 );
  */
 function wptravel_add_enquiries_data_metaboxes() {
 
+	if ( get_current_screen()->base == 'woocommerce_page_wc-orders' ) { 
+		return;
+	}
+	
 	global $post;
 	global $wp_travel_itinerary;
 

@@ -45,10 +45,10 @@ class WpTravel_Helpers_Booking {
 		<table class="wp-travel-table-content" cellpadding="0" cellspacing="0" height="100%" width="100%" style="text-align: left;">
 			<thead>
 				<tr>
-					<th><?php apply_filters( 'wp_travel_booking_mail_itinerary', esc_html_e( 'Itinerary', 'wp-travel' ), $booking_id ); ?></th>
-					<th><?php apply_filters( 'wp_travel_booking_mail_pax', esc_html_e( ! empty( $strings ) ? strtoupper( $strings['bookings']['pax'] ) : 'PAX', 'wp-travel' ), $booking_id ); ?></th>
-					<th><?php apply_filters( 'wp_travel_booking_mail_departure', esc_html_e( 'Departure Date', 'wp-travel' ), $booking_id ); ?></th>
-					<th><?php apply_filters( 'wp_travel_booking_mail_arrival', esc_html_e( 'Arrival Date', 'wp-travel' ), $booking_id ); ?></th>
+					<th><?php echo apply_filters( 'wp_travel_booking_mail_itinerary', esc_html( 'Itinerary', 'wp-travel' ), $booking_id ); ?></th>
+					<th><?php echo apply_filters( 'wp_travel_booking_mail_pax', esc_html( ! empty( $strings ) ? strtoupper( $strings['bookings']['pax'] ) : 'PAX', 'wp-travel' ), $booking_id ); ?></th>
+					<th><?php echo apply_filters( 'wp_travel_booking_mail_departure', esc_html( 'Departure Date', 'wp-travel' ), $booking_id ); ?></th>
+					<th><?php echo apply_filters( 'wp_travel_booking_mail_arrival', esc_html( 'Arrival Date', 'wp-travel' ), $booking_id ); ?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -251,6 +251,7 @@ class WpTravel_Helpers_Booking {
 				$traveler_dobs        = isset( $checkout_form_data['wp_travel_date_of_birth_traveller'] ) ? $checkout_form_data['wp_travel_date_of_birth_traveller'] : array();
 				$traveler_genders     = isset( $checkout_form_data['wp_travel_gender_traveller'] ) ? $checkout_form_data['wp_travel_gender_traveller'] : array();
 				if ( count( $items ) > 1 ) {
+					
 					$indexs = 1;
 					foreach ( $items as $item_key => $trip ) {
 						$trip_id = $trip['trip_id'];
@@ -339,6 +340,9 @@ class WpTravel_Helpers_Booking {
 									foreach ( $first_name as $indx => $dats ) {
 										$traveler_l_name = isset( $last_name[$indx] ) ? $last_name[$indx] : '';
 										$traveler_country = isset( $country[$indx] ) ? $country[$indx] : '';
+
+										$traveler_country   = wptravel_get_countries()[$traveler_country];
+
 										$traveler_phone   = isset( $phone[$indx] ) ? $phone[$indx] : '';
 										$traveler_email   = isset( $email[$indx] ) ? $email[$indx] : '';
 										$traveler_gander  = isset( $gender[$indx] ) ? $gender[$indx] : '';
@@ -364,6 +368,9 @@ class WpTravel_Helpers_Booking {
 								foreach ( $traveler_first_names as $key => $first_name ) {
 									$last_name = isset( $traveler_last_names[ $key ] ) ? $traveler_last_names[ $key ][0] : '';
 									$country   = isset( $traveler_countries[ $key ] ) ? $traveler_countries[ $key ][0] : '';
+
+									$country   = wptravel_get_countries()[$country];
+
 									$phone     = isset( $traveler_phones[ $key ] ) ? $traveler_phones[ $key ][0] : '';
 									$email     = isset( $traveler_emails[ $key ] ) ? $traveler_emails[ $key ][0] : '';
 									$dob       = isset( $traveler_dobs[ $key ] ) ? $traveler_dobs[ $key ][0] : '';
@@ -432,6 +439,9 @@ class WpTravel_Helpers_Booking {
 							foreach ( $first_names as $key => $first_name ) {
 								$last_name = isset( $last_names[ $key ] ) ? $last_names[ $key ] : '';
 								$country   = isset( $countries[ $key ] ) ? $countries[ $key ] : '';
+
+								$country   = wptravel_get_countries()[$country];
+
 								$phone     = isset( $phones[ $key ] ) ? $phones[ $key ] : '';
 								$email     = isset( $emails[ $key ] ) ? $emails[ $key ] : '';
 								$dob       = isset( $dobs[ $key ] ) ? $dobs[ $key ] : '';

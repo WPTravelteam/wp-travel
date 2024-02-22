@@ -149,9 +149,12 @@ class WpTravel_Helpers_Localize {
 				'strings'            => WpTravel_Helpers_Strings::get(),
 				'zoom'               => $settings['google_map_zoom_level'],
 				'cartUrl'            => wptravel_get_cart_url(),
-				'checkoutUrl'        => wptravel_get_checkout_url(), // @since 4.3.2
+				'checkoutUrl'        => $settings['enable_woo_checkout'] == 'no' ? wptravel_get_checkout_url() : wc_get_checkout_url(), // @since 4.3.2
 				'isEnabledCartPage'  => WP_Travel_Helpers_Cart::is_enabled_cart_page(), // @since 4.3.2
 			);
+
+			
+
 			if ( wptravel_can_load_payment_scripts() ) {
 
 				global $wt_cart;

@@ -11,12 +11,25 @@
  * @since 1.7.5
  */
 function wptravel_book_now() {
-	if (
-		! WP_Travel::verify_nonce( true )
-		|| ! isset( $_POST['wp_travel_book_now'] ) // @phpcs:ignore
-		) {
-		return;
+	
+	$settings = wptravel_get_settings();
+	if( class_exists( 'WooCommerce' ) && $settings['enable_woo_checkout'] == 'yes' ){
+		if( !isset( $_REQUEST['key']) ){
+			return;
+		}
+
+		$order_data = wc_get_order(wc_get_order_id_by_order_key($_REQUEST['key']))->data;
+
+	}else{
+		if (
+			! WP_Travel::verify_nonce( true )
+			|| ! isset( $_POST['wp_travel_book_now'] ) // @phpcs:ignore
+			) {
+			return;
+		}
 	}
+
+
 	global $wt_cart;
 
 	/**
@@ -33,46 +46,11 @@ function wptravel_book_now() {
 	if ( ! count( $items ) ) {
 		return;
 	}
+
+	
 	$discount_coupon_data = $wt_cart->get_discounts();
 
-	// return 'not pax available';
-	// if ( class_exists( 'WP_Travel_Util_Inventory' ) ) {
-	// 	$inventory_enable = 'no';
-	// 	foreach ( $items as $keys => $value ) {
-	// 		if ( isset( $value['trip_id'] ) ) {
-	// 			$inv = get_post_meta( $value['trip_id'], 'enable_trip_inventory' );
-	// 			if ( isset( $inv[0] ) && $inv[0] == 'yes' ) {
-	// 				$inventory_enable = $inv[0];
-	// 				$price_ids        = isset( $value['pricing_id'] ) ? $value['pricing_id'] : '';
-	// 				$trp_id           = $value['trip_id'];
-	// 				$select_dates     = isset( $value['trip_start_date'] ) ? $value['trip_start_date'] : '';
-	// 				$trp_time         = '';
-	// 				$available_pax    = '';
-	// 				$inventory_size   = '';
-	// 				$select_pax       = isset( $value['pax'] ) ? $value['pax'] : 0;
-	// 				if ( class_exists( 'WP_Travel_Helpers_Inventory' ) ) {
-	// 					$inventorys = WP_Travel_Helpers_Inventory::get_inventory(
-	// 						array(
-	// 							'trip_id'       => $trp_id,
-	// 							'pricing_id'    => $price_ids,
-	// 							'selected_date' => $select_dates,
-	// 							'times'         => $trp_time,
-	// 						)
-	// 					);
-	// 					if ( isset( $inventorys['inventory'] ) ) {
-	// 						foreach ( $inventorys['inventory'] as $key => $val ) {
-	// 							$available_pax = isset( $val['pax_available'] ) ? $val['pax_available'] : 0;
-	// 							if ( $select_pax > $available_pax ) {
-	// 								$wt_cart->clear();
-	// 								return;
-	// 							}
-	// 						}
-	// 					}
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-	// }
+
 	$price_key            = false;
 	$pax                  = 1;
 	$total_pax            = 0; // Total booked pax. helps to display report.
@@ -116,6 +94,7 @@ function wptravel_book_now() {
 	if ( empty( $trip_id ) ) {
 		return;
 	}
+	
 	$thankyou_page_url = wptravel_thankyou_page_url( $trip_id );
 
 	// Insert Booking.
@@ -138,6 +117,57 @@ function wptravel_book_now() {
 	
 	$sanitized_data = wptravel_sanitize_array( $_POST ); // @phpcs:ignore
 
+	if( class_exists( 'WooCommerce' ) && $settings['enable_woo_checkout'] == 'yes' ){ 
+		if( !empty( $order_data ) ){
+			$sanitized_data = array();
+	
+			$sanitized_data['wp_travel_fname_traveller'] = array(
+				strtotime("now") => array(
+					'0' =>	$order_data['billing']['first_name'] 
+				)
+			);
+		
+			$sanitized_data['wp_travel_lname_traveller'] = array(
+				strtotime("now") => array(
+					'0' =>	$order_data['billing']['last_name'] 
+				)
+			);
+		
+			$sanitized_data['wp_travel_country_traveller'] = array(
+				strtotime("now") => array(
+					'0' =>	$order_data['billing']['country'] 
+				)
+			);
+		
+			$sanitized_data['wp_travel_phone_traveller'] = array(
+				strtotime("now") => array(
+					'0' =>	$order_data['billing']['phone'] 
+				)
+			);
+		
+			$sanitized_data['wp_travel_email_traveller'] = array(
+				strtotime("now") => array(
+					'0' =>	$order_data['billing']['email'] 
+				)
+			);
+		
+			$sanitized_data['wp_travel_address'] = $order_data['billing']['address_1'];
+		
+			$sanitized_data['billing_city'] = $order_data['billing']['city'];
+		
+			$sanitized_data['wp_travel_country'] = $order_data['billing']['country'];
+		
+			$sanitized_data['billing_postal'] = $order_data['billing']['postcode'];
+		
+			if( $order_data['payment_method'] == 'cod' ){
+				$sanitized_data['wp_travel_booking_option'] = 'booking_only';
+			}else{
+				$sanitized_data['wp_travel_booking_option'] = 'booking_with_payment';
+			}
+		}
+	}
+	
+
 	if( class_exists( 'WP_Travel_Pro' ) && isset( $settings['selected_booking_option'] ) && count( $settings['selected_booking_option'] ) == 1 && $settings['selected_booking_option'][0] = 'booking-with-payment' ){
 		$sanitized_data['wp_travel_booking_option'] = 'booking_with_payment';
 	}
@@ -156,21 +186,6 @@ function wptravel_book_now() {
 
 	update_post_meta( $booking_id, 'wp_travel_booking_status', 'pending' );
 
-	// update trip extras inventory
-	// if( isset( $items[array_key_first($items)]['trip_extras'] ) ){
-	// 	foreach( $items[array_key_first($items)]['trip_extras']['id'] as $key => $value ){
-	// 		$trip_extras =  array(
-	// 				'extras_item_description' => get_post_meta( intval( $value ), 'wp_travel_tour_extras_metas' )[0]['extras_item_description'],
-	// 				'extras_item_price' => get_post_meta( intval( $value ), 'wp_travel_tour_extras_metas' )[0]['extras_item_price'],
-	// 				'extras_item_sale_price' => get_post_meta( intval( $value ), 'wp_travel_tour_extras_metas' )[0]['extras_item_sale_price'],
-	// 				'extras_item_unit' => get_post_meta( intval( $value ), 'wp_travel_tour_extras_metas' )[0]['extras_item_unit'],
-	// 				'extras_item_quantity' => get_post_meta( intval( $value ), 'wp_travel_tour_extras_metas' )[0]['extras_item_quantity'],
-	// 				'extras_item_quantity_in_used' => strval( get_post_meta( intval( $value ), 'wp_travel_tour_extras_metas' )[0]['extras_item_quantity_in_used'] + $items[array_key_first($items)]['trip_extras']['qty'][$key] )
-	// 			); 
-
-	// 		update_post_meta( intval( $value ), 'wp_travel_tour_extras_metas', $trip_extras );
-	// 	}
-	// }
 
 	/**
 	 * Update Arrival and Departure dates metas.
@@ -213,7 +228,6 @@ function wptravel_book_now() {
 		}
 	}
 
-	
 	$customer_email = isset( $_POST['wp_travel_email_traveller'] ) ? wptravel_sanitize_array( wp_unslash( $_POST['wp_travel_email_traveller'] ) ) : array(); // @phpcs:ignore
 	reset( $customer_email );
 	$first_key      = key( $customer_email );
@@ -267,13 +281,14 @@ function wptravel_book_now() {
 
 		$i++;
 	}
-
+	
 	/**
 	 * Trigger Email functions. Sends Booking email to admin and client.
 	 *
 	 * @hooked array( 'WP_Travel_Email', 'send_booking_email' );
 	 * @since 5.0.0
 	 */
+
 	do_action( 'wptravel_action_send_booking_email', $booking_id, wptravel_sanitize_array( $_POST ), $new_trip_id );
 	/**
 	 * Hook used to add payment and its info.
@@ -343,12 +358,13 @@ function wptravel_book_now() {
 		update_post_meta( $payment_id, 'wp_travel_payment_mode', 'full' );
 		update_post_meta( $payment_id, 'wp_travel_payment_amount', $total_price );
 	}
+
 	// do_action( 'wp_travel_all_booking_data_list', $booking_id, $payment_data, $settings, $user_id );
 	$affiliate = apply_filters( 'wp_travel_all_booking_data_list_for_slicewp', $booking_id, $user_id );
-
+	
 	// Clear Cart After process is complete.
 	$wt_cart->clear();
-
+	
 	$thankyou_page_url = add_query_arg( 'booked', true, $thankyou_page_url );
 	$thankyou_page_url = add_query_arg( '_nonce', WP_Travel::create_nonce(), $thankyou_page_url );
 	$thankyou_page_url = add_query_arg( 'order_id', $booking_id, $thankyou_page_url );

@@ -10,7 +10,7 @@ export default () => {
     }, []);
 
     const { updateSettings } = dispatch('WPTravel/Admin');
-    const { modules, options } = allData;
+    const { modules, options, enable_woo_checkout } = allData;
     const { default_settings, saved_settings } = options;
     const { modules: defaultModules } = default_settings;
 
@@ -69,6 +69,7 @@ export default () => {
                 }
             }
         });
+
         return (
             <>
                 <div className="wp-travel-section-header wp-travel-custom-section-header">
@@ -164,8 +165,8 @@ export default () => {
                                     </div>
                                 </PanelBody>
                             }
-                            {paymentModules.length > 0 &&
-
+                            {paymentModules.length > 0 && enable_woo_checkout == 'no' &&
+                                
                                 <PanelBody
                                     title={_wp_travel.setting_strings.advance.payment_modules}
                                     initialOpen={false}

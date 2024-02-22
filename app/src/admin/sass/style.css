@@ -136,4 +136,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.wp-travel-primary-tab-container.payment-tab{
+  display: none !important;
+}
 /*# sourceMappingURL=style.css.map */

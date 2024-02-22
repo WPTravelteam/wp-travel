@@ -249,7 +249,7 @@ class WP_Travel_Default_Form_Fields { // @phpcs:ignore
 			'country'                           => array(
 				'type'        => 'country_dropdown',
 				'label'       => __( 'Country', 'wp-travel' ),
-				'name'        => 'wp_travel_country',
+				'name'        => 'wp_travel_country_traveller',
 				'id'          => 'wp-travel-country',
 				'validations' => array(
 					'required' => true,

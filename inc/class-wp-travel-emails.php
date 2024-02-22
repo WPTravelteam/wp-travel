@@ -253,7 +253,7 @@ class WP_Travel_Emails {
 		$email_template['mail_header']  = $this->email_heading( $sent_to, $header_details );
 		$email_template['mail_content'] = $email_content;
 		$email_template['mail_footer']  = $this->email_footer();
-
+	
 		return apply_filters( 'wp_travel_email_template', $email_template, $type, $sent_to );
 
 	}
