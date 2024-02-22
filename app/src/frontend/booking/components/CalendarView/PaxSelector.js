@@ -216,14 +216,14 @@ const PaxSelector = ( props ) => {
 							<span className="item-price">{c.is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat(GetConvertedPrice( c.regular_price )) }}></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCategoryPrice(c.id, true)) }}></span>/{price_per_label}</span>
 							<div className="pricing-area">
 								<div className="qty-spinner">
-									<button className="trip-page-pax-selector" data-minpax={pricing.min_pax} onClick={handlePaxChange(c.id, -1, maxPax )}>-</button>
+									<button className="trip-page-pax-selector edit-pax-selector-qty" data-minpax={pricing.min_pax} data-allpricing={tripData.enable_pax_all_pricing} onClick={handlePaxChange(c.id, -1, maxPax )}>-</button>
 			
 									<input  className='wp-trave-pax-selected-frontend-second' 
 										value={typeof paxCounts[c.id] == 'undefined' ? parseInt(c.default_pax) : paxCounts[c.id]} 
 										onChange={ ( data ) => {
 											handlePaxChangeInput( c.id, data )
 									}} />
-									<button className="trip-page-pax-selector" data-minpax={pricing.min_pax} onClick={handlePaxChange(c.id, 1, maxPax )}>+</button>
+									<button className="trip-page-pax-selector edit-pax-selector-qty" data-minpax={pricing.min_pax} data-allpricing={tripData.enable_pax_all_pricing} onClick={handlePaxChange(c.id, 1, maxPax )}>+</button>
 								</div>
 							</div>
 						</div>

@@ -430,7 +430,7 @@ Release Date: 22nd February 2024
 Fixes:
 * Fixed undefined array key access
 * Fixed deprecated return type of Recursive Array Access
-* Fixed the issue of trip inventory while updating the cart
+* Fixed the issue of trip pax while updating the cart
 * Fixed minimum value of pax selector not working while updating cart
 
 Enhancements:
@@ -1069,3 +1069,7 @@ For the changelog of earlier versions, please refer to [the changelog on wptrave
 
 = 5.1 =
 There is a new version of WP Travel available which has come with removal of v3 pricing options and new archive page layout. Check the [release note](https://wptravel.io/wp-travel-plugin-version-5-1-0-release-note/) for more detail.
+
+
+
+
