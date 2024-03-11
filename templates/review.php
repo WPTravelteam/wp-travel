@@ -46,7 +46,7 @@ $rating = intval( get_comment_meta( $comment->comment_ID, '_wp_travel_rating', t
 						<?php
 					} else {
 						?>
-						<div class="wp-travel-average-review" title="<?php echo sprintf( __( 'Rated %d out of 5', 'wp-travel' ), $rating ); ?>">
+						<div class="wp-travel-average-review" title="<?php echo __( 'Rated ', 'wp-travel' ).esc_html($rating).__( ' out of 5', 'wp-travel' ); ?>">
 							<a>
 							 <span style="width:<?php echo esc_attr( ( $rating / 5 ) * 100 ); ?>%"><strong><?php echo $rating; ?></strong> <?php _e( 'out of 5', 'wp-travel' ); ?></span>
 							</a>
@@ -55,7 +55,7 @@ $rating = intval( get_comment_meta( $comment->comment_ID, '_wp_travel_rating', t
 					}
 				} else {
 					?>
-					<div class="wp-travel-average-review" title="<?php echo sprintf( __( 'Rated %d out of 5', 'wp-travel' ), $rating ); ?>">
+					<div class="wp-travel-average-review" title="<?php echo __( 'Rated ', 'wp-travel' ).esc_html($rating).__( ' out of 5', 'wp-travel' ); ?>">
 						<a>
 						 <span style="width:<?php echo esc_attr( ( $rating / 5 ) * 100 ); ?>%"><strong><?php echo $rating; ?></strong> <?php _e( 'out of 5', 'wp-travel' ); ?></span>
 						</a>
@@ -63,7 +63,7 @@ $rating = intval( get_comment_meta( $comment->comment_ID, '_wp_travel_rating', t
 				<?php	} ?>
 				
 				<?php else : ?>
-					<div class="wp-travel-average-review" title="<?php echo sprintf( __( 'Rated %d out of 5', 'wp-travel' ), $rating ); ?>">
+					<div class="wp-travel-average-review" title="<?php echo __( 'Rated ', 'wp-travel' ).esc_html($rating).__( ' out of 5', 'wp-travel' ); ?>">
 						<a>
 						 <span style="width:<?php echo esc_attr( ( $rating / 5 ) * 100 ); ?>%"><strong><?php echo $rating; ?></strong> <?php _e( 'out of 5', 'wp-travel' ); ?></span>
 						</a>
@@ -74,7 +74,7 @@ $rating = intval( get_comment_meta( $comment->comment_ID, '_wp_travel_rating', t
 
 			<?php if ( $comment->comment_approved == '0' ) : ?>
 
-				<p class="meta"><em><?php esc_html_e( apply_filters( 'wp_travel_single_archive_comment_approve_message', 'Your comment is awaiting approval' ), 'wp-travel' ); ?></em></p>
+				<p class="meta"><em><?php echo apply_filters( 'wp_travel_single_archive_comment_approve_message', __( 'Your comment is awaiting approval', 'wp-travel' ) ); ?></em></p>
 
 			<?php else : ?>
 

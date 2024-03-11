@@ -36,7 +36,7 @@ $url = add_query_arg(
 ?>
 
 <p><?php _e( 'Someone requested that the password be reset for the following account:', 'wp-travel' ); ?></p>
-<p><?php printf( __( 'Username: %s', 'wp-travel' ), $user_login ); ?></p>
+<p><?php echo __( 'Username: ', 'wp-travel' ). $user_login; ?></p>
 <p><?php _e( 'If this was a mistake, just ignore this email and nothing will happen.', 'wp-travel' ); ?></p>
 <p><?php _e( 'To reset your password, visit the following address:', 'wp-travel' ); ?></p>
 <p>

@@ -170,8 +170,7 @@ if ( ! class_exists( 'WP_Travel_Coupons_Pro_Install' ) ) :
 					$max_users   = $coupon->get_coupon_meta( $id, 'restriction', 'coupon_limit_number' );
 					$max_users   = $max_users ? $max_users : __( 'Unlimited', 'wp-travel' );
 					?>
-						<span title="<?php echo esc_attr( sprintf( __( 'Used %1$1s out of %2$2s', 'wp-travel' ), $used_so_far, $max_users ) ); ?>"><strong><?php echo esc_html( $used_so_far ); ?>/ <?php echo esc_html( $max_users ); ?></strong></span>
-
+						<span title="<?php echo esc_attr( __( 'Used ', 'wp-travel' ).$used_so_far.__( ' out of ', 'wp-travel' ).$max_users ); ?>"><strong><?php echo esc_html( $used_so_far ); ?>/ <?php echo esc_html( $max_users ); ?></strong></span>
 					<?php
 
 					break;

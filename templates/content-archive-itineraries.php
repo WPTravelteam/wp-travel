@@ -68,7 +68,7 @@ if ( post_password_required() ) {
 							<?php wptravel_trip_rating( get_the_ID() ); ?>
 							<?php $count = (int) wptravel_get_review_count(); ?>
 						</div>
-						<span class="wp-travel-review-text"> (<?php printf( _n( '%d Review', '%d Reviews', $count, 'wp-travel' ), $count ); ?>)</span>
+						<span class="wp-travel-review-text"> (<?php echo $count.__( ' Reviews', 'wp-travel' ); ?>)</span>
 					<?php endif; ?>
 					<div class="entry-meta">
 						<div class="category-list-items">

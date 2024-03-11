@@ -909,12 +909,14 @@ function wptravel_publish_metabox() {
 			<?php
 			$status    = wptravel_get_booking_status();
 			$label_key = get_post_meta( $post->ID, 'wp_travel_booking_status', true );
-			?>
 
+			?>
+			
 			<label for="wp-travel-post-id"><?php esc_html_e( 'Booking Status', 'wp-travel' ); ?></label>
 			<select id="wp_travel_booking_status" name="wp_travel_booking_status" >
-			<?php foreach ( $status as $value => $st ) : ?>
-				<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $value, $label_key ); ?>>
+			<?php foreach ( $status as $value => $st ) :?>
+				
+				<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $st['text'], $label_key ); ?>>
 					<?php echo esc_html( $status[ $value ]['text'] ); ?>
 				</option>
 			<?php endforeach; ?>

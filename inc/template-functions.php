@@ -694,7 +694,7 @@ function wptravel_group_size( $attr ) {
 	$strings                         = WpTravel_Helpers_Strings::get();
 	// Strings.
 	$group_size_text = isset( $strings['group_size'] ) ? $strings['group_size'] : __( 'Group size', 'wp-travel' );
-	$pax_text        = isset( $strings['bookings']['pax'] ) ? $strings['bookings']['pax'] : __( 'Pax', 'wp-travel' );
+	$pax_text        = isset( $strings['bookings']['pax'] ) ? $strings['bookings']['pax'] : __( ' Pax', 'wp-travel' );
 	// Empty string
 	$empty_group_size_text = isset( $strings['empty_results']['group_size'] ) ? $strings['empty_results']['group_size'] : __( 'No Size Limit', 'wp-travel' );
 	// get trip_Id from user
@@ -705,7 +705,7 @@ function wptravel_group_size( $attr ) {
 										<strong class="title">' . esc_html( $group_size_text ) . '</strong>
 									</div>
 									<div class="travel-info">
-										<span class="value">' . apply_filters( 'wp_travel_frontend_group_sized_show_min_max_in', ( ( (int) $group_size && $group_size < 999 ) ? ( sprintf( apply_filters( 'wp_travel_template_group_size_text', __( '%1$d %2$s', 'wp-travel' ) ), esc_html( $group_size ), esc_html( ( $pax_text ) ) ) ) : ( esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_group_size_text ) ) ) ), $trip_id ) .
+										<span class="value">' . apply_filters( 'wp_travel_frontend_group_sized_show_min_max_in', ( ( (int) $group_size && $group_size < 999 ) ?  apply_filters( 'wp_travel_template_group_size_text', esc_html( $group_size ). esc_html( $pax_text ) ) : ( esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_group_size_text ) ) ) ), $trip_id ) .
 										'</span>
 									</div>' ) : '<div style=" display:none; " ></div>' );
 	return $group_size_data;
@@ -734,7 +734,7 @@ function wptravel_reviews( $attr ) {
 							<strong class="title">' . esc_html( $reviews_text ) . '</strong>
 						</div>
 						<div class="travel-info">
-							<span class="value"> <a href="javascript:void(0)" class="wp-travel-count-info">' . ( sprintf( _n( '%s Review', '%s Reviews', $count, 'wp-travel' ), esc_html( $count ) ) ) .
+							<span class="value"> <a href="javascript:void(0)" class="wp-travel-count-info">' .esc_html( $count ) . __( ' Review', 'wp-travel' ).
 							'</a></span>
 						</div> ' );
 	return $review_data;
@@ -776,6 +776,8 @@ function wptravel_single_excerpt( $trip_id ) {
 	$trip_type_text  = isset( $strings['trip_type'] ) ? $strings['trip_type'] : __( 'Trip Type', 'wp-travel' );
 	$activities_text = isset( $strings['activities'] ) ? $strings['activities'] : __( 'Activities', 'wp-travel' );
 	$group_size_text = isset( $strings['group_size'] ) ? $strings['group_size'] : __( 'Group size', 'wp-travel' );
+	$min_pax_text        = isset( $strings['bookings']['min_pax'] ) ? $strings['bookings']['min_pax'] : __( ' Min', 'wp-travel' );
+	$max_pax_text        = isset( $strings['bookings']['max_pax'] ) ? $strings['bookings']['max_pax'] : __( ' Max', 'wp-travel' );
 	$pax_text        = isset( $strings['bookings']['pax'] ) ? $strings['bookings']['pax'] : __( 'Pax', 'wp-travel' );
 	$reviews_text    = isset( $strings['reviews'] ) ? $strings['reviews'] : __( 'Reviews', 'wp-travel' );
 
@@ -807,7 +809,9 @@ function wptravel_single_excerpt( $trip_id ) {
 				$trip_types_list                 = $wp_travel_itinerary->get_trip_types_list();
 				$activity_list                   = $wp_travel_itinerary->get_activities_list();
 				$wptravel_enable_group_size_text = apply_filters( 'wptravel_show_group_size_text_single_itinerary', true );
-				$group_size                      = wptravel_get_group_size( $trip_id );
+				$min_group_size                      = wptravel_get_group_size( $trip_id, 'min_pax' );
+				$max_group_size                      = wptravel_get_group_size( $trip_id, 'max_pax' );
+				// $group_size                      = wptravel_get_group_size( $trip_id );
 				$count                           = (int) get_comments_number();
 
 				/**
@@ -838,7 +842,9 @@ function wptravel_single_excerpt( $trip_id ) {
 											<strong class="title">' . esc_html( $group_size_text ) . '</strong>
 										</div>
 										<div class="travel-info">
-											<span class="value">' . apply_filters( 'wp_travel_frontend_group_sized_show_min_max', ( ( (int) $group_size && $group_size < 999 ) ? ( sprintf( apply_filters( 'wp_travel_template_group_size_text', __( '%1$d %2$s', 'wp-travel' ) ), esc_html( $group_size ), esc_html( ( $pax_text ) ) ) ) : ( esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_group_size_text ) ) ) ), $trip_id ) .
+											<span class="value minpax">' . apply_filters( 'wp_travel_frontend_group_sized_show_min_max', ( ( (int) $min_group_size && $min_group_size < 999 ) ? apply_filters( 'wp_travel_template_group_size_text', esc_html( $min_group_size ). ' ' .esc_html( $min_pax_text ) ) : ( esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_group_size_text ) ) ) ), $trip_id ) .
+											'</span> <span class="separator"> - </span> 
+											<span class="value maxpax">' . apply_filters( 'wp_travel_frontend_group_sized_show_min_max', ( ( (int) $max_group_size && $max_group_size < 999 ) ?  apply_filters( 'wp_travel_template_group_size_text', esc_html( $max_group_size ). ' ' .esc_html( $max_pax_text  ) )  : ( esc_html( apply_filters( 'wp_travel_default_no_trip_type_text', $empty_group_size_text ) ) ) ), $trip_id ) .
 											'</span>
 										</div>
 									</li>', $trip_id ) ) : '' ),
@@ -847,7 +853,7 @@ function wptravel_single_excerpt( $trip_id ) {
 										<strong class="title">' . esc_html( $reviews_text ) . '</strong>
 									</div>
 									<div class="travel-info">
-										<span class="value"> <a href="javascript:void(0)" class="wp-travel-count-info">' . ( sprintf( _n( '%s Review', '%s Reviews', $count, 'wp-travel' ), esc_html( $count ) ) ) .
+										<span class="value"> <a href="javascript:void(0)" class="wp-travel-count-info">' . esc_html( $count ) . __( ' Reviews', 'wp-travel' ) .
 										'</a></span>
 									</div>
 								</li>', $trip_id ),
@@ -1101,7 +1107,7 @@ function wptravel_frontend_trip_facts( $trip_id ) {
 		}
 	}
 
-	$wp_travel_trip_facts = $new_trip_facts;
+	// $wp_travel_trip_facts = $new_trip_facts; // temporary comment for testing wpml compatibility
 	if ( is_array( $wp_travel_trip_facts ) && count( $wp_travel_trip_facts ) > 0 ) {
 		?>
 		<!-- TRIP FACTS -->
@@ -1881,7 +1887,7 @@ function wptravel_booking_message() {
  * @param  int $trip_id ID of current trip post.
  * @return String.
  */
-function wptravel_get_group_size( $trip_id = null ) {
+function wptravel_get_group_size( $trip_id = null, $pax_type = '' ) {
 	if ( class_exists( 'WpTravel_Helpers_Strings' ) ) {
 		$strings = WpTravel_Helpers_Strings::get();
 	}
@@ -1892,11 +1898,12 @@ function wptravel_get_group_size( $trip_id = null ) {
 		$wp_travel_itinerary = new WP_Travel_Itinerary( $post );
 	}
 
-	$group_size = $wp_travel_itinerary->get_group_size();
+	$group_size = $wp_travel_itinerary->get_group_size( $pax_type );
 
 
 	if ( $group_size ) {
-		return sprintf( apply_filters( 'wp_travel_template_group_size_text', __( '%d ' . ( $strings['bookings']['pax'] ? $strings['bookings']['pax'] : 'Pax' ), 'wp-travel' ) ), $group_size );
+		// return sprintf( apply_filters( 'wp_travel_template_group_size_text',  $group_size .' '. ( $strings['bookings']['pax'] ? $strings['bookings']['pax'] : __('Pax', 'wp-travel' ) ) ) ) ;
+		return apply_filters( 'wp_travel_template_group_size_text',  $group_size ) ;
 	}
 
 	return apply_filters( 'wp_travel_default_group_size_text', esc_html__( 'No Size Limit', 'wp-travel' ) );
@@ -2095,7 +2102,7 @@ function wptravel_archive_toolbar() {
 			}
 			?>
 			<div class="wp-travel-itinerary-items">
-				<ul class="wp-travel-itinerary-list itinerary-<?php esc_attr_e( $col_per_row, 'wp-travel' ); ?>-per-row grid-view">
+				<ul class="wp-travel-itinerary-list itinerary-<?php echo esc_html( $col_per_row ); ?>-per-row grid-view">
 			<?php
 		endif;
 	endif;
@@ -2560,3 +2567,4 @@ function wptravel_single_itinerary_trip_content() {
 		wptravel_get_template_part( 'content', 'single-itineraries' );
 	}
 }
+

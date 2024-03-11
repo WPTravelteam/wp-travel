@@ -215,8 +215,8 @@ class WP_Travel_Lib_Cart {
 				if ( $inventory_enabled && $available_pax ) {
 
 					if ( $pax > $available_pax ) {
-
-						WPTravel()->notices->add( sprintf( __( 'Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for this trip. Available pax is set for booking.', 'wp-travel' ), $pax, $available_pax ), 'error' );
+						
+						WPTravel()->notices->add( __( 'Requested pax size of ', 'wp-travel' ) .$pax. __( 'exceeds the available pax limit ' , 'wp-travel' ) .$available_pax. __( 'for this trip. Available pax is set for booking.', 'wp-travel' ), 'error' );
 
 						$pax = $available_pax;
 
@@ -367,7 +367,7 @@ class WP_Travel_Lib_Cart {
 				}
 				$cart_pax = array_sum( $pax ); // Sum of pax of all pricing category.
 				if ( $max_available && $cart_pax > $max_available ) {
-					WPTravel()->notices->add( sprintf( __( 'Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for this trip. Available pax is set for booking.', 'wp-travel' ), $pax, $max_available ), 'error' );
+					WPTravel()->notices->add( __( 'Requested pax size of ', 'wp-travel' ) .$pax. __( 'exceeds the available pax limit ' , 'wp-travel' ) .$max_available. __( ' for this trip. Available pax is set for booking.', 'wp-travel' ), 'error' );
 				}
 			} else {
 				/**
@@ -411,7 +411,7 @@ class WP_Travel_Lib_Cart {
 				}
 
 				if ( $max_available && $pax > $max_available ) {
-					WPTravel()->notices->add( sprintf( __( 'Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for this trip. Available pax is set for booking.', 'wp-travel' ), $pax, $max_available ), 'error' );
+					WPTravel()->notices->add( __( 'Requested pax size of ', 'wp-travel' ) .$pax. __( 'exceeds the available pax limit ' , 'wp-travel' ) .$max_available. __( ' for this trip. Available pax is set for booking.', 'wp-travel' ), 'error' );
 				}
 			}
 

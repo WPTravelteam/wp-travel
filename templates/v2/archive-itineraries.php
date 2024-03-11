@@ -14,45 +14,137 @@
  * @package     WP_Travel
  * @since       1.0.0
  */
-$template      = get_option( 'template' );
-$current_theme = wp_get_theme();
-$sanitized_get = WP_Travel::get_sanitize_request( 'get', true );
-$view_mode     = wptravel_get_archive_view_mode( $sanitized_get );
-get_header( 'itinerary' );
+
+if( !wp_is_block_theme() ){
+	$template      = get_option( 'template' );
+	$current_theme = wp_get_theme();
+	$sanitized_get = WP_Travel::get_sanitize_request( 'get', true );
+	$view_mode     = wptravel_get_archive_view_mode( $sanitized_get );
+	get_header( 'itinerary' );
 
 
-if ( 'Divi' === $template ) {
+	if ( 'Divi' === $template ) {
+		?>
+		<div class="container clearfix">
+		<?php
+	}
+
+
+	if ( 'twentyseventeen' === $current_theme->get( 'TextDomain' ) ) {
+		?> <div class="wrap"><?php
+	}
+	do_action( 'wp_travel_before_main_content' );
 	?>
-	<div class="container clearfix">
-	<?php
-}
-
-
-if ( 'twentyseventeen' === $current_theme->get( 'TextDomain' ) ) {
-	?> <div class="wrap"><?php
-}
-do_action( 'wp_travel_before_main_content' );
-?>
-<div id="wptravel-archive-wrapper" class="wptravel-archive-wrapper <?php echo esc_attr( 'grid' === $view_mode ? 'grid-view' : '' ); ?> ">
-	<?php
-	if ( have_posts() ) :
-		while ( have_posts() ) :
-			the_post();
-			wptravel_get_template_part( 'v2/content', 'archive-itineraries' );
-		endwhile; // end of the loop.
-	else :
-		wptravel_get_template_part( 'v2/content', 'archive-itineraries-none' );
-	endif;
-	?>
-</div>
-<?php
-do_action( 'wp_travel_after_main_content' );
-do_action( 'wp_travel_archive_listing_sidebar' );
-
-if ( 'twentyseventeen' === $current_theme->get( 'TextDomain' ) || 'Divi' === $template ) {
-	?>
+	<div id="wptravel-archive-wrapper" class="wptravel-archive-wrapper <?php echo esc_attr( 'grid' === $view_mode ? 'grid-view' : '' ); ?> ">
+		<?php
+		if ( have_posts() ) :
+			while ( have_posts() ) :
+				the_post();
+				wptravel_get_template_part( 'v2/content', 'archive-itineraries' );
+			endwhile; // end of the loop.
+		else :
+			wptravel_get_template_part( 'v2/content', 'archive-itineraries-none' );
+		endif;
+		?>
 	</div>
 	<?php
-}
+	do_action( 'wp_travel_after_main_content' );
+	do_action( 'wp_travel_archive_listing_sidebar' );
 
-get_footer( 'itinerary' );
+	if ( 'twentyseventeen' === $current_theme->get( 'TextDomain' ) || 'Divi' === $template ) {
+		?>
+		</div>
+		<?php
+	}
+
+	get_footer( 'itinerary' );
+
+}else{
+	$sanitized_get = WP_Travel::get_sanitize_request( 'get', true );
+	$view_mode     = wptravel_get_archive_view_mode( $sanitized_get );
+	?>
+
+	<!DOCTYPE html>
+	<html <?php language_attributes(); ?>>
+		<head>
+			<meta charset="<?php bloginfo('charset'); ?>">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<?php
+			$title = get_the_title();
+			$site_name = get_bloginfo('name');
+			$page_title = $title . ' - ' . $site_name;
+			?>
+			<title><?php echo $page_title; ?></title>
+			<?php
+			/*
+			You have to run the do_blocks() between the <head></head> tags in order
+			for WordPress to load the corresponding CSS.
+			*/
+			ob_start();
+			block_header_area();
+			$str = ob_get_clean();
+			$block_header = do_blocks($str);
+			// Spacer block.
+			$str = '<div 
+						style="height:32px" 
+						aria-hidden="true" 
+						class="wp-block-spacer"
+					></div>';
+			$block_spacer = do_blocks($str);
+			// Content block.
+			$block_content = do_blocks(
+				'<!-- wp:group {"layout":{"type":"constrained"}} -->
+				<div class="wp-block-group">
+				<!-- wp:post-content /-->
+				</div>
+				<!-- /wp:group -->'
+			);
+			ob_start();
+			block_footer_area();
+			$str = ob_get_clean();
+			$block_footer = do_blocks($str);
+			wp_head();
+			?>
+		</head>
+		<body <?php body_class( 'block-theme-active' ); ?>>
+			<?php wp_body_open(); ?>
+			<div class="wp-site-blocks">
+				<header class="wp-block-template-part">
+					<?php echo $block_header; ?>
+				</header>
+				<main class="wptravel-content-wrapper is-layout-constrained" style="display:flex; padding: 60px 20px 80px 20px;">
+				<div class="wp-block-group archive alignwide">
+				<?php
+					do_action( 'wp_travel_before_main_content' );
+					?>
+					
+					<div id="wptravel-archive-wrapper" class="wptravel-archive-wrapper <?php echo esc_attr( 'grid' === $view_mode ? 'grid-view' : '' ); ?> ">
+						<?php
+						if ( have_posts() ) :
+							while ( have_posts() ) :
+								the_post();
+								wptravel_get_template_part( 'v2/content', 'archive-itineraries' );
+							endwhile; // end of the loop.
+						else :
+							wptravel_get_template_part( 'v2/content', 'archive-itineraries-none' );
+						endif;
+						do_action( 'wp_travel_after_main_content' );
+						?>
+						
+					</div>
+					<?php
+					
+					do_action( 'wp_travel_archive_listing_sidebar' ); 
+					
+				?>
+				</div>
+				</main>
+				<footer class="wp-block-template-part site-footer">
+					<?php echo $block_footer; ?>
+				</footer>
+			</div>
+			<?php wp_footer(); ?>
+		</body>
+	</html>
+<?php 
+}

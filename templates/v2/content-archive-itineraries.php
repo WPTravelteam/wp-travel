@@ -96,7 +96,7 @@ $trp_title = apply_filters( 'wp_travel_trip_title_enable_disable', true );
 									<?php endif; ?>
 								<?php
 							else :
-								esc_html_e( apply_filters( 'wp_travel_archives_page_trip_location', 'N/A', $trip_id), 'wp-travel' );
+								echo apply_filters( 'wp_travel_archives_page_trip_location', __( 'N/A', 'wp-travel' ), $trip_id);
 							endif;
 							?>
 						</span>
@@ -130,12 +130,12 @@ $trp_title = apply_filters( 'wp_travel_trip_title_enable_disable', true );
 								<?php wptravel_trip_rating( $trip_id ); ?>
 								<?php $count = (int) wptravel_get_review_count(); ?>
 							</div>
-							<span class="wp-travel-review-text"> (<?php printf( _n( '%d Review', '%d Reviews', $count, 'wp-travel' ), $count ); ?>)</span>
+							<span class="wp-travel-review-text"> (<?php echo esc_html( $count ) . __( ' Reviews', 'wp-travel' ); ?>)</span>
 						<?php endif; ?>
 					</div>
 				</div>
 
-				<a class="wp-block-button__link explore-btn" href="<?php the_permalink(); ?>"><span><?php esc_html_e( apply_filters( 'wp_travel_archives_page_trip_explore_btn', 'Explore', $trip_id ), 'wp-travel' ); ?></span></a>
+				<a class="wp-block-button__link explore-btn" href="<?php the_permalink(); ?>"><span><?php echo apply_filters( 'wp_travel_archives_page_trip_explore_btn', __( 'Explore', 'wp-travel' ), $trip_id ); ?></span></a>
 			</div>
 		</div>
 	</div>

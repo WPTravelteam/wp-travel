@@ -383,7 +383,7 @@ class WpTravel_Localize_Admin {
             ),
             'license' => array(
                 'license' => __('License', 'wp-travel'),
-                'wp_travel_pro' => __('', 'wp-travel'),
+                'wp_travel_pro' => __('WP Travel Pro', 'wp-travel'),
             ),
 
             'facts' => array(
@@ -461,6 +461,8 @@ class WpTravel_Localize_Admin {
             ),
             'tabs' => array(
                 'tabs_settings' => __('Tabs Settings', 'wp-travel'),
+                'force_enable_tabs' => __( 'Force enable on all trips', 'wp-travel' ),
+                'force_enable_tabs_tooltip' => __( 'This option will enable global tabs on all trips.', 'wp-travel' ),
                 'no_custom_itineraries_tab_found' => __('No custom itineraries tab found.', 'wp-travel'),
                 'add_new_tab' => __('Add New Tab', 'wp-travel'),
                 'tab_label' => __('Tab Label', 'wp-travel'),

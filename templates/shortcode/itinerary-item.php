@@ -57,10 +57,10 @@ $enable_sale = WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => $po
 				<div class="entry-meta">
 					<?php if ( wptravel_tab_show_in_menu( 'reviews' ) ) : ?>
 						<?php $average_rating = wptravel_get_average_rating( $post_id ); ?>
-						<div class="wp-travel-average-review" title="<?php printf( esc_attr__( 'Rated %s out of 5', 'wp-travel' ), $average_rating ); ?>">
+						<div class="wp-travel-average-review" title="<?php echo __( 'Rated ', 'wp-travel' ).esc_html($rating).__( ' out of 5', 'wp-travel' ); ?>">
 
 							<span style="width:<?php echo esc_attr( ( $average_rating / 5 ) * 100 ); ?>%">
-								<strong itemprop="ratingValue" class="rating"><?php echo esc_html( $average_rating ); ?></strong> <?php printf( esc_html__( 'out of %1$s5%2$s', 'wp-travel' ), '<span itemprop="bestRating">', '</span>' ); ?>
+								<strong itemprop="ratingValue" class="rating"><?php echo esc_html( $average_rating ); ?></strong> <?php echo esc_html__( 'out of ', 'wp-travel' ). '<span itemprop="bestRating">'.'</span>'; ?>
 							</span>
 						</div>
 						<?php $count = (int) wptravel_get_review_count(); ?>

@@ -122,6 +122,7 @@ function wptravel_settings_default_fields() {
 
 		// Tabs Settings Fields.
 		'global_tab_settings'                     => wptravel_get_default_trip_tabs( true ), // @since 1.1.1 Global tabs settings.
+		'force_enable_tabs'          			=> 'no',
 
 		// Payment Settings Fields.
 		'partial_payment'                         => 'no',
@@ -164,6 +165,8 @@ function wptravel_settings_default_fields() {
 
 		// @since 5.1.1.
 		'hide_plugin_archive_page_title'          => 'no',
+
+		
 
 		// @since 6.2.0.
 		'disable_admin_review'                    => 'no',
@@ -1099,6 +1102,7 @@ function wptravel_get_frontend_tabs( $show_in_menu_query = false, $frontend_hide
 
 	$settings                  = wptravel_get_settings();
 	$enable_one_page_booking = isset( $settings['enable_one_page_booking'] ) ? $settings['enable_one_page_booking'] : false;
+	$force_enable = isset( $settings['force_enable_tabs'] ) ? $settings['force_enable_tabs'] : false;
 	$wp_travel_use_global_tabs = get_post_meta( $trip_id, 'wp_travel_use_global_tabs', true );
 	if ( 'yes' === $wp_travel_use_global_tabs ) {
 		$custom_tab_enabled = apply_filters( 'wp_travel_is_custom_tabs_support_enabled', false );
@@ -1107,6 +1111,12 @@ function wptravel_get_frontend_tabs( $show_in_menu_query = false, $frontend_hide
 		$enable_custom_itinerary_tabs = apply_filters( 'wp_travel_custom_itinerary_tabs', false );
 		$wp_travel_tabs               = wptravel_get_admin_trip_tabs( $trip_id, $enable_custom_itinerary_tabs, $frontend_hide_content );
 	}
+
+	if ( 'yes' == $force_enable ) {
+		$custom_tab_enabled = apply_filters( 'wp_travel_is_custom_tabs_support_enabled', false );
+		$wp_travel_tabs     = wptravel_get_global_tabs( $settings, $custom_tab_enabled );
+	}
+
 	$hook_for_double_enable = apply_filters( 'wp_travel_enable_double_booking_button', true );
 	// Adding Content to the tabs.
 	$return_tabs = array();
@@ -2242,7 +2252,7 @@ function wptravel_get_date_diff( $start_date, $end_date ) {
 		$strings = WpTravel_Helpers_Strings::get();
 	}
 	$days = isset( $strings['days'] ) ? $strings['days'] : __('Days', 'wp-travel' );
-	return sprintf( __( '%s ' . $days, 'wp-travel' ), $diff_in_days );
+	return $days .' '. $diff_in_days;
 
 }
 
@@ -2823,7 +2833,7 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 										/**
 										 * Translators: %s placeholder is used to show the title of the trip.
 										 */
-										printf( esc_html__( 'Travelers info [ %s ]', 'wp-travel' ), get_the_title( $trip_id ) );
+										printf( __( 'Travelers info [ ', 'wp-travel' ). get_the_title( $trip_id ). ' ]' ) ;
 										?>
 									</h3>
 									<div class="row">
@@ -2832,7 +2842,7 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 											foreach ( $first_names as $key => $first_name ) :
 												?>
 												<div class="col-md-6">
-												<h3 class="my-order-single-title"><?php printf( esc_html__( 'Traveler %d :', 'wp-travel' ), $key + 1 ); ?></h3>
+												<h3 class="my-order-single-title"><?php printf( __( 'Traveler ', 'wp-travel' ). $key + 1 . ' :' ); ?></h3>
 													<?php
 													$traveller_fields = isset( $checkout_fields['traveller_fields'] ) ? $checkout_fields['traveller_fields'] : array();
 													$traveller_fields = wptravel_sort_form_fields( $traveller_fields );
@@ -2921,10 +2931,10 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 						else :
 							?>
 						<div class="my-order-single-traveller-info">
-							<h3 class="my-order-single-title"><?php esc_html_e( sprintf( 'Travelers info [ %s ]', get_the_title( $trip_id ) ), 'wp-travel' ); ?></h3>
+							<h3 class="my-order-single-title"><?php echo __( 'Travelers info [ ', 'wp-travel' ) . get_the_title( $trip_id ) . ' ]'; ?></h3>
 							<div class="row">
 								<div class="col-md-6">
-									<h3 class="my-order-single-title"><?php esc_html_e( sprintf( 'Lead Traveler :' ), 'wp-travel' ); ?></h3>
+									<h3 class="my-order-single-title"><?php echo __( 'Lead Traveler :', 'wp-travel' ); ?></h3>
 									<div class="my-order-single-field clearfix">
 										<span class="my-order-head"><?php esc_html_e( 'Name :', 'wp-travel' ); ?></span>
 										<span class="my-order-tail"><?php echo esc_html( $fname . ' ' . $lname ); ?></span>
@@ -3088,7 +3098,7 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 								<?php endif; ?>
 								<?php if ( $details['tax'] && $details['tax'] > 0 ) : ?>
 									<div class="my-order-price-breakdown-tax-due">
-										<span class="my-order-head"><?php esc_html_e( ! empty( $strings ) ? $strings['bookings']['price_tax'] : 'Tax', 'wp-travel' ); ?> </span>
+										<span class="my-order-head"><?php echo ! empty( $strings ) ? $strings['bookings']['price_tax'] : __(  'Tax', 'wp-travel' ); ?> </span>
 										<span class="my-order-tail my-order-right"><?php echo wptravel_get_formated_price_currency( $details['tax'], false, '', $booking_id ); //@phpcs:ignore ?></span>
 									</div>
 								<?php endif; ?>
@@ -3138,13 +3148,13 @@ function wptravel_view_payment_details_table( $booking_id ) {
 			<?php
 		}
 		?>
-		<h3><?php esc_html_e( $payment_detail_txt, 'wp-travel' ); ?></h3>
+		<h3><?php echo esc_html( $payment_detail_txt ); ?></h3>
 		<table class="my-order-payment-details">
 			<tr>
-				<th><?php esc_html_e( $date_txt, 'wp-travel' ); ?></th>
-				<th><?php esc_html_e( $payment_id_txt, 'wp-travel' ); ?></th>
-				<th><?php esc_html_e( $payment_method_txt, 'wp-travel' ); ?></th>
-				<th><?php esc_html_e( $payment_amount_txt, 'wp-travel' ); ?></th>
+				<th><?php echo esc_html( $date_txt ); ?></th>
+				<th><?php echo esc_html( $payment_id_txt ); ?></th>
+				<th><?php echo esc_html( $payment_method_txt ); ?></th>
+				<th><?php echo esc_html( $payment_amount_txt ); ?></th>
 			</tr>
 			<?php
 			foreach ( $payment_data as $payment_args ) {

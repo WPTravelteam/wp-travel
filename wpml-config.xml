@@ -37,6 +37,22 @@
 					<key name="label"/>
 				</key>
 			</key>
+			<key name="wp_travel_trip_facts_settings">
+				<key>
+					<key name="name"/>
+					<key name="options">
+						<key name="option1"/>
+						<key name="option2"/>
+						<key name="option3"/>
+						<key name="option4"/>
+						<key name="option5"/>
+						<key name="option6"/>
+						<key name="option7"/>
+						<key name="option8"/>
+						<key name="option9"/>
+					</key>
+				</key>
+			</key>
 			<key name="wp_travel_gdpr_message"/>
 
 			<key name="booking_admin_template_settings">
