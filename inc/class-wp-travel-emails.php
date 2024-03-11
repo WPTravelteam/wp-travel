@@ -45,7 +45,7 @@ class WP_Travel_Emails {
 
 		$styles = '<style type="text/css">
 		body{
-			 background: #fcfcfc ;
+			 background: #000;
 			 color: #5d5d5d;
 			 margin: 0;
 			 padding: 0;
@@ -79,6 +79,7 @@ class WP_Travel_Emails {
 			margin: 0;
 			padding: 20px 25px;
 		}
+
 		.wp-travel-content-top p{
 			line-height: 1.55;
 			font-size: 14px;
@@ -274,7 +275,7 @@ class WP_Travel_Emails {
 				/**
 				 * Translators: %s Sent to Email ID.
 				 */
-				printf( esc_html__( 'TO %s', 'wp-travel' ), strtoupper( $sent_to ) );
+				printf( esc_html__( 'TO ', 'wp-travel' ).strtoupper( $sent_to ) );
 				?>
 			</title>
 			<?php echo $this->email_styles(); //@phpcs:ignore ?>

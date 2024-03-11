@@ -229,7 +229,7 @@ class WP_Travel_Cart {
 
 					if ( $pax > $available_pax ) {
 
-						WPTravel()->notices->add( sprintf( __( 'Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for this trip. Available pax is set for booking.', 'wp-travel' ), $pax, $available_pax ), 'error' );
+						WPTravel()->notices->add( __( 'Requested pax size of ', 'wp-travel' ) .$pax. __(' exceeds the available pax limit ( ', 'wp-travel' ) .$available_pax. __( ' ) for this trip. Available pax is set for booking.', 'wp-travel' ), 'error' );
 
 						$pax = $available_pax;
 
@@ -446,7 +446,7 @@ class WP_Travel_Cart {
 				$cart_pax = array_sum( $pax ); // Sum of pax of all pricing category.
 
 				if ( $max_available && $cart_pax > $max_available ) {
-					WPTravel()->notices->add( sprintf( __( 'Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for this trip. Available pax is set for booking.', 'wp-travel' ), $cart_pax, $max_available ), 'error' );
+					WPTravel()->notices->add( __( 'Requested pax size of ', 'wp-travel' ) .$cart_pax. __(' exceeds the available pax limit ( ', 'wp-travel' ) .$max_available. __( ' ) for this trip. Available pax is set for booking.', 'wp-travel' ), 'error' );
 				}
 			} else {
 				/**
@@ -495,7 +495,7 @@ class WP_Travel_Cart {
 				}
 
 				if ( $max_available && $pax > $max_available ) {
-					WPTravel()->notices->add( sprintf( __( 'Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for this trip. Available pax is set for booking.', 'wp-travel' ), $pax, $max_available ), 'error' );
+					WPTravel()->notices->add( __( 'Requested pax size of ', 'wp-travel' ) .$pax. __(' exceeds the available pax limit ( ', 'wp-travel' ) .$max_available. __( ' ) for this trip. Available pax is set for booking.', 'wp-travel' ), 'error' );
 				}
 			}
 
@@ -596,7 +596,7 @@ class WP_Travel_Cart {
 	 */
 	public function cart_empty_message() {
 		$url = get_post_type_archive_link( WP_TRAVEL_POST_TYPE );
-		printf( __( 'Your cart is empty please <a href="%s"> click here </a> to add trips.', 'wp-travel' ), esc_url( $url ) );
+		printf( __( 'Your cart is empty please ', 'wp-travel' ) . '<a href="'.esc_url( $url ).'"> click here </a>' . __( ' to add trips.', 'wp-travel' ) );
 	}
 	/**
 	 * Clear all items in the cart.

@@ -56,12 +56,12 @@ do_action( 'wp_travel_before_content_start' );
 				<?php if ( WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => get_the_ID() ) ) ) : ?>
 
 					<div class="wp-travel-offer">
-						<span><?php esc_html_e( $offers, 'wp-travel' ); ?></span>
+						<span><?php echo esc_html( $offers ); ?></span>
 					</div>
 					<?php endif; ?>
 						<?php if ( $wp_travel_itinerary->has_multiple_images() ) : ?>
 					<div class="wp-travel-view-gallery">
-						<a class="top-view-gallery" href=""><?php esc_html_e( $view_gallerys, 'wp-travel' ); ?></a>
+						<a class="top-view-gallery" href=""><?php echo esc_html( $view_gallerys ); ?></a>
 					</div>
 				<?php endif; ?>
 			</div>

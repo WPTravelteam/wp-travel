@@ -5,11 +5,11 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 6.0.0
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 8.2.0
+Stable tag: 8.3.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-WP Travel is a free WordPress travel & tour agency plugin & travel engine to create customized travel & trekking websites in minutes!
+WP Travel is the Best Travel Booking WordPress Plugin to create travel & trekking websites in minutes without coding!
 
 == Description ==
 
@@ -424,6 +424,22 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
 
+= 8.3.0 =
+Release Date: 11th March 2024
+
+Fixes:
+* Added a code to get the array value instead of array key of payment and booking status array
+* Fixed a double email sending issue when payment status is changed 
+* Fixed the label issue of tab setting from " Custom Tab Title" to " Display"
+* Fixed missing text translation issue 
+
+Enhancements:
+* Added min and max pax to single trip template
+* Added translation support for trip facts
+* Added FSE header and footer support for all WP Travel default templates 
+
+**For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v8-3-0-update-release-note).**
+
 = 8.2.0 =
 Release Date: 22nd February 2024
 
@@ -792,275 +808,6 @@ Release Date:  5th January 2023
 
 Fixes: 
 * Fixed Redirect on Setup Page while Activate Plugins.
-
-= 6.0.0 =
-Release Date:  4th January 2023
-
-Enhancements:
-* Provides compatibility for the Travel Guide feature in WP Travel Pro.
-* Provides compatibility for showing high prices on trips.
-
-Fixes:
-* Fixed Ascending/Descending issue while using oderby trip_date option.
-* For more detail, please refer to our [release note](https://wptravel.io/wp-travel-plugin-version-6-0-0-release-note/)
-
-= 5.3.9 =
-Release Date: 26th December 2022
-
-Fixes:
-* Fixed Cutoff Time issue in Date Listing View.
-
-Enhancements:
-* Added Routing number field in Bank Deposit payment system.
-* Added payment Method and Payment status message in Booking success message while using WP Travel Free only.
-* Modified the code so that Pax can be renamed through function code.
-
-= 5.3.8 =
-Release Date: 5th December 2022
-
-Fixes:
-* Fixed Trip extras not being saved.
-* Fixed issue in Departure Date while adding multiple date.
-* Fixed View System Information text made translation ready.
-
-Enhancement:
-* Added Shortcode `[WP_TRAVEL_ITINERARY_FILTER]` or `[wp_travel_itinerary_filter]` to display Itinerary Filter.
-* Added Shortcode `[WP_TRAVEL_TRIP_CATEGORY_ITEMS taxonomy='itinerary_types' child='yes']` to display only the child Trip Type.
-* Added Shortcode `[WP_TRAVEL_TRIP_CATEGORY_ITEMS taxonomy='itinerary_types' parent='yes']` to display only the parent Trip Type.
-
-= 5.3.7 =
-Release Date: 9th November 2022
-
-Fixes:
-* Fixed CSS layout issue on the Single Trip page while using a Shortcode.
-
-= 5.3.6 =
-Release Date: 9th November 2022
-
-Fixes:
-* Fixed Feature image not deleted when deleting the image from the backend.
-* Fixed Shortcodes not working in Trip Outline Tab.
-* Fixed double booking created with the same detail while clicking Book and Pay button twice in the checkout page.
-
-Enhancement:
-* Added Shortcode `[WP_TRAVEL_TRIP_CATEGORY_ITEMS child='yes']` to display only the child destination.
-* Added Shortcode `[WP_TRAVEL_TRIP_CATEGORY_ITEMS parent='yes']` to display only the parent destination.
-
-Layout Fixes:
-* Fixed Calendar issue in the backend section with WordPress v6.1.
-
-= 5.3.5 =
-Release Date: 18th October 2022
-
-Enhancement:
-* Added Shortcode `[WP_TRAVEL_ITINERARIES order="asc"]`to display the Trips in Ascending order.
-* Added Shortcode `[WP_TRAVEL_ITINERARIES order="desc"]` to display the Trips in Descending order.
-
-Fixes:
-* Removed Dots (.) displaying in mail Footer section.
-* Fixed Empty data not saved in Overview , Itinerary (Trip Outline), and Include/Excludes Tabs.
-* Fixed {booking_departure_date} email tag not working.
-* Fixed Trip duration in search filter widget/Shortcode not working.
-
-Layout Fixes:
-* Fixed save % tag  issue in responsive.
-
-= 5.3.4 =
-Release Date: 27th September 2022
-
-Enhancement:
-* Added Shortcode `[wptravel_trip_type]` to display the Trip Type of trip. 
-* Added Shortcode `[wptravel_activities]` to display the Activity of trip. 
-* Added Shortcode `[wptravel_group_size]` to display the Group Size of trip. 
-* Added Shortcode `[wptravel_reviews]` to display the Review of trip. 
-* Added a hooks for remove `Trip Type` , `Activity` , `Group Size` and `Review` in a single trip page.
-
-= 5.3.3 =
-Release Date: 27th September 2022 
-
-Fixes:
-* Fixed Price not deleted when deleting pricing category
-
-= 5.3.2 =
-Release Date:  1st September 2022
-
-Fixes:
-* Fixed Trip name and trip code not displaying in dashboard while booking directly
-* Fixed Payment detail not showing in booking while paid through Bank deposit
-* Fixed save % tag not displayed in List view in v1 layout
-* Fixed duplicate price issue when publishing the trip directly
-* Fixed general issue in trip facts
-* Fixed inventory issue in multiple checkout mode 
-* Fixed magnific popup issue for payment receipt 
-
-= 5.3.1 =
-Release Date:  9th August 2022
-
-Enhancement:
-* Added all trips booking list for admin in WP Travel User Dashboard.
-* Added all payment information under Payments tabs in WP Travel User Dashboard.
-
-Tweaks:
-* Hooks added `wptravel_send_booking_email_to_client`.
-* Hooks modified `wp_travel_payment_email_tags` added new `booking id` param in the hook.
-
-Fixes:
-* Fixed WPML Compatibility with WP Travel Checkout Page. Now Mini cart section edit, and remove trip are working along with all payment methods.
-* Fixed Trip Enquiry showing an alert message.
-* Fixed Trip Enquiry data not showing on admin enquiry detail page.
-* Fixed WP Travel User Dashboard not showing booking when `enable registration` on booking is `enabled`.
-* Fixed Voucher Submit from WP Travel User Dashboard not submitting the voucher issue. 
-
-= 5.3.0 =
-Release Date: 28th July 2022
-
-Enhancement:
-* Added Shortcode `WP_TRAVEL_TRIP_CATEGORY_ITEMS` to display the trips under selected terms.
-
-Fixes:
-* Fixed License tab not working in case of multisite network activate.
-
-Layout Fixes:
-* Fixed Trip archive page pagination style in grid view.
-
-= 5.2.9 =
-Release Date: 21st July 2022
-
-Tweaks:
-* Removed Canonical page URL like `view_mode=grid` in trip archive page.
-* Added DOM event before and after adding the trip in a cart and also removing trip from a cart.
-* Code optimized and cleanup.
-
-Deprecated:
-* Functions `wptravel_booking_default_princing_list_content` and `wptravel_booking_fixed_departure_list_content` have been deprecated.
-
-Layout Fixes:
-* Archive and single trip page wishlist icon CSS removed from WP Travel.
-* Wishlist icon fixed when using shortcodes.
-* Multiple currency drop-down in navbar layout fixed.
-
-= 5.2.8 =
-Release Date: 12th July 2022
-
-Fixes:
-* Fixed dropdown date display layout issue in WP Travel pages and sections.
-
-= 5.2.7 =
-Release Date: 7th July 2022
-
-Tweaks:
-* Hide Nights text if there is no nights.
-* Added trigger event `selectedTripDate` on calendar date click.
-* Display multiple fixed departure dates.
-
-Fixes:
-* Fixed Sort Pricing and display price accordingly.
-* Fixed 100% coupon code with booking status booked.
-
-= 5.2.6 =
-Release Date: 28th June 2022
-
-Fixes:
-* Fixed not displaying menu icon for WP Travel.
-
-= 5.2.5 =
-Release Date: 21st June 2022
-
-Fixes:
-* Fixed max pax can be selectable more than max pax in case of inventory disabled.
-
-Layout Fixes:
-* Fixed Trip single page mobile tab heading displaying in desktop view.
-
-= 5.2.4 =
-Release Date: 14th June, 2022
-
-Tweaks:
-* WP Travel dates insert data for new and update for existing dates on saving instead of removing all and inserting again.
-* JS script optimization to reduce zip size and WP Travel pages size.
-
-Fixes:
-* WP Travel review schema fixes to support it with rich result test.
-* Fixed WP Travel trip date showing same date even after update while using new filter hook.
-
-Layout Fixes:
-* Fixed Archive page wishlist icon in old and new layout.
-* Fixed Single Trip Page book now button with custom link layout.
-* Fixed Single Trip page booking tab select time layout.
-* Fixed Single Trip page booking tab calendar disabled date layout.
-
-= 5.2.3 =
-Release Date: 25th May, 2022
-
-Tweaks:
-* Changed Gallery image size to `wp_travel_thumbnail` from `thumbnail`.
-* Updated Required WordPress version to `5.9` from `5.4.1` in respective file.
-* Sorted trip types options as per trip title in WP Travel Search Form.
-* Added filter `wptravel_trip_dates` to modify trip dates.
-* Added Option to rename Days and Nights in single trip page.
-
-Fixes:
-* Undefined wp_travel on the front page in case of WP Travel Pro is activated.
-* Fixed Displaying itinerary date under trip outline, even date is deleted.
-* Fixed past date also been able to select when selecting future date for date field type in the field editor option.
-* Fixed unable to select a trip time in case of no trip extras.
-* Fixed appearance of same Trip code when cloning trip.
-* Fixed issue regarding restoration of previous FAQs in case of deletion of FAQ and addition of same question as deleted FAQ.
-* Fixed issue regarding booking when pax is zero while editing through minicart. 
-
-Layout Fixes:
-* Fixed issue related to Wishlist icon on Archive Page in list view, grid view and sidebar widget section.
-* Fixed gallery section layout in Single Trip page.
-* For more detail, please refer to our [release note](https://wptravel.io/wp-travel-plugin--version-5-2-3-release-note/)
-
-= 5.2.2 =
-Release Date: 27th April, 2022
-
-Tweaks:
-* Renamed `Addons settings` to `Modules settings` and added all modules enable/disable options.
-
-Fixes:
-* Fixed conflict with wp rocket on first setup.
-* Fixed Loading issue on trip duration while selecting date 2nd time.
-* Fixed Trip extras not being displayed in case of calendar view with trip duration.
-* Fixed Invalid post type in enquiry shortcode form.
-* Fixed Warning: array_unique() expects parameter 1 to be array in dashboard and booking Page of user dashboard.
-* Fixed Inventory not working for booking only trips in case of all payment addons disabled.
-* Fixed issue related to recurring feature being available if pro is not activated.
-* Fixed issue related to displaying booking details section in dashboard page when logging in using customer login credentials.
-
-Layout Fixes:
-* Fixed Single Trip page trip tabs section gallery issue in mobile screen.
-* Fixed Trip Search responsive in Elementor.
-* Fixed Single Trip Page enquiry popup form checkbox unclickable issue.
-* For more detail, please refer to our [release note](https://wptravel.io/wp-travel-plugin-version-5-2-2-release-note/)
-
-= 5.2.1 =
-Release Date: 30th March, 2022
-
-Fixes:
-* Fixed pricing loading issue in case of trip duration.
-* Fixed search filter not working while enabling load combined scripts.
-
-Layout Fixes:
-* Fixed minor layout issue with trip time in calendar view.
-* Fixed Pax selector not visible in mobile version.
-* Fixed loader layout in mobile version.
-
-= 5.2.0 =
-Release Date: 29th March, 2022
-
-Enhancement:
-* Resolved site load speed issue with multiple currency. Reduced server response time by improving in TTFB speed.
-
-Fixes:
-* Display sold out notice in calendar if one date has been sold out and other dates has been selected.
-* Recurring dates not displaying if trip has multiple dates one with recurring and another with non recurring.
-* Amount conversion not working in checkout page while editing cart with multiple currency.
-* Fixed trip time displaying even when pro is disabled.
-* Fixed total pricing in mini cart when updating trip.
-* Fixed sidebar not displaying in the wp travel search result page.
-* Fixed showing multiple booking with same booking id while booking being logged in  through dashboard.
 
 = Earlier versions =
 For the changelog of earlier versions, please refer to [the changelog on wptravel.io](https://wptravel.io/changelog-wp-travel/).

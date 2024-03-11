@@ -62,7 +62,7 @@ class WT_Admin_status {
 			$memory        = max( $memory, $system_memory );
 		}
 		if ( $memory < 67108864 ) {
-			$memory_text = '<span class="warning"><span class="dashicons dashicons-warning"></span> ' . sprintf( __( '%1$s - For better performance, we recommend setting memory to at least 64MB. See: %2$s', 'wp-travel' ), size_format( $memory ), '<a href="https://codex.wordpress.org/Editing_wp-config.php#Increasing_memory_allocated_to_PHP" target="_blank">' . __( 'Increasing memory allocated to PHP', 'wp-travel' ) . '</a>' ) . '</span>';
+			$memory_text = '<span class="warning"><span class="dashicons dashicons-warning"></span> ' .size_format( $memory ). __( ' - For better performance, we recommend setting memory to at least 64MB. See: ', 'wp-travel' ) .'<a href="https://codex.wordpress.org/Editing_wp-config.php#Increasing_memory_allocated_to_PHP" target="_blank">' . __( 'Increasing memory allocated to PHP', 'wp-travel' ) . '</a>'. '</span>';
 		} else {
 			$memory_text = '<span class="ok">' . size_format( $memory ) . ' </span>';
 		}
@@ -75,7 +75,7 @@ class WT_Admin_status {
 			$php_version = phpversion();
 
 			if ( version_compare( $php_version, '5.6', '<' ) ) {
-				$php_version_text = '<span class="error"><span class="dashicons dashicons-warning"></span> ' . sprintf( __( '%1$s - Recommend  PHP version of 5.6. See: %2$s', 'wp-travel' ), esc_html( $php_version ), '<a href="#" target="_blank">' . __( 'How to update your PHP version', 'wp-travel' ) . '</a>' ) . '</span>';
+				$php_version_text = '<span class="error"><span class="dashicons dashicons-warning"></span> ' .esc_html( $php_version ). __( ' - Recommend  PHP version of 5.6. See: ', 'wp-travel' ) . '<a href="#" target="_blank">' . __( 'How to update your PHP version', 'wp-travel' ) . '</a>'. '</span>';
 			} else {
 				$php_version_text = '<span class="yes">' . esc_html( $php_version ) . '</span>';
 			}
@@ -104,7 +104,7 @@ class WT_Admin_status {
 		if ( ! empty( $this->_db->is_mysql ) && ! stristr( $ver, 'MariaDB' ) ) {
 			$mysql_text = $this->_db->db_version();
 			if ( version_compare( $mysql_version, '5.6', '<' ) ) {
-				$mysql_text .= '<span class="error"><span class="dashicons dashicons-warning"></span> ' . sprintf( __( '%1$s - We recommend a minimum MySQL version of 5.6. See: %2$s', 'wp-travel' ), esc_html( $mysql_version ), '<a href="https://wordpress.org/about/requirements/" target="_blank">' . __( 'WordPress Requirements', 'wp-travel' ) . '</a>' ) . '</span>';
+				$mysql_text .= '<span class="error"><span class="dashicons dashicons-warning"></span> ' .esc_html( $mysql_version ).__( ' - We recommend a minimum MySQL version of 5.6. See: ', 'wp-travel' ).'<a href="https://wordpress.org/about/requirements/" target="_blank">' . __( 'WordPress Requirements', 'wp-travel' ) . '</a>' . '</span>';
 			} else {
 				$mysql_text .= '<span class="yes">' . esc_html( $mysql_version ) . '</span>';
 			}
@@ -182,8 +182,7 @@ class WT_Admin_status {
 				__( 'DOMDocument', 'wp-travel' )        => ( class_exists( 'DOMDocument' ) ) ? $this->yes_text : $this->no_text,
 				__( 'GZip', 'wp-travel' )               => ( is_callable( 'gzopen' ) ) ? $this->yes_text : $this->no_text,
 				__( 'Multibyte String', 'wp-travel' )   => ( extension_loaded( 'mbstring' ) ) ? $this->yes_text : $this->no_text,
-				__( 'Remote Get Status', 'wp-travel' )  => $this->checkRemoteStatus() ? $this->yes_text : $this->no_text,
-				__( '', 'wp-travel' )                   => '',
+				__( 'Remote Get Statusss', 'wp-travel' )  => $this->checkRemoteStatus() ? $this->yes_text : $this->no_text,
 			);
 		}
 	}

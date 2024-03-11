@@ -40,6 +40,8 @@ class WpTravel_Helpers_Booking {
 
 		ob_start();
 		?>
+		<br/>
+		<br/>
 		<h2 class="wp-travel-order-heading"><?php esc_html_e( 'Booking Details', 'wp-travel' ); ?></h2>
 
 		<table class="wp-travel-table-content" cellpadding="0" cellspacing="0" height="100%" width="100%" style="text-align: left;">
@@ -270,7 +272,7 @@ class WpTravel_Helpers_Booking {
 						?>
 						<thead>
 							<tr>
-								<th colspan="6"><?php esc_html_e( 'Trip ' . $indexs . ' : ', 'wp-travel' ); ?> <strong><?php echo esc_html( $title ); ?></strong> / <span class="my-order-pricing"><?php echo esc_html( $pricing_title ); ?></span></th>
+								<th colspan="6"><?php echo esc_html__( 'Trip ', 'wp-travel' ) . $indexs; ?> : <strong><?php echo esc_html( $title ); ?></strong> / <span class="my-order-pricing"><?php echo esc_html( $pricing_title ); ?></span></th>
 							</tr>
 							<?php $indexs++; } } if ( count( $traveler_first_names ) < 2 ) { ?>
 							<tr>
@@ -316,7 +318,7 @@ class WpTravel_Helpers_Booking {
 									?>
 										<thead>
 											<tr>
-												<th colspan="6"><?php esc_html_e( 'Trip ' . $indexs . ' : ', 'wp-travel' ); ?> <strong><?php echo esc_html( $titles ); ?></strong> / <span class="my-order-pricing"><?php echo esc_html( $pricing_titles ); ?></span></th>
+												<th colspan="6"><?php echo esc_html__( 'Trip ', 'wp-travel' ) . $indexs; ?> : <strong><?php echo esc_html( $titles ); ?></strong> / <span class="my-order-pricing"><?php echo esc_html( $pricing_titles ); ?></span></th>
 											</tr>
 											<?php $indexs++;  ?>
 											<tr>

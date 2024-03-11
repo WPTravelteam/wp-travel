@@ -118,7 +118,7 @@ export default () => {
                                         </PanelRow>
 
                                         <PanelRow>
-                                            <label>{_wp_travel.setting_strings.tabs.custom_tab_title}</label>
+                                            <label>{_wp_travel.setting_strings.tabs.display}</label>
                                             <ToggleControl
                                                 checked={tab.show_in_menu == 'yes'}
                                                 onChange={

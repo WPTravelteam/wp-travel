@@ -169,7 +169,7 @@ function wptravel_add_enquiries_data_metaboxes() {
 		$string = WpTravel_Helpers_Strings::get();
 	}
 	$strings = isset( $string['enquiry'] ) ? $string['enquiry'] : __( 'Enquiry', 'wp-travel' );
-	add_meta_box( 'wp-travel-enquiries-info', __( $strings . ' Details <span class="wp-travel-view-enquiries"><a href="edit.php?post_type=itinerary-enquiries&wp_travel_post_id=' . $wp_travel_post_id . '">View All ' . get_the_title( $wp_travel_post_id ) . ' enquiries</a></span>', 'wp-travel' ), 'wptravel_enquiries_info', 'itinerary-enquiries', 'normal', 'default' );
+	add_meta_box( 'wp-travel-enquiries-info', $strings . __(  ' Details <span class="wp-travel-view-enquiries"><a href="edit.php?post_type=itinerary-enquiries&wp_travel_post_id=', 'wp-travel' ) . $wp_travel_post_id . __( '">View All ', 'wp-travel' ) . get_the_title( $wp_travel_post_id ) . __(' enquiries</a></span>', 'wp-travel' ), 'wptravel_enquiries_info', 'itinerary-enquiries', 'normal', 'default' );
 
 }
 
@@ -459,7 +459,7 @@ function wptravel_save_user_enquiry() {
 	// If we reach here, Send Success message !!
 	$trip_name = get_the_title( $post_id );
 	$success   = array(
-		'message' => __( $strings . ' sent successfully !!', 'wp-travel' ),
+		'message' => $strings . __(  ' sent successfully !!', 'wp-travel' ),
 	);
 
 	// Send Success Message.
@@ -491,8 +491,9 @@ function wptravel_enquiry_form_header() {
 	$enquiry = isset( $string['enquiry'] ) ? $string['enquiry'] : apply_filters( 'wp_travel_enquiry_labels', __( 'Enquiry', 'wp-travel' ) ) ;
 	?>
 		<div class="wp-travel-inquiry__form-header">
-			<h3><?php echo esc_html( sprintf( _x( $enquiry .': %s', $strings . ' Form Title', 'wp-travel' ), get_the_title() ) ); ?></h3>
+			<h3><?php echo esc_html( $enquiry ) . ': ' . esc_html( get_the_title() ); ?></h3>
 		</div>
 	<?php
 }
+
 // add_action( 'wp_travel_enquiries_before_form_field', 'wptravel_enquiry_form_header', 20 );

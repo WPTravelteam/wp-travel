@@ -16,6 +16,7 @@ import RDP_Locale from '../_Locale'
 import DatePicker, {registerLocale} from "react-datepicker";
 registerLocale( "DPLocale", RDP_Locale() );
 import generateRRule from "../_GenerateRRule";
+import { addDays } from 'date-fns';
 
 // WP Travel Functions.
 import { objectSum } from '../_wptravelFunctions';
@@ -486,6 +487,9 @@ const CalendarView = ( props ) => {
 		let duration_end_dates = typeof trip_duration != 'undefined' && typeof trip_duration.end_date != 'undefined' && trip_duration.end_date != '' && new Date( trip_duration.end_date ) || '';
 		const finalDates = validateChecking < new Date() ? new Date() : oldDates;
 		params.minDate   = finalDates;
+		// if( tripData.trip_duration.booking_start != '' ){
+		// 	params.minDate   = new Date( tripData.trip_duration.booking_start );
+		// }
 		params.maxDate	 = duration_end_dates;
 		params.startDate = selectedDate;
 		params.endDate   = moment( selectedDate ).add( duration - 1, 'days' ).toDate();
@@ -496,10 +500,27 @@ const CalendarView = ( props ) => {
 			enable_time = dateData.enable_time;
 		}
 	})
+	console.log( __i18n.booking_offset )
+
+	if( __i18n.booking_offset > 0 ){
+		params.minDate   = addDays(new Date(), __i18n.booking_offset );
+	}
+	const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+	var todayDate = new Date();
+	var bookingStart = new Date( tripData.trip_duration.booking_start );
+	var startMonthDay = months[bookingStart.getMonth()]+ ' '+ bookingStart.getDate();
     return <ErrorBoundary>
 		<div className="wp-travel-booking__datepicker-wrapper">
-			{ calendarInline ? <DatePicker inline { ...params }  /> : <DatePicker { ...params }  /> }
-			{ ! selectedDate && showTooltip && <p>{ tooltipText } </p> || null }
+			{
+				todayDate < bookingStart &&
+				<>{__i18n.booking_start_date_info} { startMonthDay }</>
+				||
+				<>
+					{ calendarInline ? <DatePicker inline { ...params }  /> : <DatePicker { ...params }  /> }
+					{ ! selectedDate && showTooltip && <p>{ tooltipText } </p> || null }
+				</>
+			}
+			
 		</div>
 		{/* Pricing and Times are in pricing wrapper */}
 		{ selectedDate && <>

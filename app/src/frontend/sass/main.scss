@@ -57,3 +57,61 @@
 .wc-block-components-checkout-return-to-cart-button{
     display: none !important;
 }
+
+.block-theme-active {
+    .right-plot-inner-wrap .entry-header .entry-title {
+        line-height: 50px;
+    }
+    footer,
+    .wptravel-content-wrapper{
+        margin-top: -24px;
+    }
+
+    .tab-list-content{
+        background-color: #fff;
+    }
+
+    .view-box{
+        .entry-title{
+            line-height: 10px;
+            a{
+                text-decoration: none;
+                font-size: 22px !important;
+            }
+        }
+        a{
+            text-decoration: none;
+        }
+    }
+
+    .archive{
+        .page-title,
+        .taxonomy-description{
+            display: none;
+        }
+        #wp-travel-secondary{
+            background-color: #fff;
+            padding: 30px;
+            // .widget_wp_travel_filter_search_widget .trip-duration-calender .calender-icon{
+            //     top: 33.5px;
+            //     left: 2px;
+            //     line-height: 21.5px;
+            // }
+        }
+        .wp-travel-navigation.wp-paging-navigation {
+            padding: 10px 0;
+            margin-bottom: 0px;
+            text-align: center;
+        }
+        .wp-travel-toolbar {
+            .wp_travel_input_filters {
+                width: 145px;
+                height: 30px;
+            }
+            .wp-travel-filter-button .btn-wp-travel-filter {
+                padding: 2px 20px;
+                cursor: pointer;
+            }
+        }
+    }
+}

@@ -158,7 +158,7 @@ class WP_Travel_Admin_Metaboxes {
 		global $post;
 		// Booking Metabox.
 		$wp_travel_post_id = get_post_meta( $post->ID, 'wp_travel_post_id', true ); // Trip ID.
-		add_meta_box( 'wp-travel-booking-info', __( 'Booking Detail <span class="wp-travel-view-bookings"><a href="edit.php?post_type=itinerary-booking&wp_travel_post_id=' . $wp_travel_post_id . '">View All ' . get_the_title( $wp_travel_post_id ) . ' Bookings</a></span>', 'wp-travel' ), array( $this, 'booking_info' ), 'itinerary-booking', 'normal', 'default' );
+		add_meta_box( 'wp-travel-booking-info', sprintf( 'Booking Detail <span class="wp-travel-view-bookings"><a href="edit.php?post_type=itinerary-booking&wp_travel_post_id=%d">View All %s Bookings</a></span>', $wp_travel_post_id, get_the_title( $wp_travel_post_id ) ), array( $this, 'booking_info' ), 'itinerary-booking', 'normal', 'default' );
 	}
 
 	/**
