@@ -137,13 +137,13 @@ $wptravel_enable_sale                      = WP_Travel_Helpers_Trips::is_sale_en
 		<div class="wti__trip-footer">
 			<div class="wti__trip-footer-meta">
 				<span>
-					<img src="<?php echo plugins_url( '/wp-travel/assets/images/flag.svg' ); ?>" alt=""> 
+					<img src="<?php echo esc_url( plugins_url( '/wp-travel/assets/images/flag.svg' ) ); ?>" alt=""> 
 					<?php printf( '%s', esc_html( $wptravel_group_size ) ); ?>
 				</span>
 				<?php
 				if ( 'yes' === $wptravel_fixed_departure ) {
 					?>
-						<span><img src="<?php echo plugins_url( '/wp-travel/assets/images/hiking.svg' ); ?>" alt="">
+						<span><img src="<?php echo esc_url( plugins_url( '/wp-travel/assets/images/hiking.svg' ) ); ?>" alt="">
 						<?php echo wptravel_get_fixed_departure_date( $wptravel_post_id ); //phpcs:ignore ?>
 						</span>
 						<?php
@@ -151,7 +151,7 @@ $wptravel_enable_sale                      = WP_Travel_Helpers_Trips::is_sale_en
 					$wptravel_trip_duration = get_post_meta( $wptravel_post_id, 'wp_travel_trip_duration', true );
 					$wptravel_trip_duration = ( $wptravel_trip_duration ) ? $wptravel_trip_duration : 0;
 					?>
-						<span><img src="<?php echo plugins_url( '/wp-travel/assets/images/hiking.svg' ); ?>" alt="">
+						<span><img src="<?php echo esc_url( plugins_url( '/wp-travel/assets/images/hiking.svg' ) ); ?>" alt="">
 						<?php if ( (int) $wptravel_trip_duration > 0 ) : ?>
 								<?php echo esc_html( $wptravel_trip_duration . ' ' . isset( $wptravel_strings['days'] ) ? $wptravel_strings['days'] : __( ' Days', 'wp-travel' ) ); ?>
 							<?php else : ?>
@@ -168,7 +168,7 @@ $wptravel_enable_sale                      = WP_Travel_Helpers_Trips::is_sale_en
 						$wptravel_term_name  = $wptravel_first_term->name;
 						$wptravel_term_link  = get_term_link( $wptravel_first_term->term_id, 'itinerary_types' );
 						?>
-						<a href="<?php echo esc_url( $wptravel_term_link ); ?>"><img src="<?php echo plugins_url( '/wp-travel/assets/images/group.svg' ); ?>" alt=""> 
+						<a href="<?php echo esc_url( $wptravel_term_link ); ?>"><img src="<?php echo esc_url(plugins_url( '/wp-travel/assets/images/group.svg' ) ); ?>" alt=""> 
 							<?php echo esc_html( $wptravel_term_name ); ?>
 						</a>
 						<?php if ( count( $wptravel_terms ) > 0 ) : ?>

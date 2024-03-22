@@ -3,7 +3,7 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 8.3.0
+ * Version: 8.4.0
  * Author: WP Travel
  * Author URI: http://wptravel.io/
  * Requires at least: 6.0.0
@@ -38,7 +38,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '8.3.0';
+		public $version = '8.4.0';
 
 		/**
 		 * WP Travel API version.
@@ -104,7 +104,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				case 'contact_number':
 					if( is_array( get_post_meta( $id, 'wp_travel_phone_traveller', true ) ) ){
 					?>
-					<span><?php echo get_post_meta( $id, 'wp_travel_phone_traveller', true )[ array_key_first( get_post_meta( $id, 'wp_travel_phone_traveller', true ) ) ][0]; ?></span>
+					<span><?php echo esc_html( get_post_meta( $id, 'wp_travel_phone_traveller', true )[ array_key_first( get_post_meta( $id, 'wp_travel_phone_traveller', true ) ) ][0] ); ?></span>
 					<?php
 					}
 					break;
@@ -112,21 +112,21 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				case 'contact_email':
 					if( is_array( get_post_meta( $id, 'wp_travel_email_traveller', true ) ) ){
 					?>
-					<span><?php echo get_post_meta( $id, 'wp_travel_email_traveller', true )[ array_key_first( get_post_meta( $id, 'wp_travel_email_traveller', true ) ) ][0]; ?></span>
+					<span><?php echo esc_html( get_post_meta( $id, 'wp_travel_email_traveller', true )[ array_key_first( get_post_meta( $id, 'wp_travel_email_traveller', true ) ) ][0] ); ?></span>
 					<?php
 					}
 					break;
 				case 'country_code':
 					if( is_array( get_post_meta( $id, 'wp_travel_country_traveller', true ) ) ){
 					?>
-					<span><?php echo get_post_meta( $id, 'wp_travel_country_traveller', true )[ array_key_first( get_post_meta( $id, 'wp_travel_country_traveller', true ) ) ][0]; ?></span>
+					<span><?php echo esc_html( get_post_meta( $id, 'wp_travel_country_traveller', true )[ array_key_first( get_post_meta( $id, 'wp_travel_country_traveller', true ) ) ][0] ); ?></span>
 					<?php
 					}
 					break;
 				case 'tour_date':
 					if( !empty(get_post_meta( $id, 'wp_travel_arrival_date', true )) ){
 					?>
-					<span><?php echo wptravel_format_date( get_post_meta( $id, 'wp_travel_arrival_date', true ) ); ?></span>
+					<span><?php echo esc_html( wptravel_format_date( get_post_meta( $id, 'wp_travel_arrival_date', true ) ) ); ?></span>
 					<?php
 					}
 					break;
@@ -500,6 +500,11 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			if( $settings['enable_woo_checkout'] == 'yes' ){ 
 				include sprintf( '%s/inc/woo-checkout.php', WP_TRAVEL_ABSPATH );
 			}
+			
+			if( is_admin() ){
+				include sprintf( '%s/inc/admin-review-notice.php', WP_TRAVEL_ABSPATH );
+			}
+			
 		}
 
 		/**
@@ -929,3 +934,4 @@ function wptravel() {
 
 // Start WP Travel.
 wptravel();
+

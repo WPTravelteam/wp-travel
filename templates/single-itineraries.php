@@ -51,7 +51,7 @@ if( !wp_is_block_theme() ){
 			$site_name = get_bloginfo('name');
 			$page_title = $title . ' - ' . $site_name;
 			?>
-			<title><?php echo $page_title; ?></title>
+			<title><?php echo esc_html( $page_title ); ?></title>
 			<?php
 			/*
 			You have to run the do_blocks() between the <head></head> tags in order
@@ -87,7 +87,7 @@ if( !wp_is_block_theme() ){
 			<?php wp_body_open(); ?>
 			<div class="wp-site-blocks">
 				<header class="wp-block-template-part">
-					<?php echo $block_header; ?>
+					<?php echo wp_kses_post( $block_header ); ?>
 				</header>
 				<main class="wptravel-content-wrapper is-layout-constrained" style="padding: 40px 20px 80px 20px;">
 				<div class="wp-block-group alignwide">
@@ -114,7 +114,7 @@ if( !wp_is_block_theme() ){
 				</div>
 				</main>
 				<footer class="wp-block-template-part site-footer">
-					<?php echo $block_footer; ?>
+					<?php echo wp_kses_post( $block_footer ); ?>
 				</footer>
 			</div>
 			<?php wp_footer(); ?>

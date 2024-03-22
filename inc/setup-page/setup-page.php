@@ -312,7 +312,7 @@ class WP_Travel_Setup_Page {
 		
 			 </div>
 			<?php else : ?>
-			  <p><?php echo __( 'Scripts is not loaded..', 'wp-travel' ); ?></p>
+			  <p><?php echo esc_html__( 'Scripts is not loaded..', 'wp-travel' ); ?></p>
 		<?php endif ?>
 	  
 		<?php

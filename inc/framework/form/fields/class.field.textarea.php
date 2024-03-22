@@ -29,6 +29,6 @@ class WP_Travel_FW_Field_Textarea {
 			return $output;
 		}
 
-		echo $output;
+		echo wp_kses_post( $output );
 	}
 }

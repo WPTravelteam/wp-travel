@@ -33,7 +33,7 @@ wptravel_print_notices(); ?>
 		<?php endif; ?>
 		<div class="form">
 			<form method="post" class="wp-travel-ResetPassword lost_reset_password">
-				<h3><?php echo apply_filters( 'wp_travel_reset_password_message', esc_html__( 'Enter a new password below.', 'wp-travel' ) ); ?></h3>
+				<h3><?php echo esc_html( apply_filters( 'wp_travel_reset_password_message', __( 'Enter a new password below.', 'wp-travel' ) ) ); ?></h3>
 				<p></p><?php // @codingStandardsIgnoreLine ?>
 
 				<p class="wp-travel-form-row wp-travel-form-row--first form-row form-row-first">

@@ -114,7 +114,7 @@ class IPNListener {
 		if ( $this->response === false || $this->response_status == '0' ) {
 			$errno  = curl_errno( $ch );
 			$errstr = curl_error( $ch );
-			throw new Exception( "cURL error: [$errno] $errstr" );
+			throw new Exception( "cURL error: " . esc_html( $errno ). " " . esc_html( $errstr )  );
 		}
 
 		return $this->response;     // function should return it's data itself
@@ -148,7 +148,7 @@ class IPNListener {
 
 		if ( ! $fp ) {
 			// fsockopen error
-			throw new Exception( "fsockopen error: [$errno] $errstr" );
+			throw new Exception( "fsockopen error: " . esc_html( $errno ). " " . esc_html( $errstr ) );
 		}
 
 		$header  = "POST /cgi-bin/webscr HTTP/1.1\r\n";

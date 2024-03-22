@@ -14,12 +14,12 @@ function wptravel_admin_init() {
 	add_action( 'wp_trash_post', 'wptravel_clear_booking_count_transient', 10 ); // @since 1.0.7
 	add_action( 'untrash_post', 'wptravel_clear_booking_count_transient_untrash', 10 ); // @since 2.0.3
 
-	if ( version_compare( WP_TRAVEL_VERSION, '1.2.0', '>' ) ) {
-		include_once sprintf( '%s/upgrade/update-121.php', WP_TRAVEL_ABSPATH );
-	}
-	if ( version_compare( WP_TRAVEL_VERSION, '1.3.6', '>' ) ) {
-		include_once sprintf( '%s/upgrade/update-137.php', WP_TRAVEL_ABSPATH );
-	}
+	// if ( version_compare( WP_TRAVEL_VERSION, '1.2.0', '>' ) ) {
+	// 	include_once sprintf( '%s/upgrade/update-121.php', WP_TRAVEL_ABSPATH );
+	// }
+	// if ( version_compare( WP_TRAVEL_VERSION, '1.3.6', '>' ) ) {
+	// 	include_once sprintf( '%s/upgrade/update-137.php', WP_TRAVEL_ABSPATH );
+	// }
 }
 
 /**
@@ -421,7 +421,7 @@ function wptravel_marketplace_page() {
 						</circle>
 					</svg>
 					<div style="text-align: center; margin-top: 10px;">
-						<?php echo __( 'Installing Theme...', 'wp-travel' ) ?>
+						<?php echo esc_html__( 'Installing Theme...', 'wp-travel' ) ?>
 					</div>
 				</div>
 				<div id="wptravel-market-content">
@@ -909,14 +909,13 @@ function wptravel_publish_metabox() {
 			<?php
 			$status    = wptravel_get_booking_status();
 			$label_key = get_post_meta( $post->ID, 'wp_travel_booking_status', true );
-
 			?>
 			
 			<label for="wp-travel-post-id"><?php esc_html_e( 'Booking Status', 'wp-travel' ); ?></label>
 			<select id="wp_travel_booking_status" name="wp_travel_booking_status" >
-			<?php foreach ( $status as $value => $st ) :?>
+			<?php foreach ( $status as $value => $st ) : ?>
 				
-				<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $st['text'], $label_key ); ?>>
+				<option value="<?php echo esc_attr( $value ); ?>" <?php selected( strtolower( $st['text'] ), strtolower( $label_key ) ); ?>>
 					<?php echo esc_html( $status[ $value ]['text'] ); ?>
 				</option>
 			<?php endforeach; ?>

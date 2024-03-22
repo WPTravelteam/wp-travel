@@ -63,7 +63,7 @@ class WP_Travel_FW_Field_Date extends WP_Travel_FW_Field_Text {
 			return $output;
 		}
 
-		echo $output;
+		echo esc_html( $output );
 	}
 
 	function render_old( $display = true ) {
@@ -119,6 +119,6 @@ class WP_Travel_FW_Field_Date extends WP_Travel_FW_Field_Text {
 			return $output;
 		}
 
-		echo $output;
+		echo wp_kses_post( $output );
 	}
 }

@@ -156,7 +156,7 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 				}
 				
 			}
-			// var_dump( $customer_email_ids );
+
 			if ( empty( $customer_email_ids ) ) {
 				return;
 			}

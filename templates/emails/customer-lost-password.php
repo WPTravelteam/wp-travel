@@ -35,13 +35,13 @@ $url = add_query_arg(
 
 ?>
 
-<p><?php _e( 'Someone requested that the password be reset for the following account:', 'wp-travel' ); ?></p>
-<p><?php echo __( 'Username: ', 'wp-travel' ). $user_login; ?></p>
-<p><?php _e( 'If this was a mistake, just ignore this email and nothing will happen.', 'wp-travel' ); ?></p>
-<p><?php _e( 'To reset your password, visit the following address:', 'wp-travel' ); ?></p>
+<p><?php esc_html_e( 'Someone requested that the password be reset for the following account:', 'wp-travel' ); ?></p>
+<p><?php echo esc_html__( 'Username: ', 'wp-travel' ). esc_html( $user_login ); ?></p>
+<p><?php esc_html_e( 'If this was a mistake, just ignore this email and nothing will happen.', 'wp-travel' ); ?></p>
+<p><?php esc_html_e( 'To reset your password, visit the following address:', 'wp-travel' ); ?></p>
 <p>
 	<a class="link" href="<?php echo esc_url( $url ); ?>">
-			<?php _e( 'Click here to reset your password', 'wp-travel' ); ?></a>
+			<?php esc_html_e( 'Click here to reset your password', 'wp-travel' ); ?></a>
 </p>
-<p><?php _e( 'Powered by', 'wp-travel' ); ?><a href="http://wptravel.io" target="_blank"> <?php _e( 'WP Travel', 'wp-travel' ); ?></a></p>
+<p><?php esc_html_e( 'Powered by', 'wp-travel' ); ?><a href="http://wptravel.io" target="_blank"> <?php esc_html_e( 'WP Travel', 'wp-travel' ); ?></a></p>
 <p></p>

@@ -878,9 +878,9 @@ function wptravel_get_trip_duration( $post_id ) {
 	if ( $fixed_departure ) :
 		?>
 		<div class="wp-travel-trip-time trip-duration">
-			<?php echo apply_filters( 'wp_travel_archive_page_duration_icon', '<i class="far fa-calendar-alt"></i>' ); ?>
+			<?php echo wp_kses_post( apply_filters( 'wp_travel_archive_page_duration_icon', '<i class="far fa-calendar-alt"></i>' ) ); ?>
 			<span class="wp-travel-trip-duration">
-				<?php echo wptravel_get_fixed_departure_date( $post_id ); ?>
+				<?php echo wp_kses_post( wptravel_get_fixed_departure_date( $post_id ) ); ?>
 			</span>
 		</div>
 		<?php
@@ -888,9 +888,9 @@ function wptravel_get_trip_duration( $post_id ) {
 		$trip_duration  = wp_travel_get_trip_durations( $post_id );
 		?>
 			<div class="wp-travel-trip-time trip-duration">
-				<?php echo apply_filters( 'wp_travel_archive_page_duration_icon', '<i class="far fa-clock"></i>' ); ?>
+				<?php echo wp_kses_post( apply_filters( 'wp_travel_archive_page_duration_icon', '<i class="far fa-clock"></i>' ) ); ?>
 				<span class="wp-travel-trip-duration">
-					<?php echo apply_filters( 'wp_travel_trip_duration_trip_list', esc_html( $trip_duration ), $post_id ); ?>
+					<?php echo wp_kses_post( apply_filters( 'wp_travel_trip_duration_trip_list', esc_html( $trip_duration ), $post_id ) ); ?>
 				</span>
 			</div>
 		<?php
@@ -2616,7 +2616,7 @@ function wptravel_get_search_filter_form( $args ) {
 			<div>
 				<?php
 				foreach ( $search_fields as $key => $search_field ) {
-
+					
 					$show_fields = isset( $instance[ $key ] ) ? $instance[ $key ] : '';
 					if ( $show_fields ) {
 						$search_field['class'] = isset( $search_field['class'] ) && '' !== $search_field['class'] ? $search_field['class'] . $index : '';
@@ -2792,7 +2792,7 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 									}
 
 									if ( 'heading' === $field['type'] ) {
-										printf( '<h3 class="my-order-single-title">%s</h3> ', $field['label'] );
+										printf( '<h3 class="my-order-single-title">%s</h3> ', esc_html( $field['label'] ) );
 									} elseif ( in_array( $field['type'], array( 'hidden' ) ) ) {
 										// Do nothing.
 									} else {
@@ -2833,7 +2833,7 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 										/**
 										 * Translators: %s placeholder is used to show the title of the trip.
 										 */
-										printf( __( 'Travelers info [ ', 'wp-travel' ). get_the_title( $trip_id ). ' ]' ) ;
+										printf( esc_html__( 'Travelers info [ ', 'wp-travel' ). esc_html( get_the_title( $trip_id ) ). ' ]' ) ;
 										?>
 									</h3>
 									<div class="row">
@@ -2842,7 +2842,7 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 											foreach ( $first_names as $key => $first_name ) :
 												?>
 												<div class="col-md-6">
-												<h3 class="my-order-single-title"><?php printf( __( 'Traveler ', 'wp-travel' ). $key + 1 . ' :' ); ?></h3>
+												<h3 class="my-order-single-title"><?php printf( esc_html__( 'Traveler ', 'wp-travel' ). esc_html( $key ) + 1 . ' :' ); ?></h3>
 													<?php
 													$traveller_fields = isset( $checkout_fields['traveller_fields'] ) ? $checkout_fields['traveller_fields'] : array();
 													$traveller_fields = wptravel_sort_form_fields( $traveller_fields );
@@ -2850,7 +2850,6 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 													if ( ! empty( $traveller_fields ) ) {
 														if ( $indexs == 0 ) {
 															foreach ( $traveller_fields as $field ) {
-																// var_dump( $traveller_infos[ $field['name'] ] );
 																if ( 'heading' === $field['type'] ) {
 																	// Do nothing.
 																} elseif ( in_array( $field['type'], array( 'hidden' ) ) ) {
@@ -2859,9 +2858,6 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 																	// Do nothing.
 																}else {
 																	$value = isset( $traveller_infos[ $field['name'] ] ) && isset( $traveller_infos[ $field['name'] ][0] ) ? maybe_unserialize( $traveller_infos[ $field['name'] ][0] ) : '';
-																	// $value = is_array( $value ) ? array_values( $value ) : $value;
-																	// $value = is_array( $value ) ? array_shift( $value ) : $value;
-																	// $value = is_array( $value ) ? $value[ $key ] : $value;
 																	echo '<div class="my-order-single-field clearfix">';
 																	printf( '<span class="my-order-head">%s:</span>', $field['label'] ); // @phpcs:ignore																	
 																	printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? $value[ $cart_id ][ $key ] : '' ); // @phpcs:ignore																	
@@ -2931,10 +2927,10 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 						else :
 							?>
 						<div class="my-order-single-traveller-info">
-							<h3 class="my-order-single-title"><?php echo __( 'Travelers info [ ', 'wp-travel' ) . get_the_title( $trip_id ) . ' ]'; ?></h3>
+							<h3 class="my-order-single-title"><?php echo esc_html__( 'Travelers info [ ', 'wp-travel' ) . esc_html( get_the_title( $trip_id ) ). ' ]'; ?></h3>
 							<div class="row">
 								<div class="col-md-6">
-									<h3 class="my-order-single-title"><?php echo __( 'Lead Traveler :', 'wp-travel' ); ?></h3>
+									<h3 class="my-order-single-title"><?php echo esc_html__( 'Lead Traveler :', 'wp-travel' ); ?></h3>
 									<div class="my-order-single-field clearfix">
 										<span class="my-order-head"><?php esc_html_e( 'Name :', 'wp-travel' ); ?></span>
 										<span class="my-order-tail"><?php echo esc_html( $fname . ' ' . $lname ); ?></span>
@@ -3003,10 +2999,10 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 																continue;
 															}
 															?>
-															<span class="my-order-price-detail">(<?php echo esc_html( $trip['pax'] ) . ' ' . $trip['custom_label'] . ' x ' . wptravel_get_formated_price_currency( $trip['price'], false, '', $booking_id ); ?>) </span>
+															<span class="my-order-price-detail">(<?php echo esc_html( $trip['pax'] ) . ' ' . esc_html( $trip['custom_label'] ) . ' x ' . wp_kses_post( wptravel_get_formated_price_currency( $trip['price'], false, '', $booking_id ) ); ?>) </span>
 														<?php endforeach; ?>
 													<?php endif; ?>
-													<span class="my-order-price"><?php echo wptravel_get_formated_price_currency( $total, false, '', $booking_id ); //@phpcs:ignore ?></span>
+													<span class="my-order-price"><?php echo wp_kses_post( wptravel_get_formated_price_currency( $total, false, '', $booking_id ) ); //@phpcs:ignore ?></span>
 												</span>
 											</div>
 										</div>
@@ -3057,8 +3053,8 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 												$total = $price * $qty;
 												?>
 												<div class="my-order-price-breakdown-additional-service-item clearfix">
-													<span class="my-order-head"><?php echo esc_html( get_the_title( $extra_id ) ); ?> (<?php echo esc_attr( $qty ) . ' x ' . wptravel_get_formated_price_currency( $price, false, '', $booking_id ); ?>)</span>
-													<span class="my-order-tail my-order-right"><?php echo wptravel_get_formated_price_currency( $total, false, '', $booking_id ); //@phpcs:ignore ?></span>
+													<span class="my-order-head"><?php echo esc_html( get_the_title( $extra_id ) ); ?> (<?php echo esc_attr( $qty ) . ' x ' . wp_kses_post( wptravel_get_formated_price_currency( $price, false, '', $booking_id ) ); ?>)</span>
+													<span class="my-order-tail my-order-right"><?php echo wp_kses_post( wptravel_get_formated_price_currency( $total, false, '', $booking_id ) ); //@phpcs:ignore ?></span>
 												</div>
 											<?php endforeach; ?>
 
@@ -3073,8 +3069,8 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 									<div class="my-order-price-breakdown-base-price">
 										<span class="my-order-head"><?php echo esc_html( get_the_title( $trip_id ) ); ?></span>
 										<span class="my-order-tail">
-											<span class="my-order-price-detail"> x <?php echo esc_html( $pax ) . ' ' . __( 'Person/s', 'wp-travel' ); ?> </span>
-											<span class="my-order-price"><?php echo wptravel_get_formated_price_currency( $details['sub_total'], false, '', $booking_id ); //@phpcs:ignore ?></span>
+											<span class="my-order-price-detail"> x <?php echo esc_html( $pax ) . ' ' . esc_html__( 'Person/s', 'wp-travel' ); ?> </span>
+											<span class="my-order-price"><?php echo wp_kses_post( wptravel_get_formated_price_currency( $details['sub_total'], false, '', $booking_id ) ); //@phpcs:ignore ?></span>
 										</span>
 									</div>
 								</div>
@@ -3086,20 +3082,20 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 								<?php if ( $details['sub_total'] > $details['total'] ) : ?>
 									<div class="my-order-price-breakdown-sub-total">
 										<span class="my-order-head"><?php esc_html_e( 'Sub Total Price', 'wp-travel' ); ?></span>
-										<span class="my-order-tail my-order-right"><?php echo wptravel_get_formated_price_currency( $details['sub_total'], false, '', $booking_id ); //@phpcs:ignore ?></span>
+										<span class="my-order-tail my-order-right"><?php echo wp_kses_post( wptravel_get_formated_price_currency( $details['sub_total'], false, '', $booking_id ) ); //@phpcs:ignore ?></span>
 									</div>
 								<?php endif; ?>
 
 								<?php if ( $details['discount'] && $details['discount'] > 0 ) : ?>
 									<div class="my-order-price-breakdown-coupon-amount">
 										<span class="my-order-head"><?php esc_html_e( 'Discount Price', 'wp-travel' ); ?></span>
-										<span class="my-order-tail my-order-right">- <?php echo wptravel_get_formated_price_currency( $details['discount'], false, '', $booking_id ); //@phpcs:ignore ?></span>
+										<span class="my-order-tail my-order-right">- <?php echo wp_kses_post( wptravel_get_formated_price_currency( $details['discount'], false, '', $booking_id ) ); //@phpcs:ignore ?></span>
 									</div>
 								<?php endif; ?>
 								<?php if ( $details['tax'] && $details['tax'] > 0 ) : ?>
 									<div class="my-order-price-breakdown-tax-due">
-										<span class="my-order-head"><?php echo ! empty( $strings ) ? $strings['bookings']['price_tax'] : __(  'Tax', 'wp-travel' ); ?> </span>
-										<span class="my-order-tail my-order-right"><?php echo wptravel_get_formated_price_currency( $details['tax'], false, '', $booking_id ); //@phpcs:ignore ?></span>
+										<span class="my-order-head"><?php echo ! empty( $strings ) ? esc_html( $strings['bookings']['price_tax'] ) : esc_html__(  'Tax', 'wp-travel' ); ?> </span>
+										<span class="my-order-tail my-order-right"><?php echo wp_kses_post( wptravel_get_formated_price_currency( $details['tax'], false, '', $booking_id ) ); //@phpcs:ignore ?></span>
 									</div>
 								<?php endif; ?>
 								
@@ -3108,7 +3104,7 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 						<div class="my-order-single-total-price clearfix">
 							<div class="my-order-single-field clearfix">
 								<span class="my-order-head"><?php esc_html_e( 'Total', 'wp-travel' ); ?></span>
-								<span class="my-order-tail"><?php echo wptravel_get_formated_price_currency( $details['total'], false, '', $booking_id ); //@phpcs:ignore ?></span>
+								<span class="my-order-tail"><?php echo wp_kses_post( wptravel_get_formated_price_currency( $details['total'], false, '', $booking_id ) ); //@phpcs:ignore ?></span>
 							</div>
 						</div>
 					</div>
@@ -3624,7 +3620,7 @@ function wptravel_get_fixed_departure_date( $trip_id ) {
 									<?php
 							}
 							?>
-								<span data-id="date-<?php echo $i; ?>" class="book-trip-date dropdown-list"> <?php echo esc_html( date_i18n( $date_format, strtotime( $date ) ) ); ?></span>
+								<span data-id="date-<?php echo esc_html( $i ); ?>" class="book-trip-date dropdown-list"> <?php echo esc_html( date_i18n( $date_format, strtotime( $date ) ) ); ?></span>
 								<?php
 								if ( count( $available_dates ) === ( $index + 1 ) ) {
 									?>
@@ -4633,7 +4629,7 @@ function wptravel_get_cart_icon(){
 		*/
 		?>
 		<div id="wp-travel__add-to-cart_notice"></div>
-		<a class="wp-travel-add-to-cart-item-anchor" href="<?php echo wptravel_get_checkout_url(); ?>" target="_blank" rel="noopener noreferrer">
+		<a class="wp-travel-add-to-cart-item-anchor" href="<?php echo esc_url( wptravel_get_checkout_url() ); ?>" target="_blank" rel="noopener noreferrer">
 			<button class="wp-travel-single-trip-cart-button">
 				<span id="wp-travel-add-to-cart-cart_item_show">
 					<i class="fa fa-shopping-cart" aria-hidden="true"></i>
@@ -4644,6 +4640,29 @@ function wptravel_get_cart_icon(){
 		
 	<?php }
 }
+
+function wptravel_cart_icon(){
+	global $wp_travel_itinerary;
+	global $wt_cart;
+	$trip_items     = $wt_cart->getItems();
+	if ( wp_travel_add_to_cart_system() == true ) {
+		/**
+		* Added toast notice
+		* 
+		* @since 7.6.0
+		*/
+		ob_start();
+	?>
+		<div id="wp-travel__add-to-cart_notice"></div>
+		<div><a class="wp-travel-add-to-cart-item-anchor" href="<?php echo esc_url( wptravel_get_checkout_url() ); ?>" target="_blank" rel="noopener noreferrer"><button class="wp-travel-single-trip-cart-button"><span id="wp-travel-add-to-cart-cart_item_show"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="wp-travel-cart-items-number <?php echo ( !empty( $trip_items ) && count( $trip_items ) > 0 ) ? 'active' : '' ?>"><?php echo count( $trip_items ); ?></span></span></button></a></div>
+	<?php 
+		$content = ob_get_contents();
+		ob_end_clean();
+		return $content;
+	}
+}
+
+add_shortcode( 'wptravel_cart_icon', 'wptravel_cart_icon' );
 
 // @since v7.6.0
 
@@ -4697,3 +4716,10 @@ function wp_travel_search_distinct( $where ) {
     return $where;
 }
 add_filter( 'posts_distinct', 'wp_travel_search_distinct' );
+
+
+
+add_filter( 'safe_style_css', function( $styles ) {
+	$styles[] = 'display';
+	return $styles;
+} );

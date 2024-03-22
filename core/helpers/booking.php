@@ -47,10 +47,10 @@ class WpTravel_Helpers_Booking {
 		<table class="wp-travel-table-content" cellpadding="0" cellspacing="0" height="100%" width="100%" style="text-align: left;">
 			<thead>
 				<tr>
-					<th><?php echo apply_filters( 'wp_travel_booking_mail_itinerary', esc_html( 'Itinerary', 'wp-travel' ), $booking_id ); ?></th>
-					<th><?php echo apply_filters( 'wp_travel_booking_mail_pax', esc_html( ! empty( $strings ) ? strtoupper( $strings['bookings']['pax'] ) : 'PAX', 'wp-travel' ), $booking_id ); ?></th>
-					<th><?php echo apply_filters( 'wp_travel_booking_mail_departure', esc_html( 'Departure Date', 'wp-travel' ), $booking_id ); ?></th>
-					<th><?php echo apply_filters( 'wp_travel_booking_mail_arrival', esc_html( 'Arrival Date', 'wp-travel' ), $booking_id ); ?></th>
+					<th><?php echo esc_html( apply_filters( 'wp_travel_booking_mail_itinerary', __( 'Itinerary', 'wp-travel' ), $booking_id ) ); ?></th>
+					<th><?php echo esc_html( apply_filters( 'wp_travel_booking_mail_pax', !empty( $strings ) ? strtoupper( $strings['bookings']['pax'] ) : __( 'PAX', 'wp-travel' ), $booking_id ) ); ?></th>
+					<th><?php echo esc_html( apply_filters( 'wp_travel_booking_mail_departure', __( 'Departure Date', 'wp-travel' ), $booking_id ) ); ?></th>
+					<th><?php echo esc_html( apply_filters( 'wp_travel_booking_mail_arrival', __( 'Arrival Date', 'wp-travel' ), $booking_id ) ); ?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -137,7 +137,7 @@ class WpTravel_Helpers_Booking {
 											$extras_price_total = $extras_price_total + ( $price * $qty );
 											?>
 											<div class="my-order-price-breakdown-additional-service-item clearfix">
-												<span class="my-order-head"><?php echo esc_html( get_the_title( $extra_id ) ); ?> (<?php echo esc_attr( $qty ) . ' x ' . wptravel_get_formated_price_currency( $price, false, '', $booking_id ); ?>)</span>
+												<span class="my-order-head"><?php echo esc_html( get_the_title( $extra_id ) ); ?> (<?php echo esc_html( $qty ) . ' x ' . wp_kses_post( wptravel_get_formated_price_currency( $price, false, '', $booking_id ) ); ?>)</span>
 												<span class="my-order-tail my-order-right"><?php echo wptravel_get_formated_price_currency( $total, false, '', $booking_id ); //@phpcs:ignore ?></span>
 											</div>
 										<?php endforeach; ?>
@@ -148,7 +148,7 @@ class WpTravel_Helpers_Booking {
 								endif;
 							?>
 						</td>
-						<td><?php echo apply_filters( 'wp_travel_booking_mail_pax_val', esc_html( $pax ), $booking_id ); ?></td>
+						<td><?php echo esc_html( apply_filters( 'wp_travel_booking_mail_pax_val', $pax, $booking_id ) ); ?></td>
 					
 						<?php if( !$trip_data['is_fixed_departure'] ): ?>
 							<?php if( isset( $trip_data['trip_duration']["duration_format"] ) && $trip_data['trip_duration']["duration_format"] == 'hour_minute' ): ?>
@@ -169,7 +169,7 @@ class WpTravel_Helpers_Booking {
 										<?php if( $trip_data['trip_duration']['days'] ): ?>
 											<?php echo esc_html( $departure_date ); ?>
 											<?php else: ?>
-												<?php echo __( 'N\A', 'wp-travel' ); ?>
+												<?php echo esc_html__( 'N\A', 'wp-travel' ); ?>
 										<?php endif; ?>
 									</td>
 								<?php endif; ?>
@@ -272,7 +272,7 @@ class WpTravel_Helpers_Booking {
 						?>
 						<thead>
 							<tr>
-								<th colspan="6"><?php echo esc_html__( 'Trip ', 'wp-travel' ) . $indexs; ?> : <strong><?php echo esc_html( $title ); ?></strong> / <span class="my-order-pricing"><?php echo esc_html( $pricing_title ); ?></span></th>
+								<th colspan="6"><?php echo esc_html__( 'Trip ', 'wp-travel' ) . esc_html( $indexs ); ?> : <strong><?php echo esc_html( $title ); ?></strong> / <span class="my-order-pricing"><?php echo esc_html( $pricing_title ); ?></span></th>
 							</tr>
 							<?php $indexs++; } } if ( count( $traveler_first_names ) < 2 ) { ?>
 							<tr>
@@ -318,7 +318,7 @@ class WpTravel_Helpers_Booking {
 									?>
 										<thead>
 											<tr>
-												<th colspan="6"><?php echo esc_html__( 'Trip ', 'wp-travel' ) . $indexs; ?> : <strong><?php echo esc_html( $titles ); ?></strong> / <span class="my-order-pricing"><?php echo esc_html( $pricing_titles ); ?></span></th>
+												<th colspan="6"><?php echo esc_html__( 'Trip ', 'wp-travel' ) . esc_html( $indexs ); ?> : <strong><?php echo esc_html( $titles ); ?></strong> / <span class="my-order-pricing"><?php echo esc_html( $pricing_titles ); ?></span></th>
 											</tr>
 											<?php $indexs++;  ?>
 											<tr>
@@ -351,7 +351,7 @@ class WpTravel_Helpers_Booking {
 										$traveler_dob  = isset( $dob[$indx] ) ? $dob[$indx] : '';
 									?>
 									<tr>
-										<td><?php echo $salutation . esc_html( $dats ); ?> <?php echo esc_html( $traveler_l_name ); ?></td>
+										<td><?php echo esc_html( $salutation ) . esc_html( $dats ); ?> <?php echo esc_html( $traveler_l_name ); ?></td>
 										<td><?php echo esc_html( $traveler_country ); ?></td>
 										<td><?php echo esc_html( $traveler_phone ); ?></td>
 										<td><?php echo esc_html( $traveler_email ); ?></td>
@@ -370,7 +370,7 @@ class WpTravel_Helpers_Booking {
 								foreach ( $traveler_first_names as $key => $first_name ) {
 									$last_name = isset( $traveler_last_names[ $key ] ) ? $traveler_last_names[ $key ][0] : '';
 									$country   = isset( $traveler_countries[ $key ] ) ? $traveler_countries[ $key ][0] : '';
-
+									
 									$country   = wptravel_get_countries()[$country];
 
 									$phone     = isset( $traveler_phones[ $key ] ) ? $traveler_phones[ $key ][0] : '';
@@ -441,7 +441,7 @@ class WpTravel_Helpers_Booking {
 							foreach ( $first_names as $key => $first_name ) {
 								$last_name = isset( $last_names[ $key ] ) ? $last_names[ $key ] : '';
 								$country   = isset( $countries[ $key ] ) ? $countries[ $key ] : '';
-
+			
 								$country   = wptravel_get_countries()[$country];
 
 								$phone     = isset( $phones[ $key ] ) ? $phones[ $key ] : '';
@@ -462,7 +462,7 @@ class WpTravel_Helpers_Booking {
 								}
 								?>
 								<tr>
-									<td><?php echo $salutation . esc_html( $first_name ); ?> <?php echo esc_html( $last_name ); ?></td>
+									<td><?php echo esc_html( $salutation ) . esc_html( $first_name ); ?> <?php echo esc_html( $last_name ); ?></td>
 									<td><?php echo esc_html( $country ); ?></td>
 									<td><?php echo esc_html( $phone ); ?></td>
 									<td><?php echo esc_html( $email ); ?></td>

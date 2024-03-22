@@ -16,7 +16,7 @@ global $post;
 		media_upload_form();
 		?>
 		<script type="text/javascript">
-				var post_id = <?php echo $post->ID; ?>, shortform = 3;
+				var post_id = <?php echo esc_attr( $post->ID ); ?>, shortform = 3;
 		</script>
 	</div>
 	<div class="wp-travel-open-uploaded-images">

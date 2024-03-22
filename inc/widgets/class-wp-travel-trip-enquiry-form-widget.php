@@ -39,10 +39,10 @@ class WP_Travel_Trip_Enquiry_Form_Widget extends WP_Widget {
 		}
 		$title = isset( $instance['title'] ) && ! empty( $instance['title'] ) ? $instance['title'] : __( 'Enquiry', 'wp-travel' );
 		extract( $args );
-		echo $before_widget;
-		echo $before_title . $title . $after_title;
+		echo wp_kses_post( $before_widget );
+		echo wp_kses_post( $before_title . $title . $after_title );
 		wptravel_get_enquiries_form( true );
-		echo $after_widget;
+		echo wp_kses_post( $after_widget );
 	}
 
 	/**

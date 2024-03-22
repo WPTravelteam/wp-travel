@@ -137,7 +137,7 @@ class WP_Travel_Itinerary {
 	 * @since 1.0.0
 	 */
 	function get_group_size( $pax_type = '' ) {
-
+		$group_size = 0;
 		if( $pax_type != 'min_pax' ){
 			$group_size = isset( $this->post_meta['wp_travel_group_size'] ) ? $this->post_meta['wp_travel_group_size'][0] : '';
 			if ( $group_size ) {

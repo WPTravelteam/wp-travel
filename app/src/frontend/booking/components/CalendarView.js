@@ -493,14 +493,24 @@ const CalendarView = ( props ) => {
 		params.maxDate	 = duration_end_dates;
 		params.startDate = selectedDate;
 		params.endDate   = moment( selectedDate ).add( duration - 1, 'days' ).toDate();
+		
 	}
+
+	params.excludeDates	 = [];
+
+	__i18n.exclude_date.forEach( excludeDate );
+
+	function excludeDate( value, index, array ){
+		params.excludeDates.push( addDays(new Date( value+'/'+__i18n.current_year ), 0) );
+	}
+
 	let enable_time = '';
 	_dates.map( ( dateData ) => {
 		if( selectedDateIds[0] == dateData.id ) {
 			enable_time = dateData.enable_time;
 		}
 	})
-	console.log( __i18n.booking_offset )
+
 
 	if( __i18n.booking_offset > 0 ){
 		params.minDate   = addDays(new Date(), __i18n.booking_offset );

@@ -265,7 +265,7 @@ class WP_Travel_Admin_Info_Pointers {
 			<div class="<?php echo esc_attr( $class ); ?>">
 			<p>
 			<strong>
-				<?php echo __( 'Want to add payment gateway in WP Travel booking? ', 'wp-travel' ); ?><a target="_blank" href="http://wptravel.io/downloads/standard-paypal/"><?php echo __( ' Download "Standard PayPal" ', 'wp-travel' ); ?></a><?php echo __( '  addon for free!!', 'wp-travel' ); ?>
+				<?php echo esc_html__( 'Want to add payment gateway in WP Travel booking? ', 'wp-travel' ); ?><a target="_blank" href="http://wptravel.io/downloads/standard-paypal/"><?php echo esc_html__( ' Download "Standard PayPal" ', 'wp-travel' ); ?></a><?php echo esc_html__( '  addon for free!!', 'wp-travel' ); ?>
 			</strong>
 			</p>
 			</div>
@@ -280,12 +280,12 @@ class WP_Travel_Admin_Info_Pointers {
 					<div class="notice notice-warning">
 						<p>
 						<strong>
-							<?php echo __( 'You are using older version of WP Travel Standard paypal. Please', 'wp-travel' ); ?><a target="_blank" href="http://wptravel.io/downloads/standard-paypal/"><?php echo __( ' Download version 1.0.1 Now ', 'wp-travel' ); ?></a>
+							<?php echo esc_html__( 'You are using older version of WP Travel Standard paypal. Please', 'wp-travel' ); ?><a target="_blank" href="http://wptravel.io/downloads/standard-paypal/"><?php echo esc_html__( ' Download version 1.0.1 Now ', 'wp-travel' ); ?></a>
 						</strong>
 						</p>
 						<p>
 						<strong>
-							<?php echo __( 'Need help With the update ? ', 'wp-travel' ); ?><a target="_blank" href="http://wptravel.io/documentations/standard-paypal/updating-wp-travel-standard-paypal/"><?php echo __( ' Click here ', 'wp-travel' ); ?></a><?php echo __( ' for detailed instructions on updating the plugin.', 'wp-travel' ); ?>
+							<?php echo esc_html__( 'Need help With the update ? ', 'wp-travel' ); ?><a target="_blank" href="http://wptravel.io/documentations/standard-paypal/updating-wp-travel-standard-paypal/"><?php echo esc_html__( ' Click here ', 'wp-travel' ); ?></a><?php echo esc_html__( ' for detailed instructions on updating the plugin.', 'wp-travel' ); ?>
 						</strong>
 						</p>
 					</div>
@@ -313,7 +313,7 @@ class WP_Travel_Admin_Info_Pointers {
 				<div class="notice notice-info is-dismissible">
 					<p>
 					<strong>
-						<?php echo __( 'WP Travel Standard Paypal plugin will be merged to WP Travel in the next update of WP Travel Plugin( v.1.2.1 ). Please make sure to deactivate the WP Travel Standard Paypal plugin before updating to next WP Travel Release.  ', 'wp-travel' ); ?><a href="?wp-travel-dismissed-nag"><?php echo __( ' Dismiss this Message ', 'wp-travel' ); ?></a>
+						<?php echo esc_html__( 'WP Travel Standard Paypal plugin will be merged to WP Travel in the next update of WP Travel Plugin( v.1.2.1 ). Please make sure to deactivate the WP Travel Standard Paypal plugin before updating to next WP Travel Release.  ', 'wp-travel' ); ?><a href="?wp-travel-dismissed-nag"><?php echo esc_html__( ' Dismiss this Message ', 'wp-travel' ); ?></a>
 					</strong>
 					</p>
 				</div>
@@ -346,7 +346,7 @@ class WP_Travel_Admin_Info_Pointers {
 						<div class="notice notice-warning">
 							<p>
 							<strong>
-								<?php echo __( 'With the update to WP Travel version 1.4.0 ', 'wp-travel' ); ?><strong> <?php echo $addon_data['Name'] . __( ' addon', 'wp-travel' ); ?> </strong><?php echo __( ' needs to be updated to work, for more information, ', 'wp-travel' ); ?><a target="_blank" href="http://wptravel.io/category/release-notes/"><?php echo __( 'Click Here', 'wp-travel' ); ?></a>
+								<?php echo esc_html__( 'With the update to WP Travel version 1.4.0 ', 'wp-travel' ); ?><strong> <?php echo esc_html( $addon_data['Name'] ) . esc_html__( ' addon', 'wp-travel' ); ?> </strong><?php echo esc_html__( ' needs to be updated to work, for more information, ', 'wp-travel' ); ?><a target="_blank" href="http://wptravel.io/category/release-notes/"><?php echo esc_html__( 'Click Here', 'wp-travel' ); ?></a>
 							</strong>
 							</p>
 						</div>
@@ -425,7 +425,7 @@ class WP_Travel_Admin_Info_Pointers {
 			<div>
 				<p>
 					<strong>
-						<?php echo __( 'WP Travel is ', 'wp-travel' ); ?><b> <?php echo __( ' GDPR ', 'wp-travel' ); ?> </b><?php echo __( ' compatible now. Please go to ', 'wp-travel' ); ?><a href="<?php echo esc_url( admin_url( 'privacy.php' ) ); ?>"><?php echo __( ' Settings > Privacy ', 'wp-travel' ); ?></a><?php echo __( ' to select Privacy Policy page. ', 'wp-travel' ); ?><a href="?wp-travel-dismissed-nag"><?php echo __( 'Dismiss this Message', 'wp-travel' ); ?></a>
+						<?php echo esc_html__( 'WP Travel is ', 'wp-travel' ); ?><b> <?php echo esc_html__( ' GDPR ', 'wp-travel' ); ?> </b><?php echo esc_html__( ' compatible now. Please go to ', 'wp-travel' ); ?><a href="<?php echo esc_url( admin_url( 'privacy.php' ) ); ?>"><?php echo esc_html__( ' Settings > Privacy ', 'wp-travel' ); ?></a><?php echo esc_html__( ' to select Privacy Policy page. ', 'wp-travel' ); ?><a href="?wp-travel-dismissed-nag"><?php echo esc_html__( 'Dismiss this Message', 'wp-travel' ); ?></a>
 					</strong>
 				</p>
 			</div>
@@ -438,7 +438,7 @@ class WP_Travel_Admin_Info_Pointers {
 			<div>
 				<p>
 				<strong>
-					<?php echo __( '"WP Travel" plugin is currently in test mode. ', 'wp-travel' ); ?><a href="<?php echo esc_url( admin_url( 'edit.php?post_type=itinerary-booking&page=settings#wp-travel-tab-content-debug' ) );?>"><?php echo __( ' Click here ', 'wp-travel' ); ?></a><?php echo __( ' to disable test mode.', 'wp-travel' ); ?>
+					<?php echo esc_html__( '"WP Travel" plugin is currently in test mode. ', 'wp-travel' ); ?><a href="<?php echo esc_url( admin_url( 'edit.php?post_type=itinerary-booking&page=settings#wp-travel-tab-content-debug' ) );?>"><?php echo esc_html__( ' Click here ', 'wp-travel' ); ?></a><?php echo esc_html__( ' to disable test mode.', 'wp-travel' ); ?>
 				</strong>
 			</div>
 			<?php

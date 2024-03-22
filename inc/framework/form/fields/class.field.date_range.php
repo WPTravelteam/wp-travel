@@ -50,6 +50,6 @@ class WP_Travel_FW_Field_Date_Range {
 			return $output;
 		}
 
-		echo $output;
+		echo wp_kses_post( $output );
 	}
 }

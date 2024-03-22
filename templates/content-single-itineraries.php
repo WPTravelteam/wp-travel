@@ -29,7 +29,7 @@ $string = isset( $strings['single_archive'] ) ? $strings['single_archive'] : [];
 $offers = isset( $string['offer'] ) ? $string['offer'] : apply_filters( 'wp_travel_singel_page_offer', 'Offer' );
 $view_gallerys = isset( $string['view_gallery'] ) ? $string['view_gallery'] : apply_filters( 'wp_travel_singel_page_view_gallery', 'View Gallery' );
 if ( post_password_required() ) {
-	echo get_the_password_form();
+	echo wp_kses_post( get_the_password_form() );
 	return;
 }
 $wrapper_class = wptravel_get_theme_wrapper_class();
@@ -47,8 +47,8 @@ do_action( 'wp_travel_before_content_start' );
 			</div>
 				
 			<div class="wp-travel-feature-slide-content featured-side-image left-plot">
-				<div class="banner-image-wrapper" style="background-image: url(<?php echo apply_filters( 'wp_travel_trip_single_page_thumbnail_background', esc_url( wptravel_get_post_thumbnail_url( get_the_ID(), 'large' ) ), get_the_ID() ); ?>)">
-						<?php echo apply_filters( 'wp_travel_trip_single_page_thumbnail', wp_kses( wptravel_get_post_thumbnail( get_the_ID() ), wptravel_allowed_html( array( 'img' ) ) ), get_the_ID() ); ?>
+				<div class="banner-image-wrapper" style="background-image: url(<?php echo esc_url( apply_filters( 'wp_travel_trip_single_page_thumbnail_background',  wptravel_get_post_thumbnail_url( get_the_ID(), 'large' ), get_the_ID() ) ); ?>)">
+						<?php echo wp_kses_post( apply_filters( 'wp_travel_trip_single_page_thumbnail', wp_kses( wptravel_get_post_thumbnail( get_the_ID() ), wptravel_allowed_html( array( 'img' ) ) ), get_the_ID() ) ); ?>
 						<?php if( WP_Travel_Helpers_Trips::get_trip(get_the_ID())['trip']['trip_video_code'] ): ?>
 						<a class="trip-video" href="<?php echo esc_url(WP_Travel_Helpers_Trips::get_trip(get_the_ID())['trip']['trip_video_code']); ?>"><i class="fas fa-play-circle"></i></a>
 						<?php endif; ?>

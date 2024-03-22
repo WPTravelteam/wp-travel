@@ -70,6 +70,6 @@ class WP_Travel_FW_Field_Radio {
 			return $output;
 		}
 
-		echo $output;
+		echo wp_kses_post( $output );
 	}
 }

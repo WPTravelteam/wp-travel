@@ -39,11 +39,11 @@ class WP_Travel_Widget_Search extends WP_Widget {
 		$title = isset( $instance['title'] ) ? $instance['title'] : '';
 		$title = apply_filters( 'wp_travel_search_widget_title', $title );
 
-		echo $before_widget;
-		echo ( $title ) ? $before_title . $title . $after_title : '';
+		echo wp_kses_post( $before_widget );
+		echo ( $title ) ? wp_kses_post( $before_title . $title . $after_title ) : '';
 
 		wptravel_search_form();
-		echo $after_widget;
+		echo wp_kses_post( $after_widget );
 	}
 	/**
 	 * Update widget.

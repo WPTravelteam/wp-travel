@@ -41,31 +41,31 @@ $rating = intval( get_comment_meta( $comment->comment_ID, '_wp_travel_rating', t
 					if ( in_array( get_user_by( 'login', $comment->comment_author )->roles[0], array( 'administrator', 'editor', 'author' ) ) ) {
 						?>
 						<div class="wp-travel-admin-review">
-							<?php _e( 'Admin', 'wp-travel' ); ?>
+							<?php esc_html_e( 'Admin', 'wp-travel' ); ?>
 						</div>
 						<?php
 					} else {
 						?>
-						<div class="wp-travel-average-review" title="<?php echo __( 'Rated ', 'wp-travel' ).esc_html($rating).__( ' out of 5', 'wp-travel' ); ?>">
+						<div class="wp-travel-average-review" title="<?php echo esc_html__( 'Rated ', 'wp-travel' ).esc_html($rating).esc_html__( ' out of 5', 'wp-travel' ); ?>">
 							<a>
-							 <span style="width:<?php echo esc_attr( ( $rating / 5 ) * 100 ); ?>%"><strong><?php echo $rating; ?></strong> <?php _e( 'out of 5', 'wp-travel' ); ?></span>
+							 <span style="width:<?php echo esc_attr( ( $rating / 5 ) * 100 ); ?>%"><strong><?php echo esc_html( $rating ); ?></strong> <?php esc_html_e( 'out of 5', 'wp-travel' ); ?></span>
 							</a>
 						</div>
 						<?php
 					}
 				} else {
 					?>
-					<div class="wp-travel-average-review" title="<?php echo __( 'Rated ', 'wp-travel' ).esc_html($rating).__( ' out of 5', 'wp-travel' ); ?>">
+					<div class="wp-travel-average-review" title="<?php echo esc_html__( 'Rated ', 'wp-travel' ).esc_html($rating).esc_html__( ' out of 5', 'wp-travel' ); ?>">
 						<a>
-						 <span style="width:<?php echo esc_attr( ( $rating / 5 ) * 100 ); ?>%"><strong><?php echo $rating; ?></strong> <?php _e( 'out of 5', 'wp-travel' ); ?></span>
+						 <span style="width:<?php echo esc_attr( ( $rating / 5 ) * 100 ); ?>%"><strong><?php echo esc_html( $rating ); ?></strong> <?php esc_html_e( 'out of 5', 'wp-travel' ); ?></span>
 						</a>
 					</div>
 				<?php	} ?>
 				
 				<?php else : ?>
-					<div class="wp-travel-average-review" title="<?php echo __( 'Rated ', 'wp-travel' ).esc_html($rating).__( ' out of 5', 'wp-travel' ); ?>">
+					<div class="wp-travel-average-review" title="<?php echo esc_html__( 'Rated ', 'wp-travel' ).esc_html($rating).esc_html__( ' out of 5', 'wp-travel' ); ?>">
 						<a>
-						 <span style="width:<?php echo esc_attr( ( $rating / 5 ) * 100 ); ?>%"><strong><?php echo $rating; ?></strong> <?php _e( 'out of 5', 'wp-travel' ); ?></span>
+						 <span style="width:<?php echo esc_attr( ( $rating / 5 ) * 100 ); ?>%"><strong><?php echo esc_html( $rating ); ?></strong> <?php esc_html_e( 'out of 5', 'wp-travel' ); ?></span>
 						</a>
 					</div>
 			<?php endif ?>
@@ -74,12 +74,12 @@ $rating = intval( get_comment_meta( $comment->comment_ID, '_wp_travel_rating', t
 
 			<?php if ( $comment->comment_approved == '0' ) : ?>
 
-				<p class="meta"><em><?php echo apply_filters( 'wp_travel_single_archive_comment_approve_message', __( 'Your comment is awaiting approval', 'wp-travel' ) ); ?></em></p>
+				<p class="meta"><em><?php echo esc_html( apply_filters( 'wp_travel_single_archive_comment_approve_message', __( 'Your comment is awaiting approval', 'wp-travel' ) ) ); ?></em></p>
 
 			<?php else : ?>
 
 				<p class="meta">
-					<strong><?php apply_Filters( 'wp_travel_single_archive_comment_author', comment_author() ); ?></strong>&ndash; <time datetime="<?php echo apply_filters( 'wp_travel_single_archive_comment_date', get_comment_date( 'c' ) ); ?>"><?php echo apply_filters( 'wp_travel_single_archive_comment_date_format', get_comment_date( get_option( 'date_format' ) ) ); ?></time>:
+					<strong><?php echo esc_html( apply_Filters( 'wp_travel_single_archive_comment_author', comment_author() ) ); ?></strong>&ndash; <time datetime="<?php echo esc_html( apply_filters( 'wp_travel_single_archive_comment_date', get_comment_date( 'c' ) ) ); ?>"><?php echo esc_html( apply_filters( 'wp_travel_single_archive_comment_date_format', get_comment_date( get_option( 'date_format' ) ) ) ); ?></time>:
 				</p>
 
 			<?php endif; ?>
@@ -104,7 +104,7 @@ $rating = intval( get_comment_meta( $comment->comment_ID, '_wp_travel_rating', t
 
 				$link = "<a class='comment-reply-link' href='" . esc_url( add_query_arg( 'replytocom', $comment->comment_ID ) ) . '#respond' . "' onclick='return addComment.moveForm(\"comment-$comment->comment_ID\", \"$comment->comment_ID\", \"respond\", \"$post_id\")'>" . esc_html( 'Reply', 'wp-travel' ) . '</a>';
 			}
-			echo apply_filters( 'wp_travel_comment_reply_link', $link );
+			echo wp_kses_post( apply_filters( 'wp_travel_comment_reply_link', $link ) );
 			?>
 			</div>
 			<?php do_action( 'wp_travel_review_after_comment_text', $comment ); ?>

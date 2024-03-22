@@ -164,6 +164,8 @@ class WpTravel_Frontend_Assets {
 
 		// Scripts for all .
 		wp_localize_script( 'jquery-datepicker-lib', 'wp_travel', $wp_travel );
+		
+		
 
 		wp_enqueue_script( 'wp-travel-widget-scripts' ); // Need to enqueue in all pages to work enquiry widget in WP Page and posts as well.
 		wp_enqueue_script( 'jquery-datepicker-lib' );
@@ -660,6 +662,11 @@ class WpTravel_Frontend_Assets {
 			wp_register_script( $handler, $script['src'], $script['deps'], $script['ver'], $script['in_footer'] );
 			wp_set_script_translations( $handler, 'wp-travel', plugin_dir_path( __FILE__ ) . 'i18n/languages' );
 		}
+		
+		$all_localized = WpTravel_Helpers_Localize::get();
+
+		$wp_travel     = $all_localized['_wp_travel_admin']; 
+		wp_localize_script( 'wp-travel-admin-script', 'wp_travel', $wp_travel );
 	}
 
 
