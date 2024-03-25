@@ -77,6 +77,6 @@ class WP_Travel_FW_Field_Checkbox {
 			return $output;
 		}
 
-		echo $output;
+		echo wp_kses_post( $output );
 	}
 }

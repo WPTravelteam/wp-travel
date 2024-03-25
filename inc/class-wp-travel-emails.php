@@ -275,7 +275,7 @@ class WP_Travel_Emails {
 				/**
 				 * Translators: %s Sent to Email ID.
 				 */
-				printf( esc_html__( 'TO ', 'wp-travel' ).strtoupper( $sent_to ) );
+				printf( esc_html__( 'TO ', 'wp-travel' ).esc_html( strtoupper( $sent_to ) ) );
 				?>
 			</title>
 			<?php echo $this->email_styles(); //@phpcs:ignore ?>

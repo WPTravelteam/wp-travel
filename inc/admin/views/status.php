@@ -53,7 +53,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 
 
 			if ( $memory < 67108864 ) {
-				echo '<span class="warning"><span class="dashicons dashicons-warning"></span> ' . size_format( $memory ) . __( ' - For better performance, we recommend setting memory to at least 64MB. See: ', 'wp-travel' ). '<a href="https://codex.wordpress.org/Editing_wp-config.php#Increasing_memory_allocated_to_PHP" target="_blank">' . __( 'Increasing memory allocated to PHP', 'wp-travel' ) . '</a>' . '</span>';
+				echo '<span class="warning"><span class="dashicons dashicons-warning"></span> ' . esc_html( size_format( $memory ) ). esc_html__( ' - For better performance, we recommend setting memory to at least 64MB. See: ', 'wp-travel' ). '<a href="https://codex.wordpress.org/Editing_wp-config.php#Increasing_memory_allocated_to_PHP" target="_blank">' . esc_html__( 'Increasing memory allocated to PHP', 'wp-travel' ) . '</a>' . '</span>';
 			} else {
 				echo '<span class="ok">' . esc_html( size_format( $memory ) ) . ' </span>';
 			}
@@ -124,7 +124,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 				$php_version = phpversion();
 
 				if ( version_compare( $php_version, '5.6', '<' ) ) {
-					echo '<span class="error"><span class="dashicons dashicons-warning"></span> ' .esc_html( $php_version ).__( ' - Recommend  PHP version of 5.6. See: ', 'wp-travel' ) . '<a href="#" target="_blank">' . __( 'How to update your PHP version', 'wp-travel' ) . '</a>' . '</span>';
+					echo '<span class="error"><span class="dashicons dashicons-warning"></span> ' .esc_html( $php_version ). esc_html__( ' - Recommend  PHP version of 5.6. See: ', 'wp-travel' ) . '<a href="#" target="_blank">' . esc_html__( 'How to update your PHP version', 'wp-travel' ) . '</a>' . '</span>';
 				} else {
 					echo '<span class="yes">' . esc_html( $php_version ) . '</span>';
 				}
@@ -188,7 +188,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 					$mysql_version = $wpdb->db_version();
 
 					if ( version_compare( $mysql_version, '5.6', '<' ) ) {
-						echo '<span class="error"><span class="dashicons dashicons-warning"></span> ' .esc_html( $mysql_version ). __( ' - We recommend a minimum MySQL version of 5.6. See: ', 'wp-travel' ) . '<a href="https://wordpress.org/about/requirements/" target="_blank">' . esc_html__( 'WordPress Requirements', 'wp-travel' ) . '</a>' . '</span>';
+						echo '<span class="error"><span class="dashicons dashicons-warning"></span> ' .esc_html( $mysql_version ). esc_html__( ' - We recommend a minimum MySQL version of 5.6. See: ', 'wp-travel' ) . '<a href="https://wordpress.org/about/requirements/" target="_blank">' . esc_html__( 'WordPress Requirements', 'wp-travel' ) . '</a>' . '</span>';
 					} else {
 						echo '<span class="yes">' . esc_html( $mysql_version ) . '</span>';
 					}
@@ -208,7 +208,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 			<?php
 				$default_timezone = date_default_timezone_get();
 			if ( 'UTC' !== $default_timezone ) {
-				echo '<span class="error"><span class="dashicons dashicons-warning"></span>No' . __( 'Default timezone is', 'wp-travel' ) .esc_html( $default_timezone ). __( ' - it should be UTC', 'wp-travel' ) . '</span>';
+				echo '<span class="error"><span class="dashicons dashicons-warning"></span>No' . esc_html__( 'Default timezone is', 'wp-travel' ) .esc_html( $default_timezone ). esc_html__( ' - it should be UTC', 'wp-travel' ) . '</span>';
 			} else {
 				echo '<span class="yes"><span class="dashicons dashicons-yes"></span>Yes</span>';
 			}

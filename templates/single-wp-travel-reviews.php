@@ -53,7 +53,7 @@ if ( ! comments_open() ) {
 
 			<?php else : ?>
 
-				<p class="wp-travel-noreviews"><?php echo apply_filters( 'wp_travel_single_archive_no_review_message', __( 'There are no reviews yet.', 'wp-travel' ) ); ?></p>
+				<p class="wp-travel-noreviews"><?php echo esc_html( apply_filters( 'wp_travel_single_archive_no_review_message', __( 'There are no reviews yet.', 'wp-travel' ) ) ); ?></p>
 
 			<?php endif; ?>
 		</div>

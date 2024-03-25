@@ -49,9 +49,9 @@ class WP_Travel_Widget_Featured extends WP_Widget {
 		// $trip_per_row = ( $instance['trip_per_row'] ) ? $instance['trip_per_row'] : $this->trip_per_row;
 		$view_mode = isset( $instance['view_mode'] ) ? $instance['view_mode'] : $this->view_mode;
 
-		echo $before_widget;
+		echo wp_kses_post( $before_widget );
 		if ( ! $hide_title ) {
-			echo ( $title ) ? $before_title . $title . $after_title : '';
+			echo ( $title ) ? wp_kses_post( $before_title . $title . $after_title ) : '';
 		}
 
 		$featured_args = array(
@@ -117,7 +117,7 @@ class WP_Travel_Widget_Featured extends WP_Widget {
 			<p class="itinerary-none"><?php esc_html_e( 'Featured Trips not found.', 'wp-travel' ); ?></p>
 			<?php
 		endif;
-		echo $after_widget;
+		echo wp_kses_post( $after_widget );
 	}
 	/**
 	 * Update widget.

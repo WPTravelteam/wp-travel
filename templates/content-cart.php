@@ -158,7 +158,7 @@ wptravel_print_notices();
 													if ( 'custom' === $category_type && ! empty( $category['custom_label'] ) ) {
 														echo esc_html( $category['custom_label'] );
 													} else {
-														echo esc_html( wptravel_get_pricing_category_by_key( $category_type ) );
+														echo wp_kses_post( wptravel_get_pricing_category_by_key( $category_type ) );
 													}
 													?>
 												</span>
@@ -168,7 +168,7 @@ wptravel_print_notices();
 														data-trip-id="<?php echo esc_attr( $trip_id ); ?>"
 														step="1"
 														min="0"
-														<?php echo $max_attr; ?>
+														<?php echo esc_attr( $max_attr ); ?>
 														name="pax[]"
 														data-category-id="<?php echo esc_attr( $category_id ); ?>"
 														value="<?php echo esc_attr( $pax ); ?>"
@@ -176,8 +176,8 @@ wptravel_print_notices();
 														size="4"
 														pattern="[0-9]*"
 														inputmode="numeric" /> x 
-														<?php echo ( wptravel_get_formated_price_currency( $category['price'] ) ); ?> = 
-														<?php echo ( wptravel_get_formated_price_currency( $price ) ); ?>
+														<?php echo wp_kses_post( wptravel_get_formated_price_currency( $category['price'] ) ); ?> = 
+														<?php echo wp_kses_post( wptravel_get_formated_price_currency( $price ) ); ?>
 											</li>
 											<?php
 										else : // if group.
@@ -186,13 +186,13 @@ wptravel_print_notices();
 												<span class="category-type">
 													<?php
 													if ( 'custom' === $category_type && ! empty( $category['custom_label'] ) ) {
-														echo esc_html( $category['custom_label'] ) . __( ' (Group)', 'wp-travel' );
+														echo esc_html( $category['custom_label'] ) . esc_html__( ' (Group)', 'wp-travel' );
 													} else {
-														echo esc_html( wptravel_get_pricing_category_by_key( $category_type ) ) . __( ' (Group)', 'wp-travel' );
+														echo wp_kses_post( wptravel_get_pricing_category_by_key( $category_type ) ) . esc_html__( ' (Group)', 'wp-travel' );
 													}
 													?>
 													<?php // _e( 'Group', 'wp-travel' ); ?>
-												</span> <input type="number" class="input-text wp-travel-pax text wp-travel-trip-pax" data-trip="wp-travel-trip-<?php echo esc_attr( $trip_id ); ?>" data-trip-id="<?php echo esc_attr( $trip_id ); ?>" step="1" min="0"<?php // echo $min_attr; ?> <?php echo $max_attr; ?> name="pax[]" data-category-id="<?php echo esc_attr( $category_id ); ?>" value="<?php echo esc_attr( $pax ); ?>" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric"> <?php echo wptravel_get_formated_price_currency( $price ); ?>
+												</span> <input type="number" class="input-text wp-travel-pax text wp-travel-trip-pax" data-trip="wp-travel-trip-<?php echo esc_attr( $trip_id ); ?>" data-trip-id="<?php echo esc_attr( $trip_id ); ?>" step="1" min="0"<?php // echo $min_attr; ?> <?php echo esc_attr( $max_attr ); ?> name="pax[]" data-category-id="<?php echo esc_attr( $category_id ); ?>" value="<?php echo esc_attr( $pax ); ?>" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric"> <?php echo wp_kses_post( wptravel_get_formated_price_currency( $price ) ); ?>
 											</li>
 											<?php
 										endif;
@@ -228,7 +228,7 @@ wptravel_print_notices();
 						<td class="product-subtotal text-right" data-title="Total">
 							<?php if ( ! empty( $trip_price ) && '0' !== $trip_price ) : ?>
 								<div class="item_cart">
-									<p><strong><?php echo wptravel_get_formated_price_currency( $trip_price ); ?></strong></p>
+									<p><strong><?php echo wp_kses_post( wptravel_get_formated_price_currency( $trip_price ) ); ?></strong></p>
 								</div>
 							<?php endif; ?>
 						</td>
@@ -250,11 +250,11 @@ wptravel_print_notices();
 					<tr>
 						<th>
 							<strong><?php esc_html_e( 'Coupon Discount: ', 'wp-travel' ); ?><span class="tax-percent">
-								<?php echo esc_html( $discounts['value'] ); ?> ( <?php echo 'percentage' === $discounts['type'] ? ' %' : wptravel_get_currency_symbol(); ?> )
+								<?php echo esc_html( $discounts['value'] ); ?> ( <?php echo 'percentage' === $discounts['type'] ? ' %' : esc_html( wptravel_get_currency_symbol() ); ?> )
 							</span></strong>
 						</th>
 						<td  class="text-right">
-							<strong> - <?php echo wptravel_get_formated_price_currency( $cart_amounts['discount'] ); ?></strong>
+							<strong> - <?php echo wp_kses_post( wptravel_get_formated_price_currency( $cart_amounts['discount'] ) ); ?></strong>
 						</td>
 					</tr>
 
@@ -272,8 +272,8 @@ wptravel_print_notices();
 							</span></strong>
 						</th>
 						<td  class="text-right">
-							<p><strong><span class="wp-travel-sub-total"><?php echo wptravel_get_formated_price_currency( $cart_amounts['sub_total'] ); ?></span></strong></p>
-							<strong><span class="wp-travel-tax"><?php echo wptravel_get_formated_price_currency( $cart_amounts['tax'] ); ?></span></strong>
+							<p><strong><span class="wp-travel-sub-total"><?php echo wp_kses_post( wptravel_get_formated_price_currency( $cart_amounts['sub_total'] ) ); ?></span></strong></p>
+							<strong><span class="wp-travel-tax"><?php echo wp_kses_post( wptravel_get_formated_price_currency( $cart_amounts['tax'] ) ); ?></span></strong>
 						</td>
 					</tr>
 				<?php endif; ?>
@@ -282,7 +282,7 @@ wptravel_print_notices();
 					<th colspan="2">
 						<strong><?php echo esc_html__( 'Total', 'wp-travel' ); ?></strong>
 						<p class="total">
-							<strong><span class="wp-travel-total"><?php echo wptravel_get_formated_price_currency( $cart_amounts['total'] ); ?></span></strong>
+							<strong><span class="wp-travel-total"><?php echo wp_kses_post( wptravel_get_formated_price_currency( $cart_amounts['total'] ) ); ?></span></strong>
 						</p>
 					</th>
 				</tr>

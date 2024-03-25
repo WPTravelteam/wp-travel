@@ -115,7 +115,7 @@ class WP_Travel_Helpers_Cart {
 				}
 				$cart[ $cart_id ]['trip_id']    = $item['trip_id']; // To loop cart items with trip id. like in discount.
 				$cart[ $cart_id ]['pricing_id'] = $item['pricing_id'];
-				$cart[ $cart_id ]['price_key']  = $item['price_key'];
+				$cart[ $cart_id ]['price_key']  = isset( $item['price_key'] ) ? $item['price_key'] : '';
 				$cart[ $cart_id ]['trip_price'] = (float) number_format( $item['trip_price'], 2, '.', '' );
 
 				// Calculation of individual trip total along with extras.

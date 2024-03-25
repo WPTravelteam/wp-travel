@@ -257,10 +257,8 @@ const Itinerary = ({allData}) => {
                                                         let _minutes = stateMinutes < 10 ? '0'+stateMinutes:stateMinutes;
                                                         let _hours = stateHours < 10 ? '0'+stateHours:stateHours;
                                                         let time = `${_hours}:${_minutes}` == '00:00' ? '' : `${_hours}:${_minutes}`;
-                                                        console.log( time );
                                                         // @todo: Need to format time.
                                                         updateTripItinerary('time', time, itineraryId)
-                                                        // updateTripItinerary('time', moment.time(time).format('hh:mm a', time), itineraryId)
 
                                                         onToggle()
                                                     }} isDefault>{__i18n.add}</Button>

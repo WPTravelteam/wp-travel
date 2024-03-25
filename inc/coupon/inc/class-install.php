@@ -149,7 +149,7 @@ if ( ! class_exists( 'WP_Travel_Coupons_Pro_Install' ) ) :
 
 					$coupon_code = get_post_meta( $id, 'wp_travel_coupon_code', true );
 
-					echo '<span><strong>' . $coupon_code . '</strong></span>';
+					echo '<span><strong>' . esc_html( $coupon_code ) . '</strong></span>';
 
 					break;
 				case 'discount_value':
@@ -159,7 +159,7 @@ if ( ! class_exists( 'WP_Travel_Coupons_Pro_Install' ) ) :
 					$symbol         = ( 'percentage' === $discount_type ) ? '%' : wptravel_get_currency_symbol();
 
 					?>
-						<span><strong><?php echo $discount_value; ?> ( <?php echo $symbol; ?> )</strong></span>
+						<span><strong><?php echo esc_html( $discount_value ); ?> ( <?php echo esc_html( $symbol ); ?> )</strong></span>
 
 					<?php
 
@@ -179,7 +179,7 @@ if ( ! class_exists( 'WP_Travel_Coupons_Pro_Install' ) ) :
 					$expiration_date = $coupon->get_coupon_meta( $id, 'general', 'coupon_expiry_date' );
 
 					?>
-						<span><strong><?php echo $expiration_date; ?></strong></span>
+						<span><strong><?php echo esc_html( $expiration_date ); ?></strong></span>
 
 					<?php
 

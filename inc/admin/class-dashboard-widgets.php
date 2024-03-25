@@ -111,7 +111,7 @@ class WP_Travel_Admin_Dashboard_Widgets {
 						$label_key = 'pending';
 						update_post_meta( $id, 'wp_travel_booking_status', $label_key );
 					}
-
+  
 					// Payment.
 					$payment_id = get_post_meta( $id, 'wp_travel_payment_id', true );
 
@@ -121,6 +121,11 @@ class WP_Travel_Admin_Dashboard_Widgets {
 						update_post_meta( $payment_id, 'wp_travel_payment_status', $pmt_label_key );
 					}
 					$Pmt_status = wptravel_get_payment_status();
+					
+					if( $label_key !== 'N/A' ){
+						$label_key = strtolower( $label_key );
+					}
+
 					?>
 
 					<tr>

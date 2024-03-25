@@ -11,7 +11,7 @@ $wptravel_itineraries = get_post_meta( $wptravel_trip_id, 'wp_travel_trip_itiner
 if ( isset( $wptravel_itineraries ) && ! empty( $wptravel_itineraries ) ) : ?>
 	<div class="itenary clearfix">
 		<div class="timeline-contents clearfix">
-			<h2><?php echo apply_filters( 'wp_travel_ititneraries_trip_outline_tab', __( 'Itineraries', 'wp-travel' ), $wptravel_trip_id ); ?></h2>
+			<h2><?php echo esc_html( apply_filters( 'wp_travel_ititneraries_trip_outline_tab', __( 'Itineraries', 'wp-travel' ), $wptravel_trip_id ) ); ?></h2>
 				<?php
 				$wptravel_index = 1;
 				foreach ( $wptravel_itineraries as $wptravel_itinerary ) :

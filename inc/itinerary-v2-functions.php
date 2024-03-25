@@ -508,7 +508,7 @@ function wptravel_single_itinerary_trip_facts() {
 								if ( isset( $trip_fact['fact_id'] ) ) {
 									?>
 									<span class="trip__info-label">
-										<?php echo @esc_html( $settings['wp_travel_trip_facts_settings'][ $trip_fact['fact_id'] ]['options'][ $val ] ); ?>
+										<?php echo esc_html( $settings['wp_travel_trip_facts_settings'][ $trip_fact['fact_id'] ]['options'][ $val ] ); ?>
 									</span>
 									<?php
 								} else {
@@ -648,7 +648,7 @@ function wptravel_single_itinerary_main_contents( $trip_id ) {
 
 					} else {
 
-						echo apply_filters( 'the_content', $tab_info['content'] );
+						echo wp_kses_post( apply_filters( 'the_content', $tab_info['content'] ) );
 					}
 
 					?>
@@ -682,7 +682,7 @@ function wptravel_single_related_trips( $trip_id ) {
 	<div class="wti__grid-item col-12">
 		<div class="wti__related-trips <?php echo esc_attr( $wrapper_class ); ?>">
 			<hr class="wti__trip-section-devider">
-			<h3 class="related-trip-title"><?php echo apply_filters( 'wp_travel_related_post_title', esc_html__( 'Related Trips', 'wp-travel' ) ); ?></h3>
+			<h3 class="related-trip-title"><?php echo esc_html( apply_filters( 'wp_travel_related_post_title', __( 'Related Trips', 'wp-travel' ) ) ); ?></h3>
 			<div class="wti__list-wrapper">
 				<div class="wti__list">
 				<?php
@@ -850,7 +850,7 @@ function wptravel_single_itinerary_maps( $trip_id ) {
 			<div id="trip-map" class="wti__tab-content-wrapper" class="wp-travel-map  <?php echo esc_attr( $wrapper_class ); ?>">
 			<h3 class="tab-content-title"><?php esc_html_e( 'Map', 'wp-travel' ); ?></h3>
 				<div class="map">
-					<iframe src="https://maps.google.com/maps?q=<?php echo $q; ?>&t=m&z=<?php echo $settings['google_map_zoom_level']; ?>&output=embed&iwloc=near" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+					<iframe src="https://maps.google.com/maps?q=<?php echo esc_attr( $q ); ?>&t=m&z=<?php echo esc_attr( $settings['google_map_zoom_level'] ); ?>&output=embed&iwloc=near" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
 				</div>
 			</div>
 			<?php

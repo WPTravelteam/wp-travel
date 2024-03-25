@@ -22,6 +22,6 @@ class WP_Travel_FW_Field_Text_Info {
 			return $output;
 		}
 
-		echo $output;
+		echo wp_kses_post( $output );
 	}
 }

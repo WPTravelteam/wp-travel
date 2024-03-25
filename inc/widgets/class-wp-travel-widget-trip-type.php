@@ -49,9 +49,9 @@ class WP_Travel_Widget_Trip_Type extends WP_Widget {
 		// $trip_per_row = ( $instance['trip_per_row'] ) ? $instance['trip_per_row'] : $this->trip_per_row;
 		$view_mode = isset( $instance['view_mode'] ) ? $instance['view_mode'] : $this->view_mode;
 		$trip_type = isset( $instance['trip_type'] ) ? $instance['trip_type'] : '';
-		echo $before_widget;
+		echo wp_kses_post( $before_widget );
 		if ( ! $hide_title ) {
-			echo ( $title ) ? $before_title . $title . $after_title : '';
+			echo ( $title ) ? wp_kses_post( $before_title . $title . $after_title ) : '';
 		}
 		$args = array(
 			'posts_per_page'   => $no_of_trip_show,
@@ -121,7 +121,7 @@ class WP_Travel_Widget_Trip_Type extends WP_Widget {
 			<p class="itinerary-none"><?php esc_html_e( 'Trips not found.', 'wp-travel' ); ?></p>
 			<?php
 		endif;
-		echo $after_widget;
+		echo wp_kses_post( $after_widget );
 	}
 	/**
 	 * Update widget.

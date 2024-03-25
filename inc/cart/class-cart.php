@@ -596,7 +596,7 @@ class WP_Travel_Cart {
 	 */
 	public function cart_empty_message() {
 		$url = get_post_type_archive_link( WP_TRAVEL_POST_TYPE );
-		printf( __( 'Your cart is empty please ', 'wp-travel' ) . '<a href="'.esc_url( $url ).'"> click here </a>' . __( ' to add trips.', 'wp-travel' ) );
+		printf( esc_html__( 'Your cart is empty please ', 'wp-travel' ) . '<a href="'.esc_url( $url ).'"> click here </a>' . esc_html__( ' to add trips.', 'wp-travel' ) );
 	}
 	/**
 	 * Clear all items in the cart.

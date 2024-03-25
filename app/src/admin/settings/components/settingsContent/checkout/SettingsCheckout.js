@@ -30,7 +30,7 @@ export default () => {
     // if (defaultModules && Object.keys(defaultModules).length > 0) { 
     const paymentModules = Object.keys(defaultModules).filter(k => 'Payment' === defaultModules[k].category);
     // }
-    // console.log(paymentModules);
+
     return (
         <>
             <div className="wp-travel-section-header">

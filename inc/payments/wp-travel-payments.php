@@ -17,11 +17,11 @@ if ( ! function_exists( 'wptravel_register_payments' ) ) {
 	function wptravel_register_payments( $object ) {
 
 		if ( ! is_object( $object ) ) {
-			throw new \Exception( 'Payment gateway must be an instance of class. ' . gettype( $object ) . ' given.' );
+			throw new \Exception( 'Payment gateway must be an instance of class. ' . esc_html( gettype( $object ) ) . ' given.' );
 		}
 
 		if ( ! ( $object instanceof Wp_Travel_Payment_Interface ) ) {
-			throw new \Exception( 'Payment gateway must be an instance of Wp_Travel_Payment_Interface. Instance of ' . get_class( $object ) . ' given.' );
+			throw new \Exception( 'Payment gateway must be an instance of Wp_Travel_Payment_Interface. Instance of ' . esc_html( get_class( $object ) ) . ' given.' );
 		}
 
 		array_push( $GLOBALS['wp_travel_payments'], $object );
@@ -718,7 +718,7 @@ function wptravel_booking_info_table( $booking_id ) {
 						<td>
 							<ol>
 								<?php foreach ( $trip_fnames as $k => $fname ) : ?>
-									<li> <?php printf( '%s %s', $fname, $trip_lnames[ $k ] ); ?> </li>
+									<li> <?php printf( '%s %s', esc_html( $fname ), esc_html( $trip_lnames[ $k ] ) ); ?> </li>
 								<?php endforeach; ?>
 							</ol>
 

@@ -27,15 +27,15 @@ $generate_user_password       = isset( $settings['generate_user_password'] ) ? $
 
 ?>
 
-	<p><?php echo  __( 'Thanks for creating an account on ', 'wp-travel' ).esc_html( $blogname ). __( ' Your username is ', 'wp-travel' ).'<strong>' . esc_html( $user_login ) . '</strong>'; ?></p>
+	<p><?php echo  esc_html__( 'Thanks for creating an account on ', 'wp-travel' ).esc_html( $blogname ). esc_html__( ' Your username is ', 'wp-travel' ).'<strong>' . esc_html( $user_login ) . '</strong>'; ?></p>
 
 <?php if ( 'yes' === $generate_user_password && $password_generated ) : ?>
 
-	<p><?php echo  __( 'Your password has been automatically generated: ', 'wp-travel' ). '<strong>' . esc_html( $user_pass ) . '</strong>'; ?></p>
+	<p><?php echo  esc_html__( 'Your password has been automatically generated: ', 'wp-travel' ). '<strong>' . esc_html( $user_pass ) . '</strong>'; ?></p>
 
 <?php endif; ?>
 
-	<p><?php echo  __( 'You can access your account area to view your Trip Bookings and change your password here: ', 'wp-travel' ). make_clickable( esc_url( wptravel_get_page_permalink( 'wp-travel-dashboard' ) ) ); ?></p>
-	<p><?php echo __( 'Powered by', 'wp-travel' ); ?><a href="http://wptravel.io" target="_blank"> <?php echo __( 'WP Travel', 'wp-travel' ); ?></a></p>
+	<p><?php echo  esc_html__( 'You can access your account area to view your Trip Bookings and change your password here: ', 'wp-travel' ). esc_html( make_clickable( esc_url( wptravel_get_page_permalink( 'wp-travel-dashboard' ) ) ) ); ?></p>
+	<p><?php echo esc_html__( 'Powered by', 'wp-travel' ); ?><a href="http://wptravel.io" target="_blank"> <?php echo esc_html__( 'WP Travel', 'wp-travel' ); ?></a></p>
 <?php
 

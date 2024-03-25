@@ -589,7 +589,7 @@ function wptravel_get_booking_chart() {
 						<h3><?php esc_html_e( 'Compare 2', 'wp-travel' ); ?></h3>
 					</div>
 					<div class="right-block-single">
-						<strong><big><?php echo esc_html( wptravel_get_currency_symbol() ); ?></big><big class="wp-travel-total-sales-compare">0</big></strong><br />
+						<strong><big><?php echo wp_kses_post( wptravel_get_currency_symbol() ); ?></big><big class="wp-travel-total-sales-compare">0</big></strong><br />
 						<p><?php esc_html_e( 'Total Sales', 'wp-travel' ); ?></p>
 					</div>
 					<div class="right-block-single">

@@ -534,7 +534,7 @@ function wptravel_search_filter_widget_form_fields( $sanitize_get = array() ) {
 		),
 	);
 	$fields = apply_filters( 'wp_travel_search_filter_widget_form_fields', $fields );
-
+	
 	return wptravel_sort_form_fields( $fields );
 }
 
