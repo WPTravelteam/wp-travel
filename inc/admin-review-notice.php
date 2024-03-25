@@ -37,7 +37,7 @@ class WP_Travel_Review_Admin_Notice {
               <p>- WP Travel Team</p>
               <div class="wp-travel-review-action-section" style="margin:20px 0px;display: flex;justify-content: space-between;">
                 <div>
-                    <a id="wptravel-review-now" href="https://wordpress.org/plugins/wp-travel/#reviews" target="_blank">Yes, you deserve it &#9733; &#9733; &#9733; &#9733; &#9733;</a>
+                    <a id="wptravel-review-now" href="https://wordpress.org/plugins/wp-travel/#reviews" target="_blank">Yes, you deserve it <span>&#9733; &#9733; &#9733; &#9733; &#9733;</span></a>
                     <a id="wptravel-review-later" href="#" style="margin-right: 20px;">Remind me later</a>
                     <a id="wptravel-review-already" href="#">I already review</a>
                 </div>
@@ -48,8 +48,11 @@ class WP_Travel_Review_Admin_Notice {
                 </div>
               </div>
               <style>
+                #wptravel-review-now span{
+                    color: #FFC733;
+                }
                 #wptravel-review-now{
-                    background:rgba(0,0,0,.3);
+                    background:#008600;
                     color:#fff;
                     text-decoration:none;
                     padding:10px 20px;
@@ -57,7 +60,7 @@ class WP_Travel_Review_Admin_Notice {
                     margin-right: 20px;
                 }
                 #wptravel-review-now:hover{
-                    background: #135e96;
+                    background: #00860099;
                 }
               </style>
               </div>'; 
@@ -79,12 +82,10 @@ class WP_Travel_Review_Admin_Notice {
 		}
 
         update_option( 'wptravel_review_notice_date', date('Y/m/d', strtotime( date('Y/m/d') . ' + 3 days') ) );
-        header("Refresh:0");
     }
 
     public function wptravel_gave_review_already(){ 
         update_option( 'wptravel_review_status', 1 );
-        header("Refresh:0");
     }
 
     public function wptravel_review_now(){ 

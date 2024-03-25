@@ -665,7 +665,7 @@ class WpTravel_Frontend_Assets {
 		
 		$all_localized = WpTravel_Helpers_Localize::get();
 
-		$wp_travel     = $all_localized['_wp_travel_admin']; 
+		$wp_travel     = isset( $all_localized['_wp_travel_admin'] ) ? $all_localized['_wp_travel_admin'] : array(); 
 		wp_localize_script( 'wp-travel-admin-script', 'wp_travel', $wp_travel );
 	}
 

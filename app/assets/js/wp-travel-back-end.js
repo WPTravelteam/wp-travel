@@ -905,11 +905,6 @@
         });
     }
 
-}(jQuery));
-
-
-(function ($) {
-    
     $("#wptravel-review-later").click(function(){
         fetch( wp_travel.ajaxUrl + "?action=wptravel_review_later&_nonce="+wp_travel._nonce ).then(response => location.reload());
     });
@@ -923,3 +918,4 @@
     });
 
 }(jQuery));
+

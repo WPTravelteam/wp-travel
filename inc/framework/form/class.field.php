@@ -204,6 +204,11 @@ class WP_Travel_FW_Field {
 			'style' => true
 		);
 		$allow_html[ 'script' ] = array();
+		$allow_html[ 'table' ] = array(
+			'width' => true,
+		);
+		$allow_html[ 'tr' ] = array();
+		$allow_html[ 'td' ] = array();
 		$allow_html[ 'h1' ] = array(
 			'class' => true,
 			'id' => true,

@@ -434,7 +434,6 @@ Fixes:
 * Fixed low high pricing filter issue on trip filter shortcode 
 
 Enhancements:
-* Added shortcode for cart - [wptravel_cart_icon]
 * Added hook to exclude dates for booking 
 
 **For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v8-4-0-update-release-note).**
