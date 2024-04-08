@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 global $wp_travel_itinerary;
 ?>
-
+<div class="<?php echo esc_attr(  wp_get_theme()->template ) ?>-wptravel-main-content-wrapper" >
 <?php
 do_action( 'wp_travel_before_single_itinerary', get_the_ID() );
 $trip_id = get_the_ID();
@@ -89,3 +89,4 @@ do_action( 'wp_travel_before_content_start' );
 </div><!-- #itinerary-<?php the_ID(); ?> -->
 
 <?php do_action( 'wp_travel_after_single_itinerary', get_the_ID() ); ?>
+</div>

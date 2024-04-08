@@ -201,6 +201,10 @@ class WP_Travel_FW_Field {
 		$allow_html[ 'div' ] = array(
 			'class' => true,
 			'id' => true,
+			'data-sitekey' => true,
+			'data-parsley-maxlength' => true,
+			'data-callback' => true,
+			'maxlength' => true,
 			'style' => true
 		);
 		$allow_html[ 'script' ] = array();
@@ -213,6 +217,18 @@ class WP_Travel_FW_Field {
 			'class' => true,
 			'id' => true,
 			'style' => true
+		);
+
+		$allow_html[ 'iframe' ] = array(
+			'title' => true,
+			'width' => true,
+			'name' => true,
+			'role' => true,
+			'frameborder' => true,
+			'scrolling' => true,
+			'sandbox' => true,
+			'src' => true,
+			'height' => true
 		);
 
 		echo wp_kses( $this->process( ), $allow_html );

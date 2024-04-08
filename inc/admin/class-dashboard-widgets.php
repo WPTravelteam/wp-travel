@@ -32,7 +32,7 @@ class WP_Travel_Admin_Dashboard_Widgets {
 		$screen = get_current_screen();
 
 		if ( 'dashboard' === $screen->id ) {
-			wp_enqueue_style( 'wp-travel-dashboard-widget-styles', $this->assets_path . 'app/assets/css/wp-travel-dashboard-widget.css' );
+			wp_enqueue_style( 'wp-travel-dashboard-widget-styles', $this->assets_path . 'app/assets/css/wp-travel-dashboard-widget.css', array(), WP_TRAVEL_VERSION );
 		}
 
 	}

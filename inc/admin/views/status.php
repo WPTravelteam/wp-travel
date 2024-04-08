@@ -3,7 +3,7 @@ global $wpdb;
 
 $common = new WT_Admin_status();
 // wp_enqueue_style( 'wp-travel-system-status', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'app/assets/css/system-status.css' );
-wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'app/assets/js/system-status.js' );
+wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'app/assets/js/system-status.js', array(), WP_TRAVEL_VERSION, false );
 ?>
 <div class="wp-travel-system">
 	<h1 class="wp-heading-inline"><?php esc_html_e( 'System Information', 'wp-travel' ); ?> </h1>

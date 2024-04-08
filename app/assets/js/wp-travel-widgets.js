@@ -119,9 +119,9 @@ jQuery(function($) {
         // window.location = redirect_url;
 
         query_string = '';
-        if ( window.location.search ) {
-            query_string = window.location.search;
-        }
+        // if ( window.location.search ) {
+        //     query_string = window.location.search;
+        // }
         var full_url       = new URL( pathname + query_string );
         var search_params  = full_url.searchParams;
 
@@ -134,6 +134,7 @@ jQuery(function($) {
             full_url.search = search_params.toString();
         })
         var new_url     = full_url.toString();
+        console.log(new_url)
         window.location = new_url;
     });
 

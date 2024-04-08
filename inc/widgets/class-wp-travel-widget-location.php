@@ -173,6 +173,9 @@ class WP_Travel_Widget_Location extends WP_Widget {
 			$trip_location = esc_attr( $instance['trip_location'] );
 		}
 		?>
+		<p> 
+			<?php echo __( 'This widget will be removed from v9.0.0. Please use "[WP_TRAVEL_ITINERARIES type=travel_locations slug="Nepal"]" shortcode in replace of this widget.', 'wp-travel' ); ?>
+		</p>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title', 'wp-travel' ); ?>:</label>
 			<input type="text" value="<?php echo esc_attr( $title ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" class="widefat">

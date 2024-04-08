@@ -361,7 +361,7 @@ const Body = () => {
 									<span><i className='fa fa-info-circle'></i></span>{ __( 'This might take 2-5 minutes depending upon your internet connection.' )}
 								</div>
 								<ul>
-									<li><i className='fa fa-check'></i>{ __( 'WP Travel FSE (Theme) will be installed and activated.' ) }</li>
+									<li><i className='fa fa-check'></i>{ __( 'Travelsolution (Theme) will be installed and activated.' ) }</li>
 									<li><i className='fa fa-check'></i>{ __( 'WP Travel Gutenberg Blocks (Plugin) will be installed and activated.' ) }</li>
 									<li><i className='fa fa-check'></i>{ __( 'Demo Trips will be imported.' ) }</li>
 								</ul>
