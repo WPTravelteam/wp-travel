@@ -62,6 +62,19 @@
     display: none;
 }
 
+.hello-elementor-wptravel-main-content-wrapper{
+    max-width: 1140px;
+    margin: auto;
+    position: relative;
+    z-index: 1;
+}
+
+.stripe-brand-logo{
+    display: none;
+}
+.stripe-brand-logo + img{
+    display: none !important;
+}
 .block-theme-active {
     .right-plot-inner-wrap .entry-header .entry-title {
         line-height: 50px;

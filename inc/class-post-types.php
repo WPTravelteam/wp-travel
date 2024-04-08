@@ -394,7 +394,7 @@ class WP_Travel_Post_Types {
 			'public'             => true,
 			'publicly_queryable' => true,
 			'show_ui'            => true,
-			'show_in_menu'       => false,
+			'show_in_menu'       => false ,
 			'query_var'          => true,
 			'rewrite'            => array( 'slug' => 'travel-guide' ),
 			'capability_type'    => 'post',

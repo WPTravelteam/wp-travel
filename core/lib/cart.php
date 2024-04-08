@@ -192,8 +192,8 @@ class WP_Travel_Lib_Cart {
 		$wp_travel_user_after_multiple_pricing_category = get_option( 'wp_travel_user_after_multiple_pricing_category' ); // New Add to cart @since 3.0.0
 		if ( is_array( $pax ) ) :
 			$this->items[ $cart_item_id ]['trip_id']            = $trip_id;
-			$this->items[ $cart_item_id ]['trip_price']         = wptravel_get_formated_price( $trip_price );
-			$this->items[ $cart_item_id ]['trip_price_partial'] = wptravel_get_formated_price( $trip_price_partial );
+			$this->items[ $cart_item_id ]['trip_price']         = $trip_price;
+			$this->items[ $cart_item_id ]['trip_price_partial'] = $trip_price_partial;
 
 		else :
 
@@ -393,7 +393,7 @@ class WP_Travel_Lib_Cart {
 
 					if ( $payout_percent > 0 ) {
 						$trip_price_partial = ( $trip_price * $payout_percent ) / 100;
-						$trip_price_partial = wptravel_get_formated_price( $trip_price_partial );
+						$trip_price_partial = $trip_price_partial;
 					}
 					$this->items[ $cart_item_id ]['trip_price_partial'] = $trip_price_partial;
 				}
@@ -534,8 +534,7 @@ class WP_Travel_Lib_Cart {
 							$price = $sale_price;
 						}
 
-						$qty                       = isset( $trip['trip_extras']['qty'][ $k ] ) && ! empty( $trip['trip_extras']['qty'][ $k ] ) ? $trip['trip_extras']['qty'][ $k ] : 1;
-						$extra_price               = wptravel_get_formated_price( $price * $qty );
+						$qty                       = $price * $qty;
 						$trip_extras_total        += $extra_price;
 						$trip_extras_total_partial = $extra_price;
 
@@ -544,7 +543,7 @@ class WP_Travel_Lib_Cart {
 							$payout_percent = WP_Travel_Helpers_Pricings::get_payout_percent( $trip['trip_id'] );
 							if ( $payout_percent > 0 && $extra_price > 0 ) {
 								$trip_extras_total_partial = ( $extra_price * $payout_percent ) / 100;
-								$trip_extras_total_partial = wptravel_get_formated_price( $trip_extras_total_partial );
+								$trip_extras_total_partial = $trip_extras_total_partial;
 							}
 						}
 					}
@@ -555,7 +554,7 @@ class WP_Travel_Lib_Cart {
 			endforeach;
 		}
 
-		$cart_total = apply_filters( 'wp_travel_cart_sub_total', wptravel_get_formated_price( $cart_total ) );
+		$cart_total = apply_filters( 'wp_travel_cart_sub_total', $cart_total );
 
 		// Discounts Calculation.
 		if ( ! empty( $discounts ) && $with_discount ) { // $with_discount will help to get actual total while calculating discount.
@@ -589,18 +588,18 @@ class WP_Travel_Lib_Cart {
 		$total_trip_price_partial = $total_trip_price_partial_after_dis + $tax_amount_partial;
 
 		$get_total = array(
-			'cart_total'         => wptravel_get_formated_price( $cart_total ), // Effective for multiple cart items[cart_total].
-			'discount'           => wptravel_get_formated_price( $discount_amount ),
-			'sub_total'          => wptravel_get_formated_price( $total_trip_price_after_dis ),
-			'tax'                => wptravel_get_formated_price( $tax_amount ),
-			'total'              => wptravel_get_formated_price( $total_trip_price ),
+			'cart_total'         => $cart_total, // Effective for multiple cart items[cart_total].
+			'discount'           => $discount_amount,
+			'sub_total'          => $total_trip_price_after_dis,
+			'tax'                => $tax_amount,
+			'total'              => $total_trip_price,
 
 			// Total payble amount // Same as above price if partial payment not enabled.
-			'cart_total_partial' => wptravel_get_formated_price( $cart_total_partial ),
-			'discount_partial'   => wptravel_get_formated_price( $discount_amount_partial ),
-			'sub_total_partial'  => wptravel_get_formated_price( $total_trip_price_partial_after_dis ),
-			'tax_partial'        => wptravel_get_formated_price( $tax_amount_partial ),
-			'total_partial'      => wptravel_get_formated_price( $total_trip_price_partial ),
+			'cart_total_partial' => $cart_total_partial,
+			'discount_partial'   => $discount_amount_partial,
+			'sub_total_partial'  => $total_trip_price_partial_after_dis,
+			'tax_partial'        => $tax_amount_partial,
+			'total_partial'      => $total_trip_price_partial,
 		);
 
 		$get_total = apply_filters( 'wp_travel_cart_get_total_fields', $get_total );

@@ -591,6 +591,31 @@ class WpTravel_Helpers_Trips {
 				update_post_meta( $trip_id, 'wp_travel_trips_dates', array() );
 			}
 		}
+		
+		update_post_meta( $trip_id, 'wp_travel_start_date', "9999-01-01");
+		update_post_meta( $trip_id, 'wp_travel_end_date', "0000-00-00");
+		global $wpdb; 
+		$date_value = $wpdb->get_results('SELECT * FROM wp_wt_dates WHERE trip_id ='.$trip_id);
+		
+
+		if( count($date_value) ){
+			$current_end_date = "0000-00-00";
+			$current_start_date = date("Y-m-d", strtotime( "9999-01-01" ));
+			foreach( $date_value as $date ){
+				
+				if( $date->start_date < $current_start_date ){
+					update_post_meta( $trip_id, 'wp_travel_start_date', date("Y-m-d", strtotime(sanitize_text_field( $date->start_date ))));
+				}
+
+				if( $date->end_date > $current_end_date ){
+					update_post_meta( $trip_id, 'wp_travel_end_date', date("Y-m-d", strtotime(sanitize_text_field( $date->end_date ))));
+				}
+				
+				$current_start_date = $date->start_date;
+				$current_end_date = $date->start_date;
+			}
+		}
+		
 		return WP_Travel_Helpers_Response_Codes::get_success_response(
 			'WP_TRAVEL_UPDATED_TRIP',
 			array(

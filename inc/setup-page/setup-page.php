@@ -48,7 +48,7 @@ class WP_Travel_Setup_Page {
 			return __( 'Error During Importing', 'wp-travel' );
 		} else {
 
-			$theme_slug = 'wp-travel-fse';
+			$theme_slug = 'travelsolution';
 
 			$api = themes_api(
 				'theme_information',
