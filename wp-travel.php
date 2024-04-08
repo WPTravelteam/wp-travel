@@ -862,7 +862,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			}
 			return $data;
 		}
-
 		/**
 		 * To disable cache and never cache cookies in WP Travel Checkout page. Setting checkout uri to exclude page in cache plugin.
 		 *
