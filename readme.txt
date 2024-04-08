@@ -3,9 +3,9 @@ Contributors: wptravel
 Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
 Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 6.0.0
-Tested up to: 6.4
+Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 8.4.0
+Stable tag: 8.5.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -424,6 +424,20 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
 
+= 8.5.0 =
+Release Date: 05th April 2024
+
+Fixes:
+* Fixed search url parameter
+* Fixed cart update issue for the trips with the custom pricing category 
+* Fixed plugin performance errors
+* Fixed compatibility issue with Beaver Builder plugin
+
+Enhancements:
+* Added shortcode for corresponding WP Travel Search widget
+* Added shortcode for corresponding WP Travel Featured Trip widget
+* Adding shortcode for corresponding WP Travel Sale Trip widget
+
 = 8.4.0 =
 Release Date: 25th March 2024
 
@@ -689,139 +703,6 @@ Enhancement:
 * Added On-Page booking option. 
 * Compatibility for Standard PayPal and  Bank deposit for On-Page booking.
 * For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version7-0-0-july-2023-update-release-notes/ ).
-
-= 6.9.1. =
-Release Date: 29th June 2023
-
-Enhancement:
-* Some information and broken links fixed in the description section of plugin page in wordpress.org
-
-= 6.9.0. =
-Release Date: 27th June 2023
-
-Fixes:
-* Fixed backend setting page string translation.
-
-Enhancement:
-* Added hook `[wp_travel_single_archive_trip_types]` to modify and remove trip types on single trip page.
-* Added hook `[wp_travel_single_archive_activities]` to modify and remove activities on single trip page.
-* Added hook `[wp_travel_single_archive_group_size]` to modify and remove group size on single trip page.
-* Added hook `[wp_travel_single_archive_review]` to modify and remove review on single trip page.
-* Added hook `[wp_travel_single_archive_page_trip_location]` to modify and remove trip location on single trip page.
-* Added hook `[wp_travel_single_archive_page_trip_duration]` to modify and remove trip duration on single trip page.
-* Added hook `[wp_travel_single_archive_trip_code]` to modify and remove trip code on single trip page.
-* Added hook `[wp_travel_single_archive_trip_keyword]` to modify and remove trip keyword on single trip page.
-* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-9-0-release-note/ ).
-
-= 6.8.0. =
-Release Date: 12th June 2023
- 
-Fixes:
-* Fixed gender translation issue in the Chinese language.
-* Fixed rating schema.
-  
-Enhancement:
-* Added option to Import/Export WP Travel settings options. 
-* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-8-0-release-note/ ). 
-
-= 6.7.0. =
-Release Date: 15th May 2023
- 
-Fixes:
-* Fixed Type Error on the Price & Dates backend section.
-* Fixed Translation issue of gender with the Chinese language.
-* Fixed searching not working in multilingual sites while using WPML plugins.
-* Fixed translation issue under the booking tab (Select Date and Pricing Options for this trip in the Trip Options setting).
-  
-Enhancement:
-* WP Travel compatibility with Yoast ( For Internal link verification and Featured image).
-* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-7-0-release-note/ ). 
-
-= 6.6.0. =
-Release Date: 27th April 2023
-
-Fixes:
-* Fixed N/A in payment mode while the partial payment is disabled.
-
-Enhancement: 
-* Sending an email to the client when Payment Info is changed to Paid by the admin manually.
-* Added option to add hourly Trips in case of Trip duration.
-* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-6-0-release-note/ ).
-
-= 6.5.0. =
-Release Date: 12th April 2023
-
-Fixes:
-* Fixed calendar layout issue in backend trip edit dashboard.
-* Fixed when changing Payment Status to paid, Payment Mode status will also be changed to full.  
-
-Enhancement: 
-* Added hook `[wp_travel_email_itinerary_pdf_attachment]` to attach itinerary PDF in the booking email. (in Pro)
-* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-5-0-release-note/ ).
-
-= 6.4.1. =
-Release Date: 3rd April 2023
-
-Fixes:
-* Fixed js issue in the gallery backend.
-* Fixed thank you page not set while activate WPML plugin.
-* Fixed custom filter label not translate while translating using WPML.
-
-others: 
-* Sets the WordPress tested up to version to 6.2.
-
-
-= 6.4.0. =
-Release Date: 30th March 2023
-
-Enhancement: 
-* Implemented new design and interface of the Settings page.
-* Added compatibility with WPML plugin for translations.
-* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-4-0-release-note/ ).
-
-
-= 6.3.0. =
-Release Date: 1st March 2023
-
-Tweaks:
-* Added hook 'wp_travel_strings'.
-
-Fixes:
-* For additional compatible bug fixes with WP Travel Pro please see this [changelog]( https://wptravel.io/changelog-wp-travel-pro/ ).
-
-= 6.2.0. =
-Release Date: 13th February 2023
-
-Fixes: 
-* Fixed Trip placeholder image being cropped.
-* Fixed filter by option not being clickable in small screen size.
-* Fixed shortcode `[WP_TRAVEL_ITINERARIES limit=50 type='itinerary_types' slug="term-slug" ]` not working.
-
-Enhancement: 
-* Added option to disable rating star option for admin.
-
-= 6.1.1 =
-Release Date:  24th January 2023
-
-Fixes: 
-* Fixed slow performance in admin Dashboard with latest version of WP Travel.
-* Fixed media upload issue. 
-
-= 6.1.0 =
-Release Date:  19th January 2023
-
-Tweaks:
-* Hook added to rename Tax.
-
-Enhancement:
-* Added WP Travel Initial Setup steps to make it admin easier to set up the site.
-* For more detail, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-6-1-0-release-note/ ).
-
-= 6.0.1 =
-Release Date:  5th January 2023
-
-Fixes: 
-* Fixed Redirect on Setup Page while Activate Plugins.
 
 = Earlier versions =
 For the changelog of earlier versions, please refer to [the changelog on wptravel.io](https://wptravel.io/changelog-wp-travel/).

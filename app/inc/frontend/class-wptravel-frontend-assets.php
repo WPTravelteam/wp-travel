@@ -153,7 +153,11 @@ class WpTravel_Frontend_Assets {
 		if ( $switch_to_v4 ) {
 			$_wp_travel = isset( $all_localized['_wp_travel'] ) ? $all_localized['_wp_travel'] : array();
 			wp_localize_script( 'wp-travel-frontend-booking-widget', '_wp_travel', $_wp_travel );
-			wp_enqueue_script( 'wp-travel-frontend-booking-widget' );
+
+			if( !isset( $_GET['fl_builder'] ) ){
+				wp_enqueue_script( 'wp-travel-frontend-booking-widget' );
+			}
+
 			wp_enqueue_style( 'wp-travel-frontend-booking-widget-style' );
 		}
 	

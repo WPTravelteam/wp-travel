@@ -246,6 +246,108 @@ export default () => {
                                             </div>
                                         </PanelRow>
                                     </>}
+                                    {partial_payouts.length >= 5 && <>
+                                        <PanelRow>
+                                            <label>{_wp_travel.setting_strings.payment.partial_payout_five}</label>
+                                            <div className="wp-travel-field-value">
+                                                <RangeControl
+                                                    value={'undefined' != typeof partial_payouts[4] ? parseFloat(partial_payouts[4]) : 0}
+                                                    onChange={
+                                                        (value) => updatePayoutOption(value, 4)
+                                                    }
+                                                    min={1.0}
+                                                    max={100.0}
+                                                    step={0.01}
+                                                />
+                                                <p className="description">{_wp_travel.setting_strings.payment.partial_payout_note}</p>
+                                            </div>
+                                        </PanelRow>
+                                    </>}
+                                    {partial_payouts.length >= 6 && <>
+                                        <PanelRow>
+                                            <label>{_wp_travel.setting_strings.payment.partial_payout_six}</label>
+                                            <div className="wp-travel-field-value">
+                                                <RangeControl
+                                                    value={'undefined' != typeof partial_payouts[5] ? parseFloat(partial_payouts[5]) : 0}
+                                                    onChange={
+                                                        (value) => updatePayoutOption(value, 5)
+                                                    }
+                                                    min={1.0}
+                                                    max={100.0}
+                                                    step={0.01}
+                                                />
+                                                <p className="description">{_wp_travel.setting_strings.payment.partial_payout_note}</p>
+                                            </div>
+                                        </PanelRow>
+                                    </>}
+                                    {partial_payouts.length >= 7 && <>
+                                        <PanelRow>
+                                            <label>{_wp_travel.setting_strings.payment.partial_payout_seven}</label>
+                                            <div className="wp-travel-field-value">
+                                                <RangeControl
+                                                    value={'undefined' != typeof partial_payouts[6] ? parseFloat(partial_payouts[6]) : 0}
+                                                    onChange={
+                                                        (value) => updatePayoutOption(value, 6)
+                                                    }
+                                                    min={1.0}
+                                                    max={100.0}
+                                                    step={0.01}
+                                                />
+                                                <p className="description">{_wp_travel.setting_strings.payment.partial_payout_note}</p>
+                                            </div>
+                                        </PanelRow>
+                                    </>}
+                                    {partial_payouts.length >= 8 && <>
+                                        <PanelRow>
+                                            <label>{_wp_travel.setting_strings.payment.partial_payout_eight}</label>
+                                            <div className="wp-travel-field-value">
+                                                <RangeControl
+                                                    value={'undefined' != typeof partial_payouts[7] ? parseFloat(partial_payouts[7]) : 0}
+                                                    onChange={
+                                                        (value) => updatePayoutOption(value, 7)
+                                                    }
+                                                    min={1.0}
+                                                    max={100.0}
+                                                    step={0.01}
+                                                />
+                                                <p className="description">{_wp_travel.setting_strings.payment.partial_payout_note}</p>
+                                            </div>
+                                        </PanelRow>
+                                    </>}
+                                    {partial_payouts.length >= 9 && <>
+                                        <PanelRow>
+                                            <label>{_wp_travel.setting_strings.payment.partial_payout_nine}</label>
+                                            <div className="wp-travel-field-value">
+                                                <RangeControl
+                                                    value={'undefined' != typeof partial_payouts[8] ? parseFloat(partial_payouts[8]) : 0}
+                                                    onChange={
+                                                        (value) => updatePayoutOption(value, 8)
+                                                    }
+                                                    min={1.0}
+                                                    max={100.0}
+                                                    step={0.01}
+                                                />
+                                                <p className="description">{_wp_travel.setting_strings.payment.partial_payout_note}</p>
+                                            </div>
+                                        </PanelRow>
+                                    </>}
+                                    {partial_payouts.length >= 10 && <>
+                                        <PanelRow>
+                                            <label>{_wp_travel.setting_strings.payment.partial_payout_ten}</label>
+                                            <div className="wp-travel-field-value">
+                                                <RangeControl
+                                                    value={'undefined' != typeof partial_payouts[10] ? parseFloat(partial_payouts[10]) : 0}
+                                                    onChange={
+                                                        (value) => updatePayoutOption(value, 10)
+                                                    }
+                                                    min={1.0}
+                                                    max={100.0}
+                                                    step={0.01}
+                                                />
+                                                <p className="description">{_wp_travel.setting_strings.payment.partial_payout_note}</p>
+                                            </div>
+                                        </PanelRow>
+                                    </>}
                                 </>
                                 :
                                 <PanelRow>

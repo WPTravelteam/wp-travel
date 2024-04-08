@@ -693,21 +693,21 @@ function wptravel_get_itinereries_prices_array() {
  * @since 1.0.1
  * @return array
  */
-function wptravel_featured_itineraries( $no_of_post_to_show = 3 ) {
-	$args        = array(
-		'numberposts'      => $no_of_post_to_show,
-		'offset'           => 0,
-		'orderby'          => 'date',
-		'order'            => 'DESC',
-		'meta_key'         => 'wp_travel_featured',
-		'meta_value'       => 'yes',
-		'post_type'        => WP_TRAVEL_POST_TYPE,
-		'post_status'      => 'publish',
-		'suppress_filters' => true,
-	);
-	$posts_array = get_posts( $args );
-	return $posts_array;
-}
+// function wptravel_featured_itineraries( $no_of_post_to_show = 3 ) {
+// 	$args        = array(
+// 		'numberposts'      => $no_of_post_to_show,
+// 		'offset'           => 0,
+// 		'orderby'          => 'date',
+// 		'order'            => 'DESC',
+// 		'meta_key'         => 'wp_travel_featured',
+// 		'meta_value'       => 'yes',
+// 		'post_type'        => WP_TRAVEL_POST_TYPE,
+// 		'post_status'      => 'publish',
+// 		'suppress_filters' => true,
+// 	);
+// 	$posts_array = get_posts( $args );
+// 	return $posts_array;
+// }
 
 
 /**
@@ -719,7 +719,7 @@ function wptravel_featured_itineraries( $no_of_post_to_show = 3 ) {
  * @since 5.0.7 Search form args added and also fetched requested data from WP_Travel::get_sanitize_request() method.
  */
 function wptravel_search_form( $args = array() ) {
-
+	
 	$submission_get = WP_Travel::get_sanitize_request();
 
 	$label_string = apply_filters(
@@ -757,11 +757,12 @@ function wptravel_search_form( $args = array() ) {
 	$show_input     = isset( $args['show_input'] ) ? $args['show_input'] : true;
 	$show_trip_type = isset( $args['show_trip_type'] ) ? $args['show_trip_type'] : true;
 	$show_location  = isset( $args['show_location'] ) ? $args['show_location'] : true;
+
 	ob_start(); ?>
 	<div class="wp-travel-search">
 		<form method="get" name="wp-travel_search" action="<?php echo esc_url( home_url( '/' ) ); ?>" >
 			<input type="hidden" name="post_type" value="<?php echo esc_attr( WP_TRAVEL_POST_TYPE ); ?>" />
-			<?php if ( $show_input ) : ?>
+			<?php if ( $show_input == 'true' ) : ?>
 				<?php if ( $input_field['search'] ) : ?>
 					<p>
 						<label><?php echo esc_html( $search_string ); ?></label>
@@ -770,7 +771,7 @@ function wptravel_search_form( $args = array() ) {
 					</p>
 				<?php endif; ?>
 			<?php endif; ?>
-			<?php if ( $show_trip_type ) : ?>
+			<?php if ( $show_trip_type == 'true'  ) : ?>
 				<?php if ( $input_field['trip_type'] ) : ?>
 					<p>
 						<label><?php echo esc_html( $trip_type_string ); ?></label>
@@ -795,7 +796,7 @@ function wptravel_search_form( $args = array() ) {
 					</p>
 				<?php endif; ?>
 			<?php endif; ?>
-			<?php if ( $show_location ) : ?>
+			<?php if ( $show_location == 'true' ) : ?>
 				<?php if ( $input_field['location'] ) : ?>
 					<p>
 						<label><?php echo esc_html( $location_string ); ?></label>
@@ -1096,9 +1097,9 @@ function wptravel_get_permalink_structure() {
  * @return void
  */
 function wptravel_get_frontend_tabs( $show_in_menu_query = false, $frontend_hide_content = false ) {
-
+	
 	global $post;
-	$trip_id = $post->ID;
+	$trip_id = isset( $post->ID ) ? $post->ID : '';
 
 	$settings                  = wptravel_get_settings();
 	$enable_one_page_booking = isset( $settings['enable_one_page_booking'] ) ? $settings['enable_one_page_booking'] : false;
@@ -1347,7 +1348,7 @@ function wptravel_get_global_tabs( $settings, $custom_tab_enabled = false ) {
 function wptravel_get_admin_trip_tabs( $post_id, $custom_tab_enabled = false, $frontend_hide_content = false ) {
 	if ( ! $post_id ) {
 		global $post;
-		$post_id = $post->ID;
+		$post_id = isset( $post->ID ) ? $post->ID : '';
 	}
 
 	// Default tab.
@@ -4723,3 +4724,45 @@ add_filter( 'safe_style_css', function( $styles ) {
 	$styles[] = 'display';
 	return $styles;
 } );
+
+function wptravel_scroll_to_top_btn() {
+    ?>
+        <script>
+
+			var element = document.createElement('div'); // is a node
+			element.id = "wptravel-scroll-to-top"
+			element.innerHTML = '<i class="fas fa-arrow-up"></i>';
+			document.body.appendChild(element);
+
+			window.addEventListener('scroll', function (e) {
+				if (document.documentElement.scrollTop > document.body.scrollHeight / 2) {
+					document.getElementById("wptravel-scroll-to-top").style.display = "block"
+				}else{
+					document.getElementById("wptravel-scroll-to-top").style.display = "none"
+				}
+			})
+
+			document.getElementById("wptravel-scroll-to-top").onclick = function() {  
+				window.scrollTo({top: 0, left: 0, behavior: "smooth" });
+				console.log(window.height() / 2 );
+			};  
+
+
+        </script>
+		<style>
+			#wptravel-scroll-to-top {
+				display: none;
+				position: fixed;
+				bottom: 80px;
+				background: #fff;
+				padding: 5px 10px;
+				border: solid 1px #000;
+				right: 10px;
+			}
+		</style>
+    <?php
+}
+
+if( wp_is_block_theme() || apply_filters( 'wptravel_enable_scroll_to_top_btn', false ) ){
+	add_action('wp_footer', 'wptravel_scroll_to_top_btn');
+}

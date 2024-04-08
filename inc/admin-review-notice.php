@@ -90,14 +90,14 @@ class WP_Travel_Review_Admin_Notice {
 
     public function wptravel_review_now(){ 
         update_option( 'wptravel_review_status', 1 );
+        $username = wp_get_current_user()->data->user_login;
 
         $to = 'wptravel.io@gmail.com';
         $from = get_option( 'admin_email' );
-        $subject = 'Interested to leave a review';
+        $subject = $username . ' has left a review for WP Travel';
         $email   = new WP_Travel_Emails();
         $headers = $email->email_headers( $from, $to );
-        $username = wp_get_current_user()->data->user_login;
-        $body    = "Hey WP Travel Team,<br><br>Congrats, I want to let you know that,Mr/Mrs. {$username} has already reviewed your WP Travel WordPress plugin.<br><br>Thank You";
+        $body    = "Hey WP Travel Team,<br><br>Congrats, I want to let you know that,Mr/Mrs. {$username} has left a review for your WP Travel WordPress plugin.<br><br>Thank You";
         wp_mail( $to, $subject, $body, $headers );
         header("Refresh:0");
     }

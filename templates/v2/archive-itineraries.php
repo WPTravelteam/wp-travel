@@ -28,7 +28,9 @@ if( !wp_is_block_theme() ){
 		<div class="container clearfix">
 		<?php
 	}
-
+	?>
+	<div class="<?php echo esc_attr(  wp_get_theme()->template ) ?>-wptravel-main-content-wrapper" >
+	<?php
 
 	if ( 'twentyseventeen' === $current_theme->get( 'TextDomain' ) ) {
 		?> <div class="wrap"><?php
@@ -56,7 +58,9 @@ if( !wp_is_block_theme() ){
 		</div>
 		<?php
 	}
-
+	?>
+	</div>
+	<?php
 	get_footer( 'itinerary' );
 
 }else{

@@ -420,7 +420,7 @@ class WP_Travel_Cart {
 					$this->items[ $cart_item_id ]['trip'][ $category_id ]['price_partial'] = $category_price_partial;  // Already converted price while adding into cart, so do not need to convert price.
 
 					// multiply category_price by pax to add in trip price if price per is person.
-					if ( isset( $cart_trip[ $category_id ]['price_per'] ) && 'person' === $cart_trip[ $category_id ]['price_per'] ) {
+					if ( isset( $cart_trip[ $category_id ]['price_per'] ) && 'group' !== $cart_trip[ $category_id ]['price_per'] ) {
 						$category_price         *= $pax_value;
 						$category_price_partial *= $pax_value;
 					}
