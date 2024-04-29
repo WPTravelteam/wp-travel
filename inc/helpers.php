@@ -2860,9 +2860,13 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 																}else {
 																	$value = isset( $traveller_infos[ $field['name'] ] ) && isset( $traveller_infos[ $field['name'] ][0] ) ? maybe_unserialize( $traveller_infos[ $field['name'] ][0] ) : '';
 																	echo '<div class="my-order-single-field clearfix">';
-																	printf( '<span class="my-order-head">%s:</span>', $field['label'] ); // @phpcs:ignore																	
-																	printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? $value[ $cart_id ][ $key ] : '' ); // @phpcs:ignore																	
-																	
+																	printf( '<span class="my-order-head">%s:</span>', $field['label'] ); // @phpcs:ignore	
+				
+																	if( $field['type'] == 'date' ){
+																		printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? wptravel_format_date( $value[ $cart_id ][ $key ] ): '' ); // @phpcs:ignore
+																	}else{														
+																		printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? $value[ $cart_id ][ $key ] : '' ); // @phpcs:ignore																	
+																	}
 																	echo '</div>';
 																}
 															}
@@ -2911,7 +2915,11 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 																	// $value = is_array( $value ) ? $value[ $key ] : $value;
 																	echo '<div class="my-order-single-field clearfix">';
 																	printf( '<span class="my-order-head">%s:</span>', $field['label'] ); // @phpcs:ignore
-																	printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? $value[ $cart_id ][ $key ] : '' ); // @phpcs:ignore
+																	if( $field['type'] == 'date' ){
+																		printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? wptravel_format_date( $value[ $cart_id ][ $key ] ): '' ); // @phpcs:ignore
+																	}else{														
+																		printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? $value[ $cart_id ][ $key ] : '' ); // @phpcs:ignore																	
+																	}
 																	echo '</div>';
 																}
 															}
@@ -4744,7 +4752,6 @@ function wptravel_scroll_to_top_btn() {
 
 			document.getElementById("wptravel-scroll-to-top").onclick = function() {  
 				window.scrollTo({top: 0, left: 0, behavior: "smooth" });
-				console.log(window.height() / 2 );
 			};  
 
 

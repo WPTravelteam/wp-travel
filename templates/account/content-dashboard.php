@@ -24,19 +24,22 @@ if( empty( $bookings ) ) {
 }
 while($getBooking->have_posts()) {
 	$getBooking->the_post();
-	$traveler_data = get_post_meta( get_the_ID(), 'wp_travel_email_traveller', true);
-
-	foreach( $traveler_data as $key => $value ) {
-		if( isset($value[0] ) && $value[0] === $current_user->user_email ) {
-			if( ! empty( $bookings) ) {
-				if ( ! in_array( get_the_ID(), $bookings ) ) {
+	$traveler_data = !empty( get_post_meta( get_the_ID(), 'wp_travel_email_traveller', true) ) ?  get_post_meta( get_the_ID(), 'wp_travel_email_traveller', true)  : array();
+	
+	if( !empty( $traveler_data ) ){
+		foreach( $traveler_data as $key => $value ) {
+			if( isset($value[0] ) && $value[0] === $current_user->user_email ) {
+				if( ! empty( $bookings) ) {
+					if ( ! in_array( get_the_ID(), $bookings ) ) {
+						$bookings[] = get_the_ID();
+					}
+				} else {
 					$bookings[] = get_the_ID();
 				}
-			} else {
-				$bookings[] = get_the_ID();
 			}
 		}
 	}
+
 }
 
 // Resverse Chronological Order For Bookings.

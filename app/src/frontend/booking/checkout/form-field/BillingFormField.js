@@ -18,6 +18,8 @@ import ProgressBary from '../ProgressBary';
 import SelectOption from './form/SelectOption';
 import Heading from './form/Heading';
 
+import $ from 'jquery';
+
 import { wpTravelFormat, objectSum, GetConvertedPrice } from '../../_wptravelFunctions';
 
 export default ( ) => {

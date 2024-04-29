@@ -74,11 +74,18 @@ const WPTravelBooking = ( props ) => {
         </ErrorBoundary>
     </>
 }
+
+
+
 let bookingWidgetElementId = _wp_travel.itinerary_v2 ? 'wti__booking' : 'booking';
 bookingWidgetElementId     = applyFilters( 'wptravel_booking_widget_id', bookingWidgetElementId );
 if (document.getElementById(bookingWidgetElementId)) {
     const tooltipText = __i18n.bookings.date_select_to_view_options;
+
     render(<WPTravelBooking forceCalendarDisplay={false} calendarInline={false} showTooltip={true} tooltipText={tooltipText} />, document.getElementById(bookingWidgetElementId));
+    if( document.querySelector('.elementor-widget-wp-travel-trip-booking-date #booking') ){
+        render(<WPTravelBooking forceCalendarDisplay={false} calendarInline={false} showTooltip={true} tooltipText={tooltipText} />, document.querySelector('.elementor-widget-wp-travel-trip-booking-date #booking'));
+    }
 }
 
 // For Frontend Block.

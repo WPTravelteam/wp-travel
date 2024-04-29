@@ -489,7 +489,7 @@ function wptravel_send_email_payment( $booking_id ) {
 		'{booking_scheduled_date}' => $booking_scheduled_date,
 		'{booking_arrival_date}'   => $arrival_date_email_tag,
 		'{booking_departure_date}' => $booking_departure_date,
-
+		'{trip_booking_date}'      => wptravel_format_date( get_post_meta( $booking_id, 'wp_travel_arrival_date' )[0] ),
 		'{customer_name}'          => $customer_name,
 		'{customer_country}'       => $customer_country,
 		'{customer_address}'       => $customer_address,

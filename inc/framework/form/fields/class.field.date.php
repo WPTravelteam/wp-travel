@@ -39,6 +39,7 @@ class WP_Travel_FW_Field_Date extends WP_Travel_FW_Field_Text {
 		
 		$output   .= '<script>';
 		$output   .= 'jQuery(function($){ ';
+		$output   .= '$("#' . $this->field['id'] . '").attr("readonly", true);';
 		$output   .= '$("#' . $this->field['id'] . '").wpt_datepicker({
 							language: "' . $locale . '",';
 		$output   .= "dateFormat: '" . $js_date_format . "',";
