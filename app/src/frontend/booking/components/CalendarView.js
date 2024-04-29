@@ -501,7 +501,7 @@ const CalendarView = ( props ) => {
 	__i18n.exclude_date.forEach( excludeDate );
 
 	function excludeDate( value, index, array ){
-		params.excludeDates.push( addDays(new Date( value+'/'+__i18n.current_year ), 0) );
+		params.excludeDates.push( addDays(new Date( value ), 0) );
 	}
 
 	let enable_time = '';

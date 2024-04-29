@@ -186,12 +186,11 @@ function wptravel_book_now() {
 
 	update_post_meta( $booking_id, 'wp_travel_booking_status', 'pending' );
 
+	update_post_meta( $booking_id, 'wp_travel_trip_code', wptravel_get_trip_code( $trip_id ) );
+
 	/**
 	 * Update Arrival and Departure dates metas.
 	 */
-	if( isset( $sanitized_data['stripe_payment_id'] ) ){
-		update_post_meta( $booking_id, 'wp_travel_stripe_payment_id', sanitize_text_field( $sanitized_data['stripe_payment_id'] ) );
-	}
 
 	update_post_meta( $booking_id, 'wp_travel_arrival_date', sanitize_text_field( $arrival_date ) );
 	update_post_meta( $booking_id, 'wp_travel_departure_date', sanitize_text_field( $departure_date ) );
@@ -364,10 +363,7 @@ function wptravel_book_now() {
 
 	// do_action( 'wp_travel_all_booking_data_list', $booking_id, $payment_data, $settings, $user_id );
 	$affiliate = apply_filters( 'wp_travel_all_booking_data_list_for_slicewp', $booking_id, $user_id );
-	if( isset( $sanitized_data['stripe_payment_id'] ) ){
-		update_post_meta( $booking_id, 'wp_travel_booking_status', 'pending' );
-		update_post_meta( $payment_id, 'wp_travel_payment_status', 'pending' );
-	}
+
 	// Clear Cart After process is complete.
 	$wt_cart->clear();
 	

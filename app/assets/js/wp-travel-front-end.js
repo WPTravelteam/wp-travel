@@ -1,5 +1,5 @@
 if( ( typeof _wp_travel_check_for_pro  != 'undefined' && _wp_travel_check_for_pro.is_enable == '1' ) && ( typeof _wp_travel_check_cp_by_billing != 'undefined' && _wp_travel_check_cp_by_billing.is_enable == 'yes' ) && ( typeof _wp_travel_check_cp_enable != 'undefined' && _wp_travel_check_cp_enable.is_enable == 'yes' ) ){ 
-  
+    
     jQuery(function ($) {
         $(".wp-travel-radio-group.wp-travel-payment-field .wp-travel-radio").remove();
         $(".wp-travel-radio-group.wp-travel-payment-field").append("<div class='wp-travel-radio no-payment-found'>Select billing country to get payment gateway.</div>");
@@ -102,6 +102,21 @@ if( ( typeof _wp_travel_check_for_pro  != 'undefined' && _wp_travel_check_for_pr
 
 jQuery(function ($) {
 
+    
+    // $( '.wp-travel-checkout-section .wp-travel-payment-field.f-full-payment .wp-travel-trip-price-figure' ).text( $('.cart-summary .wp-travel-payable-amount .wp-travel-trip-price-figure').text() );
+
+    // $( '.wp-travel-checkout-section .wp-travel-checkout-partial-payment .wp-travel-trip-price-figure' ).text(  $('.cart-summary .total-partial .wp-travel-trip-price-figure').text() );
+
+
+
+    // $("#wp-travel-payment-mode").change(function(){
+    //     if($( '#wp-travel-payment-mode' ).val() == 'partial' ){
+
+    //         $( '.wp-travel-checkout-partial-payment' ).css( 'visibility', 'visible' );
+    //         $( '.wp-travel-checkout-partial-payment' ).css( 'height', 'auto' );
+    //     }
+    // });
+
     $('#faq #close-all').click( function(){
         $('#faq .panel-collapse.collapse').removeClass( 'show' );
     } );
@@ -179,13 +194,14 @@ jQuery(function ($) {
     $('.rate_label').hover(function () {
         var rateLabel = $(this).attr('data-id');
         $('.rate_label').removeClass('fas');
-
+        $('.elementor-widget-wp-travel-trip-review-form .rate_label').removeClass('fas');
         rate(rateLabel);
     },
         function () {
-            var ratedLabel = $('#wp_travel_rate_val').val();
+            var ratedLabel = $('.elementor-widget-wp-travel-trip-review-form #wp_travel_rate_val, #wp_travel_rate_val').val();
 
             $('.rate_label').removeClass('fas').addClass('far');
+            $('.elementor-widget-wp-travel-trip-review-form .rate_label').removeClass('fas').addClass('far');
             if (ratedLabel > 0) {
                 rate(ratedLabel);
             }
@@ -194,10 +210,12 @@ jQuery(function ($) {
     function rate(rateLabel) {
         for (var i = 0; i < rateLabel; i++) {
             $('.rate_label:eq( ' + i + ' )').addClass('fas').removeClass('far');
+            $('.elementor-widget-wp-travel-trip-review-form .rate_label:eq( ' + i + ' )').addClass('fas').removeClass('far');
         }
 
         for (j = 4; j >= i; j--) {
             $('.rate_label:eq( ' + j + ' )').addClass('far');
+            $('.elementor-widget-wp-travel-trip-review-form .rate_label:eq( ' + j + ' )').addClass('far');
         }
     }
 
@@ -205,6 +223,7 @@ jQuery(function ($) {
     $('.rate_label').click(function (e) {
         e.preventDefault();
         $('#wp_travel_rate_val').val($(this).attr('data-id'));
+        $('.elementor-widget-wp-travel-trip-review-form #wp_travel_rate_val').val($(this).attr('data-id'));
     });
     // Rating script ends.
 

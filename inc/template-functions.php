@@ -262,28 +262,49 @@ function wptravel_get_for_block_template($template_name){
  */
 function wptravel_get_template( $template_name ) {	
 
-	if( is_singular('itineraries') && get_option( 'elementor_pro_theme_builder_conditions' ) ){
 
-		if( isset(get_option( 'elementor_pro_theme_builder_conditions' )['single']) ){
+	$template_lists = array( 
+						'v2/content-archive-itineraries.php',
+						'v2/content-related-posts.php', 
+						'content-faqs.php', 
+						'content-pricing-options.php', 
+						'single-wp-travel-reviews.php', 
+						'itineraries-list.php' 
+					);
+
+	$elementor_single_template = false;
+
+
+	if( is_singular('itineraries') && is_plugin_active( 'elementor-pro/elementor-pro.php' ) && get_option( 'elementor_pro_theme_builder_conditions' )  ){
+
+		if( isset(get_option( 'elementor_pro_theme_builder_conditions' )['single'])  ){
 			foreach( get_option( 'elementor_pro_theme_builder_conditions' )['single'] as $template ){
 				if( str_contains( $template[0], 'itineraries' ) ){
-					return;
+					$elementor_single_template = true;
+
+					if( !in_array( $template_name, $template_lists ) ){
+						return;
+					}
 				}
 			}
 		}
 		
 	}
 
+	
+
 	if ( count( get_block_templates() ) > 0 ) {
 		foreach ( get_block_templates() as $value ) {
-			if ( is_singular( 'itineraries' ) && $value->slug == 'single-itineraries' ) {
+			if ( is_singular( 'itineraries' ) && $value->slug == 'single-itineraries' && !$elementor_single_template ) {
 				return;
 			}
 			if( is_archive() && $value->slug == 'archive-itineraries' ){
+				var_dump( get_page_template() );
 				return;
 			}
 		}
 	}
+	
 	$template_path = apply_filters( 'wp_travel_template_path', 'wp-travel/' ); // @phpcs:ignore
 	$template_path = apply_filters( 'wptravel_template_path', $template_path );
 	$default_path  = sprintf( '%s/templates/', plugin_dir_path( dirname( __FILE__ ) ) );
@@ -377,6 +398,7 @@ function wptravel_get_template_part( $slug, $name = '' ) {
 	if ( $name ) {
 		$template = wptravel_get_template( $file_name );
 	}
+
 	if ( $template ) {
 		load_template( $template, false );
 	}
@@ -1291,6 +1313,7 @@ function wptravel_frontend_contents( $trip_id ) {
 								break;
 							case 'booking':
 								$booking_template = wptravel_get_template( 'content-pricing-options.php' );
+								
 								load_template( $booking_template );
 
 								break;

@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 6.0.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 8.5.0
+Stable tag: 8.6.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -423,6 +423,21 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 8.6.0 =
+Release Date: 29th April 2024
+
+Fixes:
+* Fixed country not showing on booking emails
+* Fixed issue with multiple pricing categories while booking a trip
+* Fixed conflict issue with the 'Smart Grid-Layout Design for Contact Form 7' plugin
+* Fixed booking status null issue on booking table
+* Fixed the issue with group pricing on booking emails
+
+Enhancements:
+* Modified 'wptravel_exclude_booking_dates' hook 
+* Added 'trip_booking_date' tag for booking email
+* Added code to block user to input date manually to the date picker input field
 
 = 8.5.0 =
 Release Date: 05th April 2024

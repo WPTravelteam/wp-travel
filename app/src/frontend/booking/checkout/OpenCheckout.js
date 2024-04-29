@@ -45,7 +45,7 @@ export default () => {
         $( '.ReactModalPortal' ).css( 'display', 'none' );
         $('.single-itineraries').removeClass('wp-travel-one-page-open-for-booking')
     } 
-
+    console.log( _wp_travel.is_user_login )
     return <>
         <Button className=" wptravel-book-your-trips  wp-travel-booknow-btns" onClick={openModal}>{__i18n.set_book_now}</Button>
         <div className="wp-travel-checkout-one-page">
@@ -55,21 +55,45 @@ export default () => {
                 onRequestClose={closeModal}
                 shouldCloseOnOverlayClick={false}
                 ariaHideApp={false}
-            >
-                <div className="wptravel-onpage-header">
-                    <h2>{typeof bookingTabEnable != 'undefined' && bookingTabEnable ? _wp_travel.select_you_pax : (typeof travelerInfo != 'undefined' && travelerInfo ? __i18n.set_traveler_details : (typeof tripBillingEnable != 'undefined' && tripBillingEnable ? __i18n.set_booking_details : (paymentEnable && __i18n.set_booking_with || __i18n.set_booking_only)))} </h2>
+            >   
+                {
+                    _wp_travel.login_required == 'yes' && _wp_travel.is_user_login != '1' &&
 
-                    <button onClick={closeModal} className="wptravel-single-page-close-btn"><i className='fa fa-times'></i></button>
-                </div>
+                    <>
+                         <div className="wptravel-onpage-header">
+                            <h2>{_wp_travel.login_required_header_text}</h2>
 
-                {typeof bookingTabEnable != 'undefined' && bookingTabEnable &&
-                    <div className='wptravel-single-page-calender-booking wp-travel-calendar-view'>
-                        <OpenBookign forceCalendarDisplay={false} calendarInline={false} showTooltip={true} tooltipText={tooltipText} />
+                            <button onClick={closeModal} className="wptravel-single-page-close-btn"><i className='fa fa-times'></i></button>
+                        </div>
+                        <div className='wptravel-single-page-calender-booking wp-travel-calendar-view'>
+                            <p>
+                                {_wp_travel.login_required_desc}
+                            </p>
+                            <a href={_wp_travel.dashboard_url} target='_blank'>{_wp_travel.login_required_text}</a>
+                            <br/>
+                            <br/>
+                            <br/>
+                        </div>
+                    </>
+                    ||
+                    <>
+                    <div className="wptravel-onpage-header">
+                        <h2>{typeof bookingTabEnable != 'undefined' && bookingTabEnable ? _wp_travel.select_you_pax : (typeof travelerInfo != 'undefined' && travelerInfo ? __i18n.set_traveler_details : (typeof tripBillingEnable != 'undefined' && tripBillingEnable ? __i18n.set_booking_details : (paymentEnable && __i18n.set_booking_with || __i18n.set_booking_only)))} </h2>
+
+                        <button onClick={closeModal} className="wptravel-single-page-close-btn"><i className='fa fa-times'></i></button>
                     </div>
+
+                    {typeof bookingTabEnable != 'undefined' && bookingTabEnable &&
+                        <div className='wptravel-single-page-calender-booking wp-travel-calendar-view'>
+                            <OpenBookign forceCalendarDisplay={false} calendarInline={false} showTooltip={true} tooltipText={tooltipText} />
+                        </div>
+                    }
+                    {typeof travelerInfo != 'undefined' && travelerInfo && <TravelerInfo />}
+                    {typeof tripBillingEnable != 'undefined' && tripBillingEnable && <BillingFormField />}
+                    {typeof treipPaymentEnable != 'undefined' && treipPaymentEnable && <BookingFormWithPayment />}
+                    </>
                 }
-                {typeof travelerInfo != 'undefined' && travelerInfo && <TravelerInfo />}
-                {typeof tripBillingEnable != 'undefined' && tripBillingEnable && <BillingFormField />}
-                {typeof treipPaymentEnable != 'undefined' && treipPaymentEnable && <BookingFormWithPayment />}
+                
 
             </Modal>
         </div>
