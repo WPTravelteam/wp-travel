@@ -37,7 +37,7 @@ export default () => {
         <>
             <div className="wp-travel-section-header">
                 <h2 className="wp-travel-section-header-title">
-                    {__("Account", "wp-travel")}
+                    {_wp_travel.setting_strings.account.account}
                 </h2>
                 <p className="wp-travel-section-header-description">
                     {__("More account settings according to your choice.", "wp-travel")}
@@ -46,7 +46,7 @@ export default () => {
             <div className='wp-travel-section-content'>
                 <ErrorBoundary>
                     <PanelRow>
-                        <label>{__('Require Login', 'wp-travel')}</label>
+                        <label>{_wp_travel.setting_strings.account.require_login}</label>
                         <div id="wp-travel-account-require-login" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={enableCheckoutCustomerRegistration == 'yes'}
@@ -57,12 +57,12 @@ export default () => {
                                     })
                                 }}
                             />
-                            <p className="description">{__('Require Customer login or register before booking.', 'wp-travel')}</p>
+                            <p className="description">{_wp_travel.setting_strings.account.require_login_note}</p>
                         </div>
                     </PanelRow>
 
                     <PanelRow>
-                        <label>{__('Enable Registration', 'wp-travel')}</label>
+                        <label>{_wp_travel.setting_strings.account.enable_registration}</label>
                         <div id="wp-travel-account-enable-registration" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={enableMyAccountCustomerRegistration == 'yes'}
@@ -73,11 +73,11 @@ export default () => {
                                     })
                                 }}
                             />
-                            <p className="description">{__('Enable customer registration on the "My Account" page.', 'wp-travel')}</p>
+                            <p className="description">{_wp_travel.setting_strings.account.enable_registration_note}</p>
                         </div>
                     </PanelRow>
                     <PanelRow>
-                        <label>{__('Create customer on booking', 'wp-travel')}</label>
+                        <label>{_wp_travel.setting_strings.account.create_customer_on_booking}</label>
                         <div id="wp-travel-account-create-customer-booking" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={createUserWhileBooking == 'yes'}
@@ -88,13 +88,13 @@ export default () => {
                                     })
                                 }}
                             />
-                            <p className="description">{__('This will create WP Travel Customer once the booking has been done.', 'wp-travel')}</p>
+                            <p className="description">{_wp_travel.setting_strings.account.create_customer_on_booking_note}</p>
                         </div>
                     </PanelRow>
                     {('yes' == enableMyAccountCustomerRegistration || 'yes' == createUserWhileBooking) &&
                         <>
                             <PanelRow>
-                                <label>{__('Automatically generate username', 'wp-travel')}</label>
+                                <label>{_wp_travel.setting_strings.account.automatically_generate_username}</label>
                                 <div id="wp-travel-account-automatically-generate-username" className="wp-travel-field-value">
                                     <ToggleControl
                                         checked={generateUsernameFromEmail == 'yes'}
@@ -105,11 +105,11 @@ export default () => {
                                             })
                                         }}
                                     />
-                                    <p className="description">{__('Automatically generate username from customer email.', 'wp-travel')}</p>
+                                    <p className="description">{_wp_travel.setting_strings.account.automatically_generate_username_note}</p>
                                 </div>
                             </PanelRow>
                             <PanelRow>
-                                <label>{__('Automatically generate password', 'wp-travel')}</label>
+                                <label>{_wp_travel.setting_strings.account.automatically_generate_password}</label>
                                 <div id="wp-travel-account-automatically-generate-password" className="wp-travel-field-value">
                                     <ToggleControl
                                         checked={generateUserPassword == 'yes'}
@@ -120,7 +120,7 @@ export default () => {
                                             })
                                         }}
                                     />
-                                    <p className="description">{__('Automatically generate customer password.', 'wp-travel')}</p>
+                                    <p className="description">{_wp_travel.setting_strings.account.automatically_generate_password_note}</p>
                                 </div>
                             </PanelRow>
                         </>

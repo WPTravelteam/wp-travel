@@ -3,7 +3,7 @@ global $wpdb;
 
 $common = new WT_Admin_status();
 // wp_enqueue_style( 'wp-travel-system-status', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'app/assets/css/system-status.css' );
-wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'app/assets/js/system-status.js' );
+wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'app/assets/js/system-status.js', array(), WP_TRAVEL_VERSION, false );
 ?>
 <div class="wp-travel-system">
 	<h1 class="wp-heading-inline"><?php esc_html_e( 'System Information', 'wp-travel' ); ?> </h1>
@@ -53,7 +53,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 
 
 			if ( $memory < 67108864 ) {
-				echo '<span class="warning"><span class="dashicons dashicons-warning"></span> ' . sprintf( __( '%1$s - For better performance, we recommend setting memory to at least 64MB. See: %2$s', 'wp-travel' ), size_format( $memory ), '<a href="https://codex.wordpress.org/Editing_wp-config.php#Increasing_memory_allocated_to_PHP" target="_blank">' . __( 'Increasing memory allocated to PHP', 'wp-travel' ) . '</a>' ) . '</span>';
+				echo '<span class="warning"><span class="dashicons dashicons-warning"></span> ' . esc_html( size_format( $memory ) ). esc_html__( ' - For better performance, we recommend setting memory to at least 64MB. See: ', 'wp-travel' ). '<a href="https://codex.wordpress.org/Editing_wp-config.php#Increasing_memory_allocated_to_PHP" target="_blank">' . esc_html__( 'Increasing memory allocated to PHP', 'wp-travel' ) . '</a>' . '</span>';
 			} else {
 				echo '<span class="ok">' . esc_html( size_format( $memory ) ) . ' </span>';
 			}
@@ -124,7 +124,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 				$php_version = phpversion();
 
 				if ( version_compare( $php_version, '5.6', '<' ) ) {
-					echo '<span class="error"><span class="dashicons dashicons-warning"></span> ' . sprintf( __( '%1$s - Recommend  PHP version of 5.6. See: %2$s', 'wp-travel' ), esc_html( $php_version ), '<a href="#" target="_blank">' . __( 'How to update your PHP version', 'wp-travel' ) . '</a>' ) . '</span>';
+					echo '<span class="error"><span class="dashicons dashicons-warning"></span> ' .esc_html( $php_version ). esc_html__( ' - Recommend  PHP version of 5.6. See: ', 'wp-travel' ) . '<a href="#" target="_blank">' . esc_html__( 'How to update your PHP version', 'wp-travel' ) . '</a>' . '</span>';
 				} else {
 					echo '<span class="yes">' . esc_html( $php_version ) . '</span>';
 				}
@@ -188,7 +188,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 					$mysql_version = $wpdb->db_version();
 
 					if ( version_compare( $mysql_version, '5.6', '<' ) ) {
-						echo '<span class="error"><span class="dashicons dashicons-warning"></span> ' . sprintf( __( '%1$s - We recommend a minimum MySQL version of 5.6. See: %2$s', 'wp-travel' ), esc_html( $mysql_version ), '<a href="https://wordpress.org/about/requirements/" target="_blank">' . esc_html__( 'WordPress Requirements', 'wp-travel' ) . '</a>' ) . '</span>';
+						echo '<span class="error"><span class="dashicons dashicons-warning"></span> ' .esc_html( $mysql_version ). esc_html__( ' - We recommend a minimum MySQL version of 5.6. See: ', 'wp-travel' ) . '<a href="https://wordpress.org/about/requirements/" target="_blank">' . esc_html__( 'WordPress Requirements', 'wp-travel' ) . '</a>' . '</span>';
 					} else {
 						echo '<span class="yes">' . esc_html( $mysql_version ) . '</span>';
 					}
@@ -208,7 +208,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 			<?php
 				$default_timezone = date_default_timezone_get();
 			if ( 'UTC' !== $default_timezone ) {
-				echo '<span class="error"><span class="dashicons dashicons-warning"></span>No' . sprintf( __( 'Default timezone is %s - it should be UTC', 'wp-travel' ), esc_html( $default_timezone ) ) . '</span>';
+				echo '<span class="error"><span class="dashicons dashicons-warning"></span>No' . esc_html__( 'Default timezone is', 'wp-travel' ) .esc_html( $default_timezone ). esc_html__( ' - it should be UTC', 'wp-travel' ) . '</span>';
 			} else {
 				echo '<span class="yes"><span class="dashicons dashicons-yes"></span>Yes</span>';
 			}
@@ -247,7 +247,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 			$fields['soap_client']['success'] = true;
 		} else {
 			$fields['soap_client']['success'] = false;
-			$fields['soap_client']['note']    = sprintf( __( 'Your server does not have the %s class enabled - some gateway plugins which use SOAP may not work as expected.', 'wp-travel' ), '<a href="https://php.net/manual/en/class.soapclient.php">SoapClient</a>' );
+			$fields['soap_client']['note']    = __( 'Your server does not have the ', 'wp-travel' ) .'<a href="https://php.net/manual/en/class.soapclient.php">SoapClient</a>'.__( ' class enabled - some gateway plugins which use SOAP may not work as expected.', 'wp-travel' );
 		}
 
 		// DOMDocument.
@@ -258,7 +258,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 			$fields['dom_document']['success'] = true;
 		} else {
 			$fields['dom_document']['success'] = false;
-			$fields['dom_document']['note']    = sprintf( __( 'Your server does not have the %s class enabled - HTML/Multipart emails, and also some extensions, will not work without DOMDocument.', 'wp-travel' ), '<a href="https://php.net/manual/en/class.domdocument.php">DOMDocument</a>' );
+			$fields['dom_document']['note']    = __( 'Your server does not have the ', 'wp-travel' ) .'<a href="https://php.net/manual/en/class.domdocument.php">DOMDocument</a>'. __( 'class enabled - HTML/Multipart emails, and also some extensions, will not work without DOMDocument.', 'wp-travel' );
 		}
 
 		// GZIP.
@@ -269,7 +269,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 			$fields['gzip']['success'] = true;
 		} else {
 			$fields['gzip']['success'] = false;
-			$fields['gzip']['note']    = sprintf( __( 'Your server does not support the %s function - this is required to use the GeoIP database from MaxMind.', 'wp-travel' ), '<a href="https://php.net/manual/en/zlib.installation.php">gzopen</a>' );
+			$fields['gzip']['note']    = __( 'Your server does not support the ', 'wp-travel').'<a href="https://php.net/manual/en/zlib.installation.php">gzopen</a>'.__(' function - this is required to use the GeoIP database from MaxMind.', 'wp-travel' );
 		}
 
 		// Multibyte String.
@@ -280,7 +280,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 			$fields['mbstring']['success'] = true;
 		} else {
 			$fields['mbstring']['success'] = false;
-			$fields['mbstring']['note']    = sprintf( __( 'Your server does not support the %s functions - this is required for better character encoding. Some fallbacks will be used instead for it.', 'wp-travel' ), '<a href="https://php.net/manual/en/mbstring.installation.php">mbstring</a>' );
+			$fields['mbstring']['note']    = __( 'Your server does not support the ', 'wp-travel' ).'<a href="https://php.net/manual/en/mbstring.installation.php">mbstring</a>'.__(' functions - this is required for better character encoding. Some fallbacks will be used instead for it.', 'wp-travel' );
 		}
 
 		// Remote Get.

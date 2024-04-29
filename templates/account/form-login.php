@@ -39,7 +39,7 @@ if ( ! empty( $_POST['register'] ) && wp_verify_nonce( $nonce_value, 'wp-travel-
 		<div class="form">
 		<?php if ( 'yes' === $enable_my_account_customer_registration ) : ?>
 			<!-- Registration form -->
-			<form method="post" class="register-form" <?php echo $reg_form_toogle; ?> >
+			<form method="post" class="register-form" <?php echo esc_attr( $reg_form_toogle ); ?> >
 				<h3><?php esc_html_e( 'Register', 'wp-travel' ); ?></h3>
 				<?php if ( 'no' === $generate_username_from_email ) : ?>
 					<span class="user-name">

@@ -10,7 +10,7 @@ export default () => {
     }, []);
 
     const { updateSettings } = dispatch('WPTravel/Admin');
-    const { modules, options } = allData;
+    const { modules, options, enable_woo_checkout } = allData;
     const { default_settings, saved_settings } = options;
     const { modules: defaultModules } = default_settings;
 
@@ -69,12 +69,13 @@ export default () => {
                 }
             }
         });
+
         return (
             <>
                 <div className="wp-travel-section-header wp-travel-custom-section-header">
                     <div className='wp-travel-section-info'>
                         <h2 className="wp-travel-section-header-title">
-                            {__("Modules", "wp-travel")}
+                            {_wp_travel.setting_strings.advance.modules}
                         </h2>
                         <p className="wp-travel-section-header-description">
                             {__('You can enable or disable modules features from here.', 'wp-travel')}
@@ -104,11 +105,11 @@ export default () => {
                         <ErrorBoundary>
                             {proModules.length > 0 &&
                                 <PanelBody
-                                    title="Pro Modules"
+                                    title={_wp_travel.setting_strings.advance.pro_modules}
                                     initialOpen={false}
                                 >
                                     <label id="wp-travel-modules-pro" className="enable-all-btn">
-                                        <p className="description">{__('Enable/Disable All Pro Modules', 'wp-travel')}</p>
+                                        <p className="description">{_wp_travel.setting_strings.advance.enable_disable_all_pro_modules}</p>
                                         <ToggleControl
                                             checked={enableProModules}
                                             onChange={(value) => {
@@ -157,21 +158,21 @@ export default () => {
                                                             />
                                                         </div>
                                                     </div>
-                                                    <p className="description">{__('Show all your "' + moduleName + '" settings and enable its feature', 'wp-travel')}</p>
+                                                    <p className="description">{ _wp_travel.setting_strings.advance.pro_modules_note + moduleName + _wp_travel.setting_strings.advance.pro_modules_note2}</p>
                                                 </div>
                                             </PanelRow>
                                         })}
                                     </div>
                                 </PanelBody>
                             }
-                            {paymentModules.length > 0 &&
-
+                            {paymentModules.length > 0 && enable_woo_checkout == 'no' &&
+                                
                                 <PanelBody
-                                    title="Payment Modules"
+                                    title={_wp_travel.setting_strings.advance.payment_modules}
                                     initialOpen={false}
                                 >
                                     <label id="wp-travel-modules-payment" className="enable-all-btn">
-                                        <p className="description">{__('Enable/Disable All Payment Modules', 'wp-travel')}</p>
+                                        <p className="description">{_wp_travel.setting_strings.advance.enable_disable_all_payment_modules}</p>
                                         <ToggleControl
                                             checked={enablePaymentModules}
                                             onChange={(value) => {
@@ -220,7 +221,7 @@ export default () => {
                                                             />
                                                         </div>
                                                     </div>
-                                                    <p className="description">{__('Show all your "' + moduleName + '" settings and enable its feature', 'wp-travel')}</p>
+                                                    <p className="description">{ _wp_travel.setting_strings.advance.pro_modules_note + moduleName + _wp_travel.setting_strings.advance.pro_modules_note2}</p>
                                                 </div>
                                             </PanelRow>
                                         })}
@@ -230,7 +231,7 @@ export default () => {
 
                             {mapModules.length > 0 &&
                                 <PanelBody
-                                    title="Map Modules"
+                                    title={_wp_travel.setting_strings.advance.map_modules}
                                     initialOpen={false}
                                 >
                                     <div id="wp-travel-modules-map" className="wptravel-modules-list">
@@ -264,7 +265,7 @@ export default () => {
                                                             />
                                                         </div>
                                                     </div>
-                                                    <p className="description">{__('Show all your "' + moduleName + '" settings and enable its feature', 'wp-travel')}</p>
+                                                    <p className="description">{ _wp_travel.setting_strings.advance.pro_modules_note + moduleName + _wp_travel.setting_strings.advance.pro_modules_note2}</p>
                                                 </div>
                                             </PanelRow>
                                         })}
@@ -275,7 +276,7 @@ export default () => {
                         </ErrorBoundary>
                     </div>
                     <Notice isDismissible={false} status="warning">
-                        <p><b>Note:</b> Please reload page after enabling/disabling modules.</p>
+                        <p>{_wp_travel.setting_strings.advance.advance_modules_note}</p>
                     </Notice><br />
                 </div>
             </>

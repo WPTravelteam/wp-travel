@@ -66,7 +66,10 @@ if ( ! class_exists( 'WP_Travel_Coupon_Pro' ) ) :
 			$this->define_constants();
 			$this->assets_path = plugin_dir_url( WP_TRAVEL_COUPON_PRO_PLUGIN_FILE ) . 'assets/';
 			$this->includes();
-			$this->init_hooks();
+			$settings = wptravel_get_settings();
+			if( $settings['enable_woo_checkout'] == 'no' ){ 
+				$this->init_hooks();
+			}
 		}
 
 		/**

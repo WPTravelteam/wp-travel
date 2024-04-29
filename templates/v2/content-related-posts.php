@@ -23,7 +23,7 @@ $no_related_post_message = '<p class="wp-travel-no-detail-found-msg">' . esc_htm
 $wrapper_class           = wptravel_get_theme_wrapper_class();
 ?>
 <div class="wp-travel-related-posts wp-travel-container-wrap <?php echo esc_attr( $wrapper_class ); ?>">
-	<h2><?php echo apply_filters( 'wp_travel_related_post_title', esc_html__( 'Related Trips', 'wp-travel' ) ); ?></h2>
+	<h2><?php echo esc_html( apply_filters( 'wp_travel_related_post_title', esc_html__( 'Related Trips', 'wp-travel' ) ) ); ?></h2>
 	<div class="wp-travel-itinerary-items"> 
 		<?php
 		if ( ! empty( $terms ) ) {

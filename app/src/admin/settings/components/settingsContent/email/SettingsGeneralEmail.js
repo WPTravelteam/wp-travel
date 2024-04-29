@@ -17,7 +17,7 @@ export default () => {
         <>
             <div className="wp-travel-section-header">
                 <h2 className="wp-travel-section-header-title">
-                    {__("General Email Settings", "wp-travel")}
+                    {_wp_travel.setting_strings.email.general_email_settings}
                 </h2>
                 <p className="wp-travel-section-header-description">
                     {__("More email settings according to your choice.", "wp-travel")}
@@ -26,9 +26,9 @@ export default () => {
             <div className='wp-travel-section-content'>
                 <PanelRow>
                     <label>
-                        {__('From Email', 'wp-travel')}
+                        {_wp_travel.setting_strings.email.from_email}
                         <Tooltip
-                            text={<strong>{__('Preferred to use webmail like: sales@yoursite.com', 'wp-travel')}</strong>}
+                            text={<strong>{_wp_travel.setting_strings.email.from_email_tooltip}</strong>}
                         >
                             <span>
                                 <i className="fa fa-info-circle" aria-hidden="true"></i>

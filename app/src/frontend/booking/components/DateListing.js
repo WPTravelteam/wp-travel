@@ -4,7 +4,8 @@ import apiFetch from '@wordpress/api-fetch';
 
 // Additional lib
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
-const _ = lodash;
+// const _ = lodash;
+import _ from 'lodash';
 import moment from 'moment';
 
 // WP Travel Components.
@@ -271,7 +272,7 @@ const DateListing = ( props ) => {
 			_bookingData = {..._bookingData, ..._inventory_state }
 		}
 		updateBookingData( _bookingData );
-		// console.log(effectType, bookingData, _bookingData );
+
 	}
 
 	// functions.
@@ -347,7 +348,8 @@ const DateListing = ( props ) => {
                     }
 
                     { recurringDates.length > 0 && <>
-						{ recurringDates.map((date, index) => {
+						{  
+						recurringDates.map((date, index) => {
 							return <div className="wptravel-recurring-table-wrapper" key={index}>
 								<table className="wptravel-recurring-table">
 									<DateListingTableHead />

@@ -155,14 +155,145 @@ class WP_Travel_FW_Field {
 	}
 
 	function render( ) {
-		echo $this->process( );
+		$allow_html =  wp_kses_allowed_html();
+		$allow_html[ 'input' ] = array(
+			'type' => true,
+			'class' => true,
+			'name' => true,
+			'id' => true,
+			'value' => true,
+			'placeholder' => true,
+			'required' => true,
+			'data-parsley-required' => true,
+			'maxlength' => true,
+			'data-parsley-maxlength' => true,
+			'pattern' => true,
+			'data-parsley-pattern' => true,
+			'data-parsley-errors-container' => true
+		);
+		$allow_html[ 'textarea' ] = array(
+			'type' => true,
+			'class' => true,
+			'name' => true,
+			'id' => true,
+			'value' => true,
+			'rows' => true,
+			'cols' => true,
+		);
+		$allow_html[ 'select' ] = array(
+			'id' => true,
+			'class' => true,
+			'data-parsley-required' => true,
+			'name' => true,
+		);
+		$allow_html[ 'option' ] = array(
+			'class' => true,
+			'value' => true,
+			'selected' => true
+		);
+		$allow_html[ 'label' ] = array(
+			'class' => true,
+			'for' => true
+		);
+		$allow_html[ 'span' ] = array(
+			'class' => true
+		);
+		$allow_html[ 'div' ] = array(
+			'class' => true,
+			'id' => true,
+			'data-sitekey' => true,
+			'data-parsley-maxlength' => true,
+			'data-callback' => true,
+			'maxlength' => true,
+			'style' => true
+		);
+		$allow_html[ 'script' ] = array();
+		$allow_html[ 'table' ] = array(
+			'width' => true,
+		);
+		$allow_html[ 'tr' ] = array();
+		$allow_html[ 'td' ] = array();
+		$allow_html[ 'h1' ] = array(
+			'class' => true,
+			'id' => true,
+			'style' => true
+		);
+
+		$allow_html[ 'iframe' ] = array(
+			'title' => true,
+			'width' => true,
+			'name' => true,
+			'role' => true,
+			'frameborder' => true,
+			'scrolling' => true,
+			'sandbox' => true,
+			'src' => true,
+			'height' => true
+		);
+
+		echo wp_kses( $this->process( ), $allow_html );
 	}
 
 	function render_input( $field ) {
 		if ( ! $field ) {
 			return;
 		}
-		echo $this->process_single( $field );
+		$allow_html =  wp_kses_allowed_html();
+		$allow_html[ 'input' ] = array(
+			'type' => true,
+			'class' => true,
+			'name' => true,
+			'id' => true,
+			'value' => true,
+			'placeholder' => true,
+			'required' => true,
+			'data-parsley-required' => true,
+			'maxlength' => true,
+			'data-parsley-maxlength' => true,
+			'pattern' => true,
+			'data-parsley-pattern' => true,
+			'data-parsley-errors-container' => true
+		);
+		$allow_html[ 'textarea' ] = array(
+			'type' => true,
+			'class' => true,
+			'name' => true,
+			'id' => true,
+			'value' => true,
+			'rows' => true,
+			'cols' => true,
+		);
+		$allow_html[ 'select' ] = array(
+			'id' => true,
+			'class' => true,
+			'data-parsley-required' => true,
+			'name' => true,
+		);
+		$allow_html[ 'option' ] = array(
+			'class' => true,
+			'value' => true,
+			'selected' => true
+		);
+		$allow_html[ 'label' ] = array(
+			'class' => true,
+			'for' => true
+		);
+		$allow_html[ 'span' ] = array(
+			'class' => true
+		);
+		$allow_html[ 'div' ] = array(
+			'class' => true,
+			'id' => true,
+			'style' => true
+		);
+		$allow_html[ 'script' ] = array();
+		$allow_html[ 'h1' ] = array(
+			'class' => true,
+			'id' => true,
+			'style' => true
+		);
+
+		echo wp_kses( $this->process_single( $field ), $allow_html );
 	}
 
 	private function process_single( $field  ) {

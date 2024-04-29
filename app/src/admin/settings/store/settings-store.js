@@ -119,11 +119,13 @@ registerStore('WPTravel/Admin', {
     selectors: { // store selector
         getAllStore(store) {
             return { ...store };
+            
         },
         getSettings(state) {
             return { ...state.settings }
         },
     },
+
 
     controls: {
         FETCH_FROM_API(action) {
@@ -143,3 +145,5 @@ registerStore('WPTravel/Admin', {
         },
     },
 });
+
+

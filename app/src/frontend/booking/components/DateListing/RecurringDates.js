@@ -12,7 +12,8 @@ import Loader from '../../../../GlobalComponents/Loader';
 
 
 // Additional lib
-const _ = lodash;
+// const _ = lodash;
+import _ from 'lodash';
 import { RRule, RRuleSet } from "rrule";
 
 
@@ -34,8 +35,14 @@ const RecurringRepeator = ( props ) =>  {
 
     // Booking Data.
     const { isLoading, selectedDate, selectedDateIds, selectedPricingId, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
-    let sd = moment(moment(selectedDate).format('YYYY-MM-DD')).unix();
-    let rd = moment(moment(recurrindDate).format('YYYY-MM-DD')).unix();
+
+    var sd = '';
+	if( selectedDate !== null ){ 
+		
+		sd     = moment(moment(selectedDate).format('YYYY-MM-DD')).unix();
+	}
+	let rd = moment(moment(recurrindDate).format('YYYY-MM-DD')).unix();
+
 
     let loadingClass = isLoading && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) ? 'wptravel-loading' : '';
     const { enable_time } = date;

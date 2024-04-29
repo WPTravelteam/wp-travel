@@ -21,7 +21,31 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 if ( post_password_required() ) {
-	echo get_the_password_form();
+
+	$allow_html =  wp_kses_allowed_html();
+	$allow_html[ 'form' ] = array(
+		'class' => true,
+		'action' => true,
+		'method' => true
+	);
+	$allow_html[ 'input' ] = array(
+		'type' => true,
+		'class' => true,
+		'name' => true,
+		'id' => true,
+		'value' => true,
+		'spellcheck' => true,
+		'size' => true,
+	);
+	$allow_html[ 'label' ] = array(
+		'class' => true,
+		'for' => true
+	);
+	$allow_html[ 'p' ] = array(
+		'class' => true
+	);
+
+	echo wp_kses( get_the_password_form(), $allow_html );
 	return;
 }
 
@@ -33,7 +57,7 @@ $end_date    = get_post_meta( get_the_ID(), 'wp_travel_end_date', true );
 <article class="wp-travel-default-article">
 	<div class="wp-travel-article-image-wrap">
 		<a href="<?php the_permalink(); ?>">
-			<?php echo wptravel_get_post_thumbnail( get_the_ID() ); ?>
+			<?php echo wp_kses_post( wptravel_get_post_thumbnail( get_the_ID() ) ); ?>
 		</a>
 		<?php if ( $enable_sale ) : ?>
 		<div class="wp-travel-offer">
@@ -106,7 +130,7 @@ $end_date    = get_post_meta( get_the_ID(), 'wp_travel_end_date', true );
 				</div>
 				<div class="travel-info">
 					<i class="wt-icon wt-icon-child" aria-hidden="true"></i>
-					<span class="value"><?php printf( '%s', $group_size ); ?></span>
+					<span class="value"><?php printf( '%s', esc_html( $group_size ) ); ?></span>
 				</div>
 				
 				<div class="travel-info">

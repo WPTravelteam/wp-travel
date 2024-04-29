@@ -9,14 +9,12 @@ const bookingStoreName = 'WPTravelFrontend/BookingData';
 import ResetBooking from "../components/ResetBooking";
 import DateListing from "../components/DateListing";
 import CalendarView from "../components/CalendarView";
-// import WpTravelBookNow from '../components/WpTravelBookNow';
 import CustomBooking from '../components/CustomBooking';
 import NextTravelerBtn from './NextTravelerBtn'
-// import ProgressBary from './ProgressBary';
+
 export default ( props ) => {
 	// Component Props.
 	const { forceCalendarDisplay } = props;
-
 	// All Trip Related Data(Not State)
     const tripListingType = 'undefined' !== typeof _wp_travel.trip_date_listing ? _wp_travel.trip_date_listing : 'calendar'; // dates | calendar
     let tripData = 'undefined' !== typeof _wp_travel.trip_data ? _wp_travel.trip_data : {};
@@ -28,7 +26,6 @@ export default ( props ) => {
 
 	// Booking Data/state.
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
-    // console.log( bookingData );
     const { selectedDate } = bookingData;
     const { updateStore } = dispatch( bookingStoreName );
     const updateBookingData = ( data ) => {

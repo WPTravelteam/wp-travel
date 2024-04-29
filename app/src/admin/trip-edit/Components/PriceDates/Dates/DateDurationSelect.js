@@ -14,10 +14,10 @@ export default ( {allData } ) => {
     const translatedSelectLabel = __i18n.duration_select_label;
     const selectOption = [
         {label : translatedSelectLabel.day_night, value : 'day_night' },
-        {label : translatedSelectLabel.hour, value : 'hour' },
+        {label : translatedSelectLabel.hour_minute, value : 'hour_minute' },
         
     ];
-    const newSelectOption = applyFilters( 'wp_travel_trip_duration_formate_select', selectOption);
+    const newSelectOption = applyFilters( 'wp_travel_trip_duration_formate_selected', selectOption);
     const timeFormating = {
         amPmAriaLabel: "Select AM/PM",
         clockIcon: false,
@@ -32,7 +32,7 @@ export default ( {allData } ) => {
     }
     const arrival = typeof arrival_time != 'undefined' && arrival_time != '' && arrival_time || '00:00';
     const departure = typeof departure_time != 'undefined' && departure_time != '' && departure_time || '00:00';
-    // console.log( allData );
+
     return <>
         <PanelRow>
             <label>{__i18n.trip_duration}</label>

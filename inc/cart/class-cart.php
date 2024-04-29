@@ -229,7 +229,7 @@ class WP_Travel_Cart {
 
 					if ( $pax > $available_pax ) {
 
-						WPTravel()->notices->add( sprintf( __( 'Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for this trip. Available pax is set for booking.', 'wp-travel' ), $pax, $available_pax ), 'error' );
+						WPTravel()->notices->add( __( 'Requested pax size of ', 'wp-travel' ) .$pax. __(' exceeds the available pax limit ( ', 'wp-travel' ) .$available_pax. __( ' ) for this trip. Available pax is set for booking.', 'wp-travel' ), 'error' );
 
 						$pax = $available_pax;
 
@@ -302,8 +302,8 @@ class WP_Travel_Cart {
 		$cart_items = WPTravel()->session->set( $this->cart_id, $cart );
 		// Cookie data to enable data info in js.
 		ob_start();
-		setcookie( 'wp_travel_cart', wp_json_encode( $cart ), time() + 604800, '/' );
 		ob_end_flush();
+		setcookie( 'wp_travel_cart', wp_json_encode( $cart ), time() + 604800, '/' );
 	}
 	/**
 	 * Read items from cart session.
@@ -420,7 +420,7 @@ class WP_Travel_Cart {
 					$this->items[ $cart_item_id ]['trip'][ $category_id ]['price_partial'] = $category_price_partial;  // Already converted price while adding into cart, so do not need to convert price.
 
 					// multiply category_price by pax to add in trip price if price per is person.
-					if ( isset( $cart_trip[ $category_id ]['price_per'] ) && 'person' === $cart_trip[ $category_id ]['price_per'] ) {
+					if ( isset( $cart_trip[ $category_id ]['price_per'] ) && 'group' !== $cart_trip[ $category_id ]['price_per'] ) {
 						$category_price         *= $pax_value;
 						$category_price_partial *= $pax_value;
 					}
@@ -434,6 +434,7 @@ class WP_Travel_Cart {
 					$trip_price = floatval( $_REQUEST['trip_price'] );
 				}
 
+				$this->items[ $cart_item_id ]['pax']        = array_sum( array_values( $pax )  );
 				$this->items[ $cart_item_id ]['trip_price']         = $trip_price;
 				$this->items[ $cart_item_id ]['trip_price_partial'] = $trip_price_partial;
 				if ( $trip_extras ) {
@@ -445,7 +446,7 @@ class WP_Travel_Cart {
 				$cart_pax = array_sum( $pax ); // Sum of pax of all pricing category.
 
 				if ( $max_available && $cart_pax > $max_available ) {
-					WPTravel()->notices->add( sprintf( __( 'Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for this trip. Available pax is set for booking.', 'wp-travel' ), $cart_pax, $max_available ), 'error' );
+					WPTravel()->notices->add( __( 'Requested pax size of ', 'wp-travel' ) .$cart_pax. __(' exceeds the available pax limit ( ', 'wp-travel' ) .$max_available. __( ' ) for this trip. Available pax is set for booking.', 'wp-travel' ), 'error' );
 				}
 			} else {
 				/**
@@ -494,7 +495,7 @@ class WP_Travel_Cart {
 				}
 
 				if ( $max_available && $pax > $max_available ) {
-					WPTravel()->notices->add( sprintf( __( 'Requested pax size of %1$s exceeds the available pax limit ( %2$s ) for this trip. Available pax is set for booking.', 'wp-travel' ), $pax, $max_available ), 'error' );
+					WPTravel()->notices->add( __( 'Requested pax size of ', 'wp-travel' ) .$pax. __(' exceeds the available pax limit ( ', 'wp-travel' ) .$max_available. __( ' ) for this trip. Available pax is set for booking.', 'wp-travel' ), 'error' );
 				}
 			}
 
@@ -536,6 +537,13 @@ class WP_Travel_Cart {
 					$discount_amount = WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $discount_value );
 				} elseif ( 'percentage' === $discount_type ) {
 					$discount_amount = ( $item_total * $discount_value ) / 100;
+				}
+				$this->items[ $cart_item_id ]['coupon_code'] = $coupon_code; 
+				$this->items[ $cart_item_id ]['discount_type'] = $discount_type;
+				if ( 'fixed' === $discount_type ) {
+					$this->items[ $cart_item_id ]['discount_price'] = WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $discount_value );
+				} elseif ( 'percentage' === $discount_type ) {
+					$this->items[ $cart_item_id ]['discount_percentage'] = $discount_value;
 				}
 				$this->items[ $cart_item_id ]['discount'] = $discount_amount;  // Discount amount applied to individual trip total.
 			}
@@ -588,7 +596,7 @@ class WP_Travel_Cart {
 	 */
 	public function cart_empty_message() {
 		$url = get_post_type_archive_link( WP_TRAVEL_POST_TYPE );
-		printf( __( 'Your cart is empty please <a href="%s"> click here </a> to add trips.', 'wp-travel' ), esc_url( $url ) );
+		printf( esc_html__( 'Your cart is empty please ', 'wp-travel' ) . '<a href="'.esc_url( $url ).'"> click here </a>' . esc_html__( ' to add trips.', 'wp-travel' ) );
 	}
 	/**
 	 * Clear all items in the cart.
@@ -696,7 +704,7 @@ class WP_Travel_Cart {
 		$total_trip_price_partial = $total_trip_price_partial_after_dis + $tax_amount_partial; // Need to deprecate this.
 
 		$payout_percent           = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
-		$total_trip_price_partial = ( $total_trip_price * $payout_percent ) / 100;
+		$total_trip_price_partial = ( class_exists( 'WP_Travel_Pro' ) && wptravel_get_settings()['partial_payment_amount'] == 'yes' ) ? wptravel_get_settings()['partial_amount'] : ( $total_trip_price * $payout_percent ) / 100;
 		$get_total                = array(
 			'cart_total'         => wptravel_get_formated_price( $cart_total ), // Effective for multiple cart items[cart_total].
 			'discount'           => wptravel_get_formated_price( $discount_amount ),

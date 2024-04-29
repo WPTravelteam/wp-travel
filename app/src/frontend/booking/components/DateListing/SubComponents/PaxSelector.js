@@ -1,7 +1,9 @@
 import { __ } from '@wordpress/i18n'
 import DiscountTable from '../../CalendarView/_GroupDiscountTable';
+import { useState, useEffect } from "@wordpress/element";
+import apiFetch from '@wordpress/api-fetch';
 
-const _ = lodash
+import _ from 'lodash';
 const __i18n = {
 	..._wp_travel.strings
 }
@@ -22,6 +24,39 @@ const PaxSelector = ( props ) => {
 
     // Booking Data.
     const { selectedDate, selectedDateIds, selectedPricingId, excludedDateTimes, pricingUnavailable, inventory, paxCounts } = bookingData;
+
+
+	var tripID = tripData.id;
+
+	if( bookingData.selectedDate !== null ){
+		var tripDepartureDate = moment(moment(bookingData.selectedDate).format('YYYY-MM-DD'))._i.replace( '-', '_' ).replace( '-', '_' );
+	}
+	
+	
+	const[ tripPaxStock, setTripPaxStock ] = useState( [] );
+
+	if( typeof _wp_travel.WP_Travel_Trip_Extras_Inventory !== 'undefined' ){
+
+		useEffect( () => {	
+			apiFetch( { url: `${_wp_travel.ajax_url}?action=wptravel_get_trip_pax_inventory&_nonce=${_wp_travel._nonce}&tripID=${tripID}&tripDepartureDate=${tripDepartureDate}`, data:'', method:'post' } ).then( res => {
+				
+				if( res.success){
+					setTripPaxStock( res.data )
+				}
+			} );
+		}, [] );
+		
+		// useEffect( () => {	
+			
+		// 	let nonce = Math.random().toString(36).substring(2,7);
+		// 	apiFetch.use( apiFetch.createNonceMiddleware( nonce ) );
+
+		// 	apiFetch( { path: '/wptravelgettripindividual_pricing_category_paxstock/v1/tripindividual_pricing_category_paxStock/'+tripDepartureDate+'seperate'+tripID+'?key='+Math.random().toString(36).substring(2,7), method: 'GET' } ).then( ( response ) => {
+		// 		setTripPaxStock( response )
+		// 	} )
+		// }, [] );
+	}
+
 
 	/**]
 	 * @param categoryId This is to return price as per category id
@@ -73,8 +108,13 @@ const PaxSelector = ( props ) => {
 		return GetConvertedPrice( price ); // Add Multiple currency support to get converted price.
 	}
 
-	let sd     = moment(moment(selectedDate).format('YYYY-MM-DD')).unix();
-	let rd     = moment(moment(recurrindDate).format('YYYY-MM-DD')).unix();
+	var sd = '';
+	if( selectedDate !== null ){ 
+		
+		sd     = moment(moment(selectedDate).format('YYYY-MM-DD')).unix();
+	}
+	let rd = moment(moment(recurrindDate).format('YYYY-MM-DD')).unix();
+
 
 	let firstIndex = _nomineePricings[0];
 	let pricing    = [];
@@ -86,22 +126,11 @@ const PaxSelector = ( props ) => {
 		pricing = allPricings[selectedPricingId];
 	}
 	// Fetch Default First Pricing and Category 
-	// let firstPricing    = {};
-	// let firstCagegories = [];
-	// let firstCagegory   = [];
-	// let firstPrice      = 0;
-	// let firstCagegoryId = null;
-	// // If Pricing is not selected then Need to display Pax selector as per First Pricing from pricings list.
-	// if ( pricings.length > 0 ) {
-		// firstPricing    = allPricings[firstIndex];
-	// 	firstCagegories = 'undefined' != typeof firstPricing && firstPricing.categories;
-	// 	firstCagegory   = firstCagegories.length > 0 ? firstCagegories[0] : [];
-	// 	firstCagegoryId = firstCagegory && firstCagegory.id ? firstCagegory.id : null;
-	// 	firstPrice      = firstCagegoryId ? getCategoryPrice(  firstCagegoryId, true ) : 0;
-	// }
+
 	let categories = pricing && pricing.categories || []
 
-	const handlePaxChange = (id, value) => e => {
+	const handlePaxChange = (id, value, tripPax) => e => {
+
 		let pricing    = [];
 		// Pricing Not Selected or ( not recurring date && for not selected rows ) or ( recurring date but not selected rows )
 		if ( ( pricings.length > 0  && ! selectedPricingId ) || ( ! recurrindDate && ! selectedDateIds.includes( date.id ) ) || ( recurrindDate && sd !== rd ) ) {
@@ -111,17 +140,10 @@ const PaxSelector = ( props ) => {
 		}
 		let count = parseInt ( paxCounts[id] ) + value <= 0 ? 0 : parseInt ( paxCounts[id] ) + value
 
-		let _inventory = inventory.find(i => i.date === moment(selectedDate).format('YYYY-MM-DD[T]HH:mm')); // selectedDate : date along with time.
-		let maxPax = _inventory && _inventory.pax_available;
-		if ( ! maxPax ) {
-			maxPax = pricing && pricing.max_pax ? pricing.max_pax : 1;
-		}
-
-		if (maxPax >= 1) {
-
-			let _totalPax = _.size(paxCounts) > 0 && Object.values(paxCounts).reduce((acc, curr) => acc + curr) || 0
-
-			if (_totalPax + value > parseInt(maxPax)) {
+		// @since v7.4.0
+		if( isInventoryEnabled && tripData.enable_pax_all_pricing == "1" ){
+			if( count > tripPax ){
+				count = tripPax
 				if (e.target.parentElement.querySelector('.error'))
 					return
 				let em = document.createElement('em')
@@ -132,10 +154,37 @@ const PaxSelector = ( props ) => {
 					em.remove()
 				}, 1000)
 				return
-			} else {
-				e.target.parentElement.querySelector('.error') && e.target.parentElement.querySelector('.error').remove()
+			}
+			
+		}else{
+			// let count = parseInt ( paxCounts[id] ) + value <= 0 ? 0 : parseInt ( paxCounts[id] ) + value
+			let _inventory = inventory.find(i => i.date === moment(selectedDate).format('YYYY-MM-DD[T]HH:mm')); // selectedDate : date along with time.
+			let maxPax = _inventory && _inventory.pax_available;
+			if ( ! maxPax ) {
+				maxPax = pricing && pricing.max_pax ? pricing.max_pax : 1;
+			}
+
+			if (maxPax >= 1) {
+
+				let _totalPax = _.size(paxCounts) > 0 && Object.values(paxCounts).reduce((acc, curr) => acc + curr) || 0
+
+				if (_totalPax + value > parseInt(maxPax)) {
+					if (e.target.parentElement.querySelector('.error'))
+						return
+					let em = document.createElement('em')
+					em.classList.add('error')
+					em.textContent = __i18n.bookings.max_pax_exceeded
+					e.target.parentElement.appendChild(em)
+					setTimeout(() => {
+						em.remove()
+					}, 1000)
+					return
+				} else {
+					e.target.parentElement.querySelector('.error') && e.target.parentElement.querySelector('.error').remove()
+				}
 			}
 		}
+		
 		updateBookingData({ paxCounts: { ...paxCounts, [id]: count } })
 	}
 
@@ -170,7 +219,7 @@ const PaxSelector = ( props ) => {
 	return <div className="wp-travel-booking__pax-selector-wrapper">
 		<h4>{__i18n.bookings.booking_tab_pax_selector}</h4>
 		<ul className="wp-travel-booking__trip-option-list">
-			{
+			{	
 				categories.map((c, i) => {
 					let price = getCategoryPrice(c.id, true );
 					if ( 'undefined' == typeof c.term_info ) { // Fixes : index title of undefined.
@@ -193,7 +242,11 @@ const PaxSelector = ( props ) => {
 					    _inventory = inventory.find(i => i.date === moment(recurrindDate).format('YYYY-MM-DD[T]HH:mm')); // selectedDate : date along with time.
 						maxPax = isInventoryEnabled && _inventory && _inventory.pax_available && selectedDateIds.includes( date.id ) ? _inventory.pax_available : pricing.max_pax; // Temp fixes for inventory disabled case.
 					}
-
+					
+					if( isInventoryEnabled && typeof _wp_travel.WP_Travel_Trip_Extras_Inventory !== 'undefined' ){ 
+						maxPax = pricing.max_pax - ( typeof tripPaxStock[c.term_info.title] !== 'undefined' ? tripPaxStock[c.term_info.title] : 0 )
+					}
+					
 					return <li key={i}>
 						<div className="text-left">
 							<strong>
@@ -242,12 +295,11 @@ const PaxSelector = ( props ) => {
 							<span className="item-price">{c.is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat( GetConvertedPrice( c.regular_price ) ) }}></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat( price ) }}></span>/{price_per_label}</span>
 							<div className="pricing-area">
 								<div className="qty-spinner wp-travel-pax-selected-frontend-flex">
-									<button onClick={handlePaxChange(c.id, -1)}>-</button>
+									<button onClick={handlePaxChange(c.id, -1, maxPax )}>-</button>
 									<input  className='wp-trave-pax-selected-frontend' value={selectedPax} onChange={ ( essdfdsf ) => {
 										handlePaxChangeInput( c.id, essdfdsf )
-										console.log( 'thsidf', essdfdsf )
 									}} />
-									<button className='wp-booking-pax-selected-wp' onClick={handlePaxChange(c.id, 1)}>+</button>
+									<button className='wp-booking-pax-selected-wp' onClick={handlePaxChange(c.id, 1, maxPax )}>+</button>
 								</div>
 							</div>
 						</div>

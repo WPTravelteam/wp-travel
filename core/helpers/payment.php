@@ -53,7 +53,7 @@ class WpTravel_Helpers_Payment { // @phpcs:ignore
 							$payment_amount = get_post_meta( $payment_args['payment_id'], 'wp_travel_payment_amount', true );
 							?>
 							<tr>
-								<td><?php echo esc_html( $payment_args['payment_date'] ); ?></td>
+								<td><?php echo esc_html( wptravel_format_date( $payment_args['payment_date'] ) ); ?></td>
 								<td>
 									<?php
 									echo esc_html( $payment_args['payment_id'] );

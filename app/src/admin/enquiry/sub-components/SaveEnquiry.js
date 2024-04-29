@@ -27,7 +27,7 @@ const saveEnquiry = (props) => {
                     <p className="text-success"><strong>{__('Enquiry Saved !', 'wp-travel')}</strong></p>
                 </div> }
             </div>
-            <Button isPrimary onClick={()=>{
+            <Button variant="primary" onClick={()=>{
 
                 updateRequestSending(true);
                 apiFetch( { url: `${ajaxurl}?action=wptravel_update_enquiry&_nonce=${_wp_travel._nonce}&enquiry_id=${_wp_travel.postID}`, data:allData, method:'post' } ).then( res => {

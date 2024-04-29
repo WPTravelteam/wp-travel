@@ -2,6 +2,7 @@ import { addFilter } from '@wordpress/hooks';
 import apiFetch from '@wordpress/api-fetch';
 import { dispatch, useSelect } from '@wordpress/data'; // redux [and also for hook / filter] | dispatch : send data to store
 import { useState } from '@wordpress/element';
+import { PanelRow, TextControl, Tooltip } from '@wordpress/components';    /** import WordPress components @since 7.7.0 */
 import Gallery from './Gallery';
 import GalleyDropZone from './GalleryDropZone';
 import { __ } from '@wordpress/i18n'
@@ -17,6 +18,61 @@ const __i18n = {
 // export default WPTravelTripOptionsGallery
 
 // Single Components for hook callbacks.
+
+/**
+ * Add Featured Trip Video Option to Gallery tab
+ * 
+ * @since 7.7.0
+ * @param {Object} allData
+ * @returns JSX
+ */
+const FeaturedTripVideo = ({ allData }) => {
+    const { trip_video_code } = allData;
+    const { updateTripData } = dispatch("WPTravel/TripEdit");
+
+    return (
+        <>
+            <div className='wp-travel-itinerary-title'>
+                <h3 className='wp-travel-tab-content-title'>{ __i18n.featured_trip_video }</h3>
+            </div>
+            <PanelRow>
+                <label>
+                    { __i18n.video_url }{ " " }
+                    <Tooltip text="The embeded video will appear as a play button overlay on top of featured image">
+                        <i className='fa fa-info-circle'></i>
+                    </Tooltip>
+                </label>
+                <div className="wp-travel-field-value">
+                    <TextControl
+                        value={trip_video_code}
+                        onChange={(trip_video_code) => {
+                            updateTripData({
+                                ...allData,
+                                trip_video_code: trip_video_code,
+                            });
+                        }}
+                    />
+                    <p className='description'>{__i18n.notices.featured_trip_video_option.description}</p>
+                </div>
+            </PanelRow>
+        </>
+    );
+}
+
+/**
+ * Add Gallery Title to Gallery Images section
+ * 
+ * @since 7.7.0
+ * @returns JSX
+ */
+const GalleryTitle = () => {
+    return (
+        <div className='wp-travel-itinerary-title'>
+            <h3 className='wp-travel-tab-content-title'>{ __i18n.gallery_images }</h3>
+        </div>
+    );
+}
+
 const SimpleGallery = ({allData, drag=true }) => {
     const [{ isUploading, isOpenModal }, setState] = useState({
         isUploading: false,
@@ -143,8 +199,18 @@ const SimpleGalleryCB = ( content, allData ) => {
     return [ ...content, <SimpleGallery allData={allData} key="SimpleGallery" /> ];
 }
 
+const GalleryTitleCB = ( content ) => {
+    return [ ...content, <GalleryTitle key="GalleryTitle" /> ];
+}
+
+const FeaturedTripVideoCB = ( content, allData ) => {
+    return [ ...content, <FeaturedTripVideo allData={allData} key="FeaturedTripVideo" /> ];
+}
+
 // Hooks.
-addFilter( 'wptravel_trip_edit_tab_content_gallery', 'WPTravel/TripEdit/SimpleGallery', SimpleGalleryCB, 10 );
+addFilter( 'wptravel_trip_edit_tab_content_gallery', 'WPTravel/TripEdit/FeaturedTripVideo', FeaturedTripVideoCB, 10 );
+addFilter( 'wptravel_trip_edit_tab_content_gallery', 'WPTravel/TripEdit/GalleryTitle', GalleryTitleCB, 20 );
+addFilter( 'wptravel_trip_edit_tab_content_gallery', 'WPTravel/TripEdit/SimpleGallery', SimpleGalleryCB, 30 );
 addFilter( 'wptravel_trip_edit_block_tab_gallery', 'WPTravel/TripEdit/Block/Gallery/SimpleGallery', ( content, allData ) => {
     return [ ...content, <SimpleGallery allData={allData} key="SimpleGallery" drag={false} /> ];
-}, 10 );
+}, 40 );

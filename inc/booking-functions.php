@@ -11,12 +11,25 @@
  * @since 1.7.5
  */
 function wptravel_book_now() {
-	if (
-		! WP_Travel::verify_nonce( true )
-		|| ! isset( $_POST['wp_travel_book_now'] ) // @phpcs:ignore
-		) {
-		return;
+	
+	$settings = wptravel_get_settings();
+	if( class_exists( 'WooCommerce' ) && $settings['enable_woo_checkout'] == 'yes' ){
+		if( !isset( $_REQUEST['key']) ){
+			return;
+		}
+
+		$order_data = wc_get_order(wc_get_order_id_by_order_key($_REQUEST['key']))->data;
+
+	}else{
+		if (
+			! WP_Travel::verify_nonce( true )
+			|| ! isset( $_POST['wp_travel_book_now'] ) // @phpcs:ignore
+			) {
+			return;
+		}
 	}
+
+
 	global $wt_cart;
 
 	/**
@@ -33,46 +46,11 @@ function wptravel_book_now() {
 	if ( ! count( $items ) ) {
 		return;
 	}
+
+	
 	$discount_coupon_data = $wt_cart->get_discounts();
 
-	// return 'not pax available';
-	if ( class_exists( 'WP_Travel_Util_Inventory' ) ) {
-		$inventory_enable = 'no';
-		foreach ( $items as $keys => $value ) {
-			if ( isset( $value['trip_id'] ) ) {
-				$inv = get_post_meta( $value['trip_id'], 'enable_trip_inventory' );
-				if ( isset( $inv[0] ) && $inv[0] == 'yes' ) {
-					$inventory_enable = $inv[0];
-					$price_ids        = isset( $value['pricing_id'] ) ? $value['pricing_id'] : '';
-					$trp_id           = $value['trip_id'];
-					$select_dates     = isset( $value['trip_start_date'] ) ? $value['trip_start_date'] : '';
-					$trp_time         = '';
-					$available_pax    = '';
-					$inventory_size   = '';
-					$select_pax       = isset( $value['pax'] ) ? $value['pax'] : 0;
-					if ( class_exists( 'WP_Travel_Helpers_Inventory' ) ) {
-						$inventorys = WP_Travel_Helpers_Inventory::get_inventory(
-							array(
-								'trip_id'       => $trp_id,
-								'pricing_id'    => $price_ids,
-								'selected_date' => $select_dates,
-								'times'         => $trp_time,
-							)
-						);
-						if ( isset( $inventorys['inventory'] ) ) {
-							foreach ( $inventorys['inventory'] as $key => $val ) {
-								$available_pax = isset( $val['pax_available'] ) ? $val['pax_available'] : 0;
-								if ( $select_pax > $available_pax ) {
-									$wt_cart->clear();
-									return;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+
 	$price_key            = false;
 	$pax                  = 1;
 	$total_pax            = 0; // Total booked pax. helps to display report.
@@ -90,7 +68,6 @@ function wptravel_book_now() {
 		// @since 3.1.3
 		$email_travel_date = apply_filters( 'wp_travel_email_travel_date', $item['arrival_date'], $item ); // phpcs:ignore
 		$email_travel_date = apply_filters( 'wptravel_email_travel_date', $email_travel_date, $item );
-
 		$trip_ids[]               = $item['trip_id'];
 		$pax_array[]              = $item['pax'];
 		$price_keys[]             = $item['price_key'];
@@ -117,6 +94,7 @@ function wptravel_book_now() {
 	if ( empty( $trip_id ) ) {
 		return;
 	}
+	
 	$thankyou_page_url = wptravel_thankyou_page_url( $trip_id );
 
 	// Insert Booking.
@@ -134,18 +112,86 @@ function wptravel_book_now() {
 		'post_title' => 'Booking - # ' . $booking_id,
 	);
 	wp_update_post( $update_data_array );
-
+	$settings       = wptravel_get_settings();
+	
+	
 	$sanitized_data = wptravel_sanitize_array( $_POST ); // @phpcs:ignore
 
+	if( class_exists( 'WooCommerce' ) && $settings['enable_woo_checkout'] == 'yes' ){ 
+		if( !empty( $order_data ) ){
+			$sanitized_data = array();
+	
+			$sanitized_data['wp_travel_fname_traveller'] = array(
+				strtotime("now") => array(
+					'0' =>	$order_data['billing']['first_name'] 
+				)
+			);
+		
+			$sanitized_data['wp_travel_lname_traveller'] = array(
+				strtotime("now") => array(
+					'0' =>	$order_data['billing']['last_name'] 
+				)
+			);
+		
+			$sanitized_data['wp_travel_country_traveller'] = array(
+				strtotime("now") => array(
+					'0' =>	$order_data['billing']['country'] 
+				)
+			);
+		
+			$sanitized_data['wp_travel_phone_traveller'] = array(
+				strtotime("now") => array(
+					'0' =>	$order_data['billing']['phone'] 
+				)
+			);
+		
+			$sanitized_data['wp_travel_email_traveller'] = array(
+				strtotime("now") => array(
+					'0' =>	$order_data['billing']['email'] 
+				)
+			);
+		
+			$sanitized_data['wp_travel_address'] = $order_data['billing']['address_1'];
+		
+			$sanitized_data['billing_city'] = $order_data['billing']['city'];
+		
+			$sanitized_data['wp_travel_country'] = $order_data['billing']['country'];
+		
+			$sanitized_data['billing_postal'] = $order_data['billing']['postcode'];
+		
+			if( $order_data['payment_method'] == 'cod' ){
+				$sanitized_data['wp_travel_booking_option'] = 'booking_only';
+			}else{
+				$sanitized_data['wp_travel_booking_option'] = 'booking_with_payment';
+			}
+		}
+	}
+	
+
+	if( class_exists( 'WP_Travel_Pro' ) && isset( $settings['selected_booking_option'] ) && count( $settings['selected_booking_option'] ) == 1 && $settings['selected_booking_option'][0] = 'booking-with-payment' ){
+		$sanitized_data['wp_travel_booking_option'] = 'booking_with_payment';
+	}
+	do_action( 'wpcrm_post_booking_user', $sanitized_data );
 	// Updating Booking Metas.
 	update_post_meta( $booking_id, 'order_data', $sanitized_data );
 	update_post_meta( $booking_id, 'order_items_data', $items ); // @since 1.8.3
 	update_post_meta( $booking_id, 'order_totals', $wt_cart->get_total() );
 	update_post_meta( $booking_id, 'wp_travel_pax', $total_pax );
+
+	$checkout_default_country = apply_filters( 'checkout_default_country', '' ); //@since 8.1.0
+
+	if( !empty( $checkout_default_country ) ){
+		update_post_meta( $booking_id, 'wp_travel_country', $checkout_default_country );
+	}
+
 	update_post_meta( $booking_id, 'wp_travel_booking_status', 'pending' );
+
+	update_post_meta( $booking_id, 'wp_travel_trip_code', wptravel_get_trip_code( $trip_id ) );
+
 	/**
 	 * Update Arrival and Departure dates metas.
 	 */
+
 	update_post_meta( $booking_id, 'wp_travel_arrival_date', sanitize_text_field( $arrival_date ) );
 	update_post_meta( $booking_id, 'wp_travel_departure_date', sanitize_text_field( $departure_date ) );
 	update_post_meta( $booking_id, 'wp_travel_post_id', absint( $trip_id ) ); // quick fix [booking not listing in user dashboard].
@@ -184,7 +230,6 @@ function wptravel_book_now() {
 		}
 	}
 
-	$settings       = wptravel_get_settings();
 	$customer_email = isset( $_POST['wp_travel_email_traveller'] ) ? wptravel_sanitize_array( wp_unslash( $_POST['wp_travel_email_traveller'] ) ) : array(); // @phpcs:ignore
 	reset( $customer_email );
 	$first_key      = key( $customer_email );
@@ -238,13 +283,14 @@ function wptravel_book_now() {
 
 		$i++;
 	}
-
+	
 	/**
 	 * Trigger Email functions. Sends Booking email to admin and client.
 	 *
 	 * @hooked array( 'WP_Travel_Email', 'send_booking_email' );
 	 * @since 5.0.0
 	 */
+
 	do_action( 'wptravel_action_send_booking_email', $booking_id, wptravel_sanitize_array( $_POST ), $new_trip_id );
 	/**
 	 * Hook used to add payment and its info.
@@ -314,12 +360,13 @@ function wptravel_book_now() {
 		update_post_meta( $payment_id, 'wp_travel_payment_mode', 'full' );
 		update_post_meta( $payment_id, 'wp_travel_payment_amount', $total_price );
 	}
+
 	// do_action( 'wp_travel_all_booking_data_list', $booking_id, $payment_data, $settings, $user_id );
 	$affiliate = apply_filters( 'wp_travel_all_booking_data_list_for_slicewp', $booking_id, $user_id );
 
 	// Clear Cart After process is complete.
 	$wt_cart->clear();
-
+	
 	$thankyou_page_url = add_query_arg( 'booked', true, $thankyou_page_url );
 	$thankyou_page_url = add_query_arg( '_nonce', WP_Travel::create_nonce(), $thankyou_page_url );
 	$thankyou_page_url = add_query_arg( 'order_id', $booking_id, $thankyou_page_url );
@@ -544,7 +591,7 @@ function wptravel_get_booking_chart() {
 						<h3><?php esc_html_e( 'Compare 2', 'wp-travel' ); ?></h3>
 					</div>
 					<div class="right-block-single">
-						<strong><big><?php echo esc_html( wptravel_get_currency_symbol() ); ?></big><big class="wp-travel-total-sales-compare">0</big></strong><br />
+						<strong><big><?php echo wp_kses_post( wptravel_get_currency_symbol() ); ?></big><big class="wp-travel-total-sales-compare">0</big></strong><br />
 						<p><?php esc_html_e( 'Total Sales', 'wp-travel' ); ?></p>
 					</div>
 					<div class="right-block-single">

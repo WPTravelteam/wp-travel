@@ -62,6 +62,7 @@ class WpTravel_Helpers_Trips {
 		$has_extras        = is_array( $extras ) && isset( $extras['code'] ) && 'WP_TRAVEL_TRIP_EXTRAS' == $extras['code'] && isset( $extras['trip_extras'] ) && count( $extras['trip_extras'] ) > 0 ? true : false;
 		$highest_price     = get_post_meta( $trip_id, 'wp_travel_show_highest_price', true );
 		$trip_default_data = array(
+			'trip_video_code'					=> get_post_meta( $trip_id, 'wp_travel_video_code', true ),
 			'pricing_type'                        => 'multiple-price',
 			'custom_booking_type'                 => 'custom-link',
 			'custom_booking_form'                 => '',
@@ -69,6 +70,7 @@ class WpTravel_Helpers_Trips {
 			'custom_booking_link_text'            => '',
 			'custom_booking_link_open_in_new_tab' => '',
 			'highest_price'                       => ! empty( $highest_price ) ? $highest_price : '',
+			'enable_pax_all_pricing'              => get_post_meta( $trip_id, 'wp_travel_enable_pax_all_pricing', true ),
 			'pricings'                            => array(),
 			'trip_price'                          => 0,
 			'regular_price'                       => 0,
@@ -161,6 +163,7 @@ class WpTravel_Helpers_Trips {
 		$enable_trip_enquiry_option = get_post_meta( $trip_id, 'wp_travel_enable_trip_enquiry_option', true );
 
 		$trip_overview = get_post_meta( $trip_id, 'wp_travel_overview', true );
+		$trip_video_url = get_post_meta( $trip_id, 'wp_travel_video_url', true );
 		$trip_include  = get_post_meta( $trip_id, 'wp_travel_trip_include', true );
 		$trip_exclude  = get_post_meta( $trip_id, 'wp_travel_trip_exclude', true );
 		$trip_outline  = get_post_meta( $trip_id, 'wp_travel_outline', true );
@@ -199,18 +202,19 @@ class WpTravel_Helpers_Trips {
 			);
 		} else {
 			$old_duration_select = isset( $trip_duration_formating['duration_format'] ) ? $trip_duration_formating['duration_format'] : '';
-			if ( ! empty( $old_duration_select ) && $old_duration_select == 'hour' ) {
-				$duration_selected_date = $old_duration_select;
-			} else {
-				$duration_selected_date = 'day_night';
-			}
+			// if ( ! empty( $old_duration_select ) && $old_duration_select == 'hour' ) {
+			// 	$duration_selected_date = $old_duration_select;
+			// } else {
+			// 	$duration_selected_date = 'day_night';
+			// }
 			$new_duration_date = array(
 				'days'				=> isset( $trip_duration_formating['days'] ) ? $trip_duration_formating['days'] : '',
 				'nights'			=> isset( $trip_duration_formating['nights'] ) ? $trip_duration_formating['nights'] : '',
 				'hours'				=> isset( $trip_duration_formating['hours'] ) ? $trip_duration_formating['hours'] : '',
-				'duration_format'	=> $duration_selected_date,
+				'minute'			=> isset( $trip_duration_formating['minute'] ) ? $trip_duration_formating['minut'] : '',
+				'duration_format'	=> $old_duration_select,
 			);
-			$trip_duration = apply_filters( 'wp_travel_trip_duration_formating_select', $new_duration_date, $trip_duration_formating );
+			$trip_duration = apply_filters( 'wp_travel_trip_duration_formating_selected', $trip_duration_formating );
 		}
 		$trip_data     = array(
 			'id'                                => $trip->ID,
@@ -330,6 +334,7 @@ class WpTravel_Helpers_Trips {
 	 * @param int $trip_data Other data related to that particular trip.
 	 */
 	public static function update_trip( $trip_id, $trip_data ) {
+
 		if ( empty( $trip_id ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
 		}
@@ -349,6 +354,8 @@ class WpTravel_Helpers_Trips {
 
 		$is_fixed_departure = ! empty( $trip_data->is_fixed_departure ) ? 'yes' : 'no';
 		update_post_meta( $trip_id, 'wp_travel_fixed_departure', $is_fixed_departure );
+		
+		update_post_meta( $trip_id, 'wp_travel_enable_pax_all_pricing', $trip_data->enable_pax_all_pricing );
 
 		$dates = ( 'no' === $is_fixed_departure ) ? array() : $trip_data->dates;
 		if ( ! empty( $dates ) ) {
@@ -442,6 +449,15 @@ class WpTravel_Helpers_Trips {
 			 * @todo Need escaping in wp_travel_overview
 			 */
 			update_post_meta( $trip_id, 'wp_travel_overview', wp_kses_post( $trip_data->trip_overview ) );
+		}
+
+		if ( ! empty( $trip_data->trip_video_code ) || empty( $trip_data->trip_video_code ) ) {
+			/**
+			 * Save trip outline.
+			 *
+			 * @todo Need escaping in wp_travel_overview
+			 */
+			update_post_meta( $trip_id, 'wp_travel_video_code', sanitize_url( $trip_data->trip_video_code ) );
 		}
 
 		if ( ! empty( $trip_data->trip_outline ) || empty( $trip_data->trip_outline ) ) {
@@ -575,6 +591,31 @@ class WpTravel_Helpers_Trips {
 				update_post_meta( $trip_id, 'wp_travel_trips_dates', array() );
 			}
 		}
+		
+		update_post_meta( $trip_id, 'wp_travel_start_date', "9999-01-01");
+		update_post_meta( $trip_id, 'wp_travel_end_date', "0000-00-00");
+		global $wpdb; 
+		$date_value = $wpdb->get_results('SELECT * FROM wp_wt_dates WHERE trip_id ='.$trip_id);
+		
+
+		if( count($date_value) ){
+			$current_end_date = "0000-00-00";
+			$current_start_date = date("Y-m-d", strtotime( "9999-01-01" ));
+			foreach( $date_value as $date ){
+				
+				if( $date->start_date < $current_start_date ){
+					update_post_meta( $trip_id, 'wp_travel_start_date', date("Y-m-d", strtotime(sanitize_text_field( $date->start_date ))));
+				}
+
+				if( $date->end_date > $current_end_date ){
+					update_post_meta( $trip_id, 'wp_travel_end_date', date("Y-m-d", strtotime(sanitize_text_field( $date->end_date ))));
+				}
+				
+				$current_start_date = $date->start_date;
+				$current_end_date = $date->start_date;
+			}
+		}
+		
 		return WP_Travel_Helpers_Response_Codes::get_success_response(
 			'WP_TRAVEL_UPDATED_TRIP',
 			array(
@@ -742,7 +783,7 @@ class WpTravel_Helpers_Trips {
 		if ( empty( $trips ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIPS' );
 		}
-
+	
 		return WP_Travel_Helpers_Response_Codes::get_success_response(
 			'WP_TRAVEL_FILTER_RESULTS',
 			array(

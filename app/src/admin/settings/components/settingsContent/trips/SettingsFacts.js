@@ -105,7 +105,7 @@ export default () => {
         }
         let selectedFactOptions = factOptions.filter(opt => { return opt.value == props.fact.type })
         return <PanelRow>
-            <label>{__('Field Type', 'wp-travel')}</label>
+            <label>{_wp_travel.setting_strings.facts.field_type}</label>
             <div className="wp-travel-field-value">
                 <div className="wp-travel-select-wrapper">
                     <Select
@@ -135,7 +135,7 @@ export default () => {
     return <>
         <div className="wp-travel-section-header">
             <h2 className="wp-travel-section-header-title">
-                {__("Facts Settings", "wp-travel")}
+                {_wp_travel.setting_strings.facts.facts_settings}
             </h2>
             <p className="wp-travel-section-header-description">
                 {__("More facts settings according to your choice.", "wp-travel")}
@@ -144,7 +144,7 @@ export default () => {
         <div className='wp-travel-section-content'>
             <ErrorBoundary>
                 <PanelRow>
-                    <label>{__('Trip Facts', 'wp-travel')}</label>
+                    <label>{_wp_travel.setting_strings.facts.trip_facts}</label>
                     <div id="wp-travel-trip-facts" className="wp-travel-field-value">
                         <ToggleControl
                             checked={wp_travel_trip_facts_enable == 'yes'}
@@ -155,13 +155,13 @@ export default () => {
                                 })
                             }}
                         />
-                        <p className="description">{__('Enable Trip Facts display on trip single page.', 'wp-travel')}</p>
+                        <p className="description">{_wp_travel.setting_strings.facts.trip_facts_note}</p>
                     </div>
                 </PanelRow>
 
                 {'undefined' != typeof wp_travel_trip_facts_enable && 'yes' == wp_travel_trip_facts_enable &&
                     <>
-                        <PanelRow className="wp-travel-action-section"><span></span><Button isSecondary onClick={() => addNewFactData()}>{__('+ Add New', 'wp-travel')}</Button></PanelRow>
+                        <PanelRow className="wp-travel-action-section"><span></span><Button variant="secondary" onClick={() => addNewFactData()}>{_wp_travel.setting_strings.facts.add_new}</Button></PanelRow>
 
                         {'undefined' != typeof wp_travel_trip_facts_settings &&
                             <>
@@ -174,9 +174,9 @@ export default () => {
                                             opened={isTabOpen && index == tabData.index ? true : false}
                                         >
                                             <PanelRow>
-                                                <label>{__('Field Name', 'wp-travel')}</label>
+                                                <label>{_wp_travel.setting_strings.facts.field_name}</label>
                                                 <TextControl
-                                                    placeholder={__('Enter Field name', 'wp-travel')}
+                                                    placeholder={_wp_travel.setting_strings.facts.field_name_label}
                                                     value={fact.name}
                                                     onChange={(value) => {
                                                         updateFact('name', value, index)
@@ -188,7 +188,7 @@ export default () => {
 
                                             {(fact.type == 'single' || fact.type == 'multiple') &&
                                                 <PanelRow>
-                                                    <label>{__('Values', 'wp-travel')}</label>
+                                                    <label>{_wp_travel.setting_strings.facts.values}</label>
                                                     <div className="wp-travel-field-value">
                                                         <FormTokenField
                                                             label=""
@@ -197,14 +197,14 @@ export default () => {
                                                             onChange={tokens => {
                                                                 updateFact('options', tokens, index)
                                                             }}
-                                                            placeholder={__('Add an option and press Enter', 'wp-travel')}
+                                                            placeholder={_wp_travel.setting_strings.facts.values_label}
                                                         />
                                                     </div>
                                                 </PanelRow>
                                             }
                                             {/** Icon Start here. */}
                                             <PanelRow>
-                                                <label>{__('Icon', 'wp-travel')}</label>
+                                                <label>{_wp_travel.setting_strings.facts.icon}</label>
                                                 <div className="wti_icon_btn_wrapper">
                                                     {
                                                         'fontawesome-icon' == fact.selected_icon_type && '' != fact.icon &&
@@ -218,7 +218,7 @@ export default () => {
                                                         'icon-class' == fact.selected_icon_type && '' != fact.icon &&
                                                         <p>{__('Icon Class: ', 'wp-travel')}<strong>[ {fact.icon} ]</strong></p>
                                                     }
-                                                    <Button isSecondary onClick={openModal}>{__('Choose Icon', 'wp-travel')}</Button>
+                                                    <Button variant="secondary" onClick={openModal}>{_wp_travel.setting_strings.facts.choose_icon}</Button>
                                                 </div>
                                                 {
                                                     isOpenModal &&
@@ -228,8 +228,8 @@ export default () => {
 
                                             <PanelRow className="wp-travel-action-section">
                                                 <span></span>
-                                                <Button isSecondary onClick={() => {
-                                                    if (!confirm(__('Are you sure to delete Fact?', 'wp-travel'))) {
+                                                <Button variant="secondary" onClick={() => {
+                                                    if (!confirm(_wp_travel.setting_strings.facts.remove_note )) {
                                                         return false;
                                                     }
                                                     let factData = [];
@@ -237,13 +237,13 @@ export default () => {
                                                         return newIndex != index;
                                                     });
                                                     removeFact(factData);
-                                                }} className="wp-traval-button-danger">{__('- Remove Fact', 'wp-travel')}</Button></PanelRow>
+                                                }} className="wp-traval-button-danger">{_wp_travel.setting_strings.facts.remove_fact}</Button></PanelRow>
 
                                         </PanelBody>
                                     )
                                 })}
 
-                                {wp_travel_trip_facts_settings.length > 2 && <PanelRow className="wp-travel-action-section"><span></span><Button isSecondary onClick={() => addNewFactData()}>{__('+ Add New', 'wp-travel')}</Button></PanelRow>}
+                                {wp_travel_trip_facts_settings.length > 2 && <PanelRow className="wp-travel-action-section"><span></span><Button variant="secondary" onClick={() => addNewFactData()}>{_wp_travel.setting_strings.facts.add_new}</Button></PanelRow>}
                             </>
                         }
                     </>

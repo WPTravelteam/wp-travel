@@ -1,29 +1,83 @@
 import { __ } from '@wordpress/i18n';
 import { wpTravelFormat, GetConvertedPrice } from '../../../_wptravelFunctions';
+import apiFetch from '@wordpress/api-fetch';
+import { useState, useEffect } from "@wordpress/element";
 const __i18n = {
 	..._wp_travel.strings
 }
 const TripExtras = ( props ) => {
 	// Component Props.
-	const { bookingData, updateBookingData } = props;
-	const { nomineeTripExtras, tripExtras } = bookingData;
+	const { tripData, bookingData, updateBookingData } = props;
+	const { isLoading, nomineeTripExtras, tripExtras } = bookingData;
+	const[ tripExtrasStock, setTripExtrasStock ] = useState( [] );
+	
+	var tripID = tripData.id;
+	var tripDepartureDate = moment(moment(bookingData.selectedDate).format('YYYY-MM-DD'))._i.replace( '-', '_' ).replace( '-', '_' );
 
-	const handleClick = ( index, inc ) => () => {
+	if( typeof _wp_travel.WP_Travel_Trip_Extras_Inventory !== 'undefined' ){
+
+		useEffect( () => {	
+		apiFetch( { url: `${_wp_travel.ajax_url}?action=wptravel_get_trip_extras_inventory&_nonce=${_wp_travel._nonce}&tripID=${tripID}&tripDepartureDate=${tripDepartureDate}`, data:'', method:'post' } ).then( res => {
+			
+			if( res.success){
+				setTripExtrasStock( res.data )
+			}
+		} );
+		}, [] );
+		
+		// useEffect( () => {	
+			
+		// 	let nonce = Math.random().toString(36).substring(2,7);
+		// 	apiFetch.use( apiFetch.createNonceMiddleware( nonce ) );
+			
+		// 	apiFetch( { path: '/wptravelgettripextrasstock/v1/tripextrasStock/'+tripDepartureDate+'seperate'+tripID+'?key='+Math.random().toString(36).substring(2,7), method: 'GET' } ).then( ( response ) => {
+		// 		setTripExtrasStock( response )
+		// 	} )
+			
+		// }, [] );
+	}
+
+	const handleClick = ( index, inc, quantity ) => e => {
+		
 		let id = nomineeTripExtras[index].id
 		let _xcount = tripExtras[id] + inc < 0 ? 0 : tripExtras[id] + inc;
+
+		if( typeof _wp_travel.WP_Travel_Trip_Extras_Inventory !== 'undefined' ){
+			if( quantity != -1 ){
+				if( _xcount > quantity ){
+					_xcount = quantity
+					if (e.target.parentElement.querySelector('.error'))
+						return
+					let em = document.createElement('em')
+					em.classList.add('error')
+					em.textContent = __i18n.bookings.max_pax_exceeded
+					e.target.parentElement.appendChild(em)
+					setTimeout(() => {
+						em.remove()
+					}, 1000)
+					return
+				}
+			}
+		}
+			
+		
 		// Trip extras required validation.
 		if ( nomineeTripExtras[index].is_required && _xcount <= 0 ) {
 			_xcount = 1;
 		}
+
 		updateBookingData({ tripExtras: { ...tripExtras, [id]: parseInt(_xcount) } });
 	}
 
+
 	return <div className="wp-travel-booking__trip-extras-wrapper">
-		{
+		{	
+		
 			nomineeTripExtras.length > 0 && <>
 				<h4>{__i18n.bookings.trip_extras_list_label}</h4>
 				<ul className="wp-travel-booking__trip-option-list">
-					{
+					{	
+					
 						nomineeTripExtras.map((tx, i) => {
 							if (typeof tx.tour_extras_metas == 'undefined') {
 								return <li key={i}>
@@ -76,14 +130,22 @@ const TripExtras = ( props ) => {
 											}
 										</a>
 									</div>
+	
+									{	
+										( typeof _wp_travel.WP_Travel_Trip_Extras_Inventory !== 'undefined' && tx.tour_extras_metas.extras_item_quantity != -1 ) &&
+										<>
+											<span className='trip-extra-quantity'>( {_count} / { tx.tour_extras_metas.extras_item_quantity - ( typeof tripExtrasStock[tx.id] !== 'undefined' ? tripExtrasStock[tx.id] : 0 ) } )</span>
+										</>
+									}									
 								</div>
 								<div className="text-right">
-									<span className="item-price">{tx.is_sale && <del dangerouslySetInnerHTML={{__html: wpTravelFormat( GetConvertedPrice( tx.tour_extras_metas.extras_item_price ) ) }}></del>} <span dangerouslySetInnerHTML={ { __html: wpTravelFormat( GetConvertedPrice( price ) ) }}></span> /{__i18n.unit}</span>
+									<span className="item-price">{tx.is_sale && <del dangerouslySetInnerHTML={{__html: wpTravelFormat( GetConvertedPrice( tx.tour_extras_metas.extras_item_price ) ) }}></del>} <span dangerouslySetInnerHTML={ { __html: wpTravelFormat( GetConvertedPrice( price ) ) }}></span> /{tx.unit}</span>
+									
 									<div className="pricing-area">
 										<div className="qty-spinner">
-											<button onClick={ handleClick( i, -1 ) }>-</button>
+											<button onClick={ handleClick( i, -1, ( tx.tour_extras_metas.extras_item_quantity - ( typeof tripExtrasStock[tx.id] !== 'undefined' ? tripExtrasStock[tx.id] : 0 ) ) ) }>-</button>
 											<span>{_count}</span>
-											<button onClick={ handleClick( i, 1 ) }>+</button>
+											<button onClick={ handleClick( i, 1, ( tx.tour_extras_metas.extras_item_quantity - ( typeof tripExtrasStock[tx.id] !== 'undefined' ? tripExtrasStock[tx.id] : 0 ) ) ) }>+</button>
 										</div>
 									</div>
 								</div>
@@ -96,3 +158,5 @@ const TripExtras = ( props ) => {
 	</div >
 }
 export default TripExtras
+
+

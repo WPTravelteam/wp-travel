@@ -1,26 +1,99 @@
 .wptravel-on-page-booking-update-cart-section {
-	.wp-travel-on-page-cart-update-button {
-		display: flex;
-		// gap: 10px;
+	.wptravel-on-page-booking-update-cart-section-wrapper {
+		border: 1px solid rgb(204, 204, 204);
+		padding: 20px;
+		margin-bottom: 20px;
+		border-radius: 4px;
+		span.pax-selector-label {
+			font-size: 20px;
+		}
 	}
-
+	.wptravel-on-page-booking-update-trip-extras-wrapper {
+		border: 1px solid rgb(204, 204, 204);
+		padding: 20px;
+		margin-bottom: 20px;
+		border-radius: 4px;
+		span.item-price {
+			opacity: 0.7;
+		}
+	}
 	.wptrave-on-page-booking-cart-update-field {
 		display: flex;
-		// gap: 40px;
-		margin: 20px 0;
+		align-items: center;
+		gap: 10px;
+		padding: 10px;
+		margin: 0;
+		justify-content: space-between;
+		@media screen and (max-width: 768px) {
+			padding: 0;
+			flex-direction: column;
+			align-items: flex-start;
+		}
 		label {
-			width: 100px;
+			// width: 250px;
+			flex-basis: 40%;
+			font-weight: bold;
+		}
+		@media screen and (max-width: 768px) {
+			label{
+				flex-basis: 30%;
+			}
+		}
+		span.item-price {
+			flex-basis: 30%;
+			text-align: right;
+			margin-right: 10px;
+			del {
+				opacity: 0.5;
+			}
+		}
+		@media screen and (max-width: 768px) {
+			span.item-price{
+				flex-basis: 20%;
+			}
+		}
+
+		.wp-travel-on-page-cart-update-button {
+			display: flex;
+			align-items: center;
+			flex: 5%;
+			justify-content: flex-end;
+			button {
+				height: 30px;
+				width: 30px;
+				transition: all 0.2s ease-in;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				text-decoration: none;
+				padding: 0 !important;
+			}
+
+			p {
+				margin: 0;
+				height: 30px;
+				width: 30px;
+				border: 1px solid rgb(204, 204, 204);
+				text-align: center;
+				border-radius: 4px;
+			}
+		}
+
+		.wptravel-onpage-booking-cart-price {
+			flex: 5%;
+			text-align: right;
+			p {
+				margin: 0;
+				margin-left: 50px;
+				@media screen and (max-width: 768px) {
+					margin-left: 0;
+				}
+				font-size: 20px;
+				font-weight: 600;
+			}
 		}
 	}
 	button {
-		height: 30px;
-		width: 30px;
-		border: 0;
-		border-radius: 5px;
-		transition: all 0.2s ease-in;
-		display: flex;
-		justify-content: center;
-		align-items: center;
 		margin: 0 10px;
 		text-decoration: none;
 	}
@@ -29,10 +102,38 @@
 // Update cart button
 .wptravel-on-page-booking-cart-update-btn {
 	margin: 10px 0;
+	button {
+		width: auto;
+		display: flex;
+		gap: 10px;
+		align-items: center;
+
+		img {
+			width: 20px;
+			height: 20px;
+			filter: brightness(100);
+		}
+	}
+
+	.wptravel-onpage-cart-updated-message {
+		display: inline-block;
+		margin-top: 10px;
+		padding: 10px 20px;
+		background-color: #d7f3d7;
+		color: #329b32;
+		border: 1px solid #329b32;
+		border-radius: 5px;
+
+		i {
+			margin-right: 5px;
+		}
+	}
 }
 // edit cart
-.wptravel-udate-cart-wrapper button.components-button {
+.wptravel-udate-cart-wrapper button {
 	margin: 10px 0;
+	width: auto;
+	padding: 10px 10px;
 }
 .wptravel-udate-cart-wrapper
 	button.wptravel-page-cart-update-btn-increase:hover {
@@ -43,27 +144,85 @@
 .wptravel-onpage-checkbox-container {
 	.components-panel__body.is-opened {
 		align-items: baseline;
+
+		.wtravel-onpage-boking-checkbox {
+			label {
+				font-weight: 400;
+			}
+
+			.components-checkbox-control__input-container {
+				input.components-checkbox-control__input {
+					width: 15px;
+					height: 15px;
+					min-height: fit-content;
+
+					&:focus,
+					&:active {
+						outline: none;
+					}
+				}
+
+				svg {
+					display: none;
+				}
+			}
+		}
 	}
 }
 
 // Coupon code apply
 .booknow-btn-modal {
+
 	.wptravel-on-page-coupon-apply {
 		display: flex;
 		align-items: center;
 		gap: 10px;
-	}
-}
-.wptrave-onpage-price-calculation {
-	display: flex;
-	flex-direction: column;
-	.components-panel__row {
-		justify-content: left;
-		label {
-			flex-basis: 220px;
+		flex-wrap: wrap;
+
+		// apply cupon button
+		.wptravel-on-page-coupon-code-btn {
+			width: auto;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+
+			img {
+				width: 20px;
+				height: 20px;
+				filter: brightness(100);
+			}
 		}
 	}
 }
+.wptravel-onepage-payment-total-trip-price {
+	width: 100%;
+	margin-bottom: 20px;
+
+	.wptrave-onpage-price-calculation {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+
+		.components-panel__row {
+			justify-content: left;
+
+			label {
+				width: 33%;
+				font-size: initial;
+
+				@media screen and (max-width: 576px) {
+					width: 100%;
+				}
+			}
+
+			#wp-travel-trip-price_info {
+				font-weight: 600;
+				font-size: initial;
+			}
+		}
+	}
+}
+
 .wptravel-on-page-coupon-error {
 	font-size: 12px;
 	text-align: left;
@@ -77,8 +236,22 @@
 	display: flex;
 	justify-content: start;
 	align-items: center;
-	.wptravel-onepage-payment-total-trip-price {
-		flex: 0 0 45%;
+
+	.wptrave-on-page-booking-price-with-coupon.wptravel-onepage-payment-total-trip-price {
+		width: 100%;
+
+		.wptrave-onepage-price-calculation {
+			.components-panel__row {
+				label {
+					font-size: initial;
+				}
+
+				#wp-travel-trip-price_info {
+					font-size: 20px;
+					font-weight: 600;
+				}
+			}
+		}
 	}
 	.wptravel-on-page-stripe-ideal-checkout-field {
 		flex: 0 0 15%;
@@ -108,45 +281,201 @@
 	border-radius: 0.5rem;
 }
 
-.wp-travel-single-trip-add-to-cart {
+.wp-travel__trip-headline {
 	display: flex;
 	justify-content: flex-end;
-	margin-bottom: 30px;
+	max-height: 75px;
 
-	.wp-travel-add-to-cart-item-anchor {
-		.wp-travel-single-trip-cart-button {
-			.wp-travel-add-to-cart-cart_item_show {
-				i.fa.fa-shopping-cart {
-					font-size: 18px;
-				}
-	
-				.wp-travel-cart-items-number {
-					position: absolute;
-					top: 5px;
-					right: 10px;
-					background: red;
-					width: 20px;
-					height: 20px;
-					display: inline-flex;
-					line-height: 1;
-					color: white;
-					border-radius: 50%;
-					justify-content: center;
-					align-items: center;
-					font-weight: 600;
-					font-size: 12px;
-					letter-spacing: normal;
+	// #wp-travel__add-to-cart_notice {
+	// 	border-radius: 5px;
+	// 	margin: 10px 0 25px 0;
+
+	// 	&.success {
+	// 		padding: 10px 20px;
+	// 		background-color: #d7f3d7;
+	// 		color: #329b32;
+	// 		border: 1px solid #329b32;
+	// 	}
+
+	// 	&.error {
+	// 		padding: 10px 20px;
+	// 		background-color: #f3d7d7;
+	// 		color: #d12323;
+	// 		border: 1px solid #d12323;
+	// 	}
+
+	// 	i {
+	// 		margin-right: 7px;
+	// 	}
+	// }
+
+	.wp-travel-single-trip-add-to-cart {
+		display: flex;
+		flex-direction: row-reverse;
+		justify-content: space-between;
+		padding: 0 25px;
+		margin: 10px 0 25px 0;
+
+		.wp-travel-add-to-cart-item-anchor {
+			.wp-travel-single-trip-cart-button {
+				width: 40px;
+				height: 40px;
+				border: none;
+				padding: 10px;
+				border-radius: 50%;
+				cursor: pointer;
+
+				#wp-travel-add-to-cart-cart_item_show {
+					position: relative;
+
+					i.fa.fa-shopping-cart {
+						font-size: 18px;
+						vertical-align: middle;
+						width: 18px;
+						height: 18px;
+						position: absolute;
+						top: -9px;
+						left: -10px;
+					}
+
+					.wp-travel-cart-items-number {
+						display: none;
+						position: absolute;
+						top: -27px;
+						right: -27px;
+						background: #333333;
+						width: 20px;
+						height: 20px;
+						line-height: 1;
+						color: white;
+						border-radius: 50%;
+						justify-content: center;
+						align-items: center;
+						font-weight: 600;
+						font-size: 12px;
+						letter-spacing: normal;
+
+						&.active {
+							display: inline-flex;
+						}
+					}
 				}
 			}
 		}
+
+		.wp-travel-add-to-cart-item-anchor-tag {
+			padding: 10px 30px;
+			display: inline-block;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+	}
+}
+
+/**
+* Added toast styles
+*
+* @since 7.6.0
+*/
+#wp-travel__add-to-cart_notice {
+	display: none;
+	position: fixed;
+	right: 20px;
+	top: 45px;
+	background: white;
+	color: #000;
+	padding: 30px;
+	border-radius: 10px;
+	max-width: 450px;
+	box-shadow: 0 0 10px 3px rgba(0,0,0,0.05);
+	overflow: hidden;
+	gap: 50px;
+	align-items: center;
+	z-index: 999;
+
+	&.success {
+		display: flex;
+		
+		#wp-travel__notice_time-bar {
+			height: 5px;
+			background-color: green;
+			width: 100%;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			animation: slide-out 8s forwards linear;
+		}
 	}
 
-	.wp-travel-add-to-cart-item-anchor-tag {
-		padding: 10px 30px;
-		display: inline-block;
-		border-radius: 5px;
+	#toast-close {
 		cursor: pointer;
 	}
-	
 
+	span {
+		i {
+			margin-right: 5px;
+			color: rgb(22, 153, 22);
+		}
+	}
 }
+
+.trip-extra-label,
+.pax-selector-label {
+	font-weight: bold;
+	font-size: 20px;
+}
+// .animated-wp-travel {
+//     opacity: 0; 
+//     -webkit-animation-duration: 0.6s;
+//     animation-duration: 0.6s;
+//     -webkit-animation-fill-mode: both;
+//     animation-fill-mode: both;
+// }
+
+/**
+* Added animation for toast time-bar
+*
+* @since 7.6.0
+*/
+@-webkit-keyframes slide-out {
+    0% {
+        left: 0;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+@keyframes slide-out {
+    0% {
+        left: 0;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+// @-webkit-keyframes fadeIn {
+// 	0% {
+// 		opacity: 0;
+// 	}
+// 	100% {
+// 		opacity: 1;
+// 	}
+// }
+
+// @keyframes fadeIn {
+// 	0% {
+// 		opacity: 0;
+// 	}
+// 	100% {
+// 		opacity: 1;
+// 	}
+// }
+
+// .fadeIn-wp-travel {
+// 	-webkit-animation-name: fadeIn;
+// 	animation-name: fadeIn;
+// }

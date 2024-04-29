@@ -57,8 +57,115 @@ input.wp-trave-pax-selected-frontend {
 }
 
 input.wp-trave-pax-selected-frontend-second { 
-	width: 30px;
+	width: 30px !important;
     height: 30px;
-    line-height: 30px;
     text-align: center;
+}
+#onpage-privacy-policy{
+	margin-bottom: 30px;
+	.radio-checkbox-label input{
+		margin-right: 5px;
+	}
+	a{
+		margin-left: 5px;
+	}
+}
+
+.wptravel-layout-v2 #wp-travel__add-to-cart_notice{
+	color: #000 ;
+}
+
+
+.wptravel-billing-formfield .heading{
+	display: none;
+}
+
+.booknow-btn-modal #onpage-trip_price + .wptravel-onepage-navigation-btn {
+	justify-content: flex-end !important;
+}
+
+.wp-travel-booking__trip-option-list .group-discount-button svg{
+	width: 15px;
+}
+
+.wp-travel-booking__trip-option-list .group-discount-button .discount-table{
+	display: none;
+}
+
+.wp-travel-booking__trip-option-list .group-discount-button:hover .discount-table{
+	display: block;
+	position: absolute;
+	background: #fff;
+    z-index: 1;
+}
+
+.on-page.wp-travel-enquiry-subscribe-section {
+	padding: 0px 40px 10px 40px;
+    display: flex;
+}
+
+.on-page.wp-travel-enquiry-subscribe-section {
+	label[for="wp-travel-subscribe"]{
+		width: 34%;
+		font-weight: bold;
+	}
+	.radio-checkbox-label{
+		width: 66%;
+	}
+}
+
+.booknow-btn-modal .wptrave-onpage-price-calculation .radio-checkbox-label{
+	width: 66%;
+}
+.wptravel-on-page-coupon-error{
+	padding: 0px 40px 0px 40px;
+}
+.wptravel-on-page-coupon-apply{
+	.wptravel-on-page-coupon-data{
+		width: 33%;
+	}
+	padding: 40px 40px 0px 40px;
+	button{
+		text-decoration: none;
+		padding: 5px;
+		border: none;
+		padding: 10px 25px;
+		font-weight: 500;
+		cursor: pointer;
+		transition: all 0.1s ease;
+		position: relative;
+		outline: none;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}
+
+@media screen and (max-width: 622px) {
+	// apply coupon 
+	.wptravel-on-page-coupon-apply{
+		padding: 0px !important;
+		.wptravel-on-page-coupon-data{
+			width: 100%;
+		}
+	}
+	
+	.on-page.wp-travel-enquiry-subscribe-section {
+		display: block;
+	}
+	.on-page.wp-travel-enquiry-subscribe-section {
+		label[for="wp-travel-subscribe"]{
+			width: 100%;
+    		display: block;
+		}
+		.radio-checkbox-label{
+			width: 100%;
+			margin-right: 10px;
+		}
+	}
+}
+@media screen and (max-width: 575px) {
+	.on-page.wp-travel-enquiry-subscribe-section {
+		padding: 0px !important;
+	}
 }

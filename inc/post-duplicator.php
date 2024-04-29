@@ -37,7 +37,7 @@ function wptravel_post_duplicator_action_row_link( $post ) {
 	}
 
 	// Set the button label
-	$label = sprintf( __( 'Clone %s', 'wp-travel' ), $post_type->labels->singular_name );
+	$label = __( 'Clone ', 'wp-travel' ) . $post_type->labels->singular_name;
 
 	// Create a nonce & add an action
 	$nonce = wp_create_nonce( 'wp_travel_clone_post_nonce' );

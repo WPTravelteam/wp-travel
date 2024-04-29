@@ -30,10 +30,13 @@ class WP_Travel_Ajax_Payments { // @phpcs:ignore
 
 		global $wpdb;
 
-		$row = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->postmeta . " WHERE meta_key='wp_travel_payment_id' and meta_value='$payment_id'" );
-		$booking_id = $row->post_id;
+		// $row = $wpdb->get_row( 'SELECT * FROM ' . $wpdb->postmeta . " WHERE meta_key='wp_travel_payment_id' and meta_value='$payment_id'" );
+		// $booking_id = $row->post_id;
+
+		$booking_id = get_post_meta( $payment_id, 'wp_travel_payment_booking_id', true );
 		?>
 		<div class="my-order my-order-details" style="margin:50px">
+		
 			<div class="view-order">
 				<div class="order-list" style="padding:20px">
 					<div class="order-wrapper">

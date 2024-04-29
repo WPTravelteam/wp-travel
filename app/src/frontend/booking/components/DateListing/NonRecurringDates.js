@@ -23,7 +23,8 @@ import { RRule, RRuleSet } from "rrule";
 import { objectSum } from '../../_wptravelFunctions';
 
 // Additional lib
-const _ = lodash;
+
+import _ from 'lodash';
 
 // WP Travel Components.
 import Pricings from './SubComponents/Pricings';
@@ -41,8 +42,7 @@ import InventoryNotice, { Notice } from '../../_InventoryNotice';
  */
 const NonRecorringRepeater = ( props ) => {
     const { date, _nomineePricings } = props;
-    // console.log('ppp');
-    // console.log(date);
+
     const [dates, setRecurringDates] = useState([]); // New dates will push here when clicking load more.
     const [activeRecurringDates, setActiveRecurringDates] = useState([]); // curren page dates.
     const [rruleArgs, setRRuleArgs] = useState(null)
@@ -141,8 +141,7 @@ const NonRecorringRepeater = ( props ) => {
     }
     return <>
             { activeRecurringDates.map( esx => {
-            // { console.log('mmmm') }
-            // { console.log(props) } 
+
             	return  <div key={12} > {IsTourDates(props)(esx) && <Pricings { ...props } /> || <Disabled><Pricings { ...props } /></Disabled>} </div>; 
                        
             })}
@@ -174,7 +173,8 @@ const NonRecurringDates = ( props ) => {
 		}
 	})
     return <>
-    {
+    {   
+        
 		nonRecurringDates.length > 0 && <tbody className="tbody-table">
 		{ nonRecurringDates.map( ( date, index ) => {
 			let loadingClass = isLoading && selectedDateIds.includes( date.id ) ? 'wptravel-loading' : '';
@@ -183,8 +183,8 @@ const NonRecurringDates = ( props ) => {
 			if ( ! _nomineePricings.length ) {
 				return <Fragment key={index}></Fragment>
 			}
-			return <tr key={index} className={loadingClass}>
-				<td data-label={__i18n.bookings.pricings_list_label}>
+			return <tr key={index} id={'date-'+date.id} className={loadingClass}>
+				<td class="tablebody-booking-pricings" data-label={__i18n.bookings.pricings_list_label}>
 					{/* _nomineePricings not updated in store/state because there are multiple _nomineePricings as per date so just a variable. */}
 					{/* <Pricings { ...{ ...props, _nomineePricings, date } }  /> */}
 					{/**
@@ -194,7 +194,7 @@ const NonRecurringDates = ( props ) => {
 					 */}
 					 <NonRecorringRepeater { ...{ ...props, _nomineePricings, date } } />
 				</td>
-				<td data-label={__i18n.bookings.person}>
+				<td class="tablebody-booking-person" data-label={__i18n.bookings.person}>
 					<div className ="person-box">
 						
 						{ ! isLoading && pricingUnavailable && tripData.inventory && 'yes' === tripData.inventory.enable_trip_inventory && selectedDateIds.includes( date.id ) ? 
@@ -214,7 +214,7 @@ const NonRecurringDates = ( props ) => {
 						}
 					</div>
 				</td>
-				<td data-label={__i18n.bookings.date}>
+				<td class="tablebody-booking-dates" data-label={__i18n.bookings.date}>
 					<div className = "date-box">
 						<div className="date-time-wrapper">
 							<span className="start-date"><span>{__i18n.bookings.start_date}: </span>{moment(date.start_date).format(_wp_travel.date_format_moment)}</span>

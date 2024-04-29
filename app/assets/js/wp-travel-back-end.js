@@ -905,4 +905,17 @@
         });
     }
 
+    $("#wptravel-review-later").click(function(){
+        fetch( wp_travel.ajaxUrl + "?action=wptravel_review_later&_nonce="+wp_travel._nonce ).then(response => location.reload());
+    });
+    
+    $("#wptravel-review-already").click(function(){
+        fetch( wp_travel.ajaxUrl + "?action=wptravel_gave_review_already&_nonce="+wp_travel._nonce ).then(response => location.reload());
+    });
+
+    $("#wptravel-review-now").click(function(){
+        fetch( wp_travel.ajaxUrl + "?action=wptravel_review_now&_nonce="+wp_travel._nonce ).then(response => location.reload());
+    });
+
 }(jQuery));
+

@@ -11,7 +11,11 @@ class WP_Travel_Ajax_View_Mode {
 
 	public static function set_view_mode_cookie() {
         
-		WP_Travel::verify_nonce();
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
 
         $payload = WP_Travel::get_sanitize_request('post');
         $view_mode = $payload['mode'];

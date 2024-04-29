@@ -21,7 +21,7 @@ export default () => {
         <>
             <div className="wp-travel-section-header">
                 <h2 className="wp-travel-section-header-title">
-                    {__("Miscellaneous Settings", "wp-travel")}
+                    {_wp_travel.setting_strings.miscellaneous.miscellaneous_settings}
                 </h2>
                 <p className="wp-travel-section-header-description">
                     {__("More miscellaneous Settings according to your choice.", "wp-travel")}
@@ -30,7 +30,7 @@ export default () => {
             <div className='wp-travel-section-content'>
                 <ErrorBoundary>
                     <PanelRow>
-                        <label>{__('GDPR Message', 'wp-travel')}</label>
+                        <label>{_wp_travel.setting_strings.miscellaneous.gdpr_message}</label>
                         <div id="wp-travel-misc-gdpr-message" className="wp-travel-field-value">
                             <TextareaControl
                                 value={wp_travel_gdpr_message}
@@ -46,7 +46,7 @@ export default () => {
                         </div>
                     </PanelRow>
                     <PanelRow>
-                        <label>{__('Open GDPR in new tab', 'wp-travel')}</label>
+                        <label>{_wp_travel.setting_strings.miscellaneous.open_gdpr_new_tab}</label>
                         <div id="wp-travel-misc-open-gdpr-tab" className="wp-travel-field-value">
                             <ToggleControl
                                 checked={open_gdpr_in_new_tab == 'yes'}

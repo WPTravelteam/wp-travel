@@ -99,6 +99,6 @@ class WP_Travel_FW_Field_Category_Dropdown {
 			return $output;
 		}
 
-		echo $output;
+		echo wp_kses_post( $output );
 	}
 }

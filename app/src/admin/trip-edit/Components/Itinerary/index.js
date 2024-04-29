@@ -6,7 +6,7 @@ import { _n, __ } from '@wordpress/i18n';
 
 import { ReactSortable } from 'react-sortablejs';
 import {alignJustify } from '@wordpress/icons';
-
+import DatePicker from 'react-datepicker';
 import WPEditor from '../../../fields/WPEditor';
 const __i18n = {
 	..._wp_travel_admin.strings
@@ -120,10 +120,20 @@ const Itinerary = ({allData}) => {
             itineraries: sortedItineraries
         })
     }
+
+    const startParams =  {
+		showMonthDropdown: true,
+		showYearDropdown: 'select',
+		dropdownMode: "select",
+		// minDate: new Date(),
+		// maxDate: typeof newEndDate != 'undefined' && newEndDate || '',
+	}
+
+    
     return <>
             <div className="wp-travel-itinerary-title">
                 <h3 className="wp-travel-tab-content-title">{__i18n.itinerary}</h3>
-                {typeof itineraries != 'undefined' && itineraries && Object.keys(itineraries).length > 0 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addItinerary()}>{__i18n.add_itinerary}</Button></PanelRow> }
+                {typeof itineraries != 'undefined' && itineraries && Object.keys(itineraries).length > 0 && <PanelRow className="wp-travel-action-section"><span></span><Button variant="secondary" onClick={() => addItinerary()}>{__i18n.add_itinerary}</Button></PanelRow> }
             </div>
             {typeof itineraries != 'undefined' && itineraries && Object.keys(itineraries).length > 0 ?
                 <div className="wp-travel-sortable-component itinerary-sortable">
@@ -135,6 +145,9 @@ const Itinerary = ({allData}) => {
                         {
                             Object.keys(itineraries).map(function (itineraryId) {
 								let index     = parseInt(itineraryId);
+                                let _itineraryDate = moment(itineraries[itineraryId].date ? itineraries[itineraryId].date : null);
+                                _itineraryDate = _itineraryDate.isValid() ? _itineraryDate.toDate() : '';
+
                                 return <div style={{position:'relative'}}  data-index={index} key={index} >
 										<div className={`wptravel-swap-list`}>
 										<Button
@@ -183,37 +196,20 @@ const Itinerary = ({allData}) => {
                                     </PanelRow>
                                     <PanelRow>
                                         <label>{__i18n.itinerary_date}</label>
-                                        <Dropdown
-                                            className="wp-travel-dropdown-container"
-                                            contentClassName="wp-travel-dropdown-popup-content"
-                                            position="bottom right"
-                                            renderToggle={({ isOpen, onToggle }) => {
-                                                var itineraryDate = moment(itineraries[itineraryId].date ? itineraries[itineraryId].date : null);
-                                                return <TextControl value={itineraryDate.isValid() ? itineraries[itineraryId].date : ''} onFocus={onToggle} aria-expanded={isOpen} onChange={() => false} autoComplete="off" />
-                                            }}
-                                            renderContent={() => {
-                                                {
-                                                    let _itineraryDate = moment(itineraries[itineraryId].date ? itineraries[itineraryId].date : null);
-                                                    _itineraryDate = _itineraryDate.isValid() ? _itineraryDate.toDate() : new Date();
-
-                                                    return (
-                                                        <div className="wp-travel-dropdown-content-wrap wp-travel-datetimepicker wp-travel-datetimepicker-hide-time">
-                                                            <DateTimePicker
-                                                                currentDate={_itineraryDate}
-                                                                onChange={(date) => {
-                                                                    if (moment(date).isSame(_itineraryDate)) {
-                                                                        return false;
-                                                                    }
-                                                                    updateTripItinerary('date', moment(date).format('YYYY-MM-DD', date), itineraryId)
-                                                                    // updateDatesTimes( {start_date: moment(date).format( 'YYYY-MM-DD', date)}, _dateIndex );
-
-                                                                }}
-                                                            />
-                                                        </div>
-                                                    )
+                                        
+                                        <DatePicker
+                                            selected={ _itineraryDate }
+                                            { ...startParams }
+                                            onChange={ ( date ) =>{
+                                                if (moment(date).isSame(_itineraryDate)) {
+                                                    return false;
                                                 }
+                                                updateTripItinerary('date', moment(date).format('YYYY-MM-DD', date), itineraryId)
+                                                // updateDatesTimes( {start_date: moment(date).format( 'YYYY-MM-DD', date)}, _dateIndex );
+
                                             }}
                                         />
+                                       
                                     </PanelRow>
                                     <PanelRow>
                                         <label>{__i18n.itinerary_time}</label>
@@ -224,7 +220,7 @@ const Itinerary = ({allData}) => {
                                             position="bottom right"
                                             renderToggle={({ isOpen, onToggle }) => {
                                                 var itineraryTime = moment(itineraries[itineraryId].time ? itineraries[itineraryId].time : null);
-                                                return <TextControl value={itineraryTime ? itineraries[itineraryId].time : ''} onFocus={onToggle} aria-expanded={isOpen} onChange={() => false} autoComplete="off" />
+                                                return <TextControl value={itineraryTime ? itineraries[itineraryId].time : ''} onFocus={onToggle} aria-expanded={isOpen} autoComplete="off" />
                                             }}
                                             renderContent={ ({ isOpen, onToggle } ) => (
                                                 <div className="wp-travel-dropdown-content-wrap">
@@ -260,11 +256,9 @@ const Itinerary = ({allData}) => {
                                                     <Button onClick={()=>{
                                                         let _minutes = stateMinutes < 10 ? '0'+stateMinutes:stateMinutes;
                                                         let _hours = stateHours < 10 ? '0'+stateHours:stateHours;
-                                                        let time = `${_hours}:${_minutes}`;
-
+                                                        let time = `${_hours}:${_minutes}` == '00:00' ? '' : `${_hours}:${_minutes}`;
                                                         // @todo: Need to format time.
                                                         updateTripItinerary('time', time, itineraryId)
-                                                        // updateTripItinerary('time', moment.time(time).format('hh:mm a', time), itineraryId)
 
                                                         onToggle()
                                                     }} isDefault>{__i18n.add}</Button>
@@ -289,7 +283,7 @@ const Itinerary = ({allData}) => {
                                     </PanelRow>
                                     <hr />
                                     <PanelRow className="wp-travel-action-section has-right-padding">
-                                        <span></span><Button isDefault onClick={() => {
+                                        <span></span><Button variant="secondary" onClick={() => {
                                             if (!confirm(__i18n.alert.remove_itinerary )) {
                                                 return false;
                                             }
@@ -306,7 +300,7 @@ const Itinerary = ({allData}) => {
                             })
                         }
                     </ReactSortable>
-                    {typeof itineraries != 'undefined' && Object.keys(itineraries).length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addItinerary()}>{__i18n.add_itinerary}</Button></PanelRow> }
+                    {typeof itineraries != 'undefined' && Object.keys(itineraries).length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button variant="secondary" onClick={() => addItinerary()}>{__i18n.add_itinerary}</Button></PanelRow> }
 
                 </div>
                 : <><Notice isDismissible={false} actions={[{

@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n'
 import DiscountTable from './_GroupDiscountTable';
 
-const _ = lodash
+import _ from 'lodash';
 const __i18n = {
 	..._wp_travel.strings
 }
@@ -50,14 +50,14 @@ const PaxSelector = ( props ) => {
 					price = parseFloat(group_price.price);
 					return  GetConvertedPrice( price ); // Add Multiple currency support to get converted price.
 				}
-				// price = 'group' === category.price_per ? (totalPax > 0 ? parseFloat(group_price.price) : 0) : parseFloat(group_price.price) * totalPax
+
 				price =  parseFloat(group_price.price) * totalPax
 			} else {
 				if (single) {
 					price = parseFloat(price);
 					return GetConvertedPrice( price ); // Add Multiple currency support to get converted price.
 				}
-				// price = 'group' === category.price_per ? (totalPax > 0 ? parseFloat(price) : 0) : parseFloat(price) * totalPax
+		
 				price = parseFloat(price) * totalPax
 			}
 		} else if (category.has_group_price && category.group_prices.length > 0) { // If has group price/discount.
@@ -87,18 +87,11 @@ const PaxSelector = ( props ) => {
 		return GetConvertedPrice( price ); // Add Multiple currency support to get converted price.
 	}
 
-	const handlePaxChange = (id, value) => e => {
+	const handlePaxChange = (id, value, tripPax) => e => {
 		let count = paxCounts[id] + value < 0 ? 0 : paxCounts[id] + value
-		let _inventory = inventory.find(i => i.date === moment(selectedDate).format('YYYY-MM-DD[T]HH:mm')); // selectedDate : date along with time.
-		let maxPax = _inventory && _inventory.pax_available;
-		if ( ! maxPax ) {
-			maxPax = pricing && pricing.max_pax ? pricing.max_pax : 1;
-		}
-
-		if (maxPax >= 1) {
-
-			let _totalPax = _.size(paxCounts) > 0 && Object.values(paxCounts).reduce((acc, curr) => acc + curr) || 0
-			if (_totalPax + value > parseInt(maxPax)) {
+		if( tripData.enable_pax_all_pricing == "1" ){
+			if( count > tripPax ){
+				count = tripPax
 				if (e.target.parentElement.querySelector('.error'))
 					return
 				let em = document.createElement('em')
@@ -109,8 +102,32 @@ const PaxSelector = ( props ) => {
 					em.remove()
 				}, 1000)
 				return
-			} else {
-				e.target.parentElement.querySelector('.error') && e.target.parentElement.querySelector('.error').remove()
+			}
+			
+		}else{
+			let _inventory = inventory.find(i => i.date === moment(selectedDate).format('YYYY-MM-DD[T]HH:mm')); // selectedDate : date along with time.
+			let maxPax = _inventory && _inventory.pax_available;
+			if ( ! maxPax ) {
+				maxPax = pricing && pricing.max_pax ? pricing.max_pax : 1;
+			}
+	
+			if (maxPax >= 1) {
+	
+				let _totalPax = _.size(paxCounts) > 0 && Object.values(paxCounts).reduce((acc, curr) => acc + curr) || 0
+				if (_totalPax + value > parseInt(maxPax)) {
+					if (e.target.parentElement.querySelector('.error'))
+						return
+					let em = document.createElement('em')
+					em.classList.add('error')
+					em.textContent = __i18n.bookings.max_pax_exceeded
+					e.target.parentElement.appendChild(em)
+					setTimeout(() => {
+						em.remove()
+					}, 1000)
+					return
+				} else {
+					e.target.parentElement.querySelector('.error') && e.target.parentElement.querySelector('.error').remove()
+				}
 			}
 		}
 
@@ -131,7 +148,7 @@ const PaxSelector = ( props ) => {
 		}
 
 		if (maxPax >= 1) {
-			// let _totalPax = _.size(paxCounts) > 0 && Object.values(paxCounts).reduce((acc, curr) => acc + curr) || 0
+
 			if ( values > parseInt(maxPax)) {
 				updateBookingData({ paxCounts: { ...paxCounts, [id]: 0 } })
 				return;
@@ -199,14 +216,14 @@ const PaxSelector = ( props ) => {
 							<span className="item-price">{c.is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat(GetConvertedPrice( c.regular_price )) }}></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCategoryPrice(c.id, true)) }}></span>/{price_per_label}</span>
 							<div className="pricing-area">
 								<div className="qty-spinner">
-									<button onClick={handlePaxChange(c.id, -1)}>-</button>
-									{/* <span>{typeof paxCounts[c.id] == 'undefined' ? parseInt(c.default_pax) : paxCounts[c.id]}</span> */}
+									<button className="trip-page-pax-selector edit-pax-selector-qty" data-minpax={pricing.min_pax} data-allpricing={tripData.enable_pax_all_pricing} onClick={handlePaxChange(c.id, -1, maxPax )}>-</button>
+			
 									<input  className='wp-trave-pax-selected-frontend-second' 
 										value={typeof paxCounts[c.id] == 'undefined' ? parseInt(c.default_pax) : paxCounts[c.id]} 
-										onChange={ ( essdfdsf ) => {
-											handlePaxChangeInput( c.id, essdfdsf )
+										onChange={ ( data ) => {
+											handlePaxChangeInput( c.id, data )
 									}} />
-									<button onClick={handlePaxChange(c.id, 1)}>+</button>
+									<button className="trip-page-pax-selector edit-pax-selector-qty" data-minpax={pricing.min_pax} data-allpricing={tripData.enable_pax_all_pricing} onClick={handlePaxChange(c.id, 1, maxPax )}>+</button>
 								</div>
 							</div>
 						</div>

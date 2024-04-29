@@ -1,4 +1,4 @@
-const __i18n = {
+const i18n = {
 	..._wp_travel.strings
 }
 import CheckBoxs from './form/CheckBoxs';
@@ -12,19 +12,28 @@ const bookingStoreName = 'WPTravelFrontend/BookingData';
 import { Button } from '@wordpress/components'
 import TextArea from './form/TextArea';
 import { useEffect, useState } from '@wordpress/element'
-// import apiFetch from '@wordpress/api-fetch';
+import { __ } from '@wordpress/i18n';
+
 import ProgressBary from '../ProgressBary';
+import SelectOption from './form/SelectOption';
+import Heading from './form/Heading';
+
+import $ from 'jquery';
+
+import { wpTravelFormat, objectSum, GetConvertedPrice } from '../../_wptravelFunctions';
+
 export default ( ) => {
     // Booking Data/state.
     const [loaders, setLoaders] = useState(false)
     const [errorFound, setErrorFound] = useState('')
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     const { updateStore } = dispatch( bookingStoreName );
-    const { billing_form, error_list, checkoutDetails, price_list, currency_symbol } = bookingData;
+    const { billing_form, error_list, checkoutDetails, price_list, currency_symbol,  cart_amount  } = bookingData;
     const { billing } = checkoutDetails;
     const billingData = typeof billing != 'undefined' && billing || {};
     const fieldKey  = typeof billing_form != 'undefined' && Object.keys( billing_form ) || [];
-    const { trip_price }  = typeof price_list != 'undefined' && price_list || ''
+
+    const trip_price = typeof cart_amount != 'undefined' && typeof cart_amount.cart_total != 'undefined' && cart_amount.cart_total || 0
     useEffect( () => {
         const requiredField = {};
         if ( fieldKey.length > 0 ) {
@@ -54,11 +63,11 @@ export default ( ) => {
                 const intRequiresd = requireds;
                 if ( intRequiresd == 1 || intRequiresd == true ) {
                     if ( Object.keys( billingData ).length < 1 ) {
-                        errorss[name] = label + ' is required';
+                        errorss[name] = label + i18n.set_require_message
                     } else {
                         const travelData = typeof billingData[name] != 'undefined' && billingData[name] || '';
                         if ( travelData == '' ) {
-                            errorss[name] = label + ' is required';
+                            errorss[name] = label + i18n.set_require_message
                         }
                     }
                 }
@@ -68,44 +77,40 @@ export default ( ) => {
             setLoaders(false);
             updateStore({...bookingData, error_list : {}, treipPaymentEnable : true , tripBillingEnable : false })
         } else {
-            setErrorFound('Required field is empty' );
+            setErrorFound(i18n.set_require_empty );
             updateStore({...bookingData, error_list : errorss })
             setLoaders(false);
         }
     }
+
     return <>
-    <div className="wptravel-billing-formfield">
+    <div className="wptravel-billing-formfield animated-wp-travel  fadeIn-wp-travel">
         {
             fieldKey.length > 0 && fieldKey.map( ( trvKey, index ) => {
                 const travelerData = typeof billing_form[trvKey] != 'undefined' && billing_form[trvKey] || undefined;
                 const fieldTypes = typeof travelerData != 'undefined' && typeof travelerData.type != 'undefined' && travelerData.type || 'text';
                 const fieldName = typeof travelerData != 'undefined' && typeof travelerData.name != 'undefined' && travelerData.name || '';
-                if ( fieldTypes != 'heading' ) {
-                return <div  key={ index }>{ ( fieldTypes == 'text' || fieldTypes == 'number' ) && <Texts travelerData={travelerData} trvOne={'billing'} /> || fieldTypes == 'email' && <Emails travelerData={travelerData} trvOne={'billing'} /> || fieldTypes == 'radio' && <RadioButton travelerData={travelerData} trvOne={'billing'} /> || fieldTypes == 'checkbox' && <CheckBoxs travelerData={travelerData} trvOne={'billing'} /> || fieldTypes == 'date' && <Dates travelerData={travelerData} trvOne={'billing'} /> || fieldTypes == 'country_dropdown' && <DropDowns travelerData={travelerData} trvOne={'billing'} /> || fieldTypes == 'textarea' && <TextArea travelerData={travelerData} trvOne={'billing'} /> } </div>
-                }
+                return <div className={fieldTypes} key={ index }>{ ( fieldTypes == 'text' || fieldTypes == 'number' ) && <Texts travelerData={travelerData} trvOne={'billing'} /> || fieldTypes == 'email' && <Emails travelerData={travelerData} trvOne={'billing'} /> || fieldTypes == 'radio' && <RadioButton travelerData={travelerData} trvOne={'billing'} /> || fieldTypes == 'checkbox' && <CheckBoxs travelerData={travelerData} trvOne={'billing'} /> || fieldTypes == 'date' && <Dates travelerData={travelerData} trvOne={'billing'} /> || fieldTypes == 'country_dropdown' && <DropDowns travelerData={travelerData} trvOne={'billing'} /> || fieldTypes == 'select' && <SelectOption travelerData={travelerData} trvOne={'billing'} /> || fieldTypes == 'textarea' && <TextArea travelerData={travelerData} trvOne={'billing'} /> } </div>
             })
         }
         </div>
-        {/* <PanelBody>
-            <PanelRow> */}
+        <p className='wptravel-onepage-navigation-error'>{errorFound}</p>
+
         <div className='wptravel-onepage-navigation-btn'>
         
             <Button onClick={ () => { 
                 updateStore({...bookingData, travelerInfo : true , tripBillingEnable : false })
-            }} >Go Back</Button>
+            }} >{i18n.set_go_back}</Button>
             <div>
-                <p className='wptravel-onepage-navigation-error'>{errorFound}</p>
                 <div className="wptravel-onpage-priceshow">
                     { trip_price != '' && <div className="onpage-traveler-field-price-show">
-                        <p><span className='onpage-travel-price-display-label'>Trip Price</span>{currency_symbol}{trip_price}</p>
+                        <p><span className='onpage-travel-price-display-label'>{i18n.set_cart_total_price}</span><span dangerouslySetInnerHTML={{ __html: wpTravelFormat( trip_price ) }}></span></p>
                     </div>}
-                    <Button onClick={ validateTravelerData } >Next{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</Button>
+                    <Button onClick={ validateTravelerData } >{i18n.set_next_btn }{loaders && <img className='wptravel-single-page-loader-btn' src={_wp_travel.loader_url } /> }</Button>
                 </div>
                 
             </div>
         </div>
-            {/* </PanelRow>
-        </PanelBody> */}
         
         
     </>

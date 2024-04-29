@@ -1,16 +1,5 @@
-import { useState } from "@wordpress/element";
-import {
-	TextControl,
-	PanelRow,
-	PanelBody,
-	Button,
-	Notice,
-	TextareaControl,
-	Dropdown,
-	DateTimePicker,
-	RangeControl,
-} from "@wordpress/components";
-import { applyFilters, addFilter } from "@wordpress/hooks";
+import { PanelRow } from "@wordpress/components";
+import { addFilter } from "@wordpress/hooks";
 import { dispatch } from "@wordpress/data";
 import { _n, __ } from "@wordpress/i18n";
 
@@ -42,6 +31,7 @@ const TripOverview = ({ allData }) => {
 						name="trip_overview"
 					/>
 				)}
+				
 			</PanelRow>
 		</>
 	);

@@ -115,7 +115,7 @@ class WP_Travel_Helpers_Cart {
 				}
 				$cart[ $cart_id ]['trip_id']    = $item['trip_id']; // To loop cart items with trip id. like in discount.
 				$cart[ $cart_id ]['pricing_id'] = $item['pricing_id'];
-				$cart[ $cart_id ]['price_key']  = $item['price_key'];
+				$cart[ $cart_id ]['price_key']  = isset( $item['price_key'] ) ? $item['price_key'] : '';
 				$cart[ $cart_id ]['trip_price'] = (float) number_format( $item['trip_price'], 2, '.', '' );
 
 				// Calculation of individual trip total along with extras.
@@ -142,6 +142,7 @@ class WP_Travel_Helpers_Cart {
 				$cart[ $cart_id ]['trip']               = $item['trip'];
 				$cart[ $cart_id ]['trip_data']          = $trip_data['trip'];
 				$cart[ $cart_id ]['arrival_date']       = wptravel_format_date( $item['arrival_date'] );
+				$cart[ $cart_id ]['date_id']       		= $item['date_id'];
 				if ( isset( $item['trip_time'] ) ) {
 					$cart[ $cart_id ]['trip_time'] = $item['trip_time'];
 				}
@@ -283,7 +284,7 @@ class WP_Travel_Helpers_Cart {
 					WP_Travel_Helpers_REST_API::response( $error );
 				}
 			}
-
+			
 			global $wt_cart;
 			$wt_cart->add_discount_values( $coupon_id, $discount_type, $discount_value, $coupon_code );
 			$cart = self::get_cart(); // 2nd assignment after deducting discount.

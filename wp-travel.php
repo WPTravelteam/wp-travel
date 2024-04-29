@@ -3,12 +3,12 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 7.0.1
+ * Version: 8.6.0
  * Author: WP Travel
  * Author URI: http://wptravel.io/
  * Requires at least: 6.0.0
  * Requires PHP: 7.4
- * Tested up to: 6.2.2
+ * Tested up to: 6.5
  *
  * Text Domain: wp-travel
  * Domain Path: /i18n/languages/
@@ -31,14 +31,14 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 	 * @since 1.0.0
 	 */
 	final class WP_Travel {
- // @phpcs:ignore
+
 
 		/**
 		 * WP Travel version.
 		 *
 		 * @var string
 		 */
-		public $version = '7.0.0';
+		public $version = '8.6.0';
 
 		/**
 		 * WP Travel API version.
@@ -80,8 +80,62 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			$this->init_hooks();
 			$this->init_shortcodes();
 			$this->init_sidebars();
+
+			/**
+			 * Add to extra column - booking table 
+			 * @since 7.8.0
+			 */
+			add_filter( 'manage_edit-itinerary-booking_columns', array( $this, 'wp_travel_booking_column_name' ) );
+			add_action( 'manage_itinerary-booking_posts_custom_column', array( $this, 'wp_travel_booking_columns_content' ), 10, 2 );
+		}
+		
+		public function wp_travel_booking_column_name( $columns ) {
+			$columns['contact_number'] = __( 'Contact Number', 'wp-travel' );
+			$columns['contact_email'] = __( 'Contact Email', 'wp-travel' );
+			$columns['country_code'] = __( 'Country Code', 'wp-travel' );
+			$columns['tour_date'] = __( 'Tour date', 'wp-travel' );
+			return $columns;
 		}
 
+		public function wp_travel_booking_columns_content( $column_name, $id ) {
+			$traveller_data = get_post_meta( $id, 'order_data', true );
+
+			switch ( $column_name ) {
+				case 'contact_number':
+					if( is_array( get_post_meta( $id, 'wp_travel_phone_traveller', true ) ) ){
+					?>
+					<span><?php echo esc_html( get_post_meta( $id, 'wp_travel_phone_traveller', true )[ array_key_first( get_post_meta( $id, 'wp_travel_phone_traveller', true ) ) ][0] ); ?></span>
+					<?php
+					}
+					break;
+
+				case 'contact_email':
+					if( is_array( get_post_meta( $id, 'wp_travel_email_traveller', true ) ) ){
+					?>
+					<span><?php echo esc_html( get_post_meta( $id, 'wp_travel_email_traveller', true )[ array_key_first( get_post_meta( $id, 'wp_travel_email_traveller', true ) ) ][0] ); ?></span>
+					<?php
+					}
+					break;
+				case 'country_code':
+					if( is_array( get_post_meta( $id, 'wp_travel_country_traveller', true ) ) ){
+					?>
+					<span><?php echo esc_html( get_post_meta( $id, 'wp_travel_country_traveller', true )[ array_key_first( get_post_meta( $id, 'wp_travel_country_traveller', true ) ) ][0] ); ?></span>
+					<?php
+					}
+					break;
+				case 'tour_date':
+					if( !empty(get_post_meta( $id, 'wp_travel_arrival_date', true )) ){
+					?>
+					<span><?php echo esc_html( wptravel_format_date( get_post_meta( $id, 'wp_travel_arrival_date', true ) ) ); ?></span>
+					<?php
+					}
+					break;
+				default:
+					break;
+			}
+		}
+
+		
 		/**
 		 * Define WP Travel Constants.
 		 */
@@ -272,6 +326,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @return void
 		 */
 		public function includes() {
+			
 			include sprintf( '%s/core/helpers/strings.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/core/helpers/dev.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/core/helpers/layout.php', WP_TRAVEL_ABSPATH );
@@ -295,8 +350,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/class-notices.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/template-functions.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/itinerary-v2-functions.php', WP_TRAVEL_ABSPATH ); // @since 5.0.0
-
-			include sprintf( '%s/inc/coupon/wp-travel-coupon.php', WP_TRAVEL_ABSPATH );
 
 			include_once sprintf( '%s/inc/gateways/standard-paypal/class-wp-travel-gateway-paypal-request.php', WP_TRAVEL_ABSPATH );
 			include_once sprintf( '%s/inc/gateways/standard-paypal/paypal-functions.php', WP_TRAVEL_ABSPATH );
@@ -345,6 +398,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/cart/class-cart.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/cart/class-checkout.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/cron/class-wp-travel-cron.php', WP_TRAVEL_ABSPATH );
+
+			
 
 			if ( $this->is_request( 'admin' ) ) {
 				include sprintf( '%s/inc/admin/admin-helper.php', WP_TRAVEL_ABSPATH );
@@ -414,9 +469,9 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			require WP_TRAVEL_ABSPATH . '/core/ajax/payments.php';
 
 			//include import and export setting file
-			if( isset( wptravel_get_settings()['enable_session'] ) && wptravel_get_settings()['enable_session'] == 'yes' ){
-                require WP_TRAVEL_ABSPATH . '/inc/import-export/import-export.php';
-            }
+			// if( isset( wptravel_get_settings()['enable_session'] ) && wptravel_get_settings()['enable_session'] == 'yes' ){
+                // require WP_TRAVEL_ABSPATH . '/inc/import-export/import-export.php';
+            // }
 
 			/**
 			 * App Part.
@@ -430,7 +485,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			// Front End.
 			require WP_TRAVEL_ABSPATH . '/app/inc/frontend/class-wptravel-single-itinerary-hooks.php';
 			require WP_TRAVEL_ABSPATH . '/app/inc/frontend/class-wptravel-frontend-assets.php';
-			include sprintf( '%s/core/api/include.php', WP_TRAVEL_ABSPATH ); // for api include file.
+			// include sprintf( '%s/core/api/include.php', WP_TRAVEL_ABSPATH ); // for api include file.
 			include sprintf( '%s/inc/deprecated-class/trait/class-wp-travel-deprecated-trait.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/deprecated-class/trait/deprecated-includes.php', WP_TRAVEL_ABSPATH );
 
@@ -440,6 +495,16 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			if ( ! is_multisite() ) {
 				include sprintf( '%s/inc/setup-page/setup-page.php', WP_TRAVEL_ABSPATH );
 			}
+			include sprintf( '%s/inc/coupon/wp-travel-coupon.php', WP_TRAVEL_ABSPATH );
+			$settings = wptravel_get_settings();
+			if( $settings['enable_woo_checkout'] == 'yes' ){ 
+				include sprintf( '%s/inc/woo-checkout.php', WP_TRAVEL_ABSPATH );
+			}
+			
+			if( is_admin() ){
+				include sprintf( '%s/inc/admin-review-notice.php', WP_TRAVEL_ABSPATH );
+			}
+			
 		}
 
 		/**
@@ -585,6 +650,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				if ( ! $screen ) {
 					return;
 				}
+				
 				switch ( $slug ) {
 					// WP Travel Menu.
 					case 'settings':
@@ -649,7 +715,14 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 					case 'search':
 						return is_search() && isset( $request['post_type'] ) && 'itineraries' === $request['post_type'];
 					case 'archive':
-						return ( is_post_type_archive( WP_TRAVEL_POST_TYPE ) || is_tax( array( 'itinerary_types', 'travel_locations', 'travel_keywords', 'activity' ) ) ) && ! is_search();
+						$wptravel_tax_list = array( 'itinerary_types', 'travel_locations', 'travel_keywords', 'activity' );
+						if( class_exists( 'WP_Travel_Pro' ) ){
+							foreach( array_keys( get_option( 'wp_travel_custom_filters_option', array() ) ) as $data ){
+								array_push( $wptravel_tax_list, $data );
+							}
+						}
+						
+						return ( is_post_type_archive( WP_TRAVEL_POST_TYPE ) || is_tax( $wptravel_tax_list ) ) && ! is_search();
 				}
 			}
 			return false;
@@ -789,7 +862,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			}
 			return $data;
 		}
-
 		/**
 		 * To disable cache and never cache cookies in WP Travel Checkout page. Setting checkout uri to exclude page in cache plugin.
 		 *

@@ -49,9 +49,9 @@ class WP_Travel_Widget_Location extends WP_Widget {
 		$view_mode       = isset( $instance['view_mode'] ) ? $instance['view_mode'] : $this->view_mode;
 		// $trip_per_row = ( $instance['trip_per_row'] ) ? $instance['trip_per_row'] : $this->trip_per_row;
 		$trip_location = isset( $instance['trip_location'] ) ? $instance['trip_location'] : '';
-		echo $before_widget;
+		echo wp_kses_post( $before_widget );
 		if ( ! $hide_title ) {
-			echo ( $title ) ? $before_title . $title . $after_title : '';
+			echo ( $title ) ? wp_kses_post( $before_title . $title . $after_title ) : '';
 		}
 		$args = array(
 			'posts_per_page'   => $no_of_trip_show,
@@ -121,7 +121,7 @@ class WP_Travel_Widget_Location extends WP_Widget {
 			<p class="itinerary-none"><?php esc_html_e( 'Trips not found.', 'wp-travel' ); ?></p>
 			<?php
 		endif;
-		echo $after_widget;
+		echo wp_kses_post( $after_widget );
 	}
 	/**
 	 * Update widget.
@@ -173,6 +173,9 @@ class WP_Travel_Widget_Location extends WP_Widget {
 			$trip_location = esc_attr( $instance['trip_location'] );
 		}
 		?>
+		<p> 
+			<?php echo __( 'This widget will be removed from v9.0.0. Please use "[WP_TRAVEL_ITINERARIES type=travel_locations slug="Nepal"]" shortcode in replace of this widget.', 'wp-travel' ); ?>
+		</p>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title', 'wp-travel' ); ?>:</label>
 			<input type="text" value="<?php echo esc_attr( $title ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" class="widefat">

@@ -7,7 +7,7 @@ class WpTravelSEOAnalysisEditorText {
         }
         YoastSEO.app.registerPlugin( "WpTravelSEOAnalysisEditorText", { status: "ready" } );
         this.registerModifications();
-        // console.log( 'dsjfh', this.onChangeAnalysisData );
+
     }
     /**
      * 
@@ -15,7 +15,7 @@ class WpTravelSEOAnalysisEditorText {
      * @override old data to new editor data
      */
     static changeAnalysisTextData( allData ) {
-        // console.log( 'allData', allData );
+
         const  { trip_overview, trip_outline, trip_include, trip_exclude, advanced_gallery, gallery
         } = typeof allData != undefined && allData;
         const trp_overview = typeof trip_overview != 'undefined' && trip_overview || '';
@@ -27,9 +27,9 @@ class WpTravelSEOAnalysisEditorText {
         var img_tag_string = '';
         typeof g_url != 'undefined' && Array.isArray( g_url ) && g_url.length > 0 && g_url.forEach( url_item => img_tag_string += "<img src='" + url_item + "' alt='gallery' />" );
         typeof gallery != 'undefined' && Array.isArray( gallery ) && gallery.length > 0 && gallery.forEach( gallery_item => img_tag_string += "<img src='" + gallery_item.thumbnail + "' alt='gallery' />" );
-        // console.log( 'img_tag_string', img_tag_string );
+
         const combineData = trp_overview + trp_outline + trp_include + trp_exclude + img_tag_string;
-    //    console.log( 'combineData', combineData );
+
         WpTravelSEOAnalysisEditorText.onChangeAnalysisData = combineData;
     }
     /**

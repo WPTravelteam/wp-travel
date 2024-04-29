@@ -1,10 +1,10 @@
-
 function GetConvertedPrice( price ) {
     var conversionRate = 'undefined' !== typeof wp_travel && 'undefined' !== typeof wp_travel.conversion_rate ? wp_travel.conversion_rate : 1;
     var _toFixed       = 'undefined' !== typeof wp_travel && 'undefined' !== typeof wp_travel.number_of_decimals ? wp_travel.number_of_decimals : 2;
     conversionRate     = parseFloat( conversionRate ).toFixed( 2 );
     return parseFloat( price * conversionRate ).toFixed( _toFixed );
 }
+
 jQuery(function($) {
 
     function findGetParameter(parameterName) {
@@ -119,9 +119,9 @@ jQuery(function($) {
         // window.location = redirect_url;
 
         query_string = '';
-        if ( window.location.search ) {
-            query_string = window.location.search;
-        }
+        // if ( window.location.search ) {
+        //     query_string = window.location.search;
+        // }
         var full_url       = new URL( pathname + query_string );
         var search_params  = full_url.searchParams;
 
@@ -134,6 +134,7 @@ jQuery(function($) {
             full_url.search = search_params.toString();
         })
         var new_url     = full_url.toString();
+        console.log(new_url)
         window.location = new_url;
     });
 
@@ -201,14 +202,75 @@ jQuery(function($) {
         }
     } );
 
+    $(document).on( 'click', '.edit-trip a', function(){
+        $('.checkout-trip-extras').css( 'display', 'none' );
+    } );
+
+
+    $(document).on( 'click', '.edit-pax-selector-qty', function(){
+        var cartInputValue = document.getElementsByClassName('edit-pax-'+$(this).attr( 'data-cart' ));
+
+       
+        var cartInputValueTrip = document.getElementsByClassName('wp-trave-pax-selected-frontend-second');
+
+        
+        if( $(this).attr( 'data-allpricing' ) == 1 ){
+            $flag = 1;
+
+            if( cartInputValue.length > 0 ){
+                for(var i=0;i<cartInputValue.length;i++){
+                    if(parseFloat(cartInputValue[i].value) < $(this).attr( 'data-minpax' ) ){
+                        $flag = 0;
+                    }
+                }
+
+                if( $flag == 0 ){
+                    $('.cart-edit-'+$(this).attr( 'data-cart' )).addClass( 'btn-disable' );
+                }else{
+                    $('.cart-edit-'+$(this).attr( 'data-cart' )).removeClass( 'btn-disable' );
+                }
+            }
+            
+            if( cartInputValueTrip.length > 0 ){
+                for(var i=0;i<cartInputValueTrip.length;i++){
+                    if(parseFloat(cartInputValueTrip[i].value) < $(this).attr( 'data-minpax' ) ){
+                        $flag = 0;
+                    }
+                }
+                if( $flag == 0 ){
+                    $('.wp-travel-book').addClass( 'btn-disable' );
+                }else{
+                    $('.wp-travel-book').removeClass( 'btn-disable' );
+                }
+            }
+           
+        }else{
+            var totalpax=0;
+            for(var i=0;i<cartInputValue.length;i++){
+                if(parseFloat(cartInputValue[i].value))
+                totalpax += parseFloat(cartInputValue[i].value);
+            }
+    
+            if( totalpax < $(this).attr( 'data-minpax' ) ){
+                $('.cart-edit-'+$(this).attr( 'data-cart' )).addClass( 'btn-disable' );
+            }else{
+                $('.cart-edit-'+$(this).attr( 'data-cart' )).removeClass( 'btn-disable' );
+            }
+        }
+       
+    } );
+
+    
+
 });
 
+
+
 // PWA
-if ("serviceWorker" in navigator) {
-    window.addEventListener("load", function() {
-      navigator.serviceWorker
-        .register("/sw.js")
-        .then(res => console.log("service worker registered"))
-        .catch(err => console.log("service worker not registered", err))
-    })
-  }
+// if ("serviceWorker" in navigator) {
+//     window.addEventListener("load", function() {
+//       navigator.serviceWorker
+//         .register("/sw.js")
+
+//     })
+//   }

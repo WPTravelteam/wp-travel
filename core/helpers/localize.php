@@ -25,6 +25,7 @@ class WpTravel_Helpers_Localize {
 		global $post;
 		$localized_data = array();
 		$settings       = wptravel_get_settings();
+		
 		// Getting Locale to fetch Localized calender js.
 		$lang_code            = explode( '-', get_bloginfo( 'language' ) );
 		$locale               = $lang_code[0];
@@ -40,16 +41,19 @@ class WpTravel_Helpers_Localize {
 		if ( is_array( $rdp_locale_array ) && count( $rdp_locale_array ) > 1 && strtoupper( $rdp_locale_array[0] ) === strtoupper( $rdp_locale_array[1] ) ) {
 			$rdp_locale = $rdp_locale_array[0];
 		}
+
 		$rdp_locale = str_replace( '_', '', $rdp_locale ); // React date picker locale.
 		// user form transfer in react
 		global $wt_cart;
 		$trip_items     = $wt_cart->getItems();
 		$checkoutPage   = get_option( 'wp_travel_wp-travel-checkout_page_id' );
 		$checkoutDetail = get_post( $checkoutPage );
+
 		if ( self::is_request( 'frontend' ) ) {
 			$_wp_travel                       = array();
 			$_wp_travel['_nonce']             = wp_create_nonce( 'wp_travel_nonce' );
 			$_wp_travel['ajax_url']           = admin_url( 'admin-ajax.php' );
+			$_wp_travel['login_required']     = wptravel_get_settings()['enable_checkout_customer_registration'];
 			$_wp_travel['build_path']         = esc_url( trailingslashit( plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'app/build' ) );
 			$_wp_travel['cart_url']           = wptravel_get_cart_url();
 			$_wp_travel['currency_symbol']    = wptravel_get_currency_symbol();
@@ -69,7 +73,13 @@ class WpTravel_Helpers_Localize {
 			$_wp_travel['checkout_url']       = $checkoutDetail->guid;
 			$_wp_travel['pax_show_remove'] 	  = apply_filters( 'wp_travel_booking_pax_editable', '' );
 			$_wp_travel['select_you_pax']	  = apply_filters( 'wp_travel_select_you_pax', __( 'Select Your Pax', 'wp-travel' )); 
+			$_wp_travel['login_required_header_text']	  = apply_filters( 'wp_travel_login_required_header_text', __( 'Login Required', 'wp-travel' )); 
+			$_wp_travel['login_required_desc']	  = apply_filters( 'wp_travel_login_required_description', __( 'You need to login before you book a trip.', 'wp-travel' ));
+			$_wp_travel['login_required_text']	  = apply_filters( 'wp_travel_login_required_link_text', __( 'Click here to login', 'wp-travel' )); 
+			$_wp_travel['dashboard_url']       =  apply_filters( 'wp_travel_dashboard_url', get_post( get_option( 'wp_travel_wp-travel-dashboard_page_id' ) )->guid);
+			$_wp_travel['is_user_login']       = is_user_logged_in();
 			$_wp_travel['partial_enable']     = isset( $settings['partial_payment'] ) ? $settings['partial_payment'] : 'no';
+			$_wp_travel['partial_payment_amount']     = isset( $settings['partial_payment_amount'] ) ? $settings['partial_payment_amount'] : 'no';
 			$_wp_travel['enable_one_page_booking'] = isset( $settings['enable_one_page_booking'] ) ? $settings['enable_one_page_booking'] : false;
 			$_wp_travel['loader_url']         = plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . 'assets/images/loader.gif';
 			$_wp_travel['checkout_field']     = array(
@@ -79,8 +89,59 @@ class WpTravel_Helpers_Localize {
 				'form_key'                   => ! empty( $trip_items ) ? array_key_first( $trip_items ) : 'travelerOne',
 				'my_data'                    => do_action( 'wp_travel_action_before_book_now' ),
 				'bank_detail_form'			 => wptravel_get_bank_deposit_account_details(),
+				'checkout_user_id'           => wp_get_current_user()->data->ID,
+				'checkout_user_name'           => wp_get_current_user()->data->user_login,
+				'checkout_user_email'           => wp_get_current_user()->data->user_email,
 
 			);
+			if( class_exists( 'WP_Travel_Trip_Extras_Inventory' ) ){
+				$_wp_travel['WP_Travel_Trip_Extras_Inventory'] = 'yes';
+			}
+
+			$privacy_policy_url = false;
+			if ( function_exists( 'get_privacy_policy_url' ) ) {
+				$privacy_policy_url = get_privacy_policy_url();
+			}
+
+			if ( $privacy_policy_url ) {
+				$policy_page_id = (int) get_option( 'wp_page_for_privacy_policy' );
+				$page_title     = ( $policy_page_id ) ? get_the_title( $policy_page_id ) : '';
+				$_wp_travel['policy_page_title'] = $page_title;
+			}
+
+			$_wp_travel['gdpr_msg'] = ! empty( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ) : __( 'By contacting us, you agree to our ', 'wp-travel' );
+			$_wp_travel['policy_link'] = wptravel_privacy_link_url();
+
+			$_wp_travel['is_pro_enable']  = class_exists( 'WP_Travel_Pro' ) ? 'yes' : 'no';
+			if ( isset( $settings['mailchimp'] ) && isset( $settings['mailchimp']['enable_subscription'] ) && ( in_array( 'all', $settings['mailchimp']['enable_subscription'], true ) ) ) {
+				$_wp_travel['enable_subscription'] =  'yes';
+				$_wp_travel['subscription_data'] =  $settings['mailchimp'];
+			}
+
+			if( class_exists( 'WP_Travel_Multiple_Currency_Core' ) ){
+				$_wp_travel['conversion_rate'] = wtmc_get_conversion_rate();
+				$_wp_travel['conversion_rate']  = wtmc_get_conversion_rate();
+			}
+			
+
+			$coupon_args  = array(
+				'post_type'   => 'wp-travel-coupons',
+				'post_status' => 'published',
+			);
+			$_wp_travel['trip_tax_enable']	= isset( $settings['trip_tax_enable'] ) ? $settings['trip_tax_enable'] : 'no';
+			$_wp_travel['trip_tax_percentage'] = isset( $settings['trip_tax_percentage'] ) ? $settings['trip_tax_percentage'] : 0;
+			$coupon_query = new WP_Query( $coupon_args );
+			$coupons      = false;
+			while ( $coupon_query->have_posts() ) {
+				$coupon_query->the_post();
+				$coupon_data = get_post_status();
+				if ( $coupon_data == 'publish' ) {
+					$coupons = true;
+					break;
+				}
+			}
+			$_wp_travel['coupon_available']	= $coupons;
+			wp_reset_query();
 
 			// Localized varialble for old trips less than WP Travel 4.0. // Need to migrate in _wp_travel.
 			$wp_travel = array(
@@ -98,9 +159,12 @@ class WpTravel_Helpers_Localize {
 				'strings'            => WpTravel_Helpers_Strings::get(),
 				'zoom'               => $settings['google_map_zoom_level'],
 				'cartUrl'            => wptravel_get_cart_url(),
-				'checkoutUrl'        => wptravel_get_checkout_url(), // @since 4.3.2
+				'checkoutUrl'        => $settings['enable_woo_checkout'] == 'no' ? wptravel_get_checkout_url() : wc_get_checkout_url(), // @since 4.3.2
 				'isEnabledCartPage'  => WP_Travel_Helpers_Cart::is_enabled_cart_page(), // @since 4.3.2
 			);
+
+			
+
 			if ( wptravel_can_load_payment_scripts() ) {
 
 				global $wt_cart;
@@ -269,6 +333,8 @@ class WpTravel_Helpers_Localize {
 				$_wp_travel_admin['overview'] = $wp_travel_itinerary->get_content();
 			}
 
+			$_wp_travel_admin['price_per'] = 'unit';
+
 			$localized_data['_wp_travel_admin'] = $_wp_travel_admin;
 
 		}
@@ -296,3 +362,4 @@ class WpTravel_Helpers_Localize {
 		}
 	}
 }
+

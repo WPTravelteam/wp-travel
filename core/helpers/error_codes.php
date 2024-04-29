@@ -167,6 +167,6 @@ class WP_Travel_Helpers_Error_Codes {
 			return new WP_Error( $code, $error_codes[ $code ]['message'] );
 		}
 
-		return new WP_Error( 'WP_TRAVEL_ERROR_CODE_NOT_FOUND', __( "Error code '{$code}' note found.", 'wp-travel' ) );
+		return new WP_Error( 'WP_TRAVEL_ERROR_CODE_NOT_FOUND', __( "Error code ", "wp-travel" ) . $code . __("note found.", 'wp-travel' ) );
 	}
 }

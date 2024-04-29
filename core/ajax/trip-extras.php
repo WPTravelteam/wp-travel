@@ -9,7 +9,13 @@ class WP_Travel_Ajax_Trip_Extras {
 	}
 
 	public static function get_trip_extras() {
-		WP_Travel::verify_nonce();
+
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
+
 		$args = array();
 
 		$payload = json_decode( file_get_contents( 'php://input' ) );
@@ -25,6 +31,20 @@ class WP_Travel_Ajax_Trip_Extras {
 	}
 
 	public static function search_trip_extras() {
+
+		$user = wp_get_current_user();
+		$allowed_roles = array( 'editor', 'administrator', 'author' );
+
+		if ( !array_intersect( $allowed_roles, $user->roles ) ) {
+			return wp_send_json( array( 'result' => 'Authentication error' ) );
+		}
+		
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
+
 		$requests = WP_Travel::get_sanitize_request();
 
 		$args['s'] = ! empty( $requests['keyword'] ) ? sanitize_text_field( $requests['keyword'] ) : '';

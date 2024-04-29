@@ -1,7 +1,7 @@
 import { useSelect, dispatch } from '@wordpress/data';
 const bookingStoreName = 'WPTravelFrontend/BookingData';
 import {  PanelBody, PanelRow, CheckboxControl} from '@wordpress/components'
-// import { useState, useEffect } from '@wordpress/element'
+
 export default ( { travelerData, trvOne = 'travelerOne' } ) => {
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     const { updateStore } = dispatch( bookingStoreName );
@@ -12,7 +12,7 @@ export default ( { travelerData, trvOne = 'travelerOne' } ) => {
     const travelerValue = typeof travelerDataList[name] != 'undefined' && travelerDataList[name] || [];
     const errorData = typeof error_list[name] != 'undefined' && error_list[name]  || '';
     return <div className='wptravel-onpage-checkbox-container'><PanelBody>
-        {/* <PanelRow> */}
+
             <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>
             <div className="wptravel-onpage-checkbox-wrapper">
             {
@@ -41,7 +41,7 @@ export default ( { travelerData, trvOne = 'travelerOne' } ) => {
                } )
             }
             </div>
-        {/* </PanelRow> */}
+
     </PanelBody><p className='wp-travel-in-page-error'>{errorData}</p></div>
 }
 

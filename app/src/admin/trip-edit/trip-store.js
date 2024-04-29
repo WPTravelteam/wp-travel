@@ -1,11 +1,6 @@
 import { registerStore } from '@wordpress/data';
 import apiFetch from '@wordpress/api-fetch';
-// console.log( '_wp_travel.wp_settings', _wp_travel.wp_settings.settings );
-// if ( typeof _wp_travel != 'undefined' && _wp_travel != null ) {
-//     console.log( 'hfjsdhf' );
-// } else {
-//     console.log( 'not define ');
-// }
+
 const DEFAULT_STATE = () => {
     /**
      * fixed _wp_travel undefine variable 
@@ -19,6 +14,7 @@ const DEFAULT_STATE = () => {
         galleryIds: [],
         group_size:'',
         highest_price : '',
+        
         pricing_type: 'multiple-price',
         pricings:[],
         _thumbnail_id: 0,

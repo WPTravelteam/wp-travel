@@ -44,10 +44,6 @@ class WP_Travel_Gateway_Paypal_Request {
 		if ( ! isset( $_POST['wp_travel_payment_gateway'] ) || 'paypal' !== $_POST['wp_travel_payment_gateway'] ) { //@phpcs:ignore
 			return;
 		}
-		// Check if Booking with payment is selected.
-		if ( ! isset( $_POST['wp_travel_booking_option'] ) || 'booking_with_payment' !== $_POST['wp_travel_booking_option'] ) { //@phpcs:ignore
-			return;
-		}
 
 		$args = $this->get_args( $booking_id, $complete_partial_payment );
 

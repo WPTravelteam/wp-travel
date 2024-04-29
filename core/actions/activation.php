@@ -39,7 +39,6 @@ class WP_Travel_Actions_Activation {
 		WP_Travel_Post_Types::init();
 		Wp_Travel_Taxonomies::init();
 		self::create_pages();
-		self::migrations();
 		WP_Travel::create_roles(); // @since 1.3.7
 		self::update_db_version();
 
@@ -135,89 +134,6 @@ class WP_Travel_Actions_Activation {
 
 		foreach ( $pages as $key => $page ) {
 			wptravel_create_page( esc_sql( $page['name'] ), 'wp_travel_' . $key . '_page_id', $page['title'], $page['content'], ! empty( $page['parent'] ) ? wptravel_get_page_id( $page['parent'] ) : '' );
-		}
-	}
-
-	/**
-	 * Migrations.
-	 *
-	 * @since 4.5.8
-	 */
-	public static function migrations() {
-		$migrations = array(
-			/**
-			 * 'name' : 'name of file'.
-			 * 'version':  'Migrate if current version is greater than this'.
-			 */
-			array(
-				'name'    => '103-104',
-				'version' => '1.0.3',
-			),
-			array(
-				'name'    => '104-105',
-				'version' => '1.0.4',
-			),
-			array(
-				'name'    => 'update-121',
-				'version' => '1.2.0',
-			),
-			array(
-				'name'    => '175-176',
-				'version' => '1.7.5',
-			),
-			array(
-				'name'    => '193-194',
-				'version' => '1.9.3',
-			),
-			array(
-				'name'    => '303-304',
-				'version' => '3.0.3',
-			),
-			array(
-				'name'    => '322-323',
-				'version' => '3.2.2',
-			),
-			array(
-				'name'    => '400',
-				'version' => '4.0.0',
-			),
-			array(
-				'name'    => '404',
-				'version' => '4.0.4',
-			),
-			array(
-				'name'    => '505',
-				'version' => '5.0.5',
-			),
-			array(
-				'name'    => '523',
-				'version' => '5.2.3',
-			),
-		);
-		self::migration_includes( $migrations );
-	}
-
-	/**
-	 * Include all Migration files.
-	 *
-	 * @param array $files List of migration files.
-	 * @since 4.4.0
-	 * @since 5.0.2 Optimized migration script. run/include only required migration file on activation.
-	 * @return void
-	 */
-	public static function migration_includes( $files ) {
-
-		$current_db_version = get_option( 'wp_travel_version' );
-		if ( empty( $current_db_version ) ) {
-			return; // No need to run migration in case of new user.
-		}
-
-		$user_since   = get_option( 'wp_travel_user_since', '1.0.0' );
-		$include_path = sprintf( '%s/upgrade', untrailingslashit( WP_TRAVEL_ABSPATH ) );
-		foreach ( $files as $file ) {
-			if ( version_compare( $user_since, $file['version'], '<' ) ) {
-				include_once sprintf( '%s/%s.php', $include_path, $file['name'] );
-			}
 		}
 	}
 

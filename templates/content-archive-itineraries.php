@@ -38,7 +38,7 @@ if ( post_password_required() ) {
 			<?php wptravel_save_offer( get_the_ID() ); ?>
 			<div class="wp-travel-article-image-wrap">
 				<a href="<?php the_permalink(); ?>">
-					<?php echo wptravel_get_post_thumbnail( get_the_ID() ); ?>
+					<?php echo wp_kses_post( wptravel_get_post_thumbnail( get_the_ID() ) ); ?>
 				</a>
 				<?php if ( $enable_sale ) : ?>
 				<div class="wp-travel-offer">
@@ -68,7 +68,7 @@ if ( post_password_required() ) {
 							<?php wptravel_trip_rating( get_the_ID() ); ?>
 							<?php $count = (int) wptravel_get_review_count(); ?>
 						</div>
-						<span class="wp-travel-review-text"> (<?php printf( _n( '%d Review', '%d Reviews', $count, 'wp-travel' ), $count ); ?>)</span>
+						<span class="wp-travel-review-text"> (<?php echo esc_html( $count.__( ' Reviews', 'wp-travel' ) ); ?>)</span>
 					<?php endif; ?>
 					<div class="entry-meta">
 						<div class="category-list-items">
@@ -108,7 +108,7 @@ if ( post_password_required() ) {
 						</div>
 						<div class="travel-info">
 							<i class="wt-icon wt-icon-child" aria-hidden="true"></i>
-							<span class="value"><?php printf( '%s', $group_size ); ?></span>
+							<span class="value"><?php printf( '%s', esc_html( $group_size ) ); ?></span>
 						</div>
 
 						<div class="travel-info">

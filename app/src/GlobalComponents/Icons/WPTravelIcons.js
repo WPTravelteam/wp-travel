@@ -56,7 +56,7 @@ const WPTravelIcons = (props) => {
                 const [ selectedImgDataObj ] = selectedImgData;
     
                 const { url, id, sizes } = selectedImgDataObj;
-                updateFact( 'icon_img', sizes.thumbnail.url, index );
+                updateFact( 'icon_img', ( typeof sizes.thumbnail != 'undefined' && typeof sizes.thumbnail.url != 'undefined' ? sizes.thumbnail.url : url ), index );
                 updateFact( 'icon_img_id', id, index );
                 updateFact( 'selected_icon_type', 'custom-upload', index );
                 props.modalHandleClick(false);
@@ -163,7 +163,7 @@ const WPTravelIcons = (props) => {
                         </Notice>
                     }
                         <Button
-                        isSecondary
+                        variant="secondary"
                         onClick={() => updateTabSettings(props.factIndex)}
                         >
                             {__( 'Insert', 'wp-travel' )}

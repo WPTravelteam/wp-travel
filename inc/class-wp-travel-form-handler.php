@@ -285,7 +285,7 @@ class Wp_Travel_Form_Handler {
 
 		foreach ( $required_fields as $field_key => $field_name ) {
 			if ( empty( $_POST[ $field_key ] ) ) {
-				WPTravel()->notices->add( sprintf( __( '%s is a required field.', 'wp-travel' ), esc_html( $field_name ) ), 'error' );
+				WPTravel()->notices->add( esc_html( $field_name ). __( ' is a required field.', 'wp-travel' ), 'error' );
 			}
 		}
 
@@ -365,7 +365,7 @@ class Wp_Travel_Form_Handler {
 
 		foreach ( $required_fields as $field_key => $field_name ) {
 			if ( empty( $_POST[ $field_key ] ) ) {
-				WPTravel()->notices->add( sprintf( __( '%s is a required field.', 'wp-travel' ), esc_html( $field_name ) ), 'error' );
+				WPTravel()->notices->add( esc_html( $field_name ) . __( ' is a required field.', 'wp-travel' ), 'error' );
 			}
 		}
 

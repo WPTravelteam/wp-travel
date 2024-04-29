@@ -140,6 +140,13 @@ class WP_Travel_Admin_Metaboxes {
 	 * Register metabox.
 	 */
 	public function register_metaboxes() {
+
+		$settings = wptravel_get_settings();
+
+		if( $settings['enable_woo_checkout'] == 'yes' ){ 
+			return;
+		}
+
 		$switch_to_react = wptravel_is_react_version_enabled();
 		if ( ! $switch_to_react ) {
 			add_meta_box( 'wp-travel-' . WP_TRAVEL_POST_TYPE . '-detail', __( 'Trip Detail', 'wp-travel' ), array( $this, 'load_tab_template' ), WP_TRAVEL_POST_TYPE, 'normal', 'high' );
@@ -151,7 +158,7 @@ class WP_Travel_Admin_Metaboxes {
 		global $post;
 		// Booking Metabox.
 		$wp_travel_post_id = get_post_meta( $post->ID, 'wp_travel_post_id', true ); // Trip ID.
-		add_meta_box( 'wp-travel-booking-info', __( 'Booking Detail <span class="wp-travel-view-bookings"><a href="edit.php?post_type=itinerary-booking&wp_travel_post_id=' . $wp_travel_post_id . '">View All ' . get_the_title( $wp_travel_post_id ) . ' Bookings</a></span>', 'wp-travel' ), array( $this, 'booking_info' ), 'itinerary-booking', 'normal', 'default' );
+		add_meta_box( 'wp-travel-booking-info', sprintf( 'Booking Detail <span class="wp-travel-view-bookings"><a href="edit.php?post_type=itinerary-booking&wp_travel_post_id=%d">View All %s Bookings</a></span>', $wp_travel_post_id, get_the_title( $wp_travel_post_id ) ), array( $this, 'booking_info' ), 'itinerary-booking', 'normal', 'default' );
 	}
 
 	/**

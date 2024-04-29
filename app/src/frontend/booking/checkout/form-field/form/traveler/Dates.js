@@ -16,35 +16,34 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
     const travelerDataList = typeof checkoutDetails != 'undefined' && typeof checkoutDetails[trvOne] != 'undefined' && checkoutDetails[trvOne] || {};
     const travelerValue = typeof travelerDataList[name] != 'undefined' && travelerDataList[name] || {};
     const selectedDate =  typeof travelerValue != 'undefined' && typeof travelerValue[pxKey] != 'undefined' && travelerValue[pxKey] != '' ? new Date( travelerValue[pxKey] ) : new Date();
-    // console.log( 'dhfjdf oldd', new Date( travelerValue ) )
+
     
     const datePickerParams =  {
         showMonthDropdown: true,
         showYearDropdown: "select",
-        // seleted : new Date( travelerValue ),
         dropdownMode: "select",
         minDate: backed != 1 && keyDate.length > 0 && keyDate.includes( 'data-max-today' ) ? new Date() : null,
         maxDate: backed == 1 ?  new Date() : null,
     }
     return <> <PanelBody>
         <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>
+
         <DatePicker
         className= "wptravel-booking-datepicker"
-            // dateFormat="yyyy-MM-dd"
             selected={selectedDate }
             { ...datePickerParams }
             value={ typeof travelerValue[pxKey] != 'undefined' && travelerValue[pxKey] || '' }
             onChange={ ( value ) => {
-                const createNewDate =  value;
-                const month = createNewDate.getMonth() + 1 
-                const years = createNewDate.getFullYear();
-                const days = createNewDate.getDate() ;
-                const finaldate = years + '-' + month + '-' + days;
-                // console.log( 'dhfjdf', value)
+                // const createNewDate =  value;
+                // const month = createNewDate.getMonth() + 1 
+                // const years = createNewDate.getFullYear();
+                // const days = createNewDate.getDate() ;
+                const finaldate = moment(value).format('YYYY-MM-DD', value)
+ 
                 const newTraveler = {...travelerValue, [pxKey] : finaldate}
                 const newData = {...travelerDataList, [name] : newTraveler };
                 const checkoutNewData = {...checkoutDetails, [trvOne] : newData }
-                // console.log( 'ths date', checkoutNewData )
+           
                 updateStore({...bookingData, checkoutDetails : checkoutNewData } )
             }}
         />

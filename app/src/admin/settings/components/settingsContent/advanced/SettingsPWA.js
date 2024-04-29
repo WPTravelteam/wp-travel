@@ -43,12 +43,12 @@ export default () => {
             });
         });
     };
-
+    console.log( _wp_travel.pro_version );
     return (
         <>
             <div className="wp-travel-section-header">
                 <h2 className="wp-travel-section-header-title">
-                    {__("PWA Settings", "wp-travel")}
+                    {_wp_travel.setting_strings.pwa.pwa_settings}
                 </h2>
                 <p className="wp-travel-section-header-description">
                     {__("Additional PWA settings.", "wp-travel")}
@@ -60,7 +60,7 @@ export default () => {
                         _wp_travel.is_pro_enable == 'yes' && _wp_travel.pro_version >= 5.4 &&
                         <>
                             <PanelRow>
-                                <label>{__('Enable PWA', 'wp-travel')}</label>
+                                <label>{_wp_travel.setting_strings.pwa.enable_pwa}</label>
                                 <div id="wp-travel-pwa-enable" className="wp-travel-field-value">
                                     <ToggleControl
                                         checked={enable_pwa == 'yes'}
@@ -71,14 +71,14 @@ export default () => {
                                             })
                                         }}
                                     />
-                                    <p className="description">{__('Enable to activate PWA on your site', 'wp-travel')}</p>
+                                    <p className="description">{_wp_travel.setting_strings.pwa.enable_pwa_note}</p>
                                 </div>
                             </PanelRow>
                             {
                                 enable_pwa == "yes" &&
                                 <>
                                     <PanelRow>
-                                        <label>{__('App Fullname', 'wp-travel')}</label>
+                                        <label>{_wp_travel.setting_strings.pwa.app_fullname}</label>
                                         <div id="wp-travel-pwa-app-fullname" className="wp-travel-field-value">
                                             <TextControl
                                                 // help={__( 'This sets the thousand separator of displayed prices.', 'wp-travel' )}
@@ -92,11 +92,11 @@ export default () => {
                                                     }
                                                 }
                                             />
-                                            <p className="description">{__('This sets the App fullname', 'wp-travel')}</p>
+                                            <p className="description">{_wp_travel.setting_strings.pwa.app_fullname_note}</p>
                                         </div>
                                     </PanelRow>
                                     <PanelRow>
-                                        <label>{__('App short name', 'wp-travel')}</label>
+                                        <label>{_wp_travel.setting_strings.pwa.app_short_name}</label>
                                         <div id="wp-travel-pwa-app-shortname" className="wp-travel-field-value">
                                             <TextControl
                                                 // help={__( 'This sets the thousand separator of displayed prices.', 'wp-travel' )}
@@ -110,11 +110,11 @@ export default () => {
                                                     }
                                                 }
                                             />
-                                            <p className="description">{__('This sets the App short name', 'wp-travel')}</p>
+                                            <p className="description">{_wp_travel.setting_strings.pwa.app_short_name_note}</p>
                                         </div>
                                     </PanelRow>
                                     <PanelRow>
-                                        <label>{__('Start Url', 'wp-travel')}</label>
+                                        <label>{_wp_travel.setting_strings.pwa.start_url}</label>
                                         <div id="wp-travel-pwa-start-url" className="wp-travel-field-value">
                                             <TextControl
                                                 // help={__( 'This sets the thousand separator of displayed prices.', 'wp-travel' )}
@@ -129,32 +129,32 @@ export default () => {
                                                     }
                                                 }
                                             />
-                                            <p className="description">{__('This sets the App short name', 'wp-travel')}</p>
+                                            <p className="description">{_wp_travel.setting_strings.pwa.start_url_note}</p>
                                         </div>
                                     </PanelRow>
 
                                     <PanelRow>
-                                        <label>{__('APP Logo', 'wp-travel')}</label>
+                                        <label>{_wp_travel.setting_strings.pwa.app_logo}</label>
                                         <div id="wp-travel-pwa-app-logo" className="wp-travel-field-value">
                                             <div className="wp-travel-field-image-container">
                                                 <img src={pwa_app_logo} />
                                             </div>
                                             <button className="components-button is-secondary" href="#" id="upload-app-logo" onClick={onClick}>{__('Change Image')}</button>
-                                            <p className="description">{__('The image must be of size 192px*192px', 'wp-travel')}</p>
+                                            <p className="description">{_wp_travel.setting_strings.pwa.app_logo_note}</p>
                                         </div>
                                     </PanelRow>
                                 </>
                             }
                         </>
-                        || _wp_travel.pro_version < 5.4 && _wp_travel.pro_version != null &&
-                        <Notice isDismissible={false} status="informational">
-                            <strong>{__('Looks like you haven\'t updated your WP Travel Pro plugin.', 'wp-travel')}</strong>
-                            <br />
-                            {__('Update WP Travel Pro to gain access to the new PWA feature as well as other additional settings.', 'wp-travel')}
-                            <br />
-                            <br />
-                            <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Update WP Travel Pro', 'wp-travel')}</a>
-                        </Notice>
+                        // || _wp_travel.pro_version < 5.4 && _wp_travel.pro_version != null &&
+                        // <Notice isDismissible={false} status="informational">
+                        //     <strong>{__('Looks like you haven\'t updated your WP Travel Pro plugin.', 'wp-travel')}</strong>
+                        //     <br />
+                        //     {__('Update WP Travel Pro to gain access to the new PWA feature as well as other additional settings.', 'wp-travel')}
+                        //     <br />
+                        //     <br />
+                        //     <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Update WP Travel Pro', 'wp-travel')}</a>
+                        // </Notice>
                         ||
                         <Notice isDismissible={false} status="informational">
                             <strong>{__('Want to add PWA?', 'wp-travel')}</strong>

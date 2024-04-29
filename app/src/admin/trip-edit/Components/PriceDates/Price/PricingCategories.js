@@ -79,15 +79,7 @@ const WPTravelTripPricingCategories = ({priceIndex}) => {
                     <label>{ __i18n.price_per }</label>
                     <SelectControl
                         value={ category.price_per }
-                        options={ [
-                            {
-                                label: __i18n.person,
-                                value:'person'
-                            }, {
-                                label: __i18n.group,
-                                value:'group'
-                            }
-                        ] }
+                        options={ __i18n.trip_price_per }
                         onChange={ ( price_per ) => {
                             let priceData = price;
                             priceData.categories[catIndex].price_per = price_per;
@@ -106,47 +98,7 @@ const WPTravelTripPricingCategories = ({priceIndex}) => {
                         } }
                     />
                 </PanelRow>
-                {/* <PanelRow>
-                    <label>{ __( 'Set as default price', 'wp-travel' ) }</label>
-                    <div className="wp-travel-field-value">
-                        <ToggleControl
-                            checked={ price.id == defaultPricingId && category.id == defaultCategoryId }
-                            onChange={ () => {
-                                // console.log(' price.id ', price.id )
-                                // console.log(' category.id ', category.id )
-                                
-                            } }
-                        />
-
-                        <CheckboxControl
-                            label={ __( 'Set as default price', 'wp-travel' ) }
-                            checked={ price.id == defaultPricingId && category.id == defaultCategoryId }
-                            onChange={ (v) => {
-                                if ( v ) {
-
-                                    updateTripData({
-                                        ...allData,
-                                        default_pricing_id: price.id
-                                    })
-                                    updateTripData({
-                                        ...allData,
-                                        default_category_id: category.id
-                                    })
-                                } else {
-                                    updateTripData({
-                                        ...allData,
-                                        default_pricing_id: null
-                                    })
-                                    updateTripData({
-                                        ...allData,
-                                        default_category_id: null
-                                    })
-                                }
-                            } }
-                        />
-                        <p className="components-form-token-field__help">{__( 'Display as Starting from price', 'wp-travel' )}</p>
-                    </div>
-                </PanelRow> */}
+ 
                 <PanelRow>
                     <label>{ __i18n.enable_sale }</label>
                     <ToggleControl
@@ -184,7 +136,7 @@ const WPTravelTripPricingCategories = ({priceIndex}) => {
                 <hr/>
                 <PanelRow className="wp-travel-action-section">
                     <span></span>
-                    <Button isDefault onClick={() => removePricingCategory(category.id,priceIndex)} className="wp-traval-button-danger" >{ __i18n.remove_category }</Button>
+                    <Button variant="secondary" onClick={() => removePricingCategory(category.id,priceIndex)} className="wp-traval-button-danger" >{ __i18n.remove_category }</Button>
                 </PanelRow>
             </PanelBody>})}
             {applyFilters('wp_travel_pricing_option_content_after_category', '', price, priceIndex )}

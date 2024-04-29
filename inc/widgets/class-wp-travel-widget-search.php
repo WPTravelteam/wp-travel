@@ -39,11 +39,11 @@ class WP_Travel_Widget_Search extends WP_Widget {
 		$title = isset( $instance['title'] ) ? $instance['title'] : '';
 		$title = apply_filters( 'wp_travel_search_widget_title', $title );
 
-		echo $before_widget;
-		echo ( $title ) ? $before_title . $title . $after_title : '';
+		echo wp_kses_post( $before_widget );
+		echo ( $title ) ? wp_kses_post( $before_title . $title . $after_title ) : '';
 
 		wptravel_search_form();
-		echo $after_widget;
+		echo wp_kses_post( $after_widget );
 	}
 	/**
 	 * Update widget.
@@ -68,7 +68,9 @@ class WP_Travel_Widget_Search extends WP_Widget {
 		if ( $instance ) {
 			$title = esc_attr( $instance['title'] );
 		} ?>
-
+		<p> 
+			<?php echo __( 'This widget will be removed from v9.0.0. Please use "[WP_TRAVEL_SEARCH]" shortcode in replace of this widget.', 'wp-travel' ); ?>
+		</p>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title', 'wp-travel' ); ?>:</label>
 			<input type="text" value="<?php echo esc_attr( $title ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" class="widefat">

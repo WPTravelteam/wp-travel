@@ -28,3 +28,50 @@
 	}
 }
 
+.recurring-every-year{
+	display: none !important;
+}
+
+/**
+ * since 7.7.0
+ * Fix for popover time selection
+ *
+ */
+.components-popover__fallback-container .components-popover.components-dropdown__content .wp-travel-dropdown-content-wrap {
+	width: 232px;
+}
+
+.react-datepicker-wrapper{
+	text-align: right !important;
+}
+
+.react-datepicker-wrapper input{
+	width: 250px !important;
+}
+
+.itinerary-sortable .react-datepicker-popper{
+	transform: none !important;
+	top: 35% !important;
+	left: 60% !important;
+}
+
+.react-datepicker-popper{
+	z-index: 999 !important;
+}
+
+.itinerary-sortable .react-datepicker__triangle{
+	transform: translate(130px, 0px) !important;
+}
+
+@media screen and (max-width: 1366px){
+	.itinerary-sortable .react-datepicker-popper{
+		transform: none !important;
+		top: 35% !important;
+		left: 55% !important;
+	}
+}
+
+.exclude-date-time-panel .react-datepicker-popper{
+	left: auto !important;
+    right: 10% !important;
+}

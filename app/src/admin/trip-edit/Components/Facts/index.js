@@ -127,7 +127,7 @@ const TripFacts = ({allData}) => {
                 { Object.keys(wp_travel_trip_facts_settings).length > 0 ?
                     <>
                         { typeof trip_facts != 'undefined' && trip_facts.length > 0 ? <>
-                            <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addFact()}>{__i18n.add_fact}</Button></PanelRow>
+                            <PanelRow className="wp-travel-action-section"><span></span><Button variant="secondary" onClick={() => addFact()}>{__i18n.add_fact}</Button></PanelRow>
                             <div className="wp-travel-sortable-component">
                             <ReactSortable
                                 list={trip_facts}
@@ -250,7 +250,7 @@ const TripFacts = ({allData}) => {
                                             }
                                         </PanelRow>
                                         <PanelRow className="wp-travel-action-section has-right-padding">
-                                            <span></span><Button isDefault onClick={() => {
+                                            <span></span><Button variant="secondary" onClick={() => {
                                                 if (!confirm( __i18n.alert.remove_fact )) {
                                                     return false;
                                                 }
@@ -266,7 +266,7 @@ const TripFacts = ({allData}) => {
                                     </div>
                                 })}
                             </ReactSortable>
-                            {trip_facts.length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button isDefault onClick={() => addFact()}>{__i18n.add_fact}</Button></PanelRow> }</div></>:
+                            {trip_facts.length > 1 && <PanelRow className="wp-travel-action-section"><span></span><Button variant="secondary" onClick={() => addFact()}>{__i18n.add_fact}</Button></PanelRow> }</div></>:
                             <Notice isDismissible={false} actions={[{
                                 'label': __i18n.add_fact,
                                 onClick: () => {

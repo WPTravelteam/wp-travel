@@ -47,6 +47,14 @@ class WP_Travel_Ajax_Coupon { // @phpcs:ignore
 	 * @since 5.0.0
 	 */
 	public static function get_coupon_code() {
+
+		$user = wp_get_current_user();
+		$allowed_roles = array( 'editor', 'administrator', 'author' );
+
+		if ( !array_intersect( $allowed_roles, $user->roles ) ) {
+			return wp_send_json( array( 'result' => 'Authentication error' ) );
+		}
+
 		$permission = WP_Travel::verify_nonce();
 
 		if ( ! $permission || is_wp_error( $permission ) ) {
@@ -67,6 +75,14 @@ class WP_Travel_Ajax_Coupon { // @phpcs:ignore
 	 * @since 5.0.0
 	 */
 	public static function update_coupon_code() {
+
+		$user = wp_get_current_user();
+		$allowed_roles = array( 'editor', 'administrator', 'author' );
+
+		if ( !array_intersect( $allowed_roles, $user->roles ) ) {
+			return wp_send_json( array( 'result' => 'Authentication error' ) );
+		}
+		
 		$permission = WP_Travel::verify_nonce();
 
 		if ( ! $permission || is_wp_error( $permission ) ) {

@@ -1,6 +1,8 @@
-if( ( typeof _wp_travel_check_for_pro  != 'undefined' && _wp_travel_check_for_pro.is_enable == '1' ) && ( typeof _wp_travel_check_cp_by_billing != 'undefined' && _wp_travel_check_cp_by_billing.is_enable == 'yes' ) ){ 
+if( ( typeof _wp_travel_check_for_pro  != 'undefined' && _wp_travel_check_for_pro.is_enable == '1' ) && ( typeof _wp_travel_check_cp_by_billing != 'undefined' && _wp_travel_check_cp_by_billing.is_enable == 'yes' ) && ( typeof _wp_travel_check_cp_enable != 'undefined' && _wp_travel_check_cp_enable.is_enable == 'yes' ) ){ 
     
     jQuery(function ($) {
+        $(".wp-travel-radio-group.wp-travel-payment-field .wp-travel-radio").remove();
+        $(".wp-travel-radio-group.wp-travel-payment-field").append("<div class='wp-travel-radio no-payment-found'>Select billing country to get payment gateway.</div>");
         $( '#wp-travel-country' ).change( function(){
             $(".wp-travel-radio-group.wp-travel-payment-field .wp-travel-radio").remove();
 
@@ -37,7 +39,7 @@ if( ( typeof _wp_travel_check_for_pro  != 'undefined' && _wp_travel_check_for_pr
 
             if( item == 'bank_deposit' ){
                 
-                $(".wp-travel-radio-group.wp-travel-payment-field").append("<div class='wp-travel-radio'><input type='radio' id='wp-travel-payment-bank_deposit' name='wp_travel_payment_gateway' value='bank_deposit' data-parsley-required='1' required='1' data-parsley-errors-container='#error_container-wp-travel-payment-gateway' data-parsley-multiple='wp_travel_payment_gateway' checked><label for='wp-travel-payment-bank_deposit' class='radio-checkbox-label'>Bank Deposite</label></div>");
+                $(".wp-travel-radio-group.wp-travel-payment-field").append("<div class='wp-travel-radio'><input type='radio' id='wp-travel-payment-bank_deposit' name='wp_travel_payment_gateway' value='bank_deposit' data-parsley-required='1' required='1' data-parsley-errors-container='#error_container-wp-travel-payment-gateway' data-parsley-multiple='wp_travel_payment_gateway' checked><label for='wp-travel-payment-bank_deposit' class='radio-checkbox-label'>Bank Deposit</label></div>");
             }
             if( item == 'khalti' ){
                 
@@ -98,9 +100,32 @@ if( ( typeof _wp_travel_check_for_pro  != 'undefined' && _wp_travel_check_for_pr
 }
 
 
-
-
 jQuery(function ($) {
+
+    
+    // $( '.wp-travel-checkout-section .wp-travel-payment-field.f-full-payment .wp-travel-trip-price-figure' ).text( $('.cart-summary .wp-travel-payable-amount .wp-travel-trip-price-figure').text() );
+
+    // $( '.wp-travel-checkout-section .wp-travel-checkout-partial-payment .wp-travel-trip-price-figure' ).text(  $('.cart-summary .total-partial .wp-travel-trip-price-figure').text() );
+
+
+
+    // $("#wp-travel-payment-mode").change(function(){
+    //     if($( '#wp-travel-payment-mode' ).val() == 'partial' ){
+
+    //         $( '.wp-travel-checkout-partial-payment' ).css( 'visibility', 'visible' );
+    //         $( '.wp-travel-checkout-partial-payment' ).css( 'height', 'auto' );
+    //     }
+    // });
+
+    $('#faq #close-all').click( function(){
+        $('#faq .panel-collapse.collapse').removeClass( 'show' );
+    } );
+
+    $('.trip-video').magnificPopup({
+        type: 'iframe',
+        mainClass: 'mfp-fade',
+        preloader: true,
+    });
 
     if ($('.wp-travel-error').length > 0) {
 
@@ -169,13 +194,14 @@ jQuery(function ($) {
     $('.rate_label').hover(function () {
         var rateLabel = $(this).attr('data-id');
         $('.rate_label').removeClass('fas');
-
+        $('.elementor-widget-wp-travel-trip-review-form .rate_label').removeClass('fas');
         rate(rateLabel);
     },
         function () {
-            var ratedLabel = $('#wp_travel_rate_val').val();
+            var ratedLabel = $('.elementor-widget-wp-travel-trip-review-form #wp_travel_rate_val, #wp_travel_rate_val').val();
 
             $('.rate_label').removeClass('fas').addClass('far');
+            $('.elementor-widget-wp-travel-trip-review-form .rate_label').removeClass('fas').addClass('far');
             if (ratedLabel > 0) {
                 rate(ratedLabel);
             }
@@ -184,10 +210,12 @@ jQuery(function ($) {
     function rate(rateLabel) {
         for (var i = 0; i < rateLabel; i++) {
             $('.rate_label:eq( ' + i + ' )').addClass('fas').removeClass('far');
+            $('.elementor-widget-wp-travel-trip-review-form .rate_label:eq( ' + i + ' )').addClass('fas').removeClass('far');
         }
 
         for (j = 4; j >= i; j--) {
             $('.rate_label:eq( ' + j + ' )').addClass('far');
+            $('.elementor-widget-wp-travel-trip-review-form .rate_label:eq( ' + j + ' )').addClass('far');
         }
     }
 
@@ -195,6 +223,7 @@ jQuery(function ($) {
     $('.rate_label').click(function (e) {
         e.preventDefault();
         $('#wp_travel_rate_val').val($(this).attr('data-id'));
+        $('.elementor-widget-wp-travel-trip-review-form #wp_travel_rate_val').val($(this).attr('data-id'));
     });
     // Rating script ends.
 
@@ -656,7 +685,6 @@ jQuery(function ($) {
         infinite: false,
         speed: 300,
         slidesToShow: 6,
-        centerMode: false,
         arrows: true,
         variableWidth: true,
         rows:0, // Tab issue fix
@@ -668,6 +696,22 @@ jQuery(function ($) {
         slick_options.rtl = true;
     }
     jQuery('#wp-travel-tab-wrapper .resp-tabs-list').slick(slick_options);
+
+    jQuery('.book-trip-date').click(function (e) { 
+
+
+        jQuery('#wp-travel-tab-wrapper .tab-list-content').css( 'display', 'none' );
+        
+        jQuery('.resp-tab-content').removeClass( 'resp-tab-content-active' );
+        jQuery('.resp-tab-item').removeClass( 'resp-tab-active' );
+
+        jQuery('.wp-travel-booking-form').addClass( 'resp-tab-active' );
+        jQuery('#booking').parent().css( 'display', 'block' );
+
+        $('html, body').animate({
+            scrollTop: $( "#booking" ).offset().top
+        }, 1000);
+    });
 });
 
 // New Archive page list/grid view switch

@@ -19,8 +19,8 @@ export default ( ) => {
     const { updateStore } = dispatch( bookingStoreName );
     const { payment_form } = bookingData;
     const { payment_mode } = payment_form;
-    // const fieldKey  = typeof booking_option != 'undefined' && Object.keys( booking_option ) || [];
+
     return <>
-        { typeof payment_mode != 'undefined' && <OptionDrowpDown travelerData={ payment_mode } trvOne='booking_selected' /> }
+        { typeof payment_mode != 'undefined' && <OptionDrowpDown travelerData={ payment_mode } trvOne='booking_selected' partials="yes" /> }
     </>
 }

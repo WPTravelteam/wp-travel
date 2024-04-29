@@ -40,6 +40,9 @@ class WP_Travel_Admin_Booking {
 	 * To hide visibility, rivision in the publish meta.
 	 */
 	public function internal_style() {
+		if ( get_current_screen()->base !== 'dashboard_page_wp-travel-setup-page' ) { 
+			return;
+		}
 		global $post;
 		if ( 'itinerary-booking' === $post->post_type ) : ?>
 			<style type="text/css">
@@ -84,6 +87,9 @@ class WP_Travel_Admin_Booking {
 			case 'trip_code':
 				$trip_id   = get_post_meta( $id, 'wp_travel_post_id', true );
 				$trip_code = wptravel_get_trip_code( $trip_id );
+				if( !empty(get_post_meta( $id, 'wp_travel_trip_code', true )) ){
+					$trip_code = get_post_meta( $id, 'wp_travel_trip_code', true );
+				}
 				echo esc_attr( $trip_code );
 				break;
 
@@ -129,11 +135,20 @@ class WP_Travel_Admin_Booking {
 				break;
 			case 'booking_status':
 				$status    = wptravel_get_booking_status();
-				$label_key = get_post_meta( $id, 'wp_travel_booking_status', true );
+				$label_key = strtolower( get_post_meta( $id, 'wp_travel_booking_status', true ) );
 				if ( '' === $label_key ) {
-					$label_key = 'pending';
+					$label_key = 'Pending';
 					update_post_meta( $id, 'wp_travel_booking_status', $label_key );
 				}
+
+				if( $label_key == 'n/a' ){
+					$label_key = 'N/A';
+				}
+
+				if( $label_key == 'booket' ){
+					$label_key = 'booked';
+				}
+
 				echo '<span class="wp-travel-status wp-travel-booking-status" style="background: ' . esc_attr( $status[ $label_key ]['color'] ) . ' ">' . esc_attr( $status[ $label_key ]['text'] ) . '</span>';
 				break;
 			default:
@@ -180,12 +195,19 @@ class WP_Travel_Admin_Booking {
 	 *
 	 * @since 4.4.2
 	 */
-	public function register_metaboxes() {
+	public function register_metaboxes() {		
+
+		if ( get_current_screen()->base == 'woocommerce_page_wc-orders' ) { 
+			return;
+		}
+		
 		global $post;
 		// Booking Metabox.
 		$wp_travel_post_id = get_post_meta( $post->ID, 'wp_travel_post_id', true ); // Trip ID.
-		add_meta_box( 'wp-travel-booking-info', __( 'Booking Detail <span class="wp-travel-view-bookings"><a href="edit.php?post_type=itinerary-booking&wp_travel_post_id=' . $wp_travel_post_id . '">View All ' . get_the_title( $wp_travel_post_id ) . ' Bookings</a></span>', 'wp-travel' ), array( $this, 'booking_info' ), 'itinerary-booking', 'normal', 'default' );
+		add_meta_box( 'wp-travel-booking-info', sprintf( 'Booking Detail <span class="wp-travel-view-bookings"><a href="edit.php?post_type=itinerary-booking&wp_travel_post_id=%d">View All %s Bookings</a></span>', $wp_travel_post_id, get_the_title( $wp_travel_post_id ) ), array( $this, 'booking_info' ), 'itinerary-booking', 'normal', 'default' );
 		add_action( 'admin_head', array( $this, 'internal_style' ) );
+
+		
 	}
 
 	/**
@@ -224,7 +246,7 @@ class WP_Travel_Admin_Booking {
 			$payment_id                  = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
 			$booking_option              = get_post_meta( $payment_id, 'wp_travel_booking_option', true );
 			$multiple_trips_booking_data = get_post_meta( $booking_id, 'order_items_data', true );
-			?>
+			?> 
 			<div class="wp-travel-booking-form-wrapper" >
 				<?php
 				do_action( 'wp_travel_booking_before_form_field' );
@@ -240,7 +262,7 @@ class WP_Travel_Admin_Booking {
 					'default'       => $wp_travel_post_id,
 				);
 				$form_field->init( $trip_field_args, array( 'single' => true ) )->render();
-
+				
 				$args       = array( 'trip_id' => $booking_id ); // why booking id ??
 				$trip_price = WP_Travel_Helpers_Pricings::get_price( $args );
 
@@ -251,7 +273,6 @@ class WP_Travel_Admin_Booking {
 				if ( 'booking_only' === $booking_option ) {
 					unset( $payment_fields['is_partial_payment'], $payment_fields['payment_gateway'], $payment_fields['payment_mode'], $payment_fields['payment_amount'], $payment_fields['payment_amount_info'] );
 				}
-
 				// Sort fields.
 				$traveller_fields = wptravel_sort_form_fields( $traveller_fields );
 				$billing_fields   = wptravel_sort_form_fields( $billing_fields );
@@ -267,6 +288,7 @@ class WP_Travel_Admin_Booking {
 					$input_val  = get_post_meta( $booking_id, $field_name, true );
 				}
 
+				?><div id="wpcrm-added-code" ></div> <?php
 				if ( $input_val && is_array( $input_val ) ) { // Multiple Travelers Section.
 					foreach ( $input_val as $cart_id => $field_fname_values ) {
 						$trip_id   = isset( $multiple_trips_booking_data[ $cart_id ]['trip_id'] ) ? $multiple_trips_booking_data[ $cart_id ]['trip_id'] : 0;
@@ -274,6 +296,7 @@ class WP_Travel_Admin_Booking {
 						echo '<h3>' . wptravel_get_trip_pricing_name( $trip_id, $price_key ) . '</h3>'; //phpcs:ignore
 						foreach ( $field_fname_values as $i => $field_fname_value ) {
 							?>
+							
 							<div class="wp-travel-form-field-wrapper">
 								<?php
 								if ( 0 === $i ) {
@@ -282,7 +305,7 @@ class WP_Travel_Admin_Booking {
 									<?php
 								} else {
 									?>
-									<h3><?php printf( esc_html__( 'Traveler %d', 'wp-travel' ), ( $i + 1 ) ); ?></h3>
+									<h3><?php echo esc_html__( 'Traveler ', 'wp-travel' ) .  absint( $i ) + 1; ?></h3>
 									<?php
 								}
 
@@ -407,8 +430,10 @@ class WP_Travel_Admin_Booking {
 					// Billing Fields HTML.
 					unset( $billing_fields['price-unavailable'] );
 					foreach ( $billing_fields as $field_group => $field ) {
-						$field['default'] = get_post_meta( $booking_id, $field['name'], true );
-						$form_field->init( $field, array( 'single' => true ) )->render();
+						if( isset($field['name']) ){
+							$field['default'] = get_post_meta( $booking_id, $field['name'], true );
+							$form_field->init( $field, array( 'single' => true ) )->render();
+						}
 					}
 					?>
 				</div>
@@ -500,26 +525,88 @@ class WP_Travel_Admin_Booking {
 		// Updating booking status.
 		$booking_status = isset( $_POST['wp_travel_booking_status'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_booking_status'] ) ) : 'pending';
 		$mail_sending_payment_status = apply_filters( 'wp_travel_change_payment_status_mail_sending', true );
+		$mail_sending_booking_status  = apply_filters( 'wp_travel_change_booking_status_mail_sending', true );
 		$payment_status = isset( $_POST['wp_travel_payment_status'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_payment_status'] ) ) : 'N/A';
-		$payment_status_change = sanitize_text_field( $payment_status );
-		$old_payment_status = get_post_meta( $booking_id, 'wp_travel_payment_status' );
-		$pmt_status = isset( $old_payment_status[0] ) ? $old_payment_status[0] : 'N/A';
+		$new_payment_status = sanitize_text_field( $payment_status );
+		$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id' )[0];
+		$old_payment_status = get_post_meta( $payment_id, 'wp_travel_payment_status' );
+
+		if( isset( $old_payment_status[0] ) ){
+			$old_payment_status = $old_payment_status[0];
+		}else{
+			$old_payment_status = $old_payment_status;
+		}
+
+		// $old_payment_status = isset( $old_payment_status[0] ) ? $old_payment_status[0] : 'N/A';
+
 		if ( $mail_sending_payment_status ) {
-			if ( $payment_status_change != $pmt_status ) {
+			if ( $new_payment_status != $old_payment_status ) {
+
+				if( $old_payment_status == 'waiting_voucher' ){
+					$old_payment_status = __( 'Waiting for Voucher', 'wp-travel' );
+				}elseif( $old_payment_status == 'partially_paid' ){
+					$old_payment_status = __( 'Partially Paid', 'wp-travel' );
+				}elseif( $old_payment_status == 'voucher_submited' ){
+					$old_payment_status = __( 'Voucher Submited', 'wp-travel' );
+				}
+				// $old_status = wptravel_get_payment_status()[$old_status]['text'];
+				$new_payment_status = wptravel_get_payment_status()[$new_payment_status]['text'];
+				if( $new_payment_status == 'waiting_voucher' ){
+					$new_payment_status = __( 'Waiting for Voucher', 'wp-travel' );
+				}elseif( $new_payment_status == 'partially_paid' ){
+					$new_payment_status = __( 'Partially Paid', 'wp-travel' );
+				}elseif( $new_payment_status == 'voucher_submited' ){
+					$new_payment_status = __( 'Voucher Submited', 'wp-travel' );
+				}
+
 				$traveler_email = get_post_meta( $booking_id, 'wp_travel_email_traveller', true );
 				$traveler_name = get_post_meta( $booking_id, 'wp_travel_fname_traveller', true );
-				$subject = 'Booking payment status update';
+				$subject = apply_filters( 'wptravel_email_subject_for_payment_status', __( 'Booking payment status update', 'wp-travel' ) );
 				$email_headers = "Content-Type: text/html; charset=UTF-8\r\n";
 				foreach ( $traveler_email as $trip_key => $email_detail ) {
-					$fname_traveller = isset( $traveler_name[$trip_key] ) && isset( $traveler_name[$trip_key][0] ) ? $traveler_name[$trip_key][0] : '';
-					$message = "<h2>Dear " . $fname_traveller . ",</h2><p>We've acknowledged receiving your payment detail for your trip booking. Your payment status has now been updated from " . $pmt_status . " to " . $payment_status_change .".</p><br><h3>Thank you.</h3>";
+					$traveller_name = isset( $traveler_name[$trip_key] ) && isset( $traveler_name[$trip_key][0] ) ? $traveler_name[$trip_key][0] : '';
+					$message = "<h2>Dear {$traveller_name},</h2><p>We've acknowledged receiving your payment detail for your trip booking. Your payment status has now been updated from <b> {$old_payment_status} </b> to <b> {$new_payment_status} </b>.</p><br><h3>Thank you.</h3>";
+					
+					$message = apply_filters( 'wptravel_email_content_for_payment_status', $message, $traveller_name, $old_payment_status, $new_payment_status );
+					if ( ! wp_mail( $email_detail[0], $subject, $message, $email_headers ) ) {
+
+					}
+				}
+				$booking_status_flag = 0;
+			}
+		}
+
+		$old_status = isset( $_POST['wp_travel_booking_status'] ) ? sanitize_text_field( wp_unslash( $_POST['wp_travel_booking_status'] ) ) : 'N/A';
+	
+		$new_status = sanitize_text_field( $old_status );
+		$old_booking_status = get_post_meta( $booking_id, 'wp_travel_booking_status' );
+		$old_status = isset( $old_booking_status[0] ) ? $old_booking_status[0] : 'N/A';
+		// $old_status = wptravel_get_booking_status()[$old_status]['text'];
+		$new_status = wptravel_get_booking_status()[$new_status]['text'];
+
+		if( $old_status == 'booked' ){
+			$old_status = 'Booked';
+		}
+		
+		if ( $mail_sending_booking_status ) {
+			if ( $new_status != $old_status ) {
+
+				$traveler_email = get_post_meta( $booking_id, 'wp_travel_email_traveller', true );
+				$traveler_name = get_post_meta( $booking_id, 'wp_travel_fname_traveller', true );
+				$subject = apply_filters( 'wptravel_email_subject_for_booking_status', __( 'Booking status update', 'wp-travel' ) );
+				$email_headers = "Content-Type: text/html; charset=UTF-8\r\n";
+				foreach ( $traveler_email as $trip_key => $email_detail ) {
+					$traveler_name = isset( $traveler_name[$trip_key] ) && isset( $traveler_name[$trip_key][0] ) ? $traveler_name[$trip_key][0] : '';
+					$message = "<h2>Dear {$traveler_name},</h2><p>We are reaching out to inform you about some recent changes to your booking with us. Your booking status has been updated from <b>" . $old_status . "</b> to <b>" . $new_status ."</b>.</p><br><h3>Thank you.</h3>";
+					$message = apply_filters( 'wptravel_email_content_for_booking_status', $message, $traveler_name, $old_status, $new_status );
 					if ( ! wp_mail( $email_detail[0], $subject, $message, $email_headers ) ) {
 
 					}
 				}
 			}
 		}
-		update_post_meta( $booking_id, 'wp_travel_booking_status', sanitize_text_field( $booking_status ) );
+
+		update_post_meta( $booking_id, 'wp_travel_booking_status', sanitize_text_field( $new_status ) );
 		$checkout_fields = wptravel_get_checkout_form_fields();
 		foreach ( $checkout_fields as $field_type => $fields ) {
 			$priority = array();
@@ -580,7 +667,7 @@ class WP_Travel_Admin_Booking {
 		$paid_amount = isset( $payment_data['paid_amount'] ) ? $payment_data['paid_amount'] : 0;
 		$total = isset( $payment_data['total'] ) ? $payment_data['total'] : 0;
 		
-		if ( $booking_status == 'booked' &&  $payment_status_change == 'paid' ) {
+		if ( $booking_status == 'booked' &&  $new_status == 'paid' ) {
 			if ( $due_amount > 0 && $partial_mode != 'yes' && $due_amount == $total ) {
 				update_post_meta( $payment_id, 'wp_travel_real_payment_amount_change_status', $total );
 				update_post_meta( $payment_id, 'wp_travel_payment_amount', $due_amount );

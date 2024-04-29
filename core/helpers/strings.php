@@ -22,6 +22,18 @@ class WpTravel_Helpers_Strings {
 	 * @return array
 	 */
 	public static function get() {
+
+		$price_per = array(
+			array(
+				'label' => __( 'Person', 'wp-travel' ),
+				'value' => 'person',
+			),
+			array(
+				'label' => __( 'Group', 'wp-travel' ),
+				'value' => 'group',
+			)
+		);
+
 		$localized_strings = array(
 			'activities'                => __( 'Activities', 'wp-travel' ),
 			'add_date'                  => __( 'Please add date.', 'wp-travel' ),
@@ -45,9 +57,11 @@ class WpTravel_Helpers_Strings {
 			'fact'                      => __( 'Fact', 'wp-travel' ),
 			'featured_book_now'         => __( 'Book Now', 'wp-travel' ), // Book Now at the featured section.
 			'featured_trip_enquiry'     => __( 'Trip Enquiry', 'wp-travel' ), // Trip Enquiry at the featured section.
+			'featured_trip_video'		=> __( 'Featured Video', 'wp-travel' ),	// Featured Video Heading at Trip Options
 			'filter_by'                 => __( 'Filter By', 'wp-travel' ),
 			'fixed_departure'           => __( 'Fixed Departure', 'wp-travel' ),
 			'from'                      => __( 'From', 'wp-travel' ),
+			'gallery_images'     		=> __( 'Images', 'wp-travel' ),	// Images Heading at Trip Options
 			'global_partial_payout'     => __( 'Global Partial Payout', 'wp-travel' ),
 			'global_trip_enquiry'       => __( 'Global Trip Enquiry Option', 'wp-travel' ),
 			'global_trip_title'         => __( 'Global Trip Title', 'wp-travel' ),
@@ -75,6 +89,8 @@ class WpTravel_Helpers_Strings {
 			'pricing_name'              => __( 'Pricing Name', 'wp-travel' ),
 			'highest_price'             => __( 'Show Highest Price', 'wp-travel' ),
 			'highest_price_description' => __( 'This option will display the highest price.', 'wp-travel' ),
+			'enable_pax_individual'     => __( 'Enable Pax Individually', 'wp-travel' ),
+			'enable_pax_individual_description' => __( 'This option will enable pax limit for individual pricing.', 'wp-travel' ),
 			'reviews'                   => __( 'Reviews', 'wp-travel' ),
 			'sale_price'                => __( 'Sale Price', 'wp-travel' ),
 			'search'                    => __( 'Search', 'wp-travel' ),
@@ -88,11 +104,12 @@ class WpTravel_Helpers_Strings {
 			'view_system_information'   => __( 'View system information', 'wp-travel' ),
 			'general_setting'           => __( 'General Settings', 'wp-travel' ),
 			'to'                        => __( 'To', 'wp-travel' ),
+			'video_url'                 => __( 'Video URL', 'wp-travel' ),
 			'trip_code'                 => __( 'Trip code', 'wp-travel' ),
 			'trip_date'                 => __( 'Trip date', 'wp-travel' ),
 			'trip_duration'             => __( 'Trip Duration', 'wp-travel' ),
 			'trip_enquiry'              => __( 'Trip Enquiry', 'wp-travel' ),
-			'enquiry'					=> __( 'Enquiry', 'wp-travel' ),
+			'enquiry'					=> apply_filters( 'wp_travel_trip_enquiry_label', __( 'Enquiry', 'wp-travel' ) ),
 			'trip_name'                 => __( 'Trip Name', 'wp-travel' ),
 			'trip_type'                 => __( 'Trip Type', 'wp-travel' ),
 			'unit'                      => __( 'Unit', 'wp-travel' ),
@@ -153,6 +170,11 @@ class WpTravel_Helpers_Strings {
 			'nights'                    => __( 'Night(s)', 'wp-travel' ),
 			'days'                      => __( 'Day(s)', 'wp-travel' ),
 			'hour'                     	=> __( 'Hour(s)', 'wp-travel' ),
+			'booking_start_date_info'   => apply_filters( 'booking_start_date_info', __( 'Booking will start from ', 'wp-travel' ) ),
+			'booking_offset'            => apply_filters( 'wptravel_booking_offset', 0 ),
+			'exclude_date'            	=> apply_filters( 'wptravel_exclude_booking_dates', array() ),
+			'current_year'            	=> date("Y"),
+			'booking_start_date_label'  => __( 'Booking Start', 'wp-travel' ),
 			'duration_start_date'       => __( 'Duration Start Date', 'wp-travel' ),
 			'duration_end_date'         => __( 'Duration End Date', 'wp-travel' ),
 			'minutes'                   => __( 'Minute(s)', 'wp-travel' ),
@@ -188,13 +210,58 @@ class WpTravel_Helpers_Strings {
 			'enter_your_name'           => __( 'Enter your name', 'wp-travel' ),
 			'email'                     => __( 'Email', 'wp-travel' ),
 			'enter_your_email'          => __( 'Enter your email', 'wp-travel' ),
-			'enquiry_message'           => __( 'Enquiry Message', 'wp-travel' ),
+			'enquiry_message'           => apply_filters( 'wp_travel_enquiry_message_label', __( 'Enquiry Message', 'wp-travel' ) ),
 			'enter_your_enquiry'        => __( 'Enter your enquiry...', 'wp-travel' ),
 			'arrival_departure'			=> apply_filters( 'wp_travel_trip_duration_arrival_time', false ),
-			'arrival_time'				=> __( apply_filters( 'wp_travel_arrival_time', 'Arrival Time' ), 'wp-travel' ),
-			'departure_time'			=> __( apply_filters( 'wp_travel_departure_time', 'Departure Time' ), 'wp-travel' ),
+			'arrival_time'				=> apply_filters( 'wp_travel_arrival_time', __( 'Arrival Time', 'wp-travel' ) ),
+			'departure_time'			=> apply_filters( 'wp_travel_departure_time', __( 'Departure Time', 'wp-travel' ) ),
 			'conditional_payment_text'	=> __( 'Using the Conditional payment module, you can apply for conditional payment on the checkout page according to the billing address or the trip locations.', 'wp-travel' ),
 			'single_archive'			=> self::wp_travel_single_archive_strings(),
+			'set_cart_error'			=> __( 'You have already applied a coupon.', 'wp-travel' ),
+			'set_coupon_empty'			=> __( 'Please enter your coupon code', 'wp-travel' ),
+			'set_invalid_coupon_error'	=> __( 'Invalid Coupon code. Please re-enter your coupon code', 'wp-travel' ),
+			'set_coupon_apply'			=> __( 'Coupon applied.', 'wp-travel' ),
+			'set_enter_coupon_message'	=> __( 'Enter you coupon code', 'wp-travel' ),
+			'set_coupon_btn'			=> __( 'Apply Coupon', 'wp-travel' ),
+			'set_ideal_bank'			=> __( 'iDEAL Bank', 'wp-travel' ),
+			'set_book_now_btn'			=> __( 'Book Now', 'wp-travel' ),
+			'set_cart_updated'			=> __( 'Cart updated successfully.', 'wp-travel' ),
+			'set_cart_updated_error'	=> __( "Cart failed to update due to server error.", "wp-travel" ),
+			'set_cart_updated_server_responce' => __( "Cart failed to update due to server response error.", "wp-travel" ),
+			'set_cart_server_error'		=> __( 'Cart failed to update due to some server error.', 'wp-travel' ),
+			'set_close_cart'			=> __( 'Close Cart', 'wp-travel' ),
+			'set_view_cart'				=> __( 'View Cart', 'wp-travel' ),
+			'set_updated_cart_btn'		=> __( 'Update Cart', 'wp-travel' ),
+			'set_cart_total_price'		=> __( 'Trip Price', 'wp-travel' ) ,
+			'set_cart_discount'			=> __( 'Discount', 'wp-travel' ),
+			'set_cart_tax'				=> __( 'Tax', 'wp-travel' ) ,
+			'set_payment_price'			=> __( 'Total Trip Price', 'wp-travel' ),
+			'set_cart_partial_payment'	=>  __( 'Partial Payment Price', 'wp-travel' ),
+			'set_require_message'		=> __( ' is required', 'wp-travel' ),
+			'set_require_empty'			=> __( 'Required field is empty', 'wp-travel' ),
+			'set_go_back'				=> __( 'Go Back', 'wp-travel' ) ,
+			'set_next_btn'				=> __( 'Next', 'wp-travel' ),
+			'set_added_cart'			=> __( 'has been added to cart.', 'wp-travel' ),
+			'set_gateway_select'		=> __( 'Plese select you payment gateway', 'wp-travel' ),
+			'set_book_now'				=> __( "Book Now", 'wp-travel' ),
+			'set_invalid_email'			=> __( 'Invalid Email', 'wp-travel' ),
+			'set_load_traveler'			=> __( "Lead Traveler", 'wp-travel' ),
+			'set_traveler'				=> __( 'Traveler ', 'wp-travel' ),
+			'set_time_out'				=> __( '[X] Request Timeout!', 'wp-travel' ),
+			'set_traveler_details'		=> __('Traveler Details', 'wp-travel' ),
+			'set_booking_details'		=> __('Billing Details', 'wp-travel' ),
+			'set_booking_with'			=> __( 'Booking / Payments', 'wp-travel' ),
+			'set_booking_only'			=>  __( 'Booking', 'wp-travel' ),
+			'set_bank_detail'			=> __( 'Bank Details', 'wp-travel'),
+			'set_account_name'			=> __( 'Account Name', 'wp-travel'),
+			'set_account_number'		=> __( 'Account Number', 'wp-travel'),
+			'set_bank_name'				=> __( 'Bank Name', 'wp-travel'),
+			'set_sort_code'				=> __( 'Sort Code', 'wp-travel'),
+			'set_ibam'					=> __( 'IBAN', 'wp-travel'),
+			'set_swift'					=> __( 'Swift', 'wp-travel'),
+			'set_routing_number'		=> __( 'Routing Number', 'wp-travel'),
+			'set_add_to_cart'			=> __('Add to Cart', 'wp-travel'),
+			'trip_price_per'			=> apply_filters( 'wp_travel_trip_price_per', $price_per )
 		);
 
 		$localized_strings['price_per_labels'] = array(
@@ -222,6 +289,8 @@ class WpTravel_Helpers_Strings {
 			'recurring'                     => __( 'Recurring:', 'wp-travel' ),
 			'group_size'                    => __( 'Group (Min-Max)', 'wp-travel' ),
 			'seats_left'                    => __( 'Seats left', 'wp-travel' ),
+			'min_pax'                       => __( 'Min', 'wp-travel' ),
+			'max_pax'                       => __( 'Max', 'wp-travel' ),
 			'pax'                           => __( 'Pax', 'wp-travel' ),
 			'price_tax'                     => __( 'Tax', 'wp-travel' ),
 			'select_pax'                    => __( 'Select Pax', 'wp-travel' ),
@@ -285,6 +354,7 @@ class WpTravel_Helpers_Strings {
 			'misc'              => __( 'Misc', 'wp-travel' ),
 			'tabs'              => __( 'Tabs', 'wp-travel' ),
 			'guides'            => __( 'Guides', 'wp-travel' ),
+			'checkout_field_editor'            => __( 'Checkout Field Editor', 'wp-travel' ),
 		);
 	}
 
@@ -369,6 +439,9 @@ class WpTravel_Helpers_Strings {
 			'global_faq_option'  => array(
 				'title'       => __( 'Tired of updating repitative FAQs ?', 'wp-travel' ),
 				'description' => __( 'By upgrading to Pro, you can create and use Global FAQs in all of your trips !', 'wp-travel' ),
+			),
+			'featured_trip_video_option'   => array(
+				'description' => __( 'Insert the video link to embed.', 'wp-travel' ),
 			),
 			'trip_code_option'   => array(
 				'description' => __( 'Need Custom Trip Code? Check', 'wp-travel' ),

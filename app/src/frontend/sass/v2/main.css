@@ -1116,7 +1116,6 @@
   display: inline-block;
   border-radius: 0px;
   transition: 0.2s 0.1s;
-  top: 0;
   left: 0;
   border: 1px solid #ebebeb;
   border-right: none;
@@ -10100,7 +10099,7 @@ span.wp-travel-message {
 .wp-travel-error::before,
 .wp-travel-info::before,
 .wp-travel-message::before {
-  font-family: "wp-icon-solid";
+  font-family: "wt-icon-solid";
   font-size: 18px;
   display: inline-block;
   position: absolute;

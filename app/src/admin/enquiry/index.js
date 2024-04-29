@@ -32,7 +32,7 @@ const App = () => {
     const allData = useSelect((select) => {
         return select('WPTravel/Enquiry').getAllStore()
 }, []);
-// console.log('allData', allData)
+
     //change the publish button state as per the data changes
     toggleDisablePostUpdate(allData.has_state_changes);
 

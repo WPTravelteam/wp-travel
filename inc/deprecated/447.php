@@ -594,10 +594,10 @@ function wp_travel_search_form() { // @phpcs:ignore
 	return wptravel_search_form();
 }
 
-function wp_travel_featured_itineraries( $no_of_post_to_show = '3' ) { // @phpcs:ignore
-	wptravel_deprecated_function( 'wp_travel_featured_itineraries', '4.4.7', 'wptravel_featured_itineraries' );
-	return wptravel_featured_itineraries( $no_of_post_to_show );
-}
+// function wp_travel_featured_itineraries( $no_of_post_to_show = '3' ) { // @phpcs:ignore
+// 	wptravel_deprecated_function( 'wp_travel_featured_itineraries', '4.4.7', 'wptravel_featured_itineraries' );
+// 	return wptravel_featured_itineraries( $no_of_post_to_show );
+// }
 
 function wp_travel_get_itinereries_prices_array() { // @phpcs:ignore
 	wptravel_deprecated_function( 'wp_travel_get_itinereries_prices_array', '4.4.7', 'wptravel_get_itinereries_prices_array' );

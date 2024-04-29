@@ -4,16 +4,17 @@ const __i18n = {
 }
 
 // Additional lib
-const _ = lodash
+
+import _ from 'lodash';
 const TripTimes =  ( props ) => {
 	// Component Props.
 	const { bookingData, updateBookingData, date  } = props;
 
-	const { enable_time } = date;
+	const { twentyfour_time_format, enable_time } = date;
 	const { selectedDate, nomineeTimes } = bookingData;
 	return enable_time  && <div className="wp-travel-booking__selected-time">
 		{nomineeTimes.length > 0 && <>
-			<h4>{`${__i18n.bookings.available_trip_times}`}</h4>
+			<h4 className='wptravel-available-booking-time__label'>{`${__i18n.bookings.available_trip_times}`}</h4>
 			{
 				nomineeTimes.map((timeObject, i) => {
 					return <button key={i} disabled={timeObject.isSame( selectedDate ) } onClick={ () => {
@@ -23,7 +24,13 @@ const TripTimes =  ( props ) => {
 								} );
 							}
 						} >
-							{timeObject.format('h:mm A')}
+	
+						{
+							twentyfour_time_format &&
+							timeObject.format('HH:mm')
+							||
+							timeObject.format('h:mm A')
+						}
 						</button>
 					
 				})

@@ -84,7 +84,7 @@ $billing_phone   = isset( $biling_data['billing_phone'] ) ? $biling_data['billin
 					$country_list = wptravel_get_countries();
 					foreach ( $country_list as $key => $value ) :
 						?>
-						<option value="<?php echo esc_html( $key ); ?>" <?php selected( $key, $billing_country ); ?>>
+						<option value="<?php echo esc_html( $key ); ?>" <?php echo $key == $billing_country ? "selected" : ''; ?>>
 							<?php echo esc_html( $value ); ?>
 						</option>
 					<?php endforeach; ?>
@@ -101,8 +101,6 @@ $billing_phone   = isset( $biling_data['billing_phone'] ) ? $biling_data['billin
 			</div>
 		</div>
 	</div>
-
-	<!-- <div class="clear"></div> -->
 
 	<?php do_action( 'wp_travel_edit_billing_form' ); ?>
 

@@ -37,7 +37,11 @@ class WP_Travel_Ajax {
 
 	public function check_coupon_code() {
 
-		WP_Travel::verify_nonce();
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
 
 		$post_data = wptravel_sanitize_array( $_REQUEST );
 		if ( ! isset( $post_data['coupon_code'] ) || ! isset( $post_data['coupon_id'] ) ) {
@@ -59,6 +63,11 @@ class WP_Travel_Ajax {
 	}
 
 	public function apply_coupon() {
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
 		check_ajax_referer( 'wp_travel_nonce', '_nonce' );
 		if ( ! isset( $_POST['CouponCode'] ) ) {
 			return;
@@ -168,6 +177,11 @@ class WP_Travel_Ajax {
 	}
 
 	public function add_to_cart() {
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		$http_post_data = wptravel_sanitize_array( $_POST ); // phpcs:ignore
 		$post_data      = json_decode( file_get_contents( 'php://input' ) );
@@ -356,6 +370,7 @@ class WP_Travel_Ajax {
 
 		$attrs['pricing_id']     = $pricing_id;
 		$attrs['arrival_date']   = $arrival_date;
+		$attrs['date_id']   	= isset($post_data['date_id'][0]) ? (int)$post_data['date_id'][0] : '';
 		$attrs['departure_date'] = $departure_date;
 		$attrs['trip_extras']    = $trip_extras;
 
@@ -408,6 +423,11 @@ class WP_Travel_Ajax {
 	 * @return void
 	 */
 	public function update_cart() {
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
 		check_ajax_referer( 'wp_travel_nonce', '_nonce' );
 		if ( ! isset( $_POST['update_cart_fields'] ) || count( $_POST['update_cart_fields'] ) < 1 ) {
 			return;
@@ -440,6 +460,11 @@ class WP_Travel_Ajax {
 	 * @deprecated 5.2.9
 	 */
 	public function remove_from_cart() {
+		$permission = WP_Travel::verify_nonce();
+
+		if ( ! $permission || is_wp_error( $permission ) ) {
+			WP_Travel_Helpers_REST_API::response( $permission );
+		}
 		check_ajax_referer( 'wp_travel_nonce', '_nonce' );
 		if ( ! isset( $_REQUEST['cart_id'] ) ) {
 			return;

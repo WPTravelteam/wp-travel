@@ -21,7 +21,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 if ( post_password_required() ) {
-	echo get_the_password_form();
+	$allow_html =  wp_kses_allowed_html();
+	$allow_html[ 'form' ] = array(
+		'class' => true,
+		'action' => true,
+		'method' => true
+	);
+	$allow_html[ 'input' ] = array(
+		'type' => true,
+		'class' => true,
+		'name' => true,
+		'id' => true,
+		'value' => true,
+		'spellcheck' => true,
+		'size' => true,
+	);
+	$allow_html[ 'label' ] = array(
+		'class' => true,
+		'for' => true
+	);
+	$allow_html[ 'p' ] = array(
+		'class' => true
+	);
+
+	echo wp_kses( get_the_password_form(), $allow_html );
 	return;
 }
 $post_id     = get_the_ID();
@@ -33,7 +56,7 @@ $enable_sale = WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => $po
 
 		<div class="wp-travel-post-thumbnail">
 			<a href="<?php the_permalink(); ?>">
-				<?php echo wptravel_get_post_thumbnail( $post_id, 'wp_travel_thumbnail' ); ?>
+				<?php echo wp_kses_post( wptravel_get_post_thumbnail( $post_id, 'wp_travel_thumbnail' ) ); ?>
 			</a>
 			<?php wptravel_save_offer( $post_id ); ?>
 		</div>
@@ -57,10 +80,10 @@ $enable_sale = WP_Travel_Helpers_Trips::is_sale_enabled( array( 'trip_id' => $po
 				<div class="entry-meta">
 					<?php if ( wptravel_tab_show_in_menu( 'reviews' ) ) : ?>
 						<?php $average_rating = wptravel_get_average_rating( $post_id ); ?>
-						<div class="wp-travel-average-review" title="<?php printf( esc_attr__( 'Rated %s out of 5', 'wp-travel' ), $average_rating ); ?>">
+						<div class="wp-travel-average-review" title="<?php echo esc_html__( 'Rated ', 'wp-travel' ).esc_html($rating).esc_html__( ' out of 5', 'wp-travel' ); ?>">
 
 							<span style="width:<?php echo esc_attr( ( $average_rating / 5 ) * 100 ); ?>%">
-								<strong itemprop="ratingValue" class="rating"><?php echo esc_html( $average_rating ); ?></strong> <?php printf( esc_html__( 'out of %1$s5%2$s', 'wp-travel' ), '<span itemprop="bestRating">', '</span>' ); ?>
+								<strong itemprop="ratingValue" class="rating"><?php echo esc_html( $average_rating ); ?></strong> <?php echo esc_html__( 'out of ', 'wp-travel' ). '<span itemprop="bestRating">'.'</span>'; ?>
 							</span>
 						</div>
 						<?php $count = (int) wptravel_get_review_count(); ?>

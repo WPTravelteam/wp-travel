@@ -28,7 +28,7 @@ const SaveTripSection = () => {
                 <p className="text-success"><strong>{__i18n.messages.trip_saved}</strong></p>
             </div> }
         </div>
-        <Button isPrimary onClick={()=>{
+        <Button variant="primary" onClick={()=>{
             updateRequestSending(true);
 
             if ( allData.is_fixed_departure ) {
@@ -59,7 +59,7 @@ const SaveTripSection = () => {
             }
             
             
-            apiFetch( { url: `${ajaxurl}?action=wp_travel_update_trip&trip_id=${_wp_travel.postID}&_nonce=${_wp_travel._nonce}`, data:JSON.stringify(allData), method:'post' } ).then( res => {
+            apiFetch( { url: `${ajaxurl}?action=wp_travel_update_trip&trip_id=${_wp_travel.postID}&_nonce=${_wp_travel._nonce}`, data:allData, method:'post' } ).then( res => {
                 updateRequestSending(false);
                 
                 if( res.success && "WP_TRAVEL_UPDATED_TRIP" === res.data.code){

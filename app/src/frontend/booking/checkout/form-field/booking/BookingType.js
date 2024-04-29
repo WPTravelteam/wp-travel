@@ -19,7 +19,7 @@ export default ( ) => {
     const { updateStore } = dispatch( bookingStoreName );
     const { payment_form } = bookingData;
     const { booking_option } = payment_form;
-    // const fieldKey  = typeof booking_option != 'undefined' && Object.keys( booking_option ) || [];
+
     return <>
         { typeof booking_option != 'undefined' && <OptionDrowpDown travelerData={ booking_option } trvOne='booking_selected' /> }
     </>

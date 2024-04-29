@@ -18,9 +18,7 @@ export default ( ) => {
     const { updateStore } = dispatch( bookingStoreName );
     const { payment_form } = bookingData;
     const { payment_gateway } = payment_form;
-    // console.log( 'payment select', payment_gateway)
-    // const fieldKey  = typeof payment_gateway != 'undefined' && Object.keys( payment_gateway ) || [];
-    return <>
+     return <>
         { typeof payment_gateway != undefined && <RadioButton travelerData={payment_gateway} trvOne='payment_select' pmtFld='yes' /> }
     </>
 }

@@ -73,6 +73,11 @@ class WP_Travel_Post_Types {
 			'show_in_rest'       => true,
 		);
 
+		if( class_exists( 'WP_Travel_Blocks' ) || class_exists( 'WpTravelElementorExtended\Main' ) ){
+			$args['supports'][] = 'editor';
+		}
+
+
 		/**
 		 * Register a itineraries post type.
 		 *
@@ -389,7 +394,7 @@ class WP_Travel_Post_Types {
 			'public'             => true,
 			'publicly_queryable' => true,
 			'show_ui'            => true,
-			'show_in_menu'       => false,
+			'show_in_menu'       => false ,
 			'query_var'          => true,
 			'rewrite'            => array( 'slug' => 'travel-guide' ),
 			'capability_type'    => 'post',
@@ -397,6 +402,7 @@ class WP_Travel_Post_Types {
 			'hierarchical'       => false,
 			'menu_position'      => null,
 			'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
+			'show_in_rest'       => true,
 		);
 
 		register_post_type( 'travel-guide', $guide_args );

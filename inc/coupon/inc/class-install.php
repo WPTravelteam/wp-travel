@@ -149,7 +149,7 @@ if ( ! class_exists( 'WP_Travel_Coupons_Pro_Install' ) ) :
 
 					$coupon_code = get_post_meta( $id, 'wp_travel_coupon_code', true );
 
-					echo '<span><strong>' . $coupon_code . '</strong></span>';
+					echo '<span><strong>' . esc_html( $coupon_code ) . '</strong></span>';
 
 					break;
 				case 'discount_value':
@@ -159,7 +159,7 @@ if ( ! class_exists( 'WP_Travel_Coupons_Pro_Install' ) ) :
 					$symbol         = ( 'percentage' === $discount_type ) ? '%' : wptravel_get_currency_symbol();
 
 					?>
-						<span><strong><?php echo $discount_value; ?> ( <?php echo $symbol; ?> )</strong></span>
+						<span><strong><?php echo esc_html( $discount_value ); ?> ( <?php echo esc_html( $symbol ); ?> )</strong></span>
 
 					<?php
 
@@ -170,8 +170,7 @@ if ( ! class_exists( 'WP_Travel_Coupons_Pro_Install' ) ) :
 					$max_users   = $coupon->get_coupon_meta( $id, 'restriction', 'coupon_limit_number' );
 					$max_users   = $max_users ? $max_users : __( 'Unlimited', 'wp-travel' );
 					?>
-						<span title="<?php echo esc_attr( sprintf( __( 'Used %1$1s out of %2$2s', 'wp-travel' ), $used_so_far, $max_users ) ); ?>"><strong><?php echo esc_html( $used_so_far ); ?>/ <?php echo esc_html( $max_users ); ?></strong></span>
-
+						<span title="<?php echo esc_attr( __( 'Used ', 'wp-travel' ).$used_so_far.__( ' out of ', 'wp-travel' ).$max_users ); ?>"><strong><?php echo esc_html( $used_so_far ); ?>/ <?php echo esc_html( $max_users ); ?></strong></span>
 					<?php
 
 					break;
@@ -180,7 +179,7 @@ if ( ! class_exists( 'WP_Travel_Coupons_Pro_Install' ) ) :
 					$expiration_date = $coupon->get_coupon_meta( $id, 'general', 'coupon_expiry_date' );
 
 					?>
-						<span><strong><?php echo $expiration_date; ?></strong></span>
+						<span><strong><?php echo esc_html( $expiration_date ); ?></strong></span>
 
 					<?php
 

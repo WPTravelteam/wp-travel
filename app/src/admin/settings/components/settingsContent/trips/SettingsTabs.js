@@ -54,7 +54,7 @@ export default () => {
         <>
             <div className="wp-travel-section-header">
                 <h2 className="wp-travel-section-header-title">
-                    {__("Tabs Settings", "wp-travel")}
+                    {_wp_travel.setting_strings.tabs.tabs_settings}
                 </h2>
                 <p className="wp-travel-section-header-description">
                     {__("More tabs settings according to your choice.", "wp-travel")}
@@ -98,14 +98,14 @@ export default () => {
                                         initialOpen={false}
                                     >
                                         <PanelRow>
-                                            <label>{__('Default Tab Title', 'wp-travel')}</label>
+                                            <label>{_wp_travel.setting_strings.tabs.default_tab_title}</label>
                                             <TextControl
                                                 value={tab.default_label}
                                                 disabled={true}
                                             />
                                         </PanelRow>
                                         <PanelRow>
-                                            <label>{__('Custom Tab Title', 'wp-travel')}</label>
+                                            <label>{_wp_travel.setting_strings.tabs.custom_tab_title}</label>
                                             <TextControl
                                                 value={tab.label}
                                                 placeholder={tab.default_label}
@@ -118,7 +118,7 @@ export default () => {
                                         </PanelRow>
 
                                         <PanelRow>
-                                            <label>{__('Display', 'wp-travel')}</label>
+                                            <label>{_wp_travel.setting_strings.tabs.display}</label>
                                             <ToggleControl
                                                 checked={tab.show_in_menu == 'yes'}
                                                 onChange={

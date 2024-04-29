@@ -1188,3 +1188,17 @@
 .D-article-1 .checkout-page-wrap .wp-travel-checkout-section #wp-travel-booking .radio-checkbox-label a{
 	color: #F08039 !important;
 }
+
+#shopping-cart .cart-summary .list-group li .checkout-trip-extras {
+	display: block;
+	.wp-travel-form-group {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		justify-content: space-between;
+		margin-bottom: 10px;
+		label{
+			font-weight: 600;
+		}
+	}
+}

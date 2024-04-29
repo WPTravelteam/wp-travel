@@ -10,6 +10,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+add_action( 'wp_travel_cart_empty_message', 'wp_travel_cart_set_empty_message' );
+
+function wp_travel_cart_set_empty_message(){
+	global $wt_cart;
+	$wt_cart->cart_empty_message();
+}
+
 /**
  * WP Travel Checkout Shortcode Class.
  */
@@ -25,7 +32,7 @@ class WP_Travel_Checkout { // @phpcs:ignore
 		$trips = $wt_cart->getItems();
 
 		if ( ! $trips ) {
-			$wt_cart->cart_empty_message();
+			do_action( 'wp_travel_cart_empty_message' );
 			return;
 		}
 		// Check if login is required for checkout.

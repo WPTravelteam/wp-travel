@@ -25,9 +25,7 @@ const IsTourDate = ( props ) => date => {
 
     if (moment(date).isBefore(moment(new Date())))
         return false
-    // if ( moment( date ).isSame(moment( selectedDate ) ) ) {
-    // 	return;
-    // }
+
     if ( ! isFixedDeparture )
         return true
     let curretYear = date.getFullYear();
@@ -116,9 +114,7 @@ const IsTourDates = ( props ) => date => {
 
     if (moment(date).isBefore(moment(new Date())))
         return false
-    // if ( moment( date ).isSame(moment( selectedDate ) ) ) {
-    // 	return;
-    // }
+
     if ( ! isFixedDeparture )
         return true
     let curretYear = date.getFullYear();
@@ -206,9 +202,7 @@ const IsRecuringTourDates = ( props ) => date => {
 
     if (moment(date).isBefore(moment(new Date())))
         return false
-    // if ( moment( date ).isSame(moment( selectedDate ) ) ) {
-    // 	return;
-    // }
+
     if ( ! isFixedDeparture )
         return true
     let curretYear = date.getFullYear();
@@ -255,9 +249,9 @@ const IsRecuringTourDates = ( props ) => date => {
     const _date = _dates.find(data => {
         if ( data.is_recurring ) {
             let selectedYears = data.years ? data.years.split(",").filter(year => year != 'every_year').map(year => parseInt(year)) : [];
-            if (data.end_date && moment(date).toDate().toString().toLowerCase() != 'invalid date' && moment(date).isAfter(moment(data.end_date + 1 ) ) ) {
-                return false
-            }
+            // if (data.end_date && moment(date).toDate().toString().toLowerCase() != 'invalid date' && moment(date).isAfter(moment(data.end_date + 1 ) ) ) {
+            //     return false
+            // }
             if (data.start_date && moment(date).toDate().toString().toLowerCase() != 'invalid date' && moment(date).isBefore(moment(data.start_date))) {
                 return false
             }

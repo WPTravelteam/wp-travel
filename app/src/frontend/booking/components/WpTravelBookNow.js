@@ -1,23 +1,28 @@
 import { Suspense } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 import { applyFilters } from '@wordpress/hooks';
+import { DEFAULT_BOOKING_STATE } from '../store/_Store';
 
 const __i18n = {
 	..._wp_travel.strings
 }
-// Additional lib @todo need to implement path lib.
-const _ = lodash;
+
+import _ from 'lodash';
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
+
+import { __ } from '@wordpress/i18n';
 
 // WP Travel Functions.
 import { objectSum, wpTravelFormat, wpTravelTimeout, GetConvertedPrice } from '../_wptravelFunctions';
 
 const WpTravelBookNow = ( props ) => {
+	const initialState = DEFAULT_BOOKING_STATE();
     // Component Props.
 	const { tripData, bookingData, updateBookingData } = props;
 
     // Trip Data.
     const {
+		title,
         dates,
         pricings,
     } = tripData;
@@ -113,11 +118,18 @@ const WpTravelBookNow = ( props ) => {
 		return price || 0
 	}
 
-	const addToCart = () => {
+	const addToCart = event => {
+		/**
+		 * Added button disable after clicking once on Book Now button
+		 * 
+		 * @since 7.6.0
+		 */
+		event.currentTarget.disabled = true;
 		let data = {
 			trip_id: tripData.id,
 			arrival_date: moment(selectedDate).format('YYYY-MM-DD'),
 			pricing_id: selectedPricingId,
+			date_id: selectedDateIds,
 			pax: paxCounts,
 			category_pax: paxCounts,
 			trip_price: getCartTotal(), // just trip price without extras.
@@ -149,15 +161,70 @@ const WpTravelBookNow = ( props ) => {
 				data
 			}).then(res => {
 
+				
 				if ( applyFilters( 'wptravel_redirect_to_checkout', true ) && true === res.success && 'WP_TRAVEL_ADDED_TO_CART' === res.data.code) {
-					location.href = typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? window.location.href :  wp_travel.checkoutUrl; // [only checkout page url]
-					// location.href = window.location.href;
+
+					if ( _wp_travel.add_to_cart_system == false ) {
+						location.href = typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? window.location.href :  wp_travel.checkoutUrl; // [only checkout page url]
+					} else {
+						var cartCount = Object.keys(res.data.cart.cart_items).length;
+						/**
+						 * Added toast to display successful booking 
+						 * 
+						 * @since 7.6.0
+						 */
+						jQuery( '#wp-travel__add-to-cart_notice' ).addClass( 'success' ).append( `
+								<span><i class="fa fa-check-circle"></i><strong>` + title + `</strong> ` + __i18n.set_added_cart + `</span>
+								<span id="toast-close"><i class="fa fa-times"></i></span>
+								<div id="wp-travel__notice_time-bar"></div>
+							` );
+						
+						/**
+						 * Added close [X] button on toast to remove it
+						 * 
+						 * @since 7.6.0
+						 */
+						jQuery( '#toast-close' ).on('click', function() {
+							jQuery( '#wp-travel__add-to-cart_notice' ).removeClass( 'success' )
+							/**
+							 * Remove style [ display: none ], as the notice was just hidden in DOM and not removed
+							 * Fixed: Remove toast from DOM after the toast duration expires [ 8sec ]
+							 * 
+							 * @since 7.6.0
+							 */
+							jQuery( '#wp-travel__add-to-cart_notice span' ).remove();
+							jQuery( '#wp-travel__notice_time-bar' ).remove();
+						});
+
+						setTimeout( () => {
+							jQuery( '#wp-travel__add-to-cart_notice' ).removeClass( 'success' )
+							/**
+							 * Remove style [ display: none ], as the notice was just hidden in DOM and not removed
+							 * Fixed: Remove toast from DOM after the toast duration expires [ 8sec ]
+							 * 
+							 * @since 7.6.0
+							 */
+							jQuery( '#wp-travel__add-to-cart_notice span' ).remove();
+							jQuery( '#wp-travel__notice_time-bar' ).remove();
+						}, 8000 );
+	
+						updateBookingData( initialState );
+						
+						if( cartCount > 0 ) {
+							jQuery( '.wp-travel-cart-items-number' ).css('display', 'inline-flex')
+							jQuery( '.wp-travel-cart-items-number' ).html( cartCount );
+						}
+						window.scrollTo({
+							top: 0,
+							behavior: 'smooth',
+						})
+					}
 				}
 
 				jQuery( document.body ).trigger( 'wptravel_added_to_cart', [ data ] );
 
 			}), 1000 ).catch(error => {
-				alert( '[X] Request Timeout!' );
+				alert( __( '[X] Request Timeout!', 'wp-travel' ) );
 		})
 	}
 	let enable_time = '';
@@ -166,6 +233,7 @@ const WpTravelBookNow = ( props ) => {
 			enable_time =  res.enable_time;
 		}
 	});
+
     return <>
         <ErrorBoundary>
             <Suspense>
@@ -185,7 +253,13 @@ const WpTravelBookNow = ( props ) => {
                         
                         <div className="right-info" >
                             <p>{__i18n.bookings.booking_tab_cart_total}<strong dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCartTotal(true)) }}></strong></p>
-                            <button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">{typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? 'Add to Cart' : __i18n.bookings.booking_tab_booking_btn_label}</button>
+							{/* {
+								tripData.enable_pax_all_pricing == "1" &&
+								<button onClick={addToCart} className="wp-travel-book">{typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? __i18n.set_add_to_cart : __i18n.bookings.booking_tab_booking_btn_label}</button>
+								|| */}
+								<button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">{typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? __i18n.set_add_to_cart : __i18n.bookings.booking_tab_booking_btn_label}</button>
+							{/* } */}
+							
                         </div>
                     </div>
                 }

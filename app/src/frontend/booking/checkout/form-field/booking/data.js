@@ -39,9 +39,9 @@ const display_booking_option = {
         var payment_mode = $("select[name='wp_travel_payment_mode']").val();
         display_payment_mode_option[payment_mode] && display_payment_mode_option[payment_mode]();
 
-        var elem = $('[name=wp_travel_book_now]');
-        // elem.siblings().hide();
-        elem.show().val(wp_travel.strings.book_n_pay);
+        // var elem = $('[name=wp_travel_book_now]');
+
+        // elem.show().val(wp_travel.strings.book_n_pay);
         gateway_change();
     }
 }
@@ -50,9 +50,7 @@ const payments = {
         $("#wp-travel-book-now, #wp-travel-complete-partial-payment").show().siblings().hide();
         $(".paypal-button").remove();
     },
-    // bank_deposit = function() {
-    //     // only apply in dashboard partial payment.
-    // }
+
 };
 
 
@@ -70,7 +68,7 @@ const display_payment_mode_option = {
     }
 }
 
-// $(document).ready(function($) {
+
 export const paypalPayment = () => {
     // Functions
     var booking_option_change = function() {
@@ -102,8 +100,6 @@ export const paypalPayment = () => {
     if ('booking_with_payment' == $('[name=wp_travel_booking_option]').val()) {
         $('[name=wp_travel_payment_gateway]').trigger('change');
     }
-
-
 
     // Get Payable Amount.
     function get_payable_price(payment_mode, no_of_pax) {
@@ -137,5 +133,3 @@ export const paypalPayment = () => {
         return amount;
     }
 }
-// console.log( 'helllcall', document.getElementById( 'wp-travel-option' ) )
-// document.getElementById( 'wp-travel-option' )

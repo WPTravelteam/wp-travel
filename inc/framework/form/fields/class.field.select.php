@@ -39,7 +39,7 @@ class WP_Travel_FW_Field_Select {
 			// Note : select option need to be key = value for field editor so need to map option except above options.
 			if ( ! in_array( $this->field['name'], $ignore_mapping_fields ) ) {
 				$mapped_options = array();
-				foreach( $this->field['options'] as $option ) {
+				foreach( $this->field['options'] as $option) {
 					$mapped_options[ $option ] = $option;
 				}
 				$this->field['options'] = $mapped_options;
@@ -62,7 +62,15 @@ class WP_Travel_FW_Field_Select {
 						}
 					}
 				}
+				
+				if( $key == 'Price low to high' ){
+					$key = 'low_high';
+				}
 
+				if( $key == 'Price high to low' ){
+					$key = 'high_low';
+				}
+				
 				$selected = ( $key == $this->field['default'] ) ? 'selected' : '';
 				$output  .= sprintf( '<option %s value="%s" %s>%s</option>', $option_attributes, $key, $selected, $value );
 			}
@@ -73,6 +81,6 @@ class WP_Travel_FW_Field_Select {
 			return $output;
 		}
 
-		echo $output;
+		echo wp_kses_post( $output );
 	}
 }

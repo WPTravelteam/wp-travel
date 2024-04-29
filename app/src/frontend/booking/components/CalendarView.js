@@ -9,12 +9,14 @@ const __i18n = {
 
 // Additional lib
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
-const _ = lodash;
+// const _ = lodash;
+import _ from 'lodash';
 import moment from 'moment';
 import RDP_Locale from '../_Locale'
 import DatePicker, {registerLocale} from "react-datepicker";
 registerLocale( "DPLocale", RDP_Locale() );
 import generateRRule from "../_GenerateRRule";
+import { addDays } from 'date-fns';
 
 // WP Travel Functions.
 import { objectSum } from '../_wptravelFunctions';
@@ -39,9 +41,8 @@ const CalendarView = ( props ) => {
         pricings,
         trip_duration:tripDuration
     } = tripData;
-	// console.log( 'trip data', tripDuration );
+
 	const { trip_duration } = typeof tripData != 'undefined' && tripData || {};
-	// const { start_date, end_date } = typeof trip_duration != 'undefined' && trip_duration || '';
     const allPricings        = pricings && _.keyBy( pricings, p => p.id ) // Need object structure because pricing id may not be in sequencial order.
     const _dates             = 'undefined' !== typeof dates && dates.length > 0 ? dates : [];
     const datesById          = _.keyBy(_dates, d => d.id)
@@ -66,9 +67,7 @@ const CalendarView = ( props ) => {
 			nomineeTimes: [],
 			selectedTime: null,
 		};
-		// if ( ! isInventoryEnabled ) {
-		// 	_bookingData.isLoading = false; // maybe not reqd.
-		// }
+
 		// after selecting pricing. need to check available time for selected pricing as well. Single pricing id case is already checked in date changes lifecycle below.
 		bookingWidgetUseEffects( _bookingData, 'pricingChange' );
 	}, [ selectedPricingId ]); 
@@ -359,7 +358,7 @@ const CalendarView = ( props ) => {
     // Just custom botton. There is no custom onclick event here.
     const DatePickerBtn = forwardRef( ( { value, onClick }, ref ) => (
 		<button className="wp-travel-date-picker-btn" onClick={ onClick } >
-			{ selectedDate ? ! isFixedDeparture && `${moment(selectedDate).format('MMM D, YYYY')} - ${moment(selectedDate).add(duration - 1, 'days').format('MMM D, YYYY')}` || moment(selectedDate).format('MMM D, YYYY') : __i18n.bookings.date_select}
+			{ selectedDate ? ! isFixedDeparture && `${moment(selectedDate).format('MMM D, YYYY')}` || moment(selectedDate).format('MMM D, YYYY') : __i18n.bookings.date_select}
 			<span><i className="far fa-calendar-alt"></i></span>
 		</button>
 	));
@@ -462,7 +461,7 @@ const CalendarView = ( props ) => {
 		( moment( md.start_date ).isBefore( moment(new Date() ) ) && md.is_recurring ) || // @todo need to filter end date condition as well in recurring.
 		moment( md.start_date ).isSame( moment(new Date() ) ) 
 	);
-		// console.log( 'hekdfsdf',isFixedDeparture );
+
 	let minDate = _mindate && moment(_mindate.start_date).toDate() || new Date();
 	let maxDate = new Date( new Date().setFullYear(new Date().getFullYear() + 10 ));
     let params = {
@@ -488,20 +487,50 @@ const CalendarView = ( props ) => {
 		let duration_end_dates = typeof trip_duration != 'undefined' && typeof trip_duration.end_date != 'undefined' && trip_duration.end_date != '' && new Date( trip_duration.end_date ) || '';
 		const finalDates = validateChecking < new Date() ? new Date() : oldDates;
 		params.minDate   = finalDates;
+		// if( tripData.trip_duration.booking_start != '' ){
+		// 	params.minDate   = new Date( tripData.trip_duration.booking_start );
+		// }
 		params.maxDate	 = duration_end_dates;
 		params.startDate = selectedDate;
 		params.endDate   = moment( selectedDate ).add( duration - 1, 'days' ).toDate();
+		
 	}
+
+	params.excludeDates	 = [];
+
+	__i18n.exclude_date.forEach( excludeDate );
+
+	function excludeDate( value, index, array ){
+		params.excludeDates.push( addDays(new Date( value ), 0) );
+	}
+
 	let enable_time = '';
 	_dates.map( ( dateData ) => {
 		if( selectedDateIds[0] == dateData.id ) {
 			enable_time = dateData.enable_time;
 		}
 	})
+
+
+	if( __i18n.booking_offset > 0 ){
+		params.minDate   = addDays(new Date(), __i18n.booking_offset );
+	}
+	const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+	var todayDate = new Date();
+	var bookingStart = new Date( tripData.trip_duration.booking_start );
+	var startMonthDay = months[bookingStart.getMonth()]+ ' '+ bookingStart.getDate();
     return <ErrorBoundary>
 		<div className="wp-travel-booking__datepicker-wrapper">
-			{ calendarInline ? <DatePicker inline { ...params }  /> : <DatePicker { ...params }  /> }
-			{ ! selectedDate && showTooltip && <p>{ tooltipText } </p> || null }
+			{
+				todayDate < bookingStart &&
+				<>{__i18n.booking_start_date_info} { startMonthDay }</>
+				||
+				<>
+					{ calendarInline ? <DatePicker inline { ...params }  /> : <DatePicker { ...params }  /> }
+					{ ! selectedDate && showTooltip && <p>{ tooltipText } </p> || null }
+				</>
+			}
+			
 		</div>
 		{/* Pricing and Times are in pricing wrapper */}
 		{ selectedDate && <>

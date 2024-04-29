@@ -476,7 +476,7 @@ function wp_travel_get_post_hierarchy_dropdown( $list_serialized, $selected, $ne
 	if ( ! $echo ) {
 		return $contents;
 	}
-	echo $contents;
+	echo esc_html( $contents );
 	return false;
 }
 

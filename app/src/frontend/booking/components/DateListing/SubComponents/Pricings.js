@@ -5,7 +5,8 @@ const __i18n = {
 }
 
 // Additional lib
-const _ = lodash;
+
+import _ from 'lodash';
 import moment from 'moment';
 
 // WP Travel Functions.
@@ -27,14 +28,22 @@ const Pricings = ( props ) => {
 
     // Booking Data.
     const { isLoading, dateListingChangeType, selectedDate, selectedDateIds, nomineePricingIds, selectedPricingId, excludedDateTimes, pricingUnavailable, selectedTime, nomineeTimes, paxCounts } = bookingData;
-	let sd = moment(moment(selectedDate).format('YYYY-MM-DD')).unix();
+	
+	var sd = '';
+	if( selectedDate !== null ){ 
+		
+		sd     = moment(moment(selectedDate).format('YYYY-MM-DD')).unix();
+	}
 	let rd = moment(moment(recurrindDate).format('YYYY-MM-DD')).unix();
+
+	
 	return <>
 		{ isLoading && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) && <Loader /> }
 		{ 'undefined' != typeof _nomineePricings && _nomineePricings.length > 0 && <>
 			{ 
 				_nomineePricings.map( (pricingId, pricingIndex) => {
 					return <CheckboxControl
+						className="wptravel-opb-trip-pricings-label"
 						key={pricingIndex}
 						label={allPricings[pricingId].title}
 						checked={ selectedPricingId == pricingId && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) }

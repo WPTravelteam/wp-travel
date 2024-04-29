@@ -56,7 +56,7 @@ $trp_title = apply_filters( 'wp_travel_trip_title_enable_disable', true );
 			<?php if ( $trp_thmbail == true ) { ?>
 			<a href="<?php the_permalink(); ?>" class="image-thumb">
 				<div class="image-overlay"></div>
-				<?php echo apply_filters( 'wp_travel_archive_page_trip_image', wptravel_get_post_thumbnail( $trip_id ), $trip_id ); ?>
+				<?php echo wp_kses_post( apply_filters( 'wp_travel_archive_page_trip_image', wptravel_get_post_thumbnail( $trip_id ), $trip_id ) ); ?>
 			</a>
 			<?php }
 			 if ( $trp_cd == true ) { ?>
@@ -82,19 +82,27 @@ $trp_title = apply_filters( 'wp_travel_trip_title_enable_disable', true );
 				<div class="trip-icons">
 					<?php wptravel_get_trip_duration( $trip_id ); ?>
 					<div class="trip-location">
-						<?php echo apply_filters( 'wp_travel_archive_page_location_icon', '<i class="fas fa-map-marker-alt"></i>' ); ?>
+						<?php echo wp_kses_post( apply_filters( 'wp_travel_archive_page_location_icon', '<i class="fas fa-map-marker-alt"></i>' ) ); ?>
 						<span>
 							<?php if ( $location_name ) : ?>
-								<a href="<?php echo esc_url( $location_link ); ?>" ><?php echo apply_filters( 'wp_travel_archives_page_trip_location', esc_html( $location_name ), $trip_id ); ?></a>
+								<a href="<?php echo esc_url( $location_link ); ?>" ><?php echo esc_html( apply_filters( 'wp_travel_archives_page_trip_location', esc_html( $location_name ), $trip_id ) ); ?></a>
+									<?php if( count( $locations ) > 0 ): ?>
+										<i class="fas fa-angle-down"></i>
+										<ul>
+											<?php foreach( $locations as $location ): ?>
+												<li><a href="<?php echo esc_url( get_term_link( $location->term_id, 'travel_locations' ) ); ?>" ><?php echo esc_html( $location->name ); ?></a></li>
+											<?php endforeach; ?>
+										</ul>
+									<?php endif; ?>
 								<?php
 							else :
-								esc_html_e( apply_filters( 'wp_travel_archives_page_trip_location', 'N/A', $trip_id), 'wp-travel' );
+								echo esc_html( apply_filters( 'wp_travel_archives_page_trip_location', __( 'N/A', 'wp-travel' ), $trip_id) );
 							endif;
 							?>
 						</span>
 					</div>
 					<div class="group-size">
-						<?php echo apply_filters( 'wp_travel_archive_page_group_size_icon', '<i class="fas fa-users"></i>' ); ?>
+						<?php echo wp_kses_post( apply_filters( 'wp_travel_archive_page_group_size_icon', '<i class="fas fa-users"></i>' ) ); ?>
 						<span><?php echo esc_html( apply_filters( 'wp_travel_archives_page_trip_group_size', wptravel_get_group_size( $trip_id ), $trip_id ) ); ?></span>
 					</div>
 				</div>
@@ -111,7 +119,7 @@ $trp_title = apply_filters( 'wp_travel_trip_title_enable_disable', true );
 								<?php echo apply_filters('wp_travel_archives_page_trip_price', wptravel_get_formated_price_currency( $trip_price ), $trip_id ); //phpcs:ignore ?>
 							</span>
 						<?php endif; ?>
-						<?php if ( $enable_sale ) : ?>
+						<?php if ( $enable_sale && $trip_price < $regular_price ) : ?>
 							<del><?php echo apply_filters('wp_travel_archives_page_trip_price_sale', wptravel_get_formated_price_currency( $regular_price, true ), $trip_id ); //phpcs:ignore ?></del>
 						<?php endif; ?>
 
@@ -122,12 +130,12 @@ $trp_title = apply_filters( 'wp_travel_trip_title_enable_disable', true );
 								<?php wptravel_trip_rating( $trip_id ); ?>
 								<?php $count = (int) wptravel_get_review_count(); ?>
 							</div>
-							<span class="wp-travel-review-text"> (<?php printf( _n( '%d Review', '%d Reviews', $count, 'wp-travel' ), $count ); ?>)</span>
+							<span class="wp-travel-review-text"> (<?php echo esc_html( $count ) . esc_html__( ' Reviews', 'wp-travel' ); ?>)</span>
 						<?php endif; ?>
 					</div>
 				</div>
 
-				<a class="wp-block-button__link explore-btn" href="<?php the_permalink(); ?>"><span><?php esc_html_e( apply_filters( 'wp_travel_archives_page_trip_explore_btn', 'Explore', $trip_id ), 'wp-travel' ); ?></span></a>
+				<a class="wp-block-button__link explore-btn" href="<?php the_permalink(); ?>"><span><?php echo esc_html( apply_filters( 'wp_travel_archives_page_trip_explore_btn', __( 'Explore', 'wp-travel' ), $trip_id ) ); ?></span></a>
 			</div>
 		</div>
 	</div>

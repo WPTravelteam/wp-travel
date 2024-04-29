@@ -136,10 +136,13 @@ class WP_Travel_Itinerary {
 	 *
 	 * @since 1.0.0
 	 */
-	function get_group_size() {
-		$group_size = isset( $this->post_meta['wp_travel_group_size'] ) ? $this->post_meta['wp_travel_group_size'][0] : '';
-		if ( $group_size ) {
-			return $group_size; // If group size saved in meta. return it from meta.
+	function get_group_size( $pax_type = '' ) {
+		$group_size = 0;
+		if( $pax_type != 'min_pax' ){
+			$group_size = isset( $this->post_meta['wp_travel_group_size'] ) ? $this->post_meta['wp_travel_group_size'][0] : '';
+			if ( $group_size ) {
+				return apply_filters( 'wp_travel_min_max_show_frontend', $group_size, $this->post->ID ); // If group size saved in meta. return it from meta.
+			}
 		}
 
 		// Multiple Pricing.
@@ -151,16 +154,28 @@ class WP_Travel_Itinerary {
 
 		if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
 			$group_size = 0;
+			$counter = 1;
 			foreach ( $pricing_options as $pricing_option ) {
-				if ( isset( $pricing_option['max_pax'] ) ) {
-					if ( $pricing_option['max_pax'] > $group_size ) {
-						$group_size = $pricing_option['max_pax'];
+				if ( isset( $pricing_option[$pax_type] ) ) {
+					if( $pax_type == 'min_pax' ){
+						if( $counter == 1 ){
+							$group_size = $pricing_option[$pax_type];
+						}
+						if( $pricing_option[$pax_type] < $group_size  ){
+							$group_size =  $pricing_option[$pax_type];
+						}
+					}else{
+						if ( $pricing_option[$pax_type] > $group_size ) {
+							$group_size = $pricing_option[$pax_type];
+						}
 					}
+					
 				} elseif ( isset( $pricing_option['categories'] ) ) { // Added for new category pricing options.
-					$max_pax_array = array_column( $pricing_option['categories'], 'max_pax' );
+					$max_pax_array = array_column( $pricing_option['categories'], $pax_type );
 					$max_pax       = array_sum( $max_pax_array );
 					$group_size    = $max_pax;
 				}
+				$counter++;
 			}
 		}
 		/**
@@ -180,19 +195,21 @@ class WP_Travel_Itinerary {
 	 */
 	public function update_group_size() {
 		$group_size = 0;
+		$minimum_pax =  0;
 		// Multiple Pricing.
 		$pricing_options = get_post_meta( $this->post->ID, 'wp_travel_pricing_options', true );
 
 		if ( wptravel_is_react_version_enabled() ) {
 			$pricing_options = wptravel_get_trip_pricings( $this->post->ID );
 		}
-
+		// print_r( $pricing_options );die;
 		if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
 			$group_size = 0;
 			foreach ( $pricing_options as $pricing_option ) {
 				if ( isset( $pricing_option['max_pax'] ) ) {
 					if ( $pricing_option['max_pax'] > $group_size ) {
 						$group_size = $pricing_option['max_pax'];
+						$minimum_pax = isset( $pricing_option['min_pax'] ) ? $pricing_option['min_pax'] : 0;
 					}
 				} elseif ( isset( $pricing_option['categories'] ) ) { // Added for new category pricing options.
 					$max_pax_array = array_column( $pricing_option['categories'], 'max_pax' );
@@ -202,6 +219,7 @@ class WP_Travel_Itinerary {
 			}
 		}
 		update_post_meta( $this->post->ID, 'wp_travel_group_size', $group_size );
+		update_post_meta( $this->post->ID, 'wp_travel_group_min_size', $minimum_pax );
 	}
 
 	function get_trip_code() {

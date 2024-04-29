@@ -17,11 +17,11 @@ if ( ! function_exists( 'wptravel_register_payments' ) ) {
 	function wptravel_register_payments( $object ) {
 
 		if ( ! is_object( $object ) ) {
-			throw new \Exception( 'Payment gateway must be an instance of class. ' . gettype( $object ) . ' given.' );
+			throw new \Exception( 'Payment gateway must be an instance of class. ' . esc_html( gettype( $object ) ) . ' given.' );
 		}
 
 		if ( ! ( $object instanceof Wp_Travel_Payment_Interface ) ) {
-			throw new \Exception( 'Payment gateway must be an instance of Wp_Travel_Payment_Interface. Instance of ' . get_class( $object ) . ' given.' );
+			throw new \Exception( 'Payment gateway must be an instance of Wp_Travel_Payment_Interface. Instance of ' . esc_html( get_class( $object ) ) . ' given.' );
 		}
 
 		array_push( $GLOBALS['wp_travel_payments'], $object );
@@ -450,7 +450,24 @@ function wptravel_send_email_payment( $booking_id ) {
 		$arrival_date_email_tag = $wp_travel_arrival_date_email_tag; // email date tag along with time.
 	}
 
-	$customer_name    = $first_name . ' ' . $last_name;
+	$customer_gender   = isset( get_post_meta( $booking_id, 'order_data', true )['wp_travel_gender_traveller'] ) ? get_post_meta( $booking_id, 'order_data', true )['wp_travel_gender_traveller'][array_key_first( get_post_meta( $booking_id, 'order_data', true )['wp_travel_gender_traveller'])][0] : '';
+
+	if( apply_filters( 'wptravel_traveller_salutation', true ) ==  true ){
+		if( $customer_gender == 'male' ){
+			$salutation = __( 'Mr ', 'wp-travel' );
+		}elseif( $customer_gender == 'female' ){
+			$salutation = __( 'Miss ', 'wp-travel' );
+		}else{
+			$salutation = '';
+		}
+	}else{
+		$salutation = '';
+	}
+
+	
+
+	$customer_name    = $salutation.$first_name . ' ' . $last_name;
+
 	$customer_country = $country;
 	$customer_address = get_post_meta( $booking_id, 'wp_travel_address', true );
 	$customer_phone   = $phone;
@@ -472,7 +489,7 @@ function wptravel_send_email_payment( $booking_id ) {
 		'{booking_scheduled_date}' => $booking_scheduled_date,
 		'{booking_arrival_date}'   => $arrival_date_email_tag,
 		'{booking_departure_date}' => $booking_departure_date,
-
+		'{trip_booking_date}'      => wptravel_format_date( get_post_meta( $booking_id, 'wp_travel_arrival_date' )[0] ),
 		'{customer_name}'          => $customer_name,
 		'{customer_country}'       => $customer_country,
 		'{customer_address}'       => $customer_address,
@@ -572,9 +589,10 @@ function wptravel_update_payment_status( $booking_id, $amount, $status, $args, $
 		$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
 		// need to get last payment id here. remaining.
 	}
-
+	
 	update_post_meta( $booking_id, 'wp_travel_booking_status', 'booked' );
 	update_post_meta( $payment_id, 'wp_travel_payment_amount', $amount );
+	update_post_meta( $payment_id, 'wp_travel_payment_booking_id', $booking_id );
 	update_post_meta( $payment_id, $key, $args );
 
 	$payment_mode = get_post_meta( $payment_id, 'wp_travel_payment_mode', true );
@@ -700,7 +718,7 @@ function wptravel_booking_info_table( $booking_id ) {
 						<td>
 							<ol>
 								<?php foreach ( $trip_fnames as $k => $fname ) : ?>
-									<li> <?php printf( '%s %s', $fname, $trip_lnames[ $k ] ); ?> </li>
+									<li> <?php printf( '%s %s', esc_html( $fname ), esc_html( $trip_lnames[ $k ] ) ); ?> </li>
 								<?php endforeach; ?>
 							</ol>
 
