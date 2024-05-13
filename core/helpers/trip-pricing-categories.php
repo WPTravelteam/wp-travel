@@ -60,8 +60,9 @@ class WpTravel_Helpers_Trip_Pricing_Categories {
 				continue;
 			}
 
-			$regular_price = $result->regular_price;
-			$sale_price    = $result->sale_price;
+			$regular_price 			= $result->regular_price;
+			$sale_price    			= $result->sale_price;
+			$sale_percentage_val    = $result->sale_percentage_val;
 
 			$group_prices     = ! empty( $result->group_prices ) ? maybe_unserialize( $result->group_prices ) : array();
 			$new_group_prices = $group_prices;
@@ -69,17 +70,16 @@ class WpTravel_Helpers_Trip_Pricing_Categories {
 			if ( is_array( $group_prices ) && count( $group_prices ) > 0 ) {
 				foreach ( $group_prices as $i => $group_price ) {
 					$new_group_price                 = $group_price['price'];
-					// $new_group_prices[ $i ]['price'] = self::get_converted_price( $new_group_price );
 					$new_group_prices[ $i ]['price'] = $new_group_price;
 				}
 			}
 
 			$categories[ $index ]['id']              = $pricing_category_id;
 			$categories[ $index ]['price_per']       = $result->price_per;
-			// $categories[ $index ]['regular_price']   = self::get_converted_price( $regular_price );
 			$categories[ $index ]['regular_price']   = $regular_price;
 			$categories[ $index ]['is_sale']         = ! empty( $result->is_sale ) ? true : false;
-			// $categories[ $index ]['sale_price']      = self::get_converted_price( $sale_price );
+			$categories[ $index ]['is_sale_percentage']         = ! empty( $result->is_sale_percentage ) ? true : false;
+			$categories[ $index ]['sale_percentage_val']   = $sale_percentage_val;
 			$categories[ $index ]['sale_price']      = $sale_price;
 			$categories[ $index ]['has_group_price'] = ! empty( $result->has_group_price );
 			$categories[ $index ]['group_prices']    = $new_group_prices;
@@ -208,7 +208,9 @@ class WpTravel_Helpers_Trip_Pricing_Categories {
 					'price_per'       => ! empty( $category['price_per'] ) ? $category['price_per'] : 'person',
 					'regular_price'   => ! empty( $category['regular_price'] ) ? $category['regular_price'] : 0,
 					'is_sale'         => ! empty( $category['is_sale'] ) ? absint( $category['is_sale'] ) : 0,
+					'is_sale_percentage'         => ! empty( $category['is_sale_percentage'] ) ? absint( $category['is_sale_percentage'] ) : 0,
 					'sale_price'      => ! empty( $category['sale_price'] ) ? $category['sale_price'] : 0,
+					'sale_percentage_val'      => ! empty( $category['sale_percentage_val'] ) ? $category['sale_percentage_val'] : 0,
 					'has_group_price' => ! empty( $category['has_group_price'] ) ? absint( $category['has_group_price'] ) : 0,
 					'group_prices'    => ! empty( $category['has_group_price'] ) && ! empty( $category['group_prices'] ) ? maybe_serialize( $category['group_prices'] ) : maybe_serialize( array() ),
 					'default_pax'     => ! empty( $category['default_pax'] ) ? absint( $category['default_pax'] ) : 0,
@@ -221,6 +223,8 @@ class WpTravel_Helpers_Trip_Pricing_Categories {
 					'%s',
 					'%s',
 					'%d',
+					'%d',
+					'%s',
 					'%s',
 					'%d',
 					'%s',
@@ -268,7 +272,9 @@ class WpTravel_Helpers_Trip_Pricing_Categories {
 				'price_per'           => ! empty( $category['price_per'] ) ? $category['price_per'] : 'person',
 				'regular_price'       => ! empty( $category['regular_price'] ) ? $category['regular_price'] : 0,
 				'is_sale'             => ! empty( $category['is_sale'] ) ? $category['is_sale'] : 0,
+				'is_sale_percentage'  => ! empty( $category['is_sale_percentage'] ) ? $category['is_sale_percentage'] : 0,
 				'sale_price'          => ! empty( $category['sale_price'] ) ? $category['sale_price'] : 0,
+				'sale_percentage_val'      => ! empty( $category['sale_percentage_val'] ) ? $category['sale_percentage_val'] : 0,
 				'has_group_price'     => ! empty( $category['has_group_price'] ) ? absint( $category['has_group_price'] ) : 0,
 				'group_prices'        => ! empty( $category['has_group_price'] ) && ! empty( $category['group_prices'] ) ? maybe_serialize( $category['group_prices'] ) : maybe_serialize( array() ),
 				'default_pax'         => ! empty( $category['default_pax'] ) ? absint( $category['default_pax'] ) : 0,
@@ -279,6 +285,8 @@ class WpTravel_Helpers_Trip_Pricing_Categories {
 				'%s',
 				'%s',
 				'%d',
+				'%d',
+				'%s',
 				'%s',
 				'%d',
 				'%s',

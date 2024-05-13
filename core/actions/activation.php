@@ -269,6 +269,8 @@ class WP_Travel_Actions_Activation {
 			regular_price varchar(60) DEFAULT '' NULL,
 			is_sale int(11) DEFAULT '0' NULL,
 			sale_price varchar(60) DEFAULT '' NULL,
+			is_sale_percentage varchar(60) DEFAULT '' NULL,
+ 		    sale_percentage_val varchar(60) DEFAULT '' NULL,
 			has_group_price int(11) DEFAULT '0' NULL,
 			group_prices longtext NULL,
 			default_pax int(11) DEFAULT '0' NULL,

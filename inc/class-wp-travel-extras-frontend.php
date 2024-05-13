@@ -89,7 +89,6 @@ class WPTravel_Extras_Frontend {
 
 		$trip_extras = array();
 
-		// $wp_travel_migrated_400 = 'yes' === get_option( 'wp_travel_migrate_400', 'no' );
 		$switch_to_react = wptravel_is_react_version_enabled();
 
 		if ( $switch_to_react ) {

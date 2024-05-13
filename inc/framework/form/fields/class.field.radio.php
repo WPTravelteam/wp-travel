@@ -63,7 +63,6 @@ class WP_Travel_FW_Field_Radio {
 			}
 			$output .= sprintf( '<div id="%s"></div>', $error_coontainer_id );
 		}
-		// $output .= sprintf( '</select>' );
 
 		
 		if ( ! $display ) {

@@ -88,7 +88,6 @@ class WP_Travel_Import_Dummy_Trip {
 			'post_status' => $post_status,
 			'post_slug'   => $slug,
 			'post_type'   => $post_type,
-			// 'post_date'   => $post_date, // issue in import if date format mismatch.
 		);
 
 		if ( ! empty( $post_content ) ) {
@@ -182,8 +181,6 @@ class WP_Travel_Import_Dummy_Trip {
 										'title'       => $pricing['title'],
 										'max_pax'     => ! empty( $pricing['max_pax'] ) ? absint( $pricing['max_pax'] ) : 0,
 										'min_pax'     => ! empty( $pricing['min_pax'] ) ? absint( $pricing['min_pax'] ) : 0,
-										// 'has_group_price' => 0,
-										// 'group_prices'    => array(),
 										'trip_id'     => $post_id,
 										'trip_extras' => ! empty( $pricing['tour_extras'] ) ? esc_attr( implode( ', ', $pricing['tour_extras'] ) ) : '',
 									),
@@ -191,8 +188,6 @@ class WP_Travel_Import_Dummy_Trip {
 										'%s',
 										'%d',
 										'%d',
-										// '%d',
-										// '%s',
 										'%d',
 										'%s',
 									)
@@ -217,6 +212,7 @@ class WP_Travel_Import_Dummy_Trip {
 													'price_per' => $pricing_category['price_per'],
 													'regular_price' => $pricing_category['regular_price'],
 													'is_sale' => $pricing_category['is_sale'],
+													'is_sale_percentage' => $pricing_category['is_sale_percentage'],
 													'sale_price' => $pricing_category['sale_price'],
 													'has_group_price' => $pricing_category['has_group_price'],
 													'group_prices' => maybe_serialize( $pricing_category['group_prices'] ),
@@ -340,11 +336,7 @@ class WP_Travel_Import_Dummy_Trip {
 			foreach ( $terms as $term ) {
 				$term_exists = term_exists( $term->slug, $tax );
 				$term_id     = is_array( $term_exists ) ? $term_exists['term_id'] : $term_exists;
-				// if ( 'travel_keywords' === $tax ) {
-				// 	$term_obj = is_array( $term_exists ) ? get_term( $term_exists['term_id'], $tax ) : get_term( $term_exists, $tax );
 
-				// 	$term_id = $term_obj->name;
-				// }
 				if ( ! $term_id ) {
 					$t = wp_insert_term( $term->name, $tax, array( 'slug' => $term->slug ) );
 					if ( ! is_wp_error( $t ) ) {

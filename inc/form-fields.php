@@ -26,18 +26,16 @@ function wptravel_get_checkout_form_fields() {
 	// User Details Merged.
 	if ( is_user_logged_in() ) {
 		$user = wp_get_current_user();
-		// if ( in_array( 'wp-travel-customer', (array) $user->roles, true ) ) {
-			$user_fname = isset( $user->first_name ) ? $user->first_name : '';
-			$user_lname = isset( $user->last_name ) ? $user->last_name : '';
-			$user_email = isset( $user->user_email ) ? $user->user_email : '';
+		$user_fname = isset( $user->first_name ) ? $user->first_name : '';
+		$user_lname = isset( $user->last_name ) ? $user->last_name : '';
+		$user_email = isset( $user->user_email ) ? $user->user_email : '';
 
-			$biling_data     = get_user_meta( $user->ID, 'wp_travel_customer_billing_details', true );
-			$billing_city    = isset( $biling_data['billing_city'] ) ? $biling_data['billing_city'] : '';
-			$billing_zip     = isset( $biling_data['billing_zip_code'] ) ? $biling_data['billing_zip_code'] : '';
-			$billing_address = isset( $biling_data['billing_address'] ) ? $biling_data['billing_address'] : '';
-			$billing_country = isset( $biling_data['billing_country'] ) ? $biling_data['billing_country'] : '';
-			$billing_phone   = isset( $biling_data['billing_phone'] ) ? $biling_data['billing_phone'] : '';
-		// }
+		$biling_data     = get_user_meta( $user->ID, 'wp_travel_customer_billing_details', true );
+		$billing_city    = isset( $biling_data['billing_city'] ) ? $biling_data['billing_city'] : '';
+		$billing_zip     = isset( $biling_data['billing_zip_code'] ) ? $biling_data['billing_zip_code'] : '';
+		$billing_address = isset( $biling_data['billing_address'] ) ? $biling_data['billing_address'] : '';
+		$billing_country = isset( $biling_data['billing_country'] ) ? $biling_data['billing_country'] : '';
+		$billing_phone   = isset( $biling_data['billing_phone'] ) ? $biling_data['billing_phone'] : '';
 	}
 
 	$traveller_fields = WP_Travel_Default_Form_Fields::traveller();

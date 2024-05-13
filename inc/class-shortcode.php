@@ -124,7 +124,6 @@ class Wp_Travel_Shortcodes {
 			'slug'         => '',
 			'limit'        => 20,
 			'col'          => apply_filters( 'wp_travel_itineraries_col_per_row', '3' ),
-			// 'orderby'      => 'trip_date',
 			'order'        => 'asc',
 		);
 
@@ -174,7 +173,6 @@ class Wp_Travel_Shortcodes {
 					array(
 						'key'   => 'wp_travel_featured',
 						'value' => 'yes',
-						// 'compare' => 'IN',
 					),
 				);
 			}
@@ -421,9 +419,6 @@ class Wp_Travel_Shortcodes {
 						unset( $defaults[ $key ] );
 					}
 				}
-				// foreach ( $atts as $key ) {
-				// unset( $defaults[ $key ] );
-				// }
 			}
 		}
 
@@ -488,7 +483,6 @@ class Wp_Travel_Shortcodes {
 							?>
 							<span class="tour-info-item tour-info-type">
 								<?php WpTravel_Helpers_Icon::get( $icon_args ); ?>
-								<!-- <i class="fa <?php echo esc_attr( $icon ); ?>" aria-hidden="true"></i> -->
 								<strong><?php echo esc_html( $trip_fact['label'] ); ?></strong>:
 								<?php
 								if ( $trip_fact['type'] === 'multiple' ) {

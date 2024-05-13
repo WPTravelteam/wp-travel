@@ -159,14 +159,6 @@ class WP_Travel_Post_Types {
 					return current_user_can( 'edit_posts' );
 				},
 			),
-			// 'wp_travel_itinerary_gallery_ids' => array(
-			// 'show_in_rest'  => true,
-			// 'single'        => true,
-			// 'type'          => 'string',
-			// 'auth_callback' => function () {
-			// return current_user_can( 'edit_posts' );
-			// },
-			// ),
 		);
 		/**
 		 * Filter to add meta fields for itinerary.
@@ -206,7 +198,6 @@ class WP_Travel_Post_Types {
 			'public'             => false,
 			'publicly_queryable' => false,
 			'show_ui'            => true,
-			// 'show_in_menu'       => 'edit.php?post_type=' . WP_TRAVEL_POST_TYPE,
 			'query_var'          => true,
 			'capability_type'    => 'post',
 			'has_archive'        => false,

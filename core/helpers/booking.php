@@ -255,7 +255,6 @@ class WpTravel_Helpers_Booking {
 			<tbody>
 				<?php
 				// Order Details.
-				// array_count_values( $checkout_form_data['wp_travel_fname_traveller'] );
 
 				$traveler_first_names = isset( $checkout_form_data['wp_travel_fname_traveller'] ) ? $checkout_form_data['wp_travel_fname_traveller'] : array();
 				$traveler_last_names  = isset( $checkout_form_data['wp_travel_lname_traveller'] ) ? $checkout_form_data['wp_travel_lname_traveller'] : array();
@@ -299,7 +298,7 @@ class WpTravel_Helpers_Booking {
 						</thead><?php } ?>
 						<tbody>
 							<?php
-							// print_r( $items ) ;
+		
 							if ( count( $traveler_first_names ) > 1 ) {
 								foreach ( $traveler_first_names as $key => $first_name ) {
 									$last_name = isset( $traveler_last_names[ $key ] ) ? $traveler_last_names[ $key ] : '';

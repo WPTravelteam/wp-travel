@@ -3,7 +3,7 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 8.6.0
+ * Version: 8.7.0
  * Author: WP Travel
  * Author URI: http://wptravel.io/
  * Requires at least: 6.0.0
@@ -38,7 +38,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '8.6.0';
+		public $version = '8.7.0';
 
 		/**
 		 * WP Travel API version.
@@ -80,13 +80,40 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			$this->init_hooks();
 			$this->init_shortcodes();
 			$this->init_sidebars();
-
+			$this->wp_travel_add_column_on_price_category_relation_table();
 			/**
 			 * Add to extra column - booking table 
 			 * @since 7.8.0
 			 */
 			add_filter( 'manage_edit-itinerary-booking_columns', array( $this, 'wp_travel_booking_column_name' ) );
 			add_action( 'manage_itinerary-booking_posts_custom_column', array( $this, 'wp_travel_booking_columns_content' ), 10, 2 );
+		}
+
+		public function wp_travel_add_column_on_price_category_relation_table(){
+			global $wpdb;
+			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+
+			$table_name = $wpdb->get_blog_prefix() . 'wt_price_category_relation';
+			$cols_sql = "DESCRIBE $table_name";
+			$all_objects = $wpdb->get_results( $cols_sql );
+			$existing_columns = [];
+			foreach ( $all_objects as $object ) {
+			// Build an array of Field names
+			$existing_columns[] = $object->Field;
+			}
+
+			if( !in_array( 'is_sale_percentage',  $existing_columns  )  ){
+				$table_name = $wpdb->get_blog_prefix() . 'wt_price_category_relation';
+				$charset_collate = "DEFAULT CHARACTER SET {$wpdb->charset} COLLATE {$wpdb->collate}";
+
+				$sql = "CREATE TABLE {$table_name} (
+					is_sale_percentage int(11) DEFAULT '0' NULL,
+					sale_percentage_val varchar(60) DEFAULT '' NULL,
+				)
+				{$charset_collate};";
+
+				dbDelta($sql);
+			}
 		}
 		
 		public function wp_travel_booking_column_name( $columns ) {
@@ -363,7 +390,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/class-post-types.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-post-status.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-taxonomies.php', WP_TRAVEL_ABSPATH );
-			include sprintf( '%s/inc/class-itinerary-template.php', WP_TRAVEL_ABSPATH );
+			// include sprintf( '%s/inc/class-itinerary-template.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-shortcode.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/widgets/class-wp-travel-widget-search.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/widgets/class-wp-travel-widget-featured.php', WP_TRAVEL_ABSPATH );

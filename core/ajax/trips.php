@@ -22,14 +22,6 @@ class WP_Travel_Ajax_Trips {
 		add_action( 'wp_ajax_wp_travel_get_trip', array( __CLASS__, 'get_trip' ) );
 		add_action( 'wp_ajax_nopriv_wp_travel_get_trip', array( __CLASS__, 'get_trip' ) );
 
-		// Filter item.
-		// add_action( 'wp_ajax_wp_travel_filter_trips', array( __CLASS__, 'filter_trips' ) );
-		// add_action( 'wp_ajax_nopriv_wp_travel_filter_trips', array( __CLASS__, 'filter_trips' ) );
-
-		// Filter trip ids .
-		// add_action( 'wp_ajax_wp_travel_get_trip_ids', array( __CLASS__, 'get_trip_ids' ) );
-		// add_action( 'wp_ajax_nopriv_wp_travel_get_trip_ids', array( __CLASS__, 'get_trip_ids' ) );
-
 		// Trip tab.
 		add_action( 'wp_ajax_wp_travel_get_trip_tabs', array( __CLASS__, 'trip_tabs' ) );
 		add_action( 'wp_ajax_nopriv_wp_travel_get_trip_tabs', array( __CLASS__, 'trip_tabs' ) );
@@ -115,8 +107,6 @@ class WP_Travel_Ajax_Trips {
 		$new_post_data = is_string( $post_data  ) ? json_decode( $post_data, true ) : $post_data;
 		$new_post_data = wptravel_sanitize_array( $new_post_data, true );
 		$response  = WP_Travel_Helpers_Trips::update_trip( $trip_id, $new_post_data );
-		// $post_data = wptravel_sanitize_array( $post_data, true );
-		// $response  = WP_Travel_Helpers_Trips::update_trip( $trip_id, $post_data );
 		WP_Travel_Helpers_REST_API::response( $response );
 	}
 
@@ -267,48 +257,6 @@ class WP_Travel_Ajax_Trips {
 		WP_Travel_Helpers_REST_API::response( $response );
 	}
 
-	/**
-	 * Filter Trips according to Param.
-	 */
-	// public static function get_trip_ids() {
-
-	// 	/**
-	// 	 * Permission and nonce Check
-	// 	 */
-	// 	$permission = self::get_trips_permissions_check();
-
-	// 	if ( is_wp_error( $permission ) ) {
-	// 		WP_Travel_Helpers_REST_API::response( $permission );
-	// 	} elseif ( false === $permission || null === $permission ) {
-	// 		$error = WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_INVALID_PERMISSION' );
-	// 		WP_Travel_Helpers_REST_API::response( $error );
-	// 	}
-	// 	/**
-	// 	 * Return list of filtered trips according to conditions.
-	// 	 */
-	// 	$start_date = ! empty( $_GET['start_date'] ) ? sanitize_text_field( wp_unslash( $_GET['start_date'] ) ) : ''; // @phpcs:ignore
-	// 	$end_date   = ! empty( $_GET['end_date'] ) ? sanitize_text_field( wp_unslash( $_GET['end_date'] ) ) : ''; // @phpcs:ignore
-	// 	$min_price  = ! empty( $_GET['min_price'] ) ? sanitize_text_field( wp_unslash( $_GET['min_price'] ) ) : 0; // @phpcs:ignore
-	// 	$max_price  = ! empty( $_GET['max_price'] ) ? sanitize_text_field( wp_unslash( $_GET['max_price'] ) ) : 0; // @phpcs:ignore
-
-	// 	// Not used yet to get trip id.
-	// 	$travel_locations = ! empty( $_GET['travel_locations'] ) ? sanitize_text_field( wp_unslash( $_GET['travel_locations'] ) ) : ''; // @phpcs:ignore
-	// 	$itinerary_types  = ! empty( $_GET['itinerary_types'] ) ? sanitize_text_field( wp_unslash( $_GET['itinerary_types'] ) ) : ''; // @phpcs:ignore
-	// 	$max_pax          = ! empty( $_GET['max_pax'] ) ? absint( $_GET['max_pax'] ) : ''; // @phpcs:ignore
-
-	// 	$args = array(
-	// 		'start_date'       => $start_date,
-	// 		'end_date'         => $end_date,
-	// 		'min_price'        => $min_price,
-	// 		'max_price'        => $max_price,
-	// 		'travel_locations' => $travel_locations,
-	// 		'max_pax'          => $max_pax,
-	// 		'itinerary_types'  => $itinerary_types,
-	// 	);
-
-	// 	$response = WP_Travel_Helpers_Trips::get_trip_ids( $args );
-	// 	WP_Travel_Helpers_REST_API::response( $response );
-	// }
 
 	/**
 	 * Filter Trips according to Param.

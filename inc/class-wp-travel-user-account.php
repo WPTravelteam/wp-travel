@@ -298,11 +298,6 @@ class Wp_Travel_User_Account {
 			$user_recipient  = $user_user_email;
 			$user_subject    = __( 'Password Reset Request', 'wp-travel' );
 
-			if ( ! wp_mail( $user_recipient, $user_subject, $email_content, $headers ) ) {
-
-				// return false;
-
-			}
 		}
 
 		return true;

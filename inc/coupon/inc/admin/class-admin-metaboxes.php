@@ -47,17 +47,10 @@ class WP_Travel_Admin_Coupon_Metaboxes { // @phpcs:ignore
 	 * @param Object $post Coupon post.
 	 */
 	public function load_coupons_tab_template( $post ) {
-		// if ( wptravel_dev_mode() ) {
-		?>
-			<div id="wp-travel-coupon-block"></div>
-			<?php
-			// }
+	?>
+		<div id="wp-travel-coupon-block"></div>
+	<?php
 
-			// Print Errors / Notices.
-			// wptravel_print_notices();
-
-			// $args['post'] = $post;
-			// WPTravel()->tabs->load( self::$post_type, $args );
 	}
 	/**
 	 * Function to add tab.

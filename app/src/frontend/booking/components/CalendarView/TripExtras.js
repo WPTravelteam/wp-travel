@@ -13,7 +13,7 @@ const TripExtras = ( props ) => {
 		let id = nomineeTripExtras[index].id
 		let _xcount = tripExtras[id] + inc < 0 ? 0 : tripExtras[id] + inc;
 
-		if( typeof _wp_travel.WP_Travel_Trip_Extras_Inventory !== 'undefined' && quantity > 0 ){ 
+		if( quantity > 0 ){ 
 			if( quantity != -1 ){
 				if( _xcount > quantity ){
 					_xcount = quantity
@@ -80,7 +80,7 @@ const TripExtras = ( props ) => {
 									<div className="title">
 										<strong>{tx.title}
 										{	
-											( typeof _wp_travel.WP_Travel_Trip_Extras_Inventory !== 'undefined' && tx.tour_extras_metas.extras_item_quantity != -1 ) &&
+											( tx.tour_extras_metas.extras_item_quantity != -1 ) &&
 											<>
 												<span className='trip-extra-quantity'>( {_count} / { tx.tour_extras_metas.extras_item_quantity } )</span>
 											</>

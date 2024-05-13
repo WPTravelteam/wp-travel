@@ -36,6 +36,8 @@ const WPTravelTripPricingCategories = ({priceIndex}) => {
                 price_per: 'person',
                 regular_price: 0,
                 is_sale: false,
+                is_sale_percentage: false,
+                sale_percentage_val: 0,
                 sale_price: 0
             }];
             updateTripPricing(priceData, priceIndex)
@@ -110,17 +112,50 @@ const WPTravelTripPricingCategories = ({priceIndex}) => {
                         } }
                     />
                 </PanelRow>
-                {category.is_sale&&<PanelRow>
-                    <label>{ __i18n.sale_price }</label>
-                    <TextControl
-                        value={ category.sale_price }
-                        onChange={ ( sale_price ) => {
-                            let priceData = price;
-                            priceData.categories[catIndex].sale_price = sale_price;
-                            updateTripPricing(priceData, priceIndex)
-                        } }
-                    />
-                </PanelRow>}
+                {category.is_sale&&
+                <>
+                    <PanelRow>
+                        <label>Sale Price in Percentage</label>
+                        <ToggleControl
+                            checked={ category.is_sale_percentage }
+                            onChange={ () => {
+                                let priceData = price;
+                                priceData.categories[catIndex].is_sale_percentage = !category.is_sale_percentage;
+                                updateTripPricing(priceData, priceIndex)
+                            } }
+                        />
+                    </PanelRow>
+                    {
+                        category.is_sale_percentage && 
+                        <PanelRow>
+                        <label>Sale Amount in Percentage</label>
+                        <TextControl
+                            value={ category.sale_percentage_val }
+                            type="number"
+                            min={0}
+                            max={100}
+                            onChange={ ( sale_percentage_val ) => {
+                                let priceData = price;
+                                priceData.categories[catIndex].sale_percentage_val = sale_percentage_val;
+                                updateTripPricing(priceData, priceIndex)
+                            } }
+                        />
+                        </PanelRow>
+                        ||
+                        <PanelRow>
+                        <label>{ __i18n.sale_price }</label>
+                        <TextControl
+                            value={ category.sale_price }
+                            onChange={ ( sale_price ) => {
+                                let priceData = price;
+                                priceData.categories[catIndex].sale_price = sale_price;
+                                updateTripPricing(priceData, priceIndex)
+                            } }
+                        />
+                    </PanelRow>
+                    }
+                   
+                   </>}
                 <PanelRow>
                     <label>{ __i18n.default_pax}</label>
                     <TextControl 

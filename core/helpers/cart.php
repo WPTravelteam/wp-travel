@@ -37,7 +37,6 @@ class WP_Travel_Helpers_Cart {
 		if ( $tax_rate ) {
 			$tax_amount = ( $cart_total * (float) $tax_rate ) / 100;
 			$cart_total = $cart_total - $tax_amount;
-			// $tax_amount_partial = ( $total_trip_price_partial_after_dis * $tax_rate ) / 100;
 		}
 
 		return array(
@@ -51,7 +50,6 @@ class WP_Travel_Helpers_Cart {
 				'coupon'             => count( $cart_items['discount'] ) > 0 ? $cart_items['discount'] : array(),
 				'tax'                => $tax_rate,
 				'version'            => '1',
-				// 'currency' =>
 			),
 		);
 	}
@@ -129,11 +127,7 @@ class WP_Travel_Helpers_Cart {
 
 				if ( ! empty( $discount ) && isset( $discount['coupon'] ) && ! $discount['coupon'] ) {
 					$trip_price = (float) $item['trip_price'] * ( 100 - (float) $discount['value'] ) / 100;
-					// if ( ! empty( $discount[0]['is_percent_discount'] ) && 'yes' === $discount[0]['is_percent_discount'] ) {
-					// } else {
-					// $trip_price = (float) $item['trip_price'] - (float) $discount[0]['discount_figure'];
-					// }
-					// $cart[ $cart_id ]['trip_price']         = $item['trip_price'];
+
 					$cart[ $cart_id ]['trip_price'] = number_format( $trip_price, 2, '.', '' );
 				}
 
@@ -151,11 +145,7 @@ class WP_Travel_Helpers_Cart {
 			}
 		}
 
-		// TODO:REMOve Later
-		// $cart['terms']         = $terms;
-		// $cart['common']        = $common_terms;
-		// $cart['discount']      = $discount;
-		// $cart['discount_info'] = $discount_info;
+
 		return array(
 			'code'       => 'WP_TRAVEL_CART_ITEMS',
 			'cart_items' => $cart,

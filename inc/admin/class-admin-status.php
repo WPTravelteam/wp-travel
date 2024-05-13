@@ -31,8 +31,6 @@ class WT_Admin_status {
 		$pow   = min( $pow, count( $units ) - 1 );
 
 		// Uncomment one of the following alternatives
-		// $bytes /= pow(1024, $pow);
-		// $bytes /= (1 << (10 * $pow));
 
 		return round( $bytes, $precision ) . ' ' . $units[ $pow ];
 	}

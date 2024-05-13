@@ -361,7 +361,6 @@ function wptravel_book_now() {
 		update_post_meta( $payment_id, 'wp_travel_payment_amount', $total_price );
 	}
 
-	// do_action( 'wp_travel_all_booking_data_list', $booking_id, $payment_data, $settings, $user_id );
 	$affiliate = apply_filters( 'wp_travel_all_booking_data_list_for_slicewp', $booking_id, $user_id );
 
 	// Clear Cart After process is complete.

@@ -490,6 +490,7 @@ class WpTravel_Helpers_Pricings {
 		$price         = 0;
 		$pricings_data = self::get_pricings( $trip_id );
 		$highest_price = get_post_meta( $trip_id, 'wp_travel_show_highest_price', true );
+
 		if ( ! empty( $pricing_id ) && ! empty( $category_id ) && is_array( $pricings_data ) ) { // Quick Fix here. Pricing data may be WP Error object.
 
 			$pricings = array_filter(
@@ -510,9 +511,14 @@ class WpTravel_Helpers_Pricings {
 				$price      = $category['regular_price'];
 				if ( $category['is_sale'] ) {
 					$price = $category['sale_price'];
+					if( isset($category['is_sale_percentage']) && $category['is_sale_percentage'] && $category['sale_percentage_val'] > 0 ){
+						$price   = ( $category['sale_percentage_val']/100 ) * $category['regular_price'];
+					}
 				}
 			}
+			
 		} else {
+	
 			// Min price.
 			if ( is_array( $pricings_data ) && isset( $pricings_data['pricings'] ) && count( $pricings_data['pricings'] ) ) {
 
@@ -530,29 +536,44 @@ class WpTravel_Helpers_Pricings {
 								$current_price = ( $pricing_category['is_sale'] && $pricing_category['sale_price'] > 0 ) ? $pricing_category['sale_price'] : $pricing_category['regular_price'];
 								if ( ! (float) $price || (float) $current_price > (float) $price && (float) $current_price > 0 ) { // init / update min price.
 									$price   = $current_price;
+									if( $pricing_category['is_sale'] && isset($pricing_category['is_sale_percentage']) && $pricing_category['is_sale_percentage'] && $pricing_category['sale_percentage_val'] > 0 ){
+										$price   = ( $pricing_category['sale_percentage_val']/100 ) * $pricing_category['regular_price'];
+									}
 									$regular = $pricing_category['regular_price'];
 								}
 							}
 						}
 					} else {
+						
 						foreach ( $category_data as $pricing_categories ) {
 							foreach ( $pricing_categories as $pricing_category ) {
 								$current_price = ( $pricing_category['is_sale'] && $pricing_category['sale_price'] > 0 ) ? $pricing_category['sale_price'] : $pricing_category['regular_price'];
 								if ( ! (float) $price || (float) $current_price < (float) $price && (float) $current_price > 0 ) { // init / update min price.
+									
 									$price   = $current_price;
+									if( $pricing_category['is_sale'] && isset($pricing_category['is_sale_percentage']) && $pricing_category['is_sale_percentage'] && $pricing_category['sale_percentage_val'] > 0 ){
+										$price   = ( $pricing_category['sale_percentage_val']/100 ) * $pricing_category['regular_price'];
+									}
+									
 									$regular = $pricing_category['regular_price'];
 								}
+								
 							}
+		
 						}
+						
 					}
+					
 				}
+				
 				// To return regular price. ( for v4 only ).
 				if ( $is_regular_price ) {
 					$price = $regular;
 				}
 			}
 		}
-		return $price;
+
+		return (float)$price;
 	}
 
 	// Partial Payments.

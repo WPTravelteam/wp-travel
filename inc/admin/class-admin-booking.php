@@ -581,11 +581,18 @@ class WP_Travel_Admin_Booking {
 		$new_status = sanitize_text_field( $old_status );
 		$old_booking_status = get_post_meta( $booking_id, 'wp_travel_booking_status' );
 		$old_status = isset( $old_booking_status[0] ) ? $old_booking_status[0] : 'N/A';
-		// $old_status = wptravel_get_booking_status()[$old_status]['text'];
 		$new_status = wptravel_get_booking_status()[$new_status]['text'];
 
 		if( $old_status == 'booked' ){
 			$old_status = 'Booked';
+		}
+
+		if( $old_status == 'pending' ){
+			$old_status = 'Pending';
+		}
+
+		if( $old_status == 'canceled' ){
+			$old_status = 'Canceled';
 		}
 		
 		if ( $mail_sending_booking_status ) {
@@ -656,7 +663,6 @@ class WP_Travel_Admin_Booking {
 				$order_items_data[ $cart_id ]['pax']            = $pax;
 				$order_items_data[ $cart_id ]['arrival_date']   = $arrival_date;
 				$order_items_data[ $cart_id ]['departure_date'] = $departure_date;
-				// $order_items_data[ $cart_id ]['currency'] = $wp_travel_post_id;
 			}
 			update_post_meta( $booking_id, 'order_items_data', $order_items_data ); // use this instead of order_data meta.
 		}

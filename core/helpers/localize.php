@@ -89,11 +89,13 @@ class WpTravel_Helpers_Localize {
 				'form_key'                   => ! empty( $trip_items ) ? array_key_first( $trip_items ) : 'travelerOne',
 				'my_data'                    => do_action( 'wp_travel_action_before_book_now' ),
 				'bank_detail_form'			 => wptravel_get_bank_deposit_account_details(),
-				'checkout_user_id'           => wp_get_current_user()->data->ID,
-				'checkout_user_name'           => wp_get_current_user()->data->user_login,
-				'checkout_user_email'           => wp_get_current_user()->data->user_email,
+				'checkout_user_id'           => count( (array)wp_get_current_user()->data ) > 0 ? wp_get_current_user()->data->ID : '',
+				'checkout_user_name'           => count( (array)wp_get_current_user()->data ) > 0 ? wp_get_current_user()->data->user_login : '',
+				'checkout_user_email'           => count( (array)wp_get_current_user()->data ) > 0 ? wp_get_current_user()->data->user_email : '',
 
 			);
+
+
 			if( class_exists( 'WP_Travel_Trip_Extras_Inventory' ) ){
 				$_wp_travel['WP_Travel_Trip_Extras_Inventory'] = 'yes';
 			}

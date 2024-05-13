@@ -218,6 +218,7 @@ if ( wptravel_is_react_version_enabled() ) {
 											$title    = isset( $tx['title'] ) ? $tx['title'] : '';
 											$tx_count = 0;
 											$tx_price = 0;
+						
 											?>
 											<div class="wp-travel-form-group" data-wpt-tx="<?php echo esc_attr( $tx['id'] ); ?>">
 												<label for="tour-extras-<?php echo esc_attr( $tx['id'] ); ?>"><?php echo esc_html( $title ); ?></label>
@@ -225,9 +226,12 @@ if ( wptravel_is_react_version_enabled() ) {
 												if ( isset( $tx['tour_extras_metas'] ) ) :
 													$tx_count    = isset( $cart_extras[ $tx['id'] ] ) ? (int) $cart_extras[ $tx['id'] ] : 0;
 													$tx_price    = $tx['tour_extras_metas']['extras_item_price'];
+													if( isset( $tx['tour_extras_metas']['extras_item_sale_price'] ) && !empty( $tx['tour_extras_metas']['extras_item_sale_price'] )  ){
+														$tx_price    = $tx['tour_extras_metas']['extras_item_sale_price'];
+													}
 													$tx_total    = $tx_count * (int) $tx_price;
 													$tx_min_attr = isset( $tx['is_required'] ) && $tx['is_required'] ? 'min="1"' : '';
-													// $cart_total += $tx_total;
+								
 													$required = isset( $tx['is_required'] ) && $tx['is_required'];
 												?>
 												<div class="input-group">
@@ -268,6 +272,10 @@ if ( wptravel_is_react_version_enabled() ) {
 										$category_price = $category['is_sale'] ? $category['sale_price'] : $category['regular_price'];
 										$category_price = $category_price ? $category_price : 0; // Temp fixes.
 
+										if( $category['is_sale'] && isset($category['is_sale_percentage']) && $category['is_sale_percentage'] && $category['sale_percentage_val'] > 0 ){
+											$category_price   = ( $category['sale_percentage_val']/100 ) * $category['regular_price'];
+										}
+
 										$pricing_group_price = isset( $cart_pricing['has_group_price'] ) && $cart_pricing['has_group_price'];
 										if ( $pricing_group_price ) {
 											$group_prices = $cart_pricing['group_prices'];
@@ -292,7 +300,7 @@ if ( wptravel_is_react_version_enabled() ) {
 											$category_price = isset( $group_price['price'] ) ? $group_price['price'] : $category_price;
 											$category_price = $category_price ? $category_price : 0; // Temp fixes.
 										}
-										// $category_price = apply_filters( 'wp_travel_multiple_currency', $category_price );
+			
 										if ( $pricing_group_price ) { // Pricing group price treat as price per only
 											$category_total = $pax * (float) $category_price;
 										} else {
@@ -338,11 +346,13 @@ if ( wptravel_is_react_version_enabled() ) {
 												<label for="tour-extras-<?php echo esc_attr( $tx['id'] ); ?>"><?php echo esc_html( $title ); ?></label>
 												<?php
 												if ( isset( $tx['tour_extras_metas'] ) ) :
+
 													$tx_count    = isset( $cart_extras[ $tx['id'] ] ) ? (int) $cart_extras[ $tx['id'] ] : 0;
 													$tx_price    = $tx['is_sale'] ? $tx['tour_extras_metas']['extras_item_sale_price'] : $tx['tour_extras_metas']['extras_item_price'];
 													$tx_total    = $tx_count * (int) $tx_price;
 													$tx_min_attr = isset( $tx['is_required'] ) && $tx['is_required'] ? 'min="1"' : '';
-													// $cart_total += $tx_total;
+													$tx_quantity = isset(  $tx['tour_extras_metas']['extras_item_quantity'] ) ? $tx['tour_extras_metas']['extras_item_quantity'] : '';
+													
 													$required = isset( $tx['is_required'] ) && $tx['is_required'];
 													?>
 												<div>
@@ -350,7 +360,8 @@ if ( wptravel_is_react_version_enabled() ) {
 														<span class="input-group-btn input-group-prepend">
 															<button class="btn" type="button" data-wpt-count-down>-</button>
 														</span>
-														<input id="<?php echo esc_attr( 'tx_' . $tx['id'] ); ?>" name="<?php echo esc_attr( 'tx_' . $tx['id'] ); ?>" readonly <?php echo $required ? 'required min="1"' : 'min="0"'; ?> type="text" data-wpt-tx-count-input="<?php echo esc_attr( $tx_count ); ?>" name="" class="wp-travel-form-control wp-travel-cart-extras-qty qty form-control" value="<?php echo esc_attr( $tx_count ); ?>" />
+												
+														<input id="<?php echo esc_attr( 'tx_' . $tx['id'] ); ?>" name="<?php echo esc_attr( 'tx_' . $tx['id'] ); ?>" readonly <?php echo $required ? 'required min="1"' : 'min="0"'; ?> type="text" data-wpt-tx-count-input="<?php echo esc_attr( $tx_count ); ?>" name="" class="wp-travel-form-control wp-travel-cart-extras-qty qty form-control" value="<?php echo esc_attr( $tx_count ); ?>" max="<?php echo !empty( $tx_quantity ) ? (int) $tx_quantity : 999 ?>"/>
 														<span class="input-group-btn input-group-append"><button class="btn" type="button" data-wpt-count-up>+</button></span></div>
 														<span class="prices">
 															<?php echo ' x <span data-wpt-tx-price="' . $tx_price . '">' . wptravel_get_formated_price_currency( WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $tx_price ) ) . '</span>' . '<strong><span data-wpt-tx-total="' . $tx_total . '">' . wptravel_get_formated_price_currency( WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $tx_total ) ) . '</span>' . '</strong>'; ?>
@@ -475,7 +486,7 @@ if ( wptravel_is_react_version_enabled() ) {
 								<?php } ?>
 							</form>
 						</div>
-						<!-- <a href="javascript:void(0);" class="btn btn-dark checkout-btn"><?php esc_html_e( 'Proceed to Pay', 'wp-travel' ); ?></a> -->
+						
 					</div>
 				</div>
 			</div>
@@ -541,9 +552,9 @@ $per_person_text = wptravel_get_price_per_text( $trip_id );
 
 					$pax_label = isset( $trip['pax_label'] ) ? $trip['pax_label'] : '';
 
-					// $single_trip_total         = wptravel_get_formated_price( $trip_price * $pax );
+					
 					$single_trip_total = wptravel_get_formated_price( $trip_price ); // Applies to categorized pricing @since 3.0.0
-					// $single_trip_total_partial = wptravel_get_formated_price( $trip_price_partial * $pax );
+					
 					$single_trip_total_partial = wptravel_get_formated_price( $trip_price_partial ); // Applies to categorized pricing @since 3.0.0
 
 					$trip_extras = isset( $trip['trip_extras'] ) ? $trip['trip_extras'] : array();
