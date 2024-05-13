@@ -5,7 +5,7 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 6.0.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 8.6.0
+Stable tag: 8.7.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -424,6 +424,22 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
 
+= 8.7.0 =
+Release Date: 13th May 2024
+
+Fixes:
+* Optimize Code
+* Fixed undefined property warnings 
+* Fixed trip search landing page issue for block themes
+* Fixed cart edit issue in the case of trip with group price is selected in the cart
+
+Enhancements:
+* Added text translation support for form validation message
+* Added hook to show trip start date and end date on trip page 
+* Added option to set sale price in percentage
+
+**For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v8-7-0-update-release-note).**
+
 = 8.6.0 =
 Release Date: 29th April 2024
 
@@ -439,6 +455,8 @@ Enhancements:
 * Added 'trip_booking_date' tag for booking email
 * Added code to block user to input date manually to the date picker input field
 
+**For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v8-6-0-update-release-note).**
+
 = 8.5.0 =
 Release Date: 05th April 2024
 
@@ -452,6 +470,8 @@ Enhancements:
 * Added shortcode for corresponding WP Travel Search widget
 * Added shortcode for corresponding WP Travel Featured Trip widget
 * Adding shortcode for corresponding WP Travel Sale Trip widget
+
+**For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v8-5-0-update-release-note).**
 
 = 8.4.0 =
 Release Date: 25th March 2024

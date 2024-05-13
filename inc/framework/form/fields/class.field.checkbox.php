@@ -24,7 +24,7 @@ class WP_Travel_FW_Field_Checkbox {
 			}
 		}
 		$output = '';
-		// $output = sprintf( '<select id="%s" name="%s" %s>', $this->field['id'], $this->field['name'], $validations );
+
 		if ( ! empty( $this->field['options'] ) ) {
 			$index = 0;
 			// Custom Fields. [travelers fields have _default ]
@@ -71,7 +71,7 @@ class WP_Travel_FW_Field_Checkbox {
 			}
 			$output .= sprintf( '<div id="%s"></div>', $error_coontainer_id );
 		}
-		// $output .= sprintf( '</select>' );
+
 
 		if ( ! $display ) {
 			return $output;

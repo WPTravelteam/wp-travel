@@ -13,13 +13,6 @@
 function wptravel_admin_init() {
 	add_action( 'wp_trash_post', 'wptravel_clear_booking_count_transient', 10 ); // @since 1.0.7
 	add_action( 'untrash_post', 'wptravel_clear_booking_count_transient_untrash', 10 ); // @since 2.0.3
-
-	// if ( version_compare( WP_TRAVEL_VERSION, '1.2.0', '>' ) ) {
-	// 	include_once sprintf( '%s/upgrade/update-121.php', WP_TRAVEL_ABSPATH );
-	// }
-	// if ( version_compare( WP_TRAVEL_VERSION, '1.3.6', '>' ) ) {
-	// 	include_once sprintf( '%s/upgrade/update-137.php', WP_TRAVEL_ABSPATH );
-	// }
 }
 
 /**
@@ -1410,7 +1403,7 @@ function wptravel_upsell_message( $args ) {
 	}
 	?>
 <div class="wp-travel-upsell-message wp-travel-pro-feature-notice clearfix <?php echo esc_attr( implode( ' ', $args['main_wrapper_class'] ) ); ?>">
-<!-- <div class=""> -->
+
 	<div class="section-one">
 		<h4><?php echo esc_html( $args['title'] ); ?></h4>
 		<p><?php echo wp_kses_post( $args['content'] ); ?></p>
@@ -1430,7 +1423,7 @@ function wptravel_upsell_message( $args ) {
 		</div>
 		<?php endif; ?>
 	</div>
-<!-- </div> -->
+
 </div>
 	<?php
 }

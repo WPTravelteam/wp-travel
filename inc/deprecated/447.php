@@ -181,10 +181,10 @@ function wp_travel_get_checkout_form_fields() { // @phpcs:ignore
 	return wptravel_get_checkout_form_fields();
 }
 
-function wp_travel_enquiry_form_header() { // @phpcs:ignore
-	wptravel_deprecated_function( 'wp_travel_enquiry_form_header', '4.4.7', 'wptravel_enquiry_form_header' );
-	return wptravel_enquiry_form_header();
-}
+// function wp_travel_enquiry_form_header() { // @phpcs:ignore
+// 	wptravel_deprecated_function( 'wp_travel_enquiry_form_header', '4.4.7', 'wptravel_enquiry_form_header' );
+// 	return wptravel_enquiry_form_header();
+// }
 
 function wp_travel_save_user_enquiry() { // @phpcs:ignore
 	wptravel_deprecated_function( 'wp_travel_save_user_enquiry', '4.4.7', 'wptravel_save_user_enquiry' );
@@ -1219,10 +1219,10 @@ function wp_travel_insert_common_tags() { // @phpcs:ignore
 	return wptravel_insert_common_tags();
 }
 
-function wp_travel_insert_og_tags() { // @phpcs:ignore
-	wptravel_deprecated_function( 'wp_travel_insert_og_tags', '4.4.7', 'wptravel_insert_og_tags' );
-	return wptravel_insert_og_tags();
-}
+// function wp_travel_insert_og_tags() { // @phpcs:ignore
+// 	wptravel_deprecated_function( 'wp_travel_insert_og_tags', '4.4.7', 'wptravel_insert_og_tags' );
+// 	return wptravel_insert_og_tags();
+// }
 
 function wp_travel_register_search_widgets() { // @phpcs:ignore
 	wptravel_deprecated_function( 'wp_travel_register_search_widgets', '4.4.7', 'wptravel_register_search_widgets' );

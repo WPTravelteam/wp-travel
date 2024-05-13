@@ -197,16 +197,11 @@ class WpTravel_Helpers_Trips {
 			$trip_duration = array(
 				'days'   		=> $days,
 				'nights' 		=> $night,
-				// 'start_date' 	=> isset( $duration_start_date ) ? $duration_start_date : '',
-				// 'end_date'   	=> isset( $duration_end_date ) ? $duration_end_date : '',
+
 			);
 		} else {
 			$old_duration_select = isset( $trip_duration_formating['duration_format'] ) ? $trip_duration_formating['duration_format'] : '';
-			// if ( ! empty( $old_duration_select ) && $old_duration_select == 'hour' ) {
-			// 	$duration_selected_date = $old_duration_select;
-			// } else {
-			// 	$duration_selected_date = 'day_night';
-			// }
+
 			$new_duration_date = array(
 				'days'				=> isset( $trip_duration_formating['days'] ) ? $trip_duration_formating['days'] : '',
 				'nights'			=> isset( $trip_duration_formating['nights'] ) ? $trip_duration_formating['nights'] : '',
@@ -237,7 +232,6 @@ class WpTravel_Helpers_Trips {
 			'group_size'                        => (int) $group_size, // Labeled as Inventory size.
 			'minimum_partial_payout_use_global' => $minimum_partial_payout_use_global,
 			'minimum_partial_payout_percent'    => $minimum_partial_payout_percent,
-			// '_post' => $trip,
 		);
 
 		$post_thumbnail_id = get_post_thumbnail_id( $trip->ID );
@@ -298,8 +292,6 @@ class WpTravel_Helpers_Trips {
 
 		$trip_meta = get_post_meta( $trip_id );
 
-		// $is_fixed_departure              = ! empty( $trip_meta['wp_travel_fixed_departure'][0] ) && 'yes' === $trip_meta['wp_travel_fixed_departure'][0] ? true : false;
-		// $trip_data['is_fixed_departure'] = $is_fixed_departure;
 		$trip_data['is_fixed_departure'] = WP_Travel_Helpers_Trip_Dates::is_fixed_departure( $trip_id );
 
 		// Gallery Data.

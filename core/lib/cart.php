@@ -337,7 +337,7 @@ class WP_Travel_Lib_Cart {
 					}
 					$category_price_partial = $category_price;
 
-					// if ( $this->items[ $cart_item_id ]['enable_partial'] ) {
+
 					if ( wptravel_is_partial_payment_enabled() ) {
 						$percent                = wptravel_get_actual_payout_percent( $trip_id );
 						$category_price_partial = ( $category_price * $percent ) / 100;

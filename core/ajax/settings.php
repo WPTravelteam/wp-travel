@@ -15,7 +15,6 @@ class WP_Travel_Ajax_Settings {
 
 		add_action( 'wp_ajax_wptravel_wpml_migrate', array( __CLASS__, 'force_migrate_wpml' ) );
 		add_action( 'wp_ajax_nopriv_wptravel_wpml_migrate', array( __CLASS__, 'force_migrate_wpml' ) );
-		// add_action( 'init', array( __CLASS__, 'wp_travel_trip_date_price' ) );
 	}
 
 	public static function get_settings() {
@@ -69,10 +68,7 @@ class WP_Travel_Ajax_Settings {
 		$new_post_data = wptravel_sanitize_array( $new_post_data, true );
 		$response      = WP_Travel_Helpers_Settings::update_settings( $new_post_data );
 		WP_Travel_Helpers_REST_API::response( $response );
-		// $post_data = json_decode( file_get_contents( 'php://input' ), true ); // Added 2nd Parameter to resolve issue with objects.
-		// $post_data = wptravel_sanitize_array( $post_data, true );  // wp kses for some editor content in email settings.
-		// $response  = WP_Travel_Helpers_Settings::update_settings( $post_data );
-		// WP_Travel_Helpers_REST_API::response( $response );
+
 	}
 
 

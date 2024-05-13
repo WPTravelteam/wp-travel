@@ -39,7 +39,12 @@ const PaxSelector = ( props ) => {
 			return
 		}
 		let count = paxCounts[categoryId] || 0
+		
 		let price = category && category.is_sale ? category.sale_price : category.regular_price
+
+		if( 'undefined' != typeof category.is_sale_percentage && category.is_sale_percentage ){
+			price= (category.sale_percentage_val/100)*category.regular_price
+		}
 
 		if ( 'undefined' != typeof pricing.has_group_price && pricing.has_group_price && pricing.group_prices && pricing.group_prices.length > 0  ) {
 			let totalPax = objectSum(paxCounts);

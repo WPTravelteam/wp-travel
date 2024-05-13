@@ -379,12 +379,6 @@ function wptravel_send_email_payment( $booking_id ) {
 		$price_key = isset( $price_keys[0] ) ? $price_keys[0] : '';
 	}
 
-	// Handle Multiple payment Emails.
-	// if ( $allow_multiple_items && 1 !== $order_items ) {
-	// do_action( 'wp_travel_multiple_payment_emails', $booking_id );
-	// exit;
-	// }
-
 	// Clearing cart after successfult payment.
 	global $wt_cart;
 	$wt_cart->clear();
@@ -429,10 +423,6 @@ function wptravel_send_email_payment( $booking_id ) {
 	$itinerary_id = get_post_meta( $booking_id, 'wp_travel_post_id', true );
 	$payment_id   = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
 
-	// $trip_code = wptravel_get_trip_code( $itinerary_id );
-	// $title     = 'Booking - ' . $trip_code;
-
-	// $itinerary_title = get_the_title( $itinerary_id );
 
 	$booking_no_of_pax      = get_post_meta( $booking_id, 'wp_travel_pax', true );
 	$booking_scheduled_date = 'N/A';

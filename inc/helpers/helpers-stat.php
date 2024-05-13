@@ -13,13 +13,6 @@
  */
 function wptravel_get_booking_data() {
 
-	// if ( ! WP_Travel::verify_nonce( true ) ) {
-	// return;
-	// }
-	/**
-	 * We are checking nonce using WP_Travel::verify_nonce(); method.
-	 */
-
 	global $wpdb;
 	$data = array();
 
@@ -499,37 +492,36 @@ function wptravel_get_booking_data() {
 		$stat_data['compare_top_countries'] = wp_travel_get_country_by_code( $compare_additional_data['top_countries'] );
 		$stat_data['compare_top_itinerary'] = $compare_additional_data['top_itinerary'];
 
-		// Query for total 2 in compare stat.
-		// if ( class_exists( 'WP_travel_paypal' ) ) :
-			$query   = "Select count( BOOKING.ID ) as no_of_payment, YEAR( payment_date ) as payment_year, Month( payment_date ) as payment_month, DAY( payment_date ) as payment_day, sum( AMT.payment_amount ) as payment_amount from {$wpdb->posts} BOOKING
-			join (
-				Select distinct( PaymentMeta.post_id ), meta_value as payment_id, PaymentPost.post_date as payment_date from {$wpdb->posts} PaymentPost
-				join {$wpdb->postmeta} PaymentMeta on PaymentMeta.meta_value = PaymentPost.ID
-				WHERE PaymentMeta.meta_key = 'wp_travel_payment_id'
-			) PMT on BOOKING.ID = PMT.post_id
-			join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' ) C on BOOKING.ID = C.post_id
-			join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on BOOKING.ID = I.post_id
-			join ( Select distinct( post_id ), meta_value as payment_status from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_payment_status' and meta_value = 'paid' ) PSt on PMT.payment_id = PSt.post_id
-			join ( Select distinct( post_id ), case when meta_value IS NULL or meta_value = '' then '0' else meta_value
-		end as payment_amount from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_payment_amount'  ) AMT on PMT.payment_id = AMT.post_id
-			where post_type=%s and post_status=%s {$where}
-			group by YEAR( payment_date ), Month( payment_date ), DAY( payment_date ) order by YEAR( payment_date ), Month( payment_date ), DAY( payment_date ) asc {$limit}";
-			$results = $wpdb->get_results(
-				$wpdb->prepare(
-					$query, // @phpcs:ignore
-					'itinerary-booking',
-					'publish'
-				)
-			);
 
-			$total_sales_compare = 0;
-		if ( $results ) {
-			foreach ( $results as $result ) {
-				$total_sales_compare += $result->payment_amount;
-			}
+		$query   = "Select count( BOOKING.ID ) as no_of_payment, YEAR( payment_date ) as payment_year, Month( payment_date ) as payment_month, DAY( payment_date ) as payment_day, sum( AMT.payment_amount ) as payment_amount from {$wpdb->posts} BOOKING
+		join (
+			Select distinct( PaymentMeta.post_id ), meta_value as payment_id, PaymentPost.post_date as payment_date from {$wpdb->posts} PaymentPost
+			join {$wpdb->postmeta} PaymentMeta on PaymentMeta.meta_value = PaymentPost.ID
+			WHERE PaymentMeta.meta_key = 'wp_travel_payment_id'
+		) PMT on BOOKING.ID = PMT.post_id
+		join ( Select distinct( post_id ), meta_value as country from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_country' ) C on BOOKING.ID = C.post_id
+		join ( Select distinct( post_id ), meta_value as itinerary_id from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_post_id' ) I on BOOKING.ID = I.post_id
+		join ( Select distinct( post_id ), meta_value as payment_status from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_payment_status' and meta_value = 'paid' ) PSt on PMT.payment_id = PSt.post_id
+		join ( Select distinct( post_id ), case when meta_value IS NULL or meta_value = '' then '0' else meta_value
+	end as payment_amount from {$wpdb->postmeta} WHERE meta_key = 'wp_travel_payment_amount'  ) AMT on PMT.payment_id = AMT.post_id
+		where post_type=%s and post_status=%s {$where}
+		group by YEAR( payment_date ), Month( payment_date ), DAY( payment_date ) order by YEAR( payment_date ), Month( payment_date ), DAY( payment_date ) asc {$limit}";
+		$results = $wpdb->get_results(
+			$wpdb->prepare(
+				$query, // @phpcs:ignore
+				'itinerary-booking',
+				'publish'
+			)
+		);
+
+		$total_sales_compare = 0;
+	if ( $results ) {
+		foreach ( $results as $result ) {
+			$total_sales_compare += $result->payment_amount;
 		}
-			$stat_data['total_sales_compare'] = number_format( $total_sales_compare, 2, '.', '' );
-		// endif;
+	}
+	$stat_data['total_sales_compare'] = number_format( $total_sales_compare, 2, '.', '' );
+
 	}
 
 	return $stat_data;

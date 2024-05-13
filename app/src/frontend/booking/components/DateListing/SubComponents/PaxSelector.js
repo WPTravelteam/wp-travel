@@ -221,7 +221,12 @@ const PaxSelector = ( props ) => {
 		<ul className="wp-travel-booking__trip-option-list">
 			{	
 				categories.map((c, i) => {
+					
 					let price = getCategoryPrice(c.id, true );
+					if(c.is_sale_percentage){
+						price =  ( c.sale_percentage_val/100 ) * c.regular_price
+					}
+
 					if ( 'undefined' == typeof c.term_info ) { // Fixes : index title of undefined.
 						return <></>
 					}

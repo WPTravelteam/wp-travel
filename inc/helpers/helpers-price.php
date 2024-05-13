@@ -755,7 +755,6 @@ function wptravel_get_min_pricing_id( $trip_id ) {
 		foreach ( $pricing_options as $pricing_id => $pricing_option ) {
 
 			if ( ! isset( $pricing_option['categories'] ) ) { // Old Listing upto WP Travel @since 3.0.0-below legacy version
-				// foreach ( $pricing_options as $pricing_option ) {
 				if ( isset( $pricing_option['price'] ) ) { // old pricing option.
 					$current_price = $pricing_option['price'];
 					$enable_sale   = isset( $pricing_option['enable_sale'] ) ? $pricing_option['enable_sale'] : 'no';
@@ -770,7 +769,6 @@ function wptravel_get_min_pricing_id( $trip_id ) {
 						$min_pricing_id = $pricing_id;
 					}
 				}
-				// }
 			} elseif ( is_array( $pricing_option['categories'] ) && count( $pricing_option['categories'] ) > 0 ) {
 				foreach ( $pricing_option['categories'] as $category_id => $category_option ) {
 
@@ -789,10 +787,6 @@ function wptravel_get_min_pricing_id( $trip_id ) {
 					}
 				}
 
-				// Return regular price.
-				// if ( $return_regular_price && ! empty( $min_catetory_id ) && isset( $pricing_option['categories'][ $min_catetory_id ]['price'] ) ) {
-				// $price = $pricing_option['categories'][ $min_catetory_id ]['price'];
-				// }
 			}
 		}
 	}

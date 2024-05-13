@@ -136,7 +136,6 @@ class WP_Travel_Gateway_Paypal_Request {
 
 		} elseif ( $items ) {  // Normal Payment.
 
-			// $current_url  = apply_filters( 'wp_travel_thankyou_page_url', $current_url, $booking_id );
 			$cart_amounts = $wt_cart->get_total();
 
 			$tax = 0;
@@ -188,7 +187,6 @@ class WP_Travel_Gateway_Paypal_Request {
 			$agrs_index = 1;
 			foreach ( $items as $cart_id => $item ) {
 				$trip_id = $item['trip_id'];
-				// $pax        = $item['pax'];
 
 				/**
 				 * Since We are sending calculated total trip price.
@@ -241,11 +239,11 @@ class WP_Travel_Gateway_Paypal_Request {
 				$args[ 'item_number_' . $agrs_index ] = $trip_id;
 
 				$args[ 'on0_' . $agrs_index ] = __( 'Trip Code', 'wp-travel' );
-				// $args['on1_' . $agrs_index ] = __( 'Payment Mode', 'wp-travel' );
+
 				$args[ 'on2_' . $agrs_index ] = __( 'Trip Price', 'wp-travel' );
 
 				$args[ 'os0_' . $agrs_index ] = $trip_code;
-				// $args['os1_' . $agrs_index ] = $payment_mode;
+
 				$args[ 'os2_' . $agrs_index ] = $item['trip_price'];
 
 				$args = apply_filters( 'wp_travel_tour_extra_paypal_args', $args, $item, $cart_id, $agrs_index );

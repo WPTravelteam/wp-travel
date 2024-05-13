@@ -9,7 +9,7 @@ function wptravel_bank_deposit_default_settings_fields( $settings ) {
 	$settings['payment_option_bank_deposit']        = 'no';
 	$settings['wp_travel_bank_deposits']            = array();
 	$settings['wp_travel_bank_deposit_description'] = '';
-	// $settings['wp_travel_bank_deposit_allowed_file'] = 'jpg, png';
+
 	return $settings;
 }
 

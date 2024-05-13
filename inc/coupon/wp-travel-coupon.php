@@ -88,7 +88,7 @@ if ( ! class_exists( 'WP_Travel_Coupon_Pro' ) ) :
 		 * @return void
 		 */
 		private function init_hooks() {
-			// register_activation_hook( __FILE__, array( $this, 'coupons_activation' ) );
+
 			$priority = 10;
 			if ( function_exists( 'wptravel_get_submenu' ) ) {
 				$sbumenus = wptravel_get_submenu();

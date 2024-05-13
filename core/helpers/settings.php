@@ -90,7 +90,6 @@ class WP_Travel_Helpers_Settings {
 					'options'            => isset( $facts[ $key ]['options'] ) && is_array( $facts[ $key ]['options'] ) ? array_values( $facts[ $key ]['options'] ) : array(),
 					'icon'               => isset( $facts[ $key ]['icon'] ) ? $facts[ $key ]['icon'] : '',
 					'icon_img'           => isset( $facts[ $key ]['icon_img'] ) ? $facts[ $key ]['icon_img'] : '',
-					// 'fa_icon'            => isset( $facts[ $key ]['fa_icon'] ) ? $facts[ $key ]['fa_icon'] : '',
 					'selected_icon_type' => isset( $facts[ $key ]['selected_icon_type'] ) ? $facts[ $key ]['selected_icon_type'] : 'icon-class',
 				);
 				$mapped_facts[] = $new_fact;
@@ -207,12 +206,9 @@ class WP_Travel_Helpers_Settings {
 					 * 
 					 * @remove ICL_LANGUAGE_CODE in @since 6.4.0
 					 */ 
-					// if ( defined( 'ICL_LANGUAGE_CODE' ) ) {
-					// 	update_option( 'wp_travel_' . $settings_field . '_' . ICL_LANGUAGE_CODE, $page_id );
-					// 	continue;
-					// } else {
+
 					update_option( 'wp_travel_' . $settings_field, $page_id );
-					// }
+			
 				}
 
 				$settings[ $settings_field ] = wp_unslash( $settings_data[ $settings_field ] );
@@ -256,7 +252,6 @@ class WP_Travel_Helpers_Settings {
 			$sorted_gateways = array();
 			foreach ( $settings_data['sorted_gateways'] as  $gateway ) {
 				$sorted_gateways[] = $gateway['key']; // quick fix.
-				// $sorted_gateways[ $key ]        = $gateway['label'];
 			}
 			$settings['sorted_gateways'] = $sorted_gateways;
 		}

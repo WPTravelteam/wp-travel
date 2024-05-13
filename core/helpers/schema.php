@@ -23,9 +23,7 @@ class WpTravel_Helpers_Schema {
 	 * @since 5.0.0
 	 */
 	public static function init() {
-		// if ( wptravel_dev_mode() ) {
-			add_action( 'wp_head', array( __CLASS__, 'run' ) );
-		// }
+		add_action( 'wp_head', array( __CLASS__, 'run' ) );
 	}
 
 	/**

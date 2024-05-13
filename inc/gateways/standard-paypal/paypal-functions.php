@@ -32,14 +32,14 @@ function wptravel_listen_paypal_ipn() {
 	if ( ! WP_Travel::verify_nonce( true ) ) {
 		return;
 	}
-	// print_r( $_GET ); die;
+
 	if ( isset( $_GET['wp_travel_listener'] )
 		&& $_GET['wp_travel_listener'] == 'IPN'
 		|| isset( $_GET['test'] )
 		&& $_GET['test'] == true ) {
 		do_action( 'wp_travel_verify_paypal_ipn' );
 	}
-	// echo WP_CONTENT_DIR;die;
+
 }
 add_action( 'init', 'wptravel_listen_paypal_ipn' );
 

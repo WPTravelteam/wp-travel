@@ -146,6 +146,11 @@ const wptravelcheckout = (shoppingCart) => {
             let _category = categories.find(c => c.id == parseInt(fg.dataset.wptCategory))
 
             let _price = _category && _category.is_sale ? parseFloat(_category['sale_price']) : parseFloat(_category['regular_price'])
+
+            if( 'undefined' != typeof _category.is_sale_percentage && _category.is_sale_percentage ){
+
+                _price= (parseFloat(_category['sale_percentage_val'])/100)* parseFloat(_category['regular_price'])
+              }
             // Update price for default pricing without group price.
             _price = GetConvertedPrice( _price ); // Multiple currency support on edit cart.
             dataCategoryPrice.innerHTML = wp_travel_cart.format(_price);
@@ -388,7 +393,10 @@ const wptravelcheckout = (shoppingCart) => {
                                 _input.value = _inputvalue
                             }
                         } else {
-                            _input.value = parseInt(_input.value) + 1
+                            var _inputvalue = parseInt(_input.value) + 1 < 0 ? 0 : parseInt(_input.value) + 1;
+                            if (_inputvalue <= parseInt(_input.max)) {
+                              _input.value = _inputvalue;
+                            }
                         }
                     }
                     if (typeof sp.dataset.wptCountDown != 'undefined') {
@@ -573,3 +581,4 @@ const wptravelcheckout = (shoppingCart) => {
 
 }
 document.getElementById('shopping-cart') && wptravelcheckout(document.getElementById('shopping-cart'))
+

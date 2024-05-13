@@ -381,11 +381,7 @@ class WP_Travel_Cart {
 				$trip_price         = 0;
 				$trip_price_partial = 0;
 				foreach ( $pax as $category_id => $pax_value ) {
-					if ( $pax_value < 1 ) {
-						// unset( $this->items[ $cart_item_id ]['trip'][ $category_id ] );
-						// continue;
-						// do not remove category. if removed this will not available to edit after update.
-					}
+		
 					$this->items[ $cart_item_id ]['trip'][ $category_id ]['pax'] = $pax_value;
 
 					$args           = array(
@@ -413,9 +409,7 @@ class WP_Travel_Cart {
 						$percent                = WP_Travel_Helpers_Pricings::get_payout_percent( $trip_id );
 						$category_price_partial = ( $category_price * $percent ) / 100;
 					}
-					// Updating individual category price. [ Price may change if group discount applies. so need to update individual category price as well].
-					// $category_price         = WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $category_price );
-					// $category_price_partial = WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $category_price_partial );
+
 					$this->items[ $cart_item_id ]['trip'][ $category_id ]['price']         = $category_price; // Already converted price while adding into cart, so do not need to convert price.
 					$this->items[ $cart_item_id ]['trip'][ $category_id ]['price_partial'] = $category_price_partial;  // Already converted price while adding into cart, so do not need to convert price.
 

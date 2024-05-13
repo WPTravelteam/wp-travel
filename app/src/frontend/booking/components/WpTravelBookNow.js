@@ -84,6 +84,9 @@ const WpTravelBookNow = ( props ) => {
 
 			if ( category && 'undefined' != typeof category.regular_price ) {
 				price = category && category.is_sale ? category.sale_price : category.regular_price
+				if( 'undefined' != typeof category.is_sale_percentage && category.is_sale_percentage ){
+					price= (category.sale_percentage_val/100)*category.regular_price
+				}
 			}
 	
 			if ( isPricingGroupPrice ) {

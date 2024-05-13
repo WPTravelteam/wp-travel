@@ -227,7 +227,6 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 					$email_subject = str_replace( array_keys( $email_tags ), $email_tags, $email_template['subject'] ); // Added email tag support from ver 4.1.5.
 					// Email Content.
 					$email_content      = str_replace( array_keys( $email_tags ), $email_tags, $email_content );
-					// $email_content      = 'asdasd';
 					$amdin_send_booking = apply_filters( 'wp_travel_booking_mail_sent_to_admin', true );
 					if ( $amdin_send_booking == true ) {
 						if ( ! wp_mail( $this->admin_email, $email_subject, $email_content, $headers, $attachment ) ) {
@@ -485,7 +484,6 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 			$email_tags  = array(
 				'{sitename}'               => $this->sitename,
 				'{trip_id}'                => $trip_id,
-				// '{itineraries}'            => $this->$itineraries,
 				'{itinerary_link}'         => get_permalink( $trip_id ), // @deprecated.
 				'{itinerary_title}'        => wptravel_get_trip_pricing_name( $trip_id, $price_key ), // @deprecated.
 				'{booking_arrival_date}'   => wptravel_format_date( $arrival_date ), // @deprecated.
@@ -521,10 +519,6 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 			if( $request_data['wp_travel_booking_option'] == 'booking_only' || ( class_exists( 'WooCommerce' ) && $settings['enable_woo_checkout'] == 'yes' ) ){
 				$email          = new WP_Travel_Emails();
 				$headers = $email->email_headers( $reply_to_email, $reply_to_email );
-				// $email_data = array(
-				// 	'from' => $reply_to_email,
-				// 	'to'   => $customer_email,
-				// );
 
 				do_action( 'wp_travel_after_payment_email_sent', $booking_id, $email_data, $email_tags ); // @since 3.0.6 for invoice.
 			}

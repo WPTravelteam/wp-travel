@@ -289,7 +289,7 @@ function wptravel_single_trip_tabs_and_price( $trip_id ) {
 			<div class="wti__grid">
 				<div class="wti__grid-item col-lg-8">
 					<div id="scrollspy-buttons" class="wti__scrollspy-buttons">
-					<!-- <span class="line"></span> -->
+
 					<?php
 					$wp_travel_itinerary_tabs = wptravel_get_frontend_tabs();
 					$index                    = 1;
