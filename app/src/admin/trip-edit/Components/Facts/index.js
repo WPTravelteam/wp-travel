@@ -14,12 +14,6 @@ const __i18n = {
 	..._wp_travel_admin.strings
 }
 
-// @todo Need to remove this in future.
-// const WPTravelTripOptionsFact = () => {
-//     return <></>;
-// }
-// export default WPTravelTripOptionsFact;
-
 // Swap any array or object as per provided index.
 const  swapList = (data, old_index, new_index) => {
     if ( 'object' === typeof data ) {
@@ -150,7 +144,6 @@ const TripFacts = ({allData}) => {
                                     return <div style={{position:'relative'}}  data-index={index} key={index} >
                                         <div className={`wptravel-swap-list`}>
                                         <Button
-                                        // style={{padding:0, display:'block'}}
                                         disabled={0 == index}
                                         onClick={(e) => {
                                             let sorted = swapList( trip_facts, index, index - 1 )
@@ -159,7 +152,6 @@ const TripFacts = ({allData}) => {
                                             updateRequestSending(false);
                                         }}><i className="dashicons dashicons-arrow-up"></i></Button>
                                         <Button
-                                        // style={{padding:0, display:'block'}}
                                         disabled={( Object.keys(trip_facts).length - 1 ) === index}
                                         onClick={(e) => {
                                             let sorted = swapList( trip_facts, index, index + 1 )

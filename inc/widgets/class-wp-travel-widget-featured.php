@@ -46,7 +46,6 @@ class WP_Travel_Widget_Featured extends WP_Widget {
 		$title           = isset( $instance['title'] ) ? $instance['title'] : '';
 		$hide_title      = isset( $instance['hide_title'] ) ? $instance['hide_title'] : '';
 		$no_of_trip_show = isset( $instance['no_of_trip_show'] ) ? $instance['no_of_trip_show'] : $this->no_of_trip_show;
-		// $trip_per_row = ( $instance['trip_per_row'] ) ? $instance['trip_per_row'] : $this->trip_per_row;
 		$view_mode = isset( $instance['view_mode'] ) ? $instance['view_mode'] : $this->view_mode;
 
 		echo wp_kses_post( $before_widget );
@@ -129,7 +128,6 @@ class WP_Travel_Widget_Featured extends WP_Widget {
 		$instance               = $old_instance;
 		$instance['title']      = sanitize_text_field( $new_instance['title'] );
 		$instance['hide_title'] = isset( $new_instance['hide_title'] ) ? sanitize_text_field( $new_instance['hide_title'] ) : '';
-		// $instance['trip_per_row'] = sanitize_text_field( $new_instance['trip_per_row'] );
 		$instance['view_mode']       = sanitize_key( $new_instance['view_mode'] );
 		$instance['no_of_trip_show'] = sanitize_text_field( $new_instance['no_of_trip_show'] );
 
@@ -154,9 +152,7 @@ class WP_Travel_Widget_Featured extends WP_Widget {
 		if ( isset( $instance['hide_title'] ) ) {
 			$hide_title = esc_attr( $instance['hide_title'] );
 		}
-		// if ( $instance['trip_per_row'] ) {
-		// $trip_per_row = esc_attr( $instance['trip_per_row'] );
-		// }
+
 		if ( isset( $instance['view_mode'] ) ) {
 			$view_mode = esc_attr( $instance['view_mode'] );
 		}
@@ -175,10 +171,7 @@ class WP_Travel_Widget_Featured extends WP_Widget {
 			<label for="<?php echo esc_attr( $this->get_field_id( 'no_of_trip_show' ) ); ?>"><?php esc_html_e( 'No. of trip to show', 'wp-travel' ); ?>:</label>
 			<input type="number" value="<?php echo esc_attr( $no_of_trip_show ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'no_of_trip_show' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'no_of_trip_show' ) ); ?>" min="1" max="100" class="widefat">
 		</p>
-		<!-- <p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'trip_per_row' ) ); ?>"><?php esc_html_e( 'Trip per row', 'wp-travel' ); ?>:</label>
-			<input type="number" value="<?php echo esc_attr( $trip_per_row ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'trip_per_row' ) ); ?>" id="<?php echo esc_attr( $this->get_field_id( 'trip_per_row' ) ); ?>" min="1" max="9" class="widefat">
-		</p> -->
+
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'view_mode' ) ); ?>"><?php esc_html_e( 'View Mode', 'wp-travel' ); ?>:</label>
 			<select id="<?php echo esc_attr( $this->get_field_id( 'view_mode' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'view_mode' ) ); ?>" class="widefat">

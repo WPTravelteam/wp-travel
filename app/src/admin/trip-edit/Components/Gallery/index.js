@@ -11,11 +11,6 @@ const __i18n = {
 	..._wp_travel_admin.strings
 }
 
-// @todo Need to remove this in future.
-// const WPTravelTripOptionsGallery = () => {
-//     return <></>;
-// }
-// export default WPTravelTripOptionsGallery
 
 // Single Components for hook callbacks.
 
@@ -118,7 +113,6 @@ const SimpleGallery = ({allData, drag=true }) => {
         })
     }
 
-    const onItemClickHandle = id => e => updateTripData({ ...allData, _thumbnail_id: id })
 
     const onImagesDropHandle = async files => {
         setState(state => ({ ...state, isUploading: true }))
@@ -132,7 +126,6 @@ const SimpleGallery = ({allData, drag=true }) => {
             const formData = new FormData()
             const headers = new Headers()
             headers.append('X-WP-Nonce', wpApiSettings.nonce)
-            // let currentGallery = gallery
             for (let i = 0; i < files.length; i++) {
                 formData.append('file', files[i])
                 const requestOptions = {
@@ -186,7 +179,6 @@ const SimpleGallery = ({allData, drag=true }) => {
             featuredImage={_thumbnail_id}
             onChange={() => console.log('changes')}
             onImagesSort={onImagesSortHandle}
-            // onItemClick={onItemClickHandle}
             drag={drag}
             allData={allData}
         />

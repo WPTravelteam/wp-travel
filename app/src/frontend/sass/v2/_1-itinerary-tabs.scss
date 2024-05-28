@@ -1,7 +1,5 @@
 #wp-travel-tab-wrapper {
 	position: relative;
-	// z-index: 200;
-	// z-index: 5;
 	@media screen and (min-width: 769px) and (max-width: 991px) {
 		.resp-tabs-list {
 			display: flex;
@@ -32,7 +30,6 @@
 		border: 1px solid rgba(222, 222, 222, 0.49);
 		border-bottom: none;
 		font-size: 0;
-		// text-align: center;
 		background: #f9f9f9;
 		display: flex;
 		padding: 0 !important;
@@ -46,7 +43,6 @@
 			cursor: pointer;
 			font-weight: normal;
 			border: none;
-			// border-right: 1px solid rgba(222, 222, 222, 0.49);
 			border-left: 1px solid rgba(222, 222, 222, 0.49);
 			font-size: 15px;
 			float: none;
@@ -58,18 +54,12 @@
 
 			&.resp-tab-active {
 				background: #fff;
-				// padding: 19px 30px 20px;
 				padding: 17px 30px 23px;
 				
 
 				@include sidr-view {
-					// padding: 13px 15px;
 					padding: 12px 15px 14px;
 				}
-			}
-
-			@include sidr-view {
-				// padding: 15px;
 			}
 		}
 	}
@@ -93,7 +83,6 @@
 		}
 		&.resp-tab-content-active {
 			margin-top: 0;
-			// margin-bottom: 10px;
 			border: 1px solid #ececec;
 			padding-bottom: 15px;
 			padding-top: 20px;
@@ -105,7 +94,6 @@
 
 			.wp-travel-advanced-gallery-items-list {
 				display: grid;
-				// grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 				grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
 				column-gap: 0.5em;
 				@media (max-width: 345px) {
@@ -118,11 +106,6 @@
 				}
 				&.wp-travel-advanced-gallery-items-list-slider {
 					display: block;
-					// .slick-arrow {
-					// 	&::before {
-					// 		color: #000;
-					// 	}
-					// }
 				}
 				.item {
 					width: 100%;
@@ -161,8 +144,6 @@
 		}
 
 		&:after {
-			// content: "\f140";
-			// font-family: dashicons;
 			float: right;
 			-moz-transition: all 0.4s ease-in-out;
 			-webkit-transition: all 0.4s ease-in-out;
@@ -313,11 +294,6 @@
 					justify-content: left;
 				}
 				img {
-					// float: left;
-					// margin-right: 1.5em;
-					// @media (max-width: 992px) {
-					// 	margin-bottom: 1.5em;
-					// }
 					@media (max-width: 767px) {
 						margin-right: 0;
 					}
@@ -331,12 +307,6 @@
 					justify-content: left;
 				}
 				img {
-					// float: right;
-					// margin-left: 1.5em;
-					// margin-bottom: 1.5em;
-					// @media (max-width: 992px) {
-					// 	margin-bottom: 1.5em;
-					// }
 					@media (max-width: 767px) {
 						margin-left: 0;
 					}
@@ -440,9 +410,6 @@
 }
 //review form
 #review_form_wrapper {
-	// width: 650px;
-	// width: 80%;
-	// margin-inline: auto;
 	@include mob {
 		width: 100%;
 	}
@@ -467,11 +434,9 @@
 		}
 
 		p.comment-form-author {
-			// width: calc(50% - 5px);
 			width: calc(50% - 15px);
 			float: right;
 			display: inline-block;
-			// margin-right: 10px;
 			margin-right: 0;
 			margin-block: 0;
 
@@ -482,12 +447,10 @@
 		}
 
 		p.comment-form-email {
-			// width: calc(50% - 5px);
 			width: calc(50% - 15px);
 			display: inline-block;
 			margin-right: 0;
 			margin-block: 0;
-			// float: right;
 			float: left;
 
 			@include mob {
@@ -519,14 +482,8 @@
 			padding: 10px 5px;
 		}
 		.comment-form-comment {
-			// width: 48%;
-			// float: left;
 			width: 100%;
 			float: none;
-			// @include mob {
-			// 	width: 100%;
-			// 	float: none;
-			// }
 			textarea { 
 				overflow: auto;
 				padding-left: 5px;
@@ -545,11 +502,7 @@
 //tabs front end
 .trip-headline-wrapper {
 	.wp-travel-feature-slide-content {
-		// &.left-plot {
-		// 	@media (min-width: 768px) {
-		// 		height: 598px !important;
-		// 	}
-		// }
+
 		&.right-plot {
 			height: 100% !important;
 		}
@@ -562,6 +515,7 @@
 					position: relative;
 					.entry-title {
 						margin: 0;
+						font-size: 35px;
 					}
 				}
 			}
@@ -576,7 +530,6 @@
 		.wp-travel-downloads-listings-public {
 			margin-bottom: 1em;
 			position: relative;
-			// padding-left: 1.5em;
 			padding-inline: 25px;
 			@media (max-width: 765px) {
 				grid-template-columns: 150px 1fr;
@@ -585,12 +538,10 @@
 				display: none;
 			}
 			> a {
-				// position: absolute;
 				top: 0;
 				left: 0;
 			}
 			.wp_travel_downloads_tab_title_caption {
-				// padding-left: 100px;
 				padding-left: 0;
 				margin-left: -50px;
 				a {

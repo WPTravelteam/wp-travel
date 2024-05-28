@@ -18,7 +18,7 @@ $currency_symbol = wptravel_get_currency_symbol( $currency_code );
 // For use in the loop, list 5 post titles related to first tag on current post.
 $related_trip_trip = apply_filters( 'wp_travel_related_trip_filter_single_archive_page', 'itinerary_types', $trip_id );
 $terms = wp_get_object_terms( $trip_id, $related_trip_trip );
-// print_r( $terms ); die;
+
 $no_related_post_message = '<p class="wp-travel-no-detail-found-msg">' . esc_html__( 'Related trip not found.', 'wp-travel' ) . '</p>';
 $wrapper_class           = wptravel_get_theme_wrapper_class();
 ?>

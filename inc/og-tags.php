@@ -5,31 +5,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 /**
- * Function to display OG Tags in front end.
- *
- * @since 1.7.6
- */
-/*
-function wptravel_insert_og_tags() {
-	$settings       = wptravel_get_settings();
-	$enable_og_tags = isset( $settings['enable_og_tags'] ) ? $settings['enable_og_tags'] : 'no';
-
-	if ( 'yes' !== $enable_og_tags ) {
-		return;
-	}
-	wptravel_insert_common_tags();
-
-	if ( is_singular( WP_TRAVEL_POST_TYPE ) ) {
-		wptravel_insert_post_tags();
-	}
-}
-
-// add_action( 'wp_head', 'wptravel_insert_og_tags' );
-
-*/
-
-
-/**
  * Common Tags
  */
 function wptravel_insert_common_tags() {

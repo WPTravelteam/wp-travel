@@ -1,10 +1,8 @@
 import { applyFilters, addFilter } from '@wordpress/hooks';
 import { Notice } from '@wordpress/components';
-import { useSelect, select, dispatch, withSelect } from '@wordpress/data';
+import { useSelect, select } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
-import { PanelRow, ToggleControl, RadioControl } from '@wordpress/components';
-import Select from 'react-select'
-import { VersionCompare } from '../../../../fields/VersionCompare'
+// import Select from 'react-select'
 
 import ErrorBoundary from '../../../../../ErrorBoundry/ErrorBoundry';
 import Tooltip from '../../UI/Tooltip';

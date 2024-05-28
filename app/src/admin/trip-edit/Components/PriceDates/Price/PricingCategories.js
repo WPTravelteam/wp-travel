@@ -1,9 +1,8 @@
-import { TextControl, PanelRow, PanelBody, SelectControl, ToggleControl, CheckboxControl, Notice, Button } from '@wordpress/components';
+import { TextControl, PanelRow, PanelBody, SelectControl, ToggleControl, Notice, Button } from '@wordpress/components';
 import { applyFilters } from '@wordpress/hooks';
 import _ from 'lodash';
 import { useSelect, dispatch } from '@wordpress/data';
-import apiFetch from '@wordpress/api-fetch';
-import { sprintf, _n, __} from '@wordpress/i18n';
+import { _n, __} from '@wordpress/i18n';
 import ErrorBoundary from '../../../../../ErrorBoundry/ErrorBoundry';
 const __i18n = {
 	..._wp_travel_admin.strings
@@ -14,9 +13,7 @@ const WPTravelTripPricingCategories = ({priceIndex}) => {
     }, []);
     const { pricing_categories, pricings, default_pricing_id, default_category_id } = allData;
 
-    let defaultPricingId = 'undefined' != typeof default_pricing_id ? default_pricing_id : null
-    let defaultCategoryId = 'undefined' != typeof default_category_id ? default_category_id : null
-    const { updateTripPricing, updateTripData } = dispatch('WPTravel/TripEdit');
+    const { updateTripPricing } = dispatch('WPTravel/TripEdit');
     let price = pricings[priceIndex];
     let pricingCategories = [];
     if ( pricing_categories.length > 0 ) {

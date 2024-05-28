@@ -10577,7 +10577,7 @@ label.radio-checkbox-label input[type=checkbox], label.radio-checkbox-label .wp-
   letter-spacing: 1px;
 }
 .wptravel-layout-v2 .wptravel-archive-wrapper .view-box .view-content .right-content .explore-btn:hover span {
-  text-decoration: underline;
+  text-decoration: none;
 }
 .wptravel-layout-v2 .wptravel-archive-wrapper .view-box:hover {
   box-shadow: 0 20px 38px rgba(0, 0, 0, 0.15);

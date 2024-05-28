@@ -119,14 +119,6 @@ class WP_Travel_Post_Types {
 					return current_user_can( 'edit_posts' );
 				},
 			),
-			// 'wp_travel_tabs' => array(
-			// 'show_in_rest'  => true,
-			// 'single'        => true,
-			// 'type'          => 'string',
-			// 'auth_callback' => function () {
-			// return current_user_can( 'edit_posts' );
-			// },
-			// ),
 			'wp_travel_overview'             => array(
 				'show_in_rest'  => true,
 				'single'        => true,

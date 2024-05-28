@@ -82,7 +82,6 @@ export default () => {
 
         updateSettings({
             ...allData,
-            // minimum_partial_payout: _allPayouts
             minimum_partial_payout, _tabIndex: value
         })
     }
@@ -156,7 +155,6 @@ export default () => {
                         <label>{_wp_travel.setting_strings.payment.partial_amount}</label>
                         <div id="wp-travel-payment-partial-amount" className="wp-travel-field-value">
                             <TextControl
-                                // help={__( 'Set default zoom level of map.', 'wp-travel' )}
                                 type="number"
                                 value={partial_amount}
                                 onChange={(value) => {
@@ -666,17 +664,6 @@ addFilter('wp_travel_payment_gateway_fields_bank_deposit', 'wp_travel', (content
                                 setList={sortedList => sortBankDeposit(sortedList)}
                                 handle=".account-detail-sortable"
                             >
-                                {/* <table>
-                                    <tr>
-                                        <th></th>
-                                        <th>{__( 'Account Name', 'wp-travel' )}</th>
-                                        <th>{__( 'Account Number', 'wp-travel' )}</th>
-                                        <th>{__( 'Bank Name', 'wp-travel' )}</th>
-                                        <th>{__( 'Sort Code', 'wp-travel' )}</th>
-                                        <th>{__( 'IBAN', 'wp-travel' )}</th>
-                                        <th>{__( 'BIC/Swift', 'wp-travel' )}</th>
-                                        <th>{__( 'Action', 'wp-travel' )}</th>
-                                    </tr> */}
                                 {wp_travel_bank_deposits.map((bankDeposite, index) => {
                                     return <PanelRow className="flex-wrap jsutify-content-end"><table><tr key={index}>
                                         <td><Icon icon={alignJustify} className="account-detail-sortable" /></td>

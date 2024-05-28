@@ -23,7 +23,7 @@ $wptravel_form_field                   = new WP_Travel_FW_Field();
 $wptravel_trips                        = $trips;
 $wptravel_form_fw->init_validation( 'wp-travel-booking' );
 ?>
-<form method="POST" action="<?php echo esc_url( $_SERVER['REQUEST_URI'] ); ?>" class="wp-travel-booking" id="wp-travel-booking">
+<form method="POST" action="<?php echo esc_url( $_SERVER['REQUEST_URI'] ); ?>" class="wp-travel-booking" id="wp-travel-booking" enctype="multipart/form-data">
 	<?php do_action( 'wp_travel_action_before_checkout_field' ); // @phpcs:ignore ?>
 	<!-- Travelers info -->
 	<?php
@@ -221,39 +221,45 @@ $wptravel_form_fw->init_validation( 'wp-travel-booking' );
 	<?php if ( is_array( $wptravel_billing_fields ) && count( $wptravel_billing_fields ) > 0 ) : ?>
 		<!-- Billing info -->
 		<div class="panel ws-theme-timeline-block">
-			<!-- <div id="number-accordion3" class="panel-collapse collapse in"> -->
-				<div class="panel-body">
-					<div class="payment-content">
-						<?php $wptravel_form_field->init( $wptravel_billing_fields )->render( $wptravel_trips ); ?>
-					</div>
+			<div class="panel-body">
+				<div class="payment-content">
+					<?php $wptravel_form_field->init( $wptravel_billing_fields )->render( $wptravel_trips ); ?>
 				</div>
-			<!-- </div> -->
+			</div>
 		</div>
 	<?php endif; ?>
 	<?php do_action( 'wp_travel_action_before_payment_info_field' ); // @phpcs:ignore ?>
 	<!-- Payment info -->
 	<div class="panel ws-theme-timeline-block">
-		<!-- <div id="number-accordion4" class="panel-collapse collapse in"> -->
-			<div class="panel-body">
-				<div class="payment-content">
-					<?php $wptravel_form_field->init( $wptravel_payment_fields )->render( $wptravel_trips ); ?>
-					<?php
-					/**
-					 * Before Booknow button on checkout page.
-					 *
-					 * @since 4.3.0
-					 */
-					do_action( 'wp_travel_action_before_book_now' ); // @phpcs:ignore
-					?>
-					<div class="wp-travel-form-field button-field">
-						<?php
-						WP_Travel::create_nonce_field();
-						?>
-						<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="<?php esc_html_e( 'Book Now', 'wp-travel' ); ?>">
+		<div class="panel-body">
+			<div class="payment-content">
+				<?php $wptravel_form_field->init( $wptravel_payment_fields )->render( $wptravel_trips ); ?>
+				<?php
+				/**
+				 * Before Booknow button on checkout page.
+				 *
+				 * @since 4.3.0
+				 */
+				do_action( 'wp_travel_action_before_book_now' ); // @phpcs:ignore
+				?>
+
+				<?php if( apply_filters( 'wptravel_checkout_enable_media_input', false ) == true ): ?>
+					<div class="wp-travel-form-field ">
+						<label for="media_field">
+							<?php echo esc_html( apply_filters( 'wptravel_checkout_media_input_label', __( 'Upload Media' ) ) );?>									
+						</label>
+						<input type="file" id="wptravel_media_field" name="wptravel_checkout_media_field" value="" maxlength="60" data-parsley-maxlength="60" required>			
 					</div>
+				<?php endif; ?>
+
+				<div class="wp-travel-form-field button-field">
+					<?php
+					WP_Travel::create_nonce_field();
+					?>
+					<input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value="<?php esc_html_e( 'Book Now', 'wp-travel' ); ?>">
 				</div>
 			</div>
-		<!-- </div> -->
+		</div>
 	</div>
 	<?php do_action( 'wp_travel_action_after_payment_info_field' ); // @phpcs:ignore ?>
 </form>

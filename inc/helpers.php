@@ -183,9 +183,7 @@ function wptravel_settings_default_fields() {
 	);
 
 	$user_since = get_option( 'wp_travel_user_since' );
-	// if ( version_compare( $user_since, '4.0.0', '>=' ) ) {
-	// $settings_fields['wp_travel_switch_to_react'] = 'yes';
-	// }
+
 	if ( version_compare( $user_since, '4.6.1', '>=' ) ) {
 		$settings_fields['trip_date_listing'] = 'dates';
 	}
@@ -1139,7 +1137,7 @@ function wptravel_get_frontend_tabs( $show_in_menu_query = false, $frontend_hide
 		}
 		$return_tabs = $new_tabs;
 	}
-	// echo '<pre>'; print_r( $return_tabs ); die;
+
 	return $return_tabs = apply_filters( 'wp_travel_itinerary_tabs', $return_tabs );
 }
 
@@ -2757,7 +2755,12 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 									} else {
 										echo '<div class="my-order-single-field clearfix">';
 										printf( '<span class="my-order-head">%s:</span>', esc_html( $field['label'] ) );
-										printf( '<span class="my-order-tail">%s</span>', $billing_data ); // @phpcs:ignore
+										if( $field['label'] == 'Country' && apply_filters( 'wptravel_show_full_country_name', false ) == true ){
+											printf( '<span class="my-order-tail">%s</span>', wptravel_get_countries()[$billing_data] ); // @phpcs:ignore
+										}else{
+											printf( '<span class="my-order-tail">%s</span>', $billing_data ); // @phpcs:ignore
+										}
+										
 										echo '</div>';
 									}
 								}
@@ -2801,13 +2804,15 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 											foreach ( $first_names as $key => $first_name ) :
 												?>
 												<div class="col-md-6">
-												<h3 class="my-order-single-title"><?php printf( esc_html__( 'Traveler ', 'wp-travel' ). esc_html( $key ) + 1 . ' :' ); ?></h3>
+												<h3 class="my-order-single-title"><?php echo esc_html__( 'Traveler ', 'wp-travel' ) . ( $key + 1 ) . ' :'; ?></h3>
 													<?php
 													$traveller_fields = isset( $checkout_fields['traveller_fields'] ) ? $checkout_fields['traveller_fields'] : array();
 													$traveller_fields = wptravel_sort_form_fields( $traveller_fields );
 													
 													if ( ! empty( $traveller_fields ) ) {
+														
 														if ( $indexs == 0 ) {
+															
 															foreach ( $traveller_fields as $field ) {
 																if ( 'heading' === $field['type'] ) {
 																	// Do nothing.
@@ -2819,17 +2824,23 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 																	$value = isset( $traveller_infos[ $field['name'] ] ) && isset( $traveller_infos[ $field['name'] ][0] ) ? maybe_unserialize( $traveller_infos[ $field['name'] ][0] ) : '';
 																	echo '<div class="my-order-single-field clearfix">';
 																	printf( '<span class="my-order-head">%s:</span>', $field['label'] ); // @phpcs:ignore	
-				
+																	
 																	if( $field['type'] == 'date' ){
 																		printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? wptravel_format_date( $value[ $cart_id ][ $key ] ): '' ); // @phpcs:ignore
-																	}else{														
-																		printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? $value[ $cart_id ][ $key ] : '' ); // @phpcs:ignore																	
+																	}else{		
+																		if( $field['label'] == 'Country' && apply_filters( 'wptravel_show_full_country_name', false ) == true ){
+																			printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? wptravel_get_countries()[ $value[ $cart_id ][ $key ] ]: '' );
+																		}else{
+																			printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? $value[ $cart_id ][ $key ] : '' ); // @phpcs:ignore	
+																		}											
+																																		
 																	}
 																	echo '</div>';
 																}
 															}
 															$indexs = $indexs + 1;
 														} else {
+															
 														foreach ( $traveller_fields as $field ) {
 															if ( array_key_exists( 'remove_field', $field ) ) {
 
@@ -2899,6 +2910,7 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 									</div>
 									<div class="my-order-single-field clearfix">
 										<span class="my-order-head"><?php esc_html_e( 'Country :', 'wp-travel' ); ?></span>
+										
 										<span class="my-order-tail"><?php echo esc_html( $country ); ?></span>
 									</div>
 									<div class="my-order-single-field clearfix">
@@ -2922,8 +2934,13 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 						</div>
 							<?php
 					endif;
-						?>
-
+					?>
+					<?php if( apply_filters( 'wptravel_checkout_enable_media_input', false ) == true ): ?>
+						<h3 class="my-order-single-title"><?php echo esc_html_e( 'Media Attachment : ', 'wp-travel' ); ?> 
+							<a href="<?php echo esc_url( get_post_meta( $booking_id, 'wp_travel_checkout_media', true ) ); ?>" target="_blank"><?php esc_html_e( 'See Attachment', 'WP Travel' ); ?></a>
+						</h3>
+					<?php endif; ?>
+					
 					<?php
 					if ( isset( $details['total'] ) && $details['total'] > 0 ) :
 						?>
@@ -3003,7 +3020,7 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 												if ( $sale_price ) {
 													$price = $sale_price;
 												}
-												// $price = WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $price );
+
 												// Quick fix for extras price display in admin booking section. above helper method will not work in admin part.
 												// Note : Conversion of trip extras on every page load will cause wrong extras price. because conversion rate will change everyday.
 												// @todo need to add extras price in cart data while adding it in cart.
@@ -3732,7 +3749,7 @@ function wptravel_frontend_tab_gallery( $gallery_ids ) {
 	}
 	ob_start();
 	if ( is_array( $gallery_ids ) && count( $gallery_ids ) > 0 ) :
-		$image_size = apply_filters( 'wp_travel_gallery_image', 'wp_travel_thumbnail' ); // previously using 'medium' before 1.9.0
+		$image_size = apply_filters( 'wp_travel_gallery_image', 'medium' ); // previously using 'medium' before 1.9.0
 		?>
 		<div class="wp-travel-gallery wp-travel-container-wrap">
 			<div class="wp-travel-row-wrap">
@@ -4493,7 +4510,7 @@ function wptravel_itinerary_v2_frontend_tab_gallery( $gallery_ids ) {
 	}
 	ob_start();
 	if ( is_array( $gallery_ids ) && count( $gallery_ids ) > 0 ) :
-		$image_size = apply_filters( 'wp_travel_gallery_image', 'thumbnail' ); // previously using 'medium' before 1.9.0
+		$image_size = apply_filters( 'wp_travel_gallery_image', 'medium' ); // previously using 'medium' before 1.9.0
 		?>
 		<div class="wti__gallery">
 			<ul class="wti__advance-gallery-item-list">

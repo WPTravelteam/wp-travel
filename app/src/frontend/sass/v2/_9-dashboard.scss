@@ -99,128 +99,6 @@
 			}
 		}
 
-		// For Bookings tab in wp travel dashboard
-		// #wp-travel-tab-content-bookings {
-		// 	display: block;
-		// 	.order-wrapper {
-		// 		h3 {
-		// 			display: block;
-		// 			a {
-		// 				float: right;
-		// 				margin-left: 15px;
-		// 			}
-		// 		}
-		// 		.table-wrp {
-		// 			margin: 20px 0;
-		// 			padding: 0;
-		// 			background: #fff;
-		// 			overflow: auto;
-		// 			box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
-		// 			.my-order-single-title {
-		// 				padding-top: 20px;
-		// 				padding-bottom: 16px;
-		// 				border-bottom: 1px solid #e1e1e1;
-		// 			}
-		// 			.my-order-single-field {
-		// 				margin-bottom: 5px;
-		// 				.my-order-head {
-		// 					float: left;
-		// 					margin-right: 10px;
-		// 				}
-		// 				.my-order-tail {
-		// 					display: block;
-		// 					overflow: hidden;
-		// 				}
-		// 			}
-		// 			.my-order-single-content-wrap {
-		// 				min-width: 970px;
-		// 				padding: 20px 15px;
-		// 				.my-order-single-sidebar {
-		// 					float: right;
-		// 					width: 30%;
-		// 					padding-left: 30px;
-
-		// 					.my-order-status {
-		// 						display: inline-block;
-		// 						padding: 2px 10px 3px;
-		// 						color: #fff;
-		// 						border-radius: 5px;
-		// 					}
-		// 					.wp-travel-bank-deposit-wrap {
-		// 						.wp-travel-popup {
-		// 							width: 600px;
-		// 							background: #fff;
-		// 							margin-left: calc(50% - 300px);
-		// 							padding: 20px;
-		// 							box-sizing: border-box;
-		// 							position: relative;
-		// 						}
-		// 					}
-		// 					.wp-travel-partial-payment-form-wrapper {
-		// 						.wp-travel-radio-group {
-		// 							.wp-travel-radio {
-		// 								display: flex;
-		// 								flex-wrap: wrap;
-		// 								align-items: center;
-		// 								gap: 0.3em;
-		// 								input {
-		// 									width: 5%;
-		// 								}
-		// 								label.radio-checkbox-label {
-		// 									width: 92%;
-		// 								}
-		// 							}
-		// 						}
-		// 					}
-		// 					.view-partial-info-wrapper {
-		// 						position: relative;
-		// 						z-index: 300;
-		// 						.view-partial-info {
-		// 							text-align: left;
-		// 						}
-		// 					}
-		// 				}
-
-		// 				.my-order-single-content {
-		// 					overflow: hidden;
-		// 					.row {
-		// 						margin-inline: -15px;
-		// 						.col-md-6 {
-		// 							@media (min-width: 992px) {
-		// 								width: 50%;
-		// 								float: left;
-		// 							}
-		// 						}
-		// 					}
-		// 				}
-		// 			}
-		// 			.my-order-single-price-breakdown {
-		// 				margin-top: 15px;
-		// 				margin-bottom: 30px;
-		// 				.my-order-price-breakdown-base-price-wrap {
-		// 					margin-bottom: 20px;
-		// 					padding-bottom: 8px;
-		// 					border-bottom: 1px solid #e1e1e1;
-		// 				}
-		// 				.my-order-price-breakdown-summary {
-		// 					float: right;
-		// 					min-width: 350px;
-		// 				}
-		// 			}
-
-		// 			.my-order-price-breakdown-sub-total,
-		// 			.my-order-price-breakdown-coupon-amount,
-		// 			.my-order-price-breakdown-tax-due {
-		// 				margin-bottom: 12px;
-		// 			}
-		// 			.myorder-price-breakdown {
-		// 				.my-order-head {
-		// 					margin-right: 13px;
-		// 				}
-		// 			}
-		// 		}
-		// 	}
-		// }
 	}
 	select,
 	input.form-control {
@@ -288,7 +166,6 @@
 		table.order-list-table {
 			width: 100%;
 			tbody {
-				// text-align: center;
 				text-align: left;
 			}
 		}
@@ -312,7 +189,6 @@
 		display: block;
 	}
 	.book-more {
-		// width: 18%;
 		float: right;
 		margin-top: 25px;
 		a {
@@ -345,7 +221,6 @@
 
 		.order-list-table tr {
 			border-bottom: 3px solid #ddd;
-			/*display: block;*/
 			margin-bottom: 0.625em;
 		}
 
@@ -393,7 +268,6 @@
 	.list-item {
 		display: inline-block;
 		width: 50%;
-		//float: left;
 		@media (max-width: 991px) {
 			width: 100%;
 		}
@@ -453,9 +327,7 @@
 	.single-page-article {
 		border: 1px solid #eee;
 	}
-	/*.dashboard-tab li:first-child{
-      border-top: none!important;
-    }*/
+
 	.form-horizontal label.required:after {
 		content: "*";
 		color: #f05451;
@@ -466,12 +338,7 @@
 			color: #f05451;
 		}
 	}
-	// .box-content a {
-	// 	color: #29324e;
-	// 	&:hover {
-	// 		color: #e34;
-	// 	}
-	// }
+
 	input {
 		outline: none;
 	}
@@ -651,18 +518,7 @@
 		color: #333;
 	}
 	button {
-		// text-transform: uppercase;
-		// outline: 0;
-		// background: #df1814;
-		// border: 0;
-		// padding: 10px 30px;
-		// color: #FFFFFF;
-		// font-size: 14px;
-		// -webkit-transition: all 0.3s ease;
-		// transition: all 0.3s ease;
-		// cursor: pointer;
-		// letter-spacing: 3px;
-		// border-radius: 0;
+
 
 		&:hover,
 		&:focus,
@@ -878,9 +734,6 @@
 			margin: 35px 0;
 			overflow: auto;
 			padding: 25px 15px;
-			// box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
-			// -moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
-			// -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
 		}
 		table {
 			&.order-list-table,
@@ -1091,11 +944,6 @@
 				padding-left: 30px;
 			}
 			.my-order-single-title {
-				// font-size: 15px;
-				// text-transform: uppercase;
-				// padding-top: 20px;
-				// padding-bottom: 16px;
-				// border-bottom: 1px solid #e1e1e1;
 				color: #31708f;
 				margin-bottom: 10px;
 			}
@@ -1204,8 +1052,6 @@
 				padding-bottom: 3px;
 				margin-top: 20px;
 				margin-bottom: 15px;
-				// border-top: 1px solid #e1e1e1;
-				// border-bottom: 1px solid #e1e1e1;
 				.my-order-single-field {
 					color: #545454;
 					float: right;
@@ -1217,9 +1063,6 @@
 				}
 			}
 
-			// table {
-			//     display: none;
-			// }
 		}
 	}
 	.my-order-payment-gateway {

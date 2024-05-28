@@ -13,16 +13,6 @@ export default ( { travelerData, trvOne = 'travelerOne' } ) => {
     const errorData = typeof error_list[name] != 'undefined' && error_list[name]  || '';
     var readOnly = '';
 
-    // if( id == 'billing_useremail' ){
-    //     travelerValue = _wp_travel.checkout_field.checkout_user_email
-    //     readOnly = 'readonly'
-    // }
-
-    // if( id == 'billing_userid' ){
-    //     travelerValue = _wp_travel.checkout_field.checkout_user_id
-    //     readOnly = 'readonly'
-    // }
-
     if( id == 'billing_username' ){
         readOnly = 'readonly'
     }
@@ -38,7 +28,7 @@ export default ( { travelerData, trvOne = 'travelerOne' } ) => {
                     id={ typeof id != 'undefined' && id || ''}
                     className={ typeof wrapper_class != 'undefined' && wrapper_class || ''}
                     type={ typeof type != 'undefined' && type || 'text' }  
-                    // readonly= {readOnly}
+
                     onChange={ (e => {
                         const value = _wp_travel.checkout_field.checkout_user_name
                         const newData = {...travelerDataList, [name] : value };

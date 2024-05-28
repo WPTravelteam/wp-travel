@@ -30,7 +30,6 @@
 			align-items: flex-start;
 		}
 		label {
-			// width: 250px;
 			flex-basis: 40%;
 			font-weight: bold;
 		}
@@ -226,7 +225,6 @@
 .wptravel-on-page-coupon-error {
 	font-size: 12px;
 	text-align: left;
-	// margin-right: 10px;
 	color: red;
 	margin: 10px 0;
 }
@@ -285,29 +283,6 @@
 	display: flex;
 	justify-content: flex-end;
 	max-height: 75px;
-
-	// #wp-travel__add-to-cart_notice {
-	// 	border-radius: 5px;
-	// 	margin: 10px 0 25px 0;
-
-	// 	&.success {
-	// 		padding: 10px 20px;
-	// 		background-color: #d7f3d7;
-	// 		color: #329b32;
-	// 		border: 1px solid #329b32;
-	// 	}
-
-	// 	&.error {
-	// 		padding: 10px 20px;
-	// 		background-color: #f3d7d7;
-	// 		color: #d12323;
-	// 		border: 1px solid #d12323;
-	// 	}
-
-	// 	i {
-	// 		margin-right: 7px;
-	// 	}
-	// }
 
 	.wp-travel-single-trip-add-to-cart {
 		display: flex;
@@ -424,13 +399,7 @@
 	font-weight: bold;
 	font-size: 20px;
 }
-// .animated-wp-travel {
-//     opacity: 0; 
-//     -webkit-animation-duration: 0.6s;
-//     animation-duration: 0.6s;
-//     -webkit-animation-fill-mode: both;
-//     animation-fill-mode: both;
-// }
+
 
 /**
 * Added animation for toast time-bar
@@ -456,26 +425,3 @@
         left: 100%;
     }
 }
-
-// @-webkit-keyframes fadeIn {
-// 	0% {
-// 		opacity: 0;
-// 	}
-// 	100% {
-// 		opacity: 1;
-// 	}
-// }
-
-// @keyframes fadeIn {
-// 	0% {
-// 		opacity: 0;
-// 	}
-// 	100% {
-// 		opacity: 1;
-// 	}
-// }
-
-// .fadeIn-wp-travel {
-// 	-webkit-animation-name: fadeIn;
-// 	animation-name: fadeIn;
-// }

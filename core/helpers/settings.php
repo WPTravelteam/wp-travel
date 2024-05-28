@@ -15,7 +15,6 @@ class WP_Travel_Helpers_Settings {
 		$mapped_currency_options = array();
 		$i                       = 0;
 		foreach ( $currency_options as $value => $label ) {
-			// $mapped_currency_options[ $i ]['label'] = $label;
 			$mapped_currency_options[ $i ]['label'] = $label . ' (' . html_entity_decode( wptravel_get_currency_symbol( $value ) ) . ')';
 			$mapped_currency_options[ $i ]['value'] = $value;
 			$i++;

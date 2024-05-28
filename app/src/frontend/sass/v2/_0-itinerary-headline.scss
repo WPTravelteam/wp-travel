@@ -13,7 +13,6 @@
 			height: 100%;
 			width: 100%;
 			margin: 0;
-			// display: none;
 			visibility: hidden;
 
 			@include sidr-view {
@@ -55,7 +54,6 @@
 		position: relative;
 		line-height: inherit;
 		background: none;
-		// overflow: hidden;
 
 		@include sidr-view {
 			width: 100%;
@@ -73,16 +71,10 @@
 	.banner-image-wrapper {
 		height: 100%;
 		width: 100%;
-		// background-attachment: fixed !important;
 		background-position: center !important;
 		background-repeat: no-repeat !important;
 		background-size: cover !important;
-		// min-height: 100vh;
 
-		@include sidr-view {
-			/* background-image: none !important;
-            height: auto; */
-		}
 	}
 
 	.wptravel-price-wrap {
@@ -92,8 +84,6 @@
 		.wp-travel-trip-detail {
 			position: relative;
 			margin-bottom: 20px;
-			// display: inline-block;
-			//float: left;
 		}
 	}
 
@@ -276,10 +266,8 @@
 //Close button for Trip Enquiry Form popup
 .mfp-wrap button.mfp-close {
 	margin: 0;
-	// right: -29px;
 	right: 0;
 	box-shadow: none;
-	// top: 7px;
 	top: 0;
 	display: inline-block;
 	background: #fff;
@@ -374,22 +362,18 @@ label.radio-checkbox-label {
 
 	.wp-travel-form-field {
 		label {
-			// width: 100%;
 			display: inline-block;
-			// margin-bottom: 5px;
 		}
 
 		input:not([type="checkbox"]):not([type="radio"]),
 		select {
 			width: 100%;
-			// margin-bottom: 15px;
 			margin-bottom: 0;
 			font-size: 14px;
 			padding: 0.6em 1em 0.6em;
 		}
 
 		&.textarea-field {
-			// margin-bottom: 0px;
 
 			textarea {
 				padding: 0.6em 1em 0.6em;
@@ -414,14 +398,7 @@ label.radio-checkbox-label {
 			display: none;
 		}
 	}
-	// .parsley-errors-list {
-	// 	position: relative;
-	// 	margin-left: 0;
-	// 	padding-left: 15px;
-	// 	margin-bottom: 0;
-	// 	margin-top: -15px;
-	// 	font-size: 12px;
-	// }
+
 }
 
 .mfp-wrap {
@@ -457,22 +434,18 @@ label.radio-checkbox-label {
 
 	.wp-travel-form-field {
 		label {
-			// width: 100%;
 			display: inline-block;
-			// margin-bottom: 5px;
 		}
 
 		input:not([type="checkbox"]):not([type="radio"]),
 		select {
 			width: 100%;
-			// margin-bottom: 15px;
 			font-size: 14px;
 			padding: 0.6em 1em 0.6em;
 			margin-bottom: 0;
 		}
 
 		&.textarea-field {
-			// margin-bottom: 0px;
 
 			textarea {
 				padding: 0.6em 1em 0.6em;
@@ -492,21 +465,12 @@ label.radio-checkbox-label {
 			margin-bottom: 0 !important;
 		}
 	}
-	// .parsley-errors-list {
-	// 	position: relative;
-	// 	margin-left: 0;
-	// 	padding-left: 15px;
-	// 	margin-bottom: 0;
-	// 	margin-top: -15px;
-	// 	font-size: 12px;
-	// }
+
 }
 
 .mfp-wrap {
 	#wp-travel-enquiries {
 		button.mfp-close {
-			// right: -3px;
-			// top: -2px;
 			top: 7px;
 			right: 6px;
 			background-color: transparent;
@@ -520,7 +484,6 @@ label.radio-checkbox-label {
 	}
 }
 
-// Multiple Currency Dropdown width
 .main-navigation ul {
 	align-items: center;
 }

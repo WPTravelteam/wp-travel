@@ -105,7 +105,6 @@ if ( ! class_exists( 'WP_Travel_Coupons_Pro_Install' ) ) :
 			$new_columns['title']          = _x( 'Coupon Name', 'column name', 'wp-travel' );
 			$new_columns['coupon_code']    = _x( 'Coupon Code', 'column name', 'wp-travel' );
 			$new_columns['discount_value'] = _x( 'Discount Value', 'column name', 'wp-travel' );
-			// $new_columns['max_users']  = _x( 'Max Uses', 'column name', 'wp-travel' );
 			$new_columns['used_so_far']     = _x( 'Usage Count', 'column name', 'wp-travel' );
 			$new_columns['expiration_date'] = _x( 'Expitration Date', 'column name', 'wp-travel' );
 			$new_columns['coupon_status']   = __( 'Coupon Status', 'wp-travel' );

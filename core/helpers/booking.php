@@ -459,10 +459,17 @@ class WpTravel_Helpers_Booking {
 								$last_name = isset( $last_names[ $key ] ) ? $last_names[ $key ] : '';
 								$country   = isset( $countries[ $key ] ) ? $countries[ $key ] : '';
 								
-								$country  = wptravel_get_countries()[ array_search($country, wptravel_get_countries()) ];
+								if( array_search($country, wptravel_get_countries()) !== false ){
+									$country  = wptravel_get_countries()[ array_search($country, wptravel_get_countries()) ];
+								}
+								
                                 if(!$country){
                                     $country = wptravel_get_countries()[$countries[ $key ]];
                                 }
+
+								if( apply_filters( 'wptravel_show_full_country_name', false ) == true ){
+									$country = wptravel_get_countries()[$country];
+								}
 
 								$phone     = isset( $phones[ $key ] ) ? $phones[ $key ] : '';
 								$email     = isset( $emails[ $key ] ) ? $emails[ $key ] : '';

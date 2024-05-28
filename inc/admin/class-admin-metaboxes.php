@@ -325,10 +325,8 @@ class WP_Travel_Admin_Metaboxes {
 				_.each( data, function( val ){
 			#>
 			<li data-attachmentid="{{val.id}}" id="wp-travel-gallery-image-list-{{val.id}}">
-				<!-- <a href=""> -->
 					<img src="{{val.url}}" width="100" title="<?php esc_html_e( 'Click to make featured image.', 'wp-travel' ); ?>"/>
 					<span><?php esc_html_e( 'Delete', 'wp-travel' ); ?></span>
-				<!-- </a> -->
 			</li>
 			<#
 				});

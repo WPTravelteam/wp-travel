@@ -6,11 +6,6 @@ const __i18n = {
 	..._wp_travel_admin.strings
 }
 
-// @todo Need to remove this in future.
-// const WPTravelTripOptionsMisc = () => {
-//     return <></>
-// }
-// export default WPTravelTripOptionsMisc;
 
 // Single Components for hook callbacks.
 const TripEnquiryTitle = () => {

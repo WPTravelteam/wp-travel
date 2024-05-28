@@ -1,9 +1,8 @@
 import { useState, useEffect } from '@wordpress/element';
-import { TextControl, PanelBody, PanelRow, ToggleControl, Button, FormTokenField,SelectControl, Dropdown, RangeControl, DateTimePicker , Notice} from '@wordpress/components';
-import { useSelect, dispatch } from '@wordpress/data';
+import { PanelRow, ToggleControl } from '@wordpress/components';
+import { dispatch } from '@wordpress/data';
 import {format} from '@wordpress/date'
-import apiFetch from '@wordpress/api-fetch';
-import { sprintf, _n, __} from '@wordpress/i18n';
+import { _n, __} from '@wordpress/i18n';
 import { applyFilters, addFilter } from '@wordpress/hooks';
 import _ from 'lodash';
 
@@ -18,7 +17,7 @@ const __i18n = {
 	..._wp_travel_admin.strings
 }
 const Dates = ( {allData} ) => {
-    const { updateTripData, updateRequestSending, setTripData, updateStateChange } = dispatch('WPTravel/TripEdit');
+    const { updateTripData } = dispatch('WPTravel/TripEdit');
 
     const {is_fixed_departure, has_state_changes, is_multiple_dates, dates, trip_time, pricings, trip_duration } = allData;
 
@@ -120,14 +119,12 @@ const Dates = ( {allData} ) => {
                 {applyFilters( 'wp_travel_trip_duration_condition', [], allData ) }
                 <DateDurationSelect allData={allData} />
                 <DateDuration allData={allData} format={'day'} /> 
-                {/* <Notice status="warning" isDismissible={false}>{__( 'Inventory option will only work in fixed departure date.', 'wp-travel')}</Notice> */}
                 { applyFilters( 'wp_travel_trip_duration_validation', [], allData ) }
             </>
         }
         {applyFilters('wp_travel_after_dates_options', [], allData)}
     </div>
     {applyFilters('wp_travel_itinerary_price_tab_table_last_row', '', allData )}
-    {/* <ExcludedDates /> */}
     <hr/>
     </ErrorBoundary>
 }

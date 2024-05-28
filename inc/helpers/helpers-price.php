@@ -287,7 +287,6 @@ function wptravel_booking_data( $booking_id ) {
 			$paid_amount = number_format( $paid_amount, 2, '.', '' );
 
 			$total_paid_amount += $paid_amount;
-			// $last_payment_id = $payment_id;
 		}
 	} else {
 		$payment_id = $payment_ids;

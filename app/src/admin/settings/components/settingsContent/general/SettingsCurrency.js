@@ -115,7 +115,6 @@ export default forwardRef((props) => {
                     <label>{_wp_travel.setting_strings.currency.thousand_separator}</label>
                     <div id="wp-travel-thousand-separator" className="wp-travel-field-value">
                         <TextControl
-                            // help={__( 'This sets the thousand separator of displayed prices.', 'wp-travel' )}
                             value={thousand_separator}
                             onChange={
                                 (value) => {
@@ -132,8 +131,7 @@ export default forwardRef((props) => {
                 <PanelRow>
                     <label>{_wp_travel.setting_strings.currency.decimal_separator}</label>
                     <div id="wp-travel-decimal-separator" className="wp-travel-field-value">
-                        <TextControl
-                            // help={__( 'This sets the decimal separator of displayed prices.', 'wp-travel' )}
+                        <TextControl                            
                             value={decimal_separator}
                             onChange={
                                 (value) => {
@@ -150,8 +148,7 @@ export default forwardRef((props) => {
                 <PanelRow>
                     <label>{_wp_travel.setting_strings.currency.number_decimals}</label>
                     <div id="wp-travel-number-decimals" className="wp-travel-field-value">
-                        <TextControl
-                            // help={__( 'This sets the number of decimal of displayed prices.', 'wp-travel' )}
+                        <TextControl                            
                             value={number_of_decimals}
                             type="number"
                             onChange={

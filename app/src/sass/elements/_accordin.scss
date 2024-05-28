@@ -1,18 +1,7 @@
 .tab-accordion {
 	.panel-heading {
 		position: relative;
-		// .collapse-icon {
-		//     position: absolute;
-		//     right: 50px;
-		//     width: 20px;
-		//     height: 20px;
-		//     top: calc( 50% - 10px);
-		//     border-radius: 50%;
-		//     float: right;
-		//     text-align: center;
-		// }
 		[data-toggle="collapse"] {
-			// color: #444;
 			& span.collapse-icon:after {
 				font-family: "dashicons";
 				content: "\f142";
@@ -20,7 +9,6 @@
 			}
 		}
 		[data-toggle="collapse"].collapsed {
-			// color: #999;
 			& span.collapse-icon:after {
 				content: "\f140";
 			}
@@ -34,12 +22,6 @@
 		}
 	}
 	h4 {
-		// a {
-		//     .faq-label {
-		//         padding-right: 50px;
-		//         display: block;
-		//     }
-		// }
 		.wt-accordion-close,
 		.wt-utils-accordion-close {
 			position: absolute;
@@ -132,7 +114,6 @@
 
 		&.new-category-row-heading {
 			background: #53b392;
-			// padding: 10px 30px;
 			padding: 10px;
 		}
 		&.new-category-row-content {
@@ -143,8 +124,6 @@
 
 				.wp-travel-remove-pricing-category {
 					position: absolute;
-					// top: calc( 50% - 20px );
-					// right: -15px;
 					top: 0;
 					right: 0;
 					background: #a00;
@@ -216,10 +195,7 @@
 		-ms-flex-wrap: wrap;
 		flex-wrap: wrap;
 		width: 66.6666%;
-		select,
-		input {
-			// width: 30%;
-		}
+
 		.show-in-frontend {
 			float: left !important;
 			max-width: 100% !important;
@@ -372,18 +348,11 @@
 		display: flex;
 		justify-content: right;
 		a {
-			// float: right;
 			padding: 5px 10px;
-			// margin-left: 15px;
 			border: 1px solid #8b8b8b;
-			// border: none;1
-			// font-size: 12px;
 			text-decoration: none;
 			margin-left: 10px;
-			// &:active,
-			// &:hover {
-			// 	border: none;
-			// }
+
 		}
 	}
 
@@ -421,50 +390,34 @@
 				border-radius: 50%;
 				float: right;
 				text-align: center;
-				// top: 7px;
 				top: 5px;
 			}
 			&.collapsed {
 				.collapse-icon {
-					// top: 13px;
 					top: 12px;
 				}
 			}
 		}
 
 		[data-toggle="collapse"] {
-			// color: #444;
 
 			& span.collapse-icon:after {
-				// font-family: 'dashicons';
 				font-family: "Font Awesome 5 Free";
 				font-weight: 900;
-				// content: "\f142";
-				// content: "\f0dd";
-				// font-size: 18px;
 				font-size: 15px;
 				content: "\f077";
 				position: absolute;
-				// top: 5px;
 				top: 7px;
 			}
 		}
 
 		[data-toggle="collapse"].collapsed {
-			// color: #999;
-			// background: none;
 
 			& span.collapse-icon:after {
-				// content: "\f140";
-				// content: "\f0de";
 				content: "\f078";
-				// top: 0;
 				top: 2px;
 			}
 
-			// &:hover {
-			// 	color: #444;
-			// }
 		}
 
 		.collapse-icon:focus {
@@ -474,13 +427,7 @@
 	}
 
 	h4 {
-		// border: 1px solid #ddd;
-		// padding: 10px 40px 10px 15px;
-		// margin: 0;
-		// background-color: #f7f7f1;
-		// position: relative;
-		// font-size: 14px;
-		// font-weight: 500;
+
 		margin-bottom: 0;
 		margin-top: 10px;
 
@@ -494,14 +441,9 @@
 			border: 1px solid #ddd;
 			padding: 10px 40px 10px 15px;
 			margin: 0;
-			// background-color: #f7f7f1;
-			// background: #e7e7e7;
 			position: relative;
-			// font-size: 14px;
 			font-weight: normal;
 			display: block;
-
-			// color: #999;
 			text-decoration: none;
 		}
 
@@ -528,7 +470,6 @@
 	}
 
 	.panel-default {
-		// margin-bottom: 0;
 		margin-bottom: 0.5em;
 		background-color: #fff;
 	}
@@ -579,8 +520,6 @@
 	}
 
 	h4 {
-		// border: 1px solid #ddd;
-		// padding: 10px 15px 10px 45px;
 		margin: 0 !important;
 		background-color: #f7f7f1;
 		position: relative;
@@ -612,7 +551,6 @@
 
 	.panel-collapse {
 		padding: 0;
-		// border: 1px solid #ddd;
 		border-top: none;
 	}
 
@@ -700,30 +638,4 @@
 			}
 		}
 	}
-}
-
-//faq section
-.wp-collapse-open {
-	// span {
-	//     float: right;
-	//     padding: 5px 15px;
-	//     position: relative;
-	//     cursor: pointer;
-	//     &:before {
-	//         font-family: dashicons;
-	//         position: absolute;
-	//         right: -5px;
-	//         font-size: 18px;
-	//     }
-	// }
-	.open-all {
-		// &:before {
-		//     content: "\f134";
-		// }
-	}
-	// .close-all {
-	//     &:before {
-	//         content: "\f333";
-	//     }
-	// }
 }

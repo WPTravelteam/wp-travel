@@ -112,26 +112,20 @@ $alto: #ddd;
 				flex-direction: column;
 
 				.wp-travel-article-image-wrap {
-					// width: 28%;
 					width: 100%;
 				}
 
 				.wp-travel-entry-content-wrapper {
-					// width: 69%;
 					width: 100%;
 
 					.description-left {
-						// width: 70%;
 						width: 100%;
 					}
 
 					.description-right {
 						width: 100%;
-						// width: 30%;
 						float: left;
-						// text-align: center;
 						text-align: left;
-						// border-left: 1px solid #eee;
 						border-left: 0;
 					}
 				}
@@ -188,17 +182,10 @@ ul.availabily-list {
 
 		border-bottom: 1px solid #e3e3e3;
 		line-height: 1.2;
-		// padding: 10px 0 20px;
 		margin: 10px 0;
 		position: relative;
 		padding: 20px 0;
 
-		&:first-child {
-			div {
-				// font-size: 15px;
-				// color: #c56462;
-			}
-		}
 
 		& > div {
 			display: inline-block;
@@ -210,7 +197,6 @@ ul.availabily-list {
 
 			input[type="text"] {
 				border: 1px solid #ccc;
-				// border-radius: 0;
 				font-size: 13px;
 				height: 35px;
 				padding-left: 10px;
@@ -258,7 +244,6 @@ ul.availabily-list {
 
 			&.price,
 			&.status {
-				// text-align: center;
 				padding: 0 15px;
 			}
 
@@ -271,14 +256,12 @@ ul.availabily-list {
 					border: none;
 					font-size: 14px;
 					display: inline-block;
-					// background: #f83531;
 					color: #fff;
 					border-radius: 4px;
 				}
 			}
 
 			span {
-				// display: block;
 				font-size: 14px;
 				font-weight: 400;
 				text-transform: capitalize;
@@ -309,7 +292,6 @@ ul.availabily-list {
 				}
 
 				&.animate {
-					// background-color: #f9f9f9;
 					padding: 15px;
 					padding-left: 15px !important;
 					height: auto;
@@ -343,9 +325,6 @@ ul.availabily-list {
 					display: inline-block;
 					width: auto;
 
-					// padding: 0 15px;
-					// margin-top: 27px;
-					// margin-bottom: 30px;
 					@include xs {
 						padding-left: 0;
 					}
@@ -414,7 +393,6 @@ ul.availabily-list {
 	&.additional-col {
 		li {
 			> div {
-				// width: 16.66%;
 				width: 14.26%;
 			}
 		}
@@ -439,9 +417,7 @@ ul.availabily-list {
 	}
 
 	.availabily-content {
-		// input[type="number"] {
-		//     width: 70%;
-		// }
+
 		.btn {
 			padding: 8px 15px;
 			border: 1px solid #8b8b8b;
@@ -499,7 +475,6 @@ ul.availabily-list {
 	}
 
 	ul.availabily-list li form > div span {
-		// display: block;
 		font-size: 14px;
 	}
 
@@ -571,8 +546,7 @@ ul.availabily-list {
 //end
 //trips facts
 .tour-info {
-	// margin: 0 0 30px;
-	// margin: 30px 0;
+
 	margin-block: 20px;
 
 	.tour-info-box {
@@ -583,8 +557,6 @@ ul.availabily-list {
 
 	.tour-info-column {
 		width: 100%;
-		// display: flex;
-		// flex-wrap: wrap;
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
 		gap: 1em;
@@ -593,12 +565,10 @@ ul.availabily-list {
 			display: inline-flex;
 			margin: 2px 0;
 			align-items: center;
-			// width: 33.3333333%;
 			flex-wrap: wrap;
 			align-items: center;
 			padding: 0;
 			width: 100%;
-			// padding: 0 10px;
 
 			@include sidr-view {
 				width: 50%;
@@ -613,7 +583,6 @@ ul.availabily-list {
 
 			i {
 				font-size: 16px;
-				// padding-right: 10px;
 				width: 30px;
 				line-height: 25px;
 			}
@@ -722,12 +691,10 @@ ul.availabily-list {
 					}
 
 					&:nth-child(2) {
-						// width: 17%;
 						width: 23%;
 					}
 
 					&:nth-child(3) {
-						// width: 38%;
 						width: 15%;
 					}
 
@@ -736,12 +703,10 @@ ul.availabily-list {
 					}
 
 					&:nth-child(5) {
-						// width: 10%;
 						width: 15%;
 					}
 
 					&:nth-child(6) {
-						// width: 10%;
 						width: 12%;
 					}
 				}
@@ -940,17 +905,14 @@ ul.availabily-list {
 			}
 
 			.my-order-single-title {
-				// font-size: 15px;
 				text-transform: uppercase;
 				padding-top: 20px;
 				padding-bottom: 16px;
 				border-bottom: 1px solid #e1e1e1;
-				// color: #31708f;
 				margin-bottom: 10px;
 			}
 
 			.my-order-single-sub-title {
-				// font-size: 14px;
 				font-weight: 600;
 				padding-top: 40px;
 				border-bottom: 1px solid #e1e1e1;
@@ -985,10 +947,6 @@ ul.availabily-list {
 					display: block;
 					overflow: hidden;
 				}
-
-				// a {
-				// 	color: #31708f;
-				// }
 
 				&.my-order-additional-note {
 					.my-order-head {
@@ -1094,9 +1052,6 @@ ul.availabily-list {
 				}
 			}
 
-			// table {
-			//     display: none;
-			// }
 		}
 	}
 

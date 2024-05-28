@@ -4,11 +4,6 @@ const __i18n = {
 	..._wp_travel_admin.strings
 }
 
-// @todo Need to remove this in future.
-// const WPTravelTripOptionsInventoryOptions = () => {
-//     return <>{applyFilters('wp_travel_trip_inventory_tab_content', '')}</>;
-// }
-// export default WPTravelTripOptionsInventoryOptions;
 
 // Single Components for hook callbacks.
 const InventoryNotice = ( {settingsData, map_data } ) => {

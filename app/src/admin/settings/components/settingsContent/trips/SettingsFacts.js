@@ -1,6 +1,6 @@
 import { useSelect, dispatch } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
-import { PanelBody, PanelRow, ToggleControl, TextControl, FormTokenField, Button, Disabled, Spinner, Modal, TabPanel, Notice } from '@wordpress/components';
+import { PanelBody, PanelRow, ToggleControl, TextControl, FormTokenField, Button, Disabled } from '@wordpress/components';
 import Select from '../../UI/Select';
 import { useState } from '@wordpress/element';
 

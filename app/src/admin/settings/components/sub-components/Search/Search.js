@@ -1,4 +1,4 @@
-import { useState, useEffect, createPortal } from '@wordpress/element'
+import { useState, createPortal } from '@wordpress/element'
 import { _n, __ } from "@wordpress/i18n";
 
 import Select from "../../UI/Select";

@@ -1,6 +1,5 @@
 import { _n, __ } from '@wordpress/i18n';
 import { PanelRow, TextControl } from '@wordpress/components';
-import { useEffect, useState } from '@wordpress/element';
 
 // Icon Class Content.
 const IconClassContent = (props) => {

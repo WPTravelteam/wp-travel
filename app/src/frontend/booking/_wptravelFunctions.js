@@ -13,7 +13,6 @@ const wpTravelFormat = (_num, style = 'currency') => {
     let replaceWith = `$&${kiloSeparator}`
 
     let _formattedNum = parseFloat(_num).toFixed( _toFixed == 0 ? 1 : _toFixed ).replace(/\./,decimalSeparator).replace(regEx, replaceWith)
-    // _formattedNum = String(_formattedNum).replace(/\./, ',')
     if( _toFixed == 0 ){
         _formattedNum =  _formattedNum.split(decimalSeparator)[0]
     }
@@ -36,7 +35,6 @@ const wpTravelFormatV2 = (_num, style = 'currency') => {
     let replaceWith = `$&${kiloSeparator}`
 
     let _formattedNum = parseFloat(_num).toFixed(_toFixed).replace(/\./,decimalSeparator).replace(regEx, replaceWith)
-    // _formattedNum = String(_formattedNum).replace(/\./, ',')
 
     if( _toFixed == 0 ){
         _formattedNum =  _formattedNum.split(decimalSeparator)[0]
@@ -82,7 +80,6 @@ const GetConvertedPriceCB = ( price ) => {
     
     let conversionRate = 'undefined' !== typeof _wp_travel && 'undefined' !== typeof _wp_travel.conversion_rate ? _wp_travel.conversion_rate : 1;
 
-    // conversionRate     = parseFloat( conversionRate ).toFixed( 2 );
     return parseFloat( price * conversionRate ).toFixed( _toFixed );
 }
 // Hooks.

@@ -6,10 +6,8 @@ import { __ } from '@wordpress/i18n';
 const __i18n = {
 	..._wp_travel.strings
 }
-// Additional lib @todo need to implement path lib.
-// const _ = lodash;
+
 import _ from 'lodash';
-// import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
 
 const bookingStoreName = 'WPTravelFrontend/BookingData';
@@ -60,7 +58,6 @@ const WpTravelBookNow = ( props ) => {
 			total = _.size(paxCounts) > 0 && Object.entries(paxCounts).map(([i, count]) => {
 				tpax += parseInt(count)
 				return count > 0 && getCategoryPrice(i, count) || 0 // i is category id here.
-				// return parseFloat(price) * count
 			}).reduce((acc, curr) => acc + curr) || 0
 		}
 
@@ -169,7 +166,6 @@ const WpTravelBookNow = ( props ) => {
 			}).then(res => {
 
 				if ( applyFilters( 'wptravel_redirect_to_checkout', true ) && true === res.success && 'WP_TRAVEL_ADDED_TO_CART' === res.data.code) {
-					// location.href = wp_travel.checkoutUrl; // [only checkout page url]
 					apiFetch( {
 						url: `${wp_travel.ajaxUrl}?action=wptravel_get_payment_field&_nonce=${_wp_travel._nonce}`,
 						method: 'GET',

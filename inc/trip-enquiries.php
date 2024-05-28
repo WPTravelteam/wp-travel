@@ -478,24 +478,3 @@ add_action( 'wp_ajax_nopriv_wptravel_save_user_enquiry', 'wptravel_save_user_enq
 function is_blog() {
 	return ( is_archive() || is_author() || is_category() || is_home() || is_tag() );
 }
-
-/*
-function wptravel_enquiry_form_header() {
-	if ( is_blog() ) {
-		return;
-	}
-	$strings = array();
-	if ( class_exists( 'WpTravel_Helpers_Strings' ) ) {
-		$string = WpTravel_Helpers_Strings::get(); 
-	}
-	$strings = isset( $string['trip_enquiry'] ) ? $string['trip_enquiry'] : apply_filters( 'wp_travel_trip_enquiry_title', __( 'Trip Enquiry', 'wp-travel' ) ) ;
-	$enquiry = isset( $string['enquiry'] ) ? $string['enquiry'] : apply_filters( 'wp_travel_enquiry_labels', __( 'Enquiry', 'wp-travel' ) ) ;
-	?>
-		<!-- <div class="wp-travel-inquiry__form-header">
-			<h3><?php echo esc_html( $enquiry ) . ': ' . esc_html( get_the_title() ); ?></h3>
-		</div> -->
-	<?php
-}
-
-// add_action( 'wp_travel_enquiries_before_form_field', 'wptravel_enquiry_form_header', 20 );
- */

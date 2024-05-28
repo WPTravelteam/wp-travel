@@ -14,13 +14,9 @@ import TextArea from './form/TextArea';
 import { useEffect, useState } from '@wordpress/element'
 import { __ } from '@wordpress/i18n';
 
-import ProgressBary from '../ProgressBary';
 import SelectOption from './form/SelectOption';
-import Heading from './form/Heading';
 
-import $ from 'jquery';
-
-import { wpTravelFormat, objectSum, GetConvertedPrice } from '../../_wptravelFunctions';
+import { wpTravelFormat  } from '../../_wptravelFunctions';
 
 export default ( ) => {
     // Booking Data/state.

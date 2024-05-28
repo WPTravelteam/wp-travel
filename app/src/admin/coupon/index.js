@@ -41,7 +41,6 @@ const WPTravelCoupon = () => {
     toggleDisablePostUpdate(allData.has_state_changes);
 
     let wrapperClasses = "wp-travel-block-tabs-wrapper wp-travel-trip-settings";
-    // wrapperClasses = allData.is_sending_request ? wrapperClasses + ' wp-travel-sending-request' : wrapperClasses;
 
     // Add filter to tabs.
     let tabs = applyFilters('wptravel_coupon_tabs', [

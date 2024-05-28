@@ -1,6 +1,4 @@
-import { useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
-import apiFetch from '@wordpress/api-fetch';
 const __i18n = {
 	..._wp_travel.strings
 }

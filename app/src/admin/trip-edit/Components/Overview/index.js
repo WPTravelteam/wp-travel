@@ -14,9 +14,6 @@ const TripOverview = ({ allData }) => {
 	const { updateTripData } = dispatch("WPTravel/TripEdit");
 	return (
 		<>
-			{/* <PanelRow>
-            <label htmlFor="wp-travel-trip-overview">{__i18n.overview}</label>
-        </PanelRow> */}
 			<PanelRow className="wp-travel-editor">
 				{"undefined" !== typeof trip_overview && (
 					<WPEditor

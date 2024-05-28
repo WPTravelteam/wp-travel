@@ -1,9 +1,7 @@
-import { applyFilters } from '@wordpress/hooks';
-import { useSelect, select, dispatch, withSelect } from '@wordpress/data';
+import { useSelect, select, dispatch } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
-import { PanelRow, ToggleControl, TextControl } from '@wordpress/components';
-import Select from 'react-select'
-import { VersionCompare } from '../../../../fields/VersionCompare'
+import { PanelRow, ToggleControl } from '@wordpress/components';
+// import Select from 'react-select'
 
 import ErrorBoundary from '../../../../../ErrorBoundry/ErrorBoundry';
 
@@ -20,12 +18,7 @@ export default () => {
         create_user_while_booking,
         generate_username_from_email,
         generate_user_password,
-
         options } = allData;
-
-
-
-
 
     let enableCheckoutCustomerRegistration = 'undefined' != typeof enable_checkout_customer_registration ? enable_checkout_customer_registration : 'no'
     let enableMyAccountCustomerRegistration = 'undefined' != typeof enable_my_account_customer_registration ? enable_my_account_customer_registration : 'no'

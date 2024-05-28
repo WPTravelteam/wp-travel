@@ -498,6 +498,9 @@ function wptravel_send_email_payment( $booking_id ) {
 		'{payment_details}'        => WpTravel_Helpers_Payment::render_payment_details( $booking_id ),
 	);
 
+	if( apply_filters( 'wptravel_checkout_enable_media_input', false ) == true ){
+		$email_tags['{media_attachment}'] = '<a href="'.esc_url( get_post_meta( $booking_id, "wp_travel_checkout_media", true )).'" target="_blank">'.esc_html__( 'See attachment', 'wp-travel' ).'</a>';
+	}
 	/**
 	 * Hook To modify payment email Tag
 	 *

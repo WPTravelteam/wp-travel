@@ -1,6 +1,5 @@
 .wp-travel-form-field {
 	.parsley-errors-list {
-		// padding-left: 0px;
 		list-style: none;
 		color: #ff0000;
 		display: inline;
@@ -12,11 +11,9 @@
 
 .checkout-page-wrap {
 	display: grid;
-	// grid-template-columns: 1fr 35%;
 	grid-template-columns: 1fr 42%;
 	grid-gap: 35px;
 	margin-top: 0px;
-	// grid-gap: 100px;
 	.number-accordion {
 		.checkout-accordion {
 			.panel-default {
@@ -24,9 +21,6 @@
 			}
 			h4 {
 				margin: 0;
-
-				// Applying margin bottom to the traveler accordion
-				// margin-bottom: .5em;
 			}
 		}
 	}
@@ -54,10 +48,6 @@
 		}
 		.sticky-sidebar {
 			top: 48px;
-			//     .checkout-right {
-			//         padding: 0;
-			//         border: 0;
-			//     }
 		}
 	}
 	.wp-travel-checkout-section {
@@ -69,9 +59,7 @@
 		.checkout-left {
 			border-radius: 5px;
 			border-color: #ccc;
-			// .wp-travel-booking{
 			.wp-travel-trip-details {
-				// margin-top: 0;
 				.ws-theme-timeline-block {
 					.panel-body {
 						border: 1px solid #dddddd;
@@ -81,7 +69,6 @@
 			}
 			.ws-theme-timeline-block {
 				.panel-body {
-					// padding: 0;
 					padding: 5px 15px;
 					.payment-content {
 						.wp-travel-form-field {
@@ -122,9 +109,6 @@
 	}
 
 	.checkout-block {
-		// background-color: #fff;
-		// padding: 20px 15px;
-		// border: 1px solid #eee;
 
 		h3 {
 			font-size: 18px;
@@ -257,9 +241,7 @@
 				margin-bottom: 5px !important;
 			}
 		}
-		// label:not(.radio-checkbox-label) {
-		// 	width: auto;
-		// }
+
 		&.payment-card-field {
 			display: flex;
 			flex-wrap: wrap;
@@ -271,17 +253,12 @@
 		label {
 			font-weight: 600;
 		}
-		// &.wp-travel-enquiry-subscribe-section {
-		// 	> label {
-		// 		width: 100% !important;
-		// 	}
-		// }
+
 
 		input:not([type="radio"]):not([type="checkbox"]):not([type="submit"]),
 		select,
 		textarea {
 			width: 100%;
-			// margin-bottom: 15px;
 			margin-bottom: 0;
 			padding: 3px 15px;
 		}
@@ -310,7 +287,6 @@
 			}
 
 			.radio-checkbox-label {
-				// display: inline-block;
 				float: none;
 				display: inline;
 				padding-right: 0;
@@ -355,7 +331,6 @@
 
 			.parsley-errors-list {
 				float: right;
-				// margin: -15px 0 0;
 				margin: 0;
 			}
 		}
@@ -412,17 +387,7 @@
 }
 
 #shopping-cart {
-	// border-radius: 5px;
-	// border: 1px solid #ccc;
-	// overflow: hidden;
-	// position: sticky;
-	// top: 20px;
-	// background-color: #fff;
-	// box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
 
-	// a {
-	// 	color: $primaryColor;
-	// }
 	.wp-travel-cart-loader {
 		position: absolute;
 		top: 0;
@@ -433,7 +398,6 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		// z-index: 22222222222;
 		svg {
 			width: 30px;
 			height: 30px;
@@ -445,9 +409,6 @@
 	}
 	.btn {
 		outline: none;
-		// border: 1px solid $primaryColor;
-		// background-color: $primaryColor;
-		// color: #fff;
 		padding: 0.75em 1em;
 		font-size: 16px;
 		font-weight: 500;
@@ -479,12 +440,7 @@
 		padding: 1rem;
 		background: #fff;
 		.cart-header {
-			// padding: 1em 1.5em 0.5em;
 			.title {
-				// font-size: 18px;
-				// font-weight: bold;
-				// color: #444;
-				// display: flex;
 				margin: 0;
 				svg {
 					width: 20px;
@@ -497,16 +453,8 @@
 			}
 			.subtitle {
 				color: #999;
-				// font-weight: 500;
-				// font-size: 14px;
 				margin: 0;
 				strong {
-					// display: inline-block;
-					// border-radius: 3px;
-					// background-color: #444;
-					// color: #fff;
-					// padding: 0 5px;
-					// line-height: 1;
 					border-radius: 2px;
 					background-color: #444;
 					color: #fff;
@@ -516,58 +464,17 @@
 		}
 		.list-group {
 			list-style: none;
-			// padding: 0 1.5em;
-			// margin: 1em 0 0 0;
 			padding: 0;
 			margin: 0;
 			li {
 				position: relative;
-				// margin: 20px 0;
-				// background: #f1f1f1;
-				// padding: 15px;
-				// border-radius: 0px 27px;
 				&:not(:first-child) {
 					border-top: 1px solid #f4f4f4;
 				}
-				// .del-btn {
-				// 	font-size: 12px;
-				// 	position: absolute;
-				// 	top: -5px;
-				// 	left: -10px;
-				// 	padding: 0;
-				// 	border-radius: 50%;
-				// 	background-color: #444;
-				// 	color: #fff;
-				// 	width: 20px;
-				// 	height: 20px;
-				// 	text-align: center;
-				// 	border: 0;
-				// 	line-height: unset;
-				// 	cursor: pointer;
-				// 	z-index: 1;
-				// 	display: flex;
-				// 	align-items: center;
-				// 	justify-content: center;
-				// 	&:hover {
-				// 		background-color: red;
-				// 	}
-				// }
-				// .edit-trip {
-				// 	position: absolute;
-				// 	right: 0px;
-				// 	top: -38px;
-				// 	background: #e8e8e8;
-				// 	padding: 5px 10px;
-				// 	border-radius: 0 20px 0 0;
-				// 	box-shadow: rgba(39, 39, 39, 0.65) 1px 1px 26px -7px;
-				// 	a {
-				// 		font-size: 17px;
-				// 	}
-				// }
+				
 				> div {
 					display: flex;
 					margin-top: 27px;
-					// New Change
 					align-items: center;
 					gap: 1rem;
 					@media (max-width: 558px) {
@@ -577,36 +484,15 @@
 					}
 
 					.content-left {
-						// flex: 0 0 22%;
-						// margin-right: 20px;
-						// New change
 						flex: 0 0 50px;
 						.img-wrapper {
-							// background: #fff;
-							// padding: 14px;
-							// border-radius: 21px;
-							// max-width: 133px;
-							// margin: 0 auto;
-							// box-shadow: rgba(39, 39, 39, 0.65) 1px 1px 26px -4px;
-
-							// New Change
 							max-width: 133px;
 							margin: 0 auto;
 							@media (max-width: 558px) {
 								margin-bottom: 30px;
 							}
 						}
-						img {
-							// border: 1px solid #efefef;
-							// border-radius: 3px;
-							// height: 100% !important;
-							// border-radius: 12px;
 
-							// New Change
-							// object-fit: cover;
-							// height: 100%;
-							// border-radius: 5px;
-						}
 						img {
 							object-fit: cover;
 							height: 95px;
@@ -655,7 +541,6 @@
 							.trip-name {
 								display: inline-block;
 								margin-right: 10px;
-								// line-height: 1;
 								h5 {
 									display: inline;
 									line-height: 142%;
@@ -729,9 +614,7 @@
 								text-align: right;
 								display: inline-flex;
 								flex-direction: column;
-								// span {
-								// 	color: $primaryColor;
-								// }
+				
 								.strikethrough {
 									font-size: 14px;
 									line-height: 14px;
@@ -833,9 +716,6 @@
 						> div {
 							display: flex;
 							align-items: center;
-							// @media(max-width: 575px){
-							//     flex: auto;
-							// }
 							> .input-group {
 								margin-right: 10px;
 								display: flex;
@@ -865,8 +745,7 @@
 								}
 							}
 							.btn {
-								// background: $primaryColor;
-								// color: #fff;
+						
 								padding: 0.45em 0.25em;
 								width: 20px;
 								height: 30px;
@@ -916,7 +795,6 @@
 		}
 		.extra-fields {
 			list-style: none;
-			// padding: 0 1.5em;
 			padding: 0;
 			margin: 0;
 			li {
@@ -929,7 +807,6 @@
 					margin: 0;
 				}
 				&.selected-payable-amount {
-					// color: #3399ff;
 					.price,
 					label {
 						font-size: 20px;
@@ -939,10 +816,7 @@
 		}
 		.cart-summary-bottom {
 			border-top: 1px solid #efefef;
-			// background-color: #fff;
-			// padding: 1em 1.5em 1em;
 			padding-top: 1em;
-			// margin-top: 1em;
 			.flex-wrapper {
 				display: flex;
 				align-items: center;
@@ -952,7 +826,6 @@
 					flex-direction: column-reverse;
 				}
 				.update-cart-form {
-					// margin-bottom: 1em;
 					width: 100%;
 				}
 				.price-calculate {
@@ -997,10 +870,7 @@
 					input {
 						flex: 1;
 						margin-right: 0.5em;
-						// padding: 0 1em;
-						// max-width: 140px;
 						max-width: 100%;
-						// width: 100%;
 						@media (max-width: 420px) {
 							margin-right: 0;
 							padding-block: 15px;

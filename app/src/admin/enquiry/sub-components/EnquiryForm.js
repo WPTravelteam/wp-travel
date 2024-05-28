@@ -66,7 +66,6 @@ const EnquiryForm = ( { allData } ) => {
              <label><strong>{__( res.form_field.label, 'wp-travel')}</strong></label>
              <div >
                <RadioControl
-                 // value={ allData[res.form_field.name] && allData[res.form_field.name] || wp_travel_form_field_data[res.form_field.name] }
                  selected={ allData[res.form_field.name] && allData[res.form_field.name] || wp_travel_form_field_data[res.form_field.name] }
                  options={ typeof res.form_field.options != 'undefined' && (res.form_field.options).map( ( item , index ) => {
                    return Object.assign( {}, { ['label'] : item, ['value'] : item } )

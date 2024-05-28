@@ -3,7 +3,7 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 8.7.0
+ * Version: 8.8.0
  * Author: WP Travel
  * Author URI: http://wptravel.io/
  * Requires at least: 6.0.0
@@ -38,7 +38,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '8.7.0';
+		public $version = '8.8.0';
 
 		/**
 		 * WP Travel API version.
@@ -90,6 +90,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		}
 
 		public function wp_travel_add_column_on_price_category_relation_table(){
+		
 			global $wpdb;
 			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
@@ -97,6 +98,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			$cols_sql = "DESCRIBE $table_name";
 			$all_objects = $wpdb->get_results( $cols_sql );
 			$existing_columns = [];
+
 			foreach ( $all_objects as $object ) {
 			// Build an array of Field names
 			$existing_columns[] = $object->Field;
@@ -119,7 +121,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		public function wp_travel_booking_column_name( $columns ) {
 			$columns['contact_number'] = __( 'Contact Number', 'wp-travel' );
 			$columns['contact_email'] = __( 'Contact Email', 'wp-travel' );
-			$columns['country_code'] = __( 'Country Code', 'wp-travel' );
+			$columns['country_code'] = __( 'Country', 'wp-travel' );
 			$columns['tour_date'] = __( 'Tour date', 'wp-travel' );
 			return $columns;
 		}
@@ -146,7 +148,12 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 				case 'country_code':
 					if( is_array( get_post_meta( $id, 'wp_travel_country_traveller', true ) ) ){
 					?>
-					<span><?php echo esc_html( get_post_meta( $id, 'wp_travel_country_traveller', true )[ array_key_first( get_post_meta( $id, 'wp_travel_country_traveller', true ) ) ][0] ); ?></span>
+					<?php if( apply_filters( 'wptravel_show_full_country_name', false ) == true ): ?>
+						<span><?php echo esc_html( wptravel_get_countries()[get_post_meta( $id, 'wp_travel_country_traveller', true )[ array_key_first( get_post_meta( $id, 'wp_travel_country_traveller', true ) ) ][0] ]); ?></span>
+						<?php else: ?>
+						<span><?php echo esc_html( get_post_meta( $id, 'wp_travel_country_traveller', true )[ array_key_first( get_post_meta( $id, 'wp_travel_country_traveller', true ) ) ][0] ); ?></span>
+					<?php endif; ?>
+					
 					<?php
 					}
 					break;
@@ -483,9 +490,9 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			require WP_TRAVEL_ABSPATH . '/core/ajax/settings.php';
 			require WP_TRAVEL_ABSPATH . '/core/ajax/trip-pricing-categories-taxonomy.php';
 			require WP_TRAVEL_ABSPATH . '/core/ajax/trip-extras.php';
-			require WP_TRAVEL_ABSPATH . '/core/ajax/trip-pricing-categories.php';
+			// require WP_TRAVEL_ABSPATH . '/core/ajax/trip-pricing-categories.php';
 			require WP_TRAVEL_ABSPATH . '/core/ajax/trip-dates.php';
-			require WP_TRAVEL_ABSPATH . '/core/ajax/trip-excluded-dates-times.php';
+			// require WP_TRAVEL_ABSPATH . '/core/ajax/trip-excluded-dates-times.php';
 			require WP_TRAVEL_ABSPATH . '/core/ajax/pricings.php';
 			require WP_TRAVEL_ABSPATH . '/core/ajax/cart.php';
 			require WP_TRAVEL_ABSPATH . '/core/ajax/coupon.php';
@@ -512,7 +519,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			// Front End.
 			require WP_TRAVEL_ABSPATH . '/app/inc/frontend/class-wptravel-single-itinerary-hooks.php';
 			require WP_TRAVEL_ABSPATH . '/app/inc/frontend/class-wptravel-frontend-assets.php';
-			// include sprintf( '%s/core/api/include.php', WP_TRAVEL_ABSPATH ); // for api include file.
 			include sprintf( '%s/inc/deprecated-class/trait/class-wp-travel-deprecated-trait.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/deprecated-class/trait/deprecated-includes.php', WP_TRAVEL_ABSPATH );
 

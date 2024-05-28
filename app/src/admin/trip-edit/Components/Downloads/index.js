@@ -1,14 +1,9 @@
 import { Notice } from '@wordpress/components';
-import { addFilter, applyFilters, removeFilter } from '@wordpress/hooks';
+import { addFilter } from '@wordpress/hooks';
 const __i18n = {
 	..._wp_travel_admin.strings
 }
 
-// @todo Need to remove this in future.
-// const WPTravelTripOptionsDownloads = () => {
-//     return <>{applyFilters('wp_travel_trip_downloads_tab_content', '')}</>;
-// }
-// export default WPTravelTripOptionsDownloads;
 
 // Single Components for hook callbacks.
 const DownloadsNotice = ( {settingsData, map_data } ) => {

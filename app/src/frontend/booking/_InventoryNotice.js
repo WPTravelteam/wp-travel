@@ -11,11 +11,8 @@ const Notice = ({ children, className }) => {
 
 const InventoryNotice = ({ inventory }) => {
 	const {
-		wp_travel_inventory_pax_limit_type,
 		wp_travel_inventory_sold_out_action,
-		wp_travel_inventory_custom_max_pax,
 		wp_travel_inventory_sold_out_message,
-		wp_travel_inventory_status_message_format
 	} = inventory
 
 	if (wp_travel_inventory_sold_out_action == 'show_sold_out_msg_only') {

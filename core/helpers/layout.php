@@ -29,7 +29,3 @@ function wptravel_layout_version() {
 	$version = apply_filters( 'wptravel_layout_version', $version );
 	return $version;
 }
-
-// function wptravel_is_v1_template() {
-
-// }

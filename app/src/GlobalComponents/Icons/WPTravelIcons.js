@@ -29,10 +29,8 @@ const WPTravelIcons = (props) => {
         })
     }
 
-    // const [ isOpen, setOpen ] = useState( true);
-    // const openModal = () => setOpen( true );
+
     const closeModal = () => {
-        // setOpen( false );
         props.modalHandleClick(false);
     }
 
@@ -46,7 +44,6 @@ const WPTravelIcons = (props) => {
             updateFact( 'selected_icon_type', 'fontawesome-icon', index );
             sessionStorage.clear();
             props.modalHandleClick(false);
-            // setOpen(false);
 
         } else if( 'custom-upload' == lastSelectedTab ) {
             if ( "wpTravelIconModuleUploaderData" in sessionStorage ) {
@@ -60,8 +57,7 @@ const WPTravelIcons = (props) => {
                 updateFact( 'icon_img_id', id, index );
                 updateFact( 'selected_icon_type', 'custom-upload', index );
                 props.modalHandleClick(false);
-                // sessionStorage.clear();
-                // setOpen(false);
+
             } else if ( 'undefined' !== props.factData && 'undefined' !== props.factData.icon_img ) {
                 updateFact( 'icon_img', props.factData.icon_img, index );
                 updateFact( 'icon_img_id', props.factData.icon_img_id, index );
@@ -72,8 +68,7 @@ const WPTravelIcons = (props) => {
                 updateFact( 'icon_img_id', '', index );
                 updateFact( 'selected_icon_type', 'custom-upload', index );
                 props.modalHandleClick(false);
-                // sessionStorage.clear();
-                // setOpen(false);
+
             }
 
         } else if( 'icon-class' == lastSelectedTab ) {
@@ -83,8 +78,6 @@ const WPTravelIcons = (props) => {
             updateFact( 'selected_icon_type', 'icon-class', index );
             sessionStorage.clear();
             props.modalHandleClick(false);
-            // setOpen(false);
-
         }
     }
 
@@ -113,32 +106,11 @@ const WPTravelIcons = (props) => {
             title: <><i className="fas fa-upload"></i>{__( ' Custom Upload', 'wp-travel' )}</>,
             className: 'wti__custom_upload',
             content: CustomUploadContent
-        },
-        // {
-        //     name: 'coming-soon',
-        //     title: <><i className="fas fa-step-forward"></i>{__( 'Other Icons', 'wp-travel' )}</>,
-        //     className: 'wti__coming_soon',
-        //     content: ComingSoonMessage
-        // }
+        }
+       
     ]
 
-    // Place tab here if still on development.
-    // if ( _wp_travel.dev_mode ) {
-    //     iconTabs.push(
-    //         {
-    //             name: 'fontawesome-icon',
-    //             title: <><i className="fas fa-flag"></i>{__( ' Fontawesome Icon', 'wp-travel' )}</>,
-    //             className: 'wti__fa_icon',
-    //             content: FontAwesomeIconContent
-    //         },
-    //         {
-    //             name: 'custom-upload',
-    //             title: <><i className="fas fa-upload"></i>{__( ' Custom Upload', 'wp-travel' )}</>,
-    //             className: 'wti__custom_upload',
-    //             content: CustomUploadContent
-    //         },
-    //     )
-    // }
+   
 
     return <>
         {

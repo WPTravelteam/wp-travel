@@ -9,7 +9,7 @@ const __i18n = {
 
 // Additional lib
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
-// const _ = lodash;
+
 import _ from 'lodash';
 import moment from 'moment';
 import RDP_Locale from '../_Locale'
@@ -279,18 +279,11 @@ const CalendarView = ( props ) => {
 					_inventory_state = times.length > 0 && { ..._inventory_state, nomineeTimes: _times } || { ..._inventory_state, nomineeTimes: [] }
 					if (_times.length <= 0) {
 						_inventory_state = { ..._inventory_state, pricingUnavailable: true }
-					} else if( 1 === _times.length ) {
-						// _inventory_state = {
-						// 	..._inventory_state,
-						// 	selectedTime: _times[0].format('HH:mm'),
-						// }
-					}
+					} 
 					_inventory_state = { ..._inventory_state, inventory: _inventoryData }
 				}
 				_bookingData = {..._bookingData, ..._inventory_state }
-			} else {
-				// _bookingData = {..._bookingData, isLoading:false }
-			}
+			} 
 			_bookingData = {..._bookingData }
 		}
 		updateBookingData( _bookingData );
@@ -377,11 +370,6 @@ const CalendarView = ( props ) => {
 			nomineeTimes:[]
 		}
 
-		// Not required because it is false from extras ajas request.
-		// if ( ! isFixedDeparture ) {
-		// 	_bookingData.isLoading = false;  // Default false for trip duration only because date changes effect is not triggered in trip ducation.
-		// }
-
 		// Pricing ids as per selected date for fixed departure and all pricing for trip duration.
 		let _nomineePricingIds = []; 
 
@@ -449,7 +437,6 @@ const CalendarView = ( props ) => {
 		}
 
 		updateBookingData( _bookingData  ); // isLoadting true + quick hack for issue creating from initialState update at the start.
-		// bookingWidgetUseEffects( _bookingData, 'dateChange' ); // isloading false [quick fixes for loader displaying issue on date change]
 		jQuery( document.body ).trigger( 'selectedTripDate', [ _bookingData ] );
 	}
 
@@ -481,15 +468,11 @@ const CalendarView = ( props ) => {
 		delete params.filterDate;
 		let dateformat = /^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/;
 		let oldDates  = typeof trip_duration.start_date != 'undefined' && trip_duration.start_date != '' && new Date(trip_duration.start_date) || new Date();
-		// let validateChecking = oldDates.match(dateformat ) ? oldDates : new Date();
 		let validateChecking = moment( oldDates, 'MM/DD/YYYY',true).isValid() ? oldDates : new Date();
 		let durations_dates = typeof trip_duration != 'undefined' && typeof trip_duration.start_date != 'undefined' && trip_duration.start_date != '' && new Date( trip_duration.start_date ) || new Date();
 		let duration_end_dates = typeof trip_duration != 'undefined' && typeof trip_duration.end_date != 'undefined' && trip_duration.end_date != '' && new Date( trip_duration.end_date ) || '';
 		const finalDates = validateChecking < new Date() ? new Date() : oldDates;
 		params.minDate   = finalDates;
-		// if( tripData.trip_duration.booking_start != '' ){
-		// 	params.minDate   = new Date( tripData.trip_duration.booking_start );
-		// }
 		params.maxDate	 = duration_end_dates;
 		params.startDate = selectedDate;
 		params.endDate   = moment( selectedDate ).add( duration - 1, 'days' ).toDate();
@@ -532,7 +515,6 @@ const CalendarView = ( props ) => {
 			}
 			
 		</div>
-		{/* Pricing and Times are in pricing wrapper */}
 		{ selectedDate && <>
 			<div className={isLoading ? 'wp-travel-booking__pricing-wrapper wptravel-loading' : 'wp-travel-booking__pricing-wrapper'}>
 				<div className="wp-travel-booking__pricing-name"> 

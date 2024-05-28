@@ -41,8 +41,6 @@
 }
 
 .wptravel-loading {
-	//opacity: 0.2;
-	// background-color: rgba(200, 200, 200, 0.1);
 	position: relative;
 	&::after {
 		content: "";
@@ -59,7 +57,6 @@
 			#fbfafaab 33%
 		);
 		background-size: 200% 100%;
-		// animation: 1.5s shine linear infinite;
 	}
 }
 
@@ -84,7 +81,6 @@
 		);
 		border-radius: 5px;
 		background-size: 200% 100%;
-		// animation: 1.5s shine linear infinite;
 		.person-box {
 			opacity: 0;
 		}

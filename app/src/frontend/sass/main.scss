@@ -9,8 +9,6 @@
 @import "../../sass/elements/gallery";
 @import "../../sass/elements/globalcss";
 
-//@import "../../sass/typography/wt-icon";
-//@import "../../../../assets/typography/wt-icon";
 // Misc
 @import "./itinerary-global";
 @import "./wp-travel-front-end";
@@ -21,7 +19,6 @@
 @import "./1-itinerary-tabs";
 @import "./2-date-listing";
 @import "./3-loader";
-// @import "./v2/4-checkout";
 @import "./4-checkout";
 @import "./5-toolbar";
 @import "./6-itinerary-list";
@@ -133,12 +130,19 @@
     }
 }
 
+.stripe-procced-payment-btn{
+    text-align: end;
+    visibility: hidden;
+    margin-top: 20px;
+}
+
 .stripe-payment-btn{
     text-align: end;
     visibility: hidden;
     margin-top: 20px;
 }
 
+#wptravel-proceed-with-stripe,
 #wptravel-pay-with-stripe{
     background: #fff;
     border: solid 1px;
@@ -146,6 +150,8 @@
     padding: 10px 20px;
 }
 
+#wptravel-proceed-with-stripe:focus,
+#wptravel-proceed-with-stripe:hover,
 #wptravel-pay-with-stripe:focus,
 #wptravel-pay-with-stripe:hover{
     background: #000;
@@ -184,3 +190,178 @@
     animation: l3 1s infinite linear;
   }
   @keyframes l3 {to{transform: rotate(1turn)}}
+
+  .wp-travel-container-wrap h2{
+	font-size: 35px;
+}
+
+.travel-info a{
+    text-decoration: none;
+}
+
+#faq h4 a{
+    font-size: 22px;
+}
+
+
+.wptravel-layout-v2 .wptravel-archive-wrapper.grid-view .view-box .view-content{
+    justify-content: space-between;
+}
+
+#gallery .item{
+    height: 200px;
+    overflow: hidden;
+}
+
+#gallery img:hover {
+    transition: transform 1s, filter 2s ease-in-out;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, .3));
+    transform: scale(1.2);
+}
+
+@media screen and (min-width:992px) {
+
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item{
+    height: 198px;
+    width: 19%;
+}
+
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item img{
+    object-fit: cover;
+    height: 198px;
+}
+
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(27),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(26),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(21),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(20),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(19),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(17),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(16),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(15),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(14),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(13),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(12),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(11),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(10),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(5),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(4),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(3),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(1){
+    width: 19%;
+    height: 198px;
+}
+
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(2),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(6),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(7),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(8),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(9),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(18),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(22),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(23),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(24),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(25){
+    width: 38%;
+}
+
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(2),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(8),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(24),
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(18){
+    height: 396px;
+}
+
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(2) img,
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(8) img,
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(24) img,
+#gallery .wp-travel-advanced-gallery-items-list.wp-travel-advanced-gallery-items-list-masonry .item:nth-child(18) img{
+    height: 396px;
+}
+}
+
+#trip_outline .accordion-toggle{
+    text-decoration: none;
+}
+
+#trip_outline .panel-title,
+#trip_outline .open-all-itinerary-link,
+#trip_outline .close-all-itinerary-link{
+    text-decoration: none;
+    border: 1px solid;
+    padding: 10px 20px;
+    margin-bottom: 0px;
+}
+
+#trip_outline .panel-collapse{
+    padding: 0px 20px;
+}
+
+
+.wp-travel-advanced-gallery-items-list .slick-next:before, .wp-travel-advanced-gallery-items-list .slick-prev:before {
+    font-size: 20px;
+    border: 1px solid;
+    padding: 2px;
+}
+
+@media screen and (min-width:992px) {
+    
+    #wp-travel-secondary.widget-area .list-view.itinerary-3-per-row .view-box,
+    #secondary.widget-area .list-view.itinerary-3-per-row .view-box,
+    .page .right .itinerary-3-per-row .view-box{
+    	display: block;
+    }
+    #wp-travel-secondary.widget-area .list-view.itinerary-3-per-row .view-box .view-image,
+    #secondary.widget-area .list-view.itinerary-3-per-row .view-box .view-image,
+    #wp-travel-secondary.widget-area .itinerary-3-per-row .view-box .view-content,
+    #secondary.widget-area .list-view.itinerary-3-per-row .view-box .view-content,
+    #wp-travel-secondary.widget-area .itinerary-3-per-row .view-box .view-content .left-content,
+    #secondary.widget-area .itinerary-3-per-row .view-box .view-content .left-content{
+    	display: block;
+    	width: 100% ;
+    }	
+    #wp-travel-secondary.widget-area .list-view.itinerary-3-per-row .view-box .view-content .right-content,
+    #secondary.widget-area .list-view.itinerary-3-per-row .view-box .view-content .right-content{
+    	width: 100%;
+        text-align: left;
+        border-left: none;
+        padding-bottom: 20px;
+    }
+    .post-type-archive-itineraries .widget.widget_block .grid-view, 
+    .page.wptravel-layout-v2 .right .grid-view, 
+    .post.wptravel-layout-v2 .right .grid-view,
+    .widget-area .itinerary-3-per-row{
+        grid-template-columns: repeat(1, 1fr) !important;
+    }
+    #wp-travel-secondary.widget-area .trip-rating .wp-travel-average-review,
+    #secondary.widget-area .trip-rating .wp-travel-average-review,
+    .page .right .wp-travel-itinerary-list .description-left .wp-travel-average-review,
+    .page .right .itinerary-3-per-row .view-box .wp-travel-average-review{
+    	margin-left: 0px;
+    }
+
+    .page .right .wp-travel-itinerary-list .wp-travel-article-image-wrap,
+    .page .right .wp-travel-itinerary-list .wp-travel-entry-content-wrapper,
+    .page .right .wp-travel-itinerary-list .wp-travel-entry-content-wrapper .description-left,
+    .page .right .wp-travel-itinerary-list .wp-travel-entry-content-wrapper .description-right,
+    .page .right .itinerary-3-per-row .view-box .view-image,
+    .page .right .itinerary-3-per-row .view-box .view-content,
+    .page .right .itinerary-3-per-row .view-box .view-content .left-content{
+    	width: 100%;
+    	display: block;
+    }
+
+    .page .right .itinerary-3-per-row .view-box .view-content .right-content {
+    	width: 100%;
+        text-align: left;
+        border-left: none;
+        padding-bottom: 20px;
+    }
+
+    /*padding issue*/
+    #wp-travel-secondary.widget-area .itinerary-3-per-row .view-box,
+    #secondary.widget-area .itinerary-3-per-row .view-box,
+    .page .right .itinerary-3-per-row .view-box {
+    	padding: 0px;
+    }
+} 

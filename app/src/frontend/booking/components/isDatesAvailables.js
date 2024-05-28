@@ -5,8 +5,7 @@ const isDateAvailables = (startDate, cutOffTime, times ) => {
     let nowDate = moment( new Date() ).utc().toDate();
 
     let co = new Date( startDate ) // start date as cutoff date.
-    // let coh = co.getHours(); // extract current hours in start date.
-    // let com = co.getMinutes();
+
 
     let availableToday = false;
     let hour = 0
@@ -61,7 +60,6 @@ addFilter( 'wpTravelCutofDateFilterDateListViewNonRecurring', 'wp-travel', (time
     
     if ( cutOffTime ) {
         let nowDate = moment( new Date() ).utc().toDate();
-        // let selectedDate = date.start_date
         let co = moment( new Date(selectedDate) ).utc().toDate(); // start date as cutoff date. [need to reset time in selected date due to some date doesn't have time.]
         let tripTimeData = []
         let hour = 0

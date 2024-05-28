@@ -1,5 +1,5 @@
 import { useSelect, dispatch } from '@wordpress/data';
-import { PanelRow, Button, Snackbar } from '@wordpress/components';
+import { PanelRow, Button } from '@wordpress/components';
 import apiFetch from '@wordpress/api-fetch';
 
 import { _n, __} from '@wordpress/i18n';
@@ -38,7 +38,6 @@ const SaveTripSection = () => {
                 });
                 if( allData.dates.length>0 ) {
                     allData.dates.map((_dates, _datesIndex)=>{
-                        // allData.dates[_datesIndex]['pricing_ids'] = _pricingIds.join(','); // Need this for what a life
                         if ( !allData.dates[_datesIndex].is_recurring ) {
                             allData.dates[_datesIndex] = {...allData.dates[_datesIndex],...{
                                 years:'',

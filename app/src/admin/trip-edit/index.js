@@ -11,23 +11,8 @@ import Select from 'react-select'
 import "./trip-store";
 
 
-// import "../settings/store/settings-store"; // @since 4.5.1
-
 import SaveTripSection from "./sub-components/SaveTripSection";
 
-// Tab Items.
-// import WPTravelTripOptionsItinerary from './Components/Itinerary';
-// import WPTravelTripOptionsPriceDates from './Components/PriceDates';
-// import WPTravelTripOptionsIncludesExcludes from './Components/IncludesExcludes';
-// import WPTravelTripOptionsFact from './Components/Facts';
-// import WPTravelTripOptionsGallery from './Components/Gallery'
-// import WPTravelTripOptionsLocation from './Components/Locations';
-// import WPTravelTripOptionsCartAndCheckout from './Components/Checkout';
-// import WPTravelTripOptionsInventoryOptions from './Components/Inventory';
-// import WPTravelTripOptionsFaq from './Components/Faqs';
-// import WPTravelTripOptionsDownloads from './Components/Downloads';
-// import WPTravelTripOptionsMisc from './Components/Misc';
-// import WPTravelTripOptionsTabs from './Components/Tabs';
 
 import "./Components/Overview";
 import "./Components/Itinerary";
@@ -163,86 +148,72 @@ addFilter("wp_travel_trip_options_tabs", "wp_travel", (tabs) => {
 				name: "overview",
 				title: __i18n.overview,
 				className: "tab-overview",
-				// content: WPTravelTripOptionsItinerary
 			},
 			{
 				name: "itinerary",
 				title: __i18n.admin_tabs.itinerary,
 				className: "tab-itinerary",
-				// content: WPTravelTripOptionsItinerary
 			},
 			{
 				name: "price-dates",
 				title: __i18n.admin_tabs.price_n_dates,
 				className: "tab-price-dates",
-				// content: WPTravelTripOptionsPriceDates
 			},
 
 			{
 				name: "includes-excludes",
 				title: __i18n.admin_tabs.includes_excludes,
 				className: "tab-includes-excludes",
-				// content: WPTravelTripOptionsIncludesExcludes
 			},
 			{
 				name: "facts",
 				title: __i18n.admin_tabs.facts,
 				className: "tab-facts",
-				// content: WPTravelTripOptionsFact
 			},
 			{
 				name: "gallery",
 				title: __i18n.admin_tabs.gallery,
 				className: "tab-gallery",
-				// content: WPTravelTripOptionsGallery
 			},
 			{
 				name: "locations",
 				title: __i18n.admin_tabs.locations,
 				className: "tab-locations",
-				// content: WPTravelTripOptionsLocation
 			},
 			{
 				name: "cart-checkout",
 				title: __i18n.admin_tabs.checkout, // cart & checkout label updated to checkout @since 4.4.3
 				className: "tab-cart-checkout",
-				// content: WPTravelTripOptionsCartAndCheckout
 			},
 			{
 				name: "inventory-options",
 				title: __i18n.admin_tabs.inventory_options,
 				className: "tab-inventory-options",
-				// content: WPTravelTripOptionsInventoryOptions
 			},
 			{
 				name: "faqs",
 				title: __i18n.admin_tabs.faqs,
 				className: "tab-faqs",
-				// content: WPTravelTripOptionsFaq
 			},
 			{
 				name: "downloads",
 				title: __i18n.admin_tabs.downloads,
 				className: "tab-downloads",
-				// content: WPTravelTripOptionsDownloads
 			},
 			{
 				name: "tabs",
 				title: __i18n.admin_tabs.tabs,
 				className: "tab-tabs",
-				// content: WPTravelTripOptionsTabs
 			},
 			{
 				name: "misc",
 				title: __i18n.admin_tabs.misc,
 				className: "tab-misc",
-				// content: WPTravelTripOptionsMisc
 			},
 			{
 				name: "guides",
 				title: __i18n.admin_tabs.guides,
 				className: "tab-guides",
-				// content: WPTravelTripOptionsTripGuide
 			},
 		],
 	];

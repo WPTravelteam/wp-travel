@@ -1,9 +1,6 @@
 import { __ } from '@wordpress/i18n';
-import apiFetch from '@wordpress/api-fetch';
 import { PanelRow, ToggleControl } from '@wordpress/components';
-import ErrorBoundary from '../../../../../ErrorBoundry/ErrorBoundry';
-import { useSelect, select, dispatch, withSelect } from '@wordpress/data';
-import { useState } from '@wordpress/element';
+import { useSelect, select, dispatch } from '@wordpress/data';
 
 export default () => {
 
@@ -27,8 +24,6 @@ export default () => {
     }
 
     const WP_Travel_Import = ( ) => {
-
-        
 
         var reader = new FileReader();
         reader.readAsText(document.getElementById("fileupload").files[0]);
@@ -69,7 +64,6 @@ export default () => {
                                     ...allData,
                                     enable_session: 'yes' == enable_session ? 'no' : 'yes'
                                 })
-                                // location.reload()
                             }}
                         />
                         <p className="description">{__('Enable to export settings data.', 'wp-travel')}</p>
@@ -89,8 +83,6 @@ export default () => {
                     </>
 
                 }
-                
-
             </div>
         </>
     )

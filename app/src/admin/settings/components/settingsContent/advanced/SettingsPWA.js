@@ -1,12 +1,11 @@
 import { _n, __ } from '@wordpress/i18n';
-import { PanelRow, ColorPalette, ToggleControl, TextControl, Tooltip, Icon, Notice } from '@wordpress/components';
+import { PanelRow, ToggleControl, TextControl, Notice } from '@wordpress/components';
 import ErrorBoundary from '../../../../../ErrorBoundry/ErrorBoundry';
-import { useSelect, select, dispatch, withSelect } from '@wordpress/data';
-import { useState } from '@wordpress/element';
+import { useSelect, select, dispatch } from '@wordpress/data';
 
-const __i18n = {
-    ..._wp_travel_admin.strings
-}
+// const __i18n = {
+//     ..._wp_travel_admin.strings
+// }
 
 
 export default () => {
@@ -43,7 +42,7 @@ export default () => {
             });
         });
     };
-    console.log( _wp_travel.pro_version );
+
     return (
         <>
             <div className="wp-travel-section-header">
@@ -81,7 +80,6 @@ export default () => {
                                         <label>{_wp_travel.setting_strings.pwa.app_fullname}</label>
                                         <div id="wp-travel-pwa-app-fullname" className="wp-travel-field-value">
                                             <TextControl
-                                                // help={__( 'This sets the thousand separator of displayed prices.', 'wp-travel' )}
                                                 value={pwa_app_name}
                                                 onChange={
                                                     (value) => {
@@ -99,7 +97,6 @@ export default () => {
                                         <label>{_wp_travel.setting_strings.pwa.app_short_name}</label>
                                         <div id="wp-travel-pwa-app-shortname" className="wp-travel-field-value">
                                             <TextControl
-                                                // help={__( 'This sets the thousand separator of displayed prices.', 'wp-travel' )}
                                                 value={pwa_app_short_name}
                                                 onChange={
                                                     (value) => {
@@ -117,7 +114,6 @@ export default () => {
                                         <label>{_wp_travel.setting_strings.pwa.start_url}</label>
                                         <div id="wp-travel-pwa-start-url" className="wp-travel-field-value">
                                             <TextControl
-                                                // help={__( 'This sets the thousand separator of displayed prices.', 'wp-travel' )}
                                                 value={pwa_app_start_url}
                                                 type="url"
                                                 onChange={
@@ -146,15 +142,6 @@ export default () => {
                                 </>
                             }
                         </>
-                        // || _wp_travel.pro_version < 5.4 && _wp_travel.pro_version != null &&
-                        // <Notice isDismissible={false} status="informational">
-                        //     <strong>{__('Looks like you haven\'t updated your WP Travel Pro plugin.', 'wp-travel')}</strong>
-                        //     <br />
-                        //     {__('Update WP Travel Pro to gain access to the new PWA feature as well as other additional settings.', 'wp-travel')}
-                        //     <br />
-                        //     <br />
-                        //     <a className="button button-primary" target="_blank" href="https://wptravel.io/wp-travel-pro/">{__('Update WP Travel Pro', 'wp-travel')}</a>
-                        // </Notice>
                         ||
                         <Notice isDismissible={false} status="informational">
                             <strong>{__('Want to add PWA?', 'wp-travel')}</strong>

@@ -39,9 +39,6 @@ export default ( props ) => {
 				<ErrorBoundary>
 					<Suspense>
 
-                        {/* progress bar */}
-                        {/* <ProgressBary statusText={`Progress: this is the starting`} value={5} max={100} /> */}
-
                         { ( ! forceCalendarDisplay || selectedDate ) &&
                             <div className="wp-travel-booking__header">
                                 {<h3>{__i18n.booking_tab_content_label}</h3> }
@@ -55,7 +52,6 @@ export default ( props ) => {
                             ||
                             <CalendarView { ...{ ...props, bookingData, updateBookingData, tripData } } />
                         }
-                        {/* Book Now Button at bottom */}
                         
                         <NextTravelerBtn { ...{ ...props, bookingData, updateBookingData, tripData } } />
 					</Suspense>

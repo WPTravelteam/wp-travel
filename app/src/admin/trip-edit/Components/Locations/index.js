@@ -1,5 +1,4 @@
 import { Notice, PanelRow, TextControl, ToggleControl, Button, PanelBody, BaseControl } from '@wordpress/components';
-import { useEffect } from '@wordpress/element'
 import { dispatch, useSelect } from '@wordpress/data';
 import { addFilter, applyFilters } from '@wordpress/hooks';
 import { sprintf, __ } from '@wordpress/i18n';
@@ -12,11 +11,7 @@ const __i18n = {
 	..._wp_travel_admin.strings
 }
 import { isEmpty, has } from 'lodash';
-// @todo Need to remove this in future.
-// const WPTravelTripOptionsLocation = () => {
-//     return <></>;
-// }
-// export default WPTravelTripOptionsLocation;
+
 
 const GmapIframe = props => {
     const allData = useSelect((select) => {
@@ -27,7 +22,6 @@ const GmapIframe = props => {
     const lng = allData.map_data && allData.map_data.lng || ''
     const useLatLng = allData.map_data && allData.map_data.use_lat_lng || 'no'
     const zoomlevel = props.zoomlevel || 15
-    const iframeHeight = 400
     const { updateTripData } = dispatch('WPTravel/TripEdit');
 
     const updateMapData = (name, toggle) => value => {
@@ -183,7 +177,6 @@ const GoogleMap = ( {settingsData, map_data, isBlock } ) => {
         _alMapData.lat = place.geometry.location.lat()
         _alMapData.lng = place.geometry.location.lng()
         _alMapData.loc = place.formatted_address
-        // _alMapData.searching = false
 
         updateTripData({
             ...allData,

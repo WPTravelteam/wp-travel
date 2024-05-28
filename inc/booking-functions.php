@@ -12,6 +12,7 @@
  */
 function wptravel_book_now() {
 	
+
 	$settings = wptravel_get_settings();
 	if( class_exists( 'WooCommerce' ) && $settings['enable_woo_checkout'] == 'yes' ){
 		if( !isset( $_REQUEST['key']) ){
@@ -21,10 +22,11 @@ function wptravel_book_now() {
 		$order_data = wc_get_order(wc_get_order_id_by_order_key($_REQUEST['key']))->data;
 
 	}else{
-		if (
-			! WP_Travel::verify_nonce( true )
-			|| ! isset( $_POST['wp_travel_book_now'] ) // @phpcs:ignore
-			) {
+		if ( ! WP_Travel::verify_nonce( true ) || ! isset( $_POST['wp_travel_book_now'] ) ) {
+			return;
+		}
+
+		if( $_POST['wp_travel_booking_option'] == 'booking_with_payment' && !isset( $_POST['wp_travel_payment_gateway'] ) ){
 			return;
 		}
 	}
@@ -84,8 +86,6 @@ function wptravel_book_now() {
 		$price_key      = isset( $price_keys[0] ) ? $price_keys[0] : '';
 		$arrival_date   = $arrival_date[0];
 		$departure_date = $departure_date[0];
-		// $pricing_id             = $pricing_id[0];
-		// $trip_time              = $trip_time[0];
 		$arrival_date_email_tag = wptravel_format_date( $arrival_date_email_tag[0], true, 'Y-m-d' );
 	}
 	$trip_id     = isset( $trip_ids[0] ) ? $trip_ids[0] : 0;
@@ -178,6 +178,7 @@ function wptravel_book_now() {
 	update_post_meta( $booking_id, 'order_totals', $wt_cart->get_total() );
 	update_post_meta( $booking_id, 'wp_travel_pax', $total_pax );
 
+
 	$checkout_default_country = apply_filters( 'checkout_default_country', '' ); //@since 8.1.0
 
 	if( !empty( $checkout_default_country ) ){
@@ -197,8 +198,60 @@ function wptravel_book_now() {
 	update_post_meta( $booking_id, 'wp_travel_post_id', absint( $trip_id ) ); // quick fix [booking not listing in user dashboard].
 	update_post_meta( $booking_id, 'wp_travel_arrival_date_email_tag', sanitize_text_field( $arrival_date_email_tag ) ); // quick fix arrival date with time.
 
+
+	if( apply_filters( 'wptravel_checkout_enable_media_input', false ) == true ){
+		require_once( ABSPATH . 'wp-admin/includes/file.php' );
+
+		if( $_FILES ){
+
+		// you can add some kind of validation here
+			if( empty( $_FILES[ 'wptravel_checkout_media_field' ] ) ) {
+				wp_die( 'No files selected.' );
+			}
+
+			$upload = wp_handle_upload( 
+				$_FILES[ 'wptravel_checkout_media_field' ], 
+				array( 'test_form' => false ) 
+			);
+
+			if( ! empty( $upload[ 'error' ] ) ) {
+				wp_die( $upload[ 'error' ] );
+			}
+
+			// it is time to add our uploaded image into WordPress media library
+			$attachment_id = wp_insert_attachment(
+				array(
+					'guid'           => $upload[ 'url' ],
+					'post_mime_type' => $upload[ 'type' ],
+					'post_title'     => basename( $upload[ 'file' ] ),
+					'post_content'   => '',
+					'post_status'    => 'inherit',
+				),
+				$upload[ 'file' ]
+			);
+
+			if( is_wp_error( $attachment_id ) || ! $attachment_id ) {
+				wp_die( 'Upload error.' );
+			}
+
+			// update medatata, regenerate image sizes
+			require_once( ABSPATH . 'wp-admin/includes/image.php' );
+
+			wp_update_attachment_metadata(
+				$attachment_id,
+				wp_generate_attachment_metadata( $attachment_id, $upload[ 'file' ] )
+			);
+
+			update_post_meta( $booking_id, 'wp_travel_checkout_media', sanitize_url( wp_get_attachment_url( $attachment_id ) ) );
+		}
+	}
+	
+	
+
 	// Insert $_POST as Booking Meta.
 	$post_ignore = array( '_wp_http_referer', 'wp_travel_security', '_nonce', 'wptravel_book_now', 'wp_travel_payment_amount' );
+
+	
 	foreach ( $sanitized_data as $meta_name => $meta_val ) {
 		if ( in_array( $meta_name, $post_ignore, true ) ) {
 			continue;
@@ -301,8 +354,8 @@ function wptravel_book_now() {
 	do_action( 'wptravel_after_frontend_booking_save', $booking_id, $first_key );
 
 	// Temp fixes [add payment id in case of booking only].
-	// if ( 'booking_only' === $sanitized_data['wp_travel_booking_option'] ) {
-		$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
+
+	$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
 	if ( ! $payment_id ) {
 		$title      = 'Payment - #' . $booking_id;
 		$post_array = array(
@@ -315,7 +368,7 @@ function wptravel_book_now() {
 		$payment_id = wp_insert_post( $post_array );
 		update_post_meta( $booking_id, 'wp_travel_payment_id', $payment_id );
 	}
-	// }
+
 
 	$require_login_to_checkout = isset( $settings['enable_checkout_customer_registration'] ) ? $settings['enable_checkout_customer_registration'] : 'no'; // if required login then there is registration option as well. so we continue if this is no.
 	$create_user_while_booking = isset( $settings['create_user_while_booking'] ) ? $settings['create_user_while_booking'] : 'no';
@@ -335,7 +388,7 @@ function wptravel_book_now() {
 		update_user_meta( $user_id, 'wp_travel_user_bookings', $saved_booking_ids );
 	}
 	// Clear Transient To update booking Count.
-	// delete_site_transient( "_transient_wt_booking_count_{$trip_id}" );.
+
 	delete_post_meta( $trip_id, 'wp_travel_booking_count' );
 
 	// Inc case of 100% discount.

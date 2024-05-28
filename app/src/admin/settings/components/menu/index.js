@@ -31,13 +31,11 @@ export default memo((props) => {
                 && <div id="wp-travel-backdrop" onClick={closeMenu}></div>
             }
             <div id="wp-travel-settings-menu" className={className}>
-                {isMobileNavOpen && window.innerWidth < 768
+                {
+                    isMobileNavOpen && window.innerWidth < 768
                     && <div className="wp-travel-mobile-menu-close" onClick={closeMenu}><i className='fa fa-times wp-travel-icon-close'></i></div>
                 }
-                {/* <div className="wp-travel-logo-container">
-                    <img id="wp-travel-logo" src={_wp_travel.plugin_url + "assets/images/wp-travel-log.png"}></img>
-                    {__("WP Travel", "wp-travel")}
-                </div> */}
+
 
                 <Search handleTabClick={handleTabClick} />
                 

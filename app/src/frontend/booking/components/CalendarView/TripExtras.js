@@ -5,8 +5,8 @@ const __i18n = {
 }
 const TripExtras = ( props ) => {
 	// Component Props.
-	const { tripData, bookingData, updateBookingData } = props;
-	const { selectedDate, nomineeTimes, selectedTime, nomineeTripExtras, tripExtras } = bookingData;
+	const { bookingData, updateBookingData } = props;
+	const { nomineeTripExtras, tripExtras } = bookingData;
 
 	const handleClick = ( index, inc, quantity ) => e => {
 		

@@ -1,6 +1,6 @@
 import { useSelect, dispatch } from '@wordpress/data';
-import { useRef, useState, useEffect, useMemo } from '@wordpress/element'
-import { PanelRow, Button, Snackbar } from '@wordpress/components';
+import { useRef, useState, useEffect } from '@wordpress/element'
+import { PanelRow, Button } from '@wordpress/components';
 import apiFetch from '@wordpress/api-fetch';
 
 import { _n, __ } from '@wordpress/i18n';

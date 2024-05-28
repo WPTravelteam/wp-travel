@@ -1,21 +1,21 @@
 === WP Travel - Best Travel Booking WordPress Plugin, Tour Management Engine ===
 Contributors: wptravel
-Tags: tour-operator, travel, travel-booking, travel-agency, tour-booking, paypal-express-checkout, travel-itinerary, trekking, tour-itinerary, travel-booking-engine, trekking, tour itineraries, tour operators, tour accommodation listings, travel destinations, travel locations, travel maps, trip book, travel payment, tour package payments
+Tags: travel, tour-booking, travel-agency, tour-operator, travel-booking
 Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 6.0.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 8.7.0
+Stable tag: 8.8.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-WP Travel is the Best Travel Booking WordPress Plugin to create travel & trekking websites in minutes without coding!
+WP Travel is the #1 Best Travel Booking WordPress Plugin to Create Travel and Trekking Websites in Minutes, Without Coding!
 
 == Description ==
 
-**The Ultimate Travel Booking plugin for WordPress**
+**WP Travel is the #1 Best Travel Booking WordPress Plugin to Create Travel and Trekking Websites in Minutes, Without Coding!**
 
-Looking for a reliable travel plugin for your WordPress website? Look no further than [WP Travel](https://wptravel.io/) plugin. A free powerful travel engine (available in Pro version with additional features) for making customized travel agency or tour operator websites on WordPress in minutes!
+If you are looking for a reliable travel plugin for your WordPress travel booking website, then look no further than the WP Travel [WP Travel](https://wptravel.io/) plugin. It’s a powerful, free travel engine (also available in a Pro version with additional features) for creating customized travel agency or tour operator websites on WordPress in minutes.
 
 View: [Demo of Best Travel & Tour plugin ](https://wpdemo.wensolutions.com/travel-joy-pro/) | [Modules](https://wptravel.io/modules/) | [Best Travel & Tour Themes](https://wptravel.io/travel-agency-wordpress-themes/) | [Documentations](https://wptravel.io/wp-travel-documentations/) | [Video Tutorials](https://wptravel.io/docs/youtube-video-tutorials/)
 
@@ -423,6 +423,26 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 8.8.0 =
+Release Date: 28th May 2024
+
+Fixes:
+* Fixed array key issue of billing country
+* Fixed form validation text localization issue 
+* Fixed backend date-picker issue
+* Optimized code
+
+Enhancements:
+* Update style of single trip page
+* Added hook to show full country name in emails and booking table
+* Added hook to enable file input type on checkout page 
+* Added hook to change label of file input type on checkout page 
+* Added hook to set default payment method
+* Added condition to check payment method in case of only one payment method is enabled 
+* Added a hook to make a trip itinerary on toggle form 
+
+**For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v8-8-0-update-release-note).**
 
 = 8.7.0 =
 Release Date: 13th May 2024

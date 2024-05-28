@@ -582,3 +582,10 @@ const wptravelcheckout = (shoppingCart) => {
 }
 document.getElementById('shopping-cart') && wptravelcheckout(document.getElementById('shopping-cart'))
 
+
+var countPaymentMethod = document.querySelectorAll('.wp-travel-payment-field .wp-travel-radio');
+
+if( countPaymentMethod.length == 1 ){
+   document.querySelector(".wp-travel-payment-field .wp-travel-radio input").checked = true;
+}
+

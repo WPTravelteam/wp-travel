@@ -5,10 +5,8 @@ import { useState } from '@wordpress/element';
 import OpenBookign from './OpenBookign';
 import { useSelect, dispatch } from '@wordpress/data';
 import TravelerInfo from './TravelerInfo';
-// import { getSettings } from './api-working/getSettings';
 import { _n, __ } from '@wordpress/i18n'
 import BillingFormField from './form-field/BillingFormField';
-// import PaymentFormField from './form-field/PaymentFormField';
 import BookingFormWithPayment from './form-field/BookingFormWithPayment';
 
 
