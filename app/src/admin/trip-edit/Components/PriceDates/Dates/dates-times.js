@@ -1,9 +1,8 @@
-import { useState, useEffect } from '@wordpress/element';
-import { TextControl, PanelBody, PanelRow, ToggleControl, Button, FormTokenField, SelectControl, Dropdown, RangeControl, DateTimePicker, Notice, CheckboxControl } from '@wordpress/components';
-import { sprintf, _n, __ } from '@wordpress/i18n';
+import { TextControl, PanelBody, PanelRow, Button, FormTokenField, Notice, CheckboxControl } from '@wordpress/components';
+import { _n, __ } from '@wordpress/i18n';
 import DatePicker from 'react-datepicker';
-import { useSelect, dispatch } from '@wordpress/data';
-import { applyFilters, addFilter } from '@wordpress/hooks';
+import { dispatch } from '@wordpress/data';
+import { applyFilters } from '@wordpress/hooks';
 import apiFetch from '@wordpress/api-fetch';
 import ErrorBoundary from '../../../../../ErrorBoundry/ErrorBoundry';
 
@@ -58,8 +57,7 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
 		showMonthDropdown: true,
 		showYearDropdown: 'select',
 		dropdownMode: "select",
-		// minDate: new Date(),
-		// maxDate: typeof newEndDate != 'undefined' && newEndDate || '',
+		minDate: new Date(),
 	}
 
     return <ErrorBoundary>
@@ -163,7 +161,6 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
                                         updateDatesTimes({ pricing_ids: filteredPricingIds.join(',') }, _dateIndex);
                                     }
                                 }
-                                // placeholder={__('Pricing Options', 'wp-travel')}
                             />
                             <p className="components-form-token-field__help">{__i18n.help_text.date_pricing}</p>
                         </div>
@@ -194,16 +191,9 @@ const TripDatesTimes = ({ dates, storeKey, onUpdate, pricings }) => {
                                 }}
                             />
                      
-                            {/* <button className="wp-travel-form-input-clear-btn" type="button" onClick={() => {
-                                let _allDates = dates;
-                                _allDates[_dateIndex] = { ..._allDates[_dateIndex], end_date: '' }
-                                onUpdate(storeKey, _allDates);
-                            }}>
-                                <i className="fas fa-times-circle"></i>
-                                </button> */}
                         </div>
                     </PanelRow>
-                    {/* {applyFilters('wp_travel_after_end_date', '', dates, _dateIndex, _date, onUpdate, storeKey)} */}
+
                     {applyFilters('wp_travel_after_end_date', '', dates, _dateIndex, _date, onUpdate, storeKey)}
 
                     <hr />

@@ -1,5 +1,5 @@
 import { useState } from '@wordpress/element';
-import { TextControl, PanelRow, PanelBody, Button, Notice, TextareaControl, Dropdown, DateTimePicker, RangeControl } from '@wordpress/components';
+import { TextControl, PanelRow, PanelBody, Button, Notice, TextareaControl, Dropdown, RangeControl } from '@wordpress/components';
 import { applyFilters, addFilter } from '@wordpress/hooks';
 import { dispatch } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
@@ -11,11 +11,6 @@ import WPEditor from '../../../fields/WPEditor';
 const __i18n = {
 	..._wp_travel_admin.strings
 }
-
-// @todo Need to remove this in future.
-// const WPTravelTripOptionsItinerary = () => {
-//     return <></>;
-// }
 
 // export default WPTravelTripOptionsItinerary;
 
@@ -125,8 +120,7 @@ const Itinerary = ({allData}) => {
 		showMonthDropdown: true,
 		showYearDropdown: 'select',
 		dropdownMode: "select",
-		// minDate: new Date(),
-		// maxDate: typeof newEndDate != 'undefined' && newEndDate || '',
+		minDate: new Date(),
 	}
 
     
@@ -151,7 +145,6 @@ const Itinerary = ({allData}) => {
                                 return <div style={{position:'relative'}}  data-index={index} key={index} >
 										<div className={`wptravel-swap-list`}>
 										<Button
-										// style={{padding:0, display:'block'}}
 										disabled={0 == index}
 										onClick={(e) => {
 											let sorted = swapList( itineraries, index, index - 1 )
@@ -160,7 +153,6 @@ const Itinerary = ({allData}) => {
 											updateRequestSending(false);
 										}}><i className="dashicons dashicons-arrow-up"></i></Button>
 										<Button
-										// style={{padding:0, display:'block'}}
 										disabled={( Object.keys(itineraries).length - 1 ) === index}
 										onClick={(e) => {
 											let sorted = swapList( itineraries, index, index + 1 )
@@ -205,8 +197,6 @@ const Itinerary = ({allData}) => {
                                                     return false;
                                                 }
                                                 updateTripItinerary('date', moment(date).format('YYYY-MM-DD', date), itineraryId)
-                                                // updateDatesTimes( {start_date: moment(date).format( 'YYYY-MM-DD', date)}, _dateIndex );
-
                                             }}
                                         />
                                        
@@ -227,7 +217,6 @@ const Itinerary = ({allData}) => {
                                                 <div>
                                                     <label>{__i18n.hours}</label>
                                                     <RangeControl
-                                                        // label="Hours"
                                                         value={ stateHours }
                                                         onChange={ ( hours ) => {
                                                             setState( (prevState)=>{
@@ -241,7 +230,6 @@ const Itinerary = ({allData}) => {
                                                 <div>
                                                     <label>{__i18n.minute}</label>
                                                     <RangeControl
-                                                        // label="Hours"
                                                         value={ stateMinutes }
                                                         onChange={ ( minutes ) => {
                                                             setState( (prevState)=>{

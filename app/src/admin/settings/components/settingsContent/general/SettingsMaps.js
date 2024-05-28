@@ -98,7 +98,6 @@ export default () => {
               <div id="wp-travel-api-key" className="wp-travel-field-value">
                 <TextControl
                   id="api-key"
-                  // help={__( 'To get your Google map API keys click here', 'wp-travel' )}
                   value={google_map_api_key}
                   onChange={(value) => {
                     updateSettings({
@@ -122,7 +121,6 @@ export default () => {
               <label>{_wp_travel.setting_strings.maps.zoom_level}</label>
               <div id="wp-travel-zoom-level" className="wp-travel-field-value">
                 <TextControl
-                  // help={__( 'Set default zoom level of map.', 'wp-travel' )}
                   type="number"
                   value={google_map_zoom_level}
                   onChange={(value) => {

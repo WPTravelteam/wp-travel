@@ -1,7 +1,6 @@
 import { useSelect, dispatch } from '@wordpress/data';
 const bookingStoreName = 'WPTravelFrontend/BookingData';
-import { Button, Modal, PanelBody, PanelRow, TextControl } from '@wordpress/components'
-import { useState } from '@wordpress/element'
+import {  PanelBody } from '@wordpress/components'
 import DatePicker from "react-datepicker";
 
 export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
@@ -34,10 +33,6 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
             { ...datePickerParams }
             value={ typeof travelerValue[pxKey] != 'undefined' && travelerValue[pxKey] || '' }
             onChange={ ( value ) => {
-                // const createNewDate =  value;
-                // const month = createNewDate.getMonth() + 1 
-                // const years = createNewDate.getFullYear();
-                // const days = createNewDate.getDate() ;
                 const finaldate = moment(value).format('YYYY-MM-DD', value)
  
                 const newTraveler = {...travelerValue, [pxKey] : finaldate}

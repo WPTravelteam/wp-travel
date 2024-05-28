@@ -587,7 +587,7 @@ class WpTravel_Helpers_Trips {
 		update_post_meta( $trip_id, 'wp_travel_start_date', "9999-01-01");
 		update_post_meta( $trip_id, 'wp_travel_end_date', "0000-00-00");
 		global $wpdb; 
-		$date_value = $wpdb->get_results('SELECT * FROM wp_wt_dates WHERE trip_id ='.$trip_id);
+		$date_value = $wpdb->get_results('SELECT * FROM '.$wpdb->prefix.'wt_dates WHERE trip_id ='.$trip_id);
 		
 
 		if( count($date_value) ){
@@ -635,12 +635,6 @@ class WpTravel_Helpers_Trips {
 	 * @return Array
 	 */
 	public static function filter_trips( $args = array() ) {
-
-		// $permission = WP_Travel::verify_nonce();
-
-		// if ( ! $permission || is_wp_error( $permission ) ) {
-		// WP_Travel_Helpers_REST_API::response( $permission );
-		// }
 
 		global $wpdb;
 
@@ -698,7 +692,7 @@ class WpTravel_Helpers_Trips {
 			$query_args['tax_query'] = array();
 
 			if ( ! empty( $travel_locations ) ) {
-				// $query_args['tax_query']['relation'] = 'AND';
+
 				$query_args['tax_query'][] = array(
 					'taxonomy' => 'travel_locations',
 					'field'    => 'slug',

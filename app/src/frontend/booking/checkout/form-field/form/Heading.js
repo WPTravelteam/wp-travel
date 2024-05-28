@@ -1,10 +1,10 @@
-import { useSelect, dispatch } from '@wordpress/data';
-const bookingStoreName = 'WPTravelFrontend/BookingData';
+// import { useSelect, dispatch } from '@wordpress/data';
+// const bookingStoreName = 'WPTravelFrontend/BookingData';
 
 export default ( { travelerData, trvOne = 'travelerOne' } ) => {
-    const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
-    const { updateStore } = dispatch( bookingStoreName );
-    const { label, type, name, id, wrapper_class, attributes } = travelerData
+    // const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
+    // const { updateStore } = dispatch( bookingStoreName );
+    const { label, attributes } = travelerData
     const tag = typeof attributes != 'undefined' && typeof attributes.heading_tag != 'undefined' ?attributes.heading_tag : 'h1';
 
     return  tag == 'h1' && <h1>{label}</h1> || 

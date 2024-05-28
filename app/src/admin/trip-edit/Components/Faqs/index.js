@@ -11,12 +11,6 @@ const __i18n = {
 	..._wp_travel_admin.strings
 }
 
-// @todo Need to remove this in future.
-// const WPTravelTripOptionsFaq = () => {
-//     return <></>;
-// }
-// export default WPTravelTripOptionsFaq;
-
 // Single Components for hook callbacks.
 const FaqsNotice = () => {
     return <>
@@ -139,11 +133,9 @@ const Faqs = ({allData}) => {
                     let downIndexes = Object.keys(faqs).filter(function (tempFaqId) {
                         let j = parseInt(tempFaqId);
                         let tempGglobalFaq = 'yes' === faqs[j].global
-                        // if ( globalFaq ) {
-                        //     return tempGglobalFaq && i < j
-                        // } else {
-                            return ! tempGglobalFaq && i < j
-                        // }
+               
+                        return ! tempGglobalFaq && i < j
+                        
                     })
                     downIndex = 'undefined' != typeof downIndexes && 'undefined' != typeof downIndexes[0] ? parseInt( downIndexes[0] ) : downIndex;
 
@@ -151,11 +143,9 @@ const Faqs = ({allData}) => {
                     let upIndexes = Object.keys(faqs).filter(function (tempFaqId) {
                         let j = parseInt(tempFaqId);
                         let tempGglobalFaq = 'yes' === faqs[j].global
-                        // if ( globalFaq ) {
-                        //     return tempGglobalFaq && i > j
-                        // } else {
-                            return ! tempGglobalFaq && i > j
-                        // }
+
+                        return ! tempGglobalFaq && i > j
+                      
                     })
                     let len = upIndexes.length;
                     upIndex = 'undefined' != typeof upIndexes && 'undefined' != typeof upIndexes[len-1] ? parseInt( upIndexes[len-1] ) : upIndex;
@@ -243,7 +233,6 @@ const Faqs = ({allData}) => {
                                 return <div style={{position:'relative'}}  data-index={index} key={index} >
                                     <div className={`wptravel-swap-list ${hiddenClass}`}>
                                     <Button
-                                    // style={{padding:0, display:'block'}}
                                     disabled={startIndex == index}
                                     onClick={(e) => {
                                         let sorted = swapList( faqs, index, upIndex )
@@ -252,7 +241,6 @@ const Faqs = ({allData}) => {
                                         updateRequestSending(false);
                                     }}><i className="dashicons dashicons-arrow-up"></i></Button>
                                     <Button
-                                    // style={{padding:0, display:'block'}}
                                     disabled={endIndex == index}
                                     onClick={(e) => {
                                         let sorted = swapList( faqs, index, downIndex )

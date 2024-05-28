@@ -1,6 +1,6 @@
 import { useSelect, dispatch } from '@wordpress/data';
 const bookingStoreName = 'WPTravelFrontend/BookingData';
-import { Button, Modal, PanelBody, PanelRow, TextControl, RadioControl } from '@wordpress/components'
+import { PanelBody } from '@wordpress/components'
 
 export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
 
@@ -16,30 +16,30 @@ export default ( { travelerData, trvOne = 'travelerOne', pxKey = 1 } ) => {
 
     const optionKey = typeof options != 'undefined' && Object.keys( options ) || [];
     return optionKey.length > 0 && <> <PanelBody>
-        {/* <PanelRow> */}
-            <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>
-            <div className='wptravel-onpage-radiobtn-handle' >
-                { optionKey.map( ( val, index ) => {
-                    return  <div className='wptravel-single-page-gender-radio-btn'> <input 
-                        name={name + pxKey.toString()} 
-                        type='radio' 
-                        id={id} 
-                        key={index}
-                        defaultChecked={typeof travelerValue[pxKey] != 'undefined' && travelerValue[pxKey] == val ? true : false} 
-                        value={options[val]}
-                        className={ typeof wrapper_class != undefined && wrapper_class || ''}
-                        onChange={ ( e ) => {
-                            const value = e.target.value
-                            const newTraveler = {...travelerValue, [pxKey] : value}
-                            const newData = {...travelerDataList, [name] : newTraveler };
-                            const checkoutNewData = {...checkoutDetails, [trvOne] : newData }
-                            updateStore({...bookingData, checkoutDetails : checkoutNewData } )
-                        }}
-                    /> 
-                        <label htmlFor={val}>{ options[val] }</label> <br/>
-                    </div>
-                })  }
-            </div>
-        {/* </PanelRow> */}
+
+        <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>
+        <div className='wptravel-onpage-radiobtn-handle' >
+            { optionKey.map( ( val, index ) => {
+                return  <div className='wptravel-single-page-gender-radio-btn'> <input 
+                    name={name + pxKey.toString()} 
+                    type='radio' 
+                    id={id} 
+                    key={index}
+                    defaultChecked={typeof travelerValue[pxKey] != 'undefined' && travelerValue[pxKey] == val ? true : false} 
+                    value={options[val]}
+                    className={ typeof wrapper_class != undefined && wrapper_class || ''}
+                    onChange={ ( e ) => {
+                        const value = e.target.value
+                        const newTraveler = {...travelerValue, [pxKey] : value}
+                        const newData = {...travelerDataList, [name] : newTraveler };
+                        const checkoutNewData = {...checkoutDetails, [trvOne] : newData }
+                        updateStore({...bookingData, checkoutDetails : checkoutNewData } )
+                    }}
+                /> 
+                    <label htmlFor={val}>{ options[val] }</label> <br/>
+                </div>
+            })  }
+        </div>
+
     </PanelBody> <p className='wp-travel-in-page-error'>{errorData}</p></>
 }

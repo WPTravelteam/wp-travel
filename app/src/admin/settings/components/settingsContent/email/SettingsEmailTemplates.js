@@ -1,7 +1,7 @@
 import { applyFilters } from '@wordpress/hooks';
-import { useSelect, select, dispatch, withSelect } from '@wordpress/data';
+import { useSelect, select, dispatch } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
-import { PanelBody, PanelRow, ToggleControl, RadioControl, TextControl, ColorPicker, Button } from '@wordpress/components';
+import { PanelBody, PanelRow, ToggleControl, TextControl, ColorPicker } from '@wordpress/components';
 import WPEditor from '../../../../fields/WPEditor';
 import ErrorBoundary from '../../../../../ErrorBoundry/ErrorBoundry';
 
@@ -106,9 +106,6 @@ const BookingEmailTemplates = () => {
 
             <PanelRow>
                 <label>{_wp_travel.setting_strings.email_tempaltes.email_content}</label>
-                {/* <div className="wp-travel-field-value">
-                    <Button isSecondary onClick={() => resetContent('booking_admin_template_settings', 'email_content')}>{ __( 'Reset Content', 'wp-travel' ) }</Button>
-                </div> */}
             </PanelRow>
             <PanelRow className="wp-travel-editor">
                 <WPEditor

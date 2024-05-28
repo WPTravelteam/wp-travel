@@ -202,7 +202,7 @@ class WP_Travel_Itinerary {
 		if ( wptravel_is_react_version_enabled() ) {
 			$pricing_options = wptravel_get_trip_pricings( $this->post->ID );
 		}
-		// print_r( $pricing_options );die;
+
 		if ( is_array( $pricing_options ) && count( $pricing_options ) > 0 ) {
 			$group_size = 0;
 			foreach ( $pricing_options as $pricing_option ) {

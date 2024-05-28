@@ -7,7 +7,6 @@ const DEFAULT_STATE = () => {
      * also fixed price and date not show after refreshing or realoa
      */
     var initState = {
-        // tripCode: `WT-CODE ${wpTravelLocalize.postID}`,
         content: '',
         excerpt: '',
         addons: [],
@@ -29,7 +28,6 @@ const DEFAULT_STATE = () => {
         // Additional states
         has_state_changes:false,
         is_sending_request:true,
-        // settings : _wp_travel.wp_settings.settings
     };
     if ( typeof _wp_travel != 'undefined' && _wp_travel != null ) {
         initState = {...initState, settings : _wp_travel.wp_settings.settings }
@@ -228,9 +226,7 @@ registerStore('WPTravel/TripEdit', {
                     dates: addDate,
                     has_state_changes:true
                 };
-            case 'SET_TRIP_TABS_DATA':
-                // let addPricing = [...state.pricings,action.pricingData];
-                
+            case 'SET_TRIP_TABS_DATA':                
                 return {
                     ...state,
                     trip_tabs: action.data,

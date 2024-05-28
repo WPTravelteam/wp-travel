@@ -59,12 +59,11 @@ class WpTravel_Frontend_Assets {
 				wp_enqueue_style( 'wp-travel-single-itineraries' ); // For new layout.
 				wp_enqueue_style( 'wp-travel-popup' );
 				wp_enqueue_style( 'easy-responsive-tabs' );
-				// wp_enqueue_style( 'wp-travel-itineraries' );
+
 				// fontawesome.
 				wp_enqueue_style( 'wp-travel-user-css' );
 
 				// Scripts.
-				// wp_enqueue_script( 'wp-travel-view-mode' );
 				wp_enqueue_script( 'wp-travel-accordion' );
 
 				wp_enqueue_script( 'wp-travel-accordion' );
@@ -76,34 +75,29 @@ class WpTravel_Frontend_Assets {
 				wp_enqueue_script( 'collapse-js' );
 				wp_enqueue_script( 'wp-travel-cart' );
 
-				if ( ! wp_script_is( 'jquery-parsley', 'enqueued' ) ) {
-					// Parsley For Frontend Single Trips.
-					// wp_enqueue_script( 'jquery-parsley' ); // Maybe already enqueued from form fields.
-					// wp_localize_script( 'jquery-parsley', 'error_string', [
-					// 	'defaultMessage' => __( "This value seems to be invalid.", 'wp-travel' ),
-					// 	'type' => [
-					// 	'email' => __( "This value should be a valid email.", 'wp-travel' ),
-					// 	'url' => __( "This value should be a valid url.", 'wp-travel' ),
-					// 	'number' => __( "This value should be a valid number.", 'wp-travel' ),
-					// 	'integer' => __( "This value should be a valid integer.", 'wp-travel' ),
-					// 	'digits' => __( "This value should be digits.", 'wp-travel' ),
-					// 	'alphanum' => __( "This value should be alphanumeric.", 'wp-travel' )
-					// 	],
-					// 	'notblank' => __( "This value should not be blank.", 'wp-travel' ),
-					// 	'required' => __( "This value is required.", 'wp-travel' ),
-					// 	'pattern' => __( "This value seems to be invalid.", 'wp-travel' ),
-					// 	'min' => __( "This value should be greater than or equal to %s.", 'wp-travel' ),
-					// 	'max' => __( "This value should be lower than or equal to %s.", 'wp-travel' ),
-					// 	'range' => __( "This value should be between %s and %s.", 'wp-travel' ),
-					// 	'minlength' => __( "This value is too short. It should have %s characters or more.", 'wp-travel' ),
-					// 	'maxlength' => __( "This value is too long. It should have %s characters or fewer.", 'wp-travel' ),
-					// 	'length' => __( "This value length is invalid. It should be between %s and %s characters long.", 'wp-travel' ),
-					// 	'mincheck' => __( "You must select at least %s choices.", 'wp-travel' ),
-					// 	'maxcheck' => __( "You must select %s choices or fewer.", 'wp-travel' ),
-					// 	'check' => __( "You must select between %s and %s choices.", 'wp-travel' ),
-					// 	'equalto' => __( "This value should be the same.", 'wp-travel' ),
-					// 	'euvatin' => __( "It's not a valid VAT Identification Number.", 'wp-travel' )
-					// ] );
+				if( class_exists( 'WP_Travel_Pro' ) ){ 
+					$default_payment = apply_filters( 'wptravel_default_payment', '' );
+					$payment_array = array(
+						'paypal' => 'wp-travel-payment-paypal',
+						'bank_deposit' => 'wp-travel-payment-bank_deposit',
+						'stripe' => 'wp-travel-payment-stripe',
+						'instamojo_checkout' => 'wp-travel-payment-instamojo_checkout',
+						'khalti' => 'wp-travel-payment-khalti',
+						'payu' => 'wp-travel-payment-payu',
+						'payu_latam' => 'wp-travel-payment-payu_latam',
+						'payfast' => 'wp-travel-payment-payfast',
+						'payhere' => 'wp-travel-payment-payhere',
+						'express_checkout' => 'wp-travel-payment-express_checkout',
+						'paystack' => 'wp-travel-payment-paystack',
+						'razorpay_checkout' => 'wp-travel-payment-razorpay_checkout',
+						'squareup_checkout' => 'wp-travel-payment-squareup_checkout',
+						'stripe_ideal' => 'wp-travel-payment-stripe_ideal',
+					);
+
+					if( !empty($default_payment) ){
+						wp_add_inline_script( 'wp-travel-cart', 'document.getElementById("'.$payment_array[$default_payment].'").checked = true;' );
+					}
+					
 				}
 
 				// for GMAP.
@@ -169,8 +163,6 @@ class WpTravel_Frontend_Assets {
 		// Scripts for all .
 		wp_localize_script( 'jquery-datepicker-lib', 'wp_travel', $wp_travel );
 		
-		
-
 		wp_enqueue_script( 'wp-travel-widget-scripts' ); // Need to enqueue in all pages to work enquiry widget in WP Page and posts as well.
 		wp_enqueue_script( 'jquery-datepicker-lib' );
 		wp_enqueue_script( 'jquery-datepicker-lib-eng' );
@@ -636,14 +628,6 @@ class WpTravel_Frontend_Assets {
 				'in_footer' => true,
 			);
 
-			// Legacy Widgets.
-			// $legacy_widget_deps                 = $all_dependencies['legacy-widgets'];
-			// $scripts['wptravel-legacy-widgets'] = array(
-			// 'src'       => self::$app_path . '/build/legacy-widgets' . $suffix . '.js',
-			// 'deps'      => $legacy_widget_deps['dependencies'],
-			// 'ver'       => $legacy_widget_deps['version'],
-			// 'in_footer' => true,
-			// );
 		}
 
 		// Register scripts and styles.
@@ -756,12 +740,6 @@ class WpTravel_Frontend_Assets {
 		$admin_enquiry['dependencies'][] = 'jquery';
 		$dependenccies['admin-enquiry']  = $admin_enquiry;
 		// End of Admin enquiry.
-
-		// Legacy widget.
-		// $legacy_widgets                   = include_once sprintf( '%sapp/build/legacy-widgets.asset.php', WP_TRAVEL_ABSPATH );
-		// $legacy_widgets['dependencies'][] = 'jquery';
-		// $dependenccies['legacy-widgets']  = $legacy_widgets;
-		// End of Legacy widget.
 
 		return $dependenccies; // it will return all block dependency along with compled version.
 	}

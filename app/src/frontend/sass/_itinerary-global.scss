@@ -120,7 +120,6 @@ a{
                     position: absolute;
                     top: 100%;
                     left: 0;
-                    // overflow: hidden;
                     background-color: #fff;
                     border: 1px solid #ccc;
                     border-radius: 7px;
@@ -618,7 +617,6 @@ a{
                                     top: -10px;
                                     left: 3px;
                                     border: 11px solid transparent;
-                                    /* background-color: #fff; */
                                     border-bottom-color: $itinerary-content-bg;
                                     border-top: none;
                                      
@@ -826,7 +824,6 @@ a{
         .scroll-spy-button {
             all: unset;
             padding: 1.5em 7px;
-           /*  width: 100%; */
             font-size: 16px;
             cursor: pointer;
             background-color:transparent;
@@ -1031,7 +1028,6 @@ a{
                         
                         @media(min-width: 992px){
                             flex: 1;
-                            /* max-width: 24%; */
                             min-width: 24%;
                         }
                         .trip__info-icon{
@@ -1125,7 +1121,6 @@ a{
                                 position: absolute;
                                 left: -9px;
                                 top: 0;
-                                /* background: #fff; */
                             }
                             &::after{
                                 content: "";
@@ -1204,7 +1199,6 @@ a{
             }
         }
         .react-datepicker-wrapper{
-            // width: 100%;
             width: auto;
             .react-datepicker__input-container{
                 position: relative;

@@ -7,10 +7,8 @@
 
 	ul {
 		margin: 0 !important;
-		// padding: 0 !important;
 		padding: 0 25px !important;
 		display: grid;
-		// grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 		grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
 		column-gap: 1.5em;
 		@media (min-width: 993px) and (max-width: 1071px) {
@@ -27,34 +25,14 @@
 			list-style: none;
 			float: left;
 			transition: width 1s, height 4s;
-			// width: 25%;
 			width: 100%;
-			// margin-bottom: 20px;
-			// width: 33.33333%;
-			// width: calc(33.33% - 15px);
 			position: relative;
-			// min-height: 1px;
-			// padding-left: 15px;
-			// padding-right: 15px;
 			@media (max-width: 992px) {
 				padding: 0;
 			}
 
 			&:nth-of-type(3n):after {
 				clear: both;
-			}
-
-			&:first-child {
-				// margin-left: 0;
-				// padding-left:0;
-			}
-
-			@include sidr-view {
-				// width: 50%;
-			}
-
-			@include mob {
-				// width: 50%;
 			}
 
 			@include sm {
@@ -67,8 +45,6 @@
 		}
 
 		img {
-			// width: 100%;
-			// display: block;
 			margin: 0;
 			width: 100%;
 			object-fit: cover;

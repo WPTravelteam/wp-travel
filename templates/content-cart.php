@@ -191,7 +191,6 @@ wptravel_print_notices();
 														echo wp_kses_post( wptravel_get_pricing_category_by_key( $category_type ) ) . esc_html__( ' (Group)', 'wp-travel' );
 													}
 													?>
-													<?php // _e( 'Group', 'wp-travel' ); ?>
 												</span> <input type="number" class="input-text wp-travel-pax text wp-travel-trip-pax" data-trip="wp-travel-trip-<?php echo esc_attr( $trip_id ); ?>" data-trip-id="<?php echo esc_attr( $trip_id ); ?>" step="1" min="0"<?php // echo $min_attr; ?> <?php echo esc_attr( $max_attr ); ?> name="pax[]" data-category-id="<?php echo esc_attr( $category_id ); ?>" value="<?php echo esc_attr( $pax ); ?>" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric"> <?php echo wp_kses_post( wptravel_get_formated_price_currency( $price ) ); ?>
 											</li>
 											<?php

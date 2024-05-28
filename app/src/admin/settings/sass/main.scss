@@ -1,11 +1,9 @@
 $wp-travel-background: rgb(240 240 241);
 $wp-travel-white: rgb(255, 255, 255);
 $wp-travel-light: rgb(250, 250, 250);
-// $wp-travel-light-green: rgba(116, 201, 124, 0.388);
 $wp-travel-green: rgb(7, 152, 18);
 $wp-travel-green-hover: rgb(81, 190, 90);
 $wp-travel-light-green: rgb(236 248 244);
-// $wp-travel-green: rgb(31, 150, 75);
 $wp-travel-faded: rgb(121, 136, 158);
 $wp-travel-active: rgb(30, 41, 59);
 $wp-travel-active-background: rgb(235, 235, 235);
@@ -761,74 +759,6 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
                             background-color: $wp-travel-green;
                         }
                     }
-
-					// .css-l9lx82 {
-					// 	display: block;
-					// 	flex: 1 1 0%;
-					// 	position: relative;
-					// 	width: 100%;
-					// 	color: $wp-travel-green;
-					// 	height: 30px;
-					// 	min-height: 30px;
-					// }
-
-					// .css-10282dw {
-					// 	border-radius: 4px;
-					// 	height: 4px;
-					// 	pointer-events: none;
-					// 	display: block;
-					// 	position: absolute;
-					// 	margin-top: 13px;
-					// 	top: 0px;
-					// 	background: $wp-travel-green;
-					// }
-
-					// .css-1nzgp6g {
-					// 	-webkit-box-align: center;
-					// 	align-items: center;
-					// 	border-radius: 50%;
-					// 	height: 100%;
-					// 	outline: 0px;
-					// 	position: absolute;
-					// 	-webkit-user-select: none;
-					// 	user-select: none;
-					// 	width: 100%;
-					// 	background-color: $wp-travel-green;
-					// }
-
-					// .css-19h143v {
-					// 	-webkit-box-align: center;
-					// 	align-items: center;
-					// 	border-radius: 50%;
-					// 	height: 100%;
-					// 	outline: 0px;
-					// 	position: absolute;
-					// 	-webkit-user-select: none;
-					// 	user-select: none;
-					// 	width: 100%;
-					// 	background-color: $wp-travel-green;
-					// }
-
-					// .css-azwfbw {
-					// 	-webkit-box-align: center;
-					// 	align-items: center;
-					// 	display: flex;
-					// 	height: 12px;
-					// 	-webkit-box-pack: center;
-					// 	justify-content: center;
-					// 	margin-top: 9px;
-					// 	outline: 0px;
-					// 	pointer-events: none;
-					// 	position: absolute;
-					// 	top: 0px;
-					// 	-webkit-user-select: none;
-					// 	user-select: none;
-					// 	width: 12px;
-					// 	border-radius: 50%;
-					// 	background-color: $wp-travel-green;
-					// 	margin-left: -10px;
-					// 	transform: translateX(4.5px);
-					// }
 				}
 				.components-base-control {
 					display: flex;
@@ -2159,7 +2089,6 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 		}
 		
 		.wptravel-pro-upsell-body {
-			/* display: flex; */
 			gap: 20px;
 		}
 		

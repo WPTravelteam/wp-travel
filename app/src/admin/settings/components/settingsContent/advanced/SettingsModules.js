@@ -11,7 +11,7 @@ export default () => {
 
     const { updateSettings } = dispatch('WPTravel/Admin');
     const { modules, options, enable_woo_checkout } = allData;
-    const { default_settings, saved_settings } = options;
+    const { default_settings } = options;
     const { modules: defaultModules } = default_settings;
 
     let _modules = modules;
@@ -148,7 +148,6 @@ export default () => {
                                                             <ToggleControl
                                                                 checked={enabledModule}
                                                                 onChange={(val) => {
-                                                                    // let _modules = modules;
                                                                     _modules[addonsKey].value = val ? 'yes' : 'no';
                                                                     updateSettings({
                                                                         ...allData,
@@ -255,7 +254,6 @@ export default () => {
                                                             <ToggleControl
                                                                 checked={enabledModule}
                                                                 onChange={(val) => {
-                                                                    // let _modules = modules;
                                                                     _modules[addonsKey].value = val ? 'yes' : 'no';
                                                                     updateSettings({
                                                                         ...allData,

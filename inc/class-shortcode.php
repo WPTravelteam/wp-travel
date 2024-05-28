@@ -360,7 +360,6 @@ class Wp_Travel_Shortcodes {
 	 */
 	public static function wptravel_filter_itinerary( $atts, $content ) {
 		$sanitized_get = WP_Travel::get_sanitize_request();
-		// $search_widget_fields = wptravel_search_filter_widget_form_fields( $sanitized_get );
 		ob_start();
 		?>
 		<div class="wp-travel-toolbar clearfix">

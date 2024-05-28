@@ -45,16 +45,7 @@ const PaxSelector = ( props ) => {
 				}
 			} );
 		}, [] );
-		
-		// useEffect( () => {	
-			
-		// 	let nonce = Math.random().toString(36).substring(2,7);
-		// 	apiFetch.use( apiFetch.createNonceMiddleware( nonce ) );
 
-		// 	apiFetch( { path: '/wptravelgettripindividual_pricing_category_paxstock/v1/tripindividual_pricing_category_paxStock/'+tripDepartureDate+'seperate'+tripID+'?key='+Math.random().toString(36).substring(2,7), method: 'GET' } ).then( ( response ) => {
-		// 		setTripPaxStock( response )
-		// 	} )
-		// }, [] );
 	}
 
 
@@ -157,7 +148,6 @@ const PaxSelector = ( props ) => {
 			}
 			
 		}else{
-			// let count = parseInt ( paxCounts[id] ) + value <= 0 ? 0 : parseInt ( paxCounts[id] ) + value
 			let _inventory = inventory.find(i => i.date === moment(selectedDate).format('YYYY-MM-DD[T]HH:mm')); // selectedDate : date along with time.
 			let maxPax = _inventory && _inventory.pax_available;
 			if ( ! maxPax ) {
@@ -205,7 +195,6 @@ const PaxSelector = ( props ) => {
 		}
 
 		if (maxPax >= 1) {
-			// let _totalPax = _.size(paxCounts) > 0 && Object.values(paxCounts).reduce((acc, curr) => acc + curr) || 0
 			if ( values > parseInt(maxPax)) {
 				updateBookingData({ paxCounts: { ...paxCounts, [id]: 0 } })
 				return;

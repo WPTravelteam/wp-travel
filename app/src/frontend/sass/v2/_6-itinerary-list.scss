@@ -41,7 +41,6 @@
 }
 
 .trip-price {
-	// font-weight: 600;
 
 	.person-count {
 		text-transform: capitalize;
@@ -59,9 +58,6 @@
 	font-size: 12px;
 	line-height: 1;
 	margin-left: 5px;
-	// @media (max-width: 767px) {
-	// 	display: none;
-	// }
 }
 
 .wp-travel-itinerary-items {
@@ -71,7 +67,7 @@
 		padding: 0;
 		display: grid;
 		grid-gap: 20px;
-		// grid-template-columns: repeat(auto-fill, minmax(295px, 1fr));
+
 		&.grid-view {
 			grid-template-columns: repeat(auto-fill, minmax(295px, 1fr));
 		}
@@ -175,62 +171,12 @@
 			}
 		}
 
-		// &.itinerary-1-per-row {
-		// 	grid-template-columns: 1fr;
-		// }
-		// &.itinerary-2-per-row {
-		// 	grid-template-columns: repeat(2, 1fr);
-		// }
 
-		// &.itinerary-3-per-row {
-		// 	grid-template-columns: repeat(3, 1fr);
-		// }
-
-		// &.itinerary-4-per-row {
-		// 	grid-template-columns: repeat(4, 1fr);
-		// }
-
-		// &.itinerary-5-per-row {
-		// 	grid-template-columns: repeat(5, 1fr);
-		// }
-
-		// &.itinerary-6-per-row {
-		// 	grid-template-columns: repeat(6, 1fr);
-		// }
-
-		// &.itinerary-7-per-row {
-		// 	grid-template-columns: repeat(7, 1fr);
-		// }
-
-		// &.itinerary-8-per-row {
-		// 	grid-template-columns: repeat(8, 1fr);
-		// }
-
-		// &.itinerary-9-per-row {
-		// 	grid-template-columns: repeat(9, 1fr);
-		// }
 		@media (max-width: 675px) {
 			&[class*="-per-row"] {
 				grid-template-columns: repeat(1, 1fr);
 			}
 		}
-
-		// @include mob {
-		// 	margin: 0 !important;
-		// 	padding-left: 0 !important;
-		// }
-
-		// &[class*="itinerary-"] li {
-		// 	@include sidr-view {
-		// 		width: 100%;
-		// 	}
-		// }
-
-		// &[class*="itinerary-"] li {
-		// 	@include mob {
-		// 		width: 100%;
-		// 	}
-		// }
 
 		li {
 			list-style: none;
@@ -244,10 +190,6 @@
 			&:before {
 				content: none;
 			}
-
-			// @include sidr-view {
-			// 	width: calc(50% - 20px);
-			// }
 
 			@include mob {
 				width: 100%;
@@ -321,11 +263,7 @@
 			}
 		}
 		.wp-travel-itinerary-list {
-			// grid-template-columns: repeat(3, 1fr);
 			grid-template-columns: repeat(auto-fill, minmax(315px, 1fr));
-			// @media (max-width: 991px) {
-			// 	grid-template-columns: repeat(2, 1fr);
-			// }
 			@media (max-width: 420px) {
 				grid-template-columns: auto;
 			}
@@ -333,14 +271,6 @@
 	}
 }
 
-// Widget Area related trip grid view
-// .widget-area {
-// 	.wp-travel-itinerary-items {
-// 		ul.wp-travel-itinerary-list {
-// 			grid-template-columns: auto;
-// 		}
-// 	}
-// }
 // List Mode
 .wp-travel-default-article {
 	display: block;
@@ -375,16 +305,9 @@
 			width: 100%;
 		}
 
-		// @include mob {
-		// 	width: 100%;
-		// 	float: none;
-		// 	margin-right: 0;
-		// }
-
 		.wp-travel-offer {
 			span {
 				@media (max-width: 767px) {
-					// width: 65px;
 					top: 0;
 					width: 46px;
 					line-height: 24px;
@@ -420,25 +343,15 @@
 			width: 100%;
 		}
 
-		// @include mob {
-		// 	width: 100%;
-		// 	float: none;
-		// 	display: block;
-		// }
-
 		.description-left {
 			width: 70%;
 			float: left;
 			padding: 0 20px;
-			// position: relative;
 
 			@media (max-width: 640px) {
 				width: 100%;
 			}
 
-			// @include mob {
-			// 	width: 100%;
-			// }
 			@media (max-width: 992px) {
 				.wp-travel-add-to-wishlists {
 					top: 5px;
@@ -471,9 +384,6 @@
 
 			.wp-travel-average-review {
 				display: inline-block;
-				// @media (max-width: 767px) {
-				// 	display: none;
-				// }
 			}
 
 			.travel-info {
@@ -495,17 +405,6 @@
 				text-align: left;
 			}
 
-			// @include mob {
-			// 	width: 100%;
-			// 	float: none;
-			// 	padding: 0 15px 15px;
-			// 	border-left: none;
-			// 	text-align: left;
-			// 	clear: both;
-			// }
-			// .wp-travel-average-review {
-			// 	display: none;
-			// }
 
 			.trip-price {
 				margin: 35px 0 25px;
@@ -549,25 +448,7 @@
 		margin: 0;
 	}
 }
-// Grid Mode.
-// .wp-travel-grid-mode {
-// 	.wp-travel-archive-content {
-// 		.wp-travel-itinerary-list {
-// 			display: flex;
-// 			justify-content: left;
-// 			padding-left: 0;
-// 			margin: 0 -10px;
-// 			flex-wrap: wrap;
-// 			gap: 20px;
-// 			margin-left: 0;
 
-// 			@include mob {
-// 				margin: 0 !important;
-// 				padding-left: 0 !important;
-// 			}
-// 		}
-// 	}
-// }
 
 .wp-travel-post-info {
 	padding: 10px;
@@ -580,12 +461,6 @@
 }
 
 .entry-meta {
-	// padding: 10px 0;
-	// display: block;
-	// @include clearfix();
-	// @media (max-width: 767px) {
-	// 	display: none !important;
-	// }
 
 	.travel-info {
 		float: left;
@@ -603,12 +478,6 @@
 		}
 	}
 
-	// a,
-	// i {
-	// 	font-weight: 300;
-	// 	font-size: 12px;
-	// }
-
 	i.wt-icon-caret-down {
 		color: #555;
 	}
@@ -624,23 +493,7 @@
 				padding-left: 7px;
 				display: inline-block;
 				cursor: pointer;
-				// .sub-category-menu {
-				// 	visibility: hidden;
-				// 	opacity: 0;
-				// 	position: absolute;
-				// 	top: 40px;
-				// 	right: 0px;
-				// 	text-align: left;
-				// 	background: #fff none repeat scroll 0 0;
-				// 	box-shadow: 0 6px 12px #cdcdcd;
-				// 	min-width: 115px;
-				// 	// padding: 10px;
-				// 	width: 100%;
-				// 	transform: translateY(-2em);
-				// 	z-index: 2;
-				// 	transition: all 0.3s ease-in-out 0s,
-				// 		visibility 0s linear 0.3s, z-index 0s linear 0.01s;
-				// }
+
 				&:hover {
 					.sub-category-menu {
 						visibility: visible;
@@ -672,38 +525,6 @@
 		.category-list-items {
 			margin-right: 0;
 			padding: 2px 0;
-			// .wp-travel-caret {
-			// 	padding-left: 7px;
-			// 	display: inline-block;
-			// 	cursor: pointer;
-			// 	.sub-category-menu {
-			// 		visibility: hidden;
-			// 		opacity: 0;
-			// 		position: absolute;
-			// 		top: 40px;
-			// 		right: 0px;
-			// 		text-align: left;
-			// 		background: #fff none repeat scroll 0 0;
-			// 		box-shadow: 0 6px 12px #5e5e5e;
-			// 		min-width: 115px;
-			// 		padding: 10px;
-			// 		width: 100%;
-			// 		transform: translateY(-2em);
-			// 		z-index: 2;
-			// 		transition: all 0.3s ease-in-out 0s,
-			// 			visibility 0s linear 0.3s, z-index 0s linear 0.01s;
-			// 	}
-			// 	&:hover {
-			// 		.sub-category-menu {
-			// 			visibility: visible;
-			// 			opacity: 1;
-			// 			z-index: 2;
-			// 			top: 30px;
-			// 			transform: translateY(0%);
-			// 			transition-delay: 0s, 0s, 0.3s;
-			// 		}
-			// 	}
-			// }
 		}
 	}
 }
@@ -730,9 +551,7 @@
 	padding-right: 15px;
 }
 .wp-travel-widget-area {
-	// width: 33.333333333%;
 	float: right;
-	// width: 100%;
 }
 
 // Itinerary Page List and Grid View New Design SCSS
@@ -809,7 +628,6 @@
 					bottom: 20px;
 					right: 20px;
 					i {
-						// color: $bookmarkColor;
 						font-size: 35px;
 					}
 				}
@@ -817,7 +635,6 @@
 			.view-content {
 				display: flex;
 				flex-wrap: nowrap;
-				// align-items: center;
 				margin: 30px 0;
 				width: 70%;
 				padding: 0 0 0 25px;
@@ -851,7 +668,6 @@
 							flex-wrap: nowrap;
 						}
 						> .wp-travel-add-to-wishlists {
-							// display: none;
 							position: unset;
 						}
 						.favourite {
@@ -867,7 +683,6 @@
 							.heading-link {
 								font-size: 28px;
 								line-height: 34px;
-								// color: $textColor;
 								display: inline;
 								text-transform: capitalize;
 								@media (max-width: 991px) {
@@ -875,18 +690,13 @@
 									line-height: 26px;
 								}
 							}
-							// &:hover {
-							// 	.heading-link {
-							// 		// color: $mainColor;
-							// 	}
-							// }
+
 						}
 						.favourite {
 							display: contents;
 							width: 10%;
 
 							i {
-								// color: $offerColor;
 								font-size: 20px;
 							}
 						}
@@ -904,63 +714,13 @@
 						}
 						i {
 							font-size: 16px;
-							// color: $mainColor;
 						}
 						span {
 							font-weight: 600;
 							font-size: 14px;
 							color: rgb(88, 88, 88);
 						}
-						// .trip-activity {
-						//   position: relative;
-						//   float: right;
-						//   margin-right: 0;
-						//   padding: 2px 0;
-						// }
-						// .caret {
-						//   display: inline-block;
-						//   cursor: pointer;
-						//   i {
-						//     color: #555;
-						//   }
-						//   .sub-menu {
-						//     visibility: hidden;
-						//     opacity: 0;
-						//     position: absolute;
-						//     top: 40px;
-						//     right: 0px;
-						//     text-align: left;
-						//     background: #fff none repeat scroll 0 0;
-						//     box-shadow: 0 6px 12px #c7c7c7;
-						//     min-width: 115px;
-						//     padding: 0;
-						//     width: 100%;
-						//     transform: translateY(-2em);
-						//     z-index: 2;
-						//     transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s,
-						//       z-index 0s linear 0.01s;
-						//     a {
-						//       padding: 6px 10px;
-						//       cursor: pointer;
-						//       display: block;
-						//       &:hover {
-						//         span {
-						//           color: $mainColor;
-						//         }
-						//       }
-						//     }
-						//   }
-						//   &:hover {
-						//     .sub-menu {
-						//       visibility: visible;
-						//       opacity: 1;
-						//       z-index: 2;
-						//       top: 30px;
-						//       transform: translateY(0%);
-						//       transition-delay: 0s, 0s, 0.3s;
-						//     }
-						//   }
-						// }
+						
 					}
 					.trip-desc {
 						p {
@@ -1014,7 +774,6 @@
 								display: block;
 								font-size: 22px;
 								font-weight: 600;
-								// color: $mainColor;
 								margin: 10px 0 -7px;
 							}
 							.discount {
@@ -1038,7 +797,6 @@
 					}
 
 					.explore-btn {
-						// background: $mainColor;
 						padding: 12px 15px;
 						transition: all ease 0.3s;
 						border-radius: 3px;
@@ -1046,16 +804,12 @@
 							width: 100%;
 						}
 						span {
-							// color: $whiteColor;
 							font-weight: 700;
 							letter-spacing: 1px;
 						}
 						&:hover {
-							// background: transparent;
-							// border: 1px solid $mainColor;
 							span {
-								// color: $mainColor;
-								text-decoration: underline;
+								text-decoration: none;
 							}
 						}
 					}
@@ -1087,7 +841,6 @@
 						padding: 5px 12px;
 						left: 15px;
 						bottom: -15px;
-						// bottom: 10px;
 						&::before {
 							content: none;
 						}
@@ -1108,7 +861,6 @@
 					flex-direction: column;
 					margin: 10px 0;
 					padding: 15px 15px 0;
-					// width: 100%;
 					width: auto;
 					.left-content {
 						width: 100%;
@@ -1176,7 +928,7 @@
 								text-align: right;
 
 								.price-here {
-									font-size: 30px;
+									font-size: 22px;
 									color: #484848;
 									margin: 10px 0 -10px;
 								}
@@ -1318,61 +1070,7 @@
 			&.itinerary-9-per-row {
 				grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
 			}
-			// &.itinerary-1-per-row {
-			// 	grid-template-columns: repeat(1, 1fr);
-			// }
-			// &.itinerary-2-per-row {
-			// 	grid-template-columns: repeat(2, 1fr);
-			// 	@media (max-width: 650px) {
-			// 		grid-template-columns: repeat(1, 1fr);
-			// 	}
-			// }
-			// &.itinerary-3-per-row {
-			// 	// grid-template-columns: repeat(3, 1fr);
-			// 	grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-			// 	@media (min-width: 651px) and (max-width: 1199px) {
-			// 		grid-template-columns: repeat(2, 1fr);
-			// 	}
-			// 	@media (max-width: 650px) {
-			// 		grid-template-columns: repeat(1, 1fr);
-			// 	}
-			// }
-			// &.itinerary-4-per-row {
-			// 	grid-template-columns: repeat(4, 1fr);
-			// 	@media (max-width: 1200px) {
-			// 		grid-template-columns: repeat(3, 1fr);
-			// 	}
-			// 	@media (max-width: 991px) {
-			// 		grid-template-columns: repeat(2, 1fr);
-			// 	}
-			// 	@media (max-width: 650px) {
-			// 		grid-template-columns: repeat(1, 1fr);
-			// 	}
-			// }
-			// &.itinerary-5-per-row {
-			// 	grid-template-columns: repeat(5, 1fr);
-			// 	@media (max-width: 1200px) {
-			// 		grid-template-columns: repeat(4, 1fr);
-			// 	}
-			// 	@media (max-width: 991px) {
-			// 		grid-template-columns: repeat(2, 1fr);
-			// 	}
-			// 	@media (max-width: 650px) {
-			// 		grid-template-columns: repeat(1, 1fr);
-			// 	}
-			// }
-			// &.itinerary-6-per-row {
-			// 	grid-template-columns: repeat(6, 1fr);
-			// 	@media (max-width: 1200px) {
-			// 		grid-template-columns: repeat(4, 1fr);
-			// 	}
-			// 	@media (max-width: 991px) {
-			// 		grid-template-columns: repeat(2, 1fr);
-			// 	}
-			// 	@media (max-width: 650px) {
-			// 		grid-template-columns: repeat(1, 1fr);
-			// 	}
-			// }
+			
 		}
 	}
 }
@@ -1380,19 +1078,15 @@
 // Layout V2 itinerary page grid view CSS
 .wptravel-layout-v2.wp-travel-grid-mode .site-content {
 	.wp-travel-archive-content {
-		// display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
 		gap: 1.5em;
 		.wptravel-archive-wrapper {
 			li {
 				list-style: none;
-				// border: 1px solid #e9e9e9;
-				// margin-bottom: 20px;
 				display: flex;
 				flex-wrap: nowrap;
 				align-items: flex-start;
 				background: #fff;
-				// padding-left: 25px;
 				border-radius: 4px;
 				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
 				transition: all ease 0.3s;
@@ -1432,25 +1126,6 @@
 	}
 }
 
-// // itinerary page main section wishlist icon
-// .wp-travel-itinerary-items {
-// 	.wp-travel-itinerary-list {
-// 		&.grid-view {
-// 			.wp-travel-post-info {
-// 				.wp-travel-add-to-wishlists {
-// 					left: 13px;
-// 					top: 14px;
-// 				}
-// 			}
-// 		}
-// 	}
-// }
-
-// .wp-travel-itinerary-list .wp-travel-post-info .wp-travel-add-to-wishlists,
-// .wp-travel-itinerary-list.grid-view .wp-travel-add-to-wishlists,
-// .widget .wp-travel-itinerary-list.grid-view .wp-travel-add-to-wishlists {
-// 	left: 15px !important;
-// }
 
 // Fixed Departure Date Dropdown List in archive page and single trip page
 .fixed-date-dropdown {
@@ -1458,7 +1133,6 @@
 	display: inline-block;
 	.dropbtn {
 		color: #555;
-		// font-size: 14px;
 		border: none;
 		cursor: pointer;
 		display: flex;
@@ -1467,7 +1141,6 @@
 			content: "\f107";
 			font-family: "Font Awesome 5 Free";
 			font-weight: 900;
-			// margin-left: 8px;
 			margin-left: 5px;
 			color: #555;
 			transition: all 0.3s ease;
@@ -1564,10 +1237,7 @@
 	}
 }
 
-// .description-left .wp-travel-add-to-wishlists {
-// 	top: 10px !important;
-// 	left: auto !important;
-// }
+
 .wp-travel-itinerary-items {
 	&.grid-view {
 		display: grid;
@@ -1698,7 +1368,6 @@
 				color: #fff;
 			}
 			img {
-				// position: absolute;
 				top: 0;
 				width: 100%;
 				height: 100%;
@@ -1717,7 +1386,6 @@
 		}
 		.taxonomy-content {
 			padding: 20px 15px;
-			// position: relative;
 			width: 100%;
 			bottom: 0;
 			left: 0;
@@ -1758,7 +1426,6 @@
 				}
 				.taxonomy-read-more-link {
 					float: right;
-					// position: absolute;
 					bottom: 20px;
 					right: 20px;
 					font-size: 12px;

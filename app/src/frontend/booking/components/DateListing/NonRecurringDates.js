@@ -1,4 +1,4 @@
-import { CheckboxControl, Disabled } from '@wordpress/components';
+import { Disabled } from '@wordpress/components';
 import { Fragment, useState, useEffect } from '@wordpress/element';
 
 const __i18n = {
@@ -111,7 +111,6 @@ const NonRecorringRepeater = ( props ) => {
             dtstart: new Date(rruleStartDate),
         };
 		if ( showAll ) { // This args is only For Pagination.
-			// delete ruleArgs.count;
             ruleArgs.count = ( 50 * datePerPage ); // Support Max 50 pages i.e. 500 records.
 		}
         if ( date.end_date && '0000-00-00' != date.end_date ) { // if has end date.
@@ -185,8 +184,6 @@ const NonRecurringDates = ( props ) => {
 			}
 			return <tr key={index} id={'date-'+date.id} className={loadingClass}>
 				<td class="tablebody-booking-pricings" data-label={__i18n.bookings.pricings_list_label}>
-					{/* _nomineePricings not updated in store/state because there are multiple _nomineePricings as per date so just a variable. */}
-					{/* <Pricings { ...{ ...props, _nomineePricings, date } }  /> */}
 					{/**
 					 * @param props, date , and price id
 					 * @return price name

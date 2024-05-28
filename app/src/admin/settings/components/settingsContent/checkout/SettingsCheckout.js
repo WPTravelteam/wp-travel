@@ -1,16 +1,13 @@
 import { applyFilters, addFilter } from '@wordpress/hooks';
-import { useSelect, select, dispatch, withSelect } from '@wordpress/data';
+import { useSelect, select, dispatch } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
-import { PanelBody, PanelRow, ToggleControl, TextControl, RadioControl, Notice } from '@wordpress/components';
-import Select from 'react-select'
-import { VersionCompare } from '../../../../fields/VersionCompare'
-import { alignJustify } from '@wordpress/icons';
+import { PanelRow, ToggleControl, Notice } from '@wordpress/components';
+// import Select from 'react-select'
+
 
 import ErrorBoundary from '../../../../../ErrorBoundry/ErrorBoundry';
 
 export default () => {
-
-    
 
     const allData = useSelect((select) => {
         return select('WPTravel/Admin').getAllStore()
@@ -27,9 +24,8 @@ export default () => {
     if (!_modules.length) {
         _modules = defaultModules
     }
-    // if (defaultModules && Object.keys(defaultModules).length > 0) { 
+
     const paymentModules = Object.keys(defaultModules).filter(k => 'Payment' === defaultModules[k].category);
-    // }
 
     return (
         <>

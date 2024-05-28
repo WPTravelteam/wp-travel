@@ -95,9 +95,6 @@ class WP_Travel_Admin_Info_Pointers {
 		// Add pointers style to queue.
 		wp_enqueue_style( 'wp-pointer' );
 
-		// Add pointers script to queue. Add custom script.
-		// wp_register_script( 'wp-travel-admin-pointers-js', plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ) . '/assets/js/wp-travel-backend-pointers.js', array( 'wp-pointer' ) );
-
 		// Add pointer options to script.
 		wp_localize_script( 'wp-travel-admin-pointers-js', 'wpctgPointer', $valid_pointers );
 		wp_enqueue_script( 'wp-travel-admin-pointers-js' );

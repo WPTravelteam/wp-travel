@@ -118,10 +118,6 @@ class WpTravel_Admin_Assets {
 			wp_enqueue_style( 'wptravel-admin-enquiry' );
 			wp_enqueue_script( 'wptravel-admin-enquiry' );
 		}
-
-		// if ( $screen->is_block_editor ) { 
-			// wp_enqueue_style( 'wptravel-admin-widgets' );
-		// }
 		
 	}
 }

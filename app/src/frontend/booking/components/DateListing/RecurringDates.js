@@ -1,5 +1,5 @@
-import { forwardRef, useEffect, useState, Fragment } from '@wordpress/element';
-import { CheckboxControl, Disabled } from '@wordpress/components';
+import { useEffect, useState, Fragment } from '@wordpress/element';
+import { Disabled } from '@wordpress/components';
 
 const __i18n = {
 	..._wp_travel.strings
@@ -8,11 +8,8 @@ const datePerPage = 5
 // WP Travel Functions.
 import { objectSum } from '../../_wptravelFunctions';
 import { IsRecuringTourDates } from '../../_IsTourDate'; // Filter available dates in calendar.
-import Loader from '../../../../GlobalComponents/Loader';
 
 
-// Additional lib
-// const _ = lodash;
 import _ from 'lodash';
 import { RRule, RRuleSet } from "rrule";
 
@@ -22,7 +19,6 @@ import Pricings from './SubComponents/Pricings';
 import PaxSelector from './SubComponents/PaxSelector';
 import TripExtras from './SubComponents/TripExtras';
 import TripTimes from './SubComponents/TripTimes';
-// import generateRRule from "../../_GenerateRRule";
 import InventoryNotice, { Notice } from '../../_InventoryNotice';
 
 
@@ -145,8 +141,7 @@ const RecurringDates = ( props ) => {
         rruleSet.rrule(
             new RRule(rruleArgs)
         );
-        // let exc = new Date( ' 2022-03-15 00:00:00');
-        // rruleSet.exdate( exc )
+
         return rruleSet.all();
     }
     const generateRRUleArgs = ( date, showAll ) => {
@@ -179,7 +174,6 @@ const RecurringDates = ( props ) => {
             dtstart: new Date(rruleStartDate),
         };
 		if ( showAll ) { // This args is only For Pagination.
-			// delete ruleArgs.count;
             ruleArgs.count = ( 50 * datePerPage ); // Support Max 50 pages i.e. 500 records.
 		}
         if ( date.end_date && '0000-00-00' != date.end_date ) { // if has end date.

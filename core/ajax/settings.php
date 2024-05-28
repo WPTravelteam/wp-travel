@@ -62,7 +62,6 @@ class WP_Travel_Ajax_Settings {
 		 * solve ajax request in server
 		 */
 		$post_data = file_get_contents( 'php://input' ); // Added 2nd Parameter to resolve issue with objects.
-		// $post_data = wptravel_sanitize_array( $post_data, true );  // wp kses for some editor content in email settings.
 		$post_data     = is_string( $post_data ) ? json_decode( $post_data, true ) : $post_data; // check ajax string data
 		$new_post_data = is_string( $post_data ) ? json_decode( $post_data, true ) : $post_data; // check after ajax data is converted in to array of not
 		$new_post_data = wptravel_sanitize_array( $new_post_data, true );

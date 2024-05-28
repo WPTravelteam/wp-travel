@@ -1,12 +1,10 @@
 import { applyFilters } from '@wordpress/hooks';
-import { useSelect, select, dispatch, withSelect } from '@wordpress/data';
+import { useSelect, select, dispatch } from '@wordpress/data';
 import { _n, __ } from '@wordpress/i18n';
 import { PanelBody, PanelRow, ToggleControl, TextControl, RadioControl } from '@wordpress/components';
-import Select from 'react-select'
-import { VersionCompare } from '../../../../fields/VersionCompare'
+// import Select from 'react-select'
 import { alignJustify } from '@wordpress/icons';
 import { ReactSortable } from "react-sortablejs";
-import { useRef } from '@wordpress/element'
 
 import ErrorBoundary from '../../../../../ErrorBoundry/ErrorBoundry';
 
@@ -68,12 +66,10 @@ export default () => {
                         <ReactSortable
                             list={global_tab_settings}
                             setList={sorted => SortTabs(sorted)}
-                            // handle="span.dashicons.dashicons-menu"
                             handle=".wp-travel-block-sortable .components-panel__icon"
                         >
                             {global_tab_settings.map(function (tab, tabIndex) {
                                 return <div className="wp-travel-block-section" style={{ position: 'relative' }}>
-                                    {/* <span className="dashicons dashicons-menu"></span> */}
                                     <div className={`wptravel-swap-list`}>
                                         <button
                                             disabled={0 === tabIndex}

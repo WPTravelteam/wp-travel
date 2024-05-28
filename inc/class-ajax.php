@@ -231,7 +231,6 @@ class WP_Travel_Ajax {
 
 		$pricing_option_type = wptravel_get_pricing_option_type( $trip_id );
 		if ( ( is_object( $pax ) || is_array( $pax ) ) && 'multiple-price' === $pricing_option_type ) { // @since 3.0.0
-			// if ( is_array( $pax ) && 'multiple-price' === $pricing_option_type ) { // @since 3.0.0
 			$total_pax          = array_sum( $pax );
 			$pricings           = wptravel_get_trip_pricing_option( $trip_id ); // Get Pricing Options for the trip.
 			$pricing_data       = isset( $pricings['pricing_data'] ) ? $pricings['pricing_data'] : array();

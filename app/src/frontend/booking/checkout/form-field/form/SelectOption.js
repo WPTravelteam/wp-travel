@@ -22,21 +22,19 @@ export default ( { travelerData, trvOne = 'travelerOne', partials = 'no' } ) => 
     const errorData = typeof error_list[name] != 'undefined' && error_list[name]  || '';
     
     return <><PanelBody >
-        {/* <PanelRow className='wptravel-singlepage-booking-options'> */}
-            <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>
-            <select id={id} name={name} defaultValue={ typeof travelerValue != 'undefined' && travelerValue != '' && travelerValue || defaults } 
-                onClick={ (val ) => { 
-                    const selectedValue = val.target.value;
-                    const newData = {...travelerDataList, [name] : selectedValue };
-                    const checkoutNewData = {...checkoutDetails, [trvOne] : newData }
-                    updateStore({...bookingData, checkoutDetails : checkoutNewData } )
-            }}> 
-                {
-                    optionKey.length > 0 && optionKey.map( ( list, index ) => {
-                        return <option value={list >= 0 ? options[list] : list} key={index} defaultChecked={ travelerValue == (list >= 0 ? options[list] : list) ? true : false} >{options[list]}</option>
-                    })
-                }
-            </select>
-        {/* </PanelRow> */}
+        <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>
+        <select id={id} name={name} defaultValue={ typeof travelerValue != 'undefined' && travelerValue != '' && travelerValue || defaults } 
+            onClick={ (val ) => { 
+                const selectedValue = val.target.value;
+                const newData = {...travelerDataList, [name] : selectedValue };
+                const checkoutNewData = {...checkoutDetails, [trvOne] : newData }
+                updateStore({...bookingData, checkoutDetails : checkoutNewData } )
+        }}> 
+            {
+                optionKey.length > 0 && optionKey.map( ( list, index ) => {
+                    return <option value={list >= 0 ? options[list] : list} key={index} defaultChecked={ travelerValue == (list >= 0 ? options[list] : list) ? true : false} >{options[list]}</option>
+                })
+            }
+        </select>
     </PanelBody><p className='wp-travel-in-page-error'>{errorData}</p></>
 }

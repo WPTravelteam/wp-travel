@@ -1,9 +1,9 @@
-import { applyFilters, addFilter } from '@wordpress/hooks';
+import { applyFilters } from '@wordpress/hooks';
 import FinishedTab from './tabs/finished';
 import { useSelect, select, dispatch } from '@wordpress/data'; 
 import { useState } from "react";
 import { ProgressBar } from "react-step-progress-bar";
-import { PanelRow, ToggleControl, RangeControl, RadioControl, PanelBody, TextControl, TextareaControl, Button, Icon, Spinner, Modal } from '@wordpress/components';
+import { PanelRow, ToggleControl, RadioControl, PanelBody, TextControl, Spinner, Modal } from '@wordpress/components';
 import { ReactSortable } from 'react-sortablejs';
 import { __ } from '@wordpress/i18n';
 import apiFetch from '@wordpress/api-fetch';
@@ -11,11 +11,6 @@ import apiFetch from '@wordpress/api-fetch';
 import Select from '../../settings/components/UI/Select';
 
 import "react-step-progress-bar/styles.css";
-import { createStore } from 'state-pool';
-
-// const store = createStore();  // Create store for storing our global state
-// store.setState("stepCount", 0);  // Create "count" global state and add it to the store
-
 
 
 let stepCountValue = 0;
@@ -25,8 +20,6 @@ const Body = () => {
 	var [stepCount, setStepCount] = useState(0);
 	const [ loading, setLoading ] = useState( false );
 	const [ isModalOpen, setIsModalOpen ] = useState( false );
-
-	// var [wptravelsetuppage, setwptravelsetuppage] = useState(0);
 
  	switch (stepCount) {
     	case 0:
@@ -86,16 +79,7 @@ const Body = () => {
       	break;
 
 	}
-	
-	// function manageNext() {
-	//     if ( stepCount != 6 ) {
-	//       setStepCount(stepCount + 1 );
-	//     }
-	//     else if ( setStepCount = 6 ) {
-	//       setStepCount(6);
-	//     }
-	//     return stepCount;
-	// }
+
 
 	const settingsData = useSelect((select) => {
         return select('WPTravel/Admin').getSettings()
@@ -106,14 +90,12 @@ const Body = () => {
     	setStepCount(stepCount + 1);
     	document.body.scrollTop = 0;
   		document.documentElement.scrollTop = 0;
-    	// return stepCount;
     }
 
     const backStep = () => {
     	setStepCount(stepCount - 1);
     	document.body.scrollTop = 0;
   		document.documentElement.scrollTop = 0;
-    	// return stepCount;
     }
 
     const importTrip = () => {
@@ -158,20 +140,11 @@ const Body = () => {
     const handleSubmit = ( e ) => {
 		e.preventDefault();
 		setLoading(true);
-		// document.getElementById("setup-page-loader").classList.add( 'active' );
-		// document.getElementById("setup-page-form").classList.add( 'inactive' );
-		// document.getElementById("btn-group").style.display = 'none';
-		// document.getElementById("setting-save-notice").classList.add( 'active' );
 
 		apiFetch( { url: `${ajaxurl}?action=wp_travel_update_settings&_nonce=${_wp_travel._nonce}`, data:allData, method:'post' } ).then( res => {       
             if( res.success && "WP_TRAVEL_UPDATED_SETTINGS" === res.data.code){
-               	// document.getElementById("setup-page-loader").classList.remove( 'active' );
-               	// document.getElementById("setting-save-notice").classList.remove( 'active' );
                	
                	setStepCount(stepCount + 1);
-               	// document.getElementById("setup-page-form").classList.remove( 'inactive' );
-               	// document.getElementById("btn-group").style.display = 'flex';
-               	// document.getElementById("next-step").style.margin = '20px auto';
 				setLoading(false)
             }
         } );
@@ -278,7 +251,6 @@ const Body = () => {
 
 	        updateSettings({
 	            ...allData,
-	            // minimum_partial_payout: _allPayouts
 	            minimum_partial_payout, _tabIndex: value
 	        })
 	    }
@@ -301,39 +273,6 @@ const Body = () => {
 	        arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
 	        return arr; // for testing
 	    };
-
-	    // function installTheme ( slug, title ){
-
-	    // 	document.getElementById("setup-page-loader").classList.add( 'active' );
-		// 	document.getElementById("wp-travel-theme-lists").classList.add( 'inactive' );
-		// 	document.getElementById("btn-group").style.display = 'none';
-		// 	let targetDiv = document.getElementById('setting-save-notice');        
-	    //     let noticeText = document.createTextNode ( __( 'Installing and activating ', 'wp-travel' ) + title + __( ' theme ...', 'wp-travel' ) );
-	    //     targetDiv.appendChild(noticeText);
-		// 	document.getElementById("setting-save-notice").classList.add( 'active' );
-
-	    // 	apiFetch( { path: '/wp-travel/v1/theme-install/'+slug } ).then( ( response ) => {
-	    // 		document.getElementById("setting-save-notice").classList.remove( 'active' );
-		// 	    setStepCount(stepCount + 1);
-		// 	} );
-	    // }
-
-	    // const switchTheme = ( slug, title ) => {
-
-	    // 	document.getElementById("setup-page-loader").classList.add( 'active' );
-		// 	document.getElementById("wp-travel-theme-lists").classList.add( 'inactive' );
-		// 	document.getElementById("btn-group").style.display = 'none';
-		// 	let targetDiv = document.getElementById('setting-save-notice');        
-	    //     let noticeText = document.createTextNode ( __( 'Installing and activating ', 'wp-travel' ) + title + __( ' theme ...', 'wp-travel' ) );
-	    //     targetDiv.appendChild(noticeText);
-		// 	document.getElementById("setting-save-notice").classList.add( 'active' );
-			
-
-	    // 	apiFetch( { path: '/wp-travel/v1/theme-switch/'+slug } ).then( ( response ) => {
-	    // 		document.getElementById("setting-save-notice").classList.remove( 'active' );
-		// 	    setStepCount(stepCount + 1);
-		// 	} );
-	    // }
 
 	    return(
 			<div id="wp-travel-setup-page-body">
@@ -605,139 +544,29 @@ const Body = () => {
 					{ stepCount == 4 && ( 'undefined' !== typeof partial_payment ) && ( 'undefined' !== typeof sorted_gateways ) && ( 'undefined' !== typeof minimum_partial_payout ) &&
 						<div id="payment-tab" className="tab">
 							<form onSubmit={handleSubmit} id="setup-page-form">
-								{/* <h1>{ __( 'Payment', 'wp-travel' ) }</h1>
-								<PanelRow>
-					                <label>{ __( 'Partial Payment', 'wp-travel' ) }</label>
-					                <div className="wp-travel-field-value">
-					                    <ToggleControl
-					                        checked={ partial_payment == 'yes' }
-					                        onChange={ () => {
-					                            updateSettings({
-					                                ...allData,
-					                                partial_payment: 'yes' == partial_payment ? 'no': 'yes'
-					                            })
-					                        } }
-					                    />
-					                    <p className="description">{__( 'Enable Partial Payment while booking.', 'wp-travel' )}</p>
-					                </div>
-					            </PanelRow>
-					            {applyFilters( 'wp_travel_before_minimum_partial_payout', [], allData )}
-					            { 'yes' == partial_payment && partial_payouts.length > 0 ? 
-					                <>
-					                    
-					                    { 'undefined' != typeof options && 'undefined' != options.has_partial_payment && options.has_partial_payment ? 
-					                        <>
-					                            {
-					                                partial_payouts.length >= 1 && <>
-					                                <PanelRow>
-					                                    <label>Partial Payout 1 (%)</label>
-					                                    <div className="wp-travel-field-value">
-					                                        <RangeControl
-					                                            value={ 'undefined' != typeof partial_payouts[0]  ? parseFloat(partial_payouts[0]) : 0}
-					                                            onChange={
-					                                                (value) => updatePayoutOption( value, 0 )
-					                                            }
-					                                            min={ 1.0 }
-					                                            max={ 100.0 }
-					                                            step={ 0.01 }
-					                                        />
-					                                        <p className="description">{__( 'Minimum percent of amount to pay while booking.', 'wp-travel' )}</p>
-					                                    </div>
-					                                </PanelRow>
-					                            </>}
-					                            {partial_payouts.length >= 2 && <>
-					                                <PanelRow>
-					                                    <label>Partial Payout 2 (%)</label>
-					                                    <div className="wp-travel-field-value">
-					                                        <RangeControl
-					                                            value={ 'undefined' != typeof partial_payouts[1]  ? parseFloat(partial_payouts[1]) : 0}
-					                                            onChange={
-					                                                (value) => updatePayoutOption( value, 1 )
-					                                            }
-					                                            min={ 1.0 }
-					                                            max={ 100.0 }
-					                                            step={ 0.01 }
-					                                        />
-					                                        <p className="description">{__( 'Minimum percent of amount to pay while booking.', 'wp-travel' )}</p>
-					                                    </div>
-					                                </PanelRow>
-					                            </>}
-					                            {partial_payouts.length >= 3 && <>
-					                                <PanelRow>
-					                                    <label>Partial Payout 3 (%)</label>
-					                                    <div className="wp-travel-field-value">
-					                                        <RangeControl
-					                                            value={ 'undefined' != typeof partial_payouts[2]  ? parseFloat(partial_payouts[2]) : 0}
-					                                            onChange={
-					                                                (value) => updatePayoutOption( value, 2 )
-					                                            }
-					                                            min={ 1.0 }
-					                                            max={ 100.0 }
-					                                            step={ 0.01 }
-					                                        />
-					                                        <p className="description">{__( 'Minimum percent of amount to pay while booking.', 'wp-travel' )}</p>
-					                                    </div>
-					                                </PanelRow>
-					                            </>}
-					                            {partial_payouts.length >= 4 && <>
-					                                <PanelRow>
-					                                    <label>Partial Payout 4 (%)</label>
-					                                    <div className="wp-travel-field-value">
-					                                        <RangeControl
-					                                            value={ 'undefined' != typeof partial_payouts[3]  ? parseFloat(partial_payouts[3]) : 0}
-					                                            onChange={
-					                                                (value) => updatePayoutOption( value, 3 )
-					                                            }
-					                                            min={ 1.0 }
-					                                            max={ 100.0 }
-					                                            step={ 0.01 }
-					                                        />
-					                                        <p className="description">{__( 'Minimum percent of amount to pay while booking.', 'wp-travel' )}</p>
-					                                    </div>
-					                                </PanelRow>
-					                            </>}
-					                        </>
-					                    :
-					                    <PanelRow>
-					                        <label>{ __( 'Minimum Payout (%)', 'wp-travel' ) }</label>
-					                        <div key={1} className="wp-travel-field-value">
-					                            <RangeControl
-					                                value={ 'undefined' != typeof partial_payouts && 'undefined' != typeof partial_payouts[0] ? parseFloat(partial_payouts[0]) : 0 }
-					                                onChange={
-					                                    (value) => updatePayoutOption( value, 0 )
-					                                }
-					                                min={ 1.0 }
-					                                max={ 100.0 }
-					                                step={ 0.1 }
-					                            />
-					                            <p className="description">{__( 'Minimum percent of amount to pay while booking.', 'wp-travel' )}</p>
-					                        </div>
-					                    </PanelRow>
-					                    }
-					                </>
-					                : '' }
-					            {applyFilters( 'wp_travel_after_minimum_partial_payout', [], allData )}  */}
+								
 					            <h3>
 					                {__( 'Payment Gateways', 'wp-travel' )}
-					                <label>
+					                {/* <label>
 					                    <ToggleControl
 					                        checked={enableAllGateway }
 					                        onChange={ (value) => {
+												
 					                            let gateway_key = null;
 					                            let mapDataAction =  sorted_gateways.map((gateway, index) => {
 					                                gateway_key = `payment_option_${gateway.key}`
 					                                _allData[gateway_key] = value ? 'yes' :'no'
 
 					                                // Additional settings for non consistant data [Need to improve in addons itself. For now temp fix from here]
-					                                if ( 'payfast' == gateway.key || 'payu' == gateway.key || 'payhere' == gateway.key || 'payu_latam' == gateway.key ) {
+					                                // if ( 'payfast' == gateway.key || 'payu' == gateway.key || 'payhere' == gateway.key || 'payu_latam' == gateway.key ) {
 					                                    let additionalArray = `wp_travel_${gateway.key}_settings`
-					                                    if ( 'undefined' != typeof _allData[additionalArray] ) {
+					                                    // if ( 'undefined' != typeof _allData[additionalArray] ) {
+					                                    //     _allData[additionalArray][gateway_key] = value ? 'yes' :'no'
+					                                    // } else {
+					                                        // _allData[additionalArray] = {}
 					                                        _allData[additionalArray][gateway_key] = value ? 'yes' :'no'
-					                                    } else {
-					                                        _allData[additionalArray] = {}
-					                                        _allData[additionalArray][gateway_key] = value ? 'yes' :'no'
-					                                    }
-					                                }
+					                                    // }
+					                                // }
 					                            })
 
 					                            // Wait for all mapDataAction, and then updateSettings
@@ -747,7 +576,7 @@ const Body = () => {
 					                        } }
 					                    />
 					                    <p className="description">{__( 'Enable/Disable All', 'wp-travel' )}</p>
-					                </label>
+					                </label> */}
 					            </h3>
 					            {
 					                <div className="wp-travel-block-section wp-travel-block-sortable">
@@ -943,32 +772,6 @@ const Body = () => {
 		);
 	}else{
    		return (
-   			// <div id="wp-travel-setup-page-body">
-			// 	<ProgressBar percent={stepCountValue} filledBackground="#079812">
-		    //     </ProgressBar>
-			// 	<ul id="wp-travel-setup-page-tab-list">
-			// 		<li id="ready-tab-item" className="tab-item active">{ __('Ready To Setup', 'wp-travel') }</li>
-			// 		<li id="currency-tab-item" className="tab-item">{ __('Currency', 'wp-travel') }</li>
-			// 		<li id="page-tab-item" className="tab-item">{ __('Page', 'wp-travel') }</li>
-			// 		<li id="email-tab-item"  className="tab-item">{ __('Email', 'wp-travel') }</li>
-			// 		<li id="payment-tab-item" className="tab-item">{ __('Payment', 'wp-travel') }</li>
-			// 		<li id="theme-tab-item" className="tab-item">{ __('Compatible Themes', 'wp-travel') }</li>
-			// 		<li id="finished-tab-item" className="tab-item">{ __('Finished Setup', 'wp-travel') }</li>
-			// 	</ul>
-			// 	<div id="wp-travel-setup-page-tab">
-			// 		{ stepCount == 0 &&  
-			// 			<div id="ready-tab" className="tab active">
-			// 				<h1>{ __('The Ultimate Tour Operator Plugin for WordPress', 'wp-travel') }</h1>
-			// 				<p>{ __('Thank you for choosing WP Travel! This powerful plugin is designed to help you effortlessly manage and showcase your travel-related content on your WordPress website within minutes.', 'wp-travel') }</p>
-			// 				<div className="btn-group">
-			// 					<button id="next-step" onClick={nextStep} >{ __("Let's Start", "wp-travel") }</button>
-			// 					<a className="dashboard-btn" href={ _wp_travel.admin_url }>{ __('Go To Dashboard', 'wp-travel') }</a>
-			// 				</div>
-			// 			</div>
-
-			// 		}
-			// 	</div>				
-			// </div>
 			<div id="initial-loader-container">
 				<Spinner />
 			</div>

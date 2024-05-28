@@ -1,14 +1,9 @@
 import { Notice } from '@wordpress/components';
-import { addFilter, applyFilters, removeAllFilters } from '@wordpress/hooks';
+import { addFilter } from '@wordpress/hooks';
 const __i18n = {
 	..._wp_travel_admin.strings
 }
 
-// @todo Need to remove this in future.
-// const WPTravelTripOptionsCartAndCheckout = () => {
-//     return <>{applyFilters('wp_travel_trip_cart_checkout_tab_content', '')}</>;
-// }
-// export default WPTravelTripOptionsCartAndCheckout;
 
 // Single Components for hook callbacks.
 const CheckoutNotice = ( {settingsData, map_data } ) => {
@@ -31,4 +26,4 @@ const CheckoutNoticeCB = ( content, allData ) => {
 
 // Hooks.
 addFilter( 'wptravel_trip_edit_tab_content_cart_checkout', 'WPTravel/TripEdit/CheckoutNotice', CheckoutNoticeCB, 10 );
-// removeAllFilters( 'wptravel_trip_edit_tab_content_downloads' );
+

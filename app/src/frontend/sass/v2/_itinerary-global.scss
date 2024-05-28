@@ -118,7 +118,6 @@ a {
 					position: absolute;
 					top: 100%;
 					left: 0;
-					// overflow: hidden;
 					background-color: #fff;
 					border: 1px solid #ccc;
 					border-radius: 7px;
@@ -616,7 +615,6 @@ a {
 									top: -10px;
 									left: 3px;
 									border: 11px solid transparent;
-									/* background-color: #fff; */
 									border-bottom-color: $itinerary-content-bg;
 									border-top: none;
 								}
@@ -814,7 +812,6 @@ a {
 		.scroll-spy-button {
 			all: unset;
 			padding: 1.5em 7px;
-			/*  width: 100%; */
 			font-size: 16px;
 			cursor: pointer;
 			background-color: transparent;
@@ -1019,7 +1016,6 @@ a {
 
 						@media (min-width: 992px) {
 							flex: 1;
-							/* max-width: 24%; */
 							min-width: 24%;
 						}
 						.trip__info-icon {
@@ -1112,7 +1108,6 @@ a {
 								position: absolute;
 								left: -9px;
 								top: 0;
-								/* background: #fff; */
 							}
 							&::after {
 								content: "";
@@ -1191,7 +1186,6 @@ a {
 			}
 		}
 		.react-datepicker-wrapper {
-			// width: 100%;
 			width: auto;
 			.react-datepicker__input-container {
 				position: relative;
@@ -1355,14 +1349,6 @@ a {
 			}
 			.wti_price_lists {
 				button {
-					// width: 100%;
-					// margin: 5px 0;
-					// color: $itinerary-font-color;
-					// background-color: #eee;
-					// text-align: left;
-					// font-size: 14px;
-					// padding: 0.75em 1em;
-					// border: 0;
 
 					&.active {
 						background-color: $itinerary-blue-bg;
@@ -1384,14 +1370,6 @@ a {
 			}
 			.wti_trip_times {
 				button {
-					// margin: 5px 3px;
-					// display: inline-block;
-					// color: $itinerary-font-color;
-					// background-color: #eee;
-					// text-align: left;
-					// padding: 0.75em 1em;
-					// font-size: 14px;
-					// border: 0;
 
 					&:hover {
 						background-color: $itinerary-blue-bg;
@@ -1646,13 +1624,7 @@ a {
 							}
 							button,
 							.button {
-								// width: 30px;
-								// border: 0;
-								// padding: 0;
-								// cursor: pointer;
-								// background-color: $itinerary-blue-bg;
-								// color: #fff;
-								// transition: all 0.3s linear;
+
 								&:hover {
 									background-color: $itinerary-green;
 								}

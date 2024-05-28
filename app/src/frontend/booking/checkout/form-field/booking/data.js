@@ -39,9 +39,6 @@ const display_booking_option = {
         var payment_mode = $("select[name='wp_travel_payment_mode']").val();
         display_payment_mode_option[payment_mode] && display_payment_mode_option[payment_mode]();
 
-        // var elem = $('[name=wp_travel_book_now]');
-
-        // elem.show().val(wp_travel.strings.book_n_pay);
         gateway_change();
     }
 }

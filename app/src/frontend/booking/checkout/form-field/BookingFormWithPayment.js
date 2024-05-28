@@ -1,14 +1,11 @@
 import BookingType from "./booking/BookingType"
 import PartialPyamet from "./booking/PartialPyamet"
 import PaymentFormField from "./booking/PaymentFormField"
-import PaymentPrice from "./booking/PaymentPrice"
-import TotalPrice from "./booking/TotalPrice"
 import { useSelect, dispatch } from '@wordpress/data';
 const bookingStoreName = 'WPTravelFrontend/BookingData';
 import { applyFilters, doAction } from '@wordpress/hooks';
 import HiddenText from "./form/HiddenText"
 import BillingHiddenField from "./form/BillingHiddenField"
-import { Button, PanelBody, PanelRow } from "@wordpress/components"
 import BankDetail from "./form/BankDetail"
 import {_n, __} from '@wordpress/i18n'
 import { useEffect, useState } from '@wordpress/element'
@@ -160,9 +157,6 @@ export default () => {
                 <input type="hidden" value={ partial_enable == 'yes' && wp_travel_payment_mode == 'partial' ? partial_amount : trip_price } name="onpage-trip_price" id="onpage-trip_price" />
                 {doAction( 'wptravel_booking_button_payment', bookingData )}
                 <div className="wptravel-onepage-navigation-btn">
-                    {/* <button onClick={ () => { 
-                        updateStore({...bookingData, tripBillingEnable : true, treipPaymentEnable : false })
-                    }} >{i18n.set_go_back}</button> */}
                     <div className="wp-travel-form-field button-field" >
                     {  wp_travel_booking_option == "booking_with_payment" && selected_payment == 'stripe' && applyFilters( 'wptravel_booking_button_payment_strp', [<div><input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value={i18n.set_book_now} disabled /></div> ], bookingData )
                         ||  wp_travel_booking_option == "booking_with_payment" && selected_payment == 'authorizenet' && applyFilters( 'wptravel_booking_button_payment_auth', [<div><input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value={i18n.set_book_now} disabled /></div>], bookingData )
@@ -195,9 +189,6 @@ export default () => {
                 <input type="hidden" value={_wp_travel._nonce} name="_nonce" />
                 <div style={{display:"flex", justifyContent:"space-between"}}>
                     <div className="wptravel-onepage-navigation-btn" style={{display:"flex", justifyContent:"space-between"}}>
-                        {/* <button className="wptravel-onpage-booking-back-buttons" onClick={ () => { 
-                            updateStore({...bookingData, tripBillingEnable : true, treipPaymentEnable : false })
-                        }} >{i18n.set_go_back}</button> */}
                         <input type="submit" name="wp_travel_book_now" id="wp-travel-book-now" value={i18n.set_book_now} />
                     </div>
                 </div>

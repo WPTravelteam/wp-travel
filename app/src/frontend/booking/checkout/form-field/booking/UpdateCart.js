@@ -192,7 +192,6 @@ export default () => {
                         } )
                     }
                     updateStore( {...bookingData, price_list : priceList, paxSize : size, cart_amount : total })
-                    // alert( "Cart updated successfully.")
                     setUpdateMessage( i18n.set_cart_updated )
                     setLoaders( false )
                    setTimeout( disableCart, 3000 )
@@ -291,12 +290,9 @@ export default () => {
                                 <button className='wptravel-page-cart-update-btn-increase' onClick={ () => paxIncreament( catId, is_sale, regular_price, sale_price )}>+</button>
                             </div>
                             <div className="wptravel-onpage-booking-cart-price">
-                                {/* <p>{currency_symbol}{updatePriceData[catId]}</p> */}
                                 <span dangerouslySetInnerHTML={{ __html: wpTravelFormat( updatePriceData[catId] ) }}></span>
                             </div>
-                            {/* <div className="wptravel-onpage-booking-cart-price">
-                                <p>{currency_symbol}{updatePriceData[catId]}</p>
-                            </div> */}
+    
                         </div>
                     </>
 
@@ -309,7 +305,6 @@ export default () => {
                 { typeof nomineeTripExtras != 'undefined' && nomineeTripExtras.length > 0 && nomineeTripExtras.map( ( trpExtra, extraIndex ) => {
                             let extraIds = typeof trpExtra.id != 'undefined' &&  trpExtra.id || 0;
                             let extraTitles = typeof trpExtra.title != 'undefined' &&  trpExtra.title || 0;
-                            // let extraIds = typeof trpExtra.id != 'undefined' &&  trpExtra.id || 0;
                             const { is_sale, sale_price, unit, tour_extras_metas } = trpExtra;
                             const extras_item_price = typeof tour_extras_metas != 'undefined' && typeof tour_extras_metas.extras_item_price != 'undefined' && tour_extras_metas.extras_item_price || 0;
                         

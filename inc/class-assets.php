@@ -17,23 +17,19 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 		 */
 		private static $assets_path;
 
-		/**
-		 * Frontend assets.
-		 */
-		public static function frontend() {
+		// /**
+		//  * Frontend assets.
+		//  */
+		// public static function frontend() {
 
-		}
+		// }
 
-		/**
-		 * Admin assets.
-		 */
-		public static function admin() {
+		// /**
+		//  * Admin assets.
+		//  */
+		// public static function admin() {
 
-		}
-
-
-
-
+		// }
 
 		/**
 		 * Styles filter.
@@ -55,11 +51,9 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 				'wp-travel-frontend',
 				'wp-travel-popup',
 				'easy-responsive-tabs',
-				// 'wp-travel-itineraries',
 				'wp-travel-user-css',
 				'jquery-datepicker',
 				'wp-travel-slick',
-				// Bundled in wp-travel-frontend-bundle.
 				'font-awesome-css',
 				'wp-travel-fa-css',
 			);

@@ -53,7 +53,6 @@ export default () => {
                                     })
                                 }}
                             />
-                            {/* <p className="description">{__( 'Enable test mode to make test payment.', 'wp-travel' )}</p> */}
                         </div>
                     </PanelRow>
                     <PanelRow>
@@ -99,7 +98,6 @@ export default () => {
                             }
                         </>
                     }
-                    {/* {  _wp_travel.dev_mode && */}
                     <PanelRow>
                         <label>
                             {_wp_travel.setting_strings.trip_settings.trip_date_listing}

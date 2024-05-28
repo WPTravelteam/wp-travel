@@ -25,16 +25,6 @@ const TripExtras = ( props ) => {
 		} );
 		}, [] );
 		
-		// useEffect( () => {	
-			
-		// 	let nonce = Math.random().toString(36).substring(2,7);
-		// 	apiFetch.use( apiFetch.createNonceMiddleware( nonce ) );
-			
-		// 	apiFetch( { path: '/wptravelgettripextrasstock/v1/tripextrasStock/'+tripDepartureDate+'seperate'+tripID+'?key='+Math.random().toString(36).substring(2,7), method: 'GET' } ).then( ( response ) => {
-		// 		setTripExtrasStock( response )
-		// 	} )
-			
-		// }, [] );
 	}
 
 	const handleClick = ( index, inc, quantity ) => e => {
@@ -42,24 +32,22 @@ const TripExtras = ( props ) => {
 		let id = nomineeTripExtras[index].id
 		let _xcount = tripExtras[id] + inc < 0 ? 0 : tripExtras[id] + inc;
 
-		// if( typeof _wp_travel.WP_Travel_Trip_Extras_Inventory !== 'undefined' ){
-			if( quantity != -1 ){
-				if( _xcount > quantity ){
-					_xcount = quantity
-					if (e.target.parentElement.querySelector('.error'))
-						return
-					let em = document.createElement('em')
-					em.classList.add('error')
-					em.textContent = __i18n.bookings.max_pax_exceeded
-					e.target.parentElement.appendChild(em)
-					setTimeout(() => {
-						em.remove()
-					}, 1000)
+		if( quantity != -1 ){
+			if( _xcount > quantity ){
+				_xcount = quantity
+				if (e.target.parentElement.querySelector('.error'))
 					return
-				}
+				let em = document.createElement('em')
+				em.classList.add('error')
+				em.textContent = __i18n.bookings.max_pax_exceeded
+				e.target.parentElement.appendChild(em)
+				setTimeout(() => {
+					em.remove()
+				}, 1000)
+				return
 			}
-		// }
-			
+		}
+
 		
 		// Trip extras required validation.
 		if ( nomineeTripExtras[index].is_required && _xcount <= 0 ) {

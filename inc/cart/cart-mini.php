@@ -172,23 +172,7 @@ if ( wptravel_is_react_version_enabled() ) {
 											<?php endif; ?>
 										</span>
 									</div>
-									<!-- <div style="display:none;" class="trip__partial-payment_detail" data-wpt-trip-partial-total="<?php echo esc_attr( $trip_total_partial ); ?>">
-										<div class="partial-payment-info">
-											<h5>Pay <?php echo esc_html( $payout_percent ); ?>% upfront</h5>
-										</div>
-										<span>
-											<?php
-											if ( $trip_discount ) {
-												$partial_discount = ( $trip_discount * $payout_percent ) / 100;
-
-												echo wptravel_get_formated_price_currency( $trip_total_partial - $partial_discount );
-
-											} else {
-												echo wptravel_get_formated_price_currency( $trip_total_partial );
-											}
-											?>
-										</span>
-									</div> -->
+				
 									<div class="trip-meta-content">
 										<span class="date">
 											<span><?php echo $trip_date . $trip_time; ?></span>

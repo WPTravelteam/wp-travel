@@ -233,7 +233,6 @@
 }
 
 .paxpicker .category .pricing-name {
-	// font-size: 1.4rem;
 	line-height: 2rem;
 	font-weight: normal;
 	float: none;
@@ -295,25 +294,20 @@
 	color: #1593ff;
 }
 
-// .pax-select-container {
 
 .paxpicker-input {
-	// font-size: 1.6rem;
 	line-height: 2.4rem;
 	text-align: center;
 	padding: 0;
 	background: #fff;
-	// font-size: 1.4rem;
 	border-color: #c6c8d0;
 	border-radius: 2px;
 	width: 40px;
 
 	&::-webkit-outer-spin-button,
 	&::-webkit-inner-spin-button {
-		/* display: none; <- Crashes Chrome on hover */
 		-webkit-appearance: none;
 		margin: 0;
-		/* <-- Apparently some margin are still there even though it's hidden */
 	}
 
 	&[type="number"] {
@@ -322,7 +316,6 @@
 	}
 }
 
-// }
 
 .pax-select-container .pax-picker-minus {
 	border: none;

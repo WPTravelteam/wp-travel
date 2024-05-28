@@ -1,6 +1,6 @@
-import { useSelect, dispatch } from '@wordpress/data';
-const bookingStoreName = 'WPTravelFrontend/BookingData';
-import { Button, Modal, PanelBody, PanelRow, TextControl } from '@wordpress/components'
+// import { useSelect, dispatch } from '@wordpress/data';
+// const bookingStoreName = 'WPTravelFrontend/BookingData';
+// import { Button, Modal, PanelBody, PanelRow, TextControl } from '@wordpress/components'
 
 export default ( { names, values, index = '0', keys='2_44_55' }  ) => {
 

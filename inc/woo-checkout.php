@@ -45,7 +45,6 @@ add_action('woocommerce_loaded' , function (){
 	
 	function my_woocommerce_data_stores( $stores ) {
 	
-		// require_once WP_TRAVEL_ABSPATH . '/inc/classes/class-data-store-cpt.php';
 		$stores['product'] = 'MY_Product_Data_Store_CPT';
 	
 		return $stores;
@@ -84,45 +83,6 @@ add_action('woocommerce_loaded' , function (){
 		}
 		return $price;
 	}
-
-	// add_action( 'woocommerce_before_calculate_totals', 'wptravel_add_cart_price', 10, 1);
-
-	// function wptravel_add_cart_price( $cart_object ) {
-
-	// 	global $wt_cart;
-
-	// 	if ( is_admin() && ! defined( 'DOING_AJAX' ) )
-	// 		return;
-	// 	$extras_price_total = 0;
-		
-	// 	foreach ( $cart_object->get_cart() as $cart_item ) {
-			
-	// 		if( isset( array_values($wt_cart->getItems())[0]['trip_extras'] ) && !empty( array_values($wt_cart->getItems())[0]['trip_extras'] ) ){
-	// 			foreach ( array_values($wt_cart->getItems())[0]['trip_extras']['id'] as $k => $extra_id ) :
-
-	// 				$trip_extras_data = get_post_meta( $extra_id, 'wp_travel_tour_extras_metas', true );
-
-	// 				$price      = isset( $trip_extras_data['extras_item_price'] ) && ! empty( $trip_extras_data['extras_item_price'] ) ? $trip_extras_data['extras_item_price'] : false;
-	// 				$sale_price = isset( $trip_extras_data['extras_item_sale_price'] ) && ! empty( $trip_extras_data['extras_item_sale_price'] ) ? $trip_extras_data['extras_item_sale_price'] : false;
-
-	// 				if ( $sale_price ) {
-	// 					$price = $sale_price;
-	// 				}
-	// 				$price = WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $price );
-	// 				$qty   = isset( array_values($wt_cart->getItems())[0]['trip_extras']['qty'][ $k ] ) && array_values($wt_cart->getItems())[0]['trip_extras']['qty'][ $k ] ? array_values($wt_cart->getItems())[0]['trip_extras']['qty'][ $k ] : 1;
-
-	// 				$total = $price * $qty;
-
-	// 				$extras_price_total = $extras_price_total + ( $price * $qty );
-
-	// 			endforeach;
-	// 		}
-	// 		## Price calculation ##
-	// 		$price = (double)array_values($wt_cart->getItems())[0]['trip_price'] + $extras_price_total;
-
-	// 		$cart_item['data']->set_price( $price ); // WC 3.0+
-	// 	}
-	// }
 
 } );
 

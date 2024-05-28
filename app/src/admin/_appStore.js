@@ -85,8 +85,6 @@ registerStore('WPTravel/appStore', {
         * getSettings() {
             const url = `${ajaxurl}?action=wptravel_get_settings&_nonce=${_wp_travel._nonce}`;
             
-            // yield actions.updateRequestSending(true);
-            
             const response = yield actions.getSettingsDataFromAPI( url );
             
             if(false !== response.success && "WP_TRAVEL_TRIP_INFO" === response.data.code ) {

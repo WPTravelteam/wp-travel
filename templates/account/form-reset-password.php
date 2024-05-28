@@ -37,13 +37,11 @@ wptravel_print_notices(); ?>
 				<p></p><?php // @codingStandardsIgnoreLine ?>
 
 				<p class="wp-travel-form-row wp-travel-form-row--first form-row form-row-first">
-					<!-- <label for="password_1"><?php esc_html_e( 'New password', 'wp-travel' ); ?> <span class="required">*</span></label> -->
 					<span class="user-password">
 						<input type="password" placeholder="<?php esc_html_e( 'New password', 'wp-travel' ); ?>" class="wp-travel-Input wp-travel-Input--text input-text" name="password_1" id="password_1" />
 					</span>
 				</p>
 				<p class="wp-travel-form-row wp-travel-form-row--last form-row form-row-last clearfix">
-					<!-- <label for="password_2"><?php esc_html_e( 'Re-enter new password', 'wp-travel' ); ?> <span class="required">*</span></label> -->
 					<span class="user-password-key">
 						<input type="password" placeholder="<?php esc_html_e( 'Re-enter new password', 'wp-travel' ); ?>" class="wp-travel-Input wp-travel-Input--text input-text" name="password_2" id="password_2" />
 					</span>	
@@ -51,8 +49,6 @@ wptravel_print_notices(); ?>
 
 				<input type="hidden" name="reset_key" value="<?php echo esc_attr( $args['key'] ); ?>" />
 				<input type="hidden" name="reset_login" value="<?php echo esc_attr( $args['login'] ); ?>" />
-
-				<!-- <div class="clear"></div> -->
 
 				<?php do_action( 'wp_travel_resetpassword_form' ); ?>
 

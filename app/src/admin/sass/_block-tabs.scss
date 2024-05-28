@@ -157,7 +157,6 @@
 					background: transparent;
 				}
 				&.active-tab {
-					// font-weight: 600;
 					box-shadow: inset -3px 0px #007cba;
 				}
 
@@ -168,7 +167,6 @@
 		}
 
 		.components-tab-panel__tab-content {
-			// padding: 16px;
 			flex: 1;
 			background-color: #fff;
 			border: 1px solid #e0e0e0;
@@ -253,10 +251,6 @@
 }
 
 .wp-travel-trip-edit-menu {
-	// .components-tab-panel__tabs{
-	//   flex-direction: row !important;
-	//   margin-bottom: 1em !important;
-	// }
 	.components-tab-panel__tab-content {
 		table {
 			width: 100%;
@@ -411,24 +405,11 @@ td {
 	}
 }
 
-// .components-input-control__container {
-// 	width: 250px !important;
-// }
-
-// .components-panel__body {
-// 	&.is-opened {
-// 		.components-panel__body-title {
-// 			margin: 0;
-// 		}
-// 	}
-// }
-
 .wp-travel-block-tabs
 	.components-tab-panel__tab-content
 	.wp-travel-ui.wp-travel-ui-card
 	.components-panel__body.is-opened
 	h4 {
-	// padding-left: 30px;
 	padding-left: 0;
 }
 
@@ -455,8 +436,6 @@ td {
 						}
 						.components-select-control__input {
 							height: auto;
-							// padding-left: 0;
-							// padding-right: 0;
 						}
 					}
 				}
@@ -470,10 +449,6 @@ td {
 			}
 			.components-base-control__field {
 				.components-radio-control__option {
-					// display: flex;
-					// flex-wrap: nowrap;
-					// justify-content: space-between;
-					// align-items: center;
 					.components-radio-control__input {
 						margin-right: 0;
 					}
@@ -500,7 +475,6 @@ td {
 		.components-panel__body {
 			&.is-opened {
 				.components-panel__row.wp-travel-has-child-panel {
-					// overflow-x: auto;
 					table.wp-list-table {
 						tbody {
 							tr {
@@ -532,21 +506,8 @@ td {
 	.components-tab-panel__tabs {
 	flex-direction: row;
 	margin-bottom: 20px;
-	// border-bottom: 1px solid #007cba;
 	button.components-button.active-tab {
 		color: #007cba;
-		// border: 1px solid #007cba !important;
-		// position: relative;
-		// &::before {
-		// 	content: "";
-		// 	position: absolute;
-		// 	background: #fff;
-		// 	width: 100%;
-		// 	height: 10px;
-		// 	top: 100%;
-		// 	left: 50%;
-		// 	transform: translate(-50%, -50%);
-		// }
 	}
 }
 

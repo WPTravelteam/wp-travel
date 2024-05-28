@@ -55,7 +55,6 @@ const WpTravelBookNow = ( props ) => {
 			total = _.size(paxCounts) > 0 && Object.entries(paxCounts).map(([i, count]) => {
 				tpax += parseInt(count)
 				return count > 0 && getCategoryPrice(i, count) || 0 // i is category id here.
-				// return parseFloat(price) * count
 			}).reduce((acc, curr) => acc + curr) || 0
 		}
 
@@ -256,12 +255,9 @@ const WpTravelBookNow = ( props ) => {
                         
                         <div className="right-info" >
                             <p>{__i18n.bookings.booking_tab_cart_total}<strong dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCartTotal(true)) }}></strong></p>
-							{/* {
-								tripData.enable_pax_all_pricing == "1" &&
-								<button onClick={addToCart} className="wp-travel-book">{typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? __i18n.set_add_to_cart : __i18n.bookings.booking_tab_booking_btn_label}</button>
-								|| */}
-								<button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">{typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? __i18n.set_add_to_cart : __i18n.bookings.booking_tab_booking_btn_label}</button>
-							{/* } */}
+
+							<button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">{typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? __i18n.set_add_to_cart : __i18n.bookings.booking_tab_booking_btn_label}</button>
+			
 							
                         </div>
                     </div>

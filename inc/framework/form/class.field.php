@@ -110,6 +110,7 @@ class WP_Travel_FW_Field {
 			'label' => __( 'File', 'wp-travel' ),
 			'class' => 'WP_Travel_FW_Field_File',
 		);
+		
 		$field_types               = apply_filters( 'wp_travel_register_field_types', $field_types );
 		return $field_types;
 	}

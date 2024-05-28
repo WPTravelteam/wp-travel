@@ -1,28 +1,5 @@
 .wp-travel-trips-has-sidebar {
-	// width: 66.666667%;
-	// padding-right: 15px;
-	// float: left;
 
-	& + .wp-travel-widget-area {
-		// width: 33.3333%;
-		// float: right;
-		// padding: 0px 15px;
-		// display: block;
-		// .widget_block {
-		// .widget_wp_travel_trip_type {
-		// 	.trip-price {
-		// 		margin-top: 0;
-		// 		margin-bottom: 10px;
-		// 		display: flex;
-		// 		flex-wrap: wrap;
-		// 		align-items: center;
-		// 	}
-		// 	.wp-travel-explore {
-		// 		margin-bottom: 5px;
-		// 	}
-		// }
-		// }
-	}
 
 	@include sidr-view {
 		width: 100%;
@@ -71,7 +48,6 @@
 .widget {
 	.wp-travel-itinerary-items {
 		.wp-travel-itinerary-list {
-			// grid-template-columns: repeat(1, 1fr);
 			@media (min-width: 651px) and (max-width: 992px) {
 				grid-template-columns: repeat(2, 1fr);
 			}

@@ -4,7 +4,6 @@ import apiFetch from '@wordpress/api-fetch';
 
 // Additional lib
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
-// const _ = lodash;
 import _ from 'lodash';
 import moment from 'moment';
 
@@ -261,11 +260,6 @@ const DateListing = ( props ) => {
 				// Why This time length check. this is creating issue as pricingUnavailable
 				if (_times.length <= 0) {
 					_inventory_state = { ..._inventory_state, pricingUnavailable: true }
-				} else if( 1 === _times.length ) {
-					// _inventory_state = {
-					// 	..._inventory_state,
-					// 	selectedTime: _times[0].format('HH:mm'),
-					// }
 				}
 				_inventory_state = { ..._inventory_state, inventory: _inventoryData }
 			}

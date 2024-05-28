@@ -19,7 +19,6 @@ const TripTimes =  ( props ) => {
 				nomineeTimes.map((timeObject, i) => {
 					return <button key={i} disabled={timeObject.isSame( selectedDate ) } onClick={ () => {
 								updateBookingData( {
-									// isLoading:true,
 									selectedTime: timeObject.format('HH:mm'),
 								} );
 							}

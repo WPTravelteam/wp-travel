@@ -16,41 +16,12 @@ import ErrorBoundary from '../../../../../ErrorBoundry/ErrorBoundry';
 const __i18n = {
 	..._wp_travel_admin.strings
 }
-// const _ = lodash;
+
 
 const Pricings = ( {allData} ) => {
     const [{tripExtrasData}, setState] = useState({
         tripExtrasData:[]
     });
-
-    // const [{allTripExtras, extrasLoaded}, setAllTripExtras] = useState({
-    //     allTripExtras:[],
-    //     extrasLoaded:false
-    // });
-    // if ( ! extrasLoaded ) {
-
-    //     const url = `${_wp_travel_admin.ajaxUrl}?action=wp_travel_get_trip_extras&_nonce=${_wp_travel._nonce}`;
-    //     apiFetch( { url: url, method:'post' } ).then( ( result ) => {
-    //         if ( result.success ) {
-    //             if (result.data.trip_extras.length <= 0) {
-    //                 setAllTripExtras( {
-    //                     extrasLoaded: true
-    //                 } );
-    //                 return
-    //             }
-    //             let extras = _.keyBy( result.data.trip_extras, p => p.id );
-    
-    //             setAllTripExtras( {
-    //                 allTripExtras: extras,
-    //                 extrasLoaded: true
-    //             } );
-    //         } else {
-    //             setAllTripExtras( {
-    //                 extrasLoaded: true
-    //             } );
-    //         }
-    //     } )
-    // }
 
     const settings = useSelect((select) => {
         return select('WPTravel/TripEdit').getSettings()

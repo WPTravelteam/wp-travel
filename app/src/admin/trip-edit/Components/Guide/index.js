@@ -1,5 +1,5 @@
 import { Notice } from '@wordpress/components';
-import { addFilter, applyFilters, removeAllFilters } from '@wordpress/hooks';
+import { addFilter } from '@wordpress/hooks';
 const __i18n = {
     ..._wp_travel_admin.strings
 }

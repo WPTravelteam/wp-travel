@@ -185,12 +185,4 @@ class WT_Admin_status {
 		}
 	}
 
-	function themeInfo() {
-
-	}
-
-	function pluginInfo() {
-
-	}
-
 }

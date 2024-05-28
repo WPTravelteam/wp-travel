@@ -55,12 +55,6 @@ if ( ! empty( $_POST['register'] ) && wp_verify_nonce( $nonce_value, 'wp-travel-
 					</span>
 				<?php endif; ?>
 				<?php do_action( 'wp_travel_after_registration_form_password', $settings ); ?>
-					<div class="wrapper">
-						<!--<div class="float-left">
-							<input class="" name="terms-condition" type="checkbox" id="terms-condition" value="forever" />
-							<label for="terms-condition"><span>I have read and agree to the <a href="#">Terms of Use </a>and <a href="#">Privacy Policy</a></span></label>
-						</div> -->
-					</div>
 
 				<?php wp_nonce_field( 'wp-travel-register', 'wp-travel-register-nonce' ); ?>
 				<button  type="submit" name="register" value="<?php esc_attr_e( 'Register', 'wp-travel' ); ?>" ><?php esc_attr_e( 'Register', 'wp-travel' ); ?></button>

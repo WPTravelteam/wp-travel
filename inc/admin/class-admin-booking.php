@@ -549,7 +549,7 @@ class WP_Travel_Admin_Booking {
 				}elseif( $old_payment_status == 'voucher_submited' ){
 					$old_payment_status = __( 'Voucher Submited', 'wp-travel' );
 				}
-				// $old_status = wptravel_get_payment_status()[$old_status]['text'];
+
 				$new_payment_status = wptravel_get_payment_status()[$new_payment_status]['text'];
 				if( $new_payment_status == 'waiting_voucher' ){
 					$new_payment_status = __( 'Waiting for Voucher', 'wp-travel' );
