@@ -18,8 +18,10 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
+
 $trip_id = get_the_ID();
 do_action( 'wp_travel_before_archive_itinerary', $trip_id );
+
 if ( post_password_required() ) {
 	echo get_the_password_form(); //phpcs:ignore
 	return;
@@ -135,6 +137,14 @@ $trp_title = apply_filters( 'wp_travel_trip_title_enable_disable', true );
 					</div>
 				</div>
 
+				<?php 					
+					if( apply_filters( 'wptravel_show_quick_view_option', false ) == true ){
+						
+						if( function_exists( 'wptravel_trip_quick_view' ) ){
+							echo wptravel_trip_quick_view( $trip_id );
+						}
+					}
+				?>				
 				<a class="wp-block-button__link explore-btn" href="<?php the_permalink(); ?>"><span><?php echo esc_html( apply_filters( 'wp_travel_archives_page_trip_explore_btn', __( 'Explore', 'wp-travel' ), $trip_id ) ); ?></span></a>
 			</div>
 		</div>

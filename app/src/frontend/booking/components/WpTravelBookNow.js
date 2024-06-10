@@ -25,9 +25,12 @@ const WpTravelBookNow = ( props ) => {
 		title,
         dates,
         pricings,
+		min_checkout_price
     } = tripData;
     const allPricings = pricings && _.keyBy( pricings, p => p.id ) // Need object structure because pricing id may not be in sequencial order.
     const _dates      = 'undefined' !== typeof dates && dates.length > 0 ? dates : [];
+
+	var minCheckoputPrice = !min_checkout_price ? '0' : min_checkout_price;
 
     // Booking Data.
     const { selectedPricingId, nomineeTimes, selectedTime, selectedDate, paxCounts, inventory, nomineeTripExtras, tripExtras, selectedDateIds } = bookingData;
@@ -254,9 +257,9 @@ const WpTravelBookNow = ( props ) => {
                         </div>
                         
                         <div className="right-info" >
-                            <p>{__i18n.bookings.booking_tab_cart_total}<strong dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCartTotal(true)) }}></strong></p>
+                            <p><strong dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCartTotal(true)) }}></strong></p>
 
-							<button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">{typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? __i18n.set_add_to_cart : __i18n.bookings.booking_tab_booking_btn_label}</button>
+							<button disabled={ parseFloat(minCheckoputPrice ) > parseFloat(getCartTotal(true) ) || totalPax < minPaxToBook || totalPax > maxPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">{typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? __i18n.set_add_to_cart : __i18n.bookings.booking_tab_booking_btn_label}</button>
 			
 							
                         </div>

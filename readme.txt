@@ -1,19 +1,19 @@
-=== WP Travel - Best Travel Booking WordPress Plugin, Tour Management Engine ===
+=== WP Travel - Ultimate Travel Booking System, Tour Management Engine ===
 Contributors: wptravel
 Tags: travel, tour-booking, travel-agency, tour-operator, travel-booking
 Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=WP%20Plugin
 Requires at least: 6.0.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 8.8.0
+Stable tag: 8.9.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-WP Travel is the #1 Best Travel Booking WordPress Plugin to Create Travel and Trekking Websites in Minutes, Without Coding!
+WP Travel is the Ultimate Travel Booking Plugin to Create Travel and Trekking Websites in Minutes, Without Coding!
 
 == Description ==
 
-**WP Travel is the #1 Best Travel Booking WordPress Plugin to Create Travel and Trekking Websites in Minutes, Without Coding!**
+**WP Travel is the Ultimate Travel and Tour Operator Booking Plugin to Create Travel and Trekking Websites in Minutes, Without Coding!**
 
 If you are looking for a reliable travel plugin for your WordPress travel booking website, then look no further than the WP Travel [WP Travel](https://wptravel.io/) plugin. It’s a powerful, free travel engine (also available in a Pro version with additional features) for creating customized travel agency or tour operator websites on WordPress in minutes.
 
@@ -424,6 +424,21 @@ Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
 
+= 8.9.0 =
+Release Date: 10th June 2024
+
+Fixes:
+* Fixed issue with trip facts setting
+
+Enhancements:
+* Added up and down arrow on itinerary toggle
+* Added sale price in percentage support on onpage booking module
+* Added pagination support on [WP_TRAVEL_ITINERARIES] shortcode
+* Added support to show trip lists by multiple taxonomy on [WP_TRAVEL_ITINERARIES] shortcode
+* Added "Minimum Checkout Price" trip option
+
+**For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v8-9-0-update-release-note).**
+
 = 8.8.0 =
 Release Date: 28th May 2024
 
@@ -766,7 +781,3 @@ For the changelog of earlier versions, please refer to [the changelog on wptrave
 
 = 5.1 =
 There is a new version of WP Travel available which has come with removal of v3 pricing options and new archive page layout. Check the [release note](https://wptravel.io/wp-travel-plugin-version-5-1-0-release-note/) for more detail.
-
-
-
-

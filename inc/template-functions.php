@@ -144,9 +144,9 @@ function wptravel_posts_clauses_filter( $post_clauses, $object ) {
 	 */
 	// Where clause.
 	$where      = '';
-	$start_date = isset( $_GET['trip_start'] ) ? sanitize_text_field( wp_unslash( $_GET['trip_start'] ) ) : ''; // @phpcs:ignore
-	$end_date   = isset( $_GET['trip_end'] ) ? sanitize_text_field( wp_unslash( $_GET['trip_end'] ) ) : ''; // @phpcs:ignore
-
+	$start_date = isset( $_GET['trip_start'] ) ? date("Y-m-d", strtotime(sanitize_text_field( wp_unslash( $_GET['trip_start']  ) ) )) : ''; // @phpcs:ignore
+	$end_date   = isset( $_GET['trip_end'] ) ? date("Y-m-d", strtotime(sanitize_text_field( wp_unslash( $_GET['trip_end'] ) ) ) ): ''; // @phpcs:ignore
+	
 		// Filter by date clause.
 	if ( ! empty( $start_date ) || ! empty( $end_date ) ) { // For search filter Widgets.
 		$where .= ' AND ( '; // <1

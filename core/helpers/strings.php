@@ -303,11 +303,11 @@ class WpTravel_Helpers_Strings {
 			'book_now'                      => __( 'Book Now', 'wp-travel' ),
 			'combined_pricing'              => __( 'Pricing', 'wp-travel' ), // Added for combined pricing label for categorized pricing @since 3.0.0.
 			'pricing_not_available'         => __( 'The pricing is not available on the selected Date. Please choose another date or pricing.', 'wp-travel' ),
-			'max_pax_exceeded'              => __( 'Max. Pax Exceeded.', 'wp-travel' ),
+			'max_pax_exceeded'              => __( 'Max. Exceeded.', 'wp-travel' ),
 			'date_select'                   => __( 'Select a Date', 'wp-travel' ),
 			'date_select_to_view_options'   => __( 'Select a Date to view available pricings and other options.', 'wp-travel' ),
 			'booking_tab_clear_all'         => __( 'Clear All', 'wp-travel' ),
-			'booking_tab_cart_total'        => __( 'Total:', 'wp-travel' ),
+			'min_booking_amount'        => __( 'Total:', 'wp-travel' ),
 			'booking_tab_booking_btn_label' => __( 'Book Now', 'wp-travel' ),
 			'booking_tab_pax_selector'      => __( 'Pax Selector', 'wp-travel' ),
 			'group_discount_tooltip'        => __( 'Group Discounts', 'wp-travel' ),

@@ -27,7 +27,7 @@ const Pricings = ( {allData} ) => {
         return select('WPTravel/TripEdit').getSettings()
     }, []);
 
-    const { pricing_type, pricings, has_extras, minimum_partial_payout_use_global, minimum_partial_payout_percent, highest_price } = allData;
+    const { min_checkout_price, pricing_type, pricings, has_extras, minimum_partial_payout_use_global, minimum_partial_payout_percent, highest_price } = allData;
     const { options } = typeof settings != 'undefined' && settings;
     const { updateTripPricing, addTripPricing, updateTripPrices, updateTripData } = dispatch('WPTravel/TripEdit');
 
@@ -61,6 +61,18 @@ const Pricings = ( {allData} ) => {
     }
     return <ErrorBoundary key="1">
         <div className="wp-travel-trip-pricings">
+            <PanelRow>
+                <label>{ __( 'Minimum checkout price' ) }</label>
+                <TextControl
+                    value={min_checkout_price}
+                    onChange={(min_checkout_price) => {
+                        updateTripData({
+                            ...allData,
+                            min_checkout_price: min_checkout_price,
+                        });
+                    }}
+                />
+            </PanelRow>
             {applyFilters('wp_travel_before_pricings_options', [], allData)}
             {'multiple-price' === pricing_type && <>
                 { typeof tripPrices != 'undefined' && tripPrices.length > 0 ? <>

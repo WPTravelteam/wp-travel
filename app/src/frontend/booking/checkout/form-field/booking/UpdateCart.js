@@ -40,13 +40,17 @@ export default () => {
                 var priceFirst = {};
                 if ( typeof categories != 'undefined' && categories.length > 0 ) {
                     categories.forEach( ( priceCatList, ind ) => {
-                        const { term_info, regular_price, is_sale, sale_price } = priceCatList;
+                        console.log(priceCatList )
+                        const { term_info, regular_price, is_sale, sale_price, is_sale_percentage, sale_percentage_val } = priceCatList;
                         const catName = typeof term_info != 'undefined' && typeof term_info.title != 'undefined' && term_info.title || '';
                         const catId = typeof priceCatList.id != 'undefined' && priceCatList.id || 0;
                         const optionCat = { title : catName, catId : catId, is_sale : is_sale, regular_price : regular_price, sale_price : sale_price }
                         prcCategory[catId]  = optionCat;
                         if ( is_sale == true ) {
                             var firstPrice = paxCounts[catId] * sale_price;
+                            if(  is_sale_percentage == true ){
+                                firstPrice = paxCounts[catId] * ( sale_percentage_val/100 * regular_price );
+                            }
                         } else {
                             var firstPrice = paxCounts[catId] * regular_price;
                         }
@@ -222,6 +226,10 @@ export default () => {
 		let count = paxCounts[categoryId] || 0
 		let price = category && category.is_sale ? category.sale_price : category.regular_price
 
+        if(category.sale_price && category.is_sale_percentage){
+            price = category.sale_percentage_val/100 * category.regular_price;
+        }
+
 		if ( 'undefined' != typeof pricing.has_group_price && pricing.has_group_price && pricing.group_prices && pricing.group_prices.length > 0  ) {
 			let totalPax = objectSum(paxCounts);
 			let groupPrices = _.orderBy(pricing.group_prices, gp => parseInt(gp.max_pax))
@@ -277,8 +285,8 @@ export default () => {
                 <div className="wptravel-on-page-booking-update-cart-section-wrapper">
                 <span className='pax-selector-label'> {i18n.bookings.booking_tab_pax_selector} </span>
                 { typeof priceCategoryList != 'undefined' && priceCategoryList.length > 0  && priceCategoryList.map( ( listed, index ) => {
-                    const { title, catId, is_sale, regular_price, sale_price }  = listed;
-                    
+                    const { title, catId, is_sale, regular_price  }  = listed;
+                    const sale_price = getCategoryPrice(  catId, true )
                     return <>
                         <div className="wptrave-on-page-booking-cart-update-field">
                         <label>{title} ( {paxCounts[catId]} / {prcMax} )</label>

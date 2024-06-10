@@ -136,6 +136,7 @@ class WP_Travel_Admin_Booking {
 			case 'booking_status':
 				$status    = wptravel_get_booking_status();
 				$label_key = strtolower( get_post_meta( $id, 'wp_travel_booking_status', true ) );
+				
 				if ( '' === $label_key ) {
 					$label_key = 'Pending';
 					update_post_meta( $id, 'wp_travel_booking_status', $label_key );
@@ -145,8 +146,12 @@ class WP_Travel_Admin_Booking {
 					$label_key = 'N/A';
 				}
 
-				if( $label_key == 'booket' ){
+				if( $label_key == 'booket' || $label_key == '已預訂' ){
 					$label_key = 'booked';
+				}
+
+				if( $label_key == '已取消' ){
+					$label_key = 'canceled';
 				}
 
 				echo '<span class="wp-travel-status wp-travel-booking-status" style="background: ' . esc_attr( $status[ $label_key ]['color'] ) . ' ">' . esc_attr( $status[ $label_key ]['text'] ) . '</span>';

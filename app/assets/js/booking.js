@@ -13,12 +13,13 @@ jQuery(document).ready(function ($) {
 	});
 
 	$(document).on('click', '.wp-travel-booknow-btn, div.wp-travel-booknow-btn a', function () {
-		$(".wp-travel-booking-form").trigger("click");
+        $(".booking.resp-tab-item").trigger("click");
 		var winWidth = $(window).width();
 		var tabHeight = $('.wp-travel-tab-wrapper').offset().top;
 		if (winWidth < 767) {
 			var tabHeight = $('.resp-accordion.resp-tab-active').offset().top;
 		}
+       
 		$('html, body').animate({
 			scrollTop: (tabHeight)
 		}, 1200);

@@ -4776,3 +4776,4 @@ function wptravel_scroll_to_top_btn() {
 if( wp_is_block_theme() || apply_filters( 'wptravel_enable_scroll_to_top_btn', false ) ){
 	add_action('wp_footer', 'wptravel_scroll_to_top_btn');
 }
+
