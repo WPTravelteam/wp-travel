@@ -82,9 +82,10 @@ if ( isset( $wptravel_itineraries ) && ! empty( $wptravel_itineraries ) ) : ?>
 							
 								<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse-itinerary<?php echo esc_attr( $k + 1 ); ?>">
 									<h4 class="panel-title">
-										<?php echo esc_html( $wptravel_itinerary['label'] ) . ' : ' . esc_html( $wptravel_itinerary['title'] ); ?>
+										<Span><?php echo esc_html( $wptravel_itinerary['label'] ) . ' : ' . esc_html( $wptravel_itinerary['title'] ); ?></span>
+										<span class="collapse-icon"></span>
 									</h4>
-								<span class="collapse-icon"></span>
+								
 								</a>
 							
 							</div>

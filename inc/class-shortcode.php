@@ -143,41 +143,85 @@ class Wp_Travel_Shortcodes {
 			'status'         => 'published',
 		);
 
+		$type = explode(",", $type);
+
+
 		if ( ! empty( $iti_id ) ) :
 			$args['p'] = $iti_id;
 		else :
 			$taxonomies = array( 'itinerary_types', 'travel_locations', 'activity' );
 			// if type is taxonomy.
-			if ( in_array( $type, $taxonomies ) ) {
+			if( is_array( $type ) && count( $type ) > 1 ){
+				$relation = isset( $shortcode_atts['query_relation'] ) ? $shortcode_atts['query_relation'] : 'OR';
+				$args['tax_query']['relation'] = $relation;
 
-				if ( $id > 0 ) {
-					$args['tax_query'] = array(
-						array(
-							'taxonomy' => $type,
+				foreach ( $type as $value ) {
+					if( $value = 'travel_locations' ){
+						
+						$terms = isset( $shortcode_atts['trip_location'] ) ? explode(",", $shortcode_atts['trip_location'] ) : '';
+
+						$args['tax_query'][] = array(
+							'taxonomy' => 'travel_locations',
 							'field'    => 'term_id',
-							'terms'    => $id,
-						),
-					);
-				} elseif ( '' !== $slug ) {
-					$args['tax_query'] = array(
-						array(
-							'taxonomy' => $type,
-							'field'    => 'slug',
-							'terms'    => $slug,
-						),
-					);
-				}
-			} elseif ( 'featured' === $type ) {
-				$args['meta_key']   = 'wp_travel_featured';
-				$args['meta_query'] = array(
-					array(
-						'key'   => 'wp_travel_featured',
-						'value' => 'yes',
-					),
-				);
-			}
+							'terms'    => $terms,
+						);
+					}
 
+					if( $value = 'activity' ){
+						
+						$terms = isset( $shortcode_atts['trip_activity'] ) ? explode(",", $shortcode_atts['trip_activity'] ) : '';
+
+						$args['tax_query'][] = array(
+							'taxonomy' => 'activity',
+							'field'    => 'term_id',
+							'terms'    => $terms,
+						);
+					}
+
+					if( $value = 'itinerary_types' ){
+						
+						$terms = isset( $shortcode_atts['trip_types'] ) ? explode(",", $shortcode_atts['trip_types'] ) : '';
+
+						$args['tax_query'][] = array(
+							'taxonomy' => 'itinerary_types',
+							'field'    => 'term_id',
+							'terms'    => $terms,
+						);
+					}
+				}
+				
+			}else{
+				if ( in_array( $type, $taxonomies ) ) {
+
+					if ( $id > 0 ) {
+						$args['tax_query'] = array(
+							array(
+								'taxonomy' => $type,
+								'field'    => 'term_id',
+								'terms'    => $id,
+							),
+						);
+					} elseif ( '' !== $slug ) {
+						$args['tax_query'] = array(
+							array(
+								'taxonomy' => $type,
+								'field'    => 'slug',
+								'terms'    => $slug,
+							),
+						);
+					}
+				} elseif ( 'featured' === $type ) {
+					$args['meta_key']   = 'wp_travel_featured';
+					$args['meta_query'] = array(
+						array(
+							'key'   => 'wp_travel_featured',
+							'value' => 'yes',
+						),
+					);
+				}	
+			}
 		endif;
+
 		if ( isset( $shortcode_atts['order'] ) ) {
 			$args = array(
 				'post_type'      => WP_TRAVEL_POST_TYPE,
@@ -207,7 +251,25 @@ class Wp_Travel_Shortcodes {
 
 		$col_per_row    = $atts['col'];
 		$layout_version = wptravel_layout_version();
+		if( isset( $shortcode_atts['type'] ) && $shortcode_atts['type'] == 'itinerary' ){
+			
+			$args = array(
+				'post_type'      => WP_TRAVEL_POST_TYPE,
+				'posts_per_page' => $limit,
+				'status'         => 'published',
+			);
+			if( isset( $shortcode_atts['tripids'] ) ){
+				$trip_ids = explode(",", $shortcode_atts['tripids']);
+				$args['post__in'] = $trip_ids;
+			}
+			
+		}
+		if( isset( $shortcode_atts['pagination'] ) && $shortcode_atts['pagination'] == 'true' ){
+			$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+			$args['paged'] = $paged;
+		}
 		$query          = new WP_Query( $args );
+		
 		ob_start();
 		?>
 		<div class="wp-travel-itinerary-items">
@@ -234,9 +296,23 @@ class Wp_Travel_Shortcodes {
 							$query->the_post();
 							wptravel_get_template_part( 'v2/content', 'archive-itineraries' );
 						endwhile;
+						
 						?>
 					</div>
-				<?php endif; ?>
+				<?php endif; 
+					wp_reset_postdata(); 
+					if( isset( $shortcode_atts['pagination'] ) && $shortcode_atts['pagination'] == 'true' ){
+						echo '<div class="wp-travel-navigation navigation wp-paging-navigation">';
+						$pagination_args = array(
+							'total'   => $query->max_num_pages,
+							'current' => $paged,
+							'prev_text' => __('&laquo;'),
+							'next_text' => __('&raquo;'),
+						);
+						echo paginate_links($pagination_args);
+						echo '</div>';
+					}
+				?>
 			<?php else : ?>
 				<?php wptravel_get_template_part( 'shortcode/itinerary', 'item-none' ); ?>
 			<?php endif; ?>
@@ -398,6 +474,7 @@ class Wp_Travel_Shortcodes {
 			if ( count( $atts ) > 0 ) {
 				$defaults = array();
 				foreach ( $search_widget_fields as $key => $filter ) {
+					// var_dump($filter['name']);
 					if ( isset( $filter['name'] ) ) {
 						if ( in_array( $filter['name'], $atts ) ) {
 							$defaults[ $key ] = 1;
@@ -671,3 +748,4 @@ class Wp_Travel_Shortcodes {
 	
 
 }
+

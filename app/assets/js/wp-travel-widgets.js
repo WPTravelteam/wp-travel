@@ -264,6 +264,73 @@ jQuery(function($) {
 
 });
 
+jQuery(function($) {
+    
+    $(document).on('click', '.open-quick-view-modal', function(event) {
+        event.preventDefault();
+
+        $(this).siblings('.wp-travel-quick-view-modal').show();
+        $('.modal-overlay').show();
+    });
+
+    // Close the modal
+    $(document).on('click', '.close-modal', function(event) {
+        event.preventDefault();
+
+        $(this).closest('.wp-travel-quick-view-modal').hide();
+        $('.modal-overlay').hide();
+    });
+
+    $(document).on('click', '.modal-overlay', function(event) {
+        event.preventDefault();
+        $('.wp-travel-quick-view-modal').hide();
+        $('.modal-overlay').hide();
+    });
+
+    $('.wp-travel-quick-view #overview').show();
+    $( '.wp-travel-quick-view ul.tab-list li' ).addClass( 'resp-tab-active' );
+    $('.wp-travel-quick-view .tab-list-content').addClass( 'resp-tab-content-active' );
+
+    $(document).on('click', '.wp-travel-quick-view ul.tab-list .overview', function(event) {
+        event.preventDefault();
+        $( '.wp-travel-quick-view ul.tab-list li' ).removeClass( 'resp-tab-active' );
+        $( this ).addClass( 'resp-tab-active' );
+        $('.wp-travel-quick-view .tab-list-content').hide();
+        $('.wp-travel-quick-view #overview').show();
+    });
+
+    $(document).on('click', '.wp-travel-quick-view ul.tab-list .trip_outline', function(event) {
+        event.preventDefault();
+        $( '.wp-travel-quick-view ul.tab-list li' ).removeClass( 'resp-tab-active' );
+        $( this ).addClass( 'resp-tab-active' );
+        $('.wp-travel-quick-view .tab-list-content').hide();
+        $('.wp-travel-quick-view #trip_outline').show();
+    });
+
+    $(document).on('click', '.wp-travel-quick-view ul.tab-list .trip_includes', function(event) {
+        event.preventDefault();
+        $( '.wp-travel-quick-view ul.tab-list li' ).removeClass( 'resp-tab-active' );
+        $( this ).addClass( 'resp-tab-active' );
+        $('.wp-travel-quick-view .tab-list-content').hide();
+        $('.wp-travel-quick-view #trip_includes').show();
+    });
+
+    $(document).on('click', '.wp-travel-quick-view ul.tab-list .trip_excludes', function(event) {
+        event.preventDefault();
+        $( '.wp-travel-quick-view ul.tab-list li' ).removeClass( 'resp-tab-active' );
+        $( this ).addClass( 'resp-tab-active' );
+        $('.wp-travel-quick-view .tab-list-content').hide();
+        $('.wp-travel-quick-view #trip_excludes').show();
+    });
+    
+    $(document).on('click', '.wp-travel-quick-view ul.tab-list .gallery', function(event) {
+        event.preventDefault();
+        $( '.wp-travel-quick-view ul.tab-list li' ).removeClass( 'resp-tab-active' );
+        $( this ).addClass( 'resp-tab-active' );
+        $('.wp-travel-quick-view .tab-list-content').hide();
+        $('.wp-travel-quick-view #gallery').show();
+    });
+});
 
 
 // PWA

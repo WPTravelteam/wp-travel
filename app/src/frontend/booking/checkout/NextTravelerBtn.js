@@ -6,6 +6,7 @@ import { __ } from '@wordpress/i18n';
 const __i18n = {
 	..._wp_travel.strings
 }
+import { Spinner } from '@wordpress/components';
 
 import _ from 'lodash';
 import ErrorBoundary from '../../../ErrorBoundry/ErrorBoundry';
@@ -16,7 +17,7 @@ const bookingStoreName = 'WPTravelFrontend/BookingData';
 import { objectSum, wpTravelFormat, wpTravelTimeout, GetConvertedPrice } from '../_wptravelFunctions';
 
 const WpTravelBookNow = ( props ) => {
-	const [loaders, setLoaders] = useState(false);
+
     // Booking Data/state.
     const bookingAllData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
 
@@ -28,10 +29,11 @@ const WpTravelBookNow = ( props ) => {
     const {
         dates,
         pricings,
+		min_checkout_price
     } = tripData;
     const allPricings = pricings && _.keyBy( pricings, p => p.id ) // Need object structure because pricing id may not be in sequencial order.
     const _dates      = 'undefined' !== typeof dates && dates.length > 0 ? dates : [];
-
+	var minCheckoputPrice = !min_checkout_price ? '0' : min_checkout_price;
     // Booking Data.
     const { selectedPricingId, nomineeTimes, selectedTime, selectedDate, paxCounts, inventory, nomineeTripExtras, tripExtras, selectedDateIds } = bookingData;
 
@@ -87,7 +89,12 @@ const WpTravelBookNow = ( props ) => {
 			if ( category && 'undefined' != typeof category.regular_price ) {
 				price = category && category.is_sale ? category.sale_price : category.regular_price
 			}
-	
+
+
+			if(  'undefined' != typeof category.is_sale && category.is_sale == true && 'undefined' != typeof category.is_sale_percentage && category.is_sale_percentage == true ){
+				price = category.sale_percentage_val/100 * category.regular_price;
+			}
+			
 			if ( isPricingGroupPrice ) {
 				// need one additional loop here to get default total price.
 				Object.entries( counts ).map( ( [i, count]) => {
@@ -121,7 +128,7 @@ const WpTravelBookNow = ( props ) => {
 	}
 
 	const addToCart = () => {
-		setLoaders(true)
+		jQuery( '.booking-loader' ).css( 'display', 'block');
 		let data = {
 			trip_id: tripData.id,
 			arrival_date: moment(selectedDate).format('YYYY-MM-DD'),
@@ -173,7 +180,7 @@ const WpTravelBookNow = ( props ) => {
 						if ( typeof settingData != 'undefined' && typeof settingData.success != 'undefined' && typeof settingData.data != 'undefined' ) {
 			
 							if ( settingData.success === true && settingData.data != '' ) {
-								setLoaders(false)
+
 								updateStore( {...bookingData, paxSize : size, payment_form : settingData.data.payment, form_key : settingData.data.form_key, price_list : settingData.data.price_list, cart_amount : settingData.data.cart_price , bookingTabEnable: false, travelerInfo : true } )
 							}
 			
@@ -198,6 +205,12 @@ const WpTravelBookNow = ( props ) => {
 			enable_time =  res.enable_time;
 		}
 	});
+
+	var btnClass = "wp-travel-book";
+	if( parseFloat( getCartTotal(true) ) < parseFloat( minCheckoputPrice ) ){
+		var btnClass = "wp-travel-book btndisable";
+	}
+
     return <>
         <ErrorBoundary>
             <Suspense>
@@ -218,11 +231,12 @@ const WpTravelBookNow = ( props ) => {
                         
                         <div className="right-info" >
                             <p>{__i18n.bookings.booking_tab_cart_total}<strong dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCartTotal(true)) }}></strong></p>
-							{
+							{	
 								tripData.enable_pax_all_pricing == "1" &&
-								<button onClick={addToCart} className="wp-travel-book">{typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? __i18n.set_add_to_cart : __i18n.bookings.booking_tab_booking_btn_label}</button>
+								<button onClick={addToCart} className={btnClass}><span className='booking-loader'><Spinner /></span>{typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? __i18n.set_add_to_cart : __i18n.bookings.booking_tab_booking_btn_label}</button>
 								||
-								<button disabled={totalPax < minPaxToBook || totalPax > maxPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">{typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? __i18n.set_add_to_cart : __i18n.bookings.booking_tab_booking_btn_label}</button>
+								
+								<button disabled={ totalPax < minPaxToBook || totalPax > maxPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className={btnClass}><span className='booking-loader'><Spinner /></span>{typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? __i18n.set_add_to_cart : __i18n.bookings.booking_tab_booking_btn_label}</button>
 							}
 						</div>
                     </div>

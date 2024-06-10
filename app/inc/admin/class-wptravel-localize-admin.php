@@ -550,7 +550,7 @@ class WpTravel_Localize_Admin {
                 'select_booking_option' => __('Select Booking Option','wp-travel'),
                 'select_booking_option_note' => __('Note: Any payment gateway must be enable inorder to work this options. If payment is not enabled then Booking only option will work.','wp-travel'),
                 'enable_multiple_checkout_add_to_cart' => __('Enable multiple checkout (Add to cart)','wp-travel'),
-                'enable_multiple_checkout_add_to_cart_note' => __('Add multiple trips on checkout page.)','wp-travel'),
+                'enable_multiple_checkout_add_to_cart_note' => __('Add multiple trips on checkout page.','wp-travel'),
                 'enable_multiple_travelers' => __('Enable multiple travelers','wp-travel'),
                 'enable_multiple_travelers_note' => __('Collect multiple travelers information from checkout page.','wp-travel'),
                 'enable_on_page_booking' => __('Enable On-Page Booking','wp-travel'),

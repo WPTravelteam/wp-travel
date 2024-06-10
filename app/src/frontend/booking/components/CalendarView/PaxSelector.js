@@ -42,7 +42,7 @@ const PaxSelector = ( props ) => {
 		
 		let price = category && category.is_sale ? category.sale_price : category.regular_price
 
-		if( 'undefined' != typeof category.is_sale_percentage && category.is_sale_percentage ){
+		if( 'undefined' != typeof category.is_sale && category.is_sale && 'undefined' != typeof category.is_sale_percentage && category.is_sale_percentage ){
 			price= (category.sale_percentage_val/100)*category.regular_price
 		}
 

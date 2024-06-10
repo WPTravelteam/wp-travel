@@ -43,7 +43,7 @@ export default () => {
         $( '.ReactModalPortal' ).css( 'display', 'none' );
         $('.single-itineraries').removeClass('wp-travel-one-page-open-for-booking')
     } 
-    console.log( _wp_travel.is_user_login )
+
     return <>
         <Button className=" wptravel-book-your-trips  wp-travel-booknow-btns" onClick={openModal}>{__i18n.set_book_now}</Button>
         <div className="wp-travel-checkout-one-page">

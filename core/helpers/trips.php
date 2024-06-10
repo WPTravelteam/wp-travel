@@ -63,6 +63,7 @@ class WpTravel_Helpers_Trips {
 		$highest_price     = get_post_meta( $trip_id, 'wp_travel_show_highest_price', true );
 		$trip_default_data = array(
 			'trip_video_code'					=> get_post_meta( $trip_id, 'wp_travel_video_code', true ),
+			'min_checkout_price'					=> get_post_meta( $trip_id, 'wp_travel_trip_min_checkout_price', true ),
 			'pricing_type'                        => 'multiple-price',
 			'custom_booking_type'                 => 'custom-link',
 			'custom_booking_form'                 => '',
@@ -451,6 +452,8 @@ class WpTravel_Helpers_Trips {
 			 */
 			update_post_meta( $trip_id, 'wp_travel_video_code', sanitize_url( $trip_data->trip_video_code ) );
 		}
+
+		update_post_meta( $trip_id, 'wp_travel_trip_min_checkout_price', sanitize_text_field( $trip_data->min_checkout_price ) );
 
 		if ( ! empty( $trip_data->trip_outline ) || empty( $trip_data->trip_outline ) ) {
 			/**
