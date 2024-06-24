@@ -5,15 +5,15 @@ Donate link: https://wptravel.io/wp-travel-pro/?utm_source=donate&utm_campaign=W
 Requires at least: 6.0.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 8.9.0
+Stable tag: 9.0.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-WP Travel is the Ultimate Travel Booking Plugin to Create Travel and Trekking Websites in Minutes, Without Coding!
+WP Travel is the optimal choice among the WordPress Travel and Tour Operator Booking Plugins to Create Travel and Trekking Websites Without Coding!
 
 == Description ==
 
-**WP Travel is the Ultimate Travel and Tour Operator Booking Plugin to Create Travel and Trekking Websites in Minutes, Without Coding!**
+**WP Travel is the optimal choice among the WordPress Travel and Tour Operator Booking Plugin to Create Travel and Trekking Websites in Minutes, Without Coding!**
 
 If you are looking for a reliable travel plugin for your WordPress travel booking website, then look no further than the WP Travel [WP Travel](https://wptravel.io/) plugin. It’s a powerful, free travel engine (also available in a Pro version with additional features) for creating customized travel agency or tour operator websites on WordPress in minutes.
 
@@ -269,8 +269,6 @@ Our range of exclusive WordPress payment plugins is specifically designed to sea
 
 * [WP Travel Partial Payment](https://wptravel.io/downloads/wp-travel-partial-payment/)
 
-* [WP Travel Rest API](https://wptravel.io/docs-category/wp-travel-rest-api/)
-
 * [WP Travel Downloads](https://wptravel.io/downloads/wp-travel-downloads/)
 
 * [WP Travel MailChimp](https://wptravel.io/downloads/wp-travel-mailchimp/)
@@ -423,6 +421,22 @@ If you have any queries regarding the plugin and extensions then you can ask for
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 9.0.0 =
+Release Date: 24th June 2024
+
+Fixes:
+* Fixed minor issue on Trip Search Filter
+* Fixed missing text transaltion issue
+
+Enhancements:
+* Minor modify on price category function 
+* Adde support to load HTML content of Trip Title
+* Added alt attribute to img tag for better SEO
+* Generate new pot file
+
+**For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v9-0-0-update-release-note).**
+
 
 = 8.9.0 =
 Release Date: 10th June 2024
@@ -585,187 +599,6 @@ Enhancements:
 
 **For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v8-0-0-update-release-note).**
 
-= 7.9.0 =
-Release Date: 08th January 2024
-
-Fixes:
-* Optimized code.
-* Fixed minor design issues on the initial setup page.
-* Fixed date picker issue ( current date showing even if date picker is empty ).
-* Fixed privacy policy links in case of On-Page booking.
-
-Enhancements:
-* Added quick setup options on the initial setup page.
-* Added function to scroll to booking tab while clicking on departure date.
-
-**For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v7-9-0-update-release-note).**
-
-= 7.8.1 =
-Release Date: 22th December 2023
-
-Fixes:
-* Security patch update. Added nonce to all AJAX requests.
-
-
-= 7.8.0 =
-Release Date: 20th December 2023
-
-Fixes:
-* Fixed departure date and arrival date format in booking emails.
-* Fixed trip location design issue in trip lists.
-* Fixed sale issue for multiple pricing on the trip archive page.
-* Fixed the book button alignment issue in case of On-page booking.
-
-Enhancements:
-* Added text translations for “Select Pax”, “Trip Price” and “Trip Extras”.
-* Added Contact Number, Contact Email, Country Code, and Tour Date column in the bookings table.
-* Added filter 'wp_travel_enable_traveller_dob_booking_email'.
-* Added filter 'wp_travel_enable_traveller_gender_booking_email'.
-* Added filter 'wp_travel_enable_traveller_country_booking_email'.
-* Added filter 'wp_travel_trip_enquiry_label'.
-
-**For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v7-8-0-update-release-note).**
-
-= 7.7.0 =
-Release Date: 5th December 2023
-
-Fixes:
-* Fixed ajax-loader console issue.
-* Fixed Google Map API issue.
-* Fixed booking edit page content width issue.
-* Added the latest theme to the marketplace page and setup page.
-* Update setup page design. 
-* Optimized scripts.
-* Fixed Broken Access Control Vulnerability issue. 
-* Fixed moment js issue. 
-* Replaced invalid contact page documentation url in setting page. 
-* Update demo trips CSV file. 
-* Fixed react date picker console error.  
-* Fixed Onpage layout issue.  
-
-**For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v7-7-0-update-release-note).**
-
-= 7.6.0 =
-Release Date: 6th November 2023
-
-Fixes:
-* Fixed multiple fixed departure dates not showing on the single trip page.
-* Fixed the pax selector issue while updating the cart.
-* Fixed the translation issue regarding validation.
-
-Enhancements:
-* Added function for sending email while changing booking status.
-* Added discount coupon code and discount amount on booking emails.
-* Enhanced the backend date selector calendar.
-* Added a translation for "Select Date and Pricing Options for this trip in the Trip Options setting."
-
-**For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v7-6-0-update-release-note).**
-
-= 7.5.0 =
-Release Date: 12th October  2023
-
-Fixes:
-* Fixed multiple fixed departure dates not showing on the single trip page.
-* Fixed the pax selector issue while updating the cart.
-* Fixed the translation issue regarding validation.
-* Fixed the translation issue for the Thankyou message.
-
-Enhancements:
-* Added function for sending email while changing booking status.
-* Added discount coupon code and discount amount on booking emails.
-* Enhanced the backend date selector calendar.
-* Added a translation for "Select Date and Pricing Options for this trip in the Trip Options setting."
-
-**For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v7.6.0-update-release-note).**
-
-= 7.4.0 =
-Release Date: 27th September 2023
-
-Fixes:
-* Fixed issues in the accordions with third-party plugins(like the UserWP plugin and Geodirectory plugin).
-* Removed all unwanted consoles.
-* Removed all unwanted comment codes.
-* Added translation for missing strings.
-* Fixed booking button scroll issue for mobile devices.
-* Fixed the pax issue in the mail, when updating the cart on the checkout page.
-
-
-Enhancements:
-* "Thank You" message has been added to the On-Page booking feature when WP Travel (free) is activated.
-* When payment is enabled for On-Page bookings by default booking with payment will be displayed.
-
-Layout Issue:
-* Fixed the layout issue under the Related Trip section.
-
-**For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v7-4-0-update-release-note).**
-
-= 7.3.0 =
-Release Date: 11th September 2023
-
-Fixes:
-* Code cleanup 
-* Fixed booking date label in case of one day trip
-* Added departure date in thankyou page and booking email template
-* Fixed image width on WP Travel User login page
-* Fixed CSS of group price on onpage booking 
-
-Enhancements:
-* Inherit theme color on add to cart
-* Extend time interval of cornjobs ( once in two days )
-* Added function for cart icon - `[wptravel_get_cart_icon()]`
-* Added `[wp_travel_trip_price_per]` hook ( this hook helps to and extra label for book per ( ie. person, group ) )
-* Added `[wptravel_traveller_salutation]` hook - this hook helps to add or remove salutation on booking email
-
-**For more details, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-v7-3-0-update-release-note/).**
-
-= 7.2.1 =
-Release Date: 24th August 2023
-
-Fixes:
-* Code cleanup
-
-= 7.2.0 =
-Release Date: 23rd August 2023
-
-Fixes:
-* Fixed translation issue for On-Page booking.
-
-Enhancements:
-* Added Hour and Minute option in case of Trip duration.
-* Added Tax percentage in case of On-Page booking.
-* Removed 'Apply Coupon' field, if coupon is not added in case of On-Page booking.
-
-**For more details, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-7-2-0-update-release-note/).**
-
-= 7.1.1 =
-Release Date: 9th August 2023
-
-Fixes:
-* Fixed booking issue.
-
-others: 
-* Sets the WordPress tested up to version to 6.3.
-
-= 7.1.0 =
-Release Date: 7th August 2023
-
-Enhancements:
-* Added edit cart option in case of On-Page booking.
-* Added apply coupon field in payment details section in case of On-Page booking.
-* Added tax calculation in On-Page booking in Payment Details.
-
-Fixes:
-* Fixed issue while uploading custom image in trip facts.
-* Fixed booking details not shown in the customer dashboard, in case of booking detail added by admin manually. 
-
-Layout Fixes:
-* Fixed On-Page booking layout and cart button style to match theme color.
-
-**For more details, please refer to our [release note]( https://wptravel.io/wp-travel-plugin-version-7-1-0-release-note/).**
-
-
-= 7.0.0. =
-Release Date: 17th July 2023
 
 Enhancement:
 * Added hook `[wp_travel_related_trip_filter_single_archive_page]` to show the related trip according to your taxonomy choice.

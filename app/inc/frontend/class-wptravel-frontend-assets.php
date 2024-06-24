@@ -652,27 +652,27 @@ class WpTravel_Frontend_Assets {
 		}
 
 		wp_localize_script( 'jquery-parsley', 'error_string', [
-			'defaultMessage' => __( "This value seems to be invalid.", 'wp-travel' ),
-			'email' => __( "This value should be a valid email.", 'wp-travel' ),
-			'url' => __( "This value should be a valid url.", 'wp-travel' ),
-			'number' => __( "This value should be a valid number.", 'wp-travel' ),
-			'integer' => __( "This value should be a valid integer.", 'wp-travel' ),
-			'digits' => __( "This value should be digits.", 'wp-travel' ),
-			'alphanum' => __( "This value should be alphanumeric.", 'wp-travel' ),
-			'notblank' => __( "This value should not be blank.", 'wp-travel' ),
-			'required' => __( "This value is required.", 'wp-travel' ),
-			'pattern' => __( "This value seems to be invalid.", 'wp-travel' ),
-			'min' => __( "This value should be greater than or equal to %s.", 'wp-travel' ),
-			'max' => __( "This value should be lower than or equal to %s.", 'wp-travel' ),
-			'range' => __( "This value should be between %s and %s.", 'wp-travel' ),
-			'minlength' => __( "This value is too short. It should have %s characters or more.", 'wp-travel' ),
-			'maxlength' => __( "This value is too long. It should have %s characters or fewer.", 'wp-travel' ),
-			'length' => __( "This value length is invalid. It should be between %s and %s characters long.", 'wp-travel' ),
-			'mincheck' => __( "You must select at least %s choices.", 'wp-travel' ),
-			'maxcheck' => __( "You must select %s choices or fewer.", 'wp-travel' ),
-			'check' => __( "You must select between %s and %s choices.", 'wp-travel' ),
-			'equalto' => __( "This value should be the same.", 'wp-travel' ),
-			'euvatin' => __( "It's not a valid VAT Identification Number.", 'wp-travel' )
+			'defaultMessage' => esc_html__( "This value seems to be invalid.", 'wp-travel' ),
+			'email' => esc_html__( "This value should be a valid email.", 'wp-travel' ),
+			'url' => esc_html__( "This value should be a valid url.", 'wp-travel' ),
+			'number' => esc_html__( "This value should be a valid number.", 'wp-travel' ),
+			'integer' => esc_html__( "This value should be a valid integer.", 'wp-travel' ),
+			'digits' => esc_html__( "This value should be digits.", 'wp-travel' ),
+			'alphanum' => esc_html__( "This value should be alphanumeric.", 'wp-travel' ),
+			'notblank' => esc_html__( "This value should not be blank.", 'wp-travel' ),
+			'required' => esc_html__( "This value is required.", 'wp-travel' ),
+			'pattern' => esc_html__( "This value seems to be invalid.", 'wp-travel' ),
+			'min' => esc_html__( "This value should be greater than or equal to.", 'wp-travel' ),
+			'max' => esc_html__( "This value should be lower than or equal to.", 'wp-travel' ),
+			'range' => esc_html__( "This value should be between the range.", 'wp-travel' ),
+			'minlength' => esc_html__( "This value is too short.", 'wp-travel' ),
+			'maxlength' => esc_html__( "This value is too long.", 'wp-travel' ),
+			'length' => esc_html__( "This value length is invalid.", 'wp-travel' ),
+			'mincheck' => esc_html__( "You must select at least choices.", 'wp-travel' ),
+			'maxcheck' => esc_html__( "You must select choices or fewer.", 'wp-travel' ),
+			'check' => esc_html__( "You must select between choices.", 'wp-travel' ),
+			'equalto' => esc_html__( "This value should be the same.", 'wp-travel' ),
+			'euvatin' => esc_html__( "It's not a valid VAT Identification Number.", 'wp-travel' )
 		] );
 		
 		$all_localized = WpTravel_Helpers_Localize::get();

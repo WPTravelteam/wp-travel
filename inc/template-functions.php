@@ -144,9 +144,9 @@ function wptravel_posts_clauses_filter( $post_clauses, $object ) {
 	 */
 	// Where clause.
 	$where      = '';
-	$start_date = isset( $_GET['trip_start'] ) ? date("Y-m-d", strtotime(sanitize_text_field( wp_unslash( $_GET['trip_start']  ) ) )) : ''; // @phpcs:ignore
-	$end_date   = isset( $_GET['trip_end'] ) ? date("Y-m-d", strtotime(sanitize_text_field( wp_unslash( $_GET['trip_end'] ) ) ) ): ''; // @phpcs:ignore
-	
+	$start_date = isset( $_GET['trip_start'] ) ? sanitize_text_field( wp_unslash( $_GET['trip_start'] ) ) : ''; // @phpcs:ignore
+	$end_date   = isset( $_GET['trip_end'] ) ? sanitize_text_field( wp_unslash( $_GET['trip_end'] ) ) : ''; // @phpcs:ignore
+
 		// Filter by date clause.
 	if ( ! empty( $start_date ) || ! empty( $end_date ) ) { // For search filter Widgets.
 		$where .= ' AND ( '; // <1
@@ -366,6 +366,10 @@ function wptravel_get_template( $template_name ) {
  * @return string
  */
 function wptravel_get_template_html( $template_name, $args = array() ) {
+
+	if( isset($_REQUEST['action']) && $_REQUEST['action'] == 'elementor' ){
+		return;
+	}
 	ob_start();
 	if ( ! empty( $args ) && is_array( $args ) ) {
 		extract( $args ); // @codingStandardsIgnoreLine
@@ -560,21 +564,23 @@ function wptravel_trip_price( $trip_id, $hide_rating = false ) {
 	}
 	?>
 	<div class="wptravel-price-wrap">
-		<div class="trip-price" >
-			<span class="price-from">
-				<?php echo esc_html( $strings['from'] ); ?>
-			</span>
-			<?php if ( $enable_sale && $regular_price !== $trip_price ) : ?>
-			<del>
-				<span><?php echo wptravel_get_formated_price_currency( $regular_price, true ); // @phpcs:ignore ?></span>
-			</del>
-			<?php endif; ?>
-			<span class="person-count">
-				<ins>
-					<span><?php echo wptravel_get_formated_price_currency( $trip_price ); // @phpcs:ignore ?></span>
-				</ins>
-			</span>
-		</div>
+		<!-- <div class="wp-travel-trip-detail"> -->
+			<div class="trip-price" >
+				<span class="price-from">
+					<?php echo esc_html( $strings['from'] ); ?>
+				</span>
+				<?php if ( $enable_sale && $regular_price !== $trip_price ) : ?>
+				<del>
+					<span><?php echo wptravel_get_formated_price_currency( $regular_price, true ); // @phpcs:ignore ?></span>
+				</del>
+				<?php endif; ?>
+				<span class="person-count">
+					<ins>
+						<span><?php echo wptravel_get_formated_price_currency( $trip_price ); // @phpcs:ignore ?></span>
+					</ins>
+				</span>
+			</div>
+		<!-- </div> -->
 	</div>
 
 	<?php
@@ -845,6 +851,7 @@ function wptravel_single_excerpt( $trip_id ) {
 				$wptravel_enable_group_size_text = apply_filters( 'wptravel_show_group_size_text_single_itinerary', true );
 				$min_group_size                      = wptravel_get_group_size( $trip_id, 'min_pax' );
 				$max_group_size                      = wptravel_get_group_size( $trip_id, 'max_pax' );
+				// $group_size                      = wptravel_get_group_size( $trip_id );
 				$count                           = (int) get_comments_number();
 
 				/**
@@ -1858,6 +1865,7 @@ function wptravel_booking_message() {
 			$payment_gatway = get_post_meta( $booking_id, 'wp_travel_payment_gateway', true );
 			if ( 'bank_deposit' == $payment_gatway ) {
 				$payment_status = get_post_meta( $booking_id, 'wp_travel_payment_status', true );
+				// print_r($payment_status);
 				if ( 'waiting_voucher' == $payment_status ) {
 					?>
 						<p class="col-xs-12 wp-travel-notice-success wp-travel-notice"><?php echo wp_kses_post( apply_filters( 'wp_travel_booked_message', __( "Thank you for booking! We'll reach out to you soon.", 'wp-travel' ) ) ); ?><span><?php echo esc_html( apply_filters( 'wp_travel_booked_message_after_text', '  (' . __( 'Payment Method: Bank Deposit, and Payment Status: Waiting for Voucher. Please', 'wp-travel' ) . '<a href="https://wptravel.io/docs/wp-travel-user-documentation/settings/payment/#h-bank-deposit" target="_blank" >' . __( 'submit', 'wp-travel' ) . '</a>' . __( 'your voucher', 'wp-travel' ) . '.)' ) ); ?></span> </p>
@@ -2587,4 +2595,3 @@ function wptravel_single_itinerary_trip_content() {
 		wptravel_get_template_part( 'content', 'single-itineraries' );
 	}
 }
-

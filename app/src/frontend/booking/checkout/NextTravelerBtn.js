@@ -16,6 +16,7 @@ const bookingStoreName = 'WPTravelFrontend/BookingData';
 // WP Travel Functions.
 import { objectSum, wpTravelFormat, wpTravelTimeout, GetConvertedPrice } from '../_wptravelFunctions';
 
+
 const WpTravelBookNow = ( props ) => {
 
     // Booking Data/state.
@@ -177,16 +178,21 @@ const WpTravelBookNow = ( props ) => {
 						url: `${wp_travel.ajaxUrl}?action=wptravel_get_payment_field&_nonce=${_wp_travel._nonce}`,
 						method: 'GET',
 					}).then( settingData => {
-						if ( typeof settingData != 'undefined' && typeof settingData.success != 'undefined' && typeof settingData.data != 'undefined' ) {
+						if( _wp_travel.add_to_cart_system == "1" ){
+							location.reload();
+						}else{
+							if ( typeof settingData != 'undefined' && typeof settingData.success != 'undefined' && typeof settingData.data != 'undefined' ) {
 			
-							if ( settingData.success === true && settingData.data != '' ) {
-
-								updateStore( {...bookingData, paxSize : size, payment_form : settingData.data.payment, form_key : settingData.data.form_key, price_list : settingData.data.price_list, cart_amount : settingData.data.cart_price , bookingTabEnable: false, travelerInfo : true } )
+								if ( settingData.success === true && settingData.data != '' ) {
+	
+									updateStore( {...bookingData, paxSize : size, payment_form : settingData.data.payment, form_key : settingData.data.form_key, price_list : settingData.data.price_list, cart_amount : settingData.data.cart_price , bookingTabEnable: false, travelerInfo : true } )
+								}
+				
+							} else {
+								console.log( 'setting not get!' )
 							}
-			
-						} else {
-							console.log( 'setting not get!' )
 						}
+						
 					}).catch(error => {
 						console.log( 'You can not use one page checkout because setting not loaded!' );
 					})

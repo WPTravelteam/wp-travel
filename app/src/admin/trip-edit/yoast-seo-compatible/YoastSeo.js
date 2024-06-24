@@ -1,4 +1,3 @@
-
 class WpTravelSEOAnalysisEditorText {
     static onChangeAnalysisData = '';
     constructor() {
