@@ -712,7 +712,7 @@ jQuery(function ($) {
      * =========================
      */
 
-    $(document).ready(function($) {
+    $(function($) {
         $('.wti__advance-gallery-item-list').magnificPopup({
         delegate: '.gallery-item  ',
         type: 'image',

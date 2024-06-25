@@ -102,7 +102,7 @@ $rating = intval( get_comment_meta( $comment->comment_ID, '_wp_travel_rating', t
 				$link = '<a rel="nofollow" href="' . wp_login_url( get_permalink() ) . '">' . $login_text . '</a>';
 			} else {
 
-				$link = "<a class='comment-reply-link' href='" . esc_url( add_query_arg( 'replytocom', $comment->comment_ID ) ) . '#respond' . "' onclick='return addComment.moveForm(\"comment-$comment->comment_ID\", \"$comment->comment_ID\", \"respond\", \"$post_id\")'>" . esc_html( 'Reply', 'wp-travel' ) . '</a>';
+				$link = "<a class='comment-reply-link' href='" . esc_url( add_query_arg( 'replytocom', $comment->comment_ID ) ) . '#respond' . "' onclick='return addComment.moveForm(\"comment-$comment->comment_ID\", \"$comment->comment_ID\", \"respond\", \"$post_id\")'>" . esc_html__( 'Reply', 'wp-travel' ) . '</a>';
 			}
 			echo wp_kses_post( apply_filters( 'wp_travel_comment_reply_link', $link ) );
 			?>

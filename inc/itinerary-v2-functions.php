@@ -521,7 +521,7 @@ function wptravel_single_itinerary_trip_facts() {
 								if ( $count > 1 && $i !== $count ) {
 									?>
 									<span class="trip__info-label">
-										<?php echo esc_html( ',', 'wp-travel' ); ?>
+										<?php echo esc_html__( ',', 'wp-travel' ); ?>
 									</span>
 									<?php
 								}

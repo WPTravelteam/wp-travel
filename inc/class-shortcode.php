@@ -143,7 +143,7 @@ class Wp_Travel_Shortcodes {
 			'status'         => 'published',
 		);
 
-		$type = explode(",", $type);
+		$multi_type = explode(",", $type);
 
 
 		if ( ! empty( $iti_id ) ) :
@@ -151,11 +151,11 @@ class Wp_Travel_Shortcodes {
 		else :
 			$taxonomies = array( 'itinerary_types', 'travel_locations', 'activity' );
 			// if type is taxonomy.
-			if( is_array( $type ) && count( $type ) > 1 ){
+			if( is_array( $multi_type ) && count( $multi_type ) > 1 ){
 				$relation = isset( $shortcode_atts['query_relation'] ) ? $shortcode_atts['query_relation'] : 'OR';
 				$args['tax_query']['relation'] = $relation;
 
-				foreach ( $type as $value ) {
+				foreach ( $multi_type as $value ) {
 					if( $value = 'travel_locations' ){
 						
 						$terms = isset( $shortcode_atts['trip_location'] ) ? explode(",", $shortcode_atts['trip_location'] ) : '';
@@ -422,7 +422,7 @@ class Wp_Travel_Shortcodes {
 				</div>
 			<?php
 		} else {
-			echo esc_html( 'Trips not found !!', 'wp-travel' );
+			echo esc_html__( 'Trips not found !!', 'wp-travel' );
 		}
 		$content = ob_get_contents();
 		ob_end_clean();
@@ -474,7 +474,7 @@ class Wp_Travel_Shortcodes {
 			if ( count( $atts ) > 0 ) {
 				$defaults = array();
 				foreach ( $search_widget_fields as $key => $filter ) {
-					// var_dump($filter['name']);
+					var_dump($filter['name']);
 					if ( isset( $filter['name'] ) ) {
 						if ( in_array( $filter['name'], $atts ) ) {
 							$defaults[ $key ] = 1;
@@ -567,7 +567,7 @@ class Wp_Travel_Shortcodes {
 									foreach ( $trip_fact['value'] as $key => $val ) {
 										echo esc_html( $val );
 										if ( $count > 1 && $i !== $count ) {
-											echo esc_html( ',', 'wp-travel' );
+											echo esc_html__( ',', 'wp-travel' );
 										}
 										$i++;
 									}

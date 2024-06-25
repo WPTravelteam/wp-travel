@@ -180,7 +180,10 @@ const PaxSelector = ( props ) => {
 					let _inventory = inventory.find(i => i.date === moment(selectedDate).format('YYYY-MM-DD[T]HH:mm')); // selectedDate : date along with time.
 					let maxPax = isInventoryEnabled && _inventory && _inventory.pax_available ? _inventory.pax_available : pricing.max_pax; // Temp fixes for inventory disabled case.
 					let minPax = paxCounts[c.id] ? paxCounts[c.id] : 0;
-					return <li key={i}>
+					console.log( c.term_info );
+
+					var pricing_cat = c.term_info.title.replace(/ /g, "-");
+					return <li className={pricing_cat} key={i}>
 						<div className="text-left">
 							<strong>
 								{`${c.term_info.title}`} &nbsp;

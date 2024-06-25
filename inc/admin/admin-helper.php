@@ -575,7 +575,7 @@ function wptravel_meta_box_review() {
  */
 function wptravel_get_travel_guide_upsell(){
 	?>
-	<h2><?php echo esc_html( 'Travel Guide' ); ?></h2>
+	<h2><?php echo esc_html__( 'Travel Guide', 'wp-travel' ); ?></h2>
 	<?php
 	if ( ! class_exists( 'WP_Travel_Travel_Guide_Core' ) ) :
 		$args = array(
@@ -605,7 +605,7 @@ function wptravel_get_travel_guide_upsell(){
  */
 function wptravel_get_download_upsell() {
 	?>
-	<h2><?php echo esc_html( 'Downloads' ); ?></h2>
+	<h2><?php echo esc_html__( 'Downloads', 'wp-travel' ); ?></h2>
 	<?php
 	if ( ! class_exists( 'WP_Travel_Downloads_Core' ) ) :
 		$args = array(
@@ -635,7 +635,7 @@ function wptravel_get_download_upsell() {
  */
 function wptravel_custom_filters_upsell() {
 	?>
-	<h2><?php echo esc_html( 'Custom Filters' ); ?></h2>
+	<h2><?php echo esc_html__( 'Custom Filters', 'wp-travel' ); ?></h2>
 	<?php
 	if ( ! class_exists( 'WP_Travel_Custom_Filters_Core' ) ) :
 		$args = array(

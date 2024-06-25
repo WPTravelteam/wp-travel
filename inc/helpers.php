@@ -3758,10 +3758,11 @@ function wptravel_frontend_tab_gallery( $gallery_ids ) {
 					foreach ( $gallery_ids as $gallery_id ) :
 						if ( $gallery_id ) {
 							$gallery_image = wp_get_attachment_image_src( $gallery_id, $image_size );
+							$image_alt  = get_post_meta( $gallery_id, '_wp_attachment_image_alt', true );
 							?>
 							<li>
 								<a title="<?php echo esc_attr( wp_get_attachment_caption( $gallery_id ) ); ?>" href="<?php echo esc_url( wp_get_attachment_url( $gallery_id ) ); ?>">
-								<img alt="" src="<?php echo esc_attr( isset( $gallery_image[0] ) ? $gallery_image[0] : '' ); ?>" />
+								<img alt="<?php echo esc_attr($image_alt ); ?>" src="<?php echo esc_attr( isset( $gallery_image[0] ) ? $gallery_image[0] : '' ); ?>" />
 								</a>
 							</li>
 							<?php

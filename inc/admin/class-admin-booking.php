@@ -383,7 +383,7 @@ class WP_Travel_Admin_Booking {
 						$pax              = isset( $multiple_trips_booking_data[ $cart_id ]['pax'] ) ? $multiple_trips_booking_data[ $cart_id ]['pax'] : '';
 						$booking_fields   = array();
 						$booking_fields[] = array(
-							'label'         => esc_html( 'Arrival Date' ),
+							'label'         => esc_html__( 'Arrival Date', 'wp-travel' ),
 							'name'          => 'arrival_date',
 							'type'          => 'date',
 							'class'         => 'wp-travel-datepicker',
@@ -396,7 +396,7 @@ class WP_Travel_Admin_Booking {
 
 						);
 						$booking_fields[] = array(
-							'label'         => esc_html( 'Departure Date' ),
+							'label'         => esc_html__( 'Departure Date', 'wp-travel' ),
 							'name'          => 'departure_date',
 							'type'          => 'date',
 							'class'         => 'wp-travel-datepicker',
@@ -408,7 +408,7 @@ class WP_Travel_Admin_Booking {
 							'default'       => $departure_date,
 						);
 						$booking_fields[] = array(
-							'label'         => esc_html( 'Pax' ),
+							'label'         => esc_html__( 'Pax', 'wp-travel' ),
 							'name'          => 'pax',
 							'type'          => 'number',
 							'class'         => '',

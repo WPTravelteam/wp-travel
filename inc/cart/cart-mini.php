@@ -123,7 +123,7 @@ if ( wptravel_is_react_version_enabled() ) {
 								<div class="trip-content">
 									<div class="trip-item-name-price">
 										<div class="trip-name">
-											<h5><a href="<?php echo esc_url( get_the_permalink( $trip_id ) ); ?>"><?php echo esc_html( $pricing_name ); ?></a></h5>
+											<h5><a href="<?php echo esc_url( get_the_permalink( $trip_id ) ); ?>"><?php echo wp_kses_post( $pricing_name ); ?></a></h5>
 											<?php if ( $coupon_applied && 'fixed' !== $coupon_type ) : ?>
 												<span class="tooltip group-discount-button <?php echo esc_attr( ( ! $trip_discount ) ? 'no-discount' : '' ); ?> ">
 													<svg version="1.1" x="0px" y="0px" viewBox="0 0 512.003 512.003" style={{ enableBackground: 'new 0 0 512.003 512.003' }}><path d="M477.958,262.633c-2.06-4.215-2.06-9.049,0-13.263l19.096-39.065c10.632-21.751,2.208-47.676-19.178-59.023l-38.41-20.38
@@ -233,7 +233,7 @@ if ( wptravel_is_react_version_enabled() ) {
 							</div>
 							
 							<div class="cart-item-items">
-								<a href="javascript:void(0);" class="del-btn" data-l10n="<?php echo esc_attr( __( 'Are you sure you want to remove ', 'wp-travel' ) .$trip_data['title']. __( ' from cart?', 'wp-travel' ) ); ?>"><i class="wt-icon wt-icon-trash-alt" aria-hidden="true"></i> <?php _e( 'Remove', 'wp-travel' ); ?></a>
+								<a href="javascript:void(0);" class="del-btn" data-l10n="<?php echo esc_attr( __( 'Are you sure you want to remove ', 'wp-travel' ) .strip_tags( $trip_data['title']). __( ' from cart?', 'wp-travel' ) ); ?>"><i class="wt-icon wt-icon-trash-alt" aria-hidden="true"></i> <?php _e( 'Remove', 'wp-travel' ); ?></a>
 
 								<?php if ( ! $coupon_applied ) : ?>
 									<div class="edit-trip">
