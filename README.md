@@ -28,13 +28,10 @@ To increase the productivity developers need to have common development setup.
 Before Setup the plugin you need to setup SSH [More Info](https://docs.gitlab.com/ee/user/ssh.html)
 ```sh
 # Clone WP Travel Repo 
-git clone git@gitlab.com:ws-plugins/wp-travel.git
+git clone https://github.com/WPTravelteam/wp-travel.git
 
 # Go to wp-travel folder
 cd wp-travel
-
-# Checkout to dev branch
-git checkout sn
 
 # Install all required packages.
 yarn install
