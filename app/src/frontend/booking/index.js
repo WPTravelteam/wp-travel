@@ -33,6 +33,7 @@ const WPTravelBooking = ( props ) => {
 	// All Trip Related Data(Not State)
     const tripListingType = 'undefined' !== typeof _wp_travel.trip_date_listing ? _wp_travel.trip_date_listing : 'calendar'; // dates | calendar
     let tripData = 'undefined' !== typeof _wp_travel.trip_data ? _wp_travel.trip_data : {};
+
 	const {
         pricing_type:pricingType,
         is_fixed_departure:isFixedDeparture

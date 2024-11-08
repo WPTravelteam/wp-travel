@@ -97,7 +97,7 @@ class WpTravel_Helpers_Localize {
 				'checkout_user_email'           => count( (array)wp_get_current_user()->data ) > 0 ? wp_get_current_user()->data->user_email : '',
 
 			);
-
+			
 
 			if( class_exists( 'WP_Travel_Trip_Extras_Inventory' ) ){
 				$_wp_travel['WP_Travel_Trip_Extras_Inventory'] = 'yes';
@@ -114,9 +114,11 @@ class WpTravel_Helpers_Localize {
 				$_wp_travel['policy_page_title'] = $page_title;
 			}
 
+			$_wp_travel['gdpopen_gdpr_in_new_tab'] = ! empty( $settings['open_gdpr_in_new_tab'] ) ? esc_html( $settings['open_gdpr_in_new_tab'] ) : false;
+			
 			$_wp_travel['gdpr_msg'] = ! empty( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ) : __( 'By contacting us, you agree to our ', 'wp-travel' );
 			$_wp_travel['policy_link'] = wptravel_privacy_link_url();
-
+			
 			$_wp_travel['is_pro_enable']  = class_exists( 'WP_Travel_Pro' ) ? 'yes' : 'no';
 			if ( isset( $settings['mailchimp'] ) && isset( $settings['mailchimp']['enable_subscription'] ) && ( in_array( 'all', $settings['mailchimp']['enable_subscription'], true ) ) ) {
 				$_wp_travel['enable_subscription'] =  'yes';
@@ -322,7 +324,7 @@ class WpTravel_Helpers_Localize {
 			$wp_travel_gallery_data['moment_date_format'] = $moment_date_format;
 
 			$wp_travel_gallery_data = apply_filters( 'wp_travel_localize_gallery_data', $wp_travel_gallery_data ); // phpcs:ignore
-			$wp_travel_gallery_data = apply_filters( 'wptravel_localize_gallery_data', $wp_travel_gallery_data );
+			// $wp_travel_gallery_data = apply_filters( 'wptravel_localize_gallery_data', $wp_travel_gallery_data );
 			// end of Map & Gallery Data.
 			$localized_data['wp_travel_drag_drop_uploader'] = $wp_travel_gallery_data;
 
@@ -336,8 +338,13 @@ class WpTravel_Helpers_Localize {
 			if ( $post && WP_Travel::is_page( 'itineraries', true ) ) {
 				$wp_travel_itinerary          = new WP_Travel_Itinerary( $post );
 				$_wp_travel_admin['overview'] = $wp_travel_itinerary->get_content();
+				$_wp_travel_admin['outline'] = $wp_travel_itinerary->get_outline();
+				$_wp_travel_admin['include'] = $wp_travel_itinerary->get_trip_include();
+				$_wp_travel_admin['exclude'] = $wp_travel_itinerary->get_trip_exclude();
 			}
 
+			$_wp_travel_admin['rankmath'] = class_exists( 'RankMath' );
+			
 			$_wp_travel_admin['price_per'] = 'unit';
 
 			$localized_data['_wp_travel_admin'] = $_wp_travel_admin;

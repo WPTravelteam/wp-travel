@@ -1,5 +1,6 @@
 import { __ } from '@wordpress/i18n'
 import DiscountTable from './_GroupDiscountTable';
+import { useState } from '@wordpress/element';
 
 import _ from 'lodash';
 const __i18n = {
@@ -9,10 +10,12 @@ const __i18n = {
 // WP Travel Functions.
 import { wpTravelFormat, objectSum, GetConvertedPrice } from '../../_wptravelFunctions';
 
+
+
 const PaxSelector = ( props ) => {
 	// Component Props.
 	const { tripData, bookingData, updateBookingData } = props;
-
+	const [inputTotalPax, setInputToatlPax] = useState(0);
 	// Trip Data.
     const {
         is_fixed_departure:isFixedDeparture,
@@ -92,9 +95,53 @@ const PaxSelector = ( props ) => {
 		return GetConvertedPrice( price ); // Add Multiple currency support to get converted price.
 	}
 
+	let group_discount_min_pax = '';
+
+	if( pricing && 'undefined' != typeof pricing.has_group_price && pricing.has_group_price && pricing.group_prices.length > 0 ){
+		
+		let minMinPax = Infinity;
+		let minMaxPax = Infinity;
+		let minPrice = Infinity;
+		let resultObject = null;
+			
+		for (let i = 0; i < pricing.group_prices.length; i++) {
+			let currentObject = pricing.group_prices[i];
+			let currentMinPax = parseInt(currentObject.min_pax);
+			let currentMaxPax = parseInt(currentObject.max_pax);
+			let currentPrice = parseInt(currentObject.price);
+	
+			// Check if this object has a lower min_pax or the same min_pax but lower max_pax
+			if (currentMinPax < minMinPax || (currentMinPax === minMinPax && currentMaxPax < minMaxPax)) {
+				minMinPax = currentMinPax;
+				minMaxPax = currentMaxPax;
+				minPrice = currentPrice;
+				resultObject = currentObject;
+			}
+		}
+		group_discount_min_pax = resultObject.min_pax;
+
+		if( inputTotalPax >= group_discount_min_pax ){
+			let delElements = document.querySelectorAll('.item-price del');
+
+			// Iterate through each <del> element found
+			delElements.forEach(del => {
+				// Hide the <del> element by setting its style display to 'none'
+				del.style.display = 'none';
+			});   
+		}else{
+			let delElements = document.querySelectorAll('.item-price del');
+
+			// Iterate through each <del> element found
+			delElements.forEach(del => {
+				// Hide the <del> element by setting its style display to 'none'
+				del.style.display = 'inline-block';
+			});
+		}
+	}
+	
 	const handlePaxChange = (id, value, tripPax) => e => {
 		let count = paxCounts[id] + value < 0 ? 0 : paxCounts[id] + value
-		if( tripData.enable_pax_all_pricing == "1" ){
+		if( !isInventoryEnabled && tripData.enable_pax_all_pricing == "1" ){
 			if( count > tripPax ){
 				count = tripPax
 				if (e.target.parentElement.querySelector('.error'))
@@ -136,8 +183,16 @@ const PaxSelector = ( props ) => {
 			}
 		}
 
+		if( paxCounts[id] + value >= 0 ){
+			setInputToatlPax( inputTotalPax + value )
+		}
+		
+
 		updateBookingData({ paxCounts: { ...paxCounts, [id]: count } })
+
 	}
+
+	
 
 	const handlePaxChangeInput = (id, datas ) => {
 		const values = datas.target.value;
@@ -162,7 +217,10 @@ const PaxSelector = ( props ) => {
 			}
 		}
 		updateBookingData({ paxCounts: { ...paxCounts, [id]: count != 0 && count >= 1 ? parseInt( count ) : count } })
+
 	} 
+
+	
 
 	return <div className="wp-travel-booking__pax-selector-wrapper">
 		<h4>{__i18n.bookings.booking_tab_pax_selector}</h4>
@@ -180,7 +238,7 @@ const PaxSelector = ( props ) => {
 					let _inventory = inventory.find(i => i.date === moment(selectedDate).format('YYYY-MM-DD[T]HH:mm')); // selectedDate : date along with time.
 					let maxPax = isInventoryEnabled && _inventory && _inventory.pax_available ? _inventory.pax_available : pricing.max_pax; // Temp fixes for inventory disabled case.
 					let minPax = paxCounts[c.id] ? paxCounts[c.id] : 0;
-					console.log( c.term_info );
+				
 
 					var pricing_cat = c.term_info.title.replace(/ /g, "-");
 					return <li className={pricing_cat} key={i}>
@@ -221,17 +279,23 @@ const PaxSelector = ( props ) => {
 							</span>}
 						</div>
 						<div className="text-right">
-							<span className="item-price">{c.is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat(GetConvertedPrice( c.regular_price )) }}></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCategoryPrice(c.id, true)) }}></span>/{price_per_label}</span>
+							{
+								group_discount_min_pax <= 0 &&
+								<span className="item-price"> <span dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCategoryPrice(c.id, true)) }}></span>/{price_per_label}</span>
+								||
+								<span className="item-price">{c.is_sale && <del dangerouslySetInnerHTML={{ __html: wpTravelFormat(GetConvertedPrice( c.regular_price )) }}></del>} <span dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCategoryPrice(c.id, true)) }}></span>/{price_per_label}</span>
+							}
+					
 							<div className="pricing-area">
 								<div className="qty-spinner">
-									<button className="trip-page-pax-selector edit-pax-selector-qty" data-minpax={pricing.min_pax} data-allpricing={tripData.enable_pax_all_pricing} onClick={handlePaxChange(c.id, -1, maxPax )}>-</button>
+									<button className="trip-page-pax-selector edit-pax-selector-qty minus" data-minpax={pricing.min_pax} data-allpricing={tripData.enable_pax_all_pricing} onClick={handlePaxChange(c.id, -1, maxPax )}>-</button>
 			
 									<input  className='wp-trave-pax-selected-frontend-second' 
 										value={typeof paxCounts[c.id] == 'undefined' ? parseInt(c.default_pax) : paxCounts[c.id]} 
 										onChange={ ( data ) => {
 											handlePaxChangeInput( c.id, data )
 									}} />
-									<button className="trip-page-pax-selector edit-pax-selector-qty" data-minpax={pricing.min_pax} data-allpricing={tripData.enable_pax_all_pricing} onClick={handlePaxChange(c.id, 1, maxPax )}>+</button>
+									<button className="trip-page-pax-selector edit-pax-selector-qty plus" data-minpax={pricing.min_pax} data-allpricing={tripData.enable_pax_all_pricing} onClick={handlePaxChange(c.id, 1, maxPax )}>+</button>
 								</div>
 							</div>
 						</div>

@@ -177,7 +177,6 @@ const SimpleGallery = ({allData, drag=true }) => {
             images={gallery}
             onImageRemove={onRemoveImageHandle}
             featuredImage={_thumbnail_id}
-            onChange={() => console.log('changes')}
             onImagesSort={onImagesSortHandle}
             drag={drag}
             allData={allData}

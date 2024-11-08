@@ -128,6 +128,7 @@ class Wp_Travel_Shortcodes {
 		);
 
 		$atts = shortcode_atts( $default, $shortcode_atts, 'WP_TRAVEL_ITINERARIES' );
+		
 
 		$type      = $atts['type'];
 		$iti_id    = $atts['itinerary_id'];
@@ -145,7 +146,6 @@ class Wp_Travel_Shortcodes {
 
 		$multi_type = explode(",", $type);
 
-
 		if ( ! empty( $iti_id ) ) :
 			$args['p'] = $iti_id;
 		else :
@@ -153,10 +153,12 @@ class Wp_Travel_Shortcodes {
 			// if type is taxonomy.
 			if( is_array( $multi_type ) && count( $multi_type ) > 1 ){
 				$relation = isset( $shortcode_atts['query_relation'] ) ? $shortcode_atts['query_relation'] : 'OR';
+		
 				$args['tax_query']['relation'] = $relation;
 
 				foreach ( $multi_type as $value ) {
-					if( $value = 'travel_locations' ){
+
+					if( $value == 'travel_locations' ){
 						
 						$terms = isset( $shortcode_atts['trip_location'] ) ? explode(",", $shortcode_atts['trip_location'] ) : '';
 
@@ -167,7 +169,7 @@ class Wp_Travel_Shortcodes {
 						);
 					}
 
-					if( $value = 'activity' ){
+					if( $value == 'activity' ){
 						
 						$terms = isset( $shortcode_atts['trip_activity'] ) ? explode(",", $shortcode_atts['trip_activity'] ) : '';
 
@@ -178,7 +180,7 @@ class Wp_Travel_Shortcodes {
 						);
 					}
 
-					if( $value = 'itinerary_types' ){
+					if( $value == 'itinerary_types' ){
 						
 						$terms = isset( $shortcode_atts['trip_types'] ) ? explode(",", $shortcode_atts['trip_types'] ) : '';
 
@@ -268,26 +270,27 @@ class Wp_Travel_Shortcodes {
 			$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 			$args['paged'] = $paged;
 		}
+
+	
 		$query          = new WP_Query( $args );
 		
 		ob_start();
 		?>
 		<div class="wp-travel-itinerary-items">
-			<?php if ( $query->have_posts() ) : ?>
-				<?php if ( 'v1' === $layout_version ) : ?>
+			<?php if ( $query->have_posts() ) :
+				if ( 'v1' === $layout_version ) : ?>
 					<ul style="" class="wp-travel-itinerary-list itinerary-<?php echo esc_attr( $col_per_row ); ?>-per-row  <?php echo esc_attr( 'grid' === $view_mode ? 'grid-view' : '' ); ?>">
 						<?php
 						while ( $query->have_posts() ) :
 							$query->the_post();
-							?>
-							<?php
+							
 							if ( 'grid' === $view_mode ) :
 								wptravel_get_template_part( 'shortcode/itinerary', 'item' );
 							else :
 								wptravel_get_template_part( 'shortcode/itinerary', 'item-list' );
 							endif;
-							?>
-						<?php endwhile; ?>
+							
+						endwhile; ?>
 					</ul>
 				<?php else : ?>
 					<div class="wp-travel-itinerary-items wptravel-archive-wrapper  <?php echo esc_attr( 'grid' === $view_mode ? 'grid-view' : 'list-view' ); ?> itinerary-<?php echo esc_attr( $col_per_row ); ?>-per-row" >
@@ -313,9 +316,9 @@ class Wp_Travel_Shortcodes {
 						echo '</div>';
 					}
 				?>
-			<?php else : ?>
-				<?php wptravel_get_template_part( 'shortcode/itinerary', 'item-none' ); ?>
-			<?php endif; ?>
+			<?php else :
+				wptravel_get_template_part( 'shortcode/itinerary', 'item-none' );
+			endif; ?>
 		</div>
 		<?php
 		wp_reset_query();
@@ -474,7 +477,7 @@ class Wp_Travel_Shortcodes {
 			if ( count( $atts ) > 0 ) {
 				$defaults = array();
 				foreach ( $search_widget_fields as $key => $filter ) {
-					var_dump($filter['name']);
+
 					if ( isset( $filter['name'] ) ) {
 						if ( in_array( $filter['name'], $atts ) ) {
 							$defaults[ $key ] = 1;
@@ -652,15 +655,14 @@ class Wp_Travel_Shortcodes {
 						<?php
 						while ( $itineraries->have_posts() ) :
 							$itineraries->the_post();
-							?>
-							<?php
+					
 							if ( 'grid' === $view_mode ) :
 								wptravel_get_template_part( 'shortcode/itinerary', 'item' );
 							else :
 								wptravel_get_template_part( 'shortcode/itinerary', 'item-list' );
 							endif;
-							?>
-						<?php endwhile; ?>
+						
+						endwhile; ?>
 					</ul>
 				<?php else : ?>
 					<div class="wp-travel-itinerary-items wptravel-archive-wrapper  <?php echo esc_attr( 'grid' === $view_mode ? 'grid-view' : 'list-view' ); ?> itinerary-<?php echo esc_attr( $col_per_row ); ?>-per-row" >
@@ -673,8 +675,8 @@ class Wp_Travel_Shortcodes {
 					</div>
 				<?php endif; ?>
 			<?php else : ?>
-				<?php wptravel_get_template_part( 'shortcode/itinerary', 'item-none' ); ?>
-			<?php endif; ?>
+				<?php wptravel_get_template_part( 'shortcode/itinerary', 'item-none' );
+			endif; ?>
 		</div>
 		<?php
 		$html = ob_get_clean();
@@ -710,21 +712,20 @@ class Wp_Travel_Shortcodes {
 		}
 		?>
 		<div class="wp-travel-itinerary-items">
-			<?php if ( $itineraries->have_posts() ) : ?>
-				<?php if ( 'v1' === $layout_version ) : ?>
+			<?php if ( $itineraries->have_posts() ) :
+				if ( 'v1' === $layout_version ) : ?>
 					<ul style="" class="wp-travel-itinerary-list itinerary-<?php echo esc_attr( $col_per_row ); ?>-per-row  <?php echo esc_attr( 'grid' === $view_mode ? 'grid-view' : '' ); ?>">
 						<?php
 						while ( $itineraries->have_posts() ) :
 							$itineraries->the_post();
-							?>
-							<?php
+							
 							if ( 'grid' === $view_mode ) :
 								wptravel_get_template_part( 'shortcode/itinerary', 'item' );
 							else :
 								wptravel_get_template_part( 'shortcode/itinerary', 'item-list' );
 							endif;
-							?>
-						<?php endwhile; ?>
+							
+						endwhile; ?>
 					</ul>
 				<?php else : ?>
 					<div class="wp-travel-itinerary-items wptravel-archive-wrapper  <?php echo esc_attr( 'grid' === $view_mode ? 'grid-view' : 'list-view' ); ?> itinerary-<?php echo esc_attr( $col_per_row ); ?>-per-row" >
@@ -735,17 +736,14 @@ class Wp_Travel_Shortcodes {
 						endwhile;
 						?>
 					</div>
-				<?php endif; ?>
-			<?php else : ?>
-				<?php wptravel_get_template_part( 'shortcode/itinerary', 'item-none' ); ?>
-			<?php endif; ?>
+				<?php endif;
+			else :
+				wptravel_get_template_part( 'shortcode/itinerary', 'item-none' );
+			endif; ?>
 		</div>
 		<?php
 		$html = ob_get_clean();
 		return $html;
 	}
-
-	
-
 }
 

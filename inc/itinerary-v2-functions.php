@@ -249,8 +249,7 @@ function wptravel_single_trip_buttons( $trip_id ) {
 				<?php echo esc_html( $strings ); ?>
 			</button>
 		</a>
-	<?php endif; ?>
-	<?php
+	<?php endif; 
 	if ( 'yes' === $enable_enquiry ) :
 		wptravel_get_enquiries_form();
 	endif;
@@ -295,14 +294,13 @@ function wptravel_single_trip_tabs_and_price( $trip_id ) {
 					$index                    = 1;
 					if ( is_array( $wp_travel_itinerary_tabs ) && count( $wp_travel_itinerary_tabs ) > 0 ) {
 						foreach ( $wp_travel_itinerary_tabs as $tab_key => $tab_info ) {
-							?>
-							<?php if ( 'reviews' === $tab_key && ! comments_open() ) : ?>
-								<?php continue; ?>
-							<?php endif; //phpcs:ignore ?>
-							<?php if ( 'yes' !== $tab_info['show_in_menu'] ) : ?>
-								<?php continue; ?>
-							<?php endif; //phpcs:ignore ?>
-							<?php
+							if ( 'reviews' === $tab_key && ! comments_open() ) : 
+								continue;
+							endif; 
+							if ( 'yes' !== $tab_info['show_in_menu'] ) :
+								continue;
+							endif;
+							
 							$tab_label = $tab_info['label'];
 							if ( 'booking' === $tab_key ) {
 								$tab_key = 'wti__booking'; // To scroll down to booking tab on right side.
@@ -542,11 +540,10 @@ function wptravel_single_itinerary_trip_facts() {
 						}
 						?>
 					</div>
-				<?php endif; ?>
-			<?php endforeach; ?>
+				<?php endif;
+			endforeach; ?>
 		</div>
-	<?php } ?>
-	<?php
+	<?php }
 }
 
 /**
@@ -589,8 +586,7 @@ function wptravel_single_itinerary_main_contents( $trip_id ) {
 						<?php
 						$faqs = wptravel_get_faqs( get_the_id() );
 						if ( is_array( $faqs ) && count( $faqs ) > 0 ) {
-							?>
-							<?php foreach ( $faqs as $k => $faq ) : ?>
+							foreach ( $faqs as $k => $faq ) : ?>
 							<!-- New -->
 								<div class="accordion-panel">
 									<div class="accordion-panel-heading">
@@ -703,14 +699,11 @@ function wptravel_single_related_trips( $trip_id ) {
 					);
 					$query       = new WP_Query( $args );
 					if ( $query->have_posts() ) {
-						?>
-						<?php
+						
 						while ( $query->have_posts() ) :
 							$query->the_post();
-							?>
-							<?php wptravel_get_template_part( 'shortcode/itinerary', 'item-new' ); ?>
-						<?php endwhile; ?>
-						<?php
+							wptravel_get_template_part( 'shortcode/itinerary', 'item-new' );
+						endwhile;
 					} else {
 						wptravel_get_template_part( 'shortcode/itinerary', 'item-none' );
 					}
@@ -1008,9 +1001,7 @@ function wptravel_archive_before_content() {
 					</div>
 					<?php
 				}
-				?>
-				<?php
-
+				
 				$archive_sidebar_class = '';
 
 				if ( is_active_sidebar( 'wp-travel-archive-sidebar' ) ) {
@@ -1034,8 +1025,6 @@ function wptravel_archive_before_content() {
  */
 function wptravel_archive_v2_wrapper_close() {
 	if ( ( WP_Travel::is_page( 'archive' ) || is_search() ) && ! is_admin() ) {
-		?>
-		<?php
 		$pagination_range = apply_filters( 'wp_travel_pagination_range', 2 );
 		$max_num_pages    = apply_filters( 'wp_travel_max_num_pages', '' );
 		?>

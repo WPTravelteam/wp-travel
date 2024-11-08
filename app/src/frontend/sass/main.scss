@@ -499,3 +499,92 @@
 .wp-travel-quick-view-modal .wp-travel-tab-wrapper .wp-travel button.slick-arrow{
     display: none !important;
 }
+
+.wp-travel-booking__trip-extras-wrapper a.info{
+    text-decoration: none;
+}
+
+.wp-tour-extras-detail_content{
+    padding: 80px 0;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.booknow-btn-modal .wptravel-traveller-info-container > div .components-panel__body.is-opened .wptravel-onpage-checkbox-wrapper{
+	display: block !important;
+}
+
+.booknow-btn-modal .wptravel-traveller-info-container > div .components-panel__body.is-opened .wptravel-onpage-checkbox-wrapper .components-checkbox-control__label{
+	margin-left: 5px;
+    margin-top: -5px;
+}
+
+
+#wp-travel-trip-pickup-location .location-lists::-webkit-scrollbar {
+    width: 12px;
+}
+
+#wp-travel-trip-pickup-location .location-lists::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+#wp-travel-trip-pickup-location .location-lists::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+    border: 3px solid #f1f1f1;
+}
+
+#wp-travel-trip-pickup-location .location-lists::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+#wp-travel-trip-pickup-location .location-lists {
+    position: absolute;
+    top: -30px;
+    left: 145px;
+    border: 1px solid rgba(222, 222, 222, 0.49);
+    padding: 10px 50px;
+    display: none;
+    height: 250px;
+    overflow-y: scroll;
+    z-index: 1;
+    background: #fff;
+    color: #000;
+}
+
+#wp-travel-trip-pickup-location:hover .location-lists {
+    display: block;
+}
+
+#wp-travel-trip-pickup-location{
+    position: relative;
+    cursor: pointer;;
+}
+
+#wp-travel-trip-pickup-location span::after {
+    content: '\f105';
+    margin-left: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    color: inherit;
+    font-family:'Font Awesome 5 Free';
+}
+#wp-travel-trip-pickup-location ul.location-lists {
+    padding: 10px 30px !important;
+    height: auto;
+}
+
+@media screen and ( max-width:600px) {
+    #wp-travel-trip-pickup-location .location-lists {
+        position: relative;
+        left: 0;
+    }
+}
+
+.checkout-page-wrap .wp-travel-checkout-section .checkout-left .ws-theme-timeline-block .panel-body .payment-content .wp-travel-form-field [id*=error_container-]{
+    display: block;
+}

@@ -172,10 +172,41 @@ if ( wptravel_is_react_version_enabled() ) {
 											<?php endif; ?>
 										</span>
 									</div>
+									<?php
 				
+										if( apply_filters( 'wp_travel_enable_arrival_date_on_checkout', false ) == true ){
+											if( isset( $cart_item['trip_data']['trip_duration']['days'] ) && $cart_item['trip_data']['trip_duration']['days'] > 1 ){
+												$date = DateTime::createFromFormat( get_option('date_format'), $cart_item['arrival_date'] );
+												$date->modify('+'.$cart_item['trip_data']['trip_duration']['days'] - 1 .' days');										
+												$return_date = wptravel_format_date( $date->format('Y-m-d') );		
+											}
+											if( $cart_item['trip_data']['trip_duration']['duration_format'] == 'hour_minute' ){
+												$return_date = '';
+											}
+											if(  $cart_item['trip_data']['is_fixed_departure'] == true ){
+												foreach($cart_item['trip_data']['dates'] as $data){
+													
+													
+													if( $data['is_recurring'] == false &&  $data['id'] == $cart_item['date_id'] ){
+														$return_date = wptravel_format_date(  $data['end_date'] );
+
+													}
+												}
+											}
+											
+										}								
+										
+									?>
 									<div class="trip-meta-content">
 										<span class="date">
 											<span><?php echo $trip_date . $trip_time; ?></span>
+											<?php 
+												if( apply_filters( 'wp_travel_enable_arrival_date_on_checkout', false ) == true && !empty( $return_date) ){
+												?>	
+													<span> - <?php echo $return_date; ?></span>
+												<?php
+												}
+											?>
 										</span>
 										<?php
 										// This will only for displaying purpose. Need to change this in update method[wp_travel_group_discount_price] of cart class also to update cart data.
@@ -329,23 +360,27 @@ if ( wptravel_is_react_version_enabled() ) {
 											<div class="wp-travel-form-group" data-wpt-tx="<?php echo esc_attr( $tx['id'] ); ?>">
 												<label for="tour-extras-<?php echo esc_attr( $tx['id'] ); ?>"><?php echo esc_html( $title ); ?></label>
 												<?php
-												if ( isset( $tx['tour_extras_metas'] ) ) :
+													if ( isset( $tx['tour_extras_metas'] ) ) :
 
 													$tx_count    = isset( $cart_extras[ $tx['id'] ] ) ? (int) $cart_extras[ $tx['id'] ] : 0;
 													$tx_price    = $tx['is_sale'] ? $tx['tour_extras_metas']['extras_item_sale_price'] : $tx['tour_extras_metas']['extras_item_price'];
 													$tx_total    = $tx_count * (int) $tx_price;
 													$tx_min_attr = isset( $tx['is_required'] ) && $tx['is_required'] ? 'min="1"' : '';
-													$tx_quantity = isset(  $tx['tour_extras_metas']['extras_item_quantity'] ) ? $tx['tour_extras_metas']['extras_item_quantity'] : '';
+													$tx_quantity = isset(  $tx['tour_extras_metas']['extras_item_quantity'] ) ? $tx['tour_extras_metas']['extras_item_quantity'] : 999;
 													
+													if( $tx_quantity == '-1' ){
+														$tx_quantity = 999;
+													}
+
 													$required = isset( $tx['is_required'] ) && $tx['is_required'];
-													?>
+												?>
 												<div>
 													<div class="input-group">
 														<span class="input-group-btn input-group-prepend">
 															<button class="btn" type="button" data-wpt-count-down>-</button>
 														</span>
 												
-														<input id="<?php echo esc_attr( 'tx_' . $tx['id'] ); ?>" name="<?php echo esc_attr( 'tx_' . $tx['id'] ); ?>" readonly <?php echo $required ? 'required min="1"' : 'min="0"'; ?> type="text" data-wpt-tx-count-input="<?php echo esc_attr( $tx_count ); ?>" name="" class="wp-travel-form-control wp-travel-cart-extras-qty qty form-control" value="<?php echo esc_attr( $tx_count ); ?>" max="<?php echo !empty( $tx_quantity ) ? (int) $tx_quantity : 999 ?>"/>
+														<input id="<?php echo esc_attr( 'tx_' . $tx['id'] ); ?>" name="<?php echo esc_attr( 'tx_' . $tx['id'] ); ?>" readonly <?php echo $required ? 'required min="1"' : 'min="0"'; ?> type="text" data-wpt-tx-count-input="<?php echo esc_attr( $tx_count ); ?>" name="" class="wp-travel-form-control wp-travel-cart-extras-qty qty form-control" value="<?php echo esc_attr( $tx_count ); ?>" max="<?php echo (int) $tx_quantity ?>"/>
 														<span class="input-group-btn input-group-append"><button class="btn" type="button" data-wpt-count-up>+</button></span></div>
 														<span class="prices">
 															<?php echo ' x <span data-wpt-tx-price="' . $tx_price . '">' . wptravel_get_formated_price_currency( WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $tx_price ) ) . '</span>' . '<strong><span data-wpt-tx-total="' . $tx_total . '">' . wptravel_get_formated_price_currency( WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $tx_total ) ) . '</span>' . '</strong>'; ?>

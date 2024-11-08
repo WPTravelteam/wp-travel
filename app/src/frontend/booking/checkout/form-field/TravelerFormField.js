@@ -35,8 +35,10 @@ export default ( ) => {
     const { updateStore } = dispatch( bookingStoreName );
     const multipleTraveler = typeof _wp_travel != 'undefined' && typeof _wp_travel.checkout_field != 'undefined' && typeof _wp_travel.checkout_field.enable_multiple_travellers != 'undefined' &&  _wp_travel.checkout_field.enable_multiple_travellers || 'no';
     const { traveler_form, form_key, paxCounts, checkoutDetails, error_list, paxSize, price_list, currency_symbol, cart_amount } = bookingData;
+    
     const fieldKey  = typeof traveler_form != 'undefined' && Object.keys( traveler_form ) || [];
 
+ 
     const trip_price = typeof cart_amount != 'undefined' && typeof cart_amount.cart_total != 'undefined' && cart_amount.cart_total || 0
     const travelerEnter = typeof checkoutDetails[form_key] != 'undefined' && checkoutDetails[form_key] || {};
     const validateEmail = ( input ) => {

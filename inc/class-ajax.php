@@ -225,6 +225,8 @@ class WP_Travel_Ajax {
 			'request_data'    => $post_data,
 		);
 		$attrs = wptravel_get_cart_attrs( $args ); // pricing_id && $trip_start_date @since 4.0.0.
+
+		
 		if ( isset( $post_data['trip_time'] ) ) {
 			$attrs['trip_time'] = $post_data['trip_time'];
 		}
@@ -374,7 +376,7 @@ class WP_Travel_Ajax {
 		$attrs['trip_extras']    = $trip_extras;
 
 		$attrs = apply_filters( 'wp_travel_cart_attributes', $attrs, $post_data ); // @phpcs:ignore
-
+		
 		$item_id_args = array(
 			'trip_id'    => $trip_id,
 			'price_key'  => $price_key,
@@ -410,7 +412,7 @@ class WP_Travel_Ajax {
 		} else {
 			$wt_cart->add( $add_to_cart_args );
 		}
-		// Need to update cart add. in calse of multiple items partial figure need to update in individual item.
+
 		echo true;
 
 	}

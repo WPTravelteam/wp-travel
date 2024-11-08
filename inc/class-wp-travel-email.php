@@ -34,6 +34,15 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 		 */
 		public $sitename;
 
+		public static $instance;
+
+		public static function get_instance(){
+			if( ! self::$instance ){
+				self::$instance =  new self();
+			}
+
+			return self::$instance;
+		}
 		/**
 		 * Constructor.
 		 */
@@ -135,7 +144,7 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 		 */
 		public function send_booking_email( $booking_id, $request_data, $new_trip_id ) {
 	
-			
+
 			$this->admin_email = apply_filters( 'wp_travel_booking_admin_emails', get_option( 'admin_email' ) ); // @phpcs:ignore
 
 			$customer_email_ids = isset( $request_data['wp_travel_email_traveller'] ) ? $request_data['wp_travel_email_traveller'] : array();
@@ -211,7 +220,7 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 				}
 			}
 
-			if( $settings['enable_woo_checkout'] == 'no' ){
+			if( $settings['enable_woo_checkout'] == 'no' && apply_filters( 'wp_travel_send_booking_emails', true ) == true ){
 				$send_email_to_admin = $this->settings['send_booking_email_to_admin']; // 'yes' By default.
 				if ( 'yes' === $send_email_to_admin ) { // Send mail to admin if booking email is set to yes.
 					$email_template = $email->wptravel_get_email_template( 'bookings', 'admin' );
@@ -336,7 +345,7 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 				'{itinerary_link}'         => get_permalink( $trip_id ),
 				'{itinerary_title}'        => wptravel_get_trip_pricing_name( $trip_id, $price_key ),
 				'{booking_id}'             => $booking_id,
-				'{booking_edit_link}'      => get_edit_post_link( $booking_id ),
+				'{booking_edit_link}'      => admin_url( 'post.php?post='.$booking_id.'&action=edit' ),
 				'{booking_no_of_pax}'      => $pax,
 				'{booking_scheduled_date}' => esc_html__( 'N/A', 'wp-travel' ), // always N/A. Need to remove this in future.
 				'{booking_arrival_date}'   => wptravel_format_date( $arrival_date ),
@@ -496,10 +505,10 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 				'{customer_address}'       => $customer_address,
 				'{customer_phone}'         => $customer_phone,
 				'{customer_email}'         => $customer_email,
-
+				'{currency}'               => wptravel_get_currency_symbol(),
 				'{booking_id}'             => $booking_id,
 				'{booking_no_of_pax}'      => $total_pax,
-				'{booking_edit_link}'      => get_edit_post_link( $booking_id ),
+				'{booking_edit_link}'      => admin_url( 'post.php?post='.$booking_id.'&action=edit' ),
 				'{booking_coupon_code}'    => $coupon_code,
 				'{customer_note}'          => $customer_note,
 				'{bank_deposit_table}'     => $bank_deposit_table,
@@ -532,4 +541,5 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 	}
 
 }
-new WP_Travel_Email();
+
+WP_Travel_Email::get_instance();

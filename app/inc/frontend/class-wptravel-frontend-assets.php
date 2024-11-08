@@ -74,6 +74,17 @@ class WpTravel_Frontend_Assets {
 				wp_enqueue_script( 'easy-responsive-tabs' );
 				wp_enqueue_script( 'collapse-js' );
 				wp_enqueue_script( 'wp-travel-cart' );
+				
+				if( apply_filters( 'wptravel_default_payment', '' ) == '' ){
+					wp_add_inline_script( 'wp-travel-cart', '
+						var firstRadioButton = document.querySelector(".wp-travel-payment-field .wp-travel-radio input");
+						if (firstRadioButton) {
+							firstRadioButton.checked = true;
+						}
+					', 'after' );
+				}
+				
+
 
 				if( class_exists( 'WP_Travel_Pro' ) ){ 
 					$default_payment = apply_filters( 'wptravel_default_payment', '' );

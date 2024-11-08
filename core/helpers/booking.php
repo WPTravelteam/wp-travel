@@ -11,6 +11,8 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 5.0.0
  */
+
+
 class WpTravel_Helpers_Booking {
  // @phpcs:ignore
 
@@ -28,7 +30,7 @@ class WpTravel_Helpers_Booking {
 		global $wt_cart;
 		$items = $wt_cart->getItems();
 		$coupon_applied = false;
-
+		
 		
 		if ( ! $items ) {
 			$items = get_post_meta( $booking_id, 'order_items_data', true );
@@ -73,7 +75,7 @@ class WpTravel_Helpers_Booking {
 					 * Fix for active date format that skips character.
 					 * Coverts original date instead of date from active date format to DateTime object.
 					 * 
-					 * @example Español : j \d\e F \d\e Y
+					 * @example EspaÃ±ol : j \d\e F \d\e Y
 					 * 
 					 */
 					$departure_date_raw = isset( $trip['arrival_date'] ) && ! empty( $trip['arrival_date'] ) ? $trip['arrival_date'] : '';
@@ -162,28 +164,49 @@ class WpTravel_Helpers_Booking {
 					
 						<?php if( !$trip_data['is_fixed_departure'] ): ?>
 							<?php if( isset( $trip_data['trip_duration']["duration_format"] ) && $trip_data['trip_duration']["duration_format"] == 'hour_minute' ): ?>
-								<td><?php echo esc_html( wptravel_format_date( $start_date ) ); ?></td>
+								<td>
+									<?php echo esc_html( wptravel_format_date( $start_date ) ); ?>
+								</td>
 								<?php else: ?>
-								<td><?php echo esc_html( $start_date ); ?></td>
+								<td>
+									<?php echo esc_html( $start_date ); ?>
+								</td>
 								<?php if( (int) $trip_data['trip_duration']['days'] !== 0 ): ?>
 									<td><?php echo esc_html( wptravel_format_date( $departure_date ) ); ?></td>
-								<?php endif; ?>
-							<?php endif; ?>
-							<?php else: ?>
-								<td><?php echo esc_html( $start_date ); ?></td>
+								<?php endif;
+							endif;
+						else: ?>
+								<td>
+									<?php echo esc_html( $start_date ); ?>
+									<br>
+									<?php if( isset( $trip['trip_time'] ) ): 
+										$date_format = '';
+										foreach( $trip_data['dates'] as $date ){
+											if( $trip['date_id'] == $date['id'] ){
+												$date_format = $date['twentyfour_time_format'];
+											}
+										}
+										echo wp_travel_get_converted_time_format( $trip['trip_time'], $date_format );
+									?>										
+										
+									<?php endif; ?>
+								</td>
+								
 								<?php if( isset( $trip_data['dates'] ) && $trip_data['dates'][0]['is_recurring'] == false ): ?>
 									<!-- <td><?php echo esc_html( wptravel_format_date( $end_date ) ); ?></td> -->
 									<td><?php echo esc_html( wptravel_format_date( $wpdb->get_row( $wpdb->prepare("SELECT * FROM {$wpdb->prefix}wt_dates WHERE id=%s;", isset( $trip['date_id'] ) ? $trip['date_id'] : ''  ) )->end_date ) ); ?></td>
 									<?php else: ?>
 									<td>
-										<?php if( $trip_data['trip_duration']['days'] ): ?>
-											<?php echo esc_html( wptravel_format_date( $departure_date ) ); ?>
-											<?php else: ?>
-												<?php echo esc_html__( 'N\A', 'wp-travel' ); ?>
-										<?php endif; ?>
+										<?php 
+			
+										if( $trip_data['trip_duration']['days'] ):
+											echo esc_html( wptravel_format_date( $departure_date ) );
+											else:
+												echo esc_html__( 'N\A', 'wp-travel' );
+										endif; ?>
 									</td>
-								<?php endif; ?>
-						<?php endif; ?>
+								<?php endif;
+						endif; ?>
 					</tr>
 					
 					<?php
@@ -214,7 +237,6 @@ class WpTravel_Helpers_Booking {
 			</tbody>
 		</table>
 		<?php }
-
 		$content = ob_get_contents();
 
 		ob_end_clean();
@@ -263,6 +285,7 @@ class WpTravel_Helpers_Booking {
 				$traveler_emails      = isset( $checkout_form_data['wp_travel_email_traveller'] ) ? $checkout_form_data['wp_travel_email_traveller'] : array();
 				$traveler_dobs        = isset( $checkout_form_data['wp_travel_date_of_birth_traveller'] ) ? $checkout_form_data['wp_travel_date_of_birth_traveller'] : array();
 				$traveler_genders     = isset( $checkout_form_data['wp_travel_gender_traveller'] ) ? $checkout_form_data['wp_travel_gender_traveller'] : array();
+				$traveler_locations     = isset( $checkout_form_data['wp_travel_pickup_location'] ) ? $checkout_form_data['wp_travel_pickup_location'] : array();
 		
 				if ( count( $items ) > 1 ) {
 					
@@ -298,7 +321,7 @@ class WpTravel_Helpers_Booking {
 						</thead><?php } ?>
 						<tbody>
 							<?php
-		
+						
 							if ( count( $traveler_first_names ) > 1 ) {
 								foreach ( $traveler_first_names as $key => $first_name ) {
 									$last_name = isset( $traveler_last_names[ $key ] ) ? $traveler_last_names[ $key ] : '';
@@ -394,6 +417,7 @@ class WpTravel_Helpers_Booking {
 									$email     = isset( $traveler_emails[ $key ] ) ? $traveler_emails[ $key ][0] : '';
 									$dob       = isset( $traveler_dobs[ $key ] ) ? $traveler_dobs[ $key ][0] : '';
 									$gender    = isset( $traveler_genders[ $key ] ) ? $traveler_genders[ $key ][0] : '';
+									
 									?>
 									<tr>
 										<td><?php echo esc_html( $first_name[0] ); ?> <?php echo esc_html( $last_name ); ?></td>
@@ -434,10 +458,17 @@ class WpTravel_Helpers_Booking {
 						$emails      = isset( $traveler_emails [ $item_key ] ) 		? $traveler_emails [ $item_key ] 	: array();
 						$dobs        = isset( $traveler_dobs[ $item_key ] ) 		? $traveler_dobs[ $item_key ] 		: array();
 						$genders     = isset( $traveler_genders[ $item_key ] ) 		? $traveler_genders[ $item_key ] 	: array();
+						$locations  = isset( $traveler_locations[ $item_key ] ) ? $traveler_locations[ $item_key ] 	: array();
+
+						$conspan = 6;
+
+						if( count( $traveler_locations ) > 0 ){
+							$conspan = 7;
+						}
 						?>
 						<thead>
 							<tr>
-								<th colspan="6"><?php esc_html_e( 'Trip : ', 'wp-travel' ); ?> <strong><?php echo esc_html( $title ); ?></strong> / <span class="my-order-pricing"><?php echo esc_html( $pricing_title ); ?></span></th>
+								<th colspan="<?php echo $conspan; ?>"><?php esc_html_e( 'Trip : ', 'wp-travel' ); ?> <strong><?php echo esc_html( $title ); ?></strong> / <span class="my-order-pricing"><?php echo esc_html( $pricing_title ); ?></span></th>
 							</tr>
 							<tr>
 								<th><?php esc_html_e( 'Traveler Name', 'wp-travel' ); ?></th>
@@ -446,15 +477,19 @@ class WpTravel_Helpers_Booking {
 								<th><?php esc_html_e( 'Email', 'wp-travel' ); ?></th>
 								<?php if( apply_filters( 'wp_travel_enable_traveller_dob_booking_email', true ) ): ?>
 									<th><?php esc_html_e( 'DOB', 'wp-travel' ); ?></th>
-								<?php endif; ?>
+								<?php endif;
 								
-								<?php if( apply_filters( 'wp_travel_enable_traveller_gender_booking_email', true ) ): ?>
+								 if( apply_filters( 'wp_travel_enable_traveller_gender_booking_email', true ) ): ?>
 									<th><?php esc_html_e( 'Gender', 'wp-travel' ); ?></th>
+								<?php endif;
+								if( count( $traveler_locations ) > 0 ): ?>
+									<th><?php esc_html_e( 'Pickup Location', 'wp-travel' ); ?></th>
 								<?php endif; ?>
 							</tr>
 						</thead>
 						<tbody>
 							<?php
+			
 							foreach ( $first_names as $key => $first_name ) {
 								$last_name = isset( $last_names[ $key ] ) ? $last_names[ $key ] : '';
 								$country   = isset( $countries[ $key ] ) ? $countries[ $key ] : '';
@@ -475,6 +510,7 @@ class WpTravel_Helpers_Booking {
 								$email     = isset( $emails[ $key ] ) ? $emails[ $key ] : '';
 								$dob       = isset( $dobs[ $key ] ) ? $dobs[ $key ] : '';
 								$gender    = isset( $genders[ $key ] ) ? $genders[ $key ] : '';
+								$location   = isset( $locations[ $key ] ) ? $locations[ $key ] : '';
 
 								if( apply_filters( 'wptravel_traveller_salutation', true ) ==  true ){
 									if( $gender == 'male' ){
@@ -501,10 +537,14 @@ class WpTravel_Helpers_Booking {
 									<td><?php echo esc_html( $email ); ?></td>
 									<?php if( apply_filters( 'wp_travel_enable_traveller_dob_booking_email', true ) ): ?>
 										<td><?php echo esc_html( wptravel_format_date( $dob ) ); ?></td>
-									<?php endif; ?>
+									<?php endif;
 									
-									<?php if( apply_filters( 'wp_travel_enable_traveller_gender_booking_email', true ) ): ?>
+									if( apply_filters( 'wp_travel_enable_traveller_gender_booking_email', true ) ): ?>
 										<td><?php echo esc_html( $gender ); ?></td>
+									<?php endif;
+
+									if( count( $traveler_locations ) > 0 ): ?>
+										<td><?php echo esc_html( $location ); ?></td>
 									<?php endif; ?>
 								</tr>
 								<?php
@@ -519,9 +559,9 @@ class WpTravel_Helpers_Booking {
 			</tbody>
 		</table>
 		<?php
+
 		$content = ob_get_contents();
 		ob_end_clean();
 		return $content;
 	}
 }
-

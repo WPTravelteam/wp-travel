@@ -134,7 +134,7 @@ jQuery(function($) {
             full_url.search = search_params.toString();
         })
         var new_url     = full_url.toString();
-        console.log(new_url)
+  
         window.location = new_url;
     });
 
@@ -206,14 +206,26 @@ jQuery(function($) {
         $('.checkout-trip-extras').css( 'display', 'none' );
     } );
 
-
+    $(document).on( 'click', '.wptravel-recurring-table td[data-label="Pricings"] input', function(){
+        $('.wp-travel-book').addClass( 'btn-disable' );
+    });
+    
+    
     $(document).on( 'click', '.edit-pax-selector-qty', function(){
+
+        if( $(this).parent().find( '.wp-trave-pax-selected-frontend-second' ).val() >= $(this).attr( 'data-minpax' ) ){
+            $('.wp-travel-book').removeClass( 'btn-disable' );
+        }
+
         var cartInputValue = document.getElementsByClassName('edit-pax-'+$(this).attr( 'data-cart' ));
 
        
         var cartInputValueTrip = document.getElementsByClassName('wp-trave-pax-selected-frontend-second');
 
-        
+        if( document.getElementsByClassName('wptravel-recurring-dates').length > 0 ){
+            cartInputValueTrip = document.querySelectorAll('.wp-travel-active-date .wp-trave-pax-selected-frontend-second');
+        }
+
         if( $(this).attr( 'data-allpricing' ) == 1 ){
             $flag = 1;
 
@@ -230,13 +242,16 @@ jQuery(function($) {
                     $('.cart-edit-'+$(this).attr( 'data-cart' )).removeClass( 'btn-disable' );
                 }
             }
-            
+   
             if( cartInputValueTrip.length > 0 ){
                 for(var i=0;i<cartInputValueTrip.length;i++){
                     if(parseFloat(cartInputValueTrip[i].value) < $(this).attr( 'data-minpax' ) ){
                         $flag = 0;
                     }
+               
                 }
+
+       
                 if( $flag == 0 ){
                     $('.wp-travel-book').addClass( 'btn-disable' );
                 }else{
@@ -246,15 +261,28 @@ jQuery(function($) {
            
         }else{
             var totalpax=0;
-            for(var i=0;i<cartInputValue.length;i++){
-                if(parseFloat(cartInputValue[i].value))
-                totalpax += parseFloat(cartInputValue[i].value);
+            if( cartInputValue.length > 0 ){
+                for(var i=0;i<cartInputValue.length;i++){
+                    if(parseFloat(cartInputValue[i].value))
+                    totalpax += parseFloat(cartInputValue[i].value);
+                }
             }
-    
-            if( totalpax < $(this).attr( 'data-minpax' ) ){
-                $('.cart-edit-'+$(this).attr( 'data-cart' )).addClass( 'btn-disable' );
-            }else{
+
+            if( cartInputValueTrip.length > 0 ){
+                for(var i=0;i<cartInputValueTrip.length;i++){
+                    if(parseFloat(cartInputValueTrip[i].value)  ){
+                        totalpax += parseFloat(cartInputValueTrip[i].value);
+                    }
+               
+                }
+            }
+
+            if( totalpax >= $(this).attr( 'data-minpax' ) ){   
+                $('.wp-travel-book').removeClass( 'btn-disable' );             
                 $('.cart-edit-'+$(this).attr( 'data-cart' )).removeClass( 'btn-disable' );
+            }else{
+                $('.wp-travel-book').addClass( 'btn-disable' );   
+                $('.cart-edit-'+$(this).attr( 'data-cart' )).addClass( 'btn-disable' );
             }
         }
        
@@ -265,6 +293,24 @@ jQuery(function($) {
 });
 
 jQuery(function($) {
+
+    $('.wp-travel-itinerary-items').keypress((e) => {   
+        // Enter key corresponds to number 13 
+        if (e.which === 13) { 
+            $('#wp-travel-filter-search-submit').click()
+        } 
+    }) 
+
+    $(document).on('click', '.datepicker--cell-day:not(.-disabled-)', function(event) {
+        $('.datepicker').css( 'left', '-100000px' );
+        $('.datepicker').removeClass( 'active' );
+    });    
+
+    // $(document).on('click', '.wp-travel-datepicker', function(event) {
+    //     var childItem = $(this).parent().parent().parent().parent().parent().parent().attr( 'data-child' ) 
+    //     $('#datepickers-container .datepicker:nth-child(' +childItem+ ')').css( 'left', '735px' );
+    //     $('#datepickers-container .datepicker:nth-child(' +childItem+ ')').addClass( 'active' );
+    // });
     
     $(document).on('click', '.open-quick-view-modal', function(event) {
         event.preventDefault();

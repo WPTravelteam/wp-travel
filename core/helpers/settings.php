@@ -366,6 +366,8 @@ class WP_Travel_Helpers_Settings {
 		}
 		$settings['enable_one_page_booking'] = isset( $settings_data['enable_one_page_booking'] ) ? $settings_data['enable_one_page_booking'] : false;
 		// unset( $settings['modules'] );
+
+	
 		update_option( 'wp_travel_settings', $settings );
 		/**
 		 * Hook to trigger after settings saved.

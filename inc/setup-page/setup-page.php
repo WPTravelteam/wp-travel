@@ -9,16 +9,17 @@ class WP_Travel_Setup_Page {
 
 	public function __construct() {
 
-		require_once ABSPATH . 'wp-includes/pluggable.php';
-		require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+		// require_once ABSPATH . 'wp-includes/pluggable.php';
 		require_once ABSPATH . 'wp-admin/includes/theme.php';
 		require_once ABSPATH . 'wp-admin/includes/file.php';
+
+		require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
 
 		include sprintf( '%s/inc/setup-page/trip-import-class.php', WP_TRAVEL_ABSPATH );
 
 		add_action( 'admin_menu', array( $this, 'wp_travel_welcome_screen_pages' ) );
 		add_action( 'admin_init', array( $this, 'wp_travel_setup_page_redirect' ) );
-		add_action( 'admin_head', array( $this, 'wp_travel_welcome_screen_remove_menus' ) );
+		// add_action( 'admin_head', array( $this, 'wp_travel_welcome_screen_remove_menus' ) );
 		add_action( 'rest_api_init', array( $this, 'add_custom_users_api' ) );
 	}
 

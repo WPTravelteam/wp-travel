@@ -85,7 +85,7 @@ function wptravel_get_enquiries_form( $trips_dropdown = false ) {
 			'name'  => 'wp_travel_enquiry_submit',
 			'class' => 'button wp-block-button__link',
 			'id'    => 'wp-travel-enquiry-submit',
-			'value' => apply_filters( 'wp_travel_enquiry_submit_button_label', __( 'SUBMIT ', 'wp-travel' ) ) . $strings,
+			'value' => apply_filters( 'wp_travel_enquiry_submit_button_label', __( 'Submit ', 'wp-travel' ) ) . $strings,
 		),
 		'nonce'         => array(
 			'action' => 'wp_travel_security_action',
@@ -156,10 +156,11 @@ add_action( 'add_meta_boxes', 'wptravel_add_enquiries_data_metaboxes', 10, 2 );
  */
 function wptravel_add_enquiries_data_metaboxes() {
 
-	if ( get_current_screen()->base == 'woocommerce_page_wc-orders' ) { 
+
+	if ( get_current_screen()->base == 'woocommerce_page_wc-orders' || get_current_screen()->id != 'itinerary-enquiries' ) { 
 		return;
 	}
-	
+
 	global $post;
 	global $wp_travel_itinerary;
 
@@ -258,14 +259,13 @@ function wptravel_save_backend_enqueries_data( $post_id ) {
 	if ( ! current_user_can( 'edit_post', $post_id ) ) {
 		return;
 	}
-	// If this is just a revision, don't send the email.
+
 	if ( wp_is_post_revision( $post_id ) ) {
 		return;
 	}
 
 	$post_type = get_post_type( $post_id );
 
-	// If this isn't a 'itineraries' post, don't update it.
 	if ( 'itinerary-enquiries' !== $post_type ) {
 		return;
 	}
@@ -343,7 +343,6 @@ function wptravel_save_user_enquiry() {
 
 	$post_type = get_post_type( $post_id );
 
-	// If this isn't a 'itineraries' post, don't update it.
 	if ( WP_TRAVEL_POST_TYPE !== $post_type ) {
 
 		$errors['message'] = __( 'Invalid Post Type', 'wp-travel' );
@@ -383,16 +382,13 @@ function wptravel_save_user_enquiry() {
 
 	$new_enquiry = wp_insert_post( $post_array );
 
-	// Update Data.
 	if ( ! empty( $enquiry_data ) ) {
 
-		// Sanitize Values.
 		$enquiry_data = stripslashes_deep( $enquiry_data );
 
 		$wp_travel_post_id = isset( $enquiry_data['post_id'] ) ? $enquiry_data['post_id'] : 0;
 		update_post_meta( $new_enquiry, 'wp_travel_post_id', sanitize_text_field( $wp_travel_post_id ) );
 
-		// Finally Update enquiry data.
 		update_post_meta( $new_enquiry, 'wp_travel_trip_enquiry_data', $enquiry_data );
 
 	}
@@ -401,14 +397,9 @@ function wptravel_save_user_enquiry() {
 
 	$admin_email = apply_filters( 'wp_travel_enquiries_admin_emails', $site_admin_email );
 
-	// Email Variables.
 	if ( is_multisite() ) {
 		$sitename = get_network()->site_name;
 	} else {
-		/*
-			* The blogname option is escaped with esc_html on the way into the database
-			* in sanitize_option we want to reverse this for the plain text arena of emails.
-			*/
 		$sitename = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 	}
 	$enquiry_id      = $new_enquiry;

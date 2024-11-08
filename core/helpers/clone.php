@@ -53,7 +53,7 @@ class WpTravel_Helpers_Clone {
 
 		if ( is_array( $all_old_meta ) && count( $all_old_meta ) > 0 ) {
 			foreach ( $all_old_meta as $meta_key => $meta_value_array ) {
-				if ( 'wp_travel_booking_count' === $meta_key ) {
+				if ( 'wp_travel_booking_count' === $meta_key || 'wp_travel_trip_twentyfour_time_format' === $meta_key || 'wp_travel_trip_time_enable' === $meta_key ) {
 					continue;
 				}
 				$meta_value = isset( $meta_value_array[0] ) ? $meta_value_array[0] : '';
@@ -116,6 +116,8 @@ class WpTravel_Helpers_Clone {
 								'is_sale'         => $pricing_category->is_sale,
 								'sale_price'      => $pricing_category->sale_price,
 								'has_group_price' => $pricing_category->has_group_price,
+								'is_sale_percentage' => $pricing_category->is_sale_percentage,
+								'sale_percentage_val' => $pricing_category->sale_percentage_val,
 								'group_prices'    => maybe_unserialize( $pricing_category->group_prices ),
 								'default_pax'     => $pricing_category->default_pax,
 							);
@@ -157,7 +159,7 @@ class WpTravel_Helpers_Clone {
 					'trip_time'    => $date->trip_time,
 					'pricing_ids'  => $new_pricing_ids,
 				);
-				WpTravel_Helpers_Trip_Dates::add_individual_date( $new_trip_id, $new_date );
+				WpTravel_Helpers_Trip_Dates::add_individual_date( $new_trip_id, $new_date, $date->id );
 			}
 		}
 		// Exclued Date Migration.
@@ -179,6 +181,7 @@ class WpTravel_Helpers_Clone {
 				WpTravel_Helpers_Trip_Excluded_Dates_Times::add_individual_date_time( $new_trip_id, $new_exclude_date );
 			}
 		}
+
 		wp_send_json( array( 'true' ) );
 	}
 }

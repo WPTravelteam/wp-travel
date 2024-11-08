@@ -165,8 +165,6 @@ const WpTravelBookNow = ( props ) => {
 				method: 'POST',
 				data
 			}).then(res => {
-
-				
 				if ( applyFilters( 'wptravel_redirect_to_checkout', true ) && true === res.success && 'WP_TRAVEL_ADDED_TO_CART' === res.data.code) {
 
 					if ( _wp_travel.add_to_cart_system == false ) {
@@ -181,7 +179,6 @@ const WpTravelBookNow = ( props ) => {
 						jQuery( '#wp-travel__add-to-cart_notice' ).addClass( 'success' ).append( `
 								<span><i class="fa fa-check-circle"></i><strong>` + title + `</strong> ` + __i18n.set_added_cart + `</span>
 								<span id="toast-close"><i class="fa fa-times"></i></span>
-								<div id="wp-travel__notice_time-bar"></div>
 							` );
 						
 						/**
@@ -198,7 +195,7 @@ const WpTravelBookNow = ( props ) => {
 							 * @since 7.6.0
 							 */
 							jQuery( '#wp-travel__add-to-cart_notice span' ).remove();
-							jQuery( '#wp-travel__notice_time-bar' ).remove();
+				
 						});
 
 						setTimeout( () => {
@@ -211,7 +208,7 @@ const WpTravelBookNow = ( props ) => {
 							 */
 							jQuery( '#wp-travel__add-to-cart_notice span' ).remove();
 							jQuery( '#wp-travel__notice_time-bar' ).remove();
-						}, 8000 );
+						}, __i18n.add_to_cart_notice );
 	
 						updateBookingData( initialState );
 						
@@ -229,6 +226,7 @@ const WpTravelBookNow = ( props ) => {
 				jQuery( document.body ).trigger( 'wptravel_added_to_cart', [ data ] );
 
 			}), 1000 ).catch(error => {
+				console.log( error )
 				alert( __( '[X] Request Timeout!', 'wp-travel' ) );
 		})
 	}
@@ -259,7 +257,7 @@ const WpTravelBookNow = ( props ) => {
                         <div className="right-info" >
                             <p><strong dangerouslySetInnerHTML={{ __html: wpTravelFormat(getCartTotal(true)) }}></strong></p>
 
-							<button disabled={ parseFloat(minCheckoputPrice ) > parseFloat(getCartTotal(true) ) || totalPax < minPaxToBook || totalPax > maxPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">{typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? __i18n.set_add_to_cart : __i18n.bookings.booking_tab_booking_btn_label}</button>
+							<button disabled={ parseFloat(minCheckoputPrice ) > parseFloat(getCartTotal(true) ) || totalPax < minPaxToBook || ( enable_time && nomineeTimes.length > 0 && ! selectedTime ) } onClick={addToCart} className="wp-travel-book">{typeof _wp_travel.add_to_cart_system != 'undefined' && _wp_travel.add_to_cart_system == true ? __i18n.set_add_to_cart : __i18n.bookings.booking_tab_booking_btn_label}</button>
 			
 							
                         </div>

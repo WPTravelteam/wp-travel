@@ -145,6 +145,7 @@ if ( ! function_exists( 'wptravel_account_tab_content' ) ) {
 
 												$payment_info = wptravel_booking_data( $b_id );
 
+												
 												$booking_status = $payment_info['booking_status'];
 												$payment_status = $payment_info['payment_status'];
 												$payment_mode   = $payment_info['payment_mode'];
@@ -191,7 +192,11 @@ if ( ! function_exists( 'wptravel_account_tab_content' ) ) {
 													</td>
 													<td class="booking-status" data-title="<?php esc_html_e( 'Booking Status', 'wp-travel' ); ?>">
 														<div class="contact-title">
-													<?php echo esc_html( $booking_status ); ?>
+															<?php 
+																$status_lists = wptravel_get_booking_status();
+																$status       = $status_lists[ $booking_status ];										
+																echo esc_html( $status['text'] ); 
+															?>
 														</div>
 													</td>
 													<td class="payment-status" data-title="<?php esc_html_e( 'Payment Status', 'wp-travel' ); ?>">

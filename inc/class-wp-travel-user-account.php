@@ -211,7 +211,7 @@ class Wp_Travel_User_Account {
 	 * @return bool True: when finish. False: on error
 	 */
 	public static function retrieve_password( $login = '' ) {
-
+		
 		if ( empty( $login ) ) {
 
 			WPTravel()->notices->add( __( 'Enter an email or username.', 'wp-travel' ), 'error' );
@@ -288,7 +288,8 @@ class Wp_Travel_User_Account {
 		$from    = get_option( 'admin_email' );
 		$email   = new WP_Travel_Emails();
 		$headers = $email->email_headers( $from, $from );
-
+		
+		
 		if ( $user_login && $key ) {
 
 			$user_object     = get_user_by( 'login', $user_login );
@@ -297,7 +298,16 @@ class Wp_Travel_User_Account {
 			$user_user_email = stripslashes( $user_object->user_email );
 			$user_recipient  = $user_user_email;
 			$user_subject    = __( 'Password Reset Request', 'wp-travel' );
+			
+   			$from = 'passwordresset@wptravel.com';
 
+			// Define the email headers
+			$headers = array(
+				'Content-Type: text/html; charset=UTF-8',
+				'From: My Site Name <' . $from . '>'
+			);
+
+			wp_mail( $user_recipient, $user_subject, $email_content, $headers );
 		}
 
 		return true;
@@ -328,9 +338,25 @@ class Wp_Travel_User_Account {
 		$rp_path   = current( explode( '?', wp_unslash( $_SERVER['REQUEST_URI'] ) ) );
 
 		if ( $value ) {
-			setcookie( $rp_cookie, $value, 0, $rp_path, COOKIE_DOMAIN, is_ssl(), true );
+			// setcookie( $rp_cookie, $value, 0, $rp_path, COOKIE_DOMAIN, is_ssl(), true );
+			setcookie($rp_cookie, $value, [
+				'expires'  => 0,                 // Session cookie (expires when the browser is closed)
+				'path'     => $rp_path,          // Cookie path
+				'domain'   => COOKIE_DOMAIN,     // Cookie domain
+				'secure'   => is_ssl(),          // Secure flag (true if using HTTPS)
+				'httponly' => true,              // HttpOnly flag
+				'samesite' => 'Strict'           // SameSite attribute (protects against CSRF)
+			]);
 		} else {
-			setcookie( $rp_cookie, ' ', time() - YEAR_IN_SECONDS, $rp_path, COOKIE_DOMAIN, is_ssl(), true );
+			// setcookie( $rp_cookie, ' ', time() - YEAR_IN_SECONDS, $rp_path, COOKIE_DOMAIN, is_ssl(), true );
+			setcookie($rp_cookie, ' ', [
+				'expires'  => time() - YEAR_IN_SECONDS,  // Set expiration time to the past to delete the cookie
+				'path'     => $rp_path,                  // Cookie path
+				'domain'   => COOKIE_DOMAIN,             // Cookie domain
+				'secure'   => is_ssl(),                  // Secure flag (true if using HTTPS)
+				'httponly' => true,                      // HttpOnly flag
+				'samesite' => 'Strict'                   // SameSite attribute (protects against CSRF)
+			]);
 		}
 	}
 

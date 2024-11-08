@@ -47,6 +47,7 @@ export default () => {
         arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
         return arr; // for testing
     };
+
     // mount whatever plugins you'd like to. These are the only current options.
     return (
         <>
@@ -115,6 +116,7 @@ export default () => {
 
                                         <PanelRow>
                                             <label>{_wp_travel.setting_strings.tabs.display}</label>
+           
                                             <ToggleControl
                                                 checked={tab.show_in_menu == 'yes'}
                                                 onChange={

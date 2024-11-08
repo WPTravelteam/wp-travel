@@ -12,10 +12,11 @@ const WPTravelTripPricingCategories = ({priceIndex}) => {
         return select('WPTravel/TripEdit').getAllStore()
     }, []);
     const { pricing_categories, pricings, default_pricing_id, default_category_id } = allData;
-
+  
     const { updateTripPricing } = dispatch('WPTravel/TripEdit');
     let price = pricings[priceIndex];
     let pricingCategories = [];
+
     if ( pricing_categories.length > 0 ) {
         pricing_categories.map((cat)=>{
             pricingCategories = [...pricingCategories,{
@@ -52,7 +53,7 @@ const WPTravelTripPricingCategories = ({priceIndex}) => {
         })
         updateTripPricing(priceData, priceIndex);
     }
-    
+
     return <ErrorBoundary>{ 'undefined' !== typeof price && 'undefined' !== typeof price.categories && price.categories.length > 0 ?<>{ price.categories.map((category, catIndex) => {
         let currentCategory = _.find(pricing_categories, function(o) { 
             let catId = category.id>0?category.id:pricing_categories[0].id;

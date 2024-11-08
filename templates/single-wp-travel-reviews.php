@@ -80,7 +80,7 @@ if ( ! comments_open() ) {
 				);
 
 
-				$comment_form['must_log_in'] = '<p class="must-log-in">' . __( 'You must be ', 'wp-travel' ).'<a href="'. esc_url( wp_login_url() ).'">'. __( 'logged in', 'wp-travel' ) .'</a>' . __( ' to post a review.', 'wp-travel' ) . '</p>';
+				$comment_form['must_log_in'] = '<p class="must-log-in">' . __( 'You must be ', 'wp-travel' ).'<a href="'. esc_url( wp_login_url() ).'?redirect_to='.esc_url( get_the_permalink() ).'">'. __( 'logged in', 'wp-travel' ) .'</a>' . __( ' to post a review.', 'wp-travel' ) . '</p>';
 				$settings                       = wptravel_get_settings();
 
 				if ( is_user_logged_in() ) {

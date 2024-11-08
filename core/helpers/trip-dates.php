@@ -29,8 +29,7 @@ class WpTravel_Helpers_Trip_Dates {
 	 *
 	 * @param int $trip_id Trip ID.
 	 */
-	public static function get_dates( $trip_id = false ) {
-
+	public static function get_dates($trip_id = false) {
 		if ( empty( $trip_id ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
 		}
@@ -87,7 +86,7 @@ class WpTravel_Helpers_Trip_Dates {
 			)
 		);
 	}
-
+	
 	/**
 	 * Update the trip dates.
 	 *
@@ -130,7 +129,8 @@ class WpTravel_Helpers_Trip_Dates {
 	 * @param int   $trip_id Trip ID.
 	 * @param array $date Trip date array.
 	 */
-	public static function add_individual_date( $trip_id, $date ) {
+	public static function add_individual_date( $trip_id, $date, $parent_date_id = "" ) {
+
 		if ( empty( $trip_id ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
 		}
@@ -206,13 +206,49 @@ class WpTravel_Helpers_Trip_Dates {
 				)
 			);
 			$inserted_id = $wpdb->insert_id;
+
 			if ( empty( $inserted_id ) ) {
 				return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_ERROR_ADDING_TRIP_DATE' );
 			}
+
+
 			/**
 			 * @since 6.1.0
 			 */
-			$date['ids'] = $inserted_id ? $inserted_id : 0;
+			if( !empty($parent_date_id) ){
+
+				$date['enable_time'] = get_post_meta( $parent_date_id, 'wp_travel_trip_time_enable', true );
+				$date['twentyfour_time_format'] = get_post_meta( $parent_date_id, 'wp_travel_trip_twentyfour_time_format', true );
+
+				$trip_time_metas = array( 
+					'wp_travel_trip_time_enable' => $date['enable_time'],
+					'wp_travel_trip_twentyfour_time_format' => $date['twentyfour_time_format'],
+				);
+				$time_datas = array();
+				foreach( $trip_time_metas as $key => $data ){
+					$time_datas[] = array(
+						'post_id'     => $inserted_id,
+						'meta_key'    => $key,
+						'meta_value'  => $data,
+					);
+					
+					if( count( $time_datas ) > 1 ){
+						foreach( $time_datas as $data ){
+							$wpdb->insert(
+								$wpdb->postmeta,
+								$data,
+								array(
+									'%d',
+									'%s',
+									'%s',
+								)
+							);
+						}
+					}
+					
+				}
+			}
+			
 			update_post_meta( $inserted_id, 'wp_travel_trip_time_enable', ! empty( $date['enable_time'] ) ? $date['enable_time'] : false );
 			update_post_meta( $inserted_id, 'wp_travel_trip_twentyfour_time_format', ! empty( $date['twentyfour_time_format'] ) ? $date['twentyfour_time_format'] : false );
 		}

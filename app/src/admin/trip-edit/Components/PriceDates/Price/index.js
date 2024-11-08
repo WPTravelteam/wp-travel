@@ -153,6 +153,7 @@ const Pricings = ( {allData} ) => {
                                     <label>{__i18n.bookings.trip_extras}</label>
                                     <div className="wp-travel-field-value">
                                         <div className="wp-travel-select-wrapper">
+                                           
                                             <Select options={tripExtrasData} onChange={(val)=>{
                                                 let priceData = price;
                                                 priceData.trip_extras = null!== val?val:[];

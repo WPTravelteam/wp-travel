@@ -57,7 +57,8 @@ const SaveTripSection = () => {
                 allData.excluded_dates_times = [];
             }
             
-            
+            delete allData[ 'settings' ];
+
             apiFetch( { url: `${ajaxurl}?action=wp_travel_update_trip&trip_id=${_wp_travel.postID}&_nonce=${_wp_travel._nonce}`, data:allData, method:'post' } ).then( res => {
                 updateRequestSending(false);
                 

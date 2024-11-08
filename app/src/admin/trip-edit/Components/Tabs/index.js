@@ -92,6 +92,7 @@ const TripTabs = ( {allData} ) => {
             trip_tabs: sortedTabs
         })
     }
+
     let tabsContent = () => {
         if ( typeof trip_tabs !== 'undefined' ) {
             return ( <div className="wp-travel-sortable-component"><ReactSortable

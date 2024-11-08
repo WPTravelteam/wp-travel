@@ -8,6 +8,7 @@ export default ( { coupon_data, currency_symbol, booking_option, payment_mode, p
     const payable_price = typeof total != 'undefined' && total || '0';
     const discount_get  = typeof discount != 'undefined' && discount || '0';
     const cart_payable  = typeof cart_total != 'undefined' && cart_total || '0';
+
     return <>
         <div className="wptravel-onepage-payment-total-trip-price">
             <div className="components-panel__body is-opened wptrave-on-page-booking-price-with-coupon wptrave-onpage-price-calculation">

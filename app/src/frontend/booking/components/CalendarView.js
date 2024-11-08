@@ -487,6 +487,20 @@ const CalendarView = ( props ) => {
 		params.excludeDates.push( addDays(new Date( value ), 0) );
 	}
 
+
+	__i18n.reserved_booking_dates.forEach( reservedDates );
+
+	function reservedDates( value, index, array ){
+		if( __i18n.reserved_booking_dates_all_trips ){
+			params.excludeDates.push( addDays(new Date( value.date ), 0) );
+		}else{
+			if( tripData.id == value.id ){
+				params.excludeDates.push( addDays(new Date( value.date ), 0) );
+			}
+		}
+		
+	}
+
 	let enable_time = '';
 	_dates.map( ( dateData ) => {
 		if( selectedDateIds[0] == dateData.id ) {

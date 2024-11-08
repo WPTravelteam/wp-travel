@@ -40,9 +40,10 @@ const RecurringRepeator = ( props ) =>  {
 	let rd = moment(moment(recurrindDate).format('YYYY-MM-DD')).unix();
 
 
-    let loadingClass = isLoading && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) ? 'wptravel-loading' : '';
+    let loadingClass = isLoading && selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) ? ' wptravel-loading' : '';
+    let activeClass = selectedDateIds.includes( date.id ) && ( ! recurrindDate || ( recurrindDate && sd == rd ) ) ? 'wp-travel-active-date' : '';
     const { enable_time } = date;
-    return <tr key={index} className={loadingClass}>
+    return <tr key={index} className={loadingClass + activeClass}>
         <td data-label={__i18n.bookings.pricings_list_label}>
             {/* _nomineePricings not updated in store/state because there are multiple _nomineePricings as per date so just a variable. */}
             {IsRecuringTourDates(props)(recurrindDate) && <Pricings { ...props } /> || <Disabled><Pricings { ...props } /></Disabled> }

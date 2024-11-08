@@ -180,17 +180,22 @@ class WP_Travel_FW_Field {
 			'value' => true,
 			'rows' => true,
 			'cols' => true,
+			'required' => true,
+			'data-parsley-required' => true,
 		);
 		$allow_html[ 'select' ] = array(
 			'id' => true,
 			'class' => true,
-			'data-parsley-required' => true,
 			'name' => true,
+			'required' => true,
+			'data-parsley-required' => true,
 		);
 		$allow_html[ 'option' ] = array(
 			'class' => true,
 			'value' => true,
-			'selected' => true
+			'selected' => true,
+			'required' => true,
+			'data-parsley-required' => true,
 		);
 		$allow_html[ 'label' ] = array(
 			'class' => true,
@@ -208,6 +213,13 @@ class WP_Travel_FW_Field {
 			'maxlength' => true,
 			'style' => true
 		);
+		$allow_html[ 'a' ] = array(
+			'class' => true,
+			'id' => true,
+			'target' => true,
+			'href' => true,
+			'style' => true
+		);
 		$allow_html[ 'script' ] = array();
 		$allow_html[ 'table' ] = array(
 			'width' => true,
@@ -215,6 +227,24 @@ class WP_Travel_FW_Field {
 		$allow_html[ 'tr' ] = array();
 		$allow_html[ 'td' ] = array();
 		$allow_html[ 'h1' ] = array(
+			'class' => true,
+			'id' => true,
+			'style' => true
+		);
+
+		$allow_html[ 'ul' ] = array(
+			'class' => true,
+			'id' => true,
+			'style' => true
+		);
+
+		$allow_html[ 'ol' ] = array(
+			'class' => true,
+			'id' => true,
+			'style' => true
+		);
+
+		$allow_html[ 'li' ] = array(
 			'class' => true,
 			'id' => true,
 			'style' => true
@@ -249,11 +279,6 @@ class WP_Travel_FW_Field {
 			'placeholder' => true,
 			'required' => true,
 			'data-parsley-required' => true,
-			'maxlength' => true,
-			'data-parsley-maxlength' => true,
-			'pattern' => true,
-			'data-parsley-pattern' => true,
-			'data-parsley-errors-container' => true
 		);
 		$allow_html[ 'textarea' ] = array(
 			'type' => true,
@@ -263,12 +288,15 @@ class WP_Travel_FW_Field {
 			'value' => true,
 			'rows' => true,
 			'cols' => true,
+			'required' => true,
+			'data-parsley-required' => true,
 		);
 		$allow_html[ 'select' ] = array(
 			'id' => true,
 			'class' => true,
-			'data-parsley-required' => true,
 			'name' => true,
+			'required' => true,
+			'data-parsley-required' => true,
 		);
 		$allow_html[ 'option' ] = array(
 			'class' => true,

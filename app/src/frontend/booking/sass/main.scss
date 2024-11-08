@@ -115,6 +115,12 @@ input.wp-trave-pax-selected-frontend-second {
 .wptravel-on-page-coupon-error{
 	padding: 0px 40px 0px 40px;
 }
+
+select#wp-travel-country {
+	-webkit-appearance: none; /* Remove default styling */
+	appearance: none;
+}
+
 .wptravel-on-page-coupon-apply{
 	.wptravel-on-page-coupon-data{
 		width: 33%;
@@ -134,6 +140,18 @@ input.wp-trave-pax-selected-frontend-second {
 		justify-content: center;
 		align-items: center;
 	}
+}
+
+.wp-travel-trip-extras-loader{
+	display: none !important;
+}
+
+.wp-travel-trip-extras-loader:first-child{
+	display: block !important;
+}
+
+.wp-travel-trip-extras-loader svg{
+	margin: auto;
 }
 
 @media screen and (max-width: 622px) {
@@ -159,6 +177,7 @@ input.wp-trave-pax-selected-frontend-second {
 		}
 	}
 }
+
 @media screen and (max-width: 575px) {
 	.on-page.wp-travel-enquiry-subscribe-section {
 		padding: 0px !important;

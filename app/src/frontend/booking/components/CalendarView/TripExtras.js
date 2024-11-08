@@ -96,7 +96,7 @@ const TripExtras = ( props ) => {
 											</div>
 											<div className="infoBox">
 												<p className="desc" dangerouslySetInnerHTML={{
-													__html: `${tx.content}${tx.link && `<a target="new" href="${tx.link}">${__i18n.bookings.trip_extras_link_label}</a>`}`
+													__html: `${tx.content.substring(0, __i18n.trip_extras_content_limit) + '...'}${tx.link && `<a target="new" href="${tx.link}">${__i18n.bookings.trip_extras_link_label}</a>`}`
 												}}>
 												</p>
 											</div>

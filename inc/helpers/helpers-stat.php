@@ -32,6 +32,10 @@ function wptravel_get_booking_data() {
 	 */
 	$submission_request = isset( $_REQUEST ) ? wptravel_sanitize_array( wp_unslash( $_REQUEST ) ) : array(); // @phpcs:ignore
 
+	if( !isset( $submission_request['booking_stat_from'] ) ){
+		return;
+	}
+
 	$from_date = '';
 	if ( isset( $submission_request['booking_stat_from'] ) && '' !== $submission_request['booking_stat_from'] ) {
 		$from_date = $submission_request['booking_stat_from'];

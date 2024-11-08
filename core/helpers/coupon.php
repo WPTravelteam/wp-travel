@@ -37,7 +37,8 @@ class WpTravel_Helpers_Coupon {
 		$general_tab['coupon_code'] = get_post_meta( $coupon_id, 'wp_travel_coupon_code', true ); // Saved individually to search code.
 
 		$coupon                = new WP_Travel_Coupon();
-		$general_tab['status'] = ucfirst( $coupon->get_coupon_status( $coupon_id ) );
+		$status = $coupon->get_coupon_status($coupon_id);
+		$general_tab['status'] = ucfirst($status ?? 'Unknown');
 
 		// Restriction Tab.
 		$restriction_tab                   = isset( $coupon_metas['restriction'] ) ? $coupon_metas['restriction'] : array();

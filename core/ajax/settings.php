@@ -23,11 +23,7 @@ class WP_Travel_Ajax_Settings {
 		 */
 
 		$user = wp_get_current_user();
-		$allowed_roles = array( 'editor', 'administrator', 'author' );
 
-		if ( !array_intersect( $allowed_roles, $user->roles ) ) {
-			return wp_send_json( array( 'result' => 'Authentication error' ) );
-		}
 
 		$permission = WP_Travel::verify_nonce();
 
@@ -46,29 +42,43 @@ class WP_Travel_Ajax_Settings {
 		 * Permission Check
 		 */
 		$user = wp_get_current_user();
-		$allowed_roles = array( 'editor', 'administrator', 'author' );
-
-		if ( !array_intersect( $allowed_roles, $user->roles ) ) {
-			return wp_send_json( array( 'result' => 'Authentication error' ) );
-		}
-
+	
 		$permission = WP_Travel::verify_nonce();
-
-		if ( ! $permission || is_wp_error( $permission ) ) {
-			WP_Travel_Helpers_REST_API::response( $permission );
+	
+		if ( ! $permission || is_wp_error($permission) ) {
+			return WP_Travel_Helpers_REST_API::response($permission);
 		}
-
+	
 		/**
-		 * solve ajax request in server
+		 * Handle AJAX Request
 		 */
-		$post_data = file_get_contents( 'php://input' ); // Added 2nd Parameter to resolve issue with objects.
-		$post_data     = is_string( $post_data ) ? json_decode( $post_data, true ) : $post_data; // check ajax string data
-		$new_post_data = is_string( $post_data ) ? json_decode( $post_data, true ) : $post_data; // check after ajax data is converted in to array of not
-		$new_post_data = wptravel_sanitize_array( $new_post_data, true );
-		$response      = WP_Travel_Helpers_Settings::update_settings( $new_post_data );
-		WP_Travel_Helpers_REST_API::response( $response );
-
+		$post_data = file_get_contents('php://input');
+		if ( empty($post_data) ) {
+			return wp_send_json_error(array('result' => 'No data received'));
+		}
+	
+		$new_post_data = json_decode($post_data, true);
+		if ( json_last_error() !== JSON_ERROR_NONE ) {
+			return wp_send_json_error(array('result' => 'Invalid JSON data'));
+		}
+	
+		$new_post_data = wptravel_sanitize_array($new_post_data, true);
+	
+		// Ensure sanitized data is valid
+		if ( empty($new_post_data) || ! is_array($new_post_data) ) {
+			return wp_send_json_error(array('result' => 'Invalid settings data'));
+		}
+	
+		$response = WP_Travel_Helpers_Settings::update_settings($new_post_data);
+	
+		// Assuming `WP_Travel_Helpers_Settings::update_settings` handles errors internally
+		if ( is_wp_error($response) ) {
+			return WP_Travel_Helpers_REST_API::response($response);
+		}
+	
+		return WP_Travel_Helpers_REST_API::response($response);
 	}
+	
 
 
 	/**

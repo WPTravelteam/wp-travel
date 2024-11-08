@@ -38,6 +38,42 @@ class WpTravel_Localize_Admin {
 		if ( get_current_screen()->base == 'dashboard_page_wp-travel-setup-page' ) {
 			$theme_lists = array(
                 array(
+                    'name'       => 'Trovity',
+                    'slug'       => 'trovity',
+                    'theme_page' => 'https://wensolutions.com/themes/trovity/',
+                    'screenshot' => 'http://wpdemo.wensolutions.com/trovity/wp-content/uploads/sites/55/2024/09/wpdemo-wensolutions-com-trovity-.png',
+                ),
+                array(
+                    'name'       => 'Triphub',
+                    'slug'       => 'triphub',
+                    'theme_page' => 'https://wensolutions.com/themes/triphub/',
+                    'screenshot' => 'http://wpdemo.wensolutions.com/triphub/wp-content/uploads/sites/52/2024/09/TripHub-2.png',
+                ),
+                array(
+                    'name'       => 'Travel Elemento',
+                    'slug'       => 'travel-elemento',
+                    'theme_page' => 'https://wensolutions.com/themes/travel-elemento/',
+                    'screenshot' => 'http://wpdemo.wensolutions.com/travel-elemento/wp-content/uploads/sites/50/2024/09/Travel-Elemento.png',
+                ),
+                array(
+                    'name'       => 'Travel Mates',
+                    'slug'       => 'travel-mates',
+                    'theme_page' => 'https://wensolutions.com/themes/travel-mates/',
+                    'screenshot' => 'http://wpdemo.wensolutions.com/travel-mates/wp-content/uploads/sites/49/2024/09/Travel-Mates.png',
+                ),
+                array(
+                    'name'       => 'Travelyo',
+                    'slug'       => 'travelyo',
+                    'theme_page' => 'https://wensolutions.com/themes/travelyo/',
+                    'screenshot' => 'http://wpdemo.wensolutions.com/travelyo/wp-content/uploads/sites/44/2024/09/Travelyo.png',
+                ),
+                array(
+                    'name'       => 'Travelsolution',
+                    'slug'       => 'travelsolution',
+                    'theme_page' => 'https://wensolutions.com/themes/travel-solution/',
+                    'screenshot' => 'http://wpdemo.wensolutions.com/travelsolution/wp-content/uploads/sites/28/2024/09/Travel-Solution.png',
+                ),
+                array(
                     'name'       => 'Travel Knock',
                     'slug'       => 'travel-knock',
                     'theme_page' => 'https://wensolutions.com/themes/travel-knock/',
@@ -259,7 +295,8 @@ class WpTravel_Localize_Admin {
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 		$translation_array = array(
-			'_nonce'                        => wp_create_nonce( 'wp_travel_nonce' ),
+            '_nonce'                        => wp_create_nonce( 'wp_travel_nonce' ),
+			'rest_nonce'                    => wp_create_nonce('wp_rest'),
 			'admin_url'                     => admin_url(),
 			'site_url'                      => site_url(),
 			'plugin_url'                    => plugin_dir_url( WP_TRAVEL_PLUGIN_FILE ),

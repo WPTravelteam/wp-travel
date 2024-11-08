@@ -176,13 +176,14 @@ const NonRecurringDates = ( props ) => {
         
 		nonRecurringDates.length > 0 && <tbody className="tbody-table">
 		{ nonRecurringDates.map( ( date, index ) => {
-			let loadingClass = isLoading && selectedDateIds.includes( date.id ) ? 'wptravel-loading' : '';
+			let loadingClass = isLoading && selectedDateIds.includes( date.id ) ? 'wptravel-loading ' : '';
+            let activeClass = selectedDateIds.includes( date.id ) ? 'wp-travel-active-date' : '';
 			let _nomineePricings = date.pricing_ids.split(',').map( id => id.trim() );
 			_nomineePricings = _.chain( _nomineePricings ).flatten().uniq().value().filter( p => p != '' && typeof allPricings[p] !== 'undefined' );
 			if ( ! _nomineePricings.length ) {
 				return <Fragment key={index}></Fragment>
 			}
-			return <tr key={index} id={'date-'+date.id} className={loadingClass}>
+			return <tr key={index} id={'date-'+date.id} className={loadingClass + activeClass}>
 				<td class="tablebody-booking-pricings" data-label={__i18n.bookings.pricings_list_label}>
 					{/**
 					 * @param props, date , and price id

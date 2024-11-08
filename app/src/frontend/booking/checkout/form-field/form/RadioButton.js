@@ -52,7 +52,7 @@ export default ( { travelerData, trvOne = 'travelerOne', pmtFld = 'no' } ) => {
                             type='radio' 
                             id={id} 
                             key={index}
-                            defaultChecked={ travelerValue == val ? true : false} 
+                            // defaultChecked={ travelerValue == val ? true : false} 
                             value={val}
                             className={ typeof wrapper_class != undefined && wrapper_class || ''}
                             onChange={ ( e ) => {

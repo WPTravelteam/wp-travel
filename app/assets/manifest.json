@@ -1,0 +1,16 @@
+{
+            "name": "WP Travel",
+            "short_name": "WPTVL",
+            "start_url": "http://main.local",
+            "display": "standalone",
+            "background_color": "#FDFDFD",
+            "theme_color": "#DB4938",
+            "orientation": "portrait-primary",
+            "icons": [
+            {
+                "src": "http://main.local/wp-content/uploads/2024/09/wpdemo-wensolutions-com-trovity-1.png",
+                "type": "image/png",
+                "sizes": "192x192"
+            }
+            ]
+        }

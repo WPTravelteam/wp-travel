@@ -68,6 +68,10 @@ class WP_Travel_Ajax_Cart {
 		$post_data = wptravel_sanitize_array( $post_data );
 		$response  = WP_Travel_Helpers_Cart::add_to_cart( $post_data );
 
+		// foreach ($response['cart']['cart_items'] as &$cartItem) {
+		// 	unset($cartItem['trip_data']);
+		// }
+
 		if( $settings['enable_woo_checkout'] == 'yes' ){
 			global $woocommerce;
 			$woocommerce->cart->empty_cart();

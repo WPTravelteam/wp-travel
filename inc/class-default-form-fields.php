@@ -221,6 +221,7 @@ class WP_Travel_Default_Form_Fields { // @phpcs:ignore
 	 * @return array Returns form fields.
 	 */
 	public static function traveller() {
+
 		$fields = array(
 			'first_name'   => array(
 				'type'        => 'text',
@@ -308,8 +309,90 @@ class WP_Travel_Default_Form_Fields { // @phpcs:ignore
 				),
 				'default'       => 'male',
 				'priority'      => 100,
-			),
+			)
 		);
+
+		if( is_admin() ){
+			if( get_post_meta( get_the_id(), 'wp_travel_pickup_location', true  ) ){
+				$fields['pickup_location'] = array(
+					'type'        => 'select',
+					'label'       => __( 'Pickup Point', 'wp-travel' ),
+					'name'        => 'wp_travel_pickup_location',
+					'id'          => 'wp-travel-pickup-location',
+					'validations' => array(
+						'required' => true,
+					),
+					'priority'    => 90,
+				);
+			}
+		}
+		
+		if(  isset( wptravel_get_settings()['enable_one_page_booking'] ) && wptravel_get_settings()['enable_one_page_booking'] == "" ){
+			$cart = WP_Travel_Helpers_Cart::get_cart();
+			
+			if( is_array( $cart ) ){
+
+				foreach( $cart['cart']['cart_items'] as $item ){
+					$trip_id = $item['trip_id'];
+				}
+		
+				if( get_post_meta( $trip_id, 'wp_travel_trip_pickup_points', true )  ){
+					$locations = array();
+					$required = false;
+					foreach( get_post_meta( $trip_id, 'wp_travel_trip_pickup_points', true  ) as $point ){
+						$locations[$point] = $point;
+					}
+
+					if( count( $locations ) > 0 ){
+						$required = true;
+					}
+
+					$fields['pickup_location'] = array(
+						'type'        => 'select',
+						'label'       => __( 'Pickup Point', 'wp-travel' ),
+						'name'        => 'wp_travel_pickup_location',
+						'id'          => 'wp-travel-pickup-location',
+						'validations' => array(
+							'required' => $required,
+						),
+						'options'       => $locations,
+						'priority'    => 90,
+					);
+				}
+			}
+		}else{
+			
+			if( !is_admin() ){
+				$trip_id = get_the_id();
+		
+				if( get_post_meta( $trip_id, 'wp_travel_trip_pickup_points', true )  ){
+				
+					$locations = array();
+					$required = false;
+					foreach( get_post_meta( $trip_id, 'wp_travel_trip_pickup_points', true  ) as $point ){
+						$locations[$point] = $point;
+					}
+
+					if( count( $locations ) > 0 ){
+						$required = true;
+					}
+
+					$fields['pickup_location'] = array(
+						'type'        => 'select',
+						'label'       => __( 'Pickup Point', 'wp-travel' ),
+						'name'        => 'wp_travel_pickup_location',
+						'id'          => 'wp-travel-pickup-location',
+						'validations' => array(
+							'required' => $required,
+						),
+						'options'       => $locations,
+						'priority'    => 90,
+					);
+				}
+			}
+		}
+
+
 		return $fields;
 	}
 }

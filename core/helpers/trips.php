@@ -49,20 +49,24 @@ class WpTravel_Helpers_Trips {
 		if ( empty( $trip_id ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
 		}
+		
 		$trip                = get_post( $trip_id );
+		
 		$wp_travel_itinerary = new WP_Travel_Itinerary( $trip );
 		$group_size          = $wp_travel_itinerary->get_group_size();
-
+		
 		if ( ! is_object( $trip ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
 		}
 		$settings = wptravel_get_settings();
-
+		
 		$extras            = WP_Travel_Helpers_Trip_Extras::get_trip_extras();
+		
 		$has_extras        = is_array( $extras ) && isset( $extras['code'] ) && 'WP_TRAVEL_TRIP_EXTRAS' == $extras['code'] && isset( $extras['trip_extras'] ) && count( $extras['trip_extras'] ) > 0 ? true : false;
 		$highest_price     = get_post_meta( $trip_id, 'wp_travel_show_highest_price', true );
 		$trip_default_data = array(
-			'trip_video_code'					=> get_post_meta( $trip_id, 'wp_travel_video_code', true ),
+			'trip_video_code'						=> get_post_meta( $trip_id, 'wp_travel_video_code', true ),
+			'trip_pickup_points'					=> empty( get_post_meta( $trip_id, 'wp_travel_trip_pickup_points', true ) ) ? [] : get_post_meta( $trip_id, 'wp_travel_trip_pickup_points', true ),
 			'min_checkout_price'					=> get_post_meta( $trip_id, 'wp_travel_trip_min_checkout_price', true ),
 			'pricing_type'                        => 'multiple-price',
 			'custom_booking_type'                 => 'custom-link',
@@ -260,6 +264,7 @@ class WpTravel_Helpers_Trips {
 		}
 
 		$pricings = WP_Travel_Helpers_Pricings::get_pricings( $trip->ID );
+		
 		if ( ! is_wp_error( $pricings ) && 'WP_TRAVEL_TRIP_PRICINGS' === $pricings['code'] ) {
 			$trip_data['pricings'] = (array) $pricings['pricings'];
 
@@ -274,12 +279,12 @@ class WpTravel_Helpers_Trips {
 					'from_price_sale_enable' => true,
 				)
 			);
-
+			
 			$trip_data['trip_price']    = $trip_price;
 			$trip_data['regular_price'] = $regular_price;
 			$trip_data['enable_sale']   = $enable_sale;
 		}
-
+		
 		$dates = WP_Travel_Helpers_Trip_Dates::get_dates( $trip->ID );
 		if ( ! is_wp_error( $dates ) && 'WP_TRAVEL_TRIP_DATES' === $dates['code'] ) {
 			$trip_data['dates']         = (array) $dates['dates'];
@@ -314,6 +319,7 @@ class WpTravel_Helpers_Trips {
 		$trip_data = wp_parse_args( $trip_data, $trip_default_data );
 		$trip_data = apply_filters( 'wp_travel_trip_data', $trip_data, $trip->ID ); // @phpcs:ignore
 		$trip_data = apply_filters( 'wptravel_trip_data', $trip_data, $trip->ID ); // Filters to add custom data.
+		
 		return array(
 			'code' => 'WP_TRAVEL_TRIP_INFO',
 			'trip' => $trip_data,
@@ -445,12 +451,13 @@ class WpTravel_Helpers_Trips {
 		}
 
 		if ( ! empty( $trip_data->trip_video_code ) || empty( $trip_data->trip_video_code ) ) {
-			/**
-			 * Save trip outline.
-			 *
-			 * @todo Need escaping in wp_travel_overview
-			 */
+
 			update_post_meta( $trip_id, 'wp_travel_video_code', sanitize_url( $trip_data->trip_video_code ) );
+		}
+
+		if ( ! empty( $trip_data->trip_pickup_points ) || empty( $trip_data->trip_pickup_points ) ) {
+
+			update_post_meta( $trip_id, 'wp_travel_trip_pickup_points', $trip_data->trip_pickup_points );
 		}
 
 		update_post_meta( $trip_id, 'wp_travel_trip_min_checkout_price', sanitize_text_field( $trip_data->min_checkout_price ) );
@@ -638,7 +645,7 @@ class WpTravel_Helpers_Trips {
 	 * @return Array
 	 */
 	public static function filter_trips( $args = array() ) {
-
+		
 		global $wpdb;
 
 		$post_ids      = array();
@@ -820,7 +827,7 @@ class WpTravel_Helpers_Trips {
 		if ( isset( $args['orderby'] ) && $args['orderby'] ) {
 			$orderby     = $args['orderby'];
 			$order       = isset( $args['order'] ) && $args['order'] ? $args['order'] : 'desc';
-			$orderby_sql = " ORDER BY ${orderby} {$order}";
+			$orderby_sql = " ORDER BY {$orderby} {$order}";
 		}
 
 		$year      = '';

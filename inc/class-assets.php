@@ -17,19 +17,6 @@ if ( ! class_exists( 'WpTravel_Assets' ) ) {
 		 */
 		private static $assets_path;
 
-		// /**
-		//  * Frontend assets.
-		//  */
-		// public static function frontend() {
-
-		// }
-
-		// /**
-		//  * Admin assets.
-		//  */
-		// public static function admin() {
-
-		// }
 
 		/**
 		 * Styles filter.

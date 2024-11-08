@@ -8,12 +8,14 @@ class WP_Travel_FW_Field_Text {
 	}
 
 	function render( $display = true ) {
+		
 		$validations = '';
 		if ( isset( $this->field['validations'] ) ) {
 			foreach ( $this->field['validations'] as $key => $attr ) {
 				$validations .= sprintf( ' %s="%s" data-parsley-%s="%s"', $key, $attr, $key, $attr );
 			}
 		}
+
 		$attributes = '';
 		if ( isset( $this->field['attributes'] ) ) {
 			foreach ( $this->field['attributes'] as $attribute => $attribute_val ) {

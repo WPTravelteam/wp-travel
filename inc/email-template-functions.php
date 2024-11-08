@@ -16,7 +16,7 @@ function wptravel_booking_admin_default_email_content() {
 
 	?>
 		<table class="wp-travel-wrapper" width="100%" cellpadding="0" cellspacing="0" style="color: #5d5d5d;font-family: Roboto, sans-serif;margin: auto;">
-			<tr class="wp-travel-content" style="background: #fff;">dfssdfsfsdfds
+			<tr class="wp-travel-content" style="background: #fff;">
 				<td colspan="2" align="left" class="wp-travel-content-top" style="background: #fff;box-sizing: border-box;margin: 0;padding: 20px 25px;">
 					<p style="line-height: 1.55;font-size: 14px;"><?php esc_html_e( 'Hello', 'wp-travel' ); ?> {sitename} <?php esc_html_e( 'Admin', 'wp-travel' ); ?>,</p>
 					<p style="line-height: 1.55;font-size: 14px;"><?php esc_html_e( 'You have received bookings from', 'wp-travel' ); ?> {customer_name}:</p>
@@ -280,7 +280,7 @@ function wptravel_admin_email_template() {
 	<html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>To admin</title>
+		<title><?php echo esc_html( 'To admin', 'wp-travel' ); ?></title>
 		<style type="text/css">
 			body{
 				background: #fcfcfc ;
@@ -372,7 +372,7 @@ function wptravel_admin_email_template() {
 			}
 		</style>
 	</head>
-	<body style="background: #fcfcfc;color: #5d5d5d;margin: 0;padding: 0;">aaaaaaaaaaaaaaaaaaaaa
+	<body style="background: #fcfcfc;color: #5d5d5d;margin: 0;padding: 0;">
 		<!-- Wrapper -->
 		<table class="wp-travel-wrapper" width="600" cellpadding="0" cellspacing="0" style="color: #5d5d5d;font-family: Roboto, sans-serif;margin: auto;"> 
 			<tr class="wp-travel-header" style="background: #fff;">			
@@ -590,7 +590,7 @@ function wptravel_customer_email_template() {
 	<html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>To admin</title>
+		<title><?php echo esc_html( 'To admin', 'wp-travel' ); ?></title>
 		<style type="text/css">
 			body{
 				background: #fcfcfc ;
@@ -897,7 +897,7 @@ function wptravel_enqueries_admin_email_template() {
 	<html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>To admin</title>
+		<title><?php echo esc_html( 'To admin', 'wp-travel' ); ?></title>
 		<style type="text/css">
 			body{
 				background: #fcfcfc ;
@@ -1108,7 +1108,7 @@ function wptravel_payment_email_template_admin() {
 	<html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>To admin</title>
+		<title><?php echo esc_html( 'To admin', 'wp-travel' ); ?></title>
 		<style type="text/css">
 			body{
 				background: #fcfcfc ;
@@ -1391,7 +1391,7 @@ function wptravel_payment_email_template_customer() {
 	<html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>To customer</title>
+		<title><?php echo esc_html( 'To customer', 'wp-travel' ); ?></title>
 		<style type="text/css">
 			body{
 				background: #fcfcfc;

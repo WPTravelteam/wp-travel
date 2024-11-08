@@ -124,9 +124,13 @@ final class WP_Session extends Recursive_ArrayAccess {
 	 * @uses apply_filters Calls `wp_session_cookie_httponly` to set the $httponly parameter of setcookie()
 	 */
 	protected function set_cookie() {
+		if ( isset( $_COOKIE[ WP_TRAVEL_SESSION_COOKIE ] ) ) {
+			return;
+		}
 		$secure   = apply_filters( 'wp_session_cookie_secure', false );
 		$httponly = apply_filters( 'wp_session_cookie_httponly', false );
 		if ( ! headers_sent( $file, $line ) ) {
+
 			setcookie( WP_TRAVEL_SESSION_COOKIE, $this->session_id . '||' . $this->expires . '||' . $this->exp_variant, $this->expires, COOKIEPATH, COOKIE_DOMAIN, $secure, $httponly );
 		}
 	}

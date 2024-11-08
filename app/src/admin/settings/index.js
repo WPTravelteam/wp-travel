@@ -65,7 +65,6 @@ const WPTravelSettings = () => {
 
     const { options } = allData;
 
-    let blockTab = {}
     let downloadsTab = {}
 
     if (_wp_travel.is_blocks_enable) {
@@ -85,13 +84,6 @@ const WPTravelSettings = () => {
                     </div>
                 </>
             )
-        }
-
-        blockTab = {
-            name: "block-settings",
-            title: __("Block Setting", "wp-travel"),
-            className: "tab-advanced",
-            content: SettingBlocks,
         }
     }
 
@@ -246,13 +238,12 @@ const WPTravelSettings = () => {
                 className: "tab-advanced",
                 content: SettingsDebug,
             },
-            // {
-            //     name: "import-export",
-            //     title: __("Import Export", "wp-travel"),
-            //     className: "tab-advanced",
-            //     content: ImportExport,
-            // },
-            blockTab,
+            {
+                name: "import-export",
+                title: __("Import Export", "wp-travel"),
+                className: "tab-advanced",
+                content: ImportExport,
+            },
             downloadsTab
         ],
         allData

@@ -1,79 +1,86 @@
-<?php 
+<?php
 
 /*
  * @author Wp-Travel
  * @since 6.8.0
  * Settings Import/Export
-*/
+ */
 
-// session_start();
-// session_write_close();
+class WP_Travel_Import_Export {
 
-// class WP_Travel_Import_Export{
+    public function __construct() {
+        add_action( 'rest_api_init', array( $this, 'wp_travel_import_export_api' ) );
+    }
 
-// 	public function __construct(){
-// 		add_action( 'rest_api_init', array( $this, 'wp_travel_import_export_api' ) );
-// 	}
+    // Registering the REST API routes
+    public function wp_travel_import_export_api() {
+        register_rest_route(
+            'wp-travel/v1',
+            '/import-settings-data',
+            array(
+                'methods'             => 'POST',
+                'permission_callback' => array( $this, 'check_permissions' ),
+                'callback'            => array( $this, 'wp_travel_import_data' ),
+            )
+        );
 
-// 	public function wp_travel_import_export_api(){
-// 		register_rest_route(
-// 			'wp-travel/v1',
-// 			'/import-settings-data',
-// 			array(
-// 				'methods'             => 'POST',
-// 				'permission_callback' => '__return_true',
-// 				'callback'            => array( $this, 'wp_travel_import_data' ),
-// 			)
-// 		);
+        register_rest_route(
+            'wp-travel/v1',
+            '/export-settings-data',
+            array(
+                'methods'             => 'GET',
+                'permission_callback' => array( $this, 'check_permissions' ),
+                'callback'            => array( $this, 'wp_travel_export_data' ),
+            )
+        );
+    }
 
-// 		register_rest_route(
-// 			'wp-travel/v1',
-// 			'/export-settings-data',
-// 			array(
-// 				'methods'             => 'GET',
-// 				'permission_callback' => '__return_true',
-// 				'callback'            => array( $this, 'wp_travel_export_data' ),
-// 			)
-// 		);
-// 	}
+    // Check if the current user has permission
+    public function check_permissions() {
+        return current_user_can( 'manage_options' );
+    }
 
-// 	public function wp_travel_import_data( WP_REST_Request $request ){
+    // Function to handle importing settings
+    public function wp_travel_import_data( WP_REST_Request $request ) {
+        // Get the raw JSON data from the request
+        $settings_data = $request->get_body_params();
+        
+        if ( empty( $settings_data['settings_data'] ) ) {
+            return new WP_REST_Response( 'No settings data provided.', 400 );
+        }
 
-// 		$settings_data = $request->get_body_params();
+        // Decode the JSON data into a PHP array
+        $settings_data_array = json_decode( $settings_data['settings_data'], true );
 
-// 		$settings_data =  (array)json_decode( $settings_data['settings_data'], true );
+        // Check if JSON decoding was successful
+        if ( json_last_error() !== JSON_ERROR_NONE ) {
+            return new WP_REST_Response( 'Invalid JSON data provided.', 400 );
+        }
 
-// 		update_option( 'wp_travel_settings', $settings_data );
+        // Update the option in the database
+        if ( update_option( 'wp_travel_settings', $settings_data_array ) ) {
+            return new WP_REST_Response( 'Settings imported successfully.', 200 );
+        } else {
+            return new WP_REST_Response( 'Failed to import settings.', 500 );
+        }
+    }
 
-// 		return "sucess";
-// 	}
+    // Function to handle exporting settings
+    public function wp_travel_export_data() {
+        // Retrieve WP Travel settings
+        $settings = get_option( 'wp_travel_settings' );
 
-// 	public function wp_travel_export_data(){
+        if ( empty( $settings ) ) {
+            return new WP_REST_Response( 'No settings data found.', 404 );
+        }
 
-// 		$_SESSION['download_settings'] = true;
+        // Create JSON response with settings data
+        $response = new WP_REST_Response( $settings, 200 );
+        $response->header( 'Content-Type', 'application/json' );
+        $response->header( 'Content-Disposition', 'attachment; filename=wp-travel-settings.json' );
 
-// 		return "sucess";
-// 	}
+        return $response;
+    }
+}
 
-// }
-
-// new WP_Travel_Import_Export();
-
-// if ( isset( $_SESSION['download_settings'] ) && $_SESSION['download_settings'] == true ) {
-// 	session_destroy();
-// 	$settings  = json_encode( wptravel_get_settings() );
-
-// 	$file = "wp-travel-settings.json";
-// 	$txt = fopen($file, "w") or die("Unable to open file!");
-// 	fwrite($txt, $settings);
-// 	fclose($txt);
-
-// 	header('Content-Description: File Transfer');
-// 	header('Content-Disposition: attachment; filename='.basename($file));
-// 	header('Expires: 0');
-// 	header('Cache-Control: must-revalidate');
-// 	header('Pragma: public');
-// 	header('Content-Length: ' . filesize($file));
-// 	header("Content-Type:  application/json");
-// 	readfile($file);
-// }
+new WP_Travel_Import_Export();

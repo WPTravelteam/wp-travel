@@ -544,6 +544,7 @@ class WP_Travel_Admin_Booking {
 
 		// $old_payment_status = isset( $old_payment_status[0] ) ? $old_payment_status[0] : 'N/A';
 
+
 		if ( $mail_sending_payment_status ) {
 			if ( $new_payment_status != $old_payment_status ) {
 
@@ -618,7 +619,8 @@ class WP_Travel_Admin_Booking {
 			}
 		}
 
-		update_post_meta( $booking_id, 'wp_travel_booking_status', sanitize_text_field( $new_status ) );
+
+		update_post_meta( $booking_id, 'wp_travel_booking_status', sanitize_text_field( $_POST['wp_travel_booking_status'] ) );
 		$checkout_fields = wptravel_get_checkout_form_fields();
 		foreach ( $checkout_fields as $field_type => $fields ) {
 			$priority = array();

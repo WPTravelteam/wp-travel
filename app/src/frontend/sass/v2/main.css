@@ -5579,7 +5579,7 @@ label.radio-checkbox-label input[type=checkbox], label.radio-checkbox-label .wp-
   width: auto;
 }
 .checkout-page-wrap .wp-travel-checkout-section .checkout-left .ws-theme-timeline-block .panel-body .payment-content .wp-travel-form-field [id*=error_container-] {
-  display: inherit;
+  display: block;
 }
 .checkout-page-wrap .wp-travel-checkout-section .checkout-left .ws-theme-timeline-block .panel-collapse {
   border: 0;

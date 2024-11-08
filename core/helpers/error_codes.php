@@ -106,7 +106,7 @@ class WP_Travel_Helpers_Error_Codes {
 
 			// Trip Extras.
 			'WP_TRAVEL_NO_TRIP_EXTRAS'                    => array(
-				'message' => __( 'No trip extras found.', 'wp-travel' ),
+				'message' => __( 'No trip extras found.....', 'wp-travel' ),
 			),
 
 			// WP Travel Search.

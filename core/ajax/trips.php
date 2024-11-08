@@ -46,11 +46,7 @@ class WP_Travel_Ajax_Trips {
 	public static function get_extra_gallery() {
 
 		$user = wp_get_current_user();
-		$allowed_roles = array( 'editor', 'administrator', 'author' );
 
-		if ( !array_intersect( $allowed_roles, $user->roles ) ) {
-			return wp_send_json( array( 'result' => 'Authentication error' ) );
-		}
 
 		if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 			$nonce_trip_extra  = $_POST['nonce'];
@@ -75,11 +71,6 @@ class WP_Travel_Ajax_Trips {
 		 */
 
 		$user = wp_get_current_user();
-		$allowed_roles = array( 'editor', 'administrator', 'author' );
-
-		if ( !array_intersect( $allowed_roles, $user->roles ) ) {
-			return wp_send_json( array( 'result' => 'Authentication error' ) );
-		}
 		
 		$permission = self::get_trip_permission_check();
 
@@ -103,10 +94,11 @@ class WP_Travel_Ajax_Trips {
 		 * solve json get error
 		 */
 		$post_data = file_get_contents( 'php://input' ); // Added 2nd Parameter to resolve issue with objects.
-		$post_data = is_string( $post_data ) ? json_decode( $post_data, true ) : $post_data;
-		$new_post_data = is_string( $post_data  ) ? json_decode( $post_data, true ) : $post_data;
+		//$post_data     = is_string( $post_data ) ? json_decode( $post_data, true ) : $post_data;
+		$new_post_data = is_string( $post_data ) ? json_decode( $post_data, true ) : $post_data;
 		$new_post_data = wptravel_sanitize_array( $new_post_data, true );
 		$response  = WP_Travel_Helpers_Trips::update_trip( $trip_id, $new_post_data );
+
 		WP_Travel_Helpers_REST_API::response( $response );
 	}
 
@@ -152,11 +144,7 @@ class WP_Travel_Ajax_Trips {
 	public static function get_trip() {
 
 		$user = wp_get_current_user();
-		$allowed_roles = array( 'editor', 'administrator', 'author' );
 
-		if ( !array_intersect( $allowed_roles, $user->roles ) ) {
-			return wp_send_json( array( 'result' => 'Authentication error' ) );
-		}
 
 		$permission = self::get_trip_permission_check();
 
@@ -224,7 +212,7 @@ class WP_Travel_Ajax_Trips {
 	 * Filter Trips according to Param.
 	 */
 	public static function filter_trips() {
-
+		
 		/**
 		 * Permission and nonce Check
 		 */
@@ -268,11 +256,7 @@ class WP_Travel_Ajax_Trips {
 		 */
 
 		$user = wp_get_current_user();
-		$allowed_roles = array( 'editor', 'administrator', 'author' );
 
-		if ( !array_intersect( $allowed_roles, $user->roles ) ) {
-			return wp_send_json( array( 'result' => 'Authentication error' ) );
-		}
 		
 		$permission = self::get_trips_permissions_check();
 

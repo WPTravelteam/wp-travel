@@ -370,16 +370,6 @@
 
 	&.success {
 		display: flex;
-		
-		#wp-travel__notice_time-bar {
-			height: 5px;
-			background-color: green;
-			width: 100%;
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			animation: slide-out 8s forwards linear;
-		}
 	}
 
 	#toast-close {

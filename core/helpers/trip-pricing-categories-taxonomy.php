@@ -15,7 +15,7 @@ class WP_Travel_Helpers_Trip_Pricing_Categories_Taxonomy {
 			$index = 0;
 			foreach ( $taxonomies as $tax ) {
 				$pricing_categories[ $index ]['id']       = $tax->term_id;
-				$pricing_categories[ $index ]['title']    = $tax->name;
+				$pricing_categories[ $index ]['title']    = html_entity_decode( $tax->name );
 				$pricing_categories[ $index ]['pax_size'] = 1;
 				$pax_size                                 = get_term_meta( $tax->term_id, 'pax_size', true );
 				if ( ! empty( $pax_size ) ) {
@@ -42,7 +42,7 @@ class WP_Travel_Helpers_Trip_Pricing_Categories_Taxonomy {
 		}
 
 		$pricing_categories_term['id']       = $term->term_id;
-		$pricing_categories_term['title']    = $term->name;
+		$pricing_categories_term['title']    = html_entity_decode( $term->name );
 		$pricing_categories_term['pax_size'] = 1;
 		$pax_size                            = get_term_meta( $term->term_id, 'pax_size', true );
 		if ( ! empty( $pax_size ) ) {
@@ -55,3 +55,4 @@ class WP_Travel_Helpers_Trip_Pricing_Categories_Taxonomy {
 		);
 	}
 }
+

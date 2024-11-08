@@ -74,3 +74,22 @@
 	left: auto !important;
     right: 10% !important;
 }
+
+.wp-travel-trip-pickup-location{
+	margin-bottom: 40px;
+}
+
+.wp-travel-trip-pickup-location h4.pickup-point-label{
+	padding: 0px;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 30px !important;
+}
+
+.wp-travel-trip-pickup-location .components-form-token-field__label{
+	display: none;
+}
+
+#wp-travel-trip-options .wp-travel-trip-pickup-location .components-form-token-field {
+    width: 100%;
+}

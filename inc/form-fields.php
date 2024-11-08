@@ -113,7 +113,17 @@ function wptravel_get_checkout_form_fields() {
 	$cart_amounts = $wt_cart->get_total();
 
 	$cart_total   = isset( $cart_amounts['total'] ) ? $cart_amounts['total'] : 0;
-	if ( wptravel_is_payment_enabled() && $cart_total > 0 ) {
+	
+
+	$include_trip_id = '';
+
+	foreach ($wt_cart->getItems() as $trip_key => $trip_info) {
+		if (isset($trip_info['trip_id'])) {
+			$include_trip_id = $trip_info['trip_id'];
+		}
+	}
+
+	if ( wptravel_is_payment_enabled( $include_trip_id ) && $cart_total > 0 ) {
 		$payment_fields['wp_travel_billing_address_heading'] = array(
 			'type'        => 'heading',
 			'label'       => __( 'Booking / Payments', 'wp-travel' ),
@@ -358,6 +368,7 @@ function wptravel_get_checkout_form_fields() {
 		);
 	}
 
+
 	$checkout_fields = array(
 		'traveller_fields' => $traveller_fields,
 		'billing_fields'   => $fields,
@@ -375,6 +386,7 @@ function wptravel_get_checkout_form_fields() {
 	if ( isset( $checkout_fields['payment_fields'] ) ) {
 		$checkout_fields['payment_fields'] = wptravel_sort_form_fields( $checkout_fields['payment_fields'] );
 	}
+
 	return $checkout_fields;
 }
 

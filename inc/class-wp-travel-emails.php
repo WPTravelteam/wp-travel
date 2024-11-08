@@ -180,7 +180,7 @@ class WP_Travel_Emails {
 
 					$email_template['subject'] = isset( $settings['booking_admin_template_settings']['admin_subject'] ) && '' !== $settings['booking_admin_template_settings']['admin_subject'] ? $settings['booking_admin_template_settings']['admin_subject'] : __( 'New Booking', 'wp-travel' );
 					// Set Contents.
-					$email_content = isset( $settings['booking_admin_template_settings']['email_content'] ) && '' !== $settings['booking_admin_template_settings']['email_content'] ? $settings['booking_admin_template_settings']['email_content'] : wptravel_booking_admin_default_email_content();
+					$email_content = isset( $settings['booking_admin_template_settings']['email_content'] ) && '' !== $settings['booking_admin_template_settings']['email_content'] ? $settings['booking_admin_template_settings']['email_content'] :'asdasdas';
 
 				} elseif ( 'client' == $sent_to ) {
 					// Set Headings.
@@ -192,6 +192,7 @@ class WP_Travel_Emails {
 					$email_template['subject'] = isset( $settings['booking_client_template_settings']['client_subject'] ) && '' !== $settings['booking_client_template_settings']['client_subject'] ? $settings['booking_client_template_settings']['client_subject'] : __( 'Thank you for your booking.', 'wp-travel' );
 					// Set Contents.
 					$email_content = isset( $settings['booking_client_template_settings']['email_content'] ) && '' !== $settings['booking_client_template_settings']['email_content'] ? $settings['booking_client_template_settings']['email_content'] : wptravel_booking_client_default_email_content();
+				
 				}
 				break;
 
@@ -266,7 +267,8 @@ class WP_Travel_Emails {
 	 * @return HTML
 	 */
 	public function email_heading( $sent_to, $details = array() ) {
-		ob_start(); ?><!DOCTYPE html>
+		ob_start(); ?>
+		<!DOCTYPE html>
 		<html>
 		<head>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">

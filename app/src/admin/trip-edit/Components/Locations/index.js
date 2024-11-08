@@ -1,5 +1,6 @@
-import { Notice, PanelRow, TextControl, ToggleControl, Button, PanelBody, BaseControl } from '@wordpress/components';
+import { Notice, PanelRow, TextControl, ToggleControl, Button, PanelBody, BaseControl, FormTokenField } from '@wordpress/components';
 import { dispatch, useSelect } from '@wordpress/data';
+import { useState } from '@wordpress/element';
 import { addFilter, applyFilters } from '@wordpress/hooks';
 import { sprintf, __ } from '@wordpress/i18n';
 import Geocode from "react-geocode";
@@ -97,8 +98,30 @@ const Locations = ({allData}) => {
     const settingsData = useSelect((select) => {
         return select('WPTravel/TripEdit').getSettings()
     }, []);
-    const { map_data } = allData
+    const { trip_pickup_points, map_data } = allData
+
+
+    const { updateTripData } = dispatch('WPTravel/TripEdit')
+
+    const [ selectedPoints, setSelectedPoints ] = useState( trip_pickup_points );
+
     return <ErrorBoundary>
+        <div className="wp-travel-trip-pickup-location">
+            <h4 className="pickup-point-label">Pickup Locations</h4>
+            <FormTokenField
+                value={ selectedPoints }
+                onChange={ ( tokens ) => { 
+                    setSelectedPoints( tokens ) 
+          
+                    updateTripData({
+                        ...allData,
+                        trip_pickup_points: tokens,
+                    });
+            
+                } }
+                __nextHasNoMarginBottom
+            />
+        </div>
         <div className="wp-travel-trip-location">
             <h4>{__i18n.map}</h4>
             {applyFilters('wp_travel_admin_map_area', [], settingsData, map_data)}

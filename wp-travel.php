@@ -3,12 +3,12 @@
  * Plugin Name: WP Travel
  * Plugin URI: http://wptravel.io/
  * Description: The best choice for a Travel Agency, Tour Operator or Destination Management Company, wanting to manage packages more efficiently & increase sales.
- * Version: 9.0.0
+ * Version: 9.8.0
  * Author: WP Travel
  * Author URI: http://wptravel.io/
  * Requires at least: 6.0.0
  * Requires PHP: 7.4
- * Tested up to: 6.5
+ * Tested up to: 6.6
  *
  * Text Domain: wp-travel
  * Domain Path: /i18n/languages/
@@ -38,7 +38,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '9.0.0';
+		public $version = '9.8.0';
 
 		/**
 		 * WP Travel API version.
@@ -54,6 +54,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 		 * @since 1.0.0
 		 */
 		protected static $instance = null;
+
+		public $session, $notices, $coupon, $tabs, $uploader;
 
 		/**
 		 * Main WpTravel Instance.
@@ -80,13 +82,14 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			$this->init_hooks();
 			$this->init_shortcodes();
 			$this->init_sidebars();
-			$this->wp_travel_add_column_on_price_category_relation_table();
+			// $this->wp_travel_add_column_on_price_category_relation_table();
 			/**
 			 * Add to extra column - booking table 
 			 * @since 7.8.0
 			 */
 			add_filter( 'manage_edit-itinerary-booking_columns', array( $this, 'wp_travel_booking_column_name' ) );
 			add_action( 'manage_itinerary-booking_posts_custom_column', array( $this, 'wp_travel_booking_columns_content' ), 10, 2 );
+			
 		}
 
 		public function wp_travel_add_column_on_price_category_relation_table(){
@@ -260,7 +263,38 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			/**
 			 * Admin Notice for install wp travel slicewp affiliate addon
  			 */
-			  add_action( 'admin_notices', array( $this, 'wp_travel_slicewp_affiliate_install_notice' ) );			
+			add_action( 'admin_notices', array( $this, 'wp_travel_slicewp_affiliate_install_notice' ) );			
+			
+			$reserved_booking_dates = array();
+
+			$booking_args = array(
+				'post_type'      => 'itinerary-booking', // Specify the custom post type
+				'posts_per_page' => 50, // Get all posts
+			);
+			
+			// Get the posts
+			$booking_posts = get_posts( $booking_args );
+
+			if ( !empty( $booking_posts ) ) {
+
+				$i = 0;
+				foreach ( $booking_posts as $post ) {
+
+					$oreder_items = get_post_meta( $post->ID, 'order_items_data', true );
+					
+					if( is_array( $oreder_items ) ){
+						foreach( $oreder_items as $item ){
+							$reserved_booking_dates[$i]['id'] = $item['trip_id'];
+							$reserved_booking_dates[$i]['date'] = isset( $item['trip_start_date'] ) ? $item['trip_start_date'] : '';
+							$i++;
+						}
+					}
+					
+				}
+				// Reset the global post object
+				wp_reset_postdata();
+			}
+			update_option('wp_travel_reserve_date', $reserved_booking_dates);
 			
 		}
 
@@ -397,7 +431,6 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			include sprintf( '%s/inc/class-post-types.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-post-status.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-taxonomies.php', WP_TRAVEL_ABSPATH );
-			// include sprintf( '%s/inc/class-itinerary-template.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/class-shortcode.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/widgets/class-wp-travel-widget-search.php', WP_TRAVEL_ABSPATH );
 			include sprintf( '%s/inc/widgets/class-wp-travel-widget-featured.php', WP_TRAVEL_ABSPATH );
@@ -490,9 +523,7 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			require WP_TRAVEL_ABSPATH . '/core/ajax/settings.php';
 			require WP_TRAVEL_ABSPATH . '/core/ajax/trip-pricing-categories-taxonomy.php';
 			require WP_TRAVEL_ABSPATH . '/core/ajax/trip-extras.php';
-			// require WP_TRAVEL_ABSPATH . '/core/ajax/trip-pricing-categories.php';
 			require WP_TRAVEL_ABSPATH . '/core/ajax/trip-dates.php';
-			// require WP_TRAVEL_ABSPATH . '/core/ajax/trip-excluded-dates-times.php';
 			require WP_TRAVEL_ABSPATH . '/core/ajax/pricings.php';
 			require WP_TRAVEL_ABSPATH . '/core/ajax/cart.php';
 			require WP_TRAVEL_ABSPATH . '/core/ajax/coupon.php';
@@ -502,10 +533,8 @@ if ( ! class_exists( 'WP_Travel' ) ) :
 			require WP_TRAVEL_ABSPATH . '/core/ajax/view-mode.php';
 			require WP_TRAVEL_ABSPATH . '/core/ajax/payments.php';
 
-			//include import and export setting file
-			// if( isset( wptravel_get_settings()['enable_session'] ) && wptravel_get_settings()['enable_session'] == 'yes' ){
-                // require WP_TRAVEL_ABSPATH . '/inc/import-export/import-export.php';
-            // }
+			//include import and export setting file			
+            require WP_TRAVEL_ABSPATH . '/inc/import-export/import-export.php';
 
 			/**
 			 * App Part.
@@ -964,5 +993,5 @@ function wptravel() {
 	return WP_Travel::instance();
 }
 
-// Start WP Travel.
+// // Start WP Travel.
 wptravel();

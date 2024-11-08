@@ -40,13 +40,13 @@ const TripOutline = ({allData}) => {
             <label htmlFor="wp-travel-trip-outline">{__i18n.trip_outline}</label>
         </PanelRow>
         <PanelRow className="wp-travel-editor">
-            {'undefined' !== typeof trip_outline && <WPEditor id="wp-travel-trip-outline" value={trip_outline}
+            {'undefined' !== typeof trip_outline && <WPEditor id="wp-travel-trip-outlines" value={trip_outline}
             onContentChange={(trip_outline) => {
                 updateTripData({
                     ...allData,
                     trip_outline: trip_outline
                 })
-            }} name="trip_outline" />}
+            }} name="trip_outlines" />}
         </PanelRow>
     </>;
 }
@@ -262,11 +262,17 @@ const Itinerary = ({allData}) => {
                                         <label>{__i18n.description}</label>
                                     </PanelRow>
                                     <PanelRow className="itinerary-description">
-                                        <TextareaControl
+                                        {/* <TextareaControl
                                             value={itineraries[itineraryId].desc ? itineraries[itineraryId].desc : null}
                                             onChange={
                                                 (e) => updateTripItinerary('desc', e, itineraryId)
                                             }
+                                        /> */}
+                                        <WPEditor 
+                                            id={`wp-travel-itinerary-description-${itineraryId}`} 
+                                            value={itineraries[itineraryId].desc ? itineraries[itineraryId].desc : null}
+                                            onContentChange={ (e) => updateTripItinerary('desc', e, itineraryId)} 
+                                            name={`itinerary_description_${itineraryId}`} 
                                         />
                                     </PanelRow>
                                     <hr />

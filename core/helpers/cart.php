@@ -10,6 +10,11 @@
  */
 class WP_Travel_Helpers_Cart {
 	public static function get_cart() {
+		
+		if( is_singular('itineraries') && wptravel_get_settings()['enable_one_page_booking'] == "" ){
+			return;
+		}
+
 		$cart_items = self::get_cart_items();
 		if ( is_wp_error( $cart_items ) || 'WP_TRAVEL_CART_ITEMS' !== $cart_items['code'] ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_EMPTY_CART' );
@@ -153,6 +158,7 @@ class WP_Travel_Helpers_Cart {
 			'discount'   => $wt_cart->get_discounts(), // Coupon Implementation.
 		);
 	}
+	
 
 	public static function add_to_cart( $postData = array() ) {
 		if ( empty( $postData['trip_id'] ) ) {

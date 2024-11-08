@@ -34,13 +34,15 @@ class WpTravel_Helpers_Strings {
 			)
 		);
 
+
 		$localized_strings = array(
+			'trip_extras_content_limit' => apply_filters( 'wp_travel_trip_extras_content_limit', 250 ),
 			'activities'                => __( 'Activities', 'wp-travel' ),
 			'add_date'                  => __( 'Please add date.', 'wp-travel' ),
 			'alert'                     => self::alert_strings(),
 			'book_n_pay'                => __( 'Book and Pay', 'wp-travel' ),
 			'book_now'                  => __( 'Book Now', 'wp-travel' ),
-			'booking_tab_content_label' => __( 'Select Date and Pricing Options for this trip in the Trip Options setting.', 'wp-travel' ),
+			'booking_tab_content_label' => apply_filters( 'wp_travel_booking_section_main_title', __( 'Select Date and Pricing Options for this trip in the Trip Options setting.', 'wp-travel' ) ),
 			'bookings'                  => self::booking_strings(),
 			'category'                  => __( 'Category', 'wp-travel' ),
 			'close'                     => __( 'Close', 'wp-travel' ),
@@ -223,7 +225,12 @@ class WpTravel_Helpers_Strings {
 			'set_coupon_apply'			=> __( 'Coupon applied.', 'wp-travel' ),
 			'set_enter_coupon_message'	=> __( 'Enter you coupon code', 'wp-travel' ),
 			'set_coupon_btn'			=> __( 'Apply Coupon', 'wp-travel' ),
+			'privacy_label'				=> __( 'Privacy Policy', 'wp-travel' ),
+			'strip_card'				=> __( 'Stripe Card', 'wp-travel' ),
 			'set_ideal_bank'			=> __( 'iDEAL Bank', 'wp-travel' ),
+			'payupay'					=> __( 'Pay with PayU', 'wp-travel' ),
+			'payupaylatam'					=> __( 'Pay with PayU Latam', 'wp-travel' ),
+			'payupayrazorpay'					=> __( 'Pay with Razorpay', 'wp-travel' ),
 			'set_book_now_btn'			=> __( 'Book Now', 'wp-travel' ),
 			'set_cart_updated'			=> __( 'Cart updated successfully.', 'wp-travel' ),
 			'set_cart_updated_error'	=> __( "Cart failed to update due to server error.", "wp-travel" ),
@@ -268,7 +275,18 @@ class WpTravel_Helpers_Strings {
 			'group'  => $localized_strings['group'],
 			'person' => self::booking_strings()['person'],
 		);
+		
+		$localized_strings['reserved_booking_dates_all_trips'] = apply_filters( 'wp_travel_enable_booking_reserve_date_all_trips', true );
 
+		$localized_strings['add_to_cart_notice'] = apply_filters( 'wp_travel_add_to_cart_notice_delay_time', 3000 );
+
+
+		if( apply_filters( 'wp_travel_enable_booking_reserve_date', false ) == true && class_exists( 'WP_Travel_Pro' ) ){
+			$localized_strings['reserved_booking_dates'] = get_option('wp_travel_reserve_date');
+		}else{
+			$localized_strings['reserved_booking_dates'] = array();
+		}
+	
 		return apply_filters( 'wp_travel_strings', $localized_strings ); // @phpcs:ignore
 
 	}
@@ -304,8 +322,8 @@ class WpTravel_Helpers_Strings {
 			'combined_pricing'              => __( 'Pricing', 'wp-travel' ), // Added for combined pricing label for categorized pricing @since 3.0.0.
 			'pricing_not_available'         => __( 'The pricing is not available on the selected Date. Please choose another date or pricing.', 'wp-travel' ),
 			'max_pax_exceeded'              => __( 'Max. Exceeded.', 'wp-travel' ),
-			'date_select'                   => __( 'Select a Date', 'wp-travel' ),
-			'date_select_to_view_options'   => __( 'Select a Date to view available pricings and other options.', 'wp-travel' ),
+			'date_select'                   => apply_filters( 'wp_travel_select_date_label', __( 'Select a Date', 'wp-travel' ) ),
+			'date_select_to_view_options'   => apply_filters( 'wp_travel_select_date_notice_label', __( 'Select a Date to view available pricings and other options.', 'wp-travel' ) ),
 			'booking_tab_clear_all'         => __( 'Clear All', 'wp-travel' ),
 			'min_booking_amount'        => __( 'Total:', 'wp-travel' ),
 			'booking_tab_booking_btn_label' => __( 'Book Now', 'wp-travel' ),
@@ -313,6 +331,7 @@ class WpTravel_Helpers_Strings {
 			'group_discount_tooltip'        => __( 'Group Discounts', 'wp-travel' ),
 			'view_group_discount'           => __( 'Discounts', 'wp-travel' ),
 			'pricings_list_label'           => __( 'Pricings', 'wp-travel' ),
+			'pricings_not_found'           => __( 'Sorry!! Pricing not found for selected date. Please select another date.', 'wp-travel' ),
 			'person'                        => __( 'Person', 'wp-travel' ),
 			'date'                          => __( 'Date', 'wp-travel' ),
 			'trip_extras'                   => __( 'Trip Extras', 'wp-travel' ),

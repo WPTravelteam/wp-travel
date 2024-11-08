@@ -12,7 +12,6 @@
  */
 function wptravel_book_now() {
 	
-
 	$settings = wptravel_get_settings();
 	if( class_exists( 'WooCommerce' ) && $settings['enable_woo_checkout'] == 'yes' ){
 		if( !isset( $_REQUEST['key']) ){
@@ -177,6 +176,8 @@ function wptravel_book_now() {
 	update_post_meta( $booking_id, 'order_items_data', $items ); // @since 1.8.3
 	update_post_meta( $booking_id, 'order_totals', $wt_cart->get_total() );
 	update_post_meta( $booking_id, 'wp_travel_pax', $total_pax );
+
+	
 
 
 	$checkout_default_country = apply_filters( 'checkout_default_country', '' ); //@since 8.1.0
@@ -418,7 +419,38 @@ function wptravel_book_now() {
 
 	// Clear Cart After process is complete.
 	$wt_cart->clear();
+
+
+	$reserved_booking_dates = array();
+
+	$booking_args = array(
+		'post_type'      => 'itinerary-booking', // Specify the custom post type
+		'posts_per_page' => 50, // Get all posts
+	);
 	
+	// Get the posts
+	$booking_posts = get_posts( $booking_args );
+
+	if ( !empty( $booking_posts ) ) {
+
+		$i = 0;
+		foreach ( $booking_posts as $post ) {
+
+			$oreder_items = get_post_meta( $post->ID, 'order_items_data', true );
+
+			foreach( $oreder_items as $item ){
+				$reserved_booking_dates[$i]['id'] = $item['trip_id'];
+				$reserved_booking_dates[$i]['date'] = $item['trip_start_date'];
+				$i++;
+			}
+			
+		}
+		// Reset the global post object
+		wp_reset_postdata();
+	}
+	update_option('wp_travel_reserve_date', $reserved_booking_dates);
+
+
 	$thankyou_page_url = add_query_arg( 'booked', true, $thankyou_page_url );
 	$thankyou_page_url = add_query_arg( '_nonce', WP_Travel::create_nonce(), $thankyou_page_url );
 	$thankyou_page_url = add_query_arg( 'order_id', $booking_id, $thankyou_page_url );

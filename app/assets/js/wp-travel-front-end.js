@@ -1239,4 +1239,10 @@ jQuery(function($) {
 		$(this).hide();
 		$(parent + ' .open-all-itinerary-link').show();
 	});
+
+    $( '.timeline-contents .panel' ).on( 'click', function(){
+        $( '.timeline-contents .panel .panel-collapse' ).removeClass('in').addClass('collapse');
+    } );
+     
 });
+

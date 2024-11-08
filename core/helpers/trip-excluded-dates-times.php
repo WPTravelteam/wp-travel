@@ -29,8 +29,7 @@ class WpTravel_Helpers_Trip_Excluded_Dates_Times {
 	 *
 	 * @param int $trip_id Trip ID.
 	 */
-	public static function get_dates_times( $trip_id = false ) {
-
+	public static function get_dates_times($trip_id = false) {
 		if ( empty( $trip_id ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_ID' );
 		}
@@ -69,6 +68,7 @@ class WpTravel_Helpers_Trip_Excluded_Dates_Times {
 			)
 		);
 	}
+	
 
 	/**
 	 * Update trip dates and times.

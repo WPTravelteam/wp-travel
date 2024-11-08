@@ -61,11 +61,40 @@ const __i18n = {
 	..._wp_travel_admin.strings,
 };
 
+const removeTags = (str) => {
+	if ((str === null) || (str === ''))
+        return false;
+    else
+        str = str.toString();
+
+    // Regular expression to identify HTML tags in
+    // the input string. Replacing the identified
+    // HTML tag with a null string.
+    return str.replace(/(<([^>]+)>)/ig, '');
+}
+
 const WPTravelTripOptions = () => {
 	const allData = useSelect((select) => {
 		return select("WPTravel/TripEdit").getAllStore();
 	}, []);
 
+
+	if( _wp_travel_admin.rankmath == 1 ){
+
+		var trip_overview =_wp_travel_admin.overview;
+		var trip_outline =_wp_travel_admin.outline;
+		var trip_include =_wp_travel_admin.include;
+		var trip_exclude =_wp_travel_admin.exclude;
+
+		useEffect(() => {
+		
+			wp.hooks.addFilter('rank_math_content', 'rank-math', function(content) {
+				// 
+				// This function modifies the content passed to the hook
+				return content + trip_overview + trip_outline + trip_include + trip_exclude;
+			});
+		},[trip_overview, trip_outline, trip_include, trip_exclude] );
+	}
 
 	toggleDisablePostUpdate(allData.has_state_changes);
 
@@ -275,3 +304,4 @@ domReady(function () {
 		);
 	}
 });
+

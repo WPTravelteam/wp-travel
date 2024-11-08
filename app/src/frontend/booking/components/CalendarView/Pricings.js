@@ -41,7 +41,7 @@ const Pricings =  ( props ) => {
 				}
 				</>
 				
-			: 1 != nomineePricingIds.length && <h4>{ __( 'Sorry!! Pricing not found for selected date. Please select another date.', 'wp-travel' ) }</h4>
+			: 1 != nomineePricingIds.length && <h4>{ __i18n.bookings.pricings_not_found }</h4>
 		}
 	</>
 }

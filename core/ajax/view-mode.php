@@ -19,7 +19,16 @@ class WP_Travel_Ajax_View_Mode {
 
         $payload = WP_Travel::get_sanitize_request('post');
         $view_mode = $payload['mode'];
-        setcookie( 'wptravel_view_mode', $view_mode, time() + 604800, '/' );
+        // setcookie( 'wptravel_view_mode', $view_mode, time() + 604800, '/' );
+		setcookie(
+		'wptravel_view_mode',   // Cookie name
+		$view_mode,             // Cookie value
+		time() + 604800,        // Expiration time (1 week)
+		'/',                    // Path
+		$_SERVER['HTTP_HOST'],  // Domain
+		isset($_SERVER['HTTPS']), // Secure flag (true if HTTPS is enabled)
+		true                    // HttpOnly flag
+	);
 		$response  = array( 'success' => true );
 		WP_Travel_Helpers_REST_API::response( $response );
 	}

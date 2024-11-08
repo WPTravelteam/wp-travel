@@ -12,11 +12,7 @@ class WP_Travel_Ajax_Trip_Pricing_Categories_Taxonomy {
 	public static function get_trip_pricing_categories_terms() {
 
 		$user = wp_get_current_user();
-		$allowed_roles = array( 'editor', 'administrator', 'author' );
 
-		if ( !array_intersect( $allowed_roles, $user->roles ) ) {
-			return wp_send_json( array( 'result' => 'Authentication error' ) );
-		}
 		
 		$permission = WP_Travel::verify_nonce();
 
@@ -31,11 +27,7 @@ class WP_Travel_Ajax_Trip_Pricing_Categories_Taxonomy {
 	public static function get_trip_pricing_categories_term() {
 
 		$user = wp_get_current_user();
-		$allowed_roles = array( 'editor', 'administrator', 'author' );
 
-		if ( !array_intersect( $allowed_roles, $user->roles ) ) {
-			return wp_send_json( array( 'result' => 'Authentication error' ) );
-		}
 		
 		$permission = WP_Travel::verify_nonce();
 

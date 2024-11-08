@@ -258,7 +258,16 @@ class WP_Travel_Lib_Cart {
 		$cart_items = WPTravel()->session->set( $this->cart_id, $cart );
 		// Cookie data to enable data info in js.
 		ob_start();
-		setcookie( 'wp_travel_cart', wp_json_encode( $cart ), time() + 604800, '/' );
+		// setcookie( 'wp_travel_cart', wp_json_encode( $cart ), time() + 604800, '/' );
+		setcookie(
+			'wp_travel_cart',               // Cookie name
+			wp_json_encode($cart),          // Cookie value (JSON-encoded cart)
+			time() + 604800,                // Expiration time (1 week)
+			'/',                            // Path
+			$_SERVER['HTTP_HOST'],          // Domain
+			isset($_SERVER['HTTPS']),       // Secure flag (true if HTTPS is enabled)
+			true                            // HttpOnly flag
+		);
 		ob_end_flush();
 	}
 	/**

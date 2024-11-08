@@ -20,7 +20,7 @@ class WP_Travel_FW_Field_Checkbox {
 				if ( 'maxlength' === $key ) { // issue fixes for field editor conflict with validaton. checkbox doesn't have maxlength.
 					continue;
 				}
-				$validations .= sprintf( 'data-parsley-%s="%s"', $key, $attr );
+				$validations .= sprintf( ' %s="%s" data-parsley-%s="%s"', $key, $attr, $key, $attr );
 			}
 		}
 		$output = '';

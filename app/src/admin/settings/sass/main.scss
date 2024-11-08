@@ -145,8 +145,8 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 	}
 	svg.components-checkbox-control__checked,
 	svg.components-checkbox-control__indeterminate {
-		left: -4px;
-		top: -4px;
+		left: 9px;
+		top: 7px;
 	}
 	.wp-core-ui .button,
 	.wp-core-ui .button-secondary {
@@ -209,7 +209,7 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 			.components-base-control__field {
 				.components-flex {
 					display: flex;
-					justify-content: flex-end;
+					// justify-content: flex-end;
 				}
 
 				.components-textarea-control__input {
@@ -2249,3 +2249,4 @@ $wp-travel-backdrop: rgba(100, 100, 100, 0.7);
 		}
     }
 }
+

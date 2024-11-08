@@ -61,7 +61,7 @@ class WpTravel_Helpers_Enquiry {
 			'trips'                     => $mapped_trip,
 			'wp_travel_enquiry_name'    => $enquiry_name,
 			'wp_travel_enquiry_email'   => $enquiry_email,
-			'wp_travel_enquiry_query'   => $enquiry_query,
+			'wp_travel_enquiry_query'   => isset($enquiry_query) ? $enquiry_query : '',
 			'wp_travel_trip_id'         => $enquiry_trip_id,
 			'wp_travel_form_field'      => $enquiry_forms,
 			'wp_travel_form_field_data' => $enquiry_field_data,

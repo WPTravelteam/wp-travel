@@ -72,11 +72,16 @@ const SaveSettings = (props) => {
                         </p>
                     </div>
                 </div>
+
                 <Button
                     variant="secondary"
                     onClick={() => {
+                        
+                        delete allData[ 'options' ];
+
                         updateRequestSending(true);
-                        apiFetch({ url: `${ajaxurl}?action=wp_travel_update_settings&_nonce=${_wp_travel._nonce}`, data: JSON.stringify( allData ), method: 'post' }).then(res => {
+                        // apiFetch({ url: `${ajaxurl}?action=wp_travel_update_settings&_nonce=${_wp_travel._nonce}`, data: JSON.stringify( allData ), method: 'post' }).then(res => {
+                        apiFetch({ url: `${ajaxurl}?action=wp_travel_update_settings&_nonce=${_wp_travel._nonce}`, data: allData, method: 'post' }).then(res => {
                             updateRequestSending(false);
 
                             if (res.success && "WP_TRAVEL_UPDATED_SETTINGS" === res.data.code) {
