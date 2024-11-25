@@ -11,6 +11,8 @@ import { useSelect, select, dispatch } from "@wordpress/data"; // redux [and als
 import { applyFilters, addFilter } from "@wordpress/hooks";
 import { _n, __ } from "@wordpress/i18n";
 import domReady from "@wordpress/dom-ready";
+import ReactDOM from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
 import ErrorBoundary from "../../ErrorBoundry/ErrorBoundry";
 
 import SettingsCurrency from "./components/settingsContent/general/SettingsCurrency";
@@ -659,18 +661,18 @@ domReady(function () {
         typeof document.getElementById("wp-travel-settings-block") &&
         null !== document.getElementById("wp-travel-settings-block")
     ) {
-        render(
-            <WPTravelSettings />,
-            document.getElementById("wp-travel-settings-block")
-        );
+        const root = createRoot(document.getElementById("wp-travel-settings-block"));
+        root.render(<WPTravelSettings />);
     }
 });
+
 /**
  * Rendering network 
  * @since 6.7.0
  */
 domReady(function () {
     if ('undefined' !== typeof document.getElementById('wp-travel-network-settings-block') && null !== document.getElementById('wp-travel-network-settings-block')) {
-        render(<WPTravelNetworkSettings />, document.getElementById('wp-travel-network-settings-block'));
+        const root = createRoot(document.getElementById('wp-travel-network-settings-block'));
+        root.render(<WPTravelNetworkSettings />);
     }
 });

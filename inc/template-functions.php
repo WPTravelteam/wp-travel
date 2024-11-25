@@ -116,7 +116,7 @@ function wptravel_archive_title() {
  * @since 4.0.4
  */
 function wptravel_posts_clauses_filter( $post_clauses, $object ) {
-
+	
 	if ( ! WP_Travel::verify_nonce( true ) ) {
 		return $post_clauses;
 	}
@@ -2197,11 +2197,22 @@ function wptravel_archive_listing_sidebar() {
  * @return void
  */
 function wptravel_posts_filter( $query ) {
-	
+
 	if ( ! WP_Travel::verify_nonce( true ) ) {	
-		if ( !is_admin() && apply_filters( 'wp_travel_list_trips_orders', '' ) != '' ) {
-			$query->set( 'orderby', 'post_title' );
-			$query->set( 'order', apply_filters( 'wp_travel_list_trips_orders', '' ) );
+
+		$current_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+		
+		// Check if the URL contains 'tour-extras'
+		if (strpos($current_url, 'tour-extras') !== false) {
+			if ( !is_admin() && apply_filters( 'wp_travel_list_tour_extras_orders', '' ) != '' ) {
+				$query->set( 'orderby', 'post_title' );
+				$query->set( 'order', apply_filters( 'wp_travel_list_tour_extras_orders', '' ) );
+			}
+		} else {
+			if ( is_archive() && !is_admin() && apply_filters( 'wp_travel_list_trips_orders', '' ) != '' ) {
+				$query->set( 'orderby', 'post_title' );
+				$query->set( 'order', apply_filters( 'wp_travel_list_trips_orders', '' ) );
+			}
 		}
 			
 		return $query;

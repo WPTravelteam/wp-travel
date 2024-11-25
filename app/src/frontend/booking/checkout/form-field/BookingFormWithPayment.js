@@ -130,7 +130,7 @@ export default () => {
                 })}
                 { wp_travel_booking_option == "booking_with_payment"&& selected_payment == 'bank_deposit' && <BankDetail />}
                 { wp_travel_booking_option == 'booking_with_payment' && typeof payment_select != 'undefined' && typeof payment_select.wp_travel_payment_gateway != 'undefined' && payment_select.wp_travel_payment_gateway == 'stripe' && <div className="wptravel-single-page-stripcheckout"><label> {i18n.strip_card }</label><div id="card-element"></div> </div>}
-                {  _wp_travel.policy_link !== "" &&
+               {  _wp_travel.policy_link !== "" &&
                     <div id="onpage-privacy-policy" className="wptravel-onepage-payment-total-trip-price">
                         <div className="components-panel__body is-opened wptrave-on-page-booking-price-with-coupon wptrave-onpage-price-calculation wptravel-opb-privacy-policy-check">
                             <div className="components-panel__row">
@@ -138,7 +138,7 @@ export default () => {
                                     {i18n.privacy_label }
                                 </label>
                                 <div className="radio-checkbox-label">
-                                    <input type="checkbox" name="wp_travel_checkout_gdpr_msg[]" required="1" value={_wp_travel.gdpr_msg} data-parsley-required="1" data-parsley-errors-container="#error_container-wp-travel-enquiry-gdpr-msg" data-parsley-multiple="wp_travel_checkout_gdpr_msg" checked/>
+                                    <input type="checkbox" name="wp_travel_checkout_gdpr_msg[]" required="1" value={_wp_travel.gdpr_msg} data-parsley-required="1" data-parsley-errors-container="#error_container-wp-travel-enquiry-gdpr-msg" data-parsley-multiple="wp_travel_checkout_gdpr_msg"/>
                                         <span>{_wp_travel.gdpr_msg}</span>  
                                         {   
                                             _wp_travel.gdpopen_gdpr_in_new_tab == 'yes' &&
@@ -182,6 +182,36 @@ export default () => {
                 <div className="wptravel-on-page-price-with-payment-field-show">
                     <CouponApplyAmount coupon_data={cart_amount} currency_symbol={ currency_symbol } booking_option={wp_travel_booking_option} payment_mode={wp_travel_payment_mode} partial_enable={ partial_enable }  /> 
                 </div>
+                {  _wp_travel.policy_link !== "" &&
+                    <div id="onpage-privacy-policy" className="wptravel-onepage-payment-total-trip-price">
+                        <div className="components-panel__body is-opened wptrave-on-page-booking-price-with-coupon wptrave-onpage-price-calculation wptravel-opb-privacy-policy-check">
+                            <div className="components-panel__row">
+                                <label for="wp-travel-enquiry-gdpr-msg">
+                                    {i18n.privacy_label }
+                                </label>
+                                <div className="radio-checkbox-label">
+                                    <input type="checkbox" name="wp_travel_checkout_gdpr_msg[]" required="1" value={_wp_travel.gdpr_msg} data-parsley-required="1" data-parsley-errors-container="#error_container-wp-travel-enquiry-gdpr-msg" data-parsley-multiple="wp_travel_checkout_gdpr_msg"/>
+                                        <span>{_wp_travel.gdpr_msg}</span>  
+                                        {   
+                                            _wp_travel.gdpopen_gdpr_in_new_tab == 'yes' &&
+                                            <a href={_wp_travel.policy_link} target="_blank"><span>{ _wp_travel.policy_page_title }</span></a>
+                                            ||
+                                            <a href={_wp_travel.policy_link}><span>{ _wp_travel.policy_page_title }</span></a>
+                                        }
+                                        
+                                </div>	
+                                	
+                            </div>
+                        </div>
+                    </div>
+                }
+                {  ( _wp_travel.is_pro_enable == 'yes' && typeof _wp_travel.enable_subscription != 'undefined' ) &&
+                    <div class="on-page wp-travel-form-field wp-travel-enquiry-subscribe-section">
+                        <label for="wp-travel-subscribe">{_wp_travel.subscription_data.subscribe_label}</label>
+                        <label class="radio-checkbox-label"><input type="checkbox" name="wp_travel_subscribe[]" value={_wp_travel.subscription_data.subscribe_desc} data-parsley-errors-container="#error_container-wp-travel-subscribe" data-parsley-multiple="wp_travel_subscribe" />{_wp_travel.subscription_data.subscribe_desc}</label>
+                        <div id="error_container-wp-travel-subscribe"></div>
+                    </div>
+                } 
                 <input type="hidden" name="wp_travel_booking_option" value="booking_only" />
                 { travelerKey.length > 0 && travelerKey.map( ( keyList, indexs ) => {
                     const trvValue = typeof travelerData[keyList] != 'undefined' && travelerData[keyList] || { 1 : ''}

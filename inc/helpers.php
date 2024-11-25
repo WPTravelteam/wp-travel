@@ -2819,6 +2819,7 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 														if ( $indexs == 0 ) {
 															
 															foreach ( $traveller_fields as $field ) {
+										
 																if ( 'heading' === $field['type'] ) {
 																	// Do nothing.
 																} elseif ( in_array( $field['type'], array( 'hidden' ) ) ) {
@@ -2827,22 +2828,24 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 																	// Do nothing.
 																}else {
 																	$value = isset( $traveller_infos[ $field['name'] ] ) && isset( $traveller_infos[ $field['name'] ][0] ) ? maybe_unserialize( $traveller_infos[ $field['name'] ][0] ) : '';
-																	echo '<div class="my-order-single-field clearfix">';
-																	printf( '<span class="my-order-head">%s:</span>', $field['label'] ); // @phpcs:ignore	
-																	
-																	if( $field['type'] == 'date' ){
-																		printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? wptravel_format_date( $value[ $cart_id ][ $key ] ): '' ); // @phpcs:ignore
-																	}else{		
-																		if( $field['label'] == 'Country' && apply_filters( 'wptravel_show_full_country_name', false ) == true ){
-																			printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? wptravel_get_countries()[ $value[ $cart_id ][ $key ] ]: '' );
-																		}else{
-																			if( isset($value[ $cart_id ]) ){
-																			printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? $value[ $cart_id ][ $key ] : '' ); // @phpcs:ignore	
-																			}
-																		}											
-																																		
+																	if( isset( $value[ $cart_id ][ $key ] ) && !empty($value[ $cart_id ][ $key ]) ){
+																		echo '<div class="my-order-single-field clearfix">';
+																		printf( '<span class="my-order-head">%s:</span>', $field['label'] ); // @phpcs:ignore	
+																		
+																		if( $field['type'] == 'date' ){
+																			printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? wptravel_format_date( $value[ $cart_id ][ $key ] ): '' ); // @phpcs:ignore
+																		}else{		
+																			if( $field['label'] == 'Country' && apply_filters( 'wptravel_show_full_country_name', false ) == true ){
+																				printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? wptravel_get_countries()[ $value[ $cart_id ][ $key ] ]: '' );
+																			}else{
+																				if( isset($value[ $cart_id ]) ){
+																				printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? $value[ $cart_id ][ $key ] : '' ); // @phpcs:ignore	
+																				}
+																			}											
+																																			
+																		}
+																		echo '</div>';
 																	}
-																	echo '</div>';
 																}
 															}
 															$indexs = $indexs + 1;
@@ -2864,10 +2867,13 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 																		 * remove @since 6.2.0 
 																		 * for fixes multicart multitraveler info..
 																		 */
-																		echo '<div class="my-order-single-field clearfix">';
-																		printf( '<span class="my-order-head">%s:</span>', $field['label'] ); // @phpcs:ignore
-																		printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? $value[ $cart_id ][ $key ] : ''   ); // @phpcs:ignore
-																		echo '</div>';
+
+																		if( isset( $value[ $cart_id ][ $key ] )  && !empty($value[ $cart_id ][ $key ]) ){
+																			echo '<div class="my-order-single-field clearfix">';
+																			printf( '<span class="my-order-head">%s:</span>', $field['label'] ); // @phpcs:ignore
+																			printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? $value[ $cart_id ][ $key ] : ''   ); // @phpcs:ignore
+																			echo '</div>';
+																		}
 																	}
 																}
 															} else {
@@ -2883,17 +2889,19 @@ function wptravel_view_booking_details_table( $booking_id, $hide_payment_column 
 																	 * remove @since 6.2.0 
 																	 * for fixes multicart multitraveler info..
 																	 */
-
-																	echo '<div class="my-order-single-field clearfix">';
-																	printf( '<span class="my-order-head">%s:</span>', $field['label'] ); // @phpcs:ignore
-																	if( $field['type'] == 'date' ){
-																		printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? wptravel_format_date( $value[ $cart_id ][ $key ] ): '' ); // @phpcs:ignore
-																	}else{	
-																		if( isset($value[ $cart_id ]) ){													
-																		printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? $value[ $cart_id ][ $key ] : '' ); // @phpcs:ignore		
-																		}															
+																	if( isset( $value[ $cart_id ][ $key ] )  && !empty($value[ $cart_id ][ $key ]) ){
+																		echo '<div class="my-order-single-field clearfix">';
+																		printf( '<span class="my-order-head">%s:</span>', $field['label'] ); // @phpcs:ignore
+																		if( $field['type'] == 'date' ){
+																			printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? wptravel_format_date( $value[ $cart_id ][ $key ] ): '' ); // @phpcs:ignore
+																		}else{	
+																			if( isset($value[ $cart_id ]) ){													
+																			printf( '<span class="my-order-tail">%s</span>', isset( $value[ $cart_id ][ $key ] ) ? $value[ $cart_id ][ $key ] : '' ); // @phpcs:ignore		
+																			}															
+																		}
+																		echo '</div>';
 																	}
-																	echo '</div>';
+																	
 																}
 															}
 														} }

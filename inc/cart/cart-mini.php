@@ -231,15 +231,14 @@ if ( wptravel_is_react_version_enabled() ) {
 										echo '<h4>' . __( 'Trip Extras:', 'wp-travel' ) . '</h4>';
 										foreach ( $trip_extras as $tx ) {
 											$title    = isset( $tx['title'] ) ? $tx['title'] : '';
-											$tx_count = 0;
+											$tx_count = isset( $cart_extras[ $tx['id'] ] ) ? (int) $cart_extras[ $tx['id'] ] : 0;
 											$tx_price = 0;
-						
+											if( $tx_count > 0 ):
 											?>
 											<div class="wp-travel-form-group" data-wpt-tx="<?php echo esc_attr( $tx['id'] ); ?>">
 												<label for="tour-extras-<?php echo esc_attr( $tx['id'] ); ?>"><?php echo esc_html( $title ); ?></label>
 												<?php
 												if ( isset( $tx['tour_extras_metas'] ) ) :
-													$tx_count    = isset( $cart_extras[ $tx['id'] ] ) ? (int) $cart_extras[ $tx['id'] ] : 0;
 													$tx_price    = $tx['tour_extras_metas']['extras_item_price'];
 													if( isset( $tx['tour_extras_metas']['extras_item_sale_price'] ) && !empty( $tx['tour_extras_metas']['extras_item_sale_price'] )  ){
 														$tx_price    = $tx['tour_extras_metas']['extras_item_sale_price'];
@@ -248,6 +247,7 @@ if ( wptravel_is_react_version_enabled() ) {
 													$tx_min_attr = isset( $tx['is_required'] ) && $tx['is_required'] ? 'min="1"' : '';
 								
 													$required = isset( $tx['is_required'] ) && $tx['is_required'];
+													
 												?>
 												<div class="input-group">
 													<span class="quantity"><?php echo esc_attr( $tx_count ); ?></span>
@@ -255,9 +255,10 @@ if ( wptravel_is_react_version_enabled() ) {
 														<?php echo ' x <span data-wpt-tx-price="' . $tx_price . '">' . wptravel_get_formated_price_currency( WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $tx_price ) ) . '</span> = ' . '<strong><span data-wpt-tx-total="' . $tx_total . '">' . wptravel_get_formated_price_currency( WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $tx_total ) ) . '</span>' . '</strong>'; ?>
 													</span>
 												</div>
-												<?php endif; ?>
+												<?php  endif; ?>
 											</div>
 											<?php
+											endif;
 										}
 									}
 								?>

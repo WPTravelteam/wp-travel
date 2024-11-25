@@ -5853,7 +5853,7 @@ msgid "Your trip has been booked but the email could not be sent. Possible reaso
 msgstr ""
 
 #: inc/class-wp-travel-email.php:318
-msgid "Mrss "
+msgid "Mr "
 msgstr ""
 
 #: inc/class-wp-travel-email.php:521 inc/payments/wp-travel-payments.php:502

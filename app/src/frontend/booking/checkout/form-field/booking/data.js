@@ -98,6 +98,11 @@ export const paypalPayment = () => {
         $('[name=wp_travel_payment_gateway]').trigger('change');
     }
 
+    if( $('.my-order-status').hasClass( 'my-order-status-waiting_voucher' ) ){
+        $('#wp-travel-partial-payment .wp-travel-radio-group').hide();
+        $('#wp-travel-partial-payment .button-field').hide();
+    }
+    
     // Get Payable Amount.
     function get_payable_price(payment_mode, no_of_pax) {
         if (!payment_mode) {

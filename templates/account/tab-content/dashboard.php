@@ -1,6 +1,7 @@
 <?php
 $bookings_glance    = $args['bookings_glance'];
 $bookings_glance    = is_array( $bookings_glance ) ? array_unique( $bookings_glance ) : $bookings_glance;
+
 $biling_glance_data = $args['biling_glance_data'];
 ?>
 <div>
@@ -18,6 +19,10 @@ $biling_glance_data = $args['biling_glance_data'];
 				foreach ( $bookings_glance as $key => $bk_id ) :
 
 					$trip_id = get_post_meta( $bk_id, 'wp_travel_post_id', true );
+
+					if ( get_post( $bk_id )->post_status == 'trash' ) {
+						continue;
+					}
 
 					if ( ! $trip_id ) {
 						continue;

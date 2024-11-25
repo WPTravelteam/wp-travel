@@ -315,7 +315,7 @@ if ( ! class_exists( 'WP_Travel_Email' ) ) {
 
 			if( apply_filters( 'wptravel_traveller_salutation', true ) ==  true ){
 				if( $customer_gender == 'male' ){
-					$salutation = __( 'Mrss ', 'wp-travel' );
+					$salutation = __( 'Mr ', 'wp-travel' );
 				}elseif( $customer_gender == 'female' ){
 					$salutation = __( 'Ms ', 'wp-travel' );
 				}else{

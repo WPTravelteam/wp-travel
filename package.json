@@ -1,6 +1,6 @@
 {
   "name": "wp-travel",
-  "version": "9.8.0",
+  "version": "9.9.0",
   "description": "Travel plugin for WordPress",
   "main": "index.js",
   "scripts": {
@@ -83,8 +83,11 @@
     "@wordpress/icons": "^5.0.2",
     "date-fns": "^3.0.0-alpha.1",
     "lodash": "^4.17.21",
+    "multiselect-react-dropdown": "^2.0.25",
     "querystring-es3": "^0.2.1",
+    "react": "18",
     "react-datepicker": "^4.2.1",
+    "react-dom": "18",
     "react-geocode": "^0.2.1",
     "react-gmaps": "^1.9.0",
     "react-google-autocomplete": "^2.4.2",

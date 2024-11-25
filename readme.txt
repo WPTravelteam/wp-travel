@@ -2,9 +2,9 @@
 Contributors: wptravel, suascat_wp
 Tags: travel, tour-booking, travel-agency, tour-operator, travel-booking
 Requires at least: 6.0.0
-Tested up to: 6.6
+Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 9.8.0
+Stable tag: 9.9.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -400,6 +400,20 @@ WP Travel provides live support during standard business hours in the Nepal Time
 Before updating plugin please check ["our latest release notes"](#developers).
 
 == Changelog ==
+
+= 9.9.0 =
+Release Date: 4th December 2024
+
+Fixes:
+* Fixed the issue on the booking table data that is showing emply input field form checkout form
+* Fixed the issue that is showing non selected trip extras on checkout page
+
+Enhancements:
+* Added html render support for "trip checkout info"
+* Added support to show trip return date on different booking format
+
+
+**For more details, please refer to our [release note](https://wptravel.io/wp-travel-plugin-v9-9-0-update-release-note).**
 
 = 9.8.0 =
 Release Date: 6th November 2024

@@ -2344,10 +2344,12 @@ li {
 	}
 }
 
+
+
 .wp-travel-popup {
-	width: 600px;
+	width: 90%;
 	background: #fff;
-	margin-left: calc(50% - 300px);
+	margin: auto;
 	padding: 20px;
 	box-sizing: border-box;
 	position: relative;
@@ -2394,6 +2396,10 @@ li {
 		}
 	}
 }
+
+#wp-travel-bank-deposit-content.wp-travel-popup{
+	width: 700px;
+} 
 
 @media screen and (max-width: 680px) {
 	.wp-travel-popup {

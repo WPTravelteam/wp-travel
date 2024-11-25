@@ -152,3 +152,5 @@ $trp_title = apply_filters( 'wp_travel_trip_title_enable_disable', true );
 
 <?php
 do_action( 'wp_travel_after_archive_itinerary', $trip_id );
+
+

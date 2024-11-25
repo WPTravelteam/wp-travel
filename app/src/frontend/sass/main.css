@@ -5165,9 +5165,9 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
   }
 }
 .wp-travel-popup {
-  width: 600px;
+  width: 90%;
   background: #fff;
-  margin-left: calc(50% - 300px);
+  margin: auto;
   padding: 20px;
   box-sizing: border-box;
   position: relative;

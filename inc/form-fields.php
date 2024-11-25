@@ -553,9 +553,19 @@ function wptravel_search_filter_widget_form_fields( $sanitize_get = array() ) {
  *
  * @since 2.0.0
  */
-function wptravel_get_bank_deposit_form_fields() {
+function wptravel_get_bank_deposit_form_fields($details = array()) {
+
+
 	$fields = array();
 	if ( wptravel_is_partial_payment_enabled() ) {
+
+		$payment_mode_options = array();
+
+		$payment_mode_options['partial'] = __( 'Partial Payment', 'wp-travel' );
+
+		if( $details['payment_mode'] == 'Full' ){
+			$payment_mode_options['full'] = __( 'Full Payment', 'wp-travel' );
+		}
 
 		$fields['payment_mode'] = array(
 			'type'          => 'select',
@@ -566,7 +576,7 @@ function wptravel_get_bank_deposit_form_fields() {
 			'validations'   => array(
 				'required' => true,
 			),
-			'options'       => wptravel_get_payment_modes(),
+			'options'       => $payment_mode_options,
 			'default'       => 'full',
 			'priority'      => 10,
 		);
