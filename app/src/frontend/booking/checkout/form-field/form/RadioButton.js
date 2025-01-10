@@ -1,6 +1,7 @@
 import { useSelect, dispatch } from '@wordpress/data';
 const bookingStoreName = 'WPTravelFrontend/BookingData';
-import { PanelBody, PanelRow } from '@wordpress/components'
+import { PanelBody, PanelRow } from '@wordpress/components';
+import { applyFilters } from '@wordpress/hooks';
 
 export default ( { travelerData, trvOne = 'travelerOne', pmtFld = 'no' } ) => {
 
@@ -46,7 +47,8 @@ export default ( { travelerData, trvOne = 'travelerOne', pmtFld = 'no' } ) => {
                   <label >{typeof label != 'undefined' && label || '' }{ thisRequired == true && <span className='wp-travel-in-page-required-field'>*</span> }</label>  
                   <div className='wptravel-onpage-radiobtn-handle'>
                  {optionKey.map( ( val, index ) => {
-                    if ( val == 'stripe' || val == 'authorizenet' || val == 'bank_deposit' || val == 'paypal' || val == 'express_checkout' || val == 'stripe_ideal' || val == 'payu' || val == 'payu_latam' || val == "razorpay_checkout" ) {
+                     if (  applyFilters('wptravel_onpage_payment_gateways', ['stripe', 'authorizenet', 'bank_deposit', 'paypal', 'express_checkout', 
+                        'stripe_ideal', 'payu', 'payu_latam', 'razorpay_checkout']).includes(val) ) {
                         return  <> <input 
                             name={name} 
                             type='radio' 
