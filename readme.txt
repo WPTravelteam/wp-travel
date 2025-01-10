@@ -1,5 +1,5 @@
  === WP Travel - Ultimate Travel Booking System, Tour Management Engine ===
-Contributors: wptravel, suascat_wp
+Contributors: wptravel, suascat_wp, gautammkgarg
 Tags: travel, tour-booking, travel-agency, tour-operator, travel-booking
 Requires at least: 6.0.0
 Tested up to: 6.7
