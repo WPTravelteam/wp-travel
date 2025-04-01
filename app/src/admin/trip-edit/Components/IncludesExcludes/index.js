@@ -17,7 +17,7 @@ const TripIncludes = ({allData}) => {
             <label>{__i18n.trip_includes}</label>
         </PanelRow>
         <PanelRow className="wp-travel-editor">
-            {'undefined' !== typeof trip_include && <WPEditor id="wp-travel-trip-includes" value={trip_include}
+            {'undefined' !== typeof trip_include && <WPEditor id="wp-travel-trip-includes" value={trip_include.replace(/<p>\s*<\/p>/g, '<p><br /></p>')}
             onContentChange={(trip_include) => {
                 updateTripData({
                     ...allData,
@@ -36,7 +36,7 @@ const TripExcludes = ({allData}) => {
             <label>{__i18n.trip_excludes}</label>
         </PanelRow>
         <PanelRow className="wp-travel-editor">
-            {'undefined' !== typeof trip_exclude && <WPEditor id="wp-travel-trip-excludes" value={trip_exclude}
+            {'undefined' !== typeof trip_exclude && <WPEditor id="wp-travel-trip-excludes" value={trip_exclude.replace(/<p>\s*<\/p>/g, '<p><br /></p>')}
             onContentChange={(trip_exclude) => {
                 updateTripData({
                     ...allData,

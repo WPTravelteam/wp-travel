@@ -12,13 +12,14 @@ const __i18n = {
 const TripOverview = ({ allData }) => {
 	const { trip_overview } = allData;
 	const { updateTripData } = dispatch("WPTravel/TripEdit");
+
 	return (
 		<>
 			<PanelRow className="wp-travel-editor">
 				{"undefined" !== typeof trip_overview && (
 					<WPEditor
 						id="wp-travel-trip-overview"
-						value={trip_overview}
+						value={trip_overview.replace(/<p>\s*<\/p>/g, '<p><br /></p>')}
 						onContentChange={(trip_overview) => {
 							updateTripData({
 								...allData,
@@ -26,6 +27,8 @@ const TripOverview = ({ allData }) => {
 							});
 						}}
 						name="trip_overview"
+						allowedFormats={['core/bold', 'core/italic']} // Add formats as needed
+ 						placeholder="Add trip overview..."
 					/>
 				)}
 				

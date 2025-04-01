@@ -180,7 +180,7 @@ class WP_Travel_Emails {
 
 					$email_template['subject'] = isset( $settings['booking_admin_template_settings']['admin_subject'] ) && '' !== $settings['booking_admin_template_settings']['admin_subject'] ? $settings['booking_admin_template_settings']['admin_subject'] : __( 'New Booking', 'wp-travel' );
 					// Set Contents.
-					$email_content = isset( $settings['booking_admin_template_settings']['email_content'] ) && '' !== $settings['booking_admin_template_settings']['email_content'] ? $settings['booking_admin_template_settings']['email_content'] :'asdasdas';
+					$email_content = isset( $settings['booking_admin_template_settings']['email_content'] ) && '' !== $settings['booking_admin_template_settings']['email_content'] ? $settings['booking_admin_template_settings']['email_content'] :'';
 
 				} elseif ( 'client' == $sent_to ) {
 					// Set Headings.
@@ -192,6 +192,22 @@ class WP_Travel_Emails {
 					$email_template['subject'] = isset( $settings['booking_client_template_settings']['client_subject'] ) && '' !== $settings['booking_client_template_settings']['client_subject'] ? $settings['booking_client_template_settings']['client_subject'] : __( 'Thank you for your booking.', 'wp-travel' );
 					// Set Contents.
 					$email_content = isset( $settings['booking_client_template_settings']['email_content'] ) && '' !== $settings['booking_client_template_settings']['email_content'] ? $settings['booking_client_template_settings']['email_content'] : wptravel_booking_client_default_email_content();
+					
+					if( function_exists( 'wptravel_custom_email_template_content' ) ){
+						$lang_attribute = get_bloginfo('language');
+						if( array_key_exists( $lang_attribute, wptravel_custom_email_template_content() ) ){
+
+							if( array_key_exists( 'booking_email_client_subject', wptravel_custom_email_template_content()[$lang_attribute] ) ){
+								$email_template['subject'] = wptravel_custom_email_template_content()[$lang_attribute]['booking_email_client_subject'];
+							}
+
+							if( array_key_exists( 'booking_email_client_content', wptravel_custom_email_template_content()[$lang_attribute] ) ){
+								$email_content = wptravel_custom_email_template_content()[$lang_attribute]['booking_email_client_content'];
+							}
+						}
+						
+					}
+					
 				
 				}
 				break;

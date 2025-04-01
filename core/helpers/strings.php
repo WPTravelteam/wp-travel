@@ -175,7 +175,7 @@ class WpTravel_Helpers_Strings {
 			'booking_start_date_info'   => apply_filters( 'booking_start_date_info', __( 'Booking will start from ', 'wp-travel' ) ),
 			'booking_offset'            => apply_filters( 'wptravel_booking_offset', 0 ),
 			'exclude_date'            	=> apply_filters( 'wptravel_exclude_booking_dates', array() ),
-			'current_year'            	=> date("Y"),
+			'current_year'            	=> gmdate("Y"),
 			'booking_start_date_label'  => __( 'Booking Start', 'wp-travel' ),
 			'duration_start_date'       => __( 'Duration Start Date', 'wp-travel' ),
 			'duration_end_date'         => __( 'Duration End Date', 'wp-travel' ),

@@ -125,6 +125,13 @@ if ( ! comments_open() ) {
 
 					$comment_form['comment_field'] .= '<p class="comment-form-comment"><label for="comment">' . apply_filters( 'wp_travel_single_archive_rv',  __( 'Your review', 'wp-travel' ) ) . '</label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>';
 				}
+
+				$recaptcha_site_key = !empty($settings['recaptcha_v2_site_key']) ? esc_attr($settings['recaptcha_v2_site_key']) : '';
+
+				if (!empty($recaptcha_site_key)) {
+                    $comment_form['comment_field'] .= '<div id="recaptcha2" class="g-recaptcha" data-sitekey="' . $recaptcha_site_key . '"></div>';
+                }
+
 				
 				apply_filters( 'wp_travel_single_archive_comment_form', comment_form( apply_filters( 'wp_travel_product_review_comment_form_args', $comment_form ) ) );
 				?>
@@ -134,3 +141,4 @@ if ( ! comments_open() ) {
 
 	<!-- <div class="clear"></div> -->
 </div>
+

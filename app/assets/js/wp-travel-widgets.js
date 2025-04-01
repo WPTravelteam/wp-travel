@@ -205,11 +205,6 @@ jQuery(function($) {
     $(document).on( 'click', '.edit-trip a', function(){
         $('.checkout-trip-extras').css( 'display', 'none' );
     } );
-
-    $(document).on( 'click', '.wptravel-recurring-table td[data-label="Pricings"] input', function(){
-        $('.wp-travel-book').addClass( 'btn-disable' );
-    });
-    
     
     $(document).on( 'click', '.edit-pax-selector-qty', function(){
 

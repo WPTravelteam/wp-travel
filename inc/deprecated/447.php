@@ -146,10 +146,10 @@ function wp_travel_get_countries() { // @phpcs:ignore
 	return wptravel_get_countries();
 }
 
-function wp_travel_get_booking_chart() { // @phpcs:ignore
-	wptravel_deprecated_function( 'wp_travel_get_booking_chart', '4.4.7', 'wptravel_get_booking_chart' );
-	return wptravel_get_booking_chart();
-}
+// function wp_travel_get_booking_chart() { // @phpcs:ignore
+// 	wptravel_deprecated_function( 'wp_travel_get_booking_chart', '4.4.7', 'wptravel_get_booking_chart' );
+// 	return wptravel_get_booking_chart();
+// }
 
 function wp_travel_book_now() { // @phpcs:ignore
 	wptravel_deprecated_function( 'wp_travel_book_now', '4.4.7', 'wptravel_book_now' );

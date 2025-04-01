@@ -43,6 +43,7 @@ class WP_Session_Utils {
 	 * @param null|string $date
 	 */
 	public static function create_dummy_session( $date = null ) {
+		
 		// Generate our date
 		if ( null !== $date ) {
 			$time = strtotime( $date );
@@ -50,7 +51,7 @@ class WP_Session_Utils {
 			if ( false === $time ) {
 				$date = null;
 			} else {
-				$expires = date( 'U', strtotime( $date ) );
+				$expires = gmdate( 'U', strtotime( $date ) );
 			}
 		}
 
@@ -83,34 +84,38 @@ class WP_Session_Utils {
 	public static function delete_old_sessions( $limit = 1000 ) {
 		global $wpdb;
 
-		$limit = absint( $limit );
-		$keys  = $wpdb->get_results( "SELECT option_name, option_value FROM $wpdb->options WHERE option_name LIKE '_wp_session_expires_%' ORDER BY option_value ASC LIMIT 0, {$limit}" );
+		// $limit = absint( $limit );
+		// $keys  = $wpdb->get_results( "SELECT option_name, option_value FROM $wpdb->options WHERE option_name LIKE '_wp_session_expires_%' ORDER BY option_value ASC LIMIT 0, {$limit}" );
 
-		$now     = time();
-		$expired = array();
-		$count   = 0;
+		// $now     = time();
+		// $expired = array();
+		// $count   = 0;
 
-		foreach ( $keys as $expiration ) {
-			$key     = $expiration->option_name;
-			$expires = $expiration->option_value;
+		// foreach ( $keys as $expiration ) {
+		// 	$key     = $expiration->option_name;
+		// 	$expires = $expiration->option_value;
 
-			if ( $now > $expires ) {
-				$session_id = addslashes( substr( $key, 20 ) );
+		// 	if ( $now > $expires ) {
+		// 		$session_id = addslashes( substr( $key, 20 ) );
 
-				$expired[] = $key;
-				$expired[] = "_wp_session_{$session_id}";
+		// 		$expired[] = $key;
+		// 		$expired[] = "_wp_session_{$session_id}";
 
-				$count += 1;
-			}
-		}
+		// 		$count += 1;
+		// 	}
+		// }
 
-		// Delete expired sessions
-		if ( ! empty( $expired ) ) {
-			$names = implode( "','", $expired );
-			$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name IN ('{$names}')" );
-		}
+		// // Delete expired sessions
+		// if ( ! empty( $expired ) ) {
+		// 	$names = implode( "','", $expired );
+		// 	$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name IN ('{$names}')" );
+		// }
 
-		return $count;
+		// return $count;
+
+		$count = $wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE '_wp_session_%'" ) );
+
+		return (int) ( $count / 2 );
 	}
 
 	/**

@@ -59,7 +59,7 @@ class WP_Travel_Widget_Trip_Type extends WP_Widget {
 			'order'            => 'DESC',
 			'post_type'        => WP_TRAVEL_POST_TYPE,
 			'post_status'      => 'publish',
-			'suppress_filters' => true,
+			// 'suppress_filters' => true,
 		);
 		if ( $trip_type ) {
 			$args['tax_query'] = array(
@@ -170,7 +170,7 @@ class WP_Travel_Widget_Trip_Type extends WP_Widget {
 		}
 		?>
 		<p> 
-			<?php echo __( 'This widget will be removed from v9.0.0. Please use "[WP_TRAVEL_ITINERARIES type=itinerary_types  slug="hikking"]" shortcode in replace of this widget.', 'wp-travel' ); ?>
+			<?php echo esc_html__( 'This widget will be removed from v9.0.0. Please use "[WP_TRAVEL_ITINERARIES type=itinerary_types  slug="hikking"]" shortcode in replace of this widget.', 'wp-travel' ); ?>
 		</p>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title', 'wp-travel' ); ?>:</label>

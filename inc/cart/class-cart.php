@@ -174,19 +174,20 @@ class WP_Travel_Cart {
 		$table = $wpdb->prefix . 'wt_dates';
 
 		if ( is_array( $args ) ) { // add to cart args. $args since WP Travel 4.4.2.
-			$trip_id            = isset( $args['trip_id'] ) ? $args['trip_id'] : 0;
+			$trip_id            = isset( $args['trip_id'] ) ? intval($args['trip_id']) : 0;
 			$trip_price         = isset( $args['trip_price'] ) ? $args['trip_price'] : 0;
 			$trip_price_partial = isset( $args['trip_price_partial'] ) ? $args['trip_price_partial'] : 0;
 			$pax                = isset( $args['pax'] ) ? $args['pax'] : array();
 			$price_key          = isset( $args['price_key'] ) ? $args['price_key'] : '';
 			$attrs              = isset( $args['attrs'] ) ? $args['attrs'] : array();
-			$price_ids          = isset( $attrs['pricing_id'] ) ? $attrs['pricing_id'] : 0;
+			$price_ids          = isset( $attrs['pricing_id'] ) ? intval( $attrs['pricing_id'] ) : 0;
 		} else {
 			$trip_id = $args;
 		}
 
 		$arrival_date            = isset( $attrs['arrival_date'] ) ? $attrs['arrival_date'] : '';
-		$departure_date          = ! empty( $wpdb->get_col( " SELECT end_date FROM $table WHERE trip_id = $trip_id AND pricing_ids = $price_ids " ) ) ? ( $wpdb->get_col( " SELECT end_date FROM $table WHERE trip_id = $trip_id  AND pricing_ids = $price_ids " ) ) : '';
+		$departure_date = ! empty( $wpdb->get_col( $wpdb->prepare( "SELECT end_date FROM $table WHERE trip_id = %d AND pricing_ids = %d", $trip_id, $price_ids ) ) ) ? $wpdb->get_col( $wpdb->prepare( "SELECT end_date FROM $table WHERE trip_id = %d AND pricing_ids = %d", $trip_id, $price_ids ) ) : '';
+
 		$attrs['departure_date'] = isset(  $departure_date[0] ) && $departure_date[0] != '0000-00-00' ? maybe_unserialize( $departure_date[0] ) : '';
 		
 		$item_id_args = array(
@@ -294,6 +295,8 @@ class WP_Travel_Cart {
 		$cart_attributes_session_name = $this->cart_id . '_attributes';
 		$items                        = array();
 
+
+
 		foreach ( $this->items as $id => $item ) {
 			if ( ! $id ) {
 				continue;
@@ -302,14 +305,13 @@ class WP_Travel_Cart {
 		}
 
 		$cart['cart_items'] = $items;
-		$cart['discounts']  = $this->discounts;
+		$cart['discounts']  = $this->discounts;		
 
 		$cart_items = WPTravel()->session->set( $this->cart_id, $cart );
-		// Cookie data to enable data info in js.
-		ob_start();
-		setcookie( 'wp_travel_cart', wp_json_encode( $cart ), time() + 604800, '/' );
-		ob_end_flush();
 		
+		ob_start();
+			setcookie( 'wp_travel_cart', wp_json_encode( $cart ), time() + 604800, '/' );
+		ob_end_flush();	
 	}
 	/**
 	 * Read items from cart session.

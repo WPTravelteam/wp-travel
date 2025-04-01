@@ -6,13 +6,14 @@ const _i18n = {
     ..._wp_travel.strings
 } 
 
-
 export default ( { travelerData, trvOne = 'travelerOne' } ) => {
     const bookingData  = useSelect((select) => { return select(bookingStoreName).getAllStore() }, []);
     const { banck_detail } = bookingData
+    
     return banck_detail.length > 0 && <>
         <div className='wp-travel-one-page-bank-detail'>
             <h4>{_i18n.set_bank_detail}</h4>
+            <p className='bank-description'>{_wp_travel.bank_description}</p>
             <table>
                 <thead>
                     <tr>

@@ -16,5 +16,5 @@ function wptravel_tour_extras_gallery_tab_callback() {
 		);
 		wptravel_upsell_message( $args );
 	endif;
-	do_action( 'wp_travel_tour_extras_gallery_tab_content' ); // @since 2.0.4
+	do_action( 'wptravel_tour_extras_gallery_tab_content' ); // @since 2.0.4
 }

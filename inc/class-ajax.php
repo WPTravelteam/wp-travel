@@ -10,16 +10,16 @@ class WP_Travel_Ajax {
 		 *
 		 * @deprecated 5.2.9
 		 */
-		add_action( 'wp_ajax_wt_add_to_cart', array( $this, 'add_to_cart' ) );
-		add_action( 'wp_ajax_nopriv_wt_add_to_cart', array( $this, 'add_to_cart' ) );
+		// add_action( 'wp_ajax_wt_add_to_cart', array( $this, 'add_to_cart' ) );
+		// add_action( 'wp_ajax_nopriv_wt_add_to_cart', array( $this, 'add_to_cart' ) );
 
 		/**
 		 * Update cart ajax callback.
 		 *
 		 * @deprecated 5.2.9
 		 */
-		add_action( 'wp_ajax_wt_update_cart', array( $this, 'update_cart' ) );
-		add_action( 'wp_ajax_nopriv_wt_update_cart', array( $this, 'update_cart' ) );
+		// add_action( 'wp_ajax_wt_update_cart', array( $this, 'update_cart' ) );
+		// add_action( 'wp_ajax_nopriv_wt_update_cart', array( $this, 'update_cart' ) );
 
 		// Apply Coupon
 		add_action( 'wp_ajax_wt_cart_apply_coupon', array( $this, 'apply_coupon' ) );

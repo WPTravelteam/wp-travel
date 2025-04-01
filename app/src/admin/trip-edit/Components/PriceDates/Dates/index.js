@@ -1,5 +1,5 @@
 import { useState, useEffect } from '@wordpress/element';
-import { PanelRow, ToggleControl } from '@wordpress/components';
+import { PanelRow, ToggleControl, SelectControl } from '@wordpress/components';
 import { dispatch } from '@wordpress/data';
 import {format} from '@wordpress/date'
 import { _n, __} from '@wordpress/i18n';
@@ -95,11 +95,38 @@ const Dates = ( {allData} ) => {
             [storeKey]:[...data]
         })
     }
+    
     const durationValidation = document.getElementById( 'wp-travel-trip-duration-validation' );
+
+    const { duration_format, arrival_time, departure_time } = typeof trip_duration != 'undefined' && trip_duration;
+    const time_format = typeof duration_format != 'undefined' && duration_format || '';
+    const translatedSelectLabel = __i18n.duration_select_label;
+    const selectOption = [
+        {label : translatedSelectLabel.day_night, value : 'day_night' },
+        {label : translatedSelectLabel.hour_minute, value : 'hour_minute' },
+        
+    ];
+    const newSelectOption = applyFilters( 'wp_travel_trip_duration_formate_selected', selectOption);
 
     return <ErrorBoundary key="1">
     <div className="wp-travel-ui wp-travel-ui-card wp-travel-ui-card-top-border">
         <h4>{ __i18n.date_time }</h4>
+        <PanelRow>
+            <label>{__i18n.trip_duration}</label>
+            <SelectControl
+            options={newSelectOption}
+            value  ={ time_format }
+            onChange={ (val)=> {
+                const old_duration = typeof allData.trip_duration != 'undefined' && allData.trip_duration
+                const new_duration = {...old_duration, duration_format : val };
+                updateTripData({
+                    ...allData,
+                    trip_duration : new_duration
+                })
+            } }
+            />
+        </PanelRow>
+        <DateDuration allData={allData} format={'day'} /> 
         <PanelRow>
             <label>{ __i18n.enable_fixed_departure }</label>
             <ToggleControl
@@ -118,7 +145,7 @@ const Dates = ( {allData} ) => {
             <>
                 {applyFilters( 'wp_travel_trip_duration_condition', [], allData ) }
                 <DateDurationSelect allData={allData} />
-                <DateDuration allData={allData} format={'day'} /> 
+                
                 { applyFilters( 'wp_travel_trip_duration_validation', [], allData ) }
             </>
         }

@@ -11,7 +11,13 @@
  * @since 1.7.5
  */
 function wptravel_book_now() {
-	
+
+	global $wt_cart;
+	$items = $wt_cart->getItems();
+
+	$discount_coupon_data = $wt_cart->get_discounts();
+
+
 	$settings = wptravel_get_settings();
 	if( class_exists( 'WooCommerce' ) && $settings['enable_woo_checkout'] == 'yes' ){
 		if( !isset( $_REQUEST['key']) ){
@@ -21,17 +27,18 @@ function wptravel_book_now() {
 		$order_data = wc_get_order(wc_get_order_id_by_order_key($_REQUEST['key']))->data;
 
 	}else{
+		
 		if ( ! WP_Travel::verify_nonce( true ) || ! isset( $_POST['wp_travel_book_now'] ) ) {
 			return;
 		}
-
-		if( $_POST['wp_travel_booking_option'] == 'booking_with_payment' && !isset( $_POST['wp_travel_payment_gateway'] ) ){
-			return;
+		
+		if( $discount_coupon_data['type'] !== 'percentage' && $discount_coupon_data['value'] !== '100' ){
+			if( $_POST['wp_travel_booking_option'] == 'booking_with_payment' && !isset( $_POST['wp_travel_payment_gateway'] ) ){
+				return;
+			}
 		}
+		
 	}
-
-
-	global $wt_cart;
 
 	/**
 	 * Trigger any action before Booking Process.
@@ -40,17 +47,12 @@ function wptravel_book_now() {
 	 * @since 4.4.2
 	 */
 	do_action( 'wp_travel_action_before_booking_process' ); // phpcs:ignore
-	do_action( 'wptravel_action_before_booking_process' );
+	do_action( 'wptravel_action_before_booking_process' );	
 
-	// Start Booking Process.
-	$items = $wt_cart->getItems();
+
 	if ( ! count( $items ) ) {
 		return;
 	}
-
-	
-	$discount_coupon_data = $wt_cart->get_discounts();
-
 
 	$price_key            = false;
 	$pax                  = 1;
@@ -165,6 +167,10 @@ function wptravel_book_now() {
 			}
 		}
 	}
+
+	if( isset( $_POST['wp_travel_checkout_gdpr_msg'] ) ){
+		$sanitized_data['privacy_policy'] = true;
+	}
 	
 
 	if( class_exists( 'WP_Travel_Pro' ) && isset( $settings['selected_booking_option'] ) && count( $settings['selected_booking_option'] ) == 1 && $settings['selected_booking_option'][0] = 'booking-with-payment' ){
@@ -216,7 +222,7 @@ function wptravel_book_now() {
 			);
 
 			if( ! empty( $upload[ 'error' ] ) ) {
-				wp_die( $upload[ 'error' ] );
+				wp_die( esc_html( $upload[ 'error' ] ) );
 			}
 
 			// it is time to add our uploaded image into WordPress media library
@@ -351,9 +357,15 @@ function wptravel_book_now() {
 	 *
 	 * @since 1.0.5 // For Payment.
 	 */
+	
 	do_action( 'wp_travel_after_frontend_booking_save', $booking_id, $first_key ); // phpcs:ignore
 	do_action( 'wptravel_after_frontend_booking_save', $booking_id, $first_key );
-
+	
+	if( $_POST['wp_travel_payment_gateway'] == 'paypal' ){
+	
+		do_action( 'wp_travel_standard_paypal_payment_process', $booking_id, $_POST['complete_partial_payment'] );
+	}
+	
 	// Temp fixes [add payment id in case of booking only].
 
 	$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
@@ -410,6 +422,11 @@ function wptravel_book_now() {
 	$booking_paid   = get_post_meta( $booking_id, 'wp_travel_payment_status', true );
 	$partial_enable = get_post_meta( $payment_id, 'wp_travel_is_partial_payment', true );
 
+	if( $discount_coupon_data['type'] == 'percentage' && $discount_coupon_data['value'] == '100' ){
+		update_post_meta( $payment_id, 'wp_travel_payment_status', 'full_discount' );
+		update_post_meta( $payment_id, 'wp_travel_payment_mode', 'full' );
+	}
+
 	if ( $booking_paid == 'paid' && $payment_paid == 'paid' && $partial_enable == 'no' && $total_price > 0 ) {
 		update_post_meta( $payment_id, 'wp_travel_payment_mode', 'full' );
 		update_post_meta( $payment_id, 'wp_travel_payment_amount', $total_price );
@@ -450,19 +467,16 @@ function wptravel_book_now() {
 	}
 	update_option('wp_travel_reserve_date', $reserved_booking_dates);
 
+	if( apply_filters( 'wp_travel_disable_default_thankyoupage', false ) == false ){
+		$thankyou_page_url = add_query_arg( 'booked', true, $thankyou_page_url );
+		$thankyou_page_url = add_query_arg( '_nonce', WP_Travel::create_nonce(), $thankyou_page_url );
+		$thankyou_page_url = add_query_arg( 'order_id', $booking_id, $thankyou_page_url );
+		header( 'Location: ' . $thankyou_page_url );
+		exit;
+	}
 
-	$thankyou_page_url = add_query_arg( 'booked', true, $thankyou_page_url );
-	$thankyou_page_url = add_query_arg( '_nonce', WP_Travel::create_nonce(), $thankyou_page_url );
-	$thankyou_page_url = add_query_arg( 'order_id', $booking_id, $thankyou_page_url );
-	header( 'Location: ' . $thankyou_page_url );
-	exit;
 }
 
-/**
- * Get All booking stat data.
- *
- * @return void
- */
 function wptravel_get_booking_chart() {
 
 	$submission_request = WP_Travel::get_sanitize_request();

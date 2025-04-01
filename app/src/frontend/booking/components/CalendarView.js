@@ -515,7 +515,7 @@ const CalendarView = ( props ) => {
 	const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 	var todayDate = new Date();
 	var bookingStart = new Date( tripData.trip_duration.booking_start );
-	var startMonthDay = months[bookingStart.getMonth()]+ ' '+ bookingStart.getDate();
+	var startMonthDay = bookingStart.getFullYear() + ' '+ months[bookingStart.getMonth()]+ ' '+ bookingStart.getDate();
     return <ErrorBoundary>
 		<div className="wp-travel-booking__datepicker-wrapper">
 			{

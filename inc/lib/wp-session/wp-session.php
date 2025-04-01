@@ -97,6 +97,8 @@ function wp_session_status() {
 	return PHP_SESSION_NONE;
 }
 
+
+
 /**
  * Unset all session variables.
  */

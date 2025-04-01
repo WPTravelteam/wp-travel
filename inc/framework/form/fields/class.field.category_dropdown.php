@@ -40,7 +40,7 @@ class WP_Travel_FW_Field_Category_Dropdown {
 		$terms = get_terms(
 			array(
 				'taxonomy'   => $taxonomy,
-				'hide_empty' => true,
+				'hide_empty' => apply_filters( 'wptravel_hide_empty_taxonomies_search_form', true ),
 			)
 		);
 

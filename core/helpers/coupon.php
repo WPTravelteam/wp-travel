@@ -128,21 +128,22 @@ class WpTravel_Helpers_Coupon {
 			global $wpdb;
 			$meta_key = 'coupon_user_id';
 
-			$results = $wpdb->get_results( // @phpcs:ignore
+			$results = $wpdb->get_results(
 				$wpdb->prepare(
 					"
-					SELECT post_id
-					FROM $wpdb->postmeta Meta 
-					join
-					$wpdb->posts P
-					on Meta.post_id = P.ID
+					SELECT Meta.post_id
+					FROM {$wpdb->postmeta} Meta
+					INNER JOIN {$wpdb->posts} P
+					ON Meta.post_id = P.ID
 					WHERE Meta.meta_key = %s
-					AND Meta.meta_value = %s and P.post_status = 'publish'
-				",
+					AND Meta.meta_value = %s
+					AND P.post_status = 'publish'
+					",
 					$meta_key,
-					esc_sql( $user_id )
+					$user_id
 				)
 			);
+			
 			if ( ! empty( $results ) ) {
 				foreach ( $results as $result ) {
 					$coupon_id = $result->post_id;

@@ -88,6 +88,7 @@ final class WP_Session extends Recursive_ArrayAccess {
 			$this->set_expiration();
 		}
 
+
 		$this->read_data();
 
 		$this->set_cookie();
@@ -114,7 +115,7 @@ final class WP_Session extends Recursive_ArrayAccess {
 	 */
 	protected function set_expiration() {
 		$this->exp_variant = time() + (int) apply_filters( 'wp_session_expiration_variant', 24 * 60 );
-		$this->expires     = time() + (int) apply_filters( 'wp_session_expiration', 30 * 60 );
+		$this->expires     = time() + (int) apply_filters( 'wp_session_expiration', 120 * 60 );
 	}
 
 	/**

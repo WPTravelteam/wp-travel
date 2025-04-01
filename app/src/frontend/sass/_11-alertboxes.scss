@@ -125,7 +125,7 @@
 .wp-travel-error,
 .wp-travel-info,
 .wp-travel-message {
-	padding: 1em 2em 1em 4.5em !important;
+	padding: 1em 1em 1em 3em !important;;
 	margin: 0 0 2em !important;
 	position: relative;
 	background-color: #e0e0e0;
@@ -156,7 +156,6 @@
 	font-size: 18px;
 	display: inline-block;
 	position: absolute;
-	top: 13px;
 	left: 1.5em;
 }
 
@@ -213,7 +212,7 @@ span.wp-travel-message {
 .wp-travel-error,
 .wp-travel-info,
 .wp-travel-message {
-	padding: 1em 2em 1em 4.5em !important;
+	padding: 1em 1em 1em 3em !important;;
 	margin: 0 0 2em !important;
 	position: relative;
 	background-color: #e0e0e0;
@@ -230,7 +229,7 @@ span.wp-travel-message {
 	font-size: 18px;
 	display: inline-block;
 	position: absolute;
-	top: 13px;
+	top: 25px;
 	left: 1.5em;
 }
 
@@ -239,10 +238,10 @@ span.wp-travel-message {
 }
 
 .wp-travel-message::before {
-	content: "\f05d";
+	content: "\f058";
 	color: #0aa525;
-	font-family: "wp-icon-regular";
-}
+	font-family: "wt-icon-solid";
+  }
 
 .wp-travel-error::before {
 	content: "\f071";

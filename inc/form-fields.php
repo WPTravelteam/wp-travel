@@ -563,9 +563,12 @@ function wptravel_get_bank_deposit_form_fields($details = array()) {
 
 		$payment_mode_options['partial'] = __( 'Partial Payment', 'wp-travel' );
 
-		if( $details['payment_mode'] == 'Full' ){
+		// if( $details['payment_mode'] == 'Full' ){
+		// 	$payment_mode_options['full'] = __( 'Full Payment', 'wp-travel' );
+		// }else{
+			$payment_mode_options['partial'] = __( 'Partial Payment', 'wp-travel' );
 			$payment_mode_options['full'] = __( 'Full Payment', 'wp-travel' );
-		}
+		// }
 
 		$fields['payment_mode'] = array(
 			'type'          => 'select',
@@ -577,7 +580,7 @@ function wptravel_get_bank_deposit_form_fields($details = array()) {
 				'required' => true,
 			),
 			'options'       => $payment_mode_options,
-			'default'       => 'full',
+			'default'       => '',
 			'priority'      => 10,
 		);
 

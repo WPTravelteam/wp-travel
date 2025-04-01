@@ -596,21 +596,29 @@ class WpTravel_Helpers_Trips {
 		
 		update_post_meta( $trip_id, 'wp_travel_start_date', "9999-01-01");
 		update_post_meta( $trip_id, 'wp_travel_end_date', "0000-00-00");
-		global $wpdb; 
-		$date_value = $wpdb->get_results('SELECT * FROM '.$wpdb->prefix.'wt_dates WHERE trip_id ='.$trip_id);
+		global $wpdb;
+
+		$trip_id = intval($trip_id);
+
+		$date_value = $wpdb->get_results(
+			$wpdb->prepare(
+				'SELECT * FROM ' . $wpdb->prefix . 'wt_dates WHERE trip_id = %d',
+				$trip_id
+			)
+		);
 		
 
 		if( count($date_value) ){
 			$current_end_date = "0000-00-00";
-			$current_start_date = date("Y-m-d", strtotime( "9999-01-01" ));
+			$current_start_date = gmdate("Y-m-d", strtotime( "9999-01-01" ));
 			foreach( $date_value as $date ){
 				
 				if( $date->start_date < $current_start_date ){
-					update_post_meta( $trip_id, 'wp_travel_start_date', date("Y-m-d", strtotime(sanitize_text_field( $date->start_date ))));
+					update_post_meta( $trip_id, 'wp_travel_start_date', gmdate("Y-m-d", strtotime(sanitize_text_field( $date->start_date ))));
 				}
 
 				if( $date->end_date > $current_end_date ){
-					update_post_meta( $trip_id, 'wp_travel_end_date', date("Y-m-d", strtotime(sanitize_text_field( $date->end_date ))));
+					update_post_meta( $trip_id, 'wp_travel_end_date', gmdate("Y-m-d", strtotime(sanitize_text_field( $date->end_date ))));
 				}
 				
 				$current_start_date = $date->start_date;
@@ -812,15 +820,16 @@ class WpTravel_Helpers_Trips {
 			$pricing_table = $wpdb->base_prefix . $blog_id . '_' . self::$pricing_table;
 		}
 		// Filter Arguments.
-		$start_date = isset( $args['start_date'] ) ? $args['start_date'] : '';
-		$end_date   = isset( $args['end_date'] ) ? $args['end_date'] : '';
-
-		$max_pax   = isset( $args['max_pax'] ) ? $args['max_pax'] : '';
-		$min_price = isset( $args['min_price'] ) ? $args['min_price'] : '';
-		$max_price = isset( $args['max_price'] ) ? $args['max_price'] : '';
+		$start_date = isset( $args['start_date'] ) ? sanitize_text_field( $args['start_date'] ) : '';
+		$end_date   = isset( $args['end_date'] ) ? sanitize_text_field( $args['end_date'] ) : '';
+		$max_pax    = isset( $args['max_pax'] ) ? intval( $args['max_pax'] ) : '';
+		$min_price  = isset( $args['min_price'] ) ? floatval( $args['min_price'] ) : '';
+		$max_price  = isset( $args['max_price'] ) ? floatval( $args['max_price'] ) : '';
 
 		// List all trip ids as per filter arguments.
-		$sql = "select distinct DATES.trip_id from {$date_table}";
+		$sql = $wpdb->prepare(
+					"SELECT DISTINCT DATES.trip_id FROM {$date_table}"
+				);
 
 		// Order By qyery.
 		$orderby_sql = ' ORDER BY post_date desc';
@@ -848,25 +857,25 @@ class WpTravel_Helpers_Trips {
 			$sql .= ' where ';
 
 			if ( ! empty( $start_date ) ) {
-				$sql .= "
-					(
-						( '' = IFNULL(start_date,'') || start_date >= '{$start_date}' )
-						OR
-						(
-							( FIND_IN_SET( '{$year}', years)  || '' = IFNULL(years,'' ) || 'every_year' = years ) AND
-							( FIND_IN_SET( '{$month}', months) || '' = IFNULL(months,'' ) || 'every_month' = months )
-						)
-					)";
+				$sql .= $wpdb->prepare( "
+                (
+                    ( '' = IFNULL(start_date,'') OR start_date >= %s )
+                    OR
+                    (
+                        ( FIND_IN_SET( %d, years) OR '' = IFNULL(years,'' ) OR 'every_year' = years ) AND
+                        ( FIND_IN_SET( %d, months) OR '' = IFNULL(months,'' ) OR 'every_month' = months )
+                    )
+                )", $start_date, $year, $month );
 			}
 
 			if ( ! empty( $end_date ) ) {
 				if ( ! empty( $start_date ) ) {
 					$sql .= 'AND  ';
 				}
-				$sql .= "
-					(
-						( '' = IFNULL(end_date,'') || end_date <= '{$end_date}' )
-					)";
+				$sql .= $wpdb->prepare( "
+                (
+                    ( '' = IFNULL(end_date,'') OR end_date <= %s )
+                )", $end_date );
 			}
 		}
 		$sql .= ' DATES'; // table alias.
@@ -874,11 +883,19 @@ class WpTravel_Helpers_Trips {
 
 		// Second query for group size if max_pax param.
 		if ( $max_pax && $max_pax > 0 ) {
-			$sql .= " and ( PRICINGS.max_pax = 0 or ( {$max_pax} >= PRICINGS.min_pax and {$max_pax} <= PRICINGS.max_pax  ) )";
+			$sql .= $wpdb->prepare( " AND ( PRICINGS.max_pax = 0 OR ( %d >= PRICINGS.min_pax AND %d <= PRICINGS.max_pax ) )", $max_pax, $max_pax );
 		}
 
 		// Query 2 for trip duration dates.
-		$duration_query = "Select META.post_id as trip_id, TRIPS.post_date, TRIPS.post_title from {$wpdb->prefix}postmeta META join {$wpdb->prefix}posts TRIPS on META.post_id=TRIPS.ID where META.meta_key='wp_travel_fixed_departure' and META.meta_value!= 'yes' and TRIPS.post_status IN ( 'publish' ) {$orderby_sql}";
+		$duration_query = $wpdb->prepare( "
+							SELECT META.post_id AS trip_id, TRIPS.post_date, TRIPS.post_title
+							FROM {$wpdb->prefix}postmeta META
+							JOIN {$wpdb->prefix}posts TRIPS ON META.post_id=TRIPS.ID
+							WHERE META.meta_key='wp_travel_fixed_departure'
+							AND META.meta_value!= 'yes'
+							AND TRIPS.post_status IN ( 'publish' )
+							{$orderby_sql}"
+						);
 
 		// Filter as per min and max price.
 		if ( ( $min_price && $min_price > 0 ) || ( $max_price && $max_price > 0 ) ) {
@@ -923,7 +940,11 @@ class WpTravel_Helpers_Trips {
 
 		}
 		// SQL for Trip ids from dates table.
-		$sql      = "select TRIPS.ID as trip_id, TRIPS.post_date, TRIPS.post_title from {$wpdb->prefix}posts TRIPS where TRIPS.ID IN({$sql}) {$orderby_sql}";
+		$sql      = $wpdb->prepare( "
+						SELECT TRIPS.ID AS trip_id, TRIPS.post_date, TRIPS.post_title
+						FROM {$wpdb->prefix}posts TRIPS
+						WHERE TRIPS.ID IN({$sql}) {$orderby_sql}"
+					);
 		$results  = $wpdb->get_results( $sql ); // @phpcs:ignore
 		$results2 = $wpdb->get_results( $duration_query );
 
@@ -1225,8 +1246,8 @@ class WpTravel_Helpers_Trips {
 			while ( $post->have_posts() ) {
 				$post->the_post();
 				$trip_id = get_the_ID();
-				$price_d = $wpdb->get_results( "select * from {$price_table} where trip_id={$trip_id}" );
-				$date_w = $wpdb->get_results( "select * from {$date_table} where trip_id={$trip_id}" );
+				$price_d = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$price_table} WHERE trip_id = %d", $trip_id ) );
+				$date_w = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$date_table} WHERE trip_id = %d", $trip_id ) );
 				$new_price_id = array();
 				$new_date_id = array();
 				$price_cat = get_post_meta( $trip_id, 'wp_travel_trip_price_categorys', true ); 

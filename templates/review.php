@@ -18,8 +18,9 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+	exit;
 }
+
 global $comment;
 $settings = wptravel_get_settings();
 
@@ -27,7 +28,6 @@ $settings = wptravel_get_settings();
 $rating = intval( get_comment_meta( $comment->comment_ID, '_wp_travel_rating', true ) ); ?>
 
 <li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
-
 	<div id="comment-<?php comment_ID(); ?>" class="comment_container">
 
 		<?php echo get_avatar( $comment, apply_filters( 'wp_travel_review_gravatar_size', '60' ), '' ); ?>
@@ -87,6 +87,7 @@ $rating = intval( get_comment_meta( $comment->comment_ID, '_wp_travel_rating', t
 			<?php do_action( 'wp_travel_review_before_comment_text', $comment ); ?>
 
 			<div class="description"><?php apply_filters( 'wp_travel_single_archive_comment', comment_text() ); ?></div>
+			<?php if( get_option( 'thread_comments', true ) == '1' ): ?>
 			<div class="reply">
 			<?php
 			do_action( 'wp_travel_single_archive_after_comment_text', $comment, $rating );
@@ -107,6 +108,7 @@ $rating = intval( get_comment_meta( $comment->comment_ID, '_wp_travel_rating', t
 			echo wp_kses_post( apply_filters( 'wp_travel_comment_reply_link', $link ) );
 			?>
 			</div>
+			<?php endif; ?>
 			<?php do_action( 'wp_travel_review_after_comment_text', $comment ); ?>
 
 		</div>

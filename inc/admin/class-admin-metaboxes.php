@@ -249,6 +249,10 @@ class WP_Travel_Admin_Metaboxes {
 
 		$details        = wptravel_booking_data( $booking_id );
 		$payment_status = $details['payment_status'];
+
+		if( get_post_meta( $payment_id, 'wp_travel_payment_mode' )[0] == 'full_discount' ){
+			$details['payment_mode'] = __( 'Full Discount', 'wp-travel' );
+		}
 		?>
 		<table>
 			<tr>
@@ -264,7 +268,9 @@ class WP_Travel_Admin_Metaboxes {
 				</td>
 
 			</tr>
-			<?php if ( 'paid' === $payment_status || 'partially_paid' === $payment_status ) : ?>
+			
+			<?php 
+			 if ( 'paid' === $payment_status || 'partially_paid' === $payment_status ) : ?>
 				<?php
 				$total_price = $details['total'];
 				$paid_amount = $details['paid_amount'];

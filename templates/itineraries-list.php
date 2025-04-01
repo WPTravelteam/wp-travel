@@ -46,7 +46,7 @@ if ( isset( $wptravel_itineraries ) && ! empty( $wptravel_itineraries ) ) : ?>
 					}
 					if ( isset( $wptravel_itinerary['time'] ) && '' !== $wptravel_itinerary['time'] ) {
 						$wptravel_itinerary_time = stripslashes( $wptravel_itinerary['time'] );
-						$wptravel_itinerary_time = date( $wptravel_time_format, strtotime( $wptravel_itinerary_time ) ); // @phpcs:ignore
+						$wptravel_itinerary_time = gmdate( $wptravel_time_format, strtotime( $wptravel_itinerary_time ) ); // @phpcs:ignore
 					}
 					?>
 					<div class="col clearfix <?php echo esc_attr( $wptravel_row_reverse ); ?>">
@@ -73,8 +73,8 @@ if ( isset( $wptravel_itineraries ) && ! empty( $wptravel_itineraries ) ) : ?>
 					<?php $wptravel_index++; ?>
 				<?php endforeach; else: ?>
 					<div class="wp-collapse-open clearfix">
-						<a href="#" class="open-all-itinerary-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel-blocks' ); ?></span></a>
-						<a href="#" class="close-all-itinerary-link" style="display:none;"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel-blocks' ); ?></span></a>
+						<a href="#" class="open-all-itinerary-link"><span class="open-all" id="open-all"><?php esc_html_e( 'Open All', 'wp-travel' ); ?></span></a>
+						<a href="#" class="close-all-itinerary-link" style="display:none;"><span class="close-all" id="close-all"><?php esc_html_e( 'Close All', 'wp-travel' ); ?></span></a>
 					</div>
 					<?php foreach ( $wptravel_itineraries as $k => $wptravel_itinerary ) : ?>
 						<div class="panel panel-default">
@@ -93,10 +93,10 @@ if ( isset( $wptravel_itineraries ) && ! empty( $wptravel_itineraries ) ) : ?>
 							<div class="panel-body">
 								<p class="itinerary-meta">
 									<?php if( isset( $wptravel_itinerary['date'] ) && !empty( $wptravel_itinerary['date'] ) ):  ?>
-										<p><b><?php echo __( 'Date : ' ) .'</b>'. $wptravel_itinerary['date']; ?></p>
+										<p><b><?php echo esc_html__( 'Date : ', 'wp-travel' ) .'</b>'. esc_html( $wptravel_itinerary['date'] ); ?></p>
 									<?php endif; ?>
 									<?php if( isset( $wptravel_itinerary['time'] ) && !empty( $wptravel_itinerary['time'] ) ):  ?>
-										<p><b><?php echo __( 'Time : ' ) .'</b>'. $wptravel_itinerary['time']; ?></p>
+										<p><b><?php echo esc_html__( 'Time : ', 'wp-travel' ) .'</b>'. esc_html( $wptravel_itinerary['time'] ); ?></p>
 									<?php endif; ?>
 								</p>
 								<p><?php echo wp_kses_post( wpautop( $wptravel_itinerary['desc'] ) ); ?></p>

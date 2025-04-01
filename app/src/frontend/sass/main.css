@@ -4657,6 +4657,7 @@ li.pricing_unavailable form div.trip_list_by_fixed_departure_dates_booking .show
 .mfp-content .my-order table.order-list-table,
 .mfp-content .my-order table.my-order-payment-details {
   font-size: 13px;
+  width: 100%;
   min-width: 800px;
   border: 0;
   margin-bottom: 0;
@@ -8360,7 +8361,7 @@ label.radio-checkbox-label input[type=checkbox], label.radio-checkbox-label .wp-
   border-top: none;
 }
 .checkout-page-wrap .wp-travel-checkout-section .checkout-left .ws-theme-timeline-block .panel-body {
-  padding: 5px 15px;
+  padding: 5px 0px;
 }
 .checkout-page-wrap .wp-travel-checkout-section .checkout-left .ws-theme-timeline-block .panel-body .payment-content .wp-travel-form-field #wp-travel-book-now {
   margin: 0;
@@ -8746,7 +8747,7 @@ label.radio-checkbox-label input[type=checkbox], label.radio-checkbox-label .wp-
 }
 #shopping-cart .cart-summary {
   position: relative;
-  border: 1px solid #f0f0f0;
+  border: 2px solid #f0f0f0;
   padding: 1rem;
   background: #fff;
 }
@@ -11867,8 +11868,7 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
   padding-right: 5px;
   position: absolute;
   left: 0;
-  top: 4px;
-  top: 2px;
+  top: 6px;
   font-size: 12px;
 }
 .dashboard-tab .password-opt {
@@ -12364,6 +12364,7 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
 }
 #wp-travel-booking-info .my-order table.order-list-table, #wp-travel-booking-info .my-order table.my-order-payment-details {
   font-size: 13px;
+  width: 100%;
   min-width: 800px;
   border: 0;
   margin-bottom: 0;
@@ -12961,7 +12962,7 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
 .wp-travel-error,
 .wp-travel-info,
 .wp-travel-message {
-  padding: 1em 2em 1em 4.5em !important;
+  padding: 1em 1em 1em 3em !important;;
   margin: 0 0 2em !important;
   position: relative;
   background-color: #e0e0e0;
@@ -12995,7 +12996,7 @@ html .wp-trave-price-range .ui-button.ui-state-disabled:active {
   font-size: 18px;
   display: inline-block;
   position: absolute;
-  top: 13px;
+  top: 25px;
   left: 1.5em;
 }
 
@@ -13052,7 +13053,7 @@ span.wp-travel-message {
 .wp-travel-error,
 .wp-travel-info,
 .wp-travel-message {
-  padding: 1em 2em 1em 4.5em !important;
+  padding: 1em 1em 1em 3em !important;;
   margin: 0 0 2em !important;
   position: relative;
   background-color: #e0e0e0;
@@ -13070,7 +13071,7 @@ span.wp-travel-message {
   font-size: 18px;
   display: inline-block;
   position: absolute;
-  top: 13px;
+  top: 25px;
   left: 1.5em;
 }
 
@@ -13079,9 +13080,9 @@ span.wp-travel-message {
 }
 
 .wp-travel-message::before {
-  content: "\f05d";
+  content: "\f058";
   color: #0aa525;
-  font-family: "wp-icon-regular";
+  font-family: "wt-icon-solid";
 }
 
 .wp-travel-error::before {

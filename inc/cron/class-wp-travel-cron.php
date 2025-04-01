@@ -71,7 +71,11 @@ if ( ! class_exists( 'WP_Travel_Cron' ) ) {
 		public static function trigger_cron_job() {
 			global $wpdb;
 			$custom_post_type = WP_TRAVEL_POST_TYPE;
-			$query1           = "SELECT ID from {$wpdb->posts}  where post_type='$custom_post_type' and post_status in( 'publish', 'draft' )";
+			$query1           = $wpdb->prepare(
+				"SELECT ID FROM {$wpdb->posts} WHERE post_type = %s AND post_status IN ( 'publish', 'draft' )",
+				$custom_post_type
+			);
+
 			$post_ids         = $wpdb->get_results( $query1 );
 
 			$settings                   = wptravel_get_settings();
@@ -114,14 +118,14 @@ if ( ! class_exists( 'WP_Travel_Cron' ) ) {
 							$trip_dates = $trip_dates_data['dates'];
 
 							$valid_trip   = false;
-							$current_date = date( 'Y-m-d' );
+							$current_date = gmdate( 'Y-m-d' );
 							foreach ( $trip_dates as $trip_date ) {
 
 								$start_date = strtotime( $trip_date['start_date'] );
-								$start_date = date( 'Y-m-d', $start_date );
+								$start_date = dagmdatete( 'Y-m-d', $start_date );
 
 								$end_date = strtotime( $trip_date['end_date'] );
-								$end_date = date( 'Y-m-d', $end_date );
+								$end_date = gmdate( 'Y-m-d', $end_date );
 
 								$is_recurring = $trip_date['is_recurring'];
 

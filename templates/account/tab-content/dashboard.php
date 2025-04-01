@@ -56,10 +56,10 @@ $biling_glance_data = $args['biling_glance_data'];
 		  <div class="box-content">
 			<?php if ( is_array( $biling_glance_data ) && ! empty( $biling_glance_data ) ) : ?>
 			  <p>
-				<?php echo esc_html( $biling_glance_data['billing_address'] ); ?><br>
-				<?php echo esc_html( $biling_glance_data['billing_city'] ); ?><br>
-				<?php echo esc_html( $biling_glance_data['billing_zip_code'] ); ?><br>
-				<?php echo esc_html( $biling_glance_data['billing_country'] ); ?><br>
+			  	<b><?php esc_html_e( 'Address: ', 'wp-travel' ); ?></b><?php echo esc_html( $biling_glance_data['billing_address'] ); ?><br>
+				<b><?php esc_html_e( 'City: ', 'wp-travel' ); ?></b><?php echo esc_html( $biling_glance_data['billing_city'] ); ?><br>
+				<b><?php esc_html_e( 'ZIP Code: ', 'wp-travel' ); ?></b><?php echo esc_html( $biling_glance_data['billing_zip_code'] ); ?><br>
+				<b><?php esc_html_e( 'Contry Code: ', 'wp-travel' ); ?></b><?php echo esc_html( $biling_glance_data['billing_country'] ); ?><br>
 			  </p>
 			<?php endif; ?>
 		  </div>
@@ -78,8 +78,8 @@ $biling_glance_data = $args['biling_glance_data'];
 		  <a href="#" class="dashtab-nav" data-tabtitle="account"><strong><?php esc_html_e( 'Account Info', 'wp-travel' ); ?></strong></a>
 		  <div class="box-content">
 			<p>
-				<?php echo esc_html( $current_user->first_name . ' ' . $current_user->last_name ); ?><br>
-				<?php echo esc_html( $current_user->user_email ); ?><br>
+				<b><?php esc_html_e( 'Full Name: ', 'wp-travel' ); ?></b><?php echo esc_html( $current_user->first_name . ' ' . $current_user->last_name ); ?><br>
+				<b><?php esc_html_e( 'Email Address: ', 'wp-travel' ); ?></b><?php echo esc_html( $current_user->user_email ); ?><br>
 			</p>
 		  </div>
 		  <div class="box-actions">

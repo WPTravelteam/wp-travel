@@ -14,12 +14,13 @@ global $wt_cart;
 $wptravel_checkout_fields              = wptravel_get_checkout_form_fields();
 
 $wptravel_traveller_fields             = isset( $wptravel_checkout_fields['traveller_fields'] ) ? $wptravel_checkout_fields['traveller_fields'] : array();
-
+$wptravel_settings                     = wptravel_get_settings();
 
 $wptravel_billing_fields               = isset( $wptravel_checkout_fields['billing_fields'] ) ? $wptravel_checkout_fields['billing_fields'] : array();
 $wptravel_payment_fields               = isset( $wptravel_checkout_fields['payment_fields'] ) ? $wptravel_checkout_fields['payment_fields'] : array();
-$wptravel_settings                     = wptravel_get_settings();
+
 $wptravel_enable_multiple_travellers   = isset( $wptravel_settings['enable_multiple_travellers'] ) && $wptravel_settings['enable_multiple_travellers'] ? esc_html( $wptravel_settings['enable_multiple_travellers'] ) : 'no';
+$wptravel_enable_multiple_checkout   = isset( $wptravel_settings['enable_multiple_checkout'] ) && $wptravel_settings['enable_multiple_checkout'] ? esc_html( $wptravel_settings['enable_multiple_checkout'] ) : 'no';
 $wptravel_all_travelers_fields_require = apply_filters( 'wp_travel_require_all_travelers_fields', false ); // @phpcs:ignore
 $wptravel_form_fw                      = new WP_Travel_FW_Form();
 $wptravel_form_field                   = new WP_Travel_FW_Field();
@@ -59,7 +60,7 @@ $wptravel_form_fw->init_validation( 'wp-travel-booking' );
 		}
 		?>
 		<div class="wp-travel-trip-details">
-			<?php if ( 'yes' === $wptravel_enable_multiple_travellers ) : ?>
+			<?php if ( 'yes' === $wptravel_enable_multiple_checkout ) : ?>
 				<div class="section-title text-left">
 					<h3><?php echo esc_html( $wptravel_pricing_name ); ?><!-- <small> / 8 days 7 nights</small> --></h3>
 				</div>
@@ -78,7 +79,7 @@ $wptravel_form_fw->init_validation( 'wp-travel-booking' );
 					
 					for ( $i = 0; $i < $wptravel_repeator_count; $i++ ) : // @phpcs:ignore
 						?>
-						<div class="panel panel-default" data-child="<?php echo $i+1;?>">
+						<div class="panel panel-default" data-child="<?php echo absint( $i )+1;?>">
 							<div class="panel-heading">
 								<h4 class="panel-title">
 									<a class="accordion-toggle" data-toggle="collapse" data-parent="#checkout-accordion-<?php echo esc_attr( $wptravel_cart_id ); ?>" href="#collapse-<?php echo esc_attr( $wptravel_cart_id . '-' . $i ); ?>" aria-expanded="true">
@@ -261,7 +262,7 @@ $wptravel_form_fw->init_validation( 'wp-travel-booking' );
 				if( apply_filters( 'wptravel_checkout_enable_media_input', false ) == true ): ?>
 					<div class="wp-travel-form-field ">
 						<label for="media_field">
-							<?php echo esc_html( apply_filters( 'wptravel_checkout_media_input_label', __( 'Upload Media' ) ) );?>									
+							<?php echo esc_html( apply_filters( 'wptravel_checkout_media_input_label', __( 'Upload Media', 'wp-travel' ) ) );?>									
 						</label>
 						<input type="file" id="wptravel_media_field" name="wptravel_checkout_media_field" value="" maxlength="60" data-parsley-maxlength="60" required>			
 					</div>

@@ -1,3 +1,55 @@
+Are you seeing this error?
+
+```
+[RuntimeException]
+  Failed to clone https://github.com/WadeShuler/PHP-PayPal-IPN.git via https, ssh protocols, aborting.
+
+  - https://github.com/WadeShuler/PHP-PayPal-IPN.git
+    Cloning into '/var/www/appname/vendor/wadeshuler/php-paypal-ipn'...
+    remote: Support for password authentication was removed on August 13, 2021.
+    remote: Please see https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#cloning-with-https-urls for information on currently recommen
+  ded modes of authentication.
+    fatal: Authentication failed for 'https://github.com/WadeShuler/PHP-PayPal-IPN.git/'
+
+  - git@github.com:WadeShuler/PHP-PayPal-IPN.git
+    Cloning into '/var/www/appname/vendor/wadeshuler/php-paypal-ipn'...
+    git@github.com: Permission denied (publickey).
+    fatal: Could not read from remote repository.
+
+    Please make sure you have the correct access rights
+    and the repository exists.
+```
+
+The GitHub repository https://github.com/WadeShuler/PHP-PayPal-IPN has been deleted, so a `composer install` will fail if you have this dependency.
+I have uploaded a copy of the `vendor/wadeshuler/php-paypal-ipn` directory here so you can un-break your dependencies.
+**This is only version 2.5.0 sorry!** This is not a fork of the original repo. This is a copy of the directory from `vendor`.
+
+These instructions fixed it for me:
+
+- Remove `wadeshuler/php-paypal-ipn` from the requires in `composer.json`.
+- Manually remove the section `"name": "wadeshuler/php-paypal-ipn",` from `composer.lock`.
+- Edit `composer.json` and add:
+```
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/antriver/wadeshuler-php-paypal-ipn"
+        }
+    ],
+```
+- Re-add the package:
+```
+COMPOSER_MEMORY_LIMIT=-1 composer require wadeshuler/php-paypal-ipn:2.5.0
+```
+You might not need the COMPOSER_MEMORY_LIMIT or even the first 2 steps but I was having out memory issues when running this, which may have been unrelated.
+
+!!! I have no idea if this package still even works. I have only done this to fix a broken `composer install`. Use entirely at your own risk.
+
+Original README follows.
+
+---
+
+
 PHP-PayPal-IPN
 ==============
 
@@ -80,9 +132,9 @@ below. For a more thoroughly documented example, take a look at the
 
     <?php
 
-    include('/path/to/IPNListener.php');
+    require_once('vendor/autoload.php');
 
-    $listener = new IPNListener();
+    $listener = new \WadeShuler\PhpPaypalIpn\IpnListener();
     $listener->use_sandbox = true;
 
     if ($verified = $listener->processIpn())

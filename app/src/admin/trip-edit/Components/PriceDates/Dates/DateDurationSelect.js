@@ -10,14 +10,9 @@ export default ( {allData } ) => {
     const { updateTripData } = dispatch('WPTravel/TripEdit');
     const { trip_duration, } = allData;
     const { duration_format, arrival_time, departure_time } = typeof trip_duration != 'undefined' && trip_duration;
-    const format = typeof duration_format != 'undefined' && duration_format || '';
-    const translatedSelectLabel = __i18n.duration_select_label;
-    const selectOption = [
-        {label : translatedSelectLabel.day_night, value : 'day_night' },
-        {label : translatedSelectLabel.hour_minute, value : 'hour_minute' },
-        
-    ];
-    const newSelectOption = applyFilters( 'wp_travel_trip_duration_formate_selected', selectOption);
+    // const format = typeof duration_format != 'undefined' && duration_format || '';
+    // const translatedSelectLabel = __i18n.duration_select_label;
+
     const timeFormating = {
         amPmAriaLabel: "Select AM/PM",
         clockIcon: false,
@@ -34,21 +29,7 @@ export default ( {allData } ) => {
     const departure = typeof departure_time != 'undefined' && departure_time != '' && departure_time || '00:00';
 
     return <>
-        <PanelRow>
-            <label>{__i18n.trip_duration}</label>
-            <SelectControl
-            options={newSelectOption}
-            value  ={ format }
-            onChange={ (val)=> {
-                const old_duration = typeof allData.trip_duration != 'undefined' && allData.trip_duration
-                const new_duration = {...old_duration, duration_format : val };
-                updateTripData({
-                    ...allData,
-                    trip_duration : new_duration
-                })
-            } }
-            />
-        </PanelRow>
+
         { typeof __i18n.arrival_departure != 'undefined' && __i18n.arrival_departure && <>
             <PanelRow>
                 <label>{ typeof __i18n.arrival_time != 'undefined' && __i18n.arrival_time || '' }</label>

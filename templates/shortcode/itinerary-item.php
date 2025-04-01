@@ -45,6 +45,7 @@ if ( post_password_required() ) {
 	);
 
 	echo wp_kses( get_the_password_form(), $allow_html );
+
 	return;
 }
 $post_id     = get_the_ID();

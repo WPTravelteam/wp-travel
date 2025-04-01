@@ -32,6 +32,9 @@ class Wp_Travel_Shortcodes {
 		add_shortcode( 'WP_TRAVEL_FEATURED_TRIP', array( $this, 'wptravel_featured_trip_shortcode' ) );
 		add_shortcode( 'WP_TRAVEL_SALE_TRIP', array( $this, 'wptravel_sale_trip_shortcode' ) );
 
+
+		add_shortcode( 'WP_TRAVEL_ITINERARIES_BY_MONTHS', array( $this, 'get_itineraries_by_months_shortcode' ) );
+
 		/**
 		 * Checkout Shortcodes.
 		 *
@@ -309,10 +312,11 @@ class Wp_Travel_Shortcodes {
 						$pagination_args = array(
 							'total'   => $query->max_num_pages,
 							'current' => $paged,
-							'prev_text' => __('&laquo;'),
-							'next_text' => __('&raquo;'),
+							'prev_text' => '&laquo;',
+							'next_text' => '&raquo;',
 						);
-						echo paginate_links($pagination_args);
+						$pagination = paginate_links($pagination_args);
+						echo wp_kses_post($pagination);
 						echo '</div>';
 					}
 				?>
@@ -745,5 +749,310 @@ class Wp_Travel_Shortcodes {
 		$html = ob_get_clean();
 		return $html;
 	}
-}
 
+	public function get_itineraries_by_months_shortcode ( $attrs, $content ){
+
+		$days_offset = 3;
+
+		if( isset($attrs['days_offset']) ){
+			$days_offset = (int)$attrs['days_offset'];
+		}
+		
+		global $wpdb;
+		$results = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT id, trip_id, start_date, pricing_ids
+				FROM {$wpdb->prefix}wt_dates
+				WHERE recurring = %d
+				  AND start_date >= DATE_ADD(CURDATE(), INTERVAL %d DAY)",
+				0, 
+				$days_offset 
+			)
+		);
+
+		usort($results, function($a, $b) {
+			return strtotime($a->start_date) - strtotime($b->start_date);
+		});
+
+		$months_label = array(
+			'01' => esc_html( 'January', 'wp-travel' ),
+			'02' => esc_html( 'February', 'wp-travel' ),
+			'03' => esc_html( 'March', 'wp-travel' ),
+			'04' => esc_html( 'April', 'wp-travel' ),
+			'05' => esc_html( 'May', 'wp-travel' ),
+			'06' => esc_html( 'June', 'wp-travel' ),
+			'07' => esc_html( 'July', 'wp-travel' ),
+			'08' => esc_html( 'August', 'wp-travel' ),
+			'09' => esc_html( 'September', 'wp-travel' ),
+			'10' => esc_html( 'October', 'wp-travel' ),
+			'11' => esc_html( 'November', 'wp-travel' ),
+			'12' => esc_html( 'December', 'wp-travel' )
+		);
+
+		ob_start();
+
+		if($results):
+		?>
+		<div id="wp-travel-trip-by-months">
+			<table class="table wp-travel-trip-by-months">
+				<h3>Trips For <?php echo esc_html( date("Y") ); ?></h3>
+				<tbody>
+			
+					<?php 
+						$month = '00';
+						foreach( $results as $data ){
+							$date = $data->start_date;
+
+							if( date('m', strtotime($date)) > $month ){
+								$month = date('m', strtotime($date));
+								?>
+									<tr class="new-month">
+										<th colspan="2"><?php echo $months_label[$month]; ?></th>
+									</tr>
+								<?php
+							}
+
+							$pricing_ids = explode(",", $data->pricing_ids);
+	
+							foreach( $pricing_ids as $id ){
+								$inventory_args = '';
+								$booking_full = false;
+								if( class_exists( 'WP_Travel_Pro' ) ){
+									$args = array(
+										'trip_id'       => (int)$data->trip_id,
+										'pricing_id'    => (int)$id,
+										'selected_date' => $date,
+										'times'         => '',
+									);
+									
+									if( !isset( WP_Travel_Helpers_Inventory::get_inventory( $args )->errors ) ){
+										$inventory_args = WP_Travel_Helpers_Inventory::get_inventory( $args )['inventory'][0];
+
+										if( (int)$inventory_args['booked_pax'] == (int)$inventory_args['pax_limit'] ){
+											$booking_full = true;
+										}else{
+											$booking_full = false;
+										}
+									}
+									
+								}
+								
+								$pricing_results = $wpdb->get_results(
+									$wpdb->prepare(
+										"SELECT price_per, regular_price, is_sale, sale_price, is_sale_percentage, sale_percentage_val
+										FROM {$wpdb->prefix}wt_price_category_relation
+										WHERE pricing_id = %d",
+										(int)$id
+									)
+								)[0];
+								$sale_price = 0;
+					
+								if( $pricing_results->is_sale_percentage == '1' ){
+									$sale_price = ((float)$pricing_results->sale_percentage_val / 100) * (float)$pricing_results->regular_price;
+								}else{
+									$sale_price = $pricing_results->sale_price;
+								}
+
+								
+								?>	
+									<tr class="trip-item">
+										<th></th>
+										<td class="trip-item"> 
+											<a class="<?php echo $booking_full == false ? 'book-active' : 'full-booked'; ?>" href="<?php echo esc_url( get_the_permalink( (int)$data->trip_id ) );?>">
+												<span class="trip-title"><?php echo esc_html( get_the_title( (int)$data->trip_id ) );?></span>
+												<span class="table-trip-metas">
+													<span class="date"> <?php echo esc_html( $date );?> </span>
+													<?php if( !empty( $inventory_args ) ): ?>
+													<span class="pax"><?php echo sprintf("%d/%d %s", $inventory_args['booked_pax'], $inventory_args['pax_limit'], __( '( Pax )', 'wp-travel' ) ); ?></span> 
+													<?php endif; ?>
+													<span class="trip-price">
+														<?php if( $pricing_results->is_sale == '1' ): ?>
+															<del>
+																<?php echo wp_kses_post( wptravel_get_formated_price_currency( WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $pricing_results->regular_price ) ) ) ?>
+															</del>
+															<?php echo wp_kses_post( wptravel_get_formated_price_currency( WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $sale_price ) ) ) ?>
+															<?php else: ?>
+																<?php echo wp_kses_post( wptravel_get_formated_price_currency( WpTravel_Helpers_Trip_Pricing_Categories::get_converted_price( $pricing_results->regular_price ) ) ) ?>
+														<?php endif; ?>
+														
+													</span>
+													<span class="pricing-per"><?php echo sprintf( "%s %s", __( 'per', 'wp-travel' ), $pricing_results->price_per ); ?></span>
+													
+													<?php if(!empty($inventory_args)): ?>
+														<?php if($booking_full): ?>
+															<span class="closed"><?php echo esc_html__('Booking Closed', 'wp-travel'); ?></span> 
+															<?php else: ?>
+																<span class="active"><?php echo esc_html__('Booking Active', 'wp-travel'); ?></span> 
+														<?php endif; ?>
+														
+														<?php else: ?>
+															<span class="active"><?php echo esc_html__('Booking Active', 'wp-travel'); ?></span> 
+													<?php endif; ?>
+													
+												</span>
+											</a> 
+										</td>
+									</tr>
+								<?php
+							}
+						}
+					?>
+					<tr class="new-month end">
+						<th colspan="2"><?php echo esc_html__('End Of Year', 'wp-travel'); ?></th>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<style>
+			#wp-travel-trip-by-months{
+				border: 1px solid #eeeeee;
+				padding: 30px;
+			}
+			#wp-travel-trip-by-months table.wp-travel-trip-by-months {
+				width: 100%;
+				border-collapse: collapse;
+			}
+
+			#wp-travel-trip-by-months table.wp-travel-trip-by-months th, #wp-travel-trip-by-months table.wp-travel-trip-by-months td {
+				border: none;
+			}
+
+			#wp-travel-trip-by-months tr.new-month {
+				background-color: #f0f0f0;
+				font-weight: bold;
+				padding: 10px 0;
+			}
+
+			#wp-travel-trip-by-months tr.new-month th {
+				text-align: left;
+				padding: 10px 15px;
+			}
+
+			#wp-travel-trip-by-months .trip-item a {
+				text-decoration: none;
+				color: #333;
+				display: block;
+				padding: 10px;
+				border-bottom: 1px solid #dddddd;
+			}
+
+			#wp-travel-trip-by-months tr:last-of-type,
+			#wp-travel-trip-by-months tr:has(+ tr.new-month).trip-item a {
+				border-bottom: none;
+			}
+
+			#wp-travel-trip-by-months .trip-item a:hover {
+				background-color: #f4f4f4;
+			}
+
+			#wp-travel-trip-by-months .trip-title{
+				font-weight: 600;
+				display: flex;
+   			 	align-items: center;
+			}
+
+			#wp-travel-trip-by-months .wp-travel-trip-by-months .trip-price,
+			#wp-travel-trip-by-months .wp-travel-trip-by-months .pax,
+			#wp-travel-trip-by-months .wp-travel-trip-by-months .date {
+				font-style: italic;
+				color: #777;
+				font-size: 16px;
+				margin-left: 20px;
+				display: flex;
+   			 	align-items: center;
+			}
+
+			#wp-travel-trip-by-months .wp-travel-trip-by-months .pricing-per{
+				font-style: italic;
+				margin-left: 3px;
+				color: #777;
+				display: flex;
+   			 	align-items: center;
+			}
+
+			#wp-travel-trip-by-months .active {
+				font-weight: bold;
+				background: green;
+				font-size: 12px;
+				color: #fff;
+				padding: 5px 10px;
+				margin-left: 20px;
+				display: flex;
+   			 	align-items: center;
+			}
+
+			#wp-travel-trip-by-months .closed {
+				font-weight: bold;
+				background: #CC3300;
+				font-size: 12px;
+				color: #fff;
+				padding: 5px 10px;
+				margin-left: 20px;
+				display: flex;
+				align-items: center;
+			}
+
+			#wp-travel-trip-by-months .trip-item a {
+				display: flex;
+				justify-content: space-between;
+				width: 100%;
+			}
+
+			#wp-travel-trip-by-months .trip-item a .date {
+				margin-left: auto;
+				margin-right: 10px;
+			}
+
+			#wp-travel-trip-by-months span.table-trip-metas {
+				width: 70%;
+				display: flex;
+			}
+
+			.wp-travel-trip-by-months .full-booked{
+				pointer-events: none;
+			}
+
+			@media (max-width: 960px) {
+				#wp-travel-trip-by-months .trip-item a{
+					flex-direction: column;
+				}
+
+				#wp-travel-trip-by-months span.table-trip-metas {
+					width: 100%;
+				}
+
+				#wp-travel-trip-by-months .trip-item a .date{
+					margin-left: 0px;
+				}
+			}
+
+			@media (max-width: 690px) {
+				#wp-travel-trip-by-months .active,
+				#wp-travel-trip-by-months .closed{
+					display: none;
+				}
+			}
+
+			@media (max-width: 560px) {
+				#wp-travel-trip-by-months .trip-price del{
+					display: none;
+				}
+			}
+
+			@media (max-width: 500px) {
+				#wp-travel-trip-by-months .pricing-per{
+					display: none !important;
+				}
+			}
+
+		</style>
+		<?php
+			else:
+				echo esc_html__( 'No Departure Trips Found.', 'wp-travel' );
+
+		endif;
+		$html = ob_get_clean();
+		return $html;
+	}
+}

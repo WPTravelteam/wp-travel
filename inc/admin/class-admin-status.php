@@ -94,19 +94,25 @@ class WT_Admin_status {
 	}
 
 	function checkMySQL() {
-		if ( $this->_db->use_mysqli ) {
-			$ver = mysqli_get_server_info( $this->_db->dbh );
-		} else {
-			$ver = mysql_get_server_info();
-		}
-		if ( ! empty( $this->_db->is_mysql ) && ! stristr( $ver, 'MariaDB' ) ) {
-			$mysql_text = $this->_db->db_version();
+		global $wpdb;
+
+		$ver = $wpdb->db_version();
+		if ( ! empty( $wpdb->is_mysql ) && false === stripos( $ver, 'MariaDB' ) ) {
+			$mysql_version = $ver;
+			$mysql_text    = esc_html( $mysql_version );
+
 			if ( version_compare( $mysql_version, '5.6', '<' ) ) {
-				$mysql_text .= '<span class="error"><span class="dashicons dashicons-warning"></span> ' .esc_html( $mysql_version ).__( ' - We recommend a minimum MySQL version of 5.6. See: ', 'wp-travel' ).'<a href="https://wordpress.org/about/requirements/" target="_blank">' . __( 'WordPress Requirements', 'wp-travel' ) . '</a>' . '</span>';
+				$mysql_text .= '<span class="error"><span class="dashicons dashicons-warning"></span> ' .
+					esc_html( $mysql_version ) . ' ' .
+					__( ' - We recommend a minimum MySQL version of 5.6. See: ', 'wp-travel' ) .
+					'<a href="https://wordpress.org/about/requirements/" target="_blank">' . 
+					__( 'WordPress Requirements', 'wp-travel' ) . '</a>' .
+					'</span>';
 			} else {
 				$mysql_text .= '<span class="yes">' . esc_html( $mysql_version ) . '</span>';
 			}
 		}
+
 	}
 
 	function checkRemoteStatus() {

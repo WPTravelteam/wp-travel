@@ -172,11 +172,7 @@ wp_enqueue_script( 'wp-travel-system-status-script', plugin_dir_url( WP_TRAVEL_P
 			<?php
 		endif;
 
-		if ( $wpdb->use_mysqli ) {
-			$ver = mysqli_get_server_info( $wpdb->dbh ); // @phpcs:ignore
-		} else {
-			$ver = mysql_get_server_info();
-		}
+		$ver = $wpdb->get_var( "SELECT VERSION()" );
 
 		if ( ! empty( $wpdb->is_mysql ) && ! stristr( $ver, 'MariaDB' ) ) :
 			?>

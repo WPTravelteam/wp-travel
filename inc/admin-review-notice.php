@@ -13,10 +13,10 @@ class WP_Travel_Review_Admin_Notice {
         }
 
         if( !get_option( 'wptravel_review_notice_date' ) ){
-            update_option( 'wptravel_review_notice_date', date("Y/m/d") );
+            update_option( 'wptravel_review_notice_date', gmdate("Y/m/d") );
         }
 
-		if(  get_option( 'wptravel_review_status' ) == 0 && get_option( 'wptravel_review_notice_date' ) <= date("Y/m/d") ){
+		if(  get_option( 'wptravel_review_status' ) == 0 && get_option( 'wptravel_review_notice_date' ) <= gmdate("Y/m/d") ){
             add_action( 'admin_notices', array( $this, 'wptravel_review_admin_notice' ) );
         }
 
@@ -81,7 +81,7 @@ class WP_Travel_Review_Admin_Notice {
 			WP_Travel_Helpers_REST_API::response( $permission );
 		}
 
-        update_option( 'wptravel_review_notice_date', date('Y/m/d', strtotime( date('Y/m/d') . ' + 3 days') ) );
+        update_option( 'wptravel_review_notice_date', gmdate('Y/m/d', strtotime( gmdate('Y/m/d') . ' + 3 days') ) );
     }
 
     public function wptravel_gave_review_already(){ 

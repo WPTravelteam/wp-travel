@@ -1013,7 +1013,33 @@
 		color: #ff0000;
 		padding-left: 5px;
 	}
+	
+	.wp-travel-one-page-bank-detail .bank-description{
+		font-size: 16px;
+		margin-bottom: 30px;
+	}
+	
+	.wptravel-billing-formfield label,
+	.wptravel-traveller-info-container label{
+		font-size: 14px;
+	}
 
+	.wp-travel-one-page-bank-detail{
+		margin-bottom: 40px;
+	}
+
+	.wp-travel-one-page-bank-detail h4{
+		font-size: 18px !important;
+	}
+
+	.wptravel-onepage-payment-gateway .wptravel-onpage-radiobtn-handle label,
+	.wp-travel-one-page-bank-detail th{
+		font-size: 16px;
+	}
+
+	.wp-travel-one-page-bank-detail td{
+		font-size: 14px;
+	}
 
 	.wptravel-traveller-info-container,
 	.wptravel-billing-formfield {
@@ -1252,6 +1278,9 @@
 			display: flex;
 			flex-direction: row-reverse;
 			justify-content: center;
+			pointer-events: none; /* Disable click events */
+    opacity: 0.5; /* Make it look disabled */
+    cursor: not-allowed; /* Change the cursor to show it's not clickable */
 
 			// reference stripe checkout 
 			.wp-travel-one-page-booking-buttons {
@@ -1330,7 +1359,7 @@
 			//stripe checkout
 			.wptravel-single-page-stripcheckout {
 				padding: 40px 40px 10px 40px;
-				display: flex;
+				display: none;
 				justify-content: center;
 				align-items: flex-start;
 
@@ -1662,6 +1691,8 @@ div.wptravel-onpage-priceshow {
 span.onpage-travel-price-display-label {
 	margin-right: 15px;
 }
+
+
 
 
 @import "./responsive.scss";

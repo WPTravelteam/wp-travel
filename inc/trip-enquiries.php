@@ -58,7 +58,7 @@ function wptravel_get_enquiries_form( $trips_dropdown = false ) {
 
 	$settings = wptravel_get_settings();
 
-	$gdpr_msg = isset( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ) : __( 'By contacting us, you agree to our ', 'wp-travel' );
+	$gdpr_msg = !empty( $settings['wp_travel_gdpr_message'] ) ? esc_html( $settings['wp_travel_gdpr_message'] ) : __( 'By contacting us, you agree to our ', 'wp-travel' );
 
 	$privacy_policy_url = false;
 
@@ -126,12 +126,12 @@ function wptravel_get_enquiries_form( $trips_dropdown = false ) {
 		);
 	}
 	$policy_link = wptravel_privacy_link();
-	if ( ! empty( $gdpr_msg ) && $policy_link ) {
+	if ( $policy_link && apply_filters( 'wptravel_enable_privacy_policy_checkout_box_enquiry_form', true ) == true ) {
 		// GDPR Compatibility for enquiry.
 		$fields['wp_travel_enquiry_gdpr'] = array(
 			'type'              => 'checkbox',
 			'label'             => __( 'Privacy Policy', 'wp-travel' ),
-			'options'           => array( 'gdpr_agree' => sprintf( '%1s %2s', $gdpr_msg, $policy_link ) ),
+			'options'           => array( 'gdpr_agree' => sprintf( '%1s %2s', '<span>'.$gdpr_msg.'</span>', $policy_link ) ),
 			'name'              => 'wp_travel_enquiry_gdpr_msg',
 			'id'                => 'wp-travel-enquiry-gdpr-msg',
 			'validations'       => array(

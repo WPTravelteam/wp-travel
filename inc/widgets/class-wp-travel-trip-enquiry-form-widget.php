@@ -68,7 +68,7 @@ class WP_Travel_Trip_Enquiry_Form_Widget extends WP_Widget {
 		}
 		?>
 		<p> 
-			<?php echo __( 'This widget will be removed from v9.0.0. Please use "[wp_travel_trip_enquiry_form]" shortcode in replace of this widget.', 'wp-travel' ); ?>
+			<?php echo esc_html__( 'This widget will be removed from v9.0.0. Please use "[wp_travel_trip_enquiry_form]" shortcode in replace of this widget.', 'wp-travel' ); ?>
 		</p>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title', 'wp-travel' ); ?>:</label>

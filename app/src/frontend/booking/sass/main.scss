@@ -154,6 +154,18 @@ select#wp-travel-country {
 	margin: auto;
 }
 
+@media (max-width: 991px) {
+    .wp-travel-list-view .wptravel-recurring-dates .wptravel-recurring-table-wrapper .wptravel-recurring-table .tbody-table td {
+        flex-wrap: nowrap;
+    }
+            .wp-travel-list-view .wptravel-recurring-dates .wptravel-recurring-table-wrapper .wptravel-recurring-table .components-base-control__field .components-checkbox-control__input{
+            width: 20px;
+            height: 20px;
+        }
+}
+
+
+
 @media screen and (max-width: 622px) {
 	// apply coupon 
 	.wptravel-on-page-coupon-apply{
@@ -179,7 +191,19 @@ select#wp-travel-country {
 }
 
 @media screen and (max-width: 575px) {
+	.wp-travel-list-view .wptravel-recurring-dates .wptravel-recurring-table-wrapper .wptravel-recurring-table .components-base-control__field label, 
+    .wp-travel-list-view .wptravel-recurring-dates .wptravel-recurring-table-wrapper table .components-base-control__field label {
+        font-size: 14px;
+    }
+
+    .wp-travel-list-view .wptravel-recurring-dates .wptravel-recurring-table-wrapper .wptravel-recurring-table .tbody-table td {
+        flex-wrap: nowrap;
+    }
+    .wp-travel-list-view .wptravel-recurring-dates .wptravel-recurring-table-wrapper table .tbody-table td[data-label="Pricings"] span{
+        vertical-align: top;
+    }
 	.on-page.wp-travel-enquiry-subscribe-section {
 		padding: 0px !important;
 	}
 }
+

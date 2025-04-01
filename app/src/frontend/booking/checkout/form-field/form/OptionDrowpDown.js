@@ -23,7 +23,7 @@ export default ( { travelerData, trvOne = 'travelerOne', partials = 'no' } ) => 
     
     return <>
     {
-        Object.keys(travelerData.options).length > 1 &&
+        Object.keys(travelerData.options).length > 0 &&
         <>
         <PanelBody >
         <PanelRow className='wptravel-singlepage-booking-options'>

@@ -10,7 +10,7 @@ if ( ! class_exists( 'WP_Travel_Coupons_Pro_Admin_Assets' ) ) :
 	 * Admin Assets Class.
 	 */
 	class WP_Travel_Coupons_Pro_Admin_Assets { // @phpcs:ignore
-
+		public $assets_path;
 		/**
 		 * Constructor.
 		 */

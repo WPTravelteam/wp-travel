@@ -40,7 +40,7 @@ const TripOutline = ({allData}) => {
             <label htmlFor="wp-travel-trip-outline">{__i18n.trip_outline}</label>
         </PanelRow>
         <PanelRow className="wp-travel-editor">
-            {'undefined' !== typeof trip_outline && <WPEditor id="wp-travel-trip-outlines" value={trip_outline}
+            {'undefined' !== typeof trip_outline && <WPEditor id="wp-travel-trip-outlines" value={trip_outline.replace(/<p>\s*<\/p>/g, '<p><br /></p>')}
             onContentChange={(trip_outline) => {
                 updateTripData({
                     ...allData,
@@ -270,7 +270,7 @@ const Itinerary = ({allData}) => {
                                         /> */}
                                         <WPEditor 
                                             id={`wp-travel-itinerary-description-${itineraryId}`} 
-                                            value={itineraries[itineraryId].desc ? itineraries[itineraryId].desc : null}
+                                            value={itineraries[itineraryId].desc ? itineraries[itineraryId].desc.replace(/<p>\s*<\/p>/g, '<p><br /></p>') : null}
                                             onContentChange={ (e) => updateTripItinerary('desc', e, itineraryId)} 
                                             name={`itinerary_description_${itineraryId}`} 
                                         />

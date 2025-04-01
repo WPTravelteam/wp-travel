@@ -136,15 +136,7 @@ $trp_title = apply_filters( 'wp_travel_trip_title_enable_disable', true );
 						<?php endif; ?>
 					</div>
 				</div>
-
-				<?php 					
-					if( apply_filters( 'wptravel_show_quick_view_option', false ) == true ){
-						
-						if( function_exists( 'wptravel_trip_quick_view' ) ){
-							echo wptravel_trip_quick_view( $trip_id );
-						}
-					}
-				?>				
+			
 				<a class="wp-block-button__link explore-btn" href="<?php the_permalink(); ?>"><span><?php echo esc_html( apply_filters( 'wp_travel_archives_page_trip_explore_btn', __( 'Explore', 'wp-travel' ), $trip_id ) ); ?></span></a>
 			</div>
 		</div>

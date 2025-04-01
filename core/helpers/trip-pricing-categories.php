@@ -44,7 +44,17 @@ class WpTravel_Helpers_Trip_Pricing_Categories {
 			$table   = $wpdb->base_prefix . $blog_id . '_' . self::$table_name;
 		}
 
+		$pricing_id = intval( $pricing_id );
+
 		$results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}wt_price_category_relation WHERE `pricing_id` = %d", $pricing_id ) );
+
+		$cache_key = 'wp_travel_pricing_categories_' . $pricing_id;
+		$results = wp_cache_get( $cache_key );
+
+		if ( false === $results ) {
+			$results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}wt_price_category_relation WHERE `pricing_id` = %d", $pricing_id ) );
+			wp_cache_set( $cache_key, $results );
+		}
 
 		if ( empty( $results ) ) {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_PRICING_CATEGORIES' );
@@ -139,6 +149,8 @@ class WpTravel_Helpers_Trip_Pricing_Categories {
 			return WP_Travel_Helpers_Error_Codes::get_error( 'WP_TRAVEL_NO_TRIP_PRICING_CATEGORIES' );
 		}
 
+		wp_cache_delete( 'wp_travel_pricing_categories_' . $pricing_id );
+
 		$result           = self::remove_trip_pricing_categories( $pricing_id );
 		$saved_categories = array();
 		foreach ( $categories as $category ) {
@@ -172,6 +184,10 @@ class WpTravel_Helpers_Trip_Pricing_Categories {
 		}
 
 		global $wpdb;
+
+		$pricing_id = intval( $pricing_id );
+
+		$category_id = intval( $category_id );
 
 		$result = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}wt_price_category_relation WHERE `pricing_id` = %d AND `pricing_category_id` = %d", $pricing_id, $category_id ) );
 		if ( empty( $result ) ) {

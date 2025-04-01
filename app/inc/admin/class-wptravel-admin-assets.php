@@ -30,6 +30,8 @@ class WpTravel_Admin_Assets {
 
 		$all_localized                = WpTravel_Helpers_Localize::get();
 		$wp_travel_chart_data         = isset( $all_localized['wp_travel_chart_data'] ) ? $all_localized['wp_travel_chart_data'] : array();
+
+
 		$wp_travel_drag_drop_uploader = isset( $all_localized['wp_travel_drag_drop_uploader'] ) ? $all_localized['wp_travel_drag_drop_uploader'] : array();
 		$_wp_travel_admin             = isset( $all_localized['_wp_travel_admin'] ) ? $all_localized['_wp_travel_admin'] : array();
 

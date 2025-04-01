@@ -132,8 +132,8 @@ class WP_Travel_Admin_Dashboard_Widgets {
 						<td><a href="<?php echo esc_url( get_edit_post_link( $id ) ); ?>"><?php echo esc_html( $booking_id ); ?></a></td>
 						<td><?php echo esc_html( $trip_code ); ?></td>
 						<td><?php echo esc_html( $name ); ?></td>
-						<td><?php echo '<span class="wp-travel-status wp-travel-booking-status" style="background: ' . esc_attr( $status[ $label_key ]['color'] ) . ' ">' . esc_attr( $status[ $label_key ]['text'] ) . '</span>'; ?></td>
-						<td><?php echo '<span class="wp-travel-status wp-travel-payment-status" style="background: ' . esc_attr( $Pmt_status[ $pmt_label_key ]['color'], 'wp-travel' ) . ' ">' . esc_attr( $Pmt_status[ $pmt_label_key ]['text'], 'wp-travel' ) . '</span>'; ?></td>
+						<td><?php echo '<span class="wp-travel-status wp-travel-booking-status" style="color:#fff;padding:2px 5px;background: ' . esc_attr( $status[ $label_key ]['color'] ) . ' ">' . esc_attr( $status[ $label_key ]['text'] ) . '</span>'; ?></td>
+						<td><?php echo '<span class="wp-travel-status wp-travel-payment-status" style="color:#fff;padding:2px 5px;background: ' . esc_attr( $Pmt_status[ $pmt_label_key ]['color'], 'wp-travel' ) . ' ">' . esc_attr( $Pmt_status[ $pmt_label_key ]['text'], 'wp-travel' ) . '</span>'; ?></td>
 						<td><?php echo esc_html( $date ); ?></td>
 					</tr>
 
@@ -143,7 +143,7 @@ class WP_Travel_Admin_Dashboard_Widgets {
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="5"><a href="<?php echo esc_url( admin_url( 'edit.php?post_type=itinerary-booking' ) ); ?>" class="button button-primary"><?php esc_html_e( 'View All Bookings', 'wp-travel' ); ?></a></td>
+					<td colspan="6"><a href="<?php echo esc_url( admin_url( 'edit.php?post_type=itinerary-booking' ) ); ?>" class="button button-primary"><?php esc_html_e( 'View All Bookings', 'wp-travel' ); ?></a></td>
 				</tr>
 			<tfoot>
 			</table>

@@ -29,16 +29,10 @@ function wptravel_get_paypal_redirect_url( $ssl_check = false ) {
  * This would also do the "set-up" for an "alternate purchase verification"
  */
 function wptravel_listen_paypal_ipn() {
-	if ( ! WP_Travel::verify_nonce( true ) ) {
-		return;
-	}
 
-	if ( isset( $_GET['wp_travel_listener'] )
-		&& $_GET['wp_travel_listener'] == 'IPN'
-		|| isset( $_GET['test'] )
-		&& $_GET['test'] == true ) {
+	if ( isset( $_POST['payer_id'] ) && isset( $_POST['txn_id'] ) ) {
 		do_action( 'wp_travel_verify_paypal_ipn' );
-	}
+    }
 
 }
 add_action( 'init', 'wptravel_listen_paypal_ipn' );
@@ -51,40 +45,12 @@ add_action( 'init', 'wptravel_listen_paypal_ipn' );
  * This is the Pink Lilly of the whole operation.
  */
 function wptravel_paypal_ipn_process() {
-	/**
-	 * Instantiate the IPNListener class
-	 */
-	include dirname( __FILE__ ) . '/php-paypal-ipn/IPNListener.php';
-	$listener = new IPNListener();
 
-	/**
-	 * Set to PayPal sandbox or live mode
-	 */
-	$settings              = wptravel_get_settings();
-	$listener->use_sandbox = ( $settings['wt_test_mode'] ) ? true : false;
 
-	/**
-	 * Check if IPN was successfully processed
-	 */
-	if ( $verified = $listener->processIpn() ) {
+		$settings              = wptravel_get_settings();
 
 		$message = null;
-		/**
-		 * Verify seller PayPal email with PayPal email in settings
-		 *
-		 * Check if the seller email that was processed by the IPN matches what is saved as
-		 * the seller email in our DB
-		 */
-		if ( $_POST['receiver_email'] != $settings['paypal_email'] ) { // @phpcs:ignore
-			$message .= "\nEmail seller email does not match email in settings\n";
-		}
-
-		/**
-		 * Verify currency
-		 *
-		 * Check if the currency that was processed by the IPN matches what is saved as
-		 * the currency setting
-		 */
+	
 		if ( $_POST['mc_currency'] != $settings['currency'] ) { // @phpcs:ignore
 			$message .= "\nCurrency does not match those assigned in settings\n";
 		}
@@ -108,9 +74,11 @@ function wptravel_paypal_ipn_process() {
 		 *
 		 * Create a new payment, send customer an email and empty the cart
 		 */
-		 
-		if ( ! empty( $_POST['payment_status'] ) && $_POST['payment_status'] == 'Pending' ) { // @phpcs:ignore
-				// Update booking status and Payment args.
+
+		if ( ! empty( $_POST['payer_status'] ) && $_POST['payer_status'] == 'VERIFIED' && ! isset( $_GET['partial'] ) ) { // @phpcs:ignore
+				
+			
+			// Update booking status and Payment args.
 				update_post_meta( $booking_id, 'wp_travel_booking_status', 'booked' );
 				$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
 
@@ -146,58 +114,77 @@ function wptravel_paypal_ipn_process() {
 				update_post_meta( $new_payment_id, 'wp_travel_payment_gateway', $payment_method );
 
 				update_post_meta( $new_payment_id, 'wp_travel_payment_amount', $amount );
-				update_post_meta( $new_payment_id, 'wp_travel_payment_status', 'paid' );
+				
+		
+				if( $_POST['payment_status'] == 'Completed' ){
+		
+					update_post_meta( $new_payment_id, 'wp_travel_payment_status', 'paid' );
+				}else{
+	
+					update_post_meta( $new_payment_id, 'wp_travel_payment_status', 'pending' );
+				}
+				
 				update_post_meta( $new_payment_id, 'wp_travel_payment_mode', 'partial' );
 
 				$json = sanitize_text_field( wp_unslash( $_POST['payment_details'] ) );
 				wptravel_update_payment_status( $booking_id, $amount, 'paid', $detail, sprintf( '_%s_args', $payment_method ), $new_payment_id );
 
-			} else { // New Payment.
+			} else { 
+                
+				
 				update_post_meta( $payment_id, '_paypal_args', wptravel_sanitize_array( $_POST ) );
-				update_post_meta( $payment_id, 'wp_travel_payment_status', 'paid' );
+				if( $_GET['payment'] == 'partial' ){
+					if( $_POST['payment_status'] == 'Completed' ){
+						update_post_meta( $payment_id, 'wp_travel_payment_status', 'partially_paid' );
+					}else{
+						update_post_meta( $payment_id, 'wp_travel_payment_status', 'pending' );
+					}
+				}elseif( $_GET['payment'] == 'full' ){
+				    
+					if( $_POST['payment_status'] == 'Completed' ){
+						update_post_meta( $payment_id, 'wp_travel_payment_status', 'paid' );
+					}else{
+					   
+						update_post_meta( $payment_id, 'wp_travel_payment_status', 'pending' );
+					}
+				}else{
+					if( $_POST['payment_status'] == 'Completed' ){
+						update_post_meta( $payment_id, 'wp_travel_payment_status', 'paid' );
+					}else{
+						update_post_meta( $payment_id, 'wp_travel_payment_status', 'pending' );
+					}
+				}
+
+				update_post_meta( $payment_id, 'wp_travel_payment_mode', 'full' );
+
+				if( $_GET['payment'] == 'partial' ){ 
+					update_post_meta( $payment_id, 'wp_travel_payment_mode', 'partial' );
+				}
+				
 				update_post_meta( $payment_id, 'wp_travel_payment_amount', sanitize_text_field( $_POST['mc_gross'] ) );
 
 				do_action( 'wp_travel_after_successful_payment', $booking_id );
 			}
-		} else {
+		} elseif( ! empty( $_POST['payer_status'] ) && $_POST['payer_status'] == 'VERIFIED' && isset( $_GET['partial'] ) ) {
+				$payment_gateway = 'paypal';
+				$booking_id      = (int)$_GET['booking_id'];
+				
+				$payment_id = get_post_meta( $booking_id, 'wp_travel_payment_id', true );
+
+				
+				$new_payment_id = apply_filters( 'wptravel_before_insert_partial_payment', $payment_id, $booking_id, $payment_gateway );
+
+				$detail = wptravel_sanitize_array( $_POST );
+
+				$amount = sanitize_text_field( $_POST['mc_gross'] ); // @since 1.0.7
+
+				wptravel_update_payment_status( $booking_id, $amount, 'paid', $detail, sprintf( '_%s_args', $payment_gateway ), $new_payment_id );
+			
+		}else {
 
 			$message .= "\nPayment status not set to Completed\n";
 
-		}
+		}    
 
-		/**
-		 * Check if this is the test mode
-		 *
-		 * If this is the test mode we email the IPN text report.
-		 * note about and box http://stackoverflow.com/questions/4298117/paypal-ipn-always-return-payment-status-pending-on-sandbox
-		 */
-		if ( $settings['wt_test_mode'] == true ) {
-
-			$message .= "\nTest Mode\n";
-			$email    = array(
-				'to'      => $settings['wt_test_email'],
-				'subject' => 'Verified IPN',
-				'message' => $message . "\n" . $listener->getTextReport(),
-			);
-			wp_mail( $email['to'], $email['subject'], $email['message'] );
-
-		}
-	} else {
-
-		/**
-		 * Log errors
-		 */
-		$errors = $listener->getErrors();
-
-		/**
-		 * An Invalid IPN *may* be caused by a fraudulent transaction attempt. It's
-		 * a good idea to have a developer or sys admin manually investigate any
-		 * invalid IPN.
-		 */
-		$from_email = isset( $settings['from_email'] ) ? $settings['from_email'] : '';
-		if ( ! empty( $from_email ) ) {
-			wp_mail( $settings['from_email'], 'Invalid IPN', $listener->getTextReport() );
-		}
-	}
 }
 add_action( 'wp_travel_verify_paypal_ipn', 'wptravel_paypal_ipn_process' );

@@ -41,7 +41,9 @@ class WP_Travel_Coupon {
 	 */
 	public function get_coupon_id_by_code( $string ) {
 
+
 		global $wpdb;
+		$string = preg_replace('/[^a-zA-Z0-9\s]/', '', $string);
 
 		$meta_key = 'wp_travel_coupon_code';
 
@@ -53,7 +55,7 @@ class WP_Travel_Coupon {
 			AND meta_value = %s
 		",
 			$meta_key,
-			esc_sql( $string )
+			$string
 		);
 
 		$results = $wpdb->get_results( $sql );

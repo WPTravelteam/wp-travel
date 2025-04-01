@@ -1005,7 +1005,7 @@ function wptravel_single_keywords( $trip_id ) {
 	?>
 	<div id="wp-travel-trip-pickup-location">
 
-		<span><?php echo esc_html__( 'Pickup Locations: ', 'wp-travel' ) . get_post_meta( $trip_id, 'wp_travel_trip_pickup_points', true )[0]; ?></span>
+		<span><?php echo esc_html__( 'Pickup Locations: ', 'wp-travel' ) . esc_html( get_post_meta( $trip_id, 'wp_travel_trip_pickup_points', true )[0] ); ?></span>
 		<ul class="location-lists">
 			<?php foreach( get_post_meta( $trip_id, 'wp_travel_trip_pickup_points', true ) as $location ): ?>
 				<li class="location">
@@ -1224,7 +1224,7 @@ function wptravel_frontend_trip_facts( $trip_id ) {
 											echo esc_html( $val );
 										}
 										if ( $count > 1 && $i !== $count ) {
-											esc_html_e( ',', 'wp-travel' );
+											esc_html_e( ', ', 'wp-travel' );
 										}
 										$i++;
 									}
@@ -1521,6 +1521,8 @@ function wptravel_get_review_count( $trip_id = null ) {
 	}
 	// No meta data? Do the calculation.
 	if ( ! metadata_exists( 'post', $trip_id, '_wpt_review_count' ) ) {
+
+		$trip_id = intval($trip_id);
 		$count = $wpdb->get_var(
 			$wpdb->prepare(
 				"
@@ -2037,7 +2039,9 @@ function wptravel_archive_filter_by( $submission_get = array() ) {
 			</div>
 		<?php endif; ?>
 		<div class="wp-toolbar-filter-field wt-filter-by-itinerary-types">
+			
 			<?php
+	
 			wp_dropdown_categories(
 				array(
 					'taxonomy'          => 'itinerary_types',
@@ -2045,6 +2049,7 @@ function wptravel_archive_filter_by( $submission_get = array() ) {
 					'class'             => 'wp_travel_input_filters type',
 					'show_option_none'  => esc_html( $trip_type_text ),
 					'option_none_value' => '',
+					'hide_empty'      => apply_filters( 'wptravel_hide_empty_taxonomies_search_form', true ),
 					'selected'          => $type,
 					'value_field'       => 'slug',
 				)
@@ -2060,6 +2065,7 @@ function wptravel_archive_filter_by( $submission_get = array() ) {
 					'class'             => 'wp_travel_input_filters location',
 					'show_option_none'  => esc_html( $location_text ),
 					'option_none_value' => '',
+					'hide_empty'      => apply_filters( 'wptravel_hide_empty_taxonomies_search_form', true ),
 					'selected'          => $location,
 					'value_field'       => 'slug',
 				)
@@ -2198,7 +2204,7 @@ function wptravel_archive_listing_sidebar() {
  */
 function wptravel_posts_filter( $query ) {
 
-	if ( ! WP_Travel::verify_nonce( true ) ) {	
+	if ( ! WP_Travel::verify_nonce( true ) && !is_admin()) {	
 
 		$current_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 		
@@ -2209,10 +2215,13 @@ function wptravel_posts_filter( $query ) {
 				$query->set( 'order', apply_filters( 'wp_travel_list_tour_extras_orders', '' ) );
 			}
 		} else {
-			if ( is_archive() && !is_admin() && apply_filters( 'wp_travel_list_trips_orders', '' ) != '' ) {
+			if ( !is_admin() && apply_filters( 'wp_travel_list_trips_orders', '' ) != '' ) {
+			// if ( is_archive() && !is_admin() && apply_filters( 'wp_travel_list_trips_orders', '' ) != '' ) {
+			
 				$query->set( 'orderby', 'post_title' );
 				$query->set( 'order', apply_filters( 'wp_travel_list_trips_orders', '' ) );
 			}
+			
 		}
 			
 		return $query;
@@ -2269,7 +2278,7 @@ function wptravel_posts_filter( $query ) {
 					$date_format = get_option( 'date_format' );
 					// Convert to timestamp.
 					if ( ! $trip_start ) {
-						$trip_start = date( 'Y-m-d' );
+						$trip_start = gmdate( 'Y-m-d' );
 					}
 
 					$custom_meta = array(
@@ -2631,3 +2640,4 @@ function wptravel_single_itinerary_trip_content() {
 		wptravel_get_template_part( 'content', 'single-itineraries' );
 	}
 }
+

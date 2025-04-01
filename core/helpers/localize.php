@@ -61,6 +61,7 @@ class WpTravel_Helpers_Localize {
 			$_wp_travel['rdp_locale']         = $rdp_locale;
 			$_wp_travel['time_format']        = get_option( 'time_format' );
 			$_wp_travel['date_format']        = get_option( 'date_format' );
+			$_wp_travel['bank_description']   = $settings['wp_travel_bank_deposit_description'] ? $settings['wp_travel_bank_deposit_description'] : '';
 			$_wp_travel['currency']           = $settings['currency'];
 			$_wp_travel['currency_position']  = $settings['currency_position'];
 			$_wp_travel['decimal_separator']  = $settings['decimal_separator'] ? $settings['decimal_separator'] : '.';
@@ -112,6 +113,8 @@ class WpTravel_Helpers_Localize {
 				$policy_page_id = (int) get_option( 'wp_page_for_privacy_policy' );
 				$page_title     = ( $policy_page_id ) ? get_the_title( $policy_page_id ) : '';
 				$_wp_travel['policy_page_title'] = $page_title;
+				$_wp_travel['policy_required_message'] = __( 'Check this field to proceed.', 'wp-travel' );
+				
 			}
 
 			$_wp_travel['gdpopen_gdpr_in_new_tab'] = ! empty( $settings['open_gdpr_in_new_tab'] ) ? esc_html( $settings['open_gdpr_in_new_tab'] ) : false;
@@ -122,6 +125,15 @@ class WpTravel_Helpers_Localize {
 			$_wp_travel['is_pro_enable']  = class_exists( 'WP_Travel_Pro' ) ? 'yes' : 'no';
 			if ( isset( $settings['mailchimp'] ) && isset( $settings['mailchimp']['enable_subscription'] ) && ( in_array( 'all', $settings['mailchimp']['enable_subscription'], true ) ) ) {
 				$_wp_travel['enable_subscription'] =  'yes';
+
+				if (isset($settings['mailchimp']['api_key'])) {
+					unset($settings['mailchimp']['api_key']);
+				}
+
+				if (isset($settings['mailchimp']['list_id'])) {
+					unset($settings['mailchimp']['list_id']);
+				}
+				
 				$_wp_travel['subscription_data'] =  $settings['mailchimp'];
 			}
 
@@ -282,6 +294,11 @@ class WpTravel_Helpers_Localize {
 				'compare_stat'      => false,
 			);
 			if ( isset( $_REQUEST['compare_stat'] ) && 'yes' === $_REQUEST['compare_stat'] ) { // phpcs:ignore
+				$permission =  WP_Travel::verify_nonce( true );
+				if ( ! $permission ) {
+					return;
+				}
+
 				$compare_stat_from = isset( $booking_data['compare_stat_from'] ) ? $booking_data['compare_stat_from'] : '';
 				$compare_stat_to   = isset( $booking_data['compare_stat_to'] ) ? $booking_data['compare_stat_to'] : '';
 
@@ -304,6 +321,8 @@ class WpTravel_Helpers_Localize {
 			}
 			$wp_travel_chart_data                   = apply_filters( 'wptravel_chart_data', $wp_travel_chart_data );
 			$localized_data['wp_travel_chart_data'] = $wp_travel_chart_data;
+
+
 			// End of Booking Chart Data.
 
 			// Map & Gallery Data. Need to merge in wp_travel or _wp_travel.

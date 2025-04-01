@@ -43,6 +43,7 @@ export default forwardRef((props, ref) => {
     const selectedCurrency = currencyOptions.find(opt => opt.value === currency) || {};
     const selectedCurrencyPosition = currencyPositionOptions.find(opt => opt.value === currency_position) || {};
 
+
     return (
         <>
             <div className="wp-travel-section-header">
@@ -105,7 +106,7 @@ export default forwardRef((props, ref) => {
                                     }
                                 }}
                                 options={currencyPositionOptions}
-                                value={selectedCurrencyPosition[0] || []}
+                                value={selectedCurrencyPosition || []}
                                 onChange={(data) => {
                                     if (data !== '') {
                                         updateSettings({

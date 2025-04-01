@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <?php
 
 if ( post_password_required() ) {
-	$allow_html =  wp_kses_allowed_html();
+$allow_html =  wp_kses_allowed_html();
 	$allow_html[ 'form' ] = array(
 		'class' => true,
 		'action' => true,
@@ -47,6 +47,7 @@ if ( post_password_required() ) {
 	);
 
 	echo wp_kses( get_the_password_form(), $allow_html );
+
 	return;
 }
 ?>

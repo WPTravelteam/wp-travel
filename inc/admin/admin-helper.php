@@ -741,6 +741,9 @@ function wptravel_get_booking_count( $trip_id ) {
 		return 0;
 	}
 	global $wpdb;
+
+	$trip_id = intval($trip_id);
+
 	$booking_count = get_post_meta( $trip_id, 'wp_travel_booking_count', true );
 	if ( ! $booking_count ) {
 		$booking_count = 0;

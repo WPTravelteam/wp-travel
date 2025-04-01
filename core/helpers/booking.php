@@ -69,7 +69,14 @@ class WpTravel_Helpers_Booking {
 					$arrival_date   = isset( $trip['departure_date'] ) && ! empty( $trip['departure_date'] ) ? wptravel_format_date( $trip['departure_date'] ) : '';
 					
 					$start_date   = isset( $trip['arrival_date'] ) && ! empty( $trip['arrival_date'] ) ? wptravel_format_date( $trip['arrival_date'] ) : '';
-					$end_date = isset( $trip['departure_date'] ) && ! empty( $trip['departure_date'] ) ? wptravel_format_date( $wpdb->get_row( $wpdb->prepare("SELECT * FROM {$wpdb->prefix}wt_dates WHERE id=%s;", isset( $trip['date_id'] ) ? $trip['date_id'] : ''  ) )->end_date ) : '';
+					$date_id = isset($trip['date_id']) ? intval($trip['date_id']) : 0;
+
+					$end_date = isset( $trip['departure_date'] ) && ! empty( $trip['departure_date'] ) 
+						? wptravel_format_date( $wpdb->get_var( 
+							$wpdb->prepare("SELECT end_date FROM {$wpdb->prefix}wt_dates WHERE id=%d;", $date_id ) 
+						)) 
+						: '';
+
 					
 					/**
 					 * Fix for active date format that skips character.
@@ -186,7 +193,7 @@ class WpTravel_Helpers_Booking {
 												$date_format = $date['twentyfour_time_format'];
 											}
 										}
-										echo wp_travel_get_converted_time_format( $trip['trip_time'], $date_format );
+										echo esc_html( wp_travel_get_converted_time_format( $trip['trip_time'], $date_format ) );
 									?>										
 										
 									<?php endif; ?>
@@ -194,7 +201,18 @@ class WpTravel_Helpers_Booking {
 								
 								<?php if( isset( $trip_data['dates'] ) && $trip_data['dates'][0]['is_recurring'] == false ): ?>
 									<!-- <td><?php echo esc_html( wptravel_format_date( $end_date ) ); ?></td> -->
-									<td><?php echo esc_html( wptravel_format_date( $wpdb->get_row( $wpdb->prepare("SELECT * FROM {$wpdb->prefix}wt_dates WHERE id=%s;", isset( $trip['date_id'] ) ? $trip['date_id'] : ''  ) )->end_date ) ); ?></td>
+									<td>
+										<?php 
+										
+											$date_id = isset($trip['date_id']) ? intval($trip['date_id']) : 0;
+
+											$end_date = $wpdb->get_var(
+												$wpdb->prepare("SELECT end_date FROM {$wpdb->prefix}wt_dates WHERE id = %d;", $date_id)
+											);
+										
+											echo esc_html( wptravel_format_date( $end_date ) );
+										?>
+									</td>
 									<?php else: ?>
 									<td>
 										<?php 
@@ -468,7 +486,7 @@ class WpTravel_Helpers_Booking {
 						?>
 						<thead>
 							<tr>
-								<th colspan="<?php echo $conspan; ?>"><?php esc_html_e( 'Trip : ', 'wp-travel' ); ?> <strong><?php echo esc_html( $title ); ?></strong> / <span class="my-order-pricing"><?php echo esc_html( $pricing_title ); ?></span></th>
+								<th colspan="<?php echo absint( $conspan ); ?>"><?php esc_html_e( 'Trip : ', 'wp-travel' ); ?> <strong><?php echo esc_html( $title ); ?></strong> / <span class="my-order-pricing"><?php echo esc_html( $pricing_title ); ?></span></th>
 							</tr>
 							<tr>
 								<th><?php esc_html_e( 'Traveler Name', 'wp-travel' ); ?></th>
@@ -498,12 +516,12 @@ class WpTravel_Helpers_Booking {
 									$country  = wptravel_get_countries()[ array_search($country, wptravel_get_countries()) ];
 								}
 								
-                                if(!$country){
+                                if(!$country && wptravel_get_countries()[$countries[ $key ]] !==1 ){
                                     $country = wptravel_get_countries()[$countries[ $key ]];
                                 }
 
 								if( apply_filters( 'wptravel_show_full_country_name', false ) == true ){
-									$country = wptravel_get_countries()[$country];
+									$country = isset( wptravel_get_countries()[$country] ) ? wptravel_get_countries()[$country] : '';
 								}
 
 								$phone     = isset( $phones[ $key ] ) ? $phones[ $key ] : '';
